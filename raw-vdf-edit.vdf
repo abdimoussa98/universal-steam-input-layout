@@ -27690,41 +27690,6 @@
 		"description"		""
 		"inputs"
 		{
-// clean up functions for every layer
-			"always_on_action"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 87 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"1"
-							"hold_repeats"		"1"
-							"interruptable"		"0"
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
 			"button_escape"
 			{
 				"activators"
@@ -29107,41 +29072,6 @@
 		"description"		""
 		"inputs"
 		{
-// clean up functions for every layer
-			"always_on_action"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 87 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"1"
-							"hold_repeats"		"1"
-							"interruptable"		"0"
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
 			"button_escape"
 			{
 				"activators"
@@ -30076,41 +30006,6 @@
 		"description"		""
 		"inputs"
 		{
-// clean up functions for every layer
-			"always_on_action"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 87 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"1"
-							"hold_repeats"		"1"
-							"interruptable"		"0"
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
 			"button_escape"
 			{
 				"activators"
@@ -30675,41 +30570,6 @@
 		"description"		""
 		"inputs"
 		{
-// clean up functions for every layer
-			"always_on_action"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 87 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"1"
-							"hold_repeats"		"1"
-							"interruptable"		"0"
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
 			"button_escape"
 			{
 				"activators"
@@ -38245,6 +38105,7 @@
 			"layer"		"1"
 		}
 	}
+// start of main action set presets
 	"preset"
 	{
 		"id"		"0"
@@ -38335,6 +38196,7 @@
 			"563"		"right_trackpad active"
 		}
 	}
+// end of main action set presets
 	"preset"
 	{
 		"id"		"4"
