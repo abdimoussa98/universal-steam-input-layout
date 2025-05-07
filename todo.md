@@ -10,12 +10,12 @@ todo:
         - [x] "Backtick"
         - [x] "Middle Mouse"
     - gyro:
-        - [] "Menu Buttons: Entry Point"
-        - [] "RTP: Entry Point"
-        - [] "Menu Left: Double Tap"
-        - [] "Menu Right: Double Tap"
-        - [] "Backtick"
-        - [] "Middle Mouse"
+        - [x] "Menu Buttons: Entry Point"
+        - [x] "RTP: Entry Point"
+        - [x] "Menu Left: Double Tap"
+        - [x] "Menu Right: Double Tap"
+        - [x] "Backtick"
+        - [x] "Middle Mouse"
     - alt:
         - [] "Menu Buttons: Entry Point"
         - [] "RTP: Entry Point"
