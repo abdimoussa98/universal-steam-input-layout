@@ -4,21 +4,21 @@ todo:
  - add proper clean up functions for rst&lst (where action is xinput left trigger)
     - base:
         - [x] "Menu Buttons: Entry Point" 
-        - [] "RST: Entry Point"
-        - [] "Menu Left: Double Tap"
-        - [] "Menu Right: Double Tap"
-        - [] "Backtick"
-        - [] "Middle Mouse"
+        - [x] "RTP: Entry Point"
+        - [x] "Menu Left: Double Tap"
+        - [x] "Menu Right: Double Tap"
+        - [x] "Backtick"
+        - [x] "Middle Mouse"
     - gyro:
         - [] "Menu Buttons: Entry Point"
-        - [] "RST: Entry Point"
+        - [] "RTP: Entry Point"
         - [] "Menu Left: Double Tap"
         - [] "Menu Right: Double Tap"
         - [] "Backtick"
         - [] "Middle Mouse"
     - alt:
         - [] "Menu Buttons: Entry Point"
-        - [] "RST: Entry Point"
+        - [] "RTP: Entry Point"
         - [] "Menu Left: Double Tap"
         - [] "Menu Right: Double Tap"
         - [] "Backtick"
