@@ -32812,11 +32812,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 9 0 0, , "
+							"binding"		"controller_action remove_layer 71 0 0, , "
+							"binding"		"controller_action remove_layer 77 0 0, , "
+							"binding"		"controller_action add_layer 60 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -32842,11 +32849,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 10 0 0, , "
+							"binding"		"controller_action remove_layer 73 0 0, , "
+							"binding"		"controller_action remove_layer 78 0 0, , "
+							"binding"		"controller_action add_layer 60 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}

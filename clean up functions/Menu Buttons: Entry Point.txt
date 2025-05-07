@@ -1,8 +1,6 @@
-Clean up functions
+Menu Buttons: Entry Point Clean up functions
 
-
-Base
-LST_base:
+LST:
 			"touch"
 			{
 				"activators"
@@ -28,7 +26,7 @@ LST_base:
 			}
 
 
-RST_base:
+RST:
 
 			"touch"
 			{

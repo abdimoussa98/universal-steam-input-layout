@@ -1,4 +1,7 @@
-// Layer Ids
+/*
+Layer Ids
+ids are base on order of creation. so the order in which they appear in the layer vdf. (haven't tested adding more sets so maybe if adding set 5 then layer 5's id will increase to 6. still need to test)
+*/
 {
 	"Preset_1000001"
 	{
