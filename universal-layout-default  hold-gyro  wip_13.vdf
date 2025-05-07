@@ -3,7 +3,7 @@
 	"version"		"3"
 	"revision"		"11331"
 	"title"		"universal-layout-default :: hold-gyro :: wip"
-	"description"		"change bumpers to scroll wheel; still need to fix clean ups"
+	"description"		"change bumpers to scroll wheel; change tilde name to backtick; add proper clean up functions for rst&lst (where action is xinput left trigger)"
 	"creator"		"76561198079670632"
 	"progenitor"		""
 	"url"		"autosave://C:\\Program Files (x86)\\Steam\\steamapps\\common\\Steam Controller Configs\\119404904\\config\\692890\\controller_neptune.vdf"
@@ -33892,11 +33892,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 23 0 0, , "
+							"binding"		"controller_action remove_layer 72 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"controller_action add_layer 62 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -33922,11 +33929,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 24 0 0, , "
+							"binding"		"controller_action remove_layer 74 0 0, , "
+							"binding"		"controller_action remove_layer 82 0 0, , "
+							"binding"		"controller_action add_layer 62 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -33968,11 +33982,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 23 0 0, , "
+							"binding"		"controller_action remove_layer 72 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"controller_action add_layer 109 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -33998,11 +34019,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 24 0 0, , "
+							"binding"		"controller_action remove_layer 74 0 0, , "
+							"binding"		"controller_action remove_layer 82 0 0, , "
+							"binding"		"controller_action add_layer 109 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -34044,11 +34072,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 23 0 0, , "
+							"binding"		"controller_action remove_layer 72 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"controller_action remove_layer 118 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -34074,11 +34109,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 24 0 0, , "
+							"binding"		"controller_action remove_layer 74 0 0, , "
+							"binding"		"controller_action remove_layer 82 0 0, , "
+							"binding"		"controller_action remove_layer 118 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -34120,11 +34162,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 23 0 0, , "
+							"binding"		"controller_action remove_layer 72 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"controller_action remove_layer 119 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -34150,11 +34199,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 24 0 0, , "
+							"binding"		"controller_action remove_layer 74 0 0, , "
+							"binding"		"controller_action remove_layer 82 0 0, , "
+							"binding"		"controller_action remove_layer 119 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -34180,11 +34236,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 24 0 0, , "
+							"binding"		"controller_action remove_layer 74 0 0, , "
+							"binding"		"controller_action remove_layer 82 0 0, , "
+							"binding"		"controller_action add_layer 120 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -34226,11 +34289,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 23 0 0, , "
+							"binding"		"controller_action remove_layer 72 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"controller_action add_layer 120 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -34272,11 +34342,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 23 0 0, , "
+							"binding"		"controller_action remove_layer 72 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"controller_action add_layer 121 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -34302,11 +34379,18 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"xinput_button TRIGGER_LEFT, , "
+							"binding"		"controller_action remove_layer 24 0 0, , "
+							"binding"		"controller_action remove_layer 74 0 0, , "
+							"binding"		"controller_action remove_layer 82 0 0, , "
+							"binding"		"controller_action add_layer 121 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
