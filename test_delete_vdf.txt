@@ -1,0 +1,165 @@
+	"actions"
+	{
+		"Preset_1000001"
+		{
+			"title"		"Base"
+			"legacy_set"		"1"
+		}
+		"Preset_1000014"
+		{
+			"title"		"Gyro"
+			"legacy_set"		"1"
+		}
+	}
+	"action_layers"
+	{
+		"Preset_1000015"
+		{
+			"title"		"L2"
+			"legacy_set"		"1"
+			"set_layer"		"1"
+			"parent_set_name"		"Preset_1000014"
+		}
+    }
+    "preset"
+	{
+		"id"		"12"
+		"name"		"Preset_1000015"
+		"group_source_bindings"
+		{
+			"288"		"switch active"
+			"304"		"gyro inactive"
+			"429"		"gyro inactive"
+			"650"		"gyro inactive"
+			"882"		"gyro active"
+			"285"		"button_diamond inactive"
+			"685"		"joystick active"
+			"286"		"left_trigger active"
+			"287"		"right_trigger active"
+			"425"		"right_joystick active"
+		}
+	}
+    "group"
+	{
+		"id"		"288"
+		"mode"		"switches"
+		"name"		""
+		"description"		""
+		"inputs"
+		{
+			"button_escape"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_menu"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"left_bumper"
+			{
+				"activators"
+				{
+					"Start_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 13 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 15 0 0, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"right_bumper"
+			{
+				"activators"
+				{
+					"Start_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 13 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 16 0 0, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_capture"
+			{
+				"activators"
+				{
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action system_key_1, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
