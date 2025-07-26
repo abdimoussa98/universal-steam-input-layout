@@ -4,8 +4,8 @@
 ### RST/LST Cleanups
 - [x] In "Menu Buttons: Entry Point"
     - [x] On RST/LST release, add "Fn Layer"
-- [ ] In "Fn Layer"
-    - [ ] On RST/LST release, remove RST/LST layers
+- [x] In "Fn Layer"
+    - [x] On RST/LST release, remove RST/LST layers
 - [ ] In "Modifier 2" layers
     - [ ] On RST/LST release, remove RST/LST layers & add "L1&R1: Tap Cover"
 
