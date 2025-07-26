@@ -3,7 +3,7 @@
 		"version": "3",
 		"revision": "12438",
 		"title": "universal-layout-default :: hold-gyro :: latest",
-		"description": "make rtp double tap more forgiving",
+		"description": "add clean temp gyro cleanup for fn layer and menu buttons entry point",
 		"creator": "76561198079670632",
 		"progenitor": "",
 		"url": "workshop://3532665739",
@@ -24128,7 +24128,7 @@
 										"controller_action remove_layer 9 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 77 0 0, , ",
-										"controller_action empty_binding, , "
+										"controller_action add_layer 60 0 0, , "
 									]
 								},
 								"settings": {
@@ -24177,7 +24177,7 @@
 										"controller_action remove_layer 10 0 0, , ",
 										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 78 0 0, , ",
-										"controller_action empty_binding, , "
+										"controller_action add_layer 60 0 0, , "
 									]
 								},
 								"settings": {

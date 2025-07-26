@@ -2,8 +2,8 @@
 
 ## Base Action Set
 ### RST/LST Cleanups
-- [ ] In "Menu Buttons: Entry Point"
-    - [ ] On RST/LST release, add "Fn Layer"
+- [x] In "Menu Buttons: Entry Point"
+    - [x] On RST/LST release, add "Fn Layer"
 - [ ] In "Fn Layer"
     - [ ] On RST/LST release, remove RST/LST layers
 - [ ] In "Modifier 2" layers
