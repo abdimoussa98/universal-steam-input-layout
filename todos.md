@@ -6,8 +6,6 @@
     - [x] On RST/LST release, add "Fn Layer"
 - [x] In "Fn Layer"
     - [x] On RST/LST release, remove RST/LST layers
-- [ ] In "Modifier 2" layers
-    - [ ] On RST/LST release, remove RST/LST layers & add "L1&R1: Tap Cover"
 
 ### General Button Cleanups
 - [ ] In Modifier 0,1,2 layers
@@ -25,8 +23,6 @@
     - [ ] On RST/LST release, add "Fn Layer"
 - [ ] In "Fn Layer"
     - [ ] On RST/LST release, remove RST/LST layers
-- [ ] In "Modifier 2" layers
-    - [ ] On RST/LST release, remove RST/LST layers & add "L1&R1: Tap Cover"
 
 ### General Button Cleanups
 - [ ] In Modifier 0,1,2 layers
@@ -48,3 +44,10 @@
 ### General Button Cleanups
 - [ ] In "Fn Layer"
     - [ ] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
+
+
+Spike:
+Figure out a way to add "L1&R1: Tap Cover" whilst in Modifier 2 layers without using always on action. Since i want to be able to remove RST/LST layer and add the tap cover on RST/LST release. Currently if i do this, the always on action will be interrupted and crash steam.
+
+- [ ] In "Modifier 2" layers
+    - [ ] On RST/LST release, remove RST/LST layers & add "L1&R1: Tap Cover"
