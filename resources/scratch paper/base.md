@@ -7,7 +7,8 @@ remove LST layer:
         "binding": [
             "controller_action remove_layer 10 0 0, , ",
             "controller_action remove_layer 73 0 0, , ",
-            "controller_action remove_layer 78 0 0, , "
+            "controller_action remove_layer 78 0 0, , ",
+            "controller_action add_layer 75 0 0, , "
         ]
     },
     "settings": {
@@ -22,7 +23,8 @@ remove RST layer:
         "binding": [
             "controller_action remove_layer 9 0 0, , ",
             "controller_action remove_layer 71 0 0, , ",
-            "controller_action remove_layer 77 0 0, , "
+            "controller_action remove_layer 77 0 0, , ",
+            "controller_action add_layer 75 0 0, , "
         ]
     },
     "settings": {
