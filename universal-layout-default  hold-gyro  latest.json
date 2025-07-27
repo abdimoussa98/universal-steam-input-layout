@@ -2029,7 +2029,21 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_button FORWARD, , "
+									"binding": [
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 69 0 0, , "
+									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"key_press FORWARD, , ",
+										"controller_action add_layer 69 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "1"
 								}
 							}
 						},
@@ -13207,7 +13221,21 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_button BACK, , "
+									"binding": [
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 69 0 0, , "
+									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"key_press BACK, , ",
+										"controller_action add_layer 69 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "1"
 								}
 							}
 						},
@@ -29081,7 +29109,21 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RETURN, , "
+									"binding": [
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 69 0 0, , "
+									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"key_press RETURN, , ",
+										"controller_action add_layer 69 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "1"
 								}
 							}
 						},
@@ -29091,7 +29133,21 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press BACKSPACE, , "
+									"binding": [
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 69 0 0, , "
+									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"key_press BACKSPACE, , ",
+										"controller_action add_layer 69 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "1"
 								}
 							}
 						},
