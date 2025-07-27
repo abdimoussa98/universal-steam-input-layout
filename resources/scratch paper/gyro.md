@@ -39,7 +39,7 @@ Modifier 2 Bumpers:
                     "controller_action CHANGE_PRESET 1 1 1, , ", // switch to base
                     "controller_action remove_layer 15 0 0, , ", // "L1: Modifier 0"
                     "controller_action remove_layer 16 0 0, , ", // "R1: Modifier 1"
-                    "controller_action remove_layer 34 0 0, , ", // "L1: Tap Cover",
+                    "controller_action remove_layer 34 0 0, , ", // "L1: Tap Cover"
                     "controller_action remove_layer 35 0 0, , ", // "R1: Tap Cover"
                     "controller_action remove_layer 76 0 0, , ", // "L1&R1: Tap Cover"
                     "controller_action remove_layer 58 0 0, , ", // "L1!R1: Modifier 2"
@@ -72,7 +72,7 @@ Modifier 2 Bumpers:
                     "controller_action CHANGE_PRESET 1 1 1, , ", // switch to base
                     "controller_action remove_layer 15 0 0, , ", // "L1: Modifier 0"
                     "controller_action remove_layer 16 0 0, , ", // "R1: Modifier 1"
-                    "controller_action remove_layer 34 0 0, , ", // "L1: Tap Cover",
+                    "controller_action remove_layer 34 0 0, , ", // "L1: Tap Cover"
                     "controller_action remove_layer 35 0 0, , ", // "R1: Tap Cover"
                     "controller_action remove_layer 76 0 0, , ", // "L1&R1: Tap Cover"
                     "controller_action remove_layer 58 0 0, , ", // "L1!R1: Modifier 2"
@@ -96,5 +96,5 @@ Modifier 2 Bumpers:
         }
     },
     "disabled_activators": {}
-},
+}
 ```
