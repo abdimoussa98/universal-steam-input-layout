@@ -2633,7 +2633,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"mouse_button FORWARD, , "
+							"binding"		"controller_action add_layer 69 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
 						}
 					}
 				}
@@ -4435,7 +4448,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press BACK_TICK, , "
+							"binding"		"controller_action add_layer 70 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
 						}
 					}
 				}
@@ -9459,7 +9485,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"mouse_button FORWARD, , "
+							"binding"		"controller_action add_layer 34 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
 						}
 					}
 				}
@@ -9569,7 +9608,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press BACK_TICK, , "
+							"binding"		"controller_action add_layer 35 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
 						}
 					}
 				}
@@ -17733,7 +17785,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"mouse_button BACK, , "
+							"binding"		"controller_action add_layer 69 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
 						}
 					}
 				}
@@ -17810,7 +17875,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"mouse_button MIDDLE, , "
+							"binding"		"controller_action add_layer 70 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
 						}
 					}
 				}
@@ -18595,7 +18673,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 56 0 0, , "
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+							"binding"		"controller_action remove_layer 75 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press PAGE_UP, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -18737,7 +18845,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 56 0 0, , "
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+							"binding"		"controller_action remove_layer 75 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press PAGE_DOWN, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -19252,7 +19390,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"mouse_button BACK, , "
+							"binding"		"controller_action add_layer 34 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
 						}
 					}
 				}
@@ -19329,7 +19480,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"mouse_button MIDDLE, , "
+							"binding"		"controller_action add_layer 35 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
 						}
 					}
 				}
@@ -20114,7 +20278,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+							"binding"		"controller_action remove_layer 76 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press PAGE_UP, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -20256,7 +20450,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+							"binding"		"controller_action remove_layer 76 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press PAGE_DOWN, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -25038,7 +25262,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+							"binding"		"controller_action remove_layer 75 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press PAGE_DOWN, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -25127,7 +25381,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+							"binding"		"controller_action remove_layer 75 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press PAGE_UP, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -25463,7 +25747,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 59 0 0, , "
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+							"binding"		"controller_action remove_layer 76 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press PAGE_UP, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -25601,7 +25915,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 59 0 0, , "
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+							"binding"		"controller_action remove_layer 76 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press PAGE_DOWN, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -38942,7 +39286,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press RETURN, , "
+							"binding"		"controller_action add_layer 69 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
 						}
 					}
 				}
@@ -38958,7 +39315,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press BACKSPACE, , "
+							"binding"		"controller_action add_layer 69 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
 						}
 					}
 				}
@@ -39055,7 +39425,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press INSERT, , "
+							"binding"		"controller_action add_layer 70 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
 						}
 					}
 				}
@@ -39071,7 +39454,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press DELETE, , "
+							"binding"		"controller_action add_layer 70 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
 						}
 					}
 				}
@@ -39692,7 +40088,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press RETURN, , "
+							"binding"		"controller_action add_layer 34 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
 						}
 					}
 				}
@@ -39708,7 +40117,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press BACKSPACE, , "
+							"binding"		"controller_action add_layer 34 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
 						}
 					}
 				}
@@ -39805,7 +40227,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press INSERT, , "
+							"binding"		"controller_action add_layer 35 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
 						}
 					}
 				}
@@ -39821,7 +40256,20 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press DELETE, , "
+							"binding"		"controller_action add_layer 35 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
 						}
 					}
 				}
@@ -41430,7 +41878,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 56 0 0, , "
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+							"binding"		"controller_action remove_layer 75 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press HOME, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -41446,7 +41924,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 56 0 0, , "
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+							"binding"		"controller_action remove_layer 75 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press END, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -41558,7 +42066,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+							"binding"		"controller_action remove_layer 75 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press HOME, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -41574,7 +42112,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 8 0 0, , "
+							"binding"		"controller_action remove_layer 69 0 0, , "
+							"binding"		"controller_action remove_layer 70 0 0, , "
+							"binding"		"controller_action remove_layer 75 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press END, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -41686,7 +42254,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+							"binding"		"controller_action remove_layer 76 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press HOME, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -41702,7 +42300,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+							"binding"		"controller_action remove_layer 76 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press END, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -41814,7 +42442,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 59 0 0, , "
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+							"binding"		"controller_action remove_layer 76 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press HOME, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -41830,7 +42488,37 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 59 0 0, , "
+							"binding"		"controller_action remove_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 16 0 0, , "
+							"binding"		"controller_action remove_layer 34 0 0, , "
+							"binding"		"controller_action remove_layer 35 0 0, , "
+							"binding"		"controller_action remove_layer 76 0 0, , "
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
 							"binding"		"key_press END, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
 						}
 					}
 				}
