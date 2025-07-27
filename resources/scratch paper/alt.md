@@ -30,3 +30,41 @@ remove RST layer:
     }
 }
 ```
+Fn layer clean up functions:
+
+```json
+"activators": {
+    "chord": [
+        {
+            "bindings": {
+                "binding": "controller_action empty_binding, , "
+            },
+            "settings": {
+                "chord_button": "15",
+                "interruptable": "0"
+            }
+        },
+        {
+            "bindings": {
+                "binding": "controller_action empty_binding, , "
+            },
+            "settings": {
+                "chord_button": "14",
+                "interruptable": "0"
+            }
+        }
+    ],
+    "Full_Press": {
+        "bindings": {
+            "binding": [
+                "controller_action remove_layer 62 0 0, , ",
+                "controller_action remove_layer 85 0 0, , "
+            ]
+        },
+        "settings": {
+            "hold_repeats": "1"
+        }
+    }
+},
+"disabled_activators": {}
+```
