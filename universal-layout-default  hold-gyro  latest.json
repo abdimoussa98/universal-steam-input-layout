@@ -30601,10 +30601,30 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action CHANGE_PRESET 2 1 1, , "
+									"binding": [
+										"controller_action CHANGE_PRESET 2 1 1, , ",
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 69 0 0, , ",
+										"controller_action remove_layer 70 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 57 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 75 0 0, , "
+								},
+								"settings": {
+									"chord_button": "1",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -30614,10 +30634,30 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action CHANGE_PRESET 2 1 1, , "
+									"binding": [
+										"controller_action CHANGE_PRESET 2 1 1, , ",
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 69 0 0, , ",
+										"controller_action remove_layer 70 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 57 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 75 0 0, , "
+								},
+								"settings": {
+									"chord_button": "2",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -30658,10 +30698,30 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action CHANGE_PRESET 2 1 1, , "
+									"binding": [
+										"controller_action CHANGE_PRESET 2 1 1, , ",
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 69 0 0, , ",
+										"controller_action remove_layer 70 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 57 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 75 0 0, , "
+								},
+								"settings": {
+									"chord_button": "1",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -30671,10 +30731,30 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action CHANGE_PRESET 2 1 1, , "
+									"binding": [
+										"controller_action CHANGE_PRESET 2 1 1, , ",
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 69 0 0, , ",
+										"controller_action remove_layer 70 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 57 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 75 0 0, , "
+								},
+								"settings": {
+									"chord_button": "2",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -30715,10 +30795,30 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action CHANGE_PRESET 1 1 1, , "
+									"binding": [
+										"controller_action CHANGE_PRESET 1 1 1, , ",
+										"controller_action remove_layer 15 0 0, , ",
+										"controller_action remove_layer 16 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 58 0 0, , ",
+										"controller_action remove_layer 59 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 76 0 0, , "
+								},
+								"settings": {
+									"chord_button": "1",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -30728,10 +30828,30 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action CHANGE_PRESET 1 1 1, , "
+									"binding": [
+										"controller_action CHANGE_PRESET 1 1 1, , ",
+										"controller_action remove_layer 15 0 0, , ",
+										"controller_action remove_layer 16 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 58 0 0, , ",
+										"controller_action remove_layer 59 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 76 0 0, , "
+								},
+								"settings": {
+									"chord_button": "2",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -30772,10 +30892,30 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action CHANGE_PRESET 1 1 1, , "
+									"binding": [
+										"controller_action CHANGE_PRESET 1 1 1, , ",
+										"controller_action remove_layer 15 0 0, , ",
+										"controller_action remove_layer 16 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 58 0 0, , ",
+										"controller_action remove_layer 59 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 76 0 0, , "
+								},
+								"settings": {
+									"chord_button": "1",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -30785,10 +30925,30 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action CHANGE_PRESET 1 1 1, , "
+									"binding": [
+										"controller_action CHANGE_PRESET 1 1 1, , ",
+										"controller_action remove_layer 15 0 0, , ",
+										"controller_action remove_layer 16 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 58 0 0, , ",
+										"controller_action remove_layer 59 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 76 0 0, , "
+								},
+								"settings": {
+									"chord_button": "2",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
