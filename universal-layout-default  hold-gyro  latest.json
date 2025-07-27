@@ -30622,19 +30622,6 @@
 							}
 						},
 						"disabled_activators": {}
-					},
-					"always_on_action": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 75 0 0, , "
-								},
-								"settings": {
-									"delay_start": "200"
-								}
-							}
-						},
-						"disabled_activators": {}
 					}
 				},
 				"settings": {
@@ -30688,19 +30675,6 @@
 								},
 								"settings": {
 									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"always_on_action": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 75 0 0, , "
-								},
-								"settings": {
-									"delay_start": "200"
 								}
 							}
 						},
@@ -30762,19 +30736,6 @@
 							}
 						},
 						"disabled_activators": {}
-					},
-					"always_on_action": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 76 0 0, , "
-								},
-								"settings": {
-									"delay_start": "200"
-								}
-							}
-						},
-						"disabled_activators": {}
 					}
 				},
 				"settings": {
@@ -30828,19 +30789,6 @@
 								},
 								"settings": {
 									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"always_on_action": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 76 0 0, , "
-								},
-								"settings": {
-									"delay_start": "200"
 								}
 							}
 						},
