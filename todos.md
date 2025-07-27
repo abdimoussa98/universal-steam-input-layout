@@ -49,5 +49,5 @@
 Spike:
 Figure out a way to add "L1&R1: Tap Cover" whilst in Modifier 2 layers without using always on action. Since i want to be able to remove RST/LST layer and add the tap cover on RST/LST release. Currently if i do this, the always on action will be interrupted and crash steam.
 
-- [ ] In "Modifier 2" layers
-    - [ ] On RST/LST release, remove RST/LST layers & add "L1&R1: Tap Cover"
+- [x] In "Modifier 2" layers
+    - [x] On RST/LST release, remove RST/LST layers & add "L1&R1: Tap Cover"
