@@ -35,7 +35,16 @@ Modifier 2 Bumpers:
     "activators": {
         "release": {
             "bindings": {
-                "binding": "controller_action CHANGE_PRESET 1 1 1, , "
+                "binding": [
+                    "controller_action CHANGE_PRESET 1 1 1, , ", // switch to base
+                    "controller_action remove_layer 15 0 0, , ", // "L1: Modifier 0"
+                    "controller_action remove_layer 16 0 0, , ", // "R1: Modifier 1"
+                    "controller_action remove_layer 34 0 0, , ", // "L1: Tap Cover",
+                    "controller_action remove_layer 35 0 0, , ", // "R1: Tap Cover"
+                    "controller_action remove_layer 76 0 0, , ", // "L1&R1: Tap Cover"
+                    "controller_action remove_layer 58 0 0, , ", // "L1!R1: Modifier 2"
+                    "controller_action remove_layer 59 0 0, , " // "R1!L1: Modifier 2"
+                ]
             },
             "settings": {
                 "haptic_intensity": "0"
@@ -59,7 +68,16 @@ Modifier 2 Bumpers:
     "activators": {
         "release": {
             "bindings": {
-                "binding": "controller_action CHANGE_PRESET 1 1 1, , "
+                "binding": [
+                    "controller_action CHANGE_PRESET 1 1 1, , ", // switch to base
+                    "controller_action remove_layer 15 0 0, , ", // "L1: Modifier 0"
+                    "controller_action remove_layer 16 0 0, , ", // "R1: Modifier 1"
+                    "controller_action remove_layer 34 0 0, , ", // "L1: Tap Cover",
+                    "controller_action remove_layer 35 0 0, , ", // "R1: Tap Cover"
+                    "controller_action remove_layer 76 0 0, , ", // "L1&R1: Tap Cover"
+                    "controller_action remove_layer 58 0 0, , ", // "L1!R1: Modifier 2"
+                    "controller_action remove_layer 59 0 0, , " // "R1!L1: Modifier 2"
+                ]
             },
             "settings": {
                 "haptic_intensity": "0"

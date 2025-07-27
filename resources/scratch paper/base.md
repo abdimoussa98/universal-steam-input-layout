@@ -37,7 +37,16 @@ Modifier 2 Bumpers:
     "activators": {
         "release": {
             "bindings": {
-                "binding": "controller_action CHANGE_PRESET 2 1 1, , "
+                "binding": [
+                    "controller_action CHANGE_PRESET 2 1 1, , ", // switch to gyro
+                    "controller_action remove_layer 7 0 0, , ", // "L1: Modifier 0"
+                    "controller_action remove_layer 8 0 0, , ", // "R1: Modifier 1"
+                    "controller_action remove_layer 69 0 0, , ", // "L1: Tap Cover",
+                    "controller_action remove_layer 70 0 0, , ", // "R1: Tap Cover"
+                    "controller_action remove_layer 75 0 0, , ", // "L1&R1: Tap Cover"
+                    "controller_action remove_layer 56 0 0, , ", // "L1!R1: Modifier 2"
+                    "controller_action remove_layer 57 0 0, , " // "R1!L1: Modifier 2"
+                ]
             },
             "settings": {
                 "haptic_intensity": "0"
@@ -60,9 +69,18 @@ Modifier 2 Bumpers:
 "right_bumper": {
     "activators": {
         "release": {
-            "bindings": {
-                "binding": "controller_action CHANGE_PRESET 2 1 1, , "
-            },
+                "bindings": {
+                    "binding": [
+                        "controller_action CHANGE_PRESET 2 1 1, , ", // switch to gyro
+                        "controller_action remove_layer 7 0 0, , ", // "L1: Modifier 0"
+                        "controller_action remove_layer 8 0 0, , ", // "R1: Modifier 1"
+                        "controller_action remove_layer 69 0 0, , ", // "L1: Tap Cover",
+                        "controller_action remove_layer 70 0 0, , ", // "R1: Tap Cover"
+                        "controller_action remove_layer 75 0 0, , ", // "L1&R1: Tap Cover"
+                        "controller_action remove_layer 56 0 0, , ", // "L1!R1: Modifier 2"
+                        "controller_action remove_layer 57 0 0, , " // "R1!L1: Modifier 2"
+                    ]
+                },
             "settings": {
                 "haptic_intensity": "0"
             }
