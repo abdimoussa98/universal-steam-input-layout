@@ -42,9 +42,9 @@
 - [x] In "L1!R1: Modifier 2" "Preset_1000062"
     - [x] Add cleanup funcs to menu buttons
     - [x] Add cleanup funcs to stick clicks
-- [ ] In "R1!L1: Modifier 2" "Preset_1000063"
-    - [ ] Add cleanup funcs to menu buttons
-    - [ ] Add cleanup funcs to stick clicks
+- [x] In "R1!L1: Modifier 2" "Preset_1000063"
+    - [x] Add cleanup funcs to menu buttons
+    - [x] Add cleanup funcs to stick clicks
 - [x] In "Fn Layer"
     - [x] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
 
