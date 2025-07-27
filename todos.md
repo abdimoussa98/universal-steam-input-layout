@@ -21,8 +21,8 @@
 ### RST/LST Cleanups
 - [x] In "Menu Buttons: Entry Point"
     - [x] On RST/LST release, add "Fn Layer"
-- [ ] In "Fn Layer"
-    - [ ] On RST/LST release, remove RST/LST layers
+- [x] In "Fn Layer"
+    - [x] On RST/LST release, remove RST/LST layers
 
 ### General Button Cleanups
 - [ ] In Modifier 0,1,2 layers
