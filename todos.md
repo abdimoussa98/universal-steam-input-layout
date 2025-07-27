@@ -12,8 +12,6 @@
     - [ ] Add cleanup funcs to menu buttons & stick clicks
 - [ ] In "Fn Layer"
     - [ ] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
-- [ ] In Modifier 2 layers
-    - [ ] Remove all layers before changing action sets (remove all modifiers and tap covers)
 
 ---
 
@@ -29,8 +27,6 @@
     - [ ] Add cleanup funcs to menu buttons & stick clicks
 - [ ] In "Fn Layer"
     - [ ] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
-- [ ] In Modifier 2 layers
-    - [ ] Remove all layers before changing action sets (remove all modifiers and tap covers)
 
 ---
 
