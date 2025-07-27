@@ -31415,9 +31415,35 @@
 					},
 					"button_back_left": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_CONTROL, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_CONTROL, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RIGHT_CONTROL, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31425,9 +31451,35 @@
 					},
 					"button_back_right": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_ALT, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_ALT, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RIGHT_ALT, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31435,9 +31487,35 @@
 					},
 					"button_back_left_upper": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_SHIFT, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_SHIFT, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RIGHT_SHIFT, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31445,9 +31523,35 @@
 					},
 					"button_back_right_upper": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press CAPSLOCK, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press CAPSLOCK, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press CAPSLOCK, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31620,9 +31724,35 @@
 					},
 					"button_back_left": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_CONTROL, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_CONTROL, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RIGHT_CONTROL, , "
+									"binding": [
+										"controller_action remove_layer 61 0 0, , ",
+										"controller_action remove_layer 84 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31630,9 +31760,35 @@
 					},
 					"button_back_right": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_ALT, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_ALT, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RIGHT_ALT, , "
+									"binding": [
+										"controller_action remove_layer 61 0 0, , ",
+										"controller_action remove_layer 84 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31640,9 +31796,35 @@
 					},
 					"button_back_left_upper": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_SHIFT, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_SHIFT, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RIGHT_SHIFT, , "
+									"binding": [
+										"controller_action remove_layer 61 0 0, , ",
+										"controller_action remove_layer 84 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31650,9 +31832,35 @@
 					},
 					"button_back_right_upper": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press CAPSLOCK, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press CAPSLOCK, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press CAPSLOCK, , "
+									"binding": [
+										"controller_action remove_layer 61 0 0, , ",
+										"controller_action remove_layer 84 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31825,9 +32033,35 @@
 					},
 					"button_back_left": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_CONTROL, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_CONTROL, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RIGHT_CONTROL, , "
+									"binding": [
+										"controller_action remove_layer 62 0 0, , ",
+										"controller_action remove_layer 85 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31835,9 +32069,35 @@
 					},
 					"button_back_right": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_ALT, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_ALT, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RIGHT_ALT, , "
+									"binding": [
+										"controller_action remove_layer 62 0 0, , ",
+										"controller_action remove_layer 85 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31845,9 +32105,35 @@
 					},
 					"button_back_left_upper": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_SHIFT, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_SHIFT, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press RIGHT_SHIFT, , "
+									"binding": [
+										"controller_action remove_layer 62 0 0, , ",
+										"controller_action remove_layer 85 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -31855,9 +32141,35 @@
 					},
 					"button_back_right_upper": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press CAPSLOCK, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press CAPSLOCK, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press CAPSLOCK, , "
+									"binding": [
+										"controller_action remove_layer 62 0 0, , ",
+										"controller_action remove_layer 85 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},

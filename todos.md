@@ -10,8 +10,8 @@
 ### General Button Cleanups
 - [ ] In Modifier 0,1,2 layers
     - [ ] Add cleanup funcs to menu buttons & stick clicks
-- [ ] In "Fn Layer"
-    - [ ] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
+- [x] In "Fn Layer"
+    - [x] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
 
 ---
 
@@ -25,8 +25,8 @@
 ### General Button Cleanups
 - [ ] In Modifier 0,1,2 layers
     - [ ] Add cleanup funcs to menu buttons & stick clicks
-- [ ] In "Fn Layer"
-    - [ ] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
+- [x] In "Fn Layer"
+    - [x] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
 
 ---
 
@@ -38,8 +38,8 @@
     - [x] On RST/LST release, remove RST/LST layers
 
 ### General Button Cleanups
-- [ ] In "Fn Layer"
-    - [ ] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
+- [x] In "Fn Layer"
+    - [x] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
 
 
 Spike:
