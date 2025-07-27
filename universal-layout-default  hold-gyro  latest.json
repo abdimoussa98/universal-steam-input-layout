@@ -3,7 +3,7 @@
 		"version": "3",
 		"revision": "12438",
 		"title": "universal-layout-default :: hold-gyro :: latest",
-		"description": "add clean temp gyro cleanup for fn layer and menu buttons entry point",
+		"description": "still need to add clean up functions for mod 0,1,2",
 		"creator": "76561198079670632",
 		"progenitor": "",
 		"url": "workshop://3532665739",
@@ -14080,9 +14080,6 @@
 								},
 								"settings": {
 									"hold_repeats": "1"
-								},
-								"settings": {
-									"hold_repeats": "1"
 								}
 							}
 						},
@@ -14096,9 +14093,6 @@
 										"controller_action remove_layer 60 0 0, , ",
 										"controller_action remove_layer 83 0 0, , "
 									]
-								},
-								"settings": {
-									"hold_repeats": "1"
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -15253,9 +15247,6 @@
 								},
 								"settings": {
 									"hold_repeats": "1"
-								},
-								"settings": {
-									"hold_repeats": "1"
 								}
 							}
 						},
@@ -15269,9 +15260,6 @@
 										"controller_action remove_layer 61 0 0, , ",
 										"controller_action remove_layer 84 0 0, , "
 									]
-								},
-								"settings": {
-									"hold_repeats": "1"
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -16030,9 +16018,6 @@
 								},
 								"settings": {
 									"hold_repeats": "1"
-								},
-								"settings": {
-									"hold_repeats": "1"
 								}
 							}
 						},
@@ -16046,9 +16031,6 @@
 										"controller_action remove_layer 62 0 0, , ",
 										"controller_action remove_layer 85 0 0, , "
 									]
-								},
-								"settings": {
-									"hold_repeats": "1"
 								},
 								"settings": {
 									"hold_repeats": "1"
