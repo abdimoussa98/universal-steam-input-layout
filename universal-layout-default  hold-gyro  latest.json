@@ -3352,7 +3352,21 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press BACK_TICK, , "
+									"binding": [
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 70 0 0, , "
+									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"key_press BACK_TICK, , ",
+										"controller_action add_layer 70 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "2"
 								}
 							}
 						},
@@ -13294,7 +13308,21 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_button MIDDLE, , "
+									"binding": [
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 70 0 0, , "
+									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"mouse_button MIDDLE, , ",
+										"controller_action add_layer 70 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "2"
 								}
 							}
 						},
@@ -29222,7 +29250,21 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press INSERT, , "
+									"binding": [
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 70 0 0, , "
+									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"key_press INSERT, , ",
+										"controller_action add_layer 70 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "2"
 								}
 							}
 						},
@@ -29232,7 +29274,21 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press DELETE, , "
+									"binding": [
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 70 0 0, , "
+									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"key_press DELETE, , ",
+										"controller_action add_layer 70 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "2"
 								}
 							}
 						},
