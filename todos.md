@@ -14,9 +14,9 @@
 - [x] In "R1: Modifier 1" "Preset_1000005"
     - [x] Add cleanup funcs to menu buttons
     - [x] Add cleanup funcs to stick clicks
-- [ ] In "L1!R1: Modifier 2" "Preset_1000060"
-    - [ ] Add cleanup funcs to menu buttons
-    - [ ] Add cleanup funcs to stick clicks
+- [x] In "L1!R1: Modifier 2" "Preset_1000060"
+    - [x] Add cleanup funcs to menu buttons
+    - [x] Add cleanup funcs to stick clicks
 - [ ] In "R1!L1: Modifier 2" "Preset_1000061"
     - [ ] Add cleanup funcs to menu buttons
     - [ ] Add cleanup funcs to stick clicks

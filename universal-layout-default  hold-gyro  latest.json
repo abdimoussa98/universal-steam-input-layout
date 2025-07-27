@@ -13921,9 +13921,39 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press PAGE_UP, , "
+									"binding": [
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 69 0 0, , ",
+										"controller_action remove_layer 70 0 0, , ",
+										"controller_action remove_layer 75 0 0, , "
+									]
 								}
-							}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": [
+											"key_press PAGE_UP, , ",
+											"controller_action add_layer 75 0 0, , "
+										]
+									},
+									"settings": {
+										"chord_button": "1",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "2",
+										"interruptable": "0"
+									}
+								}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -14035,9 +14065,39 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press PAGE_DOWN, , "
+									"binding": [
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 69 0 0, , ",
+										"controller_action remove_layer 70 0 0, , ",
+										"controller_action remove_layer 75 0 0, , "
+									]
 								}
-							}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": [
+											"key_press PAGE_DOWN, , ",
+											"controller_action add_layer 75 0 0, , "
+										]
+									},
+									"settings": {
+										"chord_button": "1",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "2",
+										"interruptable": "0"
+									}
+								}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -30995,9 +31055,39 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press HOME, , "
+									"binding": [
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 69 0 0, , ",
+										"controller_action remove_layer 70 0 0, , ",
+										"controller_action remove_layer 75 0 0, , "
+									]
 								}
-							}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": [
+											"key_press HOME, , ",
+											"controller_action add_layer 75 0 0, , "
+										]
+									},
+									"settings": {
+										"chord_button": "1",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "2",
+										"interruptable": "0"
+									}
+								}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -31005,9 +31095,39 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press END, , "
+									"binding": [
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action remove_layer 69 0 0, , ",
+										"controller_action remove_layer 70 0 0, , ",
+										"controller_action remove_layer 75 0 0, , "
+									]
 								}
-							}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": [
+											"key_press END, , ",
+											"controller_action add_layer 75 0 0, , "
+										]
+									},
+									"settings": {
+										"chord_button": "1",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "2",
+										"interruptable": "0"
+									}
+								}
+							]
 						},
 						"disabled_activators": {}
 					},
