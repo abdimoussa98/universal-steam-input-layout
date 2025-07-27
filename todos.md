@@ -33,9 +33,9 @@
     - [x] On RST/LST release, remove RST/LST layers
 
 ### General Button Cleanups
-- [ ] In "L1: Modifier 0" "Preset_1000017"
-    - [ ] Add cleanup funcs to menu buttons
-    - [ ] Add cleanup funcs to stick clicks
+- [X] In "L1: Modifier 0" "Preset_1000017"
+    - [X] Add cleanup funcs to menu buttons
+    - [X] Add cleanup funcs to stick clicks
 - [ ] In "R1: Modifier 1" "Preset_1000018"
     - [ ] Add cleanup funcs to menu buttons
     - [ ] Add cleanup funcs to stick clicks
