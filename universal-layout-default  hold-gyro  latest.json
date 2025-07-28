@@ -3,7 +3,7 @@
 		"version": "3",
 		"revision": "12467",
 		"title": "universal-layout-default :: hold-gyro :: latest",
-		"description": "add the rest of the gyro modeshifts, still need to add the activators manually",
+		"description": "finish adding menu buttons to gyro modeshift activators; still need to remove l2 from gyro modeshift activators",
 		"creator": "76561198079670632",
 		"progenitor": "",
 		"url": "autosave:///home/deck/.local/share/Steam/steamapps/common/Steam Controller Configs/119404904/config/413080/controller_neptune.vdf",
@@ -31307,18 +31307,28 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 57 0 0, , ",
-										"controller_action remove_layer 7 0 0, , ",
-										"controller_action remove_layer 8 0 0, , ",
-										"controller_action remove_layer 69 0 0, , ",
-										"controller_action remove_layer 70 0 0, , ",
-										"controller_action remove_layer 75 0 0, , "
-									]
+							"Full_Press": [
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 57 0 0, , ",
+											"controller_action remove_layer 7 0 0, , ",
+											"controller_action remove_layer 8 0 0, , ",
+											"controller_action remove_layer 69 0 0, , ",
+											"controller_action remove_layer 70 0 0, , ",
+											"controller_action remove_layer 75 0 0, , "
+										]
+									}
+								},
+								{
+									"bindings": {
+										"binding": "mode_shift gyro 1310"
+									},
+									"settings": {
+										"interruptable": "0"
+									}
 								}
-							},
+							],
 							"chord": [
 								{
 									"bindings": {
@@ -31347,18 +31357,28 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 57 0 0, , ",
-										"controller_action remove_layer 7 0 0, , ",
-										"controller_action remove_layer 8 0 0, , ",
-										"controller_action remove_layer 69 0 0, , ",
-										"controller_action remove_layer 70 0 0, , ",
-										"controller_action remove_layer 75 0 0, , "
-									]
+							"Full_Press": [
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 57 0 0, , ",
+											"controller_action remove_layer 7 0 0, , ",
+											"controller_action remove_layer 8 0 0, , ",
+											"controller_action remove_layer 69 0 0, , ",
+											"controller_action remove_layer 70 0 0, , ",
+											"controller_action remove_layer 75 0 0, , "
+										]
+									}
+								},
+								{
+									"bindings": {
+										"binding": "mode_shift gyro 1310"
+									},
+									"settings": {
+										"interruptable": "0"
+									}
 								}
-							},
+							],
 							"chord": [
 								{
 									"bindings": {
@@ -31477,18 +31497,28 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 58 0 0, , ",
-										"controller_action remove_layer 15 0 0, , ",
-										"controller_action remove_layer 16 0 0, , ",
-										"controller_action remove_layer 34 0 0, , ",
-										"controller_action remove_layer 35 0 0, , ",
-										"controller_action remove_layer 76 0 0, , "
-									]
+							"Full_Press": [
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 58 0 0, , ",
+											"controller_action remove_layer 15 0 0, , ",
+											"controller_action remove_layer 16 0 0, , ",
+											"controller_action remove_layer 34 0 0, , ",
+											"controller_action remove_layer 35 0 0, , ",
+											"controller_action remove_layer 76 0 0, , "
+										]
+									}
+								},
+								{
+									"bindings": {
+										"binding": "mode_shift gyro 1314"
+									},
+									"settings": {
+										"interruptable": "0"
+									}
 								}
-							},
+							],
 							"chord": [
 								{
 									"bindings": {
@@ -31517,18 +31547,28 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 58 0 0, , ",
-										"controller_action remove_layer 15 0 0, , ",
-										"controller_action remove_layer 16 0 0, , ",
-										"controller_action remove_layer 34 0 0, , ",
-										"controller_action remove_layer 35 0 0, , ",
-										"controller_action remove_layer 76 0 0, , "
-									]
+							"Full_Press": [
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 58 0 0, , ",
+											"controller_action remove_layer 15 0 0, , ",
+											"controller_action remove_layer 16 0 0, , ",
+											"controller_action remove_layer 34 0 0, , ",
+											"controller_action remove_layer 35 0 0, , ",
+											"controller_action remove_layer 76 0 0, , "
+										]
+									}
+								},
+								{
+									"bindings": {
+										"binding": "mode_shift gyro 1314"
+									},
+									"settings": {
+										"interruptable": "0"
+									}
 								}
-							},
+							],
 							"chord": [
 								{
 									"bindings": {
@@ -31647,18 +31687,28 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 59 0 0, , ",
-										"controller_action remove_layer 15 0 0, , ",
-										"controller_action remove_layer 16 0 0, , ",
-										"controller_action remove_layer 34 0 0, , ",
-										"controller_action remove_layer 35 0 0, , ",
-										"controller_action remove_layer 76 0 0, , "
-									]
+							"Full_Press": [
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 59 0 0, , ",
+											"controller_action remove_layer 15 0 0, , ",
+											"controller_action remove_layer 16 0 0, , ",
+											"controller_action remove_layer 34 0 0, , ",
+											"controller_action remove_layer 35 0 0, , ",
+											"controller_action remove_layer 76 0 0, , "
+										]
+									}
+								},
+								{
+									"bindings": {
+										"binding": "mode_shift gyro 1316"
+									},
+									"settings": {
+										"interruptable": "0"
+									}
 								}
-							},
+							],
 							"chord": [
 								{
 									"bindings": {
@@ -31687,18 +31737,28 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 59 0 0, , ",
-										"controller_action remove_layer 15 0 0, , ",
-										"controller_action remove_layer 16 0 0, , ",
-										"controller_action remove_layer 34 0 0, , ",
-										"controller_action remove_layer 35 0 0, , ",
-										"controller_action remove_layer 76 0 0, , "
-									]
+							"Full_Press": [
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 59 0 0, , ",
+											"controller_action remove_layer 15 0 0, , ",
+											"controller_action remove_layer 16 0 0, , ",
+											"controller_action remove_layer 34 0 0, , ",
+											"controller_action remove_layer 35 0 0, , ",
+											"controller_action remove_layer 76 0 0, , "
+										]
+									}
+								},
+								{
+									"bindings": {
+										"binding": "mode_shift gyro 1316"
+									},
+									"settings": {
+										"interruptable": "0"
+									}
 								}
-							},
+							],
 							"chord": [
 								{
 									"bindings": {
