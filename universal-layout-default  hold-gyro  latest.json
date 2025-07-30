@@ -1,9 +1,9 @@
 {
 	"controller_mappings": {
 		"version": "3",
-		"revision": "12467",
+		"revision": "12471",
 		"title": "universal-layout-default :: hold-gyro :: latest",
-		"description": "finish adding menu buttons to gyro modeshift activators; still need to remove l2 from gyro modeshift activators",
+		"description": "remove l2 from gyro modeshifts",
 		"creator": "76561198079670632",
 		"progenitor": "",
 		"url": "autosave:///home/deck/.local/share/Steam/steamapps/common/Steam Controller Configs/119404904/config/413080/controller_neptune.vdf",
@@ -31470,19 +31470,6 @@
 							}
 						},
 						"disabled_activators": {}
-					},
-					"left_trigger": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "mode_shift gyro 1310"
-								},
-								"settings": {
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
 					}
 				},
 				"settings": {
@@ -31660,19 +31647,6 @@
 							}
 						},
 						"disabled_activators": {}
-					},
-					"left_trigger": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "mode_shift gyro 1314"
-								},
-								"settings": {
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
 					}
 				},
 				"settings": {
@@ -31845,19 +31819,6 @@
 									"chord_button": "2",
 									"haptic_intensity": "3",
 									"delay_start": "200",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"left_trigger": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "mode_shift gyro 1316"
-								},
-								"settings": {
 									"interruptable": "0"
 								}
 							}
