@@ -31171,18 +31171,29 @@
 									}
 								}
 							],
-							"chord": {
-								"bindings": {
-									"binding": [
-										"key_press HOME, , ",
-										"controller_action add_layer 75 0 0, , "
-									]
+							"chord": [
+								{
+									"bindings": {
+										"binding": [
+											"key_press HOME, , ",
+											"controller_action add_layer 75 0 0, , "
+										]
+									},
+									"settings": {
+										"chord_button": "1",
+										"interruptable": "0"
+									}
 								},
-								"settings": {
-									"chord_button": "1",
-									"interruptable": "0"
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "2",
+										"interruptable": "0"
+									}
 								}
-							}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -31213,18 +31224,29 @@
 									}
 								}
 							],
-							"chord": {
-								"bindings": {
-									"binding": [
-										"key_press END, , ",
-										"controller_action add_layer 75 0 0, , "
-									]
+							"chord": [
+								{
+									"bindings": {
+										"binding": [
+											"key_press END, , ",
+											"controller_action add_layer 75 0 0, , "
+										]
+									},
+									"settings": {
+										"chord_button": "1",
+										"interruptable": "0"
+									}
 								},
-								"settings": {
-									"chord_button": "1",
-									"interruptable": "0"
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "2",
+										"interruptable": "0"
+									}
 								}
-							}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -31332,15 +31354,6 @@
 							"chord": [
 								{
 									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "1",
-										"interruptable": "0"
-									}
-								},
-								{
-									"bindings": {
 										"binding": [
 											"key_press HOME, , ",
 											"controller_action add_layer 75 0 0, , "
@@ -31348,6 +31361,15 @@
 									},
 									"settings": {
 										"chord_button": "2",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "1",
 										"interruptable": "0"
 									}
 								}
@@ -31382,15 +31404,6 @@
 							"chord": [
 								{
 									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "1",
-										"interruptable": "0"
-									}
-								},
-								{
-									"bindings": {
 										"binding": [
 											"key_press END, , ",
 											"controller_action add_layer 75 0 0, , "
@@ -31398,6 +31411,15 @@
 									},
 									"settings": {
 										"chord_button": "2",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "1",
 										"interruptable": "0"
 									}
 								}
@@ -31686,15 +31708,6 @@
 							"chord": [
 								{
 									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "1",
-										"interruptable": "0"
-									}
-								},
-								{
-									"bindings": {
 										"binding": [
 											"key_press HOME, , ",
 											"controller_action add_layer 76 0 0, , "
@@ -31702,6 +31715,15 @@
 									},
 									"settings": {
 										"chord_button": "2",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "1",
 										"interruptable": "0"
 									}
 								}
@@ -31736,15 +31758,6 @@
 							"chord": [
 								{
 									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "1",
-										"interruptable": "0"
-									}
-								},
-								{
-									"bindings": {
 										"binding": [
 											"key_press END, , ",
 											"controller_action add_layer 76 0 0, , "
@@ -31752,6 +31765,15 @@
 									},
 									"settings": {
 										"chord_button": "2",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "1",
 										"interruptable": "0"
 									}
 								}
