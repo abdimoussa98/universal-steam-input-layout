@@ -1,69 +1,62 @@
 # Todo:
-
+universal-layout-alternative:
+    We need to swap all functionality on the bumpers and the triggers.
+    
 ## Base Action Set
-### RST/LST Cleanups
-- [x] In "Menu Buttons: Entry Point"
-    - [x] On RST/LST release, add "Fn Layer"
-- [x] In "Fn Layer"
-    - [x] On RST/LST release, remove RST/LST layers
-
-### General Button Cleanups
-- [x] In "L1: Modifier 0" "Preset_1000008"
-    - [x] Add cleanup funcs to menu buttons
-    - [x] Add cleanup funcs to stick clicks
-- [x] In "R1: Modifier 1" "Preset_1000005"
-    - [x] Add cleanup funcs to menu buttons
-    - [x] Add cleanup funcs to stick clicks
-- [x] In "L1!R1: Modifier 2" "Preset_1000060"
-    - [x] Add cleanup funcs to menu buttons
-    - [x] Add cleanup funcs to stick clicks
-- [x] In "R1!L1: Modifier 2" "Preset_1000061"
-    - [x] Add cleanup funcs to menu buttons
-    - [x] Add cleanup funcs to stick clicks
-- [x] In "Fn Layer"
-    - [x] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
-
----
+    - [ ] Modifier 0 layer
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Modifier 1 layer
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Modifier 2 layer
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Scroll Wheel double press lifecycle
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+        - [ ] Mimic Trigger soft/full pull from existing solution discovered from duelsense edge
+    - [ ] Turning ramp ups
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Chorded Turning ramp ups
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Fragile Layers
+        - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
+        - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
 
 ## Gyro Action Set
-### RST/LST Cleanups
-- [x] In "Menu Buttons: Entry Point"
-    - [x] On RST/LST release, add "Fn Layer"
-- [x] In "Fn Layer"
-    - [x] On RST/LST release, remove RST/LST layers
-
-### General Button Cleanups
-- [X] In "L1: Modifier 0" "Preset_1000017"
-    - [X] Add cleanup funcs to menu buttons
-    - [X] Add cleanup funcs to stick clicks
-- [x] In "R1: Modifier 1" "Preset_1000018"
-    - [x] Add cleanup funcs to menu buttons
-    - [x] Add cleanup funcs to stick clicks
-- [x] In "L1!R1: Modifier 2" "Preset_1000062"
-    - [x] Add cleanup funcs to menu buttons
-    - [x] Add cleanup funcs to stick clicks
-- [x] In "R1!L1: Modifier 2" "Preset_1000063"
-    - [x] Add cleanup funcs to menu buttons
-    - [x] Add cleanup funcs to stick clicks
-- [x] In "Fn Layer"
-    - [x] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
-
----
+    - [ ] Modifier 0 layer
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Modifier 1 layer
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Modifier 2 layer
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Scroll Wheel double press lifecycle
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+        - [ ] Mimic Trigger soft/full pull from existing solution discovered from duelsense edge
+    - [ ] Turning ramp ups
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Chorded Turning ramp ups
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Fragile Layers
+        - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
+        - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
 
 ## Alt Action Set
-### RST/LST Cleanups
-- [x] In "Menu Buttons: Entry Point"
-    - [x] On RST/LST release, add "Fn Layer"
-- [x] In "Fn Layer"
-    - [x] On RST/LST release, remove RST/LST layers
-
-### General Button Cleanups
-- [x] In "Fn Layer"
-    - [x] Add clean-up to all button presses (4 back buttons and update all face buttons, bumpers, and triggers)
-
-
-Spike:
-Figure out a way to add "L1&R1: Tap Cover" whilst in Modifier 2 layers without using always on action. Since i want to be able to remove RST/LST layer and add the tap cover on RST/LST release. Currently if i do this, the always on action will be interrupted and crash steam.
-
-- [x] In "Modifier 2" layers
-    - [x] On RST/LST release, remove RST/LST layers & add "L1&R1: Tap Cover"
+    - [ ] Turning ramp ups
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Chorded Turning ramp ups
+        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] Clean up functions interrupts need to be swapped to triggers
+    - [ ] Fragile Layers
+        - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
+        - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
