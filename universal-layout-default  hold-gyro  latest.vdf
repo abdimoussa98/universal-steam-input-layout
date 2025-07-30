@@ -3,7 +3,7 @@
 	"version"				"3"
 	"revision"				"12471"
 	"title"					"universal-layout-default :: hold-gyro :: latest"
-	"description"			"remove l2 from gyro modeshifts"
+	"description"			"fix main set transition from getting stuck; update menu buttons in mod layers ordering to accomodate desktop 3 command limitation"
 	"creator"				"76561198079670632"
 	"progenitor"			""
 	"url"					"autosave:///home/deck/.local/share/Steam/steamapps/common/Steam Controller Configs/119404904/config/413080/controller_neptune.vdf"
@@ -41718,6 +41718,18 @@
 							"interruptable"		"0"
 						}
 					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
+						}
+					}
 				}
 				"disabled_activators"
 				{
@@ -41764,6 +41776,18 @@
 							"interruptable"		"0"
 						}
 					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"2"
+							"interruptable"		"0"
+						}
+					}
 				}
 				"disabled_activators"
 				{
@@ -41789,20 +41813,6 @@
 						"settings"
 						{
 							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 75 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"			"1"
-							"haptic_intensity"		"3"
-							"delay_start"			"200"
-							"interruptable"			"0"
 						}
 					}
 				}
@@ -41840,7 +41850,7 @@
 						}
 						"settings"
 						{
-							"chord_button"			"2"
+							"chord_button"			"1"
 							"haptic_intensity"		"3"
 							"delay_start"			"200"
 							"interruptable"			"0"
@@ -41896,11 +41906,12 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"key_press HOME, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
 						}
 						"settings"
 						{
-							"chord_button"		"1"
+							"chord_button"		"2"
 							"interruptable"		"0"
 						}
 					}
@@ -41908,12 +41919,11 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press HOME, , "
-							"binding"		"controller_action add_layer 75 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
-							"chord_button"		"2"
+							"chord_button"		"1"
 							"interruptable"		"0"
 						}
 					}
@@ -41953,11 +41963,12 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"key_press END, , "
+							"binding"		"controller_action add_layer 75 0 0, , "
 						}
 						"settings"
 						{
-							"chord_button"		"1"
+							"chord_button"		"2"
 							"interruptable"		"0"
 						}
 					}
@@ -41965,12 +41976,11 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press END, , "
-							"binding"		"controller_action add_layer 75 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
-							"chord_button"		"2"
+							"chord_button"		"1"
 							"interruptable"		"0"
 						}
 					}
@@ -42009,7 +42019,7 @@
 						}
 						"settings"
 						{
-							"chord_button"			"1"
+							"chord_button"			"2"
 							"haptic_intensity"		"3"
 							"delay_start"			"200"
 							"interruptable"			"0"
@@ -42040,20 +42050,6 @@
 						"settings"
 						{
 							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 75 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"			"2"
-							"haptic_intensity"		"3"
-							"delay_start"			"200"
-							"interruptable"			"0"
 						}
 					}
 				}
@@ -42211,20 +42207,6 @@
 							"haptic_intensity"		"0"
 						}
 					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 76 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"			"1"
-							"haptic_intensity"		"3"
-							"delay_start"			"200"
-							"interruptable"			"0"
-						}
-					}
 				}
 				"disabled_activators"
 				{
@@ -42260,7 +42242,7 @@
 						}
 						"settings"
 						{
-							"chord_button"			"2"
+							"chord_button"			"1"
 							"haptic_intensity"		"3"
 							"delay_start"			"200"
 							"interruptable"			"0"
@@ -42316,11 +42298,12 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"key_press HOME, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
 						}
 						"settings"
 						{
-							"chord_button"		"1"
+							"chord_button"		"2"
 							"interruptable"		"0"
 						}
 					}
@@ -42328,12 +42311,11 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press HOME, , "
-							"binding"		"controller_action add_layer 76 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
-							"chord_button"		"2"
+							"chord_button"		"1"
 							"interruptable"		"0"
 						}
 					}
@@ -42373,11 +42355,12 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"key_press END, , "
+							"binding"		"controller_action add_layer 76 0 0, , "
 						}
 						"settings"
 						{
-							"chord_button"		"1"
+							"chord_button"		"2"
 							"interruptable"		"0"
 						}
 					}
@@ -42385,12 +42368,11 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press END, , "
-							"binding"		"controller_action add_layer 76 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
-							"chord_button"		"2"
+							"chord_button"		"1"
 							"interruptable"		"0"
 						}
 					}
@@ -42429,7 +42411,7 @@
 						}
 						"settings"
 						{
-							"chord_button"			"1"
+							"chord_button"			"2"
 							"haptic_intensity"		"3"
 							"delay_start"			"200"
 							"interruptable"			"0"
@@ -42460,20 +42442,6 @@
 						"settings"
 						{
 							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 76 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"			"2"
-							"haptic_intensity"		"3"
-							"delay_start"			"200"
-							"interruptable"			"0"
 						}
 					}
 				}
