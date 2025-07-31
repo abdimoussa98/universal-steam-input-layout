@@ -4337,28 +4337,16 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 13 0 0, , "
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
 					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_button LEFT, , "
+									"binding": "controller_action add_layer 15 0 0, , "
 								},
 								"settings": {
-									"repeat_rate": "99"
+									"hold_repeats": "1",
+									"haptic_intensity": "2",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -4366,9 +4354,7 @@
 					}
 				},
 				"settings": {
-					"deadzone_outer_radius": "32767",
 					"deadzone_inner_radius": "0",
-					"edge_binding_radius": "0",
 					"adaptive_threshold": "0"
 				}
 			},
@@ -4378,28 +4364,16 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 14 0 0, , "
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
 					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_button RIGHT, , "
+									"binding": "controller_action add_layer 16 0 0, , "
 								},
 								"settings": {
-									"repeat_rate": "99"
+									"hold_repeats": "1",
+									"haptic_intensity": "2",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -4407,9 +4381,7 @@
 					}
 				},
 				"settings": {
-					"deadzone_outer_radius": "32767",
 					"deadzone_inner_radius": "0",
-					"edge_binding_radius": "0",
 					"adaptive_threshold": "0"
 				}
 			},
@@ -29504,13 +29476,14 @@
 					},
 					"left_bumper": {
 						"activators": {
-							"chord": {
+							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action add_layer 15 0 0, , "
+									"binding": [
+										"controller_action add_layer 13 0 0, , ",
+										"mouse_button LEFT, , "
+									]
 								},
 								"settings": {
-									"chord_button": "1",
-									"hold_repeats": "1",
 									"interruptable": "0"
 								}
 							}
@@ -29519,13 +29492,14 @@
 					},
 					"right_bumper": {
 						"activators": {
-							"chord": {
+							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action add_layer 16 0 0, , "
+									"binding": [
+										"controller_action add_layer 14 0 0, , ",
+										"mouse_button RIGHT, , "
+									]
 								},
 								"settings": {
-									"chord_button": "2",
-									"hold_repeats": "1",
 									"interruptable": "0"
 								}
 							}

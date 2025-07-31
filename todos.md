@@ -28,7 +28,7 @@ universal-layout-alternative:
         - [ ] Clean up functions interrupts need to be swapped to triggers
 
 ## Gyro Action Set
-    - [ ] Swap intial layer's bumpers & triggers
+    - [x] Swap intial layer's bumpers & triggers
     - [ ] Turning ramp ups
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
