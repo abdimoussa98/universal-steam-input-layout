@@ -7484,12 +7484,25 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 30 0 0, , ",
-										"controller_action add_layer 13 0 0, , "
+										"controller_action add_layer 15 0 0, , "
 									]
 								},
 								"settings": {
 									"hold_repeats": "1",
 									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"haptic_intensity": "2"
 								}
 							}
 						},
@@ -7512,12 +7525,25 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 30 0 0, , ",
-										"controller_action add_layer 14 0 0, , "
+										"controller_action add_layer 16 0 0, , "
 									]
 								},
 								"settings": {
 									"hold_repeats": "1",
 									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"haptic_intensity": "2"
 								}
 							}
 						},
@@ -30509,7 +30535,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 30 0 0, , ",
-										"controller_action add_layer 15 0 0, , "
+										"controller_action add_layer 13 0 0, , ",
+										"mouse_button LEFT, , "
 									]
 								},
 								"settings": {
@@ -30526,7 +30553,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 30 0 0, , ",
-										"controller_action add_layer 16 0 0, , "
+										"controller_action add_layer 14 0 0, , ",
+										"mouse_button RIGHT, , "
 									]
 								},
 								"settings": {

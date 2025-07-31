@@ -39,7 +39,7 @@ universal-layout-alternative:
 
 ## Gyro Action Set
     - [x] Swap intial layer's bumpers & triggers
-    - [ ] Turning ramp up 0
+    - [x] Turning ramp up 0
     - [ ] Turning ramp up 1
     - [ ] Chorded Turning ramp up 0
     - [ ] Chorded Turning ramp up 1
