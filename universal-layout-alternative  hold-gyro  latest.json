@@ -9443,26 +9443,7 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 52 0 0, , ",
-										"controller_action remove_layer 31 0 0, , ",
-										"controller_action add_layer 53 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}
@@ -9472,26 +9453,7 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 52 0 0, , ",
-										"controller_action remove_layer 31 0 0, , ",
-										"controller_action add_layer 54 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}
@@ -31059,7 +31021,46 @@
 				"mode": "switches",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"left_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 52 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action add_layer 53 0 0, , ",
+										"mouse_button LEFT, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"right_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 52 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action add_layer 54 0 0, , ",
+										"mouse_button RIGHT, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
