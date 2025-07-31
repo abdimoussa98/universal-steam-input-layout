@@ -16,7 +16,7 @@ universal-layout-alternative:
 ## Base Action Set
     - [x] Swap intial layer's bumpers & triggers
     - [x] Turning ramp up 0
-    - [ ] Turning ramp up 1
+    - [x] Turning ramp up 1
     - [ ] Chorded Turning ramp up 0
     - [ ] Chorded Turning ramp up 1
 

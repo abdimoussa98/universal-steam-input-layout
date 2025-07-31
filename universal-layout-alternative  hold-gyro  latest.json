@@ -9263,12 +9263,25 @@
 									"binding": [
 										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 29 0 0, , ",
-										"controller_action add_layer 5 0 0, , "
+										"controller_action add_layer 7 0 0, , "
 									]
 								},
 								"settings": {
 									"hold_repeats": "1",
 									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"haptic_intensity": "2"
 								}
 							}
 						},
@@ -9292,12 +9305,25 @@
 									"binding": [
 										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 29 0 0, , ",
-										"controller_action add_layer 6 0 0, , "
+										"controller_action add_layer 8 0 0, , "
 									]
 								},
 								"settings": {
 									"hold_repeats": "1",
 									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"haptic_intensity": "2"
 								}
 							}
 						},
@@ -30917,7 +30943,8 @@
 									"binding": [
 										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 29 0 0, , ",
-										"controller_action add_layer 7 0 0, , "
+										"controller_action add_layer 5 0 0, , ",
+										"mouse_button LEFT, , "
 									]
 								},
 								"settings": {
@@ -30935,7 +30962,8 @@
 									"binding": [
 										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 29 0 0, , ",
-										"controller_action add_layer 8 0 0, , "
+										"controller_action add_layer 6 0 0, , ",
+										"mouse_button RIGHT, , "
 									]
 								},
 								"settings": {
