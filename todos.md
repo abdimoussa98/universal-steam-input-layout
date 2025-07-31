@@ -1,6 +1,17 @@
 # Todo:
 universal-layout-alternative:
     We need to swap all functionality on the bumpers and the triggers.
+
+    Recipe:
+        Have the alternative layout open to the triggers
+        Have the DUELSENSE example layout open to the triggers
+        Have the default layout open to the bumpers
+
+        Use the structure from the example layout
+        Use the values from the default layout
+        Update the alternative
+        
+        Swap the recipe for the bumpers now
     
 ## Base Action Set
     - [x] Swap intial layer's bumpers & triggers
@@ -56,7 +67,7 @@ universal-layout-alternative:
     - [ ] Turning ramp up 1
     - [ ] Chorded Turning ramp up 0
     - [ ] Chorded Turning ramp up 1
-    
+
     - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
         - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
         - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
