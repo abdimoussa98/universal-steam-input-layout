@@ -5394,28 +5394,16 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 53 0 0, , "
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
 					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_button LEFT, , "
+									"binding": "mouse_wheel SCROLL_DOWN, , "
 								},
 								"settings": {
-									"repeat_rate": "99"
+									"hold_repeats": "1",
+									"haptic_intensity": "2",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -5423,9 +5411,7 @@
 					}
 				},
 				"settings": {
-					"deadzone_outer_radius": "32767",
 					"deadzone_inner_radius": "0",
-					"edge_binding_radius": "0",
 					"adaptive_threshold": "0"
 				}
 			},
@@ -5435,28 +5421,16 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 54 0 0, , "
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
 					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_button RIGHT, , "
+									"binding": "mouse_wheel SCROLL_UP, , "
 								},
 								"settings": {
-									"repeat_rate": "99"
+									"hold_repeats": "1",
+									"haptic_intensity": "2",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -5464,9 +5438,7 @@
 					}
 				},
 				"settings": {
-					"deadzone_outer_radius": "32767",
 					"deadzone_inner_radius": "0",
-					"edge_binding_radius": "0",
 					"adaptive_threshold": "0"
 				}
 			},
@@ -30062,11 +30034,13 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_wheel SCROLL_DOWN, , "
+									"binding": [
+										"controller_action add_layer 53 0 0, , ",
+										"mouse_button LEFT, , "
+									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"repeat_rate": "50"
+									"interruptable": "0"
 								}
 							}
 						},
@@ -30076,11 +30050,13 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_wheel SCROLL_UP, , "
+									"binding": [
+										"controller_action add_layer 54 0 0, , ",
+										"mouse_button RIGHT, , "
+									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"repeat_rate": "50"
+									"interruptable": "0"
 								}
 							}
 						},
