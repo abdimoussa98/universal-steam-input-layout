@@ -1,0 +1,569 @@
+{
+	"controller_mappings": {
+		"version": "3",
+		"revision": "73",
+		"title": "Neptune Chord Ids",
+		"description": "...",
+		"creator": "76561198079670632",
+		"progenitor": "",
+		"url": "workshop://3538923045",
+		"export_type": "personal_local",
+		"controller_type": "controller_neptune",
+		"controller_caps": "23117823",
+		"major_revision": "0",
+		"minor_revision": "0",
+		"Timestamp": "0",
+		"group": [
+			{
+				"id": "1",
+				"mode": "trigger",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "5",
+									"haptic_intensity": "2"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "7",
+									"haptic_intensity": "2"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				}
+			},
+			{
+				"id": "2",
+				"mode": "trigger",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "6",
+									"haptic_intensity": "2"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "8",
+									"haptic_intensity": "2"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				}
+			},
+			{
+				"id": "9",
+				"mode": "four_buttons",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"button_a": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "10"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_b": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "11"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_x": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "12"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_y": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "13"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				}
+			},
+			{
+				"id": "10",
+				"mode": "four_buttons",
+				"name": "",
+				"description": "",
+				"inputs": {}
+			},
+			{
+				"id": "11",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"dpad_north": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "28"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "29"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_east": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "31"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_west": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "30"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"requires_click": "0",
+					"haptic_intensity_override": "0"
+				}
+			},
+			{
+				"id": "12",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {},
+				"settings": {
+					"output_joystick": "2"
+				}
+			},
+			{
+				"id": "13",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {},
+				"settings": {
+					"output_joystick": "2"
+				}
+			},
+			{
+				"id": "14",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {},
+				"settings": {
+					"requires_click": "0"
+				}
+			},
+			{
+				"id": "15",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {},
+				"settings": {
+					"requires_click": "0"
+				}
+			},
+			{
+				"id": "16",
+				"mode": "joystick_move",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "20"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "25"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "24"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"output_joystick": "2",
+					"sensitivity_horiz_scale": "0",
+					"sensitivity_vert_scale": "0"
+				}
+			},
+			{
+				"id": "17",
+				"mode": "joystick_move",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "9"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "33"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "23"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"output_joystick": "2",
+					"sensitivity_horiz_scale": "0",
+					"sensitivity_vert_scale": "0"
+				}
+			},
+			{
+				"id": "21",
+				"mode": "single_button",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "19"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "17",
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				}
+			},
+			{
+				"id": "22",
+				"mode": "single_button",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "18"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "16",
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				}
+			},
+			{
+				"id": "0",
+				"mode": "switches",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"button_escape": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_menu": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "15"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"left_bumper": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"right_bumper": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "2"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_back_left": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_back_right": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "4"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_back_left_upper": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "27"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_back_right_upper": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "26"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				}
+			}
+		],
+		"preset": {
+			"id": "0",
+			"name": "Default",
+			"group_source_bindings": {
+				"0": "switch active",
+				"1": "left_trigger active",
+				"2": "right_trigger active",
+				"9": "button_diamond active",
+				"10": "dpad inactive",
+				"11": "dpad active",
+				"12": "right_joystick inactive",
+				"13": "joystick inactive",
+				"14": "joystick inactive",
+				"15": "right_joystick inactive",
+				"16": "right_joystick active",
+				"17": "joystick active",
+				"21": "right_trackpad active",
+				"22": "left_trackpad active"
+			}
+		},
+		"settings": {}
+	}
+}
