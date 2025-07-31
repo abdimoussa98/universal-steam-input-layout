@@ -10,7 +10,7 @@ universal-layout-alternative:
     - [ ] Chorded Turning ramp ups
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
-    - [ ] Fragile Layers
+    - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
         - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
         - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
     - [ ] Modifier 0 layer
@@ -35,7 +35,7 @@ universal-layout-alternative:
     - [ ] Chorded Turning ramp ups
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
-    - [ ] Fragile Layers
+    - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
         - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
         - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
     - [ ] Modifier 0 layer
@@ -59,6 +59,6 @@ universal-layout-alternative:
     - [ ] Chorded Turning ramp ups
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
-    - [ ] Fragile Layers
+    - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
         - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
         - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
