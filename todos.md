@@ -20,19 +20,37 @@ universal-layout-alternative:
     - [x] Chorded Ramp Up 0
     - [x] Chorded Ramp Up 1
 
-    - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
-        - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
-        - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
+    - [ ] Fragile Layers 
+    (Layers that were blocking Modifier layer entry need to be swapped with M1&M2, Layers that were blocking Trigger layers entry need to be swapped 'empty action')
+        - [ ] L2
+        - [ ] R2
+        - [ ] Menu Buttons: Entry Point
+        - [ ] Menu Left: Double Tap
+        - [ ] Menu Right: Double Tap
+        - [ ] Menu Left: Escape
+        - [ ] Menu Right: Tab
+        - [ ] Menu Left: Transition Set
+        - [ ] Menu Right: Transition Set
+        - [ ] RST: Double Tap
+        - [ ] LST: Double Tap
+
     - [ ] Modifier 0 layer
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
+
     - [ ] Modifier 1 layer
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
+
     - [ ] Scroll Wheel double press lifecycle
-        - [ ] Actions assigned to bumpers need to be swapped with trigger
-        - [ ] Clean up functions interrupts need to be swapped to triggers
-        - [ ] Mimic Trigger soft/full pull from existing solution discovered from duelsense edge
+    (Actions assigned to bumpers need to be swapped with trigger; Clean up functions interrupts need to be swapped to triggers; Mimic Trigger soft/full pull from existing solution discovered from duelsense edge)
+        - [ ] L1: Double Tap
+        - [ ] R1: Double Tap
+        - [ ] L1: Scroll Down
+        - [ ] R1: Scroll Up
+        - [ ] L1: Double Tap Cover
+        - [ ] R1: Double Tap Cover
+
     - [ ] Modifier 2 layer
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
@@ -44,19 +62,37 @@ universal-layout-alternative:
     - [x] Chorded Ramp Up 0
     - [x] Chorded Ramp Up 1
 
-    - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
-        - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
-        - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
+    - [ ] Fragile Layers 
+    (Layers that were blocking Modifier layer entry need to be swapped with M1&M2, Layers that were blocking Trigger layers entry need to be swapped 'empty action')
+        - [ ] L2
+        - [ ] R2
+        - [ ] Menu Buttons: Entry Point
+        - [ ] Menu Left: Double Tap
+        - [ ] Menu Right: Double Tap
+        - [ ] Menu Left: Escape
+        - [ ] Menu Right: Tab
+        - [ ] Menu Left: Transition Set
+        - [ ] Menu Right: Transition Set
+        - [ ] RST: Double Tap
+        - [ ] LST: Double Tap
+
     - [ ] Modifier 0 layer
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
+
     - [ ] Modifier 1 layer
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
+
     - [ ] Scroll Wheel double press lifecycle
-        - [ ] Actions assigned to bumpers need to be swapped with trigger
-        - [ ] Clean up functions interrupts need to be swapped to triggers
-        - [ ] Mimic Trigger soft/full pull from existing solution discovered from duelsense edge
+    (Actions assigned to bumpers need to be swapped with trigger; Clean up functions interrupts need to be swapped to triggers; Mimic Trigger soft/full pull from existing solution discovered from duelsense edge)
+        - [ ] L1: Double Tap
+        - [ ] R1: Double Tap
+        - [ ] L1: Scroll Down
+        - [ ] R1: Scroll Up
+        - [ ] L1: Double Tap Cover
+        - [ ] R1: Double Tap Cover
+
     - [ ] Modifier 2 layer
         - [ ] Actions assigned to bumpers need to be swapped with trigger
         - [ ] Clean up functions interrupts need to be swapped to triggers
@@ -68,6 +104,19 @@ universal-layout-alternative:
     - [x] Chorded Ramp Up 0
     - [x] Chorded Ramp Up 1
 
-    - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
-        - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
-        - [ ] Layers that were blocking Trigger layers entry need to be swapped 'empty action'
+    - [ ] Fragile Layers 
+    (Layers that were blocking Modifier layer entry need to be swapped with M1&M2, Layers that were blocking Trigger layers entry need to be swapped 'empty action')
+        - [ ] L2
+        - [ ] R2
+        - [ ] Menu Buttons: Entry Point
+        - [ ] Menu Left: Double Tap
+        - [ ] Menu Right: Double Tap
+        - [ ] Menu Left: Escape
+        - [ ] Menu Right: Tab
+        - [ ] Menu Left: Transition Set
+        - [ ] Menu Right: Transition Set
+        - [ ] RST: Double Tap
+        - [ ] LST: Double Tap
+
+Final: 
+    - [ ] Rename all L1/R1 & L2/R2 layers
