@@ -22,7 +22,7 @@ universal-layout-alternative:
 
     - [ ] Fragile Layers 
     (Layers that were blocking Modifier layer entry need to be swapped with M1&M2, Layers that were blocking Trigger layers entry need to be swapped 'empty action')
-        - [ ] L2
+        - [x] L2
         - [ ] R2
         - [ ] Menu Buttons: Entry Point
         - [ ] Menu Left: Double Tap
