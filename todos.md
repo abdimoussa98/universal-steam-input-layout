@@ -42,7 +42,7 @@ universal-layout-alternative:
     - [x] Turning Ramp Up 0
     - [x] Turning Ramp Up 1
     - [x] Chorded Ramp Up 0
-    - [ ] Chorded Ramp Up 1
+    - [x] Chorded Ramp Up 1
 
     - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
         - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
