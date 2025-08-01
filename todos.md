@@ -15,10 +15,10 @@ universal-layout-alternative:
     
 ## Base Action Set
     - [x] Swap intial layer's bumpers & triggers
-    - [x] Turning ramp up 0
-    - [x] Turning ramp up 1
-    - [ ] Chorded Turning ramp up 0
-    - [ ] Chorded Turning ramp up 1
+    - [x] Turning Ramp Up 0
+    - [x] Turning Ramp Up 1
+    - [x] Chorded Ramp Up 0
+    - [ ] Chorded Ramp Up 1
 
     - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
         - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
@@ -39,10 +39,10 @@ universal-layout-alternative:
 
 ## Gyro Action Set
     - [x] Swap intial layer's bumpers & triggers
-    - [x] Turning ramp up 0
-    - [x] Turning ramp up 1
-    - [ ] Chorded Turning ramp up 0
-    - [ ] Chorded Turning ramp up 1
+    - [x] Turning Ramp Up 0
+    - [x] Turning Ramp Up 1
+    - [ ] Chorded Ramp Up 0
+    - [ ] Chorded Ramp Up 1
 
     - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
         - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
@@ -63,10 +63,10 @@ universal-layout-alternative:
 
 ## Alt Action Set
     - [x] Swap intial layer's bumpers & triggers
-    - [x] Turning ramp up 0
-    - [x] Turning ramp up 1
-    - [ ] Chorded Turning ramp up 0
-    - [ ] Chorded Turning ramp up 1
+    - [x] Turning Ramp Up 0
+    - [x] Turning Ramp Up 1
+    - [ ] Chorded Ramp Up 0
+    - [ ] Chorded Ramp Up 1
 
     - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
         - [ ] Layers that were blocking Modifier layer entry need to be swapped with M1&M2
