@@ -10155,7 +10155,28 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 55 0 0, , ",
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action add_layer 15 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "2",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
@@ -10165,7 +10186,28 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 55 0 0, , ",
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action add_layer 16 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "2",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
@@ -31174,46 +31216,7 @@
 				"mode": "switches",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"left_bumper": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 55 0 0, , ",
-										"controller_action remove_layer 13 0 0, , ",
-										"controller_action remove_layer 14 0 0, , ",
-										"controller_action add_layer 15 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"right_bumper": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 55 0 0, , ",
-										"controller_action remove_layer 13 0 0, , ",
-										"controller_action remove_layer 14 0 0, , ",
-										"controller_action add_layer 16 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}
