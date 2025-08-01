@@ -65,7 +65,7 @@ universal-layout-alternative:
     - [x] Swap intial layer's bumpers & triggers
     - [x] Turning Ramp Up 0
     - [x] Turning Ramp Up 1
-    - [ ] Chorded Ramp Up 0
+    - [x] Chorded Ramp Up 0
     - [ ] Chorded Ramp Up 1
 
     - [ ] Fragile Layers (L2, R2, All Double Tap Layers, All Menu Button Layers)
