@@ -9800,21 +9800,7 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"click": {
-						"activators": {
-							"release": {
-								"bindings": {
-									"binding": "controller_action remove_layer 53 0 0, , "
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}
@@ -9824,18 +9810,7 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}
@@ -31270,6 +31245,31 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"left_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_button LEFT, , "
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": "controller_action remove_layer 53 0 0, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"right_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_button RIGHT, , "
 								}
 							}
 						},
