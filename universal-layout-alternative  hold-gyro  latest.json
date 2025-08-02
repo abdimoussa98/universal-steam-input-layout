@@ -23586,6 +23586,19 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_DOWN, , "
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
@@ -23606,6 +23619,19 @@
 								},
 								"settings": {
 									"haptic_intensity": "2"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_UP, , "
+								},
+								"settings": {
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -35111,7 +35137,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_wheel SCROLL_DOWN, , "
+									"binding": "mouse_button LEFT, , "
 								}
 							}
 						},
@@ -35121,7 +35147,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_wheel SCROLL_UP, , "
+									"binding": "mouse_button RIGHT, , "
 								}
 							}
 						},
