@@ -20196,21 +20196,7 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"haptic_intensity": "2"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}
@@ -20220,21 +20206,7 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"haptic_intensity": "2"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}
@@ -33791,6 +33763,26 @@
 									}
 								}
 							]
+						},
+						"disabled_activators": {}
+					},
+					"left_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_button LEFT, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"right_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_button RIGHT, , "
+								}
+							}
 						},
 						"disabled_activators": {}
 					}

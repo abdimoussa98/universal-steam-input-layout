@@ -110,7 +110,7 @@ universal-layout-alternative:
     (Layers that were blocking Modifier layer entry need to be swapped with M1&M2, Layers that were blocking Trigger layers entry need to be swapped 'empty action')
         - [x] L2
         - [x] R2
-        - [ ] Menu Buttons: Entry Point
+        - [x] Menu Buttons: Entry Point
         - [ ] Menu Left: Double Tap
         - [ ] Menu Right: Double Tap
         - [ ] Menu Left: Escape
