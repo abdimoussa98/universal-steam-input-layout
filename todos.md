@@ -111,7 +111,7 @@ universal-layout-alternative:
         - [x] L2
         - [x] R2
         - [x] Menu Buttons: Entry Point
-        - [ ] Menu Left: Double Tap
+        - [x] Menu Left: Double Tap
         - [ ] Menu Right: Double Tap
         - [ ] Menu Left: Escape
         - [ ] Menu Right: Tab
