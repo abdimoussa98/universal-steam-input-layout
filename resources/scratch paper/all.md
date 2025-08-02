@@ -68,8 +68,7 @@
 									"binding": "controller_action empty_binding, , "
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
+									"haptic_intensity": "2"
 								}
 							}
 						},
@@ -82,7 +81,7 @@
 									"binding": "mouse_wheel SCROLL_DOWN, , "
 								},
 								"settings": {
-									"repeat_rate": "99"
+									"haptic_intensity": "0"
 								}
 							}
 						},
