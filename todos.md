@@ -26,7 +26,7 @@ universal-layout-alternative:
         - [x] R2
         - [x] Menu Buttons: Entry Point
         - [x] Menu Left: Double Tap
-        - [ ] Menu Right: Double Tap
+        - [x] Menu Right: Double Tap
         - [ ] Menu Left: Escape
         - [ ] Menu Right: Tab
         - [ ] Menu Left: Transition Set
