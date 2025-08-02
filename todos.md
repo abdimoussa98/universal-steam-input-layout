@@ -33,6 +33,7 @@ universal-layout-alternative:
         - [ ] Menu Right: Transition Set
         - [ ] RST: Double Tap
         - [ ] LST: Double Tap
+        - [ ] RTP: Double Tap
 
     - [ ] Modifier 0 layer
         - [ ] Actions assigned to bumpers need to be swapped with trigger
@@ -75,6 +76,7 @@ universal-layout-alternative:
         - [ ] Menu Right: Transition Set
         - [ ] RST: Double Tap
         - [ ] LST: Double Tap
+        - [ ] RTP: Double Tap
 
     - [ ] Modifier 0 layer
         - [ ] Actions assigned to bumpers need to be swapped with trigger
@@ -117,6 +119,7 @@ universal-layout-alternative:
         - [ ] Menu Right: Transition Set
         - [ ] RST: Double Tap
         - [ ] LST: Double Tap
+        - [ ] RTP: Double Tap
 
 Final: 
     - [ ] Swap button chords between L1/R1 & L2/R2
