@@ -114,7 +114,7 @@ universal-layout-alternative:
         - [x] Menu Left: Double Tap
         - [x] Menu Right: Double Tap
         - [x] Menu Left: Escape
-        - [ ] Menu Right: Tab
+        - [x] Menu Right: Tab
         - [ ] Menu Left: Transition Set
         - [ ] Menu Right: Transition Set
         - [ ] RST: Double Tap
