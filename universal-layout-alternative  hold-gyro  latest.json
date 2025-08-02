@@ -4722,11 +4722,19 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
+					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action empty_binding, , "
+									"binding": [
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action add_layer 15 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -4743,14 +4751,19 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
+					"edge": {
 						"activators": {
-							"release": {
+							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 14 0 0, , "
+									"binding": [
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action add_layer 16 0 0, , "
+									]
 								},
 								"settings": {
-									"haptic_intensity": "0"
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -29837,14 +29850,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"controller_action remove_layer 14 0 0, , ",
-										"controller_action add_layer 15 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
+									"binding": "mouse_button LEFT, , "
 								}
 							}
 						},
@@ -29854,14 +29860,12 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"controller_action remove_layer 14 0 0, , ",
-										"controller_action add_layer 16 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
+									"binding": "mouse_button RIGHT, , "
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": "controller_action remove_layer 14 0 0, , "
 								}
 							}
 						},
