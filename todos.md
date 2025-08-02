@@ -119,7 +119,7 @@ universal-layout-alternative:
         - [x] Menu Right: Transition Set
         - [x] RST: Double Tap
         - [x] LST: Double Tap
-        - [ ] RTP: Double Tap
+        - [x] RTP: Double Tap
 
 Final: 
     - [ ] Swap button chords between L1/R1 & L2/R2
