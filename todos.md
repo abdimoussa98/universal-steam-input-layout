@@ -119,4 +119,5 @@ universal-layout-alternative:
         - [ ] LST: Double Tap
 
 Final: 
+    - [ ] Swap button chords between L1/R1 & L2/R2
     - [ ] Rename all L1/R1 & L2/R2 layers
