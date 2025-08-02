@@ -76,7 +76,7 @@ universal-layout-alternative:
         - [x] Menu Right: Transition Set
         - [x] RST: Double Tap
         - [x] LST: Double Tap
-        - [ ] RTP: Double Tap
+        - [x] RTP: Double Tap
 
     - [ ] Modifier 0 layer
         - [ ] Actions assigned to bumpers need to be swapped with trigger
