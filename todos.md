@@ -20,7 +20,7 @@ universal-layout-alternative:
     - [x] Chorded Ramp Up 0
     - [x] Chorded Ramp Up 1
 
-    - [ ] Fragile Layers 
+    - [x] Fragile Layers 
     (Layers that were blocking Modifier layer entry need to be swapped with M1&M2, Layers that were blocking Trigger layers entry need to be swapped 'empty action')
         - [x] L2
         - [x] R2
@@ -63,7 +63,7 @@ universal-layout-alternative:
     - [x] Chorded Ramp Up 0
     - [x] Chorded Ramp Up 1
 
-    - [ ] Fragile Layers 
+    - [x] Fragile Layers 
     (Layers that were blocking Modifier layer entry need to be swapped with M1&M2, Layers that were blocking Trigger layers entry need to be swapped 'empty action')
         - [x] L2
         - [x] R2
@@ -106,7 +106,7 @@ universal-layout-alternative:
     - [x] Chorded Ramp Up 0
     - [x] Chorded Ramp Up 1
 
-    - [ ] Fragile Layers 
+    - [x] Fragile Layers 
     (Layers that were blocking Modifier layer entry need to be swapped with M1&M2, Layers that were blocking Trigger layers entry need to be swapped 'empty action')
         - [x] L2
         - [x] R2
