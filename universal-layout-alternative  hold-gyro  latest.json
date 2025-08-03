@@ -19006,7 +19006,26 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"edge": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 57 0 0, , ",
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action empty_binding, , ",
+										"controller_action remove_layer 69 0 0, , ",
+										"controller_action empty_binding, , ",
+										"controller_action remove_layer 75 0 0, , "
+									]
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
@@ -19016,7 +19035,26 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"edge": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 56 0 0, , ",
+										"controller_action remove_layer 57 0 0, , ",
+										"controller_action empty_binding, , ",
+										"controller_action remove_layer 8 0 0, , ",
+										"controller_action empty_binding, , ",
+										"controller_action remove_layer 70 0 0, , ",
+										"controller_action remove_layer 75 0 0, , "
+									]
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
@@ -34146,20 +34184,9 @@
 				"inputs": {
 					"left_bumper": {
 						"activators": {
-							"release": {
+							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"controller_action remove_layer 56 0 0, , ",
-										"controller_action remove_layer 57 0 0, , ",
-										"controller_action remove_layer 7 0 0, , ",
-										"controller_action empty_binding, , ",
-										"controller_action remove_layer 69 0 0, , ",
-										"controller_action empty_binding, , ",
-										"controller_action remove_layer 75 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
+									"binding": "mouse_button LEFT, , "
 								}
 							}
 						},
@@ -34167,20 +34194,9 @@
 					},
 					"right_bumper": {
 						"activators": {
-							"release": {
+							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"controller_action remove_layer 56 0 0, , ",
-										"controller_action remove_layer 57 0 0, , ",
-										"controller_action empty_binding, , ",
-										"controller_action remove_layer 8 0 0, , ",
-										"controller_action empty_binding, , ",
-										"controller_action remove_layer 70 0 0, , ",
-										"controller_action remove_layer 75 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
+									"binding": "mouse_button RIGHT, , "
 								}
 							}
 						},
