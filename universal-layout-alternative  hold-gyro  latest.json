@@ -21227,14 +21227,11 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
+					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"haptic_intensity": "2"
+									"binding": "mouse_wheel SCROLL_DOWN, , "
 								}
 							}
 						},
@@ -21251,14 +21248,37 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
+					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action empty_binding, , "
+									"binding": "mouse_wheel SCROLL_UP, , "
 								},
 								"settings": {
-									"haptic_intensity": "2"
+									"hold_repeats": "1",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer 87 0 0, , ",
+										"controller_action remove_layer 89 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 95 0 0, , "
+								},
+								"settings": {
+									"chord_button": "8",
+									"haptic_intensity": "0",
+									"delay_start": "150",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -21501,14 +21521,11 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
+					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"haptic_intensity": "2"
+									"binding": "mouse_wheel SCROLL_DOWN, , "
 								}
 							}
 						},
@@ -21525,14 +21542,37 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
+					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action empty_binding, , "
+									"binding": "mouse_wheel SCROLL_UP, , "
 								},
 								"settings": {
-									"haptic_intensity": "2"
+									"hold_repeats": "1",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer 91 0 0, , ",
+										"controller_action remove_layer 93 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 97 0 0, , "
+								},
+								"settings": {
+									"chord_button": "8",
+									"haptic_intensity": "0",
+									"delay_start": "150",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -34998,7 +35038,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_wheel SCROLL_DOWN, , "
+									"binding": "mouse_button LEFT, , "
 								}
 							}
 						},
@@ -35008,32 +35048,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_wheel SCROLL_UP, , "
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							},
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 87 0 0, , ",
-										"controller_action remove_layer 89 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": "controller_action add_layer 95 0 0, , "
-								},
-								"settings": {
-									"chord_button": "8",
-									"delay_start": "150",
-									"interruptable": "0"
+									"binding": "mouse_button RIGHT, , "
 								}
 							}
 						},
@@ -35277,7 +35292,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_wheel SCROLL_DOWN, , "
+									"binding": "mouse_button LEFT, , "
 								}
 							}
 						},
@@ -35287,32 +35302,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_wheel SCROLL_UP, , "
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							},
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 91 0 0, , ",
-										"controller_action remove_layer 93 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": "controller_action add_layer 97 0 0, , "
-								},
-								"settings": {
-									"chord_button": "8",
-									"delay_start": "150",
-									"interruptable": "0"
+									"binding": "mouse_button RIGHT, , "
 								}
 							}
 						},
