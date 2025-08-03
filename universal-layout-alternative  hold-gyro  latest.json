@@ -33,25 +33,25 @@
 		},
 		"action_layers": {
 			"Preset_1000006": {
-				"title": "L2",
+				"title": "L1",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000007": {
-				"title": "R2",
+				"title": "R1",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000008": {
-				"title": "L1: Modifier 0",
+				"title": "L2: Modifier 0",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000005": {
-				"title": "R1: Modifier 1",
+				"title": "R2: Modifier 1",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
@@ -81,25 +81,25 @@
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000015": {
-				"title": "L2",
+				"title": "L1",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000016": {
-				"title": "R2",
+				"title": "R1",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000017": {
-				"title": "L1: Modifier 0",
+				"title": "L2: Modifier 0",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000018": {
-				"title": "R1: Modifier 1",
+				"title": "R2: Modifier 1",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
@@ -207,13 +207,13 @@
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000038": {
-				"title": "L1: Tap Cover",
+				"title": "L2: Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000039": {
-				"title": "R1: Tap Cover",
+				"title": "R2: Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
@@ -321,13 +321,13 @@
 				"parent_set_name": "Preset_1000021"
 			},
 			"Preset_1000057": {
-				"title": "L2",
+				"title": "L1",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000021"
 			},
 			"Preset_1000058": {
-				"title": "R2",
+				"title": "R1",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000021"
@@ -339,25 +339,25 @@
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000060": {
-				"title": "L1!R1: Modifier 2",
+				"title": "L2!R2: Modifier 2",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000061": {
-				"title": "R1!L1: Modifier 2",
+				"title": "R2!L2: Modifier 2",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000062": {
-				"title": "L1!R1: Modifier 2",
+				"title": "L2!R2: Modifier 2",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000063": {
-				"title": "R1!L1: Modifier 2",
+				"title": "R2!L2: Modifier 2",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
@@ -417,13 +417,13 @@
 				"parent_set_name": "Preset_1000021"
 			},
 			"Preset_1000073": {
-				"title": "L1: Tap Cover",
+				"title": "L2: Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000074": {
-				"title": "R1: Tap Cover",
+				"title": "R2: Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
@@ -453,13 +453,13 @@
 				"parent_set_name": "Preset_1000021"
 			},
 			"Preset_1000079": {
-				"title": "L1&R1: Tap Cover",
+				"title": "L2&R2: Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000080": {
-				"title": "L1&R1: Tap Cover",
+				"title": "L2&R2: Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
@@ -519,73 +519,73 @@
 				"parent_set_name": "Preset_1000021"
 			},
 			"Preset_1000090": {
-				"title": "L1: Double Tap",
+				"title": "L2: Double Tap",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000091": {
-				"title": "R1: Double Tap",
+				"title": "R2: Double Tap",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000092": {
-				"title": "L1: Scroll Down",
+				"title": "L2: Scroll Down",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000093": {
-				"title": "R1: Scroll Up",
+				"title": "R2: Scroll Up",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000094": {
-				"title": "L1: Double Tap",
+				"title": "L2: Double Tap",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000095": {
-				"title": "R1: Double Tap",
+				"title": "R2: Double Tap",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000096": {
-				"title": "L1: Scroll Down",
+				"title": "L2: Scroll Down",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000097": {
-				"title": "R1: Scroll Up",
+				"title": "R2: Scroll Up",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000098": {
-				"title": "L1: Double Tap Cover",
+				"title": "L2: Double Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000099": {
-				"title": "R1: Double Tap Cover",
+				"title": "R2: Double Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000100": {
-				"title": "L1: Double Tap Cover",
+				"title": "L2: Double Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000101": {
-				"title": "R1: Double Tap Cover",
+				"title": "R2: Double Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"

@@ -126,4 +126,4 @@ universal-layout-alternative:
 
 Final: 
     - [x] Swap button chords between L1/R1 & L2/R2
-    - [ ] Rename all L1/R1 & L2/R2 layers
+    - [X] Rename all L1/R1 & L2/R2 layers
