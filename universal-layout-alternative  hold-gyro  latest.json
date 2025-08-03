@@ -18174,7 +18174,21 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"edge": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 69 0 0, , "
+									]
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
@@ -33989,24 +34003,7 @@
 				"mode": "switches",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"left_bumper": {
-						"activators": {
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 7 0 0, , ",
-										"controller_action remove_layer 69 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}

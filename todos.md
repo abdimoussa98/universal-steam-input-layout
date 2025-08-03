@@ -37,7 +37,7 @@ universal-layout-alternative:
 
     - [ ] Modifiers
         - [x] L1: Modifier 0
-        - [ ] L1: Tap Cover
+        - [x] L1: Tap Cover
         
         - [ ] R1: Modifier 1
         - [ ] R1: Tap Cover
