@@ -35,23 +35,28 @@ universal-layout-alternative:
         - [x] LST: Double Tap
         - [x] RTP: Double Tap
 
-    - [ ] Modifier 0 layer
-        - [ ] Actions assigned to bumpers need to be swapped with trigger
+    - [ ] Modifiers
+        - [ ] L1: Modifier 0
+        - [ ] L1: Tap Cover
+        
+        - [ ] R1: Modifier 1
+        - [ ] R1: Tap Cover
 
-    - [ ] Modifier 1 layer
-        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] L1!R1: Modifier 2
+        - [ ] R1!L1: Modifier 2
+        - [ ] L1&R1: Tap Cover
 
     - [ ] Scroll Wheel double press lifecycle
-    (Actions assigned to bumpers need to be swapped with trigger; Clean up functions interrupts need to be swapped to triggers; Mimic Trigger soft/full pull from existing solution discovered from duelsense edge)
         - [ ] L1: Double Tap
         - [ ] R1: Double Tap
+
         - [ ] L1: Scroll Down
         - [ ] R1: Scroll Up
+        
         - [ ] L1: Double Tap Cover
         - [ ] R1: Double Tap Cover
 
-    - [ ] Modifier 2 layer
-        - [ ] Actions assigned to bumpers need to be swapped with trigger
+    
 
 ## Gyro Action Set
     - [x] Swap intial layer's bumpers & triggers
@@ -75,23 +80,27 @@ universal-layout-alternative:
         - [x] LST: Double Tap
         - [x] RTP: Double Tap
 
-    - [ ] Modifier 0 layer
-        - [ ] Actions assigned to bumpers need to be swapped with trigger
+    - [ ] Modifiers
+        - [ ] L1: Modifier 0
+        - [ ] L1: Tap Cover
+        
+        - [ ] R1: Modifier 1
+        - [ ] R1: Tap Cover
 
-    - [ ] Modifier 1 layer
-        - [ ] Actions assigned to bumpers need to be swapped with trigger
+        - [ ] L1!R1: Modifier 2
+        - [ ] R1!L1: Modifier 2
+        - [ ] L1&R1: Tap Cover
 
     - [ ] Scroll Wheel double press lifecycle
-    (Actions assigned to bumpers need to be swapped with trigger; Clean up functions interrupts need to be swapped to triggers; Mimic Trigger soft/full pull from existing solution discovered from duelsense edge)
         - [ ] L1: Double Tap
         - [ ] R1: Double Tap
+
         - [ ] L1: Scroll Down
         - [ ] R1: Scroll Up
+
         - [ ] L1: Double Tap Cover
         - [ ] R1: Double Tap Cover
 
-    - [ ] Modifier 2 layer
-        - [ ] Actions assigned to bumpers need to be swapped with trigger
 
 ## Alt Action Set
     - [x] Swap intial layer's bumpers & triggers
