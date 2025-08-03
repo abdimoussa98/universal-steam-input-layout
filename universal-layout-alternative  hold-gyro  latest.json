@@ -21133,19 +21133,6 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
 					"edge": {
 						"activators": {
 							"Full_Press": {
@@ -21427,19 +21414,6 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
 					"edge": {
 						"activators": {
 							"Full_Press": {
