@@ -81,7 +81,7 @@ universal-layout-alternative:
         - [x] RTP: Double Tap
 
     - [ ] Modifiers
-        - [ ] L1: Modifier 0
+        - [x] L1: Modifier 0
         - [ ] L1: Tap Cover
         
         - [ ] R1: Modifier 1
