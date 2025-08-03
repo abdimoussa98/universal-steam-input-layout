@@ -84,7 +84,7 @@ universal-layout-alternative:
         - [x] L1: Modifier 0
         - [x] L1: Tap Cover
         
-        - [ ] R1: Modifier 1
+        - [x] R1: Modifier 1
         - [ ] R1: Tap Cover
 
         - [ ] L1!R1: Modifier 2
