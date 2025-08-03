@@ -40,7 +40,7 @@ universal-layout-alternative:
         - [x] L1: Tap Cover
         
         - [x] R1: Modifier 1
-        - [ ] R1: Tap Cover
+        - [x] R1: Tap Cover
 
         - [ ] L1!R1: Modifier 2
         - [ ] R1!L1: Modifier 2
