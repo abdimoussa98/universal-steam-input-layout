@@ -50,7 +50,7 @@ universal-layout-alternative:
         - [x] L1: Double Tap
         - [x] R1: Double Tap
 
-        - [ ] L1: Scroll Down
+        - [x] L1: Scroll Down
         - [ ] R1: Scroll Up
         
         - [ ] L1: Double Tap Cover
@@ -95,7 +95,7 @@ universal-layout-alternative:
         - [x] L1: Double Tap
         - [x] R1: Double Tap
 
-        - [ ] L1: Scroll Down
+        - [x] L1: Scroll Down
         - [ ] R1: Scroll Up
 
         - [ ] L1: Double Tap Cover
