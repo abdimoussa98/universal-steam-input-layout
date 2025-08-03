@@ -21011,14 +21011,17 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
+					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action empty_binding, , "
+									"binding": [
+										"controller_action add_layer 88 0 0, , ",
+										"controller_action remove_layer 86 0 0, , "
+									]
 								},
 								"settings": {
-									"haptic_intensity": "2"
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -21035,14 +21038,14 @@
 				"name": "",
 				"description": "",
 				"inputs": {
-					"click": {
+					"edge": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action empty_binding, , "
+									"binding": "mouse_wheel SCROLL_UP, , "
 								},
 								"settings": {
-									"haptic_intensity": "2"
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -34711,10 +34714,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"controller_action add_layer 88 0 0, , ",
-										"controller_action remove_layer 86 0 0, , "
-									]
+									"binding": "mouse_button LEFT, , "
 								}
 							}
 						},
@@ -34724,7 +34724,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "mouse_wheel SCROLL_UP, , "
+									"binding": "mouse_button RIGHT, , "
 								}
 							}
 						},

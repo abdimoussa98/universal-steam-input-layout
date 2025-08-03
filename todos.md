@@ -47,7 +47,7 @@ universal-layout-alternative:
         - [x] L1&R1: Tap Cover
 
     - [ ] Scroll Wheel double press lifecycle
-        - [ ] L1: Double Tap
+        - [x] L1: Double Tap
         - [ ] R1: Double Tap
 
         - [ ] L1: Scroll Down
