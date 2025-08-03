@@ -43,7 +43,7 @@ universal-layout-alternative:
         - [x] R1: Tap Cover
 
         - [x] L1!R1: Modifier 2
-        - [ ] R1!L1: Modifier 2
+        - [x] R1!L1: Modifier 2
         - [ ] L1&R1: Tap Cover
 
     - [ ] Scroll Wheel double press lifecycle
@@ -88,7 +88,7 @@ universal-layout-alternative:
         - [x] R1: Tap Cover
 
         - [x] L1!R1: Modifier 2
-        - [ ] R1!L1: Modifier 2
+        - [x] R1!L1: Modifier 2
         - [ ] L1&R1: Tap Cover
 
     - [ ] Scroll Wheel double press lifecycle
