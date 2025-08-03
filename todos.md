@@ -54,7 +54,7 @@ universal-layout-alternative:
         - [x] R1: Scroll Up
         
         - [x] L1: Double Tap Cover
-        - [ ] R1: Double Tap Cover
+        - [x] R1: Double Tap Cover
 
     
 
@@ -99,7 +99,7 @@ universal-layout-alternative:
         - [x] R1: Scroll Up
 
         - [x] L1: Double Tap Cover
-        - [ ] R1: Double Tap Cover
+        - [x] R1: Double Tap Cover
 
 
 ## Alt Action Set
