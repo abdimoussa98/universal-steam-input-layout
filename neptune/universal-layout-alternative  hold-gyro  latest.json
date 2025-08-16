@@ -30437,11 +30437,11 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 5 0 0, , ",
-										"mouse_button LEFT, , "
+										"controller_action add_layer 5 0 0, , "
 									]
 								},
 								"settings": {
+									"hold_repeats": "1",
 									"interruptable": "0"
 								}
 							}
@@ -30453,11 +30453,11 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 6 0 0, , ",
-										"mouse_button RIGHT, , "
+										"controller_action add_layer 6 0 0, , "
 									]
 								},
 								"settings": {
+									"hold_repeats": "1",
 									"interruptable": "0"
 								}
 							}
@@ -31037,11 +31037,11 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 13 0 0, , ",
-										"mouse_button LEFT, , "
+										"controller_action add_layer 13 0 0, , "
 									]
 								},
 								"settings": {
+									"hold_repeats": "1",
 									"interruptable": "0"
 								}
 							}
@@ -31053,11 +31053,11 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 14 0 0, , ",
-										"mouse_button RIGHT, , "
+										"controller_action add_layer 14 0 0, , "
 									]
 								},
 								"settings": {
+									"hold_repeats": "1",
 									"interruptable": "0"
 								}
 							}
@@ -31535,11 +31535,11 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 53 0 0, , ",
-										"mouse_button LEFT, , "
+										"controller_action add_layer 53 0 0, , "
 									]
 								},
 								"settings": {
+									"hold_repeats": "1",
 									"interruptable": "0"
 								}
 							}
@@ -31551,11 +31551,11 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 54 0 0, , ",
-										"mouse_button RIGHT, , "
+										"controller_action add_layer 54 0 0, , "
 									]
 								},
 								"settings": {
+									"hold_repeats": "1",
 									"interruptable": "0"
 								}
 							}
@@ -31935,8 +31935,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 29 0 0, , ",
-										"controller_action add_layer 5 0 0, , ",
-										"mouse_button LEFT, , "
+										"controller_action add_layer 5 0 0, , "
 									]
 								},
 								"settings": {
@@ -31953,8 +31952,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 29 0 0, , ",
-										"controller_action add_layer 6 0 0, , ",
-										"mouse_button RIGHT, , "
+										"controller_action add_layer 6 0 0, , "
 									]
 								},
 								"settings": {
@@ -31982,8 +31980,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 30 0 0, , ",
-										"controller_action add_layer 13 0 0, , ",
-										"mouse_button LEFT, , "
+										"controller_action add_layer 13 0 0, , "
 									]
 								},
 								"settings": {
@@ -32000,8 +31997,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 30 0 0, , ",
-										"controller_action add_layer 14 0 0, , ",
-										"mouse_button RIGHT, , "
+										"controller_action add_layer 14 0 0, , "
 									]
 								},
 								"settings": {
@@ -32029,8 +32025,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 31 0 0, , ",
-										"controller_action add_layer 53 0 0, , ",
-										"mouse_button LEFT, , "
+										"controller_action add_layer 53 0 0, , "
 									]
 								},
 								"settings": {
@@ -32047,8 +32042,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 31 0 0, , ",
-										"controller_action add_layer 54 0 0, , ",
-										"mouse_button RIGHT, , "
+										"controller_action add_layer 54 0 0, , "
 									]
 								},
 								"settings": {
@@ -32367,8 +32361,7 @@
 									"binding": [
 										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 29 0 0, , ",
-										"controller_action add_layer 5 0 0, , ",
-										"mouse_button LEFT, , "
+										"controller_action add_layer 5 0 0, , "
 									]
 								},
 								"settings": {
@@ -32386,8 +32379,7 @@
 									"binding": [
 										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 29 0 0, , ",
-										"controller_action add_layer 6 0 0, , ",
-										"mouse_button RIGHT, , "
+										"controller_action add_layer 6 0 0, , "
 									]
 								},
 								"settings": {
@@ -32416,8 +32408,7 @@
 									"binding": [
 										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 30 0 0, , ",
-										"controller_action add_layer 13 0 0, , ",
-										"mouse_button LEFT, , "
+										"controller_action add_layer 13 0 0, , "
 									]
 								},
 								"settings": {
@@ -32435,8 +32426,7 @@
 									"binding": [
 										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 30 0 0, , ",
-										"controller_action add_layer 14 0 0, , ",
-										"mouse_button RIGHT, , "
+										"controller_action add_layer 14 0 0, , "
 									]
 								},
 								"settings": {
@@ -32465,8 +32455,7 @@
 									"binding": [
 										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 31 0 0, , ",
-										"controller_action add_layer 53 0 0, , ",
-										"mouse_button LEFT, , "
+										"controller_action add_layer 53 0 0, , "
 									]
 								},
 								"settings": {
@@ -32484,8 +32473,7 @@
 									"binding": [
 										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 31 0 0, , ",
-										"controller_action add_layer 54 0 0, , ",
-										"mouse_button RIGHT, , "
+										"controller_action add_layer 54 0 0, , "
 									]
 								},
 								"settings": {
