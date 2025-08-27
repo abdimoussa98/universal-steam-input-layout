@@ -27811,6 +27811,173 @@
 				}
 			},
 			{
+				"id": "12900",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"dpad_north": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press SEMICOLON, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press SINGLE_QUOTE, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_east": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press PERIOD, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_west": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press COMMA, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"click": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1",
+					"requires_click": "0",
+					"layout": "0",
+					"deadzone": "13276"
+				}
+			},
+			{
+				"id": "12910",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"dpad_north": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press BACKSLASH, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press FORWARD_SLASH, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_east": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press RIGHT_BRACKET, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_west": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press LEFT_BRACKET, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"click": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1",
+					"layout": "0",
+					"edge_binding_invert": "0"
+				}
+			},
+			{
 				"id": "1292",
 				"mode": "dpad",
 				"name": "",
@@ -28836,9 +29003,143 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
-							}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F3, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F3, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"button_b": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F2, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F2, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"button_x": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F4, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F4, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"button_y": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F1, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F1, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
 						},
 						"disabled_activators": {}
 					}
@@ -28857,12 +29158,35 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
 								},
 								"settings": {
-									"haptic_intensity": "2"
+									"hold_repeats": "1"
 								}
-							}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F12, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F12, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -28870,10 +29194,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
-								},
-								"settings": {
-									"haptic_intensity": "2"
+									"binding": "controller_action empty_binding, , "
 								}
 							}
 						},
@@ -28894,12 +29215,35 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
 								},
 								"settings": {
-									"haptic_intensity": "2"
+									"hold_repeats": "1"
 								}
-							}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F11, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F11, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -28907,7 +29251,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": "controller_action empty_binding, , "
 								},
 								"settings": {
 									"haptic_intensity": "2"
@@ -29121,9 +29465,143 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
-							}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F5, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F5, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F7, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F7, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"dpad_east": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F6, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F6, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"dpad_west": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F8, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F8, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
 						},
 						"disabled_activators": {}
 					}
@@ -29142,7 +29620,37 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_east": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_west": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
 								}
 							}
 						},
@@ -29150,50 +29658,45 @@
 					},
 					"edge": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
 						"disabled_activators": {}
 					},
-					"touch": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "key_press ESCAPE, , "
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
-				"id": "1331",
-				"mode": "joystick_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {
 					"click": {
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"edge": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": "controller_action empty_binding, , "
 								}
 							}
 						},
@@ -29201,9 +29704,16 @@
 					},
 					"touch": {
 						"activators": {
-							"Full_Press": {
+							"release": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 10 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
+										"controller_action remove_layer 78 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -29211,7 +29721,128 @@
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"layout": "0",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
+				}
+			},
+			{
+				"id": "1331",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"dpad_north": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_east": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_west": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"click": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 9 0 0, , ",
+										"controller_action remove_layer 71 0 0, , ",
+										"controller_action remove_layer 77 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1",
+					"requires_click": "0",
+					"layout": "0",
+					"deadzone": "13276",
+					"edge_binding_radius": "21000"
 				}
 			},
 			{
@@ -37154,9 +37785,27 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": {
+							"release": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer 135 0 0, , ",
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "15"
 								}
 							}
 						},
@@ -37164,9 +37813,27 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": {
+							"release": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer 139 0 0, , ",
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"chord_button": "14"
 								}
 							}
 						},
@@ -37176,9 +37843,35 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
-							}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F10, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F10, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -37186,7 +37879,105 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press F9, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press F9, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"button_back_left": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_CONTROL, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_CONTROL, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_back_right": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_ALT, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_ALT, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
 								}
 							}
 						},
@@ -37194,9 +37985,97 @@
 					},
 					"button_back_left_upper": {
 						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_SHIFT, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press RIGHT_SHIFT, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "key_press ESCAPE, , "
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_back_right_upper": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "key_press CAPSLOCK, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "key_press CAPSLOCK, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 60 0 0, , ",
+										"controller_action remove_layer 83 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"left_stick_click": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mode_shift joystick 12910"
+								},
+								"settings": {
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"right_stick_click": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mode_shift right_joystick 12900"
+								},
+								"settings": {
+									"interruptable": "0"
 								}
 							}
 						},
@@ -39367,7 +40246,9 @@
 					"1329": "dpad active",
 					"1330": "joystick active",
 					"1331": "right_joystick active",
-					"1332": "gyro active"
+					"1332": "gyro active",
+					"12900": "right_joystick active modeshift",
+					"12910": "joystick active modeshift"
 				}
 			},
 			{
