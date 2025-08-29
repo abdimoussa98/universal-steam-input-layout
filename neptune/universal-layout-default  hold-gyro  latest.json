@@ -56,6 +56,18 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
+			"Preset_1000060": {
+				"title": "L1!R1: Modifier 2",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000061": {
+				"title": "R1!L1: Modifier 2",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
 			"Preset_1000010": {
 				"title": "RST: Temporary Gyro",
 				"legacy_set": "1",
@@ -76,6 +88,234 @@
 			},
 			"Preset_1000012": {
 				"title": "LTP: Arrow Keys",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000029": {
+				"title": "RTP: Circular Scroll",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000033": {
+				"title": "Turning Ramp Up 0",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000054": {
+				"title": "Turning Ramp Up 1",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000067": {
+				"title": "Chorded Ramp Up 0",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000102": {
+				"title": "Chorded Ramp Up 1",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000042": {
+				"title": "Tab",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000043": {
+				"title": "Backspace",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000044": {
+				"title": "Escape",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000045": {
+				"title": "Enter",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000069": {
+				"title": "RST: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000070": {
+				"title": "LST: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000073": {
+				"title": "L1: Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000074": {
+				"title": "R1: Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000075": {
+				"title": "RST: Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000077": {
+				"title": "LST: Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000079": {
+				"title": "L1&R1: Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000081": {
+				"title": "RST: Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000082": {
+				"title": "LST: Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000087": {
+				"title": "Menu Buttons: Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000090": {
+				"title": "L1: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000091": {
+				"title": "R1: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000092": {
+				"title": "L1: Scroll Down",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000093": {
+				"title": "R1: Scroll Up",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000098": {
+				"title": "L1: Double Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000099": {
+				"title": "R1: Double Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000105": {
+				"title": "RTP: Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000106": {
+				"title": "RTP: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000107": {
+				"title": "RTP: Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000114": {
+				"title": "Menu Left: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000115": {
+				"title": "Menu Right: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000116": {
+				"title": "Menu Left: Double Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000117": {
+				"title": "Menu Right: Double Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000131": {
+				"title": "Menu Left: Escape",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000132": {
+				"title": "Menu Right: Tab",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000139": {
+				"title": "Menu Left: Transition Set",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000143": {
+				"title": "Menu Right: Transition Set",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000064": {
+				"title": "Menu Left: Fn Layer",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000147": {
+				"title": "Menu Right: Fn Layer",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
@@ -104,6 +344,18 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
+			"Preset_1000062": {
+				"title": "L1!R1: Modifier 2",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
+			},
+			"Preset_1000063": {
+				"title": "R1!L1: Modifier 2",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
+			},
 			"Preset_1000019": {
 				"title": "RST: Temporary Gyro",
 				"legacy_set": "1",
@@ -128,59 +380,11 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
-			"Preset_1000024": {
-				"title": "RTP: Mouse Buttons",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000025": {
-				"title": "LTP: Arrow Keys",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000026": {
-				"title": "RST: Temporary Gyro",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000027": {
-				"title": "LST: Temporary Gyro",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000029": {
-				"title": "RTP: Circular Scroll",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
 			"Preset_1000030": {
 				"title": "RTP: Circular Scroll",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000031": {
-				"title": "RTP: Circular Scroll",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000032": {
-				"title": "Menu Left: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000028"
-			},
-			"Preset_1000033": {
-				"title": "Turning Ramp Up 0",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000034": {
 				"title": "Turning Ramp Up 0",
@@ -188,11 +392,23 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
-			"Preset_1000035": {
-				"title": "Turning Ramp Up 0",
+			"Preset_1000055": {
+				"title": "Turning Ramp Up 1",
 				"legacy_set": "1",
 				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
+				"parent_set_name": "Preset_1000014"
+			},
+			"Preset_1000059": {
+				"title": "Chorded Ramp Up 0",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
+			},
+			"Preset_1000103": {
+				"title": "Chorded Ramp Up 1",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
 			},
 			"Preset_1000036": {
 				"title": "RST: Double Tap",
@@ -230,30 +446,6 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
-			"Preset_1000042": {
-				"title": "Tab",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000043": {
-				"title": "Backspace",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000044": {
-				"title": "Escape",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000045": {
-				"title": "Enter",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
 			"Preset_1000046": {
 				"title": "Tab",
 				"legacy_set": "1",
@@ -278,203 +470,11 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
-			"Preset_1000050": {
-				"title": "Tab",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000051": {
-				"title": "Backspace",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000052": {
-				"title": "Escape",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000053": {
-				"title": "Enter",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000054": {
-				"title": "Turning Ramp Up 1",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000055": {
-				"title": "Turning Ramp Up 1",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000056": {
-				"title": "Turning Ramp Up 1",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000057": {
-				"title": "L2",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000058": {
-				"title": "R2",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000059": {
-				"title": "Chorded Ramp Up 0",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000060": {
-				"title": "L1!R1: Modifier 2",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000061": {
-				"title": "R1!L1: Modifier 2",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000062": {
-				"title": "L1!R1: Modifier 2",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000063": {
-				"title": "R1!L1: Modifier 2",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000064": {
-				"title": "Menu Left: Fn Layer",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000065": {
-				"title": "Menu Left: Fn Layer",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000066": {
-				"title": "Menu Left: Fn Layer",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000067": {
-				"title": "Chorded Ramp Up 0",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000068": {
-				"title": "Chorded Ramp Up 0",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000069": {
-				"title": "RST: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000070": {
-				"title": "LST: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000071": {
-				"title": "RST: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000072": {
-				"title": "LST: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000073": {
-				"title": "L1: Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000074": {
-				"title": "R1: Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000075": {
-				"title": "RST: Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000076": {
-				"title": "RST: Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000077": {
-				"title": "LST: Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000078": {
-				"title": "LST: Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000079": {
-				"title": "L1&R1: Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
 			"Preset_1000080": {
 				"title": "L1&R1: Tap Cover",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000081": {
-				"title": "RST: Entry Point",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000082": {
-				"title": "LST: Entry Point",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000083": {
 				"title": "RST: Entry Point",
@@ -488,59 +488,11 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
-			"Preset_1000085": {
-				"title": "RST: Entry Point",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000086": {
-				"title": "LST: Entry Point",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000087": {
-				"title": "Menu Buttons: Entry Point",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
 			"Preset_1000088": {
 				"title": "Menu Buttons: Entry Point",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000089": {
-				"title": "Menu Buttons: Entry Point",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000090": {
-				"title": "L1: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000091": {
-				"title": "R1: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000092": {
-				"title": "L1: Scroll Down",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000093": {
-				"title": "R1: Scroll Up",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000094": {
 				"title": "L1: Double Tap",
@@ -566,18 +518,6 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
-			"Preset_1000098": {
-				"title": "L1: Double Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000099": {
-				"title": "R1: Double Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
 			"Preset_1000100": {
 				"title": "L1: Double Tap Cover",
 				"legacy_set": "1",
@@ -589,42 +529,6 @@
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000102": {
-				"title": "Chorded Ramp Up 1",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000103": {
-				"title": "Chorded Ramp Up 1",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000104": {
-				"title": "Chorded Ramp Up 1",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000105": {
-				"title": "RTP: Entry Point",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000106": {
-				"title": "RTP: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000107": {
-				"title": "RTP: Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000108": {
 				"title": "RTP: Entry Point",
@@ -643,48 +547,6 @@
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000111": {
-				"title": "RTP: Entry Point",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000112": {
-				"title": "RTP: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000113": {
-				"title": "RTP: Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000114": {
-				"title": "Menu Left: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000115": {
-				"title": "Menu Right: Double Tap",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000116": {
-				"title": "Menu Left: Double Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000117": {
-				"title": "Menu Right: Double Tap Cover",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000118": {
 				"title": "Menu Left: Double Tap",
@@ -710,6 +572,192 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000014"
 			},
+			"Preset_1000133": {
+				"title": "Menu Left: Escape",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
+			},
+			"Preset_1000134": {
+				"title": "Menu Right: Tab",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
+			},
+			"Preset_1000140": {
+				"title": "Menu Left: Transition Set",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
+			},
+			"Preset_1000144": {
+				"title": "Menu Right: Transition Set",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
+			},
+			"Preset_1000065": {
+				"title": "Menu Left: Fn Layer",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
+			},
+			"Preset_1000148": {
+				"title": "Menu Right: Fn Layer",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000014"
+			},
+			"Preset_1000057": {
+				"title": "L2",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000058": {
+				"title": "R2",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000024": {
+				"title": "RTP: Mouse Buttons",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000025": {
+				"title": "LTP: Arrow Keys",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000026": {
+				"title": "RST: Temporary Gyro",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000027": {
+				"title": "LST: Temporary Gyro",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000031": {
+				"title": "RTP: Circular Scroll",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000035": {
+				"title": "Turning Ramp Up 0",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000056": {
+				"title": "Turning Ramp Up 1",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000068": {
+				"title": "Chorded Ramp Up 0",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000104": {
+				"title": "Chorded Ramp Up 1",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000050": {
+				"title": "Tab",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000051": {
+				"title": "Backspace",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000052": {
+				"title": "Escape",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000053": {
+				"title": "Enter",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000071": {
+				"title": "RST: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000072": {
+				"title": "LST: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000076": {
+				"title": "RST: Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000078": {
+				"title": "LST: Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000085": {
+				"title": "RST: Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000086": {
+				"title": "LST: Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000089": {
+				"title": "Menu Buttons: Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000111": {
+				"title": "RTP: Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000112": {
+				"title": "RTP: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000113": {
+				"title": "RTP: Tap Cover",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
 			"Preset_1000122": {
 				"title": "Menu Left: Double Tap",
 				"legacy_set": "1",
@@ -733,6 +781,48 @@
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000135": {
+				"title": "Menu Left: Escape",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000136": {
+				"title": "Menu Right: Tab",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000141": {
+				"title": "Menu Left: Transition Set",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000145": {
+				"title": "Menu Right: Transition Set",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000066": {
+				"title": "Menu Left: Fn Layer",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+            "Preset_1000149": {
+				"title": "Menu Right: Fn Layer",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000021"
+			},
+			"Preset_1000032": {
+				"title": "Menu Left: Double Tap",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000028"
 			},
 			"Preset_1000126": {
 				"title": "Menu Right: Double Tap",
@@ -764,42 +854,6 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000028"
 			},
-			"Preset_1000131": {
-				"title": "Menu Left: Escape",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000132": {
-				"title": "Menu Right: Tab",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000133": {
-				"title": "Menu Left: Escape",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000134": {
-				"title": "Menu Right: Tab",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000135": {
-				"title": "Menu Left: Escape",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
-			"Preset_1000136": {
-				"title": "Menu Right: Tab",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
 			"Preset_1000137": {
 				"title": "Menu Left: Select",
 				"legacy_set": "1",
@@ -812,72 +866,19 @@
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000028"
 			},
-			"Preset_1000139": {
-				"title": "Menu Left: Transition Set",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000140": {
-				"title": "Menu Left: Transition Set",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000141": {
-				"title": "Menu Left: Transition Set",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
 			"Preset_1000142": {
 				"title": "Menu Left: Transition Set",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000028"
 			},
-			"Preset_1000143": {
-				"title": "Menu Right: Transition Set",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000144": {
-				"title": "Menu Right: Transition Set",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000145": {
-				"title": "Menu Right: Transition Set",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
-			},
 			"Preset_1000146": {
 				"title": "Menu Right: Transition Set",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000028"
-			},
-			"Preset_1000147": {
-				"title": "Menu Right: Fn Layer",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000001"
-			},
-			"Preset_1000148": {
-				"title": "Menu Right: Fn Layer",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000014"
-			},
-			"Preset_1000149": {
-				"title": "Menu Right: Fn Layer",
-				"legacy_set": "1",
-				"set_layer": "1",
-				"parent_set_name": "Preset_1000021"
 			}
+		
 		},
 		"localization": {
 			"english": {
