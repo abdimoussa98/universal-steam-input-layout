@@ -4,6 +4,7 @@ universal-layout-alternative:
     Stick Mod Reordering:
         [ ] Move Page Up and Page Down to mod layer 2 menu buttons
         [ ] Move Enter and Backspace to corded menu button presses
+        [x] Make caps lock to space in fn layer 
             caps      |   middle mouse
         --------------|----------------
             mouse 4   |   mouse 5
