@@ -12,4 +12,4 @@ universal-layout-alternative:
     [X] add missing tap cover trigger in alt layout for L2!R2 & R2!L2
     [ ] add `enter` and `backspace` to chorded menu button presses
     [X] fix `Menu Right: Fn Layer` clean up functions in alt layout
-    [ ] fix `Menu Right: Fn Layer` clean up functions in base layout
+    [X] fix `Menu Right: Fn Layer` clean up functions in default layout
