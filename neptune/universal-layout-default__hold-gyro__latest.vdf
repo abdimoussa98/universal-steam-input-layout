@@ -3,7 +3,7 @@
 	"version"				"3"
 	"revision"				"12528"
 	"title"					"universal-layout-default :: hold-gyro :: latest"
-	"description"			"Menu Right: Fn Layer"
+	"description"			"add steering layer"
 	"creator"				"76561198079670632"
 	"progenitor"			""
 	"url"					"autosave://C:\\Program Files (x86)\\Steam\\steamapps\\common\\Steam Controller Configs\\119404904\\config\\692890\\controller_neptune.vdf"
@@ -27,7 +27,7 @@
 		}
 		"Preset_1000021"
 		{
-			"title"				"Alt"
+			"title"				"Steering"
 			"legacy_set"		"1"
 		}
 		"Preset_1000028"
@@ -1166,10 +1166,6 @@
 						{
 							"binding"		"key_press SPACE, Jump, , "
 						}
-						"settings"
-						{
-							"repeat_rate"		"99"
-						}
 					}
 				}
 				"disabled_activators"
@@ -1185,10 +1181,6 @@
 						"bindings"
 						{
 							"binding"		"key_press E, Use, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -1206,10 +1198,6 @@
 						{
 							"binding"		"key_press R, Reload, , "
 						}
-						"settings"
-						{
-							"repeat_rate"		"99"
-						}
 					}
 				}
 				"disabled_activators"
@@ -1225,10 +1213,6 @@
 						"bindings"
 						{
 							"binding"		"key_press F, Flashlight, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -1473,10 +1457,6 @@
 						{
 							"binding"		"key_press W, , "
 						}
-						"settings"
-						{
-							"repeat_rate"		"99"
-						}
 					}
 				}
 				"disabled_activators"
@@ -1492,10 +1472,6 @@
 						"bindings"
 						{
 							"binding"		"key_press S, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -1513,10 +1489,6 @@
 						{
 							"binding"		"key_press D, , "
 						}
-						"settings"
-						{
-							"repeat_rate"		"99"
-						}
 					}
 				}
 				"disabled_activators"
@@ -1532,10 +1504,6 @@
 						"bindings"
 						{
 							"binding"		"key_press A, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -1643,10 +1611,6 @@
 						{
 							"binding"		"mouse_button LEFT, , "
 						}
-						"settings"
-						{
-							"repeat_rate"		"99"
-						}
 					}
 				}
 				"disabled_activators"
@@ -1700,10 +1664,6 @@
 						"bindings"
 						{
 							"binding"		"mouse_button RIGHT, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -5752,10 +5712,6 @@
 						{
 							"binding"		"key_press W, , "
 						}
-						"settings"
-						{
-							"repeat_rate"		"99"
-						}
 					}
 				}
 				"disabled_activators"
@@ -5771,10 +5727,6 @@
 						"bindings"
 						{
 							"binding"		"key_press S, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -5792,10 +5744,6 @@
 						{
 							"binding"		"key_press D, , "
 						}
-						"settings"
-						{
-							"repeat_rate"		"99"
-						}
 					}
 				}
 				"disabled_activators"
@@ -5811,10 +5759,6 @@
 						"bindings"
 						{
 							"binding"		"key_press A, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -5922,10 +5866,6 @@
 						{
 							"binding"		"mouse_button LEFT, , "
 						}
-						"settings"
-						{
-							"repeat_rate"		"99"
-						}
 					}
 				}
 				"disabled_activators"
@@ -5979,10 +5919,6 @@
 						"bindings"
 						{
 							"binding"		"mouse_button RIGHT, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -7254,11 +7190,12 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press W, , "
+							"binding"		"mouse_wheel SCROLL_UP, , "
 						}
 						"settings"
 						{
-							"repeat_rate"		"99"
+							"hold_repeats"		"1"
+							"repeat_rate"		"50"
 						}
 					}
 				}
@@ -7274,7 +7211,12 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press S, , "
+							"binding"		"mouse_wheel SCROLL_DOWN, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+							"repeat_rate"		"50"
 						}
 					}
 				}
@@ -7292,10 +7234,6 @@
 						{
 							"binding"		"key_press D, , "
 						}
-						"settings"
-						{
-							"repeat_rate"		"99"
-						}
 					}
 				}
 				"disabled_activators"
@@ -7311,10 +7249,6 @@
 						"bindings"
 						{
 							"binding"		"key_press A, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -7381,6 +7315,7 @@
 			"requires_click"			"0"
 			"deadzone"					"13276"
 			"edge_binding_invert"		"1"
+			"layout"					"0"
 		}
 	}
 	"group"
@@ -7421,10 +7356,6 @@
 						"bindings"
 						{
 							"binding"		"mouse_button LEFT, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -7479,10 +7410,6 @@
 						"bindings"
 						{
 							"binding"		"mouse_button RIGHT, , "
-						}
-						"settings"
-						{
-							"repeat_rate"		"99"
 						}
 					}
 				}
@@ -43679,12 +43606,11 @@
 					{
 						"bindings"
 						{
-							"binding"		"mouse_wheel SCROLL_DOWN, , "
+							"binding"		"key_press S, , "
 						}
 						"settings"
 						{
-							"hold_repeats"		"1"
-							"repeat_rate"		"50"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -43700,12 +43626,11 @@
 					{
 						"bindings"
 						{
-							"binding"		"mouse_wheel SCROLL_UP, , "
+							"binding"		"key_press W, , "
 						}
 						"settings"
 						{
-							"hold_repeats"		"1"
-							"repeat_rate"		"50"
+							"interruptable"		"0"
 						}
 					}
 				}
