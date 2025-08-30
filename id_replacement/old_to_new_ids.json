@@ -20,849 +20,708 @@
 		"new_id": 4
 	},
 	"Preset_1000006": {
-		"title": "L2",
+		"title": "L1",
 		"old_id": 5,
-		"new_id": 5,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 5
 	},
 	"Preset_1000007": {
-		"title": "R2",
+		"title": "R1",
 		"old_id": 6,
-		"new_id": 6,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 6
 	},
 	"Preset_1000008": {
-		"title": "L1: Modifier 0",
+		"title": "L2: Modifier 0",
 		"old_id": 7,
-		"new_id": 7,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 7
 	},
 	"Preset_1000005": {
-		"title": "R1: Modifier 1",
+		"title": "R2: Modifier 1",
 		"old_id": 8,
-		"new_id": 8,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 8
 	},
 	"Preset_1000060": {
-		"title": "L1!R1: Modifier 2",
+		"title": "L2!R2: Modifier 2",
 		"old_id": 56,
-		"new_id": 9,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 9
 	},
 	"Preset_1000061": {
-		"title": "R1!L1: Modifier 2",
+		"title": "R2!L2: Modifier 2",
 		"old_id": 57,
-		"new_id": 10,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 10
 	},
 	"Preset_1000010": {
 		"title": "RST: Temporary Gyro",
 		"old_id": 9,
-		"new_id": 11,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 11
 	},
 	"Preset_1000011": {
 		"title": "LST: Temporary Gyro",
 		"old_id": 10,
-		"new_id": 12,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 12
 	},
 	"Preset_1000009": {
 		"title": "RTP: Mouse Buttons",
 		"old_id": 11,
-		"new_id": 13,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 13
 	},
 	"Preset_1000012": {
 		"title": "LTP: Arrow Keys",
 		"old_id": 12,
-		"new_id": 14,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 14
 	},
 	"Preset_1000029": {
 		"title": "RTP: Circular Scroll",
 		"old_id": 25,
-		"new_id": 15,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 15
 	},
 	"Preset_1000033": {
 		"title": "Turning Ramp Up 0",
 		"old_id": 29,
-		"new_id": 16,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 16
 	},
 	"Preset_1000054": {
 		"title": "Turning Ramp Up 1",
 		"old_id": 50,
-		"new_id": 17,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 17
 	},
 	"Preset_1000067": {
 		"title": "Chorded Ramp Up 0",
 		"old_id": 63,
-		"new_id": 18,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 18
 	},
-		"Preset_1000102": {
+	"Preset_1000102": {
 		"title": "Chorded Ramp Up 1",
 		"old_id": 98,
-		"new_id": 19,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 19
 	},
 	"Preset_1000042": {
 		"title": "Tab",
 		"old_id": 38,
-		"new_id": 20,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 20
 	},
 	"Preset_1000043": {
 		"title": "Backspace",
 		"old_id": 39,
-		"new_id": 21,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 21
 	},
 	"Preset_1000044": {
 		"title": "Escape",
 		"old_id": 40,
-		"new_id": 22,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 22
 	},
 	"Preset_1000045": {
 		"title": "Enter",
 		"old_id": 41,
-		"new_id": 23,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 23
 	},
 	"Preset_1000069": {
 		"title": "RST: Double Tap",
 		"old_id": 65,
-		"new_id": 24,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 24
 	},
 	"Preset_1000070": {
 		"title": "LST: Double Tap",
 		"old_id": 66,
-		"new_id": 25,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 25
 	},
 	"Preset_1000073": {
-		"title": "L1: Tap Cover",
+		"title": "L2: Tap Cover",
 		"old_id": 69,
-		"new_id": 26,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 26
 	},
 	"Preset_1000074": {
-		"title": "R1: Tap Cover",
+		"title": "R2: Tap Cover",
 		"old_id": 70,
-		"new_id": 27,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 27
 	},
 	"Preset_1000075": {
 		"title": "RST: Tap Cover",
 		"old_id": 71,
-		"new_id": 28,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 28
 	},
 	"Preset_1000077": {
 		"title": "LST: Tap Cover",
 		"old_id": 73,
-		"new_id": 29,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 29
 	},
 	"Preset_1000079": {
-		"title": "L1&R1: Tap Cover",
+		"title": "L2&R2: Tap Cover",
 		"old_id": 75,
-		"new_id": 30,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 30
 	},
 	"Preset_1000081": {
 		"title": "RST: Entry Point",
 		"old_id": 77,
-		"new_id": 31,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 31
 	},
 	"Preset_1000082": {
 		"title": "LST: Entry Point",
 		"old_id": 78,
-		"new_id": 32,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 32
 	},
 	"Preset_1000087": {
 		"title": "Menu Buttons: Entry Point",
 		"old_id": 83,
-		"new_id": 33,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 33
 	},
 	"Preset_1000090": {
-		"title": "L1: Double Tap",
+		"title": "L2: Double Tap",
 		"old_id": 86,
-		"new_id": 34,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 34
 	},
 	"Preset_1000091": {
-		"title": "R1: Double Tap",
+		"title": "R2: Double Tap",
 		"old_id": 87,
-		"new_id": 35,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 35
 	},
 	"Preset_1000092": {
-		"title": "L1: Scroll Down",
+		"title": "L2: Scroll Down",
 		"old_id": 88,
-		"new_id": 36,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 36
 	},
 	"Preset_1000093": {
-		"title": "R1: Scroll Up",
+		"title": "R2: Scroll Up",
 		"old_id": 89,
-		"new_id": 37,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 37
 	},
 	"Preset_1000098": {
-		"title": "L1: Double Tap Cover",
+		"title": "L2: Double Tap Cover",
 		"old_id": 94,
-		"new_id": 38,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 38
 	},
 	"Preset_1000099": {
-		"title": "R1: Double Tap Cover",
+		"title": "R2: Double Tap Cover",
 		"old_id": 95,
-		"new_id": 39,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 39
 	},
 	"Preset_1000105": {
 		"title": "RTP: Entry Point",
 		"old_id": 101,
-		"new_id": 40,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 40
 	},
 	"Preset_1000106": {
 		"title": "RTP: Double Tap",
 		"old_id": 102,
-		"new_id": 41,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 41
 	},
 	"Preset_1000107": {
 		"title": "RTP: Tap Cover",
 		"old_id": 103,
-		"new_id": 42,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 42
 	},
 	"Preset_1000114": {
 		"title": "Menu Left: Double Tap",
 		"old_id": 110,
-		"new_id": 43,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 43
 	},
 	"Preset_1000115": {
 		"title": "Menu Right: Double Tap",
 		"old_id": 111,
-		"new_id": 44,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 44
 	},
 	"Preset_1000116": {
 		"title": "Menu Left: Double Tap Cover",
 		"old_id": 112,
-		"new_id": 45,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 45
 	},
 	"Preset_1000117": {
 		"title": "Menu Right: Double Tap Cover",
 		"old_id": 113,
-		"new_id": 46,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 46
 	},
 	"Preset_1000131": {
 		"title": "Menu Left: Escape",
 		"old_id": 127,
-		"new_id": 47,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 47
 	},
 	"Preset_1000132": {
 		"title": "Menu Right: Tab",
 		"old_id": 128,
-		"new_id": 48,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 48
 	},
 	"Preset_1000139": {
 		"title": "Menu Left: Transition Set",
 		"old_id": 135,
-		"new_id": 49,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 49
 	},
 	"Preset_1000143": {
 		"title": "Menu Right: Transition Set",
 		"old_id": 139,
-		"new_id": 50,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 50
 	},
 	"Preset_1000064": {
 		"title": "Menu Left: Fn Layer",
 		"old_id": 60,
-		"new_id": 51,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 51
 	},
 	"Preset_1000147": {
 		"title": "Menu Right: Fn Layer",
 		"old_id": 143,
-		"new_id": 52,
-		"parent_set_name": "Preset_1000001"
+		"new_id": 52
 	},
-		"Preset_1000015": {
-		"title": "L2",
+	"Preset_1000015": {
+		"title": "L1",
 		"old_id": 13,
-		"new_id": 53,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 53
 	},
 	"Preset_1000016": {
-		"title": "R2",
+		"title": "R1",
 		"old_id": 14,
-		"new_id": 54,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 54
 	},
 	"Preset_1000017": {
-		"title": "L1: Modifier 0",
+		"title": "L2: Modifier 0",
 		"old_id": 15,
-		"new_id": 55,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 55
 	},
 	"Preset_1000018": {
-		"title": "R1: Modifier 1",
+		"title": "R2: Modifier 1",
 		"old_id": 16,
-		"new_id": 56,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 56
 	},
 	"Preset_1000062": {
-		"title": "L1!R1: Modifier 2",
+		"title": "L2!R2: Modifier 2",
 		"old_id": 58,
-		"new_id": 57,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 57
 	},
 	"Preset_1000063": {
-		"title": "R1!L1: Modifier 2",
+		"title": "R2!L2: Modifier 2",
 		"old_id": 59,
-		"new_id": 58,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 58
 	},
 	"Preset_1000019": {
 		"title": "RST: Temporary Gyro",
 		"old_id": 17,
-		"new_id": 59,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 59
 	},
 	"Preset_1000020": {
 		"title": "LST: Temporary Gyro",
 		"old_id": 18,
-		"new_id": 60,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 60
 	},
 	"Preset_1000022": {
 		"title": "RTP: Mouse Buttons",
 		"old_id": 19,
-		"new_id": 61,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 61
 	},
 	"Preset_1000023": {
 		"title": "LTP: Arrow Keys",
 		"old_id": 20,
-		"new_id": 62,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 62
 	},
 	"Preset_1000030": {
 		"title": "RTP: Circular Scroll",
 		"old_id": 26,
-		"new_id": 63,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 63
 	},
 	"Preset_1000034": {
 		"title": "Turning Ramp Up 0",
 		"old_id": 30,
-		"new_id": 64,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 64
 	},
-		"Preset_1000055": {
+	"Preset_1000055": {
 		"title": "Turning Ramp Up 1",
 		"old_id": 51,
-		"new_id": 65,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 65
 	},
 	"Preset_1000059": {
 		"title": "Chorded Ramp Up 0",
 		"old_id": 55,
-		"new_id": 66,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 66
 	},
 	"Preset_1000103": {
 		"title": "Chorded Ramp Up 1",
 		"old_id": 99,
-		"new_id": 67,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 67
 	},
 	"Preset_1000036": {
 		"title": "RST: Double Tap",
 		"old_id": 32,
-		"new_id": 68,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 68
 	},
 	"Preset_1000037": {
 		"title": "LST: Double Tap",
 		"old_id": 33,
-		"new_id": 69,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 69
 	},
 	"Preset_1000038": {
-		"title": "L1: Tap Cover",
+		"title": "L2: Tap Cover",
 		"old_id": 34,
-		"new_id": 70,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 70
 	},
 	"Preset_1000039": {
-		"title": "R1: Tap Cover",
+		"title": "R2: Tap Cover",
 		"old_id": 35,
-		"new_id": 71,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 71
 	},
 	"Preset_1000040": {
 		"title": "RST: Tap Cover",
 		"old_id": 36,
-		"new_id": 72,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 72
 	},
 	"Preset_1000041": {
 		"title": "LST: Tap Cover",
 		"old_id": 37,
-		"new_id": 73,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 73
 	},
 	"Preset_1000046": {
 		"title": "Tab",
 		"old_id": 42,
-		"new_id": 74,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 74
 	},
 	"Preset_1000047": {
 		"title": "Backspace",
 		"old_id": 43,
-		"new_id": 75,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 75
 	},
 	"Preset_1000048": {
 		"title": "Escape",
 		"old_id": 44,
-		"new_id": 76,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 76
 	},
 	"Preset_1000049": {
 		"title": "Enter",
 		"old_id": 45,
-		"new_id": 77,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 77
 	},
 	"Preset_1000080": {
-		"title": "L1&R1: Tap Cover",
+		"title": "L2&R2: Tap Cover",
 		"old_id": 76,
-		"new_id": 78,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 78
 	},
 	"Preset_1000083": {
 		"title": "RST: Entry Point",
 		"old_id": 79,
-		"new_id": 79,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 79
 	},
 	"Preset_1000084": {
 		"title": "LST: Entry Point",
 		"old_id": 80,
-		"new_id": 80,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 80
 	},
 	"Preset_1000088": {
 		"title": "Menu Buttons: Entry Point",
 		"old_id": 84,
-		"new_id": 81,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 81
 	},
 	"Preset_1000094": {
-		"title": "L1: Double Tap",
+		"title": "L2: Double Tap",
 		"old_id": 90,
-		"new_id": 82,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 82
 	},
 	"Preset_1000095": {
-		"title": "R1: Double Tap",
+		"title": "R2: Double Tap",
 		"old_id": 91,
-		"new_id": 83,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 83
 	},
 	"Preset_1000096": {
-		"title": "L1: Scroll Down",
+		"title": "L2: Scroll Down",
 		"old_id": 92,
-		"new_id": 84,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 84
 	},
 	"Preset_1000097": {
-		"title": "R1: Scroll Up",
+		"title": "R2: Scroll Up",
 		"old_id": 93,
-		"new_id": 85,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 85
 	},
 	"Preset_1000100": {
-		"title": "L1: Double Tap Cover",
+		"title": "L2: Double Tap Cover",
 		"old_id": 96,
-		"new_id": 86,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 86
 	},
 	"Preset_1000101": {
-		"title": "R1: Double Tap Cover",
+		"title": "R2: Double Tap Cover",
 		"old_id": 97,
-		"new_id": 87,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 87
 	},
 	"Preset_1000108": {
 		"title": "RTP: Entry Point",
 		"old_id": 104,
-		"new_id": 88,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 88
 	},
 	"Preset_1000109": {
 		"title": "RTP: Double Tap",
 		"old_id": 105,
-		"new_id": 89,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 89
 	},
 	"Preset_1000110": {
 		"title": "RTP: Tap Cover",
 		"old_id": 106,
-		"new_id": 90,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 90
 	},
 	"Preset_1000118": {
 		"title": "Menu Left: Double Tap",
 		"old_id": 114,
-		"new_id": 91,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 91
 	},
 	"Preset_1000119": {
 		"title": "Menu Right: Double Tap",
 		"old_id": 115,
-		"new_id": 92,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 92
 	},
 	"Preset_1000120": {
 		"title": "Menu Left: Double Tap Cover",
 		"old_id": 116,
-		"new_id": 93,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 93
 	},
 	"Preset_1000121": {
 		"title": "Menu Right: Double Tap Cover",
 		"old_id": 117,
-		"new_id": 94,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 94
 	},
 	"Preset_1000133": {
 		"title": "Menu Left: Escape",
 		"old_id": 129,
-		"new_id": 95,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 95
 	},
 	"Preset_1000134": {
 		"title": "Menu Right: Tab",
 		"old_id": 130,
-		"new_id": 96,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 96
 	},
 	"Preset_1000140": {
 		"title": "Menu Left: Transition Set",
 		"old_id": 136,
-		"new_id": 97,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 97
 	},
 	"Preset_1000144": {
 		"title": "Menu Right: Transition Set",
 		"old_id": 140,
-		"new_id": 98,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 98
 	},
 	"Preset_1000065": {
 		"title": "Menu Left: Fn Layer",
 		"old_id": 61,
-		"new_id": 99,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 99
 	},
 	"Preset_1000148": {
 		"title": "Menu Right: Fn Layer",
 		"old_id": 144,
-		"new_id": 100,
-		"parent_set_name": "Preset_1000014"
+		"new_id": 100
 	},
-		"Preset_1000057": {
-		"title": "L2",
+	"Preset_1000057": {
+		"title": "L1",
 		"old_id": 53,
-		"new_id": 101,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 101
 	},
 	"Preset_1000058": {
-		"title": "R2",
+		"title": "R1",
 		"old_id": 54,
-		"new_id": 102,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 102
 	},
 	"Preset_1000024": {
 		"title": "RTP: Mouse Buttons",
 		"old_id": 21,
-		"new_id": 103,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 103
 	},
 	"Preset_1000025": {
 		"title": "LTP: Arrow Keys",
 		"old_id": 22,
-		"new_id": 104,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 104
 	},
 	"Preset_1000026": {
 		"title": "RST: Temporary Gyro",
 		"old_id": 23,
-		"new_id": 105,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 105
 	},
 	"Preset_1000027": {
 		"title": "LST: Temporary Gyro",
 		"old_id": 24,
-		"new_id": 106,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 106
 	},
 	"Preset_1000031": {
 		"title": "RTP: Circular Scroll",
 		"old_id": 27,
-		"new_id": 107,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 107
 	},
 	"Preset_1000035": {
 		"title": "Turning Ramp Up 0",
 		"old_id": 31,
-		"new_id": 108,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 108
 	},
 	"Preset_1000056": {
 		"title": "Turning Ramp Up 1",
 		"old_id": 52,
-		"new_id": 109,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 109
 	},
 	"Preset_1000068": {
 		"title": "Chorded Ramp Up 0",
 		"old_id": 64,
-		"new_id": 110,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 110
 	},
 	"Preset_1000104": {
 		"title": "Chorded Ramp Up 1",
 		"old_id": 100,
-		"new_id": 111,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 111
 	},
 	"Preset_1000050": {
 		"title": "Tab",
 		"old_id": 46,
-		"new_id": 112,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 112
 	},
 	"Preset_1000051": {
 		"title": "Backspace",
 		"old_id": 47,
-		"new_id": 113,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 113
 	},
 	"Preset_1000052": {
 		"title": "Escape",
 		"old_id": 48,
-		"new_id": 114,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 114
 	},
 	"Preset_1000053": {
 		"title": "Enter",
 		"old_id": 49,
-		"new_id": 115,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 115
 	},
 	"Preset_1000071": {
 		"title": "RST: Double Tap",
 		"old_id": 67,
-		"new_id": 116,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 116
 	},
 	"Preset_1000072": {
 		"title": "LST: Double Tap",
 		"old_id": 68,
-		"new_id": 117,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 117
 	},
 	"Preset_1000076": {
 		"title": "RST: Tap Cover",
 		"old_id": 72,
-		"new_id": 118,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 118
 	},
 	"Preset_1000078": {
 		"title": "LST: Tap Cover",
 		"old_id": 74,
-		"new_id": 119,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 119
 	},
 	"Preset_1000085": {
 		"title": "RST: Entry Point",
 		"old_id": 81,
-		"new_id": 120,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 120
 	},
 	"Preset_1000086": {
 		"title": "LST: Entry Point",
 		"old_id": 82,
-		"new_id": 121,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 121
 	},
 	"Preset_1000089": {
 		"title": "Menu Buttons: Entry Point",
 		"old_id": 85,
-		"new_id": 122,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 122
 	},
 	"Preset_1000111": {
 		"title": "RTP: Entry Point",
 		"old_id": 107,
-		"new_id": 123,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 123
 	},
 	"Preset_1000112": {
 		"title": "RTP: Double Tap",
 		"old_id": 108,
-		"new_id": 124,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 124
 	},
 	"Preset_1000113": {
 		"title": "RTP: Tap Cover",
 		"old_id": 109,
-		"new_id": 125,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 125
 	},
 	"Preset_1000122": {
 		"title": "Menu Left: Double Tap",
 		"old_id": 118,
-		"new_id": 126,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 126
 	},
 	"Preset_1000123": {
 		"title": "Menu Right: Double Tap",
 		"old_id": 119,
-		"new_id": 127,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 127
 	},
 	"Preset_1000124": {
 		"title": "Menu Left: Double Tap Cover",
 		"old_id": 120,
-		"new_id": 128,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 128
 	},
 	"Preset_1000125": {
 		"title": "Menu Right: Double Tap Cover",
 		"old_id": 121,
-		"new_id": 129,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 129
 	},
 	"Preset_1000135": {
 		"title": "Menu Left: Escape",
 		"old_id": 131,
-		"new_id": 130,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 130
 	},
 	"Preset_1000136": {
 		"title": "Menu Right: Tab",
 		"old_id": 132,
-		"new_id": 131,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 131
 	},
 	"Preset_1000141": {
 		"title": "Menu Left: Transition Set",
 		"old_id": 137,
-		"new_id": 132,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 132
 	},
 	"Preset_1000145": {
 		"title": "Menu Right: Transition Set",
 		"old_id": 141,
-		"new_id": 133,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 133
 	},
 	"Preset_1000066": {
 		"title": "Menu Left: Fn Layer",
 		"old_id": 62,
-		"new_id": 134,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 134
 	},
 	"Preset_1000149": {
 		"title": "Menu Right: Fn Layer",
 		"old_id": 145,
-		"new_id": 135,
-		"parent_set_name": "Preset_1000021"
+		"new_id": 135
 	},
-		"Preset_1000032": {
+	"Preset_1000032": {
 		"title": "Menu Left: Double Tap",
 		"old_id": 28,
-		"new_id": 136,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 136
 	},
 	"Preset_1000126": {
 		"title": "Menu Right: Double Tap",
 		"old_id": 122,
-		"new_id": 137,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 137
 	},
 	"Preset_1000127": {
 		"title": "Menu Left: Double Tap Cover",
 		"old_id": 123,
-		"new_id": 138,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 138
 	},
 	"Preset_1000128": {
 		"title": "Menu Right: Double Tap Cover",
 		"old_id": 124,
-		"new_id": 139,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 139
 	},
 	"Preset_1000129": {
 		"title": "Menu Buttons: Entry Point",
 		"old_id": 125,
-		"new_id": 140,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 140
 	},
 	"Preset_1000130": {
 		"title": "Fn Layer",
 		"old_id": 126,
-		"new_id": 141,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 141
 	},
 	"Preset_1000137": {
 		"title": "Menu Left: Select",
 		"old_id": 133,
-		"new_id": 142,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 142
 	},
 	"Preset_1000138": {
 		"title": "Menu Right: Start",
 		"old_id": 134,
-		"new_id": 143,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 143
 	},
 	"Preset_1000142": {
 		"title": "Menu Left: Transition Set",
 		"old_id": 138,
-		"new_id": 144,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 144
 	},
 	"Preset_1000146": {
 		"title": "Menu Right: Transition Set",
 		"old_id": 142,
-		"new_id": 145,
-		"parent_set_name": "Preset_1000028"
+		"new_id": 145
 	}
 }
