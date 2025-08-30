@@ -10598,6 +10598,17 @@
 										"controller_action remove_layer 10 0 0, , "
 									]
 								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 30 0 0, , "
+								},
+								"settings": {
+									"chord_button": "7",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
+								}
 							}
 						},
 						"disabled_activators": {}
@@ -10688,6 +10699,17 @@
 										"controller_action remove_layer 9 0 0, , ",
 										"controller_action remove_layer 10 0 0, , "
 									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 30 0 0, , "
+								},
+								"settings": {
+									"chord_button": "8",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -10980,6 +11002,17 @@
 										"controller_action remove_layer 58 0 0, , "
 									]
 								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 78 0 0, , "
+								},
+								"settings": {
+									"chord_button": "7",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
+								}
 							}
 						},
 						"disabled_activators": {}
@@ -11070,6 +11103,17 @@
 										"controller_action remove_layer 57 0 0, , ",
 										"controller_action remove_layer 58 0 0, , "
 									]
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 78 0 0, , "
+								},
+								"settings": {
+									"chord_button": "8",
+									"haptic_intensity": "3",
+									"delay_start": "200",
+									"interruptable": "0"
 								}
 							}
 						},
