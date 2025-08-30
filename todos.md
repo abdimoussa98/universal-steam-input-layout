@@ -2,9 +2,8 @@
 universal-layout-alternative:
     [ ] Move set navigation from corded menu presses to corded stick presses
     Stick Mod Reordering:
-        [ ] Move Page Up and Page Down to mod layer 2 menu buttons
-        [ ] Move Enter and Backspace to corded menu button presses
-        [x] Make caps lock to space in fn layer 
+        [X] Move Page Up and Page Down to mod layer 2 menu buttons
+        [x] Make caps lock to super key in fn layer 
             caps      |   middle mouse
         --------------|----------------
             mouse 4   |   mouse 5
