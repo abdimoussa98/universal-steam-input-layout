@@ -1,15 +1,8 @@
 # Todo:
 universal-layout-alternative:
-    [ ] Move set navigation from corded menu presses to corded stick presses
-    Stick Mod Reordering:
-        [X] Move Page Up and Page Down to mod layer 2 menu buttons
-        [X] Make caps lock to super key in fn layer 
-            caps      |   middle mouse
-        --------------|----------------
-            mouse 4   |   mouse 5
-        --------------|----------------
-            `/~       |   super key
-    [X] add missing tap cover trigger in alt layout for L2!R2 & R2!L2
-    [ ] add `enter` and `backspace` to chorded menu button presses
-    [X] fix `Menu Right: Fn Layer` clean up functions in alt layout
-    [X] fix `Menu Right: Fn Layer` clean up functions in default layout
+    [X] Move set navigation from corded menu presses to corded stick presses
+    [ ] add `enter` and `backspace` to fn layers
+    [ ] rename transition layers
+    [ ] add clean up functions to joystick in transition layers
+    [ ] add clean up functions to joystick in menu entry layer
+    [ ] add clean up functions to joystick in fn layers
