@@ -6,7 +6,6 @@ universal-layout-default:
     [X] Move set navigation from corded menu presses to corded stick presses
     [ ] add `enter` to left fn layer
     [ ] add `backspace` to right fn layer
-    [ ] rename transition layers
     [ ] add clean up functions to joystick in transition layers
     [ ] add clean up functions to joystick in menu entry layer
     [ ] add clean up functions to joystick in fn layers
@@ -14,7 +13,6 @@ universal-layout-default:
     gyro
     [ ] add `enter` to left fn layer
     [ ] add `backspace` to right fn layer
-    [ ] rename transition layers
     [ ] add clean up functions to joystick in transition layers
     [ ] add clean up functions to joystick in menu entry layer
     [ ] add clean up functions to joystick in fn layers
@@ -22,13 +20,11 @@ universal-layout-default:
     alt
     [ ] add `enter` to left fn layer
     [ ] add `backspace` to right fn layer
-    [ ] rename transition layers
     [ ] add clean up functions to joystick in transition layers
     [ ] add clean up functions to joystick in menu entry layer
     [ ] add clean up functions to joystick in fn layers
     --------------------------------------------------------
     gamepad
-    [ ] rename transition layers
     [ ] add clean up functions to joystick in transition layers
     [ ] add clean up functions to joystick in menu entry layer
     [ ] add clean up functions to joystick in fn layers
@@ -38,7 +34,6 @@ universal-layout-alternative:
     [X] Move set navigation from corded menu presses to corded stick presses
     [ ] add `enter` to left fn layer
     [ ] add `backspace` to right fn layer
-    [ ] rename transition layers
     [ ] add clean up functions to joystick in transition layers
     [ ] add clean up functions to joystick in menu entry layer
     [ ] add clean up functions to joystick in fn layers
@@ -46,7 +41,6 @@ universal-layout-alternative:
     gyro
     [ ] add `enter` to left fn layer
     [ ] add `backspace` to right fn layer
-    [ ] rename transition layers
     [ ] add clean up functions to joystick in transition layers
     [ ] add clean up functions to joystick in menu entry layer
     [ ] add clean up functions to joystick in fn layers
@@ -54,13 +48,11 @@ universal-layout-alternative:
     alt
     [ ] add `enter` to left fn layer
     [ ] add `backspace` to right fn layer
-    [ ] rename transition layers
     [ ] add clean up functions to joystick in transition layers
     [ ] add clean up functions to joystick in menu entry layer
     [ ] add clean up functions to joystick in fn layers
     --------------------------------------------------------
     gamepad
-    [ ] rename transition layers
     [ ] add clean up functions to joystick in transition layers
     [ ] add clean up functions to joystick in menu entry layer
     [ ] add clean up functions to joystick in fn layers
