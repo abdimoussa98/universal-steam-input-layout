@@ -16,9 +16,7 @@ universal-layout-default:
     [ ] add `enter` to left fn layer
     [ ] add `backspace` to right fn layer
     [ ] add fn dpads to both left and right menu layer on ls/rs sticks
-    --------------------------------------------------------
-    gamepad
-    [ ] add clean up functions to joystick in fn layers
+
 
 universal-layout-alternative:
     base
@@ -35,6 +33,4 @@ universal-layout-alternative:
     [ ] add `enter` to left fn layer
     [ ] add `backspace` to right fn layer
     [ ] add fn dpads to both left and right menu layer on ls/rs sticks
-    --------------------------------------------------------
-    gamepad
-    [ ] add clean up functions to joystick in fn layers
+
