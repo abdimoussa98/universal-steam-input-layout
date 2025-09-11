@@ -1,9 +1,9 @@
 "controller_mappings"
 {
 	"version"				"3"
-	"revision"				"12529"
+	"revision"				"12814"
 	"title"					"universal-layout-alternative :: hold-gyro :: latest"
-	"description"			"add steering layer"
+	"description"			"..."
 	"creator"				"76561198079670632"
 	"progenitor"			""
 	"url"					"autosave://C:\\Program Files (x86)\\Steam\\steamapps\\common\\Steam Controller Configs\\119404904\\config\\692890\\controller_neptune.vdf"
@@ -348,14 +348,14 @@
 		}
 		"Preset_1000139"
 		{
-			"title"					"Menu Left: Transition Set"
+			"title"					"Transition Set 0"
 			"legacy_set"			"1"
 			"set_layer"				"1"
 			"parent_set_name"		"Preset_1000001"
 		}
 		"Preset_1000143"
 		{
-			"title"					"Menu Right: Transition Set"
+			"title"					"Transition Set 1"
 			"legacy_set"			"1"
 			"set_layer"				"1"
 			"parent_set_name"		"Preset_1000001"
@@ -684,14 +684,14 @@
 		}
 		"Preset_1000140"
 		{
-			"title"					"Menu Left: Transition Set"
+			"title"					"Transition Set 0"
 			"legacy_set"			"1"
 			"set_layer"				"1"
 			"parent_set_name"		"Preset_1000014"
 		}
 		"Preset_1000144"
 		{
-			"title"					"Menu Right: Transition Set"
+			"title"					"Transition Set 1"
 			"legacy_set"			"1"
 			"set_layer"				"1"
 			"parent_set_name"		"Preset_1000014"
@@ -929,14 +929,14 @@
 		}
 		"Preset_1000141"
 		{
-			"title"					"Menu Left: Transition Set"
+			"title"					"Transition Set 0"
 			"legacy_set"			"1"
 			"set_layer"				"1"
 			"parent_set_name"		"Preset_1000021"
 		}
 		"Preset_1000145"
 		{
-			"title"					"Menu Right: Transition Set"
+			"title"					"Transition Set 1"
 			"legacy_set"			"1"
 			"set_layer"				"1"
 			"parent_set_name"		"Preset_1000021"
@@ -1013,14 +1013,14 @@
 		}
 		"Preset_1000142"
 		{
-			"title"					"Menu Left: Transition Set"
+			"title"					"Transition Set 0"
 			"legacy_set"			"1"
 			"set_layer"				"1"
 			"parent_set_name"		"Preset_1000028"
 		}
 		"Preset_1000146"
 		{
-			"title"					"Menu Right: Transition Set"
+			"title"					"Transition Set 1"
 			"legacy_set"			"1"
 			"set_layer"				"1"
 			"parent_set_name"		"Preset_1000028"
@@ -7395,9 +7395,9 @@
 		"settings"
 		{
 			"requires_click"			"0"
+			"layout"					"0"
 			"deadzone"					"13276"
 			"edge_binding_invert"		"1"
-			"layout"					"0"
 		}
 	}
 	"group"
@@ -19376,11 +19376,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press BACKSLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -19392,11 +19408,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press FORWARD_SLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -19408,11 +19440,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press RIGHT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -19424,11 +19472,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press LEFT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -19485,11 +19549,17 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action add_layer 50 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -20865,11 +20935,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press BACKSLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -20881,11 +20967,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press FORWARD_SLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -20897,11 +20999,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press RIGHT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -20913,11 +21031,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press LEFT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -20974,11 +21108,17 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action add_layer 98 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -21841,11 +21981,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press BACKSLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -21857,11 +22013,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press FORWARD_SLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -21873,11 +22045,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press RIGHT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -21889,11 +22077,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press LEFT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -21950,11 +22154,17 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action add_layer 133 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -21988,7 +22198,6 @@
 		"settings"
 		{
 			"layer"						"1"
-			"layout"					"0"
 			"edge_binding_radius"		"21000"
 			"edge_binding_invert"		"0"
 		}
@@ -34081,15 +34290,76 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 51 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 52 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"edge"
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 51 0 0, , "
+							"binding"		"controller_action add_layer 52 0 0, , "
+							"binding"		"controller_action add_layer 33 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
 						}
 					}
 				}
@@ -34158,6 +34428,37 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 51 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 52 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -34669,15 +34970,76 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 99 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 100 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"edge"
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 99 0 0, , "
+							"binding"		"controller_action add_layer 100 0 0, , "
+							"binding"		"controller_action add_layer 81 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
 						}
 					}
 				}
@@ -34746,6 +35108,37 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 99 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 100 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -35257,15 +35650,76 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 134 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 135 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"edge"
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 134 0 0, , "
+							"binding"		"controller_action add_layer 135 0 0, , "
+							"binding"		"controller_action add_layer 122 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
 						}
 					}
 				}
@@ -35334,6 +35788,37 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 134 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 135 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -36489,6 +36974,22 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -36547,7 +37048,7 @@
 		"description"		""
 		"inputs"
 		{
-			"edge"
+			"click"
 			{
 				"activators"
 				{
@@ -36556,6 +37057,50 @@
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 49 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
 						}
 					}
 				}
@@ -36621,7 +37166,7 @@
 		"description"		""
 		"inputs"
 		{
-			"edge"
+			"click"
 			{
 				"activators"
 				{
@@ -36630,6 +37175,50 @@
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 97 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
 						}
 					}
 				}
@@ -36695,6 +37284,22 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -36753,7 +37358,7 @@
 		"description"		""
 		"inputs"
 		{
-			"edge"
+			"click"
 			{
 				"activators"
 				{
@@ -36762,6 +37367,50 @@
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 132 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
 						}
 					}
 				}
@@ -36827,6 +37476,22 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -36885,6 +37550,66 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 144 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -36943,6 +37668,66 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 144 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -37418,6 +38203,22 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -37476,7 +38277,7 @@
 		"description"		""
 		"inputs"
 		{
-			"edge"
+			"click"
 			{
 				"activators"
 				{
@@ -37485,6 +38286,50 @@
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 50 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
 						}
 					}
 				}
@@ -37550,7 +38395,7 @@
 		"description"		""
 		"inputs"
 		{
-			"edge"
+			"click"
 			{
 				"activators"
 				{
@@ -37559,6 +38404,50 @@
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 98 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
 						}
 					}
 				}
@@ -37624,6 +38513,22 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -37682,7 +38587,7 @@
 		"description"		""
 		"inputs"
 		{
-			"edge"
+			"click"
 			{
 				"activators"
 				{
@@ -37691,6 +38596,50 @@
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 133 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
 						}
 					}
 				}
@@ -37756,6 +38705,22 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -37814,6 +38779,66 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 145 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -37872,6 +38897,66 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 145 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -38109,6 +39194,81 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 141 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 141 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 140 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -38167,6 +39327,81 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 141 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 141 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 140 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -38225,6 +39460,83 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 144 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 145 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 141 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -38283,6 +39595,83 @@
 		"description"		""
 		"inputs"
 		{
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 144 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 145 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 141 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
 			"touch"
 			{
 				"activators"
@@ -38345,11 +39734,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SEMICOLON, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -38361,11 +39766,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SINGLE_QUOTE, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -38377,11 +39798,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press PERIOD, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -38393,11 +39830,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press COMMA, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -38454,11 +39907,17 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action add_layer 49 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39024,11 +40483,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SEMICOLON, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39040,11 +40515,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SINGLE_QUOTE, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39056,11 +40547,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press PERIOD, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39072,11 +40579,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press COMMA, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39133,11 +40656,17 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action add_layer 97 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39707,11 +41236,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SEMICOLON, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39723,11 +41268,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SINGLE_QUOTE, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39739,11 +41300,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press PERIOD, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39755,11 +41332,27 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press COMMA, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+						}
+					}
+					"chord"
 					{
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -39816,11 +41409,17 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action add_layer 132 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
 						}
 					}
 				}
@@ -40114,7 +41713,6 @@
 		"settings"
 		{
 			"layer"						"1"
-			"layout"					"0"
 			"edge_binding_radius"		"21000"
 			"edge_binding_invert"		"0"
 		}
@@ -40373,7 +41971,6 @@
 		"settings"
 		{
 			"layer"						"1"
-			"layout"					"0"
 			"edge_binding_radius"		"21000"
 			"edge_binding_invert"		"0"
 		}
@@ -42020,6 +43617,2027 @@
 	}
 	"group"
 	{
+		"id"				"1329"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 52 0 0, , "
+							"binding"		"controller_action remove_layer 33 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F5, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F5, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 52 0 0, , "
+							"binding"		"controller_action remove_layer 33 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F7, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F7, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 52 0 0, , "
+							"binding"		"controller_action remove_layer 33 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F6, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F6, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 52 0 0, , "
+							"binding"		"controller_action remove_layer 33 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F8, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F8, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"1330"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press BACKSLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press FORWARD_SLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press RIGHT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press LEFT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 52 0 0, , "
+							"binding"		"controller_action remove_layer 33 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 50 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"touch"
+			{
+				"activators"
+				{
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 12 0 0, , "
+							"binding"		"controller_action remove_layer 29 0 0, , "
+							"binding"		"controller_action remove_layer 32 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"						"1"
+			"layout"					"0"
+			"edge_binding_radius"		"21000"
+			"edge_binding_invert"		"0"
+		}
+	}
+	"group"
+	{
+		"id"				"1331"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SEMICOLON, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SINGLE_QUOTE, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press PERIOD, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press COMMA, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 52 0 0, , "
+							"binding"		"controller_action remove_layer 33 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 49 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"touch"
+			{
+				"activators"
+				{
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 11 0 0, , "
+							"binding"		"controller_action remove_layer 28 0 0, , "
+							"binding"		"controller_action remove_layer 31 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"						"1"
+			"requires_click"			"0"
+			"layout"					"0"
+			"deadzone"					"13276"
+			"edge_binding_radius"		"21000"
+		}
+	}
+	"group"
+	{
+		"id"				"1332"
+		"mode"				"disabled"
+		"name"				""
+		"description"		""
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"1333"
+		"mode"				"disabled"
+		"name"				""
+		"description"		""
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"1334"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SEMICOLON, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SINGLE_QUOTE, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press PERIOD, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press COMMA, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 100 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 97 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"touch"
+			{
+				"activators"
+				{
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 59 0 0, , "
+							"binding"		"controller_action remove_layer 72 0 0, , "
+							"binding"		"controller_action remove_layer 79 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"						"1"
+			"requires_click"			"0"
+			"layout"					"0"
+			"deadzone"					"13276"
+			"edge_binding_radius"		"21000"
+		}
+	}
+	"group"
+	{
+		"id"				"1335"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press BACKSLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press FORWARD_SLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press RIGHT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press LEFT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 100 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 98 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"touch"
+			{
+				"activators"
+				{
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 60 0 0, , "
+							"binding"		"controller_action remove_layer 73 0 0, , "
+							"binding"		"controller_action remove_layer 80 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"						"1"
+			"layout"					"0"
+			"edge_binding_radius"		"21000"
+			"edge_binding_invert"		"0"
+		}
+	}
+	"group"
+	{
+		"id"				"1336"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 100 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F5, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F5, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 100 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F7, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F7, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 100 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F6, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F6, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 100 0 0, , "
+							"binding"		"controller_action remove_layer 81 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F8, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F8, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"1337"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 135 0 0, , "
+							"binding"		"controller_action remove_layer 122 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F5, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F5, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 135 0 0, , "
+							"binding"		"controller_action remove_layer 122 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F7, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F7, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 135 0 0, , "
+							"binding"		"controller_action remove_layer 122 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F6, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F6, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 135 0 0, , "
+							"binding"		"controller_action remove_layer 122 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F8, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F8, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"1338"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press BACKSLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press FORWARD_SLASH, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press RIGHT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press LEFT_BRACKET, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"9"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 135 0 0, , "
+							"binding"		"controller_action remove_layer 122 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 133 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"touch"
+			{
+				"activators"
+				{
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 106 0 0, , "
+							"binding"		"controller_action remove_layer 119 0 0, , "
+							"binding"		"controller_action remove_layer 121 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"						"1"
+			"edge_binding_radius"		"21000"
+			"edge_binding_invert"		"0"
+		}
+	}
+	"group"
+	{
+		"id"				"1339"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SEMICOLON, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press SINGLE_QUOTE, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press PERIOD, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"key_press COMMA, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"20"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 135 0 0, , "
+							"binding"		"controller_action remove_layer 122 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"15"
+							"interruptable"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"click"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 132 0 0, , "
+						}
+						"settings"
+						{
+							"chord_button"		"14"
+							"hold_repeats"		"1"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"touch"
+			{
+				"activators"
+				{
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 105 0 0, , "
+							"binding"		"controller_action remove_layer 118 0 0, , "
+							"binding"		"controller_action remove_layer 120 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"						"1"
+			"requires_click"			"0"
+			"layout"					"0"
+			"deadzone"					"13276"
+			"edge_binding_radius"		"21000"
+		}
+	}
+	"group"
+	{
+		"id"				"1340"
+		"mode"				"disabled"
+		"name"				""
+		"description"		""
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
 		"id"				"10"
 		"mode"				"switches"
 		"name"				""
@@ -42185,11 +45803,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift dpad 1039"
-							"binding"		"mode_shift dpad 1039"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 					"Full_Press"
@@ -42197,11 +45810,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift button_diamond 1043"
-							"binding"		"mode_shift button_diamond 1043"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -42218,11 +45826,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift dpad 1039"
-							"binding"		"mode_shift dpad 1039"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 					"Full_Press"
@@ -42230,11 +45833,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift button_diamond 1043"
-							"binding"		"mode_shift button_diamond 1043"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -43005,11 +46603,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift dpad 1038"
-							"binding"		"mode_shift dpad 1038"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 					"Full_Press"
@@ -43017,11 +46610,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift button_diamond 1040"
-							"binding"		"mode_shift button_diamond 1040"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -43038,11 +46626,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift dpad 1038"
-							"binding"		"mode_shift dpad 1038"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 					"Full_Press"
@@ -43050,11 +46633,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift button_diamond 1040"
-							"binding"		"mode_shift button_diamond 1040"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -43681,11 +47259,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift dpad 1042"
-							"binding"		"mode_shift dpad 1042"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 					"Full_Press"
@@ -43693,11 +47266,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift button_diamond 1041"
-							"binding"		"mode_shift button_diamond 1041"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -43714,11 +47282,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift dpad 1042"
-							"binding"		"mode_shift dpad 1042"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 					"Full_Press"
@@ -43726,11 +47289,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift button_diamond 1041"
-							"binding"		"mode_shift button_diamond 1041"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -45105,6 +48663,12 @@
 						"bindings"
 						{
 							"binding"		"mode_shift gyro 1307"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
 							"binding"		"mode_shift gyro 1308"
 						}
 						"settings"
@@ -45163,6 +48727,12 @@
 						"bindings"
 						{
 							"binding"		"mode_shift gyro 1307"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
 							"binding"		"mode_shift gyro 1308"
 						}
 						"settings"
@@ -45730,7 +49300,7 @@
 			{
 				"activators"
 				{
-					"release"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -45739,16 +49309,16 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"0"
+							"hold_repeats"		"1"
 						}
 					}
 					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 49 0 0, , "
-							"binding"		"controller_action remove_layer 51 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
+							"binding"		"key_press RETURN, , "
+							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -45774,19 +49344,6 @@
 						"settings"
 						{
 							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 50 0 0, , "
-							"binding"		"controller_action remove_layer 51 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
 						}
 					}
 				}
@@ -46074,10 +49631,6 @@
 						{
 							"binding"		"mode_shift joystick 1291"
 						}
-						"settings"
-						{
-							"interruptable"		"0"
-						}
 					}
 				}
 				"disabled_activators"
@@ -46093,10 +49646,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift right_joystick 1290"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -46122,7 +49671,7 @@
 			{
 				"activators"
 				{
-					"release"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -46131,16 +49680,16 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"0"
+							"hold_repeats"		"1"
 						}
 					}
 					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 97 0 0, , "
-							"binding"		"controller_action remove_layer 99 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"key_press RETURN, , "
+							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -46166,19 +49715,6 @@
 						"settings"
 						{
 							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 98 0 0, , "
-							"binding"		"controller_action remove_layer 99 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
 						}
 					}
 				}
@@ -46466,10 +50002,6 @@
 						{
 							"binding"		"mode_shift joystick 1294"
 						}
-						"settings"
-						{
-							"interruptable"		"0"
-						}
 					}
 				}
 				"disabled_activators"
@@ -46485,10 +50017,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift right_joystick 1293"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -46514,7 +50042,7 @@
 			{
 				"activators"
 				{
-					"release"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -46523,16 +50051,16 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"0"
+							"hold_repeats"		"1"
 						}
 					}
 					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 132 0 0, , "
-							"binding"		"controller_action remove_layer 134 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
+							"binding"		"key_press RETURN, , "
+							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -46558,19 +50086,6 @@
 						"settings"
 						{
 							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 133 0 0, , "
-							"binding"		"controller_action remove_layer 134 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
 						}
 					}
 				}
@@ -46858,10 +50373,6 @@
 						{
 							"binding"		"mode_shift joystick 1297"
 						}
-						"settings"
-						{
-							"interruptable"		"0"
-						}
 					}
 				}
 				"disabled_activators"
@@ -46877,10 +50388,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift right_joystick 1296"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -47606,7 +51113,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 51 0 1, , "
+							"binding"		"controller_action add_layer 52 0 1, , "
 							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
@@ -47619,8 +51126,8 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 49 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
+							"binding"		"controller_action add_layer 51 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -47666,8 +51173,8 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 50 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
+							"binding"		"controller_action add_layer 52 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -47746,7 +51253,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 99 0 1, , "
+							"binding"		"controller_action add_layer 100 0 1, , "
 							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
@@ -47759,8 +51266,8 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 97 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"controller_action add_layer 99 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -47806,8 +51313,8 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 98 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"controller_action add_layer 100 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -47886,7 +51393,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 134 0 1, , "
+							"binding"		"controller_action add_layer 135 0 1, , "
 							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
@@ -47899,8 +51406,8 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 132 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
+							"binding"		"controller_action add_layer 134 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -47946,8 +51453,8 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 133 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
+							"binding"		"controller_action add_layer 135 0 0, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -50394,7 +53901,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 144 0 0, , "
+							"binding"		"controller_action remove_layer 141 0 0, , "
 							"binding"		"controller_action remove_layer 140 0 0, , "
 						}
 						"settings"
@@ -50441,7 +53948,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 145 0 0, , "
+							"binding"		"controller_action remove_layer 141 0 0, , "
 							"binding"		"controller_action remove_layer 140 0 0, , "
 						}
 						"settings"
@@ -50485,19 +53992,6 @@
 							"haptic_intensity"		"0"
 						}
 					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 144 0 0, , "
-							"binding"		"controller_action remove_layer 141 0 0, , "
-							"binding"		"controller_action remove_layer 140 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-						}
-					}
 				}
 				"disabled_activators"
 				{
@@ -50517,19 +54011,6 @@
 						"settings"
 						{
 							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 145 0 0, , "
-							"binding"		"controller_action remove_layer 141 0 0, , "
-							"binding"		"controller_action remove_layer 140 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
 						}
 					}
 				}
@@ -51347,11 +54828,11 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action CHANGE_PRESET 4 1 1, , "
 						}
 					}
 				}
@@ -51425,11 +54906,11 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action CHANGE_PRESET 4 1 1, , "
 						}
 					}
 				}
@@ -51503,11 +54984,11 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action CHANGE_PRESET 1 1 1, , "
 						}
 					}
 				}
@@ -51581,11 +55062,11 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action CHANGE_PRESET 1 1 1, , "
 						}
 					}
 				}
@@ -51643,11 +55124,11 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action CHANGE_PRESET 3 1 1, , "
 						}
 					}
 				}
@@ -51721,11 +55202,11 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action CHANGE_PRESET 3 1 1, , "
 						}
 					}
 				}
@@ -51799,11 +55280,11 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action CHANGE_PRESET 1 1 1, , "
 						}
 					}
 				}
@@ -51877,11 +55358,11 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action CHANGE_PRESET 1 1 1, , "
 						}
 					}
 				}
@@ -51919,19 +55400,6 @@
 							"haptic_intensity"		"0"
 						}
 					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 49 0 0, , "
-							"binding"		"controller_action remove_layer 52 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-						}
-					}
 				}
 				"disabled_activators"
 				{
@@ -51941,7 +55409,7 @@
 			{
 				"activators"
 				{
-					"release"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -51950,16 +55418,16 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"0"
+							"hold_repeats"		"1"
 						}
 					}
 					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 50 0 0, , "
-							"binding"		"controller_action remove_layer 52 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
+							"binding"		"key_press BACKSPACE, , "
+							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -52251,10 +55719,6 @@
 						{
 							"binding"		"mode_shift joystick 12910"
 						}
-						"settings"
-						{
-							"interruptable"		"0"
-						}
 					}
 				}
 				"disabled_activators"
@@ -52270,10 +55734,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift right_joystick 12900"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -52311,19 +55771,6 @@
 							"haptic_intensity"		"0"
 						}
 					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 97 0 0, , "
-							"binding"		"controller_action remove_layer 100 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-						}
-					}
 				}
 				"disabled_activators"
 				{
@@ -52333,7 +55780,7 @@
 			{
 				"activators"
 				{
-					"release"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -52342,16 +55789,16 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"0"
+							"hold_repeats"		"1"
 						}
 					}
 					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 98 0 0, , "
-							"binding"		"controller_action remove_layer 100 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
+							"binding"		"key_press BACKSPACE, , "
+							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -52643,10 +56090,6 @@
 						{
 							"binding"		"mode_shift joystick 12940"
 						}
-						"settings"
-						{
-							"interruptable"		"0"
-						}
 					}
 				}
 				"disabled_activators"
@@ -52662,10 +56105,6 @@
 						"bindings"
 						{
 							"binding"		"mode_shift right_joystick 12930"
-						}
-						"settings"
-						{
-							"interruptable"		"0"
 						}
 					}
 				}
@@ -52703,19 +56142,6 @@
 							"haptic_intensity"		"0"
 						}
 					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 132 0 0, , "
-							"binding"		"controller_action remove_layer 135 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-						}
-					}
 				}
 				"disabled_activators"
 				{
@@ -52725,7 +56151,7 @@
 			{
 				"activators"
 				{
-					"release"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -52734,16 +56160,16 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"0"
+							"hold_repeats"		"1"
 						}
 					}
 					"chord"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 133 0 0, , "
-							"binding"		"controller_action remove_layer 135 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
+							"binding"		"key_press BACKSPACE, , "
+							"binding"		"controller_action empty_binding, , "
+							"binding"		"controller_action empty_binding, , "
 						}
 						"settings"
 						{
@@ -53035,10 +56461,6 @@
 						{
 							"binding"		"mode_shift joystick 12970"
 						}
-						"settings"
-						{
-							"interruptable"		"0"
-						}
 					}
 				}
 				"disabled_activators"
@@ -53055,10 +56477,6 @@
 						{
 							"binding"		"mode_shift right_joystick 12960"
 						}
-						"settings"
-						{
-							"interruptable"		"0"
-						}
 					}
 				}
 				"disabled_activators"
@@ -53070,1596 +56488,6 @@
 		{
 			"layer"		"1"
 		}
-	}
-	"group"
-	{
-		"id"				"1329"
-		"mode"				"dpad"
-		"name"				""
-		"description"		""
-		"inputs"
-		{
-			"dpad_north"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 52 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F5, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F5, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_south"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 52 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F7, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F7, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_east"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 52 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F6, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F6, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_west"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 52 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F8, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F8, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-		}
-		"settings"
-		{
-			"layer"		"1"
-		}
-	}
-	"group"
-	{
-		"id"				"1330"
-		"mode"				"dpad"
-		"name"				""
-		"description"		""
-		"inputs"
-		{
-			"dpad_north"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_south"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_east"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_west"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"edge"
-			{
-				"activators"
-				{
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 52 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"click"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"touch"
-			{
-				"activators"
-				{
-					"release"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 12 0 0, , "
-							"binding"		"controller_action remove_layer 29 0 0, , "
-							"binding"		"controller_action remove_layer 32 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-		}
-		"settings"
-		{
-			"layer"						"1"
-			"layout"					"0"
-			"edge_binding_radius"		"21000"
-			"edge_binding_invert"		"0"
-		}
-	}
-	"group"
-	{
-		"id"				"1331"
-		"mode"				"dpad"
-		"name"				""
-		"description"		""
-		"inputs"
-		{
-			"dpad_north"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_south"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_east"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_west"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"edge"
-			{
-				"activators"
-				{
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 52 0 0, , "
-							"binding"		"controller_action remove_layer 33 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"click"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"touch"
-			{
-				"activators"
-				{
-					"release"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 11 0 0, , "
-							"binding"		"controller_action remove_layer 28 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-		}
-		"settings"
-		{
-			"layer"						"1"
-			"requires_click"			"0"
-			"layout"					"0"
-			"deadzone"					"13276"
-			"edge_binding_radius"		"21000"
-		}
-	}
-	"group"
-	{
-		"id"				"1332"
-		"mode"				"disabled"
-		"name"				""
-		"description"		""
-	}
-	"group"
-	{
-		"id"				"1333"
-		"mode"				"disabled"
-		"name"				""
-		"description"		""
-	}
-	"group"
-	{
-		"id"				"1334"
-		"mode"				"dpad"
-		"name"				""
-		"description"		""
-		"inputs"
-		{
-			"dpad_north"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_south"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_east"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_west"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"edge"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 100 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"click"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"touch"
-			{
-				"activators"
-				{
-					"release"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 72 0 0, , "
-							"binding"		"controller_action remove_layer 79 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-		}
-		"settings"
-		{
-			"layer"						"1"
-			"requires_click"			"0"
-			"layout"					"0"
-			"deadzone"					"13276"
-			"edge_binding_radius"		"21000"
-		}
-	}
-	"group"
-	{
-		"id"				"1335"
-		"mode"				"dpad"
-		"name"				""
-		"description"		""
-		"inputs"
-		{
-			"dpad_north"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_south"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_east"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_west"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"edge"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 100 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"click"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"touch"
-			{
-				"activators"
-				{
-					"release"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 60 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 80 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-		}
-		"settings"
-		{
-			"layer"						"1"
-			"layout"					"0"
-			"edge_binding_radius"		"21000"
-			"edge_binding_invert"		"0"
-		}
-	}
-	"group"
-	{
-		"id"				"1336"
-		"mode"				"dpad"
-		"name"				""
-		"description"		""
-		"inputs"
-		{
-			"dpad_north"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 100 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F5, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F5, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_south"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 100 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F7, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F7, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_east"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 100 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F6, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F6, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_west"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 100 0 0, , "
-							"binding"		"controller_action remove_layer 81 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F8, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F8, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-		}
-		"settings"
-		{
-			"layer"		"1"
-		}
-	}
-	"group"
-	{
-		"id"				"1337"
-		"mode"				"dpad"
-		"name"				""
-		"description"		""
-		"inputs"
-		{
-			"dpad_north"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 135 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F5, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F5, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_south"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 135 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F7, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F7, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_east"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 135 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F6, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F6, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_west"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 135 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F8, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"key_press F8, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-		}
-		"settings"
-		{
-			"layer"		"1"
-		}
-	}
-	"group"
-	{
-		"id"				"1338"
-		"mode"				"dpad"
-		"name"				""
-		"description"		""
-		"inputs"
-		{
-			"dpad_north"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_south"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_east"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_west"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"edge"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 135 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"click"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"touch"
-			{
-				"activators"
-				{
-					"release"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 106 0 0, , "
-							"binding"		"controller_action remove_layer 119 0 0, , "
-							"binding"		"controller_action remove_layer 121 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-		}
-		"settings"
-		{
-			"layer"						"1"
-			"layout"					"0"
-			"edge_binding_radius"		"21000"
-			"edge_binding_invert"		"0"
-		}
-	}
-	"group"
-	{
-		"id"				"1339"
-		"mode"				"dpad"
-		"name"				""
-		"description"		""
-		"inputs"
-		{
-			"dpad_north"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_south"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_east"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"dpad_west"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"edge"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 135 0 0, , "
-							"binding"		"controller_action remove_layer 122 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"15"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"14"
-							"interruptable"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"click"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"touch"
-			{
-				"activators"
-				{
-					"release"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 105 0 0, , "
-							"binding"		"controller_action remove_layer 118 0 0, , "
-							"binding"		"controller_action remove_layer 120 0 0, , "
-						}
-						"settings"
-						{
-							"haptic_intensity"		"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-		}
-		"settings"
-		{
-			"layer"						"1"
-			"requires_click"			"0"
-			"layout"					"0"
-			"deadzone"					"13276"
-			"edge_binding_radius"		"21000"
-		}
-	}
-	"group"
-	{
-		"id"				"1340"
-		"mode"				"disabled"
-		"name"				""
-		"description"		""
 	}
 	"preset"
 	{
@@ -54854,6 +56682,46 @@
 	"preset"
 	{
 		"id"						"8"
+		"name"						"Preset_1000060"
+		"group_source_bindings"
+		{
+			"596"		"button_diamond active"
+			"597"		"left_trigger active"
+			"598"		"right_trigger active"
+			"599"		"switch active"
+			"612"		"dpad active"
+			"681"		"right_joystick active"
+			"682"		"joystick active"
+			"1305"		"gyro inactive modeshift"
+			"1306"		"gyro inactive modeshift"
+			"1307"		"gyro inactive modeshift"
+			"1308"		"gyro active modeshift"
+		}
+	}
+	"preset"
+	{
+		"id"						"9"
+		"name"						"Preset_1000061"
+		"group_source_bindings"
+		{
+			"600"		"button_diamond inactive"
+			"601"		"left_trigger active"
+			"602"		"right_trigger active"
+			"603"		"switch active"
+			"613"		"dpad inactive"
+			"790"		"right_joystick inactive"
+			"791"		"joystick inactive"
+			"817"		"button_diamond active"
+			"818"		"dpad active"
+			"819"		"joystick active"
+			"820"		"right_joystick active"
+			"1309"		"gyro inactive modeshift"
+			"1310"		"gyro active modeshift"
+		}
+	}
+	"preset"
+	{
+		"id"						"10"
 		"name"						"Preset_1000010"
 		"group_source_bindings"
 		{
@@ -54877,7 +56745,7 @@
 	}
 	"preset"
 	{
-		"id"						"9"
+		"id"						"11"
 		"name"						"Preset_1000011"
 		"group_source_bindings"
 		{
@@ -54902,7 +56770,7 @@
 	}
 	"preset"
 	{
-		"id"						"10"
+		"id"						"12"
 		"name"						"Preset_1000009"
 		"group_source_bindings"
 		{
@@ -54923,7 +56791,7 @@
 	}
 	"preset"
 	{
-		"id"						"11"
+		"id"						"13"
 		"name"						"Preset_1000012"
 		"group_source_bindings"
 		{
@@ -54940,7 +56808,572 @@
 	}
 	"preset"
 	{
-		"id"						"12"
+		"id"						"14"
+		"name"						"Preset_1000029"
+		"group_source_bindings"
+		{
+			"367"		"button_diamond inactive"
+			"368"		"left_trigger active"
+			"369"		"right_trigger active"
+			"370"		"switch active"
+			"379"		"right_trackpad inactive"
+			"386"		"right_trackpad inactive"
+			"407"		"left_trackpad inactive"
+			"721"		"right_trackpad active"
+			"722"		"joystick active"
+			"723"		"right_joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"15"
+		"name"						"Preset_1000033"
+		"group_source_bindings"
+		{
+			"411"		"button_diamond inactive"
+			"412"		"left_trigger active"
+			"413"		"right_trigger active"
+			"414"		"switch active"
+			"423"		"right_joystick active"
+			"554"		"gyro active"
+			"737"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"16"
+		"name"						"Preset_1000054"
+		"group_source_bindings"
+		{
+			"539"		"button_diamond inactive"
+			"540"		"left_trigger active"
+			"541"		"right_trigger active"
+			"542"		"switch active"
+			"551"		"right_joystick active"
+			"555"		"gyro active"
+			"738"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"17"
+		"name"						"Preset_1000067"
+		"group_source_bindings"
+		{
+			"642"		"button_diamond inactive"
+			"643"		"left_trigger active"
+			"644"		"right_trigger active"
+			"645"		"switch active"
+			"664"		"right_joystick active"
+			"739"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"18"
+		"name"						"Preset_1000102"
+		"group_source_bindings"
+		{
+			"964"		"button_diamond active"
+			"965"		"left_trigger active"
+			"966"		"right_trigger active"
+			"967"		"switch active"
+			"976"		"right_joystick active"
+			"977"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"19"
+		"name"						"Preset_1000042"
+		"group_source_bindings"
+		{
+			"479"		"button_diamond inactive"
+			"480"		"left_trigger active"
+			"481"		"right_trigger active"
+			"482"		"switch active"
+			"527"		"left_trackpad active"
+			"673"		"right_joystick active"
+			"674"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"20"
+		"name"						"Preset_1000043"
+		"group_source_bindings"
+		{
+			"483"		"button_diamond inactive"
+			"484"		"left_trigger active"
+			"485"		"right_trigger active"
+			"486"		"switch active"
+			"528"		"left_trackpad active"
+			"675"		"right_joystick active"
+			"676"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"21"
+		"name"						"Preset_1000044"
+		"group_source_bindings"
+		{
+			"487"		"button_diamond inactive"
+			"488"		"left_trigger active"
+			"489"		"right_trigger active"
+			"490"		"switch active"
+			"529"		"left_trackpad active"
+			"677"		"right_joystick active"
+			"678"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"22"
+		"name"						"Preset_1000045"
+		"group_source_bindings"
+		{
+			"491"		"button_diamond inactive"
+			"492"		"left_trigger active"
+			"493"		"right_trigger active"
+			"494"		"switch active"
+			"530"		"left_trackpad active"
+			"679"		"right_joystick active"
+			"680"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"23"
+		"name"						"Preset_1000069"
+		"group_source_bindings"
+		{
+			"746"		"button_diamond inactive"
+			"747"		"left_trigger active"
+			"748"		"right_trigger active"
+			"749"		"switch active"
+			"762"		"right_joystick active"
+			"768"		"joystick active"
+			"856"		"left_trackpad active"
+			"857"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"24"
+		"name"						"Preset_1000070"
+		"group_source_bindings"
+		{
+			"750"		"button_diamond inactive"
+			"751"		"left_trigger active"
+			"752"		"right_trigger active"
+			"753"		"switch active"
+			"763"		"right_joystick active"
+			"769"		"joystick active"
+			"858"		"left_trackpad active"
+			"859"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"25"
+		"name"						"Preset_1000073"
+		"group_source_bindings"
+		{
+			"774"		"button_diamond inactive"
+			"775"		"left_trigger active"
+			"776"		"right_trigger active"
+			"777"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"26"
+		"name"						"Preset_1000074"
+		"group_source_bindings"
+		{
+			"778"		"button_diamond inactive"
+			"779"		"left_trigger active"
+			"780"		"right_trigger active"
+			"781"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"27"
+		"name"						"Preset_1000075"
+		"group_source_bindings"
+		{
+			"782"		"button_diamond inactive"
+			"783"		"left_trigger active"
+			"784"		"right_trigger active"
+			"785"		"switch active"
+			"800"		"right_joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"28"
+		"name"						"Preset_1000077"
+		"group_source_bindings"
+		{
+			"796"		"button_diamond inactive"
+			"797"		"left_trigger active"
+			"798"		"right_trigger active"
+			"799"		"switch active"
+			"801"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"29"
+		"name"						"Preset_1000079"
+		"group_source_bindings"
+		{
+			"809"		"button_diamond inactive"
+			"810"		"left_trigger active"
+			"811"		"right_trigger active"
+			"812"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"30"
+		"name"						"Preset_1000081"
+		"group_source_bindings"
+		{
+			"825"		"button_diamond active"
+			"826"		"left_trigger active"
+			"827"		"right_trigger active"
+			"828"		"switch active"
+			"849"		"right_joystick active"
+			"850"		"joystick inactive"
+		}
+	}
+	"preset"
+	{
+		"id"						"31"
+		"name"						"Preset_1000082"
+		"group_source_bindings"
+		{
+			"829"		"button_diamond active"
+			"830"		"left_trigger active"
+			"831"		"right_trigger active"
+			"832"		"switch active"
+			"851"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"32"
+		"name"						"Preset_1000087"
+		"group_source_bindings"
+		{
+			"868"		"button_diamond inactive"
+			"869"		"left_trigger active"
+			"870"		"right_trigger active"
+			"871"		"switch active"
+			"1158"		"gyro active"
+			"1161"		"right_joystick active"
+			"1162"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"33"
+		"name"						"Preset_1000090"
+		"group_source_bindings"
+		{
+			"890"		"button_diamond inactive"
+			"891"		"left_trigger active"
+			"892"		"right_trigger active"
+			"893"		"switch active"
+			"922"		"right_joystick active"
+			"923"		"joystick active"
+			"924"		"right_trackpad inactive"
+			"925"		"right_trackpad active"
+			"926"		"left_trackpad inactive"
+			"927"		"left_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"34"
+		"name"						"Preset_1000091"
+		"group_source_bindings"
+		{
+			"894"		"button_diamond inactive"
+			"895"		"left_trigger active"
+			"896"		"right_trigger active"
+			"897"		"switch active"
+			"928"		"right_joystick active"
+			"929"		"joystick active"
+			"930"		"left_trackpad active"
+			"931"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"35"
+		"name"						"Preset_1000092"
+		"group_source_bindings"
+		{
+			"898"		"button_diamond inactive"
+			"899"		"left_trigger active"
+			"900"		"right_trigger active"
+			"901"		"switch active"
+			"944"		"right_joystick active"
+			"945"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"36"
+		"name"						"Preset_1000093"
+		"group_source_bindings"
+		{
+			"902"		"button_diamond inactive"
+			"903"		"left_trigger active"
+			"904"		"right_trigger active"
+			"905"		"switch active"
+			"946"		"right_joystick active"
+			"947"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"37"
+		"name"						"Preset_1000098"
+		"group_source_bindings"
+		{
+			"948"		"button_diamond inactive"
+			"949"		"left_trigger active"
+			"950"		"right_trigger active"
+			"951"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"38"
+		"name"						"Preset_1000099"
+		"group_source_bindings"
+		{
+			"952"		"button_diamond inactive"
+			"953"		"left_trigger active"
+			"954"		"right_trigger active"
+			"955"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"39"
+		"name"						"Preset_1000105"
+		"group_source_bindings"
+		{
+			"982"		"button_diamond inactive"
+			"983"		"left_trigger active"
+			"984"		"right_trigger active"
+			"985"		"switch active"
+			"1032"		"right_trackpad active"
+			"1163"		"right_joystick active"
+			"1164"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"40"
+		"name"						"Preset_1000106"
+		"group_source_bindings"
+		{
+			"986"		"button_diamond inactive"
+			"987"		"left_trigger active"
+			"988"		"right_trigger active"
+			"989"		"switch active"
+			"1023"		"right_joystick active"
+			"1024"		"joystick active"
+			"1025"		"right_trackpad inactive"
+			"1026"		"left_trackpad inactive"
+			"1027"		"left_trackpad active"
+			"1298"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"41"
+		"name"						"Preset_1000107"
+		"group_source_bindings"
+		{
+			"990"		"button_diamond inactive"
+			"991"		"left_trigger active"
+			"992"		"right_trigger active"
+			"993"		"switch active"
+			"1033"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"42"
+		"name"						"Preset_1000114"
+		"group_source_bindings"
+		{
+			"1044"		"button_diamond active"
+			"1045"		"left_trigger active"
+			"1046"		"right_trigger active"
+			"1047"		"switch active"
+			"1148"		"left_trackpad active"
+			"1149"		"right_trackpad active"
+			"1165"		"right_joystick active"
+			"1166"		"joystick active"
+			"1199"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"43"
+		"name"						"Preset_1000115"
+		"group_source_bindings"
+		{
+			"1048"		"button_diamond active"
+			"1049"		"left_trigger active"
+			"1050"		"right_trigger active"
+			"1051"		"switch active"
+			"1144"		"left_trackpad active"
+			"1145"		"right_trackpad active"
+			"1167"		"right_joystick active"
+			"1168"		"joystick active"
+			"1200"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"44"
+		"name"						"Preset_1000116"
+		"group_source_bindings"
+		{
+			"1052"		"button_diamond active"
+			"1053"		"left_trigger active"
+			"1054"		"right_trigger active"
+			"1055"		"switch active"
+			"1201"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"45"
+		"name"						"Preset_1000117"
+		"group_source_bindings"
+		{
+			"1056"		"button_diamond active"
+			"1057"		"left_trigger active"
+			"1058"		"right_trigger active"
+			"1059"		"switch active"
+			"1202"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"46"
+		"name"						"Preset_1000131"
+		"group_source_bindings"
+		{
+			"1112"		"button_diamond active"
+			"1113"		"left_trigger active"
+			"1114"		"right_trigger active"
+			"1115"		"switch active"
+			"1169"		"right_joystick active"
+			"1170"		"joystick active"
+			"1203"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"47"
+		"name"						"Preset_1000132"
+		"group_source_bindings"
+		{
+			"1116"		"button_diamond active"
+			"1117"		"left_trigger active"
+			"1118"		"right_trigger active"
+			"1119"		"switch active"
+			"1171"		"right_joystick active"
+			"1172"		"joystick active"
+			"1204"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"48"
+		"name"						"Preset_1000139"
+		"group_source_bindings"
+		{
+			"1217"		"button_diamond inactive"
+			"1218"		"left_trigger active"
+			"1219"		"right_trigger active"
+			"1220"		"switch active"
+			"1233"		"joystick active"
+			"1234"		"right_joystick active"
+			"1241"		"gyro active"
+			"1274"		"right_trackpad active"
+			"1275"		"left_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"49"
+		"name"						"Preset_1000143"
+		"group_source_bindings"
+		{
+			"1244"		"button_diamond inactive"
+			"1245"		"left_trigger active"
+			"1246"		"right_trigger active"
+			"1247"		"switch active"
+			"1260"		"joystick active"
+			"1261"		"right_joystick active"
+			"1271"		"gyro active"
+			"1272"		"left_trackpad active"
+			"1273"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"50"
+		"name"						"Preset_1000064"
+		"group_source_bindings"
+		{
+			"624"		"button_diamond active"
+			"625"		"left_trigger active"
+			"626"		"right_trigger active"
+			"627"		"switch active"
+			"636"		"dpad active"
+			"639"		"gyro active"
+			"683"		"right_joystick inactive"
+			"684"		"joystick active"
+			"1289"		"right_joystick active"
+			"1290"		"right_joystick inactive modeshift"
+			"1291"		"joystick inactive modeshift"
+		}
+	}
+	"preset"
+	{
+		"id"						"51"
+		"name"						"Preset_1000147"
+		"group_source_bindings"
+		{
+			"1317"		"button_diamond active"
+			"1318"		"left_trigger active"
+			"1319"		"right_trigger active"
+			"1320"		"switch active"
+			"1329"		"dpad active"
+			"1330"		"joystick active"
+			"1331"		"right_joystick active"
+			"1332"		"gyro active"
+			"12900"		"right_joystick inactive modeshift"
+			"12910"		"joystick inactive modeshift"
+		}
+	}
+	"preset"
+	{
+		"id"						"52"
 		"name"						"Preset_1000015"
 		"group_source_bindings"
 		{
@@ -54958,7 +57391,7 @@
 	}
 	"preset"
 	{
-		"id"						"13"
+		"id"						"53"
 		"name"						"Preset_1000016"
 		"group_source_bindings"
 		{
@@ -54976,7 +57409,7 @@
 	}
 	"preset"
 	{
-		"id"						"14"
+		"id"						"54"
 		"name"						"Preset_1000017"
 		"group_source_bindings"
 		{
@@ -54996,7 +57429,7 @@
 	}
 	"preset"
 	{
-		"id"						"15"
+		"id"						"55"
 		"name"						"Preset_1000018"
 		"group_source_bindings"
 		{
@@ -55016,7 +57449,43 @@
 	}
 	"preset"
 	{
-		"id"						"16"
+		"id"						"56"
+		"name"						"Preset_1000062"
+		"group_source_bindings"
+		{
+			"604"		"button_diamond active"
+			"605"		"left_trigger active"
+			"606"		"right_trigger active"
+			"607"		"switch active"
+			"614"		"dpad active"
+			"701"		"right_joystick active"
+			"702"		"joystick active"
+			"1313"		"gyro inactive modeshift"
+			"1314"		"gyro active modeshift"
+		}
+	}
+	"preset"
+	{
+		"id"						"57"
+		"name"						"Preset_1000063"
+		"group_source_bindings"
+		{
+			"608"		"button_diamond inactive"
+			"609"		"left_trigger active"
+			"610"		"right_trigger active"
+			"611"		"switch active"
+			"615"		"dpad inactive"
+			"821"		"button_diamond active"
+			"822"		"right_joystick active"
+			"823"		"joystick active"
+			"824"		"dpad active"
+			"1315"		"gyro inactive modeshift"
+			"1316"		"gyro active modeshift"
+		}
+	}
+	"preset"
+	{
+		"id"						"58"
 		"name"						"Preset_1000019"
 		"group_source_bindings"
 		{
@@ -55039,7 +57508,7 @@
 	}
 	"preset"
 	{
-		"id"						"17"
+		"id"						"59"
 		"name"						"Preset_1000020"
 		"group_source_bindings"
 		{
@@ -55062,7 +57531,7 @@
 	}
 	"preset"
 	{
-		"id"						"18"
+		"id"						"60"
 		"name"						"Preset_1000022"
 		"group_source_bindings"
 		{
@@ -55081,7 +57550,7 @@
 	}
 	"preset"
 	{
-		"id"						"19"
+		"id"						"61"
 		"name"						"Preset_1000023"
 		"group_source_bindings"
 		{
@@ -55100,95 +57569,7 @@
 	}
 	"preset"
 	{
-		"id"						"20"
-		"name"						"Preset_1000024"
-		"group_source_bindings"
-		{
-			"334"		"button_diamond active"
-			"335"		"left_trigger active"
-			"336"		"right_trigger active"
-			"337"		"switch active"
-			"344"		"right_trackpad active"
-			"346"		"left_trackpad inactive"
-			"427"		"right_joystick inactive"
-			"705"		"right_joystick active"
-			"706"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"21"
-		"name"						"Preset_1000025"
-		"group_source_bindings"
-		{
-			"338"		"button_diamond active"
-			"339"		"left_trigger active"
-			"340"		"right_trigger active"
-			"341"		"switch active"
-			"349"		"left_trackpad active"
-			"707"		"right_joystick active"
-			"708"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"22"
-		"name"						"Preset_1000026"
-		"group_source_bindings"
-		{
-			"350"		"button_diamond active"
-			"351"		"left_trigger active"
-			"352"		"right_trigger active"
-			"353"		"switch active"
-			"359"		"gyro inactive"
-			"360"		"right_joystick active"
-			"404"		"gyro inactive"
-			"580"		"gyro inactive"
-			"588"		"joystick inactive"
-			"735"		"joystick inactive"
-			"888"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"23"
-		"name"						"Preset_1000027"
-		"group_source_bindings"
-		{
-			"354"		"button_diamond active"
-			"355"		"left_trigger active"
-			"356"		"right_trigger active"
-			"357"		"switch active"
-			"358"		"gyro inactive"
-			"361"		"joystick active"
-			"405"		"gyro inactive"
-			"581"		"gyro inactive"
-			"589"		"right_joystick inactive"
-			"736"		"right_joystick inactive"
-			"889"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"24"
-		"name"						"Preset_1000029"
-		"group_source_bindings"
-		{
-			"367"		"button_diamond inactive"
-			"368"		"left_trigger active"
-			"369"		"right_trigger active"
-			"370"		"switch active"
-			"379"		"right_trackpad inactive"
-			"386"		"right_trackpad inactive"
-			"407"		"left_trackpad inactive"
-			"721"		"right_trackpad active"
-			"722"		"joystick active"
-			"723"		"right_joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"25"
+		"id"						"62"
 		"name"						"Preset_1000030"
 		"group_source_bindings"
 		{
@@ -55207,53 +57588,7 @@
 	}
 	"preset"
 	{
-		"id"						"26"
-		"name"						"Preset_1000031"
-		"group_source_bindings"
-		{
-			"375"		"button_diamond active"
-			"376"		"left_trigger active"
-			"377"		"right_trigger active"
-			"378"		"switch active"
-			"381"		"right_trackpad inactive"
-			"409"		"left_trackpad inactive"
-			"728"		"right_trackpad active"
-			"729"		"right_joystick active"
-			"730"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"27"
-		"name"						"Preset_1000032"
-		"group_source_bindings"
-		{
-			"391"		"button_diamond active"
-			"392"		"left_trigger active"
-			"393"		"right_trigger active"
-			"394"		"switch active"
-			"395"		"right_trackpad inactive"
-			"410"		"left_trackpad inactive"
-		}
-	}
-	"preset"
-	{
-		"id"						"28"
-		"name"						"Preset_1000033"
-		"group_source_bindings"
-		{
-			"411"		"button_diamond inactive"
-			"412"		"left_trigger active"
-			"413"		"right_trigger active"
-			"414"		"switch active"
-			"423"		"right_joystick active"
-			"554"		"gyro active"
-			"737"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"29"
+		"id"						"63"
 		"name"						"Preset_1000034"
 		"group_source_bindings"
 		{
@@ -55268,22 +57603,52 @@
 	}
 	"preset"
 	{
-		"id"						"30"
-		"name"						"Preset_1000035"
+		"id"						"64"
+		"name"						"Preset_1000055"
 		"group_source_bindings"
 		{
-			"419"		"button_diamond active"
-			"420"		"left_trigger active"
-			"421"		"right_trigger active"
-			"422"		"switch active"
-			"428"		"right_joystick active"
-			"558"		"gyro active"
-			"743"		"joystick active"
+			"543"		"button_diamond inactive"
+			"544"		"left_trigger active"
+			"545"		"right_trigger active"
+			"546"		"switch active"
+			"552"		"right_joystick active"
+			"557"		"gyro active"
+			"741"		"joystick active"
 		}
 	}
 	"preset"
 	{
-		"id"						"31"
+		"id"						"65"
+		"name"						"Preset_1000059"
+		"group_source_bindings"
+		{
+			"590"		"button_diamond inactive"
+			"591"		"left_trigger active"
+			"592"		"right_trigger active"
+			"593"		"switch active"
+			"594"		"right_joystick inactive"
+			"595"		"gyro inactive"
+			"662"		"right_joystick active"
+			"742"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"66"
+		"name"						"Preset_1000103"
+		"group_source_bindings"
+		{
+			"968"		"button_diamond active"
+			"969"		"left_trigger active"
+			"970"		"right_trigger active"
+			"971"		"switch active"
+			"978"		"right_joystick active"
+			"979"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"67"
 		"name"						"Preset_1000036"
 		"group_source_bindings"
 		{
@@ -55304,7 +57669,7 @@
 	}
 	"preset"
 	{
-		"id"						"32"
+		"id"						"68"
 		"name"						"Preset_1000037"
 		"group_source_bindings"
 		{
@@ -55325,7 +57690,7 @@
 	}
 	"preset"
 	{
-		"id"						"33"
+		"id"						"69"
 		"name"						"Preset_1000038"
 		"group_source_bindings"
 		{
@@ -55344,7 +57709,7 @@
 	}
 	"preset"
 	{
-		"id"						"34"
+		"id"						"70"
 		"name"						"Preset_1000039"
 		"group_source_bindings"
 		{
@@ -55361,7 +57726,7 @@
 	}
 	"preset"
 	{
-		"id"						"35"
+		"id"						"71"
 		"name"						"Preset_1000040"
 		"group_source_bindings"
 		{
@@ -55377,7 +57742,7 @@
 	}
 	"preset"
 	{
-		"id"						"36"
+		"id"						"72"
 		"name"						"Preset_1000041"
 		"group_source_bindings"
 		{
@@ -55393,67 +57758,7 @@
 	}
 	"preset"
 	{
-		"id"						"37"
-		"name"						"Preset_1000042"
-		"group_source_bindings"
-		{
-			"479"		"button_diamond inactive"
-			"480"		"left_trigger active"
-			"481"		"right_trigger active"
-			"482"		"switch active"
-			"527"		"left_trackpad active"
-			"673"		"right_joystick active"
-			"674"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"38"
-		"name"						"Preset_1000043"
-		"group_source_bindings"
-		{
-			"483"		"button_diamond inactive"
-			"484"		"left_trigger active"
-			"485"		"right_trigger active"
-			"486"		"switch active"
-			"528"		"left_trackpad active"
-			"675"		"right_joystick active"
-			"676"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"39"
-		"name"						"Preset_1000044"
-		"group_source_bindings"
-		{
-			"487"		"button_diamond inactive"
-			"488"		"left_trigger active"
-			"489"		"right_trigger active"
-			"490"		"switch active"
-			"529"		"left_trackpad active"
-			"677"		"right_joystick active"
-			"678"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"40"
-		"name"						"Preset_1000045"
-		"group_source_bindings"
-		{
-			"491"		"button_diamond inactive"
-			"492"		"left_trigger active"
-			"493"		"right_trigger active"
-			"494"		"switch active"
-			"530"		"left_trackpad active"
-			"679"		"right_joystick active"
-			"680"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"41"
+		"id"						"73"
 		"name"						"Preset_1000046"
 		"group_source_bindings"
 		{
@@ -55468,7 +57773,7 @@
 	}
 	"preset"
 	{
-		"id"						"42"
+		"id"						"74"
 		"name"						"Preset_1000047"
 		"group_source_bindings"
 		{
@@ -55483,7 +57788,7 @@
 	}
 	"preset"
 	{
-		"id"						"43"
+		"id"						"75"
 		"name"						"Preset_1000048"
 		"group_source_bindings"
 		{
@@ -55498,7 +57803,7 @@
 	}
 	"preset"
 	{
-		"id"						"44"
+		"id"						"76"
 		"name"						"Preset_1000049"
 		"group_source_bindings"
 		{
@@ -55513,470 +57818,7 @@
 	}
 	"preset"
 	{
-		"id"						"45"
-		"name"						"Preset_1000050"
-		"group_source_bindings"
-		{
-			"511"		"button_diamond active"
-			"512"		"left_trigger active"
-			"513"		"right_trigger active"
-			"514"		"switch active"
-			"535"		"left_trackpad active"
-			"709"		"right_joystick active"
-			"710"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"46"
-		"name"						"Preset_1000051"
-		"group_source_bindings"
-		{
-			"515"		"button_diamond active"
-			"516"		"left_trigger active"
-			"517"		"right_trigger active"
-			"518"		"switch active"
-			"536"		"left_trackpad active"
-			"711"		"right_joystick active"
-			"712"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"47"
-		"name"						"Preset_1000052"
-		"group_source_bindings"
-		{
-			"519"		"button_diamond active"
-			"520"		"left_trigger active"
-			"521"		"right_trigger active"
-			"522"		"switch active"
-			"537"		"left_trackpad active"
-			"713"		"right_joystick active"
-			"714"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"48"
-		"name"						"Preset_1000053"
-		"group_source_bindings"
-		{
-			"523"		"button_diamond active"
-			"524"		"left_trigger active"
-			"525"		"right_trigger active"
-			"526"		"switch active"
-			"538"		"left_trackpad active"
-			"715"		"right_joystick active"
-			"716"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"49"
-		"name"						"Preset_1000054"
-		"group_source_bindings"
-		{
-			"539"		"button_diamond inactive"
-			"540"		"left_trigger active"
-			"541"		"right_trigger active"
-			"542"		"switch active"
-			"551"		"right_joystick active"
-			"555"		"gyro active"
-			"738"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"50"
-		"name"						"Preset_1000055"
-		"group_source_bindings"
-		{
-			"543"		"button_diamond inactive"
-			"544"		"left_trigger active"
-			"545"		"right_trigger active"
-			"546"		"switch active"
-			"552"		"right_joystick active"
-			"557"		"gyro active"
-			"741"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"51"
-		"name"						"Preset_1000056"
-		"group_source_bindings"
-		{
-			"547"		"button_diamond active"
-			"548"		"left_trigger active"
-			"549"		"right_trigger active"
-			"550"		"switch active"
-			"553"		"right_joystick active"
-			"559"		"gyro active"
-			"744"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"52"
-		"name"						"Preset_1000057"
-		"group_source_bindings"
-		{
-			"564"		"button_diamond active"
-			"565"		"left_trigger active"
-			"566"		"right_trigger active"
-			"567"		"switch active"
-			"572"		"right_joystick active"
-			"719"		"joystick inactive"
-		}
-	}
-	"preset"
-	{
-		"id"						"53"
-		"name"						"Preset_1000058"
-		"group_source_bindings"
-		{
-			"568"		"button_diamond active"
-			"569"		"left_trigger active"
-			"570"		"right_trigger active"
-			"571"		"switch active"
-			"573"		"right_joystick active"
-			"720"		"joystick inactive"
-		}
-	}
-	"preset"
-	{
-		"id"						"54"
-		"name"						"Preset_1000059"
-		"group_source_bindings"
-		{
-			"590"		"button_diamond inactive"
-			"591"		"left_trigger active"
-			"592"		"right_trigger active"
-			"593"		"switch active"
-			"594"		"right_joystick inactive"
-			"595"		"gyro inactive"
-			"662"		"right_joystick active"
-			"742"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"55"
-		"name"						"Preset_1000060"
-		"group_source_bindings"
-		{
-			"596"		"button_diamond active"
-			"597"		"left_trigger active"
-			"598"		"right_trigger active"
-			"599"		"switch active"
-			"612"		"dpad active"
-			"681"		"right_joystick active"
-			"682"		"joystick active"
-			"1305"		"gyro inactive modeshift"
-			"1306"		"gyro inactive modeshift"
-			"1307"		"gyro inactive modeshift"
-			"1308"		"gyro active modeshift"
-		}
-	}
-	"preset"
-	{
-		"id"						"56"
-		"name"						"Preset_1000061"
-		"group_source_bindings"
-		{
-			"600"		"button_diamond inactive"
-			"601"		"left_trigger active"
-			"602"		"right_trigger active"
-			"603"		"switch active"
-			"613"		"dpad inactive"
-			"790"		"right_joystick inactive"
-			"791"		"joystick inactive"
-			"817"		"button_diamond active"
-			"818"		"dpad active"
-			"819"		"joystick active"
-			"820"		"right_joystick active"
-			"1309"		"gyro inactive modeshift"
-			"1310"		"gyro active modeshift"
-		}
-	}
-	"preset"
-	{
-		"id"						"57"
-		"name"						"Preset_1000062"
-		"group_source_bindings"
-		{
-			"604"		"button_diamond active"
-			"605"		"left_trigger active"
-			"606"		"right_trigger active"
-			"607"		"switch active"
-			"614"		"dpad active"
-			"701"		"right_joystick active"
-			"702"		"joystick active"
-			"1313"		"gyro inactive modeshift"
-			"1314"		"gyro active modeshift"
-		}
-	}
-	"preset"
-	{
-		"id"						"58"
-		"name"						"Preset_1000063"
-		"group_source_bindings"
-		{
-			"608"		"button_diamond inactive"
-			"609"		"left_trigger active"
-			"610"		"right_trigger active"
-			"611"		"switch active"
-			"615"		"dpad inactive"
-			"821"		"button_diamond active"
-			"822"		"right_joystick active"
-			"823"		"joystick active"
-			"824"		"dpad active"
-			"1315"		"gyro inactive modeshift"
-			"1316"		"gyro active modeshift"
-		}
-	}
-	"preset"
-	{
-		"id"						"59"
-		"name"						"Preset_1000064"
-		"group_source_bindings"
-		{
-			"624"		"button_diamond active"
-			"625"		"left_trigger active"
-			"626"		"right_trigger active"
-			"627"		"switch active"
-			"636"		"dpad active"
-			"639"		"gyro active"
-			"683"		"right_joystick inactive"
-			"684"		"joystick active"
-			"1289"		"right_joystick active"
-			"1290"		"right_joystick active modeshift"
-			"1291"		"joystick active modeshift"
-		}
-	}
-	"preset"
-	{
-		"id"						"60"
-		"name"						"Preset_1000065"
-		"group_source_bindings"
-		{
-			"628"		"button_diamond active"
-			"629"		"left_trigger active"
-			"630"		"right_trigger active"
-			"631"		"switch active"
-			"637"		"dpad active"
-			"640"		"gyro active"
-			"703"		"right_joystick inactive"
-			"704"		"joystick active"
-			"1292"		"right_joystick active"
-			"1293"		"right_joystick active modeshift"
-			"1294"		"joystick active modeshift"
-		}
-	}
-	"preset"
-	{
-		"id"						"61"
-		"name"						"Preset_1000066"
-		"group_source_bindings"
-		{
-			"632"		"button_diamond active"
-			"633"		"left_trigger active"
-			"634"		"right_trigger active"
-			"635"		"switch active"
-			"638"		"dpad active"
-			"641"		"gyro active"
-			"717"		"right_joystick inactive"
-			"718"		"joystick active"
-			"1295"		"right_joystick active"
-			"1296"		"right_joystick active modeshift"
-			"1297"		"joystick active modeshift"
-		}
-	}
-	"preset"
-	{
-		"id"						"62"
-		"name"						"Preset_1000067"
-		"group_source_bindings"
-		{
-			"642"		"button_diamond inactive"
-			"643"		"left_trigger active"
-			"644"		"right_trigger active"
-			"645"		"switch active"
-			"664"		"right_joystick active"
-			"739"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"63"
-		"name"						"Preset_1000068"
-		"group_source_bindings"
-		{
-			"646"		"button_diamond active"
-			"647"		"left_trigger active"
-			"648"		"right_trigger active"
-			"649"		"switch active"
-			"663"		"right_joystick active"
-			"745"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"64"
-		"name"						"Preset_1000069"
-		"group_source_bindings"
-		{
-			"746"		"button_diamond inactive"
-			"747"		"left_trigger active"
-			"748"		"right_trigger active"
-			"749"		"switch active"
-			"762"		"right_joystick active"
-			"768"		"joystick active"
-			"856"		"left_trackpad active"
-			"857"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"65"
-		"name"						"Preset_1000070"
-		"group_source_bindings"
-		{
-			"750"		"button_diamond inactive"
-			"751"		"left_trigger active"
-			"752"		"right_trigger active"
-			"753"		"switch active"
-			"763"		"right_joystick active"
-			"769"		"joystick active"
-			"858"		"left_trackpad active"
-			"859"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"66"
-		"name"						"Preset_1000071"
-		"group_source_bindings"
-		{
-			"754"		"button_diamond inactive"
-			"755"		"left_trigger active"
-			"756"		"right_trigger active"
-			"757"		"switch active"
-			"766"		"right_joystick active"
-			"772"		"joystick active"
-			"864"		"left_trackpad active"
-			"865"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"67"
-		"name"						"Preset_1000072"
-		"group_source_bindings"
-		{
-			"758"		"button_diamond inactive"
-			"759"		"left_trigger active"
-			"760"		"right_trigger active"
-			"761"		"switch active"
-			"767"		"right_joystick active"
-			"773"		"joystick active"
-			"866"		"left_trackpad active"
-			"867"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"68"
-		"name"						"Preset_1000073"
-		"group_source_bindings"
-		{
-			"774"		"button_diamond inactive"
-			"775"		"left_trigger active"
-			"776"		"right_trigger active"
-			"777"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"69"
-		"name"						"Preset_1000074"
-		"group_source_bindings"
-		{
-			"778"		"button_diamond inactive"
-			"779"		"left_trigger active"
-			"780"		"right_trigger active"
-			"781"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"70"
-		"name"						"Preset_1000075"
-		"group_source_bindings"
-		{
-			"782"		"button_diamond inactive"
-			"783"		"left_trigger active"
-			"784"		"right_trigger active"
-			"785"		"switch active"
-			"800"		"right_joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"71"
-		"name"						"Preset_1000076"
-		"group_source_bindings"
-		{
-			"786"		"button_diamond active"
-			"787"		"left_trigger active"
-			"788"		"right_trigger active"
-			"789"		"switch active"
-			"794"		"right_joystick active"
-			"795"		"joystick inactive"
-		}
-	}
-	"preset"
-	{
-		"id"						"72"
-		"name"						"Preset_1000077"
-		"group_source_bindings"
-		{
-			"796"		"button_diamond inactive"
-			"797"		"left_trigger active"
-			"798"		"right_trigger active"
-			"799"		"switch active"
-			"801"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"73"
-		"name"						"Preset_1000078"
-		"group_source_bindings"
-		{
-			"804"		"button_diamond active"
-			"805"		"left_trigger active"
-			"806"		"right_trigger active"
-			"807"		"switch active"
-			"808"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"74"
-		"name"						"Preset_1000079"
-		"group_source_bindings"
-		{
-			"809"		"button_diamond inactive"
-			"810"		"left_trigger active"
-			"811"		"right_trigger active"
-			"812"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"75"
+		"id"						"77"
 		"name"						"Preset_1000080"
 		"group_source_bindings"
 		{
@@ -55984,33 +57826,6 @@
 			"814"		"left_trigger active"
 			"815"		"right_trigger active"
 			"816"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"76"
-		"name"						"Preset_1000081"
-		"group_source_bindings"
-		{
-			"825"		"button_diamond active"
-			"826"		"left_trigger active"
-			"827"		"right_trigger active"
-			"828"		"switch active"
-			"849"		"right_joystick active"
-			"850"		"joystick inactive"
-		}
-	}
-	"preset"
-	{
-		"id"						"77"
-		"name"						"Preset_1000082"
-		"group_source_bindings"
-		{
-			"829"		"button_diamond active"
-			"830"		"left_trigger active"
-			"831"		"right_trigger active"
-			"832"		"switch active"
-			"851"		"joystick active"
 		}
 	}
 	"preset"
@@ -56042,47 +57857,6 @@
 	"preset"
 	{
 		"id"						"80"
-		"name"						"Preset_1000085"
-		"group_source_bindings"
-		{
-			"841"		"button_diamond active"
-			"842"		"left_trigger active"
-			"843"		"right_trigger active"
-			"844"		"switch active"
-			"854"		"right_joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"81"
-		"name"						"Preset_1000086"
-		"group_source_bindings"
-		{
-			"845"		"button_diamond active"
-			"846"		"left_trigger active"
-			"847"		"right_trigger active"
-			"848"		"switch active"
-			"855"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"82"
-		"name"						"Preset_1000087"
-		"group_source_bindings"
-		{
-			"868"		"button_diamond inactive"
-			"869"		"left_trigger active"
-			"870"		"right_trigger active"
-			"871"		"switch active"
-			"1158"		"gyro active"
-			"1161"		"right_joystick active"
-			"1162"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"83"
 		"name"						"Preset_1000088"
 		"group_source_bindings"
 		{
@@ -56097,84 +57871,7 @@
 	}
 	"preset"
 	{
-		"id"						"84"
-		"name"						"Preset_1000089"
-		"group_source_bindings"
-		{
-			"876"		"button_diamond inactive"
-			"877"		"left_trigger active"
-			"878"		"right_trigger active"
-			"879"		"switch active"
-			"1160"		"gyro active"
-			"1185"		"right_joystick active"
-			"1186"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"85"
-		"name"						"Preset_1000090"
-		"group_source_bindings"
-		{
-			"890"		"button_diamond inactive"
-			"891"		"left_trigger active"
-			"892"		"right_trigger active"
-			"893"		"switch active"
-			"922"		"right_joystick active"
-			"923"		"joystick active"
-			"924"		"right_trackpad inactive"
-			"925"		"right_trackpad active"
-			"926"		"left_trackpad inactive"
-			"927"		"left_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"86"
-		"name"						"Preset_1000091"
-		"group_source_bindings"
-		{
-			"894"		"button_diamond inactive"
-			"895"		"left_trigger active"
-			"896"		"right_trigger active"
-			"897"		"switch active"
-			"928"		"right_joystick active"
-			"929"		"joystick active"
-			"930"		"left_trackpad active"
-			"931"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"87"
-		"name"						"Preset_1000092"
-		"group_source_bindings"
-		{
-			"898"		"button_diamond inactive"
-			"899"		"left_trigger active"
-			"900"		"right_trigger active"
-			"901"		"switch active"
-			"944"		"right_joystick active"
-			"945"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"88"
-		"name"						"Preset_1000093"
-		"group_source_bindings"
-		{
-			"902"		"button_diamond inactive"
-			"903"		"left_trigger active"
-			"904"		"right_trigger active"
-			"905"		"switch active"
-			"946"		"right_joystick active"
-			"947"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"89"
+		"id"						"81"
 		"name"						"Preset_1000094"
 		"group_source_bindings"
 		{
@@ -56190,7 +57887,7 @@
 	}
 	"preset"
 	{
-		"id"						"90"
+		"id"						"82"
 		"name"						"Preset_1000095"
 		"group_source_bindings"
 		{
@@ -56206,7 +57903,7 @@
 	}
 	"preset"
 	{
-		"id"						"91"
+		"id"						"83"
 		"name"						"Preset_1000096"
 		"group_source_bindings"
 		{
@@ -56220,7 +57917,7 @@
 	}
 	"preset"
 	{
-		"id"						"92"
+		"id"						"84"
 		"name"						"Preset_1000097"
 		"group_source_bindings"
 		{
@@ -56234,31 +57931,7 @@
 	}
 	"preset"
 	{
-		"id"						"93"
-		"name"						"Preset_1000098"
-		"group_source_bindings"
-		{
-			"948"		"button_diamond inactive"
-			"949"		"left_trigger active"
-			"950"		"right_trigger active"
-			"951"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"94"
-		"name"						"Preset_1000099"
-		"group_source_bindings"
-		{
-			"952"		"button_diamond inactive"
-			"953"		"left_trigger active"
-			"954"		"right_trigger active"
-			"955"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"95"
+		"id"						"85"
 		"name"						"Preset_1000100"
 		"group_source_bindings"
 		{
@@ -56270,7 +57943,7 @@
 	}
 	"preset"
 	{
-		"id"						"96"
+		"id"						"86"
 		"name"						"Preset_1000101"
 		"group_source_bindings"
 		{
@@ -56282,95 +57955,7 @@
 	}
 	"preset"
 	{
-		"id"						"97"
-		"name"						"Preset_1000102"
-		"group_source_bindings"
-		{
-			"964"		"button_diamond active"
-			"965"		"left_trigger active"
-			"966"		"right_trigger active"
-			"967"		"switch active"
-			"976"		"right_joystick active"
-			"977"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"98"
-		"name"						"Preset_1000103"
-		"group_source_bindings"
-		{
-			"968"		"button_diamond active"
-			"969"		"left_trigger active"
-			"970"		"right_trigger active"
-			"971"		"switch active"
-			"978"		"right_joystick active"
-			"979"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"99"
-		"name"						"Preset_1000104"
-		"group_source_bindings"
-		{
-			"972"		"button_diamond active"
-			"973"		"left_trigger active"
-			"974"		"right_trigger active"
-			"975"		"switch active"
-			"980"		"right_joystick active"
-			"981"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"100"
-		"name"						"Preset_1000105"
-		"group_source_bindings"
-		{
-			"982"		"button_diamond inactive"
-			"983"		"left_trigger active"
-			"984"		"right_trigger active"
-			"985"		"switch active"
-			"1032"		"right_trackpad active"
-			"1163"		"right_joystick active"
-			"1164"		"joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"101"
-		"name"						"Preset_1000106"
-		"group_source_bindings"
-		{
-			"986"		"button_diamond inactive"
-			"987"		"left_trigger active"
-			"988"		"right_trigger active"
-			"989"		"switch active"
-			"1023"		"right_joystick active"
-			"1024"		"joystick active"
-			"1025"		"right_trackpad inactive"
-			"1026"		"left_trackpad inactive"
-			"1027"		"left_trackpad active"
-			"1298"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"102"
-		"name"						"Preset_1000107"
-		"group_source_bindings"
-		{
-			"990"		"button_diamond inactive"
-			"991"		"left_trigger active"
-			"992"		"right_trigger active"
-			"993"		"switch active"
-			"1033"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"103"
+		"id"						"87"
 		"name"						"Preset_1000108"
 		"group_source_bindings"
 		{
@@ -56385,7 +57970,7 @@
 	}
 	"preset"
 	{
-		"id"						"104"
+		"id"						"88"
 		"name"						"Preset_1000109"
 		"group_source_bindings"
 		{
@@ -56402,7 +57987,7 @@
 	}
 	"preset"
 	{
-		"id"						"105"
+		"id"						"89"
 		"name"						"Preset_1000110"
 		"group_source_bindings"
 		{
@@ -56415,7 +58000,501 @@
 	}
 	"preset"
 	{
+		"id"						"90"
+		"name"						"Preset_1000118"
+		"group_source_bindings"
+		{
+			"1060"		"button_diamond active"
+			"1061"		"left_trigger active"
+			"1062"		"right_trigger active"
+			"1063"		"switch active"
+			"1150"		"left_trackpad active"
+			"1151"		"right_trackpad active"
+			"1177"		"right_joystick active"
+			"1178"		"joystick active"
+			"1205"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"91"
+		"name"						"Preset_1000119"
+		"group_source_bindings"
+		{
+			"1064"		"button_diamond active"
+			"1065"		"left_trigger active"
+			"1066"		"right_trigger active"
+			"1067"		"switch active"
+			"1152"		"right_trackpad active"
+			"1153"		"left_trackpad active"
+			"1179"		"right_joystick active"
+			"1180"		"joystick active"
+			"1206"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"92"
+		"name"						"Preset_1000120"
+		"group_source_bindings"
+		{
+			"1068"		"button_diamond active"
+			"1069"		"left_trigger active"
+			"1070"		"right_trigger active"
+			"1071"		"switch active"
+			"1207"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"93"
+		"name"						"Preset_1000121"
+		"group_source_bindings"
+		{
+			"1072"		"button_diamond active"
+			"1073"		"left_trigger active"
+			"1074"		"right_trigger active"
+			"1075"		"switch active"
+			"1208"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"94"
+		"name"						"Preset_1000133"
+		"group_source_bindings"
+		{
+			"1120"		"button_diamond active"
+			"1121"		"left_trigger active"
+			"1122"		"right_trigger active"
+			"1123"		"switch active"
+			"1181"		"right_joystick active"
+			"1182"		"joystick active"
+			"1209"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"95"
+		"name"						"Preset_1000134"
+		"group_source_bindings"
+		{
+			"1124"		"button_diamond active"
+			"1125"		"left_trigger active"
+			"1126"		"right_trigger active"
+			"1127"		"switch active"
+			"1183"		"right_joystick active"
+			"1184"		"joystick active"
+			"1210"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"96"
+		"name"						"Preset_1000140"
+		"group_source_bindings"
+		{
+			"1221"		"button_diamond inactive"
+			"1222"		"left_trigger active"
+			"1223"		"right_trigger active"
+			"1224"		"switch active"
+			"1235"		"right_joystick active"
+			"1236"		"joystick active"
+			"1243"		"gyro active"
+			"1276"		"left_trackpad active"
+			"1277"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"97"
+		"name"						"Preset_1000144"
+		"group_source_bindings"
+		{
+			"1248"		"button_diamond inactive"
+			"1249"		"left_trigger active"
+			"1250"		"right_trigger active"
+			"1251"		"switch active"
+			"1262"		"right_joystick active"
+			"1263"		"joystick active"
+			"1270"		"gyro active"
+			"1278"		"left_trackpad active"
+			"1279"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"98"
+		"name"						"Preset_1000065"
+		"group_source_bindings"
+		{
+			"628"		"button_diamond active"
+			"629"		"left_trigger active"
+			"630"		"right_trigger active"
+			"631"		"switch active"
+			"637"		"dpad active"
+			"640"		"gyro active"
+			"703"		"right_joystick inactive"
+			"704"		"joystick active"
+			"1292"		"right_joystick active"
+			"1293"		"right_joystick inactive modeshift"
+			"1294"		"joystick inactive modeshift"
+		}
+	}
+	"preset"
+	{
+		"id"						"99"
+		"name"						"Preset_1000148"
+		"group_source_bindings"
+		{
+			"1321"		"button_diamond active"
+			"1322"		"left_trigger active"
+			"1323"		"right_trigger active"
+			"1324"		"switch active"
+			"1333"		"gyro active"
+			"1334"		"right_joystick active"
+			"1335"		"joystick active"
+			"1336"		"dpad active"
+			"12930"		"right_joystick inactive modeshift"
+			"12940"		"joystick inactive modeshift"
+		}
+	}
+	"preset"
+	{
+		"id"						"100"
+		"name"						"Preset_1000057"
+		"group_source_bindings"
+		{
+			"564"		"button_diamond active"
+			"565"		"left_trigger active"
+			"566"		"right_trigger active"
+			"567"		"switch active"
+			"572"		"right_joystick active"
+			"719"		"joystick inactive"
+		}
+	}
+	"preset"
+	{
+		"id"						"101"
+		"name"						"Preset_1000058"
+		"group_source_bindings"
+		{
+			"568"		"button_diamond active"
+			"569"		"left_trigger active"
+			"570"		"right_trigger active"
+			"571"		"switch active"
+			"573"		"right_joystick active"
+			"720"		"joystick inactive"
+		}
+	}
+	"preset"
+	{
+		"id"						"102"
+		"name"						"Preset_1000024"
+		"group_source_bindings"
+		{
+			"334"		"button_diamond active"
+			"335"		"left_trigger active"
+			"336"		"right_trigger active"
+			"337"		"switch active"
+			"344"		"right_trackpad active"
+			"346"		"left_trackpad inactive"
+			"427"		"right_joystick inactive"
+			"705"		"right_joystick active"
+			"706"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"103"
+		"name"						"Preset_1000025"
+		"group_source_bindings"
+		{
+			"338"		"button_diamond active"
+			"339"		"left_trigger active"
+			"340"		"right_trigger active"
+			"341"		"switch active"
+			"349"		"left_trackpad active"
+			"707"		"right_joystick active"
+			"708"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"104"
+		"name"						"Preset_1000026"
+		"group_source_bindings"
+		{
+			"350"		"button_diamond active"
+			"351"		"left_trigger active"
+			"352"		"right_trigger active"
+			"353"		"switch active"
+			"359"		"gyro inactive"
+			"360"		"right_joystick active"
+			"404"		"gyro inactive"
+			"580"		"gyro inactive"
+			"588"		"joystick inactive"
+			"735"		"joystick inactive"
+			"888"		"gyro active"
+		}
+	}
+	"preset"
+	{
+		"id"						"105"
+		"name"						"Preset_1000027"
+		"group_source_bindings"
+		{
+			"354"		"button_diamond active"
+			"355"		"left_trigger active"
+			"356"		"right_trigger active"
+			"357"		"switch active"
+			"358"		"gyro inactive"
+			"361"		"joystick active"
+			"405"		"gyro inactive"
+			"581"		"gyro inactive"
+			"589"		"right_joystick inactive"
+			"736"		"right_joystick inactive"
+			"889"		"gyro active"
+		}
+	}
+	"preset"
+	{
 		"id"						"106"
+		"name"						"Preset_1000031"
+		"group_source_bindings"
+		{
+			"375"		"button_diamond active"
+			"376"		"left_trigger active"
+			"377"		"right_trigger active"
+			"378"		"switch active"
+			"381"		"right_trackpad inactive"
+			"409"		"left_trackpad inactive"
+			"728"		"right_trackpad active"
+			"729"		"right_joystick active"
+			"730"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"107"
+		"name"						"Preset_1000035"
+		"group_source_bindings"
+		{
+			"419"		"button_diamond active"
+			"420"		"left_trigger active"
+			"421"		"right_trigger active"
+			"422"		"switch active"
+			"428"		"right_joystick active"
+			"558"		"gyro active"
+			"743"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"108"
+		"name"						"Preset_1000056"
+		"group_source_bindings"
+		{
+			"547"		"button_diamond active"
+			"548"		"left_trigger active"
+			"549"		"right_trigger active"
+			"550"		"switch active"
+			"553"		"right_joystick active"
+			"559"		"gyro active"
+			"744"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"109"
+		"name"						"Preset_1000068"
+		"group_source_bindings"
+		{
+			"646"		"button_diamond active"
+			"647"		"left_trigger active"
+			"648"		"right_trigger active"
+			"649"		"switch active"
+			"663"		"right_joystick active"
+			"745"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"110"
+		"name"						"Preset_1000104"
+		"group_source_bindings"
+		{
+			"972"		"button_diamond active"
+			"973"		"left_trigger active"
+			"974"		"right_trigger active"
+			"975"		"switch active"
+			"980"		"right_joystick active"
+			"981"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"111"
+		"name"						"Preset_1000050"
+		"group_source_bindings"
+		{
+			"511"		"button_diamond active"
+			"512"		"left_trigger active"
+			"513"		"right_trigger active"
+			"514"		"switch active"
+			"535"		"left_trackpad active"
+			"709"		"right_joystick active"
+			"710"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"112"
+		"name"						"Preset_1000051"
+		"group_source_bindings"
+		{
+			"515"		"button_diamond active"
+			"516"		"left_trigger active"
+			"517"		"right_trigger active"
+			"518"		"switch active"
+			"536"		"left_trackpad active"
+			"711"		"right_joystick active"
+			"712"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"113"
+		"name"						"Preset_1000052"
+		"group_source_bindings"
+		{
+			"519"		"button_diamond active"
+			"520"		"left_trigger active"
+			"521"		"right_trigger active"
+			"522"		"switch active"
+			"537"		"left_trackpad active"
+			"713"		"right_joystick active"
+			"714"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"114"
+		"name"						"Preset_1000053"
+		"group_source_bindings"
+		{
+			"523"		"button_diamond active"
+			"524"		"left_trigger active"
+			"525"		"right_trigger active"
+			"526"		"switch active"
+			"538"		"left_trackpad active"
+			"715"		"right_joystick active"
+			"716"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"115"
+		"name"						"Preset_1000071"
+		"group_source_bindings"
+		{
+			"754"		"button_diamond inactive"
+			"755"		"left_trigger active"
+			"756"		"right_trigger active"
+			"757"		"switch active"
+			"766"		"right_joystick active"
+			"772"		"joystick active"
+			"864"		"left_trackpad active"
+			"865"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"116"
+		"name"						"Preset_1000072"
+		"group_source_bindings"
+		{
+			"758"		"button_diamond inactive"
+			"759"		"left_trigger active"
+			"760"		"right_trigger active"
+			"761"		"switch active"
+			"767"		"right_joystick active"
+			"773"		"joystick active"
+			"866"		"left_trackpad active"
+			"867"		"right_trackpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"117"
+		"name"						"Preset_1000076"
+		"group_source_bindings"
+		{
+			"786"		"button_diamond active"
+			"787"		"left_trigger active"
+			"788"		"right_trigger active"
+			"789"		"switch active"
+			"794"		"right_joystick active"
+			"795"		"joystick inactive"
+		}
+	}
+	"preset"
+	{
+		"id"						"118"
+		"name"						"Preset_1000078"
+		"group_source_bindings"
+		{
+			"804"		"button_diamond active"
+			"805"		"left_trigger active"
+			"806"		"right_trigger active"
+			"807"		"switch active"
+			"808"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"119"
+		"name"						"Preset_1000085"
+		"group_source_bindings"
+		{
+			"841"		"button_diamond active"
+			"842"		"left_trigger active"
+			"843"		"right_trigger active"
+			"844"		"switch active"
+			"854"		"right_joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"120"
+		"name"						"Preset_1000086"
+		"group_source_bindings"
+		{
+			"845"		"button_diamond active"
+			"846"		"left_trigger active"
+			"847"		"right_trigger active"
+			"848"		"switch active"
+			"855"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"121"
+		"name"						"Preset_1000089"
+		"group_source_bindings"
+		{
+			"876"		"button_diamond inactive"
+			"877"		"left_trigger active"
+			"878"		"right_trigger active"
+			"879"		"switch active"
+			"1160"		"gyro active"
+			"1185"		"right_joystick active"
+			"1186"		"joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"122"
 		"name"						"Preset_1000111"
 		"group_source_bindings"
 		{
@@ -56430,7 +58509,7 @@
 	}
 	"preset"
 	{
-		"id"						"107"
+		"id"						"123"
 		"name"						"Preset_1000112"
 		"group_source_bindings"
 		{
@@ -56448,7 +58527,7 @@
 	}
 	"preset"
 	{
-		"id"						"108"
+		"id"						"124"
 		"name"						"Preset_1000113"
 		"group_source_bindings"
 		{
@@ -56461,127 +58540,7 @@
 	}
 	"preset"
 	{
-		"id"						"109"
-		"name"						"Preset_1000114"
-		"group_source_bindings"
-		{
-			"1044"		"button_diamond active"
-			"1045"		"left_trigger active"
-			"1046"		"right_trigger active"
-			"1047"		"switch active"
-			"1148"		"left_trackpad active"
-			"1149"		"right_trackpad active"
-			"1165"		"right_joystick active"
-			"1166"		"joystick active"
-			"1199"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"110"
-		"name"						"Preset_1000115"
-		"group_source_bindings"
-		{
-			"1048"		"button_diamond active"
-			"1049"		"left_trigger active"
-			"1050"		"right_trigger active"
-			"1051"		"switch active"
-			"1144"		"left_trackpad active"
-			"1145"		"right_trackpad active"
-			"1167"		"right_joystick active"
-			"1168"		"joystick active"
-			"1200"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"111"
-		"name"						"Preset_1000116"
-		"group_source_bindings"
-		{
-			"1052"		"button_diamond active"
-			"1053"		"left_trigger active"
-			"1054"		"right_trigger active"
-			"1055"		"switch active"
-			"1201"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"112"
-		"name"						"Preset_1000117"
-		"group_source_bindings"
-		{
-			"1056"		"button_diamond active"
-			"1057"		"left_trigger active"
-			"1058"		"right_trigger active"
-			"1059"		"switch active"
-			"1202"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"113"
-		"name"						"Preset_1000118"
-		"group_source_bindings"
-		{
-			"1060"		"button_diamond active"
-			"1061"		"left_trigger active"
-			"1062"		"right_trigger active"
-			"1063"		"switch active"
-			"1150"		"left_trackpad active"
-			"1151"		"right_trackpad active"
-			"1177"		"right_joystick active"
-			"1178"		"joystick active"
-			"1205"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"114"
-		"name"						"Preset_1000119"
-		"group_source_bindings"
-		{
-			"1064"		"button_diamond active"
-			"1065"		"left_trigger active"
-			"1066"		"right_trigger active"
-			"1067"		"switch active"
-			"1152"		"right_trackpad active"
-			"1153"		"left_trackpad active"
-			"1179"		"right_joystick active"
-			"1180"		"joystick active"
-			"1206"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"115"
-		"name"						"Preset_1000120"
-		"group_source_bindings"
-		{
-			"1068"		"button_diamond active"
-			"1069"		"left_trigger active"
-			"1070"		"right_trigger active"
-			"1071"		"switch active"
-			"1207"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"116"
-		"name"						"Preset_1000121"
-		"group_source_bindings"
-		{
-			"1072"		"button_diamond active"
-			"1073"		"left_trigger active"
-			"1074"		"right_trigger active"
-			"1075"		"switch active"
-			"1208"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"117"
+		"id"						"125"
 		"name"						"Preset_1000122"
 		"group_source_bindings"
 		{
@@ -56598,7 +58557,7 @@
 	}
 	"preset"
 	{
-		"id"						"118"
+		"id"						"126"
 		"name"						"Preset_1000123"
 		"group_source_bindings"
 		{
@@ -56615,7 +58574,7 @@
 	}
 	"preset"
 	{
-		"id"						"119"
+		"id"						"127"
 		"name"						"Preset_1000124"
 		"group_source_bindings"
 		{
@@ -56628,7 +58587,7 @@
 	}
 	"preset"
 	{
-		"id"						"120"
+		"id"						"128"
 		"name"						"Preset_1000125"
 		"group_source_bindings"
 		{
@@ -56641,134 +58600,7 @@
 	}
 	"preset"
 	{
-		"id"						"121"
-		"name"						"Preset_1000126"
-		"group_source_bindings"
-		{
-			"1092"		"button_diamond active"
-			"1093"		"left_trigger active"
-			"1094"		"right_trigger active"
-			"1095"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"122"
-		"name"						"Preset_1000127"
-		"group_source_bindings"
-		{
-			"1096"		"button_diamond active"
-			"1097"		"left_trigger active"
-			"1098"		"right_trigger active"
-			"1099"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"123"
-		"name"						"Preset_1000128"
-		"group_source_bindings"
-		{
-			"1100"		"button_diamond active"
-			"1101"		"left_trigger active"
-			"1102"		"right_trigger active"
-			"1103"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"124"
-		"name"						"Preset_1000129"
-		"group_source_bindings"
-		{
-			"1104"		"button_diamond active"
-			"1105"		"left_trigger active"
-			"1106"		"right_trigger active"
-			"1107"		"switch active"
-			"1285"		"joystick active"
-			"1286"		"right_joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"125"
-		"name"						"Preset_1000130"
-		"group_source_bindings"
-		{
-			"1108"		"button_diamond inactive"
-			"1109"		"left_trigger active"
-			"1110"		"right_trigger active"
-			"1111"		"switch active"
-			"1197"		"joystick inactive"
-			"1198"		"right_joystick inactive"
-			"1284"		"right_joystick inactive"
-			"1287"		"joystick active"
-			"1288"		"right_joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"126"
-		"name"						"Preset_1000131"
-		"group_source_bindings"
-		{
-			"1112"		"button_diamond active"
-			"1113"		"left_trigger active"
-			"1114"		"right_trigger active"
-			"1115"		"switch active"
-			"1169"		"right_joystick active"
-			"1170"		"joystick active"
-			"1203"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"127"
-		"name"						"Preset_1000132"
-		"group_source_bindings"
-		{
-			"1116"		"button_diamond active"
-			"1117"		"left_trigger active"
-			"1118"		"right_trigger active"
-			"1119"		"switch active"
-			"1171"		"right_joystick active"
-			"1172"		"joystick active"
-			"1204"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"128"
-		"name"						"Preset_1000133"
-		"group_source_bindings"
-		{
-			"1120"		"button_diamond active"
-			"1121"		"left_trigger active"
-			"1122"		"right_trigger active"
-			"1123"		"switch active"
-			"1181"		"right_joystick active"
-			"1182"		"joystick active"
-			"1209"		"gyro active"
-		}
-	}
-	"preset"
-	{
 		"id"						"129"
-		"name"						"Preset_1000134"
-		"group_source_bindings"
-		{
-			"1124"		"button_diamond active"
-			"1125"		"left_trigger active"
-			"1126"		"right_trigger active"
-			"1127"		"switch active"
-			"1183"		"right_joystick active"
-			"1184"		"joystick active"
-			"1210"		"gyro active"
-		}
-	}
-	"preset"
-	{
-		"id"						"130"
 		"name"						"Preset_1000135"
 		"group_source_bindings"
 		{
@@ -56783,7 +58615,7 @@
 	}
 	"preset"
 	{
-		"id"						"131"
+		"id"						"130"
 		"name"						"Preset_1000136"
 		"group_source_bindings"
 		{
@@ -56798,65 +58630,7 @@
 	}
 	"preset"
 	{
-		"id"						"132"
-		"name"						"Preset_1000137"
-		"group_source_bindings"
-		{
-			"1136"		"button_diamond active"
-			"1137"		"left_trigger active"
-			"1138"		"right_trigger active"
-			"1139"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"133"
-		"name"						"Preset_1000138"
-		"group_source_bindings"
-		{
-			"1140"		"button_diamond active"
-			"1141"		"left_trigger active"
-			"1142"		"right_trigger active"
-			"1143"		"switch active"
-		}
-	}
-	"preset"
-	{
-		"id"						"134"
-		"name"						"Preset_1000139"
-		"group_source_bindings"
-		{
-			"1217"		"button_diamond inactive"
-			"1218"		"left_trigger active"
-			"1219"		"right_trigger active"
-			"1220"		"switch active"
-			"1233"		"joystick active"
-			"1234"		"right_joystick active"
-			"1241"		"gyro active"
-			"1274"		"right_trackpad active"
-			"1275"		"left_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"135"
-		"name"						"Preset_1000140"
-		"group_source_bindings"
-		{
-			"1221"		"button_diamond inactive"
-			"1222"		"left_trigger active"
-			"1223"		"right_trigger active"
-			"1224"		"switch active"
-			"1235"		"right_joystick active"
-			"1236"		"joystick active"
-			"1243"		"gyro active"
-			"1276"		"left_trackpad active"
-			"1277"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"136"
+		"id"						"131"
 		"name"						"Preset_1000141"
 		"group_source_bindings"
 		{
@@ -56873,55 +58647,7 @@
 	}
 	"preset"
 	{
-		"id"						"137"
-		"name"						"Preset_1000142"
-		"group_source_bindings"
-		{
-			"1229"		"button_diamond inactive"
-			"1230"		"left_trigger active"
-			"1231"		"right_trigger active"
-			"1232"		"switch active"
-			"1239"		"joystick active"
-			"1240"		"right_joystick active"
-		}
-	}
-	"preset"
-	{
-		"id"						"138"
-		"name"						"Preset_1000143"
-		"group_source_bindings"
-		{
-			"1244"		"button_diamond inactive"
-			"1245"		"left_trigger active"
-			"1246"		"right_trigger active"
-			"1247"		"switch active"
-			"1260"		"joystick active"
-			"1261"		"right_joystick active"
-			"1271"		"gyro active"
-			"1272"		"left_trackpad active"
-			"1273"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"139"
-		"name"						"Preset_1000144"
-		"group_source_bindings"
-		{
-			"1248"		"button_diamond inactive"
-			"1249"		"left_trigger active"
-			"1250"		"right_trigger active"
-			"1251"		"switch active"
-			"1262"		"right_joystick active"
-			"1263"		"joystick active"
-			"1270"		"gyro active"
-			"1278"		"left_trackpad active"
-			"1279"		"right_trackpad active"
-		}
-	}
-	"preset"
-	{
-		"id"						"140"
+		"id"						"132"
 		"name"						"Preset_1000145"
 		"group_source_bindings"
 		{
@@ -56938,57 +58664,26 @@
 	}
 	"preset"
 	{
-		"id"						"141"
-		"name"						"Preset_1000146"
+		"id"						"133"
+		"name"						"Preset_1000066"
 		"group_source_bindings"
 		{
-			"1256"		"button_diamond inactive"
-			"1257"		"left_trigger active"
-			"1258"		"right_trigger active"
-			"1259"		"switch active"
-			"1266"		"right_joystick active"
-			"1267"		"joystick active"
+			"632"		"button_diamond active"
+			"633"		"left_trigger active"
+			"634"		"right_trigger active"
+			"635"		"switch active"
+			"638"		"dpad active"
+			"641"		"gyro active"
+			"717"		"right_joystick inactive"
+			"718"		"joystick active"
+			"1295"		"right_joystick active"
+			"1296"		"right_joystick inactive modeshift"
+			"1297"		"joystick inactive modeshift"
 		}
 	}
 	"preset"
 	{
-		"id"						"142"
-		"name"						"Preset_1000147"
-		"group_source_bindings"
-		{
-			"1317"		"button_diamond active"
-			"1318"		"left_trigger active"
-			"1319"		"right_trigger active"
-			"1320"		"switch active"
-			"1329"		"dpad active"
-			"1330"		"joystick active"
-			"1331"		"right_joystick active"
-			"1332"		"gyro active"
-			"12900"		"right_joystick active modeshift"
-			"12910"		"joystick active modeshift"
-		}
-	}
-	"preset"
-	{
-		"id"						"143"
-		"name"						"Preset_1000148"
-		"group_source_bindings"
-		{
-			"1321"		"button_diamond active"
-			"1322"		"left_trigger active"
-			"1323"		"right_trigger active"
-			"1324"		"switch active"
-			"1333"		"gyro active"
-			"1334"		"right_joystick active"
-			"1335"		"joystick active"
-			"1336"		"dpad active"
-			"12930"		"right_joystick active modeshift"
-			"12940"		"joystick active modeshift"
-		}
-	}
-	"preset"
-	{
-		"id"						"144"
+		"id"						"134"
 		"name"						"Preset_1000149"
 		"group_source_bindings"
 		{
@@ -57000,8 +58695,141 @@
 			"1338"		"joystick active"
 			"1339"		"right_joystick active"
 			"1340"		"gyro active"
-			"12960"		"right_joystick active modeshift"
-			"12970"		"joystick active modeshift"
+			"12960"		"right_joystick inactive modeshift"
+			"12970"		"joystick inactive modeshift"
+		}
+	}
+	"preset"
+	{
+		"id"						"135"
+		"name"						"Preset_1000032"
+		"group_source_bindings"
+		{
+			"391"		"button_diamond active"
+			"392"		"left_trigger active"
+			"393"		"right_trigger active"
+			"394"		"switch active"
+			"395"		"right_trackpad inactive"
+			"410"		"left_trackpad inactive"
+		}
+	}
+	"preset"
+	{
+		"id"						"136"
+		"name"						"Preset_1000126"
+		"group_source_bindings"
+		{
+			"1092"		"button_diamond active"
+			"1093"		"left_trigger active"
+			"1094"		"right_trigger active"
+			"1095"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"137"
+		"name"						"Preset_1000127"
+		"group_source_bindings"
+		{
+			"1096"		"button_diamond active"
+			"1097"		"left_trigger active"
+			"1098"		"right_trigger active"
+			"1099"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"138"
+		"name"						"Preset_1000128"
+		"group_source_bindings"
+		{
+			"1100"		"button_diamond active"
+			"1101"		"left_trigger active"
+			"1102"		"right_trigger active"
+			"1103"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"139"
+		"name"						"Preset_1000129"
+		"group_source_bindings"
+		{
+			"1104"		"button_diamond active"
+			"1105"		"left_trigger active"
+			"1106"		"right_trigger active"
+			"1107"		"switch active"
+			"1285"		"joystick active"
+			"1286"		"right_joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"140"
+		"name"						"Preset_1000130"
+		"group_source_bindings"
+		{
+			"1108"		"button_diamond inactive"
+			"1109"		"left_trigger active"
+			"1110"		"right_trigger active"
+			"1111"		"switch active"
+			"1197"		"joystick inactive"
+			"1198"		"right_joystick inactive"
+			"1284"		"right_joystick inactive"
+			"1287"		"joystick active"
+			"1288"		"right_joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"141"
+		"name"						"Preset_1000137"
+		"group_source_bindings"
+		{
+			"1136"		"button_diamond active"
+			"1137"		"left_trigger active"
+			"1138"		"right_trigger active"
+			"1139"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"142"
+		"name"						"Preset_1000138"
+		"group_source_bindings"
+		{
+			"1140"		"button_diamond active"
+			"1141"		"left_trigger active"
+			"1142"		"right_trigger active"
+			"1143"		"switch active"
+		}
+	}
+	"preset"
+	{
+		"id"						"143"
+		"name"						"Preset_1000142"
+		"group_source_bindings"
+		{
+			"1229"		"button_diamond inactive"
+			"1230"		"left_trigger active"
+			"1231"		"right_trigger active"
+			"1232"		"switch active"
+			"1239"		"joystick active"
+			"1240"		"right_joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"144"
+		"name"						"Preset_1000146"
+		"group_source_bindings"
+		{
+			"1256"		"button_diamond inactive"
+			"1257"		"left_trigger active"
+			"1258"		"right_trigger active"
+			"1259"		"switch active"
+			"1266"		"right_joystick active"
+			"1267"		"joystick active"
 		}
 	}
 	"settings"
