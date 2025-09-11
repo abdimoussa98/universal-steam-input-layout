@@ -1,18 +1,18 @@
 {
 	"controller_mappings": {
 		"version": "3",
-		"revision": "12738",
-		"title": "universal-layout-alternative :: hold-gyro :: latest",
-		"description": "add transition set navigation",
+		"revision": "12814",
+		"title": "finsh_alternative",
+		"description": "add keys for the fn special keys",
 		"creator": "76561198079670632",
 		"progenitor": "",
-		"url": "workshop://3564358614",
+		"url": "autosave://C:\\\\Program Files (x86)\\\\Steam\\\\steamapps\\\\common\\\\Steam Controller Configs\\\\119404904\\\\config\\\\692890\\\\controller_neptune.vdf",
 		"export_type": "personal_local",
 		"controller_type": "controller_neptune",
 		"controller_caps": "23117823",
 		"major_revision": "0",
 		"minor_revision": "0",
-		"Timestamp": "1275068418",
+		"Timestamp": "2",
 		"actions": {
 			"Preset_1000001": {
 				"title": "Base",
@@ -14561,9 +14561,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "9"
 								}
 							}
 						},
@@ -14571,9 +14574,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "15"
 								}
 							}
 						},
@@ -15720,9 +15726,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "9"
 								}
 							}
 						},
@@ -15730,9 +15739,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "15"
 								}
 							}
 						},
@@ -16465,9 +16477,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "9"
 								}
 							}
 						},
@@ -16475,9 +16490,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "15"
 								}
 							}
 						},
@@ -29673,9 +29691,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "20"
 								}
 							}
 						},
@@ -29683,9 +29704,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "15"
 								}
 							}
 						},
@@ -30130,9 +30154,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "20"
 								}
 							}
 						},
@@ -30140,9 +30167,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "15"
 								}
 							}
 						},
@@ -30591,9 +30621,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "20"
 								}
 							}
 						},
@@ -30601,9 +30634,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "15"
 								}
 							}
 						},
@@ -32454,9 +32490,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "9"
 								}
 							}
 						},
@@ -32464,9 +32503,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14"
 								}
 							}
 						},
@@ -32576,9 +32618,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "20"
 								}
 							}
 						},
@@ -32586,9 +32631,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14"
 								}
 							}
 						},
@@ -32717,9 +32765,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "20"
 								}
 							}
 						},
@@ -32727,9 +32778,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14"
 								}
 							}
 						},
@@ -32840,9 +32894,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "9"
 								}
 							}
 						},
@@ -32850,9 +32907,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14"
 								}
 							}
 						},
@@ -33272,9 +33332,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "9"
 								}
 							}
 						},
@@ -33282,9 +33345,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14"
 								}
 							}
 						},
@@ -33393,9 +33459,12 @@
 				"inputs": {
 					"dpad_north": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "20"
 								}
 							}
 						},
@@ -33403,9 +33472,12 @@
 					},
 					"dpad_south": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14"
 								}
 							}
 						},
@@ -33626,24 +33698,12 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift dpad 1039",
-											"mode_shift dpad 1039"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift dpad 1039"
 									}
 								},
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift button_diamond 1043",
-											"mode_shift button_diamond 1043"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift button_diamond 1043"
 									}
 								}
 							]
@@ -33655,24 +33715,12 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift dpad 1039",
-											"mode_shift dpad 1039"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift dpad 1039"
 									}
 								},
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift button_diamond 1043",
-											"mode_shift button_diamond 1043"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift button_diamond 1043"
 									}
 								}
 							]
@@ -34222,24 +34270,12 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift dpad 1038",
-											"mode_shift dpad 1038"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift dpad 1038"
 									}
 								},
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift button_diamond 1040",
-											"mode_shift button_diamond 1040"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift button_diamond 1040"
 									}
 								}
 							]
@@ -34251,24 +34287,12 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift dpad 1038",
-											"mode_shift dpad 1038"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift dpad 1038"
 									}
 								},
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift button_diamond 1040",
-											"mode_shift button_diamond 1040"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift button_diamond 1040"
 									}
 								}
 							]
@@ -34716,24 +34740,12 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift dpad 1042",
-											"mode_shift dpad 1042"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift dpad 1042"
 									}
 								},
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift button_diamond 1041",
-											"mode_shift button_diamond 1041"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift button_diamond 1041"
 									}
 								}
 							]
@@ -34745,24 +34757,12 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift dpad 1042",
-											"mode_shift dpad 1042"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift dpad 1042"
 									}
 								},
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift button_diamond 1041",
-											"mode_shift button_diamond 1041"
-										]
-									},
-									"settings": {
-										"interruptable": "0"
+										"binding": "mode_shift button_diamond 1041"
 									}
 								}
 							]
@@ -35743,10 +35743,12 @@
 								},
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift gyro 1307",
-											"mode_shift gyro 1308"
-										]
+										"binding": "mode_shift gyro 1307"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "mode_shift gyro 1308"
 									},
 									"settings": {
 										"interruptable": "0"
@@ -35796,10 +35798,12 @@
 								},
 								{
 									"bindings": {
-										"binding": [
-											"mode_shift gyro 1307",
-											"mode_shift gyro 1308"
-										]
+										"binding": "mode_shift gyro 1307"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "mode_shift gyro 1308"
 									},
 									"settings": {
 										"interruptable": "0"
@@ -36258,7 +36262,7 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"release": {
+							"Full_Press": {
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 51 0 0, , ",
@@ -36266,15 +36270,15 @@
 									]
 								},
 								"settings": {
-									"haptic_intensity": "0"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 49 0 0, , ",
-										"controller_action remove_layer 51 0 0, , ",
-										"controller_action remove_layer 33 0 0, , "
+										"key_press RETURN, , ",
+										"controller_action empty_binding, , ",
+										"controller_action empty_binding, , "
 									]
 								},
 								"settings": {
@@ -36295,18 +36299,6 @@
 								},
 								"settings": {
 									"haptic_intensity": "0"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 50 0 0, , ",
-										"controller_action remove_layer 51 0 0, , ",
-										"controller_action remove_layer 33 0 0, , "
-									]
-								},
-								"settings": {
-									"chord_button": "14"
 								}
 							}
 						},
@@ -36532,13 +36524,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift joystick 1291",
-										"mode_shift joystick 1291"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift joystick 1291"
 								}
 							}
 						},
@@ -36548,13 +36534,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift right_joystick 1290",
-										"mode_shift right_joystick 1290"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift right_joystick 1290"
 								}
 							}
 						},
@@ -36573,7 +36553,7 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"release": {
+							"Full_Press": {
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 99 0 0, , ",
@@ -36581,15 +36561,15 @@
 									]
 								},
 								"settings": {
-									"haptic_intensity": "0"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 97 0 0, , ",
-										"controller_action remove_layer 99 0 0, , ",
-										"controller_action remove_layer 81 0 0, , "
+										"key_press RETURN, , ",
+										"controller_action empty_binding, , ",
+										"controller_action empty_binding, , "
 									]
 								},
 								"settings": {
@@ -36610,18 +36590,6 @@
 								},
 								"settings": {
 									"haptic_intensity": "0"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 98 0 0, , ",
-										"controller_action remove_layer 99 0 0, , ",
-										"controller_action remove_layer 81 0 0, , "
-									]
-								},
-								"settings": {
-									"chord_button": "14"
 								}
 							}
 						},
@@ -36847,13 +36815,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift joystick 1294",
-										"mode_shift joystick 1294"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift joystick 1294"
 								}
 							}
 						},
@@ -36863,13 +36825,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift right_joystick 1293",
-										"mode_shift right_joystick 1293"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift right_joystick 1293"
 								}
 							}
 						},
@@ -36888,7 +36844,7 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"release": {
+							"Full_Press": {
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 134 0 0, , ",
@@ -36896,15 +36852,15 @@
 									]
 								},
 								"settings": {
-									"haptic_intensity": "0"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 132 0 0, , ",
-										"controller_action remove_layer 134 0 0, , ",
-										"controller_action remove_layer 122 0 0, , "
+										"key_press RETURN, , ",
+										"controller_action empty_binding, , ",
+										"controller_action empty_binding, , "
 									]
 								},
 								"settings": {
@@ -36925,18 +36881,6 @@
 								},
 								"settings": {
 									"haptic_intensity": "0"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 133 0 0, , ",
-										"controller_action remove_layer 134 0 0, , ",
-										"controller_action remove_layer 122 0 0, , "
-									]
-								},
-								"settings": {
-									"chord_button": "14"
 								}
 							}
 						},
@@ -37162,13 +37106,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift joystick 1297",
-										"mode_shift joystick 1297"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift joystick 1297"
 								}
 							}
 						},
@@ -37178,13 +37116,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift right_joystick 1296",
-										"mode_shift right_joystick 1296"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift right_joystick 1296"
 								}
 							}
 						},
@@ -39761,18 +39693,6 @@
 								"settings": {
 									"haptic_intensity": "0"
 								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 144 0 0, , ",
-										"controller_action remove_layer 141 0 0, , ",
-										"controller_action remove_layer 140 0 0, , "
-									]
-								},
-								"settings": {
-									"chord_button": "15"
-								}
 							}
 						},
 						"disabled_activators": {}
@@ -39788,18 +39708,6 @@
 								},
 								"settings": {
 									"haptic_intensity": "0"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 145 0 0, , ",
-										"controller_action remove_layer 141 0 0, , ",
-										"controller_action remove_layer 140 0 0, , "
-									]
-								},
-								"settings": {
-									"chord_button": "14"
 								}
 							}
 						},
@@ -40756,25 +40664,13 @@
 								"settings": {
 									"haptic_intensity": "0"
 								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 49 0 0, , ",
-										"controller_action remove_layer 52 0 0, , ",
-										"controller_action remove_layer 33 0 0, , "
-									]
-								},
-								"settings": {
-									"chord_button": "15"
-								}
 							}
 						},
 						"disabled_activators": {}
 					},
 					"button_menu": {
 						"activators": {
-							"release": {
+							"Full_Press": {
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 52 0 0, , ",
@@ -40782,15 +40678,15 @@
 									]
 								},
 								"settings": {
-									"haptic_intensity": "0"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 50 0 0, , ",
-										"controller_action remove_layer 52 0 0, , ",
-										"controller_action remove_layer 33 0 0, , "
+										"key_press BACKSPACE, , ",
+										"controller_action empty_binding, , ",
+										"controller_action empty_binding, , "
 									]
 								},
 								"settings": {
@@ -41020,13 +40916,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift joystick 12910",
-										"mode_shift joystick 12910"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift joystick 12910"
 								}
 							}
 						},
@@ -41036,13 +40926,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift right_joystick 12900",
-										"mode_shift right_joystick 12900"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift right_joystick 12900"
 								}
 							}
 						},
@@ -41071,25 +40955,13 @@
 								"settings": {
 									"haptic_intensity": "0"
 								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 97 0 0, , ",
-										"controller_action remove_layer 100 0 0, , ",
-										"controller_action remove_layer 81 0 0, , "
-									]
-								},
-								"settings": {
-									"chord_button": "15"
-								}
 							}
 						},
 						"disabled_activators": {}
 					},
 					"button_menu": {
 						"activators": {
-							"release": {
+							"Full_Press": {
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 100 0 0, , ",
@@ -41097,15 +40969,15 @@
 									]
 								},
 								"settings": {
-									"haptic_intensity": "0"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 98 0 0, , ",
-										"controller_action remove_layer 100 0 0, , ",
-										"controller_action remove_layer 81 0 0, , "
+										"key_press BACKSPACE, , ",
+										"controller_action empty_binding, , ",
+										"controller_action empty_binding, , "
 									]
 								},
 								"settings": {
@@ -41335,13 +41207,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift joystick 12940",
-										"mode_shift joystick 12940"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift joystick 12940"
 								}
 							}
 						},
@@ -41351,13 +41217,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift right_joystick 12930",
-										"mode_shift right_joystick 12930"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift right_joystick 12930"
 								}
 							}
 						},
@@ -41386,25 +41246,13 @@
 								"settings": {
 									"haptic_intensity": "0"
 								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": [
-										"controller_action add_layer 132 0 0, , ",
-										"controller_action remove_layer 135 0 0, , ",
-										"controller_action remove_layer 122 0 0, , "
-									]
-								},
-								"settings": {
-									"chord_button": "15"
-								}
 							}
 						},
 						"disabled_activators": {}
 					},
 					"button_menu": {
 						"activators": {
-							"release": {
+							"Full_Press": {
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 135 0 0, , ",
@@ -41412,15 +41260,15 @@
 									]
 								},
 								"settings": {
-									"haptic_intensity": "0"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 133 0 0, , ",
-										"controller_action remove_layer 135 0 0, , ",
-										"controller_action remove_layer 122 0 0, , "
+										"key_press BACKSPACE, , ",
+										"controller_action empty_binding, , ",
+										"controller_action empty_binding, , "
 									]
 								},
 								"settings": {
@@ -41650,13 +41498,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift joystick 12970",
-										"mode_shift joystick 12970"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift joystick 12970"
 								}
 							}
 						},
@@ -41666,13 +41508,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": [
-										"mode_shift right_joystick 12960",
-										"mode_shift right_joystick 12960"
-									]
-								},
-								"settings": {
-									"interruptable": "0"
+									"binding": "mode_shift right_joystick 12960"
 								}
 							}
 						},
