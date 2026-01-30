@@ -1,18 +1,18 @@
 {
 	"controller_mappings": {
 		"version": "3",
-		"revision": "12855",
-		"title": "universal-layout-default :: hold-gyro :: latest",
+		"revision": "12875",
+		"title": "universal-layout-default :: hold-gyro :: 60.0",
 		"description": "...",
 		"creator": "76561198079670632",
 		"progenitor": "",
-		"url": "autosave://C:\\\\Program Files (x86)\\\\Steam\\\\steamapps\\\\common\\\\Steam Controller Configs\\\\119404904\\\\config\\\\692890\\\\controller_neptune.vdf",
+		"url": "workshop://3602398618",
 		"export_type": "personal_local",
 		"controller_type": "controller_neptune",
 		"controller_caps": "23117823",
 		"major_revision": "0",
 		"minor_revision": "0",
-		"Timestamp": "2",
+		"Timestamp": "-540030088",
 		"actions": {
 			"Preset_1000001": {
 				"title": "Base",
@@ -14036,7 +14036,7 @@
 								{
 									"bindings": {
 										"binding": [
-											"key_press LEFT_WINDOWS, , ",
+											"key_press NUM_LOCK, , ",
 											"controller_action add_layer 30 0 0, , "
 										]
 									},
@@ -15251,7 +15251,7 @@
 								{
 									"bindings": {
 										"binding": [
-											"key_press LEFT_WINDOWS, , ",
+											"key_press NUM_LOCK, , ",
 											"controller_action add_layer 78 0 0, , "
 										]
 									},
@@ -18942,7 +18942,7 @@
 								{
 									"bindings": {
 										"binding": [
-											"key_press PAGE_DOWN, , ",
+											"key_press NUM_LOCK, , ",
 											"controller_action add_layer 30 0 0, , "
 										]
 									},
@@ -19011,7 +19011,7 @@
 								{
 									"bindings": {
 										"binding": [
-											"key_press PAGE_UP, , ",
+											"key_press BACK_TICK, , ",
 											"controller_action add_layer 30 0 0, , "
 										]
 									},
@@ -19291,7 +19291,7 @@
 								{
 									"bindings": {
 										"binding": [
-											"key_press PAGE_UP, , ",
+											"key_press BACK_TICK, , ",
 											"controller_action add_layer 78 0 0, , "
 										]
 									},
@@ -19400,7 +19400,7 @@
 								{
 									"bindings": {
 										"binding": [
-											"key_press PAGE_DOWN, , ",
+											"key_press NUM_LOCK, , ",
 											"controller_action add_layer 78 0 0, , "
 										]
 									},
@@ -29183,9 +29183,14 @@
 					},
 					"click": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action add_layer 97 0 0, , "
+								},
+								"settings": {
+									"chord_button": "15",
+									"hold_repeats": "1",
+									"interruptable": "0"
 								}
 							}
 						},
@@ -32316,9 +32321,14 @@
 					},
 					"click": {
 						"activators": {
-							"Full_Press": {
+							"chord": {
 								"bindings": {
 									"binding": "controller_action add_layer 97 0 0, , "
+								},
+								"settings": {
+									"chord_button": "14",
+									"hold_repeats": "1",
+									"interruptable": "0"
 								}
 							}
 						},

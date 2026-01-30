@@ -1,18 +1,18 @@
 "controller_mappings"
 {
 	"version"				"3"
-	"revision"				"12814"
-	"title"					"universal-layout-alternative :: hold-gyro :: latest"
+	"revision"				"12822"
+	"title"					"universal-layout-alternative :: hold-gyro :: 60.0"
 	"description"			"..."
 	"creator"				"76561198079670632"
 	"progenitor"			""
-	"url"					"autosave://C:\\Program Files (x86)\\Steam\\steamapps\\common\\Steam Controller Configs\\119404904\\config\\692890\\controller_neptune.vdf"
+	"url"					"workshop://3602413460"
 	"export_type"			"personal_local"
 	"controller_type"		"controller_neptune"
 	"controller_caps"		"23117823"
 	"major_revision"		"0"
 	"minor_revision"		"0"
-	"Timestamp"				"2"
+	"Timestamp"				"-540030088"
 	"actions"
 	{
 		"Preset_1000001"
@@ -19205,7 +19205,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press LEFT_WINDOWS, , "
+							"binding"		"key_press NUM_LOCK, , "
 							"binding"		"controller_action add_layer 30 0 0, , "
 						}
 						"settings"
@@ -20764,7 +20764,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press LEFT_WINDOWS, , "
+							"binding"		"key_press NUM_LOCK, , "
 							"binding"		"controller_action add_layer 78 0 0, , "
 						}
 						"settings"
@@ -25897,7 +25897,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press PAGE_DOWN, , "
+							"binding"		"key_press NUM_LOCK, , "
 							"binding"		"controller_action add_layer 30 0 0, , "
 						}
 						"settings"
@@ -25980,7 +25980,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press PAGE_UP, , "
+							"binding"		"key_press BACK_TICK, , "
 							"binding"		"controller_action add_layer 30 0 0, , "
 						}
 						"settings"
@@ -26310,7 +26310,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press PAGE_UP, , "
+							"binding"		"key_press BACK_TICK, , "
 							"binding"		"controller_action add_layer 78 0 0, , "
 						}
 						"settings"
@@ -26442,7 +26442,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"key_press PAGE_DOWN, , "
+							"binding"		"key_press NUM_LOCK, , "
 							"binding"		"controller_action add_layer 78 0 0, , "
 						}
 						"settings"
