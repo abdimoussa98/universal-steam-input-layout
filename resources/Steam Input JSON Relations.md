@@ -169,6 +169,13 @@ binding: "controller_action add_layer 32 0 0, , "
               Runtime ID 32 = 32nd item in combined actions + action_layers order
 ```
 
+**Hold layer while pressed (ID 13):**
+```
+binding: "controller_action hold_layer 13 0 0, , "
+                                       ↑↑
+               Runtime ID 13 = Layer active only while button is held
+```
+
 ### ⚠️ CRITICAL: ID Shift on Deletion
 
 **When you delete an action set or action layer, ALL runtime IDs for subsequent items shift down.**

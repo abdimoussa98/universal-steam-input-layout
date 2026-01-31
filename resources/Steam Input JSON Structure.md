@@ -368,6 +368,13 @@ controller_action remove_layer 5 0 0, ,
                                Runtime ID 5 = L2 Layer
 ```
 
+**Hold layer while pressed (e.g., ID 13):**
+```
+controller_action hold_layer 13 0 0, ,
+                             ↑↑
+                             Runtime ID 13 = Layer held while button pressed
+```
+
 **Add a later layer (e.g., ID 32):**
 ```
 controller_action add_layer 32 0 0, ,

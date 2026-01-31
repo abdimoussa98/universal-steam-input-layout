@@ -160,7 +160,7 @@ def update_controller_action_ids_two_pass(json_str: str, id_mapping: Dict[int, i
     
     # Patterns for controller_action commands
     # Format: "controller_action CMD ID PARAM1 PARAM2, ..."
-    commands = ['CHANGE_PRESET', 'add_layer', 'remove_layer']
+    commands = ['CHANGE_PRESET', 'add_layer', 'remove_layer', 'hold_layer']
     
     # PASS 1: Replace old IDs with unique placeholders
     # Sort by old ID descending to avoid partial replacements (e.g., 10 before 1)
@@ -306,16 +306,12 @@ def delete_action_set_complete(layout_data: Dict[str, Any], target_preset_id: st
             stats["group_bindings_removed"] += 1
             print(f"  Removed binding for group {key} from preset {preset.get('name')}")
     
-    # STEP 10: Renumber preset IDs to maintain sequential order
-    print(f"\n[Step 10] Renumbering preset IDs to maintain sequential order...")
-    for i, preset in enumerate(cm["preset"]):
-        old_preset_id = preset.get("id")
-        preset["id"] = str(i)
-        if old_preset_id != str(i):
-            print(f"  Preset {preset.get('name')}: id {old_preset_id} -> {i}")
+    # NOTE: We intentionally do NOT renumber preset[].id values or group[].id values.
+    # Only the runtime IDs in controller_action commands need to be updated.
+    # The preset and group IDs in the JSON structure are left as-is.
     
-    # STEP 11: Update controller_action IDs (this needs to be done on the string representation)
-    # We'll return the id_mapping for the caller to handle
+    # Controller_action ID updates are done in the caller via string replacement
+    # We return the id_mapping for that purpose
     
     return layout_data, {"stats": stats, "id_mapping": id_mapping, "old_runtime_ids": old_runtime_ids, "new_runtime_ids": new_runtime_ids}
 
@@ -360,7 +356,7 @@ def main():
     updated_layout, deletion_info = delete_action_set_complete(layout_data, preset_id)
     
     # Convert to string for ID replacement
-    print(f"\n[Step 11] Updating controller_action runtime IDs (two-pass)...")
+    print(f"\n[Step 10] Updating controller_action runtime IDs (two-pass)...")
     json_str = json.dumps(updated_layout, indent='\t', ensure_ascii=False)
     
     # Update controller_action IDs
@@ -374,7 +370,7 @@ def main():
     final_layout = json.loads(json_str, object_pairs_hook=OrderedDict)
     
     # Save updated layout
-    print(f"\n[Step 12] Saving updated layout...")
+    print(f"\n[Step 11] Saving updated layout...")
     save_json_file(json_file, final_layout)
     
     # Print summary
