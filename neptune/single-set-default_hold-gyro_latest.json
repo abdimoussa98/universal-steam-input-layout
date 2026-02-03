@@ -1342,6 +1342,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1366,6 +1367,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1390,6 +1392,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1414,6 +1417,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1479,6 +1483,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1512,6 +1517,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -1528,6 +1534,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -1578,6 +1585,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1602,6 +1610,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1626,6 +1635,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1650,6 +1660,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1896,6 +1907,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1920,6 +1932,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1944,6 +1957,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -1968,6 +1982,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -2023,6 +2038,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -2047,6 +2063,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -2071,6 +2088,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -2095,6 +2113,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -2802,6 +2821,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -2835,6 +2855,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -2851,6 +2872,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -4402,8 +4424,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -4442,8 +4467,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -4482,8 +4510,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -4522,8 +4553,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -4714,8 +4748,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -4754,8 +4791,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -4794,8 +4834,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -4834,8 +4877,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -5553,6 +5599,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -5577,6 +5624,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -5626,6 +5674,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -5650,6 +5699,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -6239,8 +6289,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -6299,8 +6352,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -6348,8 +6404,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7330,7 +7389,10 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+									"binding": [
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
@@ -7354,7 +7416,10 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+									"binding": [
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
@@ -7494,8 +7559,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7534,8 +7602,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7574,8 +7645,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7614,8 +7688,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7665,8 +7742,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7705,8 +7785,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7745,8 +7828,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7785,8 +7871,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7836,8 +7925,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7905,8 +7997,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -7965,8 +8060,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -12695,6 +12793,7 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 										]
 									}
@@ -12729,6 +12828,7 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 										]
 									}
@@ -12762,7 +12862,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer {{Base::L1: Double Tap}} 0 0, , ",
-										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , "
+										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -12803,6 +12904,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -12828,6 +12930,7 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 										]
 									}
@@ -12862,6 +12965,7 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 										]
 									}
@@ -12910,6 +13014,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -12923,7 +13028,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer {{Base::R1: Double Tap}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , "
+										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -13185,8 +13291,11 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -13240,8 +13349,11 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -13295,12 +13407,16 @@
 									"binding": [
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -13317,12 +13433,16 @@
 									"binding": [
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -13361,8 +13481,11 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -13411,8 +13534,11 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -13461,12 +13587,16 @@
 									"binding": [
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -13494,12 +13624,16 @@
 									"binding": [
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -13996,6 +14130,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -14023,6 +14158,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -14070,8 +14206,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action empty_binding, , ",
@@ -14091,9 +14230,12 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -15550,6 +15692,7 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 										]
 									}
@@ -15584,6 +15727,7 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 										]
 									}
@@ -15617,7 +15761,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer {{Base::L1: Double Tap}} 0 0, , ",
-										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , "
+										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -15658,6 +15803,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -15682,6 +15828,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -15706,6 +15853,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -15730,6 +15878,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -15754,6 +15903,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -15819,6 +15969,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -15852,6 +16003,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -15868,6 +16020,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -15918,6 +16071,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -15942,6 +16096,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -15966,6 +16121,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -15990,6 +16146,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16120,6 +16277,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16144,6 +16302,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -16215,6 +16374,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16239,6 +16399,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16263,6 +16424,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16287,6 +16449,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16343,6 +16506,7 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 										]
 									}
@@ -16377,6 +16541,7 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 										]
 									}
@@ -16425,6 +16590,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16438,7 +16604,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer {{Base::R1: Double Tap}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , "
+										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -16475,6 +16642,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16499,6 +16667,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16523,6 +16692,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16547,6 +16717,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16594,6 +16765,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16627,6 +16799,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -16643,6 +16816,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -16808,6 +16982,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								}
@@ -16832,6 +17007,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -16903,8 +17079,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -16943,8 +17122,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -16983,8 +17165,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17023,8 +17208,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17117,8 +17305,11 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17172,8 +17363,11 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17227,12 +17421,16 @@
 									"binding": [
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -17249,12 +17447,16 @@
 									"binding": [
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -17292,8 +17494,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17332,8 +17537,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17372,8 +17580,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17412,8 +17623,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17463,8 +17677,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17523,8 +17740,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17572,8 +17792,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17784,8 +18007,11 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17834,8 +18060,11 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 											"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -17884,12 +18113,16 @@
 									"binding": [
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -17917,12 +18150,16 @@
 									"binding": [
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
-										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+										"controller_action remove_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -17998,7 +18235,10 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+									"binding": [
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
@@ -18022,7 +18262,10 @@
 						"activators": {
 							"release": {
 								"bindings": {
-									"binding": "controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , "
+									"binding": [
+										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , "
+									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
@@ -18048,8 +18291,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18088,8 +18334,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18128,8 +18377,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18168,8 +18420,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18219,8 +18474,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18259,8 +18517,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18299,8 +18560,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18339,8 +18603,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18390,8 +18657,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18459,8 +18729,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
@@ -18519,8 +18792,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::R1: Tap Cover}} 0 0, , ",
 										"controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , "
