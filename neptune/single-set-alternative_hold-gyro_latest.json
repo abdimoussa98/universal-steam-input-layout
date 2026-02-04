@@ -3890,6 +3890,10 @@
 									"binding": [
 										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
+										"controller_action remove_layer {{Base::L1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1}} 0 0, , ",
 										"controller_action add_layer {{Base::L2: Modifier 0}} 0 0, , "
 									]
 								},
@@ -3929,6 +3933,10 @@
 									"binding": [
 										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
+										"controller_action remove_layer {{Base::L1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1}} 0 0, , ",
 										"controller_action add_layer {{Base::R2: Modifier 1}} 0 0, , "
 									]
 								},
@@ -4290,6 +4298,10 @@
 										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
+										"controller_action remove_layer {{Base::L1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1}} 0 0, , ",
 										"controller_action add_layer {{Base::L2: Modifier 0}} 0 0, , "
 									]
 								},
@@ -4330,6 +4342,10 @@
 										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
+										"controller_action remove_layer {{Base::L1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) L1}} 0 0, , ",
+										"controller_action remove_layer {{Base::R1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) R1}} 0 0, , ",
 										"controller_action add_layer {{Base::R2: Modifier 1}} 0 0, , "
 									]
 								},
@@ -13788,44 +13804,7 @@
 				"mode": "switches",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"left_bumper": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
-										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
-										"controller_action add_layer {{Base::L1}} 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"right_bumper": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
-										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
-										"controller_action add_layer {{Base::R1}} 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}
@@ -13875,46 +13854,7 @@
 				"mode": "switches",
 				"name": "",
 				"description": "",
-				"inputs": {
-					"left_bumper": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
-										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
-										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
-										"controller_action add_layer {{Base::L1}} 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"right_bumper": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
-										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
-										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
-										"controller_action add_layer {{Base::R1}} 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
+				"inputs": {},
 				"settings": {
 					"layer": "1"
 				}
