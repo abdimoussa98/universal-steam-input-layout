@@ -99,13 +99,13 @@
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000067": {
-				"title": "Chorded Ramp Up 0",
+				"title": "(Gyro) Turning Ramp Up 0",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000102": {
-				"title": "Chorded Ramp Up 1",
+				"title": "(Gyro) Turning Ramp Up 1",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
@@ -1230,7 +1230,7 @@
 						"activators": {
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer {{Base::Chorded Ramp Up 0}} 0 0, , "
+									"binding": "controller_action add_layer {{Base::Turning Ramp Up 0}} 0 0, , "
 								},
 								"settings": {
 									"chord_button": "5",
@@ -1317,7 +1317,7 @@
 						"activators": {
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer {{Base::Chorded Ramp Up 0}} 0 0, , "
+									"binding": "controller_action add_layer {{Base::Turning Ramp Up 0}} 0 0, , "
 								},
 								"settings": {
 									"chord_button": "6",
@@ -5407,7 +5407,7 @@
 							"Soft_Press": [
 								{
 									"bindings": {
-										"binding": "controller_action add_layer {{Base::Chorded Ramp Up 1}} 0 0, , "
+										"binding": "controller_action add_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , "
 									},
 									"settings": {
 										"hold_repeats": "1",
@@ -5420,7 +5420,7 @@
 								{
 									"bindings": {
 										"binding": [
-											"controller_action remove_layer {{Base::Chorded Ramp Up 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
 											"controller_action remove_layer {{Base::Gyro Off}} 0 0, , "
 										]
 									},
@@ -9099,8 +9099,8 @@
 							"Soft_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer {{Base::Chorded Ramp Up 1}} 0 0, , ",
-										"controller_action remove_layer {{Base::Chorded Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , "
 									]
 								},
@@ -13944,7 +13944,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer {{Base::Chorded Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
@@ -13966,7 +13966,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer {{Base::Chorded Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
@@ -14783,8 +14783,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer {{Base::Chorded Ramp Up 1}} 0 0, , ",
-										"controller_action remove_layer {{Base::Chorded Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
@@ -14806,8 +14806,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer {{Base::Chorded Ramp Up 1}} 0 0, , ",
-										"controller_action remove_layer {{Base::Chorded Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
@@ -19185,7 +19185,7 @@
 						"activators": {
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer {{Base::Chorded Ramp Up 0}} 0 0, , "
+									"binding": "controller_action add_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , "
 								},
 								"settings": {
 									"chord_button": "5",
@@ -19465,7 +19465,7 @@
 						"activators": {
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer {{Base::Chorded Ramp Up 0}} 0 0, , "
+									"binding": "controller_action add_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , "
 								},
 								"settings": {
 									"chord_button": "6",
