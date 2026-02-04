@@ -2,6 +2,10 @@
 
 This document describes the structure and relationships within Steam Input controller configuration files (JSON format converted from VDF).
 
+**References:**
+- [Steam Input Action Sets & Layers Overview](https://partner.steamgames.com/doc/features/steam_controller/iga_file)
+- [Action Set Layers Behavior (overlay/stacking)](https://partner.steamgames.com/doc/features/steam_controller/action_set_layers)
+
 ## Overview
 
 Steam Input configurations define how a controller's physical inputs map to game actions. The JSON structure contains several interconnected sections that work together to define a complete controller layout.
@@ -345,42 +349,87 @@ Given this structure:
 - `Preset_1000006` (L2 Layer) → ID **5**
 - `Preset_1000007` (R2 Layer) → ID **6**
 
+### controller_action Command Syntax
+
+**General format:**
+```
+controller_action COMMAND RUNTIME_ID BEEP NOTIFICATION, LABEL,
+```
+
+| Parameter | Description |
+|-----------|-------------|
+| `COMMAND` | The action: `CHANGE_PRESET`, `add_layer`, `remove_layer`, `hold_layer` |
+| `RUNTIME_ID` | Numeric ID of the action set or layer (see ID Assignment Rules above) |
+| `BEEP` | `1` = play haptic/beep feedback on trigger, `0` = silent |
+| `NOTIFICATION` | `1` = show on-screen notification, `0` = no notification |
+| `LABEL` | Optional display label (usually empty) |
+
 ### controller_action Command Examples
 
-**Change to Base action set:**
+**Change to Base action set (with beep and notification):**
 ```
 controller_action CHANGE_PRESET 1 1 1, ,
-                                  ↑
-                                  Runtime ID 1 = Base
+                                ↑ ↑ ↑
+                                │ │ └─ Show notification
+                                │ └─── Play beep
+                                └───── Runtime ID 1 = Base
 ```
 
-**Add/activate L2 layer:**
+**Add/activate L2 layer (silent, no notification):**
 ```
 controller_action add_layer 5 0 0, ,
-                            ↑
-                            Runtime ID 5 = L2 Layer (Preset_1000006)
+                            ↑ ↑ ↑
+                            │ │ └─ No notification
+                            │ └─── No beep
+                            └───── Runtime ID 5 = L2 Layer (Preset_1000006)
 ```
 
-**Remove L2 layer:**
+**Remove L2 layer (silent, no notification):**
 ```
 controller_action remove_layer 5 0 0, ,
-                               ↑
-                               Runtime ID 5 = L2 Layer
+                               ↑ ↑ ↑
+                               │ │ └─ No notification
+                               │ └─── No beep
+                               └───── Runtime ID 5 = L2 Layer
 ```
 
-**Hold layer while pressed (e.g., ID 13):**
+**Remove Gyro layer with feedback (beep and notification):**
+```
+controller_action remove_layer 2 1 1, ,
+                               ↑ ↑ ↑
+                               │ │ └─ Show notification
+                               │ └─── Play beep
+                               └───── Runtime ID 2 = Gyro layer
+```
+
+**Hold layer while pressed (silent):**
 ```
 controller_action hold_layer 13 0 0, ,
-                             ↑↑
-                             Runtime ID 13 = Layer held while button pressed
+                             ↑↑ ↑ ↑
+                             ││ │ └─ No notification
+                             ││ └─── No beep
+                             │└───── Runtime ID 13 = Layer held while button pressed
+                             └────── 
 ```
 
-**Add a later layer (e.g., ID 32):**
+**Add a later layer (silent):**
 ```
 controller_action add_layer 32 0 0, ,
-                            ↑↑
-                            Runtime ID 32 = 32nd total item in combined order
+                            ↑↑ ↑ ↑
+                            ││ │ └─ No notification
+                            ││ └─── No beep
+                            │└───── Runtime ID 32 = 32nd total item
+                            └────── 
 ```
+
+### When to Use Beep/Notification
+
+| Scenario | Beep | Notification | Rationale |
+|----------|------|--------------|-----------|
+| Frequent layer toggles (triggers, modifiers) | `0` | `0` | Avoid spam during gameplay |
+| Mode switches (Base ↔ Gyro ↔ Gamepad) | `1` | `1` | User should know mode changed |
+| Debug/testing | `1` | `1` | Helps verify bindings work |
+| Temporary layers (hold_layer) | `0` | `0` | Too frequent to notify |
 
 ### ⚠️ CRITICAL WARNING: ID Shift on Deletion
 
@@ -417,8 +466,45 @@ R2 Layer (Preset_1000007) → ID 4  ← SHIFTED from 5
 
 ---
 
+---
+
+## Action Sets Quick Reference
+
+| Preset ID | Title |
+|-----------|-------|
+| `Preset_1000001` | Base |
+| `Preset_1000014` | Gyro |
+| `Preset_1000021` | Alt |
+| `Preset_1000028` | Gamepad |
+
+---
+
+## Runtime ID Calculation Algorithm
+
+```python
+def calculate_runtime_id(preset_name, actions_dict, action_layers_dict):
+    """Calculate the runtime ID for a given Preset_* identifier."""
+    position = 1
+    
+    # Check action sets first
+    for action_key in actions_dict.keys():
+        if action_key == preset_name:
+            return position
+        position += 1
+    
+    # Check action layers next
+    for layer_key in action_layers_dict.keys():
+        if layer_key == preset_name:
+            return position
+        position += 1
+    
+    return None  # Not found
+```
+
+---
+
 ## See Also
 
-- `Action Sets.md` - List of Action Set IDs and names
 - `Layer Reverse Lookup.md` - Complete mapping of layer IDs to names and parents
 - `Neptune Chorded Button Ids.md` - Chord button ID reference for Steam Deck
+- `Ramp Up Layers Comparison.md` - Comparison of turning/ramp up layer configurations
