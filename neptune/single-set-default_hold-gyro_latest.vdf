@@ -1666,6 +1666,7 @@
 						"bindings"
 						{
 							"binding"		"controller_action add_layer 13 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
 						}
 						"settings"
 						{
@@ -1784,6 +1785,7 @@
 						"bindings"
 						{
 							"binding"		"controller_action add_layer 13 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
 						}
 						"settings"
 						{
@@ -18502,7 +18504,7 @@
 							"binding"		"controller_action remove_layer 55 0 0, , "
 							"binding"		"controller_action remove_layer 3 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
-							"binding"		"controller_action add_layer 4 0 0, , "
+							"binding"		"controller_action add_layer 51 0 0, , "
 						}
 						"settings"
 						{
@@ -18532,7 +18534,7 @@
 							"binding"		"controller_action remove_layer 55 0 0, , "
 							"binding"		"controller_action remove_layer 3 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
-							"binding"		"controller_action add_layer 5 0 0, , "
+							"binding"		"controller_action add_layer 52 0 0, , "
 						}
 						"settings"
 						{
@@ -19650,7 +19652,7 @@
 							"binding"		"controller_action remove_layer 55 0 0, , "
 							"binding"		"controller_action remove_layer 3 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
-							"binding"		"controller_action add_layer 4 0 0, , "
+							"binding"		"controller_action add_layer 51 0 0, , "
 						}
 						"settings"
 						{
@@ -19680,7 +19682,7 @@
 							"binding"		"controller_action remove_layer 55 0 0, , "
 							"binding"		"controller_action remove_layer 3 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
-							"binding"		"controller_action add_layer 5 0 0, , "
+							"binding"		"controller_action add_layer 52 0 0, , "
 						}
 						"settings"
 						{
@@ -25365,6 +25367,7 @@
 						"bindings"
 						{
 							"binding"		"controller_action add_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
 						}
 						"settings"
 						{
@@ -25742,6 +25745,7 @@
 						"bindings"
 						{
 							"binding"		"controller_action add_layer 15 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
 						}
 						"settings"
 						{
@@ -26527,7 +26531,7 @@
 			"413"		"right_trigger active"
 			"414"		"switch active"
 			"423"		"right_joystick active"
-			"554"		"gyro active"
+			"554"		"gyro inactive"
 			"737"		"joystick active"
 		}
 	}
@@ -26542,7 +26546,7 @@
 			"541"		"right_trigger active"
 			"542"		"switch active"
 			"551"		"right_joystick active"
-			"555"		"gyro active"
+			"555"		"gyro inactive"
 			"738"		"joystick active"
 		}
 	}
@@ -27166,7 +27170,7 @@
 			"12973"		"right_trigger inactive"
 			"12974"		"switch active"
 			"12975"		"gyro inactive"
-			"12976"		"right_joystick inactive"
+			"12976"		"right_joystick active"
 			"12977"		"joystick inactive"
 			"12978"		"left_trigger inactive"
 			"12979"		"right_trigger inactive"
