@@ -6,3 +6,5 @@
 - [ ] Make base gyro activation dependent on: left stick deflect, right stick deflect, left stick touch, right stick touch, Select, and Start all being held at the same time. This removes the need for mode shifts everywhere we want to hold Start and Select (L1/R1 layers and Menu button layers)
 - [ ] Handle steering layer
 - [ ] Handle cursor gyro layer
+- [ ] Clear all unnecessary layers on action set swap
+- [ ] Add temp gyro to both right and left stick touch
