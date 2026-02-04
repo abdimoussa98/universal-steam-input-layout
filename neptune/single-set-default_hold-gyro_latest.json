@@ -3860,6 +3860,9 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::Gyro Off}} 0 0, , "
 										]
 									},
@@ -4189,6 +4192,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , "
 									]
@@ -5421,6 +5426,9 @@
 									"bindings": {
 										"binding": [
 											"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+											"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+											"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
 											"controller_action remove_layer {{Base::Gyro Off}} 0 0, , "
 										]
 									},
@@ -9100,6 +9108,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , "
 									]
@@ -13132,6 +13142,9 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
@@ -13154,6 +13167,9 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
@@ -13227,6 +13243,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
@@ -13250,6 +13268,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
@@ -13945,6 +13965,9 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
@@ -13967,6 +13990,9 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
@@ -14784,6 +14810,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
@@ -14807,6 +14835,8 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
