@@ -8,6 +8,21 @@ Drop layout files in `/home/deck/.steam/steam/controller_base/templates/`
 
 ---
 
+## Layout Variants
+
+This repository contains two layout variants with different button mappings:
+
+| Layout | Triggers | Modifiers |
+|--------|----------|-----------|
+| **Default** | L2/R2 | L1/R1 (bumpers add modifier layers) |
+| **Alternative** | L1/R1 | L2/R2 (triggers add modifier layers) |
+
+**Default layout:** Traditional FPS-style where L2/R2 are used as triggers (aim/fire) and L1/R1 bumpers activate modifier layers for alternate button mappings.
+
+**Alternative layout:** Inverted scheme where L1/R1 are used as triggers and L2/R2 activate modifier layers. Useful for games where analog trigger control is less important.
+
+---
+
 ## Scripts
 
 This repository includes several Python scripts for managing Steam Input layout JSON files.

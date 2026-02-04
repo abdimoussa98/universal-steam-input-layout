@@ -13996,7 +13996,7 @@
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) R2}} 0 0, , ",
-										"controller_action add_layer {{Base::L1: Modifier 0}} 0 0, , "
+										"controller_action add_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -14021,7 +14021,7 @@
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) R2}} 0 0, , ",
-										"controller_action add_layer {{Base::R1: Modifier 1}} 0 0, , "
+										"controller_action add_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -14841,7 +14841,7 @@
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) R2}} 0 0, , ",
-										"controller_action add_layer {{Base::L1: Modifier 0}} 0 0, , "
+										"controller_action add_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -14866,7 +14866,7 @@
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) R2}} 0 0, , ",
-										"controller_action add_layer {{Base::R1: Modifier 1}} 0 0, , "
+										"controller_action add_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -20249,7 +20249,7 @@
 					"413": "right_trigger active",
 					"414": "switch active",
 					"423": "right_joystick active",
-					"554": "gyro active",
+					"554": "gyro inactive",
 					"737": "joystick active"
 				}
 			},
@@ -20262,7 +20262,7 @@
 					"541": "right_trigger active",
 					"542": "switch active",
 					"551": "right_joystick active",
-					"555": "gyro active",
+					"555": "gyro inactive",
 					"738": "joystick active"
 				}
 			},
