@@ -19192,7 +19192,50 @@
 				"mode": "switches",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"left_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer {{Base::(Gyro) L1}} 0 0, , ",
+										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"right_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer {{Base::(Gyro) R1}} 0 0, , ",
+										"controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",
+										"controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
@@ -19214,7 +19257,26 @@
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"edge": {
+						"activators": {
+							"Soft_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer {{Base::Gyro Off}} 0 0, , ",
+										"controller_action add_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"activation_threshold": "32255"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
@@ -19254,7 +19316,22 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer {{Base::(Gyro) L2: Modifier 0}} 0 0, , "
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
@@ -19264,7 +19341,22 @@
 				"mode": "trigger",
 				"name": "",
 				"description": "",
-				"inputs": {},
+				"inputs": {
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer {{Base::(Gyro) R2: Modifier 1}} 0 0, , "
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
 				"settings": {
 					"layer": "1"
 				}
