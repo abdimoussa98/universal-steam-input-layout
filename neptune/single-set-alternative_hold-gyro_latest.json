@@ -4789,7 +4789,7 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action empty_binding, , ",
+										"controller_action add_layer {{Base::Gyro}} 1 1, , ",
 										"controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
@@ -4833,7 +4833,7 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action empty_binding, , ",
+										"controller_action add_layer {{Base::Gyro}} 1 1, , ",
 										"controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
@@ -4939,7 +4939,7 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action empty_binding, , ",
+										"controller_action add_layer {{Base::Gyro}} 1 1, , ",
 										"controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
@@ -4994,7 +4994,7 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action empty_binding, , ",
+										"controller_action add_layer {{Base::Gyro}} 1 1, , ",
 										"controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
@@ -17552,7 +17552,7 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action empty_binding, , ",
+										"controller_action remove_layer {{Base::Gyro}} 1 1, , ",
 										"controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
@@ -17596,7 +17596,7 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action empty_binding, , ",
+										"controller_action remove_layer {{Base::Gyro}} 1 1, , ",
 										"controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
@@ -18262,7 +18262,7 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action empty_binding, , ",
+										"controller_action remove_layer {{Base::Gyro}} 1 1, , ",
 										"controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
@@ -18317,7 +18317,7 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action empty_binding, , ",
+										"controller_action remove_layer {{Base::Gyro}} 1 1, , ",
 										"controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2: Modifier 0}} 0 0, , ",
 										"controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
