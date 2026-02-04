@@ -15829,9 +15829,9 @@
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer {{Base::L1!R1: Modifier 2}} 0 0, , ",
+										"controller_action add_layer {{Base::(Gyro) L1!R1: Modifier 2}} 0 0, , ",
 										"controller_action add_layer {{Base::R1: Tap Cover}} 0 0, , ",
-										"controller_action add_layer {{Base::R1: Modifier 1}} 0 0, , ",
+										"controller_action add_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , ",
 										"controller_action add_layer {{Base::L1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -16616,9 +16616,9 @@
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer {{Base::R1!L1: Modifier 2}} 0 0, , ",
+										"controller_action add_layer {{Base::(Gyro) R1!L1: Modifier 2}} 0 0, , ",
 										"controller_action add_layer {{Base::L1: Tap Cover}} 0 0, , ",
-										"controller_action add_layer {{Base::L1: Modifier 0}} 0 0, , ",
+										"controller_action add_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , ",
 										"controller_action add_layer {{Base::R1: Tap Cover}} 0 0, , "
 									]
 								},
@@ -19137,7 +19137,7 @@
 									"binding": [
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
-										"controller_action add_layer {{Base::L1: Modifier 0}} 0 0, , "
+										"controller_action add_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -19155,7 +19155,7 @@
 									"binding": [
 										"controller_action remove_layer {{Base::L2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) L2}} 0 0, , ",
-										"controller_action add_layer {{Base::R1: Modifier 1}} 0 0, , "
+										"controller_action add_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -19417,7 +19417,7 @@
 									"binding": [
 										"controller_action remove_layer {{Base::R2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) R2}} 0 0, , ",
-										"controller_action add_layer {{Base::L1: Modifier 0}} 0 0, , "
+										"controller_action add_layer {{Base::(Gyro) L1: Modifier 0}} 0 0, , "
 									]
 								},
 								"settings": {
@@ -19435,7 +19435,7 @@
 									"binding": [
 										"controller_action remove_layer {{Base::R2}} 0 0, , ",
 										"controller_action remove_layer {{Base::(Gyro) R2}} 0 0, , ",
-										"controller_action add_layer {{Base::R1: Modifier 1}} 0 0, , "
+										"controller_action add_layer {{Base::(Gyro) R1: Modifier 1}} 0 0, , "
 									]
 								},
 								"settings": {
