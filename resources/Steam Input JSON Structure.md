@@ -196,6 +196,27 @@ Groups define the actual input configurations—what physical inputs do and how 
   - `binding` format: `"key_press KEY, Label, , "`
 - `settings`: Mode-specific configuration options
 
+#### Binding Execution Order
+
+**IMPORTANT:** When a binding contains an array of `controller_action` commands, they execute **from bottom to top** (reverse order).
+
+```json
+"binding": [
+    "controller_action add_layer {{Base::L2}} 0 0, , ",           // Executes LAST
+    "controller_action remove_layer {{Base::Gyro Off}} 0 0, , ",  // Executes 4th
+    "controller_action remove_layer {{Base::Turning Ramp Up 0}} 0 0, , ",  // Executes 3rd
+    "controller_action remove_layer {{Base::Turning Ramp Up 1}} 0 0, , ",  // Executes 2nd
+    "controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 0}} 0 0, , ",  // Executes 1st
+    "controller_action remove_layer {{Base::(Gyro) Turning Ramp Up 1}} 0 0, , "   // Executes FIRST
+]
+```
+
+**Why this matters:**
+- The **final state** is determined by the **top** binding executing last
+- For layer management, place `add_layer` commands at the **top** so they apply after all cleanup/removal operations
+- Place `remove_layer` cleanup commands **below** the primary action
+- This ensures a clean state before the main layer is added
+
 **Common Group Modes:**
 | Mode | Description |
 |------|-------------|
