@@ -160,3 +160,9 @@ See the `resources/` folder for additional documentation:
 
 - `.json` - Human-readable format for editing with these scripts
 - `.vdf` - Valve Data Format used by Steam (convert using external tools)
+
+python3 convert_runtime_ids.py to-ids neptune/single-set-alternative_hold-gyro_latest.json &&
+python3 convert_runtime_ids.py to-ids neptune/single-set-default_hold-gyro_latest.json
+
+python3 convert_runtime_ids.py to-titles neptune/single-set-alternative_hold-gyro_latest.json &&
+python3 convert_runtime_ids.py to-titles neptune/single-set-default_hold-gyro_latest.json
