@@ -22,6 +22,8 @@
 ### Guardrails
 - If you renamed an action set/layer title, you may need to re-run `to-titles` first (to regenerate tokens) before making sweeping edits.
 - Avoid manual edits that change the order of `actions` / `action_layers` unless you understand the runtime ID implications.
+- **Before running `to-ids`, confirm `action_layers` keys are in ascending `Preset_` numeric order.** If list order diverges from numeric key order, Steam's loader may resolve the generated runtime IDs against numeric key order and silently swap layers on a fresh load. Normalize the order first (reorder layers + matching `preset` blocks, resequence preset `id` fields) while still in `{{title}}` form. See `findings/2026-07-11-layer-order-swap/FINDINGS.md`.
+- **Duplicate titles break `to-ids`**: layers sharing a title (e.g. two named `DEPRECATED`) all resolve to the last one. Rename them uniquely before round-tripping.
 
 ### References
 - Converter script: `convert_runtime_ids.py`

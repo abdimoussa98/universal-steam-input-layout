@@ -339,6 +339,21 @@ Examples:
 2. **Action Layers** are numbered **after** all action sets
 3. IDs are assigned based on the **order they appear** in the `actions` and `action_layers` blocks
 
+### ⚠️ CAVEAT: Steam's loader may use Preset numeric key order instead (found 2026-07-11)
+
+The "order of appearance" rule above describes how the GUI/session writes runtime IDs. On a
+**fresh VDF load**, Steam has been observed resolving the same positional runtime IDs against
+the **`Preset_10000XX` numeric key order** instead. The two orderings normally coincide, but
+can diverge — e.g. after reordering layers in the Steam GUI (in-session everything is
+handle-based, so nothing looks wrong until the next reload). When they diverge, every binding
+whose runtime ID falls in the divergent range silently retargets to a different layer.
+
+Diagnostic signature: `action_layers` keys not in ascending numeric order, with the swapped
+layers being exactly the out-of-order entries. Fix: reorder `action_layers` + matching
+`preset` blocks into numeric key order (resequencing preset `id` fields) so both
+interpretations agree — do this while bindings are in `{{title}}` token form so intent is
+preserved. Case study: `findings/2026-07-11-layer-order-swap/FINDINGS.md`.
+
 ### Example ID Assignment
 
 Given this structure:

@@ -145,6 +145,19 @@ action_layers:
 
 **Critical:** If you delete or reorder action sets/layers, all subsequent runtime IDs shift. Always use the provided scripts to handle this automatically.
 
+### ⚠️ Load-time hazard: list order vs. Preset numbering (found 2026-07-11)
+
+A layout file actually carries **two implicit orderings**, and Steam can resolve runtime IDs by either one:
+
+1. **List order** — the order blocks appear in `actions` / `action_layers` (what the GUI shows, and what this repo's scripts use)
+2. **Numeric key order** — the order of the `Preset_10000XX` numeric keys (creation/renumbering order)
+
+Normally they match. If they diverge (observed after reordering layers in the Steam GUI), a layout that works perfectly in the live editing session can come back with **silently swapped layers on the next fresh VDF load** — Steam's loader resolved the positional runtime IDs against numeric key order while the binds were saved against list order.
+
+**Before trusting or finalizing any exported layout, verify `action_layers` keys are in ascending numeric order.** If they aren't, normalize while the file is in `{{title}}` token form: reorder `action_layers` (and the matching `preset` blocks) into numeric order and resequence the preset `id` fields, then run `to-ids`.
+
+Full case study with pre/post snapshots: `findings/2026-07-11-layer-order-swap/FINDINGS.md`
+
 ---
 
 ## Resources

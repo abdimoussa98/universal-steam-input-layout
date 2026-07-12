@@ -29,6 +29,7 @@
 ### Guardrails
 - **Do not hand-edit numeric runtime IDs** in `controller_action` commands. Convert to titles first.
 - **Do not reorder** keys in `controller_mappings.actions` or `controller_mappings.action_layers` unless you also plan to remap runtime IDs.
+- **Check for list-order vs. numeric-key-order divergence FIRST**: verify `action_layers` keys are in ascending `Preset_` numeric order. Steam's loader can resolve runtime IDs by numeric key order while the saved binds reflect list order — a divergence (e.g. from reordering layers in the Steam GUI) silently swaps layers on the next fresh load. If keys are out of order, normalize (reorder layers + matching `preset` blocks, resequence preset `id` fields) while the file is in `{{title}}` form. See `findings/2026-07-11-layer-order-swap/FINDINGS.md`.
 - Prefer `--output` when you’re experimenting so you can diff/rollback easily.
 
 ### References

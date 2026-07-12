@@ -66,6 +66,40 @@ non-numeric list order and loaded correctly, so the key-order resolution on load
 be device- or client-path-dependent (this layout is `controller_triton`). Regardless of which
 side Steam picks, a file where both orderings agree cannot be misread — hence the fix below.
 
+## How the two orderings were identified
+
+The "numeric key order" interpretation was **not prior knowledge** — no documentation
+(Valve's or this repo's) describes it. This repo's docs only state the *list order* rule
+("runtime IDs are assigned by order of appearance"). The second ordering was **inferred by
+differential diagnosis**: it is the only enumeration of the layers that reproduces the
+observed in-game behavior.
+
+1. **The anomaly:** a structural audit showed `action_layers` keys ascending everywhere
+   except one 4-layer window (`1000057, 1000058, 1000055, 1000056`) — and two of those four
+   were exactly the layers reported swapped. One anomaly, co-located with the symptom.
+2. **Candidate enumerations:** for Steam to resolve a positional runtime ID like `53`, it
+   must walk the layers in *some* order. The plausible candidates in the file:
+   - (a) **list order** (the documented rule) → ID 53 = Gyro Off Ramp Up. This predicts *no
+     swap at all* (the file is self-consistent under list order) — contradicted by what was
+     observed in Steam.
+   - (b) **preset `id` field order** → the `id` fields are sequential in list order in this
+     file, so identical to (a) — also contradicted.
+   - (c) **numeric `Preset_` key order** (equivalently lexicographic, since keys are
+     same-width; equivalently creation/renumbering order) → ID 53 = Split Stick — **matches
+     the observed swap exactly.**
+3. **Falsifiable cross-check:** hypothesis (c) predicts *exactly one* additional swapped
+   pair (Gated Gyro ↔ Split Stick Fallback) and **zero** effects on any other layer — which
+   matched the report of "a few other layers" swapping rather than layout-wide chaos.
+4. **Supporting evidence that key order is a real internal ordering:** the keys are
+   contiguous (`1000004`–`1000061`), proving Steam renumbers presets in list order at some
+   point. Numeric key order is therefore a frozen snapshot of a *past* list order — a
+   natural sequence for a loader to walk (e.g. an internal map keyed by preset number).
+5. **Counter-evidence, handled:** the April `neptune/*` layouts have wildly non-numeric list
+   order and always loaded correctly, so key-order resolution is not universal — it appears
+   client- or device-path-dependent (`controller_triton` here vs. `neptune`). That is why the
+   fix makes the two orderings *agree* instead of betting on either one: a file where they
+   match cannot be misread by any loader.
+
 ### Audit results (everything else was clean)
 
 - `preset` block `id` fields: sequential 0–58, matching block order ✓
@@ -135,3 +169,7 @@ After any GUI session where layers were added or reordered, re-export and check 
 **Prompt 3 (documentation request):**
 
 > before you do this document these finding and save this most recent layout with it and you preposed fix in it that documentation. I want to document this find and how you resolved this. Also include the info of which model was used to fix this and the prompts that were given
+
+**Prompt 4 (doc propagation + methodology request):**
+
+> Ok i want you to update any documentation that is relavant with these findigns and also as a part of the findings document. mention how you knew the of the two different types of runtime ids (list order vs numeric key order) since i never knew about the numeric key ordering being a thing
