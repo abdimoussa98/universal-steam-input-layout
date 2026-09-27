@@ -163,9 +163,15 @@ Full case study with pre/post snapshots: `findings/2026-07-11-layer-order-swap/F
 ## Resources
 
 See the `resources/` folder for additional documentation:
-- `Steam Input JSON Structure.md` - Detailed explanation of the JSON format
+
+- [Steam Input JSON Structure](resources/Steam%20Input%20JSON%20Structure.md) - JSON format, binding execution order, and [interrupted delayed layer applies](resources/Steam%20Input%20JSON%20Structure.md#interrupted-delayed-layer-applies), including the repeating-removal workaround and RTP trackball-momentum exception
 - `Action Sets.md` - List of action set IDs
 - `Layer Reverse Lookup.md` - Complete mapping of layer IDs to names
+
+Detailed comparisons and runtime observations:
+
+- [R1 and L1&R1 tap-cover findings](findings/2026-09-27-r1-tap-cover/FINDINGS.md)
+- [Stuck RTP entry layer blocking right-stick ramp-up](findings/2026-09-27-rtp-entry-ramp-up/FINDINGS.md)
 
 ---
 

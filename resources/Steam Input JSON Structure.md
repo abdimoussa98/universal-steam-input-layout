@@ -217,7 +217,50 @@ Groups define the actual input configurations—what physical inputs do and how 
 - Place `remove_layer` cleanup commands **below** the primary action
 - This ensures a clean state before the main layer is added
 
+#### Interrupted Delayed Layer Applies
+
+The layout author observed a Steam Input bug where interrupting an `add_layer` command
+before its Fire Start Delay completes can prevent the command from firing on the next
+press. **Repeated `remove_layer` commands reset the start delay and allow the delayed apply
+to trigger again.** This is the author's observed workaround; the exact Steam internals
+were not independently verified.
+
+The July layout implements this with two separate activators on the same bumper input:
+a **Button Chord** that applies `L1&R1: Tap Cover` after **200 ms**, and a **Regular Press**
+that removes that cover with a **250 ms** repeat interval.
+
+| Activator field | Value | Purpose |
+|---|---|---|
+| `chord.bindings.binding` | `controller_action add_layer {{Base::L1&R1: Tap Cover}} 0 0, , ` | Apply the cover |
+| `chord.settings.delay_start` | `"200"` | Fire Start Delay in milliseconds |
+| `Full_Press.bindings.binding` | `controller_action remove_layer {{Base::L1&R1: Tap Cover}} 0 0, , ` | Remove the cover to reset the delayed apply |
+| `Full_Press.settings.hold_repeats` | `"1"` | Enable Hold to Repeat |
+| `Full_Press.settings.repeat_rate` | `"250"` | Repeat interval in milliseconds |
+| `Full_Press.settings.interruptable` | `"0"` | Keep the removal activator from being suppressed by the chord |
+
+These paths are relative to an input's `activators` object. The removal has no chord
+requirement or explicit start delay. This uses independently configured activators;
+the bottom-to-top rule above applies to commands within a `binding` array, not the timing
+of these two activators.
+
+The pattern appears on **R1 in `*L1!R1: Modifier 2`** (chord requires L1) and **L1 in
+`*R1!L1: Modifier 2`** (chord requires R1). It is absent from Neptune's corresponding
+`(Gyro)` layers and the July layout's unstarred variants. The separate single-bumper
+`R1: Tap Cover` apply still uses a 300 ms delay without this added repeating removal.
+The 200/250 ms values describe this implementation, not a general timing formula.
+
+**RTP trackpad exception:** the author deliberately left this workaround out of the RTP
+trackpad layers because repeated layer removal interfered with **trackball momentum**.
+Preserve that exception when copying the bumper fix. RTP's delayed touch binding applies
+`RTP: Tap Cover` after 150 ms without a corresponding repeating removal on that input.
+Other repeated cleanup bindings in RTP-related layers serve separate purposes; their
+presence does not mean this workaround was applied to the trackpad-touch path.
+
+See the [R1 and L1&R1 tap-cover findings](../findings/2026-09-27-r1-tap-cover/FINDINGS.md)
+for exact groups, source locations, the Neptune comparison, and supporting research.
+
 **Common Group Modes:**
+
 | Mode | Description |
 |------|-------------|
 | `four_buttons` | Face buttons (A, B, X, Y) |
@@ -284,6 +327,35 @@ L2 Layer (Preset_1000006) activated:
 L2 released:
   - Reverts to Base Set bindings
 ```
+
+### Empty Bindings and Stuck Layer Cleanup
+
+An explicit `controller_action empty_binding` overrides the lower binding for that input;
+it does not mean “inherit.” A layer left active after its intended interaction can therefore
+block both normal actions and cleanup bindings in layers underneath it.
+
+The RTP ramp-up fix illustrates this. In Neptune, `RTP: Entry Point` assigns an unconditional
+empty binding to the right-stick edge. If the entry layer remains active, that override
+blocks the lower ramp-up action. It can also hide R1's edge cleanup if an R1 modifier
+remains underneath.
+
+The July layout changes the edge binding to two cases:
+
+- **RTP touched:** a chord keeps the empty binding, preserving intentional suppression.
+- **RTP no longer touched:** a Regular Press removes `RTP: Tap Cover` and `RTP: Entry Point`,
+  exposing the lower edge bindings. It has `hold_repeats: "1"` with no explicit repeat rate.
+
+This cleanup provides another exit if the normal trackpad-release cleanup leaves stale
+state. It does not directly apply ramp-up or remove R1. R1's existing cleanup can run once
+exposed, and the Base ramp-up binding remains subject to its own conditions.
+
+This is stick-edge cleanup after leaving the trackpad. It preserves the
+[RTP exception to the delayed-apply workaround](#interrupted-delayed-layer-applies): no
+periodic removal was added to the trackpad-touch apply path, where the author observed
+interference with trackball momentum.
+
+See the [stuck RTP entry / ramp-up findings](../findings/2026-09-27-rtp-entry-ramp-up/FINDINGS.md)
+for the exact bindings, the R1 interaction, and the limits of the static diagnosis.
 
 ---
 
