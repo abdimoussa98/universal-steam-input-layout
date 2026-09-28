@@ -11576,115 +11576,6 @@
 				}
 			},
 			{
-				"id": "1301",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "1302",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"gyro_button_invert": "0"
-				}
-			},
-			{
-				"id": "1303",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "1304",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"gyro_button_invert": "0"
-				}
-			},
-			{
-				"id": "1305",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "1306",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
-				"id": "1307",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "1308",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"gyro_button_invert": "0"
-				}
-			},
-			{
-				"id": "1309",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "1310",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"gyro_button_invert": "0"
-				}
-			},
-			{
 				"id": "1317",
 				"mode": "four_buttons",
 				"name": "",
@@ -13032,28 +12923,6 @@
 				}
 			},
 			{
-				"id": "12926",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "12927",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"gyro_button_invert": "0"
-				}
-			},
-			{
 				"id": "12928",
 				"mode": "four_buttons",
 				"name": "",
@@ -13629,28 +13498,6 @@
 				},
 				"settings": {
 					"layer": "1"
-				}
-			},
-			{
-				"id": "12945",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "12946",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"gyro_button_invert": "0"
 				}
 			},
 			{
@@ -14312,49 +14159,6 @@
 				},
 				"settings": {
 					"layer": "1"
-				}
-			},
-			{
-				"id": "12954",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "12955",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
-				"id": "12956",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "12957",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"gyro_button_invert": "0"
 				}
 			},
 			{
@@ -15175,28 +14979,6 @@
 				}
 			},
 			{
-				"id": "12969",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"requires_click": "0"
-				}
-			},
-			{
-				"id": "12970",
-				"mode": "gyro_to_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {},
-				"settings": {
-					"layer": "1",
-					"gyro_button_invert": "0"
-				}
-			},
-			{
 				"id": "12971",
 				"mode": "four_buttons",
 				"name": "",
@@ -15893,26 +15675,19 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 19 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1302"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 19 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press PAGE_UP, , ",
+										"key_press INSERT, , ",
 										"controller_action add_layer 19 0 0, , "
 									]
 								},
@@ -15925,26 +15700,19 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 19 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1302"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 19 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press PAGE_DOWN, , ",
+										"key_press DELETE, , ",
 										"controller_action add_layer 19 0 0, , "
 									]
 								},
@@ -15988,26 +15756,19 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 20 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1304"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 20 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press INSERT, , ",
+										"key_press HOME, , ",
 										"controller_action add_layer 20 0 0, , "
 									]
 								},
@@ -16020,26 +15781,19 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 20 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1304"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 20 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press DELETE, , ",
+										"key_press END, , ",
 										"controller_action add_layer 20 0 0, , "
 									]
 								},
@@ -16235,38 +15989,26 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 4 0 0, , ",
-											"controller_action remove_layer 49 0 0, , ",
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 19 0 0, , ",
-											"controller_action remove_layer 20 0 0, , ",
-											"controller_action remove_layer 23 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1307"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1308"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 19 0 0, , ",
+										"controller_action remove_layer 20 0 0, , ",
+										"controller_action remove_layer 23 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": [
 								{
 									"bindings": {
 										"binding": [
-											"key_press HOME, , ",
+											"key_press PAGE_UP, , ",
 											"controller_action add_layer 23 0 0, , "
 										]
 									},
@@ -16290,38 +16032,26 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 4 0 0, , ",
-											"controller_action remove_layer 49 0 0, , ",
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 19 0 0, , ",
-											"controller_action remove_layer 20 0 0, , ",
-											"controller_action remove_layer 23 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1307"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1308"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 19 0 0, , ",
+										"controller_action remove_layer 20 0 0, , ",
+										"controller_action remove_layer 23 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": [
 								{
 									"bindings": {
 										"binding": [
-											"key_press END, , ",
+											"key_press PAGE_DOWN, , ",
 											"controller_action add_layer 23 0 0, , "
 										]
 									},
@@ -16376,33 +16106,26 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 5 0 0, , ",
-											"controller_action remove_layer 50 0 0, , ",
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 19 0 0, , ",
-											"controller_action remove_layer 20 0 0, , ",
-											"controller_action remove_layer 23 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1310"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 19 0 0, , ",
+										"controller_action remove_layer 20 0 0, , ",
+										"controller_action remove_layer 23 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": [
 								{
 									"bindings": {
 										"binding": [
-											"key_press HOME, , ",
+											"key_press PAGE_UP, , ",
 											"controller_action add_layer 23 0 0, , "
 										]
 									},
@@ -16426,33 +16149,26 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 5 0 0, , ",
-											"controller_action remove_layer 50 0 0, , ",
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 19 0 0, , ",
-											"controller_action remove_layer 20 0 0, , ",
-											"controller_action remove_layer 23 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1310"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 19 0 0, , ",
+										"controller_action remove_layer 20 0 0, , ",
+										"controller_action remove_layer 23 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": [
 								{
 									"bindings": {
 										"binding": [
-											"key_press END, , ",
+											"key_press PAGE_DOWN, , ",
 											"controller_action add_layer 23 0 0, , "
 										]
 									},
@@ -18264,34 +17980,19 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 19 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1302"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 12927"
-									},
-									"settings": {
-										"interruptable": "0"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 19 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press PAGE_UP, , ",
+										"key_press INSERT, , ",
 										"controller_action add_layer 19 0 0, , "
 									]
 								},
@@ -18304,34 +18005,19 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 19 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1302"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 12927"
-									},
-									"settings": {
-										"interruptable": "0"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 19 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press PAGE_DOWN, , ",
+										"key_press DELETE, , ",
 										"controller_action add_layer 19 0 0, , "
 									]
 								},
@@ -18375,34 +18061,19 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 20 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1304"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 12946"
-									},
-									"settings": {
-										"interruptable": "0"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 20 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press INSERT, , ",
+										"key_press HOME, , ",
 										"controller_action add_layer 20 0 0, , "
 									]
 								},
@@ -18415,34 +18086,19 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 20 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1304"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 12946"
-									},
-									"settings": {
-										"interruptable": "0"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 20 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press DELETE, , ",
+										"key_press END, , ",
 										"controller_action add_layer 20 0 0, , "
 									]
 								},
@@ -18486,43 +18142,26 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 4 0 0, , ",
-											"controller_action remove_layer 49 0 0, , ",
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 19 0 0, , ",
-											"controller_action remove_layer 20 0 0, , ",
-											"controller_action remove_layer 23 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1307"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 12957"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1308"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 19 0 0, , ",
+										"controller_action remove_layer 20 0 0, , ",
+										"controller_action remove_layer 23 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": [
 								{
 									"bindings": {
 										"binding": [
-											"key_press HOME, , ",
+											"key_press PAGE_UP, , ",
 											"controller_action add_layer 23 0 0, , "
 										]
 									},
@@ -18546,43 +18185,26 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 4 0 0, , ",
-											"controller_action remove_layer 49 0 0, , ",
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 19 0 0, , ",
-											"controller_action remove_layer 20 0 0, , ",
-											"controller_action remove_layer 23 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1307"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 12957"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1308"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 19 0 0, , ",
+										"controller_action remove_layer 20 0 0, , ",
+										"controller_action remove_layer 23 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": [
 								{
 									"bindings": {
 										"binding": [
-											"key_press END, , ",
+											"key_press PAGE_DOWN, , ",
 											"controller_action add_layer 23 0 0, , "
 										]
 									},
@@ -18637,41 +18259,26 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 5 0 0, , ",
-											"controller_action remove_layer 50 0 0, , ",
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 19 0 0, , ",
-											"controller_action remove_layer 20 0 0, , ",
-											"controller_action remove_layer 23 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1310"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 12970"
-									},
-									"settings": {
-										"interruptable": "0"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 19 0 0, , ",
+										"controller_action remove_layer 20 0 0, , ",
+										"controller_action remove_layer 23 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": [
 								{
 									"bindings": {
 										"binding": [
-											"key_press HOME, , ",
+											"key_press PAGE_UP, , ",
 											"controller_action add_layer 23 0 0, , "
 										]
 									},
@@ -18695,41 +18302,26 @@
 					},
 					"button_menu": {
 						"activators": {
-							"Full_Press": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action remove_layer 5 0 0, , ",
-											"controller_action remove_layer 50 0 0, , ",
-											"controller_action remove_layer 2 0 0, , ",
-											"controller_action remove_layer 47 0 0, , ",
-											"controller_action remove_layer 3 0 0, , ",
-											"controller_action remove_layer 48 0 0, , ",
-											"controller_action remove_layer 19 0 0, , ",
-											"controller_action remove_layer 20 0 0, , ",
-											"controller_action remove_layer 23 0 0, , "
-										]
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 1310"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "mode_shift gyro 12970"
-									},
-									"settings": {
-										"interruptable": "0"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 2 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 3 0 0, , ",
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 19 0 0, , ",
+										"controller_action remove_layer 20 0 0, , ",
+										"controller_action remove_layer 23 0 0, , "
+									]
 								}
-							],
+							},
 							"chord": [
 								{
 									"bindings": {
 										"binding": [
-											"key_press END, , ",
+											"key_press PAGE_DOWN, , ",
 											"controller_action add_layer 23 0 0, , "
 										]
 									},
@@ -18928,9 +18520,7 @@
 					"256": "left_trigger active",
 					"257": "right_trigger active",
 					"274": "right_trackpad inactive",
-					"667": "joystick active",
-					"1301": "gyro inactive modeshift",
-					"1302": "gyro inactive modeshift"
+					"667": "joystick active"
 				}
 			},
 			{
@@ -18953,9 +18543,7 @@
 					"259": "right_trigger active",
 					"268": "button_diamond inactive",
 					"275": "right_trackpad inactive",
-					"668": "joystick active",
-					"1303": "gyro inactive modeshift",
-					"1304": "gyro inactive modeshift"
+					"668": "joystick active"
 				}
 			},
 			{
@@ -18968,11 +18556,7 @@
 					"599": "switch active",
 					"612": "dpad active",
 					"681": "right_joystick active",
-					"682": "joystick active",
-					"1305": "gyro inactive modeshift",
-					"1306": "gyro inactive modeshift",
-					"1307": "gyro inactive modeshift",
-					"1308": "gyro inactive modeshift"
+					"682": "joystick active"
 				}
 			},
 			{
@@ -18989,9 +18573,7 @@
 					"817": "button_diamond active",
 					"818": "dpad active",
 					"819": "joystick active",
-					"820": "right_joystick active",
-					"1309": "gyro inactive modeshift",
-					"1310": "gyro inactive modeshift"
+					"820": "right_joystick active"
 				}
 			},
 			{
@@ -19578,8 +19160,6 @@
 					"12923": "right_trigger active",
 					"12924": "right_trackpad inactive",
 					"12925": "joystick active",
-					"12926": "gyro inactive modeshift",
-					"12927": "gyro inactive modeshift",
 					"13034": "gyro active"
 				}
 			},
@@ -19604,8 +19184,6 @@
 					"12942": "button_diamond inactive",
 					"12943": "right_trackpad inactive",
 					"12944": "joystick active",
-					"12945": "gyro inactive modeshift",
-					"12946": "gyro inactive modeshift",
 					"13035": "gyro active"
 				}
 			},
@@ -19620,10 +19198,6 @@
 					"12951": "dpad active",
 					"12952": "right_joystick active",
 					"12953": "joystick active",
-					"12954": "gyro inactive modeshift",
-					"12955": "gyro inactive modeshift",
-					"12956": "gyro inactive modeshift",
-					"12957": "gyro inactive modeshift",
 					"13036": "gyro active"
 				}
 			},
@@ -19642,8 +19216,6 @@
 					"12966": "dpad active",
 					"12967": "joystick active",
 					"12968": "right_joystick active",
-					"12969": "gyro inactive modeshift",
-					"12970": "gyro inactive modeshift",
 					"13037": "gyro active"
 				}
 			},
