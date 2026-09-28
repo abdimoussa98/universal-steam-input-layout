@@ -27,6 +27,8 @@
    - If you see `{{Parent::Title}}`, that’s intentional: it disambiguates duplicate layer names across sets.
 
 ### Guardrails
+- Audit with `python3 audit_command_budget.py path/to/layout.json` (add `--json` for a complete inventory). Each input may have at most three GUI command entries across activator objects/types; binding-array subcommands are allowed beyond three. Scan inactive/unreferenced groups too; report failures while continuing a read-only audit.
+- Do not assume Neptune requires a separate command for every chord button. Modern multi-button mask selectors support grouped Any/All conditions; see `resources/Steam Input JSON Structure.md`, **Command Entry Budget**.
 - **Do not hand-edit numeric runtime IDs** in `controller_action` commands. Convert to titles first.
 - **Do not reorder** keys in `controller_mappings.actions` or `controller_mappings.action_layers` unless you also plan to remap runtime IDs.
 - **Check for list-order vs. numeric-key-order divergence FIRST**: verify `action_layers` keys are in ascending `Preset_` numeric order. Steam's loader can resolve runtime IDs by numeric key order while the saved binds reflect list order — a divergence (e.g. from reordering layers in the Steam GUI) silently swaps layers on the next fresh load. If keys are out of order, normalize (reorder layers + matching `preset` blocks, resequence preset `id` fields) while the file is in `{{title}}` form. See `findings/2026-07-11-layer-order-swap/FINDINGS.md`.
@@ -36,4 +38,3 @@
 - Repo overview & script usage: `README.md`
 - Converter script: `convert_runtime_ids.py`
 - Why runtime IDs are fragile: `resources/Steam Input JSON Structure.md`
-

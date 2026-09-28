@@ -1,0 +1,59 @@
+{
+  "baseline_commit": "7cee48d",
+  "status": "JSON implementation complete; VDF export and fresh-load Deck tests pending",
+  "layout_version": "90.1 (unchanged)",
+  "layouts": [
+    {
+      "file": "neptune/single-set-alternative_hold-gyro_latest.json",
+      "sha256": "43f94bc21cbf45a75d68423e5cb1b28290ab1d5015e9d9eba282ca200f32e15a",
+      "summary": {
+        "action_sets": 1,
+        "layers": 53,
+        "groups": 530,
+        "unreferenced_groups": 50,
+        "inputs": 630,
+        "commands": 1020,
+        "disabled_commands": 0,
+        "command_histogram": {
+          "1": 378,
+          "2": 114,
+          "3": 138
+        },
+        "max_commands": 3,
+        "max_actions_in_one_command": 12,
+        "violations": 0
+      },
+      "runtime_references": 1437,
+      "selector_combinations_checked": 64,
+      "only_base_edge_chords_changed": true,
+      "numeric_title_round_trip": true,
+      "preset_ordering": true
+    },
+    {
+      "file": "neptune/single-set-default_hold-gyro_latest.json",
+      "sha256": "7cf5acdd659c370404cdb5bb93137acad982bbfb20d52ecd98d9da2141b6b763",
+      "summary": {
+        "action_sets": 1,
+        "layers": 53,
+        "groups": 531,
+        "unreferenced_groups": 50,
+        "inputs": 594,
+        "commands": 984,
+        "disabled_commands": 0,
+        "command_histogram": {
+          "1": 342,
+          "2": 114,
+          "3": 138
+        },
+        "max_commands": 3,
+        "max_actions_in_one_command": 12,
+        "violations": 0
+      },
+      "runtime_references": 1437,
+      "selector_combinations_checked": 64,
+      "only_base_edge_chords_changed": true,
+      "numeric_title_round_trip": true,
+      "preset_ordering": true
+    }
+  ]
+}

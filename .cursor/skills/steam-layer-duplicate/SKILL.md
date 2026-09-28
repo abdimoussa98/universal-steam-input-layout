@@ -26,10 +26,10 @@
    - Use `--no-backup` only when you’re confident in your workflow.
 
 ### Guardrails
+- After wiring the copy, run `python3 audit_command_budget.py path/to/layout.json`. The maximum is three GUI command entries per input across activator types; binding-array subcommands may exceed three. A duplicated layer can inherit violations, and the full layout must pass before finalization.
 - Do not manually insert the duplicated layer “in the middle” of `action_layers`; that can shift runtime IDs for everything after it.
 - If your file currently uses `{{...}}` tokens, you can keep working in titles mode; just remember to run `convert_runtime_ids.py to-ids` before exporting back to Steam.
 
 ### References
 - Script: `duplicate_layer.py`
 - Runtime ID rules: `README.md`, `resources/Steam Input JSON Structure.md`
-

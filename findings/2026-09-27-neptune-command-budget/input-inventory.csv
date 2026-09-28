@@ -1,0 +1,1225 @@
+variant,group_id,input,owners,source_states,command_entries,disabled_entries,binding_actions,max_actions_in_one_command,json_pointer
+default,0,button_a,(unreferenced),,1,0,1,1,/controller_mappings/group/0/inputs/button_a
+default,0,button_b,(unreferenced),,1,0,1,1,/controller_mappings/group/0/inputs/button_b
+default,0,button_x,(unreferenced),,1,0,1,1,/controller_mappings/group/0/inputs/button_x
+default,0,button_y,(unreferenced),,1,0,1,1,/controller_mappings/group/0/inputs/button_y
+default,1,dpad_north,(unreferenced),,1,0,1,1,/controller_mappings/group/1/inputs/dpad_north
+default,1,dpad_south,(unreferenced),,1,0,1,1,/controller_mappings/group/1/inputs/dpad_south
+default,1,dpad_east,(unreferenced),,1,0,1,1,/controller_mappings/group/1/inputs/dpad_east
+default,1,dpad_west,(unreferenced),,1,0,1,1,/controller_mappings/group/1/inputs/dpad_west
+default,2,click,(unreferenced),,1,0,1,1,/controller_mappings/group/2/inputs/click
+default,11,button_a,Base,button_diamond active,1,0,1,1,/controller_mappings/group/3/inputs/button_a
+default,11,button_b,Base,button_diamond active,1,0,1,1,/controller_mappings/group/3/inputs/button_b
+default,11,button_x,Base,button_diamond active,1,0,1,1,/controller_mappings/group/3/inputs/button_x
+default,11,button_y,Base,button_diamond active,1,0,1,1,/controller_mappings/group/3/inputs/button_y
+default,12,dpad_north,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/dpad_north
+default,12,dpad_south,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/dpad_south
+default,12,dpad_east,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/dpad_east
+default,12,dpad_west,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/dpad_west
+default,12,edge,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/edge
+default,12,click,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/click
+default,12,touch,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/touch
+default,13,edge,Base,left_trigger active,1,0,1,1,/controller_mappings/group/5/inputs/edge
+default,14,edge,Base,right_trigger active,1,0,1,1,/controller_mappings/group/6/inputs/edge
+default,15,click,Base,right_joystick active,1,0,1,1,/controller_mappings/group/7/inputs/click
+default,15,edge,Base,right_joystick active,7,0,7,1,/controller_mappings/group/7/inputs/edge
+default,15,touch,Base,right_joystick active,1,0,1,1,/controller_mappings/group/7/inputs/touch
+default,16,dpad_north,Base,dpad active,1,0,1,1,/controller_mappings/group/8/inputs/dpad_north
+default,16,dpad_south,Base,dpad active,1,0,1,1,/controller_mappings/group/8/inputs/dpad_south
+default,16,dpad_east,Base,dpad active,1,0,1,1,/controller_mappings/group/8/inputs/dpad_east
+default,16,dpad_west,Base,dpad active,1,0,1,1,/controller_mappings/group/8/inputs/dpad_west
+default,60,button_a,L1: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/33/inputs/button_a
+default,60,button_b,L1: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/33/inputs/button_b
+default,60,button_x,L1: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/33/inputs/button_x
+default,60,button_y,L1: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/33/inputs/button_y
+default,64,click,L1: Modifier 0,right_joystick active,2,0,5,3,/controller_mappings/group/37/inputs/click
+default,64,edge,L1: Modifier 0,right_joystick active,2,0,4,3,/controller_mappings/group/37/inputs/edge
+default,64,touch,L1: Modifier 0,right_joystick active,3,0,8,4,/controller_mappings/group/37/inputs/touch
+default,65,dpad_north,L1: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/38/inputs/dpad_north
+default,65,dpad_south,L1: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/38/inputs/dpad_south
+default,65,dpad_east,L1: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/38/inputs/dpad_east
+default,65,dpad_west,L1: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/38/inputs/dpad_west
+default,85,scroll_clockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/42/inputs/scroll_clockwise
+default,85,scroll_counterclockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/42/inputs/scroll_counterclockwise
+default,85,click,(unreferenced),,1,0,1,1,/controller_mappings/group/42/inputs/click
+default,139,scroll_clockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/47/inputs/scroll_clockwise
+default,139,scroll_counterclockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/47/inputs/scroll_counterclockwise
+default,139,click,(unreferenced),,1,0,1,1,/controller_mappings/group/47/inputs/click
+default,145,click,(unreferenced),,1,0,1,1,/controller_mappings/group/49/inputs/click
+default,157,button_a,R1: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/52/inputs/button_a
+default,157,button_b,R1: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/52/inputs/button_b
+default,157,button_x,R1: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/52/inputs/button_x
+default,157,button_y,R1: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/52/inputs/button_y
+default,161,dpad_north,R1: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/55/inputs/dpad_north
+default,161,dpad_south,R1: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/55/inputs/dpad_south
+default,161,dpad_east,R1: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/55/inputs/dpad_east
+default,161,dpad_west,R1: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/55/inputs/dpad_west
+default,174,button_a,(unreferenced),,1,0,1,1,/controller_mappings/group/58/inputs/button_a
+default,174,button_b,(unreferenced),,1,0,1,1,/controller_mappings/group/58/inputs/button_b
+default,174,button_x,(unreferenced),,1,0,1,1,/controller_mappings/group/58/inputs/button_x
+default,174,button_y,(unreferenced),,1,0,1,1,/controller_mappings/group/58/inputs/button_y
+default,178,button_a,(unreferenced),,1,0,1,1,/controller_mappings/group/61/inputs/button_a
+default,178,button_b,(unreferenced),,1,0,1,1,/controller_mappings/group/61/inputs/button_b
+default,178,button_x,(unreferenced),,1,0,1,1,/controller_mappings/group/61/inputs/button_x
+default,178,button_y,(unreferenced),,1,0,1,1,/controller_mappings/group/61/inputs/button_y
+default,185,scroll_clockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/65/inputs/scroll_clockwise
+default,185,scroll_counterclockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/65/inputs/scroll_counterclockwise
+default,185,click,(unreferenced),,1,0,1,1,/controller_mappings/group/65/inputs/click
+default,186,dpad_north,(unreferenced),,1,0,1,1,/controller_mappings/group/66/inputs/dpad_north
+default,186,dpad_south,(unreferenced),,1,0,1,1,/controller_mappings/group/66/inputs/dpad_south
+default,186,dpad_east,(unreferenced),,1,0,1,1,/controller_mappings/group/66/inputs/dpad_east
+default,186,dpad_west,(unreferenced),,1,0,1,1,/controller_mappings/group/66/inputs/dpad_west
+default,187,dpad_north,(unreferenced),,1,0,1,1,/controller_mappings/group/67/inputs/dpad_north
+default,187,dpad_south,(unreferenced),,1,0,1,1,/controller_mappings/group/67/inputs/dpad_south
+default,187,dpad_east,(unreferenced),,1,0,1,1,/controller_mappings/group/67/inputs/dpad_east
+default,187,dpad_west,(unreferenced),,1,0,1,1,/controller_mappings/group/67/inputs/dpad_west
+default,190,click,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/click
+default,190,dpad_west,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/dpad_west
+default,190,dpad_east,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/dpad_east
+default,190,dpad_north,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/dpad_north
+default,190,dpad_south,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/dpad_south
+default,192,click,(unreferenced),,1,0,1,1,/controller_mappings/group/72/inputs/click
+default,195,click,Base,right_trackpad inactive,2,0,2,1,/controller_mappings/group/75/inputs/click
+default,203,touch,RST: Temporary Gyro,right_joystick active,1,0,2,2,/controller_mappings/group/81/inputs/touch
+default,210,touch,LST: Temporary Gyro,joystick active,1,0,2,2,/controller_mappings/group/87/inputs/touch
+default,217,click,R1: Modifier 1,right_joystick active,2,0,5,3,/controller_mappings/group/90/inputs/click
+default,217,edge,R1: Modifier 1,right_joystick active,2,0,4,3,/controller_mappings/group/90/inputs/edge
+default,217,touch,R1: Modifier 1,right_joystick active,3,0,8,4,/controller_mappings/group/90/inputs/touch
+default,242,dpad_north,RTP: Mouse Buttons,right_trackpad active,2,0,2,1,/controller_mappings/group/104/inputs/dpad_north
+default,242,dpad_south,RTP: Mouse Buttons,right_trackpad active,2,0,2,1,/controller_mappings/group/104/inputs/dpad_south
+default,242,dpad_east,RTP: Mouse Buttons,right_trackpad active,1,0,1,1,/controller_mappings/group/104/inputs/dpad_east
+default,242,dpad_west,RTP: Mouse Buttons,right_trackpad active,1,0,1,1,/controller_mappings/group/104/inputs/dpad_west
+default,242,edge,RTP: Mouse Buttons,right_trackpad active,1,0,1,1,/controller_mappings/group/104/inputs/edge
+default,242,click,RTP: Mouse Buttons,right_trackpad active,2,0,2,1,/controller_mappings/group/104/inputs/click
+default,251,dpad_north,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/dpad_north
+default,251,dpad_south,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/dpad_south
+default,251,dpad_east,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/dpad_east
+default,251,dpad_west,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/dpad_west
+default,251,edge,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/edge
+default,251,click,LTP: Arrow Keys,left_trackpad active,2,0,2,1,/controller_mappings/group/112/inputs/click
+default,256,click,L1: Modifier 0,left_trigger active,1,0,1,1,/controller_mappings/group/113/inputs/click
+default,257,click,L1: Modifier 0,right_trigger active,1,0,1,1,/controller_mappings/group/114/inputs/click
+default,258,click,R1: Modifier 1,left_trigger active,1,0,1,1,/controller_mappings/group/115/inputs/click
+default,259,click,R1: Modifier 1,right_trigger active,1,0,1,1,/controller_mappings/group/116/inputs/click
+default,423,edge,Turning Ramp Up 0,right_joystick active,3,0,5,3,/controller_mappings/group/140/inputs/edge
+default,423,touch,Turning Ramp Up 0,right_joystick active,1,0,3,3,/controller_mappings/group/140/inputs/touch
+default,527,touch,Tab,left_trackpad active,2,0,2,1,/controller_mappings/group/153/inputs/touch
+default,528,touch,Backspace,left_trackpad active,2,0,2,1,/controller_mappings/group/154/inputs/touch
+default,529,touch,Escape,left_trackpad active,2,0,2,1,/controller_mappings/group/155/inputs/touch
+default,530,touch,Enter,left_trackpad active,2,0,2,1,/controller_mappings/group/156/inputs/touch
+default,551,edge,Turning Ramp Up 1,right_joystick active,1,0,3,3,/controller_mappings/group/160/inputs/edge
+default,551,touch,Turning Ramp Up 1,right_joystick active,1,0,3,3,/controller_mappings/group/160/inputs/touch
+default,562,click,Base,right_trackpad active,1,0,1,1,/controller_mappings/group/162/inputs/click
+default,562,touch,Base,right_trackpad active,1,0,1,1,/controller_mappings/group/162/inputs/touch
+default,586,touch,RST: Temporary Gyro,joystick inactive,1,0,1,1,/controller_mappings/group/166/inputs/touch
+default,587,touch,LST: Temporary Gyro,right_joystick inactive,1,0,1,1,/controller_mappings/group/167/inputs/touch
+default,596,button_a,L1!R1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/168/inputs/button_a
+default,596,button_b,L1!R1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/168/inputs/button_b
+default,596,button_x,L1!R1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/168/inputs/button_x
+default,596,button_y,L1!R1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/168/inputs/button_y
+default,597,click,L1!R1: Modifier 2,left_trigger active,1,0,1,1,/controller_mappings/group/169/inputs/click
+default,598,click,L1!R1: Modifier 2,right_trigger active,1,0,1,1,/controller_mappings/group/170/inputs/click
+default,600,button_a,R1!L1: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/171/inputs/button_a
+default,600,button_b,R1!L1: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/171/inputs/button_b
+default,600,button_x,R1!L1: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/171/inputs/button_x
+default,600,button_y,R1!L1: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/171/inputs/button_y
+default,601,click,R1!L1: Modifier 2,left_trigger active,1,0,1,1,/controller_mappings/group/172/inputs/click
+default,602,click,R1!L1: Modifier 2,right_trigger active,1,0,1,1,/controller_mappings/group/173/inputs/click
+default,612,dpad_north,L1!R1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/174/inputs/dpad_north
+default,612,dpad_south,L1!R1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/174/inputs/dpad_south
+default,612,dpad_east,L1!R1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/174/inputs/dpad_east
+default,612,dpad_west,L1!R1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/174/inputs/dpad_west
+default,613,dpad_north,R1!L1: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/175/inputs/dpad_north
+default,613,dpad_south,R1!L1: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/175/inputs/dpad_south
+default,613,dpad_east,R1!L1: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/175/inputs/dpad_east
+default,613,dpad_west,R1!L1: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/175/inputs/dpad_west
+default,624,button_a,Menu Left: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/176/inputs/button_a
+default,624,button_b,Menu Left: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/176/inputs/button_b
+default,624,button_x,Menu Left: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/176/inputs/button_x
+default,624,button_y,Menu Left: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/176/inputs/button_y
+default,625,click,Menu Left: Fn Layer,left_trigger active,3,0,4,2,/controller_mappings/group/177/inputs/click
+default,625,edge,Menu Left: Fn Layer,left_trigger active,1,0,1,1,/controller_mappings/group/177/inputs/edge
+default,626,click,Menu Left: Fn Layer,right_trigger active,3,0,4,2,/controller_mappings/group/178/inputs/click
+default,626,edge,Menu Left: Fn Layer,right_trigger active,1,0,1,1,/controller_mappings/group/178/inputs/edge
+default,636,dpad_north,Menu Left: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/179/inputs/dpad_north
+default,636,dpad_south,Menu Left: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/179/inputs/dpad_south
+default,636,dpad_east,Menu Left: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/179/inputs/dpad_east
+default,636,dpad_west,Menu Left: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/179/inputs/dpad_west
+default,667,click,L1: Modifier 0,joystick active,2,0,5,3,/controller_mappings/group/181/inputs/click
+default,667,touch,L1: Modifier 0,joystick active,3,0,8,4,/controller_mappings/group/181/inputs/touch
+default,668,click,R1: Modifier 1,joystick active,2,0,5,3,/controller_mappings/group/182/inputs/click
+default,668,touch,R1: Modifier 1,joystick active,3,0,8,4,/controller_mappings/group/182/inputs/touch
+default,669,touch,RTP: Mouse Buttons,joystick active,3,0,5,3,/controller_mappings/group/183/inputs/touch
+default,670,touch,RTP: Mouse Buttons,right_joystick active,3,0,5,3,/controller_mappings/group/184/inputs/touch
+default,671,touch,LTP: Arrow Keys,joystick active,3,0,5,3,/controller_mappings/group/185/inputs/touch
+default,672,touch,LTP: Arrow Keys,right_joystick active,3,0,5,3,/controller_mappings/group/186/inputs/touch
+default,673,touch,Tab,right_joystick active,3,0,5,3,/controller_mappings/group/187/inputs/touch
+default,674,touch,Tab,joystick active,3,0,5,3,/controller_mappings/group/188/inputs/touch
+default,675,touch,Backspace,right_joystick active,3,0,5,3,/controller_mappings/group/189/inputs/touch
+default,676,touch,Backspace,joystick active,3,0,5,3,/controller_mappings/group/190/inputs/touch
+default,677,touch,Escape,right_joystick active,3,0,5,3,/controller_mappings/group/191/inputs/touch
+default,678,touch,Escape,joystick active,3,0,5,3,/controller_mappings/group/192/inputs/touch
+default,679,touch,Enter,right_joystick active,3,0,5,3,/controller_mappings/group/193/inputs/touch
+default,680,touch,Enter,joystick active,3,0,5,3,/controller_mappings/group/194/inputs/touch
+default,681,click,L1!R1: Modifier 2,right_joystick active,3,0,12,9,/controller_mappings/group/195/inputs/click
+default,681,edge,L1!R1: Modifier 2,right_joystick active,3,0,11,9,/controller_mappings/group/195/inputs/edge
+default,681,touch,L1!R1: Modifier 2,right_joystick active,1,0,4,4,/controller_mappings/group/195/inputs/touch
+default,682,click,L1!R1: Modifier 2,joystick active,3,0,12,9,/controller_mappings/group/196/inputs/click
+default,682,touch,L1!R1: Modifier 2,joystick active,1,0,4,4,/controller_mappings/group/196/inputs/touch
+default,683,edge,Menu Left: Fn Layer,right_joystick inactive,3,0,4,2,/controller_mappings/group/197/inputs/edge
+default,683,touch,Menu Left: Fn Layer,right_joystick inactive,3,0,4,2,/controller_mappings/group/197/inputs/touch
+default,684,dpad_north,Menu Left: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/198/inputs/dpad_north
+default,684,dpad_south,Menu Left: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/198/inputs/dpad_south
+default,684,dpad_east,Menu Left: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/198/inputs/dpad_east
+default,684,dpad_west,Menu Left: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/198/inputs/dpad_west
+default,684,edge,Menu Left: Fn Layer,joystick active,3,0,4,2,/controller_mappings/group/198/inputs/edge
+default,684,click,Menu Left: Fn Layer,joystick active,1,0,1,1,/controller_mappings/group/198/inputs/click
+default,684,touch,Menu Left: Fn Layer,joystick active,1,0,3,3,/controller_mappings/group/198/inputs/touch
+default,721,scroll_clockwise,RTP: Circular Scroll,right_trackpad active,1,0,1,1,/controller_mappings/group/199/inputs/scroll_clockwise
+default,721,scroll_counterclockwise,RTP: Circular Scroll,right_trackpad active,1,0,1,1,/controller_mappings/group/199/inputs/scroll_counterclockwise
+default,721,click,RTP: Circular Scroll,right_trackpad active,1,0,1,1,/controller_mappings/group/199/inputs/click
+default,721,touch,RTP: Circular Scroll,right_trackpad active,1,0,2,2,/controller_mappings/group/199/inputs/touch
+default,722,touch,RTP: Circular Scroll,joystick active,3,0,6,3,/controller_mappings/group/200/inputs/touch
+default,723,touch,RTP: Circular Scroll,right_joystick active,3,0,6,3,/controller_mappings/group/201/inputs/touch
+default,731,touch,RST: Temporary Gyro,joystick inactive,3,0,3,1,/controller_mappings/group/202/inputs/touch
+default,732,touch,LST: Temporary Gyro,right_joystick inactive,3,0,3,1,/controller_mappings/group/203/inputs/touch
+default,737,touch,Turning Ramp Up 0,joystick active,1,0,3,3,/controller_mappings/group/204/inputs/touch
+default,738,touch,Turning Ramp Up 1,joystick active,1,0,3,3,/controller_mappings/group/205/inputs/touch
+default,747,click,RST: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/207/inputs/click
+default,748,click,RST: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/208/inputs/click
+default,751,click,LST: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/210/inputs/click
+default,752,click,LST: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/211/inputs/click
+default,762,edge,RST: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/212/inputs/edge
+default,762,touch,RST: Double Tap,right_joystick active,1,0,3,3,/controller_mappings/group/212/inputs/touch
+default,763,edge,LST: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/213/inputs/edge
+default,763,touch,LST: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/213/inputs/touch
+default,768,touch,RST: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/214/inputs/touch
+default,769,touch,LST: Double Tap,joystick active,1,0,3,3,/controller_mappings/group/215/inputs/touch
+default,790,touch,R1!L1: Modifier 2,right_joystick inactive,1,0,2,2,/controller_mappings/group/225/inputs/touch
+default,791,touch,R1!L1: Modifier 2,joystick inactive,1,0,2,2,/controller_mappings/group/226/inputs/touch
+default,800,touch,RST: Tap Cover,right_joystick active,1,0,2,2,/controller_mappings/group/230/inputs/touch
+default,801,touch,LST: Tap Cover,joystick active,1,0,2,2,/controller_mappings/group/231/inputs/touch
+default,817,button_a,R1!L1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/235/inputs/button_a
+default,817,button_b,R1!L1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/235/inputs/button_b
+default,817,button_x,R1!L1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/235/inputs/button_x
+default,817,button_y,R1!L1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/235/inputs/button_y
+default,818,dpad_north,R1!L1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/236/inputs/dpad_north
+default,818,dpad_south,R1!L1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/236/inputs/dpad_south
+default,818,dpad_east,R1!L1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/236/inputs/dpad_east
+default,818,dpad_west,R1!L1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/236/inputs/dpad_west
+default,819,click,R1!L1: Modifier 2,joystick active,3,0,12,9,/controller_mappings/group/237/inputs/click
+default,819,touch,R1!L1: Modifier 2,joystick active,1,0,4,4,/controller_mappings/group/237/inputs/touch
+default,820,click,R1!L1: Modifier 2,right_joystick active,3,0,12,9,/controller_mappings/group/238/inputs/click
+default,820,edge,R1!L1: Modifier 2,right_joystick active,3,0,11,9,/controller_mappings/group/238/inputs/edge
+default,820,touch,R1!L1: Modifier 2,right_joystick active,1,0,4,4,/controller_mappings/group/238/inputs/touch
+default,849,touch,RST: Entry Point,right_joystick active,2,0,3,2,/controller_mappings/group/245/inputs/touch
+default,851,touch,LST: Entry Point,joystick active,2,0,3,2,/controller_mappings/group/247/inputs/touch
+default,869,click,Menu Left: Entry Point,left_trigger active,1,0,1,1,/controller_mappings/group/253/inputs/click
+default,870,click,Menu Left: Entry Point,right_trigger active,1,0,1,1,/controller_mappings/group/254/inputs/click
+default,891,click,L1: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/258/inputs/click
+default,892,click,L1: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/259/inputs/click
+default,895,click,R1: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/261/inputs/click
+default,896,click,R1: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/262/inputs/click
+default,899,click,L1: Scroll Down,left_trigger active,1,0,1,1,/controller_mappings/group/264/inputs/click
+default,900,click,L1: Scroll Down,right_trigger active,1,0,1,1,/controller_mappings/group/265/inputs/click
+default,903,click,R1: Scroll Up,left_trigger active,1,0,1,1,/controller_mappings/group/267/inputs/click
+default,904,click,R1: Scroll Up,right_trigger active,1,0,1,1,/controller_mappings/group/268/inputs/click
+default,922,edge,L1: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/269/inputs/edge
+default,922,touch,L1: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/269/inputs/touch
+default,923,touch,L1: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/270/inputs/touch
+default,924,click,L1: Double Tap,right_trackpad inactive,1,0,1,1,/controller_mappings/group/271/inputs/click
+default,928,edge,R1: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/275/inputs/edge
+default,928,touch,R1: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/275/inputs/touch
+default,929,touch,R1: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/276/inputs/touch
+default,944,edge,L1: Scroll Down,right_joystick active,2,0,3,2,/controller_mappings/group/279/inputs/edge
+default,944,touch,L1: Scroll Down,right_joystick active,3,0,7,4,/controller_mappings/group/279/inputs/touch
+default,945,touch,L1: Scroll Down,joystick active,3,0,7,4,/controller_mappings/group/280/inputs/touch
+default,946,edge,R1: Scroll Up,right_joystick active,2,0,3,2,/controller_mappings/group/281/inputs/edge
+default,946,touch,R1: Scroll Up,right_joystick active,3,0,7,4,/controller_mappings/group/281/inputs/touch
+default,947,touch,R1: Scroll Up,joystick active,3,0,7,4,/controller_mappings/group/282/inputs/touch
+default,987,click,RTP: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/293/inputs/click
+default,988,click,RTP: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/294/inputs/click
+default,1023,edge,RTP: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/298/inputs/edge
+default,1023,touch,RTP: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/298/inputs/touch
+default,1024,touch,RTP: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/299/inputs/touch
+default,1025,click,RTP: Double Tap,right_trackpad inactive,1,0,1,1,/controller_mappings/group/300/inputs/click
+default,1025,touch,RTP: Double Tap,right_trackpad inactive,1,0,2,2,/controller_mappings/group/300/inputs/touch
+default,1032,touch,RTP: Entry Point,right_trackpad active,2,0,3,2,/controller_mappings/group/303/inputs/touch
+default,1033,touch,RTP: Tap Cover,right_trackpad active,1,0,2,2,/controller_mappings/group/304/inputs/touch
+default,1039,dpad_north,Base,dpad inactive modeshift,1,0,1,1,/controller_mappings/group/305/inputs/dpad_north
+default,1039,dpad_south,Base,dpad inactive modeshift,1,0,1,1,/controller_mappings/group/305/inputs/dpad_south
+default,1039,dpad_east,Base,dpad inactive modeshift,1,0,1,1,/controller_mappings/group/305/inputs/dpad_east
+default,1039,dpad_west,Base,dpad inactive modeshift,1,0,1,1,/controller_mappings/group/305/inputs/dpad_west
+default,1043,button_a,Base,button_diamond inactive modeshift,1,0,1,1,/controller_mappings/group/306/inputs/button_a
+default,1043,button_b,Base,button_diamond inactive modeshift,1,0,1,1,/controller_mappings/group/306/inputs/button_b
+default,1043,button_x,Base,button_diamond inactive modeshift,1,0,1,1,/controller_mappings/group/306/inputs/button_x
+default,1043,button_y,Base,button_diamond inactive modeshift,1,0,1,1,/controller_mappings/group/306/inputs/button_y
+default,1045,click,Menu Left: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/308/inputs/click
+default,1046,click,Menu Left: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/309/inputs/click
+default,1049,click,Menu Right: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/311/inputs/click
+default,1050,click,Menu Right: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/312/inputs/click
+default,1113,click,Menu Left: Escape,left_trigger active,1,0,1,1,/controller_mappings/group/320/inputs/click
+default,1114,click,Menu Left: Escape,right_trigger active,1,0,1,1,/controller_mappings/group/321/inputs/click
+default,1117,click,Menu Right: Tab,left_trigger active,1,0,1,1,/controller_mappings/group/323/inputs/click
+default,1118,click,Menu Right: Tab,right_trigger active,1,0,1,1,/controller_mappings/group/324/inputs/click
+default,1161,click,Menu Left: Entry Point,right_joystick active,1,0,1,1,/controller_mappings/group/329/inputs/click
+default,1161,edge,Menu Left: Entry Point,right_joystick active,2,0,3,2,/controller_mappings/group/329/inputs/edge
+default,1161,touch,Menu Left: Entry Point,right_joystick active,2,0,5,4,/controller_mappings/group/329/inputs/touch
+default,1162,click,Menu Left: Entry Point,joystick active,1,0,1,1,/controller_mappings/group/330/inputs/click
+default,1162,touch,Menu Left: Entry Point,joystick active,2,0,5,4,/controller_mappings/group/330/inputs/touch
+default,1163,edge,RTP: Entry Point,right_joystick active,2,0,3,2,/controller_mappings/group/331/inputs/edge
+default,1163,touch,RTP: Entry Point,right_joystick active,1,0,4,4,/controller_mappings/group/331/inputs/touch
+default,1164,touch,RTP: Entry Point,joystick active,1,0,4,4,/controller_mappings/group/332/inputs/touch
+default,1165,edge,Menu Left: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/333/inputs/edge
+default,1165,touch,Menu Left: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/333/inputs/touch
+default,1166,touch,Menu Left: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/334/inputs/touch
+default,1167,edge,Menu Right: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/335/inputs/edge
+default,1167,touch,Menu Right: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/335/inputs/touch
+default,1168,touch,Menu Right: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/336/inputs/touch
+default,1169,edge,Menu Left: Escape,right_joystick active,1,0,1,1,/controller_mappings/group/337/inputs/edge
+default,1169,touch,Menu Left: Escape,right_joystick active,1,0,4,4,/controller_mappings/group/337/inputs/touch
+default,1170,touch,Menu Left: Escape,joystick active,1,0,4,4,/controller_mappings/group/338/inputs/touch
+default,1171,edge,Menu Right: Tab,right_joystick active,1,0,1,1,/controller_mappings/group/339/inputs/edge
+default,1171,touch,Menu Right: Tab,right_joystick active,1,0,4,4,/controller_mappings/group/339/inputs/touch
+default,1172,touch,Menu Right: Tab,joystick active,1,0,4,4,/controller_mappings/group/340/inputs/touch
+default,1218,click,Transition Set 0,left_trigger active,1,0,1,1,/controller_mappings/group/347/inputs/click
+default,1219,click,Transition Set 0,right_trigger active,1,0,1,1,/controller_mappings/group/348/inputs/click
+default,1233,click,Transition Set 0,joystick active,1,0,1,1,/controller_mappings/group/349/inputs/click
+default,1233,touch,Transition Set 0,joystick active,3,0,3,1,/controller_mappings/group/349/inputs/touch
+default,1234,click,Transition Set 0,right_joystick active,1,0,1,1,/controller_mappings/group/350/inputs/click
+default,1234,edge,Transition Set 0,right_joystick active,3,0,3,1,/controller_mappings/group/350/inputs/edge
+default,1234,touch,Transition Set 0,right_joystick active,3,0,3,1,/controller_mappings/group/350/inputs/touch
+default,1245,click,Transition Set 1,left_trigger active,1,0,1,1,/controller_mappings/group/353/inputs/click
+default,1246,click,Transition Set 1,right_trigger active,1,0,1,1,/controller_mappings/group/354/inputs/click
+default,1260,click,Transition Set 1,joystick active,1,0,1,1,/controller_mappings/group/355/inputs/click
+default,1260,touch,Transition Set 1,joystick active,3,0,3,1,/controller_mappings/group/355/inputs/touch
+default,1261,click,Transition Set 1,right_joystick active,1,0,1,1,/controller_mappings/group/356/inputs/click
+default,1261,edge,Transition Set 1,right_joystick active,3,0,3,1,/controller_mappings/group/356/inputs/edge
+default,1261,touch,Transition Set 1,right_joystick active,3,0,3,1,/controller_mappings/group/356/inputs/touch
+default,1289,dpad_north,Menu Left: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/362/inputs/dpad_north
+default,1289,dpad_south,Menu Left: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/362/inputs/dpad_south
+default,1289,dpad_east,Menu Left: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/362/inputs/dpad_east
+default,1289,dpad_west,Menu Left: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/362/inputs/dpad_west
+default,1289,edge,Menu Left: Fn Layer,right_joystick active,3,0,4,2,/controller_mappings/group/362/inputs/edge
+default,1289,click,Menu Left: Fn Layer,right_joystick active,1,0,1,1,/controller_mappings/group/362/inputs/click
+default,1289,touch,Menu Left: Fn Layer,right_joystick active,1,0,3,3,/controller_mappings/group/362/inputs/touch
+default,1290,dpad_north,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/363/inputs/dpad_north
+default,1290,dpad_south,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/363/inputs/dpad_south
+default,1290,dpad_east,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/363/inputs/dpad_east
+default,1290,dpad_west,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/363/inputs/dpad_west
+default,1290,edge,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/363/inputs/edge
+default,1290,click,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/363/inputs/click
+default,1290,touch,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/363/inputs/touch
+default,1291,dpad_north,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/364/inputs/dpad_north
+default,1291,dpad_south,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/364/inputs/dpad_south
+default,1291,dpad_east,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/364/inputs/dpad_east
+default,1291,dpad_west,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/364/inputs/dpad_west
+default,1291,edge,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/364/inputs/edge
+default,1291,click,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/364/inputs/click
+default,1291,touch,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/364/inputs/touch
+default,12900,dpad_north,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/dpad_north
+default,12900,dpad_south,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/dpad_south
+default,12900,dpad_east,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/dpad_east
+default,12900,dpad_west,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/dpad_west
+default,12900,edge,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/edge
+default,12900,click,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/click
+default,12900,touch,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/touch
+default,12910,dpad_north,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/dpad_north
+default,12910,dpad_south,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/dpad_south
+default,12910,dpad_east,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/dpad_east
+default,12910,dpad_west,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/dpad_west
+default,12910,edge,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/edge
+default,12910,click,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/click
+default,12910,touch,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/touch
+default,1298,dpad_north,RTP: Double Tap,right_trackpad active,1,0,2,2,/controller_mappings/group/367/inputs/dpad_north
+default,1298,dpad_south,RTP: Double Tap,right_trackpad active,1,0,2,2,/controller_mappings/group/367/inputs/dpad_south
+default,1298,dpad_east,RTP: Double Tap,right_trackpad active,1,0,1,1,/controller_mappings/group/367/inputs/dpad_east
+default,1298,dpad_west,RTP: Double Tap,right_trackpad active,1,0,1,1,/controller_mappings/group/367/inputs/dpad_west
+default,1298,edge,RTP: Double Tap,right_trackpad active,1,0,1,1,/controller_mappings/group/367/inputs/edge
+default,1317,button_a,Menu Right: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/368/inputs/button_a
+default,1317,button_b,Menu Right: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/368/inputs/button_b
+default,1317,button_x,Menu Right: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/368/inputs/button_x
+default,1317,button_y,Menu Right: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/368/inputs/button_y
+default,1318,click,Menu Right: Fn Layer,left_trigger active,3,0,4,2,/controller_mappings/group/369/inputs/click
+default,1318,edge,Menu Right: Fn Layer,left_trigger active,1,0,1,1,/controller_mappings/group/369/inputs/edge
+default,1319,click,Menu Right: Fn Layer,right_trigger active,3,0,4,2,/controller_mappings/group/370/inputs/click
+default,1319,edge,Menu Right: Fn Layer,right_trigger active,1,0,1,1,/controller_mappings/group/370/inputs/edge
+default,1329,dpad_north,Menu Right: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/371/inputs/dpad_north
+default,1329,dpad_south,Menu Right: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/371/inputs/dpad_south
+default,1329,dpad_east,Menu Right: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/371/inputs/dpad_east
+default,1329,dpad_west,Menu Right: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/371/inputs/dpad_west
+default,1330,dpad_north,Menu Right: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/372/inputs/dpad_north
+default,1330,dpad_south,Menu Right: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/372/inputs/dpad_south
+default,1330,dpad_east,Menu Right: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/372/inputs/dpad_east
+default,1330,dpad_west,Menu Right: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/372/inputs/dpad_west
+default,1330,edge,Menu Right: Fn Layer,joystick active,3,0,4,2,/controller_mappings/group/372/inputs/edge
+default,1330,click,Menu Right: Fn Layer,joystick active,1,0,1,1,/controller_mappings/group/372/inputs/click
+default,1330,touch,Menu Right: Fn Layer,joystick active,1,0,3,3,/controller_mappings/group/372/inputs/touch
+default,1331,dpad_north,Menu Right: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/373/inputs/dpad_north
+default,1331,dpad_south,Menu Right: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/373/inputs/dpad_south
+default,1331,dpad_east,Menu Right: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/373/inputs/dpad_east
+default,1331,dpad_west,Menu Right: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/373/inputs/dpad_west
+default,1331,edge,Menu Right: Fn Layer,right_joystick active,3,0,4,2,/controller_mappings/group/373/inputs/edge
+default,1331,click,Menu Right: Fn Layer,right_joystick active,1,0,1,1,/controller_mappings/group/373/inputs/click
+default,1331,touch,Menu Right: Fn Layer,right_joystick active,1,0,3,3,/controller_mappings/group/373/inputs/touch
+default,12912,button_a,Gyro | L1: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/375/inputs/button_a
+default,12912,button_b,Gyro | L1: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/375/inputs/button_b
+default,12912,button_x,Gyro | L1: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/375/inputs/button_x
+default,12912,button_y,Gyro | L1: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/375/inputs/button_y
+default,12916,click,Gyro | L1: Modifier 0,right_joystick active,2,0,5,3,/controller_mappings/group/379/inputs/click
+default,12916,edge,Gyro | L1: Modifier 0,right_joystick active,2,0,4,3,/controller_mappings/group/379/inputs/edge
+default,12916,touch,Gyro | L1: Modifier 0,right_joystick active,3,0,8,4,/controller_mappings/group/379/inputs/touch
+default,12917,dpad_north,Gyro | L1: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/380/inputs/dpad_north
+default,12917,dpad_south,Gyro | L1: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/380/inputs/dpad_south
+default,12917,dpad_east,Gyro | L1: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/380/inputs/dpad_east
+default,12917,dpad_west,Gyro | L1: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/380/inputs/dpad_west
+default,12922,click,Gyro | L1: Modifier 0,left_trigger active,1,0,1,1,/controller_mappings/group/385/inputs/click
+default,12923,click,Gyro | L1: Modifier 0,right_trigger active,1,0,1,1,/controller_mappings/group/386/inputs/click
+default,12925,click,Gyro | L1: Modifier 0,joystick active,2,0,5,3,/controller_mappings/group/388/inputs/click
+default,12925,touch,Gyro | L1: Modifier 0,joystick active,3,0,8,4,/controller_mappings/group/388/inputs/touch
+default,12928,button_a,Gyro | R1: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/389/inputs/button_a
+default,12928,button_b,Gyro | R1: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/389/inputs/button_b
+default,12928,button_x,Gyro | R1: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/389/inputs/button_x
+default,12928,button_y,Gyro | R1: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/389/inputs/button_y
+default,12932,dpad_north,Gyro | R1: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/392/inputs/dpad_north
+default,12932,dpad_south,Gyro | R1: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/392/inputs/dpad_south
+default,12932,dpad_east,Gyro | R1: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/392/inputs/dpad_east
+default,12932,dpad_west,Gyro | R1: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/392/inputs/dpad_west
+default,12934,click,Gyro | R1: Modifier 1,right_joystick active,2,0,5,3,/controller_mappings/group/394/inputs/click
+default,12934,edge,Gyro | R1: Modifier 1,right_joystick active,2,0,4,3,/controller_mappings/group/394/inputs/edge
+default,12934,touch,Gyro | R1: Modifier 1,right_joystick active,3,0,8,4,/controller_mappings/group/394/inputs/touch
+default,12940,click,Gyro | R1: Modifier 1,left_trigger active,1,0,1,1,/controller_mappings/group/400/inputs/click
+default,12941,click,Gyro | R1: Modifier 1,right_trigger active,1,0,1,1,/controller_mappings/group/401/inputs/click
+default,12944,click,Gyro | R1: Modifier 1,joystick active,2,0,5,3,/controller_mappings/group/404/inputs/click
+default,12944,touch,Gyro | R1: Modifier 1,joystick active,3,0,8,4,/controller_mappings/group/404/inputs/touch
+default,12947,button_a,Gyro | L1!R1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/405/inputs/button_a
+default,12947,button_b,Gyro | L1!R1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/405/inputs/button_b
+default,12947,button_x,Gyro | L1!R1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/405/inputs/button_x
+default,12947,button_y,Gyro | L1!R1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/405/inputs/button_y
+default,12948,click,Gyro | L1!R1: Modifier 2,left_trigger active,1,0,1,1,/controller_mappings/group/406/inputs/click
+default,12949,click,Gyro | L1!R1: Modifier 2,right_trigger active,1,0,1,1,/controller_mappings/group/407/inputs/click
+default,12951,dpad_north,Gyro | L1!R1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/408/inputs/dpad_north
+default,12951,dpad_south,Gyro | L1!R1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/408/inputs/dpad_south
+default,12951,dpad_east,Gyro | L1!R1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/408/inputs/dpad_east
+default,12951,dpad_west,Gyro | L1!R1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/408/inputs/dpad_west
+default,12952,click,Gyro | L1!R1: Modifier 2,right_joystick active,3,0,12,9,/controller_mappings/group/409/inputs/click
+default,12952,edge,Gyro | L1!R1: Modifier 2,right_joystick active,3,0,11,9,/controller_mappings/group/409/inputs/edge
+default,12952,touch,Gyro | L1!R1: Modifier 2,right_joystick active,1,0,4,4,/controller_mappings/group/409/inputs/touch
+default,12953,click,Gyro | L1!R1: Modifier 2,joystick active,3,0,12,9,/controller_mappings/group/410/inputs/click
+default,12953,touch,Gyro | L1!R1: Modifier 2,joystick active,1,0,4,4,/controller_mappings/group/410/inputs/touch
+default,12958,button_a,Gyro | R1!L1: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/411/inputs/button_a
+default,12958,button_b,Gyro | R1!L1: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/411/inputs/button_b
+default,12958,button_x,Gyro | R1!L1: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/411/inputs/button_x
+default,12958,button_y,Gyro | R1!L1: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/411/inputs/button_y
+default,12959,click,Gyro | R1!L1: Modifier 2,left_trigger active,1,0,1,1,/controller_mappings/group/412/inputs/click
+default,12960,click,Gyro | R1!L1: Modifier 2,right_trigger active,1,0,1,1,/controller_mappings/group/413/inputs/click
+default,12962,dpad_north,Gyro | R1!L1: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/414/inputs/dpad_north
+default,12962,dpad_south,Gyro | R1!L1: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/414/inputs/dpad_south
+default,12962,dpad_east,Gyro | R1!L1: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/414/inputs/dpad_east
+default,12962,dpad_west,Gyro | R1!L1: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/414/inputs/dpad_west
+default,12963,touch,Gyro | R1!L1: Modifier 2,right_joystick inactive,1,0,2,2,/controller_mappings/group/415/inputs/touch
+default,12964,touch,Gyro | R1!L1: Modifier 2,joystick inactive,1,0,2,2,/controller_mappings/group/416/inputs/touch
+default,12965,button_a,Gyro | R1!L1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/417/inputs/button_a
+default,12965,button_b,Gyro | R1!L1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/417/inputs/button_b
+default,12965,button_x,Gyro | R1!L1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/417/inputs/button_x
+default,12965,button_y,Gyro | R1!L1: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/417/inputs/button_y
+default,12966,dpad_north,Gyro | R1!L1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/418/inputs/dpad_north
+default,12966,dpad_south,Gyro | R1!L1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/418/inputs/dpad_south
+default,12966,dpad_east,Gyro | R1!L1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/418/inputs/dpad_east
+default,12966,dpad_west,Gyro | R1!L1: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/418/inputs/dpad_west
+default,12967,click,Gyro | R1!L1: Modifier 2,joystick active,3,0,12,9,/controller_mappings/group/419/inputs/click
+default,12967,touch,Gyro | R1!L1: Modifier 2,joystick active,1,0,4,4,/controller_mappings/group/419/inputs/touch
+default,12968,click,Gyro | R1!L1: Modifier 2,right_joystick active,3,0,12,9,/controller_mappings/group/420/inputs/click
+default,12968,edge,Gyro | R1!L1: Modifier 2,right_joystick active,3,0,11,9,/controller_mappings/group/420/inputs/edge
+default,12968,touch,Gyro | R1!L1: Modifier 2,right_joystick active,1,0,4,4,/controller_mappings/group/420/inputs/touch
+default,12984,touch,Gyro,joystick inactive,1,0,1,1,/controller_mappings/group/433/inputs/touch
+default,12985,touch,Gyro,joystick inactive,3,0,3,1,/controller_mappings/group/434/inputs/touch
+default,13026,touch,Gyro Off Ramp Up,joystick inactive,1,0,1,1,/controller_mappings/group/448/inputs/touch
+default,13027,touch,Gyro Off Ramp Up,joystick inactive,3,0,3,1,/controller_mappings/group/449/inputs/touch
+default,13030,edge,Gyro Off Ramp Up,left_trigger active,1,0,1,1,/controller_mappings/group/451/inputs/edge
+default,13031,edge,Gyro Off Ramp Up,right_trigger active,1,0,1,1,/controller_mappings/group/452/inputs/edge
+default,10,button_escape,Base,switch active,1,0,1,1,/controller_mappings/group/462/inputs/button_escape
+default,10,button_menu,Base,switch active,1,0,1,1,/controller_mappings/group/462/inputs/button_menu
+default,10,left_bumper,Base,switch active,1,0,1,1,/controller_mappings/group/462/inputs/left_bumper
+default,10,right_bumper,Base,switch active,1,0,1,1,/controller_mappings/group/462/inputs/right_bumper
+default,10,button_back_left,Base,switch active,1,0,1,1,/controller_mappings/group/462/inputs/button_back_left
+default,10,button_back_right,Base,switch active,1,0,1,1,/controller_mappings/group/462/inputs/button_back_right
+default,10,button_back_left_upper,Base,switch active,1,0,1,1,/controller_mappings/group/462/inputs/button_back_left_upper
+default,10,button_back_right_upper,Base,switch active,1,0,1,1,/controller_mappings/group/462/inputs/button_back_right_upper
+default,10,left_trackpad_touch,Base,switch active,2,0,2,1,/controller_mappings/group/462/inputs/left_trackpad_touch
+default,10,right_trackpad_touch,Base,switch active,2,0,2,1,/controller_mappings/group/462/inputs/right_trackpad_touch
+default,59,button_escape,L1: Modifier 0,switch active,2,0,5,3,/controller_mappings/group/467/inputs/button_escape
+default,59,button_menu,L1: Modifier 0,switch active,2,0,5,3,/controller_mappings/group/467/inputs/button_menu
+default,59,left_bumper,L1: Modifier 0,switch active,2,0,4,3,/controller_mappings/group/467/inputs/left_bumper
+default,59,right_bumper,L1: Modifier 0,switch active,2,0,7,4,/controller_mappings/group/467/inputs/right_bumper
+default,160,button_escape,R1: Modifier 1,switch active,2,0,5,3,/controller_mappings/group/468/inputs/button_escape
+default,160,button_menu,R1: Modifier 1,switch active,2,0,5,3,/controller_mappings/group/468/inputs/button_menu
+default,160,left_bumper,R1: Modifier 1,switch active,2,0,7,4,/controller_mappings/group/468/inputs/left_bumper
+default,160,right_bumper,R1: Modifier 1,switch active,2,0,4,3,/controller_mappings/group/468/inputs/right_bumper
+default,177,button_capture,(unreferenced),,1,0,1,1,/controller_mappings/group/469/inputs/button_capture
+default,181,button_capture,(unreferenced),,1,0,1,1,/controller_mappings/group/470/inputs/button_capture
+default,414,left_bumper,Turning Ramp Up 0,switch active,1,0,4,4,/controller_mappings/group/476/inputs/left_bumper
+default,414,right_bumper,Turning Ramp Up 0,switch active,1,0,4,4,/controller_mappings/group/476/inputs/right_bumper
+default,542,left_bumper,Turning Ramp Up 1,switch active,1,0,4,4,/controller_mappings/group/481/inputs/left_bumper
+default,542,right_bumper,Turning Ramp Up 1,switch active,1,0,4,4,/controller_mappings/group/481/inputs/right_bumper
+default,599,button_escape,L1!R1: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/482/inputs/button_escape
+default,599,button_menu,L1!R1: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/482/inputs/button_menu
+default,599,left_bumper,L1!R1: Modifier 2,switch active,1,0,12,12,/controller_mappings/group/482/inputs/left_bumper
+default,599,right_bumper,L1!R1: Modifier 2,switch active,3,0,14,12,/controller_mappings/group/482/inputs/right_bumper
+default,603,button_escape,R1!L1: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/483/inputs/button_escape
+default,603,button_menu,R1!L1: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/483/inputs/button_menu
+default,603,left_bumper,R1!L1: Modifier 2,switch active,3,0,14,12,/controller_mappings/group/483/inputs/left_bumper
+default,603,right_bumper,R1!L1: Modifier 2,switch active,1,0,12,12,/controller_mappings/group/483/inputs/right_bumper
+default,627,button_escape,Menu Left: Fn Layer,switch active,2,0,5,3,/controller_mappings/group/484/inputs/button_escape
+default,627,button_menu,Menu Left: Fn Layer,switch active,1,0,2,2,/controller_mappings/group/484/inputs/button_menu
+default,627,left_bumper,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/484/inputs/left_bumper
+default,627,right_bumper,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/484/inputs/right_bumper
+default,627,button_back_left,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/484/inputs/button_back_left
+default,627,button_back_right,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/484/inputs/button_back_right
+default,627,button_back_left_upper,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/484/inputs/button_back_left_upper
+default,627,button_back_right_upper,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/484/inputs/button_back_right_upper
+default,627,left_stick_click,Menu Left: Fn Layer,switch active,1,0,1,1,/controller_mappings/group/484/inputs/left_stick_click
+default,627,right_stick_click,Menu Left: Fn Layer,switch active,1,0,1,1,/controller_mappings/group/484/inputs/right_stick_click
+default,749,button_escape,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/button_escape
+default,749,button_menu,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/button_menu
+default,749,left_bumper,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/left_bumper
+default,749,right_bumper,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/right_bumper
+default,749,always_on_action,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/always_on_action
+default,753,button_escape,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/486/inputs/button_escape
+default,753,button_menu,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/486/inputs/button_menu
+default,753,left_bumper,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/486/inputs/left_bumper
+default,753,right_bumper,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/486/inputs/right_bumper
+default,753,always_on_action,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/486/inputs/always_on_action
+default,777,left_bumper,L1: Tap Cover,switch active,1,0,3,3,/controller_mappings/group/487/inputs/left_bumper
+default,781,right_bumper,R1: Tap Cover,switch active,1,0,3,3,/controller_mappings/group/488/inputs/right_bumper
+default,812,left_bumper,L1&R1: Tap Cover,switch active,1,0,10,10,/controller_mappings/group/491/inputs/left_bumper
+default,812,right_bumper,L1&R1: Tap Cover,switch active,1,0,10,10,/controller_mappings/group/491/inputs/right_bumper
+default,871,button_escape,Menu Left: Entry Point,switch active,2,0,4,3,/controller_mappings/group/494/inputs/button_escape
+default,871,button_menu,Menu Left: Entry Point,switch active,3,0,5,2,/controller_mappings/group/494/inputs/button_menu
+default,871,left_bumper,Menu Left: Entry Point,switch active,1,0,1,1,/controller_mappings/group/494/inputs/left_bumper
+default,871,right_bumper,Menu Left: Entry Point,switch active,1,0,1,1,/controller_mappings/group/494/inputs/right_bumper
+default,893,button_escape,L1: Double Tap,switch active,1,0,1,1,/controller_mappings/group/495/inputs/button_escape
+default,893,button_menu,L1: Double Tap,switch active,1,0,1,1,/controller_mappings/group/495/inputs/button_menu
+default,893,left_bumper,L1: Double Tap,switch active,1,0,2,2,/controller_mappings/group/495/inputs/left_bumper
+default,893,right_bumper,L1: Double Tap,switch active,1,0,1,1,/controller_mappings/group/495/inputs/right_bumper
+default,893,always_on_action,L1: Double Tap,switch active,2,0,2,1,/controller_mappings/group/495/inputs/always_on_action
+default,897,button_escape,R1: Double Tap,switch active,1,0,1,1,/controller_mappings/group/496/inputs/button_escape
+default,897,button_menu,R1: Double Tap,switch active,1,0,1,1,/controller_mappings/group/496/inputs/button_menu
+default,897,left_bumper,R1: Double Tap,switch active,1,0,1,1,/controller_mappings/group/496/inputs/left_bumper
+default,897,right_bumper,R1: Double Tap,switch active,1,0,2,2,/controller_mappings/group/496/inputs/right_bumper
+default,897,always_on_action,R1: Double Tap,switch active,2,0,2,1,/controller_mappings/group/496/inputs/always_on_action
+default,901,button_escape,L1: Scroll Down,switch active,1,0,1,1,/controller_mappings/group/497/inputs/button_escape
+default,901,button_menu,L1: Scroll Down,switch active,1,0,1,1,/controller_mappings/group/497/inputs/button_menu
+default,901,left_bumper,L1: Scroll Down,switch active,3,0,4,2,/controller_mappings/group/497/inputs/left_bumper
+default,901,right_bumper,L1: Scroll Down,switch active,1,0,1,1,/controller_mappings/group/497/inputs/right_bumper
+default,905,button_escape,R1: Scroll Up,switch active,1,0,1,1,/controller_mappings/group/498/inputs/button_escape
+default,905,button_menu,R1: Scroll Up,switch active,1,0,1,1,/controller_mappings/group/498/inputs/button_menu
+default,905,left_bumper,R1: Scroll Up,switch active,1,0,1,1,/controller_mappings/group/498/inputs/left_bumper
+default,905,right_bumper,R1: Scroll Up,switch active,3,0,4,2,/controller_mappings/group/498/inputs/right_bumper
+default,951,left_bumper,L1: Double Tap Cover,switch active,2,0,3,2,/controller_mappings/group/499/inputs/left_bumper
+default,955,right_bumper,R1: Double Tap Cover,switch active,2,0,3,2,/controller_mappings/group/500/inputs/right_bumper
+default,989,button_escape,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/502/inputs/button_escape
+default,989,button_menu,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/502/inputs/button_menu
+default,989,left_bumper,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/502/inputs/left_bumper
+default,989,right_bumper,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/502/inputs/right_bumper
+default,989,always_on_action,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/502/inputs/always_on_action
+default,1047,button_escape,Menu Left: Double Tap,switch active,1,0,1,1,/controller_mappings/group/504/inputs/button_escape
+default,1047,button_menu,Menu Left: Double Tap,switch active,1,0,2,2,/controller_mappings/group/504/inputs/button_menu
+default,1047,left_bumper,Menu Left: Double Tap,switch active,1,0,1,1,/controller_mappings/group/504/inputs/left_bumper
+default,1047,right_bumper,Menu Left: Double Tap,switch active,1,0,1,1,/controller_mappings/group/504/inputs/right_bumper
+default,1047,always_on_action,Menu Left: Double Tap,switch active,2,0,2,1,/controller_mappings/group/504/inputs/always_on_action
+default,1051,button_escape,Menu Right: Double Tap,switch active,1,0,2,2,/controller_mappings/group/505/inputs/button_escape
+default,1051,button_menu,Menu Right: Double Tap,switch active,1,0,1,1,/controller_mappings/group/505/inputs/button_menu
+default,1051,left_bumper,Menu Right: Double Tap,switch active,1,0,1,1,/controller_mappings/group/505/inputs/left_bumper
+default,1051,right_bumper,Menu Right: Double Tap,switch active,1,0,1,1,/controller_mappings/group/505/inputs/right_bumper
+default,1051,always_on_action,Menu Right: Double Tap,switch active,2,0,2,1,/controller_mappings/group/505/inputs/always_on_action
+default,1055,button_menu,Menu Left: Double Tap Cover,switch active,2,0,3,2,/controller_mappings/group/506/inputs/button_menu
+default,1059,button_escape,Menu Right: Double Tap Cover,switch active,2,0,3,2,/controller_mappings/group/507/inputs/button_escape
+default,1115,button_escape,Menu Left: Escape,switch active,1,0,1,1,/controller_mappings/group/508/inputs/button_escape
+default,1115,button_menu,Menu Left: Escape,switch active,3,0,4,2,/controller_mappings/group/508/inputs/button_menu
+default,1115,left_bumper,Menu Left: Escape,switch active,1,0,1,1,/controller_mappings/group/508/inputs/left_bumper
+default,1115,right_bumper,Menu Left: Escape,switch active,1,0,1,1,/controller_mappings/group/508/inputs/right_bumper
+default,1119,button_escape,Menu Right: Tab,switch active,3,0,4,2,/controller_mappings/group/509/inputs/button_escape
+default,1119,button_menu,Menu Right: Tab,switch active,1,0,1,1,/controller_mappings/group/509/inputs/button_menu
+default,1119,left_bumper,Menu Right: Tab,switch active,1,0,1,1,/controller_mappings/group/509/inputs/left_bumper
+default,1119,right_bumper,Menu Right: Tab,switch active,1,0,1,1,/controller_mappings/group/509/inputs/right_bumper
+default,1220,button_escape,Transition Set 0,switch active,1,0,1,1,/controller_mappings/group/510/inputs/button_escape
+default,1220,button_menu,Transition Set 0,switch active,1,0,1,1,/controller_mappings/group/510/inputs/button_menu
+default,1220,left_bumper,Transition Set 0,switch active,1,0,1,1,/controller_mappings/group/510/inputs/left_bumper
+default,1220,right_bumper,Transition Set 0,switch active,1,0,1,1,/controller_mappings/group/510/inputs/right_bumper
+default,1247,button_escape,Transition Set 1,switch active,1,0,1,1,/controller_mappings/group/511/inputs/button_escape
+default,1247,button_menu,Transition Set 1,switch active,1,0,1,1,/controller_mappings/group/511/inputs/button_menu
+default,1247,left_bumper,Transition Set 1,switch active,1,0,1,1,/controller_mappings/group/511/inputs/left_bumper
+default,1247,right_bumper,Transition Set 1,switch active,1,0,1,1,/controller_mappings/group/511/inputs/right_bumper
+default,1320,button_escape,Menu Right: Fn Layer,switch active,1,0,2,2,/controller_mappings/group/512/inputs/button_escape
+default,1320,button_menu,Menu Right: Fn Layer,switch active,2,0,5,3,/controller_mappings/group/512/inputs/button_menu
+default,1320,left_bumper,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/512/inputs/left_bumper
+default,1320,right_bumper,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/512/inputs/right_bumper
+default,1320,button_back_left,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/512/inputs/button_back_left
+default,1320,button_back_right,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/512/inputs/button_back_right
+default,1320,button_back_left_upper,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/512/inputs/button_back_left_upper
+default,1320,button_back_right_upper,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/512/inputs/button_back_right_upper
+default,1320,left_stick_click,Menu Right: Fn Layer,switch active,1,0,1,1,/controller_mappings/group/512/inputs/left_stick_click
+default,1320,right_stick_click,Menu Right: Fn Layer,switch active,1,0,1,1,/controller_mappings/group/512/inputs/right_stick_click
+default,12911,button_escape,Gyro | L1: Modifier 0,switch active,2,0,5,3,/controller_mappings/group/513/inputs/button_escape
+default,12911,button_menu,Gyro | L1: Modifier 0,switch active,2,0,5,3,/controller_mappings/group/513/inputs/button_menu
+default,12911,left_bumper,Gyro | L1: Modifier 0,switch active,2,0,4,3,/controller_mappings/group/513/inputs/left_bumper
+default,12911,right_bumper,Gyro | L1: Modifier 0,switch active,2,0,7,4,/controller_mappings/group/513/inputs/right_bumper
+default,12931,button_escape,Gyro | R1: Modifier 1,switch active,2,0,5,3,/controller_mappings/group/514/inputs/button_escape
+default,12931,button_menu,Gyro | R1: Modifier 1,switch active,2,0,5,3,/controller_mappings/group/514/inputs/button_menu
+default,12931,left_bumper,Gyro | R1: Modifier 1,switch active,2,0,7,4,/controller_mappings/group/514/inputs/left_bumper
+default,12931,right_bumper,Gyro | R1: Modifier 1,switch active,2,0,4,3,/controller_mappings/group/514/inputs/right_bumper
+default,12950,button_escape,Gyro | L1!R1: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/515/inputs/button_escape
+default,12950,button_menu,Gyro | L1!R1: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/515/inputs/button_menu
+default,12950,left_bumper,Gyro | L1!R1: Modifier 2,switch active,1,0,12,12,/controller_mappings/group/515/inputs/left_bumper
+default,12950,right_bumper,Gyro | L1!R1: Modifier 2,switch active,3,0,14,12,/controller_mappings/group/515/inputs/right_bumper
+default,12961,button_escape,Gyro | R1!L1: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/516/inputs/button_escape
+default,12961,button_menu,Gyro | R1!L1: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/516/inputs/button_menu
+default,12961,left_bumper,Gyro | R1!L1: Modifier 2,switch active,3,0,14,12,/controller_mappings/group/516/inputs/left_bumper
+default,12961,right_bumper,Gyro | R1!L1: Modifier 2,switch active,1,0,12,12,/controller_mappings/group/516/inputs/right_bumper
+default,12974,left_bumper,Gyro,switch active,1,0,1,1,/controller_mappings/group/517/inputs/left_bumper
+default,12974,right_bumper,Gyro,switch active,1,0,1,1,/controller_mappings/group/517/inputs/right_bumper
+default,13041,edge,Gyro Off Ramp Up,right_joystick active,2,0,2,1,/controller_mappings/group/520/inputs/edge
+default,13042,click,Menu Right: Entry Point,left_trigger active,1,0,1,1,/controller_mappings/group/521/inputs/click
+default,13043,click,Menu Right: Entry Point,right_trigger active,1,0,1,1,/controller_mappings/group/522/inputs/click
+default,13044,button_escape,Menu Right: Entry Point,switch active,3,0,5,2,/controller_mappings/group/523/inputs/button_escape
+default,13044,button_menu,Menu Right: Entry Point,switch active,2,0,4,3,/controller_mappings/group/523/inputs/button_menu
+default,13044,left_bumper,Menu Right: Entry Point,switch active,1,0,1,1,/controller_mappings/group/523/inputs/left_bumper
+default,13044,right_bumper,Menu Right: Entry Point,switch active,1,0,1,1,/controller_mappings/group/523/inputs/right_bumper
+default,13045,click,Menu Right: Entry Point,right_joystick active,1,0,1,1,/controller_mappings/group/524/inputs/click
+default,13045,edge,Menu Right: Entry Point,right_joystick active,2,0,3,2,/controller_mappings/group/524/inputs/edge
+default,13045,touch,Menu Right: Entry Point,right_joystick active,2,0,5,4,/controller_mappings/group/524/inputs/touch
+default,13046,click,Menu Right: Entry Point,joystick active,1,0,1,1,/controller_mappings/group/525/inputs/click
+default,13046,touch,Menu Right: Entry Point,joystick active,2,0,5,4,/controller_mappings/group/525/inputs/touch
+default,13048,button_menu,Menu Left: Backspace,switch active,2,0,2,1,/controller_mappings/group/527/inputs/button_menu
+default,13050,button_escape,Menu Right: Enter,switch active,2,0,2,1,/controller_mappings/group/529/inputs/button_escape
+alternative,0,button_a,(unreferenced),,1,0,1,1,/controller_mappings/group/0/inputs/button_a
+alternative,0,button_b,(unreferenced),,1,0,1,1,/controller_mappings/group/0/inputs/button_b
+alternative,0,button_x,(unreferenced),,1,0,1,1,/controller_mappings/group/0/inputs/button_x
+alternative,0,button_y,(unreferenced),,1,0,1,1,/controller_mappings/group/0/inputs/button_y
+alternative,1,dpad_north,(unreferenced),,1,0,1,1,/controller_mappings/group/1/inputs/dpad_north
+alternative,1,dpad_south,(unreferenced),,1,0,1,1,/controller_mappings/group/1/inputs/dpad_south
+alternative,1,dpad_east,(unreferenced),,1,0,1,1,/controller_mappings/group/1/inputs/dpad_east
+alternative,1,dpad_west,(unreferenced),,1,0,1,1,/controller_mappings/group/1/inputs/dpad_west
+alternative,2,click,(unreferenced),,1,0,1,1,/controller_mappings/group/2/inputs/click
+alternative,11,button_a,Base,button_diamond active,1,0,1,1,/controller_mappings/group/3/inputs/button_a
+alternative,11,button_b,Base,button_diamond active,1,0,1,1,/controller_mappings/group/3/inputs/button_b
+alternative,11,button_x,Base,button_diamond active,1,0,1,1,/controller_mappings/group/3/inputs/button_x
+alternative,11,button_y,Base,button_diamond active,1,0,1,1,/controller_mappings/group/3/inputs/button_y
+alternative,12,dpad_north,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/dpad_north
+alternative,12,dpad_south,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/dpad_south
+alternative,12,dpad_east,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/dpad_east
+alternative,12,dpad_west,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/dpad_west
+alternative,12,edge,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/edge
+alternative,12,click,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/click
+alternative,12,touch,Base,joystick active,1,0,1,1,/controller_mappings/group/4/inputs/touch
+alternative,13,edge,Base,left_trigger active,1,0,1,1,/controller_mappings/group/5/inputs/edge
+alternative,14,edge,Base,right_trigger active,1,0,1,1,/controller_mappings/group/6/inputs/edge
+alternative,15,click,Base,right_joystick active,1,0,1,1,/controller_mappings/group/7/inputs/click
+alternative,15,edge,Base,right_joystick active,7,0,7,1,/controller_mappings/group/7/inputs/edge
+alternative,15,touch,Base,right_joystick active,1,0,1,1,/controller_mappings/group/7/inputs/touch
+alternative,16,dpad_north,Base,dpad active,1,0,1,1,/controller_mappings/group/8/inputs/dpad_north
+alternative,16,dpad_south,Base,dpad active,1,0,1,1,/controller_mappings/group/8/inputs/dpad_south
+alternative,16,dpad_east,Base,dpad active,1,0,1,1,/controller_mappings/group/8/inputs/dpad_east
+alternative,16,dpad_west,Base,dpad active,1,0,1,1,/controller_mappings/group/8/inputs/dpad_west
+alternative,60,button_a,L2: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/33/inputs/button_a
+alternative,60,button_b,L2: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/33/inputs/button_b
+alternative,60,button_x,L2: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/33/inputs/button_x
+alternative,60,button_y,L2: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/33/inputs/button_y
+alternative,64,click,L2: Modifier 0,right_joystick active,2,0,5,3,/controller_mappings/group/37/inputs/click
+alternative,64,edge,L2: Modifier 0,right_joystick active,2,0,4,3,/controller_mappings/group/37/inputs/edge
+alternative,64,touch,L2: Modifier 0,right_joystick active,3,0,8,4,/controller_mappings/group/37/inputs/touch
+alternative,65,dpad_north,L2: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/38/inputs/dpad_north
+alternative,65,dpad_south,L2: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/38/inputs/dpad_south
+alternative,65,dpad_east,L2: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/38/inputs/dpad_east
+alternative,65,dpad_west,L2: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/38/inputs/dpad_west
+alternative,85,scroll_clockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/42/inputs/scroll_clockwise
+alternative,85,scroll_counterclockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/42/inputs/scroll_counterclockwise
+alternative,85,click,(unreferenced),,1,0,1,1,/controller_mappings/group/42/inputs/click
+alternative,139,scroll_clockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/47/inputs/scroll_clockwise
+alternative,139,scroll_counterclockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/47/inputs/scroll_counterclockwise
+alternative,139,click,(unreferenced),,1,0,1,1,/controller_mappings/group/47/inputs/click
+alternative,145,click,(unreferenced),,1,0,1,1,/controller_mappings/group/49/inputs/click
+alternative,157,button_a,R2: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/52/inputs/button_a
+alternative,157,button_b,R2: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/52/inputs/button_b
+alternative,157,button_x,R2: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/52/inputs/button_x
+alternative,157,button_y,R2: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/52/inputs/button_y
+alternative,161,dpad_north,R2: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/55/inputs/dpad_north
+alternative,161,dpad_south,R2: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/55/inputs/dpad_south
+alternative,161,dpad_east,R2: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/55/inputs/dpad_east
+alternative,161,dpad_west,R2: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/55/inputs/dpad_west
+alternative,174,button_a,(unreferenced),,1,0,1,1,/controller_mappings/group/58/inputs/button_a
+alternative,174,button_b,(unreferenced),,1,0,1,1,/controller_mappings/group/58/inputs/button_b
+alternative,174,button_x,(unreferenced),,1,0,1,1,/controller_mappings/group/58/inputs/button_x
+alternative,174,button_y,(unreferenced),,1,0,1,1,/controller_mappings/group/58/inputs/button_y
+alternative,178,button_a,(unreferenced),,1,0,1,1,/controller_mappings/group/61/inputs/button_a
+alternative,178,button_b,(unreferenced),,1,0,1,1,/controller_mappings/group/61/inputs/button_b
+alternative,178,button_x,(unreferenced),,1,0,1,1,/controller_mappings/group/61/inputs/button_x
+alternative,178,button_y,(unreferenced),,1,0,1,1,/controller_mappings/group/61/inputs/button_y
+alternative,185,scroll_clockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/65/inputs/scroll_clockwise
+alternative,185,scroll_counterclockwise,(unreferenced),,1,0,1,1,/controller_mappings/group/65/inputs/scroll_counterclockwise
+alternative,185,click,(unreferenced),,1,0,1,1,/controller_mappings/group/65/inputs/click
+alternative,186,dpad_north,(unreferenced),,1,0,1,1,/controller_mappings/group/66/inputs/dpad_north
+alternative,186,dpad_south,(unreferenced),,1,0,1,1,/controller_mappings/group/66/inputs/dpad_south
+alternative,186,dpad_east,(unreferenced),,1,0,1,1,/controller_mappings/group/66/inputs/dpad_east
+alternative,186,dpad_west,(unreferenced),,1,0,1,1,/controller_mappings/group/66/inputs/dpad_west
+alternative,187,dpad_north,(unreferenced),,1,0,1,1,/controller_mappings/group/67/inputs/dpad_north
+alternative,187,dpad_south,(unreferenced),,1,0,1,1,/controller_mappings/group/67/inputs/dpad_south
+alternative,187,dpad_east,(unreferenced),,1,0,1,1,/controller_mappings/group/67/inputs/dpad_east
+alternative,187,dpad_west,(unreferenced),,1,0,1,1,/controller_mappings/group/67/inputs/dpad_west
+alternative,190,click,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/click
+alternative,190,dpad_west,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/dpad_west
+alternative,190,dpad_east,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/dpad_east
+alternative,190,dpad_north,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/dpad_north
+alternative,190,dpad_south,Base,left_trackpad active,1,0,1,1,/controller_mappings/group/70/inputs/dpad_south
+alternative,192,click,(unreferenced),,1,0,1,1,/controller_mappings/group/72/inputs/click
+alternative,195,click,Base,right_trackpad inactive,2,0,2,1,/controller_mappings/group/75/inputs/click
+alternative,203,touch,RST: Temporary Gyro,right_joystick active,1,0,2,2,/controller_mappings/group/81/inputs/touch
+alternative,210,touch,LST: Temporary Gyro,joystick active,1,0,2,2,/controller_mappings/group/87/inputs/touch
+alternative,217,click,R2: Modifier 1,right_joystick active,2,0,5,3,/controller_mappings/group/90/inputs/click
+alternative,217,edge,R2: Modifier 1,right_joystick active,2,0,4,3,/controller_mappings/group/90/inputs/edge
+alternative,217,touch,R2: Modifier 1,right_joystick active,3,0,8,4,/controller_mappings/group/90/inputs/touch
+alternative,242,dpad_north,RTP: Mouse Buttons,right_trackpad active,2,0,2,1,/controller_mappings/group/104/inputs/dpad_north
+alternative,242,dpad_south,RTP: Mouse Buttons,right_trackpad active,2,0,2,1,/controller_mappings/group/104/inputs/dpad_south
+alternative,242,dpad_east,RTP: Mouse Buttons,right_trackpad active,1,0,1,1,/controller_mappings/group/104/inputs/dpad_east
+alternative,242,dpad_west,RTP: Mouse Buttons,right_trackpad active,1,0,1,1,/controller_mappings/group/104/inputs/dpad_west
+alternative,242,edge,RTP: Mouse Buttons,right_trackpad active,1,0,1,1,/controller_mappings/group/104/inputs/edge
+alternative,242,click,RTP: Mouse Buttons,right_trackpad active,2,0,2,1,/controller_mappings/group/104/inputs/click
+alternative,251,dpad_north,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/dpad_north
+alternative,251,dpad_south,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/dpad_south
+alternative,251,dpad_east,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/dpad_east
+alternative,251,dpad_west,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/dpad_west
+alternative,251,edge,LTP: Arrow Keys,left_trackpad active,1,0,1,1,/controller_mappings/group/112/inputs/edge
+alternative,251,click,LTP: Arrow Keys,left_trackpad active,2,0,2,1,/controller_mappings/group/112/inputs/click
+alternative,256,edge,L2: Modifier 0,left_trigger active,2,0,4,3,/controller_mappings/group/113/inputs/edge
+alternative,257,edge,L2: Modifier 0,right_trigger active,2,0,7,4,/controller_mappings/group/114/inputs/edge
+alternative,258,edge,R2: Modifier 1,left_trigger active,2,0,7,4,/controller_mappings/group/115/inputs/edge
+alternative,259,edge,R2: Modifier 1,right_trigger active,2,0,4,3,/controller_mappings/group/116/inputs/edge
+alternative,412,click,Turning Ramp Up 0,left_trigger active,1,0,4,4,/controller_mappings/group/138/inputs/click
+alternative,412,edge,Turning Ramp Up 0,left_trigger active,1,0,1,1,/controller_mappings/group/138/inputs/edge
+alternative,413,click,Turning Ramp Up 0,right_trigger active,1,0,4,4,/controller_mappings/group/139/inputs/click
+alternative,413,edge,Turning Ramp Up 0,right_trigger active,1,0,1,1,/controller_mappings/group/139/inputs/edge
+alternative,423,edge,Turning Ramp Up 0,right_joystick active,3,0,5,3,/controller_mappings/group/140/inputs/edge
+alternative,423,touch,Turning Ramp Up 0,right_joystick active,1,0,3,3,/controller_mappings/group/140/inputs/touch
+alternative,527,touch,Tab,left_trackpad active,2,0,2,1,/controller_mappings/group/153/inputs/touch
+alternative,528,touch,Backspace,left_trackpad active,2,0,2,1,/controller_mappings/group/154/inputs/touch
+alternative,529,touch,Escape,left_trackpad active,2,0,2,1,/controller_mappings/group/155/inputs/touch
+alternative,530,touch,Enter,left_trackpad active,2,0,2,1,/controller_mappings/group/156/inputs/touch
+alternative,540,click,Turning Ramp Up 1,left_trigger active,1,0,4,4,/controller_mappings/group/158/inputs/click
+alternative,540,edge,Turning Ramp Up 1,left_trigger active,1,0,1,1,/controller_mappings/group/158/inputs/edge
+alternative,541,click,Turning Ramp Up 1,right_trigger active,1,0,4,4,/controller_mappings/group/159/inputs/click
+alternative,541,edge,Turning Ramp Up 1,right_trigger active,1,0,1,1,/controller_mappings/group/159/inputs/edge
+alternative,551,edge,Turning Ramp Up 1,right_joystick active,1,0,3,3,/controller_mappings/group/160/inputs/edge
+alternative,551,touch,Turning Ramp Up 1,right_joystick active,1,0,3,3,/controller_mappings/group/160/inputs/touch
+alternative,562,click,Base,right_trackpad active,1,0,1,1,/controller_mappings/group/162/inputs/click
+alternative,562,touch,Base,right_trackpad active,1,0,1,1,/controller_mappings/group/162/inputs/touch
+alternative,586,touch,RST: Temporary Gyro,joystick inactive,1,0,1,1,/controller_mappings/group/166/inputs/touch
+alternative,587,touch,LST: Temporary Gyro,right_joystick inactive,1,0,1,1,/controller_mappings/group/167/inputs/touch
+alternative,596,button_a,L2!R2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/168/inputs/button_a
+alternative,596,button_b,L2!R2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/168/inputs/button_b
+alternative,596,button_x,L2!R2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/168/inputs/button_x
+alternative,596,button_y,L2!R2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/168/inputs/button_y
+alternative,597,click,L2!R2: Modifier 2,left_trigger active,1,0,1,1,/controller_mappings/group/169/inputs/click
+alternative,597,edge,L2!R2: Modifier 2,left_trigger active,1,0,12,12,/controller_mappings/group/169/inputs/edge
+alternative,598,click,L2!R2: Modifier 2,right_trigger active,1,0,1,1,/controller_mappings/group/170/inputs/click
+alternative,598,edge,L2!R2: Modifier 2,right_trigger active,3,0,14,12,/controller_mappings/group/170/inputs/edge
+alternative,600,button_a,R2!L2: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/171/inputs/button_a
+alternative,600,button_b,R2!L2: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/171/inputs/button_b
+alternative,600,button_x,R2!L2: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/171/inputs/button_x
+alternative,600,button_y,R2!L2: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/171/inputs/button_y
+alternative,601,click,R2!L2: Modifier 2,left_trigger active,1,0,1,1,/controller_mappings/group/172/inputs/click
+alternative,601,edge,R2!L2: Modifier 2,left_trigger active,3,0,14,12,/controller_mappings/group/172/inputs/edge
+alternative,602,click,R2!L2: Modifier 2,right_trigger active,1,0,1,1,/controller_mappings/group/173/inputs/click
+alternative,602,edge,R2!L2: Modifier 2,right_trigger active,1,0,12,12,/controller_mappings/group/173/inputs/edge
+alternative,612,dpad_north,L2!R2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/174/inputs/dpad_north
+alternative,612,dpad_south,L2!R2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/174/inputs/dpad_south
+alternative,612,dpad_east,L2!R2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/174/inputs/dpad_east
+alternative,612,dpad_west,L2!R2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/174/inputs/dpad_west
+alternative,613,dpad_north,R2!L2: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/175/inputs/dpad_north
+alternative,613,dpad_south,R2!L2: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/175/inputs/dpad_south
+alternative,613,dpad_east,R2!L2: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/175/inputs/dpad_east
+alternative,613,dpad_west,R2!L2: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/175/inputs/dpad_west
+alternative,624,button_a,Menu Left: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/176/inputs/button_a
+alternative,624,button_b,Menu Left: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/176/inputs/button_b
+alternative,624,button_x,Menu Left: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/176/inputs/button_x
+alternative,624,button_y,Menu Left: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/176/inputs/button_y
+alternative,625,click,Menu Left: Fn Layer,left_trigger active,3,0,4,2,/controller_mappings/group/177/inputs/click
+alternative,625,edge,Menu Left: Fn Layer,left_trigger active,1,0,1,1,/controller_mappings/group/177/inputs/edge
+alternative,626,click,Menu Left: Fn Layer,right_trigger active,3,0,4,2,/controller_mappings/group/178/inputs/click
+alternative,626,edge,Menu Left: Fn Layer,right_trigger active,1,0,1,1,/controller_mappings/group/178/inputs/edge
+alternative,636,dpad_north,Menu Left: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/179/inputs/dpad_north
+alternative,636,dpad_south,Menu Left: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/179/inputs/dpad_south
+alternative,636,dpad_east,Menu Left: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/179/inputs/dpad_east
+alternative,636,dpad_west,Menu Left: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/179/inputs/dpad_west
+alternative,667,click,L2: Modifier 0,joystick active,2,0,5,3,/controller_mappings/group/181/inputs/click
+alternative,667,touch,L2: Modifier 0,joystick active,3,0,8,4,/controller_mappings/group/181/inputs/touch
+alternative,668,click,R2: Modifier 1,joystick active,2,0,5,3,/controller_mappings/group/182/inputs/click
+alternative,668,touch,R2: Modifier 1,joystick active,3,0,8,4,/controller_mappings/group/182/inputs/touch
+alternative,669,touch,RTP: Mouse Buttons,joystick active,3,0,5,3,/controller_mappings/group/183/inputs/touch
+alternative,670,touch,RTP: Mouse Buttons,right_joystick active,3,0,5,3,/controller_mappings/group/184/inputs/touch
+alternative,671,touch,LTP: Arrow Keys,joystick active,3,0,5,3,/controller_mappings/group/185/inputs/touch
+alternative,672,touch,LTP: Arrow Keys,right_joystick active,3,0,5,3,/controller_mappings/group/186/inputs/touch
+alternative,673,touch,Tab,right_joystick active,3,0,5,3,/controller_mappings/group/187/inputs/touch
+alternative,674,touch,Tab,joystick active,3,0,5,3,/controller_mappings/group/188/inputs/touch
+alternative,675,touch,Backspace,right_joystick active,3,0,5,3,/controller_mappings/group/189/inputs/touch
+alternative,676,touch,Backspace,joystick active,3,0,5,3,/controller_mappings/group/190/inputs/touch
+alternative,677,touch,Escape,right_joystick active,3,0,5,3,/controller_mappings/group/191/inputs/touch
+alternative,678,touch,Escape,joystick active,3,0,5,3,/controller_mappings/group/192/inputs/touch
+alternative,679,touch,Enter,right_joystick active,3,0,5,3,/controller_mappings/group/193/inputs/touch
+alternative,680,touch,Enter,joystick active,3,0,5,3,/controller_mappings/group/194/inputs/touch
+alternative,681,click,L2!R2: Modifier 2,right_joystick active,3,0,12,9,/controller_mappings/group/195/inputs/click
+alternative,681,edge,L2!R2: Modifier 2,right_joystick active,3,0,11,9,/controller_mappings/group/195/inputs/edge
+alternative,681,touch,L2!R2: Modifier 2,right_joystick active,1,0,4,4,/controller_mappings/group/195/inputs/touch
+alternative,682,click,L2!R2: Modifier 2,joystick active,3,0,12,9,/controller_mappings/group/196/inputs/click
+alternative,682,touch,L2!R2: Modifier 2,joystick active,1,0,4,4,/controller_mappings/group/196/inputs/touch
+alternative,683,edge,Menu Left: Fn Layer,right_joystick inactive,3,0,4,2,/controller_mappings/group/197/inputs/edge
+alternative,683,touch,Menu Left: Fn Layer,right_joystick inactive,3,0,4,2,/controller_mappings/group/197/inputs/touch
+alternative,684,dpad_north,Menu Left: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/198/inputs/dpad_north
+alternative,684,dpad_south,Menu Left: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/198/inputs/dpad_south
+alternative,684,dpad_east,Menu Left: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/198/inputs/dpad_east
+alternative,684,dpad_west,Menu Left: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/198/inputs/dpad_west
+alternative,684,edge,Menu Left: Fn Layer,joystick active,3,0,4,2,/controller_mappings/group/198/inputs/edge
+alternative,684,click,Menu Left: Fn Layer,joystick active,1,0,1,1,/controller_mappings/group/198/inputs/click
+alternative,684,touch,Menu Left: Fn Layer,joystick active,1,0,3,3,/controller_mappings/group/198/inputs/touch
+alternative,721,scroll_clockwise,RTP: Circular Scroll,right_trackpad active,1,0,1,1,/controller_mappings/group/199/inputs/scroll_clockwise
+alternative,721,scroll_counterclockwise,RTP: Circular Scroll,right_trackpad active,1,0,1,1,/controller_mappings/group/199/inputs/scroll_counterclockwise
+alternative,721,click,RTP: Circular Scroll,right_trackpad active,1,0,1,1,/controller_mappings/group/199/inputs/click
+alternative,721,touch,RTP: Circular Scroll,right_trackpad active,1,0,2,2,/controller_mappings/group/199/inputs/touch
+alternative,722,touch,RTP: Circular Scroll,joystick active,3,0,6,3,/controller_mappings/group/200/inputs/touch
+alternative,723,touch,RTP: Circular Scroll,right_joystick active,3,0,6,3,/controller_mappings/group/201/inputs/touch
+alternative,731,touch,RST: Temporary Gyro,joystick inactive,3,0,3,1,/controller_mappings/group/202/inputs/touch
+alternative,732,touch,LST: Temporary Gyro,right_joystick inactive,3,0,3,1,/controller_mappings/group/203/inputs/touch
+alternative,737,touch,Turning Ramp Up 0,joystick active,1,0,3,3,/controller_mappings/group/204/inputs/touch
+alternative,738,touch,Turning Ramp Up 1,joystick active,1,0,3,3,/controller_mappings/group/205/inputs/touch
+alternative,747,click,RST: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/207/inputs/click
+alternative,747,edge,RST: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/207/inputs/edge
+alternative,748,click,RST: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/208/inputs/click
+alternative,748,edge,RST: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/208/inputs/edge
+alternative,751,click,LST: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/210/inputs/click
+alternative,751,edge,LST: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/210/inputs/edge
+alternative,752,click,LST: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/211/inputs/click
+alternative,752,edge,LST: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/211/inputs/edge
+alternative,762,edge,RST: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/212/inputs/edge
+alternative,762,touch,RST: Double Tap,right_joystick active,1,0,3,3,/controller_mappings/group/212/inputs/touch
+alternative,763,edge,LST: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/213/inputs/edge
+alternative,763,touch,LST: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/213/inputs/touch
+alternative,768,touch,RST: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/214/inputs/touch
+alternative,769,touch,LST: Double Tap,joystick active,1,0,3,3,/controller_mappings/group/215/inputs/touch
+alternative,775,edge,L2: Tap Cover,left_trigger active,1,0,3,3,/controller_mappings/group/217/inputs/edge
+alternative,780,edge,R2: Tap Cover,right_trigger active,1,0,3,3,/controller_mappings/group/221/inputs/edge
+alternative,790,touch,R2!L2: Modifier 2,right_joystick inactive,1,0,2,2,/controller_mappings/group/225/inputs/touch
+alternative,791,touch,R2!L2: Modifier 2,joystick inactive,1,0,2,2,/controller_mappings/group/226/inputs/touch
+alternative,800,touch,RST: Tap Cover,right_joystick active,1,0,2,2,/controller_mappings/group/230/inputs/touch
+alternative,801,touch,LST: Tap Cover,joystick active,1,0,2,2,/controller_mappings/group/231/inputs/touch
+alternative,810,edge,L2&R2: Tap Cover,left_trigger active,1,0,10,10,/controller_mappings/group/233/inputs/edge
+alternative,811,edge,L2&R2: Tap Cover,right_trigger active,1,0,10,10,/controller_mappings/group/234/inputs/edge
+alternative,817,button_a,R2!L2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/235/inputs/button_a
+alternative,817,button_b,R2!L2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/235/inputs/button_b
+alternative,817,button_x,R2!L2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/235/inputs/button_x
+alternative,817,button_y,R2!L2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/235/inputs/button_y
+alternative,818,dpad_north,R2!L2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/236/inputs/dpad_north
+alternative,818,dpad_south,R2!L2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/236/inputs/dpad_south
+alternative,818,dpad_east,R2!L2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/236/inputs/dpad_east
+alternative,818,dpad_west,R2!L2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/236/inputs/dpad_west
+alternative,819,click,R2!L2: Modifier 2,joystick active,3,0,12,9,/controller_mappings/group/237/inputs/click
+alternative,819,touch,R2!L2: Modifier 2,joystick active,1,0,4,4,/controller_mappings/group/237/inputs/touch
+alternative,820,click,R2!L2: Modifier 2,right_joystick active,3,0,12,9,/controller_mappings/group/238/inputs/click
+alternative,820,edge,R2!L2: Modifier 2,right_joystick active,3,0,11,9,/controller_mappings/group/238/inputs/edge
+alternative,820,touch,R2!L2: Modifier 2,right_joystick active,1,0,4,4,/controller_mappings/group/238/inputs/touch
+alternative,849,touch,RST: Entry Point,right_joystick active,2,0,3,2,/controller_mappings/group/245/inputs/touch
+alternative,851,touch,LST: Entry Point,joystick active,2,0,3,2,/controller_mappings/group/247/inputs/touch
+alternative,869,click,Menu Left: Entry Point,left_trigger active,1,0,1,1,/controller_mappings/group/253/inputs/click
+alternative,869,edge,Menu Left: Entry Point,left_trigger active,1,0,1,1,/controller_mappings/group/253/inputs/edge
+alternative,870,click,Menu Left: Entry Point,right_trigger active,1,0,1,1,/controller_mappings/group/254/inputs/click
+alternative,870,edge,Menu Left: Entry Point,right_trigger active,1,0,1,1,/controller_mappings/group/254/inputs/edge
+alternative,891,edge,L2: Double Tap,left_trigger active,1,0,2,2,/controller_mappings/group/258/inputs/edge
+alternative,892,edge,L2: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/259/inputs/edge
+alternative,895,edge,R2: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/261/inputs/edge
+alternative,896,edge,R2: Double Tap,right_trigger active,1,0,2,2,/controller_mappings/group/262/inputs/edge
+alternative,899,edge,L2: Scroll Down,left_trigger active,3,0,4,2,/controller_mappings/group/264/inputs/edge
+alternative,900,edge,L2: Scroll Down,right_trigger active,1,0,1,1,/controller_mappings/group/265/inputs/edge
+alternative,903,edge,R2: Scroll Up,left_trigger active,1,0,1,1,/controller_mappings/group/267/inputs/edge
+alternative,904,edge,R2: Scroll Up,right_trigger active,3,0,4,2,/controller_mappings/group/268/inputs/edge
+alternative,922,edge,L2: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/269/inputs/edge
+alternative,922,touch,L2: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/269/inputs/touch
+alternative,923,touch,L2: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/270/inputs/touch
+alternative,924,click,L2: Double Tap,right_trackpad inactive,1,0,1,1,/controller_mappings/group/271/inputs/click
+alternative,928,edge,R2: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/275/inputs/edge
+alternative,928,touch,R2: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/275/inputs/touch
+alternative,929,touch,R2: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/276/inputs/touch
+alternative,944,edge,L2: Scroll Down,right_joystick active,2,0,3,2,/controller_mappings/group/279/inputs/edge
+alternative,944,touch,L2: Scroll Down,right_joystick active,3,0,7,4,/controller_mappings/group/279/inputs/touch
+alternative,945,touch,L2: Scroll Down,joystick active,3,0,7,4,/controller_mappings/group/280/inputs/touch
+alternative,946,edge,R2: Scroll Up,right_joystick active,2,0,3,2,/controller_mappings/group/281/inputs/edge
+alternative,946,touch,R2: Scroll Up,right_joystick active,3,0,7,4,/controller_mappings/group/281/inputs/touch
+alternative,947,touch,R2: Scroll Up,joystick active,3,0,7,4,/controller_mappings/group/282/inputs/touch
+alternative,949,edge,L2: Double Tap Cover,left_trigger active,2,0,3,2,/controller_mappings/group/284/inputs/edge
+alternative,954,edge,R2: Double Tap Cover,right_trigger active,2,0,3,2,/controller_mappings/group/288/inputs/edge
+alternative,987,click,RTP: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/293/inputs/click
+alternative,987,edge,RTP: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/293/inputs/edge
+alternative,988,click,RTP: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/294/inputs/click
+alternative,988,edge,RTP: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/294/inputs/edge
+alternative,1023,edge,RTP: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/298/inputs/edge
+alternative,1023,touch,RTP: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/298/inputs/touch
+alternative,1024,touch,RTP: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/299/inputs/touch
+alternative,1025,click,RTP: Double Tap,right_trackpad inactive,1,0,1,1,/controller_mappings/group/300/inputs/click
+alternative,1025,touch,RTP: Double Tap,right_trackpad inactive,1,0,2,2,/controller_mappings/group/300/inputs/touch
+alternative,1032,touch,RTP: Entry Point,right_trackpad active,2,0,3,2,/controller_mappings/group/303/inputs/touch
+alternative,1033,touch,RTP: Tap Cover,right_trackpad active,1,0,2,2,/controller_mappings/group/304/inputs/touch
+alternative,1039,dpad_north,Base,dpad inactive modeshift,1,0,1,1,/controller_mappings/group/305/inputs/dpad_north
+alternative,1039,dpad_south,Base,dpad inactive modeshift,1,0,1,1,/controller_mappings/group/305/inputs/dpad_south
+alternative,1039,dpad_east,Base,dpad inactive modeshift,1,0,1,1,/controller_mappings/group/305/inputs/dpad_east
+alternative,1039,dpad_west,Base,dpad inactive modeshift,1,0,1,1,/controller_mappings/group/305/inputs/dpad_west
+alternative,1043,button_a,Base,button_diamond inactive modeshift,1,0,1,1,/controller_mappings/group/306/inputs/button_a
+alternative,1043,button_b,Base,button_diamond inactive modeshift,1,0,1,1,/controller_mappings/group/306/inputs/button_b
+alternative,1043,button_x,Base,button_diamond inactive modeshift,1,0,1,1,/controller_mappings/group/306/inputs/button_x
+alternative,1043,button_y,Base,button_diamond inactive modeshift,1,0,1,1,/controller_mappings/group/306/inputs/button_y
+alternative,1045,click,Menu Left: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/308/inputs/click
+alternative,1045,edge,Menu Left: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/308/inputs/edge
+alternative,1046,click,Menu Left: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/309/inputs/click
+alternative,1046,edge,Menu Left: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/309/inputs/edge
+alternative,1049,click,Menu Right: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/311/inputs/click
+alternative,1049,edge,Menu Right: Double Tap,left_trigger active,1,0,1,1,/controller_mappings/group/311/inputs/edge
+alternative,1050,click,Menu Right: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/312/inputs/click
+alternative,1050,edge,Menu Right: Double Tap,right_trigger active,1,0,1,1,/controller_mappings/group/312/inputs/edge
+alternative,1113,click,Menu Left: Escape,left_trigger active,1,0,1,1,/controller_mappings/group/320/inputs/click
+alternative,1113,edge,Menu Left: Escape,left_trigger active,1,0,1,1,/controller_mappings/group/320/inputs/edge
+alternative,1114,click,Menu Left: Escape,right_trigger active,1,0,1,1,/controller_mappings/group/321/inputs/click
+alternative,1114,edge,Menu Left: Escape,right_trigger active,1,0,1,1,/controller_mappings/group/321/inputs/edge
+alternative,1117,click,Menu Right: Tab,left_trigger active,1,0,1,1,/controller_mappings/group/323/inputs/click
+alternative,1117,edge,Menu Right: Tab,left_trigger active,1,0,1,1,/controller_mappings/group/323/inputs/edge
+alternative,1118,click,Menu Right: Tab,right_trigger active,1,0,1,1,/controller_mappings/group/324/inputs/click
+alternative,1118,edge,Menu Right: Tab,right_trigger active,1,0,1,1,/controller_mappings/group/324/inputs/edge
+alternative,1161,click,Menu Left: Entry Point,right_joystick active,1,0,1,1,/controller_mappings/group/330/inputs/click
+alternative,1161,edge,Menu Left: Entry Point,right_joystick active,2,0,3,2,/controller_mappings/group/330/inputs/edge
+alternative,1161,touch,Menu Left: Entry Point,right_joystick active,2,0,5,4,/controller_mappings/group/330/inputs/touch
+alternative,1162,click,Menu Left: Entry Point,joystick active,1,0,1,1,/controller_mappings/group/331/inputs/click
+alternative,1162,touch,Menu Left: Entry Point,joystick active,2,0,5,4,/controller_mappings/group/331/inputs/touch
+alternative,1163,edge,RTP: Entry Point,right_joystick active,2,0,3,2,/controller_mappings/group/332/inputs/edge
+alternative,1163,touch,RTP: Entry Point,right_joystick active,1,0,4,4,/controller_mappings/group/332/inputs/touch
+alternative,1164,touch,RTP: Entry Point,joystick active,1,0,4,4,/controller_mappings/group/333/inputs/touch
+alternative,1165,edge,Menu Left: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/334/inputs/edge
+alternative,1165,touch,Menu Left: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/334/inputs/touch
+alternative,1166,touch,Menu Left: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/335/inputs/touch
+alternative,1167,edge,Menu Right: Double Tap,right_joystick active,1,0,1,1,/controller_mappings/group/336/inputs/edge
+alternative,1167,touch,Menu Right: Double Tap,right_joystick active,1,0,4,4,/controller_mappings/group/336/inputs/touch
+alternative,1168,touch,Menu Right: Double Tap,joystick active,1,0,4,4,/controller_mappings/group/337/inputs/touch
+alternative,1169,edge,Menu Left: Escape,right_joystick active,1,0,1,1,/controller_mappings/group/338/inputs/edge
+alternative,1169,touch,Menu Left: Escape,right_joystick active,1,0,4,4,/controller_mappings/group/338/inputs/touch
+alternative,1170,touch,Menu Left: Escape,joystick active,1,0,4,4,/controller_mappings/group/339/inputs/touch
+alternative,1171,edge,Menu Right: Tab,right_joystick active,1,0,1,1,/controller_mappings/group/340/inputs/edge
+alternative,1171,touch,Menu Right: Tab,right_joystick active,1,0,4,4,/controller_mappings/group/340/inputs/touch
+alternative,1172,touch,Menu Right: Tab,joystick active,1,0,4,4,/controller_mappings/group/341/inputs/touch
+alternative,1218,click,Transition Set 0,left_trigger active,1,0,1,1,/controller_mappings/group/349/inputs/click
+alternative,1218,edge,Transition Set 0,left_trigger active,1,0,1,1,/controller_mappings/group/349/inputs/edge
+alternative,1219,click,Transition Set 0,right_trigger active,1,0,1,1,/controller_mappings/group/350/inputs/click
+alternative,1219,edge,Transition Set 0,right_trigger active,1,0,1,1,/controller_mappings/group/350/inputs/edge
+alternative,1233,click,Transition Set 0,joystick active,1,0,1,1,/controller_mappings/group/351/inputs/click
+alternative,1233,touch,Transition Set 0,joystick active,3,0,3,1,/controller_mappings/group/351/inputs/touch
+alternative,1234,click,Transition Set 0,right_joystick active,1,0,1,1,/controller_mappings/group/352/inputs/click
+alternative,1234,edge,Transition Set 0,right_joystick active,3,0,3,1,/controller_mappings/group/352/inputs/edge
+alternative,1234,touch,Transition Set 0,right_joystick active,3,0,3,1,/controller_mappings/group/352/inputs/touch
+alternative,1245,click,Transition Set 1,left_trigger active,1,0,1,1,/controller_mappings/group/355/inputs/click
+alternative,1245,edge,Transition Set 1,left_trigger active,1,0,1,1,/controller_mappings/group/355/inputs/edge
+alternative,1246,click,Transition Set 1,right_trigger active,1,0,1,1,/controller_mappings/group/356/inputs/click
+alternative,1246,edge,Transition Set 1,right_trigger active,1,0,1,1,/controller_mappings/group/356/inputs/edge
+alternative,1260,click,Transition Set 1,joystick active,1,0,1,1,/controller_mappings/group/357/inputs/click
+alternative,1260,touch,Transition Set 1,joystick active,3,0,3,1,/controller_mappings/group/357/inputs/touch
+alternative,1261,click,Transition Set 1,right_joystick active,1,0,1,1,/controller_mappings/group/358/inputs/click
+alternative,1261,edge,Transition Set 1,right_joystick active,3,0,3,1,/controller_mappings/group/358/inputs/edge
+alternative,1261,touch,Transition Set 1,right_joystick active,3,0,3,1,/controller_mappings/group/358/inputs/touch
+alternative,1289,dpad_north,Menu Left: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/364/inputs/dpad_north
+alternative,1289,dpad_south,Menu Left: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/364/inputs/dpad_south
+alternative,1289,dpad_east,Menu Left: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/364/inputs/dpad_east
+alternative,1289,dpad_west,Menu Left: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/364/inputs/dpad_west
+alternative,1289,edge,Menu Left: Fn Layer,right_joystick active,3,0,4,2,/controller_mappings/group/364/inputs/edge
+alternative,1289,click,Menu Left: Fn Layer,right_joystick active,1,0,1,1,/controller_mappings/group/364/inputs/click
+alternative,1289,touch,Menu Left: Fn Layer,right_joystick active,1,0,3,3,/controller_mappings/group/364/inputs/touch
+alternative,1290,dpad_north,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/dpad_north
+alternative,1290,dpad_south,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/dpad_south
+alternative,1290,dpad_east,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/dpad_east
+alternative,1290,dpad_west,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/dpad_west
+alternative,1290,edge,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/edge
+alternative,1290,click,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/click
+alternative,1290,touch,Menu Left: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/365/inputs/touch
+alternative,1291,dpad_north,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/dpad_north
+alternative,1291,dpad_south,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/dpad_south
+alternative,1291,dpad_east,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/dpad_east
+alternative,1291,dpad_west,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/dpad_west
+alternative,1291,edge,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/edge
+alternative,1291,click,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/click
+alternative,1291,touch,Menu Left: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/366/inputs/touch
+alternative,12900,dpad_north,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/367/inputs/dpad_north
+alternative,12900,dpad_south,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/367/inputs/dpad_south
+alternative,12900,dpad_east,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/367/inputs/dpad_east
+alternative,12900,dpad_west,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/367/inputs/dpad_west
+alternative,12900,edge,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/367/inputs/edge
+alternative,12900,click,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/367/inputs/click
+alternative,12900,touch,Menu Right: Fn Layer,right_joystick inactive modeshift,1,0,1,1,/controller_mappings/group/367/inputs/touch
+alternative,12910,dpad_north,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/368/inputs/dpad_north
+alternative,12910,dpad_south,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/368/inputs/dpad_south
+alternative,12910,dpad_east,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/368/inputs/dpad_east
+alternative,12910,dpad_west,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/368/inputs/dpad_west
+alternative,12910,edge,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/368/inputs/edge
+alternative,12910,click,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/368/inputs/click
+alternative,12910,touch,Menu Right: Fn Layer,joystick inactive modeshift,1,0,1,1,/controller_mappings/group/368/inputs/touch
+alternative,1298,dpad_north,RTP: Double Tap,right_trackpad active,1,0,2,2,/controller_mappings/group/369/inputs/dpad_north
+alternative,1298,dpad_south,RTP: Double Tap,right_trackpad active,1,0,2,2,/controller_mappings/group/369/inputs/dpad_south
+alternative,1298,dpad_east,RTP: Double Tap,right_trackpad active,1,0,1,1,/controller_mappings/group/369/inputs/dpad_east
+alternative,1298,dpad_west,RTP: Double Tap,right_trackpad active,1,0,1,1,/controller_mappings/group/369/inputs/dpad_west
+alternative,1298,edge,RTP: Double Tap,right_trackpad active,1,0,1,1,/controller_mappings/group/369/inputs/edge
+alternative,1317,button_a,Menu Right: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/370/inputs/button_a
+alternative,1317,button_b,Menu Right: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/370/inputs/button_b
+alternative,1317,button_x,Menu Right: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/370/inputs/button_x
+alternative,1317,button_y,Menu Right: Fn Layer,button_diamond active,3,0,4,2,/controller_mappings/group/370/inputs/button_y
+alternative,1318,click,Menu Right: Fn Layer,left_trigger active,3,0,4,2,/controller_mappings/group/371/inputs/click
+alternative,1318,edge,Menu Right: Fn Layer,left_trigger active,1,0,1,1,/controller_mappings/group/371/inputs/edge
+alternative,1319,click,Menu Right: Fn Layer,right_trigger active,3,0,4,2,/controller_mappings/group/372/inputs/click
+alternative,1319,edge,Menu Right: Fn Layer,right_trigger active,1,0,1,1,/controller_mappings/group/372/inputs/edge
+alternative,1329,dpad_north,Menu Right: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/373/inputs/dpad_north
+alternative,1329,dpad_south,Menu Right: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/373/inputs/dpad_south
+alternative,1329,dpad_east,Menu Right: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/373/inputs/dpad_east
+alternative,1329,dpad_west,Menu Right: Fn Layer,dpad active,3,0,4,2,/controller_mappings/group/373/inputs/dpad_west
+alternative,1330,dpad_north,Menu Right: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/374/inputs/dpad_north
+alternative,1330,dpad_south,Menu Right: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/374/inputs/dpad_south
+alternative,1330,dpad_east,Menu Right: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/374/inputs/dpad_east
+alternative,1330,dpad_west,Menu Right: Fn Layer,joystick active,2,0,2,1,/controller_mappings/group/374/inputs/dpad_west
+alternative,1330,edge,Menu Right: Fn Layer,joystick active,3,0,4,2,/controller_mappings/group/374/inputs/edge
+alternative,1330,click,Menu Right: Fn Layer,joystick active,1,0,1,1,/controller_mappings/group/374/inputs/click
+alternative,1330,touch,Menu Right: Fn Layer,joystick active,1,0,3,3,/controller_mappings/group/374/inputs/touch
+alternative,1331,dpad_north,Menu Right: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/375/inputs/dpad_north
+alternative,1331,dpad_south,Menu Right: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/375/inputs/dpad_south
+alternative,1331,dpad_east,Menu Right: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/375/inputs/dpad_east
+alternative,1331,dpad_west,Menu Right: Fn Layer,right_joystick active,2,0,2,1,/controller_mappings/group/375/inputs/dpad_west
+alternative,1331,edge,Menu Right: Fn Layer,right_joystick active,3,0,4,2,/controller_mappings/group/375/inputs/edge
+alternative,1331,click,Menu Right: Fn Layer,right_joystick active,1,0,1,1,/controller_mappings/group/375/inputs/click
+alternative,1331,touch,Menu Right: Fn Layer,right_joystick active,1,0,3,3,/controller_mappings/group/375/inputs/touch
+alternative,12912,button_a,Gyro | L2: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/377/inputs/button_a
+alternative,12912,button_b,Gyro | L2: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/377/inputs/button_b
+alternative,12912,button_x,Gyro | L2: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/377/inputs/button_x
+alternative,12912,button_y,Gyro | L2: Modifier 0,button_diamond active,2,0,5,3,/controller_mappings/group/377/inputs/button_y
+alternative,12916,click,Gyro | L2: Modifier 0,right_joystick active,2,0,5,3,/controller_mappings/group/381/inputs/click
+alternative,12916,edge,Gyro | L2: Modifier 0,right_joystick active,2,0,4,3,/controller_mappings/group/381/inputs/edge
+alternative,12916,touch,Gyro | L2: Modifier 0,right_joystick active,3,0,8,4,/controller_mappings/group/381/inputs/touch
+alternative,12917,dpad_north,Gyro | L2: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/382/inputs/dpad_north
+alternative,12917,dpad_south,Gyro | L2: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/382/inputs/dpad_south
+alternative,12917,dpad_east,Gyro | L2: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/382/inputs/dpad_east
+alternative,12917,dpad_west,Gyro | L2: Modifier 0,dpad active,2,0,5,3,/controller_mappings/group/382/inputs/dpad_west
+alternative,12922,edge,Gyro | L2: Modifier 0,left_trigger active,2,0,4,3,/controller_mappings/group/387/inputs/edge
+alternative,12923,edge,Gyro | L2: Modifier 0,right_trigger active,2,0,7,4,/controller_mappings/group/388/inputs/edge
+alternative,12925,click,Gyro | L2: Modifier 0,joystick active,2,0,5,3,/controller_mappings/group/390/inputs/click
+alternative,12925,touch,Gyro | L2: Modifier 0,joystick active,3,0,8,4,/controller_mappings/group/390/inputs/touch
+alternative,12928,button_a,Gyro | R2: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/391/inputs/button_a
+alternative,12928,button_b,Gyro | R2: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/391/inputs/button_b
+alternative,12928,button_x,Gyro | R2: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/391/inputs/button_x
+alternative,12928,button_y,Gyro | R2: Modifier 1,button_diamond active,2,0,5,3,/controller_mappings/group/391/inputs/button_y
+alternative,12932,dpad_north,Gyro | R2: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/394/inputs/dpad_north
+alternative,12932,dpad_south,Gyro | R2: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/394/inputs/dpad_south
+alternative,12932,dpad_east,Gyro | R2: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/394/inputs/dpad_east
+alternative,12932,dpad_west,Gyro | R2: Modifier 1,dpad active,2,0,5,3,/controller_mappings/group/394/inputs/dpad_west
+alternative,12934,click,Gyro | R2: Modifier 1,right_joystick active,2,0,5,3,/controller_mappings/group/396/inputs/click
+alternative,12934,edge,Gyro | R2: Modifier 1,right_joystick active,2,0,4,3,/controller_mappings/group/396/inputs/edge
+alternative,12934,touch,Gyro | R2: Modifier 1,right_joystick active,3,0,8,4,/controller_mappings/group/396/inputs/touch
+alternative,12940,edge,Gyro | R2: Modifier 1,left_trigger active,2,0,7,4,/controller_mappings/group/402/inputs/edge
+alternative,12941,edge,Gyro | R2: Modifier 1,right_trigger active,2,0,4,3,/controller_mappings/group/403/inputs/edge
+alternative,12944,click,Gyro | R2: Modifier 1,joystick active,2,0,5,3,/controller_mappings/group/406/inputs/click
+alternative,12944,touch,Gyro | R2: Modifier 1,joystick active,3,0,8,4,/controller_mappings/group/406/inputs/touch
+alternative,12947,button_a,Gyro | L2!R2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/407/inputs/button_a
+alternative,12947,button_b,Gyro | L2!R2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/407/inputs/button_b
+alternative,12947,button_x,Gyro | L2!R2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/407/inputs/button_x
+alternative,12947,button_y,Gyro | L2!R2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/407/inputs/button_y
+alternative,12948,click,Gyro | L2!R2: Modifier 2,left_trigger active,1,0,1,1,/controller_mappings/group/408/inputs/click
+alternative,12948,edge,Gyro | L2!R2: Modifier 2,left_trigger active,1,0,12,12,/controller_mappings/group/408/inputs/edge
+alternative,12949,click,Gyro | L2!R2: Modifier 2,right_trigger active,1,0,1,1,/controller_mappings/group/409/inputs/click
+alternative,12949,edge,Gyro | L2!R2: Modifier 2,right_trigger active,3,0,14,12,/controller_mappings/group/409/inputs/edge
+alternative,12951,dpad_north,Gyro | L2!R2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/410/inputs/dpad_north
+alternative,12951,dpad_south,Gyro | L2!R2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/410/inputs/dpad_south
+alternative,12951,dpad_east,Gyro | L2!R2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/410/inputs/dpad_east
+alternative,12951,dpad_west,Gyro | L2!R2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/410/inputs/dpad_west
+alternative,12952,click,Gyro | L2!R2: Modifier 2,right_joystick active,3,0,12,9,/controller_mappings/group/411/inputs/click
+alternative,12952,edge,Gyro | L2!R2: Modifier 2,right_joystick active,3,0,11,9,/controller_mappings/group/411/inputs/edge
+alternative,12952,touch,Gyro | L2!R2: Modifier 2,right_joystick active,1,0,4,4,/controller_mappings/group/411/inputs/touch
+alternative,12953,click,Gyro | L2!R2: Modifier 2,joystick active,3,0,12,9,/controller_mappings/group/412/inputs/click
+alternative,12953,touch,Gyro | L2!R2: Modifier 2,joystick active,1,0,4,4,/controller_mappings/group/412/inputs/touch
+alternative,12958,button_a,Gyro | R2!L2: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/413/inputs/button_a
+alternative,12958,button_b,Gyro | R2!L2: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/413/inputs/button_b
+alternative,12958,button_x,Gyro | R2!L2: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/413/inputs/button_x
+alternative,12958,button_y,Gyro | R2!L2: Modifier 2,button_diamond inactive,1,0,1,1,/controller_mappings/group/413/inputs/button_y
+alternative,12959,click,Gyro | R2!L2: Modifier 2,left_trigger active,1,0,1,1,/controller_mappings/group/414/inputs/click
+alternative,12959,edge,Gyro | R2!L2: Modifier 2,left_trigger active,3,0,14,12,/controller_mappings/group/414/inputs/edge
+alternative,12960,click,Gyro | R2!L2: Modifier 2,right_trigger active,1,0,1,1,/controller_mappings/group/415/inputs/click
+alternative,12960,edge,Gyro | R2!L2: Modifier 2,right_trigger active,1,0,12,12,/controller_mappings/group/415/inputs/edge
+alternative,12962,dpad_north,Gyro | R2!L2: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/416/inputs/dpad_north
+alternative,12962,dpad_south,Gyro | R2!L2: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/416/inputs/dpad_south
+alternative,12962,dpad_east,Gyro | R2!L2: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/416/inputs/dpad_east
+alternative,12962,dpad_west,Gyro | R2!L2: Modifier 2,dpad inactive,1,0,1,1,/controller_mappings/group/416/inputs/dpad_west
+alternative,12963,touch,Gyro | R2!L2: Modifier 2,right_joystick inactive,1,0,2,2,/controller_mappings/group/417/inputs/touch
+alternative,12964,touch,Gyro | R2!L2: Modifier 2,joystick inactive,1,0,2,2,/controller_mappings/group/418/inputs/touch
+alternative,12965,button_a,Gyro | R2!L2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/419/inputs/button_a
+alternative,12965,button_b,Gyro | R2!L2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/419/inputs/button_b
+alternative,12965,button_x,Gyro | R2!L2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/419/inputs/button_x
+alternative,12965,button_y,Gyro | R2!L2: Modifier 2,button_diamond active,3,0,12,9,/controller_mappings/group/419/inputs/button_y
+alternative,12966,dpad_north,Gyro | R2!L2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/420/inputs/dpad_north
+alternative,12966,dpad_south,Gyro | R2!L2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/420/inputs/dpad_south
+alternative,12966,dpad_east,Gyro | R2!L2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/420/inputs/dpad_east
+alternative,12966,dpad_west,Gyro | R2!L2: Modifier 2,dpad active,3,0,12,9,/controller_mappings/group/420/inputs/dpad_west
+alternative,12967,click,Gyro | R2!L2: Modifier 2,joystick active,3,0,12,9,/controller_mappings/group/421/inputs/click
+alternative,12967,touch,Gyro | R2!L2: Modifier 2,joystick active,1,0,4,4,/controller_mappings/group/421/inputs/touch
+alternative,12968,click,Gyro | R2!L2: Modifier 2,right_joystick active,3,0,12,9,/controller_mappings/group/422/inputs/click
+alternative,12968,edge,Gyro | R2!L2: Modifier 2,right_joystick active,3,0,11,9,/controller_mappings/group/422/inputs/edge
+alternative,12968,touch,Gyro | R2!L2: Modifier 2,right_joystick active,1,0,4,4,/controller_mappings/group/422/inputs/touch
+alternative,12980,edge,Gyro,left_trigger active,1,0,1,1,/controller_mappings/group/431/inputs/edge
+alternative,12981,edge,Gyro,right_trigger active,1,0,1,1,/controller_mappings/group/432/inputs/edge
+alternative,12984,touch,Gyro,joystick inactive,1,0,1,1,/controller_mappings/group/435/inputs/touch
+alternative,12985,touch,Gyro,joystick inactive,3,0,3,1,/controller_mappings/group/436/inputs/touch
+alternative,13026,touch,Gyro Off Ramp Up,joystick inactive,1,0,1,1,/controller_mappings/group/450/inputs/touch
+alternative,13027,touch,Gyro Off Ramp Up,joystick inactive,3,0,3,1,/controller_mappings/group/451/inputs/touch
+alternative,10,button_escape,Base,switch active,1,0,1,1,/controller_mappings/group/461/inputs/button_escape
+alternative,10,button_menu,Base,switch active,1,0,1,1,/controller_mappings/group/461/inputs/button_menu
+alternative,10,left_bumper,Base,switch active,1,0,1,1,/controller_mappings/group/461/inputs/left_bumper
+alternative,10,right_bumper,Base,switch active,1,0,1,1,/controller_mappings/group/461/inputs/right_bumper
+alternative,10,button_back_left,Base,switch active,1,0,1,1,/controller_mappings/group/461/inputs/button_back_left
+alternative,10,button_back_right,Base,switch active,1,0,1,1,/controller_mappings/group/461/inputs/button_back_right
+alternative,10,button_back_left_upper,Base,switch active,1,0,1,1,/controller_mappings/group/461/inputs/button_back_left_upper
+alternative,10,button_back_right_upper,Base,switch active,1,0,1,1,/controller_mappings/group/461/inputs/button_back_right_upper
+alternative,10,left_trackpad_touch,Base,switch active,2,0,2,1,/controller_mappings/group/461/inputs/left_trackpad_touch
+alternative,10,right_trackpad_touch,Base,switch active,2,0,2,1,/controller_mappings/group/461/inputs/right_trackpad_touch
+alternative,59,button_escape,L2: Modifier 0,switch active,2,0,5,3,/controller_mappings/group/466/inputs/button_escape
+alternative,59,button_menu,L2: Modifier 0,switch active,2,0,5,3,/controller_mappings/group/466/inputs/button_menu
+alternative,59,left_bumper,L2: Modifier 0,switch active,1,0,1,1,/controller_mappings/group/466/inputs/left_bumper
+alternative,59,right_bumper,L2: Modifier 0,switch active,1,0,1,1,/controller_mappings/group/466/inputs/right_bumper
+alternative,160,button_escape,R2: Modifier 1,switch active,2,0,5,3,/controller_mappings/group/467/inputs/button_escape
+alternative,160,button_menu,R2: Modifier 1,switch active,2,0,5,3,/controller_mappings/group/467/inputs/button_menu
+alternative,160,left_bumper,R2: Modifier 1,switch active,1,0,1,1,/controller_mappings/group/467/inputs/left_bumper
+alternative,160,right_bumper,R2: Modifier 1,switch active,1,0,1,1,/controller_mappings/group/467/inputs/right_bumper
+alternative,177,button_capture,(unreferenced),,1,0,1,1,/controller_mappings/group/468/inputs/button_capture
+alternative,181,button_capture,(unreferenced),,1,0,1,1,/controller_mappings/group/469/inputs/button_capture
+alternative,599,button_escape,L2!R2: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/481/inputs/button_escape
+alternative,599,button_menu,L2!R2: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/481/inputs/button_menu
+alternative,599,left_bumper,L2!R2: Modifier 2,switch active,1,0,1,1,/controller_mappings/group/481/inputs/left_bumper
+alternative,599,right_bumper,L2!R2: Modifier 2,switch active,1,0,1,1,/controller_mappings/group/481/inputs/right_bumper
+alternative,603,button_escape,R2!L2: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/482/inputs/button_escape
+alternative,603,button_menu,R2!L2: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/482/inputs/button_menu
+alternative,603,left_bumper,R2!L2: Modifier 2,switch active,1,0,1,1,/controller_mappings/group/482/inputs/left_bumper
+alternative,603,right_bumper,R2!L2: Modifier 2,switch active,1,0,1,1,/controller_mappings/group/482/inputs/right_bumper
+alternative,627,button_escape,Menu Left: Fn Layer,switch active,2,0,5,3,/controller_mappings/group/483/inputs/button_escape
+alternative,627,button_menu,Menu Left: Fn Layer,switch active,1,0,2,2,/controller_mappings/group/483/inputs/button_menu
+alternative,627,left_bumper,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/483/inputs/left_bumper
+alternative,627,right_bumper,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/483/inputs/right_bumper
+alternative,627,button_back_left,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/483/inputs/button_back_left
+alternative,627,button_back_right,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/483/inputs/button_back_right
+alternative,627,button_back_left_upper,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/483/inputs/button_back_left_upper
+alternative,627,button_back_right_upper,Menu Left: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/483/inputs/button_back_right_upper
+alternative,627,left_stick_click,Menu Left: Fn Layer,switch active,1,0,1,1,/controller_mappings/group/483/inputs/left_stick_click
+alternative,627,right_stick_click,Menu Left: Fn Layer,switch active,1,0,1,1,/controller_mappings/group/483/inputs/right_stick_click
+alternative,749,button_escape,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/484/inputs/button_escape
+alternative,749,button_menu,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/484/inputs/button_menu
+alternative,749,left_bumper,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/484/inputs/left_bumper
+alternative,749,right_bumper,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/484/inputs/right_bumper
+alternative,749,always_on_action,RST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/484/inputs/always_on_action
+alternative,753,button_escape,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/button_escape
+alternative,753,button_menu,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/button_menu
+alternative,753,left_bumper,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/left_bumper
+alternative,753,right_bumper,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/right_bumper
+alternative,753,always_on_action,LST: Double Tap,switch active,1,0,1,1,/controller_mappings/group/485/inputs/always_on_action
+alternative,812,left_bumper,L2&R2: Tap Cover,switch active,1,0,1,1,/controller_mappings/group/490/inputs/left_bumper
+alternative,812,right_bumper,L2&R2: Tap Cover,switch active,1,0,1,1,/controller_mappings/group/490/inputs/right_bumper
+alternative,871,button_escape,Menu Left: Entry Point,switch active,2,0,4,3,/controller_mappings/group/493/inputs/button_escape
+alternative,871,button_menu,Menu Left: Entry Point,switch active,3,0,5,2,/controller_mappings/group/493/inputs/button_menu
+alternative,871,left_bumper,Menu Left: Entry Point,switch active,1,0,1,1,/controller_mappings/group/493/inputs/left_bumper
+alternative,871,right_bumper,Menu Left: Entry Point,switch active,1,0,1,1,/controller_mappings/group/493/inputs/right_bumper
+alternative,893,button_escape,L2: Double Tap,switch active,1,0,1,1,/controller_mappings/group/494/inputs/button_escape
+alternative,893,button_menu,L2: Double Tap,switch active,1,0,1,1,/controller_mappings/group/494/inputs/button_menu
+alternative,893,left_bumper,L2: Double Tap,switch active,1,0,1,1,/controller_mappings/group/494/inputs/left_bumper
+alternative,893,right_bumper,L2: Double Tap,switch active,1,0,1,1,/controller_mappings/group/494/inputs/right_bumper
+alternative,893,always_on_action,L2: Double Tap,switch active,2,0,2,1,/controller_mappings/group/494/inputs/always_on_action
+alternative,897,button_escape,R2: Double Tap,switch active,1,0,1,1,/controller_mappings/group/495/inputs/button_escape
+alternative,897,button_menu,R2: Double Tap,switch active,1,0,1,1,/controller_mappings/group/495/inputs/button_menu
+alternative,897,left_bumper,R2: Double Tap,switch active,1,0,1,1,/controller_mappings/group/495/inputs/left_bumper
+alternative,897,right_bumper,R2: Double Tap,switch active,1,0,1,1,/controller_mappings/group/495/inputs/right_bumper
+alternative,897,always_on_action,R2: Double Tap,switch active,2,0,2,1,/controller_mappings/group/495/inputs/always_on_action
+alternative,901,button_escape,L2: Scroll Down,switch active,1,0,1,1,/controller_mappings/group/496/inputs/button_escape
+alternative,901,button_menu,L2: Scroll Down,switch active,1,0,1,1,/controller_mappings/group/496/inputs/button_menu
+alternative,901,left_bumper,L2: Scroll Down,switch active,1,0,1,1,/controller_mappings/group/496/inputs/left_bumper
+alternative,901,right_bumper,L2: Scroll Down,switch active,1,0,1,1,/controller_mappings/group/496/inputs/right_bumper
+alternative,905,button_escape,R2: Scroll Up,switch active,1,0,1,1,/controller_mappings/group/497/inputs/button_escape
+alternative,905,button_menu,R2: Scroll Up,switch active,1,0,1,1,/controller_mappings/group/497/inputs/button_menu
+alternative,905,left_bumper,R2: Scroll Up,switch active,1,0,1,1,/controller_mappings/group/497/inputs/left_bumper
+alternative,905,right_bumper,R2: Scroll Up,switch active,1,0,1,1,/controller_mappings/group/497/inputs/right_bumper
+alternative,989,button_escape,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/501/inputs/button_escape
+alternative,989,button_menu,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/501/inputs/button_menu
+alternative,989,left_bumper,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/501/inputs/left_bumper
+alternative,989,right_bumper,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/501/inputs/right_bumper
+alternative,989,always_on_action,RTP: Double Tap,switch active,1,0,1,1,/controller_mappings/group/501/inputs/always_on_action
+alternative,1047,button_escape,Menu Left: Double Tap,switch active,1,0,1,1,/controller_mappings/group/503/inputs/button_escape
+alternative,1047,button_menu,Menu Left: Double Tap,switch active,1,0,2,2,/controller_mappings/group/503/inputs/button_menu
+alternative,1047,left_bumper,Menu Left: Double Tap,switch active,1,0,1,1,/controller_mappings/group/503/inputs/left_bumper
+alternative,1047,right_bumper,Menu Left: Double Tap,switch active,1,0,1,1,/controller_mappings/group/503/inputs/right_bumper
+alternative,1047,always_on_action,Menu Left: Double Tap,switch active,2,0,2,1,/controller_mappings/group/503/inputs/always_on_action
+alternative,1051,button_escape,Menu Right: Double Tap,switch active,1,0,2,2,/controller_mappings/group/504/inputs/button_escape
+alternative,1051,button_menu,Menu Right: Double Tap,switch active,1,0,1,1,/controller_mappings/group/504/inputs/button_menu
+alternative,1051,left_bumper,Menu Right: Double Tap,switch active,1,0,1,1,/controller_mappings/group/504/inputs/left_bumper
+alternative,1051,right_bumper,Menu Right: Double Tap,switch active,1,0,1,1,/controller_mappings/group/504/inputs/right_bumper
+alternative,1051,always_on_action,Menu Right: Double Tap,switch active,2,0,2,1,/controller_mappings/group/504/inputs/always_on_action
+alternative,1055,button_menu,Menu Left: Double Tap Cover,switch active,2,0,3,2,/controller_mappings/group/505/inputs/button_menu
+alternative,1059,button_escape,Menu Right: Double Tap Cover,switch active,2,0,3,2,/controller_mappings/group/506/inputs/button_escape
+alternative,1115,button_escape,Menu Left: Escape,switch active,1,0,1,1,/controller_mappings/group/507/inputs/button_escape
+alternative,1115,button_menu,Menu Left: Escape,switch active,3,0,4,2,/controller_mappings/group/507/inputs/button_menu
+alternative,1115,left_bumper,Menu Left: Escape,switch active,1,0,1,1,/controller_mappings/group/507/inputs/left_bumper
+alternative,1115,right_bumper,Menu Left: Escape,switch active,1,0,1,1,/controller_mappings/group/507/inputs/right_bumper
+alternative,1119,button_escape,Menu Right: Tab,switch active,3,0,4,2,/controller_mappings/group/508/inputs/button_escape
+alternative,1119,button_menu,Menu Right: Tab,switch active,1,0,1,1,/controller_mappings/group/508/inputs/button_menu
+alternative,1119,left_bumper,Menu Right: Tab,switch active,1,0,1,1,/controller_mappings/group/508/inputs/left_bumper
+alternative,1119,right_bumper,Menu Right: Tab,switch active,1,0,1,1,/controller_mappings/group/508/inputs/right_bumper
+alternative,1220,button_escape,Transition Set 0,switch active,1,0,1,1,/controller_mappings/group/509/inputs/button_escape
+alternative,1220,button_menu,Transition Set 0,switch active,1,0,1,1,/controller_mappings/group/509/inputs/button_menu
+alternative,1220,left_bumper,Transition Set 0,switch active,1,0,1,1,/controller_mappings/group/509/inputs/left_bumper
+alternative,1220,right_bumper,Transition Set 0,switch active,1,0,1,1,/controller_mappings/group/509/inputs/right_bumper
+alternative,1247,button_escape,Transition Set 1,switch active,1,0,1,1,/controller_mappings/group/510/inputs/button_escape
+alternative,1247,button_menu,Transition Set 1,switch active,1,0,1,1,/controller_mappings/group/510/inputs/button_menu
+alternative,1247,left_bumper,Transition Set 1,switch active,1,0,1,1,/controller_mappings/group/510/inputs/left_bumper
+alternative,1247,right_bumper,Transition Set 1,switch active,1,0,1,1,/controller_mappings/group/510/inputs/right_bumper
+alternative,1320,button_escape,Menu Right: Fn Layer,switch active,1,0,2,2,/controller_mappings/group/511/inputs/button_escape
+alternative,1320,button_menu,Menu Right: Fn Layer,switch active,2,0,5,3,/controller_mappings/group/511/inputs/button_menu
+alternative,1320,left_bumper,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/511/inputs/left_bumper
+alternative,1320,right_bumper,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/511/inputs/right_bumper
+alternative,1320,button_back_left,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/511/inputs/button_back_left
+alternative,1320,button_back_right,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/511/inputs/button_back_right
+alternative,1320,button_back_left_upper,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/511/inputs/button_back_left_upper
+alternative,1320,button_back_right_upper,Menu Right: Fn Layer,switch active,3,0,4,2,/controller_mappings/group/511/inputs/button_back_right_upper
+alternative,1320,left_stick_click,Menu Right: Fn Layer,switch active,1,0,1,1,/controller_mappings/group/511/inputs/left_stick_click
+alternative,1320,right_stick_click,Menu Right: Fn Layer,switch active,1,0,1,1,/controller_mappings/group/511/inputs/right_stick_click
+alternative,12911,button_escape,Gyro | L2: Modifier 0,switch active,2,0,5,3,/controller_mappings/group/512/inputs/button_escape
+alternative,12911,button_menu,Gyro | L2: Modifier 0,switch active,2,0,5,3,/controller_mappings/group/512/inputs/button_menu
+alternative,12911,left_bumper,Gyro | L2: Modifier 0,switch active,1,0,1,1,/controller_mappings/group/512/inputs/left_bumper
+alternative,12911,right_bumper,Gyro | L2: Modifier 0,switch active,1,0,1,1,/controller_mappings/group/512/inputs/right_bumper
+alternative,12931,button_escape,Gyro | R2: Modifier 1,switch active,2,0,5,3,/controller_mappings/group/513/inputs/button_escape
+alternative,12931,button_menu,Gyro | R2: Modifier 1,switch active,2,0,5,3,/controller_mappings/group/513/inputs/button_menu
+alternative,12931,left_bumper,Gyro | R2: Modifier 1,switch active,1,0,1,1,/controller_mappings/group/513/inputs/left_bumper
+alternative,12931,right_bumper,Gyro | R2: Modifier 1,switch active,1,0,1,1,/controller_mappings/group/513/inputs/right_bumper
+alternative,12950,button_escape,Gyro | L2!R2: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/514/inputs/button_escape
+alternative,12950,button_menu,Gyro | L2!R2: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/514/inputs/button_menu
+alternative,12950,left_bumper,Gyro | L2!R2: Modifier 2,switch active,1,0,1,1,/controller_mappings/group/514/inputs/left_bumper
+alternative,12950,right_bumper,Gyro | L2!R2: Modifier 2,switch active,1,0,1,1,/controller_mappings/group/514/inputs/right_bumper
+alternative,12961,button_escape,Gyro | R2!L2: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/515/inputs/button_escape
+alternative,12961,button_menu,Gyro | R2!L2: Modifier 2,switch active,3,0,12,9,/controller_mappings/group/515/inputs/button_menu
+alternative,12961,left_bumper,Gyro | R2!L2: Modifier 2,switch active,1,0,1,1,/controller_mappings/group/515/inputs/left_bumper
+alternative,12961,right_bumper,Gyro | R2!L2: Modifier 2,switch active,1,0,1,1,/controller_mappings/group/515/inputs/right_bumper
+alternative,13029,left_bumper,Gyro Off Ramp Up,switch active,1,0,1,1,/controller_mappings/group/518/inputs/left_bumper
+alternative,13029,right_bumper,Gyro Off Ramp Up,switch active,1,0,1,1,/controller_mappings/group/518/inputs/right_bumper
+alternative,13038,edge,Gyro Off Ramp Up,right_joystick active,2,0,2,1,/controller_mappings/group/519/inputs/edge
+alternative,13039,click,Menu Right: Entry Point,left_trigger active,1,0,1,1,/controller_mappings/group/520/inputs/click
+alternative,13039,edge,Menu Right: Entry Point,left_trigger active,1,0,1,1,/controller_mappings/group/520/inputs/edge
+alternative,13040,click,Menu Right: Entry Point,right_trigger active,1,0,1,1,/controller_mappings/group/521/inputs/click
+alternative,13040,edge,Menu Right: Entry Point,right_trigger active,1,0,1,1,/controller_mappings/group/521/inputs/edge
+alternative,13041,button_escape,Menu Right: Entry Point,switch active,3,0,5,2,/controller_mappings/group/522/inputs/button_escape
+alternative,13041,button_menu,Menu Right: Entry Point,switch active,2,0,4,3,/controller_mappings/group/522/inputs/button_menu
+alternative,13041,left_bumper,Menu Right: Entry Point,switch active,1,0,1,1,/controller_mappings/group/522/inputs/left_bumper
+alternative,13041,right_bumper,Menu Right: Entry Point,switch active,1,0,1,1,/controller_mappings/group/522/inputs/right_bumper
+alternative,13043,click,Menu Right: Entry Point,right_joystick active,1,0,1,1,/controller_mappings/group/524/inputs/click
+alternative,13043,edge,Menu Right: Entry Point,right_joystick active,2,0,3,2,/controller_mappings/group/524/inputs/edge
+alternative,13043,touch,Menu Right: Entry Point,right_joystick active,2,0,5,4,/controller_mappings/group/524/inputs/touch
+alternative,13044,click,Menu Right: Entry Point,joystick active,1,0,1,1,/controller_mappings/group/525/inputs/click
+alternative,13044,touch,Menu Right: Entry Point,joystick active,2,0,5,4,/controller_mappings/group/525/inputs/touch
+alternative,13045,button_menu,Menu Left: Backspace,switch active,2,0,2,1,/controller_mappings/group/526/inputs/button_menu
+alternative,13047,button_escape,Menu Right: Enter,switch active,2,0,2,1,/controller_mappings/group/528/inputs/button_escape

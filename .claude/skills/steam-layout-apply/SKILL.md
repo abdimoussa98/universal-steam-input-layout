@@ -7,6 +7,14 @@ description: Finalize an edited Steam Input layout for loading into Steam. Runs 
 
 ## 1. Run the pre-flight check
 
+First run `python3 audit_command_budget.py path/to/layout.json`. It must exit **0**
+before finalizing a layout for Steam. The limit is **three GUI command entries per
+input**, across activator types; `binding` array subcommands do not consume extra
+entries. The checker includes inactive/unreferenced groups and checks disabled
+banks separately. Resolve failures using `steam-binding-order`; do not truncate
+cleanup subcommands to make a count pass. Read-only audits may report failures
+without changing the layout.
+
 ```bash
 python3 - path/to/layout.json <<'EOF'
 import json, sys, collections

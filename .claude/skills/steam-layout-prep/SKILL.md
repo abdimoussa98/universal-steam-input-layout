@@ -36,7 +36,7 @@ What each result means:
   2. Move the matching `preset` blocks the same way.
   3. Resequence the preset `id` fields to 0..N.
 
-  The `neptune/` files are out of order too and have always loaded on the Deck. The Triton layout was the one that broke.
+  Older Neptune exports were out of order and loaded on the Deck; the current 90.1 files were normalized. Check each file rather than assuming either state from its device name.
 - **preset blocks MISMATCH / preset ids not sequential**: fix these together with the reorder above.
 - **title form: yes**: the file is already readable (the `findings/` snapshots are), so skip step 3.
 
@@ -53,12 +53,23 @@ Token format:
 
 ## Reading the file
 
-- **Chords are encoded per device.**
-  - `controller_neptune` (Deck) uses `chord_button` IDs.
-  - `controller_triton` uses `gyro_ratchet_button_mask` bitmasks.
+- **Chord encoding depends on export/client format, not just device.**
+  - Older Neptune chords use single-selector `chord_button` IDs.
+  - The July reference uses modern `gyro_ratchet_button_mask` selectors; multi-button chords are also supported by modern Deck clients. Do not expand a multi-button chord into one command per button merely because the layout is Neptune.
+  - Preserve Any/All semantics. Legacy selector IDs are not masks; decode them before combining buttons.
   - The decode table is in the appendix of `findings/2026-09-27-exploratory-layout-audit/AUDIT.md`.
   - `button_escape` is the user's "Menu Right" and `button_menu` is "Menu Left".
 - **Only some groups are live.** In `group_source_bindings`, groups marked `inactive` are dormant alternate modes. Only `active` groups and `mode_shift` targets affect behavior.
+
+## Check the command budget
+
+Run `python3 audit_command_budget.py path/to/layout.json` for a complete scan, or add
+`--json` for every input's counts and exact violation paths. The maximum is **three
+GUI command entries per input**, summed over all activator types/list elements.
+Subcommands in a `binding` array share one entry and may exceed three. Inactive and
+unreferenced groups are included; disabled banks are checked separately. A failure
+is an audit finding to document or fix, not a reason to skip the remaining audit.
+See `steam-binding-order` for consolidation rules.
 
 ## Guardrails
 

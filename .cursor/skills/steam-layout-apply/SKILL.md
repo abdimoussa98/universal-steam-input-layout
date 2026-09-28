@@ -9,6 +9,9 @@
 - The file must still contain consistent `controller_mappings.actions` and `controller_mappings.action_layers` blocks; runtime IDs are derived from their order.
 
 ### Steps
+0. **Enforce the command budget before finalizing**
+   - `python3 audit_command_budget.py path/to/layout.json` must exit 0. At most three GUI command entries per input, counted across activator types/list elements; binding-array subcommands may exceed three. All groups are scanned and disabled banks checked separately. Follow `steam-binding-order` to consolidate violations without deleting required cleanup.
+
 1. **Convert titles back to IDs (in place)**
    - `python3 convert_runtime_ids.py to-ids path/to/layout.json`
 
@@ -28,4 +31,3 @@
 ### References
 - Converter script: `convert_runtime_ids.py`
 - Runtime ID ordering rules: `README.md`, `resources/Steam Input JSON Structure.md`
-

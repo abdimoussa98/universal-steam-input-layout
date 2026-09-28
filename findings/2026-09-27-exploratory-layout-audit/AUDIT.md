@@ -205,7 +205,7 @@ Other changes:
 
 ### 9. Housekeeping and device
 
-- **Device:** `controller_neptune` → `controller_triton` (the new Steam Controller). Chords are now stored as bitmasks instead of `chord_button` IDs (see the [appendix](#appendix-chord-and-mask-decoding)). Porting anything back to the Neptune files means converting the masks back to IDs.
+- **Device/export:** `controller_neptune` → `controller_triton` (the new Steam Controller). This snapshot stores chords as bitmasks instead of legacy `chord_button` IDs (see the [appendix](#appendix-chord-and-mask-decoding)). Modern Deck clients also support the mask selector; porting to Neptune does not require expanding a mask into separate commands. See the [command-budget correction](../2026-09-27-neptune-command-budget/AUDIT.md).
 - **Groups: 604 → 421.**
   - 50 unreferenced groups were dropped, including the two `system_key_1` binds.
   - Dormant `inactive` groups went from 189 to 37.
@@ -236,14 +236,20 @@ Other changes:
 
 ## Appendix: chord and mask decoding
 
-Neptune stores chords as `chord_button: N`. Triton stores them as `gyro_ratchet_button_mask` bitmasks, the same format gyro activation buttons use. Pairs marked "paired" come from the same bind appearing in both files. Pairs marked "inferred" come from context.
+The compared Neptune export stores chords as legacy `chord_button: N`; the Triton
+snapshot uses `gyro_ratchet_button_mask` bitmasks, the same format gyro activation
+buttons use. This describes those exports, not a device limitation. Modern Deck
+clients also support multi-button selectors. The [command-budget follow-up](../2026-09-27-neptune-command-budget/AUDIT.md)
+corrects the earlier recommendation to expand masks into separate Neptune
+commands. Pairs marked "paired" come from the same bind appearing in both files.
+Pairs marked "inferred" come from context.
 
 | Button | Neptune `chord_button` | Triton mask bit (value) | Source |
 |---|---|---|---|
 | LB | 1 | 3 (8) | paired |
 | RB | 2 | 2 (4) | paired |
 | RT / LT full pull | 6 / 5 | 0 / 1 (1 / 2) | inferred (always used together) |
-| LT / RT soft pull | 7 / 8 | 24 / 25 | inferred (always used together) |
+| LT / RT soft pull | 7 / 8 | 25 / 24 | mask bits verified in Steam UI; corrected from the earlier inference |
 | LS click | 9 | 22 (4194304) | paired |
 | **Menu Right** (`button_escape`) | 14 | 14 (16384) | paired |
 | **Menu Left** (`button_menu`) | 15 | 12 (4096) | paired |
@@ -255,7 +261,7 @@ Neptune stores chords as `chord_button: N`. Triton stores them as `gyro_ratchet_
 | LS deflect | – | 30 | inferred (used by the left-stick Split Stick chords) |
 | RS deflect | – | 31 | inferred |
 
-- **`gyro_ratchet_button_requireany_or_all`:** `"1"` means *all*, and absent or `"0"` means *any*. This is inferred from the Split Stick Fallback bumper chord (bumper + LS deflect), which only makes sense as "all".
+- **`gyro_ratchet_button_requireany_or_all`:** `"1"` means *all*, and `"0"` means *any* (the default). Initially inferred from Split Stick Fallback; the Any/All values are now verified directly in the installed Steam chord UI schema. See the [selector verification](../2026-09-27-neptune-command-budget/CHORD_SELECTOR_VERIFICATION.md), which also confirms the exact trigger and bumper mask bits.
 - **Masks in use:**
   - `211109453778944` = Menu Left + Menu Right + LS / RS touch + LS / RS deflect (Base with "all"; Gated Gyro with "any")
   - `211109453758464` = the four stick bits only (the Gyro layer and the `*` layers' gyro)

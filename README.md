@@ -125,6 +125,34 @@ The `Parent::Title` format for layers ensures unique identification when multipl
 
 ---
 
+## Command entry limit and audit
+
+Every input in these layouts must have **at most three GUI command entries**.
+Count each activator object across all activation types, including every element
+of a repeated `chord` or `Soft_Press` list. A `bindings.binding` array is
+subcommands inside one entry, so its length does not count against this limit.
+This is the layout author's requirement, confirmed on 2026-09-27.
+
+```bash
+python3 audit_command_budget.py neptune/single-set-default_hold-gyro_latest.json neptune/single-set-alternative_hold-gyro_latest.json
+```
+
+The read-only checker scans all groups, including inactive, mode-shift, and
+unreferenced groups. It checks disabled activator banks separately. Add `--json`
+for a complete input inventory, counts, owners, and exact violation paths.
+Exit codes: **0** = pass, **1** = over budget, **2** = invalid input/schema.
+Run it before finalizing edited layouts; it accepts numeric IDs or title tokens.
+
+The baseline 90.1 [audit](findings/2026-09-27-neptune-command-budget/AUDIT.md) found one
+violation in each variant: Base's right-stick edge has seven command entries.
+The [consolidation plan](plans/2026-09-27-neptune-command-budget.md) has now been
+applied to both JSON files: each edge has three entries using two multi-button
+Any chords, and the full command-budget checks pass. The
+[implementation record](findings/2026-09-27-neptune-command-budget/IMPLEMENTATION.md)
+tracks the results. Both 90.2 VDF exports match their JSONs; fresh-load Deck tests
+remain pending.
+See [counting and chord rules](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget).
+
 ## Runtime ID System
 
 Steam Input assigns runtime IDs based on the **order of appearance** in the JSON:

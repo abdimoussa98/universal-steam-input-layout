@@ -2,8 +2,8 @@
 {
 	"version"				"3"
 	"revision"				"12896"
-	"title"					"single-set-default :: always-gyro :: 90.1"
-	"description"			"Ramp Up 0 and 1 first for sensitivity tuning; grouped modifiers, gyro layers, mouse/keyboard helpers, entry points, double taps, and tap covers; transition layers last; cleaner Gyro | prefixes"
+	"title"					"single-set-default :: always-gyro :: 90.2"
+	"description"			"Ramp-up edge consolidated to three command entries using multi-button Any chords; Ramp Up 0 and 1 first for sensitivity tuning; related layers grouped; cleaner Gyro | prefixes"
 	"creator"				"76561198079670632"
 	"progenitor"			""
 	"url"					"workshop://3660206238"
@@ -1055,44 +1055,9 @@
 						}
 						"settings"
 						{
-							"chord_button"		"5"
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 2 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"6"
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 2 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"7"
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 2 0 0, , "
-						}
-						"settings"
-						{
-							"chord_button"		"8"
-							"hold_repeats"		"1"
+							"hold_repeats"								"1"
+							"gyro_ratchet_button_mask"					"50331651"
+							"gyro_ratchet_button_requireany_or_all"		"0"
 						}
 					}
 					"chord"
@@ -1103,22 +1068,10 @@
 						}
 						"settings"
 						{
-							"chord_button"		"1"
-							"hold_repeats"		"1"
-							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"chord_button"		"2"
-							"hold_repeats"		"1"
-							"interruptable"		"0"
+							"hold_repeats"								"1"
+							"interruptable"								"0"
+							"gyro_ratchet_button_mask"					"12"
+							"gyro_ratchet_button_requireany_or_all"		"0"
 						}
 					}
 				}

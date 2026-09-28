@@ -70,6 +70,10 @@ Nothing adds it yet.
 ## 7. Re-check
 
 Re-run step 4 and the pre-flight check, then finalize with the `steam-layout-apply` skill.
+Run `python3 audit_command_budget.py path/to/layout.json` after retargeting and wiring
+the copy: each input may have at most three GUI command entries across activator
+types. `binding` array subcommands are allowed beyond three. Duplicating a layer
+also duplicates any existing command-budget violations; do not carry them forward.
 
 ## Guardrails
 

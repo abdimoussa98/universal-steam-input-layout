@@ -1,5 +1,16 @@
 # Plan: port the trigger/ramp-up rework and the findings fixes to both Neptune layouts
 
+> **Command-budget correction (2026-09-27):** the implementation of step 2 expanded
+> two multi-button chords into six single-button chords. With Regular Press,
+> Base's right-stick edge has seven GUI command entries in each variant, violating
+> the author's maximum of three. Earlier static checks did not count entries.
+> The device-only encoding assumption below is superseded by the
+> [audit](../findings/2026-09-27-neptune-command-budget/AUDIT.md) and
+> [consolidation plan](2026-09-27-neptune-command-budget.md). That repair is now
+> applied to both JSONs and passes static checks; matching 90.2 VDF exports are
+> verified, and Deck validation remains pending. Subcommand cleanup arrays are allowed and need not be shortened
+> to three actions. See the [implementation record](../findings/2026-09-27-neptune-command-budget/IMPLEMENTATION.md).
+
 - **Date:** 2026-09-27
 - **Status:** Steps 1–5 done on 2026-09-27. Both `neptune/*.json` files are edited and pass the static checks. Waiting on step 6 (VDF conversion and in-game testing on the Deck); step 7 follows once testing is confirmed.
 - **Parity with July (default variant):** the ported inputs match July after chord decoding, with two intended exceptions. The Base stick-edge Full_Press keeps `haptic_intensity 0`, and July's Mod 2 release lists also remove Split Stick layers that Neptune doesn't have.
@@ -48,7 +59,11 @@ The alternative variant swaps roles: its bumpers act as the triggers, and L2/R2 
 | "Modifier held" chords | 1, 2 | 5, 6, 7, 8 |
 | Trigger layers to delete | L2, R2, (Gyro) L2, (Gyro) R2 | L1, R1, (Gyro) L1, (Gyro) R1 |
 
-July encodes each chord group as a single bitmask activator. Neptune's `chord_button` takes one button, so the port uses **one chord activator per button**.
+July encodes each chord group as a single bitmask activator. The port used **one
+chord activator per button** because the existing Neptune file used legacy
+`chord_button` selectors. That was an incorrect constraint on the design: modern
+Deck clients also support multi-button selectors. Follow the correction above;
+do not repeat this expansion in future ports.
 
 ## Changes (both files, roles from the table)
 

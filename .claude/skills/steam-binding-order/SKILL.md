@@ -1,9 +1,32 @@
 ---
 name: steam-binding-order
-description: Rules for Steam Input `binding` arrays that hold several controller_action commands (add_layer, remove_layer, hold_layer). The array executes bottom to top, so cleanup removals go lower and the final add goes on top. Use this whenever you write, reorder, copy, or review a multi-command binding in a layout JSON, or when a layer ends up added or removed in the wrong order, gets stuck on, or disappears unexpectedly.
+description: Enforce the maximum of three GUI command entries per input and bottom-to-top execution of binding subcommand arrays. Use when writing, copying, consolidating, or reviewing activators, chords, and layer cleanup bindings in this repo.
 ---
 
 # Binding array execution order
+
+## Maximum three command entries per input
+
+This is a hard requirement from the layout author. Count **activator objects across all
+activation types on one input**, not the strings in `bindings.binding`:
+
+- A single `Full_Press` object counts as one command entry.
+- A `chord` list of six objects counts as six entries. Adding one `Full_Press` makes seven, even though `activators` has only two keys.
+- A `binding` array is subcommands within one entry. Arrays with more than three subcommands are allowed; preserve their execution order.
+- Count each `group.inputs.<input>` separately, including edge, touch, click, and trigger pulls. Scan inactive groups, mode-shift groups, and unreferenced groups too. Check disabled activator banks separately before restoring them.
+
+Run `python3 audit_command_budget.py path/to/layout.json` after edits. A nonzero exit
+means the file is not ready to finalize (1 = over budget, 2 = malformed input).
+
+To consolidate identical chord outputs/settings, use one multi-button chord with **Any**
+semantics rather than one command per possible button. Modern selectors use
+`gyro_ratchet_button_mask` and `gyro_ratchet_button_requireany_or_all`; legacy
+`chord_button` IDs are not bitmasks. Keep different outputs, delays, repeat settings,
+and interruption behavior distinct. Do not merge independent conditions into an
+unconditional subcommand array or move overflow into disabled entries.
+
+See [the counting rule and chord format](../../../resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget)
+and [the Neptune consolidation plan](../../../plans/2026-09-27-neptune-command-budget.md).
 
 ## The rule
 

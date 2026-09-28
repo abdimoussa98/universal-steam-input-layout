@@ -1,0 +1,252 @@
+[
+  {
+    "file": "neptune/single-set-default_hold-gyro_latest.json",
+    "limit": 3,
+    "summary": {
+      "action_sets": 1,
+      "layers": 53,
+      "groups": 531,
+      "unreferenced_groups": 50,
+      "inputs": 594,
+      "commands": 988,
+      "disabled_commands": 0,
+      "command_histogram": {
+        "1": 342,
+        "2": 114,
+        "3": 137,
+        "7": 1
+      },
+      "max_commands": 7,
+      "max_actions_in_one_command": 12,
+      "violations": 1
+    },
+    "violations": [
+      {
+        "group_id": "15",
+        "input": "edge",
+        "path": "/controller_mappings/group/7/inputs/edge",
+        "owners": [
+          {
+            "preset": "Preset_1000001",
+            "title": "Base",
+            "source_state": "right_joystick active"
+          }
+        ],
+        "commands": 7,
+        "disabled_commands": 0,
+        "binding_actions": 7,
+        "max_actions_in_one_command": 1,
+        "bank": "activators",
+        "count": 7,
+        "entries": [
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/Full_Press",
+            "activation": "Full_Press",
+            "actions": [
+              "controller_action add_layer 15 0 0, , "
+            ],
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/0",
+            "activation": "chord",
+            "actions": [
+              "controller_action add_layer 2 0 0, , "
+            ],
+            "settings": {
+              "chord_button": "5",
+              "hold_repeats": "1"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/1",
+            "activation": "chord",
+            "actions": [
+              "controller_action add_layer 2 0 0, , "
+            ],
+            "settings": {
+              "chord_button": "6",
+              "hold_repeats": "1"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/2",
+            "activation": "chord",
+            "actions": [
+              "controller_action add_layer 2 0 0, , "
+            ],
+            "settings": {
+              "chord_button": "7",
+              "hold_repeats": "1"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/3",
+            "activation": "chord",
+            "actions": [
+              "controller_action add_layer 2 0 0, , "
+            ],
+            "settings": {
+              "chord_button": "8",
+              "hold_repeats": "1"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/4",
+            "activation": "chord",
+            "actions": [
+              "controller_action empty_binding, , "
+            ],
+            "settings": {
+              "chord_button": "1",
+              "hold_repeats": "1",
+              "interruptable": "0"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/5",
+            "activation": "chord",
+            "actions": [
+              "controller_action empty_binding, , "
+            ],
+            "settings": {
+              "chord_button": "2",
+              "hold_repeats": "1",
+              "interruptable": "0"
+            }
+          }
+        ]
+      }
+    ],
+    "sha256": "cfa0fb70c72289a101f7a1c3dab82820495a24c2d9003e09db9be2f723bfea76"
+  },
+  {
+    "file": "neptune/single-set-alternative_hold-gyro_latest.json",
+    "limit": 3,
+    "summary": {
+      "action_sets": 1,
+      "layers": 53,
+      "groups": 530,
+      "unreferenced_groups": 50,
+      "inputs": 630,
+      "commands": 1024,
+      "disabled_commands": 0,
+      "command_histogram": {
+        "1": 378,
+        "2": 114,
+        "3": 137,
+        "7": 1
+      },
+      "max_commands": 7,
+      "max_actions_in_one_command": 12,
+      "violations": 1
+    },
+    "violations": [
+      {
+        "group_id": "15",
+        "input": "edge",
+        "path": "/controller_mappings/group/7/inputs/edge",
+        "owners": [
+          {
+            "preset": "Preset_1000001",
+            "title": "Base",
+            "source_state": "right_joystick active"
+          }
+        ],
+        "commands": 7,
+        "disabled_commands": 0,
+        "binding_actions": 7,
+        "max_actions_in_one_command": 1,
+        "bank": "activators",
+        "count": 7,
+        "entries": [
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/Full_Press",
+            "activation": "Full_Press",
+            "actions": [
+              "controller_action add_layer 15 0 0, , "
+            ],
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/0",
+            "activation": "chord",
+            "actions": [
+              "controller_action add_layer 2 0 0, , "
+            ],
+            "settings": {
+              "chord_button": "1",
+              "hold_repeats": "1"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/1",
+            "activation": "chord",
+            "actions": [
+              "controller_action add_layer 2 0 0, , "
+            ],
+            "settings": {
+              "chord_button": "2",
+              "hold_repeats": "1"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/2",
+            "activation": "chord",
+            "actions": [
+              "controller_action empty_binding, , "
+            ],
+            "settings": {
+              "chord_button": "5",
+              "hold_repeats": "1",
+              "interruptable": "0"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/3",
+            "activation": "chord",
+            "actions": [
+              "controller_action empty_binding, , "
+            ],
+            "settings": {
+              "chord_button": "6",
+              "hold_repeats": "1",
+              "interruptable": "0"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/4",
+            "activation": "chord",
+            "actions": [
+              "controller_action empty_binding, , "
+            ],
+            "settings": {
+              "chord_button": "7",
+              "hold_repeats": "1",
+              "interruptable": "0"
+            }
+          },
+          {
+            "path": "/controller_mappings/group/7/inputs/edge/activators/chord/5",
+            "activation": "chord",
+            "actions": [
+              "controller_action empty_binding, , "
+            ],
+            "settings": {
+              "chord_button": "8",
+              "hold_repeats": "1",
+              "interruptable": "0"
+            }
+          }
+        ]
+      }
+    ],
+    "sha256": "519b66ca3bbddd2f2e6aaae89dc8426c1aa5811577a0a406be5c615e33432afd"
+  }
+]

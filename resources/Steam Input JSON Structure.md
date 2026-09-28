@@ -196,9 +196,61 @@ Groups define the actual input configurations—what physical inputs do and how 
   - `binding` format: `"key_press KEY, Label, , "`
 - `settings`: Mode-specific configuration options
 
+#### Command Entry Budget
+
+**Hard requirement for this repository: at most three GUI command entries per
+input.** The layout author confirmed on 2026-09-27 that subcommands are allowed
+inside those entries. This records the required design constraint, not a claim
+about an independently measured limit in every Steam client version.
+
+Count objects under `group[].inputs.<input>.activators`, across **all** activation
+types. A singleton object counts as one; a list contributes its number of objects.
+For example, one `Full_Press` plus six `chord` objects is **seven**, even though
+there are only two activation-type keys. One `Full_Press` plus two chord objects
+is **three**. Each of those objects can have a string or an array in
+`bindings.binding`; the array's actions are subcommands sharing that one entry.
+Do not count or truncate those actions as separate GUI command entries.
+
+The budget applies separately to each input (button, edge, click, touch, trigger
+pull, etc.) in each group; do not sum inherited/layered definitions or different
+inputs together. Audit active groups, dormant groups, mode-shift targets, and
+unreferenced groups. Check disabled activator banks separately before restoring
+them; disabling overflow is not a repair.
+
+Run `python3 audit_command_budget.py path/to/layout.json` before finalizing.
+It is read-only and supports numeric IDs and title tokens. Exit 0 is required;
+exit 1 reports violations, exit 2 reports invalid input. `--json` emits every
+input's counts and every violation's activators, bindings, settings, and path.
+
+**Multi-button chord consolidation:** combine commands only when the output and
+all non-selector settings match. A single modern chord can select several
+buttons with `gyro_ratchet_button_mask`; use
+`gyro_ratchet_button_requireany_or_all: "0"` for **Any**, or `"1"` for **All**.
+The Any/All values are independently verified in the installed Steam chord UI
+schema; see the [selector verification](../findings/2026-09-27-neptune-command-budget/CHORD_SELECTOR_VERIFICATION.md).
+Confirm the imported selections in the target client's GUI. Preserve
+delays, thresholds, repeat settings, and `interruptable`. Different activation
+conditions cannot be represented by dumping all outputs into one unconditional
+subcommand array.
+
+Legacy `chord_button` values are selector IDs, **not bit positions or bitmasks**.
+Do not OR those IDs together. Decode actual button masks first. Nor is the modern
+selector exclusive to Triton: Valve's [March 9, 2026 client update](https://steamcommunity.com/games/593110/announcements/detail/524243918833846834)
+introduced a multiple-button selector for chord activators; the [Deck release
+notes](https://www.steamdeck.com/en/news/?p=26) also record that change (news page
+pagination can move). This does not substitute for a fresh-load test of the exact
+mask on the target controller.
+
+See the [90.1 audit](../findings/2026-09-27-neptune-command-budget/AUDIT.md) and
+[three-entry ramp-up plan](../plans/2026-09-27-neptune-command-budget.md) for the
+specific masks, the alternative variant's swapped roles, and regression checks.
+
 #### Binding Execution Order
 
 **IMPORTANT:** When a binding contains an array of `controller_action` commands, they execute **from bottom to top** (reverse order).
+The array below is subcommands within **one** GUI command entry; it does not
+violate the three-entry budget. This execution-order rule does not specify
+priority or timing between separate activator objects.
 
 ```json
 "binding": [
@@ -243,9 +295,10 @@ requirement or explicit start delay. This uses independently configured activato
 the bottom-to-top rule above applies to commands within a `binding` array, not the timing
 of these two activators.
 
-The pattern appears on **R1 in `*L1!R1: Modifier 2`** (chord requires L1) and **L1 in
-`*R1!L1: Modifier 2`** (chord requires R1). It is absent from Neptune's corresponding
-`(Gyro)` layers and the July layout's unstarred variants. The separate single-bumper
+In the July snapshot, the pattern appears on **R1 in `*L1!R1: Modifier 2`** (chord
+requires L1) and **L1 in `*R1!L1: Modifier 2`** (chord requires R1), but not the
+unstarred variants. It was absent from the earlier Neptune export; the September
+port added it to all four Neptune Mod 2 layers, regular and gyro. The separate single-bumper
 `R1: Tap Cover` apply still uses a 300 ms delay without this added repeating removal.
 The 200/250 ms values describe this implementation, not a general timing formula.
 
@@ -334,12 +387,12 @@ An explicit `controller_action empty_binding` overrides the lower binding for th
 it does not mean “inherit.” A layer left active after its intended interaction can therefore
 block both normal actions and cleanup bindings in layers underneath it.
 
-The RTP ramp-up fix illustrates this. In Neptune, `RTP: Entry Point` assigns an unconditional
-empty binding to the right-stick edge. If the entry layer remains active, that override
+The RTP ramp-up fix illustrates this. The earlier Neptune export assigned an unconditional
+empty binding to `RTP: Entry Point`'s right-stick edge. If the entry layer remains active, that override
 blocks the lower ramp-up action. It can also hide R1's edge cleanup if an R1 modifier
 remains underneath.
 
-The July layout changes the edge binding to two cases:
+The July layout uses two cases, also carried into Neptune by the September port:
 
 - **RTP touched:** a chord keeps the empty binding, preserving intentional suppression.
 - **RTP no longer touched:** a Regular Press removes `RTP: Tap Cover` and `RTP: Entry Point`,
