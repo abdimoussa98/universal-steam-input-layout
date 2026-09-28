@@ -165,7 +165,13 @@
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000082": {
-				"title": "Menu Buttons: Entry Point",
+				"title": "Menu Left: Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000083": {
+				"title": "Menu Right: Entry Point",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
@@ -261,6 +267,18 @@
 				"parent_set_name": "Preset_1000001"
 			},
 			"Preset_1000132": {
+				"title": "Menu Left: Backspace",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000133": {
+				"title": "Menu Right: Enter",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000134": {
 				"title": "Transition Set 0",
 				"legacy_set": "1",
 				"set_layer": "1",
@@ -776,7 +794,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action add_layer 51 0 0, , "
+									"binding": "controller_action add_layer 54 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1",
@@ -1193,7 +1211,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -1218,7 +1236,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -1243,7 +1261,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -1268,7 +1286,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -1334,7 +1352,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -1368,7 +1386,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								},
@@ -1385,7 +1403,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								},
@@ -1436,7 +1454,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -1461,7 +1479,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -1486,7 +1504,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -1511,7 +1529,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -1738,7 +1756,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -1763,7 +1781,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -1788,7 +1806,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -1813,7 +1831,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -1869,7 +1887,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -1894,7 +1912,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -1919,7 +1937,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -1944,7 +1962,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -2652,7 +2670,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -2686,7 +2704,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								},
@@ -2703,7 +2721,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								},
@@ -3194,9 +3212,9 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 27 0 0, , ",
+										"controller_action add_layer 28 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , "
+										"controller_action remove_layer 50 0 0, , "
 									]
 								}
 							},
@@ -3245,7 +3263,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -3284,7 +3302,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -3308,9 +3326,9 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 28 0 0, , ",
+										"controller_action add_layer 29 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , "
+										"controller_action remove_layer 51 0 0, , "
 									]
 								}
 							},
@@ -3565,7 +3583,7 @@
 									"binding": [
 										"controller_action remove_layer 11 0 0, , ",
 										"controller_action remove_layer 12 0 0, , ",
-										"controller_action remove_layer 51 0 0, , ",
+										"controller_action remove_layer 54 0 0, , ",
 										"controller_action empty_binding, , "
 									]
 								},
@@ -3605,7 +3623,7 @@
 									"binding": [
 										"controller_action remove_layer 11 0 0, , ",
 										"controller_action remove_layer 12 0 0, , ",
-										"controller_action remove_layer 51 0 0, , ",
+										"controller_action remove_layer 54 0 0, , ",
 										"controller_action empty_binding, , "
 									]
 								},
@@ -3657,7 +3675,7 @@
 										"binding": [
 											"controller_action remove_layer 11 0 0, , ",
 											"controller_action remove_layer 12 0 0, , ",
-											"controller_action remove_layer 51 0 0, , "
+											"controller_action remove_layer 54 0 0, , "
 										]
 									},
 									"settings": {
@@ -3977,7 +3995,7 @@
 									"binding": [
 										"controller_action remove_layer 12 0 0, , ",
 										"controller_action remove_layer 11 0 0, , ",
-										"controller_action remove_layer 51 0 0, , ",
+										"controller_action remove_layer 54 0 0, , ",
 										"controller_action empty_binding, , "
 									]
 								},
@@ -4017,7 +4035,7 @@
 									"binding": [
 										"controller_action remove_layer 12 0 0, , ",
 										"controller_action remove_layer 11 0 0, , ",
-										"controller_action remove_layer 51 0 0, , ",
+										"controller_action remove_layer 54 0 0, , ",
 										"controller_action empty_binding, , "
 									]
 								},
@@ -4057,7 +4075,7 @@
 									"binding": [
 										"controller_action remove_layer 12 0 0, , ",
 										"controller_action remove_layer 11 0 0, , ",
-										"controller_action remove_layer 51 0 0, , "
+										"controller_action remove_layer 54 0 0, , "
 									]
 								},
 								"settings": {
@@ -4125,7 +4143,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action add_layer 33 0 0, , "
+									"binding": "controller_action add_layer 34 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1",
@@ -4234,11 +4252,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -4277,11 +4295,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -4320,11 +4338,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -4363,11 +4381,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -4426,18 +4444,18 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 46 1 1, , ",
+										"controller_action add_layer 49 1 1, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , ",
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								}
 							}
@@ -4470,18 +4488,18 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 46 1 1, , ",
+										"controller_action add_layer 49 1 1, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , ",
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								}
 							},
@@ -4585,18 +4603,18 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 46 1 1, , ",
+										"controller_action add_layer 49 1 1, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , ",
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								}
 							},
@@ -4649,18 +4667,18 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 46 1 1, , ",
+										"controller_action add_layer 49 1 1, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , ",
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								}
 							}
@@ -4684,11 +4702,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -4727,11 +4745,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -4770,11 +4788,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -4813,11 +4831,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -4917,7 +4935,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -4953,7 +4971,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -4989,7 +5007,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -5025,7 +5043,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -5072,7 +5090,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -5129,7 +5147,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -5186,7 +5204,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -5222,7 +5240,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -5258,7 +5276,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -5294,7 +5312,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -5351,7 +5369,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -5376,7 +5394,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								},
@@ -5426,7 +5444,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -5451,7 +5469,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								},
@@ -6041,11 +6059,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -6104,11 +6122,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -6156,11 +6174,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -6247,7 +6265,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -6263,7 +6281,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -6426,7 +6444,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -6441,7 +6459,7 @@
 						"activators": {
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 43 0 0, , "
+									"binding": "controller_action add_layer 46 0 0, , "
 								},
 								"settings": {
 									"chord_button": "15",
@@ -7087,7 +7105,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -7142,7 +7160,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -7197,7 +7215,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								},
 								"settings": {
@@ -7224,7 +7242,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								},
 								"settings": {
@@ -7345,11 +7363,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action empty_binding, , ",
@@ -7377,12 +7395,12 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action empty_binding, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7409,11 +7427,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7452,11 +7470,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7495,11 +7513,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7538,11 +7556,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7592,11 +7610,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7635,11 +7653,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7678,11 +7696,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7721,11 +7739,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7775,11 +7793,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7847,11 +7865,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -7910,11 +7928,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -8251,8 +8269,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 29 0 0, , ",
-										"controller_action remove_layer 27 0 0, , "
+										"controller_action add_layer 30 0 0, , ",
+										"controller_action remove_layer 28 0 0, , "
 									]
 								}
 							}
@@ -8327,8 +8345,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 30 0 0, , ",
-										"controller_action remove_layer 28 0 0, , "
+										"controller_action add_layer 31 0 0, , ",
+										"controller_action remove_layer 29 0 0, , "
 									]
 								}
 							}
@@ -8370,8 +8388,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 27 0 0, , ",
-										"controller_action remove_layer 29 0 0, , "
+										"controller_action add_layer 28 0 0, , ",
+										"controller_action remove_layer 30 0 0, , "
 									]
 								},
 								"settings": {
@@ -8380,7 +8398,7 @@
 							},
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 31 0 0, , "
+									"binding": "controller_action add_layer 32 0 0, , "
 								},
 								"settings": {
 									"chord_button": "7",
@@ -8468,8 +8486,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 28 0 0, , ",
-										"controller_action remove_layer 30 0 0, , "
+										"controller_action add_layer 29 0 0, , ",
+										"controller_action remove_layer 31 0 0, , "
 									]
 								},
 								"settings": {
@@ -8478,7 +8496,7 @@
 							},
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 32 0 0, , "
+									"binding": "controller_action add_layer 33 0 0, , "
 								},
 								"settings": {
 									"chord_button": "8",
@@ -8518,7 +8536,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action remove_layer 27 0 0, , "
+										"controller_action remove_layer 28 0 0, , "
 									]
 								},
 								"settings": {
@@ -8547,7 +8565,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action remove_layer 27 0 0, , "
+										"controller_action remove_layer 28 0 0, , "
 									]
 								},
 								"settings": {
@@ -8635,7 +8653,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action remove_layer 28 0 0, , "
+										"controller_action remove_layer 29 0 0, , "
 									]
 								},
 								"settings": {
@@ -8664,7 +8682,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action remove_layer 28 0 0, , "
+										"controller_action remove_layer 29 0 0, , "
 									]
 								},
 								"settings": {
@@ -8717,8 +8735,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 29 0 0, , ",
-										"controller_action remove_layer 31 0 0, , "
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 32 0 0, , "
 									]
 								},
 								"settings": {
@@ -8736,7 +8754,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action add_layer 31 0 0, , "
+										"controller_action add_layer 32 0 0, , "
 									]
 								},
 								"settings": {
@@ -8746,8 +8764,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 29 0 0, , ",
-										"controller_action remove_layer 31 0 0, , "
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 32 0 0, , "
 									]
 								}
 							},
@@ -8782,7 +8800,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action add_layer 31 0 0, , "
+										"controller_action add_layer 32 0 0, , "
 									]
 								},
 								"settings": {
@@ -8792,8 +8810,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 29 0 0, , ",
-										"controller_action remove_layer 31 0 0, , "
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 32 0 0, , "
 									]
 								}
 							},
@@ -8834,8 +8852,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 30 0 0, , ",
-										"controller_action remove_layer 32 0 0, , "
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 33 0 0, , "
 									]
 								},
 								"settings": {
@@ -8853,7 +8871,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action add_layer 32 0 0, , "
+										"controller_action add_layer 33 0 0, , "
 									]
 								},
 								"settings": {
@@ -8863,8 +8881,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 30 0 0, , ",
-										"controller_action remove_layer 32 0 0, , "
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 33 0 0, , "
 									]
 								}
 							},
@@ -8899,7 +8917,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action add_layer 32 0 0, , "
+										"controller_action add_layer 33 0 0, , "
 									]
 								},
 								"settings": {
@@ -8909,8 +8927,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 30 0 0, , ",
-										"controller_action remove_layer 32 0 0, , "
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 33 0 0, , "
 									]
 								}
 							},
@@ -8962,8 +8980,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 29 0 0, , ",
-										"controller_action remove_layer 31 0 0, , "
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 32 0 0, , "
 									]
 								},
 								"settings": {
@@ -9029,8 +9047,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 30 0 0, , ",
-										"controller_action remove_layer 32 0 0, , "
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 33 0 0, , "
 									]
 								},
 								"settings": {
@@ -9207,7 +9225,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action remove_layer 34 0 0, , "
+										"controller_action remove_layer 35 0 0, , "
 									]
 								},
 								"settings": {
@@ -9236,7 +9254,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action remove_layer 34 0 0, , "
+										"controller_action remove_layer 35 0 0, , "
 									]
 								},
 								"settings": {
@@ -9273,7 +9291,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 10 0 0, , ",
-										"controller_action remove_layer 34 0 0, , "
+										"controller_action remove_layer 35 0 0, , "
 									]
 								},
 								"settings": {
@@ -9319,8 +9337,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 34 0 0, , ",
-										"controller_action remove_layer 33 0 0, , "
+										"controller_action add_layer 35 0 0, , ",
+										"controller_action remove_layer 34 0 0, , "
 									]
 								},
 								"settings": {
@@ -9329,7 +9347,7 @@
 							},
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 35 0 0, , "
+									"binding": "controller_action add_layer 36 0 0, , "
 								},
 								"settings": {
 									"chord_button": "17",
@@ -9357,8 +9375,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 33 0 0, , ",
-										"controller_action remove_layer 35 0 0, , "
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 36 0 0, , "
 									]
 								},
 								"settings": {
@@ -9899,55 +9917,33 @@
 				"inputs": {
 					"click": {
 						"activators": {
-							"chord": [
-								{
-									"bindings": {
-										"binding": "controller_action add_layer 44 0 0, , "
-									},
-									"settings": {
-										"chord_button": "15"
-									}
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 47 0 0, , "
 								},
-								{
-									"bindings": {
-										"binding": "controller_action add_layer 45 0 0, , "
-									},
-									"settings": {
-										"chord_button": "14"
-									}
+								"settings": {
+									"chord_button": "15"
 								}
-							]
+							}
 						},
 						"disabled_activators": {}
 					},
 					"edge": {
 						"activators": {
-							"chord": [
-								{
-									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "15",
-										"interruptable": "0"
-									}
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
 								},
-								{
-									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "14",
-										"interruptable": "0"
-									}
+								"settings": {
+									"chord_button": "15",
+									"interruptable": "0"
 								}
-							],
+							},
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 44 0 0, , ",
-										"controller_action add_layer 45 0 0, , ",
-										"controller_action add_layer 26 0 0, , "
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 26 0 0, , "
 									]
 								},
 								"settings": {
@@ -9965,33 +9961,22 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action add_layer 44 0 0, , "
+										"controller_action add_layer 47 0 0, , "
 									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
 								}
 							},
-							"chord": [
-								{
-									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "15",
-										"interruptable": "0"
-									}
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
 								},
-								{
-									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "14",
-										"interruptable": "0"
-									}
+								"settings": {
+									"chord_button": "15",
+									"interruptable": "0"
 								}
-							]
+							}
 						},
 						"disabled_activators": {}
 					}
@@ -10008,24 +9993,14 @@
 				"inputs": {
 					"click": {
 						"activators": {
-							"chord": [
-								{
-									"bindings": {
-										"binding": "controller_action add_layer 44 0 0, , "
-									},
-									"settings": {
-										"chord_button": "15"
-									}
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 47 0 0, , "
 								},
-								{
-									"bindings": {
-										"binding": "controller_action add_layer 45 0 0, , "
-									},
-									"settings": {
-										"chord_button": "14"
-									}
+								"settings": {
+									"chord_button": "15"
 								}
-							]
+							}
 						},
 						"disabled_activators": {}
 					},
@@ -10037,33 +10012,22 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action add_layer 44 0 0, , "
+										"controller_action add_layer 47 0 0, , "
 									]
 								},
 								"settings": {
 									"haptic_intensity": "0"
 								}
 							},
-							"chord": [
-								{
-									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "15",
-										"interruptable": "0"
-									}
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
 								},
-								{
-									"bindings": {
-										"binding": "controller_action empty_binding, , "
-									},
-									"settings": {
-										"chord_button": "14",
-										"interruptable": "0"
-									}
+								"settings": {
+									"chord_button": "15",
+									"interruptable": "0"
 								}
-							]
+							}
 						},
 						"disabled_activators": {}
 					}
@@ -10092,8 +10056,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 33 0 0, , ",
-										"controller_action remove_layer 35 0 0, , "
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 36 0 0, , "
 									]
 								},
 								"settings": {
@@ -10111,7 +10075,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action add_layer 35 0 0, , "
+										"controller_action add_layer 36 0 0, , "
 									]
 								},
 								"settings": {
@@ -10140,7 +10104,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action add_layer 35 0 0, , "
+										"controller_action add_layer 36 0 0, , "
 									]
 								},
 								"settings": {
@@ -10179,7 +10143,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action remove_layer 36 0 0, , "
+										"controller_action remove_layer 37 0 0, , "
 									]
 								},
 								"settings": {
@@ -10208,7 +10172,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action remove_layer 36 0 0, , "
+										"controller_action remove_layer 37 0 0, , "
 									]
 								},
 								"settings": {
@@ -10247,7 +10211,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action remove_layer 37 0 0, , "
+										"controller_action remove_layer 38 0 0, , "
 									]
 								},
 								"settings": {
@@ -10276,7 +10240,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action remove_layer 37 0 0, , "
+										"controller_action remove_layer 38 0 0, , "
 									]
 								},
 								"settings": {
@@ -10315,7 +10279,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action add_layer 38 0 0, , "
+										"controller_action add_layer 39 0 0, , "
 									]
 								},
 								"settings": {
@@ -10344,7 +10308,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action add_layer 38 0 0, , "
+										"controller_action add_layer 39 0 0, , "
 									]
 								},
 								"settings": {
@@ -10383,7 +10347,7 @@
 										"controller_action remove_layer 6 0 0, , ",
 										"controller_action remove_layer 21 0 0, , ",
 										"controller_action remove_layer 24 0 0, , ",
-										"controller_action add_layer 39 0 0, , "
+										"controller_action add_layer 40 0 0, , "
 									]
 								},
 								"settings": {
@@ -10412,7 +10376,7 @@
 										"controller_action remove_layer 7 0 0, , ",
 										"controller_action remove_layer 22 0 0, , ",
 										"controller_action remove_layer 25 0 0, , ",
-										"controller_action add_layer 39 0 0, , "
+										"controller_action add_layer 40 0 0, , "
 									]
 								},
 								"settings": {
@@ -10599,7 +10563,7 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 42 0 0, , "
+									"binding": "controller_action remove_layer 45 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10653,7 +10617,7 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 42 0 0, , "
+									"binding": "controller_action remove_layer 45 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10686,7 +10650,7 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 42 0 0, , "
+									"binding": "controller_action remove_layer 45 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10827,7 +10791,7 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 43 0 0, , "
+									"binding": "controller_action remove_layer 46 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10881,7 +10845,7 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 43 0 0, , "
+									"binding": "controller_action remove_layer 46 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10914,7 +10878,7 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 43 0 0, , "
+									"binding": "controller_action remove_layer 46 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -11100,7 +11064,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -11115,7 +11079,7 @@
 						"activators": {
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 42 0 0, , "
+									"binding": "controller_action add_layer 45 0 0, , "
 								},
 								"settings": {
 									"chord_button": "15",
@@ -11498,7 +11462,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 10 0 0, , ",
-										"controller_action remove_layer 34 0 0, , "
+										"controller_action remove_layer 35 0 0, , "
 									]
 								},
 								"settings": {
@@ -11515,7 +11479,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 10 0 0, , ",
-										"controller_action remove_layer 34 0 0, , "
+										"controller_action remove_layer 35 0 0, , "
 									]
 								},
 								"settings": {
@@ -11530,7 +11494,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 34 0 0, , "
+									"binding": "controller_action remove_layer 35 0 0, , "
 								},
 								"settings": {
 									"haptic_intensity": "0"
@@ -11543,7 +11507,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 34 0 0, , "
+									"binding": "controller_action remove_layer 35 0 0, , "
 								},
 								"settings": {
 									"haptic_intensity": "0"
@@ -11556,7 +11520,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 34 0 0, , "
+									"binding": "controller_action remove_layer 35 0 0, , "
 								},
 								"settings": {
 									"haptic_intensity": "0"
@@ -11586,8 +11550,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -11622,8 +11586,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -11658,8 +11622,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -11694,8 +11658,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -11741,8 +11705,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -11798,8 +11762,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -11855,8 +11819,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -11891,8 +11855,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -11927,8 +11891,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -11963,8 +11927,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -12126,8 +12090,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -12141,7 +12105,7 @@
 						"activators": {
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 43 0 0, , "
+									"binding": "controller_action add_layer 46 0 0, , "
 								},
 								"settings": {
 									"chord_button": "14",
@@ -12304,8 +12268,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -12319,7 +12283,7 @@
 						"activators": {
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 42 0 0, , "
+									"binding": "controller_action add_layer 45 0 0, , "
 								},
 								"settings": {
 									"chord_button": "14",
@@ -12377,7 +12341,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12402,7 +12366,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12427,7 +12391,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12452,7 +12416,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12518,7 +12482,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12552,7 +12516,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								},
@@ -12569,7 +12533,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								},
@@ -12620,7 +12584,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12645,7 +12609,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12670,7 +12634,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12695,7 +12659,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12773,9 +12737,9 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 27 0 0, , ",
+										"controller_action add_layer 28 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , "
+										"controller_action remove_layer 50 0 0, , "
 									]
 								}
 							},
@@ -12808,9 +12772,9 @@
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 49 0 0, , ",
+										"controller_action add_layer 52 0 0, , ",
 										"controller_action add_layer 20 0 0, , ",
-										"controller_action add_layer 48 0 0, , ",
+										"controller_action add_layer 51 0 0, , ",
 										"controller_action add_layer 19 0 0, , "
 									]
 								},
@@ -12824,7 +12788,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12859,7 +12823,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -12884,7 +12848,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								},
@@ -12934,7 +12898,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -12959,7 +12923,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -12984,7 +12948,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -13009,7 +12973,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -13065,7 +13029,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -13090,7 +13054,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -13115,7 +13079,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -13140,7 +13104,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -13188,7 +13152,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -13222,7 +13186,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								},
@@ -13239,7 +13203,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								},
@@ -13340,9 +13304,9 @@
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 50 0 0, , ",
+										"controller_action add_layer 53 0 0, , ",
 										"controller_action add_layer 19 0 0, , ",
-										"controller_action add_layer 47 0 0, , ",
+										"controller_action add_layer 50 0 0, , ",
 										"controller_action add_layer 20 0 0, , "
 									]
 								},
@@ -13355,7 +13319,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -13379,9 +13343,9 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 28 0 0, , ",
+										"controller_action add_layer 29 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , "
+										"controller_action remove_layer 51 0 0, , "
 									]
 								}
 							},
@@ -13437,7 +13401,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -13462,7 +13426,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								},
@@ -13512,11 +13476,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -13555,11 +13519,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -13598,11 +13562,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -13641,11 +13605,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -13704,18 +13668,18 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 46 1 1, , ",
+										"controller_action remove_layer 49 1 1, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , ",
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								}
 							}
@@ -13748,18 +13712,18 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 46 1 1, , ",
+										"controller_action remove_layer 49 1 1, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , ",
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								}
 							},
@@ -13803,11 +13767,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -13846,11 +13810,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -13889,11 +13853,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -13932,11 +13896,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -13986,11 +13950,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14049,11 +14013,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14101,11 +14065,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14233,18 +14197,18 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 46 1 1, , ",
+										"controller_action remove_layer 49 1 1, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , ",
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								}
 							},
@@ -14297,18 +14261,18 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 46 1 1, , ",
+										"controller_action remove_layer 49 1 1, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , ",
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								}
 							}
@@ -14383,7 +14347,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								},
 								"settings": {
@@ -14410,7 +14374,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , "
+										"controller_action remove_layer 53 0 0, , "
 									]
 								},
 								"settings": {
@@ -14437,11 +14401,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14480,11 +14444,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14523,11 +14487,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14566,11 +14530,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14620,11 +14584,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14663,11 +14627,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14706,11 +14670,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14749,11 +14713,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14803,11 +14767,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14875,11 +14839,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -14938,11 +14902,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -15070,7 +15034,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action add_layer 47 0 0, , "
+									"binding": "controller_action add_layer 50 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1",
@@ -15096,7 +15060,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action add_layer 48 0 0, , "
+									"binding": "controller_action add_layer 51 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1",
@@ -15505,7 +15469,7 @@
 						"activators": {
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 26 0 0, , "
+									"binding": "controller_action add_layer 27 0 0, , "
 								},
 								"settings": {
 									"chord_button": "14",
@@ -15679,7 +15643,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -15704,7 +15668,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -15760,7 +15724,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -15785,7 +15749,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -15993,11 +15957,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -16036,11 +16000,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -16110,11 +16074,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -16153,11 +16117,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -16226,7 +16190,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -16237,7 +16201,7 @@
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press RETURN, , ",
+										"controller_action add_layer 44 0 0, , ",
 										"controller_action empty_binding, , ",
 										"controller_action empty_binding, , "
 									]
@@ -16254,7 +16218,7 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -16270,7 +16234,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -16306,7 +16270,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -16362,7 +16326,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -16398,7 +16362,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -16434,7 +16398,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -16470,7 +16434,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 26 0 0, , "
 									]
 								},
@@ -16735,6 +16699,32 @@
 				"inputs": {
 					"button_escape": {
 						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer 44 0 0, , ",
+										"controller_action add_layer 47 0 0, , ",
+										"controller_action empty_binding, , "
+									]
+								},
+								"settings": {
+									"chord_button": "15",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action remove_layer 26 0 0, , "
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_menu": {
+						"activators": {
 							"release": {
 								"bindings": {
 									"binding": [
@@ -16746,74 +16736,28 @@
 									"haptic_intensity": "0"
 								}
 							},
-							"chord": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action add_layer 45 0 1, , ",
-											"controller_action empty_binding, , "
-										]
-									},
-									"settings": {
-										"chord_button": "14",
-										"delay_start": "300"
-									}
-								},
-								{
-									"bindings": {
-										"binding": [
-											"controller_action add_layer 44 0 0, , ",
-											"controller_action empty_binding, , "
-										]
-									},
-									"settings": {
-										"chord_button": "15",
-										"interruptable": "0"
-									}
-								}
-							]
-						},
-						"disabled_activators": {}
-					},
-					"button_menu": {
-						"activators": {
-							"release": {
+							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 36 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action add_layer 47 0 1, , ",
+										"controller_action empty_binding, , "
 									]
 								},
 								"settings": {
-									"haptic_intensity": "0"
+									"chord_button": "15",
+									"delay_start": "300"
 								}
 							},
-							"chord": [
-								{
-									"bindings": {
-										"binding": [
-											"controller_action add_layer 44 0 1, , ",
-											"controller_action empty_binding, , "
-										]
-									},
-									"settings": {
-										"chord_button": "15",
-										"delay_start": "300"
-									}
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action remove_layer 47 0 0, , "
 								},
-								{
-									"bindings": {
-										"binding": [
-											"controller_action add_layer 45 0 0, , ",
-											"controller_action empty_binding, , "
-										]
-									},
-									"settings": {
-										"chord_button": "14",
-										"interruptable": "0"
-									}
+								"settings": {
+									"hold_repeats": "1",
+									"repeat_rate": "350",
+									"interruptable": "0"
 								}
-							]
+							}
 						},
 						"disabled_activators": {}
 					},
@@ -16893,7 +16837,7 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": "controller_action remove_layer 27 0 0, , "
+										"binding": "controller_action remove_layer 28 0 0, , "
 									},
 									"settings": {
 										"delay_start": "150",
@@ -16969,7 +16913,7 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": "controller_action remove_layer 28 0 0, , "
+										"binding": "controller_action remove_layer 29 0 0, , "
 									},
 									"settings": {
 										"delay_start": "150",
@@ -17176,7 +17120,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 34 0 0, , "
+									"binding": "controller_action remove_layer 35 0 0, , "
 								},
 								"settings": {
 									"delay_start": "150",
@@ -17222,8 +17166,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 40 0 0, , ",
-										"controller_action remove_layer 36 0 0, , "
+										"controller_action add_layer 41 0 0, , ",
+										"controller_action remove_layer 37 0 0, , "
 									]
 								}
 							}
@@ -17255,7 +17199,7 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": "controller_action remove_layer 36 0 0, , "
+										"binding": "controller_action remove_layer 37 0 0, , "
 									},
 									"settings": {
 										"delay_start": "150",
@@ -17291,8 +17235,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 41 0 0, , ",
-										"controller_action remove_layer 37 0 0, , "
+										"controller_action add_layer 42 0 0, , ",
+										"controller_action remove_layer 38 0 0, , "
 									]
 								}
 							}
@@ -17334,7 +17278,7 @@
 							"Full_Press": [
 								{
 									"bindings": {
-										"binding": "controller_action remove_layer 37 0 0, , "
+										"binding": "controller_action remove_layer 38 0 0, , "
 									},
 									"settings": {
 										"delay_start": "150",
@@ -17378,8 +17322,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 40 0 0, , ",
-										"controller_action remove_layer 38 0 0, , "
+										"controller_action remove_layer 41 0 0, , ",
+										"controller_action remove_layer 39 0 0, , "
 									]
 								},
 								"settings": {
@@ -17413,8 +17357,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 41 0 0, , ",
-										"controller_action remove_layer 39 0 0, , "
+										"controller_action remove_layer 42 0 0, , ",
+										"controller_action remove_layer 40 0 0, , "
 									]
 								},
 								"settings": {
@@ -17458,8 +17402,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 36 0 0, , ",
-										"controller_action remove_layer 40 0 0, , "
+										"controller_action add_layer 37 0 0, , ",
+										"controller_action remove_layer 41 0 0, , "
 									]
 								},
 								"settings": {
@@ -17468,7 +17412,7 @@
 							},
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 38 0 0, , "
+									"binding": "controller_action add_layer 39 0 0, , "
 								},
 								"settings": {
 									"chord_button": "15",
@@ -17523,8 +17467,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 37 0 0, , ",
-										"controller_action remove_layer 41 0 0, , "
+										"controller_action add_layer 38 0 0, , ",
+										"controller_action remove_layer 42 0 0, , "
 									]
 								},
 								"settings": {
@@ -17533,7 +17477,7 @@
 							},
 							"chord": {
 								"bindings": {
-									"binding": "controller_action add_layer 39 0 0, , "
+									"binding": "controller_action add_layer 40 0 0, , "
 								},
 								"settings": {
 									"chord_button": "14",
@@ -17692,8 +17636,8 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -17708,8 +17652,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -17719,7 +17663,7 @@
 							"chord": {
 								"bindings": {
 									"binding": [
-										"key_press BACKSPACE, , ",
+										"controller_action add_layer 43 0 0, , ",
 										"controller_action empty_binding, , ",
 										"controller_action empty_binding, , "
 									]
@@ -17736,8 +17680,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -17772,8 +17716,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -17828,8 +17772,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -17864,8 +17808,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -17900,8 +17844,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -17936,8 +17880,8 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 45 0 0, , ",
-										"controller_action remove_layer 26 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
 									]
 								},
 								"settings": {
@@ -17984,7 +17928,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -18009,7 +17953,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 19 0 0, , "
 									]
 								}
@@ -18065,7 +18009,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -18090,7 +18034,7 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 20 0 0, , "
 									]
 								}
@@ -18146,11 +18090,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -18189,11 +18133,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 4 0 0, , ",
-										"controller_action remove_layer 49 0 0, , ",
+										"controller_action remove_layer 52 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -18263,11 +18207,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -18306,11 +18250,11 @@
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 5 0 0, , ",
-										"controller_action remove_layer 50 0 0, , ",
+										"controller_action remove_layer 53 0 0, , ",
 										"controller_action remove_layer 2 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 50 0 0, , ",
 										"controller_action remove_layer 3 0 0, , ",
-										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 51 0 0, , ",
 										"controller_action remove_layer 19 0 0, , ",
 										"controller_action remove_layer 20 0 0, , ",
 										"controller_action remove_layer 23 0 0, , "
@@ -18398,7 +18342,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 51 0 0, , "
+									"binding": "controller_action remove_layer 54 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1",
@@ -18412,7 +18356,7 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 51 0 0, , "
+									"binding": "controller_action remove_layer 54 0 0, , "
 								},
 								"settings": {
 									"hold_repeats": "1",
@@ -18438,7 +18382,7 @@
 							"Soft_Press": [
 								{
 									"bindings": {
-										"binding": "controller_action remove_layer 51 0 0, , "
+										"binding": "controller_action remove_layer 54 0 0, , "
 									},
 									"settings": {
 										"hold_repeats": "1",
@@ -18464,6 +18408,387 @@
 						"disabled_activators": {}
 					}
 				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13039",
+				"mode": "trigger",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"haptic_intensity": "2"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_DOWN, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13040",
+				"mode": "trigger",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"haptic_intensity": "2"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_UP, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13041",
+				"mode": "switches",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"button_escape": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer 38 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer 48 0 1, , ",
+										"controller_action empty_binding, , "
+									]
+								},
+								"settings": {
+									"chord_button": "14",
+									"delay_start": "300"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action remove_layer 48 0 0, , "
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"repeat_rate": "350",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"button_menu": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": [
+										"controller_action add_layer 43 0 0, , ",
+										"controller_action add_layer 48 0 0, , ",
+										"controller_action empty_binding, , "
+									]
+								},
+								"settings": {
+									"chord_button": "14",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action remove_layer 27 0 0, , "
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"left_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_button LEFT, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"right_bumper": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_button RIGHT, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13042",
+				"mode": "disabled",
+				"name": "",
+				"description": "",
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13043",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 48 0 0, , "
+								},
+								"settings": {
+									"chord_button": "14"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 27 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 6 0 0, , ",
+										"controller_action remove_layer 21 0 0, , ",
+										"controller_action remove_layer 24 0 0, , ",
+										"controller_action add_layer 48 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13044",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action add_layer 48 0 0, , "
+								},
+								"settings": {
+									"chord_button": "14"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 22 0 0, , ",
+										"controller_action remove_layer 25 0 0, , ",
+										"controller_action add_layer 48 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13045",
+				"mode": "switches",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"button_menu": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press BACKSPACE, , "
+								},
+								"settings": {
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": "controller_action remove_layer 43 0 0, , "
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13046",
+				"mode": "disabled",
+				"name": "",
+				"description": "",
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13047",
+				"mode": "switches",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"button_escape": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press RETURN, , "
+								},
+								"settings": {
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": "controller_action remove_layer 44 0 0, , "
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13048",
+				"mode": "disabled",
+				"name": "",
+				"description": "",
 				"settings": {
 					"layer": "1"
 				}
@@ -18865,6 +19190,18 @@
 			},
 			{
 				"id": "26",
+				"name": "Preset_1000083",
+				"group_source_bindings": {
+					"13039": "left_trigger active",
+					"13040": "right_trigger active",
+					"13041": "switch active",
+					"13042": "gyro active",
+					"13043": "right_joystick active",
+					"13044": "joystick active"
+				}
+			},
+			{
+				"id": "27",
 				"name": "Preset_1000087",
 				"group_source_bindings": {
 					"890": "button_diamond inactive",
@@ -18880,7 +19217,7 @@
 				}
 			},
 			{
-				"id": "27",
+				"id": "28",
 				"name": "Preset_1000090",
 				"group_source_bindings": {
 					"894": "button_diamond inactive",
@@ -18894,7 +19231,7 @@
 				}
 			},
 			{
-				"id": "28",
+				"id": "29",
 				"name": "Preset_1000091",
 				"group_source_bindings": {
 					"898": "button_diamond inactive",
@@ -18906,7 +19243,7 @@
 				}
 			},
 			{
-				"id": "29",
+				"id": "30",
 				"name": "Preset_1000092",
 				"group_source_bindings": {
 					"902": "button_diamond inactive",
@@ -18918,7 +19255,7 @@
 				}
 			},
 			{
-				"id": "30",
+				"id": "31",
 				"name": "Preset_1000093",
 				"group_source_bindings": {
 					"948": "button_diamond inactive",
@@ -18928,7 +19265,7 @@
 				}
 			},
 			{
-				"id": "31",
+				"id": "32",
 				"name": "Preset_1000098",
 				"group_source_bindings": {
 					"952": "button_diamond inactive",
@@ -18938,7 +19275,7 @@
 				}
 			},
 			{
-				"id": "32",
+				"id": "33",
 				"name": "Preset_1000099",
 				"group_source_bindings": {
 					"982": "button_diamond inactive",
@@ -18951,7 +19288,7 @@
 				}
 			},
 			{
-				"id": "33",
+				"id": "34",
 				"name": "Preset_1000105",
 				"group_source_bindings": {
 					"986": "button_diamond inactive",
@@ -18967,7 +19304,7 @@
 				}
 			},
 			{
-				"id": "34",
+				"id": "35",
 				"name": "Preset_1000106",
 				"group_source_bindings": {
 					"990": "button_diamond inactive",
@@ -18978,7 +19315,7 @@
 				}
 			},
 			{
-				"id": "35",
+				"id": "36",
 				"name": "Preset_1000107",
 				"group_source_bindings": {
 					"1044": "button_diamond active",
@@ -18993,7 +19330,7 @@
 				}
 			},
 			{
-				"id": "36",
+				"id": "37",
 				"name": "Preset_1000114",
 				"group_source_bindings": {
 					"1048": "button_diamond active",
@@ -19008,7 +19345,7 @@
 				}
 			},
 			{
-				"id": "37",
+				"id": "38",
 				"name": "Preset_1000115",
 				"group_source_bindings": {
 					"1052": "button_diamond active",
@@ -19019,7 +19356,7 @@
 				}
 			},
 			{
-				"id": "38",
+				"id": "39",
 				"name": "Preset_1000116",
 				"group_source_bindings": {
 					"1056": "button_diamond active",
@@ -19030,7 +19367,7 @@
 				}
 			},
 			{
-				"id": "39",
+				"id": "40",
 				"name": "Preset_1000117",
 				"group_source_bindings": {
 					"1112": "button_diamond active",
@@ -19043,7 +19380,7 @@
 				}
 			},
 			{
-				"id": "40",
+				"id": "41",
 				"name": "Preset_1000131",
 				"group_source_bindings": {
 					"1116": "button_diamond active",
@@ -19056,8 +19393,24 @@
 				}
 			},
 			{
-				"id": "41",
+				"id": "42",
 				"name": "Preset_1000132",
+				"group_source_bindings": {
+					"13045": "switch active",
+					"13046": "gyro active"
+				}
+			},
+			{
+				"id": "43",
+				"name": "Preset_1000133",
+				"group_source_bindings": {
+					"13047": "switch active",
+					"13048": "gyro active"
+				}
+			},
+			{
+				"id": "44",
+				"name": "Preset_1000134",
 				"group_source_bindings": {
 					"1217": "button_diamond inactive",
 					"1218": "left_trigger active",
@@ -19071,7 +19424,7 @@
 				}
 			},
 			{
-				"id": "42",
+				"id": "45",
 				"name": "Preset_1000139",
 				"group_source_bindings": {
 					"1244": "button_diamond inactive",
@@ -19086,7 +19439,7 @@
 				}
 			},
 			{
-				"id": "43",
+				"id": "46",
 				"name": "Preset_1000143",
 				"group_source_bindings": {
 					"624": "button_diamond active",
@@ -19103,7 +19456,7 @@
 				}
 			},
 			{
-				"id": "44",
+				"id": "47",
 				"name": "Preset_1000147",
 				"group_source_bindings": {
 					"1317": "button_diamond active",
@@ -19119,7 +19472,7 @@
 				}
 			},
 			{
-				"id": "45",
+				"id": "48",
 				"name": "Preset_1000148",
 				"group_source_bindings": {
 					"12971": "button_diamond inactive",
@@ -19142,7 +19495,7 @@
 				}
 			},
 			{
-				"id": "46",
+				"id": "49",
 				"name": "Preset_1000149",
 				"group_source_bindings": {
 					"12911": "switch active",
@@ -19164,7 +19517,7 @@
 				}
 			},
 			{
-				"id": "47",
+				"id": "50",
 				"name": "Preset_1000150",
 				"group_source_bindings": {
 					"12928": "button_diamond active",
@@ -19188,7 +19541,7 @@
 				}
 			},
 			{
-				"id": "48",
+				"id": "51",
 				"name": "Preset_1000151",
 				"group_source_bindings": {
 					"12947": "button_diamond active",
@@ -19202,7 +19555,7 @@
 				}
 			},
 			{
-				"id": "49",
+				"id": "52",
 				"name": "Preset_1000152",
 				"group_source_bindings": {
 					"12958": "button_diamond inactive",
@@ -19220,7 +19573,7 @@
 				}
 			},
 			{
-				"id": "50",
+				"id": "53",
 				"name": "Preset_1000155",
 				"group_source_bindings": {
 					"13013": "button_diamond inactive",
