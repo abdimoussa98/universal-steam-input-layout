@@ -1,0 +1,4728 @@
+[
+  {
+    "variant": "default",
+    "file": "neptune/single-set-default_hold-gyro_latest.json",
+    "sha256": "78a128016a8cb7746a5785df68880923b87e1ad9b96741126fae4464be62039b",
+    "entries": 984,
+    "empty_entries_by_status": {
+      "active": 226,
+      "unreferenced": 2,
+      "inactive": 14,
+      "mode_shift": 12
+    },
+    "active_pure_empty_by_activation": {
+      "Full_Press": 78,
+      "chord": 132,
+      "release": 4
+    },
+    "active_mixed_empty_entries": 12,
+    "active_guarded_cleanup_entries": 185,
+    "disabled_sources": {
+      "gyro": 15,
+      "left_trackpad": 9,
+      "right_trackpad": 8
+    },
+    "always_on_layers": [
+      {
+        "title": "L1: Double Tap",
+        "timer_entries": [
+          "D:893:always_on_action:activators:Full_Press:0",
+          "D:893:always_on_action:activators:Full_Press:1"
+        ],
+        "entries": [
+          {
+            "id": "D:59:left_bumper:activators:release:0",
+            "line": 14795,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Gyro | L1: Modifier 0}} 0 0, , ",
+              "controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+              "controller_action add_layer {{Base::L1: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:901:left_bumper:activators:release:0",
+            "line": 16405,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L1: Scroll Down}} 0 0, , ",
+              "controller_action add_layer {{Base::L1: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:12911:left_bumper:activators:release:0",
+            "line": 17508,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Gyro | L1: Modifier 0}} 0 0, , ",
+              "controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+              "controller_action add_layer {{Base::L1: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "D:922:touch:activators:release:0",
+            "line": 8004,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L1: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:923:touch:activators:release:0",
+            "line": 8033,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L1: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:893:left_bumper:activators:Full_Press:0",
+            "line": 16238,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L1: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::L1: Scroll Down}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:893:always_on_action:activators:Full_Press:0",
+            "line": 16262,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L1: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "D:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:923:touch:activators:release:0"
+            ],
+            "groups": [
+              "923"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:922:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "922"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:922:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "922"
+            ]
+          },
+          {
+            "base_entry": "D:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:922:touch:activators:release:0"
+            ],
+            "groups": [
+              "922"
+            ]
+          },
+          {
+            "base_entry": "D:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "D:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "925"
+            ]
+          },
+          {
+            "base_entry": "D:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "925"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:893:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "893"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:893:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "893"
+            ]
+          },
+          {
+            "base_entry": "D:10:left_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "left_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:893:left_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "893"
+            ]
+          },
+          {
+            "base_entry": "D:10:right_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "right_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:893:right_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "893"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "R1: Double Tap",
+        "timer_entries": [
+          "D:897:always_on_action:activators:Full_Press:0",
+          "D:897:always_on_action:activators:Full_Press:1"
+        ],
+        "entries": [
+          {
+            "id": "D:160:right_bumper:activators:release:0",
+            "line": 14941,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Gyro | R1: Modifier 1}} 0 0, , ",
+              "controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+              "controller_action add_layer {{Base::R1: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:905:right_bumper:activators:release:0",
+            "line": 16491,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R1: Scroll Up}} 0 0, , ",
+              "controller_action add_layer {{Base::R1: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:12931:right_bumper:activators:release:0",
+            "line": 17654,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Gyro | R1: Modifier 1}} 0 0, , ",
+              "controller_action remove_layer {{Base::R1: Modifier 1}} 0 0, , ",
+              "controller_action add_layer {{Base::R1: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "D:928:touch:activators:release:0",
+            "line": 8121,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R1: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:929:touch:activators:release:0",
+            "line": 8150,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R1: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:897:right_bumper:activators:Full_Press:0",
+            "line": 16327,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R1: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::R1: Scroll Up}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:897:always_on_action:activators:Full_Press:0",
+            "line": 16341,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R1: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "D:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:929:touch:activators:release:0"
+            ],
+            "groups": [
+              "929"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:928:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "928"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:928:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "928"
+            ]
+          },
+          {
+            "base_entry": "D:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:928:touch:activators:release:0"
+            ],
+            "groups": [
+              "928"
+            ]
+          },
+          {
+            "base_entry": "D:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "D:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "931"
+            ]
+          },
+          {
+            "base_entry": "D:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "931"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:897:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "897"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:897:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "897"
+            ]
+          },
+          {
+            "base_entry": "D:10:left_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "left_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:897:left_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "897"
+            ]
+          },
+          {
+            "base_entry": "D:10:right_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "right_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:897:right_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "897"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "LST: Double Tap",
+        "timer_entries": [
+          "D:753:always_on_action:activators:Full_Press:0"
+        ],
+        "entries": [
+          {
+            "id": "D:851:touch:activators:release:0",
+            "line": 7609,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::LST: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "D:763:touch:activators:release:0",
+            "line": 6605,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::LST: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:769:touch:activators:Full_Press:0",
+            "line": 6663,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::LST: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:753:always_on_action:activators:Full_Press:0",
+            "line": 15943,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::LST: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "D:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:769:touch:activators:Full_Press:0"
+            ],
+            "groups": [
+              "769"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:763:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "763"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:763:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "763"
+            ]
+          },
+          {
+            "base_entry": "D:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:763:touch:activators:release:0"
+            ],
+            "groups": [
+              "763"
+            ]
+          },
+          {
+            "base_entry": "D:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "D:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "859"
+            ]
+          },
+          {
+            "base_entry": "D:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "859"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:753:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "753"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:753:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "753"
+            ]
+          },
+          {
+            "base_entry": "D:10:left_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "left_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:753:left_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "753"
+            ]
+          },
+          {
+            "base_entry": "D:10:right_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "right_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:753:right_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "753"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "RST: Double Tap",
+        "timer_entries": [
+          "D:749:always_on_action:activators:Full_Press:0"
+        ],
+        "entries": [
+          {
+            "id": "D:849:touch:activators:release:0",
+            "line": 7562,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::RST: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "D:762:touch:activators:Full_Press:0",
+            "line": 6567,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RST: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:768:touch:activators:release:0",
+            "line": 6634,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RST: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:749:always_on_action:activators:Full_Press:0",
+            "line": 15878,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RST: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "D:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:768:touch:activators:release:0"
+            ],
+            "groups": [
+              "768"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:762:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "762"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:762:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "762"
+            ]
+          },
+          {
+            "base_entry": "D:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:762:touch:activators:Full_Press:0"
+            ],
+            "groups": [
+              "762"
+            ]
+          },
+          {
+            "base_entry": "D:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "D:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "857"
+            ]
+          },
+          {
+            "base_entry": "D:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "857"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:749:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "749"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:749:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "749"
+            ]
+          },
+          {
+            "base_entry": "D:10:left_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "left_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:749:left_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "749"
+            ]
+          },
+          {
+            "base_entry": "D:10:right_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "right_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:749:right_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "749"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "RTP: Double Tap",
+        "timer_entries": [
+          "D:989:always_on_action:activators:Full_Press:0"
+        ],
+        "entries": [
+          {
+            "id": "D:1032:touch:activators:release:0",
+            "line": 8728,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "D:1023:touch:activators:release:0",
+            "line": 8613,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1024:touch:activators:release:0",
+            "line": 8642,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1298:dpad_north:activators:Full_Press:0",
+            "line": 10714,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::RTP: Circular Scroll}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1298:dpad_south:activators:Full_Press:0",
+            "line": 10731,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::RTP: Circular Scroll}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1298:dpad_east:activators:Full_Press:0",
+            "line": 10748,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1298:dpad_west:activators:Full_Press:0",
+            "line": 10761,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1298:edge:activators:Full_Press:0",
+            "line": 10774,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:989:always_on_action:activators:Full_Press:0",
+            "line": 16652,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "D:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1024:touch:activators:release:0"
+            ],
+            "groups": [
+              "1024"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1023:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1023"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1023:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1023"
+            ]
+          },
+          {
+            "base_entry": "D:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1023:touch:activators:release:0"
+            ],
+            "groups": [
+              "1023"
+            ]
+          },
+          {
+            "base_entry": "D:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "D:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source mode replaced; runtime inheritance check",
+            "own_entries": [],
+            "groups": [
+              "1298"
+            ]
+          },
+          {
+            "base_entry": "D:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source mode replaced; runtime inheritance check",
+            "own_entries": [],
+            "groups": [
+              "1298"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:989:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "989"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:989:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "989"
+            ]
+          },
+          {
+            "base_entry": "D:10:left_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "left_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:989:left_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "989"
+            ]
+          },
+          {
+            "base_entry": "D:10:right_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "right_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:989:right_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "989"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Menu Left: Double Tap",
+        "timer_entries": [
+          "D:1047:always_on_action:activators:Full_Press:0",
+          "D:1047:always_on_action:activators:Full_Press:1"
+        ],
+        "entries": [
+          {
+            "id": "D:871:button_menu:activators:release:0",
+            "line": 16149,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Left: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1115:button_menu:activators:release:0",
+            "line": 16933,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Escape}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Left: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "D:1165:touch:activators:release:0",
+            "line": 9442,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1166:touch:activators:release:0",
+            "line": 9471,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1047:button_menu:activators:Full_Press:0",
+            "line": 16697,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Left: Escape}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1047:always_on_action:activators:Full_Press:0",
+            "line": 16731,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "D:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1166:touch:activators:release:0"
+            ],
+            "groups": [
+              "1166"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1165:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1165"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1165:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1165"
+            ]
+          },
+          {
+            "base_entry": "D:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1165:touch:activators:release:0"
+            ],
+            "groups": [
+              "1165"
+            ]
+          },
+          {
+            "base_entry": "D:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "D:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1149"
+            ]
+          },
+          {
+            "base_entry": "D:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1149"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1047:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1047"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1047:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1047"
+            ]
+          },
+          {
+            "base_entry": "D:10:left_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "left_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1047:left_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1047"
+            ]
+          },
+          {
+            "base_entry": "D:10:right_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "right_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1047:right_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1047"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Menu Right: Double Tap",
+        "timer_entries": [
+          "D:1051:always_on_action:activators:Full_Press:0",
+          "D:1051:always_on_action:activators:Full_Press:1"
+        ],
+        "entries": [
+          {
+            "id": "D:1119:button_escape:activators:release:0",
+            "line": 16998,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Tab}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Right: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:13044:button_escape:activators:release:0",
+            "line": 18182,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Right: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "D:1167:touch:activators:release:0",
+            "line": 9510,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1168:touch:activators:release:0",
+            "line": 9539,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1051:button_escape:activators:Full_Press:0",
+            "line": 16766,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Right: Tab}} 0 0, , "
+            ]
+          },
+          {
+            "id": "D:1051:always_on_action:activators:Full_Press:0",
+            "line": 16810,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "D:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1168:touch:activators:release:0"
+            ],
+            "groups": [
+              "1168"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1167:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1167"
+            ]
+          },
+          {
+            "base_entry": "D:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1167:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1167"
+            ]
+          },
+          {
+            "base_entry": "D:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1167:touch:activators:release:0"
+            ],
+            "groups": [
+              "1167"
+            ]
+          },
+          {
+            "base_entry": "D:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "D:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "D:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1145"
+            ]
+          },
+          {
+            "base_entry": "D:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1145"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1051:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1051"
+            ]
+          },
+          {
+            "base_entry": "D:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1051:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1051"
+            ]
+          },
+          {
+            "base_entry": "D:10:left_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "left_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1051:left_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1051"
+            ]
+          },
+          {
+            "base_entry": "D:10:right_bumper:activators:chord:0",
+            "source": "switch",
+            "input": "right_bumper",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "D:1051:right_bumper:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1051"
+            ]
+          }
+        ]
+      }
+    ],
+    "layers": [
+      {
+        "title": "Base",
+        "runtime_id": 1,
+        "preset": "Preset_1000001",
+        "pure_empty_by_activation": {
+          "Full_Press": 1,
+          "chord": 1
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Turning Ramp Up 0",
+        "runtime_id": 2,
+        "preset": "Preset_1000005",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Turning Ramp Up 1",
+        "runtime_id": 3,
+        "preset": "Preset_1000008",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L1: Modifier 0",
+        "runtime_id": 4,
+        "preset": "Preset_1000009",
+        "pure_empty_by_activation": {
+          "chord": 3,
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 16,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R1: Modifier 1",
+        "runtime_id": 5,
+        "preset": "Preset_1000010",
+        "pure_empty_by_activation": {
+          "chord": 3,
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 16,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L1!R1: Modifier 2",
+        "runtime_id": 6,
+        "preset": "Preset_1000011",
+        "pure_empty_by_activation": {
+          "chord": 14,
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 13,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R1!L1: Modifier 2",
+        "runtime_id": 7,
+        "preset": "Preset_1000012",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 14
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 13,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro",
+        "runtime_id": 8,
+        "preset": "Preset_1000029",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro | L1: Modifier 0",
+        "runtime_id": 9,
+        "preset": "Preset_1000033",
+        "pure_empty_by_activation": {
+          "chord": 3,
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 16,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro | R1: Modifier 1",
+        "runtime_id": 10,
+        "preset": "Preset_1000042",
+        "pure_empty_by_activation": {
+          "chord": 3,
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 16,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro | L1!R1: Modifier 2",
+        "runtime_id": 11,
+        "preset": "Preset_1000043",
+        "pure_empty_by_activation": {
+          "chord": 14,
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 13,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro | R1!L1: Modifier 2",
+        "runtime_id": 12,
+        "preset": "Preset_1000044",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 14
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 13,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "LST: Temporary Gyro",
+        "runtime_id": 13,
+        "preset": "Preset_1000045",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RST: Temporary Gyro",
+        "runtime_id": 14,
+        "preset": "Preset_1000054",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro Off Ramp Up",
+        "runtime_id": 15,
+        "preset": "Preset_1000060",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "LTP: Arrow Keys",
+        "runtime_id": 16,
+        "preset": "Preset_1000061",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RTP: Mouse Buttons",
+        "runtime_id": 17,
+        "preset": "Preset_1000064",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RTP: Circular Scroll",
+        "runtime_id": 18,
+        "preset": "Preset_1000069",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L1: Scroll Down",
+        "runtime_id": 19,
+        "preset": "Preset_1000070",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 3,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R1: Scroll Up",
+        "runtime_id": 20,
+        "preset": "Preset_1000073",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 3,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Escape",
+        "runtime_id": 21,
+        "preset": "Preset_1000074",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Tab",
+        "runtime_id": 22,
+        "preset": "Preset_1000075",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Backspace",
+        "runtime_id": 23,
+        "preset": "Preset_1000077",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Enter",
+        "runtime_id": 24,
+        "preset": "Preset_1000079",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Escape",
+        "runtime_id": 25,
+        "preset": "Preset_1000081",
+        "pure_empty_by_activation": {
+          "Full_Press": 4
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Backspace",
+        "runtime_id": 26,
+        "preset": "Preset_1000082",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Fn Layer",
+        "runtime_id": 27,
+        "preset": "Preset_1000083",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 12
+        },
+        "mixed_empty_entries": 1,
+        "guarded_cleanup_entries": 19,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Tab",
+        "runtime_id": 28,
+        "preset": "Preset_1000087",
+        "pure_empty_by_activation": {
+          "Full_Press": 4
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Enter",
+        "runtime_id": 29,
+        "preset": "Preset_1000090",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Fn Layer",
+        "runtime_id": 30,
+        "preset": "Preset_1000091",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 12
+        },
+        "mixed_empty_entries": 1,
+        "guarded_cleanup_entries": 19,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "LST: Entry Point",
+        "runtime_id": 31,
+        "preset": "Preset_1000092",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RST: Entry Point",
+        "runtime_id": 32,
+        "preset": "Preset_1000093",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RTP: Entry Point",
+        "runtime_id": 33,
+        "preset": "Preset_1000098",
+        "pure_empty_by_activation": {
+          "chord": 1
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 1,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Entry Point",
+        "runtime_id": 34,
+        "preset": "Preset_1000099",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 3
+        },
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Entry Point",
+        "runtime_id": 35,
+        "preset": "Preset_1000105",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 3
+        },
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "L1: Double Tap",
+        "runtime_id": 36,
+        "preset": "Preset_1000106",
+        "pure_empty_by_activation": {
+          "Full_Press": 5
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "right_trackpad",
+          "left_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "R1: Double Tap",
+        "runtime_id": 37,
+        "preset": "Preset_1000107",
+        "pure_empty_by_activation": {
+          "Full_Press": 5
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "LST: Double Tap",
+        "runtime_id": 38,
+        "preset": "Preset_1000114",
+        "pure_empty_by_activation": {
+          "Full_Press": 5
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "RST: Double Tap",
+        "runtime_id": 39,
+        "preset": "Preset_1000115",
+        "pure_empty_by_activation": {
+          "Full_Press": 5
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "RTP: Double Tap",
+        "runtime_id": 40,
+        "preset": "Preset_1000116",
+        "pure_empty_by_activation": {
+          "Full_Press": 5
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "Menu Left: Double Tap",
+        "runtime_id": 41,
+        "preset": "Preset_1000117",
+        "pure_empty_by_activation": {
+          "Full_Press": 4
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad",
+          "gyro"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "Menu Right: Double Tap",
+        "runtime_id": 42,
+        "preset": "Preset_1000131",
+        "pure_empty_by_activation": {
+          "Full_Press": 4
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad",
+          "gyro"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "L1: Tap Cover",
+        "runtime_id": 43,
+        "preset": "Preset_1000132",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R1: Tap Cover",
+        "runtime_id": 44,
+        "preset": "Preset_1000133",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L1&R1: Tap Cover",
+        "runtime_id": 45,
+        "preset": "Preset_1000134",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "LST: Tap Cover",
+        "runtime_id": 46,
+        "preset": "Preset_1000139",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RST: Tap Cover",
+        "runtime_id": 47,
+        "preset": "Preset_1000143",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RTP: Tap Cover",
+        "runtime_id": 48,
+        "preset": "Preset_1000147",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L1: Double Tap Cover",
+        "runtime_id": 49,
+        "preset": "Preset_1000148",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R1: Double Tap Cover",
+        "runtime_id": 50,
+        "preset": "Preset_1000149",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Double Tap Cover",
+        "runtime_id": 51,
+        "preset": "Preset_1000150",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Double Tap Cover",
+        "runtime_id": 52,
+        "preset": "Preset_1000151",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Transition Set 0",
+        "runtime_id": 53,
+        "preset": "Preset_1000152",
+        "pure_empty_by_activation": {
+          "Full_Press": 4,
+          "chord": 6,
+          "release": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 3,
+        "disabled_sources": [
+          "gyro",
+          "right_trackpad",
+          "left_trackpad"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Transition Set 1",
+        "runtime_id": 54,
+        "preset": "Preset_1000155",
+        "pure_empty_by_activation": {
+          "Full_Press": 4,
+          "chord": 6,
+          "release": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 3,
+        "disabled_sources": [
+          "gyro",
+          "left_trackpad",
+          "right_trackpad"
+        ],
+        "always_on": false
+      }
+    ]
+  },
+  {
+    "variant": "alternative",
+    "file": "neptune/single-set-alternative_hold-gyro_latest.json",
+    "sha256": "cf51a89b8ecf7ccbc8ee83b6cf5c916cf863fb9d8ffb9b67370032dbf0cf5ce0",
+    "entries": 1020,
+    "empty_entries_by_status": {
+      "active": 214,
+      "unreferenced": 2,
+      "inactive": 14,
+      "mode_shift": 12
+    },
+    "active_pure_empty_by_activation": {
+      "Full_Press": 66,
+      "chord": 132,
+      "release": 4
+    },
+    "active_mixed_empty_entries": 12,
+    "active_guarded_cleanup_entries": 185,
+    "disabled_sources": {
+      "gyro": 15,
+      "left_trackpad": 9,
+      "right_trackpad": 8
+    },
+    "always_on_layers": [
+      {
+        "title": "L2: Double Tap",
+        "timer_entries": [
+          "A:893:always_on_action:activators:Full_Press:0",
+          "A:893:always_on_action:activators:Full_Press:1"
+        ],
+        "entries": [
+          {
+            "id": "A:256:edge:activators:release:0",
+            "line": 3175,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Gyro | L2: Modifier 0}} 0 0, , ",
+              "controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
+              "controller_action add_layer {{Base::L2: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:899:edge:activators:release:0",
+            "line": 8351,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L2: Scroll Down}} 0 0, , ",
+              "controller_action add_layer {{Base::L2: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:12922:edge:activators:release:0",
+            "line": 12700,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Gyro | L2: Modifier 0}} 0 0, , ",
+              "controller_action remove_layer {{Base::L2: Modifier 0}} 0 0, , ",
+              "controller_action add_layer {{Base::L2: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "A:891:edge:activators:Full_Press:0",
+            "line": 8232,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L2: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::L2: Scroll Down}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:922:touch:activators:release:0",
+            "line": 8496,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L2: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:923:touch:activators:release:0",
+            "line": 8525,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L2: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:893:always_on_action:activators:Full_Press:0",
+            "line": 16801,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::L2: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "A:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:923:touch:activators:release:0"
+            ],
+            "groups": [
+              "923"
+            ]
+          },
+          {
+            "base_entry": "A:13:edge:activators:Full_Press:0",
+            "source": "left_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:891:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "891"
+            ]
+          },
+          {
+            "base_entry": "A:14:edge:activators:Full_Press:0",
+            "source": "right_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:892:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "892"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:922:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "922"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:922:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "922"
+            ]
+          },
+          {
+            "base_entry": "A:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:922:touch:activators:release:0"
+            ],
+            "groups": [
+              "922"
+            ]
+          },
+          {
+            "base_entry": "A:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "927"
+            ]
+          },
+          {
+            "base_entry": "A:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "925"
+            ]
+          },
+          {
+            "base_entry": "A:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "925"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:893:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "893"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:893:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "893"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "R2: Double Tap",
+        "timer_entries": [
+          "A:897:always_on_action:activators:Full_Press:0",
+          "A:897:always_on_action:activators:Full_Press:1"
+        ],
+        "entries": [
+          {
+            "id": "A:259:edge:activators:release:0",
+            "line": 3289,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Gyro | R2: Modifier 1}} 0 0, , ",
+              "controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
+              "controller_action add_layer {{Base::R2: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:904:edge:activators:release:0",
+            "line": 8449,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R2: Scroll Up}} 0 0, , ",
+              "controller_action add_layer {{Base::R2: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:12941:edge:activators:release:0",
+            "line": 13306,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Gyro | R2: Modifier 1}} 0 0, , ",
+              "controller_action remove_layer {{Base::R2: Modifier 1}} 0 0, , ",
+              "controller_action add_layer {{Base::R2: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "A:896:edge:activators:Full_Press:0",
+            "line": 8308,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R2: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::R2: Scroll Up}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:928:touch:activators:release:0",
+            "line": 8613,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R2: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:929:touch:activators:release:0",
+            "line": 8642,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R2: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:897:always_on_action:activators:Full_Press:0",
+            "line": 16877,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::R2: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "A:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:929:touch:activators:release:0"
+            ],
+            "groups": [
+              "929"
+            ]
+          },
+          {
+            "base_entry": "A:13:edge:activators:Full_Press:0",
+            "source": "left_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:895:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "895"
+            ]
+          },
+          {
+            "base_entry": "A:14:edge:activators:Full_Press:0",
+            "source": "right_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:896:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "896"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:928:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "928"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:928:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "928"
+            ]
+          },
+          {
+            "base_entry": "A:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:928:touch:activators:release:0"
+            ],
+            "groups": [
+              "928"
+            ]
+          },
+          {
+            "base_entry": "A:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "930"
+            ]
+          },
+          {
+            "base_entry": "A:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "931"
+            ]
+          },
+          {
+            "base_entry": "A:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "931"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:897:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "897"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:897:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "897"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "LST: Double Tap",
+        "timer_entries": [
+          "A:753:always_on_action:activators:Full_Press:0"
+        ],
+        "entries": [
+          {
+            "id": "A:851:touch:activators:release:0",
+            "line": 8049,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::LST: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "A:763:touch:activators:release:0",
+            "line": 6971,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::LST: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:769:touch:activators:Full_Press:0",
+            "line": 7029,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::LST: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:753:always_on_action:activators:Full_Press:0",
+            "line": 16549,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::LST: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "A:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:769:touch:activators:Full_Press:0"
+            ],
+            "groups": [
+              "769"
+            ]
+          },
+          {
+            "base_entry": "A:13:edge:activators:Full_Press:0",
+            "source": "left_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:751:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "751"
+            ]
+          },
+          {
+            "base_entry": "A:14:edge:activators:Full_Press:0",
+            "source": "right_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:752:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "752"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:763:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "763"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:763:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "763"
+            ]
+          },
+          {
+            "base_entry": "A:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:763:touch:activators:release:0"
+            ],
+            "groups": [
+              "763"
+            ]
+          },
+          {
+            "base_entry": "A:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "858"
+            ]
+          },
+          {
+            "base_entry": "A:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "859"
+            ]
+          },
+          {
+            "base_entry": "A:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "859"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:753:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "753"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:753:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "753"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "RST: Double Tap",
+        "timer_entries": [
+          "A:749:always_on_action:activators:Full_Press:0"
+        ],
+        "entries": [
+          {
+            "id": "A:849:touch:activators:release:0",
+            "line": 8002,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::RST: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "A:762:touch:activators:Full_Press:0",
+            "line": 6933,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RST: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:768:touch:activators:release:0",
+            "line": 7000,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RST: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:749:always_on_action:activators:Full_Press:0",
+            "line": 16484,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RST: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "A:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:768:touch:activators:release:0"
+            ],
+            "groups": [
+              "768"
+            ]
+          },
+          {
+            "base_entry": "A:13:edge:activators:Full_Press:0",
+            "source": "left_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:747:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "747"
+            ]
+          },
+          {
+            "base_entry": "A:14:edge:activators:Full_Press:0",
+            "source": "right_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:748:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "748"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:762:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "762"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:762:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "762"
+            ]
+          },
+          {
+            "base_entry": "A:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:762:touch:activators:Full_Press:0"
+            ],
+            "groups": [
+              "762"
+            ]
+          },
+          {
+            "base_entry": "A:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "856"
+            ]
+          },
+          {
+            "base_entry": "A:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "857"
+            ]
+          },
+          {
+            "base_entry": "A:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "857"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:749:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "749"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:749:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "749"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "RTP: Double Tap",
+        "timer_entries": [
+          "A:989:always_on_action:activators:Full_Press:0"
+        ],
+        "entries": [
+          {
+            "id": "A:1032:touch:activators:release:0",
+            "line": 9300,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "A:1023:touch:activators:release:0",
+            "line": 9185,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1024:touch:activators:release:0",
+            "line": 9214,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1298:dpad_north:activators:Full_Press:0",
+            "line": 11424,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::RTP: Circular Scroll}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1298:dpad_south:activators:Full_Press:0",
+            "line": 11441,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::RTP: Circular Scroll}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1298:dpad_east:activators:Full_Press:0",
+            "line": 11458,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1298:dpad_west:activators:Full_Press:0",
+            "line": 11471,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1298:edge:activators:Full_Press:0",
+            "line": 11484,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:989:always_on_action:activators:Full_Press:0",
+            "line": 17084,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::RTP: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "A:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1024:touch:activators:release:0"
+            ],
+            "groups": [
+              "1024"
+            ]
+          },
+          {
+            "base_entry": "A:13:edge:activators:Full_Press:0",
+            "source": "left_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:987:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "987"
+            ]
+          },
+          {
+            "base_entry": "A:14:edge:activators:Full_Press:0",
+            "source": "right_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:988:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "988"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1023:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1023"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1023:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1023"
+            ]
+          },
+          {
+            "base_entry": "A:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1023:touch:activators:release:0"
+            ],
+            "groups": [
+              "1023"
+            ]
+          },
+          {
+            "base_entry": "A:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1027"
+            ]
+          },
+          {
+            "base_entry": "A:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source mode replaced; runtime inheritance check",
+            "own_entries": [],
+            "groups": [
+              "1298"
+            ]
+          },
+          {
+            "base_entry": "A:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source mode replaced; runtime inheritance check",
+            "own_entries": [],
+            "groups": [
+              "1298"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:989:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "989"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:989:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "989"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Menu Left: Double Tap",
+        "timer_entries": [
+          "A:1047:always_on_action:activators:Full_Press:0",
+          "A:1047:always_on_action:activators:Full_Press:1"
+        ],
+        "entries": [
+          {
+            "id": "A:871:button_menu:activators:release:0",
+            "line": 16691,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Left: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1115:button_menu:activators:release:0",
+            "line": 17365,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Escape}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Left: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "A:1165:touch:activators:release:0",
+            "line": 10103,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1166:touch:activators:release:0",
+            "line": 10132,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1047:button_menu:activators:Full_Press:0",
+            "line": 17129,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Left: Escape}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1047:always_on_action:activators:Full_Press:0",
+            "line": 17163,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Left: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "A:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1166:touch:activators:release:0"
+            ],
+            "groups": [
+              "1166"
+            ]
+          },
+          {
+            "base_entry": "A:13:edge:activators:Full_Press:0",
+            "source": "left_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1045:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1045"
+            ]
+          },
+          {
+            "base_entry": "A:14:edge:activators:Full_Press:0",
+            "source": "right_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1046:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1046"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1165:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1165"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1165:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1165"
+            ]
+          },
+          {
+            "base_entry": "A:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1165:touch:activators:release:0"
+            ],
+            "groups": [
+              "1165"
+            ]
+          },
+          {
+            "base_entry": "A:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1148"
+            ]
+          },
+          {
+            "base_entry": "A:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1149"
+            ]
+          },
+          {
+            "base_entry": "A:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1149"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1047:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1047"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1047:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1047"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Menu Right: Double Tap",
+        "timer_entries": [
+          "A:1051:always_on_action:activators:Full_Press:0",
+          "A:1051:always_on_action:activators:Full_Press:1"
+        ],
+        "entries": [
+          {
+            "id": "A:1119:button_escape:activators:release:0",
+            "line": 17430,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Tab}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Right: Double Tap}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:13041:button_escape:activators:release:0",
+            "line": 18454,
+            "pass_add_last": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Entry Point}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Right: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "exits": [
+          {
+            "id": "A:1167:touch:activators:release:0",
+            "line": 10171,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1168:touch:activators:release:0",
+            "line": 10200,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Double Tap}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
+              "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1051:button_escape:activators:Full_Press:0",
+            "line": 17198,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Double Tap}} 0 0, , ",
+              "controller_action add_layer {{Base::Menu Right: Tab}} 0 0, , "
+            ]
+          },
+          {
+            "id": "A:1051:always_on_action:activators:Full_Press:0",
+            "line": 17242,
+            "pass_self_first": true,
+            "execution_order": [
+              "controller_action remove_layer {{Base::Menu Right: Double Tap}} 0 0, , "
+            ]
+          }
+        ],
+        "base_routes": [
+          {
+            "base_entry": "A:12:touch:activators:Full_Press:0",
+            "source": "joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1168:touch:activators:release:0"
+            ],
+            "groups": [
+              "1168"
+            ]
+          },
+          {
+            "base_entry": "A:13:edge:activators:Full_Press:0",
+            "source": "left_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1049:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1049"
+            ]
+          },
+          {
+            "base_entry": "A:14:edge:activators:Full_Press:0",
+            "source": "right_trigger",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1050:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1050"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1167:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1167"
+            ]
+          },
+          {
+            "base_entry": "A:15:edge:activators:chord:0",
+            "source": "right_joystick",
+            "input": "edge",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1167:edge:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1167"
+            ]
+          },
+          {
+            "base_entry": "A:15:touch:activators:Full_Press:0",
+            "source": "right_joystick",
+            "input": "touch",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1167:touch:activators:release:0"
+            ],
+            "groups": [
+              "1167"
+            ]
+          },
+          {
+            "base_entry": "A:190:click:activators:Soft_Press:0",
+            "source": "left_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_west:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_west",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_east:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_east",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_north:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_north",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "A:190:dpad_south:activators:Full_Press:0",
+            "source": "left_trackpad",
+            "input": "dpad_south",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1144"
+            ]
+          },
+          {
+            "base_entry": "A:562:click:activators:Soft_Press:0",
+            "source": "right_trackpad",
+            "input": "click",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1145"
+            ]
+          },
+          {
+            "base_entry": "A:562:touch:activators:Full_Press:0",
+            "source": "right_trackpad",
+            "input": "touch",
+            "status": "source disabled",
+            "own_entries": [],
+            "groups": [
+              "1145"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_escape:activators:chord:0",
+            "source": "switch",
+            "input": "button_escape",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1051:button_escape:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1051"
+            ]
+          },
+          {
+            "base_entry": "A:10:button_menu:activators:chord:0",
+            "source": "switch",
+            "input": "button_menu",
+            "status": "input explicitly redefined",
+            "own_entries": [
+              "A:1051:button_menu:activators:Full_Press:0"
+            ],
+            "groups": [
+              "1051"
+            ]
+          }
+        ]
+      }
+    ],
+    "layers": [
+      {
+        "title": "Base",
+        "runtime_id": 1,
+        "preset": "Preset_1000001",
+        "pure_empty_by_activation": {
+          "Full_Press": 1,
+          "chord": 1
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Turning Ramp Up 0",
+        "runtime_id": 2,
+        "preset": "Preset_1000005",
+        "pure_empty_by_activation": {
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Turning Ramp Up 1",
+        "runtime_id": 3,
+        "preset": "Preset_1000008",
+        "pure_empty_by_activation": {
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L2: Modifier 0",
+        "runtime_id": 4,
+        "preset": "Preset_1000009",
+        "pure_empty_by_activation": {
+          "chord": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 16,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R2: Modifier 1",
+        "runtime_id": 5,
+        "preset": "Preset_1000010",
+        "pure_empty_by_activation": {
+          "chord": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 16,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L2!R2: Modifier 2",
+        "runtime_id": 6,
+        "preset": "Preset_1000011",
+        "pure_empty_by_activation": {
+          "chord": 14,
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 13,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R2!L2: Modifier 2",
+        "runtime_id": 7,
+        "preset": "Preset_1000012",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 14
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 13,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro",
+        "runtime_id": 8,
+        "preset": "Preset_1000029",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro | L2: Modifier 0",
+        "runtime_id": 9,
+        "preset": "Preset_1000033",
+        "pure_empty_by_activation": {
+          "chord": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 16,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro | R2: Modifier 1",
+        "runtime_id": 10,
+        "preset": "Preset_1000042",
+        "pure_empty_by_activation": {
+          "chord": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 16,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro | L2!R2: Modifier 2",
+        "runtime_id": 11,
+        "preset": "Preset_1000043",
+        "pure_empty_by_activation": {
+          "chord": 14,
+          "Full_Press": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 13,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro | R2!L2: Modifier 2",
+        "runtime_id": 12,
+        "preset": "Preset_1000044",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 14
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 13,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "LST: Temporary Gyro",
+        "runtime_id": 13,
+        "preset": "Preset_1000045",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RST: Temporary Gyro",
+        "runtime_id": 14,
+        "preset": "Preset_1000054",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Gyro Off Ramp Up",
+        "runtime_id": 15,
+        "preset": "Preset_1000060",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "LTP: Arrow Keys",
+        "runtime_id": 16,
+        "preset": "Preset_1000061",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RTP: Mouse Buttons",
+        "runtime_id": 17,
+        "preset": "Preset_1000064",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RTP: Circular Scroll",
+        "runtime_id": 18,
+        "preset": "Preset_1000069",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L2: Scroll Down",
+        "runtime_id": 19,
+        "preset": "Preset_1000070",
+        "pure_empty_by_activation": {
+          "chord": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 3,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R2: Scroll Up",
+        "runtime_id": 20,
+        "preset": "Preset_1000073",
+        "pure_empty_by_activation": {
+          "chord": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 3,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Escape",
+        "runtime_id": 21,
+        "preset": "Preset_1000074",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Tab",
+        "runtime_id": 22,
+        "preset": "Preset_1000075",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Backspace",
+        "runtime_id": 23,
+        "preset": "Preset_1000077",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Enter",
+        "runtime_id": 24,
+        "preset": "Preset_1000079",
+        "pure_empty_by_activation": {
+          "chord": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Escape",
+        "runtime_id": 25,
+        "preset": "Preset_1000081",
+        "pure_empty_by_activation": {
+          "Full_Press": 4
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Backspace",
+        "runtime_id": 26,
+        "preset": "Preset_1000082",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Fn Layer",
+        "runtime_id": 27,
+        "preset": "Preset_1000083",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 12
+        },
+        "mixed_empty_entries": 1,
+        "guarded_cleanup_entries": 19,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Tab",
+        "runtime_id": 28,
+        "preset": "Preset_1000087",
+        "pure_empty_by_activation": {
+          "Full_Press": 4
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Enter",
+        "runtime_id": 29,
+        "preset": "Preset_1000090",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Fn Layer",
+        "runtime_id": 30,
+        "preset": "Preset_1000091",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 12
+        },
+        "mixed_empty_entries": 1,
+        "guarded_cleanup_entries": 19,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "LST: Entry Point",
+        "runtime_id": 31,
+        "preset": "Preset_1000092",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RST: Entry Point",
+        "runtime_id": 32,
+        "preset": "Preset_1000093",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RTP: Entry Point",
+        "runtime_id": 33,
+        "preset": "Preset_1000098",
+        "pure_empty_by_activation": {
+          "chord": 1
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 1,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Entry Point",
+        "runtime_id": 34,
+        "preset": "Preset_1000099",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 3
+        },
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Entry Point",
+        "runtime_id": 35,
+        "preset": "Preset_1000105",
+        "pure_empty_by_activation": {
+          "Full_Press": 2,
+          "chord": 3
+        },
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 2,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "L2: Double Tap",
+        "runtime_id": 36,
+        "preset": "Preset_1000106",
+        "pure_empty_by_activation": {
+          "Full_Press": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "right_trackpad",
+          "left_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "R2: Double Tap",
+        "runtime_id": 37,
+        "preset": "Preset_1000107",
+        "pure_empty_by_activation": {
+          "Full_Press": 3
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "LST: Double Tap",
+        "runtime_id": 38,
+        "preset": "Preset_1000114",
+        "pure_empty_by_activation": {
+          "Full_Press": 5
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "RST: Double Tap",
+        "runtime_id": 39,
+        "preset": "Preset_1000115",
+        "pure_empty_by_activation": {
+          "Full_Press": 5
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "RTP: Double Tap",
+        "runtime_id": 40,
+        "preset": "Preset_1000116",
+        "pure_empty_by_activation": {
+          "Full_Press": 5
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "Menu Left: Double Tap",
+        "runtime_id": 41,
+        "preset": "Preset_1000117",
+        "pure_empty_by_activation": {
+          "Full_Press": 4
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad",
+          "gyro"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "Menu Right: Double Tap",
+        "runtime_id": 42,
+        "preset": "Preset_1000131",
+        "pure_empty_by_activation": {
+          "Full_Press": 4
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "left_trackpad",
+          "right_trackpad",
+          "gyro"
+        ],
+        "always_on": true
+      },
+      {
+        "title": "L2: Tap Cover",
+        "runtime_id": 43,
+        "preset": "Preset_1000132",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R2: Tap Cover",
+        "runtime_id": 44,
+        "preset": "Preset_1000133",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L2&R2: Tap Cover",
+        "runtime_id": 45,
+        "preset": "Preset_1000134",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 2,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "LST: Tap Cover",
+        "runtime_id": 46,
+        "preset": "Preset_1000139",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RST: Tap Cover",
+        "runtime_id": 47,
+        "preset": "Preset_1000143",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "RTP: Tap Cover",
+        "runtime_id": 48,
+        "preset": "Preset_1000147",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "L2: Double Tap Cover",
+        "runtime_id": 49,
+        "preset": "Preset_1000148",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "R2: Double Tap Cover",
+        "runtime_id": 50,
+        "preset": "Preset_1000149",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [],
+        "always_on": false
+      },
+      {
+        "title": "Menu Left: Double Tap Cover",
+        "runtime_id": 51,
+        "preset": "Preset_1000150",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Menu Right: Double Tap Cover",
+        "runtime_id": 52,
+        "preset": "Preset_1000151",
+        "pure_empty_by_activation": {},
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 0,
+        "disabled_sources": [
+          "gyro"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Transition Set 0",
+        "runtime_id": 53,
+        "preset": "Preset_1000152",
+        "pure_empty_by_activation": {
+          "Full_Press": 4,
+          "chord": 6,
+          "release": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 3,
+        "disabled_sources": [
+          "gyro",
+          "right_trackpad",
+          "left_trackpad"
+        ],
+        "always_on": false
+      },
+      {
+        "title": "Transition Set 1",
+        "runtime_id": 54,
+        "preset": "Preset_1000155",
+        "pure_empty_by_activation": {
+          "Full_Press": 4,
+          "chord": 6,
+          "release": 2
+        },
+        "mixed_empty_entries": 0,
+        "guarded_cleanup_entries": 3,
+        "disabled_sources": [
+          "gyro",
+          "left_trackpad",
+          "right_trackpad"
+        ],
+        "always_on": false
+      }
+    ]
+  }
+]

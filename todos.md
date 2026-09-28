@@ -34,7 +34,7 @@
 - [ ] Steam button recovery:
   - Hold a menu button until its Fn layer is up, press the Steam button, let go, and close the Steam menu
   - RS to the edge (or a face button) clears the Fn and entry layers, and the menu buttons work normally again
-  - Expected gap until the cleanup todo in Bugs is done: with Enter / Backspace also up, that layer survives, and the next Start / Select press sends Enter / Backspace
+  - Enter / Backspace can survive the lower stack's cleanup. Another related-button press/release is an accepted lightweight-cover tradeoff; verify the local exit then restores the underlying controls. Gyro suppression during menu use is intentional
 - [ ] Stuck entry layer (for example, the Steam button within 300 ms of a menu press)
   - The other menu button clears it and then works normally
   - In the alternative, RS to the edge no longer makes it worse
@@ -122,7 +122,12 @@
 
 ## Sticks
 
-- [ ] Add left stick layer cleanups to match right stick cleanup behavior
+- [ ] Add left-stick edge cleanup only where needed, matching appropriate right-stick recovery
+  - Review the 15 non-ramp candidates in cleanup audit F4 individually; these are not 15 mandatory additions. The Fn layers already cover both edges
+  - LS edge cleanup overrides the inherited WASD modifier; RS edge cleanup overrides ramp-up. Prefer an adequate existing recovery path when an edge override would unnecessarily remove those functions
+  - Ramp-up is more frequently blocked because its layer add/remove logic carries timer and ordering constraints; that asymmetry alone does not justify another LS cleanup
+  - Preserve each exit's guards and family scope, movement behavior, timer protection, and Always On isolation; trace inherited LS-edge bindings through Double Tap windows before adding lower-layer cleanup
+  - Document the recovery need and inherited action displaced for each chosen layer; see [the edge-cleanup tradeoff](resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions)
 - [ ] Add WASD modifier scaffold (user-defined)
   - Empty bind on left stick (soft press) for WASD modifier
   - Supports: WASD only, modifier only, or both (hipfire aggressive / relax compatible)
@@ -140,24 +145,23 @@
 - [ ] Fix tap cover / menu entry bug (start delay interrupt)
 - [ ] Fix tap covers not properly re-adding after interrupt
 - [ ] Split menu entry layer into separate Menu Left / Menu Right layers
-- [ ] Add the Enter / Backspace layers to the menu cleanups
-  - Why: after the Steam button, Menu Left: Backspace can be left on top of Menu Right: Fn Layer and its entry layer with no menu button held
-    - Today only Select's release removes it, so the next Select press sends Backspace
-    - Menu Right: Enter over Menu Left: Fn Layer is the mirror case
-  - Follow the existing Fn-layer pattern: add the layer to the chord-guarded cleanups that already remove the Fn and entry layers, at minimum on the stick edges
-    - The Menu Left entry and Fn layers clear Menu Right: Enter
-    - The Menu Right ones clear Menu Left: Backspace
-  - Not in the Fn layers' own menu button release: lifting the first button while the second is held would drop the layer and bring back the stray Tab / Escape
-  - Background: [stuck layers](resources/Steam%20Input%20JSON%20Structure.md#stuck-layers-and-why-there-is-so-much-cleanup)
+- [x] Confirm menu helper/cover overrides are intentional within the lightweight design
+  - Keep Backspace / Enter, Escape / Tab, and the two Menu Double Tap Covers local to their button/action; the underlying stack owns recovery. Release-only cleanup and another related-button press are accepted tradeoffs, not automatic reasons to add edge cleanup
+  - Author confirmed: Start/Select menu interactions are not used during gameplay. Preserve disabled gyro in all six layers and the Escape / Tab RS-edge blocks; WASD modifiers and ramp-up are not required in menu context
+  - Preserve the still-held second menu button; do not add Enter / Backspace removal to the first Fn button's release
+  - Background: [lightweight covers and inherited cleanup](resources/Steam%20Input%20JSON%20Structure.md#lightweight-covers-and-inherited-cleanup) and both audits
 
 ## Layer cleanup
 
-- [ ] Audit every cleanup binding in both layouts
-  - For each layer, record how it's entered and every way it's removed: release, chord-guarded cleanups on other inputs, stick edge / touch / click, and timed self-removal
-  - Check that every layer that can be left on (for example after the Steam button) has an exit that needs no button held and isn't blocked by the layers above it
-  - Check that no cleanup can fire during normal use
-  - Check that each cleanup list includes every related layer. New layers are easy to miss, like Enter / Backspace
-- [ ] Document every cleanup in detail from the audit, layer by layer, extending the [stuck layers](resources/Steam%20Input%20JSON%20Structure.md#stuck-layers-and-why-there-is-so-much-cleanup) section
+- [x] Complete the static [cleanup audit](findings/2026-09-28-neptune-cleanup-audit/AUDIT.md) and [blocking audit](findings/2026-09-28-neptune-blocking-audit/AUDIT.md) for both layouts, including all layers, entry/exit references, dormant groups, and Always On ordering
+- [x] Document per-layer cleanup and blocking, with [concrete scope examples](resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) and guidance in the editing skills
+- [ ] Validate recovery on the Deck after missed releases, in both layouts
+  - Trace the underlying recovery owner and which overlays expose or block it; do not require every lightweight cover to duplicate that recovery
+  - Stale-state fallbacks must preserve valid held interactions. Normal releases, delayed-apply resets, timed expiry, and deliberate transitions are allowed during normal use
+  - Verify intended survivors, including persistent Gyro, the still-held modifier side, and accepted residual covers; record when another gesture is needed
+- [ ] Verify whether interrupted transitions can leave both Mod 2 press orders active and cause a recovery problem
+  - Retain the nine-layer current-branch fallback unless that problem is demonstrated; do not automatically expand it to eleven removals
+  - Preserve the combined tap cover's eight-layer released-side cleanup and persistent Gyro. The uncovered Mod 2 release has a separate eleven-layer cleanup plus an intentional Gyro state change
 
 ## Carried over
 

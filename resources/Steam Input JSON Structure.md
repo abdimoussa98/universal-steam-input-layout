@@ -312,6 +312,107 @@ presence does not mean this workaround was applied to the trackpad-touch path.
 See the [R1 and L1&R1 tap-cover findings](../findings/2026-09-27-r1-tap-cover/FINDINGS.md)
 for exact groups, source locations, the Neptune comparison, and supporting research.
 
+#### Blocking to Protect Layer Timers
+
+Blocking is part of the layout's state management. The author reports that layer
+removals can reset Fire Start Delay timers. A repeating removal is useful when
+deliberately restarting an interrupted apply, but an unrelated removal can
+disturb a timer that should be left alone. Unrelated additions can also change
+which layer owns the input. Do not add broad cleanup or repeated layer commands
+to an apparently unused input without checking the timing state it protects.
+
+The layouts use several distinct forms of blocking:
+
+- **Explicit empty binding:** suppress the lower action for the configured
+  input/event. An empty chord can block only while its selector is held.
+- **Chord protection:** the valid held-button action, either a real output or
+  an empty binding, interrupts the Regular Press cleanup on that input.
+- **Disabled source mode:** an active group with `mode: "disabled"` disables
+  that source, such as a trackpad or gyro. This is different from an `inactive`
+  alternate group, which is not currently applied.
+- **Replacement output or release:** a scroll/key/mouse action replaces a
+  lower layer-changing action; a cover's release replaces a tap-producing exit.
+- **Ordered exit:** remove a protected timed layer before executing any other
+  layer changes. This permits a controlled transition rather than an unrelated
+  mutation while that timed layer remains active.
+
+An `empty_binding` subcommand inside an array containing real actions does not
+cancel the rest of the array. Likewise, an empty `inputs` object, an omitted
+binding, or an inactive group is not evidence of an explicit input block.
+Layer/source inheritance and the currently exposed input must be considered.
+
+#### Always-On Layer Isolation and the Historical Crash Workaround
+
+**Author-reported historical bug, documented 2026-09-28:** adding or removing
+other layers while a layer with an Always On binding remained active caused
+severe crashes. The affected client build/date and exact internal cause are not
+known. The bug may have been fixed; no matching Valve fix or current runtime
+reproduction was confirmed in this audit. The isolation and ordering below
+remain requirements of these layouts, not claims that every current Steam
+client still crashes.
+
+The workaround isolates the short-lived Double Tap layers:
+
+1. **Before entry, finish other layer changes; add the Always On layer last.**
+2. **While it is active, block unrelated layer additions/removals**, including
+   inherited routes. Normal key/mouse/movement output need not be disabled.
+3. **On timeout, remove only that timed layer.**
+4. **For an early exit, remove the timed layer first**, then remove other
+   layers or add the next layer. Self-removal is the permitted exception; it
+   must execute before the other layer operations, not merely appear somewhere
+   in the same array.
+
+Arrays execute bottom to top. These are actual default-layout patterns, shown
+with readable titles (alternative uses L2/R2 modifier names):
+
+**Entry from L1 Modifier 0 release:**
+
+```json
+[
+  "controller_action add_layer {{Base::L1: Double Tap}} 0 0, , ",
+  "controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
+  "controller_action remove_layer {{Base::Gyro | L1: Modifier 0}} 0 0, , "
+]
+```
+
+Execution: remove the Gyro modifier, remove the regular modifier, then add
+Double Tap. Never move that timed-layer addition below the other operations.
+
+**Second-press exit from L1 Double Tap:**
+
+```json
+[
+  "controller_action add_layer {{Base::L1: Scroll Down}} 0 0, , ",
+  "controller_action remove_layer {{Base::L1: Double Tap}} 0 0, , "
+]
+```
+
+Execution: remove Double Tap first, then add Scroll Down. Cross-gesture exits
+follow the same rule: their Double Tap self-removal is at the bottom, before
+the stored RST/LST cleanup subcommands execute. Do not sort these lists by
+layer ID, name, or a blanket self-last cleanup convention.
+
+There are **seven Always On layers** in each 90.2 layout: the two modifier Double
+Tap layers, LST/RST/RTP Double Tap, and Menu Left/Right Double Tap. LST/RST time
+out after 200 ms; the other five after 150 ms. The two modifier and two menu
+windows also send a scroll/key output after 50 ms. Those outputs are not layer
+mutations. **Double Tap Covers are separate layers and have no Always On bind.**
+
+The [blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md)
+checks every layer and confirms all 13 active entry bindings add the timed layer
+last and all 30 directly owned layer-changing bindings remove it first in each
+variant. Trackpads are disabled during most windows; RTP Double Tap keeps its
+right pad for the intended selection, with self-removal before Circular Scroll.
+Menu inputs, RS edge, and modifier routes are explicitly blocked or replaced.
+This validates configured ordering, not arbitrary stale-stack inheritance or
+the absence of a crash on a current client.
+
+**Cleanup audits must preserve these protections.** An empty binding is not
+automatically a missing cleanup. Classify the reason for the block first. If a
+new recovery exit is needed inside an Always On layer, remove that layer first
+in the same entry, then perform the recovery. Preserve the separate RTP
+trackball-momentum exception to repeating delayed-apply resets.
+
 **Common Group Modes:**
 
 | Mode | Description |
@@ -362,11 +463,14 @@ preset[].group_source_bindings = {
 
 2. **Layer Applied**: When a layer is activated:
    - The layer's preset entry is loaded
-   - Bindings from the layer **overlay** (replace) the parent Action Set's bindings
-   - Only the inputs defined in the layer's groups are affected
-   - Inputs not defined in the layer retain the parent set's behavior
+   - Bindings from the layer **overlay** (replace) the exposed lower bindings
+   - Unchanged inputs can inherit from the remaining layer stack, not just the Base set
+   - Source settings and mode replacements also matter: an active `disabled` gyro
+     group overrides gyro even when it has no explicit input activators
 
-3. **Layer Deactivated**: When the layer is released, the controller reverts to the parent Action Set's bindings.
+3. **Layer Deactivated**: Removing the layer exposes the remaining stack's bindings,
+   or the parent Action Set when no lower layer overrides that input. Do not assume
+   the triggering event is replayed into a newly exposed cleanup; that needs a runtime check.
 
 **Example Flow:**
 ```
@@ -404,17 +508,22 @@ The whole stack is still active: `Menu Right: Entry Point`, `Menu Right: Fn Laye
 `Menu Left: Backspace`. Pressing Select now sends Backspace, because `Menu Left: Backspace`
 still owns that button.
 
-**So no layer should rely on its release alone.** Most layers also clear themselves from
-inputs you're likely to touch next: the sticks, the face buttons, the other menu button.
-In the default 90.2 layout, about 330 activators in active groups remove layers.
+**Recovery belongs to the interaction that owns the stack.** Modifier, Fn, and
+entry layers provide backup exits on likely next inputs: sticks, face buttons,
+or the other menu button. Lightweight covers can keep a narrow release exit and
+inherit the underlying recovery instead of duplicating it. A residual cover
+requiring another related-button press is an accepted tradeoff within the intended
+interaction context; menu layers deliberately restrict gameplay controls. See
+[cleanup scopes and examples](#cleanup-scopes-and-concrete-examples).
+Each 90.2 layout has 328 activators in active groups that explicitly remove layers.
 
 Most of these backup exits follow one pattern, on one input:
 
 - **A chord with the button (or stick touch) that normally holds the layer open.** In
   normal use that button is held, so the chord fires. It sends the layer's real output,
   or an empty binding.
-- **A Regular Press that removes the layer and its related layers,** usually with Hold to
-  Repeat. It keeps the default Interruptable setting, so the chord suppresses it during
+- **A Regular Press that removes the layer and its related layers,** with Hold to
+  Repeat on selected recovery inputs. It keeps the default Interruptable setting, so the chord suppresses it during
   normal use. It only fires when the button isn't held, which is exactly the stuck case.
 
 `L1: Modifier 0`'s right stick shows the pattern on three inputs:
@@ -442,18 +551,174 @@ Other kinds of cleanup:
 
 **When you add or change a layer:**
 
-- **Give it an exit that needs no button held.** Put it on an input that the layers above it
-  don't block.
-- **Add it to the cleanup lists of the layers it's used with.** The menu split added
-  `Menu Left: Backspace` and `Menu Right: Enter`, but no cleanup removes them yet (tracked
-  in `todos.md`). In the example above, the stick edge clears the Fn and entry layers but
-  leaves `Menu Left: Backspace`.
-- **Keep removals out of places that normal use can trigger.** A removal must not fire while
-  the layer's button is still held. For example, `Menu Left: Fn Layer`'s Select release must
-  not remove `Menu Right: Enter`: if you let go of Select first while Start is still held,
-  Start would fall through to Base and send a stray Tab on release.
-- **Watch for empty bindings.** An empty binding in a stuck layer can also hide the cleanups
-  below it; see the next section.
+- **Identify who owns recovery.** For a stack-owning layer, trace an eligible fallback
+  and the overlays that might hide it. For a lightweight cover, check its local exit
+  and inherited behavior before adding independent cleanup inputs.
+- **Choose the scope for that exit.** Remove only the state that exit owns. Review
+  related cleanup lists against their promised scope; a new layer does not require
+  adding its removal everywhere. Self-only, current-branch, released-side, and full
+  family exits are all valid for different purposes.
+- **Guard stale-state recovery during valid holds.** This rule does not forbid normal
+  releases, deliberate transitions, timed expiry, or delayed-apply resets. For example,
+  `Menu Left: Fn Layer`'s Select release must not remove `Menu Right: Enter` while Start
+  remains held: losing that overlay can restore the unwanted Tab release behavior.
+- **Preserve protected timing states.** Empty bindings can hide lower cleanup, but
+  some blocks deliberately protect timers or Always On layers. Trace their purpose
+  before replacing them. Keep Always On entry add-last and exit remove-self-first.
+- **Reserve stick-edge cleanup for layers that need it.** It replaces the inherited
+  edge action: the LS WASD modifier or RS ramp-up. Weigh that loss against the
+  recovery need before adding or mirroring an edge binding.
+
+### Stick-Edge Cleanup and Inherited Actions
+
+**Author's design rule: limit left- and right-stick edge cleanup to layers that
+really need it.** Adding an edge fallback consumes an input that otherwise serves
+the inherited layout. It is not a free extra recovery path.
+
+| Edge overridden by cleanup | Inherited behavior displaced while that override owns the input |
+|---|---|
+| Left stick | The user's WASD modifier, such as Walk, when configured in the Base edge slot; the default slot is empty. This concerns the modifier action, not all WASD movement. |
+| Right stick | The lower ramp-up / gyro-off entry logic and its conditions. |
+
+A held-owner chord protects the layer from premature cleanup, but its empty or
+replacement binding still owns that edge; it does not restore the inherited
+WASD modifier or ramp-up action. Removing the layer exposes lower behavior again,
+but the same gesture is not guaranteed to run both cleanup and the newly exposed
+action.
+
+The author intentionally accepts more restrictions on ramp-up: it uses layer
+add/remove commands and delayed transitions, so it carries the timer-reset,
+ordering, and protected-layer constraints documented above. RS ramp-up is thus
+blocked or overridden by cleanup more often. This does not justify copying each
+RS cleanup onto LS and losing the WASD modifier in all of those layers.
+
+Menu layers are an intentional exception to preserving gameplay availability:
+the author does not use Start/Select menu interactions while playing. WASD
+modifiers and ramp-up need not remain available there, and gyro suppression is
+intentional. Preserve those context-specific overrides; the selective-edge rule
+still applies to gameplay layers where the inherited action is useful.
+
+For each proposed edge cleanup, identify the stuck state it must recover, check
+whether an existing inherited/touch/click/button exit is sufficient, and record
+which inherited action will become unavailable. Add or mirror the edge only
+where that tradeoff is needed. Keep lightweight covers minimal and preserve
+intentional timer blocks. Left/right consistency means matching recovery scope
+and guards **where appropriate**, not equal edge-cleanup coverage everywhere.
+
+The cleanup audit's fifteen RS-only non-ramp layers are therefore a **review
+list**, not fifteen mandatory LS additions. The two Fn layers already implement
+both edges; ramp-stage threshold exits remain specific to right-stick turning.
+
+### Cleanup Scopes and Concrete Examples
+
+Describe a cleanup by both **when it fires** and **what it removes**. A release
+can remove one layer or a family; a guarded fallback does not inherently mean
+clear every active layer. A "stack cleanup" here means a named interaction's
+stack, never a universal clear-all. The following examples describe the current
+90.2 layouts and the author's clarified design, recorded on 2026-09-28.
+
+| Scope | Concrete example | State intentionally left alone |
+|---|---|---|
+| Self only | Menu Left: Backspace removes itself on Select release; Menu Right: Enter does so on Start release | The underlying entry/Fn stack and unrelated interactions |
+| Local pair | Menu Left: Double Tap Cover release removes itself and Menu Left: Escape; the right-side pair is Double Tap Cover + Tab | Other families; no global cleanup |
+| Single-modifier family | L1: Tap Cover release removes the regular/Gyro L1 modifier and L1: Tap Cover | R1's family and persistent Gyro |
+| Current Mod 2 branch | Either L1!R1 regular/Gyro fallback removes nine modifier/cover layers | The opposite-order R1!L1 pair and persistent Gyro |
+| Released side | L1&R1: Tap Cover on L1 release removes eight layers | R1's single-modifier family, which may still be held, and persistent Gyro |
+| Whole modifier family plus mode change | Uncovered Mod 2 release removes all eleven modifier/cover layers and deliberately enables/disables persistent Gyro | Unrelated interaction families |
+| Self only, exposing parent recovery | Transition Set 0/1 guarded fallback removes only that Transition Set | Underlying menu entry/Fn layers, whose cleanup may need a subsequent gesture |
+| Timed self-exit | Double Tap expiry removes its timed owner only | Other stacks; an early transition removes the timed owner first before changing them |
+
+In alternative, replace L1/R1 modifier-family names with L2/R2. The Menu Left /
+Menu Right names and their Select / Start roles do not change.
+
+#### Lightweight Covers and Inherited Cleanup
+
+The author intends these covers and single-action helpers to be applied **on
+top of an existing interaction stack**. They override the related button/action
+and inherit unrelated behavior, including the lower stack's recovery. Repeating
+all of the parent's cleanup inputs in each cover would defeat that lightweight
+design. Release-only cleanup is not, by itself, evidence of a missing fallback.
+
+For example, Menu Right entry/Fn can add `Menu Left: Backspace` when Select is
+pressed. Select's release removes only Backspace; the Menu Right stack owns its
+own recovery. The mirror is Menu Left entry/Fn adding `Menu Right: Enter` on Start.
+Current Fn/entry fallback lists do not remove those helpers. A parent can therefore
+be cleared while a helper remains; the author's accepted tradeoff is another
+related-button press/release to finish the local exit. Do not
+silently add helper removal to the first menu button's release while the second
+button is still held.
+
+`L1: Tap Cover` shows a different inherited-cleanup relationship: it overrides
+the L1 release, while the underlying L1 modifier's guarded RS edge/touch/click
+fallback already removes both modifier variants **and the cover**. The cover
+does not need duplicate fallback bindings of its own. Menu Double Tap Covers
+instead keep a local pair exit with Escape/Tab; neither cover has Always On.
+
+**Menu gameplay suppression is intentional, confirmed by the author.** These
+layers serve Start/Select menu interactions, not simultaneous gameplay. WASD
+modifiers and ramp-up do not need to remain available in that context. All six
+menu layers discussed here—Backspace, Enter, Escape, Tab, and the two Menu Double
+Tap Covers—have active disabled gyro groups; Escape/Tab also explicitly block
+RS edge. Preserve those overrides. "Lightweight" describes local cleanup and
+inherited bindings, not a requirement to pass through every gameplay function.
+After a missed release, use the existing local exit and underlying stack's
+recovery; do not add broad cover cleanup just to remove these intended blocks.
+See the [blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md).
+
+#### Mod 2 Current-Branch Cleanup
+
+Each regular/Gyro Mod 2 variant has thirteen guarded fallbacks using the same
+nine-target scope. For `L1!R1: Modifier 2`, the targets are:
+
+- `L1!R1: Modifier 2` and `Gyro | L1!R1: Modifier 2` — two current-order layers.
+- `L1: Modifier 0`, `Gyro | L1: Modifier 0`, `R1: Modifier 1`, and
+  `Gyro | R1: Modifier 1` — four single-modifier layers.
+- `L1: Tap Cover`, `R1: Tap Cover`, and `L1&R1: Tap Cover` — three covers.
+
+The opposite-order pair is deliberately outside the preserved cleanup scope:
+
+| Fallback in either regular/Gyro variant of | Pair not targeted |
+|---|---|
+| L1!R1: Modifier 2 | R1!L1: Modifier 2 and Gyro \| R1!L1: Modifier 2 |
+| R1!L1: Modifier 2 | L1!R1: Modifier 2 and Gyro \| L1!R1: Modifier 2 |
+
+The entry paths support this interpretation: pressing R1 from the L1 modifier
+adds the L1!R1 branch; pressing L1 from the R1 modifier adds the R1!L1 branch.
+Each entry adds only its corresponding Mod 2 order. The regular/Gyro entry
+variants preserve that relationship, as do alternative's L2/R2 variants.
+Sibling chords suppress fallback while either modifier remains held. The
+fallback does not toggle or remove persistent `Gyro`.
+
+The review decision is to **retain nine-target current-branch recovery**. The
+saved structure supports this scope but cannot establish the original reason
+for choosing nine targets. Check for an actual interrupted sequence that leaves
+both orders active before broadening it. If both remain, one fallback could
+expose the other's recovery and require another gesture; that is not yet a
+demonstrated failure. Additional removals can disturb timers, so widening the
+list is a behavior change, not harmless normalization.
+
+#### Combined Tap Cover: Preserve the Still-Held Side
+
+`L1&R1: Tap Cover` has a different purpose. On **L1 release**, it removes:
+
+- Both Mod 2 orders in regular/Gyro form — four layers.
+- L1's regular/Gyro single modifier and L1: Tap Cover — three layers.
+- The combined L1&R1: Tap Cover itself — one layer.
+
+That is eight removals. It leaves R1's regular/Gyro single modifier and R1: Tap
+Cover untouched so the still-held R1 interaction can continue. R1 release is
+the mirror. This does not apply every survivor; it simply avoids removing them.
+Persistent Gyro is also preserved.
+
+By comparison, **uncovered Mod 2 release** clears the eleven-layer modifier/cover
+family and intentionally changes Gyro state: the regular variant adds Gyro,
+and the Gyro variant removes it as a twelfth removal. Do not copy that wider
+release list or its Gyro toggle into the combined cover or guarded fallback.
+
+These scopes remain subject to the [Always On ordering contract](#always-on-layer-isolation-and-the-historical-crash-workaround)
+and the three-command-entry limit. Subcommand arrays can contain all the listed
+removals within one GUI entry. See the [cleanup audit](../findings/2026-09-28-neptune-cleanup-audit/AUDIT.md)
+for exact activators, targets, source locations, and other scope examples.
 
 ### Empty Bindings and Stuck Layer Cleanup
 
