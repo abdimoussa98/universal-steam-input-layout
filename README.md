@@ -193,6 +193,7 @@ Full case study with pre/post snapshots: `findings/2026-07-11-layer-order-swap/F
 See the `resources/` folder for additional documentation:
 
 - [Steam Input JSON Structure](resources/Steam%20Input%20JSON%20Structure.md) - JSON format, binding execution order, and [interrupted delayed layer applies](resources/Steam%20Input%20JSON%20Structure.md#interrupted-delayed-layer-applies), including the repeating-removal workaround and RTP trackball-momentum exception
+  - [Stuck layers and why there is so much cleanup](resources/Steam%20Input%20JSON%20Structure.md#stuck-layers-and-why-there-is-so-much-cleanup) - how the Steam button leaves layers active with no button held, and the chord-guarded cleanup pattern that recovers from it
 - `Action Sets.md` - List of action set IDs
 - `Layer Reverse Lookup.md` - Complete mapping of layer IDs to names
 

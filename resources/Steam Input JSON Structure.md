@@ -381,6 +381,80 @@ L2 released:
   - Reverts to Base Set bindings
 ```
 
+### Stuck Layers and Why There Is So Much Cleanup
+
+**How a layer gets stuck.** Most layers are removed when the button that opened them is
+released. The layout author has observed that this release can be missed:
+
+1. A layer stack is active.
+2. You press the **Steam button**.
+3. You let go of the buttons while the Steam menu is open.
+4. You close the Steam menu.
+
+The layout never saw the releases, so the layers are still active even though no button
+is held.
+
+For example:
+
+1. Hold Start until `Menu Right: Fn Layer` is up.
+2. Press Select, so `Menu Left: Backspace` goes on top.
+3. Press the Steam button, let go of everything, and close the Steam menu.
+
+The whole stack is still active: `Menu Right: Entry Point`, `Menu Right: Fn Layer` and
+`Menu Left: Backspace`. Pressing Select now sends Backspace, because `Menu Left: Backspace`
+still owns that button.
+
+**So no layer should rely on its release alone.** Most layers also clear themselves from
+inputs you're likely to touch next: the sticks, the face buttons, the other menu button.
+In the default 90.2 layout, about 330 activators in active groups remove layers.
+
+Most of these backup exits follow one pattern, on one input:
+
+- **A chord with the button (or stick touch) that normally holds the layer open.** In
+  normal use that button is held, so the chord fires. It sends the layer's real output,
+  or an empty binding.
+- **A Regular Press that removes the layer and its related layers,** usually with Hold to
+  Repeat. It keeps the default Interruptable setting, so the chord suppresses it during
+  normal use. It only fires when the button isn't held, which is exactly the stuck case.
+
+`L1: Modifier 0`'s right stick shows the pattern on three inputs:
+
+| Input | Chord with LB (normal use) | Regular Press (LB not held, so stuck) |
+|---|---|---|
+| RS edge | empty binding | remove `L1: Modifier 0`, `Gyro \| L1: Modifier 0` and `L1: Tap Cover` (Hold to Repeat) |
+| RS touch | empty binding | the same removal (Hold to Repeat) |
+| RS click | middle mouse button, plus add `L1: Tap Cover` | the same removal |
+
+The Fn layers do the same on almost every input. For example, in `Menu Left: Fn Layer`:
+
+- A chorded with a menu button sends F3.
+- A pressed with no menu button held removes `Menu Left: Fn Layer` and `Menu Left: Entry Point`.
+
+Other kinds of cleanup:
+
+- **Stick touch release:** many layers clear `RST` / `LST: Temporary Gyro`, `Tap Cover`
+  and `Entry Point` when a thumb leaves a stick.
+- **Timed self-removal:** the double-tap windows remove themselves from `always_on_action`
+  after a start delay, for example 150 ms in `Menu Left: Double Tap`.
+- **Delayed-apply resets:** repeating removals that restart an interrupted Fire Start Delay.
+  These solve a different problem; see
+  [Interrupted Delayed Layer Applies](#interrupted-delayed-layer-applies).
+
+**When you add or change a layer:**
+
+- **Give it an exit that needs no button held.** Put it on an input that the layers above it
+  don't block.
+- **Add it to the cleanup lists of the layers it's used with.** The menu split added
+  `Menu Left: Backspace` and `Menu Right: Enter`, but no cleanup removes them yet (tracked
+  in `todos.md`). In the example above, the stick edge clears the Fn and entry layers but
+  leaves `Menu Left: Backspace`.
+- **Keep removals out of places that normal use can trigger.** A removal must not fire while
+  the layer's button is still held. For example, `Menu Left: Fn Layer`'s Select release must
+  not remove `Menu Right: Enter`: if you let go of Select first while Start is still held,
+  Start would fall through to Base and send a stray Tab on release.
+- **Watch for empty bindings.** An empty binding in a stuck layer can also hide the cleanups
+  below it; see the next section.
+
 ### Empty Bindings and Stuck Layer Cleanup
 
 An explicit `controller_action empty_binding` overrides the lower binding for that input;
