@@ -37,10 +37,17 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
 - [ ] Cursor gyro (stateful)
   - Activate via Left Menu + RS click
   - Only remove when both left and right sticks are deflected
-- [ ] Temp cursor gyro
-  - Activate via L1 / R1 holds (tap covers)
-  - Ensure proper add / remove behavior during hold lifecycle
-  - Match Enter / Backspace to current Menu Left / Menu Right behavior
+- [x] Temp cursor gyro
+  - Implemented in both JSON layouts: delayed Mod 0/1 holds apply owner-specific cursor overlays in regular/Gyro variants (L1/R1 default, L2/R2 alternative). See the [implementation and inheritance review](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md), [design](plans/2026-09-29-temp-cursor-gyro.md), and [pending Deck tests](manual-testing.md#temp-cursor-gyro)
+  - Apply Gated Gyro's response/haptic properties after 300 ms: precision 750, haptic intensity 3, haptic bump 1, movement threshold 10. Normal covers restore 0/0/5/0 explicitly. Natural sensitivity remains inherited at 300, and existing activation gates/calibration are preserved
+  - Either stick-touch release completes that apply early, before LST/RST cleanup can reset its delay; see [the documented pattern](resources/Steam%20Input%20JSON%20Structure.md#complete-delayed-applies-on-stick-touch-release)
+  - Regular face/D-pad/click inputs, Start/Select, the opposite modifier, and both sticks deflected about 25% apply the normal cover until the next modifier hold. Trackpad-held face/D-pad mode shifts are the outstanding exception below. An override before 300 ms prevents cursor entry; normal covers replace touch inputs with guarded recovery and LST/RST removals, never cursor additions
+  - Three entries per edge: interruptible owner guard, uninterruptible owner-plus-opposing-stick override, and repeating recovery. LS radius 4915 / RS 7209 account for different hysteresis to target ~25% engagement; earlier cleanup when the owner is absent is accepted. Physical/selector thresholds and chord priority remain Deck checks
+  - Extended owner-family cleanup for cursor overlays while preserving outputs, opposite held owners, and Always On isolation. Periodic delayed-apply reset extensions remain a separate review
+- [ ] Make trackpad-held face/D-pad presses override Temp Cursor Gyro in both layouts
+  - Holding either trackpad inherits Base's key-only mode-shift groups 1039/1043, which do not apply the normal Tap Cover. Those presses can leave cursor behavior active or fail to cancel its pending 300 ms apply; this is not an author-confirmed intentional exclusion
+  - Prefer modifier-specific mode-shift bindings that preserve existing key outputs and apply the owning normal cover. Trace inheritance through regular/Gyro owners, overlays, and Double Tap windows; preserve the three-command limit and Always On isolation instead of adding layer mutations to shared Base groups
+  - See the [review finding](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#stick-edges-and-inheritance) and [Deck checks](manual-testing.md#temp-cursor-gyro), including overrides before and after cursor entry
 
 ## Ramp up / triggers
 
@@ -59,10 +66,10 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
 
 - [x] Add left-stick edge cleanup only where needed, matching appropriate right-stick recovery
   - Implemented in both layouts: all eight modifier variants, both Menu Entry Points, both scroll layers, and both Transition Sets; see [scope, guards, and validation](findings/2026-09-28-left-stick-recovery/CHANGES.md). RTP Entry Point remains excluded; Fn layers already cover both edges
-  - New LS recovery matches each RS guard and family scope, with Hold to Repeat and default Interruptable. Single modifiers remove three targets; Mod 2 removes its nine-target branch; menu entries and scroll layers remove their own pairs. Persistent Gyro remains intact
+  - LS recovery matches each RS owner/family scope, with Hold to Repeat and default Interruptable. With cursor overlays included, single modifiers remove four targets and Mod 2 removes its eleven-target branch; menu entries and scroll layers remove their own pairs. Persistent Gyro remains intact
   - Author-approved Transition Set depth: LS/RS touch and edge all remove the current Transition Set first, then both Menu Entry/Fn families, only when neither menu button is held. Invalid menu-overlay recovery remains the separate ownership review
   - Added explicit LS-edge empty blocks in all seven Double Tap windows to prevent inherited layer mutations while Always On is active; existing timers and self-first/add-last boundaries remain intact
-  - Uses Fn's LS outer region (radius 21000, inversion off) without changing WASD directions. The inherited WASD modifier is displaced while these layers own the edge; see [the accepted tradeoff](resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions)
+  - Originally used Fn's LS outer region (radius 21000, inversion off). The cursor change moves the four single-modifier pairs to LS radius 4915 / RS 7209; the other ten selected LS layers retain 21000. WASD directions are unchanged; the inherited WASD modifier remains displaced while these layers own the edge. See [the accepted tradeoff](resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions)
 - [x] Add WASD modifier scaffold (user-defined)
   - Both layouts use the July reference's Base left-stick Soft Press setup, with an explicit empty binding in place of `KEYPAD_ASTERISK`; the user chooses the modifier key
   - Copied the reference's thresholds, style, inner-ring settings, and noninterruptible WASD presses. The empty scaffold sends no modifier; WASD-only, modifier-only, and combined behavior after assigning a key are covered in [manual testing](manual-testing.md#wasd-modifier-scaffold)

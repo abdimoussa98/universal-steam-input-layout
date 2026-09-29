@@ -43,6 +43,49 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - [ ] Holding Start or Select in any modifier layer, in Base or Gyro mode, doesn't change the gyro. Confirm that's what you want
 - [ ] After a nav chord, releasing the modifier doesn't fire its tap / scroll action, and Start or Select alone in a modifier layer still clears it
 
+## Temp cursor gyro
+
+Run both sides, both layouts, and both regular/Gyro modifier variants after a
+fresh load. See the [implementation and inheritance record](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md).
+
+- [ ] Hold the primary modifier for 300 ms: its Temp Cursor Gyro overlay applies,
+  with precision speed 750, haptic intensity 3, haptic bump 1, and movement
+  threshold 10. Natural sensitivity remains 300 and activation follows the
+  existing regular/Gyro rules. Releasing the modifier sends no tap/scroll output
+- [ ] Before 300 ms, lift either thumb: cursor applies immediately, then only
+  that stick's LST/RST helpers clear. Repeated thumb lifts after cursor entry
+  perform cleanup without re-adding cursor or restarting a delay
+- [ ] Check every ordinary face/D-pad/click input, Start/Select, and opposite
+  modifier before, at, and after 300 ms. Normal cover wins for the whole hold,
+  restores precision/haptic/bump/threshold to 0/0/5/0, preserves the intended key
+  or mouse output, and prevents later thumb lifts from restoring cursor
+- [ ] Trigger a normal-cover input and thumb release together near the 300 ms
+  boundary. No delayed or release-driven cursor add may defeat the normal cover
+- [ ] Confirm each single-modifier edge has three entries: interruptible owner
+  guard, uninterruptible All chord selecting the owner and opposite deflection,
+  and repeating interruptible cleanup. Alternative ownership uses soft pulls
+- [ ] One stick alone preserves cursor; both sticks around 25% should override
+  it. Test both activation orders, simultaneous movement, sticks already held
+  before modifier entry, and crossing the threshold while the other stick stays
+  deflected. LS radius 4915 and RS 7209 account for different native hysteresis;
+  verify physical travel and the opposing-stick selector threshold separately
+- [ ] Release/lose the modifier while sticks stay deflected: recovery clears its
+  four-target family, and no chord keeps adding covers. Repeat via Steam-menu
+  interruption, including a thumb already touching before the owner is lost
+  and lifted afterward; no orphan cursor overlay should remain
+- [ ] Test both Mod 2 orders and release orders, including alternative partial/
+  full pulls. Normal properties remain in effect, the still-held opposite side
+  survives, and persistent Gyro changes only through its existing intended exit
+- [ ] Fresh modifier holds become eligible for cursor again. A short primary
+  tap before either overlay retains Double Tap behavior. Check repeated attempts
+  after an interrupted delay; no periodic single-modifier reset was added
+- [ ] Hold/move/touch inputs across all seven Double Tap windows and menu/Fn/
+  Transition stacks. Timer isolation, self-first exits, menu gyro suppression,
+  movement, and existing mode shifts must remain intact
+- [ ] Check trackpad-held face/D-pad mode shifts with a modifier: their existing
+  key-only groups do not add normal covers. Record whether this retained behavior
+  needs a follow-up; it is not a confirmed intentional cursor exclusion
+
 ## Triggers and ramp-up
 
 - [ ] LT / RT fire left / right click, and Start / Select work while a trigger is held
@@ -110,5 +153,5 @@ assign a temporary modifier in a test copy for the checks that need output.
   - Stale-state fallbacks must preserve valid held interactions. Normal releases, delayed-apply resets, timed expiry, and deliberate transitions are allowed during normal use
   - Verify intended survivors, including persistent Gyro, the still-held modifier side, and valid shared overlays; flag invalid residual overlays requiring another gesture for the ownership review
 - [ ] Verify whether interrupted transitions can leave both Mod 2 press orders active and cause a recovery problem
-  - Retain the nine-layer current-branch fallback unless that problem is demonstrated; do not automatically expand it to eleven removals
-  - Preserve the combined tap cover's eight-layer released-side cleanup and persistent Gyro. The uncovered Mod 2 release has a separate eleven-layer cleanup plus an intentional Gyro state change
+  - Retain current-branch fallback unless that problem is demonstrated. Its eleven targets include both cursor overlays but still exclude the opposite Mod 2 order
+  - Preserve the combined tap cover's nine-layer released-side cleanup and persistent Gyro. The uncovered Mod 2 release has a separate thirteen-layer cleanup plus an intentional Gyro state change

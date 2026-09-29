@@ -14,7 +14,7 @@ as `L1: Tap Cover` do not need to change.
 | **Overlay** | Short form for a button overlay, or the broader category for an equally limited interaction involving linked buttons. | `L1&R1: Tap Cover` covers the two linked modifier releases; it is an overlay, but not strictly a one-button overlay. |
 | **Owning layer** | A layer that applies an overlay and is responsible for recovering it when that interaction becomes invalid. A shared overlay can have multiple owners. | `L1: Modifier 0` and its Gyro variant both apply `L1: Tap Cover`. |
 | **Interaction stack** | The active layers belonging to one interaction, regardless of their position relative to unrelated active layers. | Menu Left Entry + Fn + the Enter overlay applied for Start. |
-| **Guarded recovery** | An owner-held chord suppresses an interruptible, repeating Regular Press removal on the same input. It clears invalid state when no protecting owner is held. | L1's RS-edge fallback removes its regular/Gyro modifier pair and Tap Cover. |
+| **Guarded recovery** | An owner-held chord suppresses an interruptible, repeating Regular Press removal on the same input. It clears invalid state when no protecting owner is held. | L1's RS-edge fallback removes its regular/Gyro modifier pair, Tap Cover, and Temp Cursor Gyro. |
 | **Lifecycle exit** | A normal release, timer expiry, or deliberate transition with its own removal scope and conditions. | A Double Tap window removes itself on timeout. This is not a guarded recovery binding. |
 
 These are repository design terms, not new Steam Input object types. In
@@ -35,6 +35,12 @@ The overlay suppresses the parent's normal release into a Double Tap window
 and instead removes the L1 modifier family and itself. Its local exit can have
 several removal subcommands; “one button” describes the affected control, not
 the number of commands. Alternative uses L2 for the same modifier role.
+
+**`L1: Temp Cursor Gyro`:** shares that release lifecycle and supplies cursor
+response/haptic properties while L1 is held. The normal Tap Cover restores
+those properties for the rest of the hold. Both overlays explicitly replace
+stick-touch releases to prevent inherited cursor re-entry, while inheriting
+the owner's edge/click/directional behavior. Their modifier owner recovers both.
 
 Menu Left: Backspace, the single-button Tap Covers, and the individual Double
 Tap Covers are other examples. A combined modifier Tap Cover spans both
