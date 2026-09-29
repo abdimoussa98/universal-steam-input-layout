@@ -26,6 +26,7 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - [ ] Double tap and hold repeats Escape / Tab, and releasing stops it
   - Note whether a quick double tap sends the key two or three times (known, not fixed)
 - [ ] Menu button + stick click opens a Transition Set, and with the menu button held, the stick directions type punctuation
+- [ ] In each Menu Fn layer, its eight directional keybinds (four LS + four RS) give haptic feedback with their punctuation keys. Check holds, direction changes, and inherited Fn directions in Transition Sets for unwanted buzzing or duplicate keys. Separate held-click mode-shift bindings retain their previous haptic settings
 - [ ] Stick touch release: hold Start, touch a stick and lift off, then release Start. Menu Right: Fn comes up on the lift, and no Tab is sent. Select does the same with Menu Left: Fn, and no Escape
 - [ ] Steam button recovery:
   - Hold a menu button until its Fn layer is up, press the Steam button, let go, and close the Steam menu

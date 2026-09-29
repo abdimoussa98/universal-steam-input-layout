@@ -32,12 +32,12 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
   - Inputs: D-pad → arrow keys; face buttons → Enter / Tab / Escape / Backspace
   - On entry: remove gyro stateful set
 
-## Menu gyro
+## Cursor gyro
 
-- [ ] Stateful menu gyro
+- [ ] Cursor gyro (stateful)
   - Activate via Left Menu + RS click
   - Only remove when both left and right sticks are deflected
-- [ ] Temporary menu gyro
+- [ ] Temp cursor gyro
   - Activate via L1 / R1 holds (tap covers)
   - Ensure proper add / remove behavior during hold lifecycle
   - Match Enter / Backspace to current Menu Left / Menu Right behavior
@@ -67,8 +67,9 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
   - Both layouts use the July reference's Base left-stick Soft Press setup, with an explicit empty binding in place of `KEYPAD_ASTERISK`; the user chooses the modifier key
   - Copied the reference's thresholds, style, inner-ring settings, and noninterruptible WASD presses. The empty scaffold sends no modifier; WASD-only, modifier-only, and combined behavior after assigning a key are covered in [manual testing](manual-testing.md#wasd-modifier-scaffold)
   - Existing LS-edge recovery and Double Tap blocks still override this slot. See [configuration and inheritance](resources/Steam%20Input%20JSON%20Structure.md#user-defined-wasd-modifier-scaffold)
-- [ ] Add haptics to FN layers
-  - Apply to LS and RS
+- [x] Add haptics to Fn stick-direction key selection
+  - Both Menu Fn layers in both layouts: `haptic_intensity: "2"` on their eight directional keybinds (four LS + four RS), totaling 16 entries per layout
+  - Separate mode-shift bindings, cleanup, empty guards, touch/click actions, and timer ordering are unchanged. Upper layers can inherit the Fn directional feedback; verify feel in [manual testing](manual-testing.md#menu-buttons)
 
 ## Global stateful behavior
 
@@ -77,13 +78,17 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
 
 ## Bugs
 
-- [ ] Fix tap cover / menu entry bug (start delay interrupt)
-  - [Coverage audit for both layouts](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md): 7 of 19 delayed-add paths per layout already have the reset—both Menu Entry → Fn paths, all four combined-modifier paths, and Turning Ramp Up 0 → 1. Deck validation of interrupted holds/retries is tracked in the [manual checklist](manual-testing.md#menu-buttons)
-- [ ] Fix tap covers not properly re-adding after interrupt
+- [x] Fix menu-entry start-delay interruption
+  - Both Menu Entry → Fn paths apply after 300 ms and have a repeating 350 ms reset with Interruptable Off. Implemented in both layouts; Deck validation remains in the [manual checklist](manual-testing.md#menu-buttons)
+- [x] Fix combined tap covers not properly re-adding after interrupt
+  - All four Mod 2 variants per layout (both press orders, regular and Gyro) apply the combined Tap Cover after 200 ms and reset it every 250 ms with Interruptable Off. Deck validation remains in [triggers and ramp-up](manual-testing.md#triggers-and-ramp-up)
+- [x] Split menu entry layer into separate Menu Left / Menu Right layers
+  - Both layouts have distinct Menu Left: Entry Point and Menu Right: Entry Point layers and their own Fn paths
+- [ ] Review extending the delayed-apply reset to additional tap-cover paths
+  - Rechecked both layouts on 2026-09-29: coverage remains 7 of 19 delayed-add paths—the two menu paths, four combined-cover paths, and Turning Ramp Up 0 → 1. The completed fixes above do not imply every delayed apply needs a reset
   - [Binding inventory](findings/2026-09-28-delayed-apply-reset-audit/INVENTORY.md) and [proposed follow-up work](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md#proposed-todo-split-and-validation); missing resets are not proof of runtime failures
   - Proposed additions, not yet implemented: four single-modifier paths, then LST/RST Entry → Tap Cover per layout. Keep resets in the parent owning the pending apply; preserve overlays and the three-command limit
   - Preserve the author-confirmed RTP touch exclusion for trackball momentum. Defer the four scroll/menu-key Double Tap Cover paths until a design preserves output timing within three entries; leave the 5 ms Gyro Off → Turning Ramp Up 0 handoff unchanged unless it fails. These deferred choices are audit recommendations, not confirmed historical exclusions
-- [ ] Split menu entry layer into separate Menu Left / Menu Right layers
 - [x] Confirm menu helper/cover overrides are intentional within the overlay design
   - Keep Backspace / Enter, Escape / Tab, and the two Menu Double Tap Covers local to their button/action; the underlying stack owns recovery. Release-only exits remain valid; review invalid residual helpers in the owner's recovery instead of automatically adding independent edge cleanup to each overlay
   - Author confirmed: Start/Select menu interactions are not used during gameplay. Preserve disabled gyro in all six layers and the Escape / Tab RS-edge blocks; WASD modifiers and ramp-up are not required in menu context
@@ -101,7 +106,10 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
 
 ## Carried over
 
-- [ ] Make base gyro activation dependent on: left stick deflect, right stick deflect, left stick touch, right stick touch, Select, and Start all being held at the same time. This removes the need for mode shifts everywhere we want to hold Start and Select (L1/R1 layers and Menu button layers)
-- [ ] Handle cursor gyro layer (may be covered by Menu gyro above)
+- [x] Make Base gyro activation require LS/RS deflect, LS/RS touch, Select, and Start together, replacing the Start/Select gyro mode shifts
+  - Verified in both layouts on 2026-09-29: active Base gyro group 576 uses mask `211109453778944` with `gyro_ratchet_button_requireany_or_all: "1"` (All six inputs)
+  - The Start/Select gyro mode shifts are removed. Remaining mode shifts serve trackpad-touch navigation and menu Fn stick punctuation; they are unrelated and remain intentional
+  - Implementation: [gyro mode-shift removal plan](plans/2026-09-27-neptune-gyro-shifts-navkeys.md). Runtime checks remain in [manual testing](manual-testing.md#modifier-layers); other gyro layers retain their own activation rules
+- [ ] Handle cursor gyro layer (may be covered by [Cursor gyro above](#cursor-gyro))
 - [ ] Clear all unnecessary layers on action set swap
 - [ ] Add temp gyro to both right and left stick touch

@@ -247,5 +247,5 @@ This follows the same pipeline as the previous two plans.
 
 ## Related todos (not in this plan)
 
-- **Menu refactor:** the Menu stateful set, and Temporary menu gyro.
+- **Menu refactor:** the Menu stateful set, and Temp cursor gyro.
 - **Move gamepad layer** → Menu Right + RS click / Menu Left + LS click (the Transition Sets).
