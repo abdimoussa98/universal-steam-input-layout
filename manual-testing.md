@@ -91,6 +91,17 @@ The alternative layout is unchanged.
 - [ ] Validate the new LS-edge recovery and Transition Set depth on the Deck in both layouts
   - Follow the [fresh-load checks](findings/2026-09-28-left-stick-recovery/CHANGES.md#verification-and-deck-checks), including both Mod 2 orders/Gyro variants, either-owner guards, outer-region behavior, and LS deflection held across every Double Tap window
 
+## WASD modifier scaffold
+
+Run on both layouts after a fresh load. The shipped modifier slot is empty;
+assign a temporary modifier in a test copy for the checks that need output.
+
+- [ ] Base left stick shows one empty Soft Press command named **WASD Modifier** on its edge, with the reference's style/threshold settings. No `*` or other modifier key is sent by the shipped layout; WASD and Q click still work
+- [ ] With a test modifier assigned, check slow deflection, quick deflection, held deflection, and return to neutral. Verify the intended WASD-only, modifier-only, and combined regions; adjust the user's key and preferred Hip Fire Aggressive/Relaxed style as needed, without changing the shared scaffold just to fit one game
+- [ ] Verify inherited modifier behavior in Base, Gyro, ramp stages, stick-touch layers, and button overlays where the underlying stack exposes Base's LS edge
+- [ ] Verify the modifier is displaced by the 16 LS-edge recovery layers (including both Fn layers), all seven Double Tap windows, and both menu Fn left-stick mode shifts; their cleanup, timers, and punctuation outputs retain their behavior
+- [ ] Enter and leave those overrides while the stick is already deflected, as well as deflecting after entry. Check that no modifier stays held after release or after Steam-button recovery
+
 ## Missed releases and cleanup scope
 
 - [ ] Validate recovery on the Deck after missed releases, in both layouts

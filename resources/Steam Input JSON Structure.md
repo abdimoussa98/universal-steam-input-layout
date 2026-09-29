@@ -792,6 +792,41 @@ Tap windows now explicitly block LS edge so they cannot inherit the new lower
 recovery. The blocks contain no layer operations; timeout and ordered exits are
 unchanged. These temporary blocks also displace the inherited edge modifier.
 
+### User-Defined WASD Modifier Scaffold
+
+Both Neptune layouts use the Base left-stick setup from
+[the July reference](../findings/2026-07-11-layer-order-swap/MOST_RECENT_LAYOUT.post-fix.json),
+with its `KEYPAD_ASTERISK` action replaced by
+`controller_action empty_binding, WASD Modifier, , `. The GUI label is
+**WASD Modifier**. The user can assign a modifier such as
+Walk to this slot in the GUI. The shipped scaffold sends no modifier key.
+
+The edge has one `Soft_Press` entry with the reference's settings:
+`soft_press_sytle: "2"`, `activation_threshold: "26610"`,
+`edge_binding_invert: "1"`, `interruptable: "0"`, and
+`haptic_intensity: "0"`. Preserve the exported spelling `soft_press_sytle`.
+The source has inner-ring radius `21700`, inversion `1`, movement deadzone
+`13276`, `requires_click: "0"`, and analog-emulation duty cycle `50`.
+W/A/S/D remain Regular Press bindings and use the reference's
+`interruptable: "0"`; Q click and stick-touch entry are unchanged.
+
+This is an output scaffold, not a guarded cleanup: it adds or removes no
+layers and needs no repeating removal. The user's chosen modifier, deflection,
+and preferred Soft Press style determine the useful movement/modifier behavior.
+Validate WASD-only, modifier-only, and combined behavior on the Deck after
+assigning a key; the empty slot alone cannot demonstrate modifier output.
+
+**Inheritance review:** only Base's LS group changed. In each layout, 30 upper
+layers have no explicit LS-edge binding and can inherit the exposed lower
+edge; that may be Base's scaffold or another layer's recovery. The 16 layers
+with explicit LS-edge recovery retain their own outer geometry (`21000`,
+inversion off). All seven Always On Double Tap windows retain their explicit
+empty edge blocks, and the two menu Fn LS mode-shift groups also explicitly
+block the edge. Those overrides intentionally displace the modifier. No upper
+bindings or layer-mutation order changed. Inherited source settings can still
+affect contexts without their own settings, so test held-input entry/exit and
+release behavior using the [manual checklist](../manual-testing.md#wasd-modifier-scaffold).
+
 ### Cleanup Scopes and Concrete Examples
 
 Describe a cleanup by both **when it fires** and **what it removes**. A release

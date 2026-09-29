@@ -63,10 +63,10 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
   - Author-approved Transition Set depth: LS/RS touch and edge all remove the current Transition Set first, then both Menu Entry/Fn families, only when neither menu button is held. Invalid menu-overlay recovery remains the separate ownership review
   - Added explicit LS-edge empty blocks in all seven Double Tap windows to prevent inherited layer mutations while Always On is active; existing timers and self-first/add-last boundaries remain intact
   - Uses Fn's LS outer region (radius 21000, inversion off) without changing WASD directions. The inherited WASD modifier is displaced while these layers own the edge; see [the accepted tradeoff](resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions)
-- [ ] Add WASD modifier scaffold (user-defined)
-  - Empty bind on left stick (soft press) for WASD modifier
-  - Supports: WASD only, modifier only, or both (hipfire aggressive / relax compatible)
-  - User defines modifier key
+- [x] Add WASD modifier scaffold (user-defined)
+  - Both layouts use the July reference's Base left-stick Soft Press setup, with an explicit empty binding in place of `KEYPAD_ASTERISK`; the user chooses the modifier key
+  - Copied the reference's thresholds, style, inner-ring settings, and noninterruptible WASD presses. The empty scaffold sends no modifier; WASD-only, modifier-only, and combined behavior after assigning a key are covered in [manual testing](manual-testing.md#wasd-modifier-scaffold)
+  - Existing LS-edge recovery and Double Tap blocks still override this slot. See [configuration and inheritance](resources/Steam%20Input%20JSON%20Structure.md#user-defined-wasd-modifier-scaffold)
 - [ ] Add haptics to FN layers
   - Apply to LS and RS
 

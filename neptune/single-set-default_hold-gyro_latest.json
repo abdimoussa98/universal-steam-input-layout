@@ -644,6 +644,9 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": "key_press W, , "
+								},
+								"settings": {
+									"interruptable": "0"
 								}
 							}
 						},
@@ -654,6 +657,9 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": "key_press S, , "
+								},
+								"settings": {
+									"interruptable": "0"
 								}
 							}
 						},
@@ -664,6 +670,9 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": "key_press D, , "
+								},
+								"settings": {
+									"interruptable": "0"
 								}
 							}
 						},
@@ -674,6 +683,9 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": "key_press A, , "
+								},
+								"settings": {
+									"interruptable": "0"
 								}
 							}
 						},
@@ -681,9 +693,16 @@
 					},
 					"edge": {
 						"activators": {
-							"Full_Press": {
+							"Soft_Press": {
 								"bindings": {
-									"binding": "controller_action empty_binding, , "
+									"binding": "controller_action empty_binding, WASD Modifier, , "
+								},
+								"settings": {
+									"haptic_intensity": "0",
+									"soft_press_sytle": "2",
+									"activation_threshold": "26610",
+									"interruptable": "0",
+									"edge_binding_invert": "1"
 								}
 							}
 						},
@@ -717,7 +736,9 @@
 				"settings": {
 					"requires_click": "0",
 					"deadzone": "13276",
-					"edge_binding_invert": "1"
+					"edge_binding_radius": "21700",
+					"edge_binding_invert": "1",
+					"analog_emulation_duty_cycle_pct": "50"
 				}
 			},
 			{
