@@ -11,6 +11,7 @@
 ### Steps
 0. **Enforce the command budget before finalizing**
    - `python3 audit_command_budget.py path/to/layout.json` must exit 0. At most three GUI command entries per input, counted across activator types/list elements; binding-array subcommands may exceed three. All groups are scanned and disabled banks checked separately. Follow `steam-binding-order` to consolidate violations without deleting required cleanup.
+   - For binding, source, or layer-transition changes, confirm the [inheritance review](../../../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes) records affected upper layers, intended inheritance/blocks, and protected timer entry/exit behavior. ID and budget checks do not verify effective inheritance. Include already-held and newly activated inputs across transitions in the Deck handoff; separate static checks from runtime results.
 
 1. **Convert titles back to IDs (in place)**
    - `python3 convert_runtime_ids.py to-ids path/to/layout.json`

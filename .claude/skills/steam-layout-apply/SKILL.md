@@ -7,6 +7,13 @@ description: Finalize an edited Steam Input layout for loading into Steam. Runs 
 
 ## 1. Run the pre-flight check
 
+For binding, source, or layer-transition changes, confirm the
+[inheritance review](../../../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes)
+records affected upper layers, intended inheritance/blocks, and protected timer
+entry/exit behavior. Numeric-reference and command-budget checks do not verify
+effective inherited behavior. Include held-across-transition and newly activated
+input cases in the Deck handoff; distinguish static checks from runtime results.
+
 First run `python3 audit_command_budget.py path/to/layout.json`. It must exit **0**
 before finalizing a layout for Steam. The limit is **three GUI command entries per
 input**, across activator types; `binding` array subcommands do not consume extra

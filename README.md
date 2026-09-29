@@ -192,16 +192,21 @@ Full case study with pre/post snapshots: `findings/2026-07-11-layer-order-swap/F
 
 See the `resources/` folder for additional documentation:
 
+- [Layout Vocabulary](resources/Layout%20Vocabulary.md) - button overlays, owning layers, interaction stacks, and recovery terminology
 - [Steam Input JSON Structure](resources/Steam%20Input%20JSON%20Structure.md) - JSON format, binding execution order, and [interrupted delayed layer applies](resources/Steam%20Input%20JSON%20Structure.md#interrupted-delayed-layer-applies), including the repeating-removal workaround and RTP trackball-momentum exception
   - [Stuck layers and why there is so much cleanup](resources/Steam%20Input%20JSON%20Structure.md#stuck-layers-and-why-there-is-so-much-cleanup) - how the Steam button leaves layers active with no button held, and the chord-guarded cleanup pattern that recovers from it
-  - [Cleanup scopes and concrete examples](resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) - lightweight covers and inherited recovery, nine-layer Mod 2 branch cleanup, and eight-layer combined-cover cleanup that preserves the still-held side
+  - [Cleanup scopes and concrete examples](resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) - overlays and inherited recovery, nine-layer Mod 2 branch cleanup, and eight-layer combined-cover cleanup that preserves the still-held side
   - [Stick-edge cleanup and inherited actions](resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions) - why edge recovery is selective: LS overrides the WASD modifier, RS overrides ramp-up
+  - [Inheritance review for binding changes](resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes) - trace effects through upper layers, protected timers, and stale stacks; the seven Double Tap LS-edge blocks are the worked example
 - `Action Sets.md` - List of action set IDs
 - `Layer Reverse Lookup.md` - Complete mapping of layer IDs to names
 
 Detailed comparisons and runtime observations:
 
 - [R1 and L1&R1 tap-cover findings](findings/2026-09-27-r1-tap-cover/FINDINGS.md)
+- [Delayed-apply reset coverage audit](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md) - every delayed apply in both Neptune layouts, intentional exclusions, and proposed extensions within the three-command limit
+- [Guarded recovery repeat convention](findings/2026-09-28-repeating-recovery/CHANGES.md) - the separate change enabling Hold to Repeat on every guarded recovery removal
+- [Selected LS-edge recovery](findings/2026-09-28-left-stick-recovery/CHANGES.md) - fourteen recovery layers, seven timed-window blocks, and the approved Transition Set cleanup depth in both layouts
 - [Stuck RTP entry layer blocking right-stick ramp-up](findings/2026-09-27-rtp-entry-ramp-up/FINDINGS.md)
 - [Timer blocking and the Always On crash workaround](resources/Steam%20Input%20JSON%20Structure.md#blocking-to-protect-layer-timers) — why unrelated layer changes are blocked, and why timed layers must be added last and removed first
 - [Complete Neptune cleanup audit](findings/2026-09-28-neptune-cleanup-audit/AUDIT.md) and [per-layer blocking audit](findings/2026-09-28-neptune-blocking-audit/AUDIT.md)

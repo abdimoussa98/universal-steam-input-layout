@@ -5476,10 +5476,38 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "7",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 9 0 0, , ",
+										"controller_action remove_layer 43 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -5554,10 +5582,38 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "8",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 10 0 0, , ",
+										"controller_action remove_layer 44 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -6287,10 +6343,55 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "7",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "8",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 6 0 0, , ",
+										"controller_action remove_layer 11 0 0, , ",
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 9 0 0, , ",
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 10 0 0, , ",
+										"controller_action remove_layer 43 0 0, , ",
+										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 45 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -7108,6 +7209,16 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
@@ -7132,6 +7243,16 @@
 								},
 								"settings": {
 									"haptic_intensity": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
 								}
 							}
 						},
@@ -7933,10 +8054,55 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "7",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "8",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 12 0 0, , ",
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 9 0 0, , ",
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 10 0 0, , ",
+										"controller_action remove_layer 43 0 0, , ",
+										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 45 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -8663,6 +8829,16 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
@@ -8776,6 +8952,16 @@
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
 								}
 							}
 						},
@@ -8921,10 +9107,37 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "7",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 19 0 0, , ",
+										"controller_action remove_layer 49 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -9044,10 +9257,37 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "8",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 20 0 0, , ",
+										"controller_action remove_layer 50 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -9360,6 +9600,16 @@
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
 								}
 							}
 						},
@@ -10131,10 +10381,37 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "15",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 27 0 0, , ",
+										"controller_action remove_layer 34 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -10282,6 +10559,16 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
@@ -10346,6 +10633,16 @@
 								},
 								"settings": {
 									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
 								}
 							}
 						},
@@ -10664,7 +10961,52 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 53 0 0, , "
+									"binding": [
+										"controller_action remove_layer 27 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 53 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 27 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 53 0 0, , "
+									]
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10675,7 +11017,9 @@
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -10718,7 +11062,13 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 53 0 0, , "
+									"binding": [
+										"controller_action remove_layer 27 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 53 0 0, , "
+									]
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10751,7 +11101,13 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 53 0 0, , "
+									"binding": [
+										"controller_action remove_layer 27 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 53 0 0, , "
+									]
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10892,7 +11248,52 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 54 0 0, , "
+									"binding": [
+										"controller_action remove_layer 27 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 54 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "15",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "14",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 27 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 54 0 0, , "
+									]
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10903,7 +11304,9 @@
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -10946,7 +11349,13 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 54 0 0, , "
+									"binding": [
+										"controller_action remove_layer 27 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 54 0 0, , "
+									]
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -10979,7 +11388,13 @@
 							],
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 54 0 0, , "
+									"binding": [
+										"controller_action remove_layer 27 0 0, , ",
+										"controller_action remove_layer 34 0 0, , ",
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 35 0 0, , ",
+										"controller_action remove_layer 54 0 0, , "
+									]
 								},
 								"settings": {
 									"hold_repeats": "1"
@@ -13014,10 +13429,38 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "7",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 9 0 0, , ",
+										"controller_action remove_layer 43 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -13625,10 +14068,38 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "8",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 10 0 0, , ",
+										"controller_action remove_layer 44 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -14316,10 +14787,55 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "7",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "8",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 6 0 0, , ",
+										"controller_action remove_layer 11 0 0, , ",
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 9 0 0, , ",
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 10 0 0, , ",
+										"controller_action remove_layer 43 0 0, , ",
+										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 45 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -15045,10 +15561,55 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": [
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "7",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action empty_binding, , "
+									},
+									"settings": {
+										"chord_button": "8",
+										"interruptable": "0"
+									}
+								}
+							],
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 7 0 0, , ",
+										"controller_action remove_layer 12 0 0, , ",
+										"controller_action remove_layer 4 0 0, , ",
+										"controller_action remove_layer 9 0 0, , ",
+										"controller_action remove_layer 5 0 0, , ",
+										"controller_action remove_layer 10 0 0, , ",
+										"controller_action remove_layer 43 0 0, , ",
+										"controller_action remove_layer 44 0 0, , ",
+										"controller_action remove_layer 45 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{
@@ -18980,10 +19541,37 @@
 							}
 						},
 						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "14",
+									"interruptable": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 30 0 0, , ",
+										"controller_action remove_layer 35 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"edge_binding_radius": "21000",
+					"edge_binding_invert": "0"
 				}
 			},
 			{

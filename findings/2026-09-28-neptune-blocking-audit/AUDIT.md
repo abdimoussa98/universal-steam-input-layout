@@ -3,8 +3,12 @@
 Date: 2026-09-28. Both latest Neptune layouts were audited in title form. No JSON
 or VDF was edited. This supplements the [cleanup audit](../2026-09-28-neptune-cleanup-audit/AUDIT.md)
 with the author's explanation of the blocking design and historical crash.
-Recorded hashes describe the original audit inputs. Subsequent description-only
-edits to both JSON files leave the audited binding data unchanged.
+Recorded hashes, counts, and source-line references describe the original audit
+inputs. Subsequent changes include the [repeat convention](../2026-09-28-repeating-recovery/CHANGES.md)
+and [LS-edge recovery](../2026-09-28-left-stick-recovery/CHANGES.md), including
+seven new explicit LS-edge blocks in the Double Tap windows. The historical
+inventory below predates those changes; the Always On ordered boundaries remain
+unchanged and are checked again by the recovery regression tests.
 
 **Blocking protects layer lifetimes as well as input behavior.** The layouts
 prevent unrelated layer operations from resetting delayed applies or disturbing

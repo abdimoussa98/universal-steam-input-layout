@@ -34,7 +34,7 @@
 - [ ] Steam button recovery:
   - Hold a menu button until its Fn layer is up, press the Steam button, let go, and close the Steam menu
   - RS to the edge (or a face button) clears the Fn and entry layers, and the menu buttons work normally again
-  - Enter / Backspace can survive the lower stack's cleanup. Another related-button press/release is an accepted lightweight-cover tradeoff; verify the local exit then restores the underlying controls. Gyro suppression during menu use is intentional
+  - Enter / Backspace can currently survive the lower stack's cleanup. Verify their local overlay exits, and review invalid residual helpers under the owning-layer cleanup rule. Preserve still-held buttons; gyro suppression during menu use is intentional
 - [ ] Stuck entry layer (for example, the Steam button within 300 ms of a menu press)
   - The other menu button clears it and then works normally
   - In the alternative, RS to the edge no longer makes it worse
@@ -122,12 +122,14 @@
 
 ## Sticks
 
-- [ ] Add left-stick edge cleanup only where needed, matching appropriate right-stick recovery
-  - Review the 15 non-ramp candidates in cleanup audit F4 individually; these are not 15 mandatory additions. The Fn layers already cover both edges
-  - LS edge cleanup overrides the inherited WASD modifier; RS edge cleanup overrides ramp-up. Prefer an adequate existing recovery path when an edge override would unnecessarily remove those functions
-  - Ramp-up is more frequently blocked because its layer add/remove logic carries timer and ordering constraints; that asymmetry alone does not justify another LS cleanup
-  - Preserve each exit's guards and family scope, movement behavior, timer protection, and Always On isolation; trace inherited LS-edge bindings through Double Tap windows before adding lower-layer cleanup
-  - Document the recovery need and inherited action displaced for each chosen layer; see [the edge-cleanup tradeoff](resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions)
+- [x] Add left-stick edge cleanup only where needed, matching appropriate right-stick recovery
+  - Implemented in both layouts: all eight modifier variants, both Menu Entry Points, both scroll layers, and both Transition Sets; see [scope, guards, and validation](findings/2026-09-28-left-stick-recovery/CHANGES.md). RTP Entry Point remains excluded; Fn layers already cover both edges
+  - New LS recovery matches each RS guard and family scope, with Hold to Repeat and default Interruptable. Single modifiers remove three targets; Mod 2 removes its nine-target branch; menu entries and scroll layers remove their own pairs. Persistent Gyro remains intact
+  - Author-approved Transition Set depth: LS/RS touch and edge all remove the current Transition Set first, then both Menu Entry/Fn families, only when neither menu button is held. Invalid menu-overlay recovery remains the separate ownership review
+  - Added explicit LS-edge empty blocks in all seven Double Tap windows to prevent inherited layer mutations while Always On is active; existing timers and self-first/add-last boundaries remain intact
+  - Uses Fn's LS outer region (radius 21000, inversion off) without changing WASD directions. The inherited WASD modifier is displaced while these layers own the edge; see [the accepted tradeoff](resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions)
+- [ ] Validate the new LS-edge recovery and Transition Set depth on the Deck in both layouts
+  - Follow the [fresh-load checks](findings/2026-09-28-left-stick-recovery/CHANGES.md#verification-and-deck-checks), including both Mod 2 orders/Gyro variants, either-owner guards, outer-region behavior, and LS deflection held across every Double Tap window
 - [ ] Add WASD modifier scaffold (user-defined)
   - Empty bind on left stick (soft press) for WASD modifier
   - Supports: WASD only, modifier only, or both (hipfire aggressive / relax compatible)
@@ -143,22 +145,30 @@
 ## Bugs
 
 - [ ] Fix tap cover / menu entry bug (start delay interrupt)
+  - [Coverage audit for both layouts](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md): 7 of 19 delayed-add paths per layout already have the reset—both Menu Entry → Fn paths, all four combined-modifier paths, and Turning Ramp Up 0 → 1. Deck validation of interrupted holds/retries is still pending
 - [ ] Fix tap covers not properly re-adding after interrupt
+  - [Binding inventory](findings/2026-09-28-delayed-apply-reset-audit/INVENTORY.md) and [proposed follow-up work](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md#proposed-todo-split-and-validation); missing resets are not proof of runtime failures
+  - Proposed additions, not yet implemented: four single-modifier paths, then LST/RST Entry → Tap Cover per layout. Keep resets in the parent owning the pending apply; preserve overlays and the three-command limit
+  - Preserve the author-confirmed RTP touch exclusion for trackball momentum. Defer the four scroll/menu-key Double Tap Cover paths until a design preserves output timing within three entries; leave the 5 ms Gyro Off → Turning Ramp Up 0 handoff unchanged unless it fails. These deferred choices are audit recommendations, not confirmed historical exclusions
 - [ ] Split menu entry layer into separate Menu Left / Menu Right layers
-- [x] Confirm menu helper/cover overrides are intentional within the lightweight design
-  - Keep Backspace / Enter, Escape / Tab, and the two Menu Double Tap Covers local to their button/action; the underlying stack owns recovery. Release-only cleanup and another related-button press are accepted tradeoffs, not automatic reasons to add edge cleanup
+- [x] Confirm menu helper/cover overrides are intentional within the overlay design
+  - Keep Backspace / Enter, Escape / Tab, and the two Menu Double Tap Covers local to their button/action; the underlying stack owns recovery. Release-only exits remain valid; review invalid residual helpers in the owner's recovery instead of automatically adding independent edge cleanup to each overlay
   - Author confirmed: Start/Select menu interactions are not used during gameplay. Preserve disabled gyro in all six layers and the Escape / Tab RS-edge blocks; WASD modifiers and ramp-up are not required in menu context
   - Preserve the still-held second menu button; do not add Enter / Backspace removal to the first Fn button's release
-  - Background: [lightweight covers and inherited cleanup](resources/Steam%20Input%20JSON%20Structure.md#lightweight-covers-and-inherited-cleanup) and both audits
+  - Background: [button overlays and inherited cleanup](resources/Steam%20Input%20JSON%20Structure.md#button-overlays-and-inherited-cleanup), [vocabulary](resources/Layout%20Vocabulary.md), and both audits
 
 ## Layer cleanup
 
 - [x] Complete the static [cleanup audit](findings/2026-09-28-neptune-cleanup-audit/AUDIT.md) and [blocking audit](findings/2026-09-28-neptune-blocking-audit/AUDIT.md) for both layouts, including all layers, entry/exit references, dormant groups, and Always On ordering
 - [x] Document per-layer cleanup and blocking, with [concrete scope examples](resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) and guidance in the editing skills
+- [x] Enable Hold to Repeat on every guarded recovery removal in both layouts; see the [separate change record](findings/2026-09-28-repeating-recovery/CHANGES.md). Static validation passed; Deck behavior remains part of the recovery test below
+- [ ] Review owning-layer recovery against the [overlay cleanup ownership rule](resources/Steam%20Input%20JSON%20Structure.md#overlay-cleanup-ownership)
+  - Each layer applying an overlay is responsible for removing it during stale-state recovery when that interaction is no longer valid; retain the overlay's local exit and inherited recovery
+  - Trace shared owners and still-held buttons before extending target lists. Review the menu Entry/Fn helpers that currently rely on another related-button press after parent recovery; preserve valid held helpers and normal release behavior
 - [ ] Validate recovery on the Deck after missed releases, in both layouts
-  - Trace the underlying recovery owner and which overlays expose or block it; do not require every lightweight cover to duplicate that recovery
+  - Trace the underlying recovery owner and which overlays expose or block it; do not require every overlay to duplicate that recovery
   - Stale-state fallbacks must preserve valid held interactions. Normal releases, delayed-apply resets, timed expiry, and deliberate transitions are allowed during normal use
-  - Verify intended survivors, including persistent Gyro, the still-held modifier side, and accepted residual covers; record when another gesture is needed
+  - Verify intended survivors, including persistent Gyro, the still-held modifier side, and valid shared overlays; flag invalid residual overlays requiring another gesture for the ownership review
 - [ ] Verify whether interrupted transitions can leave both Mod 2 press orders active and cause a recovery problem
   - Retain the nine-layer current-branch fallback unless that problem is demonstrated; do not automatically expand it to eleven removals
   - Preserve the combined tap cover's eight-layer released-side cleanup and persistent Gyro. The uncovered Mod 2 release has a separate eleven-layer cleanup plus an intentional Gyro state change

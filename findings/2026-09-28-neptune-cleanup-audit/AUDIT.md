@@ -4,9 +4,13 @@ Date: 2026-09-28. Both requested layouts were audited without editing either JSO
 or VDF. The audited snapshot matches the 90.2 release (`2fee9ee`); the surrounding
 documentation includes the subsequent stuck-layer notes (`5e82567`). Source
 SHA-256 hashes are recorded in the catalogs and machine-readable summary.
-Later documentation work observed description-only edits to both JSON files.
-Their binding data still matches this snapshot; the recorded hashes describe
-the original audit inputs, before those metadata edits.
+The recorded hashes, counts, and source-line references describe the original
+audit inputs. Later changes include description edits, the
+[repeat convention](../2026-09-28-repeating-recovery/CHANGES.md), and
+[selected LS-edge recovery](../2026-09-28-left-stick-recovery/CHANGES.md).
+The latter implements fourteen of F4's candidates and supersedes F7's self-only
+Transition Set recovery. This report and its inventories retain the historical
+snapshot rather than claiming those older findings describe the current files.
 
 **The existing strategy is layered, local recovery, not a global reset.** Normal
 release removes the state associated with the gesture; other inputs provide
