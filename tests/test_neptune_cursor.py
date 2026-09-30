@@ -15,12 +15,6 @@ CURSOR_PROFILE = {
     "flickstick_haptic_bump_per_angle": "1",
     "mouse_move_threshold": "10",
 }
-NORMAL_PROFILE = {
-    "gyro_precision_speed": "0",
-    "haptic_intensity": "0",
-    "flickstick_haptic_bump_per_angle": "5",
-    "mouse_move_threshold": "0",
-}
 
 
 def owners(variant):
@@ -44,6 +38,22 @@ def bindings(entry):
 
 def stick_family(prefix):
     return {prefix + ": " + suffix for suffix in ("Entry Point", "Tap Cover", "Temporary Gyro")}
+
+
+def ordinary_outputs(side):
+    """The twelve existing outputs, independent of default/alternative owner buttons."""
+    outputs = {("button_diamond", "button_" + name): "key_press " + key + ", , "
+               for name, key in zip("abxy", ("G", "X", "Z", "T") if side == 0 else ("H", "N", "B", "Y"))}
+    outputs.update({("dpad", "dpad_" + name): "key_press " + key + ", , "
+                    for name, key in zip(("north", "south", "east", "west"),
+                                         ("9", "DASH", "0", "EQUALS") if side == 0 else ("5", "7", "6", "8"))})
+    outputs.update({
+        ("switch", "button_escape"): "key_press " + ("INSERT" if side == 0 else "HOME") + ", , ",
+        ("switch", "button_menu"): "key_press " + ("DELETE" if side == 0 else "END") + ", , ",
+        ("joystick", "click"): "key_press CAPSLOCK, , " if side == 0 else "mouse_button BACK, , ",
+        ("right_joystick", "click"): "mouse_button " + ("MIDDLE" if side == 0 else "FORWARD") + ", , ",
+    })
+    return outputs
 
 
 class NeptuneCursorTests(unittest.TestCase):
@@ -90,11 +100,6 @@ class NeptuneCursorTests(unittest.TestCase):
                     self.assertEqual(gyro_owner["gyro_ratchet_button_requireany_or_all"], "0")
                     for suffix in (": Tap Cover", ": Temp Cursor Gyro"):
                         title = button + suffix
-                        settings = self.source(layout, title, "gyro")["settings"]
-                        for inherited in ("gyro_natural_sensitivity", "gyro_ratchet_button_mask",
-                                          "gyro_ratchet_button_requireany_or_all", "flickstick_rotation_sensitivity",
-                                          "gyro_vertical_horizontal_ratio"):
-                            self.assertNotIn(inherited, settings, (title, inherited))
                         self.assertFalse(any("always_on_action" in group.get("inputs", {})
                                              for _, group in self.active_groups(layout, title)))
 
@@ -125,17 +130,76 @@ class NeptuneCursorTests(unittest.TestCase):
                             self.assertEqual(actions[-1], cursor_add)
                             self.assert_removals(actions[:-1], stick_family(prefix))
 
-    def test_normal_covers_explicitly_restore_every_cursor_property(self):
+    def test_delayed_cursor_reset_is_scoped_and_replaced_by_upper_inputs(self):
+        for variant, layout in self.layouts.items():
+            timed = [title for title in layout["presets"]
+                     if any("always_on_action" in group.get("inputs", {})
+                            for _, group in self.active_groups(layout, title))]
+            self.assertEqual(len(timed), 7)
+            for button, _, regular, source, name in owners(variant):
+                target = removal(button + ": Temp Cursor Gyro")
+                for title in (regular, "Gyro | " + regular):
+                    with self.subTest(variant=variant, layer=title):
+                        primary = self.source(layout, title, source)["inputs"][name]["activators"]
+                        self.assertEqual(len(command_entries(primary, name)), 3)
+                        reset = primary["Full_Press"]
+                        self.assertEqual(bindings(reset), [target])
+                        self.assertEqual(reset["settings"], {
+                            "hold_repeats": "1", "repeat_rate": "350", "interruptable": "0"})
+                        self.assertGreater(int(reset["settings"]["repeat_rate"]),
+                                           int(primary["chord"]["settings"]["delay_start"]))
+                for suffix in (": Tap Cover", ": Temp Cursor Gyro"):
+                    title = button + suffix
+                    # Both successful cursor entry and a normal override must replace
+                    # the whole primary input, retiring its apply AND periodic reset.
+                    primary = self.source(layout, title, source)["inputs"][name]["activators"]
+                    self.assertEqual(set(primary), {"release"}, (variant, title))
+                for title in timed:
+                    # A lower reset must not become inherited inside an Always On window.
+                    primary = self.source(layout, title, source)["inputs"][name]
+                    self.assertTrue(primary["activators"], (variant, title, name))
+                    for entry in command_entries(primary["activators"], name):
+                        self.assertNotIn(target, entry["actions"], (variant, title, name))
+
+    def test_normal_covers_inherit_gyro_without_any_source_override(self):
         for variant, layout in self.layouts.items():
             for button, _, _, _, _ in owners(variant):
                 title = button + ": Tap Cover"
                 with self.subTest(variant=variant, layer=title):
-                    normal = self.source(layout, title, "gyro")
-                    self.assertEqual(normal["mode"], "gyro_to_mouse")
-                    self.assertEqual(normal.get("inputs", {}), {})
-                    # Omitting a field here inherits its cursor value; it does not reset it.
-                    self.assertEqual(normal["settings"], {"layer": "1", **NORMAL_PROFILE})
-                    self.assertEqual(set(NORMAL_PROFILE), set(CURSOR_PROFILE))
+                    self.assertNotIn("gyro", {source for source, _ in self.active_groups(layout, title)})
+
+    def test_output_and_cover_chords_are_separate_uninterruptible_entries(self):
+        for variant, layout in self.layouts.items():
+            checked = 0
+            for side, (button, selector, regular, _, _) in enumerate(owners(variant)):
+                for title in (regular, "Gyro | " + regular):
+                    for (source, name), output in ordinary_outputs(side).items():
+                        with self.subTest(variant=variant, layer=title, source=source, input=name):
+                            value = self.source(layout, title, source)["inputs"][name]
+                            activators = value["activators"]
+                            self.assertEqual(set(activators), {"chord", "Full_Press"})
+                            self.assertFalse(value.get("disabled_activators"))
+                            self.assertEqual(len(command_entries(activators, name)), 3)
+                            chords = activators["chord"]
+                            self.assertIsInstance(chords, list)
+                            self.assertEqual(len(chords), 2)
+                            outputs = [c for c in chords if bindings(c) == [output]]
+                            covers = [c for c in chords if bindings(c) == [addition(button + ": Tap Cover")]]
+                            self.assertEqual(len(outputs), 1)
+                            self.assertEqual(len(covers), 1)
+                            # Existing outputs do not repeat; only the layer addition does.
+                            self.assertEqual(outputs[0]["settings"], {"chord_button": selector, "interruptable": "0"})
+                            self.assertEqual(covers[0]["settings"]["chord_button"], selector)
+                            self.assertEqual(covers[0]["settings"]["interruptable"], "0")
+                            self.assertEqual(covers[0]["settings"]["hold_repeats"], "1")
+                            self.assertNotIn("delay_start", covers[0]["settings"])
+                            self.assertIn(covers[0]["settings"].get("haptic_intensity"), (None, "0"))
+                            fallback = activators["Full_Press"]
+                            self.assertEqual(fallback["settings"]["hold_repeats"], "1")
+                            self.assertNotEqual(fallback["settings"].get("interruptable"), "0")
+                            self.assert_removals(bindings(fallback), recovery_specs(variant)[title][1])
+                            checked += 1
+            self.assertEqual(checked, 48)
 
     def test_override_inputs_keep_applying_normal_cover(self):
         for variant, layout in self.layouts.items():
@@ -152,7 +216,79 @@ class NeptuneCursorTests(unittest.TestCase):
                                   if addition(button + ": Tap Cover") in e["actions"]]
                         self.assertCountEqual(routes, expected)
 
-    def test_overlays_replace_primary_and_touch_inputs_without_hiding_edges(self):
+    def test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent(self):
+        for variant, layout in self.layouts.items():
+            for side, (button, _, _, _, _) in enumerate(owners(variant)):
+                title = button + ": Temp Cursor Gyro"
+                expected = set(ordinary_outputs(side)) | {primary_input(variant, 1 - side)}
+                self.assertEqual(len(expected), 13)
+                for source, name in expected:
+                    with self.subTest(variant=variant, layer=title, source=source, input=name):
+                        value = self.source(layout, title, source)["inputs"][name]
+                        self.assertEqual(set(value["activators"]), {"Full_Press"})
+                        self.assertFalse(value.get("disabled_activators"))
+                        entry = value["activators"]["Full_Press"]
+                        self.assertEqual(bindings(entry), [removal(title)])
+                        self.assertEqual(entry["settings"]["hold_repeats"], "1")
+                        self.assertEqual(entry["settings"]["interruptable"], "0")
+                        self.assertNotIn("delay_start", entry["settings"])
+                        self.assertIn(entry["settings"].get("haptic_intensity"), (None, "0"))
+                # Cursor owns cancellations and primary release, never key/cover/Mod 2 outputs.
+                for source, name, entry in self.entries(layout, title):
+                    if entry["activation"] != "release":
+                        self.assertTrue(set(entry["actions"]) <= {removal(title), EMPTY},
+                                        (variant, title, source, name, entry))
+
+    def test_opposite_modifier_transitions_repeat_and_preserve_branch_and_execution_order(self):
+        for variant, layout in self.layouts.items():
+            specs = list(owners(variant))
+            for side, (button, selector, regular, _, _) in enumerate(specs):
+                other_button, _, other_owner, source, name = specs[1 - side]
+                for prefix in ("", "Gyro | "):
+                    title = prefix + regular
+                    with self.subTest(variant=variant, layer=title):
+                        chord = self.source(layout, title, source)["inputs"][name]["activators"]["chord"]
+                        self.assertEqual(chord["settings"]["chord_button"], selector)
+                        self.assertEqual(chord["settings"]["interruptable"], "0")
+                        self.assertEqual(chord["settings"]["hold_repeats"], "1")
+                        # Stored arrays run bottom-to-top, leaving Mod 2 on top.
+                        self.assertEqual(bindings(chord), [
+                            addition(prefix + button + "!" + other_button + ": Modifier 2"),
+                            addition(other_button + ": Tap Cover"),
+                            addition(prefix + other_owner),
+                            addition(button + ": Tap Cover"),
+                        ])
+
+    def test_cursor_edges_preserve_one_stick_hold_and_repeat_self_removal_for_two(self):
+        for variant, layout in self.layouts.items():
+            for button, selector, owner, _, _ in owners(variant):
+                title = button + ": Temp Cursor Gyro"
+                for source in ("joystick", "right_joystick"):
+                    with self.subTest(variant=variant, layer=title, source=source):
+                        group = self.source(layout, title, source)
+                        self.assertEqual(group["settings"], {"layer": "1"})
+                        value = group["inputs"]["edge"]
+                        self.assertFalse(value.get("disabled_activators"))
+                        activators = value["activators"]
+                        self.assertEqual(len(command_entries(activators, "edge")), 3)
+                        guard, dual = activators["chord"]
+                        self.assertEqual(bindings(guard), [EMPTY])
+                        self.assertEqual(guard["settings"]["chord_button"], selector)
+                        self.assertNotEqual(guard["settings"].get("interruptable"), "0")
+                        parent_dual = self.source(layout, owner, source)["inputs"]["edge"]["activators"]["chord"][1]
+                        self.assertEqual({key: value for key, value in dual["settings"].items()
+                                          if key != "haptic_intensity"}, parent_dual["settings"])
+                        self.assertIn(dual["settings"].get("haptic_intensity"), (None, "0"))
+                        self.assertEqual(dual["settings"]["gyro_ratchet_button_requireany_or_all"], "1")
+                        self.assertEqual(dual["settings"]["interruptable"], "0")
+                        self.assertEqual(dual["settings"]["hold_repeats"], "1")
+                        self.assertEqual(bindings(dual), [removal(title)])
+                        fallback = activators["Full_Press"]
+                        self.assertEqual(bindings(fallback), [removal(title)])
+                        self.assertEqual(fallback["settings"]["hold_repeats"], "1")
+                        self.assertNotEqual(fallback["settings"].get("interruptable"), "0")
+
+    def test_overlays_retire_primary_timers_but_only_normal_covers_replace_touches(self):
         for variant, layout in self.layouts.items():
             for button, selector, owner, source, name in owners(variant):
                 targets = recovery_specs(variant)[owner][1]
@@ -167,6 +303,11 @@ class NeptuneCursorTests(unittest.TestCase):
                             group = self.source(layout, title, stick)
                             self.assertEqual(group["mode"], "dpad" if stick == "joystick" else "joystick_mouse")
                             self.assertEqual(group["settings"], {"layer": "1"})
+                            if suffix == ": Temp Cursor Gyro":
+                                # Omission inherits completion/recovery; an empty bind would block it.
+                                self.assertNotIn("touch", group["inputs"])
+                                self.assertEqual(set(group["inputs"]), {"click", "edge"})
+                                continue
                             self.assertEqual(set(group["inputs"]), {"touch"})
                             touch = group["inputs"]["touch"]
                             entries = command_entries(touch["activators"], "touch")
@@ -183,6 +324,40 @@ class NeptuneCursorTests(unittest.TestCase):
                             self.assert_removals(bindings(touch["activators"]["release"]), stick_family(prefix))
                         self.assertFalse(any(addition(button + ": Temp Cursor Gyro") in e["actions"]
                                              for _, _, e in self.entries(layout, title)))
+
+    def test_rtp_timer_replaces_inherited_cancellation_and_repeating_cover_inputs(self):
+        # RTP's quick-touch window can remain above a modifier or cursor. An
+        # omitted input would expose their mutations beneath Always On.
+        expected = set(ordinary_outputs(0)) - {("switch", "button_escape"), ("switch", "button_menu")}
+        self.assertEqual(len(expected), 10)
+        for variant, layout in self.layouts.items():
+            for source, name in expected:
+                with self.subTest(variant=variant, source=source, input=name):
+                    value = self.source(layout, "RTP: Double Tap", source)["inputs"][name]
+                    self.assertFalse(value.get("disabled_activators"))
+                    self.assertEqual(set(value["activators"]), {"Full_Press"})
+                    entries = command_entries(value["activators"], name)
+                    self.assertEqual(len(entries), 1)
+                    self.assertEqual(entries[0]["actions"], [EMPTY])
+            # New blocks leave the established timer and self-first exits intact.
+            title = "RTP: Double Tap"
+            timer = self.source(layout, title, "switch")["inputs"]["always_on_action"]["activators"]["Full_Press"]
+            self.assertEqual(bindings(timer), [removal(title)])
+            self.assertEqual(timer["settings"], {"delay_start": "150", "interruptable": "0"})
+            for source, prefix in (("joystick", "LST"), ("right_joystick", "RST")):
+                touch = self.source(layout, title, source)["inputs"]["touch"]["activators"]
+                self.assertEqual(set(touch), {"release"})
+                actions = bindings(touch["release"])
+                self.assertEqual(actions[-1], removal(title))
+                self.assert_removals(actions[:-1], stick_family(prefix))
+            self.assertEqual(self.source(layout, title, "left_trackpad")["mode"], "disabled")
+            trackpad = self.source(layout, title, "right_trackpad")
+            self.assertEqual(trackpad["mode"], "dpad")
+            for direction in ("north", "south"):
+                entry = trackpad["inputs"]["dpad_" + direction]["activators"]["Full_Press"]
+                self.assertEqual(bindings(entry), [addition("RTP: Circular Scroll"), removal(title)])
+            for name in ("dpad_east", "dpad_west", "edge"):
+                self.assertEqual(bindings(trackpad["inputs"][name]["activators"]["Full_Press"]), [removal(title)])
 
     def test_family_removals_include_cursor_and_combined_release_preserves_other_side(self):
         for variant, layout in self.layouts.items():

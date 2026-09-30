@@ -54,16 +54,24 @@ fresh load. See the [implementation and inheritance record](findings/2026-09-29-
   existing regular/Gyro rules. Releasing the modifier sends no tap/scroll output
 - [ ] Before 300 ms, lift either thumb: cursor applies immediately, then only
   that stick's LST/RST helpers clear. Repeated thumb lifts after cursor entry
-  perform cleanup without re-adding cursor or restarting a delay
+  inherit the same cursor-add-before-helper-removal path; an already-active cursor
+  stays active. After cancellation, normal-cover touch releases only clean up
 - [ ] Check every ordinary face/D-pad/click input, Start/Select, and opposite
-  modifier before, at, and after 300 ms. Normal cover wins for the whole hold,
-  restores precision/haptic/bump/threshold to 0/0/5/0, preserves the intended key
-  or mouse output, and prevents later thumb lifts from restoring cursor
+  modifier before, at, and after 300 ms. Active cursor removes itself, exposing
+  the parent's output and repeating normal-cover add. Gyro inherits normal
+  precision/haptic/bump/threshold 300/0/5/0. The cover wins for the whole hold,
+  preserves the intended key/mouse output, and blocks cursor on later thumb lifts
+- [ ] Check the twelve ordinary inputs in all four regular/Gyro owners: output
+  chord and cover-add chord are both uninterruptible; only the cover chord gains
+  repeat. Test owner-first and input-first presses, with inputs held across cursor
+  entry/removal. Both chords must run without lost/duplicate keys, new key repeats,
+  or stuck mouse buttons. Same-selector chord order is not a binding-array order
 - [ ] Trigger a normal-cover input and thumb release together near the 300 ms
   boundary. No delayed or release-driven cursor add may defeat the normal cover
 - [ ] Confirm each single-modifier edge has three entries: interruptible owner
   guard, uninterruptible All chord selecting the owner and opposite deflection,
-  and repeating interruptible cleanup. Alternative ownership uses soft pulls
+  and repeating interruptible cleanup. The All chord repeats: parents add the
+  normal cover; cursor edges remove only cursor. Alternative ownership uses soft pulls
 - [ ] One stick alone preserves cursor; both sticks around 25% should override
   it. Test both activation orders, simultaneous movement, sticks already held
   before modifier entry, and crossing the threshold while the other stick stays
@@ -76,15 +84,58 @@ fresh load. See the [implementation and inheritance record](findings/2026-09-29-
 - [ ] Test both Mod 2 orders and release orders, including alternative partial/
   full pulls. Normal properties remain in effect, the still-held opposite side
   survives, and persistent Gyro changes only through its existing intended exit
+- [ ] Alternative R2 regular/Gyro → L2 now repeats its Mod 2 entry. With LT already
+  pulled before the R2 layer appears, entry must work without re-pulling; keep the
+  existing destination and cleanup order
 - [ ] Fresh modifier holds become eligible for cursor again. A short primary
   tap before either overlay retains Double Tap behavior. Check repeated attempts
-  after an interrupted delay; no periodic single-modifier reset was added
+  after an interrupted delay: the parent's 350 ms reset must let the 300 ms
+  cursor apply recover without releasing/repressing indefinitely
+- [ ] Confirm each cursor-entry primary input has exactly three entries: release,
+  the 300 ms chorded cursor apply, and an uninterruptible Regular Press that
+  removes only the owning cursor overlay with Hold to Repeat and interval 350 ms
+- [ ] Keep holding for several 350 ms intervals after cursor entry, early
+  stick-touch completion, and an early/late normal-cover override. Either overlay
+  must retire the parent's apply/reset pair: no flickering or repeated removals,
+  no normal-cover loss, and no cursor re-entry after an override. Include the
+  reset boundary and held inputs across transitions into Always On windows
 - [ ] Hold/move/touch inputs across all seven Double Tap windows and menu/Fn/
   Transition stacks. Timer isolation, self-first exits, menu gyro suppression,
   movement, and existing mode shifts must remain intact
-- [ ] Check trackpad-held face/D-pad mode shifts with a modifier: their existing
-  key-only groups do not add normal covers. Record whether this retained behavior
-  needs a follow-up; it is not a confirmed intentional cursor exclusion
+- [ ] During a modifier hold, quickly touch/release RTP, before and after cursor
+  entry. RTP Double Tap must block face buttons, D-pad directions, and both stick
+  clicks while its Always On window is active. Test inputs already held and newly
+  pressed; no inherited cover-add or cursor removal may run before its safe exit
+- [ ] Cancel cursor during RTP Entry's 150 ms wait: check the touch/trackball
+  lifecycle still completes acceptably if that removal restarts its delay. Keep
+  RTP touch's intentional reset exclusion. In RTP Double Tap, confirm its existing
+  trackpad source-mode replacement prevents Base click/touch layer mutations
+- [ ] First verify whether touching either trackpad actually activates face/D-pad
+  mode-shift targets 1039/1043 under regular/Gyro modifiers in both layouts. They
+  are marked `inactive modeshift`; enabled Base references alone do not prove
+  activation. Record key outputs and normal-cover behavior before and after the
+  300 ms cursor apply, including trackpad touches held across layer transitions.
+  Only propose a fix if an actual cover bypass is reproduced; otherwise close
+  this concern without changing bindings
+
+## Reference gyro and right-stick tuning
+
+Run both layouts after a fresh load. See the [exact settings and inheritance policy](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#reference-tuning-and-gyro-inheritance-follow-up).
+
+- [ ] Base gyro matches the July reference's feel and settings: natural sensitivity
+  300, rotation calibration 3853, vertical ratio 200, conversion style 4, speed
+  deadzone 0, precision 300. Existing Base All and Gyro Any activation rules remain
+  intact; LST/RST Temporary Gyro change activation without changing response
+- [ ] In regular and Gyro modifier holds, cursor response is 750/3/1/10 and removing
+  cursor exposes 300/0/5/0 for precision/haptic/bump/threshold. Normal covers have
+  no active gyro source. Both responses inherit
+  natural sensitivity 300 and the new Base calibration/conversion. Exercise
+  LST/RST helpers before and during each profile; menu and Gyro Off modes still
+  disable gyro when intended
+- [ ] Base right stick retains its reference settings and feel. Ramp 0 changes
+  sensitivity/vertical scale to 150/80, then Ramp 1 to 200/67; recentering restores
+  the exposed lower settings. Modifier sensitivity 75 and its local edge region
+  remain intact; repeat the trigger-held and gyro-off ramp paths below
 
 ## Triggers and ramp-up
 
@@ -155,3 +206,18 @@ assign a temporary modifier in a test copy for the checks that need output.
 - [ ] Verify whether interrupted transitions can leave both Mod 2 press orders active and cause a recovery problem
   - Retain current-branch fallback unless that problem is demonstrated. Its eleven targets include both cursor overlays but still exclude the opposite Mod 2 order
   - Preserve the combined tap cover's nine-layer released-side cleanup and persistent Gyro. The uncovered Mod 2 release has a separate thirteen-layer cleanup plus an intentional Gyro state change
+
+## Held inputs across layer changes
+
+Confirms the author-reported rule in [Held Inputs Across Layer Changes](resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes).
+See the [audit](findings/2026-09-29-held-input-layer-transitions/AUDIT.md#deck-checks) for the reasoning behind each check.
+
+- [ ] In a disposable minimal layout with layer notifications on, confirm the rule itself:
+  - Hold B, then press A to add layer X, where X's B adds layer Y. Y should **not** appear
+  - The same with a 5 ms Fire Start Delay on X's B: Y appears. With Hold to Repeat instead: Y appears after one interval
+  - X's B removes X, and Base's B adds Y. Enter X, then hold B: Y **appears** from the exposed Base binding
+  - Replace X's B with a key press and hold B across the add. Record whether the key fires; this decides whether the rule covers outputs too
+- [ ] One held stick click from Menu Left / Right Entry (before 300 ms) goes Entry → Fn → Transition Set without a second click. This relies on Fn's repeating click chord
+- [ ] Staggered Gyro toggle: hold LB, press RB, then release RB about 100 ms before LB. Gyro toggles, and `Gyro | L1: Modifier 0` becomes active while LB is held. Record whether the regular L1 modifier also appears, and whether releasing LB then scrolls down through L1: Double Tap. Repeat for Gyro → regular, with both press orders, and in the alternative with L2 / R2
+- [ ] Alternative only: soft-pull both triggers during ramp-up, then fully pull one to exit. Record whether Mod 2 enters without re-pulling. Also press both triggers together from Base. `R2: Modifier 1` and its Gyro variant currently lack Hold to Repeat on their LT → Mod 2 chord
+- [ ] The existing first-click check (a trigger pulled during Gyro Off Ramp Up) tests removal passing through to a **mouse** output. The existing Enter / Backspace and double-tap-hold Escape / Tab checks test **key** outputs firing on the press that adds their layer. Record both results against this rule

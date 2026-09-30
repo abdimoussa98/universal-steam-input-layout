@@ -205,6 +205,7 @@ Detailed comparisons and runtime observations:
 
 - [R1 and L1&R1 tap-cover findings](findings/2026-09-27-r1-tap-cover/FINDINGS.md)
 - [Delayed-apply reset coverage audit](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md) - every delayed apply in both Neptune layouts, intentional exclusions, and proposed extensions within the three-command limit
+- [Held inputs across layer changes](findings/2026-09-29-held-input-layer-transitions/AUDIT.md) - why adding a layer over a held input doesn't fire its layer commands while removing one does, the ramp-up walkthrough, and which repeats and short delays exist because of it
 - [Guarded recovery repeat convention](findings/2026-09-28-repeating-recovery/CHANGES.md) - the separate change enabling Hold to Repeat on every guarded recovery removal
 - [Selected LS-edge recovery](findings/2026-09-28-left-stick-recovery/CHANGES.md) - fourteen recovery layers, seven timed-window blocks, and the approved Transition Set cleanup depth in both layouts
 - [Stuck RTP entry layer blocking right-stick ramp-up](findings/2026-09-27-rtp-entry-ramp-up/FINDINGS.md)

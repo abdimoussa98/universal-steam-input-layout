@@ -97,7 +97,7 @@ class NeptuneRecoveryTests(unittest.TestCase):
             self.assertEqual(override[0]["settings"]["gyro_ratchet_button_mask"], str(mask))
             self.assertEqual(override[0]["settings"]["gyro_ratchet_button_requireany_or_all"], "1")
             self.assertEqual(override[0]["settings"]["interruptable"], "0")
-            self.assertNotEqual(override[0]["settings"].get("hold_repeats"), "1")
+            self.assertEqual(override[0]["settings"].get("hold_repeats"), "1")
         else:
             self.assertEqual(len(chords), len(selectors))
         fallback = activators["Full_Press"]

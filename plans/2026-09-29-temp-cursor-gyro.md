@@ -1,10 +1,19 @@
-# Temp Cursor Gyro through modifier holds
+# Temp Cursor Gyro through modifier holds — original design
 
 Implemented in both Neptune JSON layouts on 2026-09-29, from baseline `c820d22`.
 Version remains 90.2. The actual converters were used before editing and after
 validation. See the [implementation record](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md)
 and [pending Deck checks](../manual-testing.md#temp-cursor-gyro).
 Stateful Cursor Gyro is outside this change.
+
+**Historical design, superseded by the implemented
+[cursor self-removal follow-up](2026-09-29-cursor-self-removal.md).** The record
+below preserves the original property-restoration approach and its tuning/reset
+follow-ups. Current normal Tap Covers inherit gyro; cursor cancellation removes
+cursor itself, exposing separate uninterruptible output and repeating cover-add
+chords. Cursor touch inputs now inherit the parent, while normal covers retain
+cleanup-only touch replacements. Use the implementation record for current
+behavior; the restoration and cursor-touch instructions below no longer apply.
 
 ## Confirmed behavior
 
@@ -34,7 +43,8 @@ Stateful Cursor Gyro is outside this change.
   uninterruptible override chord, and repeating recovery: three entries total.
 - The author accepts moving these single-modifier edge regions to about 25%,
   including earlier recovery when the modifier is no longer held. Other layers'
-  edge thresholds and Base's WASD/ramp-up configuration are outside this change.
+  edge thresholds and Base's WASD/ramp-up bindings are unchanged. The later
+  reference-tuning follow-up changes Base gyro and ramp response settings below.
 - Cleanup must include the new overlays wherever the owning interaction ends.
 
 **Activation rule retained:** preserve each owner's existing gyro activation
@@ -67,9 +77,11 @@ normal cover above a cursor-property layer would therefore inherit its settings.
 Restoration needs explicit normal values for every property changed beneath it.
 
 Both layouts currently define normal gyro sensitivity as `300` in Base. Other
-active gyro groups inherit it. The current four primary delayed applies have
-two entries each. The separate TODO for extending delayed-apply resets remains
-separate; this plan does not add periodic removal just because a slot is free.
+active gyro groups inherit it. The initial implementation left the four primary
+delayed applies at two entries and deferred their reset/retry logic. The author's
+follow-up identified that omission: each now has a third entry, a 350 ms repeating
+removal of only its pending Temp Cursor Gyro overlay, with Interruptable Off.
+See the [reset follow-up](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#delayed-apply-reset-follow-up).
 
 ## Cursor gyro property profile
 
@@ -96,7 +108,7 @@ both cursor overlays and normal covers, preserving the current value of `300`.
 | Property | Temp Cursor Gyro | Normal Tap Cover restoration |
 |---|---|---|
 | `gyro_natural_sensitivity` | Inherited unchanged (`300` from current Base) | Inherited unchanged; no override needed |
-| `gyro_precision_speed` | `750` | `0` (current Base) |
+| `gyro_precision_speed` | `750` | `300` (current Base) |
 | `haptic_intensity` | `3` | `0` (verified native gyro default) |
 | `flickstick_haptic_bump_per_angle` | `1` | `5` (verified native gyro default) |
 | `mouse_move_threshold` | `10` | `0` (verified native gyro default) |
@@ -114,13 +126,22 @@ from the upper cover would inherit the cursor value, not restore normal behavior
 Do not invent zero values for all three or borrow a value from a different source
 mode or a key activator.
 
-Keep the current normal calibration/settings outside this override list:
-`flickstick_rotation_sensitivity: "4653"` and
-`gyro_vertical_horizontal_ratio: "200"`. The reference Base uses rotation
-calibration `3853`, precision speed `300`, conversion style `4`, and speed
-deadzone `0`; these are Base settings, not explicit Gated Gyro overrides. This
-plan uses the current layouts' calibration and normal baseline when importing
-the Gated Gyro overrides.
+The initial cursor implementation retained rotation calibration `4653` and normal
+precision `0`. The author's reference-tuning follow-up replaces Base gyro settings
+with the reference's rotation `3853`, precision `300`, conversion style `4`, and
+speed deadzone `0`; natural sensitivity `300`, vertical ratio `200`, and activation
+selection remain unchanged. The normal covers now restore precision `300`.
+Cursor overlays inherit all other Base response settings and keep only their
+four explicit Gated Gyro overrides.
+
+Base RS settings already match the reference. Ramp 0 now uses sensitivity `150`
+and vertical scale `80`; Ramp 1 uses `200` and `67`. Existing bindings, modifier RS
+sensitivity `75`, and local cleanup thresholds remain unchanged. See the
+[exact settings and inheritance policy](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#reference-tuning-and-gyro-inheritance-follow-up).
+Regular modifier owners inherit gyro response; Gyro owners and LST/RST Temporary
+Gyro override only activation. All intentional active `disabled` gyro modes remain
+in place. The existing normal Tap Covers own response restoration; normal
+response settings are not copied into the modifier parents.
 
 **Activation-mask distinction:** the reference mask includes Start/Select as well
 as both stick touches/deflections. It matches current Base's six-input selection
@@ -151,6 +172,7 @@ Give the new layer no Always On action and no independent delayed timer.
 |---|---|
 | Initial primary press | Enter the existing modifier; begin the hold delay |
 | Hold reaches 300 ms without a normal cover | Apply that owner's Temp Cursor Gyro; suppress the primary tap-release action |
+| Delayed apply is interrupted before either overlay takes over | The parent's 350 ms repeating removal resets only the pending cursor target so its delayed apply can retry |
 | Stick-touch release before the delay, with the modifier held and no normal cover | Apply Temp Cursor Gyro immediately, then clear that stick's LST/RST family |
 | Stick-touch release after a normal cover | Clear that stick's family; keep the normal cover and all normal gyro properties; never add cursor gyro |
 | A normal-cover input occurs before the delay | Apply the normal cover; prevent later cursor entry for this hold |
@@ -169,12 +191,13 @@ cursor entry. The 25% edge region also intentionally advances stale recovery.
 
 The requested design is to give the two existing normal Tap Covers explicit
 normal-property overrides for every field changed by Temp Cursor Gyro: precision
-speed `0`, haptic intensity `0`, haptic bump `5`, and movement threshold `0`.
+speed `300`, haptic intensity `0`, haptic bump `5`, and movement threshold `0`.
 Natural sensitivity stays inherited in both overlay types. Both forms replace
-the complete primary input,
-including its pending delayed chord, with their own release lifecycle. Verify
-that Steam retires the parent's pending apply when the normal cover takes over;
-do not assume a release entry alone proves timer cancellation.
+the complete primary input, including its pending delayed chord and 350 ms reset,
+with their own release lifecycle. Verify that Steam retires both parent activators
+when either overlay takes over; do not assume a release entry alone proves timer
+cancellation. The reset targets only the cursor overlay and must never remove
+the normal cover or reopen cursor eligibility during that hold.
 
 The normal cover also needs explicit LS/RS **touch-input replacements**. Each
 uses the existing three-entry structure, without inheriting a cursor add:
@@ -313,10 +336,12 @@ reliable detection must be reviewed for timer interference.
   with cleanup-only release behavior, preventing a later touch release from
   defeating the hold's override. Do not normalize this deliberate ordering into
   the usual removal-before-add transition.
-- Keep periodic delayed-apply reset extensions in their separate review TODO.
-  The touch-release completion path is not a repeating reset. If a reset is
-  later justified, it belongs on the parent while its apply is pending and must
-  stop under either overlay; it cannot bypass Always On isolation.
+- Keep the 350 ms cursor reset on each single-modifier parent's primary input,
+  with Hold to Repeat On and Interruptable Off, removing only its pending cursor
+  overlay. Touch-release completion is a separate mechanism. Both overlay types
+  and all seven Always On windows replace the primary input; verify the reset
+  stops across those transitions. Other delayed-apply reset extensions remain
+  in their separate review TODO.
 
 ## Implementation sequence followed
 
@@ -390,7 +415,9 @@ Test both sides, both layouts, and regular/Gyro owners:
 - Verify the property overrides preserve intended gate/source behavior through
   regular, Gyro, menu, and timed stacks, and confirm the native normal defaults
   in the target Deck client. Sensitivity and activation masks remain inherited.
-- Preserve the existing trackpad-held face/D-pad mode shifts. Their key-only
-  outputs do not apply normal covers; this is retained baseline behavior, not
-  a newly confirmed intentional cursor exception. Record the interaction during
-  Deck testing before considering changes to shared Base mode-shift groups.
+- Verify whether trackpad-held face/D-pad mode shifts actually activate under
+  modifiers. Targets 1039/1043 are marked `inactive modeshift`; enabled Base
+  references alone do not establish runtime activation. Their key-only bindings
+  omit normal-cover additions, but the earlier claim of a confirmed cursor bypass
+  was too strong. Test before and after cursor entry and with trackpad touches
+  held across transitions. Consider binding changes only if the bypass is reproduced.

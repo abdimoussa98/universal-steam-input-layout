@@ -38,18 +38,28 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
   - Activate via Left Menu + RS click
   - Only remove when both left and right sticks are deflected
 - [x] Temp cursor gyro
-  - Implemented in both JSON layouts: delayed Mod 0/1 holds apply owner-specific cursor overlays in regular/Gyro variants (L1/R1 default, L2/R2 alternative). See the [implementation and inheritance review](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md), [design](plans/2026-09-29-temp-cursor-gyro.md), and [pending Deck tests](manual-testing.md#temp-cursor-gyro)
-  - Apply Gated Gyro's response/haptic properties after 300 ms: precision 750, haptic intensity 3, haptic bump 1, movement threshold 10. Normal covers restore 0/0/5/0 explicitly. Natural sensitivity remains inherited at 300, and existing activation gates/calibration are preserved
+  - Implemented in both JSON layouts: delayed Mod 0/1 holds apply owner-specific cursor overlays in regular/Gyro variants (L1/R1 default, L2/R2 alternative). See the [implementation and inheritance review](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md), [current design](plans/2026-09-29-cursor-self-removal.md), and [pending Deck tests](manual-testing.md#temp-cursor-gyro)
+  - Apply Gated Gyro's response/haptic properties after 300 ms: precision 750, haptic intensity 3, haptic bump 1, movement threshold 10. Cursor self-removal exposes normal 300/0/5/0; normal covers inherit gyro. Natural sensitivity remains inherited at 300, and existing activation gates are preserved
+  - Base gyro follows the July reference (rotation 3853, precision 300, conversion style 4, speed deadzone 0). Gyro/LST/RST sources retain activation-only overrides; only cursor overlays supply the temporary response. See [exact settings and inheritance policy](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#reference-tuning-and-gyro-inheritance-follow-up) and [pending Deck checks](manual-testing.md#reference-gyro-and-right-stick-tuning)
   - Either stick-touch release completes that apply early, before LST/RST cleanup can reset its delay; see [the documented pattern](resources/Steam%20Input%20JSON%20Structure.md#complete-delayed-applies-on-stick-touch-release)
-  - Regular face/D-pad/click inputs, Start/Select, the opposite modifier, and both sticks deflected about 25% apply the normal cover until the next modifier hold. Trackpad-held face/D-pad mode shifts are the outstanding exception below. An override before 300 ms prevents cursor entry; normal covers replace touch inputs with guarded recovery and LST/RST removals, never cursor additions
+  - Regular face/D-pad/click inputs, Start/Select, the opposite modifier, and both sticks deflected about 25% apply the normal cover until the next modifier hold. Whether trackpad-held face/D-pad mode shifts bypass that behavior remains unverified; see the check below. An override before 300 ms prevents cursor entry; normal covers replace touch inputs with guarded recovery and LST/RST removals, never cursor additions
   - Three entries per edge: interruptible owner guard, uninterruptible owner-plus-opposing-stick override, and repeating recovery. LS radius 4915 / RS 7209 account for different hysteresis to target ~25% engagement; earlier cleanup when the owner is absent is accepted. Physical/selector thresholds and chord priority remain Deck checks
-  - Extended owner-family cleanup for cursor overlays while preserving outputs, opposite held owners, and Always On isolation. Periodic delayed-apply reset extensions remain a separate review
-- [ ] Make trackpad-held face/D-pad presses override Temp Cursor Gyro in both layouts
-  - Holding either trackpad inherits Base's key-only mode-shift groups 1039/1043, which do not apply the normal Tap Cover. Those presses can leave cursor behavior active or fail to cancel its pending 300 ms apply; this is not an author-confirmed intentional exclusion
-  - Prefer modifier-specific mode-shift bindings that preserve existing key outputs and apply the owning normal cover. Trace inheritance through regular/Gyro owners, overlays, and Double Tap windows; preserve the three-command limit and Always On isolation instead of adding layer mutations to shared Base groups
-  - See the [review finding](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#stick-edges-and-inheritance) and [Deck checks](manual-testing.md#temp-cursor-gyro), including overrides before and after cursor entry
+  - Extended owner-family cleanup for cursor overlays while preserving outputs, opposite held owners, and Always On isolation. A follow-up adds the missing 350 ms reset to each 300 ms cursor-entry parent; both overlay types replace that input to stop the apply/reset pair
+- [x] Replace cursor property restoration with repeating cursor self-removal
+  - [Implementation plan](plans/2026-09-29-cursor-self-removal.md): split 48 ordinary modifier inputs per layout into output and repeating cover-add chords, both uninterruptible, plus existing interruptible repeating cleanup; keep three entries per input
+  - Cursor cancellation removes only itself; normal Tap Covers inherit gyro and retain cleanup-only touch releases. Cursor layers inherit LS/RS touches. Preserve the owner's 300 ms apply / 350 ms reset, repeating opposite-modifier transitions, and separate repeating dual-stick paths
+  - Fixed the two missing alternative Mod 2 repeats from held-input F1. RTP Double Tap now explicitly blocks face/D-pad/stick-click inputs above a modifier/cursor; existing timer boundaries stay intact. See the [per-window inheritance review](findings/2026-09-29-temp-cursor-gyro/SELF-REMOVAL-INHERITANCE.md)
+  - Static tests and reference checks pass; [Deck validation](manual-testing.md#temp-cursor-gyro) remains pending for both same-selector chords, held-output handoff, interrupted timers, and RTP's brief output blocking
+- [ ] Verify whether trackpad-held face/D-pad mode shifts activate under modifiers and bypass Temp Cursor Gyro overrides
+  - Both layouts mark target groups 1039/1043 as `inactive modeshift`. Enabled Base trackpad-touch commands reference them, but those references alone do not establish whether Steam activates them under the modifier stack. The earlier review overstated this as a confirmed behavior gap
+  - First reproduce the behavior on the Deck, before and after the 300 ms cursor apply. Only consider a fix if these groups actually take effect and bypass the normal Tap Cover; otherwise close this concern without changing bindings
+  - If confirmed, consider modifier-specific mode-shift bindings that preserve existing key outputs and apply the owning normal cover. Trace inheritance through regular/Gyro owners, overlays, and Double Tap windows, including held inputs across transitions; preserve the three-command limit and Always On isolation
+  - See the [corrected review note](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#stick-edges-and-inheritance) and [Deck checks](manual-testing.md#temp-cursor-gyro)
 
 ## Ramp up / triggers
+
+- [x] Copy reference Base and ramp-up right-stick settings into both layouts
+  - Base and Gyro Off Ramp Up already match. Turning Ramp Up 0 now uses sensitivity/vertical scale 150/80; Turning Ramp Up 1 uses 200/67. Bindings, modifier sensitivity 75, and local cleanup thresholds are preserved; verify feel in [manual testing](manual-testing.md#reference-gyro-and-right-stick-tuning)
 
 - [x] Remove dedicated trigger layers and the old layer-based chorded ramp-up arrangement
   - Confirmed in both layouts: dedicated trigger layers are gone. Base still intentionally uses grouped Any chords to select or suppress ramp-up; this does not mean removing every ramp-up chord
@@ -89,12 +99,15 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
   - Both Menu Entry → Fn paths apply after 300 ms and have a repeating 350 ms reset with Interruptable Off. Implemented in both layouts; Deck validation remains in the [manual checklist](manual-testing.md#menu-buttons)
 - [x] Fix combined tap covers not properly re-adding after interrupt
   - All four Mod 2 variants per layout (both press orders, regular and Gyro) apply the combined Tap Cover after 200 ms and reset it every 250 ms with Interruptable Off. Deck validation remains in [triggers and ramp-up](manual-testing.md#triggers-and-ramp-up)
+- [x] Add delayed-apply reset to all four Temp Cursor Gyro entry parents per layout
+  - Corrects the omission from the initial cursor implementation: the owning primary input removes only its Temp Cursor Gyro overlay every 350 ms with Hold to Repeat On and Interruptable Off, alongside the existing 300 ms apply and release exit
+  - Both the cursor overlay and normal Tap Cover replace the complete primary input, stopping the reset after cursor entry or override. The reset never removes the normal cover or clears the owner stack. All seven Double Tap windows explicitly replace the primary controls; see [scope and isolation](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#delayed-apply-reset-follow-up) and [pending Deck checks](manual-testing.md#temp-cursor-gyro)
 - [x] Split menu entry layer into separate Menu Left / Menu Right layers
   - Both layouts have distinct Menu Left: Entry Point and Menu Right: Entry Point layers and their own Fn paths
 - [ ] Review extending the delayed-apply reset to additional tap-cover paths
-  - Rechecked both layouts on 2026-09-29: coverage remains 7 of 19 delayed-add paths—the two menu paths, four combined-cover paths, and Turning Ramp Up 0 → 1. The completed fixes above do not imply every delayed apply needs a reset
+  - After the cursor reset follow-up, coverage is 11 of 19 delayed-add paths per layout: four single-modifier cursor paths, two menu paths, four combined-cover paths, and Turning Ramp Up 0 → 1. The completed fixes above do not imply every delayed apply needs a reset
   - [Binding inventory](findings/2026-09-28-delayed-apply-reset-audit/INVENTORY.md) and [proposed follow-up work](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md#proposed-todo-split-and-validation); missing resets are not proof of runtime failures
-  - Proposed additions, not yet implemented: four single-modifier paths, then LST/RST Entry → Tap Cover per layout. Keep resets in the parent owning the pending apply; preserve overlays and the three-command limit
+  - Remaining proposed additions: LST/RST Entry → Tap Cover per layout. The four single-modifier paths now target Temp Cursor Gyro and have their resets. Keep resets in the parent owning the pending apply; preserve overlays and the three-command limit
   - Preserve the author-confirmed RTP touch exclusion for trackball momentum. Defer the four scroll/menu-key Double Tap Cover paths until a design preserves output timing within three entries; leave the 5 ms Gyro Off → Turning Ramp Up 0 handoff unchanged unless it fails. These deferred choices are audit recommendations, not confirmed historical exclusions
 - [x] Confirm menu helper/cover overrides are intentional within the overlay design
   - Keep Backspace / Enter, Escape / Tab, and the two Menu Double Tap Covers local to their button/action; the underlying stack owns recovery. Release-only exits remain valid; review invalid residual helpers in the owner's recovery instead of automatically adding independent edge cleanup to each overlay
@@ -115,7 +128,7 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
 
 - [x] Make Base gyro activation require LS/RS deflect, LS/RS touch, Select, and Start together, replacing the Start/Select gyro mode shifts
   - Verified in both layouts on 2026-09-29: active Base gyro group 576 uses mask `211109453778944` with `gyro_ratchet_button_requireany_or_all: "1"` (All six inputs)
-  - The Start/Select gyro mode shifts are removed. Remaining mode shifts serve trackpad-touch navigation and menu Fn stick punctuation; they are unrelated and remain intentional
+  - The Start/Select gyro mode shifts are removed. Remaining mode-shift definitions cover trackpad-touch navigation and menu Fn stick punctuation and were preserved by that refactor. Trackpad mode-shift activation under modifiers remains the separate verification item above
   - Implementation: [gyro mode-shift removal plan](plans/2026-09-27-neptune-gyro-shifts-navkeys.md). Runtime checks remain in [manual testing](manual-testing.md#modifier-layers); other gyro layers retain their own activation rules
 - [ ] Handle cursor gyro layer (may be covered by [Cursor gyro above](#cursor-gyro))
 - [ ] Clear all unnecessary layers on action set swap

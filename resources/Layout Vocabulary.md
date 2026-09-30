@@ -36,11 +36,14 @@ and instead removes the L1 modifier family and itself. Its local exit can have
 several removal subcommands; “one button” describes the affected control, not
 the number of commands. Alternative uses L2 for the same modifier role.
 
-**`L1: Temp Cursor Gyro`:** shares that release lifecycle and supplies cursor
-response/haptic properties while L1 is held. The normal Tap Cover restores
-those properties for the rest of the hold. Both overlays explicitly replace
-stick-touch releases to prevent inherited cursor re-entry, while inheriting
-the owner's edge/click/directional behavior. Their modifier owner recovers both.
+**`L1: Temp Cursor Gyro`:** is a response overlay, not strictly a one-button
+overlay: it supplies cursor response/haptic properties and owns cancellation
+across several inputs. Those inputs repeatedly remove only cursor, exposing the
+modifier's output and repeating normal-cover addition. The normal Tap Cover
+inherits gyro and prevents re-entry for the rest of the hold. Cursor inherits
+stick-touch completion/cleanup; the normal cover explicitly replaces those
+releases with cleanup only. Both keep the primary family-release exit, and
+the modifier owner remains responsible for recovering both overlays.
 
 Menu Left: Backspace, the single-button Tap Covers, and the individual Double
 Tap Covers are other examples. A combined modifier Tap Cover spans both

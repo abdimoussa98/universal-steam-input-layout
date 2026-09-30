@@ -302,8 +302,12 @@ of these two activators.
 In the July snapshot, the pattern appears on **R1 in `*L1!R1: Modifier 2`** (chord
 requires L1) and **L1 in `*R1!L1: Modifier 2`** (chord requires R1), but not the
 unstarred variants. It was absent from the earlier Neptune export; the September
-port added it to all four Neptune Mod 2 layers, regular and gyro. The separate single-bumper
-hold path now applies `R1: Temp Cursor Gyro` after 300 ms without this added repeating removal.
+port added it to all four Neptune Mod 2 layers, regular and gyro. The single-modifier
+cursor follow-up adds the same pattern to all four regular/Gyro parents per layout:
+their primary input applies its own Temp Cursor Gyro after 300 ms and removes only
+that cursor target every 350 ms. Both cursor and normal overlays replace the complete
+primary input to retire the apply/reset pair. The reset must never remove the normal
+cover and reopen cursor eligibility. See the [follow-up and inheritance checks](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#delayed-apply-reset-follow-up).
 The 200/250 ms values describe this implementation, not a general timing formula.
 
 **RTP trackpad exception:** the author deliberately left this workaround out of the RTP
@@ -316,9 +320,9 @@ presence does not mean this workaround was applied to the trackpad-touch path.
 See the [R1 and L1&R1 tap-cover findings](../findings/2026-09-27-r1-tap-cover/FINDINGS.md)
 for exact groups, source locations, the Neptune comparison, and supporting research.
 
-For current coverage in both Neptune 90.2 layouts, see the
-[delayed-apply reset audit](../findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md):
-seven of nineteen delayed-add paths per layout have the reset. The audit
+The original [delayed-apply reset audit](../findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md)
+recorded seven of nineteen delayed-add paths per layout with the reset. The cursor
+follow-up raises current coverage to **eleven of nineteen**. The original audit
 distinguishes the confirmed RTP exception from undocumented omissions and
 proposed extensions; a missing reset is not by itself a reproduced failure.
 Do not add a fourth command or couple a reset to wheel/key output timing merely
@@ -382,8 +386,11 @@ pattern explicitly: the primary delay and both touch releases apply the
 cursor overlay; normal Tap Covers replace touch inputs with guarded
 recovery and LST/RST removal only. Start/Select, the opposite modifier, and the
 other normal-cover inputs remain overrides, even before 300 ms. Cursor overlays
-also replace touch inputs once applied, avoiding repeated self-additions. The
-saved bindings implement this lifecycle; race timing still needs Deck validation.
+omit both stick-touch inputs, deliberately inheriting the parent's completion
+and helper cleanup; adding the already-active cursor does not establish a new
+hold. Normal covers keep their cleanup-only replacements so a thumb lift cannot
+reactivate cursor after cancellation. The saved bindings implement this lifecycle;
+race timing still needs Deck validation.
 
 #### Blocking to Protect Layer Timers
 
@@ -542,8 +549,9 @@ preset[].group_source_bindings = {
      group overrides gyro even when it has no explicit input activators
 
 3. **Layer Deactivated**: Removing the layer exposes the remaining stack's bindings,
-   or the parent Action Set when no lower layer overrides that input. Do not assume
-   the triggering event is replayed into a newly exposed cleanup; that needs a runtime check.
+   or the parent Action Set when no lower layer overrides that input. An input
+   still held at that moment fires its newly exposed binding, but adding a layer
+   over a held input does not; see [Held Inputs Across Layer Changes](#held-inputs-across-layer-changes).
 
 **Example Flow:**
 ```
@@ -557,6 +565,133 @@ L2 Layer (Preset_1000006) activated:
 L2 released:
   - Reverts to Base Set bindings
 ```
+
+### Held Inputs Across Layer Changes
+
+**Author-reported behavior, documented 2026-09-29.** Adding a layer and removing
+a layer treat an input that is already held differently:
+
+| Change while the input is held | Top binding on that input afterward | Fires? |
+|---|---|---|
+| Layer **added** | Immediate layer command: Regular Press, chord, or Soft Press with no Fire Start Delay and no Hold to Repeat | **No.** The press happened before the layer existed |
+| Layer **added** | Activator with a Fire Start Delay | Yes, once the delay elapses |
+| Layer **added** | Activator with Hold to Repeat | Yes, on its next repeat interval |
+| Layer **removed** | The newly exposed lower binding | **Yes**, as if the input had just been pressed |
+
+A layer command is `add_layer`, `remove_layer`, or `hold_layer`. The rule was
+reported for layer commands. Whether key and mouse outputs follow it is not yet
+confirmed. The menu overlays (Backspace, Enter, Escape, Tab) rely on their key
+firing on the press that adds their layer.
+
+How these layouts use it:
+
+- **A delayed apply needs no repeat to fire on the held input that just added
+  its parent.** All 19 delayed applies per layout have this shape. The 5 ms delay
+  in `Gyro Off Ramp Up` exists only for this: the stick is already past its
+  threshold when the layer appears, so a zero-delay Soft Press would never fire.
+  Don't remove "too short to matter" delays or add repeats to delayed applies
+  without checking this.
+- **When a new layer must act immediately on a held input**, either add the next
+  layer in the same binding array, or give the new layer's activator Hold to Repeat:
+  - Array: Menu Entry → Fn also adds `Menu Right: Enter` / `Menu Left: Backspace`
+    itself.
+  - Repeat: Gyro's 50 ms modifier entry after a Mod 2 release, Mod 0/1 → Mod 2
+    entry, and Fn stick click → Transition Set.
+- **An exit whose condition can already be true when its layer is added needs
+  Hold to Repeat.** Examples: the ramp layers' inverted thresholds, the trackpad-
+  click hold exits, and `Gyro Off Ramp Up`'s firing-control removal.
+- **A removal passes through.** The same press that clears a layer also fires
+  what it exposes:
+  - Ramp modifier exits clear ramp-up, then Base/Gyro modifier entry fires.
+  - Guarded recovery lets the input's normal action follow.
+  - A Double Tap expiry fires the Base action under a held input.
+
+  Before adding a removal, trace what it exposes on every input that may still
+  be held.
+- **Base is never added.** Its bindings return only through removals, so its
+  repeating entries back up the removal case and aren't needed for the add case.
+
+This matches the timer observations above. Removals restart Fire Start Delay
+timers and can restart a stuck delayed apply; additions don't. A working model:
+a removal makes Steam re-evaluate held inputs, and an add doesn't. This is not
+verified internals, and the re-evaluation can't be a literal re-press. If it
+were, a repeating reset would re-fire its own Regular Press in a loop.
+
+See the [held-input audit](../findings/2026-09-29-held-input-layer-transitions/AUDIT.md)
+for the ramp-up walkthrough, per-layout inventory, the alternative layout's
+former missing R2 → Mod 2 repeat, and open scope questions. Deck confirmation is
+tracked in [manual testing](../manual-testing.md#held-inputs-across-layer-changes).
+
+### Gyro Settings Inheritance
+
+Keep the normal gyro response in Base. Ordinary layers inherit the exposed lower
+stack's settings; do not copy a complete Base gyro group into every layer. Follow
+the [July reference](../findings/2026-07-11-layer-order-swap/MOST_RECENT_LAYOUT.post-fix.json)
+and distinguish these intentional exceptions:
+
+- **Activation layers:** persistent Gyro, the Gyro modifier variants, and LST/RST
+  Temporary Gyro specify only `layer: "1"` and the activation selector/Any-All
+  fields they change. They inherit sensitivity, calibration, and response.
+- **Response overlays:** Temp Cursor Gyro specifies only its four response/haptic
+  overrides. Cancellation removes that cursor layer, exposing the response below.
+  Normal modifier Tap Covers and regular Mod 0/1 parents have no active gyro
+  source; neither duplicates response settings. The cover prevents cursor re-entry
+  for the rest of the hold by replacing the primary and stick-touch lifecycles.
+- **Disabled contexts:** preserve active `disabled` gyro sources in menu,
+  transition, and Gyro Off layers. These are deliberate source replacements,
+  not missing inheritance. Dormant `inactive` groups are a separate category.
+
+In the current Neptune layouts, normal precision/haptic/bump/threshold is
+300/0/5/0; cursor is 750/3/1/10. Both inherit Base natural sensitivity 300,
+rotation calibration 3853, vertical ratio 200, conversion style 4, and speed
+deadzone 0. When tuning Base, trace overlapping activation/profile layers and
+preserve cursor's deliberate response overrides. There is no normal-cover copy
+to synchronize. Do not overwrite activation gates while importing response values. The [reference-tuning record](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#reference-tuning-and-gyro-inheritance-follow-up)
+lists exact settings and pending runtime checks.
+
+### Cursor Cancellation and Repeating Cover Chords
+
+Each regular/Gyro Mod 0/1 parent splits its twelve ordinary cancellation inputs
+(face buttons, D-pad directions, stick clicks, and Start/Select) into exactly
+three GUI command entries:
+
+| Entry | Action | Interruption and repeat |
+|---|---|---|
+| Owner-held output chord | Original key/mouse output only | Uninterruptible (`interruptable: "0"`); retain the output's existing repeat behavior |
+| Same-owner cover chord | Add only the owner's normal Tap Cover | Uninterruptible; Hold to Repeat; no start delay or haptic feedback |
+| Regular Press recovery | Existing modifier-family removal | Interruptible; Hold to Repeat; suppressed by the valid owner chords |
+
+Both chords use the same owner selector. The separate repeat retries a layer
+addition without repeating a key or mouse action that was not previously
+repeating. This is 48 split inputs per layout. The opposite-modifier transition
+keeps its own repeating Mod 2 path; the owner primary still uses its three
+entries for release, 300 ms cursor apply, and the independent 350 ms reset.
+
+Temp Cursor Gyro replaces those twelve inputs and the opposite modifier with
+uninterruptible, repeating Regular Press removals of **only itself**. These
+local cancellation entries contain no key output, cover addition, or Mod 2
+selection. Removing cursor exposes the actual regular/Gyro parent, which
+provides the original output and repeating cover/transition. This follows the
+author's [held-input rule](#held-inputs-across-layer-changes); output delivery,
+release, and same-selector chord arbitration still require Deck validation.
+Do not claim chord-list order preserves the old combined array's add-before-key
+execution order.
+
+Both stick edges retain a different three-entry shape: an interruptible empty
+owner guard, an uninterruptible repeating All chord requiring owner plus the
+opposing stick's deflection, and interruptible repeating recovery. The parent
+All chord adds the normal cover; the cursor All chord removes only cursor.
+Cursor's lost-owner edge recovery also removes only itself and exposes the
+parent's family recovery. One stick alone while its owner is held does not
+cancel cursor. Keep the empty edge guard interruptible; the requirement that
+both output/cover chords are uninterruptible does not change that guard.
+
+Cursor inherits the parent's LS/RS touch inputs and geometry. Normal Tap Covers
+keep cleanup-only touch replacements and inherit gyro response. Both overlays
+retain their primary release exit, whose family cleanup is intentionally broader
+than a cursor cancellation's self-only removal. See the
+[implementation record](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md)
+for affected stacks and validation.
 
 ### Inheritance Review for Binding Changes
 
@@ -586,8 +721,10 @@ For each changed input or source:
    Fire Start Delay when that layer is added or removed. Look for inherited
    additions/removals that could disturb a timer, hidden recovery, lost movement
    modifiers, or a newly exposed action after exit. Static inspection does not
-   prove that installing a block cancels an already pending activator, or that
-   the same gesture fires a newly exposed binding.
+   prove that installing a block cancels an already pending activator. Per the
+   [held-input rule](#held-inputs-across-layer-changes), a held input fires its
+   newly exposed binding after a removal, but not an immediate layer command on a
+   newly added layer.
 4. **Choose the behavior deliberately.** Keep inheritance where the upper
    layer should share the lower action. Add a narrowly scoped explicit block
    where that action must be unavailable. If an Always On window needs an
@@ -622,6 +759,33 @@ they do not automatically need the same block. The
 configured blocks and entry/exit ordering. Pending-activator behavior and
 current-client crash behavior still require runtime evidence.
 
+**Concrete example — cursor cancellation beneath RTP Double Tap:** Base's RTP
+touch can be inherited through a single modifier and its cursor overlay. A quick
+RTP release removes RTP Entry and adds RTP Double Tap, leaving the modifier/cursor
+below the Always On window. The new repeating face, D-pad, and stick-click
+mutations therefore require explicit empty replacements in RTP Double Tap:
+four face inputs, four physical D-pad directions, and both stick clicks. These
+ten blocks temporarily suppress the corresponding inherited outputs. Existing
+menu/owner replacements, stick-edge blocks, and self-first touch/pad exits remain.
+
+The other six windows were traced separately. Modifier releases clear their
+regular/Gyro owner and cursor before adding their Double Tap window; scroll
+entry goes through that cleared window. Single modifiers and their overlays
+replace the Base LST/RST and menu entry inputs, while menu/scroll contexts
+replace modifier entry with ordinary outputs. No additional coexistence path
+for the new single-modifier repeats was found in those normal transitions, so
+this change does not add ten blanket blocks to every window. This is a traced
+configuration result, not proof about arbitrary stale stacks.
+
+RTP Double Tap still relies on its `absolute_mouse` → `dpad` source replacement
+to suppress Base's RTP click/touch layer actions, as recorded in the
+[blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md#inherited-route-review-and-remaining-uncertainty).
+The inactive-marked trackpad mode-shift targets contain only key outputs;
+whether they become effective in these stacks remains a separate runtime check.
+RTP Entry and Circular Scroll have no Always On action and keep useful modifier
+inheritance. Check cursor cancellation during RTP Entry's pending delay on Deck;
+this change does not add a repeating reset to the author's RTP touch exception.
+
 ### Stuck Layers and Why There Is So Much Cleanup
 
 **How a layer gets stuck.** Most layers are removed when the button that opened them is
@@ -654,7 +818,7 @@ residual covers under the [owning-layer responsibility](#cover-cleanup-ownership
 Menu layers deliberately restrict gameplay controls. See
 [cleanup scopes and examples](#cleanup-scopes-and-concrete-examples).
 After the [cursor-overlay additions](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md),
-each current layout has 360 activators in active groups that explicitly remove layers.
+each current layout has 390 activators in active groups that explicitly remove layers.
 
 #### Guarded Recovery Binding Shape
 
@@ -676,9 +840,9 @@ Most of these backup exits follow one pattern, on one input:
 
 | Input | Chord with LB (normal use) | Regular Press (LB not held, so stuck) |
 |---|---|---|
-| RS edge | empty binding; stronger LB + LS-deflected chord adds normal cover | remove `L1: Modifier 0`, `Gyro \| L1: Modifier 0`, `L1: Tap Cover`, and `L1: Temp Cursor Gyro` (Hold to Repeat) |
+| RS edge | empty binding; stronger LB + LS-deflected chord repeatedly adds normal cover | remove `L1: Modifier 0`, `Gyro \| L1: Modifier 0`, `L1: Tap Cover`, and `L1: Temp Cursor Gyro` (Hold to Repeat) |
 | RS touch | empty binding | the same removal (Hold to Repeat) |
-| RS click | middle mouse button, plus add `L1: Tap Cover` | the same removal (Hold to Repeat) |
+| RS click | separate uninterruptible chords for middle mouse and repeating `L1: Tap Cover` addition | the same removal (Hold to Repeat) |
 
 The Fn layers do the same on almost every input. For example, in `Menu Left: Fn Layer`:
 
@@ -742,7 +906,8 @@ For example, the existing default L1 modifier's RS-edge input has this shape
         "settings": {
           "gyro_ratchet_button_mask": "1073741832",
           "gyro_ratchet_button_requireany_or_all": "1",
-          "interruptable": "0"
+          "interruptable": "0",
+          "hold_repeats": "1"
         }
       }],
       "Full_Press": {
@@ -765,7 +930,7 @@ For example, the existing default L1 modifier's RS-edge input has this shape
 
 This example has three GUI entries and four removal subcommands. The empty
 owner guard is interruptible; the stronger owner-plus-opposing-stick chord is
-uninterruptible. Both require LB, so moving both sticks without LB cannot add
+uninterruptible and repeating. Both require LB, so moving both sticks without LB cannot add
 a cover or suppress recovery. The cleanup retains default Interruptable and
 Hold to Repeat. The opposite chord uses All; its mask is LB bit 3 plus LS
 deflection bit 30. Chord arbitration still needs a runtime check, not a claim
@@ -778,13 +943,19 @@ repeat. The [separate repeat change](../findings/2026-09-28-repeating-recovery/C
 enabled repeat on 104 of the original 185 active entries without changing their
 guards or targets. The subsequent [LS-edge work](../findings/2026-09-28-left-stick-recovery/CHANGES.md)
 added fourteen guarded recoveries and expanded Transition Set scope as approved.
-The cursor overlays and their normal covers added eight touch recoveries.
-These are saved-configuration checks, not a new Steam runtime test.
+The initial cursor implementation added eight touch recoveries. Its self-removal
+follow-up retains the four normal-cover touch recoveries and replaces the four
+cursor touch recoveries with four guarded cursor-edge recoveries. Cursor now
+inherits the parent's touch input. These are saved-configuration checks, not a
+new Steam runtime test.
 
 **Other lifecycle removals have different shapes:**
 
 - **Stick touch release:** many layers clear `RST` / `LST: Temporary Gyro`, `Tap Cover`
   and `Entry Point` when a thumb leaves a stick.
+- **Cursor cancellation:** face/D-pad/menu/click/opposite-modifier inputs use an
+  uninterruptible repeating removal of cursor alone. Their purpose is to expose
+  the lower held action; they are not owner-guarded family recovery.
 - **Timed self-removal:** the double-tap windows remove themselves from `always_on_action`
   after a start delay, for example 150 ms in `Menu Left: Double Tap`.
 - **Delayed-apply resets:** repeating removals that restart an interrupted Fire Start Delay.
@@ -833,9 +1004,9 @@ the inherited layout. It is not a free extra recovery path.
 
 A held-owner chord protects the layer from premature cleanup, but its empty or
 replacement binding still owns that edge; it does not restore the inherited
-WASD modifier or ramp-up action. Removing the layer exposes lower behavior again,
-but the same gesture is not guaranteed to run both cleanup and the newly exposed
-action.
+WASD modifier or ramp-up action. Removing the layer exposes lower behavior again.
+If the edge is still held, the exposed action fires on the same gesture; see
+[Held Inputs Across Layer Changes](#held-inputs-across-layer-changes).
 
 The author intentionally accepts more restrictions on ramp-up: it uses layer
 add/remove commands and delayed transitions, so it carries the timer-reset,
@@ -956,13 +1127,20 @@ for recovery of invalid helpers; the current bindings have not changed. Preserve
 a helper while its button is still held: do not add its removal unconditionally
 to the first menu button's release.
 
-`L1: Tap Cover` and `L1: Temp Cursor Gyro` inherit the underlying modifier's
-edge/click recovery, which removes both modifier variants and both overlays.
-They override L1 release locally. Their explicit touch replacements preserve
-owner-guarded recovery while removing only LST/RST helpers on thumb release;
-this prevents the lower touch-release cursor add from running through a normal
-cover or re-adding an already active cursor overlay. The overlays contain no
-edge bindings or movement settings. Menu Double Tap Covers instead keep a local
+`L1: Tap Cover` inherits the modifier's edge/click recovery, which removes
+both modifier variants and both overlays. Its explicit touch replacements
+preserve guarded recovery but remove only LST/RST helpers on thumb release;
+this blocks the lower cursor-add release after cancellation. It has no gyro
+source and keeps the owner's ordinary outputs and repeating cover chords.
+
+`L1: Temp Cursor Gyro` instead inherits both touch inputs, including cursor
+completion before helper cleanup. Its cancellation inputs repeatedly remove
+only itself, exposing the parent's output, repeating cover/Mod 2 transition,
+or family recovery. Its two guarded edge exits also remove only cursor; stick
+geometry and movement settings remain inherited. Both overlays replace the
+primary input with their family-release exit, stopping the 300/350 ms apply/reset
+pair. These narrow cancellation responsibilities do not replace the modifier's
+broader responsibility for both overlays. Menu Double Tap Covers keep a local
 pair exit with Escape/Tab; neither cover has Always On.
 
 **Menu gameplay suppression is intentional, confirmed by the author.** These
