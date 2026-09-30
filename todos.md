@@ -7,6 +7,23 @@ its supporting layers separately. This replaces the earlier “stateful set”
 wording. These features use layers throughout; action-set switching is excluded
 because the author reports buggy behavior with Steam action sets.
 
+## Next: allowed activators and cleanup (90.6)
+
+Implemented in 90.6 ([chorded delays](plans/2026-09-30-steering-chorded-delays.md),
+[banned activators and dead groups](plans/2026-09-30-banned-activators-and-dead-groups.md)).
+The audit now fails on Long/Double Press. Completion awaits the Deck checks.
+
+- [ ] Validate steering chorded delays on Deck (gates C1–C5): fallback warning/exit, entry carry, window clock from layer add, consume + 300 ms reset, reset never strips the cover
+- [ ] Validate the prune and RTP chord on Deck (gates D1–D5): fresh load, RTP tap/hold scroll, RTP edges, mode shifts, temporary gyro
+- [ ] Validate the second-press cover resets (gates R1–R3), including that desktop drops only the 4th entry ([record](findings/2026-09-30-second-press-cover-reset/README.md))
+- [ ] Validate Transition Set 0's new stick-touch release on Deck (gate T1) ([record](findings/2026-09-30-touch-release-rule/README.md))
+- [ ] Validate the derived Double Tap window blocks on Deck (gate B1) ([record](findings/2026-09-30-derived-window-blocks/README.md))
+- [ ] Validate the Double Tap window pads on Deck (gate P1) ([record](findings/2026-09-30-double-tap-pad-blocks/README.md))
+- [ ] Deck check: do stick inputs (edge, click, touch, directions) inherit through the middle of the stack, or only from the top layer and Base? Put three layers up where only the middle one binds LS click. A 2022 community report says sticks skip the middle ([JSON Structure](resources/Steam%20Input%20JSON%20Structure.md#how-binding-overlay-works)). If true, the inheritance tools must model it
+- [ ] Resume the stack search so the three inheritance questions get definite, realistic answers: next step is proving invariants ([status and everything tried](findings/2026-09-30-stack-search/README.md)). Then audit cleanup functions and blocks against the Cleanup Functions and Layer Definition of Done docs
+- [ ] Decide RTP Double Tap's LB, RB, menu buttons and trigger edges: their inherited values change with the stack, so §8 says clear ([finding](findings/2026-09-30-stack-search/README.md#what-we-learned))
+- [ ] Periodically recheck whether Steam's desktop configuration still drops entries after the third; consider filing a Valve bug report. If it's fixed, revisit the [command entry budget](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget)
+
 ## Done
 
 - [x] Make L1&R1: Tap Cover interruptable (in R1!L1, L1!R1, R2!L2, and L2!R2 layers)
@@ -27,9 +44,9 @@ because the author reports buggy behavior with Steam action sets.
   - Right R1/R2 owns W, left L1/L2 owns S; no built-in bank
   - Dominant release clears old modifiers/gestures; a held opposite takes over. No Rearm layer
 - [ ] Validate consolidated normal modifiers and scrolling
-  - Mod 0/1 own Down/Up gesture state; actual center qualifies tap; sideways removes silently; reversal selects the other bank consumed
+  - Mod 0/1 own Down/Up gesture state; actual center qualifies tap; sideways removes silently; reversal before 250 ms selects the other bank consumed
   - Shared normal Tap Cover, two Double Tap windows, one shared Double Tap Cover
-  - Verify cover reassertion retains priority without selector churn, and repeat reversal cancels the delayed opposite tick
+  - Tap Cover (90.6): up/down do nothing, center removes Mod 0, Mod 1, then the cover; verify repeat reversal cancels the delayed opposite tick
 - [ ] Validate simple Modifier 2 scrolling
   - Two ordered Modifier 2 variants; Up/Down wheel immediately and repeat while held; no Mod 2 gesture helpers
   - Uncovered opposite release clears all layers to Base; 200 ms hold/action coverage uses existing opposite-side single Tap Covers with the existing 250 ms reset
