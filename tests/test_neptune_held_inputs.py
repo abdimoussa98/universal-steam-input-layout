@@ -178,28 +178,14 @@ class NeptuneHeldInputTests(unittest.TestCase):
                     self.assertEqual(entries[0]["settings"].get("hold_repeats"), "1", RULE)
                     self.assertEqual(entries[0]["settings"].get("interruptable"), "0")
 
-    def test_only_documented_steering_long_press_native_gates_remain(self):
-        # These remain findings, not proven-safe exceptions. The scanner still
-        # reports them; pin their exact scope so new immediate dependencies fail.
-        # See steering-lean/ACCEPTANCE.md S3 and S7 for held Long Press/cover gates.
+    def test_no_held_input_violations_remain(self):
+        # The steering Long Press findings (90.5) are gone: 90.6 replaced them
+        # with chorded delays, and Fire Start Delay fires over a held input.
+        # Whether the delay counts from the layer add is still a native gate
+        # (plans/2026-09-30-steering-chorded-delays.md, C3/C4).
         for variant, layout in self.layouts.items():
             with self.subTest(variant=variant):
-                left, right = ('L1', 'R1') if variant == 'default' else ('L2', 'R2')
-                expected = []
-                cover = 'Steering | LS: Tap Cover'
-                for direction, cardinal, mod, other in [('Up', 'north', '1', 'Down'),
-                                                        ('Down', 'south', '0', 'Up')]:
-                    bank = f'Steering | LS {direction}: Modifier {mod}'
-                    name = 'dpad_' + cardinal
-                    parents = [f'Steering | LS {other}: Double Tap', cover,
-                               f'Steering | {right}: W Key', f'Steering | {left}: S Key']
-                    for parent in parents:
-                        expected.append((parent, 'joystick', name, bank, name + '/Long_Press',
-                                         [('add_layer', cover)]))
-                    window = f'Steering | LS {direction}: Double Tap'
-                    expected.append((bank, 'joystick', 'edge', window, 'edge/Long_Press',
-                                     [('remove_layer', window)]))
-                self.assertCountEqual(held_input_violations(layout), expected, RULE)
+                self.assertEqual(held_input_violations(layout), [], RULE)
 
     def test_held_input_guard_catches_known_regressions(self):
         layout = copy.deepcopy(self.layouts["default"])

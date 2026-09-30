@@ -24,11 +24,12 @@ record the new manifest hash when testing. Native acceptance is pending.
   repeating acquisition route; if neither is held, ordinary fallback continues.
   Both-held acquisition is blocked until an owner can be selected without the
   opposite held. Takeover clears old modifiers/gesture history and starts with
-  the current normal stick mapping consumed.
+  the Tap Cover: a stick already held gives no modifier map until it returns to
+  center (see [Simplified Tap Cover](#simplified-tap-cover-906)).
 - Modifier 2 Up/Down is a direct wheel bind with 50 ms hold repeat. It has no
   tap, double-tap, long-hold or consumed helpers. Its face mappings remain
-  independent. After coverage, opposite release retains its owner and restores normal
-  direction selection consumed.
+  independent. After coverage, opposite release retains its owner and exposes
+  the Tap Cover underneath, so a held stick does nothing until center.
   A short opposite tap instead clears all layers to Base.
 - Modifier 0/1 themselves retain fresh Down/Up gesture state. Their cardinal
   release does not remove the map; true center removes it and opens the matching
@@ -66,25 +67,25 @@ Default uses R1/L1 names; Alternative uses R2/L2. Membership is `Steering`, like
 
 Normal long-hold consumption is 250 ms. A single scroll resolves at the end of
 the 150 ms double window, or sooner on a different direction/sideways/normal
-mapped action. The window clock uses ordinary Long Press on a widened inverted
-stick edge after true-center entry; no new Always On timer is added. A second
+mapped action. The window clock is a chorded delay on the widened inverted
+stick edge after true-center entry, chorded on either driver; no new Always On
+timer is added. See [Chorded delays (90.6)](#chorded-delays-906). A second
 same-direction deflection starts the shared repeat cover, with a 5 ms initial
 delay and 50 ms repeat. Modifier 2 has immediate ordinary wheel output and
 50 ms hold repeat, with no gesture recognition.
 
 Two consolidation assumptions specifically require Deck proof:
 
-1. **Consumed-cover priority/idempotence.** Restoring a bank from the shared
-   Tap Cover adds that bank and reasserts the already-active cover last. Steam
-   must preserve that cover above the bank without repeatedly restarting its
-   selector. Otherwise a carried/reversed gesture could become fresh or the
-   selector could churn. The command-array test checks intended order only.
+1. ~~**Consumed-cover priority/idempotence.**~~ Removed in 90.6. Valve documents
+   that re-adding an active layer does not move it to the top, so the old
+   cover routing could leave a bank above the cover. The cover no longer adds
+   banks; see [Simplified Tap Cover](#simplified-tap-cover-906).
 2. **Shared-repeat reversal cancellation.** Removing the cover on old-direction
    release must cancel the new direction's delayed wheel output. The 5 ms delay
    is a guard, not proof of callback ordering/cancellation in Steam.
 
 Other native gates remain: movement handoff, held mapped-output suppression,
-added-over-held Long Press timing, timer stability, warning/beep delivery,
+added-over-held chorded-delay timing, timer stability, warning/beep delivery,
 menu thresholds/Fn cancellation and foreign-window/overlay recovery. No claim
 of bug-free runtime behavior or device acceptance is made. Failed gates block
 promotion; preserve the original candidate while fixing the failing path.
@@ -157,7 +158,71 @@ not native scheduling. Full validation: **76 Python and 8 Node tests**.
 Every new Fire Start Delay layer apply has a scoped repeating removal on the
 same owning input: W/S Up/Down selectors use 5/50 ms, protected menu covers
 300/350 ms, and Mod 2 covers 200/250 ms. Applying the target overrides the whole
-input and stops its parent reset. The LS Tap Cover instead uses regular
-50 ms repeating routing with no delayed apply: removing its active bank on a
-repeat would strip the modifier because the cover stays on top. Routing never
-removes the current bank or the cover itself. No additional layers are needed.
+input and stops its parent reset. The LS Tap Cover has no delayed apply and,
+since 90.6, no routing at all. No additional layers are needed.
+
+## Chorded delays (90.6)
+
+Long Press is banned repo-wide ([rule](../../resources/Steam%20Input%20JSON%20Structure.md#allowed-activation-types)),
+so all six steering timers are now chorded delays: a `chord` with `delay_start`
+and a modern mask (`gyro_ratchet_button_mask`, Any). Timings are unchanged.
+
+| Layer / input | Chord condition | Delay | Action | Reset |
+|---|---|---|---|---|
+| `Steering` / LS up | LS deflection (bit 30) | 1000 ms, repeat 250, haptic 3 | Warning pulse | none (no layer add) |
+| `Steering` / LS up | LS deflection | 2500 ms, haptic 3 | Full exit with beep | none |
+| `LS Down: Modifier 0` / down, `LS Up: Modifier 1` / up | LS deflection | 250 ms | Add `LS: Tap Cover` | Regular Press removal, repeat 300 |
+| `LS Up/Down: Double Tap` / edge | Either driver (Default `12`, Alternative `50331651`) | 150 ms | Wheel tick, remove window | none |
+
+The Mod 0/1 reset follows the interrupted-delay rule (delay + 50 ms). The cover
+it applies is added fresh, so it lands on top, overrides the input and hides
+the reset. The window clock is chorded on the drivers
+because it runs at center, where LS deflection is false.
+
+The builder also deletes the groups it replaces (66 Default / 64 Alternative)
+and refuses any Long or Double Press in steering layers. `LS: Entry Point` still
+overrides LS up, so W carried through entry starts no clock.
+
+Install with `install_neptune.py` after building. It carries the working
+title and description forward, applies the RTP scroll fix and prunes dead
+groups (see [dead-group prune](../2026-09-30-dead-group-prune/README.md)), then
+exports the VDF and refreshes [installation hashes](neptune-installation.json):
+
+```sh
+python3 findings/2026-09-30-steering-lean/build_candidate.py --vdf
+python3 findings/2026-09-30-steering-lean/install_neptune.py --version 90.6
+```
+
+Deck gates C1–C5 are in [ACCEPTANCE](ACCEPTANCE.md#chorded-delays-906).
+
+## Simplified Tap Cover (90.6)
+
+The first 90.6 build kept the old cover routing: every 50 ms the cover added
+the current bank and then re-added itself. Valve documents that applying an
+already-active layer has no effect and does not move it to the top
+([r1-tap-cover findings](../2026-09-27-r1-tap-cover/FINDINGS.md), [cleanup audit](../2026-09-28-neptune-cleanup-audit/AUDIT.md)).
+So whenever the cover was already active (reversing after the tap was used up,
+acquiring a driver with the stick held, leaving Mod 2 with the stick held),
+the bank landed above the cover, took over center and opened a double-tap
+window: a phantom scroll. The test helper had modelled re-add as "move to top"
+and hid this.
+
+The author's design, now implemented, for stick up (stick down is the mirror):
+
+1. In `R1: W Key` / `L1: S Key`, stick up applies `LS Up: Modifier 1` (5 ms
+   delayed apply with its 50 ms reset).
+2. In Modifier 1, holding up runs a chord on LS deflection that applies
+   `LS: Tap Cover` after 250 ms, with the repeating Regular Press removal of the
+   cover below it (interrupted-delay reset, 300 ms).
+3. Released to center before that, Modifier 1's center removes Mod 0/1 and
+   applies the `LS Up: Double Tap` window.
+4. In the Tap Cover, holding up or down does nothing (empty bindings, which
+   also hide the bank's delayed apply and reset). Center overrides the bank's
+   center and removes Mod 0, Mod 1, then the Tap Cover, in that order.
+
+The cover never adds a modifier, so it is only ever added fresh, on top of the
+bank it covers. Behavior change: after a driver takeover or a Mod 2 exit with
+the stick still held, the stick gives no modifier map until it returns to
+center and is pushed again. The test helper now follows Valve's rule, and a new
+test fails any binding that adds a bank while an active cover could be left
+below it.

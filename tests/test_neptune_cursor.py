@@ -358,7 +358,10 @@ class NeptuneCursorTests(unittest.TestCase):
                 actions = bindings(touch["release"])
                 self.assertEqual(actions[-1], removal(title))
                 self.assert_removals(actions[:-1], stick_family(prefix))
-            self.assertEqual(self.source(layout, title, "left_trackpad")["mode"], "disabled")
+            # Left pad swipes send keys directly (no layer API); see test_double_tap_windows.
+            left = self.source(layout, title, "left_trackpad")
+            self.assertFalse([b for v in left.get("inputs", {}).values()
+                              for e in v["activators"].values() for b in bindings(e) if "_layer" in b])
             trackpad = self.source(layout, title, "right_trackpad")
             self.assertEqual(trackpad["mode"], "dpad")
             for direction in ("north", "south"):

@@ -385,9 +385,11 @@
     },
     "activators": [
       {
-        "type": "Long_Press",
+        "type": "chord",
         "settings": {
-          "long_press_time": "150",
+          "gyro_ratchet_button_mask": "12",
+          "gyro_ratchet_button_requireany_or_all": "0",
+          "delay_start": "150",
           "interruptable": "0"
         },
         "execution_order": [
@@ -945,9 +947,11 @@
     },
     "activators": [
       {
-        "type": "Long_Press",
+        "type": "chord",
         "settings": {
-          "long_press_time": "150",
+          "gyro_ratchet_button_mask": "12",
+          "gyro_ratchet_button_requireany_or_all": "0",
+          "delay_start": "150",
           "interruptable": "0"
         },
         "execution_order": [
@@ -1451,22 +1455,9 @@
     "activators": [
       {
         "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1",
-          "repeat_rate": "50",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Modifier 0}} 0 0, , ",
-          "controller_action add_layer {{Base::Steering | LS Up: Modifier 1}} 0 0, , ",
-          "controller_action add_layer {{Base::Steering | LS: Tap Cover}} 0 0, , "
-        ]
-      },
-      {
-        "type": "release",
         "settings": {},
         "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Modifier 1}} 0 0, , "
+          "controller_action empty_binding, , "
         ]
       }
     ]
@@ -1487,22 +1478,9 @@
     "activators": [
       {
         "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1",
-          "repeat_rate": "50",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Modifier 1}} 0 0, , ",
-          "controller_action add_layer {{Base::Steering | LS Down: Modifier 0}} 0 0, , ",
-          "controller_action add_layer {{Base::Steering | LS: Tap Cover}} 0 0, , "
-        ]
-      },
-      {
-        "type": "release",
         "settings": {},
         "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Modifier 0}} 0 0, , "
+          "controller_action empty_binding, , "
         ]
       }
     ]
@@ -2347,13 +2325,26 @@
     },
     "activators": [
       {
-        "type": "Long_Press",
+        "type": "chord",
         "settings": {
-          "long_press_time": "250",
+          "gyro_ratchet_button_mask": "1073741824",
+          "gyro_ratchet_button_requireany_or_all": "0",
+          "delay_start": "250",
           "interruptable": "0"
         },
         "execution_order": [
           "controller_action add_layer {{Base::Steering | LS: Tap Cover}} 0 0, , "
+        ]
+      },
+      {
+        "type": "Full_Press",
+        "settings": {
+          "hold_repeats": "1",
+          "repeat_rate": "300",
+          "interruptable": "0"
+        },
+        "execution_order": [
+          "controller_action remove_layer {{Base::Steering | LS: Tap Cover}} 0 0, , "
         ]
       }
     ]
@@ -3223,13 +3214,26 @@
     },
     "activators": [
       {
-        "type": "Long_Press",
+        "type": "chord",
         "settings": {
-          "long_press_time": "250",
+          "gyro_ratchet_button_mask": "1073741824",
+          "gyro_ratchet_button_requireany_or_all": "0",
+          "delay_start": "250",
           "interruptable": "0"
         },
         "execution_order": [
           "controller_action add_layer {{Base::Steering | LS: Tap Cover}} 0 0, , "
+        ]
+      },
+      {
+        "type": "Full_Press",
+        "settings": {
+          "hold_repeats": "1",
+          "repeat_rate": "300",
+          "interruptable": "0"
+        },
+        "execution_order": [
+          "controller_action remove_layer {{Base::Steering | LS: Tap Cover}} 0 0, , "
         ]
       }
     ]
@@ -6439,9 +6443,11 @@
         ]
       },
       {
-        "type": "Long_Press",
+        "type": "chord",
         "settings": {
-          "long_press_time": "1000",
+          "gyro_ratchet_button_mask": "1073741824",
+          "gyro_ratchet_button_requireany_or_all": "0",
+          "delay_start": "1000",
           "hold_repeats": "1",
           "repeat_rate": "250",
           "haptic_intensity": "3",
@@ -6452,9 +6458,11 @@
         ]
       },
       {
-        "type": "Long_Press",
+        "type": "chord",
         "settings": {
-          "long_press_time": "2500",
+          "gyro_ratchet_button_mask": "1073741824",
+          "gyro_ratchet_button_requireany_or_all": "0",
+          "delay_start": "2500",
           "haptic_intensity": "3",
           "interruptable": "0"
         },

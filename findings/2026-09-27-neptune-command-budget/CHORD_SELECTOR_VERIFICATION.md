@@ -64,6 +64,23 @@ The same UI bundle explicitly declares these `k_eGamepadButtonBitMask_*` indices
 | Right trigger soft pull | 24 | 16,777,216 |
 | Left trigger soft pull | 25 | 33,554,432 |
 
+Further indices from the same table, checked 2026-09-30 (bits 32 and above
+also exist, for example back grips 41/42 and macros 32–39):
+
+| Button | Bit index | Value |
+|---|---:|---:|
+| North / West / East / South face | 4 / 6 / 5 / 7 | 16 / 64 / 32 / 128 |
+| D-pad up / right / left / down | 8 / 9 / 10 / 11 | 256 / 512 / 1024 / 2048 |
+| Back (View) / Guide / Start (Options) | 12 / 13 / 14 | 4096 / 8192 / 16384 |
+| Back grip left lower / right lower | 15 / 16 | 32768 / 65536 |
+| Left / right pad clicked | 17 / 18 | 131072 / 262144 |
+| Left / right pad touch (cap sense) | 19 / 20 | 524288 / 1048576 |
+| Left / right stick click | 22 / 26 | 4194304 / 67108864 |
+| Left / right stick deflection | 30 / 31 | 1073741824 / 2147483648 |
+
+The steering chorded delays use LS deflection (bit 30), and the RTP scroll
+repeat uses right-pad touch (bit 20).
+
 - Either bumper: `4 | 8 = 12`.
 - Either trigger, soft or full pull: `1 | 2 | 16777216 | 33554432 = 50331651`.
 

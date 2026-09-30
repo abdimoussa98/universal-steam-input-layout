@@ -3,30 +3,40 @@
   "device_status": "UNTESTED",
   "files": {
     "neptune/single-set-default_hold-gyro_latest.json": {
-      "sha256": "80815debb6f2f54e95ddfc5f7925619b8e1153cadbf255d98df8b7ef5b8be42b",
+      "sha256": "2243bf4c978360051a19a53ff1ca9217a58263c5624990886f4565f4e78308c0",
       "previous_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
       "backup": "findings/2026-09-30-steering-lean/pre-steering/neptune/single-set-default_hold-gyro_latest.json",
-      "version_snapshot": "versions/neptune/90.5/single-set-default_hold-gyro_90.5.json"
+      "version_snapshot": "versions/neptune/90.6/single-set-default_hold-gyro_90.6.json"
     },
     "neptune/single-set-default_hold-gyro_latest.vdf": {
-      "sha256": "a64b65bb5b823b92a40813e46af28d653f41d48c55bf76251d17295b3ba4742b",
+      "sha256": "373b8a1cf4d2e44b5a1bdcbef78a3fcbded8c5e4698736289842716f52892deb",
       "previous_sha256": "93aae94aa93a789ed9b935f82dd07f6b1fd5591bd9636569fbf6df5a13c35389",
       "backup": "findings/2026-09-30-steering-lean/pre-steering/neptune/single-set-default_hold-gyro_latest.vdf",
-      "version_snapshot": "versions/neptune/90.5/single-set-default_hold-gyro_90.5.vdf"
+      "version_snapshot": "versions/neptune/90.6/single-set-default_hold-gyro_90.6.vdf"
     },
     "neptune/single-set-alternative_hold-gyro_latest.json": {
-      "sha256": "5888acfbf18aa3c493df0d1061873f4d9a57390979269e3df99cf6bb415bdd36",
+      "sha256": "45f7988afb55720ef6024c72f393bf87778e416d62fb0a1ed857b0e2a5af7684",
       "previous_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
       "backup": "findings/2026-09-30-steering-lean/pre-steering/neptune/single-set-alternative_hold-gyro_latest.json",
-      "version_snapshot": "versions/neptune/90.5/single-set-alternative_hold-gyro_90.5.json"
+      "version_snapshot": "versions/neptune/90.6/single-set-alternative_hold-gyro_90.6.json"
     },
     "neptune/single-set-alternative_hold-gyro_latest.vdf": {
-      "sha256": "015c7a416797fe6cb353f250073014ccade0722ba0a150d2b915e7581f34d4ae",
+      "sha256": "6659fe0156aeb20cff8f82c119f8e8def75f744be7748a7cdea7d19d542552bc",
       "previous_sha256": "ce3e47a913fe99fde15f48c083ac5bb72f8f4a699329f559be9ab16e0f10af82",
       "backup": "findings/2026-09-30-steering-lean/pre-steering/neptune/single-set-alternative_hold-gyro_latest.vdf",
-      "version_snapshot": "versions/neptune/90.5/single-set-alternative_hold-gyro_90.5.vdf"
+      "version_snapshot": "versions/neptune/90.6/single-set-alternative_hold-gyro_90.6.vdf"
     }
   },
-  "release": "90.5",
-  "metadata_note": "sha256 is after the 90.5 title and description update; bindings are unchanged from the installed candidate."
+  "release": "90.6",
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline.",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-09-30-steering-lean/default-steering-lean.json",
+      "sha256": "29d8c2ed0f6a9d93219edd4e31839afd7a588f475041a3cbef34b2c836891db4"
+    },
+    "alternative": {
+      "path": "findings/2026-09-30-steering-lean/alternative-steering-lean.json",
+      "sha256": "9977b00ea040fd4e501654481fa23de44cdc0d6c898d735675160adc7707f63c"
+    }
+  }
 }

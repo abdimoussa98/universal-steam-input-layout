@@ -21,6 +21,11 @@ from audit_command_budget import audit_layout
 from convert_runtime_ids import generate_lookup, titles_to_ids, ids_to_titles
 
 BASELINE = ROOT / 'findings/2026-09-29-steering-implementation/build_candidate.py'
+# Modern chord masks (k_eGamepadButtonBitMask_*). Long/Double Press are banned
+# repo-wide; hold thresholds are chorded delays instead.
+LS_DEFLECT_MASK = 1 << 30
+DRIVER_MASK = {'default': 4 | 8, 'alternative': 1 | 2 | (1 << 24) | (1 << 25)}
+BANNED_ACTIVATORS = ('Long_Press', 'Double_Press')
 
 
 class Lean:
@@ -59,6 +64,7 @@ class Lean:
     def __init__(self, variant):
         self.variant = variant
         self.m.title = self.title
+        self.replaced_groups = set()
         super().__init__(variant)
         t = self.title
         self.stroke = []
@@ -78,6 +84,26 @@ class Lean:
 
     def exit_branch(self, first=None):
         return self.clear(([first] if first else []) + self.branch)
+
+    def group(self, name, source, inputs, settings=None, mode=None):
+        p = self.presets[self.by_title[name]]
+        self.replaced_groups.update(g for g, b in p['group_source_bindings'].items() if b == source + ' active')
+        return super().group(name, source, inputs, settings, mode)
+
+    def chorded_delay(self, binding, mask, delay, **settings):
+        return self.m.entry(binding, gyro_ratchet_button_mask=mask,
+                            gyro_ratchet_button_requireany_or_all=0, delay_start=delay, **settings)
+
+    def prune_replaced_groups(self):
+        # Drop only groups this build unbound; pre-existing orphans are left to
+        # prune_dead_groups.py so candidates stay comparable with the source.
+        referenced = {g for p in self.cm['preset'] for g in p['group_source_bindings']}
+        referenced |= set(re.findall(r'mode_shift \S+ (\d+)', json.dumps(self.cm['group'])))
+        dead = self.replaced_groups - referenced
+        self.cm['group'] = [g for g in self.cm['group'] if g['id'] not in dead]
+        for gid in dead:
+            self.groups.pop(gid, None)
+        return sorted(dead, key=int)
 
     def context_enter(self, owner, first=None):
         m = self.m
@@ -136,11 +162,13 @@ class Lean:
             self.layer(n)
         inputs = self.ls_base(vertical=True)
         inputs['touch'] = m.full()
-        inputs['dpad_north'] = m.inp(Full_Press=m.entry(m.key('W'), interruptable=0), Long_Press=[
-            m.entry(m.EMPTY, long_press_time=1000, hold_repeats=1, repeat_rate=250,
-                    haptic_intensity=3, interruptable=0),
-            m.entry(m.seq(*self.exit_all(beep=True)), long_press_time=2500,
-                    haptic_intensity=3, interruptable=0)])
+        # Fallback warning/exit: chorded delays on LS deflection. Entry Guard
+        # overrides this input, so W carried through entry has no clock.
+        inputs['dpad_north'] = m.inp(Full_Press=m.entry(m.key('W'), interruptable=0), chord=[
+            self.chorded_delay(m.EMPTY, LS_DEFLECT_MASK, 1000, hold_repeats=1, repeat_rate=250,
+                               haptic_intensity=3, interruptable=0),
+            self.chorded_delay(m.seq(*self.exit_all(beep=True)), LS_DEFLECT_MASK, 2500,
+                               haptic_intensity=3, interruptable=0)])
         self.group(t(), 'joystick', inputs, self.ls_settings())
         self.drives(t(), self.acquisition(), self.menu_switches())
         guard = self.ls_base(vertical=True)
@@ -166,9 +194,16 @@ class Lean:
         for direction, input_name in m.DIRECTIONS.items():
             name = t('Mod ' + ('1' if direction == 'Up' else '0'))
             inputs = self.ls_base()
-            inputs[input_name] = m.inp(Long_Press=m.entry(
-                m.op('add', t('Normal', 'Consumed')), long_press_time=m.HOLD_MS,
-                interruptable=0))
+            # Chorded delay plus the scoped interrupted-delay reset (250/300).
+            # The applied cover overrides this input and hides the reset. That
+            # relies on cover reassertion keeping priority (Deck gate S7); if
+            # the bank stayed on top, this reset would strip consumed state.
+            consumed = t('Normal', 'Consumed')
+            inputs[input_name] = m.inp(
+                chord=self.chorded_delay(m.op('add', consumed), LS_DEFLECT_MASK, m.HOLD_MS,
+                                         interruptable=0),
+                Full_Press=m.entry(m.op('remove', consumed), hold_repeats=1,
+                                   repeat_rate=m.HOLD_MS + 50, interruptable=0))
             # Keep the bank until actual center, not the cardinal release.
             inputs['edge'] = m.full(m.seq(*self.start_window('Normal', direction)))
             for other in ('dpad_north', 'dpad_south', 'dpad_east', 'dpad_west'):
@@ -188,22 +223,19 @@ class Lean:
             self.m.op('add', self.title(context, direction, 'Double Window'))]
 
     def build_consumed(self):
+        """The Tap Cover only means "tap used up": up/down do nothing, and
+        center removes Mod 0, Mod 1, then the cover itself, in that order.
+
+        It never adds a modifier. Re-adding an active layer does not move it to
+        the top (Valve), so a cover that added a bank above itself would lose
+        its center override. It is only ever added fresh, on top of the bank it
+        covers, and its empty up/down hide that bank's delayed apply and reset.
+        """
         m = self.m; t = self.title
         name = t('Normal', 'Consumed')
         inputs = self.ls_base()
-        for direction, input_name in m.DIRECTIONS.items():
-            bank = t('Mod ' + ('1' if direction == 'Up' else '0'))
-            other = t('Mod ' + ('0' if direction == 'Up' else '1'))
-            # Restore the current map, then keep this cover above its center/
-            # hold handlers. Re-add is intentional, never remove/recreate the
-            # cover here; native idempotence/priority is an acceptance gate.
-            # This input remains on top, so a periodic bank-removal reset would
-            # strip a valid map forever. Use regular repeating acquisition with
-            # no Fire Start Delay instead; it also recovers over a held stick.
-            inputs[input_name] = m.inp(Full_Press=m.entry(m.seq(
-                m.op('remove', other), m.op('add', bank), m.op('add', name)),
-                hold_repeats=1, repeat_rate=50, interruptable=0),
-                release=m.entry(m.op('remove', bank)))
+        for input_name in m.DIRECTIONS.values():
+            inputs[input_name] = m.full()
         inputs['edge'] = m.full(m.seq(*self.clear(self.banks[:2] + [name])),
                                 hold_repeats=1, repeat_rate=50)
         self.group(name, 'joystick', inputs, self.ls_settings())
@@ -236,8 +268,10 @@ class Lean:
         for direction, input_name in m.DIRECTIONS.items():
             name = t('Normal', direction, 'Double Window')
             inputs = self.ls_base()
-            inputs['edge'] = m.inp(Long_Press=m.entry(self.flush_window(name, direction),
-                                   long_press_time=m.DOUBLE_MS, interruptable=0))
+            # The clock runs at center, so it is chorded on the held driver;
+            # windows exist only while a driver owns movement.
+            inputs['edge'] = m.inp(chord=self.chorded_delay(self.flush_window(name, direction),
+                                   DRIVER_MASK[self.variant], m.DOUBLE_MS, interruptable=0))
             for newdir, newinput in m.DIRECTIONS.items():
                 if newdir == direction:
                     inputs[newinput] = m.full(m.seq(m.op('remove', name),
@@ -438,6 +472,14 @@ class Lean:
             'release Right Menu to enter. Right driver W, left S; LS Up/Down Modifier 1/0; '
             'opposite Modifier 2. Owner release allows a held opposite to take over; otherwise WASD. Fallback W warns at 1s, exits at 2.5s. '
             'Quick opposite tap in Mod2 clears to Base; hold keeps Mod2. 16 added layers; no new Always On actions. See findings/2026-09-30-steering-lean/README.md.')
+        self.pruned_groups = self.prune_replaced_groups()
+        touched = set(self.new) | {name for name, _ in self.changed}
+        for name in touched:
+            for source, g in self.sources(name).items():
+                for input_name, binding in g.get('inputs', {}).items():
+                    banned = set(binding.get('activators', {})) & set(BANNED_ACTIVATORS)
+                    if banned:
+                        raise ValueError(f'banned activator {sorted(banned)}: {name} {source} {input_name}')
         report = audit_layout(self.data)
         if report['violations']:
             raise ValueError(report['violations'])
@@ -497,6 +539,7 @@ def main():
             'new_always_on_count': 0, 'modified_sources': b.changed, 'resolved_references': count,
             'device_status': 'UNTESTED', 'planned_target': 16,
             'quick_base_exit_targets': b.base_exit_targets, 'reused_mod2_covers': b.mod2_covers,
+            'pruned_replaced_groups': b.pruned_groups,
             'timing_ms': {'hold': b.m.HOLD_MS, 'double': b.m.DOUBLE_MS, 'single': b.m.DOUBLE_MS,
                           'repeat': b.m.REPEAT_MS, 'warning': 1000, 'exit': 2500, 'quick_pair': 200}}
     (HERE / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')

@@ -170,7 +170,22 @@ class NeptuneRecoveryTests(unittest.TestCase):
                                         [removal(prefix + ': ' + suffix) for suffix in
                                          ('Temporary Gyro', 'Tap Cover', 'Entry Point')])
                                 continue
-                            self.assert_recovery(value, selectors, targets)
+                            if name == 'touch':
+                                # Transition Set 0 touch: the two menu guards share one Any
+                                # chord so the side-local release fits the three-entry budget.
+                                acts = value['activators']
+                                self.assertEqual(list(acts), ['chord', 'Full_Press', 'release'])
+                                self.assertEqual(acts['chord'], {'bindings': {'binding': EMPTY}, 'settings': {
+                                    'gyro_ratchet_button_mask': str((1 << 12) | (1 << 14)),
+                                    'gyro_ratchet_button_requireany_or_all': '0', 'interruptable': '0'}})
+                                self.assertEqual(acts['Full_Press']['settings'], {'hold_repeats': '1'})
+                                self.assertEqual(set(acts['Full_Press']['bindings']['binding']), {removal(t) for t in targets})
+                                prefix = 'LST' if source == 'joystick' else 'RST'
+                                self.assertEqual(acts['release']['bindings']['binding'],
+                                    [removal(prefix + ': ' + suffix) for suffix in
+                                     ('Temporary Gyro', 'Tap Cover', 'Entry Point')])
+                            else:
+                                self.assert_recovery(value, selectors, targets)
                             self.assertEqual(value["activators"]["Full_Press"]["bindings"]["binding"][-1], removal(title))
 
     def test_timed_windows_block_both_edges_and_preserve_ordered_boundaries(self):

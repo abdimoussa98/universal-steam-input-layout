@@ -23,6 +23,14 @@ class LeanTests(unittest.TestCase):
         for b in cls.builders.values():
             b.finish()
 
+    def assert_chorded_delay(self, e, mask, delay):
+        settings = e['settings']
+        self.assertEqual(settings['gyro_ratchet_button_mask'], str(mask))
+        self.assertEqual(settings['gyro_ratchet_button_requireany_or_all'], '0')
+        self.assertEqual(settings['delay_start'], delay)
+        self.assertNotIn('chord_button', settings)
+        self.assertNotIn('long_press_time', settings)
+
     def binding(self, b, layer, source, name, kind='Full_Press'):
         value = b.sources(layer)[source]['inputs'][name]['activators'][kind]
         return value[0] if isinstance(value, list) else value
@@ -45,10 +53,12 @@ class LeanTests(unittest.TestCase):
             match = re.match(r'controller_action (add|remove)_layer {{Base::(.+?)}}', command)
             if match:
                 verb, name = match.groups()
-                if name in stack:
-                    stack.remove(name)
-                if verb == 'add':
+                # Valve: applying an already-active layer has no effect and
+                # does not move it to the top of the stack.
+                if verb == 'add' and name not in stack:
                     stack.append(name)
+                elif verb == 'remove' and name in stack:
+                    stack.remove(name)
             elif command != b.m.EMPTY:
                 outputs.append(command)
         return outputs
@@ -127,8 +137,11 @@ class LeanTests(unittest.TestCase):
                 g = b.sources(n)['joystick']
                 self.assertEqual(g['settings']['edge_binding_invert'], '1')
                 self.assertNotIn('release', g['inputs'][input_name]['activators'])
-                hold = g['inputs'][input_name]['activators']['Long_Press']
-                self.assertEqual(hold['settings']['long_press_time'], '250')
+                activators = g['inputs'][input_name]['activators']
+                self.assertEqual(set(activators), {'chord', 'Full_Press'})
+                hold = activators['chord']
+                self.assert_chorded_delay(hold, lean.LS_DEFLECT_MASK, '250')
+                self.assertEqual(b.m.commands(hold), [b.m.op('add', b.title('Normal', 'Consumed'))])
                 for name, binding in g['inputs'].items():
                     for _, e in b.m.entries(binding):
                         if any(b.m.op('add', w) in b.m.commands(e) for w in b.windows):
@@ -146,8 +159,8 @@ class LeanTests(unittest.TestCase):
             self.assertEqual(len(b.windows), 2)
             for direction in b.m.DIRECTIONS:
                 n = b.title('Normal', direction, 'Double Window')
-                clock = self.binding(b, n, 'joystick', 'edge', 'Long_Press')
-                self.assertEqual(clock['settings']['long_press_time'], '150')
+                clock = self.binding(b, n, 'joystick', 'edge', 'chord')
+                self.assert_chorded_delay(clock, lean.DRIVER_MASK[b.variant], '150')
                 self.assertEqual(b.sources(n)['joystick']['settings']['edge_binding_radius'], '32767')
                 stack = [b.title(), b.title('W'), n]
                 self.assertEqual(self.run_array(b, stack, clock), [b.m.wheel(direction)])
@@ -255,30 +268,79 @@ class LeanTests(unittest.TestCase):
                 self.assertNotIn(b.m.op('add', b.title(other)), b.m.commands(chord))
                 self.assertEqual(chord['settings']['gyro_ratchet_button_requireany_or_all'], '0')
 
-    def test_consumed_restore_reasserts_cover_after_bank(self):
+    def test_tap_cover_blocks_directions_and_clears_on_center(self):
+        # User design: hold past 250 ms adds the cover on top of the bank;
+        # up/down then do nothing; center removes Mod 0, Mod 1, then the cover.
         for b in self.builders.values():
             cover = b.title('Normal', 'Consumed')
-            self.assertEqual(b.consumed, [cover])
             for direction, input_name in b.m.DIRECTIONS.items():
                 bank = b.title('Mod ' + ('1' if direction == 'Up' else '0'))
-                stack = [b.title(), b.title('W'), cover]
-                self.run_array(b, stack, self.binding(b, cover, 'joystick', input_name))
+                stack = [b.title(), b.title('W')]
+                self.run_array(b, stack, self.binding(b, b.title('W'), 'joystick', input_name))
+                self.assertEqual(stack[-1], bank)
+                self.run_array(b, stack, self.binding(b, bank, 'joystick', input_name, 'chord'))
                 self.assertEqual(stack[-2:], [bank, cover])
-                self.assertNotIn(b.m.op('remove', cover), b.m.commands(self.binding(b, cover, 'joystick', input_name)))
-                self.run_array(b, stack, self.binding(b, cover, 'joystick', 'edge'))
+                for name in b.m.DIRECTIONS.values():
+                    layer, binding = self.effective(b, stack, 'joystick', name)
+                    self.assertEqual(layer, cover)
+                    self.assertEqual(b.m.commands(binding['activators']['Full_Press']), [b.m.EMPTY])
+                layer, edge = self.effective(b, stack, 'joystick', 'edge')
+                self.assertEqual(layer, cover)
+                execution = list(reversed(b.m.commands(edge['activators']['Full_Press'])))
+                self.assertEqual(execution, [b.m.op('remove', b.title('Mod 0')), b.m.op('remove', b.title('Mod 1')),
+                                             b.m.op('remove', cover)])
+                self.assertFalse(self.run_array(b, stack, edge['activators']['Full_Press']))
                 self.assertEqual(stack, [b.title(), b.title('W')])
+
+    def test_no_binding_adds_a_bank_while_leaving_an_active_cover_below_it(self):
+        # A bank added after the cover would sit above it and take center.
+        for b in self.builders.values():
+            cover = b.title('Normal', 'Consumed')
+            for layer in b.new:
+                for source, g in b.sources(layer).items():
+                    for name, binding in g.get('inputs', {}).items():
+                        for _, e in b.m.entries(binding):
+                            execution = list(reversed(b.m.commands(e)))
+                            for bank in b.banks[:2]:
+                                if b.m.op('add', bank) not in execution:
+                                    continue
+                                with self.subTest(variant=b.variant, layer=layer, input=name):
+                                    self.assertNotEqual(layer, cover)
+                                    i = execution.index(b.m.op('add', bank))
+                                    later_cover_add = b.m.op('add', cover) in execution[i:]
+                                    # Safe if the cover overrides this input (the binding can't run
+                                    # while the cover is active), or if it removes the cover first.
+                                    unreachable = name in b.sources(cover)['joystick']['inputs'] and source == 'joystick'
+                                    if later_cover_add and not unreachable:
+                                        self.assertIn(b.m.op('remove', cover), execution[:i])
 
     def test_warning_guard_and_full_exit_preserve_feedback(self):
         for b in self.builders.values():
             binding = b.sources(b.title())['joystick']['inputs']['dpad_north']['activators']
             self.assertEqual(binding['Full_Press']['bindings']['binding'], b.m.key('W'))
-            self.assertEqual([e['settings']['long_press_time'] for e in binding['Long_Press']], ['1000', '2500'])
-            self.assertEqual(binding['Long_Press'][0]['settings']['hold_repeats'], '1')
+            warn, exit_ = binding['chord']
+            self.assert_chorded_delay(warn, lean.LS_DEFLECT_MASK, '1000')
+            self.assert_chorded_delay(exit_, lean.LS_DEFLECT_MASK, '2500')
+            self.assertEqual((warn['settings']['hold_repeats'], warn['settings']['repeat_rate']), ('1', '250'))
+            self.assertEqual(warn['bindings']['binding'], b.m.EMPTY)
+            self.assertNotIn('hold_repeats', exit_['settings'])
             stack = ['Gyro'] + b.family[:]
-            self.run_array(b, stack, binding['Long_Press'][1])
+            self.run_array(b, stack, exit_)
             self.assertEqual(stack, ['Gyro'])
+            # Entry Guard overrides the whole input, so carried W has no clock.
             guard = b.sources(b.title('Entry Guard'))['joystick']['inputs']['dpad_north']['activators']
-            self.assertNotIn('Long_Press', guard)
+            self.assertEqual(set(guard), {'Full_Press'})
+
+    def test_no_banned_activators_or_new_orphan_groups(self):
+        for b in self.builders.values():
+            touched = set(b.new) | {name for name, _ in b.changed}
+            for name in touched:
+                for source, g in b.sources(name).items():
+                    for input_name, binding in g.get('inputs', {}).items():
+                        with self.subTest(variant=b.variant, layer=name, source=source, input=input_name):
+                            self.assertFalse(set(binding['activators']) & set(lean.BANNED_ACTIVATORS))
+            referenced = {g for p in b.cm['preset'] for g in p['group_source_bindings']}
+            self.assertFalse(b.replaced_groups & {g['id'] for g in b.cm['group']} - referenced)
 
     def test_all_new_layers_have_side_local_touch_release_cleanup(self):
         for b in self.builders.values():
@@ -444,7 +506,7 @@ class LeanTests(unittest.TestCase):
                             self.assertEqual(reset['settings']['interruptable'], '0')
                             self.assertNotIn('delay_start', reset['settings'])
                             self.assertEqual(int(reset['settings']['repeat_rate']),
-                                             {5: 50, 200: 250, 300: 350}[delay])
+                                             {5: 50, 200: 250, 250: 300, 300: 350}[delay])
                             stack = ['Base', layer]
                             self.run_array(b, stack, reset)
                             self.run_array(b, stack, delayed)
@@ -452,25 +514,7 @@ class LeanTests(unittest.TestCase):
                             self.assertEqual(resolved, target)
                             self.assertFalse(any(e == reset for _, e in b.m.entries(active)))
                             checked += 1
-            self.assertEqual(checked, 8)  # Four owner selectors, two menus, two Mod 2.
-
-    def test_consumed_routing_recovers_without_delayed_apply_or_active_bank_reset(self):
-        for b in self.builders.values():
-            cover = b.title('Normal', 'Consumed')
-            for direction, name in b.m.DIRECTIONS.items():
-                bank = b.title('Mod ' + ('1' if direction == 'Up' else '0'))
-                entry = self.binding(b, cover, 'joystick', name)
-                self.assertNotIn('delay_start', entry['settings'])
-                self.assertEqual(entry['settings']['hold_repeats'], '1')
-                self.assertEqual(entry['settings']['repeat_rate'], '50')
-                self.assertNotIn(b.m.op('remove', bank), b.m.commands(entry))
-                self.assertNotIn(b.m.op('remove', cover), b.m.commands(entry))
-                stack = ['Base', b.title(), b.title('W'), cover]
-                for _ in range(3):
-                    self.assertFalse(self.run_array(b, stack, entry))
-                    self.assertEqual(stack, ['Base', b.title(), b.title('W'), bank, cover])
-                self.run_array(b, stack, self.binding(b, cover, 'joystick', 'edge'))
-                self.assertEqual(stack, ['Base', b.title(), b.title('W')])
+            self.assertEqual(checked, 10)  # Four owner selectors, two menus, two Mod 2, two Mod 0/1 consumes.
 
     def test_protected_menu_release_and_recovery_retire_owned_helpers_only(self):
         for b in self.builders.values():

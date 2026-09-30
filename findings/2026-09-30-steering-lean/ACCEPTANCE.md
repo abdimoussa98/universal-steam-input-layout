@@ -15,7 +15,7 @@ All device cases are **UNTESTED for this build**. Record the new
 | S5 feedback | Warn, release W or acquire driver, then retry and exit | Repeated warning stops; new hold starts fresh; exit beep/vibration once |
 | S6 held maps | Hold mapped buttons through normal bank/Mod 2/center changes | Old changed output releases; replacement waits fresh press; unchanged mapping survives |
 | S7 shared cover | Double Up/Down; reverse fast, slowly through diagonals, or go sideways; repeat near 5 ms tick boundaries | Old repeat stops, no unintended opposite tick; no final release tick; normal repeat Base mappings |
-| S7 consumed restore | Enter driver or leave Mod 2 with Up/Down held; reverse consumed direction repeatedly | Current bank restored with tap consumed; cover stays above bank; no selector churn or resurrected tap/window |
+| S7 used-up tap | Hold Up/Down past 250 ms, reverse, then center; enter a driver or leave Mod 2 with Up/Down held, then center | While the cover is active, up/down do nothing and center never scrolls; the next fresh push selects the bank normally |
 | S8 menu | Either stick before/during both menu entries, partial deflection/deadline, explicit Fn | Fresh protected tap window once; no automatic Fn leak; explicit and next centered Fn work |
 | S8 commit | Right Menu+LS click then release; held touch/edge; Left Menu abort | One entry, no Tab/Q/punctuation, no stale prefixed menu helpers/mode shifts |
 | S9 interruptions | Overlay/focus loss, missed release, existing Base/menu/RTP Always On paths | No stuck output/owner/timer; existing AO self-first/isolation rules preserved |
@@ -67,10 +67,20 @@ both W/S owners and both 5 ms direction selectors. The selected bank must
 retire the parent's 50 ms reset; hold a mapped button across several intervals
 and confirm no output drop, map flicker or reopened tap window.
 
-In the shared LS Tap Cover, hold and reverse directions across 50 ms routing
-intervals. The selected map and consumed state must persist without output
-retriggering; center must stop routing. Enter Mod 2 just before/after a routing
-tick and confirm no normal bank rises above it. Exit Mod 2 with stick still held:
-normal consumed mapping must recover without a scroll leak. Exercise thumb
-release and owner release around 5/50/200/250/300/350 ms boundaries. These new
-reset/routing cases remain UNTESTED on device.
+The LS Tap Cover no longer routes (90.6). Hold a mapped button in the covered
+bank across several seconds and confirm no output drop; exit Mod 2 with the
+stick held and confirm no scroll leak. Exercise thumb release and owner release
+around 5/50/200/250/300/350 ms boundaries. These reset cases remain UNTESTED on
+device.
+
+## Chorded delays (90.6)
+
+All UNTESTED. These replace the Long Press timers; timings are unchanged.
+
+| Gate | Exercise | Required result |
+|---|---|---|
+| C1 fallback | In fallback, hold LS up; release at 0.8 s, 2.0 s and 3 s; drift so deflection drops while W stays | Warning pulses from 1 s, exit at 2.5 s with one beep; early release cancels both; losing deflection cancels rather than firing late |
+| C2 entry carry | Enter Steering with W held for more than 3 s | No warning or exit until center and a fresh push |
+| C3 window clock | Short flick to center, wait; flick, pause, flick again | One scroll about 150 ms after center, counted from the window's add, not the original press; second flick still reaches repeat |
+| C4 consume | Hold down/up past 250 ms; release at about 240 ms, then hold fully; tap repeatedly | Consume only past 250 ms; an interrupted hold never blocks the next one; no leftover Tap Cover |
+| C5 reset vs cover | Hold past 250 ms and keep holding for 1 s or more; then center | The cover stays (the 300 ms reset is hidden under it); no scroll at center |
