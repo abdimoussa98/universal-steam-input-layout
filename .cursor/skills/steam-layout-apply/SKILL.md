@@ -28,7 +28,8 @@ sibling VDF after the validated edit, then save the version snapshot (step 5).
 See [Publishing layout changes](../../../README.md#publishing-layout-changes).
 
 0. **Enforce the command budget before finalizing**
-   - `python3 audit_command_budget.py path/to/layout.json` must exit 0. At most three GUI command entries per input, counted across activator types/list elements; binding-array subcommands may exceed three. All groups are scanned and disabled banks checked separately. Follow `steam-binding-order` to consolidate violations without deleting required cleanup.
+   - `python3 audit_command_budget.py path/to/layout.json` must exit 0. At most three GUI command entries per input, counted across activator types/list elements; binding-array subcommands may exceed three. All groups are scanned and disabled banks checked separately. It also fails on any Long Press or Double Press (banned activation types). Follow `steam-binding-order` to consolidate violations without deleting required cleanup.
+   - `python3 audit_inheritance.py path/to/layout.json` must exit 0. It derives every stack each Always On layer can be applied on and fails on an undecided layer command underneath or an unsaturated search; apply its `blocks_needed` (replace only if the underlying output is identical in every stack, otherwise clear). See `resources/Layer Definition of Done.md`, section 8.
    - For binding, source, or layer-transition changes, confirm the [inheritance review](../../../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes) records affected upper layers, intended inheritance/blocks, and protected timer entry/exit behavior. ID and budget checks do not verify effective inheritance. Include already-held and newly activated inputs across transitions in the Deck handoff; separate static checks from runtime results.
 
 1. **Convert titles back to IDs (in place)**

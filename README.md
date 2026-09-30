@@ -125,13 +125,78 @@ The `Parent::Title` format for layers ensures unique identification when multipl
 
 ---
 
+### 4. `audit_inheritance.py` - Inheritance and Blocking Check
+
+Derives every stack each Always On layer (and any layer named in
+`traced_stacks.json`) can be applied on, by following the layout's own layer
+transitions for up to `--depth` input events (default 5). It then checks
+whether any stack puts a layer command under an input the layer leaves open.
+Each such route must be blocked, or have a recorded decision in
+`traced_stacks.json`. The tool recommends the block: replace with the
+underlying output if it's identical in every stack, otherwise clear. The check
+also fails if the search isn't saturated, meaning the last depth level still
+found new routes. Read-only. Exit codes: **0** = pass, **1** = undecided route
+or unsaturated search, **2** = invalid input.
+See [Layer Definition of Done §8](resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking).
+
+```bash
+python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json
+python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --entries "RTP: Double Tap"
+python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --untraced   # review list
+```
+
+### 5. `steam_layout/` - Shared Library and Fix Pipeline
+
+The reusable code behind the scripts above. Import it from the repo root.
+
+| Module | Use it for |
+|---|---|
+| `steam_layout.model` | Read a layout (numeric IDs or title tokens): layer titles, active groups per source, bindings in execution order, Always On layers |
+| `steam_layout.stacks` | `StackSpace`: every stack reachable from Base, and the queries `below`, `containing`, `when_effective` and `co_active` |
+| `steam_layout.inheritance` | The inheritance and blocking audit that `audit_inheritance.py` wraps |
+| `steam_layout.fixes` | The ordered, idempotent post-install fixes that `install_neptune.py` runs |
+| `steam_layout.held_model` | The realistic stack model: which buttons are held, chords, delays, repeats, `hold_layer` |
+| `steam_layout.stackdb` | Run the exhaustive search (`tools/stack_search`, C++) and query its results: what every input does in any stack, what a layer inherits, the button sequence that reaches a state |
+
+```python
+from steam_layout.model import Layout
+from steam_layout.stacks import StackSpace
+
+space = StackSpace.of(Layout(data), depth=5)
+space.when_effective("L1: Modifier 0", "switch", "left_bumper")  # stacks where that binding fires
+space.co_active("L1: Modifier 0", "switch", "left_bumper")       # layers a cleanup there could find
+```
+
+```bash
+python3 -m steam_layout.fixes neptune/*_latest.json --dry-run   # what the pipeline would change
+```
+
+The exhaustive search visits every state (stack plus held buttons) reachable from Base, breadth first, one button event per level. `--disk` keeps it within a memory budget by storing states on disk; it can be stopped (Ctrl-C) and continued with `--resume`. `summary.json` records `exact_depth`: every state within that many events is included.
+
+```bash
+python3 -m steam_layout.stackdb run neptune/single-set-default_hold-gyro_latest.json out/stack_search/default \
+    --disk --memory 12 --disk-limit 150 --max-depth 12
+python3 -m steam_layout.stackdb sqlite neptune/single-set-default_hold-gyro_latest.json out/stack_search/default
+```
+
+```python
+db = StackDB("out/stack_search/default", Layout(data))
+db.inheritance("L1: Double Tap")          # every input: what the layers below it give it, with stack counts
+db.values(("Base", "L1: Modifier 0"))     # what every input does in that stack
+db.moment(gid)                            # a state: stack, held buttons, every input, the events that reach it
+db.sql("SELECT name, owner, summary FROM inherited WHERE top = 'L1: Double Tap' GROUP BY name, owner")
+```
+
 ## Command entry limit and audit
 
 Every input in these layouts must have **at most three GUI command entries**.
 Count each activator object across all activation types, including every element
 of a repeated `chord` or `Soft_Press` list. A `bindings.binding` array is
 subcommands inside one entry, so its length does not count against this limit.
-This is the layout author's requirement, confirmed on 2026-09-27.
+This is the layout author's requirement, confirmed on 2026-09-27. It exists
+because Steam's desktop configuration drops every entry after the third. The one
+allowed exception is a delayed-apply reset as a **last** 4th entry, which is the
+entry desktop drops; see [the exception](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget).
 
 ```bash
 python3 audit_command_budget.py neptune/single-set-default_hold-gyro_latest.json neptune/single-set-alternative_hold-gyro_latest.json
@@ -140,8 +205,19 @@ python3 audit_command_budget.py neptune/single-set-default_hold-gyro_latest.json
 The read-only checker scans all groups, including inactive, mode-shift, and
 unreferenced groups. It checks disabled activator banks separately. Add `--json`
 for a complete input inventory, counts, owners, and exact violation paths.
-Exit codes: **0** = pass, **1** = over budget, **2** = invalid input/schema.
+Exit codes: **0** = pass (allowed 4th-entry resets are listed, not failed), **1** = over budget or a banned activator, **2** = invalid input/schema.
 Run it before finalizing edited layouts; it accepts numeric IDs or title tokens.
+
+The same audit fails on **Long Press** and **Double Press**, which misbehave
+with Steam's layer API (see [allowed activation types](resources/Steam%20Input%20JSON%20Structure.md#allowed-activation-types)),
+and reports unreferenced groups and plain-inactive slots. To remove dead groups
+(unreferenced groups and plain-inactive source slots; active, mode-shift and
+mode-shift-target groups are kept, and no ID is renumbered):
+
+```bash
+python3 prune_dead_groups.py --dry-run neptune/*_latest.json   # report only
+python3 prune_dead_groups.py neptune/*_latest.json
+```
 
 The baseline 90.1 [audit](findings/2026-09-27-neptune-command-budget/AUDIT.md) found one
 violation in each variant: Base's right-stick edge has seven command entries.
@@ -297,7 +373,10 @@ python3 convert_runtime_ids.py to-titles neptune/single-set-default_hold-gyro_la
 ### Steering in the Neptune layouts
 
 Both `neptune/*_hold-gyro_latest` JSON/VDF pairs now include the 16-layer steering
-implementation (71 layers total) as release 90.5, including scoped delayed-apply resets and
-reused Mod 2 covers. See the [implementation and exports](findings/2026-09-30-steering-lean/README.md),
+implementation (71 layers total), including scoped delayed-apply resets and
+reused Mod 2 covers. Release 90.6 replaced its Long Press timers with chorded
+delays, fixed the RTP scroll Long Press and pruned dead groups
+([record](findings/2026-09-30-dead-group-prune/README.md)). Reinstall with
+`findings/2026-09-30-steering-lean/install_neptune.py`, which repeats that cleanup. See the [implementation and exports](findings/2026-09-30-steering-lean/README.md),
 [installation hashes and backups](findings/2026-09-30-steering-lean/neptune-installation.json),
 and [pending Deck checks](findings/2026-09-30-steering-lean/ACCEPTANCE.md).

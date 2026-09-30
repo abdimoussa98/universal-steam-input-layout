@@ -6,7 +6,8 @@
 
 ### Key rule (critical)
 - In Steam Input JSON bindings, when `"binding"` is an array, the commands execute **from bottom to top**.
-- **Maximum three GUI command entries per input.** Count every activator object across all types; a list of six chords plus one Regular Press is seven entries. Subcommands in a `binding` array share one entry and may exceed three.
+- **Allowed activation types only:** Regular (`Full_Press`), Chorded (`chord`), Start (`Start_Press`), Release (`release`) and Soft (`Soft_Press`) Press. Never Long Press (`Long_Press`) or Double Press (`Double_Press`), which misbehave with Steam's layer API, in any group, including inactive and unreferenced ones. Use a chorded delay (`chord` + `delay_start`, on a button or stick deflection) for holds, with a repeating removal when it adds a layer, and a layer-based window for multi-taps. Details: `resources/Steam Input JSON Structure.md`, section **Allowed Activation Types**.
+- **Maximum three GUI command entries per input.** Count every activator object across all types; a list of six chords plus one Regular Press is seven entries. Subcommands in a `binding` array share one entry and may exceed three. The limit exists because Steam's desktop configuration drops every entry after the third. The only exception is a delayed-apply reset as a **last** 4th entry, which the audit reports as `allowed_fourth`. See **Command Entry Budget**.
 - Consolidate identical chord outputs/settings using a multi-button **Any** selector, preserving timing and interruption behavior. Legacy `chord_button` IDs are not masks; modern mask selectors are not exclusive to Triton.
 - Run `python3 audit_command_budget.py path/to/layout.json` after edits; it scans every group, including inactive/unreferenced groups, and checks disabled banks separately. Do not hide overflow in disabled entries.
 - Counting details and selector rules: `resources/Steam Input JSON Structure.md`, section **Command Entry Budget**.

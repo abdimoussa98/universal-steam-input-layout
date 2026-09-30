@@ -64,12 +64,22 @@ effective inherited behavior. Include held-across-transition and newly activated
 input cases in the Deck handoff; distinguish static checks from runtime results.
 
 First run `python3 audit_command_budget.py path/to/layout.json`. It must exit **0**
-before finalizing a layout for Steam. The limit is **three GUI command entries per
+before finalizing a layout for Steam. It also fails on any Long Press or Double
+Press, which are banned (see `steam-binding-order`). The limit is **three GUI command entries per
 input**, across activator types; `binding` array subcommands do not consume extra
 entries. The checker includes inactive/unreferenced groups and checks disabled
 banks separately. Resolve failures using `steam-binding-order`; do not truncate
 cleanup subcommands to make a count pass. Read-only audits may report failures
 without changing the layout.
+
+Then run `python3 audit_inheritance.py path/to/layout.json`. It must also exit
+**0**. It derives every stack each Always On layer can be applied on and fails
+on any undecided layer command underneath, or on an unsaturated search. Apply
+its `blocks_needed` (replace only if the underlying output is identical in
+every stack, otherwise clear). The install runs
+`steam_layout.fixes` pipeline, which does
+this (`python3 -m steam_layout.fixes <layout> --dry-run` shows what it would change). See
+[Layer Definition of Done §8](../../../resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking).
 
 ```bash
 python3 - path/to/layout.json <<'EOF'

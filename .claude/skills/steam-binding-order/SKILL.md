@@ -1,9 +1,26 @@
 ---
 name: steam-binding-order
-description: Enforce the maximum of three GUI command entries per input and bottom-to-top execution of binding subcommand arrays. Use when writing, copying, consolidating, or reviewing activators, chords, and layer cleanup bindings in this repo.
+description: Enforce the allowed activation types (no Long Press or Double Press), the maximum of three GUI command entries per input, and bottom-to-top execution of binding subcommand arrays. Use when writing, copying, consolidating, or reviewing activators, chords, and layer cleanup bindings in this repo.
 ---
 
 # Binding array execution order
+
+## Allowed activation types
+
+Hard requirement from the layout author: use only Regular Press (`Full_Press`),
+Chorded Press (`chord`), Start Press (`Start_Press`), Release Press (`release`)
+and Soft Press (`Soft_Press`). **Never use Long Press (`Long_Press`) or Double
+Press (`Double_Press`)**, because they misbehave with Steam's layer API. This applies to
+inactive and unreferenced groups too.
+
+- Hold threshold: a chorded delay (`chord` + `delay_start`), conditioned on a
+  button or stick deflection (LS deflection is mask bit 30). If it adds a
+  layer, pair it with the same input's repeating removal, like the Mod 2
+  opposite cover (200 ms apply, 250 ms reset).
+- Multi-tap: a layer-based window, like the existing Double Tap layers.
+
+See [allowed activation types](../../../resources/Steam%20Input%20JSON%20Structure.md#allowed-activation-types)
+for the replacements. `audit_command_budget.py` fails on any violation.
 
 ## Maximum three command entries per input
 
@@ -14,9 +31,10 @@ activation types on one input**, not the strings in `bindings.binding`:
 - A `chord` list of six objects counts as six entries. Adding one `Full_Press` makes seven, even though `activators` has only two keys.
 - A `binding` array is subcommands within one entry. Arrays with more than three subcommands are allowed; preserve their execution order.
 - Count each `group.inputs.<input>` separately, including edge, touch, click, and trigger pulls. Scan inactive groups, mode-shift groups, and unreferenced groups too. Check disabled activator banks separately before restoring them.
+- The limit exists because Steam's **desktop** configuration drops every entry after the third. The only exception is a delayed-apply reset as a 4th entry, and it must be **last** so it's the one desktop drops. When a type has several entries, JSON keeps them together as one list, so move that list to the end of `activators`. The audit reports these as `allowed_fourth`. See [the exception](../../../resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget).
 
 Run `python3 audit_command_budget.py path/to/layout.json` after edits. A nonzero exit
-means the file is not ready to finalize (1 = over budget, 2 = malformed input).
+means the file is not ready to finalize (1 = over budget, 2 = malformed input). Allowed 4th-entry resets don't fail it.
 
 To consolidate identical chord outputs/settings, use one multi-button chord with **Any**
 semantics rather than one command per possible button. Modern selectors use

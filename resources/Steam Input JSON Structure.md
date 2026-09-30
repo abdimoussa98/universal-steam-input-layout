@@ -196,12 +196,82 @@ Groups define the actual input configurations—what physical inputs do and how 
   - `binding` format: `"key_press KEY, Label, , "`
 - `settings`: Mode-specific configuration options
 
+#### Allowed Activation Types
+
+**Hard requirement for this repository: use only these activation types.**
+The layout author reports that Steam's Long Press and Double Press activators
+misbehave when combined with the action layers this layout depends on. Build
+every hold threshold and multi-tap gesture from the allowed types and layers.
+
+| Steam GUI name | JSON key under `activators` | Allowed |
+|---|---|---|
+| Regular Press | `Full_Press` | Yes |
+| Chorded Press | `chord` | Yes |
+| Start Press | `Start_Press` | Yes |
+| Release Press | `release` | Yes |
+| Soft Press | `Soft_Press` | Yes |
+| Long Press | `Long_Press` | **No** |
+| Double Press | `Double_Press` | **No** |
+
+The rule covers every group, including inactive sources, mode-shift targets and
+unreferenced groups, because a dormant activator becomes live when its source
+is enabled or its group is reattached. Timing settings on allowed activators,
+such as `delay_start`, `hold_repeats` and `repeat_rate`, are fine.
+
+Replacements:
+
+- **Hold threshold (instead of Long Press):** a chorded delay, which is a
+  `chord` with `delay_start`. The chord condition can be a button or stick
+  deflection. In the modern mask, LS deflection is bit 30 (`1073741824`); see
+  the [guarded recovery example](#guarded-recovery-binding-shape). A stick
+  direction can't be a chord button, so chord a direction on its stick's
+  deflection. When the delayed action adds a layer, pair it with the same
+  input's repeating removal. The existing pattern is the Mod 2 opposite cover:
+  chord `delay_start 200` adds the cover, and Regular Press `hold_repeats` at
+  250 ms removes it. See [Interrupted Delayed Layer Applies](#interrupted-delayed-layer-applies).
+- **Multi-tap (instead of Double Press):** a layer-based window, as the
+  existing Double Tap and Double Tap Cover layers do. The first press or
+  release adds a window layer; a second press inside the window acts, and the
+  window's own timed exit ends it.
+
+**Enforced.** `audit_command_budget.py` fails (exit 1) on any `Long_Press` or
+`Double_Press`, in enabled or disabled banks of any group, and reports
+unreferenced groups and plain-inactive slots. The `steam-layout-apply`
+pre-flight already requires exit 0. Release 90.6 removed the last violations:
+
+- Steering's six Long Press timers became chorded delays
+  ([plan](../plans/2026-09-30-steering-chorded-delays.md)).
+- `RTP: Mouse Buttons` scroll repeat became a chord on right-pad touch.
+- The four inactive stick-touch Double Press groups were pruned with the other
+  dead groups ([plan](../plans/2026-09-30-banned-activators-and-dead-groups.md),
+  [record](../findings/2026-09-30-dead-group-prune/README.md)).
+
 #### Command Entry Budget
 
 **Hard requirement for this repository: at most three GUI command entries per
 input.** The layout author confirmed on 2026-09-27 that subcommands are allowed
 inside those entries. This records the required design constraint, not a claim
 about an independently measured limit in every Steam client version.
+
+**Where the limit comes from (author, 2026-09-30):** it comes from applying a
+layout to the **desktop** configuration in Steam Input. There, every command
+entry after the third on an input disappears. The editor doesn't show it, and
+it doesn't fire. The limit keeps the layouts working on desktop. This is a
+Steam bug the author may report. Recheck it periodically, and relax the rule
+if Valve fixes it (tracked in [todos](../todos.md)).
+
+**One allowed exception: a delayed-apply reset as a last, 4th entry.** Because
+desktop drops entries in order, a 4th entry is acceptable only when it is the
+least important one and sits **last**. The only case is the
+[interrupted-apply reset](#interrupted-delayed-layer-applies): a Regular Press
+that removes the target of the same input's chorded delay, with Hold to Repeat
+and `interruptable: "0"`. On desktop the reset is lost and everything else
+keeps working. Since 90.6 this applies to the four second-press layers,
+`Menu Left: Escape`, `Menu Right: Tab` and the two modifier Scroll layers. Each
+one's Regular Press list goes last, so the reset is the 4th entry in VDF order;
+see the [change record](../findings/2026-09-30-second-press-cover-reset/README.md).
+`audit_command_budget.py` reports these as `allowed_fourth`. Any other shape,
+including a reset that isn't last, is still a violation.
 
 Count objects under `group[].inputs.<input>.activators`, across **all** activation
 types. A singleton object counts as one; a list contributes its number of objects.
@@ -325,14 +395,29 @@ recorded seven of nineteen delayed-add paths per layout with the reset. The curs
 follow-up raises current coverage to **eleven of nineteen**. The original audit
 distinguishes the confirmed RTP exception from undocumented omissions and
 proposed extensions; a missing reset is not by itself a reproduced failure.
-Do not add a fourth command or couple a reset to wheel/key output timing merely
-to extend coverage. Keep the reset on the parent owning the pending apply,
-not inside the overlay or an Always On window.
+Don't couple a reset to wheel or key output timing to extend coverage. Keep the
+reset on the parent that owns the pending apply, not inside the overlay or an
+Always On window.
+
+**90.6 adds the four second-press layers** (`Menu Left: Escape`,
+`Menu Right: Tab`, `L1/R1: Scroll Down/Up`), which bring coverage to fifteen
+of nineteen. After an accepted double tap, these layers add their Double Tap
+Cover after 150 ms. The author chose a 200 ms reset as a **4th entry, placed
+last**; this is the only allowed exception to the
+[command entry budget](#command-entry-budget). See the
+[change record](../findings/2026-09-30-second-press-cover-reset/README.md).
 
 #### Complete Delayed Applies on Stick-Touch Release
 
-**Author-confirmed cleanup rule, 2026-09-30:** every new layer must explicitly
-provide or demonstrably inherit the appropriate stick-touch **release** cleanup.
+**Author-confirmed cleanup rule, 2026-09-30:** every layer must **explicitly**
+bind the appropriate stick-touch **release** cleanup. Only cover-type layers,
+which are only ever added on top of another layer (the Tap Covers, the Double
+Tap Covers, Temp Cursor Gyro, Enter, Backspace and `Gyro Off Ramp Up`), may
+inherit it. A trace
+showing that inheritance would work is not enough for any other layer. The
+accepted exceptions (`Gyro Off Ramp Up` as cover-type, `Gyro` as the base
+stateful layer, and the LST/RST helpers on the opposite stick) are listed in
+the [Layer Definition of Done](Layer%20Definition%20of%20Done.md#5-stick-touch-release).
 LS thumb release removes `LST: Entry Point`, `LST: Tap Cover` and
 `LST: Temporary Gyro`; RS thumb release removes the corresponding `RST` trio.
 This is capacitive touch release, not stick click or cardinal-direction release.
@@ -350,9 +435,10 @@ the three-entry budget.
 This does not mean firing delayed wheel/key output, haptic warning, exit timers,
 or both possible direction selectors on thumb release. Direction-dependent
 routing must keep its direction condition; it has no unconditional target to
-complete. Timed Always On LST/RST Double Tap windows are not part of the ordinary
-three-layer cleanup list: their own self-first exit/isolation contract takes
-precedence over early completion. See the
+complete. Always On Double Tap windows also bind the release, but they remove
+themselves **first** and then the side's trio; they never complete an early
+apply. The LST/RST windows' own stick has no release, because touching it again
+is the self-first second-touch transition. See the
 [16-layer steering cleanup audit](../findings/2026-09-30-steering-lean/CLEANUP-AUDIT.md)
 for the per-layer application of this rule.
 
@@ -506,8 +592,17 @@ mutations. **Double Tap Covers are separate layers and have no Always On bind.**
 The [blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md)
 checks every layer and confirms all 13 active entry bindings add the timed layer
 last and all 30 directly owned layer-changing bindings remove it first in each
-variant. Trackpads are disabled during most windows; RTP Double Tap keeps its
-right pad for the intended selection, with self-removal before Circular Scroll.
+variant. Since 90.6 every window's left pad swipes straight to the Escape,
+Enter, Tab and Backspace keys, with no layer command, and clears click and
+touch. The right pad stays the mouse (Base's mode, settings inherited) with
+click and touch cleared, except in RTP Double Tap. That window keeps its
+dpad-mode pad for the intended selection, with self-removal before Circular
+Scroll, and clears `click` ([change record](../findings/2026-09-30-double-tap-pad-blocks/README.md)). `audit_inheritance.py` derives every stack a
+window can be applied on and blocks any remaining layer command underneath,
+for example the default trigger edges under `Gyro Off Ramp Up` and RTP Double
+Tap's back buttons ([derived blocks](../findings/2026-09-30-derived-window-blocks/README.md)).
+RTP Double Tap's right-pad touch is a deliberate `allow` exception, because the
+pad is the window's own second-tap selection.
 Menu inputs, RS edge, and modifier routes are explicitly blocked or replaced.
 This validates configured ordering, not arbitrary stale-stack inheritance or
 the absence of a crash on a current client.
@@ -572,6 +667,19 @@ preset[].group_source_bindings = {
    - Unchanged inputs can inherit from the remaining layer stack, not just the Base set
    - Source settings and mode replacements also matter: an active `disabled` gyro
      group overrides gyro even when it has no explicit input activators
+   - **Re-adding a layer that's already active does nothing.** It isn't
+     promoted: a stack A B C (bottom to top) stays A B C when A is added again.
+     The only way to move a layer to the top is to remove it and then add it.
+     This is Valve's documented behavior
+     ([Action Set Layers](https://partner.steamgames.com/doc/features/steam_controller/action_set_layers))
+     and was confirmed by the author on the Deck on 2026-09-30.
+     `steam_layout.stacks` models it this way, and Mod 2 rocking depends on it
+     ([Rocking Between Modifiers](#rocking-between-modifiers-0-1-and-2)).
+   - **Unverified:** a 2022 community report says analog sticks inherit only
+     from the top layer and the base action set, skipping the middle of the
+     stack ([source](https://steamcommunity.com/app/353370/discussions/0/3468361193665969286/),
+     on 360 controllers). The tools assume normal inheritance for sticks. The
+     check is tracked in [todos](../todos.md).
 
 3. **Layer Deactivated**: Removing the layer exposes the remaining stack's bindings,
    or the parent Action Set when no lower layer overrides that input. Adding a
@@ -784,7 +892,10 @@ For each changed input or source:
    overlays should continue inheriting useful owner recovery where intended;
    this review does not require blocking every overlay or disabling a whole
    source to protect one input.
-5. **Record and verify the affected stacks.** State the changed lower action,
+5. **Record and verify the affected stacks.** Run `audit_inheritance.py`,
+   which derives every stack from the layout's own transitions; see the
+   [Layer Definition of Done §8](Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking).
+   State the changed lower action,
    upper layer(s), intended inheritance/block/exit, and displaced behavior.
    Check both layout variants, the three-command limit, and relevant ordering
    and timer invariants. Record unresolved runtime questions and test the input
@@ -1286,6 +1397,50 @@ By comparison, **uncovered Mod 2 release** clears the thirteen-layer modifier/co
 family and intentionally changes Gyro state: the regular variant adds Gyro,
 and the Gyro variant removes it as a fourteenth removal. Do not copy that wider
 release list or its Gyro toggle into the combined cover or guarded fallback.
+
+#### Rocking Between Modifiers 0, 1 and 2
+
+**Author-confirmed purpose, 2026-09-30.** The released-side exit exists so you
+can *rock* between the modifiers. Hold both bumpers for Mod 2, let go of one,
+and you're back on the other side's single modifier. Press it again and you're
+straight back in Mod 2. You never pass through Base, and you never wait out a
+Double Tap window. This works because of **stack order** and the **execution
+order** inside each array. Both are deliberate, so don't normalize either one.
+
+The walkthrough below uses the default layout; alternative is the same on the
+L2/R2 trigger soft pulls. Stacks are bottom to top.
+
+| Step | Input | Binding that fires | Stack after |
+|---|---|---|---|
+| 1 | Hold L1 | Base LB chord adds `L1: Modifier 0` | Base, L1 Mod 0 |
+| 2 | Hold R1 too | L1 Mod 0's RB chord adds, in order: `L1: Tap Cover`, `R1: Modifier 1`, `R1: Tap Cover`, `L1!R1: Modifier 2` | Base, L1 Mod 0, L1 Tap Cover, R1 Mod 1, R1 Tap Cover, L1!R1 Mod 2 |
+| 3 | Keep both held 200 ms | Mod 2's delayed RB chord adds `L1&R1: Tap Cover` (with the 250 ms reset) | … , L1!R1 Mod 2, L1&R1 Tap Cover |
+| 4 | Let go of L1 | The combined cover's LB release removes the left side and both Mod 2 orders | Base, R1 Mod 1, R1 Tap Cover |
+| 5 | Press L1 again | R1 Mod 1's LB chord re-adds `R1: Tap Cover` (already there, so it doesn't move), then `L1: Modifier 0`, `L1: Tap Cover`, `R1!L1: Modifier 2` | Base, R1 Mod 1, R1 Tap Cover, L1 Mod 0, L1 Tap Cover, R1!L1 Mod 2 |
+| 6 | Keep both held 200 ms | R1!L1's delayed chord is on **L1**, the side pressed second | … , R1!L1 Mod 2, L1&R1 Tap Cover |
+| 7 | Let go of R1 | The combined cover's RB release removes the right side | Base, L1 Mod 0, L1 Tap Cover |
+
+What makes it work:
+
+- **Each side's cover sits directly above its modifier.** After step 4,
+  `R1: Tap Cover` is above `R1: Modifier 1`, so releasing R1 fires the cover's
+  clean family exit instead of the modifier's release, which would open
+  `R1: Double Tap`. The entry chord's add order is what places the covers:
+  its array adds the first side's cover, then the second modifier, then its
+  cover, then Mod 2.
+- **Re-adding an active layer doesn't move it.** In step 5, R1 Mod 1's chord
+  re-adds `R1: Tap Cover`, which stays where it is. Only the new layers go on
+  top.
+- **The release removes only the released side, never the held one.** The
+  held side's modifier, its Tap Cover and its cursor survive, and so does
+  persistent Gyro. That is why an owner release can have a narrower scope
+  than a cleanup function.
+- **Without the combined cover** (both released within 200 ms), Mod 2's own
+  release fires instead. It clears everything and toggles Gyro, which is the
+  quick two-bumper tap.
+
+[test_stacks.py](../tests/test_stacks.py) replays this sequence on both layouts
+with `steam_layout.stacks.walk` and fails if any stack changes.
 
 These scopes remain subject to the [Always On ordering contract](#always-on-layer-isolation-and-the-historical-crash-workaround)
 and the three-command-entry limit. Subcommand arrays can contain all the listed
