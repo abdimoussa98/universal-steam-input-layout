@@ -1,0 +1,21 @@
+{
+  "_about": "Config for audit_inheritance.py (resources/Layer Definition of Done.md, section 8). Stacks below each layer are derived from the layout; 'targets' can add extra stacks (bottom to top, with a why) and records decisions for routes that stay open: allow (intended, with why) or todo (awaiting the author). Default-layout names; 'variants' maps them for alternative. Every Always On layer is audited automatically.",
+  "variants": {
+    "alternative": {
+      "L1": "L2",
+      "R1": "R2"
+    }
+  },
+  "targets": {
+    "RTP: Double Tap": {
+      "decisions": [
+        {
+          "source": "right_trackpad",
+          "input": "touch",
+          "status": "allow",
+          "why": "Author, 2026-09-30: RTP Double Tap's dpad-mode right pad is its own second-tap selection. A second tap in the north or south region transitions to Circular Scroll; anywhere else leaves the window and stays in mouse mode. It's a deliberate edge case, so no touch bind is added. Base's touch (add RTP: Entry Point) sits under a different source mode here."
+        }
+      ]
+    }
+  }
+}
