@@ -1,0 +1,709 @@
+"controller_mappings"
+{
+	"version"				"3"
+	"revision"				"1"
+	"title"					"held-input rule test"
+	"description"			"Minimal test for the held-input rule. D-pad Up types the top layer's digit (Base 0, X1 1, X2 2, X3 3, K 4, R 5, Target 9). Start resets. Procedure: findings/2026-09-29-held-input-layer-transitions/AUDIT.md#deck-checks"
+	"creator"				"76561198079670632"
+	"progenitor"			""
+	"url"					"template://empty.vdf"
+	"export_type"			"personal_local"
+	"controller_type"		"controller_neptune"
+	"controller_caps"		"23117823"
+	"major_revision"		"0"
+	"minor_revision"		"0"
+	"Timestamp"				"0"
+	"actions"
+	{
+		"Preset_1000001"
+		{
+			"title"				"Base"
+			"legacy_set"		"1"
+		}
+	}
+	"action_layers"
+	{
+		"Preset_1000002"
+		{
+			"title"					"X1 Immediate"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000003"
+		{
+			"title"					"X2 Delayed"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000004"
+		{
+			"title"					"X3 Repeating"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000005"
+		{
+			"title"					"K Key Output"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000006"
+		{
+			"title"					"R Remover"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000007"
+		{
+			"title"					"Target"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+	}
+	"group"
+	{
+		"id"				"0"
+		"mode"				"switches"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_escape"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 7 0 0, , "
+							"binding"		"controller_action remove_layer 6 0 0, , "
+							"binding"		"controller_action remove_layer 5 0 0, , "
+							"binding"		"controller_action remove_layer 4 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+							"binding"		"controller_action remove_layer 2 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_menu"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 6 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"left_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 5 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"right_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 7 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+		}
+	}
+	"group"
+	{
+		"id"				"1"
+		"mode"				"four_buttons"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_a"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 2 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_x"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 3 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_y"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 4 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"button_size"		"17994"
+			"button_dist"		"19994"
+		}
+	}
+	"group"
+	{
+		"id"				"2"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press Q, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 7 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"				"0"
+			"layout"						"0"
+			"haptic_intensity_override"		"0"
+		}
+	}
+	"group"
+	{
+		"id"				"3"
+		"mode"				"four_buttons"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_b"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 7 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"4"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press 1, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"5"
+		"mode"				"four_buttons"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_b"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 7 0 0, , "
+						}
+						"settings"
+						{
+							"delay_start"		"5"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"6"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press 2, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"7"
+		"mode"				"four_buttons"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_b"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 7 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"8"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press 3, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"9"
+		"mode"				"four_buttons"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_b"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press K, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"10"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press 4, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"11"
+		"mode"				"switches"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"right_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 6 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"12"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press 5, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 6 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"13"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press 9, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"preset"
+	{
+		"id"						"0"
+		"name"						"Preset_1000001"
+		"group_source_bindings"
+		{
+			"0"		"switch active"
+			"1"		"button_diamond active"
+			"2"		"dpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"1"
+		"name"						"Preset_1000002"
+		"group_source_bindings"
+		{
+			"3"		"button_diamond active"
+			"4"		"dpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"2"
+		"name"						"Preset_1000003"
+		"group_source_bindings"
+		{
+			"5"		"button_diamond active"
+			"6"		"dpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"3"
+		"name"						"Preset_1000004"
+		"group_source_bindings"
+		{
+			"7"		"button_diamond active"
+			"8"		"dpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"4"
+		"name"						"Preset_1000005"
+		"group_source_bindings"
+		{
+			"9"			"button_diamond active"
+			"10"		"dpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"5"
+		"name"						"Preset_1000006"
+		"group_source_bindings"
+		{
+			"11"		"switch active"
+			"12"		"dpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"6"
+		"name"						"Preset_1000007"
+		"group_source_bindings"
+		{
+			"13"		"dpad active"
+		}
+	}
+	"settings"
+	{
+		"left_trackpad_mode"					"0"
+		"right_trackpad_mode"					"0"
+		"action_set_trigger_cursor_show"		"0"
+		"action_set_trigger_cursor_hide"		"0"
+	}
+}

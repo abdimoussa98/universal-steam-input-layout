@@ -2,8 +2,8 @@
 	"controller_mappings": {
 		"version": "3",
 		"revision": "12834",
-		"title": "single-set-alternative :: always-gyro :: 90.2",
-		"description": "Full keyboard & mouse layout: gyro aiming with stick-assisted fast turning, WASD movement, every button mapped to a key.\n\nConfigure in Base: right-stick sensitivity/curve/deadzone apply everywhere except while ramping. Left-stick edge is an empty WASD-modifier slot (e.g. bind Walk). Ramp Up 0 / Ramp Up 1, the first two layers, set turn-assist speed and stage timing for when the stick pushes gyro off at the edge.\n\nModes: Base (KB+M, gyro aim) and Gyro (L2+R2 toggle) are live. Steering, a precision Menu Gyro (low sensitivity, from the menu buttons), and Gamepad are planned, not in this release yet.",
+		"title": "single-set-alternative :: always-gyro :: 90.3",
+		"description": "Keyboard & mouse layout with WASD movement, gyro aiming, and right-stick turn assist. L1/R1 fire left/right mouse buttons; L2/R2 are the modifiers. Hold Start or Select for the Fn layers.\n\nConfigure normal gyro and right-stick response in Base; modifier and ramp layers have their own stick overrides. The empty left-stick edge bind is the WASD Modifier slot. Ramp Up 0 and Ramp Up 1, the first two layers, control turn-assist speed and timing.\n\nTemp Cursor Gyro: hold either modifier for 300 ms, or lift a thumb from either stick during the hold, for cursor response. Vibration is off and minimum movement threshold is 5. Face buttons, D-pad, stick clicks, Start/Select, the opposite modifier, or both sticks deflected cancel cursor response for the rest of that hold. Release and hold again to re-enable it.\n\nBase and Gyro (L2+R2 toggle) retain their activation rules. Stateful Cursor Gyro, Steering, and Gamepad remain planned.",
 		"creator": "76561198079670632",
 		"progenitor": "",
 		"url": "workshop://3660203920",
@@ -20862,9 +20862,9 @@
 				"settings": {
 					"layer": "1",
 					"gyro_precision_speed": "750",
-					"haptic_intensity": "3",
+					"haptic_intensity": "0",
 					"flickstick_haptic_bump_per_angle": "1",
-					"mouse_move_threshold": "10"
+					"mouse_move_threshold": "5"
 				}
 			},
 			{
@@ -21124,9 +21124,9 @@
 				"settings": {
 					"layer": "1",
 					"gyro_precision_speed": "750",
-					"haptic_intensity": "3",
+					"haptic_intensity": "0",
 					"flickstick_haptic_bump_per_angle": "1",
-					"mouse_move_threshold": "10"
+					"mouse_move_threshold": "5"
 				}
 			},
 			{

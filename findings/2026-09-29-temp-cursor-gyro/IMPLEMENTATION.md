@@ -1,7 +1,10 @@
 # Temp Cursor Gyro implementation
 
 Implemented 2026-09-29 in both Neptune JSON layouts, starting from `c820d22`.
-Version remains 90.2. VDFs and the July reference are unchanged.
+The original implementation used 90.2. Current JSONs are prepared as 90.3 with
+vibration 0, movement threshold 5, and reviewed descriptions. Both sibling VDFs
+are regenerated with verified keys, values, and order; Deck checks remain pending.
+The July reference is unchanged.
 [Current design](../../plans/2026-09-29-cursor-self-removal.md) ·
 [Deck checklist](../../manual-testing.md#temp-cursor-gyro)
 
@@ -40,11 +43,13 @@ restoration profile to maintain.
 | Serialized gyro property | Temp Cursor Gyro override | Normal inherited response |
 |---|---:|---:|
 | `gyro_precision_speed` | 750 | 300 |
-| `haptic_intensity` | 3 | 0 |
+| `haptic_intensity` | 0 | 0 |
 | `flickstick_haptic_bump_per_angle` | 1 | 5 |
-| `mouse_move_threshold` | 10 | 0 |
+| `mouse_move_threshold` | 5 | 0 |
 
-Cursor values come from active group 370 in the July reference's `Gated Gyro`.
+Cursor properties started from active group 370 in the July reference's `Gated Gyro`.
+The author's subsequent tuning sets vibration to 0 and minimum movement threshold
+to 5; precision speed 750, haptic bump 1, and inherited sensitivity stay unchanged.
 Cursor groups use `gyro_to_mouse` and `layer: "1"`. They leave natural sensitivity
 inherited at 300, inherit Base's reference calibration/vertical scaling, and do not
 copy Gated Gyro's activation mask. Regular and Gyro owners therefore retain

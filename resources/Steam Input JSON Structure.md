@@ -549,9 +549,10 @@ preset[].group_source_bindings = {
      group overrides gyro even when it has no explicit input activators
 
 3. **Layer Deactivated**: Removing the layer exposes the remaining stack's bindings,
-   or the parent Action Set when no lower layer overrides that input. An input
-   still held at that moment fires its newly exposed binding, but adding a layer
-   over a held input does not; see [Held Inputs Across Layer Changes](#held-inputs-across-layer-changes).
+   or the parent Action Set when no lower layer overrides that input. Adding a
+   layer over a held input does not fire its immediate layer commands. Whether
+   removing one fires the exposed binding on a held input is unverified, so
+   these layouts back it with Hold to Repeat; see [Held Inputs Across Layer Changes](#held-inputs-across-layer-changes).
 
 **Example Flow:**
 ```
@@ -568,20 +569,39 @@ L2 released:
 
 ### Held Inputs Across Layer Changes
 
-**Author-reported behavior, documented 2026-09-29.** Adding a layer and removing
-a layer treat an input that is already held differently:
+**Documented 2026-09-29 from the author's runtime experience.** A layer added
+over an input that is already held treats that input as already pressed:
 
-| Change while the input is held | Top binding on that input afterward | Fires? |
-|---|---|---|
-| Layer **added** | Immediate layer command: Regular Press, chord, or Soft Press with no Fire Start Delay and no Hold to Repeat | **No.** The press happened before the layer existed |
-| Layer **added** | Activator with a Fire Start Delay | Yes, once the delay elapses |
-| Layer **added** | Activator with Hold to Repeat | Yes, on its next repeat interval |
-| Layer **removed** | The newly exposed lower binding | **Yes**, as if the input had just been pressed |
+| Layer **added** while the input is held | Fires on that held input? |
+|---|---|
+| Immediate layer command: Regular Press, chord, or Soft Press with no Fire Start Delay and no Hold to Repeat | **No.** The press happened before the layer existed |
+| Activator with a Fire Start Delay | Yes, once the delay elapses |
+| Activator with Hold to Repeat | Yes, on its next repeat interval |
+| Release activator | Yes, on release |
 
-A layer command is `add_layer`, `remove_layer`, or `hold_layer`. The rule was
-reported for layer commands. Whether key and mouse outputs follow it is not yet
-confirmed. The menu overlays (Backspace, Enter, Escape, Tab) rely on their key
-firing on the press that adds their layer.
+A layer command is `add_layer`, `remove_layer`, or `hold_layer`.
+
+**Unverified: a layer removed while the input is held.** The author expects the
+newly exposed lower binding to fire as if the input had just been pressed, but
+this hasn't been isolated. In these layouts, every layer command that a removal
+is expected to expose on a held input also has Hold to Repeat. That includes
+Base's entries, Gyro's modifier entry, and the cursor parents' cover and Mod 2
+chords. So they fire either way, and the repeat is the guarantee. Until this is
+confirmed:
+
+- Keep those repeats.
+- Give any new layer command that must fire after a removal Hold to Repeat.
+- Still trace what each new removal exposes on held inputs, since it may fire
+  immediately.
+
+[`rule-test.vdf`](../findings/2026-09-29-held-input-layer-transitions/rule-test.vdf)'s
+T4 can settle it later.
+
+**Also unverified: key and mouse outputs.** The rule above was reported for layer
+commands. The menu overlays (Backspace, Enter, Escape, Tab) rely on their key
+firing on the press that adds their layer. The first click after a trigger
+removes `Gyro Off Ramp Up`, and keys exposed by cursor self-removal, rely on
+outputs firing when a removal exposes them. Existing manual checks cover all three.
 
 How these layouts use it:
 
@@ -600,27 +620,31 @@ How these layouts use it:
 - **An exit whose condition can already be true when its layer is added needs
   Hold to Repeat.** Examples: the ramp layers' inverted thresholds, the trackpad-
   click hold exits, and `Gyro Off Ramp Up`'s firing-control removal.
-- **A removal passes through.** The same press that clears a layer also fires
-  what it exposes:
-  - Ramp modifier exits clear ramp-up, then Base/Gyro modifier entry fires.
-  - Guarded recovery lets the input's normal action follow.
-  - A Double Tap expiry fires the Base action under a held input.
+- **Re-entry after a removal is carried by repeats.** These all re-enter through
+  a repeating entry on the input that is still held:
+  - Ramp modifier exits clear ramp-up, then the Base/Gyro modifier entry
+    re-enters on its 50 ms repeat.
+  - Guarded recovery clears the stale layer, then the input's normal action follows.
+  - A Double Tap expiry exposes the Base action under a held input.
 
-  Before adding a removal, trace what it exposes on every input that may still
-  be held.
+  Removal pass-through may fire them sooner (see above).
 - **Base is never added.** Its bindings return only through removals, so its
-  repeating entries back up the removal case and aren't needed for the add case.
+  repeating entries (menu, modifier, stick/trackpad touch, RS edge) are the
+  guarantee for the unverified removal case. The regression tests protect them.
 
-This matches the timer observations above. Removals restart Fire Start Delay
-timers and can restart a stuck delayed apply; additions don't. A working model:
-a removal makes Steam re-evaluate held inputs, and an add doesn't. This is not
-verified internals, and the re-evaluation can't be a literal re-press. If it
-were, a repeating reset would re-fire its own Regular Press in a loop.
+The timer observations above point the same way: removals restart Fire Start
+Delay timers and can restart a stuck delayed apply; additions don't. One
+possible explanation is that a removal makes Steam re-evaluate held inputs and
+an add doesn't. That would also produce removal pass-through. It isn't verified,
+and the re-evaluation can't be a literal re-press. If it were, a repeating reset
+would re-fire its own Regular Press in a loop.
 
 See the [held-input audit](../findings/2026-09-29-held-input-layer-transitions/AUDIT.md)
 for the ramp-up walkthrough, per-layout inventory, the alternative layout's
-former missing R2 → Mod 2 repeat, and open scope questions. Deck confirmation is
-tracked in [manual testing](../manual-testing.md#held-inputs-across-layer-changes).
+former missing R2 → Mod 2 repeat, and the open questions. The
+[regression tests](../tests/test_neptune_held_inputs.py) protect the delays and
+repeats listed here. Real-layout checks are in
+[manual testing](../manual-testing.md#held-inputs-across-layer-changes).
 
 ### Gyro Settings Inheritance
 
@@ -642,7 +666,7 @@ and distinguish these intentional exceptions:
   not missing inheritance. Dormant `inactive` groups are a separate category.
 
 In the current Neptune layouts, normal precision/haptic/bump/threshold is
-300/0/5/0; cursor is 750/3/1/10. Both inherit Base natural sensitivity 300,
+300/0/5/0; cursor is 750/0/1/5. Both inherit Base natural sensitivity 300,
 rotation calibration 3853, vertical ratio 200, conversion style 4, and speed
 deadzone 0. When tuning Base, trace overlapping activation/profile layers and
 preserve cursor's deliberate response overrides. There is no normal-cover copy
@@ -722,9 +746,10 @@ For each changed input or source:
    additions/removals that could disturb a timer, hidden recovery, lost movement
    modifiers, or a newly exposed action after exit. Static inspection does not
    prove that installing a block cancels an already pending activator. Per the
-   [held-input rule](#held-inputs-across-layer-changes), a held input fires its
-   newly exposed binding after a removal, but not an immediate layer command on a
-   newly added layer.
+   [held-input rule](#held-inputs-across-layer-changes), a newly added layer's
+   immediate layer command doesn't fire on a held input. A newly exposed binding
+   may fire after a removal, but that's unverified; rely on Hold to Repeat
+   where it must fire.
 4. **Choose the behavior deliberately.** Keep inheritance where the upper
    layer should share the lower action. Add a narrowly scoped explicit block
    where that action must be unavailable. If an Always On window needs an
@@ -1005,7 +1030,9 @@ the inherited layout. It is not a free extra recovery path.
 A held-owner chord protects the layer from premature cleanup, but its empty or
 replacement binding still owns that edge; it does not restore the inherited
 WASD modifier or ramp-up action. Removing the layer exposes lower behavior again.
-If the edge is still held, the exposed action fires on the same gesture; see
+If the RS edge is still held, ramp-up re-enters through Base's repeating entry.
+The LS WASD modifier is a non-repeating output, with no such backup. Whether the
+removal alone fires either one on the same gesture is unverified; see
 [Held Inputs Across Layer Changes](#held-inputs-across-layer-changes).
 
 The author intentionally accepts more restrictions on ramp-up: it uses layer

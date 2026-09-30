@@ -49,8 +49,8 @@ Run both sides, both layouts, and both regular/Gyro modifier variants after a
 fresh load. See the [implementation and inheritance record](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md).
 
 - [ ] Hold the primary modifier for 300 ms: its Temp Cursor Gyro overlay applies,
-  with precision speed 750, haptic intensity 3, haptic bump 1, and movement
-  threshold 10. Natural sensitivity remains 300 and activation follows the
+  with precision speed 750, haptic intensity 0, haptic bump 1, and movement
+  threshold 5. Natural sensitivity remains 300 and activation follows the
   existing regular/Gyro rules. Releasing the modifier sends no tap/scroll output
 - [ ] Before 300 ms, lift either thumb: cursor applies immediately, then only
   that stick's LST/RST helpers clear. Repeated thumb lifts after cursor entry
@@ -126,7 +126,7 @@ Run both layouts after a fresh load. See the [exact settings and inheritance pol
   300, rotation calibration 3853, vertical ratio 200, conversion style 4, speed
   deadzone 0, precision 300. Existing Base All and Gyro Any activation rules remain
   intact; LST/RST Temporary Gyro change activation without changing response
-- [ ] In regular and Gyro modifier holds, cursor response is 750/3/1/10 and removing
+- [ ] In regular and Gyro modifier holds, cursor response is 750/0/1/5 and removing
   cursor exposes 300/0/5/0 for precision/haptic/bump/threshold. Normal covers have
   no active gyro source. Both responses inherit
   natural sensitivity 300 and the new Base calibration/conversion. Exercise
@@ -209,15 +209,14 @@ assign a temporary modifier in a test copy for the checks that need output.
 
 ## Held inputs across layer changes
 
-Confirms the author-reported rule in [Held Inputs Across Layer Changes](resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes).
+Real-layout checks for [Held Inputs Across Layer Changes](resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes).
 See the [audit](findings/2026-09-29-held-input-layer-transitions/AUDIT.md#deck-checks) for the reasoning behind each check.
+Rule 3 (a removal firing the exposed layer command) stays unverified and isn't
+scheduled. These layouts back it with repeats. If it's ever needed, the
+[optional T4 check](findings/2026-09-29-held-input-layer-transitions/AUDIT.md#optional-settle-rule-3)
+settles it.
 
-- [ ] In a disposable minimal layout with layer notifications on, confirm the rule itself:
-  - Hold B, then press A to add layer X, where X's B adds layer Y. Y should **not** appear
-  - The same with a 5 ms Fire Start Delay on X's B: Y appears. With Hold to Repeat instead: Y appears after one interval
-  - X's B removes X, and Base's B adds Y. Enter X, then hold B: Y **appears** from the exposed Base binding
-  - Replace X's B with a key press and hold B across the add. Record whether the key fires; this decides whether the rule covers outputs too
 - [ ] One held stick click from Menu Left / Right Entry (before 300 ms) goes Entry → Fn → Transition Set without a second click. This relies on Fn's repeating click chord
 - [ ] Staggered Gyro toggle: hold LB, press RB, then release RB about 100 ms before LB. Gyro toggles, and `Gyro | L1: Modifier 0` becomes active while LB is held. Record whether the regular L1 modifier also appears, and whether releasing LB then scrolls down through L1: Double Tap. Repeat for Gyro → regular, with both press orders, and in the alternative with L2 / R2
-- [ ] Alternative only: soft-pull both triggers during ramp-up, then fully pull one to exit. Record whether Mod 2 enters without re-pulling. Also press both triggers together from Base. `R2: Modifier 1` and its Gyro variant currently lack Hold to Repeat on their LT → Mod 2 chord
-- [ ] The existing first-click check (a trigger pulled during Gyro Off Ramp Up) tests removal passing through to a **mouse** output. The existing Enter / Backspace and double-tap-hold Escape / Tab checks test **key** outputs firing on the press that adds their layer. Record both results against this rule
+- [ ] Alternative only: soft-pull both triggers during ramp-up, then fully pull one to exit. Mod 2 should enter without re-pulling, in both regular and Gyro mode. Also pull both triggers together from Base. This checks the F1 fix: `R2: Modifier 1` and its Gyro variant now repeat their LT → Mod 2 chord, like the other three pairs
+- [ ] Output scope: the existing first-click check (a trigger pulled during Gyro Off Ramp Up) tests whether a removal fires an exposed **mouse** output. The existing Enter / Backspace and double-tap-hold Escape / Tab checks test whether **key** outputs fire on the press that adds their layer. Record both results in the audit

@@ -149,7 +149,8 @@ The [consolidation plan](plans/2026-09-27-neptune-command-budget.md) has now bee
 applied to both JSON files: each edge has three entries using two multi-button
 Any chords, and the full command-budget checks pass. The
 [implementation record](findings/2026-09-27-neptune-command-budget/IMPLEMENTATION.md)
-tracks the results. Both 90.2 VDF exports match their JSONs; fresh-load Deck tests
+tracks the results. Both 90.3 JSONs and regenerated VDFs include the cursor tuning
+and refreshed descriptions; export verification passes. Fresh-load Deck tests
 remain pending.
 See [counting and chord rules](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget).
 
@@ -205,7 +206,7 @@ Detailed comparisons and runtime observations:
 
 - [R1 and L1&R1 tap-cover findings](findings/2026-09-27-r1-tap-cover/FINDINGS.md)
 - [Delayed-apply reset coverage audit](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md) - every delayed apply in both Neptune layouts, intentional exclusions, and proposed extensions within the three-command limit
-- [Held inputs across layer changes](findings/2026-09-29-held-input-layer-transitions/AUDIT.md) - why adding a layer over a held input doesn't fire its layer commands while removing one does, the ramp-up walkthrough, and which repeats and short delays exist because of it
+- [Held inputs across layer changes](findings/2026-09-29-held-input-layer-transitions/AUDIT.md) - why adding a layer over a held input doesn't fire its layer commands (removal pass-through is unverified and backed by repeats), the ramp-up walkthrough, and which repeats and short delays exist because of it
 - [Guarded recovery repeat convention](findings/2026-09-28-repeating-recovery/CHANGES.md) - the separate change enabling Hold to Repeat on every guarded recovery removal
 - [Selected LS-edge recovery](findings/2026-09-28-left-stick-recovery/CHANGES.md) - fourteen recovery layers, seven timed-window blocks, and the approved Transition Set cleanup depth in both layouts
 - [Stuck RTP entry layer blocking right-stick ramp-up](findings/2026-09-27-rtp-entry-ramp-up/FINDINGS.md)
@@ -214,10 +215,70 @@ Detailed comparisons and runtime observations:
 
 ---
 
+## Publishing layout changes
+
+Every time a changed layout is published, **revalidate its description and bump
+its release version**. Apply this before committing a layout update, exporting
+it for delivery, or publishing it to Steam:
+
+1. Read the full `controller_mappings.description` and compare it with the final
+   layout. Check default/alternative controls, active features, response settings,
+   and which features remain planned. Update stale text; do not rewrite accurate
+   wording just to create a diff.
+2. Increment the release suffix in `controller_mappings.title`, such as `90.2`
+   to `90.3`, from the last published release. Use one bump for the release batch,
+   including its follow-up edits and export; align both variants when released
+   together. This is separate from schema `version`, export `revision`, and runtime
+   layer IDs, which must not be changed for a release bump.
+3. Complete command-budget, ordering, reference, and relevant regression checks.
+   **Always regenerate the sibling VDF after every successful, validated JSON
+   edit, in the same task.** This includes settings, bindings, title/version, and
+   description changes. Export the final metadata with the layout so JSON and
+   VDF agree; no separate export request or permission is needed. This standing
+   instruction supersedes the earlier preference to leave VDFs to the user.
+   Only a newer explicit instruction for the task can opt out. If conversion
+   fails, report the blocker; do not claim the edit is complete. Local VDF export
+   does not authorize a commit or Steam upload.
+4. Keep manual Deck checks explicitly pending until performed. Committing JSON
+   is not evidence of a successful Steam upload or runtime test.
+
+Read-only audits and documentation-only changes do not publish a changed layout.
+The `.claude` and `.cursor` `steam-layout-apply` skills enforce this workflow.
+
 ## File Formats
 
 - `.json` - Human-readable format for editing with these scripts
-- `.vdf` - Valve Data Format used by Steam (convert using external tools)
+- `.vdf` - Valve Data Format used by Steam
+
+Export JSON directly using the serializer from the installed
+`pfwobcke.vscode-vdf` VS Code extension:
+
+```bash
+node convert_vdf.mjs neptune/single-set-default_hold-gyro_latest.json
+node convert_vdf.mjs neptune/single-set-alternative_hold-gyro_latest.json
+node convert_vdf.mjs findings/2026-09-29-held-input-layer-transitions/rule-test.json
+```
+
+Each command writes/replaces the sibling `.vdf`, leaving the JSON intact. Use
+`-o path/to/output.vdf` for a different destination. This requires Node.js with
+`node:module.stripTypeScriptTypes` (tested on Node 26.7.0) and the installed
+extension (tested on 5.12.3); no npm install or open VS Code window is needed.
+It discovers the latest version under `~/.vscode/extensions`; use
+`--extension /path/to/pfwobcke.vscode-vdf-version` for another location. The loader
+uses the extension's bundled source map and reports an error if its structure
+changes. Node may print an experimental API warning.
+
+The exporter preserves repeated keys, binding order, and empty blocks, and checks
+every output token before writing. It preserves existing VDF escape sequences
+and escapes literal quotes, tabs, and line breaks introduced during JSON editing.
+Like the extension, it uses JavaScript's JSON parsing and property order: use
+arrays for repeated keys, and expect integer-like object keys in numeric order.
+Unsupported values (including numbers, booleans, null, and empty arrays) and
+unresolved `controller_action {{title}}` targets fail before writing.
+
+Run the command-budget and layer-order checks before exporting, and use
+`convert_runtime_ids.py to-ids` first when editing with title tokens. Fresh-load
+Deck testing remains necessary. Converter tests: `node --test tests/test_convert_vdf.mjs`.
 
 python3 convert_runtime_ids.py to-ids neptune/single-set-alternative_hold-gyro_latest.json &&
 python3 convert_runtime_ids.py to-ids neptune/single-set-default_hold-gyro_latest.json

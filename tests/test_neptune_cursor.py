@@ -11,9 +11,9 @@ from test_neptune_recovery import EMPTY, addition, load_layouts, removal, recove
 
 CURSOR_PROFILE = {
     "gyro_precision_speed": "750",
-    "haptic_intensity": "3",
+    "haptic_intensity": "0",
     "flickstick_haptic_bump_per_angle": "1",
-    "mouse_move_threshold": "10",
+    "mouse_move_threshold": "5",
 }
 
 

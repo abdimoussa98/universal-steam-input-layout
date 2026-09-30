@@ -2,16 +2,19 @@
 
 Date: 2026-09-29. This is a static audit of both Neptune layouts (working tree on
 `neptune-trigger-rampup-port`, HEAD `50758b3` plus the uncommitted cursor-gyro
-edits). **No layout was changed.** The rule below is the layout author's runtime
-observation. The JSON is consistent with it everywhere I looked, but I did not
-reproduce it on a Deck.
+edits). **No layout was changed.** Rules 1 and 2 below are the layout author's
+runtime experience and are treated as established. Rule 3 is unverified. The
+JSON is consistent with all three everywhere I looked.
 
 Follow-up: F1's two missing alternative repeats are now fixed in JSON by the
 [cursor self-removal implementation](../../plans/2026-09-29-cursor-self-removal.md)
 and covered by regression tests; Deck validation remains pending. The audit and
 inventory below describe the pre-fix snapshot, including its original cursor
 inheritance. Current cursor overlays remove themselves to expose the repeating
-parent transition.
+parent transition. The [follow-up plan](../../plans/2026-09-29-held-input-rule-followups.md)
+added [held-input regression tests](../../tests/test_neptune_held_inputs.py) and
+an optional [rule-test layout](#optional-settle-rule-3) that can settle rule 3
+later. It isn't being run now.
 
 ## Summary
 
@@ -25,8 +28,11 @@ differently depending on whether a layer was just added or just removed:
    activator with a Fire Start Delay fires once the delay elapses, and one
    with Hold to Repeat fires on its next interval. This is why the delayed
    Soft Presses in the ramp-up flow need no repeat.
-3. **Remove:** a layer removed while an input is held **does** fire the newly
-   exposed lower binding on that input, as if the input had just been pressed.
+3. **Remove (unverified):** a layer removed while an input is held is expected to
+   fire the newly exposed lower binding on that input, as if the input had just
+   been pressed. This hasn't been isolated. Every layer command in these
+   layouts that it would fire also repeats, so nothing depends on it. See
+   [where it matters](#where-removal-pass-through-rule-3-matters).
 
 "Immediate" means a Regular Press, chord, or Soft Press with no Fire Start Delay
 and no Hold to Repeat. "Layer command" means `add_layer`, `remove_layer`, or
@@ -42,16 +48,17 @@ The layouts are built around this rule, mostly without saying so:
   does.
 - **Every repeating layer add outside Base is explained by rule 1:**
   Gyro's modifier entry, Mod 0/1 → Mod 2 entry, and Fn stick-click → Transition Set.
-  Base's repeating entries are not; Base is never added, so they are backups
-  for rule 3.
+  Base's repeating entries are not; Base is never added. With rule 3
+  unverified, they are what guarantee re-entry after a removal.
 - **Every threshold exit that removes layers repeats** (five per layout),
   because its condition can already be true when its layer is added.
 - **The menu Entry → Fn transitions add the Enter/Backspace overlay themselves**,
   even though Fn has its own chord that adds it. That chord can't fire on the
   already-held button (rule 1).
 - **Ramp-up's modifier exits, Gyro Off Ramp Up's firing-control exit, and
-  stale-menu recovery rely on rule 3.** The removal lets the same press reach
-  the exposed binding.
+  stale-menu recovery are designed around rule 3.** Their layer commands also
+  re-enter through repeating Base/Gyro entries. The one real dependency is an
+  output: the first click after a trigger removes `Gyro Off Ramp Up`.
 
 I found no binding that contradicts the rule. Findings:
 
@@ -59,11 +66,12 @@ I found no binding that contradicts the rule. Findings:
   lack the Hold to Repeat that the other three Mod 2 entry pairs have. Under
   rule 1, R2 → L2 Mod 2 entry fails when LT is already pulled as R2's layer
   appears. This predates September; the archived export has it too.
-- **F2:** three passages in the structure doc said the opposite of rule 3 or left
-  it open. They now link to the new section.
-- **F3:** the rule's scope is still open for key and mouse outputs, and for how
-  the regular Mod 2 → Gyro toggle resolves while one bumper is still held.
-  Deck checks are listed [below](#deck-checks).
+- **F2:** three passages in the structure doc treated removal pass-through
+  inconsistently. They now link to the new section, which marks rule 3
+  unverified and backed by repeats.
+- **F3:** open questions: rule 3 itself; whether key and mouse outputs follow
+  the rules; and how the regular Mod 2 → Gyro toggle resolves while one bumper
+  is still held. Checks are listed [below](#deck-checks).
 
 ## The rule, with the layout evidence
 
@@ -73,7 +81,7 @@ I found no binding that contradicts the rule. Findings:
 | Layer added | Fire Start Delay (any length) | Yes, after the delay | All 19 delayed applies, including the 5 ms ramp handoff |
 | Layer added | Hold to Repeat | Yes, on the next interval | Gyro 50 ms entry, Mod 2 entry chord, Fn click chord, threshold exits |
 | Layer added | Release activator | Yes, on release (a new event) | Every modifier, entry, and overlay release exit |
-| Layer removed | Newly exposed lower binding | **Yes** | Ramp modifier exits, firing-control exit, stale-entry and guarded recovery pass-through |
+| Layer removed | Newly exposed lower binding | Expected; **unverified** | Nothing for layer commands: each one this would fire also repeats. Outputs: the first click after the firing-control exit |
 
 ### How this fits the other timer observations
 
@@ -86,10 +94,11 @@ Three earlier author observations are already documented:
 - Stick-touch releases apply their pending target *before* removing helpers so
   the removals can't postpone it ([Complete Delayed Applies on Stick-Touch Release](../../resources/Steam%20Input%20JSON%20Structure.md#complete-delayed-applies-on-stick-touch-release)).
 
-Taken with rule 3, they point the same way: **a removal makes Steam re-evaluate
+Together with rules 1 and 2, they suggest **a removal makes Steam re-evaluate
 held inputs, and an add doesn't.** The new layer inherits "already held" and
-waits for a new press, a delay, or a repeat tick. A removal re-arms what it
-touches: exposed bindings fire and delay timers restart.
+waits for a new press, a delay, or a repeat tick. If a removal re-arms what it
+touches, delay timers restart (observed), and exposed bindings would fire
+(rule 3, unverified).
 
 This is a working model, not a verified description of Steam's internals. It
 can't be a literal re-press of every binding. The 250 ms Mod 2 reset removes a
@@ -110,7 +119,7 @@ Default layout. Each row notes which input is held and why the activator fires.
 | 3a | Same layer: Regular Press repeating every 300 ms removes `Turning Ramp Up 1`. | Delayed-apply reset; a different purpose. It stops once Ramp 1 owns the edge. |
 | 3b | Same layer: inverted Soft Press 29031, repeating, removes all three ramp layers. | If `Turning Ramp Up 0` arrives from the 5 ms handoff while the stick is already coming back, this exit is already true. Only the repeat fires it (rule 1). |
 | 4 | `Turning Ramp Up 1` owns RS edge (sensitivity 200). Its only edge activator is inverted Soft Press 25807, repeating, which removes all three. | Same reasoning as 3b. |
-| 5 | Stick drops inside 25807: all ramp layers removed. Base RS edge is exposed, but the stick is below 32767, so nothing fires. Gyro is back. | Rule 3 would fire the Base edge if the stick were still at full deflection. It isn't. |
+| 5 | Stick drops inside 25807: all ramp layers removed. Base RS edge is exposed, but the stick is below 32767, so nothing fires. Gyro is back. | Had the stick still been at full deflection, Base's repeating edge entry would re-enter. |
 
 Branches:
 
@@ -120,20 +129,21 @@ Branches:
 - **Firing control pulled mid-ramp.** Ramp 0/1 have empty trigger groups, so
   the pull reaches `Gyro Off Ramp Up`'s trigger Regular Press (repeating,
   uninterruptible), which removes that layer. That exposes Base's mouse button
-  under the held trigger, so the first click still registers (rule 3, applied
-  to a mouse output; see F3). The repeat covers `Gyro Off Ramp Up` being added
-  while a trigger is already down, where rule 1 would otherwise skip it.
+  under the held trigger. The first click registers only if rule 3 applies to
+  a mouse output (unverified; see F3). Base's mouse binding has no repeat. The
+  removal's own repeat covers `Gyro Off Ramp Up` being added while a trigger
+  is already down, where rule 1 would otherwise skip it.
 - **Modifier pressed mid-ramp.** The top ramp layer's LB/RB Regular Press
   removes all three ramp layers and does nothing else (`empty_binding`). With
-  LB still held, Base's (or Gyro's) LB entry is exposed and fires by rule 3,
-  adding the right modifier variant. Their 50 ms repeat is a backup. Base's
+  LB still held, Base's (or Gyro's) LB entry is exposed. It re-enters the right
+  modifier variant on its 50 ms repeat, or sooner if rule 3 holds. Base's
   RS-edge LB/RB chord (empty, uninterruptible) then keeps the exposed edge
   from restarting ramp-up while the modifier is held. The port plan credited
-  the repeat for this re-entry. By rule 3 the removal alone is enough.
+  the repeat for this re-entry; with rule 3 unverified, that's the guaranteed path.
 - **Alternative layout.** The roles are swapped. Ramp layers block the soft pull
   (`edge` → empty) and exit on full pull (`click` → remove all three, repeating).
   The full pull exposes Base's trigger `edge`, which is still held, so
-  `L2/R2: Modifier` enters by rule 3.
+  `L2/R2: Modifier` enters on its 50 ms repeat (or sooner by rule 3).
   `Gyro Off Ramp Up`'s bumper removal repeats for the same reason as the
   default's trigger removal.
 
@@ -145,7 +155,7 @@ Counts are per layout (default / alternative).
 
 | Add | Layer added? | Rule that needs the repeat |
 |---|---|---|
-| Base: Start/Select entry, LB/RB (alt LT/RT) entry at 50 ms, LS/RS touch, RTP touch, RS edge (both) — 9 / 9 | Never (Base is the action set) | None. Base bindings come back only through removals, which fire them by rule 3. Keep the repeats as a backup |
+| Base: Start/Select entry, LB/RB (alt LT/RT) entry at 50 ms, LS/RS touch, RTP touch, RS edge (both) — 9 / 9 | Never (Base is the action set) | Not rule 1. Base bindings come back only through removals, and rule 3 is unverified, so these repeats guarantee re-entry. The regression tests protect them |
 | Gyro: LB/RB (alt LT/RT) → `Gyro \| … Modifier`, 50 ms — 2 / 2 | Yes, by the regular Mod 2 release, often while the other modifier is still held | **Rule 1.** Gyro arrives over a held modifier, so its entry can fire only on a repeat tick |
 | Mod 0/1 second modifier → Mod 2 (plus tap covers), regular and Gyro — 4 / **2** | Yes, the first modifier layer can appear while the second is already held (both pressed together, or a ramp exit exposing both) | **Rule 1.** The alternative's R2 side lacks it (F1) |
 | Menu Fn stick click → Transition Set — 4 / 4 | Yes, Menu Entry's own click chord adds Fn while the click is held | **Rule 1.** Without the repeat, one held click stops at Fn; it would take a second click to reach the Transition Set |
@@ -195,26 +205,29 @@ already-held input:
 | Threshold exits: `Gyro Off Ramp Up` 25807, `Turning Ramp Up 0` 29031, `Turning Ramp Up 1` 25807, `LTP: Arrow Keys` and `RTP: Mouse Buttons` click release — all inverted Soft Presses, 5 / 5 | **Rule 1:** the exit condition can already be true when the layer appears. That is realistic for the ramp handoffs; the trackpad-click exits share the shape as a safeguard. The Base LS-edge WASD scaffold is also inverted but has no repeat. That's correct: it sends no layer command and Base is never added |
 | `Gyro Off Ramp Up` firing-control removal (default triggers, alternative bumpers) | Rule 1: the layer can appear while a firing control is already down |
 | Ramp modifier exits (default LB/RB, alternative trigger click) | Mostly a backup. The press that triggers them is normally fresh |
-| Guarded recovery (all of them) | Convention: retry while the recovery input stays eligible. Rule 3 already cascades a single press through stacked stale layers. The repeat also covers an input that was held before the guard dropped |
+| Guarded recovery (all of them) | Convention: retry while the recovery input stays eligible. If rule 3 holds, a single press also cascades through stacked stale layers; the repeat guarantees it either way. It also covers an input that was held before the guard dropped |
 | Delayed-apply resets (11) | Restart an interrupted apply. They don't handle held inputs |
 
-## Where the layout relies on rule 3
+## Where removal pass-through (rule 3) matters
 
-- **Ramp modifier exits** (above): the modifier enters on the same press that ends
-  ramp-up.
-- **Firing control during `Gyro Off Ramp Up`:** the first click registers.
-- **Stale Menu Entry:** pressing the other menu button clears the stale entry,
-  then Base's entry for that button fires, so it "works normally" on the same
-  press. This is the existing manual check under *Stuck entry layer*.
-- **Guarded recovery in general:** clearing a stale layer exposes the input's
-  normal action, which fires on the same press.
-- **Double Tap expiry:** a bumper or stick edge held through the window fires
-  its Base binding when the window removes itself, for example the RS edge
-  resuming ramp-up after `L1: Double Tap` expires.
+Rule 3 is unverified. The layouts don't depend on it for layer commands:
 
-The flip side: any new removal fires the exposed binding of every input
-the user is still holding. When you add a removal, trace what it exposes on
-held inputs, not just what it clears.
+| Exposure after a removal, input still held | What re-enters | Depends on rule 3? |
+|---|---|---|
+| Ramp modifier exits | Base/Gyro modifier entry, 50 ms repeat | No |
+| Stale Menu Entry cleared by the other menu button | Base menu entry, repeating | No |
+| Guarded recovery exposing a Base entry | That entry's repeat | No |
+| Double Tap expiry over a held bumper or RS edge, e.g. ramp-up resuming after `L1: Double Tap` | Base modifier or RS edge entry, repeating | No |
+| Cursor self-removal exposing the parent | Parent's cover chord and Mod 2 transition, both repeating | No |
+| Firing control during `Gyro Off Ramp Up` | Base mouse button, **no repeat** | **Yes**: first click (F3) |
+| Guarded recovery or cursor self-removal exposing a key output | The key, **no repeat** | **Yes**: output delivery (F3) |
+
+If rule 3 holds, each of these fires on the same press, sooner than the
+repeat. Either way:
+- When you add a removal, trace what it exposes on inputs that may still be
+  held, not just what it clears.
+- Give any layer command that must fire after a removal Hold to Repeat, rather
+  than relying on pass-through.
 
 ## Findings
 
@@ -236,20 +249,25 @@ September regression.
 
 Failure case under rule 1: both triggers are soft-pulled during ramp-up, where
 the ramp layers block the soft pull. Then one trigger is fully pulled. The
-removal exposes both Base trigger entries at once (rule 3). If `R2: Modifier 1`
-lands on top, its LT chord can't fire for the LT that is already pulled, so
+removal exposes both Base trigger entries at once, and their repeats (or rule 3)
+add both single modifiers. If `R2: Modifier 1` lands on top, its LT chord can't
+fire for the LT that is already pulled, so
 Mod 2 needs a re-pull. Pulling both triggers at nearly the same moment is a
 second case.
 
-**Recommendation, not applied:** add `hold_repeats: "1"` (no explicit rate,
-matching the other three pairs) to both chords. The entry count doesn't
-change. The repeat stops once Mod 2 owns LT `edge`. Confirm on the Deck with
+**Fixed in JSON (commit `5bf46a7`):** both chords now have `hold_repeats: "1"`
+(no explicit rate), matching the other three pairs. The entry count didn't
+change, and the repeat stops once Mod 2 owns LT `edge`. The cursor tests check
+all four opposite-modifier routes per layout. Deck confirmation is pending; see
 the F1 check below.
 
-### F2. Documentation said the opposite of rule 3
+### F2. Documentation treated rule 3 inconsistently
 
 Three passages in [Steam Input JSON Structure](../../resources/Steam%20Input%20JSON%20Structure.md)
-now point to the new [held-input section](../../resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes):
+hedged removal pass-through without saying what guarantees re-entry instead.
+They now point to the [held-input section](../../resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes),
+which marks rule 3 unverified and names Hold to Repeat as the guarantee. The
+original passages:
 
 - *How Binding Overlay Works*, step 3: "Do not assume the triggering event is replayed
   into a newly exposed cleanup."
@@ -258,10 +276,18 @@ now point to the new [held-input section](../../resources/Steam%20Input%20JSON%2
 - *Stick-Edge Cleanup*: "the same gesture is not guaranteed to run both cleanup
   and the newly exposed action."
 
-Historical plans and findings were left as written. The port plan says the
-repeating entry performs ramp re-entry; rule 3 makes the removal enough on its own.
+Historical plans and findings were left as written. The port plan credits the
+repeating entry for ramp re-entry, which is the guaranteed path while rule 3
+is unverified.
 
-### F3. Open scope questions
+### F3. Open questions
+
+**Rule 3 itself.** Whether a removal fires the exposed layer command on a held
+input hasn't been isolated. Every such case in these layouts also repeats, so
+the layouts can't show it. It isn't being tested now; the
+[optional T4 check](#optional-settle-rule-3) can settle it later. Until then,
+the regression tests keep the covering repeats in place. The numbered
+questions below cover scope and interactions.
 
 1. **Key and mouse outputs on add.** You scoped rule 1 to layer commands.
    Four overlays depend on outputs firing on the press that adds their layer:
@@ -270,13 +296,15 @@ repeating entry performs ramp re-entry; rule 3 makes the removal enough on its o
    menu button. If outputs followed rule 1, the first Backspace/Enter and
    double-tap-hold Escape/Tab would be missing. These checks are still
    unchecked in manual testing.
-2. **Mouse output on remove.** The firing control during `Gyro Off Ramp Up`
-   applies rule 3 to a mouse button. Also still unchecked.
+2. **Outputs on remove.** The firing control during `Gyro Off Ramp Up` needs rule 3
+   to apply to a mouse button, and cursor self-removal needs it for the parent's
+   key outputs. Also still unchecked.
 3. **Regular Mod 2 release while one modifier is still held.** The release array
-   removes 13 layers, then adds Gyro (with beep and notification). Rule 3 fires
-   the exposed Base modifier entry. Rule 1 holds back Gyro's entry until its
-   50 ms repeat tick. What happens depends on whether Steam re-checks the held
-   bumper before or after the `add_layer Gyro` in the same array:
+   removes 13 layers, then adds Gyro (with beep and notification). Rule 1 holds
+   back Gyro's entry until its 50 ms repeat tick. If rule 3 holds, the exposed
+   Base modifier entry may also fire first. The result depends on whether Steam
+   re-checks the held bumper before or after the `add_layer Gyro` in the same
+   array:
    - After: only `Gyro | L1: Modifier 0` appears.
    - Before: the regular `L1: Modifier 0` also appears, under Gyro.
 
@@ -288,21 +316,33 @@ repeating entry performs ramp re-entry; rule 3 makes the removal enough on its o
 
 ## Deck checks
 
-Added to [manual testing](../../manual-testing.md#held-inputs-across-layer-changes).
-A disposable minimal layout separates the rule from this layout's other logic:
+Tracked in [manual testing](../../manual-testing.md#held-inputs-across-layer-changes).
+These run in the real layouts:
 
-1. Base: A Regular Press → `add_layer X 0 1` (notification on). X: B Regular Press
-   → `add_layer Y 0 1`. Hold B, then press A. **Rule 1 predicts Y does not appear.**
-2. Repeat step 1 with a 5 ms Fire Start Delay on X's B. **Rule 2 predicts Y appears.**
-   Repeat with Hold to Repeat instead of the delay: Y appears after one interval.
-3. X: B Regular Press → `remove_layer X`. Base: B has a second binding that adds Y.
-   Enter X, hold B. **Rule 3 predicts Y appears from the exposed Base binding.**
-4. Scope: replace X's B with `key_press` and step 1's hold. Does the key fire?
-   (F3.1.)
+- One held stick click from Menu Entry reaches a Transition Set (rule 1 plus repeat).
+- The staggered Mod 2 release (F3.3).
+- The alternative's F1 scenario, now fixed in JSON.
+- The existing first-click check (F3.2) and Enter/Backspace checks (F3.1).
 
-Then in the real layouts: one held stick click from Menu Entry reaches a
-Transition Set; the staggered Mod 2 release; the alternative's F1 scenario;
-and the existing first-click and Enter/Backspace checks.
+### Optional: settle rule 3
+
+Not scheduled. Rule 3 can't be observed in the real layouts, because every
+layer command it would fire also repeats. [`rule-test.vdf`](rule-test.vdf) has a
+case without that backup.
+
+- **Build:** exported from [`rule-test.json`](rule-test.json) with
+  `node convert_vdf.mjs`. [`build_rule_test_layout.py`](build_rule_test_layout.py)
+  regenerates the JSON.
+- **Probe:** D-pad Up types the top layer's digit: Base 0, R 5, Target 9.
+  Press it while RB is still held. Start resets.
+- **T4:** press Select (adds R). Press and hold RB; R's RB removes R, exposing
+  Base's non-repeating RB → add Target. Probe while still holding RB:
+  - 9 confirms rule 3 for layer commands.
+  - 0 means removal doesn't pass through, and the covering repeats are required.
+
+Run it five times and note the Steam client version. The file's other layers
+test rules 1–2 and output scope. They aren't needed: rules 1–2 are established,
+and output scope has the real-layout checks above.
 
 ## Reproduce
 
@@ -317,7 +357,30 @@ python3 findings/2026-09-29-held-input-layer-transitions/build_inventory.py "$tm
 Section A of the output lists every layer added while its own input is held,
 and classifies the new layer's bindings on that input. In each layout the only
 immediate layer commands are the two Menu Entry → Fn cases described above.
-Section B lists the repeating adds (19 / 17).
+Section B lists the repeating adds: 19 / 17 at the audit snapshot, 75 / 75 after
+the [cursor self-removal](../../plans/2026-09-29-cursor-self-removal.md) change
+added the repeating normal-cover chords and fixed F1. The Section A result is
+unchanged after that refactor.
+
+Regression tests and the rule-test layout:
+
+```sh
+python3 -m unittest discover -s tests -p 'test_neptune_held_inputs.py' -v
+python3 findings/2026-09-29-held-input-layer-transitions/build_rule_test_layout.py
+```
+
+[`test_neptune_held_inputs.py`](../../tests/test_neptune_held_inputs.py) protects:
+
+- the ramp handoff delays;
+- the repeating threshold exits;
+- the Gyro and Fn-click repeating adds;
+- Base's repeating entries, which carry re-entry while rule 3 is unverified;
+- `Gyro Off Ramp Up`'s firing-control removal.
+
+Its guard fails when a press adds a layer whose top binding on that still-held
+input is an immediate layer command. A self-test confirms the guard catches two
+simulated regressions: removing the 5 ms delay, and dropping Menu Left Entry's
+explicit Enter add.
 
 Key sources (default unless noted): `Gyro Off Ramp Up` 5 ms apply
 [line 19374](../../neptune/single-set-default_hold-gyro_latest.json#L19374)
@@ -331,4 +394,5 @@ Menu Left Fn LS/RS click → Transition Set [6435](../../neptune/single-set-defa
 ramp LB exit [16225](../../neptune/single-set-default_hold-gyro_latest.json#L16225);
 `Gyro Off Ramp Up` LT removal [15522](../../neptune/single-set-default_hold-gyro_latest.json#L15522);
 L1!R1 Mod 2 RB release [16487](../../neptune/single-set-default_hold-gyro_latest.json#L16487).
-Line numbers refer to the current working-tree files and will drift with edits.
+Line numbers refer to the audit snapshot (before commit `5bf46a7`); the current
+files have shifted.

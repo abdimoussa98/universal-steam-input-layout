@@ -1,9 +1,39 @@
 ---
 name: steam-layout-apply
-description: Finalize an edited Steam Input layout for loading into Steam. Runs pre-flight checks, converts {{Base::Title}} tokens back to numeric runtime IDs with convert_runtime_ids.py to-ids, confirms nothing was left unresolved, and hands off the JSON → VDF step. Use this whenever edits to a layout JSON in this repo are finished and it needs to go back into Steam, or when the user asks to run to-ids, finalize, export, or produce a VDF.
+description: Finalize an edited Steam Input layout for loading into Steam. Runs pre-flight checks, converts {{Base::Title}} tokens back to numeric runtime IDs with convert_runtime_ids.py to-ids, confirms nothing was left unresolved, and exports VDF with convert_vdf.mjs. Use this whenever edits to a layout JSON in this repo are finished and it needs to go back into Steam, or when the user asks to run to-ids, finalize, export, or produce a VDF.
 ---
 
 # Finalize a layout for Steam
+
+## Required completion: JSON and VDF together
+
+Standing user instruction: after successfully editing and validating a layout
+JSON, **always regenerate its sibling VDF in the same task**. Run the exporter
+below without asking for separate permission. This includes settings, bindings,
+title/version, and description edits. Do not stop at JSON completion or leave
+conversion to the user. This supersedes the earlier leave-VDFs-to-the-user
+preference; only a newer explicit instruction for the current task can opt out.
+If export fails, report the blocker and keep the task incomplete rather than
+claiming the layout is ready. Exporting a local VDF does not authorize a commit
+or an upload to Steam.
+
+## Required publication metadata
+
+Every publication of a changed layout must include a reviewed description and
+a version bump. Before committing layout changes, exporting for delivery, or
+publishing to Steam, follow [Publishing layout changes](../../../README.md#publishing-layout-changes):
+
+- Read the complete `controller_mappings.description` against the final layout.
+  Correct stale behavior, control mappings, tuning, and implemented/planned status;
+  keep an accurate description if no wording needs changing.
+- Increment the release version in `controller_mappings.title` from the last
+  published revision (for example `90.2` → `90.3`). Bump once per release batch,
+  not once per edit or converter run; keep jointly released variants aligned.
+- Do not use the schema `version`, export `revision`, or runtime IDs as the
+  release version. Preserve these unrelated fields.
+- Export only after metadata and validation are final, so JSON/VDF titles and
+  descriptions match. Always regenerate the sibling VDF after the validated JSON
+  edit. A JSON update alone is not a completed layout edit or Steam publication.
 
 ## 1. Run the pre-flight check
 
@@ -58,7 +88,7 @@ grep -c 'controller_action [A-Za-z_]* {{' path/to/layout_final.json   # must pri
 
 ## 4. Hand off for Steam
 
-1. **JSON → VDF:** the user converts the file with the VS Code extension `pfwobcke.vscode-vdf`. This step can't be scripted from this repo.
+1. **JSON → VDF:** run `node convert_vdf.mjs path/to/layout_final.json`. This writes/replaces the sibling `.vdf` using the installed `pfwobcke.vscode-vdf` serializer and verifies keys, values, repeated bindings, and order before writing. Use `-o path/to/output.vdf` for a different destination. See `README.md#file-formats` for requirements and extension discovery. The agent can complete this export directly.
 2. **Test on a fresh load:** the user loads the layout and spot-checks the binds on any layers that were added, renamed, or reordered. Checking in the live editing session isn't enough, because there layers are resolved by handle and swaps don't show up.
 3. **Return to editing:** to keep working, run `to-titles` again (see `steam-layout-prep`).
 

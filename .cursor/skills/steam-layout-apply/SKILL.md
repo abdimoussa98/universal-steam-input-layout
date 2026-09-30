@@ -9,6 +9,23 @@
 - The file must still contain consistent `controller_mappings.actions` and `controller_mappings.action_layers` blocks; runtime IDs are derived from their order.
 
 ### Steps
+Standing user instruction: every successful, validated layout JSON edit must
+finish by regenerating its sibling VDF in the same task, without separate
+permission. This includes bindings, settings, title/version, and descriptions.
+Do not hand conversion back to the user; this supersedes the earlier preference
+to leave VDFs alone. Only a newer explicit task instruction can opt out. Report
+export failures as blockers, not successful completion. Local export does not
+authorize a commit or Steam upload.
+
+Before publishing a changed layout (commit, delivery export, or Steam publication),
+review the complete `controller_mappings.description` against final behavior and
+bump the release version in `controller_mappings.title`. Correct stale controls,
+tuning, and implemented/planned status; accurate wording may stay. Bump once per
+release batch from the last published version, keeping jointly released variants
+aligned. Do not change schema `version`, export `revision`, or runtime IDs for this.
+Finalize metadata before exporting so JSON/VDF agree, and always regenerate the
+sibling VDF after the validated edit. See [Publishing layout changes](../../../README.md#publishing-layout-changes).
+
 0. **Enforce the command budget before finalizing**
    - `python3 audit_command_budget.py path/to/layout.json` must exit 0. At most three GUI command entries per input, counted across activator types/list elements; binding-array subcommands may exceed three. All groups are scanned and disabled banks checked separately. Follow `steam-binding-order` to consolidate violations without deleting required cleanup.
    - For binding, source, or layer-transition changes, confirm the [inheritance review](../../../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes) records affected upper layers, intended inheritance/blocks, and protected timer entry/exit behavior. ID and budget checks do not verify effective inheritance. Include already-held and newly activated inputs across transitions in the Deck handoff; separate static checks from runtime results.
@@ -22,6 +39,10 @@
 3. **Sanity check for unresolved tokens**
    - Ensure there are no remaining `{{...}}` tokens in `controller_action` strings after conversion.
    - If the script warns it can’t find a runtime ID for some `{{Title}}`, it means the title no longer matches anything in `actions`/`action_layers`.
+
+4. **Export VDF directly**
+   - Run `node convert_vdf.mjs path/to/layout_final.json` to write/replace the sibling `.vdf`, or add `-o path/to/output.vdf`. This uses the installed `pfwobcke.vscode-vdf` serializer and checks keys, values, repeated bindings, and order before writing. See `README.md#file-formats` for requirements.
+   - The agent can handle conversion. The user still needs to load the exported layout fresh on the Deck and run the relevant manual checks.
 
 ### Guardrails
 - If you renamed an action set/layer title, you may need to re-run `to-titles` first (to regenerate tokens) before making sweeping edits.

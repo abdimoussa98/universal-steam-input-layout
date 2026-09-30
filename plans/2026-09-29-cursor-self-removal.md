@@ -11,6 +11,12 @@ and [inheritance review](../findings/2026-09-29-temp-cursor-gyro/SELF-REMOVAL-IN
 describe the result. Version and VDF export remain separate work. The sequence
 below records the agreed implementation scope, not outstanding coding work.
 
+Subsequent publication preparation updates both JSON titles to 90.3 and reviews
+their descriptions, following the author's
+[required publication workflow](../README.md#publishing-layout-changes). This
+supersedes the original no-version-bump scope for the release. Both sibling VDFs
+have been regenerated and verified; Deck checks remain pending.
+
 ## Accepted behavior
 
 - Temp Cursor Gyro alone supplies the four Gated response/haptic overrides.
@@ -126,7 +132,7 @@ entries; Mod 2 and unrelated recovery edges retain their existing design.
 Remove only the normal covers' active gyro source associations. Do not disable
 gyro or replace those associations with a gyro group that resets defaults.
 An unused, unshared restoration group can be removed once its references are
-checked. Cursor response remains 750/3/1/10 for precision/haptic/bump/threshold;
+checked. Cursor response remains 750/0/1/5 for precision/haptic/bump/threshold;
 normal inherited values are 300/0/5/0 with the current reference tuning. Natural
 sensitivity stays inherited at 300. Gyro/LST/RST remain activation-only sources;
 intentional menu and Gyro Off suppression remains intact.
