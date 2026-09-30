@@ -19,16 +19,17 @@ established. Rule 3 hasn't been isolated. In these layouts every layer command
 it would fire also repeats, so the layouts don't depend on it; the repeats are
 the guarantee. Settling it is optional and not scheduled.
 
-## What "addressed" means
+## Completion criteria (runtime checks still pending)
 
-- The alternative layout's missing R2 → Mod 2 repeat (F1) is fixed and checked on the Deck.
+- The alternative layout's missing R2 → Mod 2 repeat (F1) is fixed in JSON and
+  covered by static regression tests. Its Deck check is still pending.
 - Regression tests protect the settings that exist because of rules 1–2, and the
   repeats that cover for rule 3. A future "cleanup" can't strip them without
   failing a test that explains why.
-- The real layouts confirm the output questions: keys on add (F3.1), and mouse
-  and key outputs on remove (F3.2).
-- The staggered Gyro toggle (F3.3) is measured, then either accepted or handed to
-  a separate design.
+- The real layouts must still confirm the output questions: keys on add (F3.1),
+  and mouse and key outputs on remove (F3.2).
+- The staggered Gyro toggle (F3.3) must still be measured, then either accepted
+  or handed to a separate design.
 - The docs state rules 1–2 as established, and state rule 3 as unverified with
   the repeats as its guarantee.
 

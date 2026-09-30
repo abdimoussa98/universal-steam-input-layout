@@ -1,0 +1,434 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "candidate_sha256": "ee47f2034c05b2c65e79aa86b36763c4e2886c7248c93dfb0e0a829e2b37a730",
+    "new_layers": [
+      "Steering: W: Normal: Up: Stroke",
+      "Steering: W: Normal: Down: Stroke",
+      "Steering: W: Mod2: Up: Stroke",
+      "Steering: W: Mod2: Down: Stroke",
+      "Steering: S: Normal: Up: Stroke",
+      "Steering: S: Normal: Down: Stroke",
+      "Steering: S: Mod2: Up: Stroke",
+      "Steering: S: Mod2: Down: Stroke",
+      "Steering: W: Normal: Up: Double Window",
+      "Steering: W: Normal: Down: Double Window",
+      "Steering: W: Mod2: Up: Double Window",
+      "Steering: W: Mod2: Down: Double Window",
+      "Steering: S: Normal: Up: Double Window",
+      "Steering: S: Normal: Down: Double Window",
+      "Steering: S: Mod2: Up: Double Window",
+      "Steering: S: Mod2: Down: Double Window",
+      "Steering: Normal: Up: Repeat",
+      "Steering: Normal: Down: Repeat",
+      "Steering: Mod2: Up: Repeat",
+      "Steering: Mod2: Down: Repeat",
+      "Steering: Normal: Consumed",
+      "Steering: Mod2: Consumed",
+      "Steering: Mod 0",
+      "Steering: Mod 1",
+      "Steering: Mod 2",
+      "Steering: W",
+      "Steering: S",
+      "Steering: Rearm",
+      "Steering: Entry Guard",
+      "Steering",
+      "Menu Left: Automatic Fn",
+      "Menu Left: Protected Entry",
+      "Menu Left: Silent Cover",
+      "Menu Right: Automatic Fn",
+      "Menu Right: Protected Entry",
+      "Menu Right: Silent Cover"
+    ],
+    "new_layer_count": 36,
+    "total_layer_count": 91,
+    "modified_sources": [
+      [
+        "Menu Left: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "left_trigger"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_trigger"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "switch"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "gyro"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Automatic Fn",
+        "joystick"
+      ],
+      [
+        "Menu Left: Automatic Fn",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Protected Entry",
+        "switch"
+      ],
+      [
+        "Menu Left: Protected Entry",
+        "joystick"
+      ],
+      [
+        "Menu Left: Protected Entry",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Silent Cover",
+        "switch"
+      ],
+      [
+        "Menu Left: Silent Cover",
+        "joystick"
+      ],
+      [
+        "Menu Left: Silent Cover",
+        "right_joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "left_trigger"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_trigger"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "switch"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "gyro"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Automatic Fn",
+        "joystick"
+      ],
+      [
+        "Menu Right: Automatic Fn",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Protected Entry",
+        "switch"
+      ],
+      [
+        "Menu Right: Protected Entry",
+        "joystick"
+      ],
+      [
+        "Menu Right: Protected Entry",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Silent Cover",
+        "switch"
+      ],
+      [
+        "Menu Right: Silent Cover",
+        "joystick"
+      ],
+      [
+        "Menu Right: Silent Cover",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "joystick"
+      ],
+      [
+        "Transition Set 1",
+        "right_joystick"
+      ]
+    ],
+    "resolved_references": 5382,
+    "device_status": "UNTESTED",
+    "clock_mode": "native-long-press (device verification pending)",
+    "timing_ms": {
+      "hold": 250,
+      "double": 150,
+      "repeat": 50,
+      "warning": 2500,
+      "exit": 5000
+    }
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "candidate_sha256": "ae77da9d00417edc17de4b194d51eb494f114f6abe7a02d7211cb04782f6af6b",
+    "new_layers": [
+      "Steering: W: Normal: Up: Stroke",
+      "Steering: W: Normal: Down: Stroke",
+      "Steering: W: Mod2: Up: Stroke",
+      "Steering: W: Mod2: Down: Stroke",
+      "Steering: S: Normal: Up: Stroke",
+      "Steering: S: Normal: Down: Stroke",
+      "Steering: S: Mod2: Up: Stroke",
+      "Steering: S: Mod2: Down: Stroke",
+      "Steering: W: Normal: Up: Double Window",
+      "Steering: W: Normal: Down: Double Window",
+      "Steering: W: Mod2: Up: Double Window",
+      "Steering: W: Mod2: Down: Double Window",
+      "Steering: S: Normal: Up: Double Window",
+      "Steering: S: Normal: Down: Double Window",
+      "Steering: S: Mod2: Up: Double Window",
+      "Steering: S: Mod2: Down: Double Window",
+      "Steering: Normal: Up: Repeat",
+      "Steering: Normal: Down: Repeat",
+      "Steering: Mod2: Up: Repeat",
+      "Steering: Mod2: Down: Repeat",
+      "Steering: Normal: Consumed",
+      "Steering: Mod2: Consumed",
+      "Steering: Mod 0",
+      "Steering: Mod 1",
+      "Steering: Mod 2",
+      "Steering: W",
+      "Steering: S",
+      "Steering: Rearm",
+      "Steering: Entry Guard",
+      "Steering",
+      "Menu Left: Automatic Fn",
+      "Menu Left: Protected Entry",
+      "Menu Left: Silent Cover",
+      "Menu Right: Automatic Fn",
+      "Menu Right: Protected Entry",
+      "Menu Right: Silent Cover"
+    ],
+    "new_layer_count": 36,
+    "total_layer_count": 91,
+    "modified_sources": [
+      [
+        "Menu Left: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "left_trigger"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_trigger"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "switch"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "gyro"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Automatic Fn",
+        "joystick"
+      ],
+      [
+        "Menu Left: Automatic Fn",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Protected Entry",
+        "switch"
+      ],
+      [
+        "Menu Left: Protected Entry",
+        "joystick"
+      ],
+      [
+        "Menu Left: Protected Entry",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Silent Cover",
+        "switch"
+      ],
+      [
+        "Menu Left: Silent Cover",
+        "joystick"
+      ],
+      [
+        "Menu Left: Silent Cover",
+        "right_joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "left_trigger"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_trigger"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "switch"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "gyro"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Automatic Fn",
+        "joystick"
+      ],
+      [
+        "Menu Right: Automatic Fn",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Protected Entry",
+        "switch"
+      ],
+      [
+        "Menu Right: Protected Entry",
+        "joystick"
+      ],
+      [
+        "Menu Right: Protected Entry",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Silent Cover",
+        "switch"
+      ],
+      [
+        "Menu Right: Silent Cover",
+        "joystick"
+      ],
+      [
+        "Menu Right: Silent Cover",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "joystick"
+      ],
+      [
+        "Transition Set 1",
+        "right_joystick"
+      ]
+    ],
+    "resolved_references": 5378,
+    "device_status": "UNTESTED",
+    "clock_mode": "native-long-press (device verification pending)",
+    "timing_ms": {
+      "hold": 250,
+      "double": 150,
+      "repeat": 50,
+      "warning": 2500,
+      "exit": 5000
+    }
+  }
+}

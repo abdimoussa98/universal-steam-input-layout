@@ -331,6 +331,31 @@ not inside the overlay or an Always On window.
 
 #### Complete Delayed Applies on Stick-Touch Release
 
+**Author-confirmed cleanup rule, 2026-09-30:** every new layer must explicitly
+provide or demonstrably inherit the appropriate stick-touch **release** cleanup.
+LS thumb release removes `LST: Entry Point`, `LST: Tap Cover` and
+`LST: Temporary Gyro`; RS thumb release removes the corresponding `RST` trio.
+This is capacitive touch release, not stick click or cardinal-direction release.
+Keep the scope side-local; do not remove persistent `Gyro`, the other stick's
+helpers, or a valid driving owner as part of this ordinary release cleanup.
+
+For a pending **layer transition**, complete its matching delayed add first in
+execution order, then remove the stick helper trio. Stored arrays execute
+bottom-to-top, so the add is last in storage. Completed covers override this
+with cleanup-only release to avoid reopening the parent transition. Audit the
+entire touch input when overriding it: release-only overrides also hide lower
+Regular/chord stale-state recovery. Preserve the applicable recovery guards and
+the three-entry budget.
+
+This does not mean firing delayed wheel/key output, haptic warning, exit timers,
+or both possible direction selectors on thumb release. Direction-dependent
+routing must keep its direction condition; it has no unconditional target to
+complete. Timed Always On LST/RST Double Tap windows are not part of the ordinary
+three-layer cleanup list: their own self-first exit/isolation contract takes
+precedence over early completion. See the
+[16-layer steering cleanup audit](../findings/2026-09-30-steering-lean/CLEANUP-AUDIT.md)
+for the per-layer application of this rule.
+
 **Author-confirmed intent, 2026-09-29:** certain layers deliberately apply the
 target of a pending delayed transition when a thumb leaves either stick, before
 removing that stick's helper layers. The removals can reset start-delay timers.

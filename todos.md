@@ -2,6 +2,11 @@
 
 Manual Deck validation is tracked in [the separate testing checklist](manual-testing.md).
 
+Terminology: use **stateful layer** for a persistent action layer and refer to
+its supporting layers separately. This replaces the earlier “stateful set”
+wording. These features use layers throughout; action-set switching is excluded
+because the author reports buggy behavior with Steam action sets.
+
 ## Done
 
 - [x] Make L1&R1: Tap Cover interruptable (in R1!L1, L1!R1, R2!L2, and L2!R2 layers)
@@ -13,24 +18,35 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
 
 ## Steering
 
-- [ ] Add steering stateful set
-- [ ] Add steering layer → Right Menu + LS click
-- [ ] Include W / S modifiers on bumpers or left stick up / down
-  - Intent: steering is primarily handled via bumpers
-  - Left stick up / down acts as fallback to base layer behavior without exiting the stateful set
-- [ ] Duplicate bumper mod 0 / 1 layers
-  - Mod 0 when `L1!R1`: "W" + R1 (empty)
-  - Mod 1 when `R1!L1`: "S" + L1 (empty)
-  - Use opposite bumper to increment layer from mod 0–2
-- [ ] Scroll wheel on joystick; hold up / down to exit
+[Sixteen-layer candidates](findings/2026-09-30-steering-lean/README.md) are generated for both variants: **16 additions, 71 total, no new Always On actions**. Saves nine against the prior lean build. Installed in both working layouts as release 90.5; the original 36-layer candidate remains unchanged. Completion awaits [native acceptance](findings/2026-09-30-steering-lean/ACCEPTANCE.md).
 
-## Menu stateful set
+- [ ] Validate protected menu entry and disposable WASD entry on Deck
+  - Right Menu + LS click, release menu to commit; either-stick deflection blocks automatic Fn during entry; deliberate clicks remain
+  - Guard ends at LS center or driving press; initial carried W has no timeout
+- [ ] Validate W/S ownership and held-opposite takeover
+  - Right R1/R2 owns W, left L1/L2 owns S; no built-in bank
+  - Dominant release clears old modifiers/gestures; a held opposite takes over. No Rearm layer
+- [ ] Validate consolidated normal modifiers and scrolling
+  - Mod 0/1 own Down/Up gesture state; actual center qualifies tap; sideways removes silently; reversal selects the other bank consumed
+  - Shared normal Tap Cover, two Double Tap windows, one shared Double Tap Cover
+  - Verify cover reassertion retains priority without selector churn, and repeat reversal cancels the delayed opposite tick
+- [ ] Validate simple Modifier 2 scrolling
+  - Two ordered Modifier 2 variants; Up/Down wheel immediately and repeat while held; no Mod 2 gesture helpers
+  - Uncovered opposite release clears all layers to Base; 200 ms hold/action coverage uses existing opposite-side single Tap Covers with the existing 250 ms reset
+  - Covers preserve W/S and normal covered release behavior; opposite release restores consumed normal mapping without dropping the owner
+  - Existing combined Tap Cover remains unchanged to preserve W/S inputs; face outputs remain independent
+- [ ] Validate fallback warning/exit, held outputs and recovery
+  - W warns from 1 second, exits at 2.5 seconds; W release/driver acquisition cancels; next hold starts fresh
+  - Native timers, feedback, changed-held-output suppression and foreign Always On isolation remain acceptance gates
+- [Implementation plan](plans/2026-09-29-steering-implementation-plan.md) · [Behavior matrix](plans/2026-09-29-steering-entry-brainstorm.md) · [Visual overview](plans/steering-overview.html)
 
-- [ ] Add menu stateful set
+## Menu stateful layer
+
+- [ ] Add menu stateful layer
   - Enter: Menu Left + Right
   - Exit: both sticks deflected, or one stick deflected + any face button
   - Inputs: D-pad → arrow keys; face buttons → Enter / Tab / Escape / Backspace
-  - On entry: remove gyro stateful set
+  - On entry: remove gyro stateful layer
 
 ## Cursor gyro
 
@@ -38,6 +54,7 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
   - Activate via Left Menu + RS click
   - Only remove when both left and right sticks are deflected
 - [x] Temp cursor gyro
+  - 90.4: high haptic pulse on the initial 300 ms hold entry only, in all regular/Gyro owners. Touch-release entry stays silent and ongoing gyro vibration remains off
   - Implemented in both JSON layouts: delayed Mod 0/1 holds apply owner-specific cursor overlays in regular/Gyro variants (L1/R1 default, L2/R2 alternative). See the [implementation and inheritance review](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md), [current design](plans/2026-09-29-cursor-self-removal.md), and [pending Deck tests](manual-testing.md#temp-cursor-gyro)
   - Apply Gated Gyro's response/haptic properties after 300 ms: precision 750, haptic intensity 0, haptic bump 1, movement threshold 5. Cursor self-removal exposes normal 300/0/5/0; normal covers inherit gyro. Natural sensitivity remains inherited at 300, and existing activation gates are preserved
   - Base gyro follows the July reference (rotation 3853, precision 300, conversion style 4, speed deadzone 0). Gyro/LST/RST sources retain activation-only overrides; only cursor overlays supply the temporary response. See [exact settings and inheritance policy](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#reference-tuning-and-gyro-inheritance-follow-up) and [pending Deck checks](manual-testing.md#reference-gyro-and-right-stick-tuning)
@@ -90,8 +107,9 @@ Manual Deck validation is tracked in [the separate testing checklist](manual-tes
 
 ## Global stateful behavior
 
-- [ ] L1 + R1 clears all stateful sets
-  - Exception: gamepad stateful set is preserved
+- [ ] L1 + R1 clears all stateful layers
+  - Steering candidate: uncovered opposite release in both ordered Mod 2 variants clears every layer to Base (Default bumpers / Alternative triggers), including Gyro; native acceptance pending
+  - The latest steering request explicitly clears all layers. The older Gamepad-preservation exception remains a separate policy for other global-exit routes
 
 ## Bugs
 

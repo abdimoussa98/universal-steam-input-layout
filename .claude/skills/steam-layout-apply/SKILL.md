@@ -1,6 +1,6 @@
 ---
 name: steam-layout-apply
-description: Finalize an edited Steam Input layout for loading into Steam. Runs pre-flight checks, converts {{Base::Title}} tokens back to numeric runtime IDs with convert_runtime_ids.py to-ids, confirms nothing was left unresolved, and exports VDF with convert_vdf.mjs. Use this whenever edits to a layout JSON in this repo are finished and it needs to go back into Steam, or when the user asks to run to-ids, finalize, export, or produce a VDF.
+description: Finalize an edited Steam Input layout for loading into Steam. Runs pre-flight checks, converts {{Base::Title}} tokens back to numeric runtime IDs with convert_runtime_ids.py to-ids, confirms nothing was left unresolved, exports VDF with convert_vdf.mjs, and saves a per-version backup copy under versions/neptune/. Use this whenever edits to a layout JSON in this repo are finished and it needs to go back into Steam, or when the user asks to run to-ids, finalize, export, produce a VDF, or back up a layout version.
 ---
 
 # Finalize a layout for Steam
@@ -34,6 +34,25 @@ publishing to Steam, follow [Publishing layout changes](../../../README.md#publi
 - Export only after metadata and validation are final, so JSON/VDF titles and
   descriptions match. Always regenerate the sibling VDF after the validated JSON
   edit. A JSON update alone is not a completed layout edit or Steam publication.
+
+## Required version snapshot
+
+Standing user instruction: after the JSON is validated, the VDF is regenerated,
+and the description and version are final, **save a copy of the layout under
+`versions/neptune/<version>/`** in the same task, without asking. `neptune/`
+stays the live working copy; every edit still goes there. The snapshot is the
+final step of a completed layout edit (step 4, item 2 below).
+
+- `<version>` is the release suffix of `controller_mappings.title` (the part
+  after the last ` :: `, such as `90.4`). Copy each variant's JSON and VDF,
+  replacing `_latest` in the filename with `_<version>`, for example
+  `versions/neptune/90.4/single-set-default_hold-gyro_90.4.json`.
+- Follow-up edits in the same release batch refresh that version's snapshot.
+  Never edit, overwrite, or delete a snapshot for any other version. If the
+  current version was already published, bump the title first (see above)
+  rather than overwriting its published snapshot.
+- Snapshot files are backups. Don't edit them, and don't point tools or tests at
+  them. Saving a snapshot does not authorize a commit or an upload to Steam.
 
 ## 1. Run the pre-flight check
 
@@ -89,8 +108,23 @@ grep -c 'controller_action [A-Za-z_]* {{' path/to/layout_final.json   # must pri
 ## 4. Hand off for Steam
 
 1. **JSON → VDF:** run `node convert_vdf.mjs path/to/layout_final.json`. This writes/replaces the sibling `.vdf` using the installed `pfwobcke.vscode-vdf` serializer and verifies keys, values, repeated bindings, and order before writing. Use `-o path/to/output.vdf` for a different destination. See `README.md#file-formats` for requirements and extension discovery. The agent can complete this export directly.
-2. **Test on a fresh load:** the user loads the layout and spot-checks the binds on any layers that were added, renamed, or reordered. Checking in the live editing session isn't enough, because there layers are resolved by handle and swaps don't show up.
-3. **Return to editing:** to keep working, run `to-titles` again (see `steam-layout-prep`).
+2. **Save the version snapshot:** once every exported variant has its final description and version, copy each one into `versions/neptune/<version>/` (see [Required version snapshot](#required-version-snapshot)):
+
+   ```bash
+   for json in neptune/*_latest.json; do
+     v=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["controller_mappings"]["title"].rsplit(" :: ", 1)[-1])' "$json")
+     [[ "$v" =~ ^[0-9]+(\.[0-9]+)+$ ]] || { echo "unexpected version '$v' in $json"; break; }
+     mkdir -p "versions/neptune/$v"
+     for src in "$json" "${json%.json}.vdf"; do
+       dst="versions/neptune/$v/$(basename "${src/_latest/_$v}")"
+       cp "$src" "$dst" && cmp "$src" "$dst" && echo "saved $dst"
+     done
+   done
+   ```
+
+   Expect one `saved` line for each JSON and VDF. Run it from the repo root, and only after every variant is exported. It copies every `neptune/*_latest.json` and its sibling VDF, so a variant with a stale VDF would be snapshotted stale.
+3. **Test on a fresh load:** the user loads the layout and spot-checks the binds on any layers that were added, renamed, or reordered. Checking in the live editing session isn't enough, because there layers are resolved by handle and swaps don't show up.
+4. **Return to editing:** to keep working, run `to-titles` again (see `steam-layout-prep`).
 
 ## Guardrails
 

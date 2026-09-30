@@ -52,6 +52,10 @@ fresh load. See the [implementation and inheritance record](findings/2026-09-29-
   with precision speed 750, haptic intensity 0, haptic bump 1, and movement
   threshold 5. Natural sensitivity remains 300 and activation follows the
   existing regular/Gyro rules. Releasing the modifier sends no tap/scroll output
+- [ ] The 300 ms hold entry gives one high-intensity haptic pulse. Keep holding:
+  no ongoing gyro vibration or repeated entry pulse. Early thumb-lift entry and
+  subsequent touch releases remain silent. Check both regular/Gyro owners and
+  interrupted/retried holds in both layouts
 - [ ] Before 300 ms, lift either thumb: cursor applies immediately, then only
   that stick's LST/RST helpers clear. Repeated thumb lifts after cursor entry
   inherit the same cursor-add-before-helper-removal path; an already-active cursor

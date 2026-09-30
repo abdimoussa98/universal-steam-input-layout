@@ -1,0 +1,878 @@
+"controller_mappings"
+{
+	"version"				"3"
+	"revision"				"1"
+	"title"					"Steering native gesture comparison"
+	"description"			"Diagnostic: Right Menu enters Normal; R1 holds Mod2 context; A consumes only Normal. Left Menu resets. D-pad Right F1-F4 reports context."
+	"creator"				"76561198079670632"
+	"progenitor"			""
+	"url"					"template://empty.vdf"
+	"export_type"			"personal_local"
+	"controller_type"		"controller_neptune"
+	"controller_caps"		"23117823"
+	"major_revision"		"0"
+	"minor_revision"		"0"
+	"Timestamp"				"0"
+	"actions"
+	{
+		"Preset_1000001"
+		{
+			"title"				"Base"
+			"legacy_set"		"1"
+		}
+	}
+	"action_layers"
+	{
+		"Preset_1000002"
+		{
+			"title"					"Native Normal"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000003"
+		{
+			"title"					"Native Mod2"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000004"
+		{
+			"title"					"Native Consumed"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+	}
+	"group"
+	{
+		"id"				"0"
+		"mode"				"switches"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_menu"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+							"binding"		"controller_action remove_layer 4 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_escape"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 2 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+		}
+	}
+	"group"
+	{
+		"id"				"1"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F1, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"		"0"
+			"layout"				"0"
+		}
+	}
+	"group"
+	{
+		"id"				"2"
+		"mode"				"switches"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_menu"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+							"binding"		"controller_action remove_layer 4 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_escape"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"right_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 3 0 0, , "
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 4 0 0, , "
+						}
+					}
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 4 0 0, , "
+							"binding"		"controller_action add_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"3"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F2, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"		"0"
+			"layout"				"0"
+			"layer"					"1"
+		}
+	}
+	"group"
+	{
+		"id"				"4"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_UP, , "
+						}
+					}
+					"Long_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"long_press_time"		"250"
+							"interruptable"			"0"
+						}
+					}
+					"Double_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_UP, , "
+						}
+						"settings"
+						{
+							"double_tap_time"		"150"
+							"hold_repeats"			"1"
+							"repeat_rate"			"50"
+							"interruptable"			"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_DOWN, , "
+						}
+					}
+					"Long_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"long_press_time"		"250"
+							"interruptable"			"0"
+						}
+					}
+					"Double_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_DOWN, , "
+						}
+						"settings"
+						{
+							"double_tap_time"		"150"
+							"hold_repeats"			"1"
+							"repeat_rate"			"50"
+							"interruptable"			"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"			"0"
+			"deadzone"					"13276"
+			"edge_binding_radius"		"6553"
+			"edge_binding_invert"		"1"
+			"layer"						"1"
+		}
+	}
+	"group"
+	{
+		"id"				"5"
+		"mode"				"four_buttons"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_a"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 4 0 0, , "
+							"binding"		"key_press H, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"6"
+		"mode"				"switches"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_menu"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+							"binding"		"controller_action remove_layer 4 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_escape"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"right_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 3 0 0, , "
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 4 0 0, , "
+						}
+					}
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 4 0 0, , "
+							"binding"		"controller_action add_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"7"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F3, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"		"0"
+			"layout"				"0"
+			"layer"					"1"
+		}
+	}
+	"group"
+	{
+		"id"				"8"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_UP, , "
+						}
+					}
+					"Long_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"long_press_time"		"250"
+							"interruptable"			"0"
+						}
+					}
+					"Double_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_UP, , "
+						}
+						"settings"
+						{
+							"double_tap_time"		"150"
+							"hold_repeats"			"1"
+							"repeat_rate"			"50"
+							"interruptable"			"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_DOWN, , "
+						}
+					}
+					"Long_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"long_press_time"		"250"
+							"interruptable"			"0"
+						}
+					}
+					"Double_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_DOWN, , "
+						}
+						"settings"
+						{
+							"double_tap_time"		"150"
+							"hold_repeats"			"1"
+							"repeat_rate"			"50"
+							"interruptable"			"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"			"0"
+			"deadzone"					"13276"
+			"edge_binding_radius"		"6553"
+			"edge_binding_invert"		"1"
+			"layer"						"1"
+		}
+	}
+	"group"
+	{
+		"id"				"9"
+		"mode"				"four_buttons"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_a"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press M, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"10"
+		"mode"				"switches"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_menu"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+							"binding"		"controller_action remove_layer 4 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_escape"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"right_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 3 0 0, , "
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 4 0 0, , "
+						}
+					}
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 4 0 0, , "
+							"binding"		"controller_action add_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"11"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F4, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"		"0"
+			"layout"				"0"
+			"layer"					"1"
+		}
+	}
+	"group"
+	{
+		"id"				"12"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 4 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+							"repeat_rate"		"50"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"			"0"
+			"deadzone"					"13276"
+			"edge_binding_radius"		"6553"
+			"edge_binding_invert"		"1"
+			"layer"						"1"
+		}
+	}
+	"group"
+	{
+		"id"				"13"
+		"mode"				"four_buttons"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_a"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press H, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"preset"
+	{
+		"id"						"0"
+		"name"						"Preset_1000001"
+		"group_source_bindings"
+		{
+			"0"		"switch active"
+			"1"		"dpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"1"
+		"name"						"Preset_1000002"
+		"group_source_bindings"
+		{
+			"2"		"switch active"
+			"3"		"dpad active"
+			"4"		"joystick active"
+			"5"		"button_diamond active"
+		}
+	}
+	"preset"
+	{
+		"id"						"2"
+		"name"						"Preset_1000003"
+		"group_source_bindings"
+		{
+			"6"		"switch active"
+			"7"		"dpad active"
+			"8"		"joystick active"
+			"9"		"button_diamond active"
+		}
+	}
+	"preset"
+	{
+		"id"						"3"
+		"name"						"Preset_1000004"
+		"group_source_bindings"
+		{
+			"10"		"switch active"
+			"11"		"dpad active"
+			"12"		"joystick active"
+			"13"		"button_diamond active"
+		}
+	}
+	"settings"
+	{
+		"left_trackpad_mode"					"0"
+		"right_trackpad_mode"					"0"
+		"action_set_trigger_cursor_show"		"0"
+		"action_set_trigger_cursor_hide"		"0"
+	}
+}

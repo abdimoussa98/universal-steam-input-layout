@@ -149,7 +149,7 @@ The [consolidation plan](plans/2026-09-27-neptune-command-budget.md) has now bee
 applied to both JSON files: each edge has three entries using two multi-button
 Any chords, and the full command-budget checks pass. The
 [implementation record](findings/2026-09-27-neptune-command-budget/IMPLEMENTATION.md)
-tracks the results. Both 90.3 JSONs and regenerated VDFs include the cursor tuning
+tracks the results. Both 90.4 JSONs and regenerated VDFs include the cursor tuning and hold-entry haptic
 and refreshed descriptions; export verification passes. Fresh-load Deck tests
 remain pending.
 See [counting and chord rules](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget).
@@ -239,7 +239,14 @@ it for delivery, or publishing it to Steam:
    Only a newer explicit instruction for the task can opt out. If conversion
    fails, report the blocker; do not claim the edit is complete. Local VDF export
    does not authorize a commit or Steam upload.
-4. Keep manual Deck checks explicitly pending until performed. Committing JSON
+4. **Save a version snapshot after the export.** Copy each variant's final JSON
+   and VDF into `versions/neptune/<version>/`, with `_latest` in the filename
+   replaced by the version, such as
+   `versions/neptune/90.4/single-set-default_hold-gyro_90.4.vdf`. `neptune/`
+   remains the live working copy. Follow-up edits in the same release batch
+   refresh that version's snapshot; snapshots of other versions are never
+   changed. The `steam-layout-apply` skills have the copy command.
+5. Keep manual Deck checks explicitly pending until performed. Committing JSON
    is not evidence of a successful Steam upload or runtime test.
 
 Read-only audits and documentation-only changes do not publish a changed layout.
@@ -285,3 +292,12 @@ python3 convert_runtime_ids.py to-ids neptune/single-set-default_hold-gyro_lates
 
 python3 convert_runtime_ids.py to-titles neptune/single-set-alternative_hold-gyro_latest.json &&
 python3 convert_runtime_ids.py to-titles neptune/single-set-default_hold-gyro_latest.json
+
+
+### Steering in the Neptune layouts
+
+Both `neptune/*_hold-gyro_latest` JSON/VDF pairs now include the 16-layer steering
+implementation (71 layers total) as release 90.5, including scoped delayed-apply resets and
+reused Mod 2 covers. See the [implementation and exports](findings/2026-09-30-steering-lean/README.md),
+[installation hashes and backups](findings/2026-09-30-steering-lean/neptune-installation.json),
+and [pending Deck checks](findings/2026-09-30-steering-lean/ACCEPTANCE.md).

@@ -1,0 +1,771 @@
+"controller_mappings"
+{
+	"version"				"3"
+	"revision"				"1"
+	"title"					"Steering probe default clock"
+	"description"			"Diagnostic only. Right Menu enter; Left Menu reset; D-pad Right reports F1-F6. See steering-native-probes/README.md."
+	"creator"				"76561198079670632"
+	"progenitor"			""
+	"url"					"template://empty.vdf"
+	"export_type"			"personal_local"
+	"controller_type"		"controller_neptune"
+	"controller_caps"		"23117823"
+	"major_revision"		"0"
+	"minor_revision"		"0"
+	"Timestamp"				"0"
+	"actions"
+	{
+		"Preset_1000001"
+		{
+			"title"				"Base"
+			"legacy_set"		"1"
+		}
+	}
+	"action_layers"
+	{
+		"Preset_1000002"
+		{
+			"title"					"Steering"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000003"
+		{
+			"title"					"Clock Disturbance"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+	}
+	"group"
+	{
+		"id"				"0"
+		"mode"				"switches"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_menu"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_escape"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 2 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"right_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"left_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+		}
+	}
+	"group"
+	{
+		"id"				"1"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press W, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press S, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press D, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press A, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"						"0"
+			"deadzone"								"13276"
+			"edge_binding_radius"					"21700"
+			"edge_binding_invert"					"1"
+			"analog_emulation_duty_cycle_pct"		"50"
+		}
+	}
+	"group"
+	{
+		"id"				"2"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F1, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"		"0"
+			"layout"				"0"
+		}
+	}
+	"group"
+	{
+		"id"				"3"
+		"mode"				"switches"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_menu"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_escape"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"right_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"left_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"4"
+		"mode"				"four_buttons"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_b"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 3 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+							"repeat_rate"		"100"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"5"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press W, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F9, , "
+						}
+						"settings"
+						{
+							"delay_start"		"2500"
+							"hold_repeats"		"1"
+							"repeat_rate"		"250"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"key_press F10, , "
+						}
+						"settings"
+						{
+							"delay_start"		"5000"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press S, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press D, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press A, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"						"0"
+			"deadzone"								"13276"
+			"edge_binding_radius"					"21700"
+			"edge_binding_invert"					"1"
+			"analog_emulation_duty_cycle_pct"		"50"
+			"layer"									"1"
+		}
+	}
+	"group"
+	{
+		"id"				"6"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F2, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"		"0"
+			"layout"				"0"
+			"layer"					"1"
+		}
+	}
+	"group"
+	{
+		"id"				"7"
+		"mode"				"switches"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"button_menu"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 2 0 0, , "
+							"binding"		"controller_action remove_layer 3 0 0, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"button_escape"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"right_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"left_bumper"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"8"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press W, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press S, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press D, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_west"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press A, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"						"0"
+			"deadzone"								"13276"
+			"edge_binding_radius"					"21700"
+			"edge_binding_invert"					"1"
+			"analog_emulation_duty_cycle_pct"		"50"
+			"layer"									"1"
+		}
+	}
+	"group"
+	{
+		"id"				"9"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_east"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"key_press F3, , "
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"		"0"
+			"layout"				"0"
+			"layer"					"1"
+		}
+	}
+	"preset"
+	{
+		"id"						"0"
+		"name"						"Preset_1000001"
+		"group_source_bindings"
+		{
+			"0"		"switch active"
+			"1"		"joystick active"
+			"2"		"dpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"1"
+		"name"						"Preset_1000002"
+		"group_source_bindings"
+		{
+			"3"		"switch active"
+			"4"		"button_diamond active"
+			"5"		"joystick active"
+			"6"		"dpad active"
+		}
+	}
+	"preset"
+	{
+		"id"						"2"
+		"name"						"Preset_1000003"
+		"group_source_bindings"
+		{
+			"7"		"switch active"
+			"8"		"joystick active"
+			"9"		"dpad active"
+		}
+	}
+	"settings"
+	{
+		"left_trackpad_mode"					"0"
+		"right_trackpad_mode"					"0"
+		"action_set_trigger_cursor_show"		"0"
+		"action_set_trigger_cursor_hide"		"0"
+	}
+}

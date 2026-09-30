@@ -59,6 +59,8 @@ class NeptuneGyroTests(unittest.TestCase):
                      for side in ("Left", "Right")
                      for suffix in ("Entry Point", "Fn Layer", "Double Tap", "Double Tap Cover")}
         disabled |= {"Menu Left: Escape", "Menu Left: Backspace", "Menu Right: Tab", "Menu Right: Enter"}
+        disabled |= {f'Steering | Menu {side}: {suffix}' for side in ('Left', 'Right')
+                     for suffix in ('Entry Point', 'Tap Cover')}
         gyro_activation = {"layer": "1", "gyro_ratchet_button_mask": "211109453758464",
                            "gyro_ratchet_button_requireany_or_all": "0"}
         for variant, layout in self.layouts.items():

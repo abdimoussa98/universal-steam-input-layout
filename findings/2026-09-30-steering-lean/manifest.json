@@ -1,0 +1,476 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "baseline_generator_sha256": "20c1d1b3a50a3e4597cdbfc519fd163f35fc7fedc902f1439dea4f0402c5590a",
+    "candidate_sha256": "7d974fe47121d942ad068f79d348296b89653a627564f4dd0f96cab84ad78626",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R1!L1: Modifier 2",
+      "Steering | L1!R1: Modifier 2",
+      "Steering | R1: W Key",
+      "Steering | L1: S Key",
+      "Steering | LS: Entry Point",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Steering | Menu Left: Tap Cover",
+      "Steering | Menu Right: Entry Point",
+      "Steering | Menu Right: Tap Cover"
+    ],
+    "new_layer_count": 16,
+    "total_layer_count": 71,
+    "new_always_on_count": 0,
+    "modified_sources": [
+      [
+        "Menu Left: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "switch"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Left: Tap Cover",
+        "switch"
+      ],
+      [
+        "Steering | Menu Left: Tap Cover",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Left: Tap Cover",
+        "right_joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "switch"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Right: Tap Cover",
+        "switch"
+      ],
+      [
+        "Steering | Menu Right: Tap Cover",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Right: Tap Cover",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "joystick"
+      ],
+      [
+        "Transition Set 1",
+        "right_joystick"
+      ],
+      [
+        "L1: Tap Cover",
+        "switch"
+      ],
+      [
+        "L1: Tap Cover",
+        "joystick"
+      ],
+      [
+        "L1: Tap Cover",
+        "right_joystick"
+      ],
+      [
+        "R1: Tap Cover",
+        "switch"
+      ],
+      [
+        "R1: Tap Cover",
+        "joystick"
+      ],
+      [
+        "R1: Tap Cover",
+        "right_joystick"
+      ]
+    ],
+    "resolved_references": 4065,
+    "device_status": "UNTESTED",
+    "planned_target": 16,
+    "quick_base_exit_targets": [
+      "Turning Ramp Up 0",
+      "Turning Ramp Up 1",
+      "L1: Modifier 0",
+      "R1: Modifier 1",
+      "L1!R1: Modifier 2",
+      "R1!L1: Modifier 2",
+      "Gyro",
+      "Gyro | L1: Modifier 0",
+      "Gyro | R1: Modifier 1",
+      "Gyro | L1!R1: Modifier 2",
+      "Gyro | R1!L1: Modifier 2",
+      "LST: Temporary Gyro",
+      "RST: Temporary Gyro",
+      "Gyro Off Ramp Up",
+      "LTP: Arrow Keys",
+      "RTP: Mouse Buttons",
+      "RTP: Circular Scroll",
+      "L1: Scroll Down",
+      "R1: Scroll Up",
+      "Escape",
+      "Tab",
+      "Backspace",
+      "Enter",
+      "Menu Left: Escape",
+      "Menu Left: Backspace",
+      "Menu Left: Fn Layer",
+      "Menu Right: Tab",
+      "Menu Right: Enter",
+      "Menu Right: Fn Layer",
+      "LST: Entry Point",
+      "RST: Entry Point",
+      "RTP: Entry Point",
+      "Menu Left: Entry Point",
+      "Menu Right: Entry Point",
+      "L1: Double Tap",
+      "R1: Double Tap",
+      "LST: Double Tap",
+      "RST: Double Tap",
+      "RTP: Double Tap",
+      "Menu Left: Double Tap",
+      "Menu Right: Double Tap",
+      "L1: Tap Cover",
+      "R1: Tap Cover",
+      "L1&R1: Tap Cover",
+      "L1: Temp Cursor Gyro",
+      "R1: Temp Cursor Gyro",
+      "LST: Tap Cover",
+      "RST: Tap Cover",
+      "RTP: Tap Cover",
+      "L1: Double Tap Cover",
+      "R1: Double Tap Cover",
+      "Menu Left: Double Tap Cover",
+      "Menu Right: Double Tap Cover",
+      "Transition Set 0",
+      "Transition Set 1",
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R1!L1: Modifier 2",
+      "Steering | L1!R1: Modifier 2",
+      "Steering | R1: W Key",
+      "Steering | L1: S Key",
+      "Steering | LS: Entry Point",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Steering | Menu Left: Tap Cover",
+      "Steering | Menu Right: Entry Point",
+      "Steering | Menu Right: Tap Cover"
+    ],
+    "reused_mod2_covers": [
+      "L1: Tap Cover",
+      "R1: Tap Cover"
+    ],
+    "timing_ms": {
+      "hold": 250,
+      "double": 150,
+      "single": 150,
+      "repeat": 50,
+      "warning": 1000,
+      "exit": 2500,
+      "quick_pair": 200
+    }
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "baseline_generator_sha256": "20c1d1b3a50a3e4597cdbfc519fd163f35fc7fedc902f1439dea4f0402c5590a",
+    "candidate_sha256": "3491896b57421bfe8aa391791751d19fbf07ef73eec58e43ba9b2c01223995d7",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R2!L2: Modifier 2",
+      "Steering | L2!R2: Modifier 2",
+      "Steering | R2: W Key",
+      "Steering | L2: S Key",
+      "Steering | LS: Entry Point",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Steering | Menu Left: Tap Cover",
+      "Steering | Menu Right: Entry Point",
+      "Steering | Menu Right: Tap Cover"
+    ],
+    "new_layer_count": 16,
+    "total_layer_count": 71,
+    "new_always_on_count": 0,
+    "modified_sources": [
+      [
+        "Menu Left: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "switch"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Left: Tap Cover",
+        "switch"
+      ],
+      [
+        "Steering | Menu Left: Tap Cover",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Left: Tap Cover",
+        "right_joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "switch"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Right: Tap Cover",
+        "switch"
+      ],
+      [
+        "Steering | Menu Right: Tap Cover",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Right: Tap Cover",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "joystick"
+      ],
+      [
+        "Transition Set 1",
+        "right_joystick"
+      ],
+      [
+        "L2: Tap Cover",
+        "left_trigger"
+      ],
+      [
+        "L2: Tap Cover",
+        "joystick"
+      ],
+      [
+        "L2: Tap Cover",
+        "right_joystick"
+      ],
+      [
+        "R2: Tap Cover",
+        "right_trigger"
+      ],
+      [
+        "R2: Tap Cover",
+        "joystick"
+      ],
+      [
+        "R2: Tap Cover",
+        "right_joystick"
+      ]
+    ],
+    "resolved_references": 4009,
+    "device_status": "UNTESTED",
+    "planned_target": 16,
+    "quick_base_exit_targets": [
+      "Turning Ramp Up 0",
+      "Turning Ramp Up 1",
+      "L2: Modifier 0",
+      "R2: Modifier 1",
+      "L2!R2: Modifier 2",
+      "R2!L2: Modifier 2",
+      "Gyro",
+      "Gyro | L2: Modifier 0",
+      "Gyro | R2: Modifier 1",
+      "Gyro | L2!R2: Modifier 2",
+      "Gyro | R2!L2: Modifier 2",
+      "LST: Temporary Gyro",
+      "RST: Temporary Gyro",
+      "Gyro Off Ramp Up",
+      "LTP: Arrow Keys",
+      "RTP: Mouse Buttons",
+      "RTP: Circular Scroll",
+      "L2: Scroll Down",
+      "R2: Scroll Up",
+      "Escape",
+      "Tab",
+      "Backspace",
+      "Enter",
+      "Menu Left: Escape",
+      "Menu Left: Backspace",
+      "Menu Left: Fn Layer",
+      "Menu Right: Tab",
+      "Menu Right: Enter",
+      "Menu Right: Fn Layer",
+      "LST: Entry Point",
+      "RST: Entry Point",
+      "RTP: Entry Point",
+      "Menu Left: Entry Point",
+      "Menu Right: Entry Point",
+      "L2: Double Tap",
+      "R2: Double Tap",
+      "LST: Double Tap",
+      "RST: Double Tap",
+      "RTP: Double Tap",
+      "Menu Left: Double Tap",
+      "Menu Right: Double Tap",
+      "L2: Tap Cover",
+      "R2: Tap Cover",
+      "L2&R2: Tap Cover",
+      "L2: Temp Cursor Gyro",
+      "R2: Temp Cursor Gyro",
+      "LST: Tap Cover",
+      "RST: Tap Cover",
+      "RTP: Tap Cover",
+      "L2: Double Tap Cover",
+      "R2: Double Tap Cover",
+      "Menu Left: Double Tap Cover",
+      "Menu Right: Double Tap Cover",
+      "Transition Set 0",
+      "Transition Set 1",
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R2!L2: Modifier 2",
+      "Steering | L2!R2: Modifier 2",
+      "Steering | R2: W Key",
+      "Steering | L2: S Key",
+      "Steering | LS: Entry Point",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Steering | Menu Left: Tap Cover",
+      "Steering | Menu Right: Entry Point",
+      "Steering | Menu Right: Tap Cover"
+    ],
+    "reused_mod2_covers": [
+      "L2: Tap Cover",
+      "R2: Tap Cover"
+    ],
+    "timing_ms": {
+      "hold": 250,
+      "double": 150,
+      "single": 150,
+      "repeat": 50,
+      "warning": 1000,
+      "exit": 2500,
+      "quick_pair": 200
+    }
+  }
+}

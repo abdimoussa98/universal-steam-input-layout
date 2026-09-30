@@ -120,7 +120,23 @@ class NeptuneRecoveryTests(unittest.TestCase):
                     rs = self.source(layout, title, "right_joystick")
                     self.assertEqual(ls["mode"], "dpad")
                     self.assertEqual(ls["settings"]["edge_binding_invert"], "0")
-                    if title.endswith((": Modifier 0", ": Modifier 1")):
+                    if title == 'Transition Set 1':
+                        for group in (ls, rs):
+                            self.assertEqual(group['inputs']['edge']['activators'],
+                                             {'Full_Press': {'bindings': {'binding': EMPTY}}})
+                    elif title in ('Menu Left: Entry Point', 'Menu Right: Entry Point'):
+                        for group, radius in ((ls, '4915'), (rs, '7209')):
+                            self.assertEqual(group['settings']['edge_binding_radius'], radius)
+                            self.assertEqual(group['settings']['edge_binding_invert'], '0')
+                            activators = group['inputs']['edge']['activators']
+                            self.assertEqual(set(activators), {'chord'})
+                            chord = activators['chord']
+                            self.assertEqual(chord['settings']['chord_button'], next(iter(selectors)))
+                            self.assertEqual(chord['settings']['hold_repeats'], '1')
+                            self.assertEqual(chord['settings']['interruptable'], '0')
+                            self.assertEqual(chord['bindings']['binding'],
+                                             [addition('Steering | ' + title), removal(title)])
+                    elif title.endswith((": Modifier 0", ": Modifier 1")):
                         button = title.removeprefix("Gyro | ").split(":")[0]
                         owner_mask = {"L1": 8, "R1": 4, "L2": 33554432, "R2": 16777216}[button]
                         # Steam adds source-specific hysteresis when entering the outer region:
@@ -143,6 +159,17 @@ class NeptuneRecoveryTests(unittest.TestCase):
                     for name in ("touch", "edge"):
                         with self.subTest(variant=variant, layer=title, source=source, input=name):
                             value = self.source(layout, title, source)["inputs"][name]
+                            if title == 'Transition Set 1':
+                                if name == 'edge':
+                                    self.assertEqual(value['activators'],
+                                                     {'Full_Press': {'bindings': {'binding': EMPTY}}})
+                                else:
+                                    self.assertEqual(set(value['activators']), {'release'})
+                                    prefix = 'LST' if source == 'joystick' else 'RST'
+                                    self.assertEqual(value['activators']['release']['bindings']['binding'],
+                                        [removal(prefix + ': ' + suffix) for suffix in
+                                         ('Temporary Gyro', 'Tap Cover', 'Entry Point')])
+                                continue
                             self.assert_recovery(value, selectors, targets)
                             self.assertEqual(value["activators"]["Full_Press"]["bindings"]["binding"][-1], removal(title))
 

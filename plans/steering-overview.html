@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steering · 16 layers</title>
+<style>
+body{margin:0;background:#f5f3e9;color:#24382b;font:16px/1.6 system-ui,sans-serif}main{max-width:940px;margin:auto;padding:40px 24px}h1{font-size:48px;line-height:1.1;margin:12px 0}h2{font-size:22px;margin-top:30px}a{color:#285f49}small,.muted{color:#647365}.metrics,.flow{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}.metrics div,.box{background:#fffdf6;border:1px solid #ccd5c5;border-radius:12px;padding:16px}.metrics strong{font-size:32px;display:block}.box{flex:1;min-width:180px}.active{background:#dce9d5}table{width:100%;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid #cdd7c7;padding:10px}aside{background:#ece5ce;padding:16px;border-radius:10px}footer{margin-top:30px}code{font-size:14px}
+</style><main>
+<small>Universal Steam Input · Updated 30 September 2026 · Native acceptance pending</small>
+<h1>Steering, in 16 layers.</h1>
+<p>Right holds <b>W</b>, left holds <b>S</b>. Stick Up selects Modifier 1; Down selects Modifier 0. The opposite driving control selects Modifier 2.</p>
+<div class="metrics"><div><strong>16</strong>added layers</div><div><strong>−9</strong>from the previous lean candidate</div><div><strong>0</strong>new Always On actions</div></div>
+<div class="flow"><div class="box"><b>Protected entry</b><p>Right Menu + LS click, then release menu. Initial carried WASD has no timeout.</p></div><div class="box active"><b>Driving</b><p>Press right/left to own W/S. No built-in modifier bank. Release the owner while the opposite is held to switch movement ownership.</p></div><div class="box"><b>Fallback</b><p>No driver held: WASD. W warns at 1 second and exits at 2.5 seconds. Release W or acquire a driver to cancel.</p></div></div>
+<h2>Two different scroll behaviors</h2>
+<table><tr><th>Normal Modifiers 0/1</th><th>Modifier 2</th></tr><tr><td>Short direction→center scrolls once. Hold or modified action consumes the tap. Same-direction double/hold repeats with Base face buttons.</td><td>Up/Down immediately scrolls and repeats while held. No tap/double recognition. Face buttons stay Modifier 2.</td></tr></table>
+<p>Leaving Up for sideways removes Modifier 1 silently. Reversing to Down selects Modifier 0 consumed, so it cannot invent a fresh tap. Modifier 0 mirrors this. Before coverage, releasing the Mod 2 opposite control exits all layers to Base. Holding the opposite for 200 ms or using a mapped action applies the existing opposite-side single cover. Covered opposite release restores normal driving without dropping W/S.</p>
+<h2>What the 16 layers do</h2>
+<table><tr><th>Family</th><th>Count</th></tr><tr><td>Steering membership + disposable entry</td><td>2</td></tr><tr><td>W/S owners</td><td>2</td></tr><tr><td>Modifier 0/1 + two ordered Modifier 2 variants</td><td>4</td></tr><tr><td>Existing opposite-side single Tap Covers</td><td>0 new</td></tr><tr><td>Shared normal LS Tap Cover</td><td>1</td></tr><tr><td>Up/Down Double Tap windows</td><td>2</td></tr><tr><td>Shared LS Double Tap Cover</td><td>1</td></tr><tr><td>Protected menu entries + silent covers</td><td>4</td></tr></table>
+<p>Children use <code>Steering | control: function</code> titles. There is no Rearm layer and no separate directional entry or Mod 2 scroll-gesture helper.</p>
+<aside><b>Deck checks still matter.</b> Verify cover entry preserves W/S and that the 250 ms reset stops once covered. Confirm a restored bank stays under the shared Tap Cover without restarting selectors, and reversal cancels the shared Repeat Cover's delayed wheel tick. Normal singles resolve after 150 ms; normal hold consumption is 250 ms; repeat is 50 ms.</aside>
+<footer><a href="2026-09-29-steering-implementation-plan.md">Implementation plan</a> · <a href="2026-09-29-steering-entry-brainstorm.md">Behavior matrix</a> · <a href="../findings/2026-09-30-steering-lean/README.md">Exports and validation</a></footer>
+</main></html>

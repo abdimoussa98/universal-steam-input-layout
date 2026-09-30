@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Steering event observer</title>
+<style>
+body{font:16px system-ui;background:#f4f2ec;color:#19342e;max-width:1000px;margin:30px auto;padding:0 20px}h1{margin-bottom:6px}button,input{font:inherit;padding:8px;margin:4px}button{cursor:pointer}#capture{padding:22px;border:2px solid #73906a;border-radius:12px;background:white;outline-offset:4px}#held{font-size:22px;min-height:32px}.warning{color:#9b3525}pre{height:340px;overflow:auto;background:#18342e;color:#e6eedf;padding:16px;white-space:pre-wrap}label{display:block}small{display:block;margin:10px 0}
+</style>
+<h1>Steering event observer</h1><p>Application events only. This cannot observe Steam’s internal stack or exact controller samples.</p>
+<label>Run label <input id="label" placeholder="default-owner / S1 / trial 1"></label>
+<button id="start">New recording</button><button id="stop">Stop</button><button id="download">Download JSON</button>
+<div id="capture" tabindex="0" aria-label="Controller event capture area">
+<strong id="status">Ready. Start recording, then keep this panel focused.</strong>
+<p id="held">Held: none</p><p id="counts">Wheel events: 0 · deltaY: 0</p>
+<small>F1–F6 are queried layer markers; F9 is a timer warning marker; F10 marks exit. Record vibration/sound separately.</small>
+</div><pre id="events" aria-label="Recent events"></pre>
+<script>
+const $=id=>document.getElementById(id), held=new Set();
+let events=[], recording=false, origin=0, wheelCount=0, wheelY=0, valid=true, runLabel='';
+function record(type,data={}){
+ if(!recording)return;
+ events.push({tMs:performance.now()-origin,type,...data,held:[...held]});
+ $('events').textContent=events.slice(-150).map(e=>JSON.stringify(e)).join('\n');
+ $('events').scrollTop=$('events').scrollHeight;
+ $('held').textContent='Held: '+([...held].join(', ')||'none');
+ $('counts').textContent=`Wheel events: ${wheelCount} · deltaY: ${wheelY}`;
+}
+function lostFocus(reason){if(recording){valid=false;record('focus-loss',{reason});$('status').textContent='Focus lost: continuity evidence is invalid. Save this run and start a fresh one.';$('status').className='warning';}}
+$('start').onclick=()=>{
+ recording=false;held.clear();events=[];wheelCount=0;wheelY=0;valid=true;
+ origin=performance.now();runLabel=$('label').value;recording=true;
+ $('capture').focus();$('status').className='';$('status').textContent='Recording — keep this panel focused.';
+ record('start',{label:runLabel,utc:new Date().toISOString()});
+};
+function stop(){record('stop');recording=false;$('status').textContent='Stopped. Download the trace.';}
+$('stop').addEventListener('pointerdown',stop);
+$('stop').onclick=stop;
+for(const type of ['keydown','keyup'])$('capture').addEventListener(type,e=>{
+ e.preventDefault();if(!recording)return;
+ if(type==='keydown')held.add(e.code);else held.delete(e.code);
+ record(type,{code:e.code,key:e.key,repeat:e.repeat,eventTimeStamp:e.timeStamp});
+});
+$('capture').addEventListener('wheel',e=>{
+ e.preventDefault();if(!recording)return;wheelCount++;wheelY+=e.deltaY;
+ record('wheel',{deltaX:e.deltaX,deltaY:e.deltaY,deltaMode:e.deltaMode,eventTimeStamp:e.timeStamp});
+},{passive:false});
+$('capture').addEventListener('blur',()=>lostFocus('capture blur'));
+window.addEventListener('blur',()=>lostFocus('window blur'));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)lostFocus('document hidden');});
+$('capture').addEventListener('focus',()=>record('focus'));
+$('download').onclick=()=>{
+ const data={schema:1,label:runLabel,downloadedAt:new Date().toISOString(),userAgent:navigator.userAgent,
+ continuityValid:valid,recording,heldAtDownload:[...held],wheelCount,wheelY,events};
+ const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
+ const a=document.createElement('a');a.href=url;a.download='steering-trace-'+Date.now()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+</script></html>

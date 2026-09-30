@@ -120,11 +120,14 @@ class NeptuneCursorTests(unittest.TestCase):
                         self.assertEqual(delayed["settings"]["delay_start"], "300")
                         self.assertEqual(delayed["settings"]["chord_button"], selector)
                         self.assertEqual(delayed["settings"]["interruptable"], "0")
+                        self.assertEqual(delayed["settings"]["haptic_intensity"], "3")
+                        self.assertNotEqual(delayed["settings"].get("hold_repeats"), "1")
                         release = bindings(primary["release"])
                         self.assertEqual(release[0], addition(button + ": Double Tap"))
                         self.assertIn(removal(button + ": Temp Cursor Gyro"), release[1:])
                         for stick, prefix in (("joystick", "LST"), ("right_joystick", "RST")):
                             touch = self.source(layout, title, stick)["inputs"]["touch"]["activators"]
+                            self.assertEqual(touch["release"]["settings"]["haptic_intensity"], "0")
                             actions = bindings(touch["release"])
                             # Arrays run bottom-to-top: complete the apply before removing helpers.
                             self.assertEqual(actions[-1], cursor_add)
@@ -294,11 +297,16 @@ class NeptuneCursorTests(unittest.TestCase):
                 targets = recovery_specs(variant)[owner][1]
                 for suffix in (": Tap Cover", ": Temp Cursor Gyro"):
                     title = button + suffix
+                    overlay_targets = set(targets)
+                    if suffix == ": Tap Cover":
+                        left, right = ('L1', 'R1') if variant == 'default' else ('L2', 'R2')
+                        opposite = right if button == left else left
+                        overlay_targets.add(f'Steering | {opposite}!{button}: Modifier 2')
                     with self.subTest(variant=variant, layer=title):
                         primary = self.source(layout, title, source)["inputs"][name]
                         self.assertEqual(set(primary["activators"]), {"release"})
                         self.assertFalse(primary.get("disabled_activators"))
-                        self.assert_removals(bindings(primary["activators"]["release"]), targets)
+                        self.assert_removals(bindings(primary["activators"]["release"]), overlay_targets)
                         for stick, prefix in (("joystick", "LST"), ("right_joystick", "RST")):
                             group = self.source(layout, title, stick)
                             self.assertEqual(group["mode"], "dpad" if stick == "joystick" else "joystick_mouse")
@@ -320,7 +328,7 @@ class NeptuneCursorTests(unittest.TestCase):
                             fallback = touch["activators"]["Full_Press"]
                             self.assertEqual(fallback["settings"]["hold_repeats"], "1")
                             self.assertNotEqual(fallback["settings"].get("interruptable"), "0")
-                            self.assert_removals(bindings(fallback), targets)
+                            self.assert_removals(bindings(fallback), overlay_targets)
                             self.assert_removals(bindings(touch["activators"]["release"]), stick_family(prefix))
                         self.assertFalse(any(addition(button + ": Temp Cursor Gyro") in e["actions"]
                                              for _, _, e in self.entries(layout, title)))

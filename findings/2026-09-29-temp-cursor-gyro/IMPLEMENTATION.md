@@ -1,7 +1,7 @@
 # Temp Cursor Gyro implementation
 
 Implemented 2026-09-29 in both Neptune JSON layouts, starting from `c820d22`.
-The original implementation used 90.2. Current JSONs are prepared as 90.3 with
+The original implementation used 90.2. Current JSONs are prepared as 90.4 with
 vibration 0, movement threshold 5, and reviewed descriptions. Both sibling VDFs
 are regenerated with verified keys, values, and order; Deck checks remain pending.
 The July reference is unchanged.
@@ -19,6 +19,12 @@ shared by the regular and Gyro versions of that modifier. A 300 ms primary hold
 applies it; either stick-touch release completes that apply immediately before
 removing the corresponding LST/RST helpers. The primary release clears the owner
 family without entering its tap/Double Tap flow.
+
+Version 90.4 adds high haptic feedback (`haptic_intensity: "3"`) only to the
+four 300 ms cursor-entry chords per layout. These activators do not repeat;
+touch-release completion keeps haptics at 0, as does the ongoing gyro profile.
+Entry feedback does not add an activator, layer, or timer. Confirm the pulse at
+actual entry and silent touch-release paths on Deck.
 
 Each cursor overlay has thirteen cancellation inputs: face buttons, D-pad,
 stick clicks, Start/Select, and the opposite modifier. Each has one uninterruptible,

@@ -1,0 +1,42 @@
+{
+  "default-owner": {
+    "sha256": "48ae2ca583800d14ffce412fa053d73972fa792c135ee4c4656e799e22878a42",
+    "resolved_references": 52,
+    "device_status": "UNTESTED"
+  },
+  "default-entry": {
+    "sha256": "c27a8c3861fa833b13e1cc9db26bea5d456e627218e1524db211736ca33f3adc",
+    "resolved_references": 52,
+    "device_status": "UNTESTED"
+  },
+  "default-clock": {
+    "sha256": "1798ab9c5d82775f0c3c9bae88482c3e5ea71b58bf318715f337cc621a364aeb",
+    "resolved_references": 9,
+    "device_status": "UNTESTED"
+  },
+  "default-long-clock": {
+    "sha256": "872e45fec685a75921ae2b576836faaf556bdeac613d8c1bf62c12c4cb81c901",
+    "resolved_references": 9,
+    "device_status": "UNTESTED"
+  },
+  "alternative-owner": {
+    "sha256": "5dbb6c812b9279ca7950ca9d20b63339f1b2fe7cf81aa2040e608a694f67ee8e",
+    "resolved_references": 52,
+    "device_status": "UNTESTED"
+  },
+  "alternative-entry": {
+    "sha256": "e6afa9435f352ab8e6eb7b6a9f5bb18bfa785b41d46dc164b8e37b8cf78efba7",
+    "resolved_references": 52,
+    "device_status": "UNTESTED"
+  },
+  "alternative-clock": {
+    "sha256": "ff411ddd12a3f72093b26ca5116c02b6a12ba7d292f8056ba96eedef878da6cb",
+    "resolved_references": 9,
+    "device_status": "UNTESTED"
+  },
+  "alternative-long-clock": {
+    "sha256": "56df4b19e91dfcc5bfb524c0e1a6e10f57c49364fd66d0bd65f340461f3c5416",
+    "resolved_references": 9,
+    "device_status": "UNTESTED"
+  }
+}

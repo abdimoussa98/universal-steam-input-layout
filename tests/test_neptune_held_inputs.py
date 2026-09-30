@@ -178,10 +178,28 @@ class NeptuneHeldInputTests(unittest.TestCase):
                     self.assertEqual(entries[0]["settings"].get("hold_repeats"), "1", RULE)
                     self.assertEqual(entries[0]["settings"].get("interruptable"), "0")
 
-    def test_no_new_layer_relies_on_an_immediate_command_for_its_held_input(self):
+    def test_only_documented_steering_long_press_native_gates_remain(self):
+        # These remain findings, not proven-safe exceptions. The scanner still
+        # reports them; pin their exact scope so new immediate dependencies fail.
+        # See steering-lean/ACCEPTANCE.md S3 and S7 for held Long Press/cover gates.
         for variant, layout in self.layouts.items():
             with self.subTest(variant=variant):
-                self.assertEqual(held_input_violations(layout), [], RULE)
+                left, right = ('L1', 'R1') if variant == 'default' else ('L2', 'R2')
+                expected = []
+                cover = 'Steering | LS: Tap Cover'
+                for direction, cardinal, mod, other in [('Up', 'north', '1', 'Down'),
+                                                        ('Down', 'south', '0', 'Up')]:
+                    bank = f'Steering | LS {direction}: Modifier {mod}'
+                    name = 'dpad_' + cardinal
+                    parents = [f'Steering | LS {other}: Double Tap', cover,
+                               f'Steering | {right}: W Key', f'Steering | {left}: S Key']
+                    for parent in parents:
+                        expected.append((parent, 'joystick', name, bank, name + '/Long_Press',
+                                         [('add_layer', cover)]))
+                    window = f'Steering | LS {direction}: Double Tap'
+                    expected.append((bank, 'joystick', 'edge', window, 'edge/Long_Press',
+                                     [('remove_layer', window)]))
+                self.assertCountEqual(held_input_violations(layout), expected, RULE)
 
     def test_held_input_guard_catches_known_regressions(self):
         layout = copy.deepcopy(self.layouts["default"])

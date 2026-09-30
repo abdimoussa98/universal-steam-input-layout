@@ -24,7 +24,8 @@ tuning, and implemented/planned status; accurate wording may stay. Bump once per
 release batch from the last published version, keeping jointly released variants
 aligned. Do not change schema `version`, export `revision`, or runtime IDs for this.
 Finalize metadata before exporting so JSON/VDF agree, and always regenerate the
-sibling VDF after the validated edit. See [Publishing layout changes](../../../README.md#publishing-layout-changes).
+sibling VDF after the validated edit, then save the version snapshot (step 5).
+See [Publishing layout changes](../../../README.md#publishing-layout-changes).
 
 0. **Enforce the command budget before finalizing**
    - `python3 audit_command_budget.py path/to/layout.json` must exit 0. At most three GUI command entries per input, counted across activator types/list elements; binding-array subcommands may exceed three. All groups are scanned and disabled banks checked separately. Follow `steam-binding-order` to consolidate violations without deleting required cleanup.
@@ -43,6 +44,22 @@ sibling VDF after the validated edit. See [Publishing layout changes](../../../R
 4. **Export VDF directly**
    - Run `node convert_vdf.mjs path/to/layout_final.json` to write/replace the sibling `.vdf`, or add `-o path/to/output.vdf`. This uses the installed `pfwobcke.vscode-vdf` serializer and checks keys, values, repeated bindings, and order before writing. See `README.md#file-formats` for requirements.
    - The agent can handle conversion. The user still needs to load the exported layout fresh on the Deck and run the relevant manual checks.
+
+5. **Save the version snapshot**
+   - Standing user instruction: once the JSON is validated, the VDF is regenerated, and the description and version are final, copy each variant into `versions/neptune/<version>/` in the same task, without asking. `neptune/` stays the live working copy where all edits happen.
+   - `<version>` is the title's release suffix after the last ` :: ` (such as `90.4`). Copy both JSON and VDF, replacing `_latest` in the filename with `_<version>`. Run from the repo root after every variant is exported, and expect one `saved` line per file:
+     ```bash
+     for json in neptune/*_latest.json; do
+       v=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["controller_mappings"]["title"].rsplit(" :: ", 1)[-1])' "$json")
+       [[ "$v" =~ ^[0-9]+(\.[0-9]+)+$ ]] || { echo "unexpected version '$v' in $json"; break; }
+       mkdir -p "versions/neptune/$v"
+       for src in "$json" "${json%.json}.vdf"; do
+         dst="versions/neptune/$v/$(basename "${src/_latest/_$v}")"
+         cp "$src" "$dst" && cmp "$src" "$dst" && echo "saved $dst"
+       done
+     done
+     ```
+   - Follow-up edits in the same release batch refresh that version's snapshot. Never edit, overwrite, or delete a snapshot for any other version; if the current version was already published, bump the title instead of overwriting it. Snapshots are backups only: don't edit them or point tools/tests at them. Saving one does not authorize a commit or Steam upload.
 
 ### Guardrails
 - If you renamed an action set/layer title, you may need to re-run `to-titles` first (to regenerate tokens) before making sweeping edits.

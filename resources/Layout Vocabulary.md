@@ -6,10 +6,15 @@ is the short form when that scope is clear. This replaces the earlier term
 “lightweight cover layer” in maintained documentation; saved layer titles such
 as `L1: Tap Cover` do not need to change.
 
+Use **stateful layer** for the persistent action layer of a mode. This replaces
+the earlier term **stateful set**. These modes use action layers without
+switching Steam action sets.
+
 ## Terms
 
 | Term | Definition | Example |
 |---|---|---|
+| **Stateful layer** | Keeps a mode active after its entry gesture ends, until an explicit exit. Its transient helper and modifier layers are separate layers with narrower lifetimes. | Steering remains active when the dominant W/S control is released; the W/S and Mod 0–2 helpers clear, exposing steering fallback. |
 | **Button overlay** | Changes one button's action or lifecycle, relies on the underlying interaction for broader behavior/recovery, and is not intended as a standalone mode. | `Menu Right: Enter` changes Start to Enter while the Menu Left interaction is underneath. |
 | **Overlay** | Short form for a button overlay, or the broader category for an equally limited interaction involving linked buttons. | `L1&R1: Tap Cover` covers the two linked modifier releases; it is an overlay, but not strictly a one-button overlay. |
 | **Owning layer** | A layer that applies an overlay and is responsible for recovering it when that interaction becomes invalid. A shared overlay can have multiple owners. | `L1: Modifier 0` and its Gyro variant both apply `L1: Tap Cover`. |
