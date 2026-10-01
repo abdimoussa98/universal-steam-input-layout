@@ -4,6 +4,36 @@
 definitions in [Cleanup Functions](../resources/Cleanup%20Functions.md),
 especially interaction families and survivors. Nothing here has been built.
 
+## Intended-flow inheritance audit (author-approved)
+
+Updated 2026-09-30: build this read-only checker first. Exhaustive stack search,
+numeric timer simulation and inductive completeness are deprecated as prerequisites
+for routine cleanup audits. Retain their implementation for reuse and targeted
+investigations; see the [research archive](../findings/2026-09-30-stack-search/ARCHIVE.md).
+
+1. Follow the intended logical paths of explicit layer additions from Base,
+   preserving ordered stacks, relevant button/chord guards and explicit removals
+   in each transition. Do not turn the add graph into unrestricted combinations.
+2. For each layer and relevant input, inspect its ordered lower stack on each
+   intended path. Report the nearest binding owner and original activators,
+   including explicit blocks and Base fallback.
+3. Compare distinct non-Base inherited bindings across paths. If more than one
+   occurs, recommend an explicit clear/block rather than assuming replacement
+   works on every path. Identical binding/activator definitions from different
+   owners are not automatically different bindings. Keep Base fallback visible.
+4. Defer above-layer checks to a separate pass for lightweight covers and other
+   specifically identified exceptions. Do not gate the lower-layer audit on
+   solving every possible upper-layer relationship.
+5. Report the paths and bindings behind each recommendation. Benchmark both
+   variants, then use the results to review cleanup and blocking. No layout
+   mutations are part of the initial checker.
+
+The scope is intended additive flows, not a proof over every possible runtime
+interleaving. Timer edge cases can be investigated separately when a concrete
+finding needs them. Implementation and runtime benchmarking remain TODO.
+The older candidate-based cleanup writer below remains a later proposal;
+its co-active approximation is not a substitute for the intended-path checker.
+
 ## Goal
 
 After changing the stack (a new layer, a new overlay, a changed transition),

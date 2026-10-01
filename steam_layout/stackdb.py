@@ -3,6 +3,8 @@
     python3 -m steam_layout.stackdb run LAYOUT OUTDIR --held            # in memory
     python3 -m steam_layout.stackdb run LAYOUT OUTDIR --disk [--memory 12] [--disk-limit 150] [--resume]
     python3 -m steam_layout.stackdb sqlite LAYOUT OUTDIR                 # (re)build OUTDIR/stacks.sqlite
+    .venv/bin/python -m steam_layout.stackdb show "LAYER" --layout LAYOUT --search OUTDIR
+        # witnessed facts + inductive bounds; optional requirements-proof.txt
 
     db = StackDB("out/default", layout)
     db.values(("Base", "L1: Modifier 0"))        # what every input does in this stack: {(source, name): Value}
@@ -501,6 +503,18 @@ def run(layout_path, outdir, extra=()):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) >= 2 and sys.argv[1] == "show":
+        try:
+            from .stack_report import main
+        except ModuleNotFoundError as exc:
+            if exc.name != "z3":
+                raise
+            print("stackdb show requires the optional proof dependency. Install with:\n"
+                  "  python3 -m venv .venv\n"
+                  "  .venv/bin/python -m pip install -r requirements-proof.txt\n"
+                  "Then use .venv/bin/python -m steam_layout.stackdb show ...", file=sys.stderr)
+            sys.exit(2)
+        sys.exit(main(sys.argv[2:]))
     if len(sys.argv) >= 4 and sys.argv[1] == "run":
         sys.exit(run(sys.argv[2], sys.argv[3], sys.argv[4:]))
     if len(sys.argv) == 4 and sys.argv[1] == "sqlite":

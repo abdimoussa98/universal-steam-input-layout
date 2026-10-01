@@ -6,6 +6,13 @@ This document describes the structure and relationships within Steam Input contr
 - [Steam Input Action Sets & Layers Overview](https://partner.steamgames.com/doc/features/steam_controller/iga_file)
 - [Action Set Layers Behavior (overlay/stacking)](https://partner.steamgames.com/doc/features/steam_controller/action_set_layers)
 
+## Current project policy
+
+The API descriptions below include historical and generic format capabilities.
+Current layouts must use explicit `add_layer` / `remove_layer`, never
+`hold_layer` or action-set switching (`CHANGE_PRESET`). See the
+[author-confirmed runtime rules and migration conflicts](Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30).
+
 ## Overview
 
 Steam Input configurations define how a controller's physical inputs map to game actions. The JSON structure contains several interconnected sections that work together to define a complete controller layout.

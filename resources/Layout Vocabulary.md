@@ -10,6 +10,26 @@ Use **stateful layer** for the persistent action layer of a mode. This replaces
 the earlier term **stateful set**. These modes use action layers without
 switching Steam action sets.
 
+## Runtime rules (author-confirmed, 2026-09-30)
+
+- Never use Steam's `hold_layer` API: the author considers it too buggy.
+  Implement every layer lifetime with explicit `add_layer` and `remove_layer`
+  commands, including layers active while a button is held.
+- Never switch Steam action sets (`CHANGE_PRESET`). Keep the structural Base
+  action set and implement modes with action layers. Historical “Transition
+  Set” names refer to layers, not action-set switching.
+- For the removal/reset behavior discussed in the stack investigation, the
+  timer **restarts**, then waits **300 ms**; it is not cancelled. This is the
+  author's runtime observation, not a claim that every configured delay is
+  300 ms. The untimed search model does not yet represent this behavior.
+
+**Known implementation conflicts:** on 2026-09-30, both current Neptune JSON
+variants still contain five `hold_layer` commands, in group array positions
+12, 17, 19, 52 and 82, under `click` / `Soft_Press`. They target runtime layers
+16 and 17. These are migration work, not exceptions to the rule. Neither
+current variant contains `CHANGE_PRESET`. Archived snapshots and generic
+format/parser documentation may retain historical APIs.
+
 ## Terms
 
 | Term | Definition | Example |

@@ -47,6 +47,10 @@ See: [Vocabulary](Layout%20Vocabulary.md#terms) ·
 
 ## 2. Placement
 
+- Use explicit `add_layer` / `remove_layer` for every lifetime; never
+  `hold_layer`. Never switch action sets (`CHANGE_PRESET`); modes are layers
+  within Base. See [runtime rules and existing conflicts](Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30).
+
 - Append the layer to the **end** of `action_layers` as `Preset_<max+1>`, so
   no existing runtime ID shifts.
 - Keep the list order the same as the `Preset_` numeric order. Otherwise a
@@ -142,7 +146,9 @@ If a delayed `add_layer` is interrupted before its delay finishes, it can fail
 to fire on the **next** entry. The hold then silently stops working. The
 author observed that a **repeated `remove_layer` of the same target restarts
 the delay**, so the add fires again. This is the author's runtime observation,
-not a confirmed Steam internal.
+not a confirmed Steam internal. On 2026-09-30 the author clarified the
+reset outcome: restart and wait 300 ms in the discussed case, not cancellation.
+Other configured delay values remain distinct.
 ([Interrupted applies](Steam%20Input%20JSON%20Structure.md#interrupted-delayed-layer-applies) ·
 [R1 tap-cover findings](../findings/2026-09-27-r1-tap-cover/FINDINGS.md))
 

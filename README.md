@@ -2,6 +2,10 @@
 
 Custom Steam Input controller layouts with advanced layer management.
 
+Current design uses explicit `add_layer` / `remove_layer` commands only:
+never Steam's buggy `hold_layer` API, and never action-set switching. See
+[runtime rules and remaining migration conflicts](resources/Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30).
+
 ## Installation
 
 Drop layout files in `/home/deck/.steam/steam/controller_base/templates/`
@@ -155,7 +159,24 @@ The reusable code behind the scripts above. Import it from the repo root.
 | `steam_layout.stacks` | `StackSpace`: every stack reachable from Base, and the queries `below`, `containing`, `when_effective` and `co_active` |
 | `steam_layout.inheritance` | The inheritance and blocking audit that `audit_inheritance.py` wraps |
 | `steam_layout.fixes` | The ordered, idempotent post-install fixes that `install_neptune.py` runs |
-| `steam_layout.held_model` | The realistic stack model: which buttons are held, chords, delays, repeats, `hold_layer` |
+| `steam_layout.held_model` | Historical untimed stack model: held buttons, chords, boolean delays/repeats and generic legacy `hold_layer` support |
+| `steam_layout.timed_model` | Replay presses, releases, analog thresholds and individual millisecond timers with explicit layer commands |
+| `steam_layout.timed_search` | Resumable timed search, replayed witnesses and independently checked graph closure; `run`, `show`, `witness`, `check` |
+| `steam_layout.timed_trace` | Run a JSON event trace and record all timed model branches, clocks and model identity |
+| `steam_layout.timed_facts`, `steam_layout.timed_discover` | Catalogue the three layer-query alternatives and discover independently replayed timed witnesses; compact witness archives |
+| `steam_layout.timed_seek` | Target selected unresolved facts with a bounded concrete search and save compact verified witnesses ([usage](findings/2026-09-30-stack-search/TIMED-MODEL.md#seek-witnesses-for-selected-facts)) |
+| `steam_layout.timed_envelope`, `steam_layout.timed_proof` | Check inductive exclusions over a full-stack relaxation of the timed runtime |
+| `steam_layout.timed_phase_envelope` | Six runtime-derived press/timer restrictions; included in certificate identity |
+| `steam_layout.timed_progress_envelope` | Ordered-owner repeater/delay restrictions; included in certificate identity |
+| `steam_layout.timed_elapsed_envelope` | Separate elapsed repeats from newly activated one-shots; included in certificate identity |
+| `steam_layout.timed_analog_envelope` | Production compiler: the preceding rules plus atomic first batches for positive analog samples and five event families |
+| `steam_layout.timed_predicates` | Family-order and exact-fact hypotheses for additional checked induction |
+| `steam_layout.timed_mine`, `steam_layout.timed_between` | Suggest small lower-layer or conditional between-layer families from replayed samples; every output still requires induction |
+| `steam_layout.timed_audit` | Combine witnesses and checked induction into per-layer reports; `run` / `show` with identity-bound certificates |
+| `steam_layout.timed_refine` | Extend a checked baseline with unresolved fact hypotheses; independently validate a new certificate and full report |
+| `steam_layout.timed_minimize` | Remove logically redundant predicates from a checked certificate, then independently validate the smaller proof |
+| `steam_layout.timed_reduction` | Exact relevance quotient for stack reachability, reusable with the timed search APIs |
+| `steam_layout.source_geometry` | Resolve saved source geometry and its inherited owners without inventing omitted defaults |
 | `steam_layout.stackdb` | Run the exhaustive search (`tools/stack_search`, C++) and query its results: what every input does in any stack, what a layer inherits, the button sequence that reaches a state |
 
 ```python
@@ -186,6 +207,85 @@ db.values(("Base", "L1: Modifier 0"))     # what every input does in that stack
 db.moment(gid)                            # a state: stack, held buttons, every input, the events that reach it
 db.sql("SELECT name, owner, summary FROM inherited WHERE top = 'L1: Double Tap' GROUP BY name, owner")
 ```
+
+**Deprecated for routine audits (2026-09-30):** exhaustive stack search and
+timed proof tooling are retained for reference, reuse and targeted investigations.
+The replacement is an intended-flow inheritance checker, still to be built.
+See the [decision, next steps and preserved checkpoint](findings/2026-09-30-stack-search/ARCHIVE.md).
+Historical commands below may reference disposable files under `out/`.
+
+The historical HeldModel inductive bound remains available. Install the
+optional proof dependency and query a matching untimed search:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-proof.txt
+.venv/bin/python -m steam_layout.stackdb show 'L1: Double Tap' --search out/stack_search/default-held
+```
+
+This reports layers below/above X and inherited binding owners with X anywhere
+in the stack. `proven` has a search witness; `possible` remains unresolved.
+All claims are relative to the current untimed model, which has known runtime
+gaps. See [usage and proof scope](findings/2026-09-30-stack-search/README.md#the-helper)
+and [model limits](findings/2026-09-30-stack-search/MODEL-LIMITS.md).
+
+The new timed simulator can replay a supplied input sequence with numeric
+clock deadlines, including removal-driven timer restarts:
+
+```bash
+python3 -m steam_layout.timed_trace versions/neptune/90.6/single-set-default_hold-gyro_90.6.json \
+    findings/2026-09-30-stack-search/timed-example.json \
+    --ignore-hold-bindings --default-repeat-ms 50
+```
+
+The author accepted 50 ms for omitted repeat intervals in this analysis;
+it is not a verified Steam default. Hold commands are omitted only from the
+simulation. Analog events supply logical threshold coordinates, not raw
+sensor readings. See [timed replay and its contract](findings/2026-09-30-stack-search/TIMED-MODEL.md).
+
+The current timed audit targets the original default **90.6** layout, as
+requested after `latest` advanced to 90.7. The tracked versioned file matches
+the frozen input's [recorded identity](findings/2026-09-30-stack-search/TIMED-MODEL.md).
+The newer 90.7 layout is not covered by these results.
+
+**The timed audit tools are implemented and checked; the full 90.6
+classification remains incomplete.** The audit combines replayed timed
+witnesses with independently checked induction over all 46,904 below/above
+and raw-inheritance alternatives. Every alternative needs a witness or a
+checked exclusion; a time budget or solver timeout never establishes one.
+The current checkpoint has **11,491 witnessed, 31,644 excluded and 3,769
+unresolved** alternatives. Its 901 invariants passed 3,409 independent checks.
+Read the [current summary](out/stack_search/timed-facts/default-summary.json),
+[full report](out/stack_search/timed-facts/default-audit.json), and
+[certificate](out/stack_search/timed-facts/default-certificate.json).
+The [four readable layer reports](findings/2026-09-30-stack-search/README.md#checked-current-checkpoint)
+provide smaller examples. The full regression suite passed **531 tests**.
+
+Inspect a layer in the saved checkpoint with:
+
+```bash
+.venv/bin/python -m steam_layout.timed_audit show \
+    versions/neptune/90.6/single-set-default_hold-gyro_90.6.json \
+    out/stack_search/timed-facts/default-evidence.sqlite \
+    out/stack_search/timed-facts/default-certificate.json \
+    'L1: Double Tap' --json --ignore-hold-bindings --default-repeat-ms 50
+```
+
+To collect more evidence or rebuild a baseline, use the
+[discovery, compaction and certificate workflow](findings/2026-09-30-stack-search/TIMED-MODEL.md#discover-compact-and-check).
+A fresh `timed_audit run` infers primitive invariants and may produce a weaker
+baseline than the saved proof; the workflow writes separate `regenerated-*`
+outputs. Use `timed_refine` to retain and extend the checked baseline.
+`show` replays archived edges and independently validates the loaded invariant
+certificate before using exclusions. Check `complete_for_model` and unresolved
+counts in the output; exit 0 only means the report was generated. The older
+[exhaustive timed search](findings/2026-09-30-stack-search/TIMED-MODEL.md#reachability-search-and-proof-checks)
+and its graph-closure certificates remain available. Neither timed route
+imports HeldModel exclusions or certifies Steam hardware equivalence.
+To strengthen an existing certificate, use the [refinement command](findings/2026-09-30-stack-search/TIMED-MODEL.md#refine-an-existing-certificate).
+It accepts the latest matching witness archive and preserves the checked
+baseline. Even with `--layer`, its output report remains global and separately
+records whether the selected questions are complete.
 
 ## Command entry limit and audit
 

@@ -20,7 +20,13 @@ The audit now fails on Long/Double Press. Completion awaits the Deck checks.
 - [ ] Validate the derived Double Tap window blocks on Deck (gate B1) ([record](findings/2026-09-30-derived-window-blocks/README.md))
 - [ ] Validate the Double Tap window pads on Deck (gate P1) ([record](findings/2026-09-30-double-tap-pad-blocks/README.md))
 - [ ] Deck check: do stick inputs (edge, click, touch, directions) inherit through the middle of the stack, or only from the top layer and Base? Put three layers up where only the middle one binds LS click. A 2022 community report says sticks skip the middle ([JSON Structure](resources/Steam%20Input%20JSON%20Structure.md#how-binding-overlay-works)). If true, the inheritance tools must model it
-- [ ] Resume the stack search so the three inheritance questions get definite, realistic answers: next step is proving invariants ([status and everything tried](findings/2026-09-30-stack-search/README.md)). Then audit cleanup functions and blocks against the Cleanup Functions and Layer Definition of Done docs
+- [ ] Build the intended-flow inheritance checker ([plan](plans/2026-09-30-cleanup-generator.md#intended-flow-inheritance-audit-author-approved)) instead of resuming exhaustive stack/timer proofs
+  - Follow intended explicit layer-addition paths from Base; retain stack order, input/chord conditions and removals within each transition
+  - For each relevant button, report the nearest inherited binding and original activators on each path
+  - When paths expose multiple distinct non-Base bindings, recommend explicit clear/block; compare actual bindings and activators, not just owner names. Do not assume replacement is safe
+  - Handle above-layer interactions separately for lightweight covers; do not make global above-layer reachability a prerequisite
+  - Benchmark the checker on both variants and audit cleanup functions/blocks against the project docs. Scope is intended flows, not every runtime interleaving
+- [x] Deprecate the exhaustive stack/timed-proof audit as the default workflow; preserve code, tests and a compact research checkpoint for reuse ([archive](findings/2026-09-30-stack-search/ARCHIVE.md))
 - [ ] Decide RTP Double Tap's LB, RB, menu buttons and trigger edges: their inherited values change with the stack, so §8 says clear ([finding](findings/2026-09-30-stack-search/README.md#what-we-learned))
 - [ ] Periodically recheck whether Steam's desktop configuration still drops entries after the third; consider filing a Valve bug report. If it's fixed, revisit the [command entry budget](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget)
 
