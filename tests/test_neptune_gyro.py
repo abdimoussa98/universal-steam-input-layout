@@ -58,9 +58,10 @@ class NeptuneGyroTests(unittest.TestCase):
         disabled |= {"Menu " + side + ": " + suffix
                      for side in ("Left", "Right")
                      for suffix in ("Entry Point", "Fn Layer", "Double Tap", "Double Tap Cover")}
-        disabled |= {"Menu Left: Escape", "Menu Left: Backspace", "Menu Right: Tab", "Menu Right: Enter"}
-        disabled |= {f'Steering | Menu {side}: {suffix}' for side in ('Left', 'Right')
-                     for suffix in ('Entry Point', 'Tap Cover')}
+        disabled |= {"Menu Left: Escape", "Menu Right: Tab"}
+        # The steering Menu Tap Covers sit only on their protected entry and
+        # inherit its disabled gyro (90.7).
+        disabled |= {f'Steering | Menu {side}: Entry Point' for side in ('Left', 'Right')}
         gyro_activation = {"layer": "1", "gyro_ratchet_button_mask": "211109453758464",
                            "gyro_ratchet_button_requireany_or_all": "0"}
         for variant, layout in self.layouts.items():

@@ -20,6 +20,7 @@ full explanation. The linked docs are the source of truth.
 | 8 | [Inheritance and blocking](#8-inheritance-and-blocking) | What a layer picks up from the layers below it, when to block that, and what a block looks like |
 | 9 | [Always On layers](#9-always-on-layers) | Ordering rules for the Double Tap windows. What they block comes from §8 |
 | 10 | [Ship it](#10-ship-it) | Audits, tests, Deck checks and publishing |
+| 11 | [Stateful layers](#11-stateful-layers) | A stateful layer is entered and left through the transition structure. Only for stateful layers |
 | – | [Open questions](#open-questions) | Decisions for the author |
 
 Main references: [Steam Input JSON Structure](Steam%20Input%20JSON%20Structure.md)
@@ -34,12 +35,18 @@ The author accepted these types on 2026-09-30, and more may be added later.
 
 | Type | Examples | What its cleanup removes |
 |---|---|---|
-| Stateful | `Gyro`, `Steering` | Removed only by its own deliberate exit. Other layers' cleanup never removes it |
+| Stateful | `Gyro`, `Steering` | Removed only by its own deliberate exit. Other layers' cleanup never removes it. See [§11](#11-stateful-layers) |
 | Owner | Modifiers, Menu Entry and Fn layers, Scroll, Transition Sets, trackpad modes | Its family or current branch, plus every overlay it applied |
-| Overlay | Tap Covers, `Menu Right: Enter`, `Menu Left: Backspace`, Double Tap Covers, Temp Cursor Gyro | Itself, or a local pair. The owner handles recovery when it gets stuck |
+| Overlay | Tap Covers, Double Tap Covers, Temp Cursor Gyro | Itself, or a local pair. The owner handles recovery when it gets stuck |
 | Stick-touch helper | `LST` or `RST` `Entry Point`, `Tap Cover` and `Temporary Gyro` | Every layer removes it when the thumb lifts off that stick ([§5](#5-stick-touch-release)) |
 | Always On window | The seven Double Tap layers | Only itself ([§9](#9-always-on-layers)) |
+| Chorded window | `Steering \| LS Up/Down: Double Tap` | Itself on timeout or second press (removed first). A 150 ms chord on the held drivers replaces the Always On clock, so §9 doesn't apply. Not cover-type: it binds both touch inputs with the shared driver-guarded recovery. **To be rebuilt as Always On windows** (author, 2026-10-01): the chord rides on an inverted edge of a D-pad stick, which [§3](#3-activators) now rules out |
 | Ramp or threshold | `Turning Ramp Up 0/1`, `Gyro Off Ramp Up` | Itself and the ramp family, through repeating threshold exits |
+
+**Exception (author, 2026-09-30):** the quick opposite-modifier tap in every
+Modifier 2 layer (`Gyro | …` and `Steering | …`) is a deliberate "clear to
+Base" gesture. It removes every layer, including the stateful `Gyro` and
+`Steering`.
 
 See: [Vocabulary](Layout%20Vocabulary.md#terms) ·
 [Cleanup scopes](Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) ·
@@ -73,6 +80,16 @@ See: [layout-prep skill](../.claude/skills/steam-layout-prep/SKILL.md) ·
   delayed-apply reset as a 4th entry, and it must be **last** so it's the one
   that gets dropped.
 - Subcommand arrays run **bottom to top**.
+- **On a D-pad-mode stick, an inverted edge never adds or removes a layer**
+  (author rule, 2026-10-01). It isn't caught reliably there. Use a normal
+  outer edge and its Release. An inverted edge that only sends output, such
+  as a walk bind or the WASD modifier, is fine. Mouse-mode sticks aren't
+  affected; the ramp-up's Soft Press exits work.
+  - Known violations: Steering's left-stick layers, tracked in the
+    [todos](../todos.md#stateful-layer-transitions).
+- **Chords latch** (author's test, 2026-10-01). A bind can't hand over from a
+  chord to another activator when the chord button is released; it stays in
+  the chord until its own button is released.
 
 See: [Allowed activators](Steam%20Input%20JSON%20Structure.md#allowed-activation-types) ·
 [Entry budget](Steam%20Input%20JSON%20Structure.md#command-entry-budget) ·
@@ -84,6 +101,10 @@ See: [Allowed activators](Steam%20Input%20JSON%20Structure.md#allowed-activation
 - When a layer is added, its immediate layer command **doesn't fire on an
   input that's already held**. Give that command Hold to Repeat, or add the next
   layer in the same array.
+- **This rule covers the layer API only** (author, 2026-10-01): `add_layer`,
+  `remove_layer` and `hold_layer`. It doesn't cover key or mouse outputs. The
+  author's experience is that an output does fire on an already-held input
+  when its layer is added; this hasn't been tested on the Deck in isolation.
 - Delayed applies do fire on a held input. Keep short delays such as the 5 ms
   delay.
 - Anything that must fire after a removal needs Hold to Repeat. How removals
@@ -98,9 +119,9 @@ See: [Held inputs](Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-
 layers may inherit it.** A cover-type layer is a lightweight layer that is only
 ever added on top of another layer. There's no strict definition yet; it's a
 judgment call. Current cover-type layers:
-- the Tap Covers and the Double Tap Covers
+- the Tap Covers and the Double Tap Covers, including the steering
+  `LS: Tap Cover`, `LS: Double Tap Cover` and Menu Tap Covers (since 90.7)
 - Temp Cursor Gyro
-- `Menu Right: Enter` and `Menu Left: Backspace`
 - `Gyro Off Ramp Up`. Its only delay is a 5 ms right-stick handoff to
   `Turning Ramp Up 0`, which is a threshold handoff rather than a hold, so a
   thumb release has nothing to complete.
@@ -138,7 +159,8 @@ This section is one concept. The chorded delay, the repeating reset, the
 release into a Double Tap window, the Double Tap Cover, and the stick-touch
 release all belong to the same recipe. **Any layer that adds a delay or a
 double tap must implement the whole recipe, or record which part it leaves
-out and why.**
+out and why.** Recorded so far: the steering double tap
+([deviations](../findings/2026-09-30-steering-lean/README.md#recipe-deviations-dod-6)).
 
 ### The bug it works around: the stuck delay
 
@@ -303,6 +325,8 @@ makes it obvious.**
 - **Other block shapes:**
   - a conditional empty chord blocks only while its selector is held
   - a disabled source quiets the whole trackpad or gyro, including its output
+  - a group in a different source mode blocks the whole source
+    ([below](#a-source-mode-change-blocks-inheritance))
 - **Watch the whole-input override.** Clearing or replacing an input drops
   *all* of its inherited activators. Record what's lost; for example, blocking
   LS edge loses the WASD modifier.
@@ -314,35 +338,83 @@ makes it obvious.**
 - **Existing empty bindings may be protecting a timer.** Find out what one
   protects before you replace it.
 
+### A source-mode change blocks inheritance
+
+**Author rule, 2026-10-01: inputs don't inherit between modes.** When a layer
+binds a source in a different mode from the layers below it (for example a
+`dpad` trackpad over Base's `absolute_mouse` pad), none of that source's
+lower inputs carry over, including inputs the upper group leaves unbound. The
+mode change is itself the block; no extra clear is needed.
+
+Example: the RTP Double Tap window's right pad is in `dpad` mode and binds no
+`touch`. Base's mouse-mode `touch` (which adds `RTP: Entry Point`) does not
+fire inside the window, so a second touch only fires the window's own regions.
+
+Both [audit_inheritance.py](../audit_inheritance.py) (blocked kind
+`mode replaced`) and [audit_flow_inheritance.py](../audit_flow_inheritance.py)
+apply this rule.
+
 ### How to check it
 
-**Author rule, 2026-09-30: trace every stack the layer can be applied on.**
-Ask whether any of them would ever have a layer command under an input the
-layer leaves open. If one would, the layer must block that input for its whole
-lifetime:
-- **Replace** it with the underlying output only if that output is identical in
-  every stack, for example always E or always middle mouse.
-- **Clear** it otherwise. When the layer is applied in more than one context
-  with different binds underneath, a hard-coded replacement would be wrong in
-  some of them.
+**Author rule, 2026-09-30, restated by the author on 2026-10-01. It applies
+to a layer with an Always On action, and to no other layer:**
 
-[audit_inheritance.py](../audit_inheritance.py) does this:
+1. Trace every stack the layer can be applied on.
+2. For each input the layer leaves open, look at the bindings it could
+   inherit from those stacks.
+3. If one of them is a layer command, the layer must handle that input for
+   its whole lifetime.
+4. How:
+   - **Clear** it if more than one keybind is possible underneath. A
+     hard-coded replacement would be wrong in some stack.
+   - **Replace** it with the keybind if there is only one, for example always
+     E or always middle mouse.
+
+If none of the bindings it could inherit is a layer command, the input is
+left alone, even when the keybinds differ between stacks. An ordinary layer
+inherits by default; it is never required to block an input because the
+layers below would give it different bindings.
+
+The **Window audit** ([audit_inheritance.py](../audit_inheritance.py)) checks
+this rule. The **Flow audit**
+([audit_flow_inheritance.py](../audit_flow_inheritance.py)) runs the cover
+check ([§5](#5-stick-touch-release)), checks that a chain reaches every
+layer, and lists inherited bindings that differ between stacks as
+information. Until 2026-10-01 it failed on those for every layer, which
+misread step 4 as a rule of its own. Both audits build their stacks from the
+same backward chains and run in the build audit ([§10](#10-ship-it)):
 
 ```bash
 python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json
 python3 audit_inheritance.py <layout> --entries "Menu Left: Double Tap"   # who adds it, what they remove first
+python3 audit_layer.py <layout> --layer "Menu Left: Fn Layer"             # below, above, inherited, exits
 ```
 
-1. **It derives the stacks.** Starting from Base, it applies every effective
-   binding's layer commands, respecting bottom-to-top order, whole-input
-   overrides and disabled sources. It ignores chord conditions, so missed
-   releases and stale stacks are included. It goes up to `--depth` input
-   events (default 5). Every stack the layer can be on top of is checked.
-   Every Always On layer is audited automatically.
-2. **It proves the search is complete.** The number of stacks grows with
-   depth, but the set of routes stops growing. A layer is *saturated* when the
-   last depth level adds no new route; if it doesn't, the check fails and
-   `--depth` needs raising. The current windows saturate by depth 4.
+For one layer, [audit_layer.py](../audit_layer.py) prints what can be below
+and above it, each inherited input with the layer it comes from, and what
+each of its exits removes against what can be present. The exits lists are
+for review against [§7](#7-cleanup); they aren't a check.
+
+1. **It builds the stacks backwards** (since 2026-10-01,
+   [chains.py](../steam_layout/chains.py)). It starts at the layer and asks
+   which bindings add it, then which add those layers, back to Base. Each
+   chain gives one stack, and applies the whole binding, so a parent that
+   removes itself isn't underneath.
+   - A step only counts if its layer answers that input on the stack so far.
+   - Between two steps a cover may lift (a removal-only binding), and one
+     other layer may arrive.
+   - **Bystanders:** any other layer stays underneath if it leaves the
+     chain's inputs alone and the chain doesn't remove it. This is how
+     `Gyro Off Ramp Up` ends up under a bumper window.
+   - There is no depth cap and no config, so the Steering layers are reached
+     like any other. Every Always On layer is audited automatically.
+   - Chords are ignored (author, 2026-10-01): every adding binding is
+     followed. That can add a stack that can't happen, never drop one that
+     can. Missed releases, `hold_layer` and three families overlapping are
+     not covered.
+2. **A window no stack reaches fails** as "not checked". Each open route is
+   printed with the bindings that built its stack. `--depth 5` adds the older
+   depth-limited search as a comparison; it is off by default and deprecated.
 3. **It finds the routes.** For each input the layer doesn't define, the
    topmost lower binding in each stack is the effective one. If it changes
    layers, directly or through a mode shift, that's a route. Inputs the layer
@@ -353,8 +425,9 @@ python3 audit_inheritance.py <layout> --entries "Menu Left: Double Tap"   # who 
    applies the recommendations to the Always On windows during the install.
 5. **Exceptions go in [traced_stacks.json](../traced_stacks.json):** `allow`
    with a reason, or `todo` while it awaits the author. The file can also add
-   stacks the search can't reach. An undecided `open` or `mode_replaced` route
-   fails the check.
+   stacks the search can't reach. An undecided `open` route fails the check.
+   A different source mode above the definer is a block, not a route
+   ([below](#a-source-mode-change-blocks-inheritance)).
 6. **The test enforces it.** [test_audit_inheritance.py](../tests/test_audit_inheritance.py)
    fails when a change opens an undecided route or breaks saturation in the
    working layouts.
@@ -396,11 +469,12 @@ cleared, and one is a deliberate exception
 - **Trigger edges, all seven default windows:** `Gyro Off Ramp Up` can sit
   under any window, and its edge removes it. The underlying bind varies
   between left mouse and nothing, so the edge is cleared.
-- **Right-pad `touch`, RTP Double Tap: allowed, not blocked** (author,
-  2026-09-30). The window's D-pad-mode pad is its own second-tap selection. A
+- **Right-pad `touch`, RTP Double Tap: blocked by the mode change** (author,
+  2026-10-01). The window's D-pad-mode pad is its own second-tap selection: a
   second tap north or south goes to Circular Scroll, and anywhere else leaves
-  the window and stays in mouse mode. This is a unique case, so no touch bind
-  is added. The `allow` decision is in [traced_stacks.json](../traced_stacks.json).
+  the window and stays in mouse mode. Base's mouse-mode touch doesn't inherit
+  into the dpad-mode pad ([mode rule](#a-source-mode-change-blocks-inheritance)),
+  so no touch bind is needed. The former `allow` decision was retired.
 - **The four back buttons, RTP Double Tap:** the Fn layers can be underneath
   if you hold a menu button and quick-tap the right pad.
 
@@ -414,8 +488,26 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 
 ## 10. Ship it
 
-- [ ] `python3 audit_command_budget.py <layout>` and
-      `python3 audit_inheritance.py <layout>` exit 0 for both variants.
+- [ ] **The build audit is clean, on every version.** `python3 audit_build.py`
+      runs the three audits below on both variants and exits 0 only when all
+      pass. No version ships with a failing line.
+
+      | Audit | Script | Clean means |
+      |---|---|---|
+      | Budget audit | `audit_command_budget.py` | Three entries per input and no banned activators ([§3](#3-activators)) |
+      | Window audit | `audit_inheritance.py` | No undecided layer command under an Always On window ([§8](#8-inheritance-and-blocking), [§9](#9-always-on-layers)) |
+      | Flow audit | `audit_flow_inheritance.py` | A chain of adding bindings reaches every layer, and no cover finding is open ([§5](#5-stick-touch-release), [§8](#8-inheritance-and-blocking)) |
+
+      What a clean build audit doesn't prove: it follows the intended flows,
+      not every runtime interleaving, missed release or timer race. Those are
+      what the Deck checks are for.
+- [ ] **A new layer needs no declaration.** The audits pick it up from the
+      layout. If no binding adds it, the Flow audit reports it as a coverage
+      gap. Only two things go in
+      [flow_config.json](../steam_layout/flow_config.json): a cover whose
+      title doesn't end in a cover suffix, and an accepted cover finding or
+      unsupported lookup, with a reason. A decision that no longer matches
+      anything is reported as stale.
 - [ ] The tests pass, and a new invariant gets a new test.
 - [ ] The change is recorded in `findings/<date>-<slug>/`.
 - [ ] A Deck section is added to [manual-testing.md](../manual-testing.md). It
@@ -423,6 +515,48 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       release missed while the Steam menu is open.
 - [ ] The [layout-apply skill](../.claude/skills/steam-layout-apply/SKILL.md)
       has run: description, version bump, `to-ids`, VDF export and snapshot.
+
+## 11. Stateful layers
+
+This section applies only when a stateful layer is added or changed. The
+structure is in [Stateful Layer Transitions](Stateful%20Layer%20Transitions.md).
+It was agreed on 2026-10-01 and **isn't built yet**; today's layouts still use
+the earlier Transition Sets.
+
+The check is whether the transitions behave as that document says. It lives
+here while stateful layers are still being built. Once the structure is in the
+layouts a test takes over, and the test is extended with every new stateful
+layer until all four gestures are taken.
+
+- [ ] **Gesture.** The layer is entered by one of the four menu-plus-stick-click
+      gestures, and the gesture map is updated.
+- [ ] **Entry.** The Base Entry Point sends that click's Release to the right
+      transition, and the transition's menu Release adds the layer.
+- [ ] **Exit.** Inside the layer, every one of the four gestures leads to the
+      clear transition. The layer has Entry Points for that, added by its own
+      menu press.
+- [ ] **Fallback.** The Modifier 2 clear removes the layer and its helpers.
+- [ ] **Clean entry.** At entry the layer has no Release or delayed binding on
+      Start or Select. A repeating press that adds its Entry Point, like
+      Base's, is allowed (author, 2026-10-01).
+- [ ] **No layer is entered from a transition.** Every layer-adding input
+      underneath is blocked with an empty binding.
+- [ ] **Recipes.** Nothing depends on a chord handing over when the chord
+      button is released, or on an inverted edge of a D-pad stick adding or
+      removing a layer ([§3](#3-activators)).
+- [ ] **Test and Deck checklist** are updated for the new layer.
+
+**Exceptions (author, 2026-10-01):**
+- `Gyro` is toggled by the Modifier 2 release and is left on by the clear.
+- The Modifier 2 clear and Steering's W/S hold exit skip the transition.
+- Stateful Cursor Gyro will also clear the way Temp Cursor Gyro does. An extra
+  exit like these is allowed; the menu-plus-click clear and the Modifier 2
+  clear are never dropped.
+- The planned Menu stateful layer won't use this structure.
+
+See: [Stateful Layer Transitions](Stateful%20Layer%20Transitions.md) ·
+[brainstorm record](../plans/2026-10-01-stateful-layer-transitions.md) ·
+[runtime rules](Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30)
 
 ## Open questions
 

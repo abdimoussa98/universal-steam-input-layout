@@ -1,0 +1,96 @@
+{
+  "_about": "Intended-flow rules for steam_layout/flow_paths.py (plans/2026-10-01-intended-flow-inheritance.md). Transitions are derived from the layout; this file only declares what bindings can't say: each family's starting contexts (layers in a context only fire on the family's controls unless listed as live), the controls that start the family, controls assumed held at the start, controls a family may hold only to satisfy chords, and deliberate exclusions with reasons. Titles and controls use default-layout names; 'variants' maps titles and per-variant lists may differ.",
+  "version": 4,
+  "variants": {"alternative": {"L1": "L2", "R1": "R2"}},
+  "covers": {"_about": "Cover-type layers (Layer Definition of Done section 5). They inherit their owner, so differing lower bindings are expected; the cover check (flow_covers.py) judges them instead.",
+    "suffixes": [": Tap Cover", ": Double Tap Cover", ": Temp Cursor Gyro"],
+    "titles": ["Gyro Off Ramp Up"],
+    "not_covers": ["LST: Tap Cover", "RST: Tap Cover"],
+    "allow": []},
+  "decisions": [
+    {"layers": ["Steering | LS Down: Modifier 0", "Steering | LS Up: Modifier 1", "Steering | LS Up: Double Tap", "Steering | LS Down: Double Tap"],
+     "inputs": {"default": ["switch/left_bumper", "switch/right_bumper"], "alternative": ["left_trigger/edge", "right_trigger/edge"]},
+     "status": "allow",
+     "why": "Documented steering design: helpers inherit the active W/S owner's driver bindings so the dominant press, owner release and takeover work in every phase (findings/2026-09-30-steering-lean/README.md, reused single-side covers; pinned by test_dominant_two_entries_inherit_through_every_helper)."}
+  ],
+  "families": {
+    "modifiers": {
+      "doc": "Single modifiers, both Modifier 2 orders, Tap Covers, Temp Cursor Gyro, the Double Tap -> Scroll -> Double Tap Cover recipe; Base and Gyro contexts.",
+      "contexts": [["Base"], ["Base", "Gyro"]],
+      "controls": {"default": ["switch/left_bumper", "switch/right_bumper"], "alternative": ["left_trigger/edge", "right_trigger/edge"]},
+      "held_at_start": ["joystick/touch", "right_joystick/touch"],
+      "exclude": []
+    },
+    "menu_left": {
+      "doc": "Select: Entry Point, 300 ms hold to Fn, release to the Double Tap window, second press to Escape and its Double Tap Cover, Start for Enter, Fn stick clicks into the Transition Sets, and the protected steering entry.",
+      "contexts": [["Base"], ["Base", "Gyro"]],
+      "controls": ["switch/button_menu"],
+      "held_at_start": ["joystick/touch", "right_joystick/touch"],
+      "exclude": [
+        {"layer": "Transition Set 1", "control": "switch/button_escape", "reason": "Start release commits into Steering: the steering family starts from that commit"}
+      ]
+    },
+    "menu_right": {
+      "doc": "Start: Entry Point, 300 ms hold to Fn, release to the Double Tap window, second press to Tab and its Double Tap Cover, Select for Backspace, stick clicks into the Transition Sets, and the protected steering entry.",
+      "contexts": [["Base"], ["Base", "Gyro"]],
+      "controls": ["switch/button_escape"],
+      "held_at_start": ["joystick/touch", "right_joystick/touch"],
+      "exclude": [
+        {"layer": "Transition Set 1", "control": "switch/button_escape", "reason": "Start release commits into Steering: the steering family starts from that commit"}
+      ]
+    },
+    "steering": {
+      "doc": "Steering after the Transition Set 1 commit: entry guard, W/S owners and takeover, Modifier 0/1 and both Modifier 2 orders, the chorded Double Tap windows, repeat and tap covers, fallback exit.",
+      "contexts": [
+        {"stack": ["Base", "Steering", "Steering | LS: Entry Point"], "live": ["Steering", "Steering | LS: Entry Point"]},
+        {"stack": ["Base", "Gyro", "Steering", "Steering | LS: Entry Point"], "live": ["Steering", "Steering | LS: Entry Point"]}
+      ],
+      "controls": [],
+      "held_at_start": ["joystick/touch", "right_joystick/touch", "joystick/edge"],
+      "exclude": [
+        {"layer": "Steering", "control": "switch/button_menu", "reason": "Select leaves Steering into the menu_left family"},
+        {"layer": "Steering", "control": "switch/button_escape", "reason": "Start leaves Steering into the menu_right family"},
+        {"layer": "Steering | R1: W Key", "control": "switch/button_menu", "reason": "Select leaves Steering into the menu_left family"},
+        {"layer": "Steering | R1: W Key", "control": "switch/button_escape", "reason": "Start leaves Steering into the menu_right family"},
+        {"layer": "Steering | L1: S Key", "control": "switch/button_menu", "reason": "Select leaves Steering into the menu_left family"},
+        {"layer": "Steering | L1: S Key", "control": "switch/button_escape", "reason": "Start leaves Steering into the menu_right family"}
+      ]
+    },
+    "left_stick_touch": {
+      "doc": "LS touch: Entry Point, hold to Tap Cover, release to the Double Tap window, second touch to Temporary Gyro.",
+      "contexts": [["Base"], ["Base", "Gyro"]],
+      "controls": ["joystick/touch"],
+      "held_at_start": [],
+      "exclude": []
+    },
+    "right_stick_touch": {
+      "doc": "RS touch: Entry Point, hold to Tap Cover, release to the Double Tap window, second touch to Temporary Gyro.",
+      "contexts": [["Base"], ["Base", "Gyro"]],
+      "controls": ["right_joystick/touch"],
+      "held_at_start": [],
+      "exclude": []
+    },
+    "right_pad": {
+      "doc": "Right pad touch: Entry Point, hold to Tap Cover, release to the Double Tap window, north/south second tap to Circular Scroll.",
+      "contexts": [["Base"], ["Base", "Gyro"]],
+      "controls": ["right_trackpad/touch"],
+      "held_at_start": ["joystick/touch", "right_joystick/touch"],
+      "exclude": []
+    },
+    "left_pad_keys": {
+      "doc": "Left pad swipes into the Escape, Enter, Tab and Backspace key layers; lifting the thumb removes them.",
+      "contexts": [["Base"], ["Base", "Gyro"]],
+      "controls": ["left_trackpad/dpad_north", "left_trackpad/dpad_south", "left_trackpad/dpad_east", "left_trackpad/dpad_west"],
+      "held_at_start": ["left_trackpad/touch", "joystick/touch", "right_joystick/touch"],
+      "exclude": []
+    },
+    "ramps": {
+      "doc": "RS edge turn assist: Gyro Off Ramp Up, Turning Ramp Up 0 and 1, with a trigger held for the direct ramp.",
+      "contexts": [["Base"], ["Base", "Gyro"]],
+      "controls": ["right_joystick/edge"],
+      "held_at_start": ["right_joystick/touch"],
+      "may_hold": ["left_trigger/edge", "right_trigger/edge", "left_trigger/click", "right_trigger/click"],
+      "exclude": []
+    }
+  }
+}

@@ -63,7 +63,13 @@ entry/exit behavior. Numeric-reference and command-budget checks do not verify
 effective inherited behavior. Include held-across-transition and newly activated
 input cases in the Deck handoff; distinguish static checks from runtime results.
 
-First run `python3 audit_command_budget.py path/to/layout.json`. It must exit **0**
+Run the build audit first: `python3 audit_build.py`. It runs the Budget audit,
+the Window audit and the Flow audit on both working layouts and must exit
+**0** before any version is finalized
+([Layer Definition of Done §10](../../../resources/Layer%20Definition%20of%20Done.md#10-ship-it)).
+The paragraphs below describe the individual audits it runs.
+
+The Budget audit is `python3 audit_command_budget.py path/to/layout.json`. It must exit **0**
 before finalizing a layout for Steam. It also fails on any Long Press or Double
 Press, which are banned (see `steam-binding-order`). The limit is **three GUI command entries per
 input**, across activator types; `binding` array subcommands do not consume extra
@@ -72,7 +78,7 @@ banks separately. Resolve failures using `steam-binding-order`; do not truncate
 cleanup subcommands to make a count pass. Read-only audits may report failures
 without changing the layout.
 
-Then run `python3 audit_inheritance.py path/to/layout.json`. It must also exit
+The Window audit is `python3 audit_inheritance.py path/to/layout.json`. It must also exit
 **0**. It derives every stack each Always On layer can be applied on and fails
 on any undecided layer command underneath, or on an unsaturated search. Apply
 its `blocks_needed` (replace only if the underlying output is identical in
@@ -80,6 +86,13 @@ every stack, otherwise clear). The install runs
 `steam_layout.fixes` pipeline, which does
 this (`python3 -m steam_layout.fixes <layout> --dry-run` shows what it would change). See
 [Layer Definition of Done §8](../../../resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking).
+
+The Flow audit is `python3 audit_flow_inheritance.py path/to/layout.json`. It
+must exit **0**: a chain of adding bindings reaches every layer, and no cover
+finding is open. A new or renamed layer needs no declaration; only a cover
+whose title doesn't end in a cover suffix, or an accepted cover finding with
+its reason, goes in `steam_layout/flow_config.json`. Inherited bindings that
+differ between stacks are listed as information and don't fail it.
 
 ```bash
 python3 - path/to/layout.json <<'EOF'

@@ -1,0 +1,1043 @@
+{
+ "variants": {
+  "alternative": {
+   "L1": "L2",
+   "R1": "R2"
+  }
+ },
+ "targets": {
+  "Steering": {
+   "stacks": [
+    {
+     "layers": [
+      "Base"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | LS: Entry Point": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | R1: W Key": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | LS: Tap Cover": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Up: Modifier 1"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Down: Modifier 0"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Up: Modifier 1"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Down: Modifier 0"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Up: Modifier 1"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Down: Modifier 0"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Up: Modifier 1"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Down: Modifier 0"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | LS Up: Modifier 1": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | LS Down: Modifier 0": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | LS Up: Double Tap": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | LS Down: Double Tap": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | LS: Double Tap Cover": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | R1!L1: Modifier 2": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | Menu Left: Entry Point": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | Menu Left: Tap Cover": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Menu Left: Entry Point",
+      "Steering | Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Menu Left: Entry Point",
+      "Steering | Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Menu Left: Entry Point",
+      "Steering | Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Menu Left: Entry Point",
+      "Steering | Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Menu Left: Entry Point",
+      "Steering | Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Menu Left: Entry Point",
+      "Steering | Menu Left: Entry Point"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | Menu Right: Entry Point": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | Menu Right: Tap Cover": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Menu Right: Entry Point",
+      "Steering | Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Menu Right: Entry Point",
+      "Steering | Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Menu Right: Entry Point",
+      "Steering | Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Menu Right: Entry Point",
+      "Steering | Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Menu Right: Entry Point",
+      "Steering | Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Menu Right: Entry Point",
+      "Steering | Menu Right: Entry Point"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | L1: S Key": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "Steering | L1!R1: Modifier 2": {
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "canonical"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "canonical"
+    }
+   ]
+  },
+  "RTP: Double Tap": {
+   "decisions": [
+    {
+     "source": "right_trackpad",
+     "input": "touch",
+     "status": "allow",
+     "why": "Author, 2026-09-30: RTP Double Tap's dpad-mode right pad is its own second-tap selection. A second tap in the north or south region transitions to Circular Scroll; anywhere else leaves the window and stays in mouse mode. It's a deliberate edge case, so no touch bind is added. Base's touch (add RTP: Entry Point) sits under a different source mode here."
+    }
+   ],
+   "stacks": [
+    {
+     "layers": [
+      "Base",
+      "Steering"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | LS: Entry Point"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Up: Modifier 1"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Up: Modifier 1",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Up: Double Tap"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Double Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Tap Cover",
+      "Steering | R1!L1: Modifier 2"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Tap Cover",
+      "Steering | R1!L1: Modifier 2",
+      "L1: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Up: Modifier 1"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Up: Modifier 1",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Up: Double Tap"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Double Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Tap Cover",
+      "Steering | L1!R1: Modifier 2"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Tap Cover",
+      "Steering | L1!R1: Modifier 2",
+      "R1: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | LS: Entry Point"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Up: Modifier 1"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Up: Modifier 1",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS Up: Double Tap"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Double Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Tap Cover",
+      "Steering | R1!L1: Modifier 2"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | R1: W Key",
+      "Steering | LS: Tap Cover",
+      "Steering | R1!L1: Modifier 2",
+      "L1: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Up: Modifier 1"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Up: Modifier 1",
+      "Steering | LS: Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS Up: Double Tap"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Double Tap Cover"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Tap Cover",
+      "Steering | L1!R1: Modifier 2"
+     ],
+     "why": "steering"
+    },
+    {
+     "layers": [
+      "Base",
+      "Gyro",
+      "Steering",
+      "Steering | L1: S Key",
+      "Steering | LS: Tap Cover",
+      "Steering | L1!R1: Modifier 2",
+      "R1: Tap Cover"
+     ],
+     "why": "steering"
+    }
+   ]
+  }
+ },
+ "_about": "Hand-declared canonical steering stacks for audit_inheritance.py --depth 0. The derived search cannot reach steering depth (see README). Steering targets list the stacks below each steering layer; RTP: Double Tap lists steering stacks it can open on, plus its existing touch decision from traced_stacks.json."
+}

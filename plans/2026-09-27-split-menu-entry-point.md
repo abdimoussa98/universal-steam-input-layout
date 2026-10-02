@@ -11,6 +11,12 @@
   - **New groups:** 13042–13051 in the default and 13039–13048 in the alternative.
 - **Deviation from the outline below:** each combo layer also has a disabled `gyro` group, as `Menu Right: Tab` does. That keeps the gyro off if the other menu button is released first. That's the one moment the combo layer sits directly on Base, and today the re-added entry layer keeps the gyro off there too.
 
+> **Update, 2026-10-01:** decision 6 was reversed in 90.9. `Menu Left: Backspace`
+> and `Menu Right: Enter` were removed and the menu chords type the keys
+> directly, so problem 4 (the stray Tab / Escape when the first button is lifted
+> first) is back and accepted. See the
+> [record](../findings/2026-10-01-intended-flow-checker/README.md#author-decisions-2026-10-01).
+
 ## Context
 
 This comes from the Bugs section of `todos.md`: "Split menu entry layer into separate Menu Left / Menu Right layers." It also folds in:

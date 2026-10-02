@@ -1,0 +1,57 @@
+{
+  "_about": "Rules for audit_flow_inheritance.py, which runs on backward chains (steam_layout/chains.py, covers.py). The stacks are derived from the layout; this file only declares what bindings can't say: the starting contexts the chains may begin from (Base alone, and Base with the stateful Gyro layer on it), which layers are covers, and recorded decisions with reasons. Titles use default-layout names; 'variants' maps them for the alternative layout. Until 2026-10-01 this file also declared a 'families' section for the family walk (steam_layout/flow_paths.py, deprecated); that version is kept as tests/data/flow_families_90.9.json.",
+  "version": 5,
+  "variants": {
+    "alternative": {
+      "L1": "L2",
+      "R1": "R2"
+    }
+  },
+  "contexts": [
+    [
+      "Base"
+    ],
+    [
+      "Base",
+      "Gyro"
+    ]
+  ],
+  "covers": {
+    "_about": "Cover-type layers (Layer Definition of Done section 5). They inherit their owner, so differing lower bindings are expected; the cover check (flow_covers.py) judges them instead.",
+    "suffixes": [
+      ": Tap Cover",
+      ": Double Tap Cover",
+      ": Temp Cursor Gyro"
+    ],
+    "titles": [
+      "Gyro Off Ramp Up"
+    ],
+    "not_covers": [
+      "LST: Tap Cover",
+      "RST: Tap Cover"
+    ],
+    "allow": []
+  },
+  "decisions": [
+    {
+      "layers": [
+        "Steering | LS Down: Modifier 0",
+        "Steering | LS Up: Modifier 1",
+        "Steering | LS Up: Double Tap",
+        "Steering | LS Down: Double Tap"
+      ],
+      "inputs": {
+        "default": [
+          "switch/left_bumper",
+          "switch/right_bumper"
+        ],
+        "alternative": [
+          "left_trigger/edge",
+          "right_trigger/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "Documented steering design: helpers inherit the active W/S owner's driver bindings so the dominant press, owner release and takeover work in every phase (findings/2026-09-30-steering-lean/README.md, reused single-side covers; pinned by test_dominant_two_entries_inherit_through_every_helper)."
+    }
+  ]
+}

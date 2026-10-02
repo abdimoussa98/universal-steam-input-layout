@@ -111,9 +111,10 @@ The scope is:
 So the family is the definition that matters most. Two early results already
 show the value:
 
-- `Menu Left: Fn Layer`'s RS-edge recovery can find `Menu Right: Enter` active
-  and never removes it. That is the open finding F1 in the
+- `Menu Left: Fn Layer`'s RS-edge recovery could find `Menu Right: Enter` active
+  and never removed it: finding F1 in the
   [cleanup audit](../findings/2026-09-28-neptune-cleanup-audit/AUDIT.md#f1-enterbackspace-are-missing-from-menu-family-recovery).
+  It is moot since 90.9, which removed both overlay layers.
 - Overlays that override the host's input, such as the cursor on LB, correctly
   drop out of the owner release's candidates. Their own local exit handles
   them.

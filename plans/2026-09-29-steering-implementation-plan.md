@@ -63,7 +63,8 @@ releasing the dominant permits the held opposite to become the new owner.
 
 Preserve protected menu entry, deliberate Fn, release commitment and disposable
 initial WASD. Fallback W warns at 1 s and exits at 2.5 seconds with beep/vibration;
-W release or acquisition cancels timing. Preserve unrelated persistent Gyro.
+W release or acquisition cancels timing. Preserve unrelated persistent Gyro,
+except Mod 2's quick opposite tap, which clears to Base by design (author, 2026-09-30).
 
 ## Decisions and failure branches
 

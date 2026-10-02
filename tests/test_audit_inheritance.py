@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 
 from audit_inheritance import Layout, audit, entries, explore, map_title
@@ -114,12 +115,16 @@ class RouteTests(unittest.TestCase):
         self.assertEqual([(r["source"], r["input"], r["via"]) for r in rows],
                          [("joystick", "click", "mode_shift joystick 90")])
 
-    def test_a_different_source_mode_above_the_definer_is_flagged_not_trusted(self):
-        data = build({"Base": {"right_trackpad": ("absolute_mouse", {"touch": act(add("Mod"))})},
-                      "Mod": {}, "Win": {"right_trackpad": ("dpad", {"dpad_north": act(EMPTY)})}})
-        report = audit(data, config([["Base"]]))
-        self.assertEqual(routes(report, "mode_replaced"), {("right_trackpad", "touch")})
-        self.assertFalse(report["ok"])
+    def test_a_different_source_mode_above_the_definer_blocks_inheritance(self):
+        # Author rule, 2026-10-01: a mode change blocks; the lower mode's inputs don't carry over.
+        for win, mod in [("dpad", {}), ("absolute_mouse", {"right_trackpad": ("dpad", {})})]:
+            data = build({"Base": {"right_trackpad": ("absolute_mouse", {"touch": act(add("Mod"))})},
+                          "Mod": mod, "Win": {"right_trackpad": (win, {"dpad_north": act(EMPTY)})}})
+            report = audit(data, config([["Base", "Mod"]]))
+            self.assertEqual(routes(report), set())
+            self.assertEqual({(b["input"], b["kind"]) for b in report["targets"]["Win"]["blocked"]},
+                             {("touch", "mode replaced")})
+            self.assertTrue(report["ok"])
 
     def test_decisions_allow_or_defer_routes_and_stale_ones_are_reported(self):
         data = build({"Base": {"switch": ("switches", {"button_a": act(add("Mod")),
@@ -235,6 +240,8 @@ class ExploreTests(unittest.TestCase):
 
 
 class DerivedAuditTests(unittest.TestCase):
+    """The depth-limited search on its own (`chains=False`): an opt-in comparison since the switch to chains."""
+
     def test_always_on_layers_are_audited_from_derived_stacks_without_config(self):
         data = build({"Base": {"switch": ("switches", {"left_bumper": act(add("Ramp")),
                                                        "right_bumper": act(add("Win"))}),
@@ -242,7 +249,7 @@ class DerivedAuditTests(unittest.TestCase):
                       "Ramp": {"left_trigger": ("trigger", {"edge": act([remove("Ramp"), "mouse_button LEFT, , "])})},
                       "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")),
                                                       "left_bumper": act(EMPTY), "right_bumper": act(EMPTY)})}})
-        report = audit(data, {"targets": {}}, depth=4)
+        report = audit(data, {"targets": {}}, depth=4, chains=False)
         row = report["targets"]["Win"]
         self.assertEqual({(r["source"], r["input"], r["from_layer"]) for r in row["routes"]},
                          {("left_trigger", "edge", "Ramp")})
@@ -259,7 +266,7 @@ class DerivedAuditTests(unittest.TestCase):
                       "Mod": {"joystick": ("dpad", {"click": act([add("Mod"), "mouse_button MIDDLE, , "])})},
                       "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")),
                                                       "left_bumper": act(EMPTY), "right_bumper": act(EMPTY)})}})
-        needed = audit(data, {"targets": {}}, depth=4)["targets"]["Win"]["blocks_needed"]
+        needed = audit(data, {"targets": {}}, depth=4, chains=False)["targets"]["Win"]["blocks_needed"]
         self.assertEqual([(b["input"], b["action"], b["activators"]) for b in needed], [("click", "clear", None)])
 
     def test_routes_found_only_at_the_depth_limit_mean_not_saturated(self):
@@ -268,9 +275,85 @@ class DerivedAuditTests(unittest.TestCase):
                        "B": {"switch": ("switches", {"button_x": act(remove("B"))})},
                        "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")),
                                                        "button_a": act(EMPTY), "button_b": act(EMPTY)})}})
-        shallow = audit(chain, {"targets": {}}, depth=3)["targets"]["Win"]
+        shallow = audit(chain, {"targets": {}}, depth=3, chains=False)["targets"]["Win"]
         self.assertFalse(shallow["saturated"])
-        self.assertTrue(audit(chain, {"targets": {}}, depth=5)["targets"]["Win"]["saturated"])
+        self.assertTrue(audit(chain, {"targets": {}}, depth=5, chains=False)["targets"]["Win"]["saturated"])
+
+
+def deep_window():
+    """Win is three inputs from Base (a, b, x); Owner's button_y stays open under it."""
+    return build({"Base": {"switch": ("switches", {"button_a": act(add("Mode"))})},
+                  "Mode": {"switch": ("switches", {"button_b": act(add("Owner"))})},
+                  "Owner": {"switch": ("switches", {"button_x": act(add("Win")), "button_y": act(remove("Owner"))})},
+                  "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")), "button_a": act(EMPTY),
+                                                  "button_b": act(EMPTY), "button_x": act(EMPTY)})}})
+
+
+AOA = {"always_on_action": act(remove("Win"))}
+
+
+def bystander_window():
+    """Button 1 enters L70, whose button 4 adds the window. Buttons 3 then 5 build EP > L60, which only
+    binds button 2, so it stays under the window. It takes two bindings to build, so it can't be a single
+    layer arriving mid-chain: the chain has to be replayed on top of it."""
+    return build({"Base": {"switch": ("switches", {"button_1": act(add("L70")), "button_3": act(add("EP"))})},
+                  "EP": {"switch": ("switches", {"button_5": act(add("L60"))})},
+                  "L60": {"switch": ("switches", {"button_2": act(remove("L60"))})},
+                  "L70": {"switch": ("switches", {"button_4": act([add("Win"), remove("L70")])})},
+                  "Win": {"switch": ("switches", {**AOA, "button_1": act(EMPTY), "button_3": act(EMPTY),
+                                                  "button_4": act(EMPTY), "button_5": act(EMPTY)})}})
+
+
+class ChainStackTests(unittest.TestCase):
+    """Stacks come from the backward chains (steam_layout/chains.py): no depth cap and no config."""
+
+    def test_a_window_no_stack_reaches_is_not_checked_and_fails(self):
+        report = audit(build({"Base": {}, "Win": {"switch": ("switches", AOA)}}), {"targets": {}})
+        row = report["targets"]["Win"]
+        self.assertEqual(row["stacks"], 0)
+        self.assertFalse(row["checked"])
+        self.assertFalse(report["ok"])
+
+    def test_chains_check_a_window_three_inputs_deep_with_no_depth(self):
+        report = audit(deep_window(), {"targets": {}})
+        self.assertEqual(report["depth"], 0)
+        row = report["targets"]["Win"]
+        self.assertTrue(row["checked"])
+        self.assertEqual((row["stacks"], row["chain_stacks"]), (1, 1))
+        self.assertTrue(row["saturated"])
+        self.assertEqual({(r["source"], r["input"], r["from_layer"], tuple(r["stack"])) for r in row["routes"]},
+                         {("switch", "button_y", "Owner", ("Base", "Mode", "Owner"))})
+        self.assertEqual([(b["input"], b["action"]) for b in row["blocks_needed"]], [("button_y", "clear")])
+        self.assertFalse(report["ok"])
+
+    def test_each_route_carries_the_reason_for_its_stack(self):
+        route = audit(deep_window(), {"targets": {}})["targets"]["Win"]["routes"][0]
+        self.assertEqual(route["reason"], ["Base switch/button_a Full_Press#0: +Mode",
+                                           "Mode switch/button_b Full_Press#0: +Owner",
+                                           "Owner switch/button_x Full_Press#0: +Win"])
+
+    def test_a_route_through_a_bystander_names_it(self):
+        routes = audit(bystander_window(), {"targets": {}})["targets"]["Win"]["routes"]
+        self.assertEqual([(r["input"], r["from_layer"], tuple(r["stack"])) for r in routes],
+                         [("button_2", "L60", ("Base", "EP", "L60"))])
+        self.assertEqual(routes[0]["reason"], ["Base switch/button_1 Full_Press#0: +L70",
+                                               "L70 switch/button_4 Full_Press#0: -L70 ; +Win",
+                                               "bystander: L60"])
+
+    def test_a_declared_stack_says_so(self):
+        data = build({"Base": {"switch": ("switches", {"button_a": act(add("Mod"))})}, "Mod": {}, "Win": {}})
+        route = audit(data, config([["Base"]]))["targets"]["Win"]["routes"][0]
+        self.assertEqual(route["reason"], ["declared in the config"])
+
+    def test_the_depth_search_is_an_opt_in_comparison(self):
+        # On its own it can't reach the window at depth 2, and finds it only at its limit at depth 3.
+        alone = audit(deep_window(), {"targets": {}}, depth=2, chains=False)
+        self.assertFalse(alone["targets"]["Win"]["checked"])
+        self.assertFalse(audit(deep_window(), {"targets": {}}, depth=3, chains=False)["targets"]["Win"]["saturated"])
+        # With chains the same stack is already traced, so the depth limit doesn't break saturation.
+        both = audit(deep_window(), {"targets": {}}, depth=3)["targets"]["Win"]
+        self.assertTrue(both["saturated"])
+        self.assertEqual(both["chain_stacks"], 1)
 
 
 class ConfigTests(unittest.TestCase):
@@ -315,6 +398,28 @@ class CliTests(unittest.TestCase):
             return subprocess.run([sys.executable, str(ROOT / "audit_inheritance.py"), str(layout),
                                    "--stacks", str(stacks), *extra], capture_output=True, text=True)
 
+    def test_chains_are_the_default_and_print_the_reason(self):
+        out = self.run_cli(deep_window(), {"targets": {}})
+        self.assertEqual(out.returncode, 1)
+        self.assertIn("depth 0", out.stdout)
+        self.assertIn("1 stack(s) (1 from chains)", out.stdout)
+        self.assertIn("switch/button_y from Owner", out.stdout)
+        self.assertIn("because: Owner switch/button_x Full_Press#0: +Win", out.stdout)
+
+    def test_an_unreached_window_is_reported_and_fails(self):
+        out = self.run_cli(build({"Base": {}, "Win": {"switch": ("switches", AOA)}}), {"targets": {}})
+        self.assertEqual(out.returncode, 1)
+        self.assertIn("Win: NOT CHECKED", out.stdout)
+
+    def test_the_working_layout_passes_on_chains_alone(self):
+        layout = ROOT / "neptune/single-set-default_hold-gyro_latest.json"
+        out = subprocess.run([sys.executable, str(ROOT / "audit_inheritance.py"), str(layout), "--json"],
+                             capture_output=True, text=True)
+        self.assertEqual(out.returncode, 0, out.stderr)
+        report = json.loads(out.stdout)
+        self.assertEqual(report["depth"], 0)
+        self.assertTrue(all(row["chain_stacks"] for row in report["targets"].values()))
+
     def test_exit_codes(self):
         clean = build({"Base": {}, "Win": {}})
         leaky = build({"Base": {"switch": ("switches", {"button_a": act(add("Win"))})}, "Win": {}})
@@ -339,9 +444,39 @@ class NeptuneLayoutTests(unittest.TestCase):
                 self.assertEqual(len(report["targets"]), 7)
                 self.assertTrue(all(row["saturated"] for row in report["targets"].values()))
                 undecided = [(t, r["source"], r["input"], r["status"]) for t, row in report["targets"].items()
-                             for r in row["routes"] if r["status"] in ("open", "mode_replaced")]
+                             for r in row["routes"] if r["status"] == "open"]
                 self.assertEqual(undecided, [])
                 self.assertTrue(report["ok"])
+
+    def test_every_window_is_checked_on_chain_stacks(self):
+        cfg = json.loads((ROOT / "traced_stacks.json").read_text())
+        for variant in ("default", "alternative"):
+            data = json.loads((ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json").read_text())
+            with self.subTest(variant=variant):
+                report = audit(data, cfg)
+                self.assertEqual(report["depth"], 0)
+                self.assertEqual([t for t, row in report["targets"].items() if not row["chain_stacks"]], [])
+                self.assertTrue(report["ok"])
+
+    def test_a_steering_window_is_checked_with_no_config(self):
+        # Seven inputs from Base: the depth-5 search never reaches it. Its routes aren't judged here
+        # (it isn't Always On yet).
+        title = "Steering | LS Up: Double Tap"
+        cfg = {"targets": {title: {}}}
+        data = json.loads((ROOT / "neptune/single-set-default_hold-gyro_latest.json").read_text())
+        self.assertFalse(audit(data, cfg, depth=5, chains=False)["targets"][title]["checked"])
+        row = audit(data, cfg)["targets"][title]
+        self.assertTrue(row["checked"])
+        self.assertIn(("Base", "Steering", "Steering | R1: W Key"),
+                      {tuple(b["stack"]) for b in row["blocked"]} | {tuple(r["stack"]) for r in row["routes"]})
+
+    def test_the_window_audit_takes_under_a_second(self):
+        # Plan step 3b: mid-chain arrivals must not make the audit slow. The depth-5 search took 3.3 s.
+        cfg = json.loads((ROOT / "traced_stacks.json").read_text())
+        data = json.loads((ROOT / "neptune/single-set-default_hold-gyro_latest.json").read_text())
+        started = time.perf_counter()
+        audit(data, cfg)
+        self.assertLess(time.perf_counter() - started, 1.0)
 
     def test_removing_a_window_block_is_caught(self):
         cfg = json.loads((ROOT / "traced_stacks.json").read_text())

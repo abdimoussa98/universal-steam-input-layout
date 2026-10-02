@@ -195,14 +195,22 @@ class NeptuneHeldInputTests(unittest.TestCase):
                                 lambda e: addition("Turning Ramp Up 0") in e["actions"]):
             entry["settings"].pop("delay_start")
 
-        # 2. Treating Menu Left Entry's explicit Enter add as redundant with Fn's own chord.
-        start = input_value(layout, "Menu Left: Entry Point", "switch", "button_escape")["activators"]["chord"]
-        start["bindings"]["binding"] = [b for b in start["bindings"]["binding"]
-                                        if b != addition("Menu Right: Enter")]
-
         found = {(title, name, target) for title, _, name, target, _, _ in held_input_violations(layout)}
         self.assertIn(("Base", "edge", GYRO_OFF), found)
-        self.assertIn(("Menu Left: Entry Point", "button_escape", "Menu Left: Fn Layer"), found)
+
+    def test_menu_entry_early_chord_types_its_key_itself(self):
+        # The entry's opposite-button chord adds Fn while that button is already down, so Fn's
+        # own chord can't fire for this press (held-input rule). The entry types the key in
+        # the same array, after adding Fn. Since 90.9 the key is direct (no overlay layer).
+        for variant, layout in self.layouts.items():
+            for entry, button, fn, key in (("Menu Left: Entry Point", "button_escape", "Menu Left: Fn Layer", "RETURN"),
+                                           ("Menu Right: Entry Point", "button_menu", "Menu Right: Fn Layer", "BACKSPACE")):
+                with self.subTest(variant=variant, entry=entry):
+                    chord = input_value(layout, entry, "switch", button)["activators"]["chord"]
+                    execution = [b for b in reversed(chord["bindings"]["binding"]) if "empty_binding" not in b]
+                    self.assertEqual(execution, [addition(fn), f"key_press {key}, , "])
+                    own = input_value(layout, fn, "switch", button)["activators"]["chord"]
+                    self.assertIn(f"key_press {key}, , ", own["bindings"]["binding"])
 
 
 if __name__ == "__main__":

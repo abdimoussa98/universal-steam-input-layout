@@ -2,11 +2,15 @@
 
 - `model`: read a layout JSON (numeric IDs or `{{Base::Title}}` tokens): layer
   titles, active groups per source, binding parsing, Always On layers.
-- `stacks`: `StackSpace`, every layer stack reachable from the action set, and
-  queries over it: what's below a layer, what can be active with it, and where
-  a given binding actually fires.
-- `inheritance`: the inheritance/blocking audit built on `stacks`
+- `chains`: backward chains, the stacks that can be under a layer (who adds it,
+  back to the action set, plus bystanders), each with the bindings that built
+  it. The stack source for every audit since 2026-10-01.
+- `inheritance`: the Window audit, the blocking rule for Always On layers
   (resources/Layer Definition of Done.md, section 8).
+- `covers`: the cover check. `layer_report`: the per-layer report.
+- `stacks`: applying layer commands and replaying one input sequence. Its
+  `StackSpace` search, and the family walk in `flow_paths` and `flow_covers`,
+  are deprecated and kept for reference.
 - `fixes`: idempotent post-install fixes for the Neptune layouts, run as one
   ordered pipeline (`python3 -m steam_layout.fixes`).
 

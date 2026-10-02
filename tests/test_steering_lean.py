@@ -171,6 +171,12 @@ class LeanTests(unittest.TestCase):
                 self.assertEqual(emitted, [b.m.wheel(direction)])
                 self.assertEqual(stack[-1], b.title('Mod ' + ('1' if other == 'Up' else '0')))
                 self.assertNotIn(n, stack)
+                # Sideways flushes the single at once and consumes the stick (author, D2).
+                for lateral, letter in (('dpad_east', 'D'), ('dpad_west', 'A')):
+                    stack = [b.title(), b.title('W'), n]
+                    emitted = self.run_array(b, stack, self.binding(b, n, 'joystick', lateral))
+                    self.assertEqual(emitted, [b.m.wheel(direction), b.m.key(letter)])
+                    self.assertEqual(stack, [b.title(), b.title('W'), b.title('Normal', 'Consumed')])
 
     def test_one_repeat_cover_delays_ticks_and_consumes_each_exit(self):
         for b in self.builders.values():
@@ -189,8 +195,10 @@ class LeanTests(unittest.TestCase):
                 self.assertEqual(emitted, [])
                 self.assertEqual(stack[-1], b.title('Normal', 'Consumed'))
                 self.assertNotIn(repeat, stack)
-            for n in ('edge', 'dpad_east', 'dpad_west'):
-                self.assertNotIn('mouse_wheel', json.dumps(b.sources(repeat)['joystick']['inputs'][n]))
+            self.assertNotIn('mouse_wheel', json.dumps(b.sources(repeat)['joystick']['inputs']['edge']))
+            for lateral in ('dpad_east', 'dpad_west'):
+                layer, _ = self.effective(b, [b.title(), b.title('W'), repeat], 'joystick', lateral)
+                self.assertEqual(layer, b.title('W'))
 
     def test_mod2_is_direct_repeat_without_gesture_layers(self):
         for b in self.builders.values():
@@ -208,11 +216,12 @@ class LeanTests(unittest.TestCase):
                     if kind == 'chord':
                         self.assertEqual([c for c in b.m.commands(e) if 'add_layer' in c],
                                          [b.m.op('add', b.title('Mod2 Cover', owner))])
-            for direction in b.m.DIRECTIONS:
-                win = b.title('Normal', direction, 'Double Window')
-                emitted = self.run_array(b, [b.title(), b.title('W'), win],
-                    self.binding(b, win, 'button_diamond', 'button_a'))
-                self.assertEqual(emitted.count(b.m.wheel(direction)), 1)
+            for win in b.windows:
+                # Mapped buttons inherit plain output; the clock resolves the single.
+                self.assertEqual(set(b.sources(win)), {'joystick', 'right_joystick'})
+                self.assertNotIn('click', b.sources(win)['right_joystick']['inputs'])
+                layer, _ = self.effective(b, ['Base', b.title(), b.title('W'), win], 'button_diamond', 'button_a')
+                self.assertNotIn(layer, b.new)
 
     def test_each_mod2_uses_its_source_order_payloads(self):
         for b in self.builders.values():
@@ -229,9 +238,11 @@ class LeanTests(unittest.TestCase):
         for b in self.builders.values():
             for side in ('Left', 'Right'):
                 protected, cover = b.protected_names(side)
-                for name in (f'Menu {side}: Entry Point', protected, cover):
-                    click = self.binding(b, name, 'right_joystick', 'click', 'chord')
-                    self.assertIn(b.m.op('add', f'Menu {side}: Fn Layer'), b.m.commands(click))
+                stack = ['Base', f'Menu {side}: Entry Point', protected, cover]
+                for depth in (2, 3, 4):
+                    _, click = self.effective(b, stack[:depth], 'right_joystick', 'click')
+                    self.assertIn(b.m.op('add', f'Menu {side}: Fn Layer'),
+                                  b.m.commands(click['activators']['chord']))
                 owner = 'button_menu' if side == 'Left' else 'button_escape'
                 self.assertNotIn('key_press', json.dumps(self.binding(b, cover, 'switch', owner, 'release')))
                 for target in (protected, cover):
@@ -343,8 +354,11 @@ class LeanTests(unittest.TestCase):
             self.assertFalse(b.replaced_groups & {g['id'] for g in b.cm['group']} - referenced)
 
     def test_all_new_layers_have_side_local_touch_release_cleanup(self):
+        # Covers inherit touch from their owner (DoD §5); see the cover tests.
         for b in self.builders.values():
             for name in b.new:
+                if name in b.covers():
+                    continue
                 for source in ('joystick', 'right_joystick'):
                     with self.subTest(variant=b.variant, layer=name, source=source):
                         e = self.binding(b, name, source, 'touch', 'release')
@@ -361,6 +375,8 @@ class LeanTests(unittest.TestCase):
             targets.update({b.protected_names(side)[0]: b.protected_names(side)[1]
                             for side in ('Left', 'Right')})
             for name in b.new:
+                if name in b.covers():
+                    continue
                 for source in ('joystick', 'right_joystick'):
                     execution = list(reversed(b.m.commands(self.binding(b, name, source, 'touch', 'release'))))
                     expected = ([b.m.op('add', targets[name])] if name in targets else []) + b.stick_cleanup(source)
@@ -376,9 +392,11 @@ class LeanTests(unittest.TestCase):
                         for kind in ('Full_Press', 'chord'):
                             self.assertEqual(actual[kind], expected[kind])
             for side in ('Left', 'Right'):
-                for name in b.protected_names(side):
+                stack = ['Base', f'Menu {side}: Entry Point', *b.protected_names(side)]
+                for depth in (3, 4):
                     for source in ('joystick', 'right_joystick'):
-                        chord = self.binding(b, name, source, 'touch', 'chord')
+                        _, touch = self.effective(b, stack[:depth], source, 'touch')
+                        chord = touch['activators']['chord']
                         self.assertEqual(chord['settings']['chord_button'], '15' if side == 'Left' else '14')
                         self.assertEqual(chord['bindings']['binding'], b.m.EMPTY)
 
@@ -534,9 +552,89 @@ class LeanTests(unittest.TestCase):
                         # Execute the recovery branch only; native chord suppression
                         # while the menu is held is checked separately/on device.
                         stack = ['Base', 'Gyro', normal, protected, cover]
-                        self.assertFalse(self.run_array(b, stack,
-                            self.binding(b, top, source, 'touch')))
+                        _, touch = self.effective(b, stack[:stack.index(top) + 1], source, 'touch')
+                        self.assertFalse(self.run_array(b, stack, touch['activators']['Full_Press']))
                         self.assertEqual(stack, ['Base', 'Gyro'])
+
+    def steering_stacks(self, b):
+        """Canonical steering stacks. The derived stack search in
+        audit_inheritance.py cannot reach steering depth, so declare them."""
+        t = b.title; stacks = []
+        for base in (['Base'], ['Base', 'Gyro']):
+            root = base + [t()]
+            stacks += [root, root + [t('Entry Guard')]]
+            for o in b.m.OWNERS:
+                owner = root + [t(o)]
+                stacks += [owner, owner + [t('Normal', 'Consumed')], owner + [t('Repeat')]]
+                stacks += [owner + [w] for w in b.windows]
+                for bank in b.banks[:2]:
+                    stacks += [owner + [bank], owner + [bank, t('Normal', 'Consumed')]]
+                stacks += [owner + [t('Normal', 'Consumed'), t('Mod2', o)],
+                           owner + [t('Normal', 'Consumed'), t('Mod2', o), t('Mod2 Cover', o)]]
+        return stacks
+
+    def test_covers_define_only_their_own_controls(self):
+        for b in self.builders.values():
+            t = b.title
+            expected = {t('Normal', 'Consumed'): {'joystick': {'dpad_north', 'dpad_south', 'dpad_east',
+                                                               'dpad_west', 'edge'}},
+                        t('Repeat'): {'joystick': {'dpad_north', 'dpad_south', 'edge'}}}
+            for side, owner in (('Left', 'button_menu'), ('Right', 'button_escape')):
+                expected[b.protected_names(side)[1]] = {'switch': {owner}}
+            self.assertEqual(set(expected), set(b.covers()))
+            for cover, sources in expected.items():
+                with self.subTest(variant=b.variant, cover=cover):
+                    actual = {src: set(g['inputs']) for src, g in b.sources(cover).items()}
+                    self.assertEqual(actual, sources)
+
+    def test_covers_inherit_owner_touch_recovery_and_release(self):
+        for b in self.builders.values():
+            stacks = [s for s in self.steering_stacks(b) if s[-1] in b.covers()]
+            stacks += [['Base', f'Menu {side}: Entry Point', *b.protected_names(side)]
+                       for side in ('Left', 'Right')]
+            for stack in stacks:
+                for source in ('joystick', 'right_joystick'):
+                    with self.subTest(variant=b.variant, stack=stack[-2:], source=source):
+                        layer, touch = self.effective(b, stack, source, 'touch')
+                        self.assertNotIn(layer, b.covers())
+                        self.assertEqual(set(touch['activators']), {'Full_Press', 'chord', 'release'})
+                        release = list(reversed(b.m.commands(touch['activators']['release'])))
+                        self.assertEqual([c for c in release if 'remove_layer' in c], b.stick_cleanup(source))
+
+    def test_steering_never_reaches_an_always_on_window(self):
+        for b in self.builders.values():
+            t = b.title
+            always_on = {n for n in b.by_title
+                         if any('always_on_action' in g.get('inputs', {}) for g in b.sources(n).values())}
+            # Layers with any binding that adds an Always On window.
+            feeders = {n for n in b.by_title for g in b.sources(n).values()
+                       if any(f'add_layer {{{{Base::{w}}}}}' in json.dumps(g) for w in always_on)}
+            self.assertIn('RTP: Entry Point', feeders)
+            self.assertEqual(b.sources(t())['right_trackpad']['inputs'], {'touch': b.m.full()})
+            for stack in self.steering_stacks(b):
+                inputs = {(src, n) for layer in stack for src, g in b.sources(layer).items()
+                          for n in g.get('inputs', {})}
+                for src, n in sorted(inputs):
+                    _, binding = self.effective(b, stack, src, n)
+                    for kind, e in b.m.entries(binding):
+                        after = stack[:]
+                        self.run_array(b, after, e)
+                        if t() not in after:
+                            continue  # Steering's own exit; the window then sits on Base/Gyro.
+                        with self.subTest(variant=b.variant, stack=stack[2:], input=(src, n, kind)):
+                            self.assertFalse(set(after) - set(stack) & (always_on | feeders))
+
+    def test_pending_steering_timers_clear_rs_edge(self):
+        for b in self.builders.values():
+            for name in b.windows + b.banks:
+                self.assertEqual(b.sources(name)['right_joystick']['inputs']['edge'], b.m.full(), name)
+            for stack in self.steering_stacks(b):
+                layer, _ = self.effective(b, stack, 'right_joystick', 'edge')
+                if any(n in stack for n in b.windows + b.banks):
+                    self.assertIn(layer, b.windows + b.banks, stack)
+                else:
+                    # Plain driving keeps Base's turn-assist ramp.
+                    self.assertNotIn(layer, b.new, stack)
 
 
 if __name__ == '__main__':

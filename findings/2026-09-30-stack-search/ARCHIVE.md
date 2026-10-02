@@ -10,7 +10,8 @@ The next task is the [intended-flow inheritance checker](../../plans/2026-09-30-
 tracked in [todos](../../todos.md). It follows intended layer-addition paths,
 compares inherited bindings per button, recommends clear/block for competing
 non-Base bindings, and handles lightweight-cover upper-layer checks separately.
-It has not been implemented yet. Exhaustive timer proofs are not a prerequisite.
+It was built on 2026-10-01 ([record](../2026-10-01-intended-flow-checker/README.md)).
+Exhaustive timer proofs are not a prerequisite.
 
 ## Preserved checkpoint
 

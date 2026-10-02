@@ -2,7 +2,12 @@
 
 **Deprecated for routine audits (2026-09-30):** exhaustive stack search and
 timed proof tooling are retained for reference, reuse and targeted investigations.
-The replacement is an intended-flow inheritance checker, still to be built.
+The replacement is an intended-flow inheritance checker (built 2026-10-01).
+The three questions below are now answered per layer by backward chains
+([record](../2026-10-01-backward-chain-stacks/README.md), `audit_layer.py`).
+On 2026-10-01 the depth-limited `StackSpace` search and the intended-flow
+family walk were deprecated too; every audit now builds its stacks from
+those chains.
 See the [decision, next steps and preserved checkpoint](ARCHIVE.md).
 Historical commands below may reference disposable files under `out/`.
 

@@ -2,13 +2,24 @@
 """Check what a layer inherits from every stack that can sit beneath it.
 
 Implements the check in resources/Layer Definition of Done.md, section 8
-(Inheritance and blocking). Stacks are **derived** from the layout: starting
-from the action set, every effective binding's layer commands are applied
-(bottom to top, whole-input overrides and disabled sources respected, chord
-conditions ignored), up to `--depth` input events. Every stack a target can be
-on top of is checked. `traced_stacks.json` can add extra stacks and holds the
-decisions. The search counts as complete (**saturated**) only if the last depth
-level finds no route the previous level didn't; otherwise the check fails.
+(Inheritance and blocking). Stacks come from the **backward chains**
+(steam_layout/chains.py): start at the target, ask which bindings add it, then
+which add those layers, back to the action set. Each chain gives one stack.
+Other layers that leave the chain's inputs alone and aren't removed by it are
+placed underneath as bystanders. There is no depth cap and no config, so a
+layer many inputs from the action set (the Steering layers) is checked like
+any other. Chords are ignored: a chain follows every adding binding, which can
+add a stack that can't happen but never drops one that can.
+
+`traced_stacks.json` can add extra stacks and holds the decisions. A target no
+stack reaches is **not checked**, which fails.
+
+`--depth N` adds the older search as a comparison (deprecated 2026-10-01; the
+audits no longer use it): from the action set, every
+effective binding's layer commands are applied, chord conditions ignored, up
+to N input events. It counts as complete (**saturated**) only if its last
+level finds no route that an earlier level, a chain stack or a declared stack
+didn't.
 
 For every input the target doesn't define, the effective lower binding is the
 topmost layer below that defines it. If that binding changes layers (`add_layer`, `remove_layer`,
@@ -16,13 +27,13 @@ topmost layer below that defines it. If that binding changes layers (`add_layer`
 
 Each route is one of:
   open           nothing blocks it and nobody has decided it -> fails
-  mode_replaced  a layer above the definer uses a different source mode, which
-                 may or may not stop inheritance (unverified) -> fails
   allowed        a decision in traced_stacks.json allows it, with a reason
   todo           a known gap recorded for the author's decision
 
 Blocked inputs are reported as cleared (empty binding), replaced (other
-output), or disabled source. An empty `activators` object is not a block.
+output), disabled source, or mode replaced: a layer at or above the definer
+binds that source in a different mode, which blocks inheritance (author rule,
+2026-10-01). An empty `activators` object is not a block.
 
 Each target also lists **untraced** candidates: inputs that some other layer
 anywhere in the layout uses for a layer command, which the target leaves open
@@ -39,7 +50,8 @@ default-layout names; `variants` maps them (L1 -> L2, R1 -> R2) for
 the alternative layout, which is detected from controller_mappings.title.
 
 Read-only. Works with numeric IDs or title tokens. Exit codes: 0 = ok,
-1 = undecided routes or an unsaturated search, 2 = invalid input.
+1 = undecided routes, an unchecked target or an unsaturated depth search,
+2 = invalid input.
 `--entries TITLE` lists every binding that adds TITLE and the removals that run
 before the add, to help trace stacks.
 """
@@ -60,18 +72,23 @@ ROOT = Path(__file__).resolve().parent
 def print_report(report, show_untraced=False):
     print(f"variant: {report['variant']}; depth {report['depth']}; {'PASS' if report['ok'] else 'FAIL'}")
     for title, row in report["targets"].items():
+        if not row["checked"]:
+            print(f"{title}: NOT CHECKED (no chain or declared stack reaches it)")
+            continue
         counts = {}
         for route in row["routes"]:
             counts[route["status"]] = counts.get(route["status"], 0) + 1
-        print(f"{title}: {row['stacks']} stack(s), {len(row['blocked'])} blocked, routes {counts or 'none'}"
-              + ("" if row["saturated"] else "; NOT SATURATED (raise --depth)"))
+        print(f"{title}: {row['stacks']} stack(s) ({row['chain_stacks']} from chains), {len(row['blocked'])} blocked, "
+              f"routes {counts or 'none'}" + ("" if row["saturated"] else "; NOT SATURATED (raise --depth)"))
         for need in row["blocks_needed"]:
             what = json.dumps(need["activators"]) if need["activators"] else ""
             print(f"  block needed: {need['source']}/{need['input']} -> {need['action']} {what}")
         for route in row["routes"]:
-            if route["status"] in ("open", "mode_replaced"):
+            if route["status"] == "open":
                 print(f"  {route['status']}: {route['source']}/{route['input']} from {route['from_layer']} "
                       f"({route['via']}) under {' > '.join(route['stack'])}")
+                for line in route["reason"]:
+                    print(f"    because: {line}")
         if row["untraced"] and not show_untraced:
             print(f"  untraced: {len(row['untraced'])} input(s) used for layer commands elsewhere (--untraced)")
         for item in row["untraced"] if show_untraced else []:
@@ -87,7 +104,9 @@ def main():
     parser.add_argument("--stacks", type=Path, default=ROOT / "traced_stacks.json")
     parser.add_argument("--entries", metavar="TITLE", help="list bindings that add TITLE, then exit")
     parser.add_argument("--untraced", action="store_true", help="list untraced candidates in full")
-    parser.add_argument("--depth", type=int, default=5, help="input events to explore from the action set (default 5)")
+    parser.add_argument("--depth", type=int, default=0,
+                        help="deprecated: also run the old depth-limited search to this many input events, "
+                             "as a comparison (default 0: off)")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     try:

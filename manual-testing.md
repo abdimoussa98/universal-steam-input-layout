@@ -12,6 +12,30 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
+## 90.9: Enter / Backspace typed by the menu chords
+
+Load 90.9 fresh in both variants. The `Menu Left: Backspace` and `Menu Right: Enter` layers are gone (69 layers). Record: [author decisions](findings/2026-10-01-intended-flow-checker/README.md#author-decisions-2026-10-01). 90.8 was an intermediate build; don't test it.
+
+- [ ] K1 (early path): hold Start and press Select within 300 ms, before Fn is up: Backspace types on that first press, repeats while Select is held, and stops cleanly on release with no stuck key. Then release Start: no Tab. Mirror with Select then Start for Enter (no Escape)
+- [ ] K2: with Fn up (hold Start past 300 ms), Select types Backspace on every press and repeats while held. Mirror for Enter
+- [ ] K3 (accepted): hold Start, press and keep holding Select, lift Start first. Select falls through to Base and opens Menu Left; releasing it within 300 ms sends Escape. Mirror: Tab. Confirm this is the only extra output, and that releasing Select first never sends anything extra
+- [ ] K4: other Fn keys behave the same way (hold Start, hold LB for F10, lift Start: LB becomes the L1 modifier)
+- [ ] K5: every layer still does what it did: spot-check a modifier, Mod 2, both menus' Fn keys, the Transition Sets and steering entry. The two removed layers shifted later runtime IDs, so this must be a fresh load
+- [ ] M5: RTP double tap: tap the right pad, tap again north or south within 150 ms for Circular Scroll; a second tap elsewhere returns to mouse mode. The bumpers keep their modifiers right after
+
+## 90.7: slim steering overlays
+
+Load 90.7 fresh in both variants. Record: [steering 90.7](findings/2026-09-30-steering-lean/README.md#slim-overlays-and-dod-fixes-907).
+
+- [ ] S1: drive, flick LS up to center, press A within 150 ms: F fires once, one scroll lands about 150 ms after center, and nothing is left stuck
+- [ ] S2: flick, then flick and hold: repeat scroll; releasing stops it; the next push gives no scroll until center. Sideways during the repeat steers with A/D and a true diagonal keeps scrolling until up/down is released
+- [ ] S3: hold LS up past 250 ms, lift the left thumb, put it back: LST layers clear, the stick stays consumed until center, no phantom scroll
+- [ ] S4: hold LS up past 250 ms, release the driver while the Steam menu is open, close it and touch a stick: owner recovery clears the steering branch through the cover
+- [ ] S5: protected menu entry (Start with a stick deflected), hold past 300 ms, release: silent release, both protected layers gone, gyro stays off throughout; repeat with a thumb lift during the hold
+- [ ] S6: while steering, tap and touch the right pad: the cursor moves and pad clicks work, but no RTP touch mode (Circular Scroll) starts. Outside steering, RTP double tap is unchanged
+- [ ] S7: while steering, turn assist (RS past the ramp threshold) works while just driving, and does nothing while LS holds a modifier map, in the two-modifier map, or right after a scroll flick
+- [ ] S8: flick LS up to center, then push sideways within 150 ms: one scroll fires at once, A/D steers, and pushing up again before center gives no scroll or modifier map
+
 ## 90.6: chorded delays and dead-group prune
 
 Load 90.6 fresh in both variants. Gate details: [steering C1–C5](findings/2026-09-30-steering-lean/ACCEPTANCE.md#chorded-delays-906)
@@ -40,7 +64,7 @@ and [prune D1–D5](findings/2026-09-30-dead-group-prune/README.md#deck-gates-un
   - The next tap still sends Tab / Escape
 - [ ] Start-delay reset: after an interrupted hold, keep holding or hold again, and the Fn layer comes up
 - [ ] Enter / Backspace: Select → Start sends Enter, and Start → Select sends Backspace. Try both quickly (under 300 ms) and with the Fn layer up
-  - Releasing in either order sends nothing extra, and the gyro stays off until both are released
+  - Releasing the second button first sends nothing extra. Lifting the first button first drops the still-held second button to Base (accepted since 90.9; see the 90.9 checks)
   - Holding the second button repeats the key, and pressing it again while holding the first sends it again
 - [ ] Double tap and hold repeats Escape / Tab, and releasing stops it
   - Note whether a quick double tap sends the key two or three times (known, not fixed)
@@ -50,7 +74,7 @@ and [prune D1–D5](findings/2026-09-30-dead-group-prune/README.md#deck-gates-un
 - [ ] Steam button recovery:
   - Hold a menu button until its Fn layer is up, press the Steam button, let go, and close the Steam menu
   - RS to the edge (or a face button) clears the Fn and entry layers, and the menu buttons work normally again
-  - Enter / Backspace can currently survive the lower stack's cleanup. Verify their local overlay exits, and review invalid residual helpers under the owning-layer cleanup rule. Preserve still-held buttons; gyro suppression during menu use is intentional
+  - Enter / Backspace are plain chords since 90.9, so nothing of theirs can be left behind. Gyro suppression during menu use is intentional
 - [ ] Stuck entry layer (for example, the Steam button within 300 ms of a menu press)
   - The other menu button clears it and then works normally
   - In the alternative, RS to the edge no longer makes it worse
@@ -242,4 +266,4 @@ settles it.
 - [ ] One held stick click from Menu Left / Right Entry (before 300 ms) goes Entry → Fn → Transition Set without a second click. This relies on Fn's repeating click chord
 - [ ] Staggered Gyro toggle: hold LB, press RB, then release RB about 100 ms before LB. Gyro toggles, and `Gyro | L1: Modifier 0` becomes active while LB is held. Record whether the regular L1 modifier also appears, and whether releasing LB then scrolls down through L1: Double Tap. Repeat for Gyro → regular, with both press orders, and in the alternative with L2 / R2
 - [ ] Alternative only: soft-pull both triggers during ramp-up, then fully pull one to exit. Mod 2 should enter without re-pulling, in both regular and Gyro mode. Also pull both triggers together from Base. This checks the F1 fix: `R2: Modifier 1` and its Gyro variant now repeat their LT → Mod 2 chord, like the other three pairs
-- [ ] Output scope: the existing first-click check (a trigger pulled during Gyro Off Ramp Up) tests whether a removal fires an exposed **mouse** output. The existing Enter / Backspace and double-tap-hold Escape / Tab checks test whether **key** outputs fire on the press that adds their layer. Record both results in the audit
+- [ ] Output scope: the existing first-click check (a trigger pulled during Gyro Off Ramp Up) tests whether a removal fires an exposed **mouse** output. The double-tap-hold Escape / Tab checks test whether **key** outputs fire on the press that adds their layer; since 90.9 Enter / Backspace are typed by the chord itself (check K1). Record both results in the audit

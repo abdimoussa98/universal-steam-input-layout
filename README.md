@@ -129,24 +129,86 @@ The `Parent::Title` format for layers ensures unique identification when multipl
 
 ---
 
-### 4. `audit_inheritance.py` - Inheritance and Blocking Check
+### Build audit: `audit_build.py`
 
-Derives every stack each Always On layer (and any layer named in
-`traced_stacks.json`) can be applied on, by following the layout's own layer
-transitions for up to `--depth` input events (default 5). It then checks
-whether any stack puts a layer command under an input the layer leaves open.
-Each such route must be blocked, or have a recorded decision in
-`traced_stacks.json`. The tool recommends the block: replace with the
-underlying output if it's identical in every stack, otherwise clear. The check
-also fails if the search isn't saturated, meaning the last depth level still
-found new routes. Read-only. Exit codes: **0** = pass, **1** = undecided route
-or unsaturated search, **2** = invalid input.
-See [Layer Definition of Done §8](resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking).
+The gate for every version. It runs the Budget audit
+(`audit_command_budget.py`), the Window audit (`audit_inheritance.py`) and the
+Flow audit (`audit_flow_inheritance.py`) on both working layouts, prints one
+line per audit and exits **0** only when all pass. Read-only, about ten
+seconds. See [Layer Definition of Done §10](resources/Layer%20Definition%20of%20Done.md#10-ship-it).
+
+```bash
+python3 audit_build.py              # both neptune/*_latest.json
+python3 audit_build.py --verbose    # also print each failing audit's output
+```
+
+### 4. `audit_inheritance.py` - Window Audit (Inheritance and Blocking Check)
+
+For each Always On layer (and any layer named in `traced_stacks.json`), works
+out the stacks it can sit on and checks whether any of them puts a layer
+command under an input the layer leaves open. Each such route must be blocked,
+or have a recorded decision in `traced_stacks.json`. The tool recommends the
+block: replace with the underlying output if it's identical in every stack,
+otherwise clear.
+
+The stacks come from **backward chains** (`steam_layout/chains.py`): start at
+the layer, ask which bindings add it, then which add those layers, back to
+Base. Other layers that leave the chain's inputs alone are placed underneath
+as bystanders. There is no depth cap and no config, and each open route is
+printed with the bindings that built its stack. A layer no stack reaches is
+"not checked", which fails. `--depth 5` adds the older depth-limited search as
+a comparison; that search is deprecated. Runs in under a second per layout. Read-only. Exit codes:
+**0** = pass, **1** = undecided route or unchecked layer, **2** = invalid
+input.
+See [Layer Definition of Done §8](resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking)
+and the [record](findings/2026-10-01-backward-chain-stacks/README.md).
 
 ```bash
 python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json
 python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --entries "RTP: Double Tap"
 python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --untraced   # review list
+python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --depth 5    # compare with the old search
+```
+
+### 4a. `audit_layer.py` - Layer Report (Below, Above, Inherited, Exits)
+
+Answers the three stack questions for one layer, from the same backward
+chains: what can be below it and above it, which inputs it inherits and from
+which layer, and, for each of its bindings that removes layers, what it
+removes that is present, what is present and left, and what it removes that is
+never there. The exits section is a list for review, not a check. Takes about
+two seconds. Read-only. Exit codes: **0** = report printed, **2** = invalid
+input or unknown layer.
+
+```bash
+python3 audit_layer.py neptune/single-set-default_hold-gyro_latest.json --layer "L1: Modifier 0"
+python3 audit_layer.py <layout> --layer "Menu Right: Fn Layer" --json
+```
+
+### 4b. `audit_flow_inheritance.py` - Flow Audit (Cover Check and Coverage)
+
+For every layer the backward chains reach, reports the stacks that can be
+under it, each with the bindings that built it, and what each input inherits
+on those stacks. Inherited bindings that differ between stacks are listed as
+information only. It fails on two things:
+
+- **A cover finding:** a cover that outlives its owners, sits below its
+  owner, or inherits an input through a layer between it and its owner.
+- **A coverage gap:** a layer no chain of adding bindings reaches, or a
+  lookup the chains can't model.
+
+The chains start from the contexts in `steam_layout/flow_config.json` (Base,
+and Base with `Gyro`) and keep each chain to its own layers, so a cover is
+judged with its own family. Nothing else is declared: a new layer is picked
+up from the layout. Runs in about 0.1 s per variant. Read-only. Exit codes:
+**0** = clean, **1** = cover findings or coverage gaps, **2** = invalid input.
+Until 2026-10-01 it walked families declared in the rules; see the
+[deprecation record](findings/2026-10-01-backward-chain-stacks/README.md#deprecated).
+
+```bash
+python3 audit_flow_inheritance.py neptune/single-set-default_hold-gyro_latest.json
+python3 audit_flow_inheritance.py <layout> --layer 'L1: Tap Cover'               # stacks, bindings, layers above
+python3 audit_flow_inheritance.py <layout> --inventory --layer 'L1: Modifier 0'  # what the chains follow
 ```
 
 ### 5. `steam_layout/` - Shared Library and Fix Pipeline
@@ -156,7 +218,11 @@ The reusable code behind the scripts above. Import it from the repo root.
 | Module | Use it for |
 |---|---|
 | `steam_layout.model` | Read a layout (numeric IDs or title tokens): layer titles, active groups per source, bindings in execution order, Always On layers |
-| `steam_layout.stacks` | `StackSpace`: every stack reachable from Base, and the queries `below`, `containing`, `when_effective` and `co_active` |
+| `steam_layout.chains` | `Chains`: the stacks under a layer from backward chains (who adds it, back to Base, plus bystanders), each with its reason; `below`, `above`, `lineage`, `reached` |
+| `steam_layout.layer_report` | The per-layer report that `audit_layer.py` wraps |
+| `steam_layout.covers` | The cover check on chains, and the rules loader for `flow_config.json` |
+| `steam_layout.stacks` | `walk` and `fire` for one concrete sequence, and the helpers the chains build on. Its `StackSpace` depth-limited search is deprecated (2026-10-01) and kept as an opt-in comparison |
+| `steam_layout.flow_paths`, `steam_layout.flow_covers` | Deprecated (2026-10-01): the family walk and its cover check, kept for reference with their tests |
 | `steam_layout.inheritance` | The inheritance and blocking audit that `audit_inheritance.py` wraps |
 | `steam_layout.fixes` | The ordered, idempotent post-install fixes that `install_neptune.py` runs |
 | `steam_layout.held_model` | Historical untimed stack model: held buttons, chords, boolean delays/repeats and generic legacy `hold_layer` support |
@@ -370,6 +436,7 @@ Full case study with pre/post snapshots: `findings/2026-07-11-layer-order-swap/F
 See the `resources/` folder for additional documentation:
 
 - [Layout Vocabulary](resources/Layout%20Vocabulary.md) - button overlays, owning layers, interaction stacks, and recovery terminology
+- [Stateful Layer Transitions](resources/Stateful%20Layer%20Transitions.md) - the menu-plus-stick-click gesture map, Entry Points, stick guards and transition layers every stateful layer goes through (agreed design, not built yet)
 - [Steam Input JSON Structure](resources/Steam%20Input%20JSON%20Structure.md) - JSON format, binding execution order, and [interrupted delayed layer applies](resources/Steam%20Input%20JSON%20Structure.md#interrupted-delayed-layer-applies), including the repeating-removal workaround and RTP trackball-momentum exception
   - [Stuck layers and why there is so much cleanup](resources/Steam%20Input%20JSON%20Structure.md#stuck-layers-and-why-there-is-so-much-cleanup) - how the Steam button leaves layers active with no button held, and the chord-guarded cleanup pattern that recovers from it
   - [Cleanup scopes and concrete examples](resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) - overlays and inherited recovery, nine-layer Mod 2 branch cleanup, and eight-layer combined-cover cleanup that preserves the still-held side

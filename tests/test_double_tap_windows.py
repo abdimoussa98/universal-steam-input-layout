@@ -56,14 +56,21 @@ class DoubleTapWindowTests(unittest.TestCase):
     def test_rtp_double_tap_keeps_its_touch_selection_and_clears_the_fn_back_buttons(self):
         # Author, 2026-09-30: the window's dpad pad is its second-tap selection (north/south
         # scroll; anywhere else stays in mouse mode), so touch is not bound there.
-        decisions = json.loads((ROOT / "traced_stacks.json").read_text())["targets"]["RTP: Double Tap"]["decisions"]
-        self.assertIn(("right_trackpad", "touch", "allow"), {(d["source"], d["input"], d["status"]) for d in decisions})
+        # Author, 2026-10-01: a source-mode change blocks inheritance, so Base's mouse-mode
+        # touch doesn't reach the window's dpad pad; no traced_stacks decision is needed.
+        from steam_layout.inheritance import check_stack
+        targets = json.loads((ROOT / "traced_stacks.json").read_text())["targets"]
+        self.assertNotIn("RTP: Double Tap", targets)
         for variant in ("default", "alternative"):
             layout = Layout(load(variant))
             groups = layout.active("RTP: Double Tap")
             with self.subTest(variant=variant):
                 self.assertEqual(groups["right_trackpad"]["mode"], "dpad")
                 self.assertNotIn("touch", groups["right_trackpad"]["inputs"])
+                routes, blocked = check_stack(layout, "RTP: Double Tap", [layout.base])
+                self.assertIn(("right_trackpad", "touch", "mode replaced"),
+                              {(b["source"], b["input"], b["kind"]) for b in blocked})
+                self.assertNotIn(("right_trackpad", "touch"), {(r["source"], r["input"]) for r in routes})
                 for name in ("button_back_left", "button_back_right", "button_back_left_upper", "button_back_right_upper"):
                     self.assertEqual(list(bindings(groups["switch"]["inputs"][name]["activators"])), [EMPTY], name)
 

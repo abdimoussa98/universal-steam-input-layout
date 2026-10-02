@@ -2,6 +2,10 @@
 
 Manual Deck validation is tracked in [the separate testing checklist](manual-testing.md).
 
+Reviewed 2026-10-01 against release 90.9 (69 layers per layout). Every version
+has to pass the build audit, `python3 audit_build.py`
+([definition of done §10](resources/Layer%20Definition%20of%20Done.md#10-ship-it)).
+
 Terminology: use **stateful layer** for a persistent action layer and refer to
 its supporting layers separately. This replaces the earlier “stateful set”
 wording. These features use layers throughout; action-set switching is excluded
@@ -14,34 +18,77 @@ Implemented in 90.6 ([chorded delays](plans/2026-09-30-steering-chorded-delays.m
 The audit now fails on Long/Double Press. Completion awaits the Deck checks.
 
 - [ ] Validate steering chorded delays on Deck (gates C1–C5): fallback warning/exit, entry carry, window clock from layer add, consume + 300 ms reset, reset never strips the cover
+  - The [transition build](#stateful-layer-transitions) replaces the window clock (C3) with an Always On action. The consume hold stays on the direction but is chorded on Any driver instead of stick deflection. Those gates then need rewriting; the fallback warning/exit gate stays and gains S
 - [ ] Validate the prune and RTP chord on Deck (gates D1–D5): fresh load, RTP tap/hold scroll, RTP edges, mode shifts, temporary gyro
 - [ ] Validate the second-press cover resets (gates R1–R3), including that desktop drops only the 4th entry ([record](findings/2026-09-30-second-press-cover-reset/README.md))
 - [ ] Validate Transition Set 0's new stick-touch release on Deck (gate T1) ([record](findings/2026-09-30-touch-release-rule/README.md))
+  - Goes away with the [transition build](#stateful-layer-transitions), which drops the transition's chord-guarded stick-touch recovery. Only worth running if that build is delayed
 - [ ] Validate the derived Double Tap window blocks on Deck (gate B1) ([record](findings/2026-09-30-derived-window-blocks/README.md))
 - [ ] Validate the Double Tap window pads on Deck (gate P1) ([record](findings/2026-09-30-double-tap-pad-blocks/README.md))
 - [ ] Deck check: do stick inputs (edge, click, touch, directions) inherit through the middle of the stack, or only from the top layer and Base? Put three layers up where only the middle one binds LS click. A 2022 community report says sticks skip the middle ([JSON Structure](resources/Steam%20Input%20JSON%20Structure.md#how-binding-overlay-works)). If true, the inheritance tools must model it
-- [ ] Build the intended-flow inheritance checker ([plan](plans/2026-09-30-cleanup-generator.md#intended-flow-inheritance-audit-author-approved)) instead of resuming exhaustive stack/timer proofs
+  - This is gate 1 of the [transition build](#stateful-layer-transitions): the stick guards and Fn layers inherit the stick clicks from the Entry Point. The author expects it to hold and the plan assumes it does ([test steps](resources/Stateful%20Layer%20Transitions.md#not-settled))
+- [x] Build the intended-flow inheritance checker ([implementation plan](plans/2026-10-01-intended-flow-inheritance.md)) instead of resuming exhaustive stack/timer proofs ([record](findings/2026-10-01-intended-flow-checker/README.md))
   - Follow intended explicit layer-addition paths from Base; retain stack order, input/chord conditions and removals within each transition
   - For each relevant button, report the nearest inherited binding and original activators on each path
   - When paths expose multiple distinct non-Base bindings, recommend explicit clear/block; compare actual bindings and activators, not just owner names. Do not assume replacement is safe
+    - Corrected 2026-10-01 (author): this misread the rule. Clear-or-override only applies under an Always On layer with an inherited layer command ([§8](resources/Layer%20Definition%20of%20Done.md#how-to-check-it)). The Flow audit now lists these as "varies" and doesn't fail on them
   - Handle above-layer interactions separately for lightweight covers; do not make global above-layer reachability a prerequisite
   - Benchmark the checker on both variants and audit cleanup functions/blocks against the project docs. Scope is intended flows, not every runtime interleaving
+- [x] `RTP: Entry Point` over `RTP: Double Tap`: resolved by the author's mode rule; a source-mode change blocks inheritance, so the window's dpad pad never inherits Base's touch ([decisions](findings/2026-10-01-intended-flow-checker/README.md#author-decisions-2026-10-01))
+- [x] Opposite-button overlays: removed in 90.9. The menu chords type Backspace / Enter directly (fix `menu_combo_keys`); the stray Escape / Tab when the first button is lifted first is accepted
+  - The [transition build](#stateful-layer-transitions) takes the key back out of the Entry Points: their chord only adds Fn, and Fn types Backspace / Enter, as before the split (author, 2026-10-01)
+- [x] Inheritance across a source-mode change: author rule, it blocks; documented in [Layer Definition of Done §8](resources/Layer%20Definition%20of%20Done.md#a-source-mode-change-blocks-inheritance)
+- [ ] Use the Flow audit's per-layer reports to review cleanup lists and blocks (plan [§6](plans/2026-10-01-intended-flow-inheritance.md#6-follow-up-after-the-first-checker-is-useful))
+  - Blocks are covered by the Window audit, which checks the one blocking rule: under an Always On layer, an inherited layer command must be cleared or overridden. Cleanup lists are not checked by any audit; see the Cleanup audit under [Layer cleanup](#layer-cleanup)
+  - The per-layer report is now `audit_layer.py` (2026-10-01)
+- [x] Name the audits and add one gate for every version: `audit_build.py` runs the Budget, Window and Flow audits on both layouts. In [definition of done §10](resources/Layer%20Definition%20of%20Done.md#10-ship-it) and the layout-apply skill (2026-10-01)
 - [x] Deprecate the exhaustive stack/timed-proof audit as the default workflow; preserve code, tests and a compact research checkpoint for reuse ([archive](findings/2026-09-30-stack-search/ARCHIVE.md))
-- [ ] Decide RTP Double Tap's LB, RB, menu buttons and trigger edges: their inherited values change with the stack, so §8 says clear ([finding](findings/2026-09-30-stack-search/README.md#what-we-learned))
+- [x] Deprecate the depth-limited stack search and the family walk; every audit builds its stacks from backward chains (2026-10-01, [record](findings/2026-10-01-backward-chain-stacks/README.md#deprecated))
+  - `flow_config.json` no longer declares families: a new layer needs no entry. Code and tests of both older searches are kept, with comparisons frozen at 90.9
+- [ ] Decide RTP Double Tap's LB and RB: their inherited values change with the stack, so §8 says clear ([finding](findings/2026-09-30-stack-search/README.md#what-we-learned))
+  - At 90.9 the menu buttons and both trigger stages are cleared in that window. LB and RB are replaced with the scroll wheel, like the other windows. What's left to decide is whether that replacement stays or becomes a clear
 - [ ] Periodically recheck whether Steam's desktop configuration still drops entries after the third; consider filing a Valve bug report. If it's fixed, revisit the [command entry budget](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget)
 
 ## Done
 
 - [x] Make L1&R1: Tap Cover interruptable (in R1!L1, L1!R1, R2!L2, and L2!R2 layers)
 
+## Stateful layer transitions
+
+Agreed design, not built ([implementation plan](plans/2026-10-01-stateful-transitions-implementation.md)): [Stateful Layer Transitions](resources/Stateful%20Layer%20Transitions.md) · [brainstorm record](plans/2026-10-01-stateful-layer-transitions.md) · [definition of done §11](resources/Layer%20Definition%20of%20Done.md#11-stateful-layers)
+
+- [ ] Build the transition structure in both layouts ([implementation plan](plans/2026-10-01-stateful-transitions-implementation.md); assumes both Deck gates pass)
+  - Entry Points: both sticks as D-pads, stick-click Release binds, Fn layers inherit the clicks, Fn delay 200 ms / reset 250 ms. The other menu button only adds Fn; Backspace / Enter are typed by Fn alone
+  - Two stick guards split by stick and one shared menu Tap Cover, replacing the four protected `Steering | Menu …` layers (one new layer, 70 in total). A guard's menu release still opens the Double Tap window; the hold or a thumb lift applies the Tap Cover
+  - Transition 1 (Select release clears for now, Start release enters Steering) and Transition 2 (clear, keeping Gyro); everything layer-adding blocked with empty bindings
+  - Steering's own Entry Points; W/S driver layers send Tab / Escape on Start / Select; the plain menu press no longer drops Steering
+  - Add the 2.5 s hold exit for S
+- [ ] Add `tests/test_stateful_transitions.py` once the structure is built; extend it with every new stateful layer until all four gestures are taken
+- [ ] Rework Steering's left-stick centre detection: the inverted edge on a D-pad stick isn't reliable (seven layer groups; [list](plans/2026-10-01-stateful-layer-transitions.md#9-recentre-detection-decision-19))
+  - Direction (author, 2026-10-01; not built): the stick-guard recipe. A normal, generous outer edge holds Modifier 0 / 1 and its Release cleans up, so rolling to A / D keeps the modifier. The entering direction carries the 250 ms hold that adds the Tap Cover (Any-driver chord, like the L1 / R1 modifiers); left and right add the Tap Cover with A / D; the opposite direction only cleans up; mapped-button cleanups are guarded by two All-chords, left-stick deflection plus each driver. The Tap Cover is never added by a driver press ([details](resources/Stateful%20Layer%20Transitions.md#not-settled))
+  - Depends on the edge-Release Deck check below
+  - Rebuild the two `Steering | LS …: Double Tap` windows as Always On windows; their 150 ms timeout rides on an inverted edge today (an oversight in the first build). Seven Always On windows become nine, under [definition of done §9](resources/Layer%20Definition%20of%20Done.md#9-always-on-layers). They bind the drivers themselves (W and S, Release removes the window first, then the family) and inherit nothing that changes layers
+- [ ] Add an audit check for the new rule in [definition of done §3](resources/Layer%20Definition%20of%20Done.md#3-activators): no layer command on an inverted edge of a D-pad-mode stick. It would fail today on Steering's left-stick layers, so add it with the rework
+- [ ] Deck check for the stick guards: an edge Release fires in a guard that was added while the stick was already out. The mid-stack stick inheritance check above is a gate for the guards too ([both explained](resources/Stateful%20Layer%20Transitions.md#not-settled))
+- [ ] Deck check: does a `remove_layer` call re-evaluate held inputs, the way it restarts delays? (author's hypothesis, with the [chord latch](resources/Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30))
+
 ## Gamepad layer
 
 - [ ] Move gamepad layer → Menu Right + RS click / Menu Left + LS click
   - Note: requires same-side input (claw style); not frequent, so acceptable tradeoff
+  - Enters through Transition 0, which is created with this layer ([structure](resources/Stateful%20Layer%20Transitions.md#3-transition-layers))
 
 ## Steering
 
-[Sixteen-layer candidates](findings/2026-09-30-steering-lean/README.md) are generated for both variants: **16 additions, 71 total, no new Always On actions**. Saves nine against the prior lean build. Installed in both working layouts as release 90.5; the original 36-layer candidate remains unchanged. Completion awaits [native acceptance](findings/2026-09-30-steering-lean/ACCEPTANCE.md).
+[Sixteen-layer candidates](findings/2026-09-30-steering-lean/README.md) are generated for both variants: **16 additions, 71 total at the time, no new Always On actions**. Saves nine against the prior lean build. Installed in both working layouts as release 90.5; the original 36-layer candidate remains unchanged. Completion awaits [native acceptance](findings/2026-09-30-steering-lean/ACCEPTANCE.md). The layouts have 69 layers since 90.9 removed the two menu overlays.
+
+**The [transition build](#stateful-layer-transitions) changes several behaviours listed below** (author decisions, 2026-10-01). Validating them on the Deck before that build tests behaviour that is about to change:
+- Protected menu entry is replaced by the stick guards and one menu Tap Cover, and the commit is stick click released first, then the menu button.
+- A plain Start or Select press no longer leaves Steering, so Steering can sit under the two menu Double Tap windows. With a driver held they send Tab and Escape.
+- A driver press no longer adds `Steering | LS: Tap Cover`; a stick already held enters the modifier at once.
+- Sideways keeps Modifier 0 / 1; the stick's edge Release ends it. The opposite direction only cleans up.
+- The two Double Tap windows become Always On windows, so "no new Always On actions" no longer holds.
+- The hold exit also applies to S. `Steering | LS: Entry Point` is renamed `Steering | LS: Entry Guard`.
 
 - [ ] Validate protected menu entry and disposable WASD entry on Deck
   - Right Menu + LS click, release menu to commit; either-stick deflection blocks automatic Fn during entry; deliberate clicks remain
@@ -66,6 +113,7 @@ The audit now fails on Long/Double Press. Completion awaits the Deck checks.
 ## Menu stateful layer
 
 - [ ] Add menu stateful layer
+  - Exception (author, 2026-10-01): it will not go through the [stateful transition structure](resources/Stateful%20Layer%20Transitions.md#exceptions). The idea is parked here
   - Enter: Menu Left + Right
   - Exit: both sticks deflected, or one stick deflected + any face button
   - Inputs: D-pad → arrow keys; face buttons → Enter / Tab / Escape / Backspace
@@ -74,8 +122,8 @@ The audit now fails on Long/Double Press. Completion awaits the Deck checks.
 ## Cursor gyro
 
 - [ ] Cursor gyro (stateful)
-  - Activate via Left Menu + RS click
-  - Only remove when both left and right sticks are deflected
+  - Activate via Left Menu + RS click, through Transition 1 on the Select release ([structure](resources/Stateful%20Layer%20Transitions.md))
+  - Three exits (author, 2026-10-01): any menu button plus any stick click, the Modifier 2 clear, and its own clear, built the same way Temp Cursor Gyro clears (both sticks deflected). The third skips the transition and is a recorded exception
 - [x] Temp cursor gyro
   - 90.4: high haptic pulse on the initial 300 ms hold entry only, in all regular/Gyro owners. Touch-release entry stays silent and ongoing gyro vibration remains off
   - Implemented in both JSON layouts: delayed Mod 0/1 holds apply owner-specific cursor overlays in regular/Gyro variants (L1/R1 default, L2/R2 alternative). See the [implementation and inheritance review](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md), [current design](plans/2026-09-29-cursor-self-removal.md), and [pending Deck tests](manual-testing.md#temp-cursor-gyro)
@@ -131,8 +179,9 @@ The audit now fails on Long/Double Press. Completion awaits the Deck checks.
 ## Global stateful behavior
 
 - [ ] L1 + R1 clears all stateful layers
-  - Steering candidate: uncovered opposite release in both ordered Mod 2 variants clears every layer to Base (Default bumpers / Alternative triggers), including Gyro; native acceptance pending
-  - The latest steering request explicitly clears all layers. The older Gamepad-preservation exception remains a separate policy for other global-exit routes
+  - Author rule, 2026-10-01: the Modifier 2 clear (both bumpers in default, both triggers in alternative) always clears everything to Base, including Gyro. It is the fallback from any state and the one exit that never uses a transition ([structure](resources/Stateful%20Layer%20Transitions.md#exceptions)). Every new stateful layer must be removed by it ([definition of done §11](resources/Layer%20Definition%20of%20Done.md#11-stateful-layers))
+  - Built for Gyro and Steering: the uncovered opposite release in both ordered Mod 2 variants clears every layer to Base; native acceptance pending
+  - The older Gamepad-preservation exception conflicts with this rule. Kept open by the author (2026-10-01); settle it when Gamepad is built
 
 ## Bugs
 
@@ -146,10 +195,10 @@ The audit now fails on Long/Double Press. Completion awaits the Deck checks.
 - [x] Split menu entry layer into separate Menu Left / Menu Right layers
   - Both layouts have distinct Menu Left: Entry Point and Menu Right: Entry Point layers and their own Fn paths
 - [ ] Review extending the delayed-apply reset to additional tap-cover paths
-  - After the cursor reset follow-up, coverage is 11 of 19 delayed-add paths per layout: four single-modifier cursor paths, two menu paths, four combined-cover paths, and Turning Ramp Up 0 → 1. The completed fixes above do not imply every delayed apply needs a reset
+  - At 90.9, 21 of 24 delayed-add paths per layout have a reset (static count, 2026-10-01). The three without are LST Entry → Tap Cover, RST Entry → Tap Cover, and RTP Entry → Tap Cover, which is the deliberate exclusion below. The completed fixes above do not imply every delayed apply needs a reset
   - [Binding inventory](findings/2026-09-28-delayed-apply-reset-audit/INVENTORY.md) and [proposed follow-up work](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md#proposed-todo-split-and-validation); missing resets are not proof of runtime failures
   - Remaining proposed additions: LST/RST Entry → Tap Cover per layout. The four single-modifier paths now target Temp Cursor Gyro and have their resets. Keep resets in the parent owning the pending apply; preserve overlays and the three-command limit
-  - Preserve the author-confirmed RTP touch exclusion for trackball momentum. Defer the four scroll/menu-key Double Tap Cover paths until a design preserves output timing within three entries; these deferrals are audit recommendations, not confirmed historical exclusions
+  - Preserve the author-confirmed RTP touch exclusion for trackball momentum. The four scroll/menu-key Double Tap Cover paths got their resets in 90.6 as a last 4th entry ([record](findings/2026-09-30-second-press-cover-reset/README.md))
   - Keep the 5 ms Gyro Off → Turning Ramp Up 0 delay. It lets the apply fire on the already-held stick under the [held-input rule](resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes), and `tests/test_neptune_held_inputs.py` protects it
 - [ ] Run the held-input real-layout checks and act on the results; see the [follow-up plan](plans/2026-09-29-held-input-rule-followups.md)
   - Done: F1 (the alternative R2 → Mod 2 repeats) and the [held-input regression tests](tests/test_neptune_held_inputs.py), including Base's covering repeats
@@ -159,7 +208,7 @@ The audit now fails on Long/Double Press. Completion awaits the Deck checks.
 - [x] Confirm menu helper/cover overrides are intentional within the overlay design
   - Keep Backspace / Enter, Escape / Tab, and the two Menu Double Tap Covers local to their button/action; the underlying stack owns recovery. Release-only exits remain valid; review invalid residual helpers in the owner's recovery instead of automatically adding independent edge cleanup to each overlay
   - Author confirmed: Start/Select menu interactions are not used during gameplay. Preserve disabled gyro in all six layers and the Escape / Tab RS-edge blocks; WASD modifiers and ramp-up are not required in menu context
-  - Preserve the still-held second menu button; do not add Enter / Backspace removal to the first Fn button's release
+  - Superseded 2026-10-01: the Enter / Backspace layers were removed in 90.9, so the still-held second menu button now falls through to Base
   - Background: [button overlays and inherited cleanup](resources/Steam%20Input%20JSON%20Structure.md#button-overlays-and-inherited-cleanup), [vocabulary](resources/Layout%20Vocabulary.md), and both audits
 
 ## Layer cleanup
@@ -167,7 +216,20 @@ The audit now fails on Long/Double Press. Completion awaits the Deck checks.
 - [x] Complete the static [cleanup audit](findings/2026-09-28-neptune-cleanup-audit/AUDIT.md) and [blocking audit](findings/2026-09-28-neptune-blocking-audit/AUDIT.md) for both layouts, including all layers, entry/exit references, dormant groups, and Always On ordering
 - [x] Document per-layer cleanup and blocking, with [concrete scope examples](resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) and guidance in the editing skills
 - [x] Enable Hold to Repeat on every guarded recovery removal in both layouts; see the [separate change record](findings/2026-09-28-repeating-recovery/CHANGES.md). Static validation passed; Deck behavior remains part of the [manual recovery checks](manual-testing.md#missed-releases-and-cleanup-scope)
+- [ ] Build the **Cleanup audit** and add it to the build audit as the fourth audit
+  - The gap (2026-10-01): the build audit validates blocks and inheritance, but nothing checks that a cleanup function or an owner release removes the right layers. A list can miss a layer, remove a survivor, or a new layer can be removed by nothing. Today only the Flow audit's cover check and hand-written tests such as `test_neptune_recovery.py` touch this
+  - Read-only checker first (`audit_cleanups.py`, steps 1 to 3 of the [cleanup generator plan](plans/2026-09-30-cleanup-generator.md)); no automatic rewriting of lists
+  - **The raw lists exist (2026-10-01):** `python3 audit_layer.py <layout> --layer TITLE` prints, for each binding of a layer that removes layers, what it removes that is present, what is present and left, what it removes that is never present, and which layers above intercept it. It is a report, not a check; it passes and fails nothing ([record](findings/2026-10-01-backward-chain-stacks/README.md#the-per-layer-report))
+  - Base the audit on those lists. They use the backward chains (`steam_layout/chains.py`) in the view that sees overlaps between families
+  - **Blocked on the author: review the exits lists before any of this is made to fail.** The tool can see what an exit leaves behind, but not whether that is wrong. "Present, not removed" holds both kinds:
+    - left on purpose: `Gyro`, a ramp layer or a stick-touch helper under `Menu Right: Fn Layer`. They belong to something else
+    - left by mistake, probably: the Fn layer's 19 recovery bindings leave `Steering | Menu Right: Entry Point` and its Tap Cover, which its release does remove
+    - and "removed, never present" may be clutter or a safety net: `L1: Modifier 0`'s release removes `Gyro | L1: Modifier 0`, which is never on the stack with it
+  - The review is the same decision as the four open questions in [Cleanup Functions](resources/Cleanup%20Functions.md#questions-for-the-author) (who belongs to a family, what a cleanup must leave alone, which inputs host cleanup functions, who cleans up a layer two families add). Looking at the lists for a few layers is a concrete way to answer them
+  - Without those answers a failing check would flag hundreds of correct things or miss the real ones, as the misread blocking rule did ([correction](findings/2026-10-01-backward-chain-stacks/README.md#the-flow-audit-on-chain-stacks))
+  - Best done before or with the [transition build](#stateful-layer-transitions), which rewrites many removal lists
 - [ ] Review owning-layer recovery against the [overlay cleanup ownership rule](resources/Steam%20Input%20JSON%20Structure.md#overlay-cleanup-ownership)
+  - The Cleanup audit above would check this mechanically. The menu Enter / Backspace overlays named below were removed in 90.9
   - Each layer applying an overlay is responsible for removing it during stale-state recovery when that interaction is no longer valid; retain the overlay's local exit and inherited recovery
   - Trace shared owners and still-held buttons before extending target lists. Review the menu Entry/Fn helpers that currently rely on another related-button press after parent recovery; preserve valid held helpers and normal release behavior
 
@@ -179,4 +241,6 @@ The audit now fails on Long/Double Press. Completion awaits the Deck checks.
   - Implementation: [gyro mode-shift removal plan](plans/2026-09-27-neptune-gyro-shifts-navkeys.md). Runtime checks remain in [manual testing](manual-testing.md#modifier-layers); other gyro layers retain their own activation rules
 - [ ] Handle cursor gyro layer (may be covered by [Cursor gyro above](#cursor-gyro))
 - [ ] Clear all unnecessary layers on action set swap
+  - Likely obsolete: action sets are never switched ([runtime rules](resources/Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30)), and the transitions' clear covers the layer case. Kept open by the author (2026-10-01)
 - [ ] Add temp gyro to both right and left stick touch
+  - Looks done: `LST: Temporary Gyro` and `RST: Temporary Gyro` exist in both layouts, reached by the second stick touch. Kept open by the author (2026-10-01)

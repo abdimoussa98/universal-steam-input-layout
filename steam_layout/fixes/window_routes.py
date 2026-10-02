@@ -8,9 +8,10 @@ always middle mouse); otherwise **clear** it, because a hard-coded replacement
 would be wrong somewhere.
 
 This applies audit_inheritance.py's `blocks_needed` to the Always On windows,
-using its derived stacks (default depth 5) and the decisions in
-traced_stacks.json. Idempotent: a second run finds nothing to block. Works with
-numeric IDs or title tokens.
+using the backward-chain stacks (steam_layout/chains.py: no depth cap, no
+config) and the decisions in traced_stacks.json. `depth` adds the older
+depth-limited search (deprecated 2026-10-01). Idempotent: a second run finds
+nothing to block. Works with numeric IDs or title tokens.
 """
 import copy
 import json
@@ -24,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[2]
 EMPTY = "controller_action empty_binding, , "
 
 
-def fix(data, config=None, depth=5):
+def fix(data, config=None, depth=0):
     config = config if config is not None else json.loads((ROOT / "traced_stacks.json").read_text())
     report = audit(data, config, depth)
     layout = Layout(data)

@@ -674,6 +674,12 @@ preset[].group_source_bindings = {
    - Unchanged inputs can inherit from the remaining layer stack, not just the Base set
    - Source settings and mode replacements also matter: an active `disabled` gyro
      group overrides gyro even when it has no explicit input activators
+   - **A different source mode blocks inheritance** (author rule, 2026-10-01).
+     When a layer binds a source in a different mode from the layers below, none
+     of that source's lower inputs carry over, even ones the upper group leaves
+     unbound. Example: the RTP Double Tap window's `dpad` pad doesn't inherit
+     Base's mouse-mode `touch`. See
+     [Layer Definition of Done §8](Layer%20Definition%20of%20Done.md#a-source-mode-change-blocks-inheritance).
    - **Re-adding a layer that's already active does nothing.** It isn't
      promoted: a stack A B C (bottom to top) stays A B C when A is added again.
      The only way to move a layer to the top is to remove it and then add it.
@@ -737,11 +743,21 @@ confirmed:
 [`rule-test.vdf`](../findings/2026-09-29-held-input-layer-transitions/rule-test.vdf)'s
 T4 can settle it later.
 
-**Also unverified: key and mouse outputs.** The rule above was reported for layer
-commands. The menu overlays (Backspace, Enter, Escape, Tab) rely on their key
-firing on the press that adds their layer. The first click after a trigger
-removes `Gyro Off Ramp Up`, and keys exposed by cursor self-removal, rely on
-outputs firing when a removal exposes them. Existing manual checks cover all three.
+**Scope (author, 2026-10-01): the rule covers the Steam layer API only.** It
+was reported for layer commands. It says nothing about key and mouse outputs,
+so don't use it to argue that an output can't fire on an input that is already
+held.
+
+- **Outputs when a layer is added:** the author's experience is that they do
+  fire. Before the menu split, the Entry Point's opposite-button chord only
+  added Fn, and Fn's own chord typed Backspace / Enter for the button that was
+  already down. **Not tested on the Deck in isolation.** The Escape / Tab
+  second-press layers and Steering's W / S layers rely on the same thing.
+- **Outputs when a removal exposes them:** unverified. The first click after a
+  trigger removes `Gyro Off Ramp Up`, and keys exposed by cursor self-removal,
+  rely on it.
+
+Existing manual checks cover these.
 
 How these layouts use it:
 
@@ -753,8 +769,14 @@ How these layouts use it:
   without checking this.
 - **When a new layer must act immediately on a held input**, either add the next
   layer in the same binding array, or give the new layer's activator Hold to Repeat:
-  - Array: Menu Entry → Fn also adds `Menu Right: Enter` / `Menu Left: Backspace`
-    itself.
+  - Array: in 90.9 the Menu Entry's opposite-button chord adds Fn and then
+    types Enter / Backspace itself. (Until 90.8 it added an overlay layer
+    instead of the key.) The reason given at the time, that Fn's own chord
+    can't fire for a button that is already down, stretched this rule to an
+    output; see the scope note above. **To be reverted** (author, 2026-10-01):
+    the Entry Point's chord will only add Fn, and Fn's chord types the key, as
+    it did before the split. It goes in with the
+    [transition build](../plans/2026-10-01-stateful-transitions-implementation.md).
   - Repeat: Gyro's 50 ms modifier entry after a Mod 2 release, Mod 0/1 → Mod 2
     entry, and Fn stick click → Transition Set.
 - **An exit whose condition can already be true when its layer is added needs
@@ -970,12 +992,11 @@ is held.
 For example:
 
 1. Hold Start until `Menu Right: Fn Layer` is up.
-2. Press Select, so `Menu Left: Backspace` goes on top.
-3. Press the Steam button, let go of everything, and close the Steam menu.
+2. Press the Steam button, let go of everything, and close the Steam menu.
 
-The whole stack is still active: `Menu Right: Entry Point`, `Menu Right: Fn Layer` and
-`Menu Left: Backspace`. Pressing Select now sends Backspace, because `Menu Left: Backspace`
-still owns that button.
+The whole stack is still active: `Menu Right: Entry Point` and `Menu Right: Fn Layer`,
+although Start is no longer held. The next face-button or stick press runs the Fn
+layer's guarded recovery instead of its normal action.
 
 **Recovery belongs to the interaction that owns the stack.** Modifier, Fn, and
 entry layers provide backup exits on likely next inputs: sticks, face buttons,
@@ -1150,8 +1171,8 @@ new Steam runtime test.
   family exits are all valid for different purposes.
 - **Guard stale-state recovery during valid holds.** This rule does not forbid normal
   releases, deliberate transitions, timed expiry, or delayed-apply resets. For example,
-  `Menu Left: Fn Layer`'s Select release must not remove `Menu Right: Enter` while Start
-  remains held: losing that overlay can restore the unwanted Tab release behavior.
+  the combined Tap Cover's release removes only the released side, so the modifier
+  that is still held stays valid.
 - **Preserve protected timing states.** Empty bindings can hide lower cleanup, but
   some blocks deliberately protect timers or Always On layers. Trace their purpose
   before replacing them. Keep Always On entry add-last and exit remove-self-first.
@@ -1262,7 +1283,7 @@ stack, never a universal clear-all. The following examples describe the current
 
 | Scope | Concrete example | State intentionally left alone |
 |---|---|---|
-| Self only | Menu Left: Backspace removes itself on Select release; Menu Right: Enter does so on Start release | The underlying entry/Fn stack and unrelated interactions |
+| Self only | A Double Tap window removes itself on timeout; a Temp Cursor Gyro cancellation removes only the cursor | The underlying stack and unrelated interactions |
 | Local pair | Menu Left: Double Tap Cover release removes itself and Menu Left: Escape; the right-side pair is Double Tap Cover + Tab | Other families; no global cleanup |
 | Single-modifier family | Either L1 overlay release removes the regular/Gyro L1 modifier, L1: Tap Cover, and L1: Temp Cursor Gyro | R1's family and persistent Gyro |
 | Current Mod 2 branch | Either L1!R1 regular/Gyro fallback removes eleven modifier/overlay layers | The opposite-order R1!L1 pair and persistent Gyro |
@@ -1286,16 +1307,14 @@ and inherit unrelated behavior, including the lower stack's recovery. Repeating
 all of the parent's cleanup inputs in each overlay would duplicate its recovery.
 Release-only cleanup is not, by itself, evidence of a missing fallback.
 
-For example, Menu Right entry/Fn can add `Menu Left: Backspace` when Select is
-pressed. Select's release removes only Backspace; the Menu Right stack owns its
-own recovery. The mirror is Menu Left entry/Fn adding `Menu Right: Enter` on Start.
-Current Fn/entry fallback lists do not remove those helpers. A parent can therefore
-be cleared while a helper remains. Another related-button press/release was
-previously accepted as the recovery for that residual helper. Under the
-[cover ownership rule](#cover-cleanup-ownership), review these parent fallbacks
-for recovery of invalid helpers; the current bindings have not changed. Preserve
-a helper while its button is still held: do not add its removal unconditionally
-to the first menu button's release.
+**Removed in 90.9 (author, 2026-10-01):** `Menu Left: Backspace` and
+`Menu Right: Enter` used to be the example here. They held the second menu
+button after the first was released, so it couldn't fall through to Base. The
+author decided the menu whose button is held owns the combo, like every other
+Fn key: the menu chords now type Backspace / Enter directly, and a still-held
+second button falls through to Base when the first is released. The accepted
+cost is a stray Escape / Tab if that second button is then released within
+300 ms ([record](../findings/2026-10-01-intended-flow-checker/README.md#author-decisions-2026-10-01)).
 
 `L1: Tap Cover` inherits the modifier's edge/click recovery, which removes
 both modifier variants and both overlays. Its explicit touch replacements

@@ -1,4 +1,15 @@
-"""StackSpace: every layer stack reachable from the action set, and queries over it.
+"""Stack helpers: applying layer commands, following one sequence, and the deprecated StackSpace search.
+
+Still in use: `apply_ops`, `definer` and `effective_input` (chains.py and the audits build on them),
+and `fire` / `walk` for replaying one concrete sequence of inputs.
+
+**Deprecated 2026-10-01: `StackSpace` and `explore`**, the depth-limited search of every stack. It
+can't reach layers more than a few inputs from the action set (the Steering windows are seven away) and
+took seconds where the backward chains take a fraction of one. The audits now use chains.py. The search
+is kept for reference and as an opt-in comparison (`audit_inheritance.py --depth N`); nothing depends on
+it. Record: findings/2026-10-01-backward-chain-stacks/README.md.
+
+StackSpace: every layer stack reachable from the action set, and queries over it.
 
 A stack is a tuple of layer titles, bottom (the action set) to top. Starting
 from the action set, every effective binding's layer commands are applied, one

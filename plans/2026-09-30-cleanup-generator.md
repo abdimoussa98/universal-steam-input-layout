@@ -6,7 +6,8 @@ especially interaction families and survivors. Nothing here has been built.
 
 ## Intended-flow inheritance audit (author-approved)
 
-Updated 2026-09-30: build this read-only checker first. Exhaustive stack search,
+Updated 2026-09-30: build this read-only checker first. The detailed
+[implementation plan](2026-10-01-intended-flow-inheritance.md) now tracks that work. Exhaustive stack search,
 numeric timer simulation and inductive completeness are deprecated as prerequisites
 for routine cleanup audits. Retain their implementation for reuse and targeted
 investigations; see the [research archive](../findings/2026-09-30-stack-search/ARCHIVE.md).
@@ -21,6 +22,14 @@ investigations; see the [research archive](../findings/2026-09-30-stack-search/A
    occurs, recommend an explicit clear/block rather than assuming replacement
    works on every path. Identical binding/activator definitions from different
    owners are not automatically different bindings. Keep Base fallback visible.
+
+   > **Correction, 2026-10-01 (author):** this was a misreading. "More than one inherited keybind
+   > means block" is not a rule for ordinary layers. It is the last step of the Always On window
+   > rule: under a layer with an Always On action, if one of the bindings it could inherit is a
+   > layer command, clear the input when more than one keybind is possible, otherwise override it
+   > with that keybind. The Window audit checks that. The Flow audit now lists differing inherited
+   > bindings as information ("varies") and no longer fails on them.
+
 4. Defer above-layer checks to a separate pass for lightweight covers and other
    specifically identified exceptions. Do not gate the lower-layer audit on
    solving every possible upper-layer relationship.
@@ -30,7 +39,8 @@ investigations; see the [research archive](../findings/2026-09-30-stack-search/A
 
 The scope is intended additive flows, not a proof over every possible runtime
 interleaving. Timer edge cases can be investigated separately when a concrete
-finding needs them. Implementation and runtime benchmarking remain TODO.
+finding needs them. Built and benchmarked 2026-10-01
+([record](../findings/2026-10-01-intended-flow-checker/README.md)).
 The older candidate-based cleanup writer below remains a later proposal;
 its co-active approximation is not a substitute for the intended-path checker.
 

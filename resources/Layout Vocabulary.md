@@ -22,6 +22,17 @@ switching Steam action sets.
   timer **restarts**, then waits **300 ms**; it is not cancelled. This is the
   author's runtime observation, not a claim that every configured delay is
   300 ms. The untimed search model does not yet represent this behavior.
+- **Chords latch** (author's manual test, 2026-10-01). Once a chorded
+  activator is active, releasing the chord button doesn't re-evaluate it. The
+  input stays in the chord until the button the chord is bound to is released.
+  A bind therefore can't hand over from a chord to a Regular Press when the
+  chord button goes up. Hypothesis, not yet tested: a `remove_layer` call
+  re-evaluates held inputs, the same way it restarts delays.
+- **An inverted edge on a D-pad-mode stick isn't caught reliably** (author's
+  Deck testing, 2026-10-01). Never use one to add or remove a layer. A normal
+  outer edge and its Release are reliable there. An inverted edge that only
+  sends output (a walk bind, the WASD modifier) is fine, and mouse-mode sticks
+  aren't affected.
 
 **Known implementation conflicts:** on 2026-09-30, both current Neptune JSON
 variants still contain five `hold_layer` commands, in group array positions
@@ -35,10 +46,10 @@ format/parser documentation may retain historical APIs.
 | Term | Definition | Example |
 |---|---|---|
 | **Stateful layer** | Keeps a mode active after its entry gesture ends, until an explicit exit. Its transient helper and modifier layers are separate layers with narrower lifetimes. | Steering remains active when the dominant W/S control is released; the W/S and Mod 0–2 helpers clear, exposing steering fallback. |
-| **Button overlay** | Changes one button's action or lifecycle, relies on the underlying interaction for broader behavior/recovery, and is not intended as a standalone mode. | `Menu Right: Enter` changes Start to Enter while the Menu Left interaction is underneath. |
+| **Button overlay** | Changes one button's action or lifecycle, relies on the underlying interaction for broader behavior/recovery, and is not intended as a standalone mode. | `Menu Left: Double Tap Cover` changes Select's release while `Menu Left: Escape` is underneath. |
 | **Overlay** | Short form for a button overlay, or the broader category for an equally limited interaction involving linked buttons. | `L1&R1: Tap Cover` covers the two linked modifier releases; it is an overlay, but not strictly a one-button overlay. |
 | **Owning layer** | A layer that applies an overlay and is responsible for recovering it when that interaction becomes invalid. A shared overlay can have multiple owners. | `L1: Modifier 0` and its Gyro variant both apply `L1: Tap Cover`. |
-| **Interaction stack** | The active layers belonging to one interaction, regardless of their position relative to unrelated active layers. | Menu Left Entry + Fn + the Enter overlay applied for Start. |
+| **Interaction stack** | The active layers belonging to one interaction, regardless of their position relative to unrelated active layers. | `Menu Left: Escape` + its Double Tap Cover; or L1's modifier + Tap Cover + Temp Cursor Gyro. |
 | **Guarded recovery** | An owner-held chord suppresses an interruptible, repeating Regular Press removal on the same input. It clears invalid state when no protecting owner is held. | L1's RS-edge fallback removes its regular/Gyro modifier pair, Tap Cover, and Temp Cursor Gyro. |
 | **Lifecycle exit** | A normal release, timer expiry, or deliberate transition with its own removal scope and conditions. | A Double Tap window removes itself on timeout. This is not a guarded recovery binding. |
 
@@ -49,11 +60,12 @@ interaction and own their recovery.
 
 ## Concrete button overlays
 
-**`Menu Right: Enter`:** Menu Left Entry/Fn applies it when Start is pressed.
-The overlay provides Enter on Start and removes itself on Start release. The
-Menu Left interaction remains responsible for its own recovery and for any
-invalid overlay it applied. Start still being held is a valid interaction and
-must be preserved when Select is released.
+**`Menu Right: Enter` and `Menu Left: Backspace` (removed in 90.9):** these
+overlays held the second menu button until its release. On 2026-10-01 the
+author decided they aren't needed: the menu whose button is held owns the
+combo, the menu chords type Enter / Backspace directly, and a still-held
+second button falls through to Base when the first is released
+([record](../findings/2026-10-01-intended-flow-checker/README.md#author-decisions-2026-10-01)).
 
 **`L1: Tap Cover`:** the L1 modifier applies it to change L1's release behavior.
 The overlay suppresses the parent's normal release into a Double Tap window
@@ -70,8 +82,8 @@ stick-touch completion/cleanup; the normal cover explicitly replaces those
 releases with cleanup only. Both keep the primary family-release exit, and
 the modifier owner remains responsible for recovering both overlays.
 
-Menu Left: Backspace, the single-button Tap Covers, and the individual Double
-Tap Covers are other examples. A combined modifier Tap Cover spans both
+The single-button Tap Covers and the individual Double Tap Covers are other
+examples. A combined modifier Tap Cover spans both
 buttons, so use the broader word **overlay** for that case.
 
 ## Ownership and limits
