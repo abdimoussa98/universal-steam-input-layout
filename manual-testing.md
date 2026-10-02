@@ -12,6 +12,44 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
+## 90.10: stateful transitions
+
+Load 90.10 fresh in both variants (70 layers). Record: [build](findings/2026-10-01-stateful-transitions/README.md) · [design](resources/Stateful%20Layer%20Transitions.md) · [plan](plans/2026-10-01-stateful-transitions-implementation.md). Nothing here has run on the Deck; the two gates were assumed. These replace K1 (90.9) and S5 and S8 (90.7), which test behaviour this release changed.
+
+Gates first. If G3 shows the edge Release doesn't fire, stop: the stick guards and Steering's left stick need a new design.
+
+- [ ] G1 (gate 1, stick inheritance from the middle of the stack): hold the left stick out, then hold Start (the guard lands), click and release the stick, release Start: Steering is on (R1 drives W). A Q typed at the click means the click skipped the Entry Point under the guard
+- [ ] G2 (gate 1, Fn): hold Start past 200 ms so Fn is up, click and release the left stick, release Start: Steering is on
+- [ ] G3 (gate 2, edge Release in a layer added with the stick already out): hold Start, flick the left stick out and back inside 200 ms, keep holding Start for 1 s, then press a face button: an F-key means the guard came off on the edge Release and Fn followed. If there is no F-key, release Start: a silent release means the guard never came off (gate 2 fails, the Tap Cover landed on it); a Tab means the guard came off but the Fn delay didn't come back (assumption 6)
+- [ ] G4 (stick already out): hold the left stick north, then hold Start for 500 ms: no `\` is typed, and the release is silent. A `\` means the guard landed after the 200 ms Fn delay
+- [ ] G5 (tap with a stick out): hold the left stick north, tap Start: one Tab
+- [ ] G6 (eaten delay comes back): push both sticks out while holding Start, recentre the right one before 200 ms, keep holding for 1 s, release Start: silent. A Tab means the first guard's Tap Cover delay didn't come back (assumption 6)
+
+Menu flow and transitions:
+
+- [ ] T1: each gesture from Base and from `Gyro`: Start + LS click enters Steering, with a beep and a strong haptic pulse on the Start release; Select + RS click, Start + RS click and Select + LS click clear to Base, keep `Gyro` and are silent. The stick click is released first, then the menu button
+- [ ] T2 (clear): in Steering, each of the four gestures leaves it; `Gyro` stays as it was
+- [ ] T3 (cancel): hold Start, click and hold the left stick, release Start first, then the click: no Steering. Note what the click's release does
+- [ ] T4 (missed release): in each transition, release the menu button while the Steam menu is open, close it: everything is blocked until the next tap of either menu button, which ends the transition (a Start tap in the cross transition enters Steering)
+- [ ] T5 (guards): guard on and off for each stick, and both together; with a guard on, a quick menu tap types Tab or Escape, and a 200 ms hold or a thumb lift makes the release silent
+- [ ] T6 (stale guard): with a stick out, release the menu button while the Steam menu is open, close it: touching a stick clears the guard, and the next menu tap behaves normally
+- [ ] T7 (accepted): under the menu Tap Cover, bump the other menu button: the cover returns within about 200 ms, and a release inside that gap types its key. With a stick out and no cover yet, a bump of the other menu button types its key
+- [ ] T8 (K1 reworded): hold Start, press Select before Fn is up: exactly one Backspace, repeating while held. Mirror for Enter
+- [ ] T9: the camera stick is dead while a menu button is held, and comes back on release
+- [ ] T10 (mouse buttons through a window): tap L1, or flick the left stick while driving, and pull a trigger inside the 150 ms window: the mouse button fires. Repeat with the right stick past the ramp threshold first, so `Gyro Off Ramp Up` is underneath: the mouse button still fires. Then hold a trigger and tap L1: note whether the click is interrupted when the window lands and when it times out. In the alternative, the same with the bumpers inside a Steering window
+
+Steering:
+
+- [ ] D1 (menu): with no driver held, tap Start: one Tab and Steering stays; hold Start: Fn. Hold R1 and tap Start: Tab; Select: Escape
+- [ ] D2 (hold exit): hold the left stick up, then down, with no driver for 2.5 s: warning from 1 s, then exit
+- [ ] D3 (modifier and roll): hold R1, hold the left stick up: the R1 modifier map. Roll to the side: A or D steers and the map stays until the stick is back at centre. Roll straight to down inside 250 ms: the L1 modifier map takes over
+- [ ] D4 (stick first): hold the left stick up, then press R1: the modifier map is there at once; held 250 ms, recentring is silent; recentred sooner, one scroll
+- [ ] D5 (double taps): flick up and back: one scroll about 150 ms after centre. Flick, then flick and hold: repeating scroll; releasing stops it and adds nothing. Flick up, then push down inside 150 ms: no scroll, the down modifier map. Flick, then push sideways inside 150 ms: A or D at once and the scroll still lands at 150 ms
+- [ ] D6 (W and S through the window): hold a driver, flick the stick once: W or S carries on through the window and after it. Release the driver inside the window: back on `Steering` with plain WASD
+- [ ] D7 (other driver in the window): flick the stick, bump the other driver inside 150 ms: its key for that moment, no two-modifier map, and driving carries on
+- [ ] D8 (mapped buttons): in a modifier map, press a face button: its key, and recentring is then silent. Missed release: in a modifier map, release the driver while the Steam menu is open, close it, press a face button: the steering branch clears
+- [ ] D9 (entry with the stick centred): enter Steering with the stick centred, push up and hold: W with no exit warning until the stick has been back to centre once
+
 ## 90.9: Enter / Backspace typed by the menu chords
 
 Load 90.9 fresh in both variants. The `Menu Left: Backspace` and `Menu Right: Enter` layers are gone (69 layers). Record: [author decisions](findings/2026-10-01-intended-flow-checker/README.md#author-decisions-2026-10-01). 90.8 was an intermediate build; don't test it.

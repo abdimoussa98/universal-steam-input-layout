@@ -143,19 +143,26 @@ def strip_layer_api(activators):
             actions = [a for a in (binding if isinstance(binding, list) else [binding])
                        if not LAYER_COMMAND.search(a) and not MODE_SHIFT.search(a) and not a.startswith(EMPTY)]
             if actions:
-                kept.append({"bindings": {"binding": actions[0] if len(actions) == 1 else actions},
-                             "settings": copy.deepcopy(entry.get("settings", {}))})
+                kept.append({"bindings": {"binding": actions[0] if len(actions) == 1 else actions}})
+                if entry.get("settings"):   # the builders never write an empty settings block
+                    kept[-1]["settings"] = copy.deepcopy(entry["settings"])
         if kept:
             result[kind] = kept[0] if len(kept) == 1 else kept
     return result or None
 
 
 def blocks_needed(layout, stacks, routes):
-    """Replace with the underlying output if it's the same in every stack, else clear."""
+    """Replace with the underlying keybind if only one is possible across the stacks, else clear.
+
+    A stack whose binding is only a layer command adds no keybind (author, 2026-10-01): under
+    Gyro Off Ramp Up a trigger soft pull only removes that layer, so the one keybind is Base's
+    mouse button and the window replaces the input with it. If no stack gives a keybind, clear.
+    """
     result = []
     for source, name in dict.fromkeys((r["source"], r["input"]) for r in routes):
-        outputs = [strip_layer_api(effective_input(layout, list(stack), source, name)) for stack in stacks]
-        same = outputs[0] is not None and all(o == outputs[0] for o in outputs)
+        outputs = [o for stack in stacks
+                   if (o := strip_layer_api(effective_input(layout, list(stack), source, name))) is not None]
+        same = bool(outputs) and all(o == outputs[0] for o in outputs)
         result.append({"source": source, "input": name, "action": "replace" if same else "clear",
                        "stacks": len(stacks), "activators": outputs[0] if same else None})
     return result

@@ -4,7 +4,14 @@
 Also fails on banned activation types: Long Press and Double Press misbehave
 with Steam's layer API (see resources/Steam Input JSON Structure.md, Allowed
 Activation Types). Builders that only need the budget read `violations`; the
-CLI fails on both lists.
+CLI fails on every list.
+
+And on a layer command on an inverted edge of a D-pad-mode stick: the stick's
+return to centre isn't caught reliably there (Layer Definition of Done,
+section 3). Inverted means the group's own `edge_binding_invert` is 1, or the
+entry's; a group that doesn't state it passes. Mouse-mode sticks are out of
+scope (the ramp layers' Soft Press exits work), and so is an inverted edge
+that only sends output. These are reported as `inverted_edges`.
 
 One exception: a delayed-apply reset may be a 4th entry when it is the last
 entry. Steam's desktop editor drops entries past the third, so the reset is
@@ -27,6 +34,8 @@ import sys
 MAX_COMMANDS = 3
 BANNED_ACTIVATORS = ("Long_Press", "Double_Press")
 REMOVE = "controller_action remove_layer "
+LAYER_COMMANDS = tuple(f"controller_action {verb}_layer " for verb in ("add", "remove", "hold"))
+STICKS = ("joystick", "right_joystick")
 
 
 def unique_object(pairs):
@@ -93,6 +102,7 @@ def audit_layout(data, source="<memory>"):
     violations = []
     allowed = []
     banned = []
+    inverted = []
     group_ids = set()
     for group_index, group in enumerate(cm["group"]):
         gid = group["id"]
@@ -113,6 +123,14 @@ def audit_layout(data, source="<memory>"):
                    "max_actions_in_one_command": max(
                        (len(entry["actions"]) for entry in enabled), default=0)}
             inputs.append(row)
+            if (input_name == "edge" and group.get("mode") == "dpad"
+                    and any(o["source_state"].split(" ", 1)[0] in STICKS for o in owners[gid])):
+                for entry in enabled:
+                    if "1" in (group.get("settings", {}).get("edge_binding_invert"),
+                               entry["settings"].get("edge_binding_invert")) \
+                            and any(action.startswith(LAYER_COMMANDS) for action in entry["actions"]):
+                        inverted.append({"group_id": gid, "input": input_name, "owners": owners[gid],
+                                         "activation": entry["activation"], "path": entry["path"]})
             # Disabled banks are checked too, but never added to the enabled count.
             for bank, entries in (("activators", enabled), ("disabled_activators", disabled)):
                 if len(entries) > MAX_COMMANDS:
@@ -140,10 +158,10 @@ def audit_layout(data, source="<memory>"):
                "max_actions_in_one_command": max(
                    (row["max_actions_in_one_command"] for row in inputs), default=0),
                "violations": len(violations), "allowed_fourth": len(allowed),
-               "banned_activators": len(banned)}
+               "banned_activators": len(banned), "inverted_edges": len(inverted)}
     return {"file": source, "limit": MAX_COMMANDS, "summary": summary,
             "violations": violations, "allowed_fourth": allowed,
-            "banned_activators": banned, "inputs": inputs}
+            "banned_activators": banned, "inverted_edges": inverted, "inputs": inputs}
 
 
 def main():
@@ -167,16 +185,21 @@ def main():
     else:
         for report in reports:
             s = report["summary"]
-            status = "FAIL" if s["violations"] or s["banned_activators"] else "PASS"
+            status = "FAIL" if s["violations"] or s["banned_activators"] or s["inverted_edges"] else "PASS"
             print(f"{report['file']}: {status}; {s['groups']} groups, {s['inputs']} inputs, "
                   f"{s['violations']} violation(s), max {s['max_commands']} enabled commands, "
-                  f"{s['banned_activators']} banned activator(s), {s['allowed_fourth']} allowed 4th-entry "
+                  f"{s['banned_activators']} banned activator(s), {s['inverted_edges']} layer command(s) on an "
+                  f"inverted D-pad edge, {s['allowed_fourth']} allowed 4th-entry "
                   f"reset(s); {s['unreferenced_groups']} unreferenced "
                   f"group(s), {s['plain_inactive_slots']} plain-inactive slot(s)")
             for row in report["banned_activators"]:
                 labels = "; ".join(f"{owner['title']} ({owner['source_state']})" for owner in row["owners"])
                 print(f"  banned {row['activation']}: group {row['group_id']} / {row['input']} "
                       f"— {labels or 'unreferenced'}")
+            for row in report["inverted_edges"]:
+                labels = "; ".join(f"{owner['title']} ({owner['source_state']})" for owner in row["owners"])
+                print(f"  layer command on an inverted D-pad edge: group {row['group_id']} / "
+                      f"{row['activation']} — {labels}")
             for row in report["allowed_fourth"]:
                 labels = "; ".join(owner["title"] for owner in row["owners"])
                 print(f"  allowed 4th entry (reset, dropped on desktop): group {row['group_id']} / "
@@ -186,7 +209,8 @@ def main():
                 print(f"  group {row['group_id']} / {row['input']}: {row['count']} "
                       f"{row['bank']} entries — {labels or 'unreferenced'}")
                 print(f"  {row['path']}/{row['bank']}")
-    return 1 if any(report["violations"] or report["banned_activators"] for report in reports) else 0
+    return 1 if any(report["violations"] or report["banned_activators"] or report["inverted_edges"]
+                    for report in reports) else 0
 
 
 if __name__ == "__main__":

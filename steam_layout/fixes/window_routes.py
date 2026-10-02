@@ -2,10 +2,12 @@
 
 Author rule, 2026-09-30: trace every stack a Double Tap window can be applied
 on. If any of them has a layer command under an input the window leaves open,
-the window must block that input for its lifetime. **Replace** it with the
-underlying output only when that output is identical in every stack (always E,
-always middle mouse); otherwise **clear** it, because a hard-coded replacement
-would be wrong somewhere.
+the window must handle that input for its lifetime. **Replace** it with the
+underlying keybind when only one is possible across the stacks (always E,
+always middle mouse); **clear** it when more than one is, because a hard-coded
+replacement would be wrong somewhere. A stack whose binding is only a layer
+command adds no keybind (author, 2026-10-01), so a trigger soft pull that can
+have Gyro Off Ramp Up underneath is replaced with Base's mouse button.
 
 This applies audit_inheritance.py's `blocks_needed` to the Always On windows,
 using the backward-chain stacks (steam_layout/chains.py: no depth cap, no

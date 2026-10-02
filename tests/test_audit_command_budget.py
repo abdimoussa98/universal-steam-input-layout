@@ -88,6 +88,34 @@ class CommandBudgetTests(unittest.TestCase):
         result = audit_layout(layout({key: command() for key in ("Full_Press", "Start_Press", "release")}))
         self.assertFalse(result["banned_activators"])
 
+    def test_layer_command_on_an_inverted_dpad_stick_edge_fails(self):
+        remove = {"bindings": {"binding": "controller_action remove_layer 9 0 0, , "}}
+
+        def stick(mode, settings=None, entry=remove):
+            data = layout({"Full_Press": entry})
+            data["controller_mappings"]["group"][0].update(mode=mode, settings=settings or {})
+            return audit_layout(data)
+
+        inverted = stick("dpad", {"edge_binding_invert": "1"})
+        self.assertEqual([(r["group_id"], r["activation"]) for r in inverted["inverted_edges"]], [("1", "Full_Press")])
+        # Its own list: builders that read `violations` are not affected.
+        self.assertFalse(inverted["violations"])
+        per_entry = stick("dpad", entry={**remove, "settings": {"edge_binding_invert": "1"}})
+        self.assertEqual(per_entry["summary"]["inverted_edges"], 1)
+        passing = {
+            "normal edge": stick("dpad", {"edge_binding_invert": "0"}),
+            "setting not stated": stick("dpad"),
+            "mouse-mode stick": stick("joystick_mouse", {"edge_binding_invert": "1"}),
+            "output only": stick("dpad", {"edge_binding_invert": "1"}, command("key_press W, , ")),
+        }
+        for label, result in passing.items():
+            with self.subTest(label):
+                self.assertFalse(result["inverted_edges"])
+        pad = layout({"Full_Press": remove})
+        pad["controller_mappings"]["preset"][0]["group_source_bindings"] = {"1": "left_trackpad active"}
+        pad["controller_mappings"]["group"][0].update(mode="dpad", settings={"edge_binding_invert": "1"})
+        self.assertFalse(audit_layout(pad)["inverted_edges"])
+
     def test_plain_inactive_slots_are_counted(self):
         data = layout({"Full_Press": command()})
         data["controller_mappings"]["preset"][0]["group_source_bindings"]["1"] = "right_joystick inactive"

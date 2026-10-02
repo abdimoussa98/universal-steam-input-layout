@@ -1,5 +1,9 @@
 """Give Transition Set 0 the side-local stick-touch release cleanup.
 
+Retired from the pipeline on 2026-10-01: the stateful transitions build
+(findings/2026-10-01-stateful-transitions) writes both transition layers whole.
+Kept as the record of the 90.6 patch.
+
 Every non-cover layer must bind its stick-touch release explicitly (see
 resources/Layer Definition of Done.md, section 5). The steering build gave
 Transition Set 1 a release that removes the side's LST/RST trio; Transition

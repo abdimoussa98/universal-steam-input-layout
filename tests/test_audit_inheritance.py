@@ -257,7 +257,26 @@ class DerivedAuditTests(unittest.TestCase):
         self.assertFalse(report["ok"])
         self.assertEqual(row["blocks_needed"], [{
             "source": "left_trigger", "input": "edge", "action": "replace", "stacks": 2,
-            "activators": {"Full_Press": {"bindings": {"binding": "mouse_button LEFT, , "}, "settings": {}}}}])
+            "activators": {"Full_Press": {"bindings": {"binding": "mouse_button LEFT, , "}}}}])
+
+    def test_a_stack_with_only_a_layer_command_adds_no_keybind(self):
+        # Author, 2026-10-01: one possible keybind means replace. Under Ramp the soft pull only
+        # removes Ramp, so the only keybind is Base's mouse button.
+        def layout(base_edge):
+            return build({"Base": {"switch": ("switches", {"left_bumper": act(add("Ramp")),
+                                                           "right_bumper": act(add("Win"))}),
+                                   "left_trigger": ("trigger", {"edge": act(base_edge)})},
+                          "Ramp": {"left_trigger": ("trigger", {"edge": act(remove("Ramp"))})},
+                          "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")),
+                                                          "left_bumper": act(EMPTY), "right_bumper": act(EMPTY)})}})
+        needed = audit(layout("mouse_button LEFT, , "), {"targets": {}}, depth=4, chains=False)["targets"]["Win"][
+            "blocks_needed"]
+        self.assertEqual(needed, [{
+            "source": "left_trigger", "input": "edge", "action": "replace", "stacks": 2,
+            "activators": {"Full_Press": {"bindings": {"binding": "mouse_button LEFT, , "}}}}])
+        # No keybind in any stack: nothing to replace with.
+        needed = audit(layout(EMPTY), {"targets": {}}, depth=4, chains=False)["targets"]["Win"]["blocks_needed"]
+        self.assertEqual([(b["input"], b["action"], b["activators"]) for b in needed], [("edge", "clear", None)])
 
     def test_varying_underlying_binds_must_be_cleared(self):
         data = build({"Base": {"switch": ("switches", {"left_bumper": act(add("Mod")),
@@ -441,7 +460,7 @@ class NeptuneLayoutTests(unittest.TestCase):
             with self.subTest(variant=variant):
                 report = audit(data, cfg)
                 self.assertEqual(report["variant"], variant)
-                self.assertEqual(len(report["targets"]), 7)
+                self.assertEqual(len(report["targets"]), 9)
                 self.assertTrue(all(row["saturated"] for row in report["targets"].values()))
                 undecided = [(t, r["source"], r["input"], r["status"]) for t, row in report["targets"].items()
                              for r in row["routes"] if r["status"] == "open"]
@@ -459,8 +478,7 @@ class NeptuneLayoutTests(unittest.TestCase):
                 self.assertTrue(report["ok"])
 
     def test_a_steering_window_is_checked_with_no_config(self):
-        # Seven inputs from Base: the depth-5 search never reaches it. Its routes aren't judged here
-        # (it isn't Always On yet).
+        # Seven inputs from Base: the depth-5 search never reaches it.
         title = "Steering | LS Up: Double Tap"
         cfg = {"targets": {title: {}}}
         data = json.loads((ROOT / "neptune/single-set-default_hold-gyro_latest.json").read_text())

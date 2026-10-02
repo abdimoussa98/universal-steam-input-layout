@@ -1,0 +1,596 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "lean_generator_sha256": "1960beea8a5055b16bf485d9db961b271f7262030f70fe510e592ef8de84c1eb",
+    "baseline_generator_sha256": "20c1d1b3a50a3e4597cdbfc519fd163f35fc7fedc902f1439dea4f0402c5590a",
+    "candidate_sha256": "535e8880621ec677269ae1165f018beb51b135bcbd6e443190529075d7fbf61f",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R1!L1: Modifier 2",
+      "Steering | L1!R1: Modifier 2",
+      "Steering | R1: W Key",
+      "Steering | L1: S Key",
+      "Steering | LS: Entry Guard",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Steering | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover"
+    ],
+    "new_layer_count": 17,
+    "total_layer_count": 72,
+    "menu_layers": [
+      "Steering | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Steering | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover"
+    ],
+    "new_always_on": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap"
+    ],
+    "modified_sources": [
+      [
+        "Menu Left: Entry Point",
+        "switch"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "switch"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "button_diamond"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "left_trigger"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "right_trigger"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "dpad"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "joystick"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "switch"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "switch"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "button_diamond"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "left_trigger"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "right_trigger"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "dpad"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "joystick"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "right_joystick"
+      ],
+      [
+        "Transition Set 1",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "left_trigger"
+      ],
+      [
+        "Transition Set 1",
+        "right_trigger"
+      ],
+      [
+        "Transition Set 1",
+        "joystick"
+      ],
+      [
+        "Transition Set 1",
+        "right_joystick"
+      ],
+      [
+        "Transition Set 0",
+        "switch"
+      ],
+      [
+        "Transition Set 0",
+        "left_trigger"
+      ],
+      [
+        "Transition Set 0",
+        "right_trigger"
+      ],
+      [
+        "Transition Set 0",
+        "joystick"
+      ],
+      [
+        "Transition Set 0",
+        "right_joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "L1: Tap Cover",
+        "switch"
+      ],
+      [
+        "L1: Tap Cover",
+        "joystick"
+      ],
+      [
+        "L1: Tap Cover",
+        "right_joystick"
+      ],
+      [
+        "R1: Tap Cover",
+        "switch"
+      ],
+      [
+        "R1: Tap Cover",
+        "joystick"
+      ],
+      [
+        "R1: Tap Cover",
+        "right_joystick"
+      ]
+    ],
+    "resolved_references": 3924,
+    "pruned_replaced_groups": [
+      "10",
+      "624",
+      "625",
+      "626",
+      "627",
+      "636",
+      "684",
+      "777",
+      "781",
+      "871",
+      "1161",
+      "1162",
+      "1218",
+      "1219",
+      "1220",
+      "1233",
+      "1234",
+      "1245",
+      "1246",
+      "1247",
+      "1260",
+      "1261",
+      "1289",
+      "1317",
+      "1318",
+      "1319",
+      "1320",
+      "1329",
+      "1330",
+      "1331",
+      "13044",
+      "13045",
+      "13046",
+      "13052",
+      "13053",
+      "13059",
+      "13060",
+      "13072",
+      "13075",
+      "13076",
+      "13078",
+      "13083",
+      "13084",
+      "13088",
+      "13089",
+      "13092",
+      "13093",
+      "13094",
+      "13095",
+      "13098",
+      "13099",
+      "13100",
+      "13101",
+      "13103",
+      "13104",
+      "13108",
+      "13109",
+      "13110",
+      "13114",
+      "13115",
+      "13116",
+      "13156",
+      "13157",
+      "13164",
+      "13170",
+      "13185",
+      "13187",
+      "13189",
+      "13191",
+      "13203",
+      "13205"
+    ],
+    "device_status": "UNTESTED",
+    "timing_ms": {
+      "menu_hold": 200,
+      "menu_reset": 250,
+      "edge_repeat": 50,
+      "modifier_select_repeat": 50,
+      "hold": 250,
+      "commit_haptic_intensity": 3,
+      "double": 150,
+      "warning": 1000,
+      "exit": 2500
+    }
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "lean_generator_sha256": "1960beea8a5055b16bf485d9db961b271f7262030f70fe510e592ef8de84c1eb",
+    "baseline_generator_sha256": "20c1d1b3a50a3e4597cdbfc519fd163f35fc7fedc902f1439dea4f0402c5590a",
+    "candidate_sha256": "f4681b782c91df7b0b82e3e9486cd0bb372c5711250d469f6f6be3aa811d63ce",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R2!L2: Modifier 2",
+      "Steering | L2!R2: Modifier 2",
+      "Steering | R2: W Key",
+      "Steering | L2: S Key",
+      "Steering | LS: Entry Guard",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Steering | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover"
+    ],
+    "new_layer_count": 17,
+    "total_layer_count": 72,
+    "menu_layers": [
+      "Steering | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Steering | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover"
+    ],
+    "new_always_on": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap"
+    ],
+    "modified_sources": [
+      [
+        "Menu Left: Entry Point",
+        "switch"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "switch"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Left: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "button_diamond"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "left_trigger"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "right_trigger"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "dpad"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "joystick"
+      ],
+      [
+        "Menu Left: Fn Layer",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "switch"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "switch"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "joystick"
+      ],
+      [
+        "Steering | Menu Right: Entry Point",
+        "right_joystick"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "button_diamond"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "left_trigger"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "right_trigger"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "switch"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "dpad"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "joystick"
+      ],
+      [
+        "Menu Right: Fn Layer",
+        "right_joystick"
+      ],
+      [
+        "Transition Set 1",
+        "switch"
+      ],
+      [
+        "Transition Set 1",
+        "left_trigger"
+      ],
+      [
+        "Transition Set 1",
+        "right_trigger"
+      ],
+      [
+        "Transition Set 1",
+        "joystick"
+      ],
+      [
+        "Transition Set 1",
+        "right_joystick"
+      ],
+      [
+        "Transition Set 0",
+        "switch"
+      ],
+      [
+        "Transition Set 0",
+        "left_trigger"
+      ],
+      [
+        "Transition Set 0",
+        "right_trigger"
+      ],
+      [
+        "Transition Set 0",
+        "joystick"
+      ],
+      [
+        "Transition Set 0",
+        "right_joystick"
+      ],
+      [
+        "Base",
+        "switch"
+      ],
+      [
+        "L2: Tap Cover",
+        "left_trigger"
+      ],
+      [
+        "L2: Tap Cover",
+        "joystick"
+      ],
+      [
+        "L2: Tap Cover",
+        "right_joystick"
+      ],
+      [
+        "R2: Tap Cover",
+        "right_trigger"
+      ],
+      [
+        "R2: Tap Cover",
+        "joystick"
+      ],
+      [
+        "R2: Tap Cover",
+        "right_joystick"
+      ]
+    ],
+    "resolved_references": 3924,
+    "pruned_replaced_groups": [
+      "10",
+      "624",
+      "625",
+      "626",
+      "627",
+      "636",
+      "684",
+      "775",
+      "780",
+      "871",
+      "1161",
+      "1162",
+      "1218",
+      "1219",
+      "1220",
+      "1233",
+      "1234",
+      "1245",
+      "1246",
+      "1247",
+      "1260",
+      "1261",
+      "1289",
+      "1317",
+      "1318",
+      "1319",
+      "1320",
+      "1329",
+      "1330",
+      "1331",
+      "13041",
+      "13043",
+      "13044",
+      "13049",
+      "13050",
+      "13056",
+      "13057",
+      "13073",
+      "13078",
+      "13079",
+      "13083",
+      "13090",
+      "13091",
+      "13095",
+      "13096",
+      "13100",
+      "13101",
+      "13102",
+      "13106",
+      "13107",
+      "13108",
+      "13110",
+      "13111",
+      "13115",
+      "13117",
+      "13118",
+      "13121",
+      "13123",
+      "13124",
+      "13163",
+      "13164",
+      "13171",
+      "13177",
+      "13192",
+      "13194",
+      "13196",
+      "13198",
+      "13210",
+      "13212"
+    ],
+    "device_status": "UNTESTED",
+    "timing_ms": {
+      "menu_hold": 200,
+      "menu_reset": 250,
+      "edge_repeat": 50,
+      "modifier_select_repeat": 50,
+      "hold": 250,
+      "commit_haptic_intensity": 3,
+      "double": 150,
+      "warning": 1000,
+      "exit": 2500
+    }
+  }
+}

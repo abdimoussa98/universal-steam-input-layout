@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "a96cdc52db2988f96d7681b24e4832a04846dd3c19bd4dc96fdbbd2553dbe6b8",
+      "version_snapshot": "versions/neptune/90.10/single-set-default_hold-gyro_90.10.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "28b8a09c52cef7eb44063441839b1643be8ebb9b195a6417eb9a574f502d7275",
+      "version_snapshot": "versions/neptune/90.10/single-set-default_hold-gyro_90.10.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "03ece2975b4235ac2c8d724f53878b8b8271f9b3c3246bb3b25d925dae41641b",
+      "version_snapshot": "versions/neptune/90.10/single-set-alternative_hold-gyro_90.10.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "d596f1443198cedcc8e8b1d6f2bf593701ae7f912fd44e73d626660431e7ee6f",
+      "version_snapshot": "versions/neptune/90.10/single-set-alternative_hold-gyro_90.10.vdf"
+    }
+  },
+  "release": "90.10",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-01-stateful-transitions/default-stateful-transitions.json",
+      "sha256": "535e8880621ec677269ae1165f018beb51b135bcbd6e443190529075d7fbf61f"
+    },
+    "alternative": {
+      "path": "findings/2026-10-01-stateful-transitions/alternative-stateful-transitions.json",
+      "sha256": "f4681b782c91df7b0b82e3e9486cd0bb372c5711250d469f6f6be3aa811d63ce"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

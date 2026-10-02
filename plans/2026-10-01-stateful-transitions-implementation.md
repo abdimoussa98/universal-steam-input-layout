@@ -1,9 +1,12 @@
 # Plan: build the stateful transition structure
 
-Status: plan, 2026-10-01. Not started; no layout was changed. Reviewed with
-the author twice the same day; the outcomes are folded in below and listed in
+Status: built and installed as 90.10 on 2026-10-01
+([build record](../findings/2026-10-01-stateful-transitions/README.md)). The
+author chose to build all six steps without waiting for the Deck gates, so
+both gates are still assumed and nothing has run on the Deck. Reviewed with
+the author three times; the outcomes are folded in below and listed in
 [Review decisions](#review-decisions-author-2026-10-01). Decisions 11 to 14
-are from the second review.
+are from the second review and 15 to 19 from the third.
 Design: [Stateful Layer Transitions](../resources/Stateful%20Layer%20Transitions.md)
 · [decision record](2026-10-01-stateful-layer-transitions.md)
 · [Definition of Done §11](../resources/Layer%20Definition%20of%20Done.md#11-stateful-layers)
@@ -32,12 +35,17 @@ Two more behaviours are relied on and haven't been tested in isolation:
 Two more come from keeping the Entry Point under a guard, where today's
 layout swaps it out:
 
-5. A delay that is already running on the Entry Point's menu button doesn't
-   fire once a guard binds that button. If it does, Fn lands on top of the
-   guard.
-6. When a guard comes off, the Entry Point's Fn delay starts again on the
-   still-held button. The repeating reset is what restarts it; that a
-   removal re-evaluates a held input is unverified.
+5. **Established (author, 2026-10-01), no longer an assumption.** A layer
+   that binds a button while a delay is running on that button eats the
+   delayed action. So a guard that lands before the Entry Point's Fn delay
+   ends cancels it, and Fn can't land on a guard.
+6. A delay that was eaten starts again when the layer that ate it comes off
+   and the button is still held. The repeating reset is what restarts it;
+   that a removal re-evaluates a held input is unverified. Two places need
+   it:
+   - the Entry Point's Fn delay, when the last guard comes off
+   - a guard's Tap Cover delay, when a second guard landed on top of it and
+     then came off before the cover landed
 
 If any of these fails, see [Fallbacks](#fallbacks).
 
@@ -118,7 +126,7 @@ where the clicks lead. Shown for Menu Right; Left mirrors it.
 | Select | Chord on Start | Add Fn, and nothing else. It no longer types Backspace itself |
 | Select | Regular Press, repeating | Unchanged: the recovery |
 | LS click, RS click | **Release** only | Run the clear list, then add the transition |
-| LS edge, RS edge | Chord on Start, Hold to Repeat | Add that stick's guard. No longer swaps the Entry Point out |
+| LS edge, RS edge | Chord on Start, Hold to Repeat every 50 ms | Add that stick's guard. No longer swaps the Entry Point out |
 | LS, RS touch | Unchanged | Release completes Fn and clears the trio |
 
 - **Backspace and Enter live in the Fn layers only** (author, 2026-10-01).
@@ -145,6 +153,13 @@ where the clicks lead. Shown for Menu Right; Left mirrors it.
   added last. Generated, not hand-written.
 - **Base:** Start and Select keep the repeating add of the Entry Point and
   lose the deflection chord that added the protected Entry Point.
+- **A stick that is already out when the menu button goes down** is the
+  common case (walking, then Start). The Entry Point is added over an edge
+  that is already held, so its guard add doesn't fire at once; it fires on
+  the first Hold to Repeat tick. The guard has to land before the 200 ms Fn
+  delay ends, so that it eats the delay (assumption 5). That is why the edge
+  chord states `repeat_rate` 50, where today's has none. If the guard landed
+  late, Fn would be up first and its own edge binds would hide the guard add.
 
 ## Step 2: Fn layers
 
@@ -179,9 +194,22 @@ it. One guard per stick serves both menu sides and all four Entry Points.
 
 - The left stick's group is a D-pad with the same settings and radius as the
   Entry Point's. The clicks and the other stick's edge are inherited.
+- **Both stick groups are D-pads in every layer that can sit above an Entry
+  Point during a menu hold:** each guard's own-stick and other-stick group,
+  the menu Tap Cover's two stick groups and both Fn layers. A group in
+  another mode would block the click and touch inheritance
+  ([mode rule](../resources/Layer%20Definition%20of%20Done.md#a-source-mode-change-blocks-inheritance)).
+  A guard's other-stick group binds only touch; the Tap Cover's two groups
+  bind only the edge.
 - When a stick recentres, its guard comes off. If the Tap Cover hasn't landed
   the player is back in the Entry Point and Fn can arrive (assumption 6). If
   it has landed, it stays until the menu button is released.
+- With both sticks out, the second guard eats the first guard's Tap Cover
+  delay and starts its own. If the second stick recentres before the cover
+  lands, the first guard's cover depends on its reset (assumption 6).
+- Both guards' menu releases and the Tap Cover's release also remove both Fn
+  layers. Fn can't be above them (assumption 5); the removal only covers a
+  stale Fn.
 - **Stale guard** (author, 2026-10-01): if a menu release is missed, touching
   either stick with no menu button held removes the stale guard, Tap Cover
   and Entry Points. This is the guarded recovery today's protected Entry
@@ -341,6 +369,13 @@ mirror it.
   use inverted-edge layer commands there. Add it to
   [audit_command_budget.py](../audit_command_budget.py), which already fails
   on Long and Double Press, with a test.
+  - **It reports in its own list, like `banned_activators`,** and the CLI
+    fails on it. It must not go into `violations`: `Lean.finish()` raises on
+    that list, and four tests assert it is empty on the frozen 09-29 and
+    09-30 builds, which carry the seven inverted-edge layers.
+  - A per-activator `edge_binding_invert` counts as inverted too. Only
+    Base's WASD modifier and the ramp layers state it that way today, and
+    neither is a layer command on a D-pad stick.
   - **Inverted means the layer's own stick group says so**
     (`edge_binding_invert: 1`; author, 2026-10-01). A group that doesn't
     state it passes. By that rule the seven Steering layers above are the
@@ -349,6 +384,9 @@ mirror it.
     layer on a left-stick edge, don't state the setting, and sit over Base's
     inverted edge. Whether they pick it up from Base needs a Deck check
     ([todo](../todos.md#cursor-gyro)).
+  - The two Fn layers' right sticks have the same shape (a recovery on the
+    edge, no setting stated). Nothing below them is inverted, so they are
+    safe either way; the new builder states `edge_binding_invert` 0 there.
 
 ## Step 7: verify and ship
 
@@ -357,7 +395,9 @@ mirror it.
   - each transition's two menu-release results
   - no layer-adding input left unblocked in a transition
   - Fn layers and guards bind no stick click
-  - both Entry Point sticks are D-pads with matching radii
+  - both Entry Point sticks are D-pads with matching radii, and both stick
+    groups of the guards, the menu Tap Cover and the Fn layers are D-pads
+  - every Entry Point edge chord repeats at 50 ms
   - every driver bind in a Steering window removes the window first
   - no Entry Point bind types Backspace or Enter
   - both guards carry the touch recovery on both sticks: an empty Any chord
@@ -369,9 +409,11 @@ mirror it.
   counts 15 covers and 67 reached layers),
   `test_audit_inheritance.py` with [traced_stacks.json](../traced_stacks.json),
   `test_double_tap_windows.py` (asserts seven windows and checks every
-  window's pads) and `test_neptune_gyro.py` (names the affected layers). The
-  deprecated `timed_*` tests name these layers too; check whether they read
-  the working layouts.
+  window's pads) and `test_neptune_gyro.py` (names the affected layers). Two
+  deprecated `timed_*` tests read the working layouts: `test_timed_spec.py`
+  asserts six mode-shift groups, and step 2 removes four of them;
+  `test_timed_reduction.py` replays a 300 ms menu hold on the default
+  layout.
 - **`test_steering_lean.py` stays as it is.** It loads the 09-30 `Lean`
   builder, not the working layouts, and `Lean` stays frozen, as the 09-29
   baseline did. The two rules steps 5 and 6 reverse
@@ -401,6 +443,12 @@ mirror it.
     (assumption 6)
   - push a stick about 150 ms into a menu hold: Fn must not land on the
     guard (assumption 5)
+  - hold the left stick north, then hold Start for 500 ms: no `\` is typed.
+    This is the timing check for the 50 ms edge repeat; the silent-release
+    check below can't tell the Tap Cover from Fn, because both release
+    silently
+  - both sticks out, recentre the second one before 200 ms, keep holding:
+    the release is still silent (assumption 6 for the guards)
   - a release missed while the Steam menu is open with a guard on: touching
     a stick clears it, and the next menu tap behaves normally
   - under the menu Tap Cover, bump the other menu button: the cover returns,
@@ -424,6 +472,16 @@ flow. Step 6 is independent of them.
 **One release** (author, 2026-10-01): steps 1 to 6 ship together, so the
 inverted-edge audit check goes in with no known violations left.
 
+**Build order** (third review, then changed by the author): the review
+proposed building steps 1 to 5 first and putting that candidate on the Deck
+for the two gates before step 6, because gate 2 has no fallback and all of
+step 6 rests on it. The author then asked for the whole layout to be built
+and released at once, so 90.10 carries all six steps with the gates still
+open. Gate 1 can also be checked on 90.9: hold R1,
+press A so `R1: Tap Cover` lands, then click the left stick. Mouse Back
+means the click came from `R1: Modifier 1` in the middle of the stack; Q
+means it came from Base.
+
 ## Fallbacks
 
 - **Gate 1 fails (sticks skip the middle layer):** the guards and Fn layers
@@ -438,13 +496,11 @@ inverted-edge audit check goes in with no known violations left.
 - **Assumption 4 fails (no key after a removal):** W or S drops when a
   Steering window times out, until the driver is pressed again. Nothing is
   designed for that yet.
-- **Assumption 5 fails (Fn lands on a guard):** cleanup still works, because
-  Fn's release removes the guards. But Fn becomes reachable with a stick out.
-  The fix would be to go back to swapping the Entry Point out, which breaks
-  the click inheritance; nothing is designed for that yet.
-- **Assumption 6 fails (Fn never arrives after a guard comes off):** the
-  player stays in the Entry Point until the menu button is pressed again.
-  Mild; no design needed.
+- **Assumption 6 fails (an eaten delay doesn't come back):** after a guard
+  comes off, Fn never arrives and the player stays in the Entry Point until
+  the menu button is pressed again. With two guards, the Tap Cover may not
+  land after the second one comes off, so a long hold with a stick out ends
+  in Tab or Escape through the Double Tap window. Mild; no design needed.
 
 ## Worked out during the build
 
@@ -524,3 +580,18 @@ Second review, after the plan was checked against the layouts:
     settle whether it picks up Base's inverted edge.
 14. **A bump of the other menu button under the menu Tap Cover is
     accepted,** like the bump under a guard. One Tap Cover stays.
+
+Third review, a check of the plan against the builder, the fix pipeline and
+both layouts:
+
+15. **A layer that binds a button mid-delay eats the delayed action**
+    (author's runtime fact). Assumption 5 is established and its fallback is
+    gone. Assumption 6 now also covers a guard's Tap Cover delay.
+16. **The Entry Points' edge chords repeat every 50 ms,** so the guard lands
+    inside the Fn delay when a stick is already out.
+17. **Every layer above an Entry Point keeps both sticks in D-pad mode,**
+    and the test checks it.
+18. **The inverted-edge check gets its own list** in the Budget audit, so
+    the frozen builders and their tests keep passing.
+19. **Steps 1 to 5 are built and put on the Deck for the gates first;** step
+    6 follows. Still one release.

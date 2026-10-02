@@ -594,7 +594,11 @@ There are **seven Always On layers** in each 90.2 layout: the two modifier Doubl
 Tap layers, LST/RST/RTP Double Tap, and Menu Left/Right Double Tap. LST/RST time
 out after 200 ms; the other five after 150 ms. The two modifier and two menu
 windows also send a scroll/key output after 50 ms. Those outputs are not layer
-mutations. **Double Tap Covers are separate layers and have no Always On bind.**
+mutations. **Double Tap Covers are separate layers and have no Always On bind.** Since
+90.10 there are nine: `Steering | LS Up: Double Tap` and `Steering | LS Down:
+Double Tap` time out after 150 ms and send their single scroll in the same
+entry as the self-removal, so a second push or the opposite direction can
+drop it.
 
 The [blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md)
 checks every layer and confirms all 13 active entry bindings add the timed layer
@@ -769,16 +773,23 @@ How these layouts use it:
   without checking this.
 - **When a new layer must act immediately on a held input**, either add the next
   layer in the same binding array, or give the new layer's activator Hold to Repeat:
-  - Array: in 90.9 the Menu Entry's opposite-button chord adds Fn and then
-    types Enter / Backspace itself. (Until 90.8 it added an overlay layer
-    instead of the key.) The reason given at the time, that Fn's own chord
+  - Array: Mod 0/1 → Mod 2 entry adds the covers and Mod 2 in one array.
+    In 90.9 the Menu Entry's opposite-button chord also added Fn and then
+    typed Enter / Backspace itself (until 90.8 it added an overlay layer
+    instead of the key). The reason given at the time, that Fn's own chord
     can't fire for a button that is already down, stretched this rule to an
-    output; see the scope note above. **To be reverted** (author, 2026-10-01):
-    the Entry Point's chord will only add Fn, and Fn's chord types the key, as
-    it did before the split. It goes in with the
-    [transition build](../plans/2026-10-01-stateful-transitions-implementation.md).
+    output; see the scope note above. **Reverted in 90.10** (author,
+    2026-10-01): the Entry Point's chord only adds Fn, and Fn's chord types
+    the key, as it did before the split.
   - Repeat: Gyro's 50 ms modifier entry after a Mod 2 release, Mod 0/1 → Mod 2
-    entry, and Fn stick click → Transition Set.
+    entry, the Menu Entry Points' stick-edge chord that adds a stick guard
+    (50 ms, so the guard lands inside the 200 ms Fn delay when a stick is
+    already out), and the Steering W and S layers' modifier add.
+- **A layer that binds a button while a delay is running on that button eats
+  the delayed action** (author, 2026-10-01). The stick guards rely on it: a
+  guard that lands inside the Entry Point's Fn delay cancels it. Whether the
+  delay comes back when the covering layer is removed rests on the repeating
+  reset and is unverified.
 - **An exit whose condition can already be true when its layer is added needs
   Hold to Repeat.** Examples: the ramp layers' inverted thresholds, the trackpad-
   click hold exits, and `Gyro Off Ramp Up`'s firing-control removal.

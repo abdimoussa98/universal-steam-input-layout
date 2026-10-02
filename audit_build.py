@@ -6,7 +6,7 @@ is clean only when every line passes (Layer Definition of Done, section 10).
 
 | Audit | Script | Clean means |
 |---|---|---|
-| Budget audit | audit_command_budget.py | three entries per input, no banned activators |
+| Budget audit | audit_command_budget.py | three entries per input, no banned activators, no inverted D-pad edge layer command |
 | Window audit | audit_inheritance.py | no undecided layer command under an Always On window |
 | Flow audit | audit_flow_inheritance.py | a chain of adding bindings reaches every layer, no open cover finding |
 

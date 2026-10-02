@@ -32,7 +32,7 @@ missed all of these routes.
 
 | Window | Input | Layer API underneath | Underlying bind across stacks | Block |
 |---|---|---|---|---|
-| All seven (default) | `left_trigger` / `right_trigger` edge | `Gyro Off Ramp Up` removes itself | left or right mouse in most stacks, nothing under Gyro Off Ramp Up | clear |
+| All seven (default) | `left_trigger` / `right_trigger` edge | `Gyro Off Ramp Up` removes itself | left or right mouse in most stacks, nothing under Gyro Off Ramp Up | clear (**replaced with the mouse button since 90.10**: a stack with only a layer command adds no keybind; [record](../2026-10-01-stateful-transitions/README.md#what-the-fix-pipeline-derived)) |
 | RTP Double Tap (both) | right pad `touch` | Base adds `RTP: Entry Point` | nothing but the layer command | **allowed** (see below) |
 | RTP Double Tap (both) | four back buttons | the Fn layers (hold a menu button, quick-tap the right pad) | Ctrl from Base, menu-held chords from Fn | clear |
 

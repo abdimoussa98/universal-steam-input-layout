@@ -120,22 +120,22 @@ class NeptuneRecoveryTests(unittest.TestCase):
                     rs = self.source(layout, title, "right_joystick")
                     self.assertEqual(ls["mode"], "dpad")
                     self.assertEqual(ls["settings"]["edge_binding_invert"], "0")
-                    if title == 'Transition Set 1':
+                    if title in ('Transition Set 0', 'Transition Set 1'):
                         for group in (ls, rs):
                             self.assertEqual(group['inputs']['edge']['activators'],
                                              {'Full_Press': {'bindings': {'binding': EMPTY}}})
                     elif title in ('Menu Left: Entry Point', 'Menu Right: Entry Point'):
-                        for group, radius in ((ls, '4915'), (rs, '7209')):
-                            self.assertEqual(group['settings']['edge_binding_radius'], radius)
+                        # Both sticks are D-pads with the same edge; each adds its own stick guard.
+                        for group, stick in ((ls, 'Left'), (rs, 'Right')):
+                            self.assertEqual(group['mode'], 'dpad')
+                            self.assertEqual(group['settings']['edge_binding_radius'], '4915')
                             self.assertEqual(group['settings']['edge_binding_invert'], '0')
                             activators = group['inputs']['edge']['activators']
                             self.assertEqual(set(activators), {'chord'})
                             chord = activators['chord']
-                            self.assertEqual(chord['settings']['chord_button'], next(iter(selectors)))
-                            self.assertEqual(chord['settings']['hold_repeats'], '1')
-                            self.assertEqual(chord['settings']['interruptable'], '0')
-                            self.assertEqual(chord['bindings']['binding'],
-                                             [addition('Steering | ' + title), removal(title)])
+                            self.assertEqual(chord['settings'], {'chord_button': next(iter(selectors)), 'hold_repeats': '1',
+                                                                 'repeat_rate': '50', 'interruptable': '0'})
+                            self.assertEqual(chord['bindings']['binding'], addition(f'Menu Buttons: {stick} Stick Guard'))
                     elif title.endswith((": Modifier 0", ": Modifier 1")):
                         button = title.removeprefix("Gyro | ").split(":")[0]
                         owner_mask = {"L1": 8, "R1": 4, "L2": 33554432, "R2": 16777216}[button]
@@ -151,49 +151,31 @@ class NeptuneRecoveryTests(unittest.TestCase):
                         self.assert_recovery(ls["inputs"]["edge"], selectors, targets)
                         self.assertEqual(ls["inputs"]["edge"], rs["inputs"]["edge"])
 
-    def test_transition_recovery_is_consistent_and_removes_transition_first(self):
+    def test_transitions_block_the_stick_edges_and_touch_only_clears_the_trio(self):
+        # A transition has no stick-touch or edge recovery (since 90.10): a stuck one ends on the
+        # next tap of either menu button.
         for variant, layout in self.layouts.items():
             for title in ("Transition Set 0", "Transition Set 1"):
-                selectors, targets = recovery_specs(variant)[title]
                 for source in ("joystick", "right_joystick"):
                     for name in ("touch", "edge"):
                         with self.subTest(variant=variant, layer=title, source=source, input=name):
                             value = self.source(layout, title, source)["inputs"][name]
-                            if title == 'Transition Set 1':
-                                if name == 'edge':
-                                    self.assertEqual(value['activators'],
-                                                     {'Full_Press': {'bindings': {'binding': EMPTY}}})
-                                else:
-                                    self.assertEqual(set(value['activators']), {'release'})
-                                    prefix = 'LST' if source == 'joystick' else 'RST'
-                                    self.assertEqual(value['activators']['release']['bindings']['binding'],
-                                        [removal(prefix + ': ' + suffix) for suffix in
-                                         ('Temporary Gyro', 'Tap Cover', 'Entry Point')])
-                                continue
-                            if name == 'touch':
-                                # Transition Set 0 touch: the two menu guards share one Any
-                                # chord so the side-local release fits the three-entry budget.
-                                acts = value['activators']
-                                self.assertEqual(list(acts), ['chord', 'Full_Press', 'release'])
-                                self.assertEqual(acts['chord'], {'bindings': {'binding': EMPTY}, 'settings': {
-                                    'gyro_ratchet_button_mask': str((1 << 12) | (1 << 14)),
-                                    'gyro_ratchet_button_requireany_or_all': '0', 'interruptable': '0'}})
-                                self.assertEqual(acts['Full_Press']['settings'], {'hold_repeats': '1'})
-                                self.assertEqual(set(acts['Full_Press']['bindings']['binding']), {removal(t) for t in targets})
+                            if name == 'edge':
+                                self.assertEqual(value['activators'],
+                                                 {'Full_Press': {'bindings': {'binding': EMPTY}}})
+                            else:
+                                self.assertEqual(set(value['activators']), {'release'})
                                 prefix = 'LST' if source == 'joystick' else 'RST'
-                                self.assertEqual(acts['release']['bindings']['binding'],
+                                self.assertEqual(value['activators']['release']['bindings']['binding'],
                                     [removal(prefix + ': ' + suffix) for suffix in
                                      ('Temporary Gyro', 'Tap Cover', 'Entry Point')])
-                            else:
-                                self.assert_recovery(value, selectors, targets)
-                            self.assertEqual(value["activators"]["Full_Press"]["bindings"]["binding"][-1], removal(title))
 
     def test_timed_windows_block_both_edges_and_preserve_ordered_boundaries(self):
         blank = {"activators": {"Full_Press": {"bindings": {"binding": EMPTY}}}, "disabled_activators": {}}
         for variant, layout in self.layouts.items():
             timed = {title for title in layout["presets"]
                      if any("always_on_action" in g.get("inputs", {}) for g in self.active_groups(layout, title))}
-            self.assertEqual(len(timed), 7)
+            self.assertEqual(len(timed), 9)
             for title in timed:
                 with self.subTest(variant=variant, layer=title):
                     for source in ("joystick", "right_joystick"):
@@ -213,7 +195,7 @@ class NeptuneRecoveryTests(unittest.TestCase):
                             if owner in timed and operations:
                                 self.assertEqual(actions[-1], removal(owner), owner)
                                 outgoing += 1
-            self.assertEqual((incoming, outgoing), (13, 30))
+            self.assertEqual((incoming, outgoing), (21, 44))
 
     def test_all_guarded_removals_repeat_and_rtp_stays_out_of_ls_scope(self):
         for variant, layout in self.layouts.items():

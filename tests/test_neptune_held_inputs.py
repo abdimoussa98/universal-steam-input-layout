@@ -125,7 +125,7 @@ class NeptuneHeldInputTests(unittest.TestCase):
                                                  f"the layer appears only fires on a repeat; {RULE}")
             self.assertTrue(expected <= found, (variant, expected - found))
 
-    def test_layers_added_over_a_held_modifier_or_click_repeat_their_next_add(self):
+    def test_layers_added_over_a_held_input_repeat_their_next_add(self):
         for variant, layout in self.layouts.items():
             # A regular Mod 2 release adds Gyro while the other modifier can still be held.
             for side, (_, _, owner, _, _) in enumerate(owners(variant)):
@@ -135,14 +135,27 @@ class NeptuneHeldInputTests(unittest.TestCase):
                                          lambda e: addition("Gyro | " + owner) in e["actions"])
                     self.assertEqual(len(entries), 1)
                     self.assertEqual(entries[0]["settings"].get("hold_repeats"), "1", RULE)
-            # Menu Entry's stick-click chord adds Fn while that click is still held.
-            for fn in ("Menu Left: Fn Layer", "Menu Right: Fn Layer"):
-                for source, target in (("joystick", "Transition Set 1"), ("right_joystick", "Transition Set 0")):
-                    with self.subTest(variant=variant, layer=fn, source=source):
-                        entries = find_entry(layout, fn, source, "click",
-                                             lambda e: addition(target) in e["actions"])
+            # A Menu Entry Point is often added while a stick is already out (walking, then Start).
+            # Its guard add then only fires on a repeat, and has to land inside the 200 ms Fn delay.
+            for entry in ("Menu Left: Entry Point", "Menu Right: Entry Point",
+                          "Steering | Menu Left: Entry Point", "Steering | Menu Right: Entry Point"):
+                for source, guard in (("joystick", "Menu Buttons: Left Stick Guard"),
+                                      ("right_joystick", "Menu Buttons: Right Stick Guard")):
+                    with self.subTest(variant=variant, layer=entry, source=source):
+                        entries = find_entry(layout, entry, source, "edge", lambda e: addition(guard) in e["actions"])
                         self.assertEqual(len(entries), 1)
                         self.assertEqual(entries[0]["activation"], "chord")
+                        self.assertEqual(entries[0]["settings"].get("hold_repeats"), "1", RULE)
+                        self.assertEqual(entries[0]["settings"].get("repeat_rate"), "50", RULE)
+            # A Steering driver layer is added while the stick can already be held up or down.
+            for _, _, owner, _, _ in owners(variant):
+                button = owner.split(":")[0]
+                layer = f"Steering | {button}: " + ("S Key" if "Modifier 0" in owner else "W Key")
+                for name, target in (("dpad_north", "Steering | LS Up: Modifier 1"),
+                                     ("dpad_south", "Steering | LS Down: Modifier 0")):
+                    with self.subTest(variant=variant, layer=layer, input=name):
+                        entries = find_entry(layout, layer, "joystick", name, lambda e: addition(target) in e["actions"])
+                        self.assertEqual(len(entries), 1)
                         self.assertEqual(entries[0]["settings"].get("hold_repeats"), "1", RULE)
 
     def test_base_entries_repeat_so_exposure_after_a_removal_is_guaranteed(self):
@@ -198,17 +211,17 @@ class NeptuneHeldInputTests(unittest.TestCase):
         found = {(title, name, target) for title, _, name, target, _, _ in held_input_violations(layout)}
         self.assertIn(("Base", "edge", GYRO_OFF), found)
 
-    def test_menu_entry_early_chord_types_its_key_itself(self):
-        # The entry's opposite-button chord adds Fn while that button is already down, so Fn's
-        # own chord can't fire for this press (held-input rule). The entry types the key in
-        # the same array, after adding Fn. Since 90.9 the key is direct (no overlay layer).
+    def test_menu_entry_early_chord_only_adds_fn_and_fn_types_the_key(self):
+        # The entry's opposite-button chord adds Fn while that button is already down. The
+        # held-input rule covers the layer API only (author, 2026-10-01): Fn's own chord is a
+        # key output, and it types the key for this press. The entry types nothing (since 90.10).
         for variant, layout in self.layouts.items():
             for entry, button, fn, key in (("Menu Left: Entry Point", "button_escape", "Menu Left: Fn Layer", "RETURN"),
                                            ("Menu Right: Entry Point", "button_menu", "Menu Right: Fn Layer", "BACKSPACE")):
                 with self.subTest(variant=variant, entry=entry):
                     chord = input_value(layout, entry, "switch", button)["activators"]["chord"]
                     execution = [b for b in reversed(chord["bindings"]["binding"]) if "empty_binding" not in b]
-                    self.assertEqual(execution, [addition(fn), f"key_press {key}, , "])
+                    self.assertEqual(execution, [addition(fn)])
                     own = input_value(layout, fn, "switch", button)["activators"]["chord"]
                     self.assertIn(f"key_press {key}, , ", own["bindings"]["binding"])
 

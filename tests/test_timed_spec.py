@@ -184,7 +184,7 @@ class TimedSpecTests(unittest.TestCase):
                 layout = Layout(json.loads((ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json").read_text()))
                 model = TimedSpec(layout, ignore_hold_bindings=True, default_repeat_ms=137)
                 self.assertEqual(len(model.ignored_hold_commands), 5)
-                self.assertEqual(len(model.shifts_by_group), 6)
+                self.assertEqual(len(model.shifts_by_group), 2)
                 self.assertTrue(model.entries)
                 self.assertTrue(any(e.repeat_ms == 137 for e in model.entries.values()))
 

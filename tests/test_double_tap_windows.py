@@ -21,7 +21,7 @@ class DoubleTapWindowTests(unittest.TestCase):
         for variant in ("default", "alternative"):
             layout = Layout(load(variant))
             windows = always_on_layers(layout)
-            self.assertEqual(len(windows), 7, variant)
+            self.assertEqual(len(windows), 9, variant)
             for title in windows:
                 yield variant, layout, title
 
@@ -74,13 +74,25 @@ class DoubleTapWindowTests(unittest.TestCase):
                 for name in ("button_back_left", "button_back_right", "button_back_left_upper", "button_back_right_upper"):
                     self.assertEqual(list(bindings(groups["switch"]["inputs"][name]["activators"])), [EMPTY], name)
 
-    def test_default_windows_clear_the_trigger_edges_under_gyro_off_ramp_up(self):
+    def test_default_windows_keep_the_mouse_buttons_on_the_trigger_edges(self):
+        # Gyro Off Ramp Up can sit under any window, and its soft pull removes it. That is a layer
+        # command and no keybind, so the one possible keybind is Base's mouse button (since 90.10).
         layout = Layout(load("default"))
         for title in always_on_layers(layout):
-            for source in ("left_trigger", "right_trigger"):
+            for source, button in (("left_trigger", "LEFT"), ("right_trigger", "RIGHT")):
                 with self.subTest(window=title, source=source):
                     edge = layout.active(title)[source]["inputs"]["edge"]["activators"]
-                    self.assertEqual(list(bindings(edge)), [EMPTY])
+                    self.assertEqual(list(bindings(edge)), [f"mouse_button {button}, , "])
+                    self.assertEqual(edge, layout.active("Base")[source]["inputs"]["edge"]["activators"])
+
+    def test_alternative_steering_windows_keep_the_mouse_buttons_on_the_bumpers(self):
+        # Turning Ramp Up 0 can be underneath, and its bumpers only remove the ramp layers.
+        layout = Layout(load("alternative"))
+        for title in ("Steering | LS Up: Double Tap", "Steering | LS Down: Double Tap"):
+            for name, button in (("left_bumper", "LEFT"), ("right_bumper", "RIGHT")):
+                with self.subTest(window=title, input=name):
+                    acts = layout.active(title)["switch"]["inputs"][name]["activators"]
+                    self.assertEqual(list(bindings(acts)), [f"mouse_button {button}, , "])
 
     def test_right_pad_stays_the_mouse_with_click_and_touch_cleared(self):
         # Author, 2026-09-30: the cursor keeps moving during a window; only the pad's

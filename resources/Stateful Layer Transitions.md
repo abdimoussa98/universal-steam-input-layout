@@ -1,10 +1,11 @@
 # Stateful layer transitions
 
 **Status:** design agreed with the author on 2026-10-01, and revised in the
-plan review the same day (decisions 37 to 46 in the brainstorm record).
-**Not built yet.**
-Both layouts still carry the earlier `Transition Set 0/1` and the protected
-`Steering | Menu …` layers. The decisions and the options that were rejected
+plan reviews the same day (decisions 37 to 46 in the brainstorm record).
+**Built in 90.10** for both layouts
+([build record](../findings/2026-10-01-stateful-transitions/README.md)).
+**Not validated on the Deck yet:** the [Deck gates](#steerings-left-stick-and-the-deck-gates)
+are still assumed. The decisions and the options that were rejected
 are in the [brainstorm record](../plans/2026-10-01-stateful-layer-transitions.md),
 and the build steps are in the
 [implementation plan](../plans/2026-10-01-stateful-transitions-implementation.md).
@@ -86,9 +87,9 @@ where the clicks lead.
 - **The other menu button only adds Fn** (author, 2026-10-01). Backspace and
   Enter are typed by the Fn layers alone, as before the menu split. The
   Entry Point's own key from 90.9 goes away.
-- **Fn delay:** 200 ms with a 250 ms repeating reset (tentative; today 300 and
-  350). The reset keeps firing on the held button and restarts the Fn timer,
-  so Fn always arrives on a continued hold.
+- **Fn delay:** 200 ms with a 250 ms repeating reset (tentative; 300 and 350
+  until 90.9). The reset keeps firing on the held button and restarts the Fn
+  timer, so Fn always arrives on a continued hold.
 - **Each later stateful layer may need its own pair** of Entry Points like
   Steering's. Decide when it is built.
 
@@ -160,6 +161,11 @@ menu Tap Cover where the Entry Point would bring in Fn.
 
 - The commit is one array: remove the transition and whatever the
   destination replaces, then add the stateful layer and its entry guard last.
+- **Every commit into a stateful layer beeps and gives a high haptic pulse**
+  (author, 2026-10-02): the beep flag on the stateful layer's `add_layer`,
+  and `haptic_intensity` 3 on the commit's Release. A release that only ends
+  a transition (the clear, and the gestures whose destination isn't built
+  yet) is silent.
 - At entry the stateful layer has no Release or delayed binding on Start or
   Select. A repeating press that adds its Entry Point, like Base's, is
   allowed (author, 2026-10-01).
@@ -191,7 +197,7 @@ menu Tap Cover where the Entry Point would bring in Fn.
 | Exception | What it does |
 |---|---|
 | Modifier 2 clear | Both modifiers together (bumpers in default, triggers in alternative) clear everything to Base, including `Gyro`. No transition. It is the fallback from any state |
-| Steering's hold exit | Holding W with no driver exits Steering after 2.5 s, warning from 1 s. To be added for S as well |
+| Steering's hold exit | Holding W or S with no driver exits Steering after 2.5 s, warning from 1 s |
 | Stateful Cursor Gyro's own clear (not built) | Besides the menu-plus-click clear and the Modifier 2 clear, it can be left the same way Temp Cursor Gyro clears, with both sticks deflected. No transition |
 | `Gyro` | Entered and left by the uncovered Modifier 2 release. It doesn't remap the controls that toggle it. The menu-plus-click clear leaves it on |
 | Menu stateful layer | Will not use this structure. It stays in the [todos](../todos.md#menu-stateful-layer) as its own design |
@@ -210,6 +216,8 @@ menu Tap Cover where the Entry Point would bring in Fn.
       repeating press that adds its Entry Point is allowed.
 - [ ] Nothing in it depends on a chord hand-over or a D-pad centre bind.
 - [ ] Both layouts are changed.
+- [ ] Its commit beeps and pulses: the beep flag on its `add_layer` and
+      `haptic_intensity` 3 on the Release.
 - [ ] The transition test and the Deck checklist are updated.
 
 ## Accepted consequences
@@ -236,14 +244,15 @@ menu Tap Cover where the Entry Point would bring in Fn.
 - Modifier 2 can't be reached from inside a transition. The transition ends
   when the menu button is released.
 
-## Not settled
+## Steering's left stick and the Deck gates
 
-Steering's part below is decided in direction but not built.
+Steering's part below is built in 90.10. The Deck gates at the end of this
+section are still open.
 
 - **Steering's left-stick centre detection.** `Steering | LS: Entry Point`,
   the two LS covers, Modifier 0 and 1 and the two Double Tap windows use an
-  inverted edge on a D-pad stick, which rule 6 rules out. Direction (author,
-  2026-10-01; not built): the same recipe as the stick guards.
+  inverted edge on a D-pad stick until 90.9, which rule 6 rules out. Since
+  90.10 (author, 2026-10-01) they use the same recipe as the stick guards.
   - **A normal, generous outer edge whose Release ends the modifier.** Once
     Modifier 1 is entered by holding north, the edge keeps it in place. The
     player can roll to East and West for A and D and stay in the modifier.
@@ -343,16 +352,20 @@ Steering's part below is decided in direction but not built.
   2. **A key output after a removal exposes it under a held input.** W and S
      need it when a Steering window times out.
   3. **A running delay doesn't fire once another layer binds its input.**
-     The Entry Point stays under a guard, with its Fn delay possibly
-     running. If it fired, Fn would land on the guard.
+     Established (author, 2026-10-01): the layer that binds the button eats
+     the delayed action. So a guard that lands inside the Fn delay cancels
+     it, and Fn can't land on a guard. The Entry Point's edge chord repeats
+     every 50 ms so the guard lands in time when a stick is already out.
   4. **A delay starts again when a removal exposes it under a held button.**
-     When a guard comes off, Fn is expected to follow.
+     When a guard comes off, Fn is expected to follow. The same holds for a
+     guard's Tap Cover delay after a second guard on top of it comes off.
 
 ## Tests
 
-None yet, because the structure isn't built. When it is, a test asserts for
-both layouts: each Entry Point's click-release targets, each transition's two
-menu-release destinations, that the transitions leave no layer-adding input
-unblocked, and that the Fn layers and guards bind no stick click. It is
-extended each time a stateful layer is added, until all four gestures are
-taken.
+[test_stateful_transitions.py](../tests/test_stateful_transitions.py) asserts
+for both layouts: each Entry Point's click-release targets, each transition's
+two menu-release destinations, that the transitions leave no layer-adding
+input unblocked, that the Fn layers and guards bind no stick click, the
+guards' and the Tap Cover's binds, and Steering's left-stick recipe and
+windows. It is extended each time a stateful layer is added, until all four
+gestures are taken.

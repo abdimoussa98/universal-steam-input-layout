@@ -520,8 +520,8 @@ class NeptuneFlowTests(unittest.TestCase):
             self.assertEqual(report["legacy_only"], ["LTP: Arrow Keys", "RTP: Mouse Buttons"])
             self.assertEqual(report["unsupported"], [])
             self.assertEqual(report["stale_decisions"], [])
-            self.assertEqual(len(report["covers"]), 15)
-            self.assertEqual(len(report["targets"]), 67)   # 69 layers, less the two hold_layer ones
+            self.assertEqual(len(report["covers"]), 14)
+            self.assertEqual(len(report["targets"]), 68)   # 70 layers, less the two hold_layer ones
             self.assertLess(report["view"]["seconds"], 5)
             # Inherited bindings that vary between stacks are listed, and don't decide the result.
             self.assertTrue([i for x in report["targets"].values() for i in x["inputs"] if i["finding"] == "varies"])

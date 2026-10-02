@@ -36,11 +36,10 @@ The author accepted these types on 2026-09-30, and more may be added later.
 | Type | Examples | What its cleanup removes |
 |---|---|---|
 | Stateful | `Gyro`, `Steering` | Removed only by its own deliberate exit. Other layers' cleanup never removes it. See [§11](#11-stateful-layers) |
-| Owner | Modifiers, Menu Entry and Fn layers, Scroll, Transition Sets, trackpad modes | Its family or current branch, plus every overlay it applied |
+| Owner | Modifiers, Menu Entry and Fn layers, the two menu stick guards, Scroll, Transition Sets, trackpad modes | Its family or current branch, plus every overlay it applied |
 | Overlay | Tap Covers, Double Tap Covers, Temp Cursor Gyro | Itself, or a local pair. The owner handles recovery when it gets stuck |
 | Stick-touch helper | `LST` or `RST` `Entry Point`, `Tap Cover` and `Temporary Gyro` | Every layer removes it when the thumb lifts off that stick ([§5](#5-stick-touch-release)) |
-| Always On window | The seven Double Tap layers | Only itself ([§9](#9-always-on-layers)) |
-| Chorded window | `Steering \| LS Up/Down: Double Tap` | Itself on timeout or second press (removed first). A 150 ms chord on the held drivers replaces the Always On clock, so §9 doesn't apply. Not cover-type: it binds both touch inputs with the shared driver-guarded recovery. **To be rebuilt as Always On windows** (author, 2026-10-01): the chord rides on an inverted edge of a D-pad stick, which [§3](#3-activators) now rules out |
+| Always On window | The nine Double Tap layers, including `Steering \| LS Up/Down: Double Tap` since 90.10 | Only itself ([§9](#9-always-on-layers)) |
 | Ramp or threshold | `Turning Ramp Up 0/1`, `Gyro Off Ramp Up` | Itself and the ramp family, through repeating threshold exits |
 
 **Exception (author, 2026-09-30):** the quick opposite-modifier tap in every
@@ -85,8 +84,9 @@ See: [layout-prep skill](../.claude/skills/steam-layout-prep/SKILL.md) ·
   outer edge and its Release. An inverted edge that only sends output, such
   as a walk bind or the WASD modifier, is fine. Mouse-mode sticks aren't
   affected; the ramp-up's Soft Press exits work.
-  - Known violations: Steering's left-stick layers, tracked in the
-    [todos](../todos.md#stateful-layer-transitions).
+  - The Budget audit fails on it since 90.10 (`inverted_edges`). Steering's
+    left-stick layers were the only violators and now end on the edge's
+    Release.
 - **Chords latch** (author's test, 2026-10-01). A bind can't hand over from a
   chord to another activator when the chord button is released; it stays in
   the chord until its own button is released.
@@ -120,7 +120,9 @@ layers may inherit it.** A cover-type layer is a lightweight layer that is only
 ever added on top of another layer. There's no strict definition yet; it's a
 judgment call. Current cover-type layers:
 - the Tap Covers and the Double Tap Covers, including the steering
-  `LS: Tap Cover`, `LS: Double Tap Cover` and Menu Tap Covers (since 90.7)
+  `LS: Tap Cover` and `LS: Double Tap Cover` (since 90.7) and
+  `Menu Buttons: Tap Cover` (since 90.10). The two menu stick guards are not
+  covers: they bind both stick touches with their own recovery
 - Temp Cursor Gyro
 - `Gyro Off Ramp Up`. Its only delay is a 5 ms right-stick handoff to
   `Turning Ramp Up 0`, which is a threshold handoff rather than a hold, so a
@@ -182,7 +184,7 @@ shape: L1 → `L1: Double Tap` → `L1: Scroll Down` → `L1: Double Tap Cover`.
 ```
 Base: Select press
   └─ Menu Left: Entry Point ............ (1) parent: tap or hold?
-       ├─ hold 300 ms ──► Menu Left: Fn Layer          (hold result)
+       ├─ hold 200 ms ──► Menu Left: Fn Layer          (hold result)
        └─ release ──────► Menu Left: Double Tap ....... (2) Always On window, 150 ms
             ├─ timeout ──► window removes itself        (single tap)
             └─ 2nd press ► Menu Left: Escape .......... (3) second-press layer
@@ -195,8 +197,8 @@ Base: Select press
 
 | Entry | Settings | Does |
 |---|---|---|
-| Chord (hold) | `delay_start: 300` | Adds the hold target, `Menu Left: Fn Layer` |
-| Regular Press (**reset**) | `hold_repeats: 1`, `repeat_rate: 350`, `interruptable: 0` | Removes **only** that same target, which restarts a stuck delay |
+| Chord (hold) | `delay_start: 200` | Adds the hold target, `Menu Left: Fn Layer` |
+| Regular Press (**reset**) | `hold_repeats: 1`, `repeat_rate: 250`, `interruptable: 0` | Removes **only** that same target, which restarts a stuck delay |
 | Release (tap) | — | Removes the parent, then adds `Menu Left: Double Tap` **last** |
 
 Both stick-touch releases in the parent **complete the pending hold first**
@@ -369,6 +371,12 @@ to a layer with an Always On action, and to no other layer:**
      hard-coded replacement would be wrong in some stack.
    - **Replace** it with the keybind if there is only one, for example always
      E or always middle mouse.
+   - **A stack whose binding is only a layer command adds no keybind**
+     (author, 2026-10-01). Under `Gyro Off Ramp Up` a trigger soft pull only
+     removes that layer, so the one keybind is Base's mouse button and the
+     window keeps it. Until 90.9 the audit counted that stack as a second,
+     empty keybind and cleared the input.
+   - If no stack gives a keybind, clear it.
 
 If none of the bindings it could inherit is a layer command, the input is
 left alone, even when the keybinds differ between stacks. An ordinary layer
@@ -441,7 +449,7 @@ See: [Inheritance review](Steam%20Input%20JSON%20Structure.md#inheritance-review
 ## 9. Always On layers
 
 This section applies to any layer with an `always_on_action`, which currently
-means the seven Double Tap windows.
+means the nine Double Tap windows.
 
 1. **Entry:** make every other layer change first, and add the Always On layer
    **last**.
@@ -466,9 +474,10 @@ are no open routes in any of the seven windows in either layout. The derived
 stacks found routes that the earlier hand-traced stacks missed. Most are now
 cleared, and one is a deliberate exception
 ([change record](../findings/2026-09-30-derived-window-blocks/README.md)):
-- **Trigger edges, all seven default windows:** `Gyro Off Ramp Up` can sit
-  under any window, and its edge removes it. The underlying bind varies
-  between left mouse and nothing, so the edge is cleared.
+- **Trigger edges, all nine default windows:** `Gyro Off Ramp Up` can sit
+  under any window, and its edge removes it. The only keybind underneath is
+  Base's left or right mouse button, so since 90.10 the edge is replaced
+  with it. It was cleared from 90.6 to 90.9.
 - **Right-pad `touch`, RTP Double Tap: blocked by the mode change** (author,
   2026-10-01). The window's D-pad-mode pad is its own second-tap selection: a
   second tap north or south goes to Circular Scroll, and anywhere else leaves
@@ -477,6 +486,15 @@ cleared, and one is a deliberate exception
   so no touch bind is needed. The former `allow` decision was retired.
 - **The four back buttons, RTP Double Tap:** the Fn layers can be underneath
   if you hold a menu button and quick-tap the right pad.
+- **Since 90.10** ([record](../findings/2026-10-01-stateful-transitions/README.md)):
+  - **Left-stick up and down, the two menu windows:** Steering can sit under
+    them, and its hold-exit clock would show through. Both are replaced with
+    plain W and S.
+  - **The two Steering windows** bind the stick and both drivers themselves.
+    Derived on top, because a ramp layer can be added while in Steering: in
+    the default layout the trigger edges keep the mouse buttons; in the
+    alternative the bumpers keep the mouse buttons and the trigger clicks,
+    which have no keybind underneath, are cleared.
 
 **Stick clicks, face buttons and D-pad:** the derived stacks never put a layer
 command under them in a window, so they stay inherited. `--untraced` still
@@ -494,7 +512,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 
       | Audit | Script | Clean means |
       |---|---|---|
-      | Budget audit | `audit_command_budget.py` | Three entries per input and no banned activators ([§3](#3-activators)) |
+      | Budget audit | `audit_command_budget.py` | Three entries per input, no banned activators, and no layer command on an inverted D-pad stick edge ([§3](#3-activators)) |
       | Window audit | `audit_inheritance.py` | No undecided layer command under an Always On window ([§8](#8-inheritance-and-blocking), [§9](#9-always-on-layers)) |
       | Flow audit | `audit_flow_inheritance.py` | A chain of adding bindings reaches every layer, and no cover finding is open ([§5](#5-stick-touch-release), [§8](#8-inheritance-and-blocking)) |
 
@@ -520,18 +538,21 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 
 This section applies only when a stateful layer is added or changed. The
 structure is in [Stateful Layer Transitions](Stateful%20Layer%20Transitions.md).
-It was agreed on 2026-10-01 and **isn't built yet**; today's layouts still use
-the earlier Transition Sets.
+It was agreed on 2026-10-01 and is built since 90.10; Deck validation is
+pending.
 
-The check is whether the transitions behave as that document says. It lives
-here while stateful layers are still being built. Once the structure is in the
-layouts a test takes over, and the test is extended with every new stateful
-layer until all four gestures are taken.
+The check is whether the transitions behave as that document says.
+[test_stateful_transitions.py](../tests/test_stateful_transitions.py) asserts
+it on the generated layouts, and is extended with every new stateful layer
+until all four gestures are taken.
 
 - [ ] **Gesture.** The layer is entered by one of the four menu-plus-stick-click
       gestures, and the gesture map is updated.
 - [ ] **Entry.** The Base Entry Point sends that click's Release to the right
       transition, and the transition's menu Release adds the layer.
+- [ ] **Entry feedback.** That Release beeps and gives a high haptic pulse
+      (author, 2026-10-02): the beep flag on the layer's `add_layer`, and
+      `haptic_intensity` 3 on the Release.
 - [ ] **Exit.** Inside the layer, every one of the four gestures leads to the
       clear transition. The layer has Entry Points for that, added by its own
       menu press.
