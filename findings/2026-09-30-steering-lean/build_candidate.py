@@ -171,6 +171,9 @@ class Lean:
                                haptic_intensity=3, interruptable=0)])
         self.group(t(), 'joystick', inputs, self.ls_settings())
         self.drives(t(), self.acquisition(), self.menu_switches())
+        # Base's RTP touch is the only way into RTP: Double Tap (Always On),
+        # which would inherit steering's LS layer commands. Mouse and click stay.
+        self.group(t(), 'right_trackpad', {'touch': m.full()})
         guard = self.ls_base(vertical=True)
         guard['edge'] = m.full(m.op('remove', t('Entry Guard')), hold_repeats=1, repeat_rate=50)
         self.group(t('Entry Guard'), 'joystick', guard, self.ls_settings())
@@ -243,25 +246,11 @@ class Lean:
     def flush_window(self, name, direction, *actions):
         return self.m.seq(self.m.op('remove', name), self.m.wheel(direction), *actions)
 
-    def window_action_inputs(self, name, direction):
-        """Normal mapped actions resolve a pending single; Mod2 inherits its map."""
-        m = self.m
-        for source in ('button_diamond', 'dpad', 'switch', 'joystick', 'right_joystick'):
-            g = self.base_groups.get(source)
-            if not g:
-                continue
-            inputs = {}
-            for n, binding in g.get('inputs', {}).items():
-                if source in ('joystick', 'right_joystick') and n != 'click':
-                    continue
-                if source == 'switch' and not n.startswith('button_back_'):
-                    continue
-                payload = m.commands(m.output_only(binding)['activators']['Full_Press'])
-                if payload == [m.EMPTY]:
-                    continue
-                inputs[n] = m.full(self.flush_window(name, direction, *payload), interruptable=0)
-            if inputs:
-                self.add_to_source(name, source, inputs)
+    def covers(self):
+        """Overlays: only ever added on top of their owner, so they define just
+        their own controls and inherit the rest, including touch (DoD §5)."""
+        return [self.title('Normal', 'Consumed'), self.title('Repeat')] + [
+            self.protected_names(side)[1] for side in ('Left', 'Right')]
 
     def build_windows(self):
         m = self.m; t = self.title
@@ -286,13 +275,14 @@ class Lean:
                     m.op('add', t('Normal', 'Consumed'))), interruptable=0)
             clock_settings = self.ls_settings()
             clock_settings['edge_binding_radius'] = '32767'
+            # Mapped buttons inherit: none has a layer command underneath, and
+            # the clock resolves the pending single on its own.
             self.group(name, 'joystick', inputs, clock_settings)
-            self.window_action_inputs(name, direction)
 
     def build_repeats(self):
         m = self.m; t = self.title
         name = t('Repeat')
-        inputs = self.ls_base()
+        inputs = {}
         stop = m.seq(m.op('remove', name), m.op('add', t('Normal', 'Consumed')))
         for direction, input_name in m.DIRECTIONS.items():
             # Both directions share one cover. A direction's release tears it
@@ -301,11 +291,8 @@ class Lean:
             inputs[input_name] = m.inp(Full_Press=m.entry(m.wheel(direction),
                 hold_repeats=1, repeat_rate=m.REPEAT_MS, delay_start=5, interruptable=0),
                 release=m.entry(stop))
+        # Sideways inherits the owner's A/D; leaving up/down already stops.
         inputs['edge'] = m.full(stop, hold_repeats=1, repeat_rate=50)
-        for lateral in ('dpad_east', 'dpad_west'):
-            payload = m.commands(inputs[lateral]['activators']['Full_Press'])
-            inputs[lateral] = m.full(m.seq(m.op('remove', name), *payload,
-                m.op('add', t('Normal', 'Consumed'))), interruptable=0)
         self.group(name, 'joystick', inputs, self.ls_settings())
 
     def protected_names(self, side):
@@ -321,7 +308,7 @@ class Lean:
         for side in ('Left', 'Right'):
             normal = f'Menu {side}: Entry Point'; fn = f'Menu {side}: Fn Layer'
             protected, cover = self.protected_names(side)
-            self.clone(normal, protected); self.clone(normal, cover)
+            self.clone(normal, protected); self.layer(cover)
             self.menu_helpers += [protected, cover]
             owner = 'button_menu' if side == 'Left' else 'button_escape'
             other = 'button_escape' if side == 'Left' else 'button_menu'
@@ -336,22 +323,22 @@ class Lean:
                 g['settings'].update(edge_binding_radius=radius, edge_binding_invert='0')
                 g['inputs']['edge'] = m.inp(chord=m.entry(self.transfer(side), chord_button=legacy,
                                                          hold_repeats=1, interruptable=0))
-            for target in (protected, cover):
-                sw = self.patch(target, 'switch')['inputs']
-                cleanup = self.clear([cover, protected, normal])
-                release = cleanup + ([m.key('ESCAPE' if side == 'Left' else 'TAB')] if target == protected else [])
-                regular = [
-                    m.entry(m.op('add', cover), delay_start=300, interruptable=0),
-                    m.entry(m.op('remove', cover), hold_repeats=1,
-                            repeat_rate=350, interruptable=0)
-                ] if target == protected else m.entry(m.EMPTY, interruptable=0)
-                sw[owner] = m.inp(release=m.entry(m.seq(*release)), Full_Press=regular)
-                sw[other] = m.full(); sw['left_stick_click'] = m.full(); sw['right_stick_click'] = m.full()
-                for source in ('joystick', 'right_joystick'):
-                    g = self.patch(target, source)
-                    g['inputs']['touch'] = m.full(); g['inputs']['edge'] = m.full()
-                    dest = 'Transition Set 1' if side == 'Right' and source == 'joystick' else fn
-                    g['inputs']['click'] = m.inp(chord=m.entry(m.op('add', dest), chord_button=legacy, interruptable=0))
+            cleanup = self.clear([cover, protected, normal])
+            sw = self.patch(protected, 'switch')['inputs']
+            sw[owner] = m.inp(release=m.entry(m.seq(*cleanup, m.key('ESCAPE' if side == 'Left' else 'TAB'))),
+                              Full_Press=[m.entry(m.op('add', cover), delay_start=300, interruptable=0),
+                                          m.entry(m.op('remove', cover), hold_repeats=1,
+                                                  repeat_rate=350, interruptable=0)])
+            sw[other] = m.full(); sw['left_stick_click'] = m.full(); sw['right_stick_click'] = m.full()
+            for source in ('joystick', 'right_joystick'):
+                g = self.patch(protected, source)
+                g['inputs']['touch'] = m.full(); g['inputs']['edge'] = m.full()
+                dest = 'Transition Set 1' if side == 'Right' and source == 'joystick' else fn
+                g['inputs']['click'] = m.inp(chord=m.entry(m.op('add', dest), chord_button=legacy, interruptable=0))
+            # The cover only ever sits on its protected entry: it silences the
+            # menu release and hides the parent's delayed apply and reset.
+            self.group(cover, 'switch', {owner: m.inp(release=m.entry(m.seq(*cleanup)),
+                                                      Full_Press=m.entry(m.EMPTY, interruptable=0))})
             if side == 'Right':
                 self.patch(normal, 'joystick')['inputs']['click'] = m.inp(chord=m.entry(
                     m.op('add', 'Transition Set 1'), chord_button=14, interruptable=0))
@@ -389,6 +376,8 @@ class Lean:
         """
         m = self.m; t = self.title
         for name in self.new:
+            if name in self.covers():
+                continue
             target = t('Normal', 'Consumed') if name in self.banks[:2] else None
             for o in m.OWNERS:
                 if name == t('Mod2', o): target = t('Mod2 Cover', o)
@@ -424,6 +413,18 @@ class Lean:
         for source in ('joystick', 'right_joystick'):
             touch = m.inp(release=m.entry(m.seq(*self.stick_cleanup(source)), haptic_intensity=0))
             self.add_to_source('Transition Set 1', source, {'touch': touch})
+
+    def build_rs_edge_blocks(self):
+        """Clear RS edge while a steering timer is pending (author, 2026-09-30).
+
+        Base's RS edge adds and removes the turn-assist ramp layers, and
+        removals can reset a pending timer. The windows (150 ms), Mod 0/1
+        (250 ms) and Mod 2 (200 ms) block it; the LS Tap Cover inherits the
+        bank's block. Steering and W/S Key keep turn assist: their only
+        pending layer timer is the 5 ms selector.
+        """
+        for name in self.windows + self.banks:
+            self.add_to_source(name, 'right_joystick', {'edge': self.m.full()})
 
     def build_quick_base_exit(self):
         """Reuse the opposite-side single cover without exporting steering state
@@ -467,6 +468,7 @@ class Lean:
     def finish(self):
         self.build_core(); self.build_consumed(); self.build_strokes()
         self.build_repeats(); self.build_menu(); self.build_windows(); self.build_quick_base_exit(); self.build_touch_cleanup()
+        self.build_rs_edge_blocks()
         self.cm['title'] += ' | steering lean candidate'
         self.cm['description'] = ('Lean steering candidate; device verification pending. Right Menu + LS click, '
             'release Right Menu to enter. Right driver W, left S; LS Up/Down Modifier 1/0; '

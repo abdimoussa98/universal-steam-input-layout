@@ -2,7 +2,7 @@
   "default": {
     "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
     "baseline_generator_sha256": "20c1d1b3a50a3e4597cdbfc519fd163f35fc7fedc902f1439dea4f0402c5590a",
-    "candidate_sha256": "29d8c2ed0f6a9d93219edd4e31839afd7a588f475041a3cbef34b2c836891db4",
+    "candidate_sha256": "316003a3652a0db82d91b0d81112e276689f1d7bb33f01a0d16b31c8e65e1d34",
     "new_layers": [
       "Steering | LS Up: Double Tap",
       "Steering | LS Down: Double Tap",
@@ -50,18 +50,6 @@
         "right_joystick"
       ],
       [
-        "Steering | Menu Left: Tap Cover",
-        "switch"
-      ],
-      [
-        "Steering | Menu Left: Tap Cover",
-        "joystick"
-      ],
-      [
-        "Steering | Menu Left: Tap Cover",
-        "right_joystick"
-      ],
-      [
         "Base",
         "switch"
       ],
@@ -87,18 +75,6 @@
       ],
       [
         "Steering | Menu Right: Entry Point",
-        "right_joystick"
-      ],
-      [
-        "Steering | Menu Right: Tap Cover",
-        "switch"
-      ],
-      [
-        "Steering | Menu Right: Tap Cover",
-        "joystick"
-      ],
-      [
-        "Steering | Menu Right: Tap Cover",
         "right_joystick"
       ],
       [
@@ -146,7 +122,7 @@
         "right_joystick"
       ]
     ],
-    "resolved_references": 3459,
+    "resolved_references": 3335,
     "device_status": "UNTESTED",
     "planned_target": 16,
     "quick_base_exit_targets": [
@@ -244,55 +220,45 @@
       "13059",
       "13060",
       "13072",
-      "13074",
       "13075",
-      "13077",
-      "13082",
+      "13076",
+      "13078",
       "13083",
-      "13087",
+      "13084",
       "13088",
-      "13091",
+      "13089",
       "13092",
       "13093",
       "13094",
-      "13097",
+      "13095",
       "13098",
       "13099",
       "13100",
       "13101",
-      "13102",
       "13103",
       "13104",
-      "13107",
       "13108",
       "13109",
-      "13113",
-      "13114",
-      "13115",
-      "13121",
+      "13110",
+      "13116",
+      "13117",
+      "13119",
       "13122",
+      "13123",
       "13124",
-      "13125",
-      "13126",
-      "13129",
+      "13127",
       "13130",
       "13131",
-      "13135",
       "13136",
       "13137",
-      "13140",
-      "13143",
-      "13144",
-      "13146",
-      "13147",
+      "13138",
+      "13139",
+      "13149",
       "13151",
-      "13152",
       "13153",
+      "13155",
       "13157",
-      "13158",
-      "13159",
-      "13163",
-      "13164"
+      "13159"
     ],
     "timing_ms": {
       "hold": 250,
@@ -307,7 +273,7 @@
   "alternative": {
     "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
     "baseline_generator_sha256": "20c1d1b3a50a3e4597cdbfc519fd163f35fc7fedc902f1439dea4f0402c5590a",
-    "candidate_sha256": "9977b00ea040fd4e501654481fa23de44cdc0d6c898d735675160adc7707f63c",
+    "candidate_sha256": "1e774dd65beeba2099f9ba42ded12e43b5a60b42550449145c6a720df5032943",
     "new_layers": [
       "Steering | LS Up: Double Tap",
       "Steering | LS Down: Double Tap",
@@ -355,18 +321,6 @@
         "right_joystick"
       ],
       [
-        "Steering | Menu Left: Tap Cover",
-        "switch"
-      ],
-      [
-        "Steering | Menu Left: Tap Cover",
-        "joystick"
-      ],
-      [
-        "Steering | Menu Left: Tap Cover",
-        "right_joystick"
-      ],
-      [
         "Base",
         "switch"
       ],
@@ -392,18 +346,6 @@
       ],
       [
         "Steering | Menu Right: Entry Point",
-        "right_joystick"
-      ],
-      [
-        "Steering | Menu Right: Tap Cover",
-        "switch"
-      ],
-      [
-        "Steering | Menu Right: Tap Cover",
-        "joystick"
-      ],
-      [
-        "Steering | Menu Right: Tap Cover",
         "right_joystick"
       ],
       [
@@ -451,7 +393,7 @@
         "right_joystick"
       ]
     ],
-    "resolved_references": 3459,
+    "resolved_references": 3335,
     "device_status": "UNTESTED",
     "planned_target": 16,
     "quick_base_exit_targets": [
@@ -549,53 +491,43 @@
       "13056",
       "13057",
       "13073",
-      "13077",
       "13078",
-      "13082",
-      "13089",
+      "13079",
+      "13083",
       "13090",
-      "13094",
+      "13091",
       "13095",
-      "13099",
+      "13096",
       "13100",
       "13101",
-      "13105",
+      "13102",
       "13106",
       "13107",
       "13108",
-      "13109",
       "13110",
       "13111",
-      "13114",
-      "13116",
+      "13115",
       "13117",
-      "13120",
-      "13122",
+      "13118",
       "13123",
-      "13128",
+      "13124",
+      "13126",
       "13129",
       "13131",
       "13132",
-      "13133",
-      "13136",
+      "13134",
+      "13137",
       "13138",
-      "13139",
-      "13142",
+      "13143",
       "13144",
       "13145",
-      "13147",
-      "13150",
-      "13151",
-      "13153",
-      "13154",
+      "13146",
+      "13156",
       "13158",
-      "13159",
       "13160",
+      "13162",
       "13164",
-      "13165",
-      "13166",
-      "13170",
-      "13171"
+      "13166"
     ],
     "timing_ms": {
       "hold": 250,

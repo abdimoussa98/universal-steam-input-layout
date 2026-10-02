@@ -30,7 +30,8 @@ now clears only local stick helpers, without committing, aborting or adding Fn.
 ## Per-layer exit review
 
 Each row applies in both Default and Alternative. “Side cleanup” means the
-corresponding LST/RST trio; each new layer has both release paths.
+corresponding LST/RST trio. Each non-cover layer has both release paths; since 90.7
+the four covers inherit theirs.
 
 | New layer | Main exit / cleanup | Thumb-release behavior |
 |---|---|---|
@@ -42,14 +43,14 @@ corresponding LST/RST trio; each new layer has both release paths.
 | LS Up Modifier 1 | Symmetric center/reversal lifecycle | Add LS Tap Cover first, then side cleanup |
 | R1!L1 / R2!L2 Modifier 2 | Uncovered opposite release clears all; hold/action applies L1/L2 cover | Add existing L1/L2 cover before side cleanup; W-owner recovery guard |
 | L1!R1 / L2!R2 Modifier 2 | Uncovered opposite release clears all; hold/action applies R1/R2 cover | Add existing R1/R2 cover before side cleanup; S-owner recovery guard |
-| LS Tap Cover | True center clears normal maps and cover; direction release clears that map; owner/context teardown clears all | Side cleanup only; no delayed parent add replay |
+| LS Tap Cover | True center clears normal maps and cover; owner/context teardown clears all | Inherits the bank's or owner's touch (90.7); re-adding the active cover is a no-op |
 | LS Up Double Tap | Expiry/early resolution self-removes; second Up replaces with repeat; context/owner teardown cancels | Side cleanup only; no early wheel output |
 | LS Down Double Tap | Symmetric window exits | Side cleanup only |
-| LS Double Tap Cover | Direction release, center or sideways removes repeat and adds consumed cover; owner/context teardown clears | Side cleanup only; no wheel or new modifier on thumb release |
+| LS Double Tap Cover | Direction release or center removes repeat and adds consumed cover; owner/context teardown clears | Inherits the owner's touch (90.7); no wheel or new modifier on thumb release |
 | Menu Left Entry Point | Menu release removes protected pair/normal entry and emits eligible Escape; commit retires prefixed helper | Add Menu Left Tap Cover first, then side cleanup |
 | Menu Right Entry Point | Symmetric Tab/commit handling | Add Menu Right Tap Cover first, then side cleanup |
-| Menu Left Tap Cover | Menu release removes protected pair/normal entry silently; commit removes helper | Side cleanup only; cannot re-add Fn/parent |
-| Menu Right Tap Cover | Symmetric silent cleanup | Side cleanup only |
+| Menu Left Tap Cover | Menu release removes protected pair/normal entry silently; commit removes helper | Inherits the protected entry's touch (90.7); its cover add is a no-op once active |
+| Menu Right Tap Cover | Symmetric silent cleanup | Same, from the Menu Right protected entry |
 
 ## Whole-input inheritance and recovery
 

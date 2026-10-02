@@ -1,272 +1,8 @@
 [
   {
     "layer": "Steering | LS Up: Double Tap",
-    "source": "button_diamond",
-    "group": "13161",
-    "input": "button_a",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press F, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "button_diamond",
-    "group": "13161",
-    "input": "button_b",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press V, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "button_diamond",
-    "group": "13161",
-    "input": "button_x",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press C, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "button_diamond",
-    "group": "13161",
-    "input": "button_y",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press R, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "dpad",
-    "group": "13162",
-    "input": "dpad_north",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press 1, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "dpad",
-    "group": "13162",
-    "input": "dpad_south",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press 3, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "dpad",
-    "group": "13162",
-    "input": "dpad_east",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press 2, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "dpad",
-    "group": "13162",
-    "input": "dpad_west",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press 4, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "switch",
-    "group": "13163",
-    "input": "button_back_left",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press LEFT_CONTROL, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "switch",
-    "group": "13163",
-    "input": "button_back_right",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press LEFT_ALT, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "switch",
-    "group": "13163",
-    "input": "button_back_left_upper",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press LEFT_SHIFT, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "switch",
-    "group": "13163",
-    "input": "button_back_right_upper",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press SPACE, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
     "source": "joystick",
-    "group": "13180",
+    "group": "13155",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -294,7 +30,7 @@
   {
     "layer": "Steering | LS Up: Double Tap",
     "source": "joystick",
-    "group": "13180",
+    "group": "13155",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -322,7 +58,7 @@
   {
     "layer": "Steering | LS Up: Double Tap",
     "source": "joystick",
-    "group": "13180",
+    "group": "13155",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -346,7 +82,7 @@
   {
     "layer": "Steering | LS Up: Double Tap",
     "source": "joystick",
-    "group": "13180",
+    "group": "13155",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -373,7 +109,7 @@
   {
     "layer": "Steering | LS Up: Double Tap",
     "source": "joystick",
-    "group": "13180",
+    "group": "13155",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -402,34 +138,7 @@
   {
     "layer": "Steering | LS Up: Double Tap",
     "source": "joystick",
-    "group": "13180",
-    "input": "click",
-    "source_settings": {
-      "requires_click": "0",
-      "deadzone": "13276",
-      "edge_binding_radius": "32767",
-      "edge_binding_invert": "1",
-      "analog_emulation_duty_cycle_pct": "50",
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press Q, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "joystick",
-    "group": "13180",
+    "group": "13155",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -489,28 +198,6 @@
     "layer": "Steering | LS Up: Double Tap",
     "source": "right_joystick",
     "group": "13181",
-    "input": "click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_UP, , ",
-          "key_press E, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Up: Double Tap",
-    "source": "right_joystick",
-    "group": "13181",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -562,265 +249,19 @@
     ]
   },
   {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "button_diamond",
-    "group": "13167",
-    "input": "button_a",
+    "layer": "Steering | LS Up: Double Tap",
+    "source": "right_joystick",
+    "group": "13181",
+    "input": "edge",
     "source_settings": {
       "layer": "1"
     },
     "activators": [
       {
         "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
+        "settings": {},
         "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press F, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "button_diamond",
-    "group": "13167",
-    "input": "button_b",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press V, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "button_diamond",
-    "group": "13167",
-    "input": "button_x",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press C, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "button_diamond",
-    "group": "13167",
-    "input": "button_y",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press R, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "dpad",
-    "group": "13168",
-    "input": "dpad_north",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press 1, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "dpad",
-    "group": "13168",
-    "input": "dpad_south",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press 3, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "dpad",
-    "group": "13168",
-    "input": "dpad_east",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press 2, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "dpad",
-    "group": "13168",
-    "input": "dpad_west",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press 4, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "switch",
-    "group": "13169",
-    "input": "button_back_left",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press LEFT_CONTROL, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "switch",
-    "group": "13169",
-    "input": "button_back_right",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press LEFT_ALT, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "switch",
-    "group": "13169",
-    "input": "button_back_left_upper",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press LEFT_SHIFT, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "switch",
-    "group": "13169",
-    "input": "button_back_right_upper",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press SPACE, , "
+          "controller_action empty_binding, , "
         ]
       }
     ]
@@ -828,7 +269,7 @@
   {
     "layer": "Steering | LS Down: Double Tap",
     "source": "joystick",
-    "group": "13182",
+    "group": "13157",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -856,7 +297,7 @@
   {
     "layer": "Steering | LS Down: Double Tap",
     "source": "joystick",
-    "group": "13182",
+    "group": "13157",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -884,7 +325,7 @@
   {
     "layer": "Steering | LS Down: Double Tap",
     "source": "joystick",
-    "group": "13182",
+    "group": "13157",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -911,7 +352,7 @@
   {
     "layer": "Steering | LS Down: Double Tap",
     "source": "joystick",
-    "group": "13182",
+    "group": "13157",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -935,7 +376,7 @@
   {
     "layer": "Steering | LS Down: Double Tap",
     "source": "joystick",
-    "group": "13182",
+    "group": "13157",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -964,34 +405,7 @@
   {
     "layer": "Steering | LS Down: Double Tap",
     "source": "joystick",
-    "group": "13182",
-    "input": "click",
-    "source_settings": {
-      "requires_click": "0",
-      "deadzone": "13276",
-      "edge_binding_radius": "32767",
-      "edge_binding_invert": "1",
-      "analog_emulation_duty_cycle_pct": "50",
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press Q, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "joystick",
-    "group": "13182",
+    "group": "13157",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -1050,29 +464,7 @@
   {
     "layer": "Steering | LS Down: Double Tap",
     "source": "right_joystick",
-    "group": "13183",
-    "input": "click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "mouse_wheel SCROLL_DOWN, , ",
-          "key_press E, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS Down: Double Tap",
-    "source": "right_joystick",
-    "group": "13183",
+    "group": "13182",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -1124,28 +516,19 @@
     ]
   },
   {
-    "layer": "Steering | LS: Double Tap Cover",
-    "source": "joystick",
-    "group": "13184",
-    "input": "dpad_east",
+    "layer": "Steering | LS Down: Double Tap",
+    "source": "right_joystick",
+    "group": "13182",
+    "input": "edge",
     "source_settings": {
-      "requires_click": "0",
-      "deadzone": "13276",
-      "edge_binding_radius": "6553",
-      "edge_binding_invert": "1",
-      "analog_emulation_duty_cycle_pct": "50",
       "layer": "1"
     },
     "activators": [
       {
         "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
+        "settings": {},
         "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS: Double Tap Cover}} 0 0, , ",
-          "key_press D, , ",
-          "controller_action add_layer {{Base::Steering | LS: Tap Cover}} 0 0, , "
+          "controller_action empty_binding, , "
         ]
       }
     ]
@@ -1153,34 +536,7 @@
   {
     "layer": "Steering | LS: Double Tap Cover",
     "source": "joystick",
-    "group": "13184",
-    "input": "dpad_west",
-    "source_settings": {
-      "requires_click": "0",
-      "deadzone": "13276",
-      "edge_binding_radius": "6553",
-      "edge_binding_invert": "1",
-      "analog_emulation_duty_cycle_pct": "50",
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS: Double Tap Cover}} 0 0, , ",
-          "key_press A, , ",
-          "controller_action add_layer {{Base::Steering | LS: Tap Cover}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS: Double Tap Cover",
-    "source": "joystick",
-    "group": "13184",
+    "group": "13112",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -1216,7 +572,7 @@
   {
     "layer": "Steering | LS: Double Tap Cover",
     "source": "joystick",
-    "group": "13184",
+    "group": "13112",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -1252,7 +608,7 @@
   {
     "layer": "Steering | LS: Double Tap Cover",
     "source": "joystick",
-    "group": "13184",
+    "group": "13112",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -1277,122 +633,9 @@
     ]
   },
   {
-    "layer": "Steering | LS: Double Tap Cover",
-    "source": "joystick",
-    "group": "13184",
-    "input": "touch",
-    "source_settings": {
-      "requires_click": "0",
-      "deadzone": "13276",
-      "edge_binding_radius": "6553",
-      "edge_binding_invert": "1",
-      "analog_emulation_duty_cycle_pct": "50",
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Double Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::L2: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::R2: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Down: Modifier 0}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Up: Modifier 1}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | R2!L2: Modifier 2}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | L2!R2: Modifier 2}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | R2: W Key}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | L2: S Key}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Entry Point}} 0 0, , "
-        ]
-      },
-      {
-        "type": "chord",
-        "settings": {
-          "gyro_ratchet_button_mask": "50331651",
-          "gyro_ratchet_button_requireany_or_all": "0",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      },
-      {
-        "type": "release",
-        "settings": {
-          "haptic_intensity": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS: Double Tap Cover",
-    "source": "right_joystick",
-    "group": "13185",
-    "input": "touch",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Double Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::L2: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::R2: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Down: Modifier 0}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Up: Modifier 1}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | R2!L2: Modifier 2}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | L2!R2: Modifier 2}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | R2: W Key}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | L2: S Key}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Entry Point}} 0 0, , "
-        ]
-      },
-      {
-        "type": "chord",
-        "settings": {
-          "gyro_ratchet_button_mask": "50331651",
-          "gyro_ratchet_button_requireany_or_all": "0",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      },
-      {
-        "type": "release",
-        "settings": {
-          "haptic_intensity": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
     "layer": "Steering | LS: Tap Cover",
     "source": "joystick",
-    "group": "13186",
+    "group": "13109",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -1417,7 +660,7 @@
   {
     "layer": "Steering | LS: Tap Cover",
     "source": "joystick",
-    "group": "13186",
+    "group": "13109",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -1442,7 +685,7 @@
   {
     "layer": "Steering | LS: Tap Cover",
     "source": "joystick",
-    "group": "13186",
+    "group": "13109",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -1465,7 +708,7 @@
   {
     "layer": "Steering | LS: Tap Cover",
     "source": "joystick",
-    "group": "13186",
+    "group": "13109",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -1488,7 +731,7 @@
   {
     "layer": "Steering | LS: Tap Cover",
     "source": "joystick",
-    "group": "13186",
+    "group": "13109",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -1514,122 +757,9 @@
     ]
   },
   {
-    "layer": "Steering | LS: Tap Cover",
-    "source": "joystick",
-    "group": "13186",
-    "input": "touch",
-    "source_settings": {
-      "requires_click": "0",
-      "deadzone": "13276",
-      "edge_binding_radius": "6553",
-      "edge_binding_invert": "1",
-      "analog_emulation_duty_cycle_pct": "50",
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Double Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::L2: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::R2: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Down: Modifier 0}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Up: Modifier 1}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | R2!L2: Modifier 2}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | L2!R2: Modifier 2}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | R2: W Key}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | L2: S Key}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Entry Point}} 0 0, , "
-        ]
-      },
-      {
-        "type": "chord",
-        "settings": {
-          "gyro_ratchet_button_mask": "50331651",
-          "gyro_ratchet_button_requireany_or_all": "0",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      },
-      {
-        "type": "release",
-        "settings": {
-          "haptic_intensity": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | LS: Tap Cover",
-    "source": "right_joystick",
-    "group": "13187",
-    "input": "touch",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | LS Up: Double Tap}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Down: Double Tap}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Double Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::L2: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::R2: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Down: Modifier 0}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS Up: Modifier 1}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | R2!L2: Modifier 2}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | L2!R2: Modifier 2}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | R2: W Key}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | L2: S Key}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | LS: Entry Point}} 0 0, , "
-        ]
-      },
-      {
-        "type": "chord",
-        "settings": {
-          "gyro_ratchet_button_mask": "50331651",
-          "gyro_ratchet_button_requireany_or_all": "0",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      },
-      {
-        "type": "release",
-        "settings": {
-          "haptic_intensity": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "button_diamond",
-    "group": "13086",
+    "group": "13087",
     "input": "button_a",
     "source_settings": {
       "layer": "1"
@@ -1683,7 +813,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "button_diamond",
-    "group": "13086",
+    "group": "13087",
     "input": "button_b",
     "source_settings": {
       "layer": "1"
@@ -1737,7 +867,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "button_diamond",
-    "group": "13086",
+    "group": "13087",
     "input": "button_x",
     "source_settings": {
       "layer": "1"
@@ -1791,7 +921,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "button_diamond",
-    "group": "13086",
+    "group": "13087",
     "input": "button_y",
     "source_settings": {
       "layer": "1"
@@ -1845,7 +975,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "dpad",
-    "group": "13087",
+    "group": "13088",
     "input": "dpad_north",
     "source_settings": {
       "layer": "1"
@@ -1899,7 +1029,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "dpad",
-    "group": "13087",
+    "group": "13088",
     "input": "dpad_south",
     "source_settings": {
       "layer": "1"
@@ -1953,7 +1083,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "dpad",
-    "group": "13087",
+    "group": "13088",
     "input": "dpad_east",
     "source_settings": {
       "layer": "1"
@@ -2007,7 +1137,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "dpad",
-    "group": "13087",
+    "group": "13088",
     "input": "dpad_west",
     "source_settings": {
       "layer": "1"
@@ -2061,7 +1191,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "switch",
-    "group": "13088",
+    "group": "13089",
     "input": "button_escape",
     "source_settings": {
       "layer": "1"
@@ -2115,7 +1245,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "switch",
-    "group": "13088",
+    "group": "13089",
     "input": "button_menu",
     "source_settings": {
       "layer": "1"
@@ -2169,7 +1299,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "joystick",
-    "group": "13188",
+    "group": "13159",
     "input": "click",
     "source_settings": {
       "requires_click": "0",
@@ -2228,7 +1358,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "joystick",
-    "group": "13188",
+    "group": "13159",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -2256,7 +1386,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "joystick",
-    "group": "13188",
+    "group": "13159",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -2284,7 +1414,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "joystick",
-    "group": "13188",
+    "group": "13159",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -2313,7 +1443,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "joystick",
-    "group": "13188",
+    "group": "13159",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -2352,7 +1482,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "joystick",
-    "group": "13188",
+    "group": "13159",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -2378,7 +1508,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "joystick",
-    "group": "13188",
+    "group": "13159",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -2438,7 +1568,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "right_joystick",
-    "group": "13189",
+    "group": "13183",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -2492,7 +1622,7 @@
   {
     "layer": "Steering | LS Down: Modifier 0",
     "source": "right_joystick",
-    "group": "13189",
+    "group": "13183",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -2545,9 +1675,27 @@
     ]
   },
   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "source": "right_joystick",
+    "group": "13183",
+    "input": "edge",
+    "source_settings": {
+      "layer": "1"
+    },
+    "activators": [
+      {
+        "type": "Full_Press",
+        "settings": {},
+        "execution_order": [
+          "controller_action empty_binding, , "
+        ]
+      }
+    ]
+  },
+  {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "button_diamond",
-    "group": "13091",
+    "group": "13092",
     "input": "button_a",
     "source_settings": {
       "layer": "1"
@@ -2601,7 +1749,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "button_diamond",
-    "group": "13091",
+    "group": "13092",
     "input": "button_b",
     "source_settings": {
       "layer": "1"
@@ -2655,7 +1803,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "button_diamond",
-    "group": "13091",
+    "group": "13092",
     "input": "button_x",
     "source_settings": {
       "layer": "1"
@@ -2709,7 +1857,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "button_diamond",
-    "group": "13091",
+    "group": "13092",
     "input": "button_y",
     "source_settings": {
       "layer": "1"
@@ -2763,7 +1911,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "dpad",
-    "group": "13092",
+    "group": "13093",
     "input": "dpad_north",
     "source_settings": {
       "layer": "1"
@@ -2817,7 +1965,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "dpad",
-    "group": "13092",
+    "group": "13093",
     "input": "dpad_south",
     "source_settings": {
       "layer": "1"
@@ -2871,7 +2019,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "dpad",
-    "group": "13092",
+    "group": "13093",
     "input": "dpad_east",
     "source_settings": {
       "layer": "1"
@@ -2925,7 +2073,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "dpad",
-    "group": "13092",
+    "group": "13093",
     "input": "dpad_west",
     "source_settings": {
       "layer": "1"
@@ -2979,7 +2127,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "switch",
-    "group": "13093",
+    "group": "13094",
     "input": "button_escape",
     "source_settings": {
       "layer": "1"
@@ -3033,7 +2181,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "switch",
-    "group": "13093",
+    "group": "13094",
     "input": "button_menu",
     "source_settings": {
       "layer": "1"
@@ -3087,7 +2235,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "joystick",
-    "group": "13190",
+    "group": "13161",
     "input": "click",
     "source_settings": {
       "requires_click": "0",
@@ -3146,7 +2294,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "joystick",
-    "group": "13190",
+    "group": "13161",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -3174,7 +2322,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "joystick",
-    "group": "13190",
+    "group": "13161",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -3202,7 +2350,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "joystick",
-    "group": "13190",
+    "group": "13161",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -3241,7 +2389,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "joystick",
-    "group": "13190",
+    "group": "13161",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -3270,7 +2418,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "joystick",
-    "group": "13190",
+    "group": "13161",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -3296,7 +2444,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "joystick",
-    "group": "13190",
+    "group": "13161",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -3356,7 +2504,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "right_joystick",
-    "group": "13191",
+    "group": "13184",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -3410,7 +2558,7 @@
   {
     "layer": "Steering | LS Up: Modifier 1",
     "source": "right_joystick",
-    "group": "13191",
+    "group": "13184",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -3463,9 +2611,27 @@
     ]
   },
   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "source": "right_joystick",
+    "group": "13184",
+    "input": "edge",
+    "source_settings": {
+      "layer": "1"
+    },
+    "activators": [
+      {
+        "type": "Full_Press",
+        "settings": {},
+        "execution_order": [
+          "controller_action empty_binding, , "
+        ]
+      }
+    ]
+  },
+  {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "button_diamond",
-    "group": "13096",
+    "group": "13097",
     "input": "button_a",
     "source_settings": {
       "layer": "1"
@@ -3509,7 +2675,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "button_diamond",
-    "group": "13096",
+    "group": "13097",
     "input": "button_b",
     "source_settings": {
       "layer": "1"
@@ -3553,7 +2719,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "button_diamond",
-    "group": "13096",
+    "group": "13097",
     "input": "button_x",
     "source_settings": {
       "layer": "1"
@@ -3597,7 +2763,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "button_diamond",
-    "group": "13096",
+    "group": "13097",
     "input": "button_y",
     "source_settings": {
       "layer": "1"
@@ -3641,7 +2807,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "dpad",
-    "group": "13097",
+    "group": "13098",
     "input": "dpad_north",
     "source_settings": {
       "layer": "1"
@@ -3685,7 +2851,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "dpad",
-    "group": "13097",
+    "group": "13098",
     "input": "dpad_south",
     "source_settings": {
       "layer": "1"
@@ -3729,7 +2895,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "dpad",
-    "group": "13097",
+    "group": "13098",
     "input": "dpad_east",
     "source_settings": {
       "layer": "1"
@@ -3773,7 +2939,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "dpad",
-    "group": "13097",
+    "group": "13098",
     "input": "dpad_west",
     "source_settings": {
       "layer": "1"
@@ -3817,7 +2983,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "switch",
-    "group": "13098",
+    "group": "13099",
     "input": "button_escape",
     "source_settings": {
       "layer": "1"
@@ -3861,7 +3027,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "switch",
-    "group": "13098",
+    "group": "13099",
     "input": "button_menu",
     "source_settings": {
       "layer": "1"
@@ -3905,7 +3071,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "left_trigger",
-    "group": "13172",
+    "group": "13147",
     "input": "edge",
     "source_settings": {
       "deadzone_inner_radius": "0",
@@ -4019,7 +3185,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "joystick",
-    "group": "13192",
+    "group": "13163",
     "input": "click",
     "source_settings": {
       "requires_click": "0",
@@ -4068,7 +3234,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "joystick",
-    "group": "13192",
+    "group": "13163",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -4093,7 +3259,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "joystick",
-    "group": "13192",
+    "group": "13163",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -4118,7 +3284,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "joystick",
-    "group": "13192",
+    "group": "13163",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -4145,7 +3311,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "joystick",
-    "group": "13192",
+    "group": "13163",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -4172,7 +3338,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "joystick",
-    "group": "13192",
+    "group": "13163",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -4195,7 +3361,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "joystick",
-    "group": "13192",
+    "group": "13163",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -4255,7 +3421,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "right_joystick",
-    "group": "13193",
+    "group": "13185",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -4299,7 +3465,7 @@
   {
     "layer": "Steering | R2!L2: Modifier 2",
     "source": "right_joystick",
-    "group": "13193",
+    "group": "13185",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -4352,9 +3518,27 @@
     ]
   },
   {
+    "layer": "Steering | R2!L2: Modifier 2",
+    "source": "right_joystick",
+    "group": "13185",
+    "input": "edge",
+    "source_settings": {
+      "layer": "1"
+    },
+    "activators": [
+      {
+        "type": "Full_Press",
+        "settings": {},
+        "execution_order": [
+          "controller_action empty_binding, , "
+        ]
+      }
+    ]
+  },
+  {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "button_diamond",
-    "group": "13102",
+    "group": "13103",
     "input": "button_a",
     "source_settings": {
       "layer": "1"
@@ -4398,7 +3582,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "button_diamond",
-    "group": "13102",
+    "group": "13103",
     "input": "button_b",
     "source_settings": {
       "layer": "1"
@@ -4442,7 +3626,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "button_diamond",
-    "group": "13102",
+    "group": "13103",
     "input": "button_x",
     "source_settings": {
       "layer": "1"
@@ -4486,7 +3670,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "button_diamond",
-    "group": "13102",
+    "group": "13103",
     "input": "button_y",
     "source_settings": {
       "layer": "1"
@@ -4530,7 +3714,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "dpad",
-    "group": "13103",
+    "group": "13104",
     "input": "dpad_north",
     "source_settings": {
       "layer": "1"
@@ -4574,7 +3758,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "dpad",
-    "group": "13103",
+    "group": "13104",
     "input": "dpad_south",
     "source_settings": {
       "layer": "1"
@@ -4618,7 +3802,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "dpad",
-    "group": "13103",
+    "group": "13104",
     "input": "dpad_east",
     "source_settings": {
       "layer": "1"
@@ -4662,7 +3846,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "dpad",
-    "group": "13103",
+    "group": "13104",
     "input": "dpad_west",
     "source_settings": {
       "layer": "1"
@@ -4706,7 +3890,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "switch",
-    "group": "13104",
+    "group": "13105",
     "input": "button_escape",
     "source_settings": {
       "layer": "1"
@@ -4750,7 +3934,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "switch",
-    "group": "13104",
+    "group": "13105",
     "input": "button_menu",
     "source_settings": {
       "layer": "1"
@@ -4794,7 +3978,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "right_trigger",
-    "group": "13176",
+    "group": "13151",
     "input": "edge",
     "source_settings": {
       "deadzone_inner_radius": "0",
@@ -4908,7 +4092,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "joystick",
-    "group": "13194",
+    "group": "13165",
     "input": "click",
     "source_settings": {
       "requires_click": "0",
@@ -4957,7 +4141,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "joystick",
-    "group": "13194",
+    "group": "13165",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -4982,7 +4166,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "joystick",
-    "group": "13194",
+    "group": "13165",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -5007,7 +4191,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "joystick",
-    "group": "13194",
+    "group": "13165",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -5034,7 +4218,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "joystick",
-    "group": "13194",
+    "group": "13165",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -5061,7 +4245,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "joystick",
-    "group": "13194",
+    "group": "13165",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -5084,7 +4268,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "joystick",
-    "group": "13194",
+    "group": "13165",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -5144,7 +4328,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "right_joystick",
-    "group": "13195",
+    "group": "13186",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -5188,7 +4372,7 @@
   {
     "layer": "Steering | L2!R2: Modifier 2",
     "source": "right_joystick",
-    "group": "13195",
+    "group": "13186",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -5241,9 +4425,27 @@
     ]
   },
   {
+    "layer": "Steering | L2!R2: Modifier 2",
+    "source": "right_joystick",
+    "group": "13186",
+    "input": "edge",
+    "source_settings": {
+      "layer": "1"
+    },
+    "activators": [
+      {
+        "type": "Full_Press",
+        "settings": {},
+        "execution_order": [
+          "controller_action empty_binding, , "
+        ]
+      }
+    ]
+  },
+  {
     "layer": "Steering | R2: W Key",
     "source": "right_trigger",
-    "group": "13079",
+    "group": "13080",
     "input": "edge",
     "source_settings": {
       "deadzone_inner_radius": "0",
@@ -5284,7 +4486,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "left_trigger",
-    "group": "13080",
+    "group": "13081",
     "input": "edge",
     "source_settings": {
       "deadzone_inner_radius": "0",
@@ -5332,7 +4534,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "switch",
-    "group": "13081",
+    "group": "13082",
     "input": "button_menu",
     "source_settings": {
       "layer": "1"
@@ -5364,7 +4566,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "switch",
-    "group": "13081",
+    "group": "13082",
     "input": "button_escape",
     "source_settings": {
       "layer": "1"
@@ -5396,7 +4598,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "joystick",
-    "group": "13196",
+    "group": "13167",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -5421,7 +4623,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "joystick",
-    "group": "13196",
+    "group": "13167",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -5446,7 +4648,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "joystick",
-    "group": "13196",
+    "group": "13167",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -5485,7 +4687,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "joystick",
-    "group": "13196",
+    "group": "13167",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -5524,7 +4726,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "joystick",
-    "group": "13196",
+    "group": "13167",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -5547,7 +4749,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "joystick",
-    "group": "13196",
+    "group": "13167",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -5606,7 +4808,7 @@
   {
     "layer": "Steering | R2: W Key",
     "source": "right_joystick",
-    "group": "13197",
+    "group": "13168",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -5660,7 +4862,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "right_trigger",
-    "group": "13083",
+    "group": "13084",
     "input": "edge",
     "source_settings": {
       "deadzone_inner_radius": "0",
@@ -5708,7 +4910,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "left_trigger",
-    "group": "13084",
+    "group": "13085",
     "input": "edge",
     "source_settings": {
       "deadzone_inner_radius": "0",
@@ -5749,7 +4951,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "switch",
-    "group": "13085",
+    "group": "13086",
     "input": "button_menu",
     "source_settings": {
       "layer": "1"
@@ -5781,7 +4983,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "switch",
-    "group": "13085",
+    "group": "13086",
     "input": "button_escape",
     "source_settings": {
       "layer": "1"
@@ -5813,7 +5015,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "joystick",
-    "group": "13198",
+    "group": "13169",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -5838,7 +5040,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "joystick",
-    "group": "13198",
+    "group": "13169",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -5863,7 +5065,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "joystick",
-    "group": "13198",
+    "group": "13169",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -5902,7 +5104,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "joystick",
-    "group": "13198",
+    "group": "13169",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -5941,7 +5143,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "joystick",
-    "group": "13198",
+    "group": "13169",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -5964,7 +5166,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "joystick",
-    "group": "13198",
+    "group": "13169",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -6023,7 +5225,7 @@
   {
     "layer": "Steering | L2: S Key",
     "source": "right_joystick",
-    "group": "13199",
+    "group": "13170",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -6077,7 +5279,7 @@
   {
     "layer": "Steering | LS: Entry Point",
     "source": "joystick",
-    "group": "13200",
+    "group": "13171",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -6102,7 +5304,7 @@
   {
     "layer": "Steering | LS: Entry Point",
     "source": "joystick",
-    "group": "13200",
+    "group": "13171",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -6127,7 +5329,7 @@
   {
     "layer": "Steering | LS: Entry Point",
     "source": "joystick",
-    "group": "13200",
+    "group": "13171",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -6152,7 +5354,7 @@
   {
     "layer": "Steering | LS: Entry Point",
     "source": "joystick",
-    "group": "13200",
+    "group": "13171",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -6177,7 +5379,7 @@
   {
     "layer": "Steering | LS: Entry Point",
     "source": "joystick",
-    "group": "13200",
+    "group": "13171",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -6203,7 +5405,7 @@
   {
     "layer": "Steering | LS: Entry Point",
     "source": "joystick",
-    "group": "13200",
+    "group": "13171",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -6230,7 +5432,7 @@
   {
     "layer": "Steering | LS: Entry Point",
     "source": "right_joystick",
-    "group": "13201",
+    "group": "13172",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -6387,8 +5589,26 @@
   },
   {
     "layer": "Steering",
+    "source": "right_trackpad",
+    "group": "13077",
+    "input": "touch",
+    "source_settings": {
+      "layer": "1"
+    },
+    "activators": [
+      {
+        "type": "Full_Press",
+        "settings": {},
+        "execution_order": [
+          "controller_action empty_binding, , "
+        ]
+      }
+    ]
+  },
+  {
+    "layer": "Steering",
     "source": "joystick",
-    "group": "13202",
+    "group": "13173",
     "input": "dpad_east",
     "source_settings": {
       "requires_click": "0",
@@ -6413,7 +5633,7 @@
   {
     "layer": "Steering",
     "source": "joystick",
-    "group": "13202",
+    "group": "13173",
     "input": "dpad_west",
     "source_settings": {
       "requires_click": "0",
@@ -6438,7 +5658,7 @@
   {
     "layer": "Steering",
     "source": "joystick",
-    "group": "13202",
+    "group": "13173",
     "input": "dpad_north",
     "source_settings": {
       "requires_click": "0",
@@ -6504,7 +5724,7 @@
   {
     "layer": "Steering",
     "source": "joystick",
-    "group": "13202",
+    "group": "13173",
     "input": "dpad_south",
     "source_settings": {
       "requires_click": "0",
@@ -6529,7 +5749,7 @@
   {
     "layer": "Steering",
     "source": "joystick",
-    "group": "13202",
+    "group": "13173",
     "input": "edge",
     "source_settings": {
       "requires_click": "0",
@@ -6552,7 +5772,7 @@
   {
     "layer": "Steering",
     "source": "joystick",
-    "group": "13202",
+    "group": "13173",
     "input": "touch",
     "source_settings": {
       "requires_click": "0",
@@ -6579,7 +5799,7 @@
   {
     "layer": "Steering",
     "source": "right_joystick",
-    "group": "13203",
+    "group": "13174",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -6601,7 +5821,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "left_trigger",
-    "group": "13112",
+    "group": "13113",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -6621,7 +5841,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "left_trigger",
-    "group": "13112",
+    "group": "13113",
     "input": "edge",
     "source_settings": {
       "layer": "1"
@@ -6639,7 +5859,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "right_trigger",
-    "group": "13113",
+    "group": "13114",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -6659,7 +5879,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "right_trigger",
-    "group": "13113",
+    "group": "13114",
     "input": "edge",
     "source_settings": {
       "layer": "1"
@@ -6677,7 +5897,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "switch",
-    "group": "13127",
+    "group": "13122",
     "input": "button_escape",
     "source_settings": {
       "layer": "1"
@@ -6695,7 +5915,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "switch",
-    "group": "13127",
+    "group": "13122",
     "input": "button_menu",
     "source_settings": {
       "layer": "1"
@@ -6737,7 +5957,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "switch",
-    "group": "13127",
+    "group": "13122",
     "input": "left_bumper",
     "source_settings": {
       "layer": "1"
@@ -6755,7 +5975,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "switch",
-    "group": "13127",
+    "group": "13122",
     "input": "right_bumper",
     "source_settings": {
       "layer": "1"
@@ -6773,7 +5993,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "switch",
-    "group": "13127",
+    "group": "13122",
     "input": "left_stick_click",
     "source_settings": {
       "layer": "1"
@@ -6791,7 +6011,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "switch",
-    "group": "13127",
+    "group": "13122",
     "input": "right_stick_click",
     "source_settings": {
       "layer": "1"
@@ -6809,7 +6029,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "joystick",
-    "group": "13204",
+    "group": "13175",
     "input": "click",
     "source_settings": {
       "layer": "1",
@@ -6832,7 +6052,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "joystick",
-    "group": "13204",
+    "group": "13175",
     "input": "touch",
     "source_settings": {
       "layer": "1",
@@ -6878,7 +6098,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "joystick",
-    "group": "13204",
+    "group": "13175",
     "input": "edge",
     "source_settings": {
       "layer": "1",
@@ -6898,7 +6118,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "right_joystick",
-    "group": "13205",
+    "group": "13176",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -6919,7 +6139,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "right_joystick",
-    "group": "13205",
+    "group": "13176",
     "input": "edge",
     "source_settings": {
       "layer": "1"
@@ -6937,7 +6157,7 @@
   {
     "layer": "Steering | Menu Left: Entry Point",
     "source": "right_joystick",
-    "group": "13205",
+    "group": "13176",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -6980,102 +6200,8 @@
   },
   {
     "layer": "Steering | Menu Left: Tap Cover",
-    "source": "left_trigger",
-    "group": "13118",
-    "input": "click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "haptic_intensity": "2"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "left_trigger",
-    "group": "13118",
-    "input": "edge",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "mouse_wheel SCROLL_DOWN, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "right_trigger",
-    "group": "13119",
-    "input": "click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "haptic_intensity": "2"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "right_trigger",
-    "group": "13119",
-    "input": "edge",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "mouse_wheel SCROLL_UP, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
     "source": "switch",
-    "group": "13130",
-    "input": "button_escape",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "switch",
-    "group": "13130",
+    "group": "13125",
     "input": "button_menu",
     "source_settings": {
       "layer": "1"
@@ -7102,251 +6228,9 @@
     ]
   },
   {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "switch",
-    "group": "13130",
-    "input": "left_bumper",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "mouse_button LEFT, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "switch",
-    "group": "13130",
-    "input": "right_bumper",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "mouse_button RIGHT, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "switch",
-    "group": "13130",
-    "input": "left_stick_click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "switch",
-    "group": "13130",
-    "input": "right_stick_click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "joystick",
-    "group": "13206",
-    "input": "click",
-    "source_settings": {
-      "layer": "1",
-      "edge_binding_radius": "21000",
-      "edge_binding_invert": "0"
-    },
-    "activators": [
-      {
-        "type": "chord",
-        "settings": {
-          "chord_button": "15",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action add_layer {{Base::Menu Left: Fn Layer}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "joystick",
-    "group": "13206",
-    "input": "touch",
-    "source_settings": {
-      "layer": "1",
-      "edge_binding_radius": "21000",
-      "edge_binding_invert": "0"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | Menu Left: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | Menu Left: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Menu Left: Entry Point}} 0 0, , "
-        ]
-      },
-      {
-        "type": "chord",
-        "settings": {
-          "chord_button": "15",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      },
-      {
-        "type": "release",
-        "settings": {
-          "haptic_intensity": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "joystick",
-    "group": "13206",
-    "input": "edge",
-    "source_settings": {
-      "layer": "1",
-      "edge_binding_radius": "21000",
-      "edge_binding_invert": "0"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "right_joystick",
-    "group": "13207",
-    "input": "click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "chord",
-        "settings": {
-          "chord_button": "15",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action add_layer {{Base::Menu Left: Fn Layer}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "right_joystick",
-    "group": "13207",
-    "input": "edge",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Left: Tap Cover",
-    "source": "right_joystick",
-    "group": "13207",
-    "input": "touch",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | Menu Left: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | Menu Left: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Menu Left: Entry Point}} 0 0, , "
-        ]
-      },
-      {
-        "type": "chord",
-        "settings": {
-          "chord_button": "15",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      },
-      {
-        "type": "release",
-        "settings": {
-          "haptic_intensity": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "left_trigger",
-    "group": "13134",
+    "group": "13127",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -7366,7 +6250,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "left_trigger",
-    "group": "13134",
+    "group": "13127",
     "input": "edge",
     "source_settings": {
       "layer": "1"
@@ -7384,7 +6268,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "right_trigger",
-    "group": "13135",
+    "group": "13128",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -7404,7 +6288,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "right_trigger",
-    "group": "13135",
+    "group": "13128",
     "input": "edge",
     "source_settings": {
       "layer": "1"
@@ -7422,7 +6306,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "switch",
-    "group": "13149",
+    "group": "13136",
     "input": "button_escape",
     "source_settings": {
       "layer": "1"
@@ -7464,7 +6348,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "switch",
-    "group": "13149",
+    "group": "13136",
     "input": "button_menu",
     "source_settings": {
       "layer": "1"
@@ -7482,7 +6366,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "switch",
-    "group": "13149",
+    "group": "13136",
     "input": "left_bumper",
     "source_settings": {
       "layer": "1"
@@ -7500,7 +6384,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "switch",
-    "group": "13149",
+    "group": "13136",
     "input": "right_bumper",
     "source_settings": {
       "layer": "1"
@@ -7518,7 +6402,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "switch",
-    "group": "13149",
+    "group": "13136",
     "input": "left_stick_click",
     "source_settings": {
       "layer": "1"
@@ -7536,7 +6420,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "switch",
-    "group": "13149",
+    "group": "13136",
     "input": "right_stick_click",
     "source_settings": {
       "layer": "1"
@@ -7554,7 +6438,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "joystick",
-    "group": "13208",
+    "group": "13177",
     "input": "click",
     "source_settings": {
       "layer": "1",
@@ -7577,7 +6461,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "joystick",
-    "group": "13208",
+    "group": "13177",
     "input": "touch",
     "source_settings": {
       "layer": "1",
@@ -7623,7 +6507,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "joystick",
-    "group": "13208",
+    "group": "13177",
     "input": "edge",
     "source_settings": {
       "layer": "1",
@@ -7643,7 +6527,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "right_joystick",
-    "group": "13209",
+    "group": "13178",
     "input": "click",
     "source_settings": {
       "layer": "1"
@@ -7664,7 +6548,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "right_joystick",
-    "group": "13209",
+    "group": "13178",
     "input": "edge",
     "source_settings": {
       "layer": "1"
@@ -7682,7 +6566,7 @@
   {
     "layer": "Steering | Menu Right: Entry Point",
     "source": "right_joystick",
-    "group": "13209",
+    "group": "13178",
     "input": "touch",
     "source_settings": {
       "layer": "1"
@@ -7725,84 +6609,8 @@
   },
   {
     "layer": "Steering | Menu Right: Tap Cover",
-    "source": "left_trigger",
-    "group": "13140",
-    "input": "click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "haptic_intensity": "2"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "left_trigger",
-    "group": "13140",
-    "input": "edge",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "mouse_wheel SCROLL_DOWN, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "right_trigger",
-    "group": "13141",
-    "input": "click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "haptic_intensity": "2"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "right_trigger",
-    "group": "13141",
-    "input": "edge",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "mouse_wheel SCROLL_UP, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
     "source": "switch",
-    "group": "13152",
+    "group": "13139",
     "input": "button_escape",
     "source_settings": {
       "layer": "1"
@@ -7824,266 +6632,6 @@
         },
         "execution_order": [
           "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "switch",
-    "group": "13152",
-    "input": "button_menu",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "switch",
-    "group": "13152",
-    "input": "left_bumper",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "mouse_button LEFT, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "switch",
-    "group": "13152",
-    "input": "right_bumper",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "mouse_button RIGHT, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "switch",
-    "group": "13152",
-    "input": "left_stick_click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "switch",
-    "group": "13152",
-    "input": "right_stick_click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "joystick",
-    "group": "13210",
-    "input": "click",
-    "source_settings": {
-      "layer": "1",
-      "edge_binding_radius": "21000",
-      "edge_binding_invert": "0"
-    },
-    "activators": [
-      {
-        "type": "chord",
-        "settings": {
-          "chord_button": "14",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action add_layer {{Base::Transition Set 1}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "joystick",
-    "group": "13210",
-    "input": "touch",
-    "source_settings": {
-      "layer": "1",
-      "edge_binding_radius": "21000",
-      "edge_binding_invert": "0"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | Menu Right: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | Menu Right: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Menu Right: Entry Point}} 0 0, , "
-        ]
-      },
-      {
-        "type": "chord",
-        "settings": {
-          "chord_button": "14",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      },
-      {
-        "type": "release",
-        "settings": {
-          "haptic_intensity": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::LST: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::LST: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::LST: Temporary Gyro}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "joystick",
-    "group": "13210",
-    "input": "edge",
-    "source_settings": {
-      "layer": "1",
-      "edge_binding_radius": "21000",
-      "edge_binding_invert": "0"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "right_joystick",
-    "group": "13211",
-    "input": "click",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "chord",
-        "settings": {
-          "chord_button": "14",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action add_layer {{Base::Menu Right: Fn Layer}} 0 0, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "right_joystick",
-    "group": "13211",
-    "input": "edge",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {},
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      }
-    ]
-  },
-  {
-    "layer": "Steering | Menu Right: Tap Cover",
-    "source": "right_joystick",
-    "group": "13211",
-    "input": "touch",
-    "source_settings": {
-      "layer": "1"
-    },
-    "activators": [
-      {
-        "type": "Full_Press",
-        "settings": {
-          "hold_repeats": "1"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::Steering | Menu Right: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::Steering | Menu Right: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::Menu Right: Entry Point}} 0 0, , "
-        ]
-      },
-      {
-        "type": "chord",
-        "settings": {
-          "chord_button": "14",
-          "interruptable": "0"
-        },
-        "execution_order": [
-          "controller_action empty_binding, , "
-        ]
-      },
-      {
-        "type": "release",
-        "settings": {
-          "haptic_intensity": "0"
-        },
-        "execution_order": [
-          "controller_action remove_layer {{Base::RST: Entry Point}} 0 0, , ",
-          "controller_action remove_layer {{Base::RST: Tap Cover}} 0 0, , ",
-          "controller_action remove_layer {{Base::RST: Temporary Gyro}} 0 0, , "
         ]
       }
     ]

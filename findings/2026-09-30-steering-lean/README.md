@@ -103,14 +103,15 @@ an isolated module per variant, appends fresh IDs, checks the three-entry input
 budget, rejects new Always On inputs and verifies runtime-reference roundtrips.
 Builders now read the frozen pre-steering input, so regeneration cannot ingest
 the installed steering layers. Both VDF exports verify keys, values and order.
-The lean suite has 26 tests of
+The lean suite has 31 tests of
 actual bindings and ordered command arrays; those tests do not emulate Steam.
 
 ## Touch cleanup follow-up
 
-All 16 new layers now have explicit LS/RST-side thumb-release cleanup. Normal
+The 12 non-cover layers have explicit LS/RST-side thumb-release cleanup. Normal
 Modifier 0/1 and protected menu entries first apply their delayed cover, then
-remove local stick helpers; completed covers remain cleanup-only. Owner/menu
+remove local stick helpers. Since 90.7 the four covers define no touch input and
+inherit their owner's ([slim overlays](#slim-overlays-and-dod-fixes-907)). Owner/menu
 recovery guards and three-entry budgets are preserved. See the
 [per-layer cleanup audit](CLEANUP-AUDIT.md) and the
 [repository rule](../../resources/Steam%20Input%20JSON%20Structure.md#complete-delayed-applies-on-stick-touch-release).
@@ -226,3 +227,44 @@ the stick still held, the stick gives no modifier map until it returns to
 center and is pushed again. The test helper now follows Valve's rule, and a new
 test fails any binding that adds a bank while an active cover could be left
 below it.
+
+## Slim overlays and DoD fixes (90.7)
+
+Fixes from the [steering DoD audit](../2026-09-30-steering-dod-audit/README.md).
+Layer count and runtime IDs are unchanged; only 11 steering layers differ from 90.6.
+
+| Layer | Change | Why |
+|---|---|---|
+| `LS Up/Down: Double Tap` | Removed the 14 mapped-button flushes (*remove window ; scroll ; key*) and the RS click flush. Buttons inherit their plain output; the 150 ms clock resolves the single scroll | Nothing underneath has a layer command; hard-coded Base keys go stale (F3) |
+| `LS: Tap Cover` | LS only: up/down empty, A/D, center cleanup. No touch, no RS group | Overlays inherit owner recovery and touch (F2, DoD §5) |
+| `LS: Double Tap Cover` | LS up/down (wheel + release stop) and center stop only. Sideways inherits A/D | Same (F2); leaving up/down already stops |
+| `Menu Left/Right: Tap Cover` | Built fresh with only the menu button (silent release; empty Regular Press hides the parent's delayed apply and reset). Was a full clone of the protected entry | Same (F2) |
+| `Steering` | Clears right-pad `touch` | Base's RTP touch was the only way into `RTP: Double Tap` (Always On) over steering, which inherited LS layer commands (F1, author 2026-09-30) |
+| Windows, Mod 0/1, Mod 2 | Clear RS `edge` | Pending timers must not see Base's turn-assist ramp layer changes (F7, author 2026-09-30). Steering and W/S Key keep turn assist; their only pending layer timer is the 5 ms selector |
+
+Kept by author decision: Mod 2's quick opposite tap still clears every layer,
+including Gyro, to Base (F4; recorded as a DoD §1 exception). Sideways in a
+Double Tap window still fires the pending scroll at once, ends the window and
+consumes the stick until center (D2 in the
+[slim-covers plan](../../plans/2026-09-30-steering-slim-covers.md)).
+
+### Recipe deviations (DoD §6)
+
+The steering double tap deliberately leaves out parts of the
+[hold, tap and double tap recipe](../../resources/Layer%20Definition%20of%20Done.md#6-hold-tap-and-double-tap):
+
+| Recipe | Steering | Why |
+|---|---|---|
+| Release opens the window | True center (LS edge) opens it | A cardinal release is not a tap: the stick can still be deflected sideways |
+| Always On window | 150 ms chord on the drivers, on a widened inverted edge | No new Always On actions; windows exist only while a driver is held |
+| Second-press layer, then a 150 ms chord to the Double Tap Cover | Second press enters the Double Tap Cover directly | The repeat starts at once (5 ms delay, 50 ms repeat); there is no hold-versus-tap choice on the second press |
+| Second-press release reopens the window | Double Tap Cover exit adds `LS: Tap Cover` | No tap chaining; the stick is consumed until center |
+
+### Tests
+
+`tests/test_steering_lean.py` now walks canonical steering stacks, because the
+derived search in `audit_inheritance.py` cannot reach steering depth (F8). New
+tests: covers define only their own controls; covers inherit owner touch;
+no steering stack can add an Always On window or a layer that adds one (it
+fails if the RTP block is removed); pending-timer layers clear RS edge while
+plain driving keeps it.
