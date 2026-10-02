@@ -1,8 +1,9 @@
 # Plan: build the stateful transition structure
 
 Status: plan, 2026-10-01. Not started; no layout was changed. Reviewed with
-the author later the same day; the outcomes are folded in below and listed in
-[Review decisions](#review-decisions-author-2026-10-01).
+the author twice the same day; the outcomes are folded in below and listed in
+[Review decisions](#review-decisions-author-2026-10-01). Decisions 11 to 14
+are from the second review.
 Design: [Stateful Layer Transitions](../resources/Stateful%20Layer%20Transitions.md)
 · [decision record](2026-10-01-stateful-layer-transitions.md)
 · [Definition of Done §11](../resources/Layer%20Definition%20of%20Done.md#11-stateful-layers)
@@ -27,6 +28,16 @@ Two more behaviours are relied on and haven't been tested in isolation:
    ([scope note](../resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes)).
 4. A key output carries on when a removal exposes it under a held input. W
    and S need it when a Steering window times out.
+
+Two more come from keeping the Entry Point under a guard, where today's
+layout swaps it out:
+
+5. A delay that is already running on the Entry Point's menu button doesn't
+   fire once a guard binds that button. If it does, Fn lands on top of the
+   guard.
+6. When a guard comes off, the Entry Point's Fn delay starts again on the
+   still-held button. The repeating reset is what restarts it; that a
+   removal re-evaluates a held input is unverified.
 
 If any of these fails, see [Fallbacks](#fallbacks).
 
@@ -62,9 +73,10 @@ The working layouts are generated: the frozen pre-steering copy, then
 - **Fix pipeline:**
   - Retire `transition_set_0` (the generator writes the transition layers
     whole).
-  - `menu_combo_keys`: in the Entry Points it drops the old overlay add
-    without putting the key in its place. In the Fn layers it still swaps in
-    the key ([step 1](#step-1-entry-points-all-four)).
+  - `menu_combo_keys` is unchanged. It swaps every overlay add for its key,
+    wherever it finds one. The builder writes the Entry Points' other-button
+    chord as "add Fn" only, so the fix finds nothing there; in the Fn layers
+    it still swaps in the key ([step 1](#step-1-entry-points-all-four)).
   - `window_pads` and `window_routes` pick up the two new Always On windows.
     Both raise if a window lacks a group for a source they touch, and the
     Steering windows only have stick groups today. The generator gives them
@@ -129,8 +141,8 @@ where the clicks lead. Shown for Menu Right; Left mirrors it.
   | Steering's pair | Transition 2 | Transition 2 |
 
 - **Clear list at the click:** one list for all four Entry Points: every
-  layer except Base, `Gyro` and the transition being added. Generated, not
-  hand-written.
+  layer except Base and `Gyro`, both transitions included. The transition is
+  added last. Generated, not hand-written.
 - **Base:** Start and Select keep the repeating add of the Entry Point and
   lose the deflection chord that added the protected Entry Point.
 
@@ -162,12 +174,23 @@ it. One guard per stick serves both menu sides and all four Entry Points.
 | Start, Select | Regular Press, repeating 250, uninterruptible | Remove the menu Tap Cover (the reset) |
 | LS edge | Release | Remove this guard |
 | LS, RS touch | Release | Add the menu Tap Cover, then clear that stick's trio |
+| LS, RS touch | Chord on either menu button (Any), uninterruptible | Empty. The guard is valid while a menu button is held |
+| LS, RS touch | Regular Press, repeating | The recovery: remove both guards, the menu Tap Cover and all four Entry Points |
 
 - The left stick's group is a D-pad with the same settings and radius as the
   Entry Point's. The clicks and the other stick's edge are inherited.
 - When a stick recentres, its guard comes off. If the Tap Cover hasn't landed
-  the player is back in the Entry Point and Fn can arrive. If it has landed,
-  it stays until the menu button is released.
+  the player is back in the Entry Point and Fn can arrive (assumption 6). If
+  it has landed, it stays until the menu button is released.
+- **Stale guard** (author, 2026-10-01): if a menu release is missed, touching
+  either stick with no menu button held removes the stale guard, Tap Cover
+  and Entry Points. This is the guarded recovery today's protected Entry
+  Point has, and what
+  [Definition of Done §5](../resources/Layer%20Definition%20of%20Done.md#5-stick-touch-release)
+  asks of a layer that binds stick touch. It uses all three entries on both
+  touch inputs. The menu Tap Cover inherits it.
+- **The guards are not cover-type.** They bind both stick touches and carry
+  their own recovery, so they don't go in `covers.titles`.
 
 **The one menu Tap Cover.** It follows `L1&R1: Tap Cover`: one cover that
 binds both buttons.
@@ -181,9 +204,15 @@ binds both buttons.
 - Cover-type for [Definition of Done §5](../resources/Layer%20Definition%20of%20Done.md#5-stick-touch-release).
   Its title ends in `: Tap Cover`, so the Flow audit's cover suffix matches.
 
-**Accepted (author, 2026-10-01):** both menu buttons have the same binds in a
-guard, so with a stick out and one menu button held, a bump of the other one
-types its key through its Double Tap window.
+**Accepted (author, 2026-10-01):**
+
+- Both menu buttons have the same binds in a guard, so with a stick out and
+  one menu button held, a bump of the other one types its key through its
+  Double Tap window.
+- Under the menu Tap Cover, a bump of the other menu button removes the
+  cover, the guards and the Entry Points while the first button is still
+  held. Base re-adds the Entry Point, and the guard and cover return within
+  about 200 ms. A release of the first button inside that gap types its key.
 
 ## Step 4: transition layers
 
@@ -231,7 +260,8 @@ lists.
 - **[flow_config.json](../steam_layout/flow_config.json):**
   - no families to update: since 2026-10-01 the audits build their stacks
     from the layout (backward chains), and the `families` section is gone
-  - add the two guards to `covers.titles` if they are to be judged as covers
+  - the two guards are not covers and need no entry
+    ([step 3](#step-3-stick-guards-and-the-menu-tap-cover))
   - narrow the driver-inheritance `allow` to Modifier 0 and 1; the windows
     bind the drivers themselves after step 6. Optional since 2026-10-01:
     differing inherited bindings are listed as information and no longer
@@ -310,8 +340,15 @@ mirror it.
   D-pad-mode stick. Mouse-mode sticks are out of scope: the three ramp layers
   use inverted-edge layer commands there. Add it to
   [audit_command_budget.py](../audit_command_budget.py), which already fails
-  on Long and Double Press, with a test. The seven Steering layers above are
-  the only violators in either layout today.
+  on Long and Double Press, with a test.
+  - **Inverted means the layer's own stick group says so**
+    (`edge_binding_invert: 1`; author, 2026-10-01). A group that doesn't
+    state it passes. By that rule the seven Steering layers above are the
+    only violators in either layout today.
+  - Not covered: `L1: Temp Cursor Gyro` and `R1: Temp Cursor Gyro` remove a
+    layer on a left-stick edge, don't state the setting, and sit over Base's
+    inverted edge. Whether they pick it up from Base needs a Deck check
+    ([todo](../todos.md#cursor-gyro)).
 
 ## Step 7: verify and ship
 
@@ -323,34 +360,51 @@ mirror it.
   - both Entry Point sticks are D-pads with matching radii
   - every driver bind in a Steering window removes the window first
   - no Entry Point bind types Backspace or Enter
+  - both guards carry the touch recovery on both sticks: an empty Any chord
+    on the menu buttons and a repeating removal of the guards, Tap Cover and
+    Entry Points
 - **Tests that pin today's behaviour and need updating:**
-  `test_steering_lean.py`, `test_fixes.py`, `test_neptune_recovery.py`,
-  `test_neptune_held_inputs.py`, `test_flow_inheritance.py`,
+  `test_fixes.py`, `test_neptune_recovery.py`,
+  `test_neptune_held_inputs.py`, `test_flow_inheritance.py` (its CLI test
+  counts 15 covers and 67 reached layers),
   `test_audit_inheritance.py` with [traced_stacks.json](../traced_stacks.json),
   `test_double_tap_windows.py` (asserts seven windows and checks every
   window's pads) and `test_neptune_gyro.py` (names the affected layers). The
   deprecated `timed_*` tests name these layers too; check whether they read
   the working layouts.
-- **Tests to rewrite, not update:**
-  - `test_steering_never_reaches_an_always_on_window` and
-    `test_no_new_ao_and_existing_ao_sources_unchanged` in
-    `test_steering_lean.py`: both rules are reversed by steps 5 and 6.
-  - `test_menu_entry_early_chord_types_its_key_itself` in
-    `test_neptune_held_inputs.py`: inverted, so it asserts the Entry Point
-    adds Fn and types nothing.
+- **`test_steering_lean.py` stays as it is.** It loads the 09-30 `Lean`
+  builder, not the working layouts, and `Lean` stays frozen, as the 09-29
+  baseline did. The two rules steps 5 and 6 reverse
+  (`test_steering_never_reaches_an_always_on_window` and
+  `test_no_new_ao_and_existing_ao_sources_unchanged`) are asserted the new
+  way in the new builder's test file.
+- **Test to rewrite, not update:**
+  `test_menu_entry_early_chord_types_its_key_itself` in
+  `test_neptune_held_inputs.py`, which reads the working layouts. It is
+  inverted, so it asserts the Entry Point adds Fn and types nothing.
 - **Build audit:** `python3 audit_build.py` is clean. It runs the Budget,
   Window and Flow audits on both layouts.
 - **Docs:** move the built parts of the structure document from "not built"
   to built; Definition of Done type table (Always On windows, guards, the
   menu Tap Cover); steering behaviour matrix (sideways keeps the modifier,
-  menu press keeps Steering, S exit); `Steam Input JSON Structure.md` where
-  it describes the protected entry and the Entry Point's key.
+  menu press keeps Steering, S exit, the opposite direction inside a window
+  drops the pending scroll, sideways inside a window is plain A or D);
+  `Steam Input JSON Structure.md` where it describes the protected entry and
+  the Entry Point's key; the Fn timing in Definition of Done §6 (300 and 350
+  become 200 and 250).
 - **Deck section in manual-testing.md:**
   - the two assumed gates above
   - each gesture from Base, from `Gyro` and from Steering
   - menu button released first cancels
   - a release missed while the Steam menu is open, in each transition
   - guard on and off for each stick, both together, and Fn arriving after
+    (assumption 6)
+  - push a stick about 150 ms into a menu hold: Fn must not land on the
+    guard (assumption 5)
+  - a release missed while the Steam menu is open with a guard on: touching
+    a stick clears it, and the next menu tap behaves normally
+  - under the menu Tap Cover, bump the other menu button: the cover returns,
+    and a release inside the gap types its key (accepted)
   - with a stick out: a quick menu tap types Tab or Escape, a 200 ms hold or
     a thumb lift makes the release silent
   - K1 reworded: hold Start, press Select before Fn is up: exactly one
@@ -384,6 +438,13 @@ inverted-edge audit check goes in with no known violations left.
 - **Assumption 4 fails (no key after a removal):** W or S drops when a
   Steering window times out, until the driver is pressed again. Nothing is
   designed for that yet.
+- **Assumption 5 fails (Fn lands on a guard):** cleanup still works, because
+  Fn's release removes the guards. But Fn becomes reachable with a stick out.
+  The fix would be to go back to swapping the Entry Point out, which breaks
+  the click inheritance; nothing is designed for that yet.
+- **Assumption 6 fails (Fn never arrives after a guard comes off):** the
+  player stays in the Entry Point until the menu button is pressed again.
+  Mild; no design needed.
 
 ## Worked out during the build
 
@@ -451,3 +512,15 @@ Each line is the author's answer from the plan review.
    which is accepted.
 10. **Soft pull stays on at full pull,** so the alternative layout's
     All-chords are fine as planned.
+
+Second review, after the plan was checked against the layouts:
+
+11. **The guards carry the touch recovery.** Touching a stick with no menu
+    button held clears a stale guard, Tap Cover and the Entry Points.
+12. **The Entry Point staying under a guard adds two assumptions** (5 and
+    6), each with a Deck check.
+13. **The inverted-edge check counts a layer only when its own stick group
+    says inverted.** Temp Cursor Gyro is left alone, with a Deck check to
+    settle whether it picks up Base's inverted edge.
+14. **A bump of the other menu button under the menu Tap Cover is
+    accepted,** like the bump under a guard. One Tap Cover stays.

@@ -121,6 +121,9 @@ Agreed design, not built ([implementation plan](plans/2026-10-01-stateful-transi
 
 ## Cursor gyro
 
+- [ ] Deck check: does `L1: Temp Cursor Gyro` / `R1: Temp Cursor Gyro` pick up Base's inverted left-stick edge?
+  - Their left-stick group doesn't state `edge_binding_invert`, their edge removes the layer, and Base's left-stick edge is inverted. The inverted-edge audit check only counts a layer whose own group says inverted (author, 2026-10-01; [plan](plans/2026-10-01-stateful-transitions-implementation.md#step-6-steerings-left-stick)), so these two pass it either way
+  - If they do pick it up, they break the rule in [Definition of Done §3](resources/Layer%20Definition%20of%20Done.md#3-activators) and need an explicit setting
 - [ ] Cursor gyro (stateful)
   - Activate via Left Menu + RS click, through Transition 1 on the Select release ([structure](resources/Stateful%20Layer%20Transitions.md))
   - Three exits (author, 2026-10-01): any menu button plus any stick click, the Modifier 2 clear, and its own clear, built the same way Temp Cursor Gyro clears (both sticks deflected). The third skips the transition and is a recorded exception

@@ -112,6 +112,7 @@ menu Tap Cover where the Entry Point would bring in Fn.
 | Menu button release | Opens that button's Double Tap window, as in the Entry Point | Same |
 | Menu button held 200 ms | Adds the menu Tap Cover, with the 250 ms repeating reset | Same |
 | Stick touch release | Adds the menu Tap Cover, then clears that stick's trio | Same |
+| Stick touch, no menu button held | The recovery: removes both guards, the menu Tap Cover and the Entry Points | Same |
 
 - Both menu buttons have the same three binds, so one guard serves both menu
   sides.
@@ -219,6 +220,9 @@ menu Tap Cover where the Entry Point would bring in Fn.
   the release silent.
 - With a stick out and one menu button held, a bump of the other one types
   its key, because a guard binds both menu buttons the same way.
+- Under the menu Tap Cover, a bump of the other menu button removes the
+  cover while the first button is still held. It returns within about
+  200 ms; a release inside that gap types its key.
 - Steering can sit under the two menu Double Tap windows. They bind
   left-stick up and down as plain W and S, so Steering's hold-exit clock
   doesn't run during the window.
@@ -338,6 +342,11 @@ Steering's part below is decided in direction but not built.
      ([scope note](Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes)).
   2. **A key output after a removal exposes it under a held input.** W and S
      need it when a Steering window times out.
+  3. **A running delay doesn't fire once another layer binds its input.**
+     The Entry Point stays under a guard, with its Fn delay possibly
+     running. If it fired, Fn would land on the guard.
+  4. **A delay starts again when a removal exposes it under a held button.**
+     When a guard comes off, Fn is expected to follow.
 
 ## Tests
 
