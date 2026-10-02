@@ -550,9 +550,11 @@ until all four gestures are taken.
       gestures, and the gesture map is updated.
 - [ ] **Entry.** The Base Entry Point sends that click's Release to the right
       transition, and the transition's menu Release adds the layer.
-- [ ] **Entry feedback.** That Release beeps and gives a high haptic pulse
-      (author, 2026-10-02): the beep flag on the layer's `add_layer`, and
-      `haptic_intensity` 3 on the Release.
+- [ ] **Transition feedback.** Every menu Release in a transition beeps and
+      gives a high haptic pulse (author, 2026-10-02), entering or clearing:
+      `haptic_intensity` 3 on the Release, and the beep flag on the stateful
+      layer's `add_layer`, or on the transition's own removal when nothing
+      is added. No on-screen notification.
 - [ ] **Exit.** Inside the layer, every one of the four gestures leads to the
       clear transition. The layer has Entry Points for that, added by its own
       menu press.

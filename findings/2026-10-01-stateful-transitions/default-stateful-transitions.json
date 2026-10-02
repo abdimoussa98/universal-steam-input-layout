@@ -24677,8 +24677,11 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 56 0 0, , "
+										"controller_action remove_layer 56 1 0, , "
 									]
+								},
+								"settings": {
+									"haptic_intensity": "3"
 								}
 							}
 						},
@@ -24788,8 +24791,11 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 55 0 0, , "
+										"controller_action remove_layer 55 1 0, , "
 									]
+								},
+								"settings": {
+									"haptic_intensity": "3"
 								}
 							}
 						},
@@ -24800,8 +24806,11 @@
 							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 55 0 0, , "
+										"controller_action remove_layer 55 1 0, , "
 									]
+								},
+								"settings": {
+									"haptic_intensity": "3"
 								}
 							}
 						},

@@ -248,28 +248,26 @@ class StatefulTransitionTests(unittest.TestCase):
                 self.assertEqual(list(acts), ['release'], (name, button))
                 self.assertEqual(self.ops(layout, acts['release']), ops)
 
-    def test_entering_a_stateful_layer_beeps_and_pulses(self):
-        # Author, 2026-10-02: every transition into a stateful layer has a beep and a high haptic pulse.
+    def test_every_transition_beeps_and_pulses_on_its_menu_release(self):
+        # Author, 2026-10-02: every transition has a beep and a high haptic pulse, entering a stateful
+        # layer or leaving one. No on-screen notification.
         stateful = {'Steering'}
         for b, layout in self.each():
-            commits = 0
+            entering = 0
             for name in (st.CROSS, st.CLEAR):
                 for button, _ in SIDES.values():
                     release = self.acts(layout, name, 'switch', button)['release']
-                    entered = [t for op, t in self.ops(layout, release) if op == 'add_layer' and t in stateful]
-                    if not entered:
-                        # Ending a transition without entering anything stays silent.
-                        self.assertNotIn('settings', release, (name, button))
-                        self.assertFalse([a for a in actions(release) if not a.endswith(' 0 0, , ')])
-                        continue
-                    commits += 1
                     self.assertEqual(release['settings'], {'haptic_intensity': '3'}, (name, button))
                     flags = {layout.resolve(m.group(1)): [m.group(2), m.group(3)] for a in actions(release)
                              if (m := re.search(r'_layer (\{\{.+?\}\}|\d+) (\d) (\d)', a))}
-                    for title in entered:
-                        self.assertEqual(flags[title], ['1', '0'], title)   # beep, no notification
-                    self.assertEqual(flags['Steering | LS: Entry Guard'], ['0', '0'])
-            self.assertEqual(commits, 1)   # one built gesture so far: Start + LS click into Steering
+                    entered = [t for op, t in self.ops(layout, release) if op == 'add_layer' and t in stateful]
+                    entering += bool(entered)
+                    # One beep per release: on the stateful layer's add, or on the transition's own
+                    # removal when the release only clears.
+                    beeping = entered or [name]
+                    for title, flag in flags.items():
+                        self.assertEqual(flag, ['1' if title in beeping else '0', '0'], (name, button, title))
+            self.assertEqual(entering, 1)   # one built gesture so far: Start + LS click into Steering
 
     def test_nothing_is_entered_from_a_transition(self):
         for b, layout in self.each():

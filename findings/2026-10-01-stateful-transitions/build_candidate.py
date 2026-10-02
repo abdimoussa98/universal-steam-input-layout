@@ -49,8 +49,8 @@ COVER = 'Menu Buttons: Tap Cover'
 # a Steering modifier's cleanup quiet while the modifier is valid.
 DRIVER_BITS = {'default': (3, 2), 'alternative': (25, 24)}
 SELECT_REPEAT_MS = 50
-# Entering a stateful layer is announced: the beep flag on its add, and a
-# high-intensity pulse on the commit.
+# Every transition is announced when its menu button is released, entering or
+# leaving: the beep flag on one layer command, and a high-intensity pulse.
 COMMIT_HAPTIC = 3
 
 
@@ -385,9 +385,10 @@ class Stateful:
 
     def build_transitions(self):
         """Both transitions, written whole. Nothing can be entered from one:
-        every layer-adding input of Base and Gyro is empty or disabled. A
-        release that commits to a stateful layer beeps and pulses; one that
-        only ends the transition is silent."""
+        every layer-adding input of Base and Gyro is empty or disabled. Every
+        menu release beeps and pulses, whether it enters a stateful layer or
+        clears: the beep rides on the stateful layer's add, or on the
+        transition's own removal when nothing is added."""
         m = self.m
         commit = {CROSS: {'button_escape': [m.op('add', self.title(), beep=1),
                                             m.op('add', self.title('Entry Guard'))]}}
@@ -395,8 +396,8 @@ class Stateful:
             switches = self.patch(name, 'switch')['inputs']
             for button, _, _ in MENU.values():
                 adds = commit.get(name, {}).get(button, [])
-                feedback = {'haptic_intensity': COMMIT_HAPTIC} if adds else {}
-                switches[button] = m.inp(release=m.entry(m.seq(m.op('remove', name), *adds), **feedback))
+                switches[button] = m.inp(release=m.entry(
+                    m.seq(m.op('remove', name, beep=0 if adds else 1), *adds), haptic_intensity=COMMIT_HAPTIC))
             switches['left_bumper'] = m.full(); switches['right_bumper'] = m.full()
             for source in ('left_trigger', 'right_trigger'):
                 self.patch(name, source)['inputs']['edge'] = m.full()

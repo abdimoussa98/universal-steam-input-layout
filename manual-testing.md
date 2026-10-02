@@ -27,8 +27,8 @@ Gates first. If G3 shows the edge Release doesn't fire, stop: the stick guards a
 
 Menu flow and transitions:
 
-- [ ] T1: each gesture from Base and from `Gyro`: Start + LS click enters Steering, with a beep and a strong haptic pulse on the Start release; Select + RS click, Start + RS click and Select + LS click clear to Base, keep `Gyro` and are silent. The stick click is released first, then the menu button
-- [ ] T2 (clear): in Steering, each of the four gestures leaves it; `Gyro` stays as it was
+- [ ] T1: each gesture from Base and from `Gyro`: Start + LS click enters Steering; Select + RS click, Start + RS click and Select + LS click clear to Base and keep `Gyro`. The stick click is released first, then the menu button. Every one of them beeps and gives a strong haptic pulse on the menu release, with no on-screen notification
+- [ ] T2 (clear): in Steering, each of the four gestures leaves it, with the beep and pulse on the menu release; `Gyro` stays as it was
 - [ ] T3 (cancel): hold Start, click and hold the left stick, release Start first, then the click: no Steering. Note what the click's release does
 - [ ] T4 (missed release): in each transition, release the menu button while the Steam menu is open, close it: everything is blocked until the next tap of either menu button, which ends the transition (a Start tap in the cross transition enters Steering)
 - [ ] T5 (guards): guard on and off for each stick, and both together; with a guard on, a quick menu tap types Tab or Escape, and a 200 ms hold or a thumb lift makes the release silent

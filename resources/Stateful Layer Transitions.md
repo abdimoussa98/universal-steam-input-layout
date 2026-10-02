@@ -161,11 +161,12 @@ menu Tap Cover where the Entry Point would bring in Fn.
 
 - The commit is one array: remove the transition and whatever the
   destination replaces, then add the stateful layer and its entry guard last.
-- **Every commit into a stateful layer beeps and gives a high haptic pulse**
-  (author, 2026-10-02): the beep flag on the stateful layer's `add_layer`,
-  and `haptic_intensity` 3 on the commit's Release. A release that only ends
-  a transition (the clear, and the gestures whose destination isn't built
-  yet) is silent.
+- **Every transition beeps and gives a high haptic pulse on its menu
+  release** (author, 2026-10-02), whether it enters a stateful layer or
+  clears. The Release has `haptic_intensity` 3, and one layer command
+  carries the beep flag: the stateful layer's `add_layer`, or the
+  transition's own `remove_layer` when nothing is added. No on-screen
+  notification.
 - At entry the stateful layer has no Release or delayed binding on Start or
   Select. A repeating press that adds its Entry Point, like Base's, is
   allowed (author, 2026-10-01).
@@ -216,8 +217,8 @@ menu Tap Cover where the Entry Point would bring in Fn.
       repeating press that adds its Entry Point is allowed.
 - [ ] Nothing in it depends on a chord hand-over or a D-pad centre bind.
 - [ ] Both layouts are changed.
-- [ ] Its commit beeps and pulses: the beep flag on its `add_layer` and
-      `haptic_intensity` 3 on the Release.
+- [ ] Its commit beeps and pulses like every other transition release: the
+      beep flag on its `add_layer` and `haptic_intensity` 3 on the Release.
 - [ ] The transition test and the Deck checklist are updated.
 
 ## Accepted consequences

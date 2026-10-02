@@ -64,10 +64,11 @@ in place, so no runtime ID shifts.
   `Transition Set 1` commits to Steering on the Start release;
   `Transition Set 0` is the clear. Neither has a stick-touch or edge
   recovery any more.
-  - The commit into Steering beeps and gives a high haptic pulse (author,
-    2026-10-02): `add_layer Steering 1 0` and `haptic_intensity` 3 on the
-    Release. Every later commit into a stateful layer gets the same; the
-    releases that only end a transition are silent.
+  - Every menu release in a transition beeps and gives a high haptic pulse
+    (author, 2026-10-02), entering or clearing, with no on-screen
+    notification. Each Release has `haptic_intensity` 3. The beep flag is on
+    `add_layer Steering` for the entry, and on the transition's own
+    `remove_layer` for the three releases that add nothing.
 - **Steering's menu (step 5).** `Steering` adds its own Entry Points with a
   repeating press. The W and S layers send Tab and Escape. Left-stick south
   has the hold exit too.
