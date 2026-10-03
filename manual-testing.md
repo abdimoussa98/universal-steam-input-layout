@@ -10,25 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## Reference gyro and right-stick tuning
-
-Run both layouts after a fresh load. See the [exact settings and inheritance policy](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#reference-tuning-and-gyro-inheritance-follow-up).
-
-- [ ] RG1: Base gyro matches the July reference's feel and settings: natural sensitivity
-  300, rotation calibration 3853, vertical ratio 200, conversion style 4, speed
-  deadzone 0, precision 300. Existing Base All and Gyro Any activation rules remain
-  intact; LST/RST Temporary Gyro change activation without changing response
-- [ ] RG2: In regular and Gyro modifier holds, cursor response is 750/0/1/5 and removing
-  cursor exposes 300/0/5/0 for precision/haptic/bump/threshold. Normal covers have
-  no active gyro source. Both responses inherit
-  natural sensitivity 300 and the new Base calibration/conversion. Exercise
-  LST/RST helpers before and during each profile; menu and Gyro Off modes still
-  disable gyro when intended
-- [ ] RG3: Base right stick retains its reference settings and feel. Ramp 0 changes
-  sensitivity/vertical scale to 150/80, then Ramp 1 to 200/67; recentering restores
-  the exposed lower settings. Modifier sensitivity 75 and its local edge region
-  remain intact; repeat the trigger-held and gyro-off ramp paths below
-
 ## Triggers and ramp-up
 
 - [ ] TR1: LT / RT fire left / right click, and Start / Select work while a trigger is held

@@ -233,6 +233,10 @@ WENT = {
     ("Temp cursor gyro", "TC16"): "`test_neptune_cursor.test_rtp_timer_replaces_inherited_cancellation_and_repeating_cover_inputs`",
     ("Temp cursor gyro", "TC17"): "A13 and A28: a removal during RTP Entry's delay, and trackball momentum",
     ("Temp cursor gyro", "TC18"): "A34: it is that assumption's Deck procedure",
+    ("Reference gyro and right-stick tuning", "RG1"): "`test_neptune_gyro.test_base_and_ramp_tuning_match_reference_without_replacing_modifier_edges`; the feel is a tuning note",
+    ("Reference gyro and right-stick tuning", "RG2"): "`test_neptune_gyro.test_gyro_sources_only_override_owned_properties_or_explicitly_disable` and "
+                                                      "`test_neptune_cursor.test_cursor_profile_preserves_sensitivity_and_owner_activation`; the feel is a tuning note",
+    ("Reference gyro and right-stick tuning", "RG3"): "`test_neptune_gyro.test_base_and_ramp_tuning_match_reference_without_replacing_modifier_edges`; the feel is a tuning note",
 }
 
 

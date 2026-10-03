@@ -88,6 +88,8 @@ None of them is a gate. Each comes from a check in the retired Deck checklist
 
 | From | What to try |
 |---|---|
+| Reference gyro RG1 to RG3 | The gyro and the right stick are set to the July reference's values (tests check the numbers). Does aiming feel like the reference: in Base, with the cursor on, and through the two ramp stages? |
+| WASD modifier scaffold WM2 | Assign a key such as Walk to the empty WASD Modifier slot on the left stick's edge. Try a slow, a quick and a held push: are the WASD-only, modifier-only and combined regions where you want them? |
 | Temp cursor gyro TC2 | The cursor's entry gives one strong pulse at 300 ms and nothing after. Is one pulse right, and is there any buzzing while the cursor stays on, or on a retried hold? |
 | Temp cursor gyro TC8 | Both sticks at about a quarter of their travel end the cursor (radius 4915 on the left, 7209 on the right). Do the two sticks feel alike, and is a quarter the right distance? |
 | Menu buttons MB7 | In each Menu Fn layer the eight stick directions type punctuation with a haptic tick. Hold them, change direction, and try the same directions inside a transition: is there unwanted buzzing, or a duplicate key? |
