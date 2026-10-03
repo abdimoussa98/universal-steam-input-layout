@@ -88,6 +88,7 @@ None of them is a gate. Each comes from a check in the retired Deck checklist
 
 | From | What to try |
 |---|---|
+| 90.6 P1 | In a Double Tap window a left-pad swipe types its key directly. Does the swipe feel like Base's, in sensitivity and haptics? |
 | 90.11 F2 | The Fallback Hold's warning: a strong pulse every 250 ms from the moment the stick goes up or down, and the exit with one beep at 1.5 s. Is the pulse too strong, and is 1.5 s the right length? (90.6 C1 had pulses from 1 s and the exit at 2.5 s.) |
 
 ## Two that are kept apart

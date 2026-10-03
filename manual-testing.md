@@ -10,25 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## 90.6: chorded delays and dead-group prune
-
-Load 90.6 fresh in both variants. Gate details: [steering C1–C5](findings/2026-09-30-steering-lean/ACCEPTANCE.md#chorded-delays-906)
-and [prune D1–D5](findings/2026-09-30-dead-group-prune/README.md#deck-gates-untested).
-
-- [ ] D1: both variants load without error; every layer's sources look the same as 90.5 in the editor
-- [ ] D2/D3: right pad clicked, tap up/down gives one wheel tick; hold repeats from 150 ms at the old cadence and stops on release; forward/back and edge middle click unchanged
-- [ ] D4/D5: Base dpad/face and Menu Fn stick mode shifts unchanged; stick double-touch temporary gyro unchanged
-- [ ] C1: steering fallback, hold LS up: warning pulses from 1 s, exit with one beep at 2.5 s; releasing early cancels both
-- [ ] C2: enter Steering with W held for more than 3 s: no warning or exit until center and a fresh push
-- [ ] C3: short flick to center scrolls once about 150 ms after center; flick-flick-hold still repeats
-- [ ] C4/C5/S7: holding down/up past 250 ms consumes the tap and keeps the modifier map while held; an interrupted hold never blocks the next; after that, reversing does nothing and center never scrolls. After a driver takeover or Mod 2 exit with the stick held, center never scrolls
-- [ ] R1: second-press cover. Double-tap Select and hold past 150 ms: Escape holds, and release ends cleanly with no extra Escape. Repeat with Start/Tab and with a modifier double-tap-hold scroll ([change record](findings/2026-09-30-second-press-cover-reset/README.md))
-- [ ] R2: interrupt that hold (release before 150 ms, then double-tap-hold again); the cover still arrives, so the release ends cleanly. A fast tap chain still re-enters the window
-- [ ] R3: apply either layout to the **desktop** configuration; those four inputs show three entries, the reset is the one missing, and tap, double tap and hold still work
-- [ ] T1: `Transition Set 0` (Fn + RS click). While either menu button is held, touching a stick doesn't clear the menu stack. With both menu buttons released, touching still clears it. Lifting a thumb clears only that side's LST/RST layers. Confirm in the editor that the merged chord shows both Select and Start set to Any ([record](findings/2026-09-30-touch-release-rule/README.md))
-- [ ] P1: during any Double Tap window (within 150 ms of a tap), a left-pad swipe sends Escape, Enter, Tab or Backspace directly and adds no key layer; left-pad click and touch do nothing. In the six other windows, the right pad still moves the cursor with Base's feel, and right-pad click and touch do nothing. In RTP Double Tap, right-pad click does nothing and north/south/east/west still select or cancel. Check that the swipe feel (sensitivity and haptics) matches Base ([record](findings/2026-09-30-double-tap-pad-blocks/README.md))
-- [ ] B1: derived window blocks. Default only: push RS past the ramp threshold (Gyro Off Ramp Up), tap L1, and pull a trigger inside the window. Nothing fires and gyro stays off until the window ends. Both layouts: quick-tap the right pad while holding Start or Select (Fn). In RTP Double Tap, the four back buttons do nothing. Right-pad selection is unchanged: a second tap north or south goes to Circular Scroll, and anywhere else returns to mouse mode ([record](findings/2026-09-30-derived-window-blocks/README.md))
-
 ## Menu buttons
 
 - [ ] MB1: Tapping Select sends Escape, and tapping Start sends Tab

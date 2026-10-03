@@ -203,6 +203,21 @@ WENT = {
     ("90.7", "S5"): "Obsolete: the protected menu layers were replaced by the stick guards in 90.10 (90.10 T5)",
     ("90.7", "S7"): "Obsolete: turn assist is off in Steering since 90.13 (90.13 N1)",
     ("90.7", "S8"): "Obsolete: replaced by 90.10 D5",
+    ("90.6", "C4/C5/S7"): "`tests/test_scenarios_90_6_to_90_9.py`", ("90.6", "R1"): "`tests/test_scenarios_90_6_to_90_9.py`",
+    ("90.6", "C2"): "Same as 90.11 F7",
+    ("90.6", "D1"): "`test_layout_hygiene.test_no_unreferenced_groups_or_plain_inactive_slots`; loading without error is A33",
+    ("90.6", "D2/D3"): "`test_layout_hygiene.test_rtp_scroll_repeat_is_a_touch_chorded_delay`",
+    ("90.6", "D4/D5"): "`test_fixes.test_working_layouts_are_a_fixed_point` and "
+                       "`test_layout_hygiene.test_no_unreferenced_groups_or_plain_inactive_slots`",
+    ("90.6", "C1"): "Obsolete: replaced by 90.11 F1 to F9; its timing became the tuning note from 90.11 F2",
+    ("90.6", "C3"): "Obsolete: replaced by 90.10 D5",
+    ("90.6", "R2"): "A12: the reset restarts an interrupted delay",
+    ("90.6", "R3"): "A21: it is that assumption's Deck procedure",
+    ("90.6", "T1"): "Obsolete: the transitions were rebuilt in 90.10 (90.10 T4); what the editor shows for the merged chord is A30",
+    ("90.6", "P1"): "`test_double_tap_windows.test_left_pad_swipes_send_keys_without_the_layer_api` and "
+                    "`test_double_tap_windows.test_right_pad_stays_the_mouse_with_click_and_touch_cleared`; the swipe feel is a tuning note",
+    ("90.6", "B1"): "`test_double_tap_windows.test_rtp_double_tap_keeps_its_touch_selection_and_clears_the_fn_back_buttons`; "
+                    "its trigger part was replaced by 90.10 T10",
 }
 
 
