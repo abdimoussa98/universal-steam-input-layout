@@ -246,6 +246,7 @@ WENT = {
     ("Default trigger reference match", "DT2"): "`tests/test_scenarios_triggers_and_recovery.py`",
     ("Default trigger reference match", "DT3"): "`test_double_tap_windows.test_default_windows_keep_the_mouse_buttons_on_the_trigger_edges`, "
                                                 "and the Window audit on every build",
+    ("Left-stick recovery and Transition Sets", "LR1"): "`tests/test_scenarios_triggers_and_recovery.py`",
 }
 
 

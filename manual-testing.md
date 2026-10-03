@@ -10,11 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## Left-stick recovery and Transition Sets
-
-- [ ] LR1: Validate the new LS-edge recovery and Transition Set depth on the Deck in both layouts
-  - Follow the [fresh-load checks](findings/2026-09-28-left-stick-recovery/CHANGES.md#verification-and-deck-checks), including both Mod 2 orders/Gyro variants, either-owner guards, outer-region behavior, and LS deflection held across every Double Tap window
-
 ## WASD modifier scaffold
 
 Run on both layouts after a fresh load. The shipped modifier slot is empty;
