@@ -55,6 +55,8 @@ BUTTONS = {("switch", "left_bumper"): "LB", ("switch", "right_bumper"): "RB",
 THUMBS = frozenset({"LSt", "RSt"})
 NAMES = frozenset(BUTTONS.values())
 CHECKS = ("outside the guard", "left below", "left above", "hidden cleanup", "never there", "guard mismatch")
+ENFORCES = {"outside the guard": ("R127", "R131"), "left below": ("R128",), "left above": ("R129",),   # check -> rules
+            "hidden cleanup": ("R130",), "never there": ("R132",), "guard mismatch": ("R127",)}
 LISTS = ("recovery", "release")          # the roles whose removal lists follow "never there"
 ROLE = {"recovery": "cleanup function", "release": "release"}
 

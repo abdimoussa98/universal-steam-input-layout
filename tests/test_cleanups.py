@@ -437,6 +437,12 @@ class ScriptTests(unittest.TestCase):
         self.assertIn("C", text)
         self.assertIn("LB", text)
 
+    def test_the_text_names_the_rule_each_check_enforces(self):
+        text = self.run_script(owner({"button_a": guarded(remove("P"))})).stdout
+        self.assertIn("FAIL  left above [R129]", text)
+        self.assertIn("ok    outside the guard [R127, R131]", text)
+        self.assertIn("== Left above [R129]", text)
+
 
 if __name__ == "__main__":
     unittest.main()

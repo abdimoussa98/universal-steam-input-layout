@@ -35,7 +35,8 @@ import json
 from pathlib import Path
 import sys
 
-from steam_layout.cleanups import CHECKS, audit
+from steam_layout.cleanups import CHECKS, ENFORCES, audit
+from steam_layout.rules import tag
 
 RULES = Path(__file__).resolve().parent / "steam_layout" / "flow_config.json"
 
@@ -50,12 +51,13 @@ def print_report(report, checks):
     print()
     for check in CHECKS:
         c = report["counts"][check]
-        print(f"{'ok  ' if not c['findings'] else 'FAIL'}  {check:18} {c['findings']:4} finding(s) in {c['bindings']} binding(s)")
+        label = f"{check} {tag(ENFORCES[check])}"
+        print(f"{'ok  ' if not c['findings'] else 'FAIL'}  {label:32} {c['findings']:4} finding(s) in {c['bindings']} binding(s)")
     for check in checks:
         rows = [f for f in report["findings"] if f["check"] == check]
         if not rows:
             continue
-        print(f"\n== {check.capitalize()}")
+        print(f"\n== {check.capitalize()} {tag(ENFORCES[check])}")
         by_layer = defaultdict(list)
         for f in rows:
             by_layer[f["layer"]].append(f)
