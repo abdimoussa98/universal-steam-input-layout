@@ -113,14 +113,14 @@ It becomes the migration record in phase 14.
 | 90.13 | N2 | hold R1, hold a trigger (firing), push the right stick out, let go of… | Scenario | B, Tr, St, K: the driver's Release still reaches its layer; no W left down | `tests/test_scenarios_90_11.py` |
 | 90.13 | N3 | in a Steering stick Double Tap window (flick the left stick while driv… | Scenario | St, T, Tr, K: a trigger pull inside a Steering window clicks | `tests/test_scenarios_90_11.py` |
 | 90.13 | N4 | outside Steering, turn assist and gyro-off-while-turning work as befor… | Scenario | St, T, Gyro: outside Steering the ramp layers still come and go (same as TR3) | `tests/test_scenarios_90_11.py` |
-| 90.12 | C1 | (Modifier 2, stick touch): hold L1 then R1, miss both releases, touch… | Scenario | B, Miss, St: a stick touch clears a stuck Modifier 2 | Not migrated yet |
-| 90.12 | C2 | (Modifier 2 held, stick touch): hold L1 and R1 and rest a thumb on eac… | Scenario | B, St: with either bumper held, a stick touch clears nothing | Not migrated yet |
-| 90.12 | C3 | (cursor, one step): hold L1 for 300 ms (cursor), miss the release, pus… | Scenario | B, T, Miss, St: one edge push clears a stuck cursor and its modifier | Not migrated yet |
-| 90.12 | C4 | (Steering Modifier 2): in Steering hold R1 then L1, miss R1's release… | Scenario | B, Miss, St: Steering Modifier 2 with one bumper still held | Not migrated yet |
-| 90.12 | C5 | (rocking): hold L1, add R1, wait 200 ms, let go of L1, press L1 again,… | Scenario | B, T: the rocking sequence; test_modifier_rocking.py already replays it with walk | Not migrated yet |
-| 90.12 | C6 | (taps): tap L1 twice quickly: scroll down. Hold L1 and press A, let go… | Scenario | B, T, K: double tap scrolls, a used bumper doesn't, the quick tap toggles Gyro | Not migrated yet |
-| 90.12 | C7 | (stuck, still clears): miss the release of L1 alone, of Start's Fn lay… | Scenario | B, Miss, St: a stuck modifier, Fn layer and Steering driver each clear | Not migrated yet |
-| 90.12 | C8 | (menu): hold Start, push a stick (guard), release: Tab or the window a… | Scenario | B, St, T, K: the menu hold with a stick guard, and the Fn release | Not migrated yet |
+| 90.12 | C1 | (Modifier 2, stick touch): hold L1 then R1, miss both releases, touch… | Scenario | B, Miss, St: a stick touch clears a stuck Modifier 2 | `tests/test_scenarios_90_12.py` |
+| 90.12 | C2 | (Modifier 2 held, stick touch): hold L1 and R1 and rest a thumb on eac… | Scenario | B, St: with either bumper held, a stick touch clears nothing | `tests/test_scenarios_90_12.py` |
+| 90.12 | C3 | (cursor, one step): hold L1 for 300 ms (cursor), miss the release, pus… | Scenario | B, T, Miss, St: one edge push clears a stuck cursor and its modifier | `tests/test_scenarios_90_12.py` |
+| 90.12 | C4 | (Steering Modifier 2): in Steering hold R1 then L1, miss R1's release… | Scenario | B, Miss, St: Steering Modifier 2 with one bumper still held | `tests/test_scenarios_90_12.py` |
+| 90.12 | C5 | (rocking): hold L1, add R1, wait 200 ms, let go of L1, press L1 again,… | Scenario | B, T: the rocking sequence; test_modifier_rocking.py already replays it with walk | `tests/test_scenarios_90_12.py` |
+| 90.12 | C6 | (taps): tap L1 twice quickly: scroll down. Hold L1 and press A, let go… | Scenario | B, T, K: double tap scrolls, a used bumper doesn't, the quick tap toggles Gyro | `tests/test_scenarios_90_12.py` |
+| 90.12 | C7 | (stuck, still clears): miss the release of L1 alone, of Start's Fn lay… | Scenario | B, Miss, St: a stuck modifier, Fn layer and Steering driver each clear | `tests/test_scenarios_90_12.py` |
+| 90.12 | C8 | (menu): hold Start, push a stick (guard), release: Tab or the window a… | Scenario | B, St, T, K: the menu hold with a stick guard, and the Fn release | `tests/test_scenarios_90_12.py` |
 | 90.11 | F1 | (the fix): hold the left stick up for about 1 s, roll to A or D withou… | Scenario | St, T, Hap: rolling to A or D removes the Fallback Hold, so no exit and no pulse | `tests/test_scenarios_90_11.py` |
 | 90.11 | F2 | (exit): hold the left stick up: W, pulses from the start, and Steering… | Scenario | St, T, K, Hap: W, the pulse, and the exit with its beep at 1.5 s. The pulse strength is a tuning note | `tests/test_scenarios_90_11.py` |
 | 90.11 | F3 | (early release): hold up for 1 s, recentre, hold up again: the exit co… | Scenario | St, T: the exit counts from the second push | `tests/test_scenarios_90_11.py` |

@@ -54,6 +54,7 @@ SOURCES = {"LS": "joystick", "RS": "right_joystick", "LP": "left_trackpad", "RP"
 DIRECTIONS = {"up": "dpad_north", "down": "dpad_south", "left": "dpad_west", "right": "dpad_east"}
 SWITCHES = {"A9": ("exposed_fires", (True, False)), "A32": ("reverse_ties", (False, True))}   # the either-way assumptions
 RENAME = {"L1": "L2", "R1": "R2"}
+BACK = {new: old for old, new in RENAME.items()}
 
 Meta = namedtuple("Meta", "check name rules rests either")
 SCENARIOS = []
@@ -190,7 +191,12 @@ class Pad:
 
     @property
     def top(self):
-        return self.sim.stack[-1]
+        """The top layer, by its default-layout name (L1 and R1 also in the alternative)."""
+        return self.names()[-1]
+
+    def names(self):
+        """The stack by default-layout names, so one expectation serves both layouts."""
+        return tuple(map_title(t, BACK) if self.variant == "alternative" else t for t in self.sim.stack)
 
     def has(self, *titles):
         return all(self.title(t) in self.sim.stack for t in titles)

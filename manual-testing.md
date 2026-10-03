@@ -10,24 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## 90.12: cleanup lists
-
-Load 90.12 fresh in both variants (71 layers). Record: [first run and fix](findings/2026-10-02-cleanup-audit/README.md) · [rules](findings/2026-10-02-cleanup-boundaries/README.md#the-rules). Nothing here has run on the Deck. 90.12 changes only cleanup and release lists: about a third fewer removals, three new or changed cleanups, no add and no add order. "Miss the release" means: hold the buttons, press the Steam button, let go of everything, close the Steam menu.
-
-New behaviour:
-
-- [ ] C1 (Modifier 2, stick touch): hold L1 then R1, miss both releases, touch either stick: back to Base, typing works. Repeat with Gyro on (you return to Gyro) and R1 first
-- [ ] C2 (Modifier 2 held, stick touch): hold L1 and R1 and rest a thumb on each stick: nothing clears, Modifier 2 keys still work. Repeat holding only one bumper of a stuck Modifier 2: nothing clears until that bumper is released too
-- [ ] C3 (cursor, one step): hold L1 for 300 ms (cursor), miss the release, push the right stick to the edge once: cursor and modifier are both gone in that one push (before: cursor first, modifier on the repeat). Repeat with R1 and with the left stick
-- [ ] C4 (Steering Modifier 2): in Steering hold R1 then L1, miss R1's release only (keep L1 held), touch a stick: nothing clears. Release L1: back to Steering
-
-Unchanged, check they still work:
-
-- [ ] C5 (rocking): hold L1, add R1, wait 200 ms, let go of L1, press L1 again, wait, let go of R1, let go of L1: no scroll at any point, Base at the end. Repeat starting with R1, and with Gyro on
-- [ ] C6 (taps): tap L1 twice quickly: scroll down. Hold L1 and press A, let go, tap L1 at once: no scroll. Hold L1 and tap R1 within 200 ms: Gyro toggles
-- [ ] C7 (stuck, still clears): miss the release of L1 alone, of Start's Fn layer, and of a Steering driver, then press A or touch a stick: each clears
-- [ ] C8 (menu): hold Start, push a stick (guard), release: Tab or the window as before; hold Start past 200 ms for Fn, release: Fn gone, nothing left behind
-
 ## 90.10: stateful transitions
 
 Load 90.10 fresh in both variants (70 layers). Record: [build](findings/2026-10-01-stateful-transitions/README.md) · [design](resources/Stateful%20Layer%20Transitions.md) · [plan](plans/2026-10-01-stateful-transitions-implementation.md). Nothing here has run on the Deck; the two gates were assumed. These replace K1 (90.9) and S5 and S8 (90.7), which test behaviour this release changed.
