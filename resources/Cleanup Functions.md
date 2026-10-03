@@ -1,7 +1,10 @@
 # Cleanup functions
 
-**Status:** draft for the author to define, 2026-09-30. Everything here is a
-proposal until confirmed. The linked sections are the current source of truth.
+**Status:** written as a draft on 2026-09-30. Its four open questions were
+answered by the cleanup rules on 2026-10-02, which are R127 to R132 in the
+[Layer Definition of Done §7](Layer%20Definition%20of%20Done.md#7-cleanup);
+where this page and those rules differ, the rules are right. The kinds and
+terms below still describe the layout.
 
 This page defines every kind of binding that removes layers, so that a
 script can recognize them, check them, and eventually regenerate them (see
@@ -137,8 +140,8 @@ show the value:
   between Mod 0, 1 and 2 ([Order matters](#order-matters)). The scope of each
   owner release has to be stated per gesture.
 
-**Still open.** Each question comes with real examples from the default layout.
-**Answered by the cleanup rules (author, 2026-10-02):** all four, in the
+**The four questions below were answered by the cleanup rules (author,
+2026-10-02),** in the
 [cleanup boundaries findings](../findings/2026-10-02-cleanup-boundaries/README.md#how-this-answers-the-open-questions).
 The Cleanup audit (`audit_cleanups.py`) checks them since 90.12.
 

@@ -1,5 +1,10 @@
 ## Skill: Prep a Steam Input layout for editing (VDF → JSON → readable titles)
 
+> **Older copy (last revised 2026-09-30).** The maintained version of this skill is
+> [.claude/skills/steam-layout-prep/SKILL.md](../../../.claude/skills/steam-layout-prep/SKILL.md). The rules it restates have IDs
+> in the [Layer Definition of Done](../../../resources/Layer%20Definition%20of%20Done.md#rule-tables); where
+> this file differs from either, they are right.
+
 ### When to use
 - You’re about to edit a Steam Input layout from this repo.
 - You see lots of `controller_action add_layer 32 0 0` style numeric runtime IDs and want it readable.

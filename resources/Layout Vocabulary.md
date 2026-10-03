@@ -38,10 +38,11 @@ by ID. This list says what the author observed behind them.
   sends output (a walk bind, the WASD modifier) is fine, and mouse-mode sticks
   aren't affected.
 
-**Known implementation conflicts:** on 2026-09-30, both current Neptune JSON
-variants still contain five `hold_layer` commands, in group array positions
-12, 17, 19, 52 and 82, under `click` / `Soft_Press`. They target runtime layers
-16 and 17. These are migration work, not exceptions to the rule. Neither
+**Known implementation conflicts:** both Neptune layouts still contain five
+`hold_layer` commands, on Base's trackpad `click` inputs: three add
+`RTP: Mouse Buttons` and two add `LTP: Arrow Keys` (checked on 90.13). These
+are migration work, not exceptions to the rule (R101; the open entry is in the
+exceptions register). Neither
 current variant contains `CHANGE_PRESET`. Archived snapshots and generic
 format/parser documentation may retain historical APIs.
 
@@ -54,7 +55,7 @@ format/parser documentation may retain historical APIs.
 | **Overlay** | Short form for a button overlay, or the broader category for an equally limited interaction involving linked buttons. | `L1&R1: Tap Cover` covers the two linked modifier releases; it is an overlay, but not strictly a one-button overlay. |
 | **Owning layer** | A layer that applies an overlay and is responsible for recovering it when that interaction becomes invalid. A shared overlay can have multiple owners. | `L1: Modifier 0` and its Gyro variant both apply `L1: Tap Cover`. |
 | **Interaction stack** | The active layers belonging to one interaction, regardless of their position relative to unrelated active layers. | `Menu Left: Escape` + its Double Tap Cover; or L1's modifier + Tap Cover + Temp Cursor Gyro. |
-| **Guarded recovery** | An owner-held chord suppresses an interruptible, repeating Regular Press removal on the same input. It clears invalid state when no protecting owner is held. | L1's RS-edge fallback removes its regular/Gyro modifier pair, Tap Cover, and Temp Cursor Gyro. |
+| **Guarded recovery** | An owner-held chord suppresses an interruptible, repeating Regular Press removal on the same input. It clears invalid state when no protecting owner is held. | L1's RS-edge fallback removes `L1: Modifier 0`, its Tap Cover and its Temp Cursor Gyro. |
 | **Lifecycle exit** | A normal release, timer expiry, or deliberate transition with its own removal scope and conditions. | A Double Tap window removes itself on timeout. This is not a guarded recovery binding. |
 | **Cleanup function** | The backup exit for a stuck layer: a guarded recovery. It fires when a likely next input is pressed and no owner is held (R133). | `L1: Modifier 0`'s right-stick touch removes LB's layers when LB isn't held. |
 | **Guard** | The buttons whose chords suppress a cleanup function. Holding any of them stops it (R127). | LB for `L1: Modifier 0`; LB and RB for `L1!R1: Modifier 2`. |

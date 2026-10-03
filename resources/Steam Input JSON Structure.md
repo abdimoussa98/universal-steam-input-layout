@@ -418,7 +418,9 @@ Always On window.
 
 **90.6 adds the four second-press layers** (`Menu Left: Escape`,
 `Menu Right: Tab`, `L1/R1: Scroll Down/Up`), which bring coverage to fifteen
-of nineteen. After an accepted double tap, these layers add their Double Tap
+of nineteen (these counts are from 90.6 and haven't been recounted; 90.10
+added delayed adds with their resets, for the stick guards and Steering's
+modifiers). After an accepted double tap, these layers add their Double Tap
 Cover after 150 ms. The author chose a 200 ms reset as a **4th entry, placed
 last**; this is the only allowed exception to the
 [command entry budget](#command-entry-budget). See the
@@ -431,7 +433,7 @@ last**; this is the only allowed exception to the
 **Author-confirmed cleanup rule, 2026-09-30:** every layer must **explicitly**
 bind the appropriate stick-touch **release** cleanup. Only cover-type layers,
 which are only ever added on top of another layer (the Tap Covers, the Double
-Tap Covers, Temp Cursor Gyro, Enter, Backspace and `Gyro Off Ramp Up`), may
+Tap Covers, Temp Cursor Gyro and `Gyro Off Ramp Up`), may
 inherit it. A trace
 showing that inheritance would work is not enough for any other layer. The
 accepted exceptions (`Gyro Off Ramp Up` as cover-type, `Gyro` as the base
@@ -617,9 +619,10 @@ entry as the self-removal, so a second push or the opposite direction can
 drop it.
 
 The [blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md)
-checks every layer and confirms all 13 active entry bindings add the timed layer
-last and all 30 directly owned layer-changing bindings remove it first in each
-variant. Since 90.6 every window's left pad swipes straight to the Escape,
+of 2026-09-28 checked every layer of the 90.2 layouts: all 13 entry bindings
+added the timed layer last, and all 30 layer-changing bindings in a window
+removed it first. Today `tests/test_neptune_recovery.py` checks the same for
+every window on every run. Since 90.6 every window's left pad swipes straight to the Escape,
 Enter, Tab and Backspace keys, with no layer command, and clears click and
 touch. The right pad stays the mouse (Base's mode, settings inherited) with
 click and touch cleared, except in RTP Double Tap. That window keeps its
@@ -628,8 +631,9 @@ Scroll, and clears `click` ([change record](../findings/2026-09-30-double-tap-pa
 window can be applied on and blocks any remaining layer command underneath,
 for example the default trigger edges under `Gyro Off Ramp Up` and RTP Double
 Tap's back buttons ([derived blocks](../findings/2026-09-30-derived-window-blocks/README.md)).
-RTP Double Tap's right-pad touch is a deliberate `allow` exception, because the
-pad is the window's own second-tap selection.
+RTP Double Tap's right-pad touch needs no block: the window's pad is in
+`dpad` mode, and a different source mode stops Base's mouse-mode touch from
+being inherited (the earlier `allow` decision was retired on 2026-10-01).
 Menu inputs, RS edge, and modifier routes are explicitly blocked or replaced.
 This validates configured ordering, not arbitrary stale-stack inheritance or
 the absence of a crash on a current client.
@@ -1041,8 +1045,9 @@ requiring another related-button press was previously accepted; review invalid
 residual covers under the [owning-layer responsibility](#cover-cleanup-ownership).
 Menu layers deliberately restrict gameplay controls. See
 [cleanup scopes and examples](#cleanup-scopes-and-concrete-examples).
-After the [cursor-overlay additions](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md),
-each current layout has 390 activators in active groups that explicitly remove layers.
+After the [cursor-overlay additions](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md)
+of 2026-09-29, each layout had 390 activators in active groups that explicitly
+removed layers. That count is from then; 90.12 shortened the lists (R132).
 
 #### Guarded Recovery Binding Shape
 
@@ -1066,7 +1071,7 @@ Most of these backup exits follow one pattern, on one input:
 
 | Input | Chord with LB (normal use) | Regular Press (LB not held, so stuck) |
 |---|---|---|
-| RS edge | empty binding; stronger LB + LS-deflected chord repeatedly adds normal cover | remove `L1: Modifier 0`, `Gyro \| L1: Modifier 0`, `L1: Tap Cover`, and `L1: Temp Cursor Gyro` (Hold to Repeat) |
+| RS edge | empty binding; stronger LB + LS-deflected chord repeatedly adds normal cover | remove `L1: Modifier 0`, `L1: Tap Cover` and `L1: Temp Cursor Gyro` (Hold to Repeat) |
 | RS touch | empty binding | the same removal (Hold to Repeat) |
 | RS click | separate uninterruptible chords for middle mouse and repeating `L1: Tap Cover` addition | the same removal (Hold to Repeat) |
 
@@ -1140,7 +1145,6 @@ For example, the existing default L1 modifier's RS-edge input has this shape
         "bindings": {
           "binding": [
             "controller_action remove_layer {{Base::L1: Modifier 0}} 0 0, , ",
-            "controller_action remove_layer {{Base::Gyro | L1: Modifier 0}} 0 0, , ",
             "controller_action remove_layer {{Base::L1: Temp Cursor Gyro}} 0 0, , ",
             "controller_action remove_layer {{Base::L1: Tap Cover}} 0 0, , "
           ]
@@ -1154,7 +1158,8 @@ For example, the existing default L1 modifier's RS-edge input has this shape
 }
 ```
 
-This example has three GUI entries and four removal subcommands. The empty
+This example has three GUI entries and three removal subcommands (four until
+90.11, with the `Gyro |` twin, which R132 dropped). The empty
 owner guard is interruptible; the stronger owner-plus-opposing-stick chord is
 uninterruptible and repeating. Both require LB, so moving both sticks without LB cannot add
 a cover or suppress recovery. The cleanup retains default Interruptable and
@@ -1162,8 +1167,8 @@ Hold to Repeat. The opposite chord uses All; its mask is LB bit 3 plus LS
 deflection bit 30. Chord arbitration still needs a runtime check, not a claim
 based on JSON list order. Other recovery inputs retain their existing guards.
 
-**Convention standardized, 2026-09-28:** all 207 current active guarded Regular Press
-removals per layout enable Hold to Repeat, including stick clicks and
+**Convention standardized, 2026-09-28:** all 207 active guarded Regular Press
+removals per layout at the time (265 cleanup functions in 90.13) enable Hold to Repeat, including stick clicks and
 Scroll Down/Up stick-touch recovery. The six dormant guarded entries also
 repeat. The [separate repeat change](../findings/2026-09-28-repeating-recovery/CHANGES.md)
 enabled repeat on 104 of the original 185 active entries without changing their
@@ -1271,8 +1276,8 @@ hysteresis to target roughly 25% engagement; earlier recovery
 when the owner is absent is accepted. The other ten LS groups retain `21000`.
 Movement settings are preserved; physical thresholds and the opposing-stick
 selector still need Deck verification. See the [threshold evidence](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#edge-threshold-verification).
-All seven Always On Double
-Tap windows now explicitly block LS edge so they cannot inherit the new lower
+Every Always On Double
+Tap window (seven then, nine since 90.10) explicitly blocks LS edge so it cannot inherit the new lower
 recovery. The blocks contain no layer operations; timeout and ordered exits are
 unchanged. These temporary blocks also displace the inherited edge modifier.
 
@@ -1305,8 +1310,8 @@ group. Upper layers without an explicit LS-edge binding can inherit the exposed 
 edge; that may be Base's scaffold or another layer's recovery. The 16 layers
 with explicit LS-edge recovery retain their own outer geometry (`4915` for
 single modifiers, `21000` for the other recovery layers,
-inversion off). All seven Always On Double Tap windows retain their explicit
-empty edge blocks, and the two menu Fn LS mode-shift groups also explicitly
+inversion off). Every Always On Double Tap window retains its explicit
+empty edge block, and the two menu Fn LS mode-shift groups also explicitly
 block the edge. Those overrides intentionally displace the modifier. No upper
 bindings or layer-mutation order changed in the scaffold update. Inherited source settings can still
 affect contexts without their own settings, so test held-input entry/exit and
@@ -1320,17 +1325,19 @@ Describe a cleanup by both **when it fires** and **what it removes**. A release
 can remove one layer or a family; a guarded fallback does not inherently mean
 clear every active layer. A "stack cleanup" here means a named interaction's
 stack, never a universal clear-all. The following examples describe the current
-90.2 layouts, the author's 2026-09-28 clarification, and the 2026-09-29 cursor additions.
+90.13 layouts. The scopes are the author's of 2026-09-28; the numbers are
+since 90.12, when the cleanup rules shortened every list to the layers that can be
+on the stack with its host (R132).
 
 | Scope | Concrete example | State intentionally left alone |
 |---|---|---|
 | Self only | A Double Tap window removes itself on timeout; a Temp Cursor Gyro cancellation removes only the cursor | The underlying stack and unrelated interactions |
 | Local pair | Menu Left: Double Tap Cover release removes itself and Menu Left: Escape; the right-side pair is Double Tap Cover + Tab | Other families; no global cleanup |
-| Single-modifier family | Either L1 overlay release removes the regular/Gyro L1 modifier, L1: Tap Cover, and L1: Temp Cursor Gyro | R1's family and persistent Gyro |
-| Current Mod 2 branch | Either L1!R1 regular/Gyro fallback removes eleven modifier/overlay layers | The opposite-order R1!L1 pair and persistent Gyro |
-| Released side | L1&R1: Tap Cover on L1 release removes nine layers | R1's single-modifier family, which may still be held, and persistent Gyro |
-| Whole modifier family plus mode change | Uncovered Mod 2 release removes all thirteen modifier/overlay layers and deliberately enables/disables persistent Gyro | Unrelated interaction families |
-| Current transition and menu ancestry | Transition Set 0/1 guarded fallback removes the current Transition Set first, then both Menu Entry/Fn families | Menu overlays, the opposite Transition Set, persistent Gyro, and unrelated families; either held menu button suppresses the whole fallback |
+| Single-modifier family | Either L1 overlay's release removes itself and the regular and Gyro L1 modifier (it can sit on either); the modifier's cleanup function removes the modifier, L1: Tap Cover and L1: Temp Cursor Gyro | R1's family and persistent Gyro |
+| Current Mod 2 branch | Either L1!R1 regular/Gyro cleanup function removes six layers: that Mod 2, the two single modifiers of its mode, and the three covers | The opposite-order R1!L1 pair and persistent Gyro |
+| Released side | L1&R1: Tap Cover on L1 release removes eight layers | R1's single-modifier family, which may still be held, and persistent Gyro |
+| Whole modifier family plus mode change | Uncovered Mod 2 release removes six layers and deliberately enables or disables persistent Gyro | Unrelated interaction families |
+| Transition (since 90.10) | A Transition Set's menu Release removes the transition. It has no cleanup function: a missed release is recovered by the next tap of either menu button. The binding that enters it clears every layer except Gyro first (R163) | Persistent Gyro |
 | Timed self-exit | Double Tap expiry removes its timed owner only | Other stacks; an early transition removes the timed owner first before changing them |
 
 In alternative, replace L1/R1 modifier-family names with L2/R2. The Menu Left /
@@ -1360,7 +1367,7 @@ cost is a stray Escape / Tab if that second button is then released within
 300 ms ([record](../findings/2026-10-01-intended-flow-checker/README.md#author-decisions-2026-10-01)).
 
 `L1: Tap Cover` inherits the modifier's edge/click recovery, which removes
-both modifier variants and both overlays. Its explicit touch replacements
+the modifier and both overlays. Its explicit touch replacements
 preserve guarded recovery but remove only LST/RST helpers on thumb release;
 this blocks the lower cursor-add release after cancellation. It has no gyro
 source and keeps the owner's ordinary outputs and repeating cover chords.
@@ -1377,9 +1384,9 @@ pair exit with Escape/Tab; neither cover has Always On.
 
 **Menu gameplay suppression is intentional, confirmed by the author.** These
 layers serve Start/Select menu interactions, not simultaneous gameplay. WASD
-modifiers and ramp-up do not need to remain available in that context. All six
-menu layers discussed here—Backspace, Enter, Escape, Tab, and the two Menu Double
-Tap Covers—have active disabled gyro groups; Escape/Tab also explicitly block
+modifiers and ramp-up do not need to remain available in that context. The four
+menu layers discussed here (Escape, Tab and the two Menu Double
+Tap Covers) have active disabled gyro groups; Escape/Tab also explicitly block
 RS edge. Preserve those overrides. An overlay has local cleanup and inherited
 bindings; that does not require passing through every gameplay function.
 After a missed release, use the existing local exit and underlying stack's
@@ -1404,8 +1411,8 @@ inherit broader recovery; it does not need to duplicate the owner's fallback
 bindings. The overlay's limited responsibility does not exempt the owning
 layer from cleaning it up.
 
-For example, the L1 modifier's recovery already removes its regular/Gyro
-modifier pair, `L1: Tap Cover`, and `L1: Temp Cursor Gyro`. The scroll layer similarly recovers itself
+For example, the L1 modifier's recovery removes the modifier,
+`L1: Tap Cover` and `L1: Temp Cursor Gyro`. The scroll layer similarly recovers itself
 and its `Double Tap Cover`. Apply the same ownership review wherever a layer
 adds a cover or helper following this overlay design.
 
@@ -1420,16 +1427,19 @@ review/implementation work.
 
 #### Mod 2 Current-Branch Cleanup
 
-Each regular/Gyro Mod 2 variant has fourteen guarded fallbacks using the same
-eleven-target scope. For `L1!R1: Modifier 2`, the targets are:
+Each regular/Gyro Mod 2 variant has sixteen cleanup functions, guarded by
+either bumper, with the same six-layer list. For `L1!R1: Modifier 2`:
 
-- `L1!R1: Modifier 2` and `Gyro | L1!R1: Modifier 2` — two current-order layers.
-- `L1: Modifier 0`, `Gyro | L1: Modifier 0`, `R1: Modifier 1`, and
-  `Gyro | R1: Modifier 1` — four single-modifier layers.
-- `L1: Tap Cover`, `R1: Tap Cover`, and `L1&R1: Tap Cover` — three covers.
-- `L1: Temp Cursor Gyro` and `R1: Temp Cursor Gyro` — two dependent overlays.
+- `L1!R1: Modifier 2` itself.
+- `L1: Modifier 0` and `R1: Modifier 1`, the two single modifiers under it.
+- `L1: Tap Cover`, `R1: Tap Cover` and `L1&R1: Tap Cover`, the three covers.
 
-The opposite-order pair is deliberately outside the preserved cleanup scope:
+`Gyro | L1!R1: Modifier 2` lists the `Gyro |` modifiers instead. Until 90.11
+the list had eleven targets: both modes' modifiers and the two cursor
+overlays as well. 90.12 dropped the ones that can never be on the stack with
+the host (R132).
+
+The opposite-order pair is deliberately outside the cleanup scope:
 
 | Fallback in either regular/Gyro variant of | Pair not targeted |
 |---|---|
@@ -1443,8 +1453,8 @@ variants preserve that relationship, as do alternative's L2/R2 variants.
 Sibling chords suppress fallback while either modifier remains held. The
 fallback does not toggle or remove persistent `Gyro`.
 
-The review decision is to **retain current-branch recovery**. The original
-nine-target scope now includes its two cursor overlays, making eleven targets;
+The review decision is to **retain current-branch recovery**. The scope went
+from nine targets to eleven with the cursor overlays, and to six in 90.12;
 it still excludes the opposite Mod 2 order. Check for an interrupted sequence that leaves
 both orders active before broadening it. If both remain, one fallback could
 expose the other's recovery and require another gesture; that is not yet a
@@ -1456,17 +1466,19 @@ list is a behavior change, not harmless normalization.
 `L1&R1: Tap Cover` has a different purpose. On **L1 release**, it removes:
 
 - Both Mod 2 orders in regular/Gyro form — four layers.
-- L1's regular/Gyro single modifier, L1: Tap Cover, and L1: Temp Cursor Gyro — four layers.
+- L1's regular/Gyro single modifier and L1: Tap Cover — three layers.
 - The combined L1&R1: Tap Cover itself — one layer.
 
-That is nine removals. It leaves R1's regular/Gyro single modifier, R1: Tap
+That is eight removals (nine until 90.11, with L1: Temp Cursor Gyro, which can't be
+on the stack with the combined cover). It leaves R1's regular/Gyro single modifier, R1: Tap
 Cover, and R1: Temp Cursor Gyro untouched so the still-held R1 interaction can continue. R1 release is
 the mirror. This does not apply every survivor; it simply avoids removing them.
 Persistent Gyro is also preserved.
 
-By comparison, **uncovered Mod 2 release** clears the thirteen-layer modifier/cover
-family and intentionally changes Gyro state: the regular variant adds Gyro,
-and the Gyro variant removes it as a fourteenth removal. Do not copy that wider
+By comparison, **uncovered Mod 2 release** removes six layers (that Mod 2, its
+mode's two single modifiers and the three covers; thirteen until 90.11) and
+intentionally changes Gyro state: the regular variant adds Gyro,
+and the Gyro variant removes it as a seventh removal. Do not copy that wider
 release list or its Gyro toggle into the combined cover or guarded fallback.
 
 #### Rocking Between Modifiers 0, 1 and 2

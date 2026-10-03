@@ -1,6 +1,8 @@
 # Layer definition of done
 
-**Status:** draft for author review, 2026-09-30.
+**Status:** in use since 2026-09-30. The rule tables, the checks behind them
+and the exceptions register were added on 2026-10-02
+([plan](../plans/2026-10-02-rule-registry.md)).
 
 A layer is done when every section below holds for both variants (default and
 alternative). This page is the one list of the layout's rules. Each section
@@ -83,8 +85,8 @@ Choose the layer's type first. The author accepted these types on
 | Type | Examples | What its cleanup removes |
 |---|---|---|
 | Stateful | `Gyro`, `Steering` | Removed only by its own deliberate exit. Other layers' cleanup never removes it. See [§11](#11-stateful-layers) |
-| Owner | Modifiers, Menu Entry and Fn layers, the two menu stick guards, Scroll, Transition Sets, trackpad modes | Its family or current branch, plus every overlay it applied |
-| Overlay | Tap Covers, Double Tap Covers, Temp Cursor Gyro | Itself, or a local pair. The owner handles recovery when it gets stuck |
+| Owner | Modifiers, Menu Entry and Fn layers, the two menu stick guards, Scroll, Transition Sets, trackpad modes | What its guard's buttons keep alive, under it and on top of it (R127 to R129), and nothing that can't be on the stack with it (R132) |
+| Overlay | Tap Covers, Double Tap Covers, Temp Cursor Gyro | Itself, or a local pair. The owner handles recovery when it gets stuck. Where it binds an input its owner has a cleanup on, it carries that cleanup (R130) |
 | Stick-touch helper | `LST` or `RST` `Entry Point`, `Tap Cover` and `Temporary Gyro` | Every layer removes it when the thumb lifts off that stick ([§5](#5-stick-touch-release)) |
 | Always On window | The nine Double Tap layers, including `Steering \| LS Up/Down: Double Tap` since 90.10 | Only itself ([§9](#9-always-on-layers)) |
 | Ramp or threshold | `Turning Ramp Up 0/1`, `Gyro Off Ramp Up` | Itself and the ramp family, through repeating threshold exits |
@@ -181,8 +183,11 @@ See: [Held inputs](Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-
 | R118 | An Always On window's stick-touch Release removes the window first, then that side's helpers. The `LST` and `RST` windows bind no Release on their own stick | `L1: Double Tap`'s left-stick touch Release stores the window's removal last, so it runs first | Author, 2026-09-30 | `test_double_tap_windows.test_stick_touch_release_removes_the_window_first_then_the_side_trio` | — | None |
 
 **R116.** A cover-type layer is a lightweight layer that is only
-ever added on top of another layer. There's no strict definition yet; it's a
-judgment call. Current cover-type layers:
+ever added on top of another layer. The audits recognise one by its title:
+it ends in `: Tap Cover`, `: Double Tap Cover` or `: Temp Cursor Gyro`, or it
+is `Gyro Off Ramp Up`; the `LST` and `RST` Tap Covers are helpers, not covers
+([flow_config.json](../steam_layout/flow_config.json), `covers`). Whether a
+new kind of layer counts is still a judgment call. Current cover-type layers:
 - the Tap Covers and the Double Tap Covers, including the steering
   `LS: Tap Cover` and `LS: Double Tap Cover` (since 90.7) and
   `Menu Buttons: Tap Cover` (since 90.10). The two menu stick guards are not
@@ -564,8 +569,8 @@ for review against [§7](#7-cleanup); they aren't a check.
    A different source mode above the definer is a block, not a route
    ([below](#a-source-mode-change-blocks-inheritance)).
 6. **The test enforces it.** [test_audit_inheritance.py](../tests/test_audit_inheritance.py)
-   fails when a change opens an undecided route or breaks saturation in the
-   working layouts.
+   fails when a change opens an undecided route in the working layouts, or
+   leaves a window that no stack reaches.
 
 See: [Inheritance review](Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes) ·
 [Blocking for timers](Steam%20Input%20JSON%20Structure.md#blocking-to-protect-layer-timers) ·
@@ -598,11 +603,12 @@ While a window is active, every inherited layer command is blocked (R140,
 
 See the [change record](../findings/2026-09-30-double-tap-pad-blocks/README.md).
 
-**Current coverage of rule 2** (derived stacks, depth 5, 2026-09-30): there
-are no open routes in any of the seven windows in either layout. The derived
-stacks found routes that the earlier hand-traced stacks missed. Most are now
-cleared, and one is a deliberate exception
-([change record](../findings/2026-09-30-derived-window-blocks/README.md)):
+**Current coverage of R140:** the Window audit builds every stack from the
+backward chains and finds no open route in any of the nine windows in either
+layout, on every build. The derived stacks found routes that the earlier
+hand-traced stacks missed
+([change record](../findings/2026-09-30-derived-window-blocks/README.md)).
+What the windows block today:
 - **Trigger edges, all nine default windows:** `Gyro Off Ramp Up` can sit
   under any window, and its edge removes it. The only keybind underneath is
   Base's left or right mouse button, so since 90.10 the edge is replaced

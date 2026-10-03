@@ -32,6 +32,11 @@ instead of `Steering | R1: W Key` (the hidden-exit prototype's only open case).
 
 Released as 90.13 on top of 90.12 (90.12's snapshot untouched).
 
+A comment that no longer holds: the frozen 09-30 Lean builder
+(`findings/2026-09-30-steering-lean/build_candidate.py`, line 423) still says
+Steering and the W and S layers keep turn assist. Since 90.13 they don't. The
+builder is frozen (later manifests record its hash), so the comment stays.
+
 ## The problem
 
 In 90.10 Steering's fallback timers (warning from 1 s, exit at 2.5 s) sat in

@@ -377,3 +377,28 @@ the Always On ordering test. They were replaced too, so 12 numbers went.
 
 Each replacement was run against the working layouts, and the first one was
 also tried with a window dropped from the audit, which it catches.
+
+## Stale text, fixed (phase 9)
+
+Every row of the [stale text](#stale-text) table was dealt with on 2026-10-02:
+
+- **Corrected to 90.13:** the structure reference's cleanup lists and counts
+  (Modifier 2, the combined Tap Cover, the guarded recovery example, the
+  cleanup scopes table, the cover-type list, the RTP `allow` note), the
+  Vocabulary's guarded recovery example and `hold_layer` note, the Definition
+  of Done's status line, its coverage note in §9 and step 6 in §8, the apply
+  skill's "unsaturated search", Cleanup Functions' status, and the Deck
+  checklist's header.
+- **Dated instead of recounted:** the counts of removing activators, guarded
+  removals and delayed-add resets in the structure reference now say which
+  release they are from.
+- **Left in place, with a note:** the frozen 09-30 builder's comment (noted
+  in the [90.13 record](../2026-10-02-steering-fallback-hold/README.md)), and
+  `.cursor/skills/`, whose four shared skills now point at the maintained
+  copies under `.claude/skills/`.
+- **Found while fixing, not in the table:** the cleanup scopes table still
+  described a guarded fallback on the Transition Sets, which 90.10 removed.
+
+Of the six [conflicts](#conflicts): 1, 3, 4 and 6 are resolved in the documents, 2
+is kept apart as two assumptions for phase 10, and 5 (Gamepad through the
+Modifier 2 clear) is the author's open decision, in the exceptions register.

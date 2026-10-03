@@ -1,5 +1,10 @@
 ## Skill: Duplicate an action layer safely (preserve existing runtime IDs)
 
+> **Older copy (last revised 2026-09-30).** The maintained version of this skill is
+> [.claude/skills/steam-layer-duplicate/SKILL.md](../../../.claude/skills/steam-layer-duplicate/SKILL.md). The rules it restates have IDs
+> in the [Layer Definition of Done](../../../resources/Layer%20Definition%20of%20Done.md#rule-tables); where
+> this file differs from either, they are right.
+
 ### When to use
 - You want to create a new variant of an existing layer (e.g. tweak bindings) without breaking other `controller_action` references.
 - You need a “backup copy” of a complex layer before experimenting.

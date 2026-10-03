@@ -1,5 +1,10 @@
 ## Skill: Avoid layer-management bugs caused by binding array execution order
 
+> **Older copy (last revised 2026-09-30).** The maintained version of this skill is
+> [.claude/skills/steam-binding-order/SKILL.md](../../../.claude/skills/steam-binding-order/SKILL.md). The rules it restates have IDs
+> in the [Layer Definition of Done](../../../resources/Layer%20Definition%20of%20Done.md#rule-tables); where
+> this file differs from either, they are right.
+
 ### When to use
 - You’re editing a group binding where `"binding"` is an array of multiple `controller_action ...` commands.
 - You’re seeing surprising behavior where a layer is added/removed “in the wrong order”.

@@ -1,5 +1,8 @@
 ## Project skills
 
+> Four of these (`steam-layout-prep`, `steam-layout-apply`, `steam-layer-duplicate`, `steam-binding-order`)
+> have a newer, maintained copy under `.claude/skills/`. The copies here were last revised on 2026-09-30.
+
 These are project-local Agent Skills for working on this repository’s Steam Input layouts.
 
 ### Skills included

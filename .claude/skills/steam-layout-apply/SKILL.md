@@ -87,7 +87,7 @@ without changing the layout.
 
 The Window audit (R140) is `python3 audit_inheritance.py path/to/layout.json`. It must also exit
 **0**. It derives every stack each Always On layer can be applied on and fails
-on any undecided layer command underneath, or on an unsaturated search. Apply
+on any undecided layer command underneath, or on a window no stack reaches. Apply
 its `blocks_needed` (replace only if the underlying output is identical in
 every stack, otherwise clear). The install runs
 `steam_layout.fixes` pipeline, which does
