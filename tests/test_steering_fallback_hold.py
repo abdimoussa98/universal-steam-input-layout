@@ -186,11 +186,11 @@ class FallbackHoldTests(unittest.TestCase):
                 'Menu Left: Entry Point', 'Menu Right: Entry Point', 'Steering | Menu Left: Entry Point',
                 'Steering | Menu Right: Entry Point', b.title('Mod2', 'W'), b.title('Mod2', 'S')})
 
-    def test_budget_and_layer_count(self):
+    def test_entry_budget(self):
+        # The layer list itself is checked by test_the_hold_is_appended: 90.10's layers plus the hold.
         for b, layout in self.each():
             report = audit_layout(self.data[b.variant])
             self.assertEqual(report['violations'], [])
-            self.assertEqual(len(layout.presets), 72)  # Base and 71 layers
 
 
 if __name__ == '__main__':
