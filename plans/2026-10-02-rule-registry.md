@@ -1,6 +1,6 @@
 # Rule registry and an automated definition of done
 
-**Status, 2026-10-02:** Parts A and B are done; Part C is not started. The author said to implement it on
+**Status, 2026-10-02:** Parts A and B are done; Part C is in progress. The author said to implement it on
 2026-10-02, slowly, one step at a time, with nothing breaking. Reviewed against
 the repo the same day; the review's changes and the author's answers are
 folded in (see [Decisions](#decisions)).
@@ -17,7 +17,9 @@ folded in (see [Decisions](#decisions)).
 | 7. Hidden-exit check | Done: the Cleanup audit's seventh check, "hidden exit" (R136). On 90.13 it gives the prototype's result: 0 findings, 68 touchpad pairs set aside through the register, 2 information pairs. The cleanup fix leaves these findings alone: they need a design decision |
 | 8. Information that nobody reads | Done: the Flow audit's "needs review" check (R139) and the Cleanup audit's "exit to review" check (R136). On a layer that changed since the newest snapshot, or that a changed layer feeds, a "varies" or "review" input and a covered side exit fail until fixed or accepted in the register. At the 90.13 baseline nothing is changed, so the build audit is clean. Tried on past releases: 90.13's change would have asked for 12 inputs to be accepted and 90.11's for 20, all on six menu layers; the cover-layer entry (decision 10) is in the register |
 | 9. Stale text | Done: the 17 places the inventory flagged are corrected, dated, or left with a note (the frozen builder, the `.cursor/skills/` copies). The record is at the end of the [inventory](../findings/2026-10-02-rule-inventory/README.md#stale-text-fixed-phase-9) |
-| **Part B** | **Complete on 2026-10-02. Waiting for the author's review before Part C starts** |
+| **Part B** | **Complete on 2026-10-02.** The author said to start Part C on 2026-10-02 |
+| 10. Assumptions document | Done: [Steam Behaviour Assumptions](../resources/Steam%20Behaviour%20Assumptions.md), 32 entries (19 verified, 4 reported but never isolated, 9 unverified), each with whether the layout relies on it and a Deck procedure. Every rule's "Rests on" is filled, and a test keeps the two in step |
+| 11 to 15 | Not started |
 | Parts B and C | Not started; each waits for the author's review of the part before it |
 
 **Baseline:** commits `601b61b` (archive) and `1fa38ac` (90.11 to 90.13, the

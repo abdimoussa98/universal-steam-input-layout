@@ -18,7 +18,8 @@ or renumbered; a retired rule keeps its row.
     Retired, 2026-10-02: why           the rule no longer applies
 
 A checker may end in " (part)" when it covers only some layers. "Rests on"
-names Steam assumptions by ID (`A3, A12`), or is a dash.
+names Steam assumptions by ID (`A3, A12`), or is a dash. The assumptions have
+their own table, in resources/Steam Behaviour Assumptions.md (`load_assumptions`).
 
 The other direction is declared in the code: each audit and the fix pipeline
 has an `ENFORCES` table, check or fix -> the rule IDs it enforces. `declared()`
@@ -35,13 +36,18 @@ import re
 import sys
 
 REGISTRY = Path(__file__).resolve().parent.parent / "resources" / "Layer Definition of Done.md"
+ASSUMPTIONS = REGISTRY.with_name("Steam Behaviour Assumptions.md")
 HEADER = ("ID", "Rule", "Example", "Decided", "Checked by", "Rests on", "Exceptions")
+ASSUMPTION_HEADER = ("ID", "Assumption", "Status", "The layout", "How to verify on the Deck", "What rests on it")
+STATUSES = ("Verified", "Reported", "Unverified", "Refuted")
+LAYOUT_FLAGS = ("Relies on it", "Works either way")
 AUDITS = ("Budget", "Window", "Flow", "Cleanup", "Build")
 NOT_CHECKED = "Not checked yet"
 PART = " (part)"
 RULE_ID = re.compile(r"R[1-9]\d\d")
 REFERENCE = re.compile(r"(?<![A-Za-z0-9])R[1-9]\d\d(?![0-9])")
 ASSUMPTION_ID = re.compile(r"A[1-9]\d*")
+ASSUMPTION_REFERENCE = re.compile(r"(?<![A-Za-z0-9])A[1-9]\d?(?![0-9A-Za-z])")
 SOURCES = (                                # (kind, audit name, module holding its ENFORCES)
     ("audit", "Budget", "audit_command_budget"),
     ("audit", "Window", "steam_layout.inheritance"),
@@ -52,6 +58,7 @@ SOURCES = (                                # (kind, audit name, module holding i
 )
 
 Rule = namedtuple("Rule", "id statement example decided checked_by rests_on exceptions section")
+Assumption = namedtuple("Assumption", "id statement status verified layout procedure rests rules")
 Checker = namedtuple("Checker", "kind name check part")   # kind: audit, fix, test, none or retired
 
 
@@ -118,6 +125,46 @@ def load(path=REGISTRY):
             found[rule_id] = Rule(rule_id, statement, example, decided, checkers(checked), assumptions(rests),
                                   exceptions, section)
     return found
+
+
+def load_assumptions(path=ASSUMPTIONS):
+    """{assumption ID: Assumption}, in file order, from resources/Steam Behaviour Assumptions.md.
+
+    What we believe Steam does, one row each: ID, statement, status (Verified, Reported, Unverified or
+    Refuted, with who and when), whether the layout relies on it or works either way, how to check it on
+    the Deck, and what rests on it. `rules` are the rule IDs that cell names; `verified` is True only for
+    a status that starts with "Verified".
+    """
+    found, in_table = {}, False
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        if not line.lstrip().startswith("|"):
+            in_table = False
+            continue
+        row = cells(line)
+        if tuple(row) == ASSUMPTION_HEADER:
+            in_table = True
+        elif in_table and not all(set(cell) <= set("-: ") for cell in row):
+            if len(row) != len(ASSUMPTION_HEADER):
+                raise ValueError(f"an assumption row needs {len(ASSUMPTION_HEADER)} cells: {line.strip()[:80]}")
+            assumption_id, statement, status, layout, procedure, rests = row
+            if not ASSUMPTION_ID.fullmatch(assumption_id):
+                raise ValueError(f"bad assumption ID {assumption_id!r}")
+            if assumption_id in found:
+                raise ValueError(f"{assumption_id} appears twice")
+            if not all(row):
+                raise ValueError(f"{assumption_id} has an empty field")
+            if not status.startswith(STATUSES):
+                raise ValueError(f"{assumption_id}: the status starts with one of {STATUSES}")
+            if layout not in LAYOUT_FLAGS:
+                raise ValueError(f"{assumption_id}: the layout either {LAYOUT_FLAGS[0]!r} or {LAYOUT_FLAGS[1]!r}")
+            found[assumption_id] = Assumption(assumption_id, statement, status, status.startswith("Verified"), layout,
+                                              procedure, rests, tuple(sorted(references(rests))))
+    return found
+
+
+def assumption_references(text):
+    """The assumption IDs a text names (A1 to A99)."""
+    return set(ASSUMPTION_REFERENCE.findall(text))
 
 
 def references(text):

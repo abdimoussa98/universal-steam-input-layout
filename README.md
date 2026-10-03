@@ -375,6 +375,8 @@ See the `resources/` folder for additional documentation:
 
 - [Layout Vocabulary](resources/Layout%20Vocabulary.md) - button overlays, owning layers, interaction stacks, and recovery terminology
 - [Stateful Layer Transitions](resources/Stateful%20Layer%20Transitions.md) - the menu-plus-stick-click gesture map, Entry Points, stick guards and transition layers every stateful layer goes through (agreed design, not built yet)
+- [Layer Definition of Done](resources/Layer%20Definition%20of%20Done.md) - the one list of the layout's rules, each with its ID, example and check
+- [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md) - what the rules and tools assume Steam does, each with its status and a Deck procedure
 - [Steam Input JSON Structure](resources/Steam%20Input%20JSON%20Structure.md) - JSON format, binding execution order, and [interrupted delayed layer applies](resources/Steam%20Input%20JSON%20Structure.md#interrupted-delayed-layer-applies), including the repeating-removal workaround and RTP trackball-momentum exception
   - [Stuck layers and why there is so much cleanup](resources/Steam%20Input%20JSON%20Structure.md#stuck-layers-and-why-there-is-so-much-cleanup) - how the Steam button leaves layers active with no button held, and the chord-guarded cleanup pattern that recovers from it
   - [Cleanup scopes and concrete examples](resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) - overlays and inherited recovery, nine-layer Mod 2 branch cleanup, and eight-layer combined-cover cleanup that preserves the still-held side

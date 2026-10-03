@@ -740,6 +740,8 @@ L2 released:
 ### Held Inputs Across Layer Changes
 
 **Rules: R113 to R115** (Layer Definition of Done [§4](Layer%20Definition%20of%20Done.md#4-entry)). This section explains them; the rule text is there.
+What Steam is assumed to do here is A5 to A11 and A15 in
+[Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md), each with its status.
 
 **Documented 2026-09-29 from the author's runtime experience.** A layer added
 over an input that is already held treats that input as already pressed:

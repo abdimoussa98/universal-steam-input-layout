@@ -14,7 +14,9 @@ switching Steam action sets.
 
 The rules themselves are in the
 [Layer Definition of Done](Layer%20Definition%20of%20Done.md#rule-tables),
-by ID. This list says what the author observed behind them.
+by ID. This list says what the author observed behind them; each observation
+is an entry in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md)
+(A12, A17 and A19 for the last three).
 
 - **R101:** never use Steam's `hold_layer` API: the author considers it too buggy.
   Implement every layer lifetime with explicit `add_layer` and `remove_layer`

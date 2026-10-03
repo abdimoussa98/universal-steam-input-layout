@@ -172,6 +172,81 @@ class DeclarationTests(unittest.TestCase):
         self.assertFalse(set(nothing) & set(partly))
 
 
+AHEAD = ("| ID | Assumption | Status | The layout | How to verify on the Deck | What rests on it |\n"
+         "|---|---|---|---|---|---|\n")
+
+
+def arow(assumption_id="A1", status="Verified by the author, 2026-09-29", layout="Relies on it", rests="R113, R115"):
+    return f"| {assumption_id} | Steam does the thing | {status} | {layout} | Hold a button, add a layer | {rests} |\n"
+
+
+class AssumptionReaderTests(unittest.TestCase):
+    def read(self, text):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "assumptions.md"
+            path.write_text(text, encoding="utf-8")
+            return rules.load_assumptions(path)
+
+    def test_an_assumption_table_is_read(self):
+        found = self.read("# Doc\n\n" + AHEAD + arow() + arow("A2", "Unverified", "Works either way", "R114; held-input replay"))
+        self.assertEqual(list(found), ["A1", "A2"])
+        first, second = found["A1"], found["A2"]
+        self.assertEqual((first.status, first.verified, first.layout, first.rules), ("Verified by the author, 2026-09-29", True, "Relies on it", ("R113", "R115")))
+        self.assertEqual((second.verified, second.layout, second.rules), (False, "Works either way", ("R114",)))
+
+    def test_bad_rows_are_rejected(self):
+        for label, text in (("a duplicate ID", AHEAD + arow() + arow()),
+                            ("a bad ID", AHEAD + arow("B1")),
+                            ("an unknown status", AHEAD + arow(status="Probably")),
+                            ("an unknown layout flag", AHEAD + arow(layout="Maybe")),
+                            ("an empty field", AHEAD + arow(rests=""))):
+            with self.subTest(label):
+                with self.assertRaises(ValueError):
+                    self.read(text)
+
+    def test_reported_and_refuted_are_statuses_too(self):
+        found = self.read(AHEAD + arow(status="Reported by the author, not isolated") + arow("A2", "Refuted on the Deck, 2026-10-03"))
+        self.assertEqual([a.verified for a in found.values()], [False, False])
+
+
+class AssumptionTests(unittest.TestCase):
+    """resources/Steam Behaviour Assumptions.md against the rule registry."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.rules = rules.load()
+        cls.assumptions = rules.load_assumptions()
+
+    def test_every_assumption_a_rule_rests_on_exists(self):
+        self.assertTrue(self.assumptions)
+        for rule in self.rules.values():
+            with self.subTest(rule.id):
+                self.assertFalse(set(rule.rests_on) - set(self.assumptions))
+
+    def test_rests_on_and_what_rests_on_it_agree(self):
+        for assumption in self.assumptions.values():
+            resting = {rule.id for rule in self.rules.values() if assumption.id in rule.rests_on}
+            with self.subTest(assumption.id):
+                self.assertEqual(set(assumption.rules), resting)
+
+    def test_an_unverified_assumption_says_whether_the_layout_relies_on_it(self):
+        for assumption in self.assumptions.values():
+            if not assumption.verified:
+                with self.subTest(assumption.id):
+                    self.assertIn(assumption.layout, ("Relies on it", "Works either way"))
+
+    def test_assumption_ids_named_elsewhere_exist(self):
+        places = [ROOT / "README.md", ROOT / "todos.md", *sorted((ROOT / "resources").glob("*.md")),
+                  *sorted((ROOT / ".claude" / "skills").glob("*/SKILL.md")), *sorted(ROOT.glob("audit_*.py")),
+                  *sorted((ROOT / "steam_layout").rglob("*.py")), *sorted((ROOT / "tests").glob("test_*.py"))]
+        for path in places:
+            if path.name in (Path(__file__).name, "rules.py"):
+                continue                               # their own examples of the ID shape
+            unknown = rules.assumption_references(path.read_text(encoding="utf-8")) - set(self.assumptions)
+            with self.subTest(path.relative_to(ROOT).as_posix()):
+                self.assertFalse(unknown)
+
+
 class SkillTests(unittest.TestCase):
     """A skill restates a rule in one line next to its ID, so an agent has it in front of it."""
 
