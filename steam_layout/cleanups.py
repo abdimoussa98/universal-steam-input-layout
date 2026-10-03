@@ -35,6 +35,19 @@ Checks, each a failing finding:
     never there         a cleanup, an ordinary release or a Modifier 2 quick tap
                         removes a layer that can never be on the stack with it
     guard mismatch      one layer's cleanups have different guard buttons
+    hidden exit         a layer that can land on top of another covers an exit on what
+                        keeps the lower layer alive, and doesn't remove it there (R136)
+
+An exit is a Release that removes its own layer. For the hidden-exit check a
+layer on top covers it when it answers that input instead: it binds it, or blocks
+it with a disabled source or another source mode. The stack is taken after the
+whole binding that added the upper layer has run. Covering an exit that is not on
+the keeper is information, not a finding: the keeper's exit still works.
+
+The touchpad exception (author, 2026-10-02) sets a hidden-exit pair aside when
+either layer is a touchpad layer (only trackpad bindings add it) or the covered
+exit is a trackpad input. It applies while the exceptions register has it
+(`cleanups.touchpad_exits`, filled by steam_layout/exceptions.py).
 
 Left out, by the author's choice: layers that only `hold_layer` adds. They are
 neither audited nor counted as removed layers.
@@ -44,6 +57,7 @@ from collections import defaultdict
 from .chains import Chains
 from .flow_model import Inventory, chord_condition, resolve
 from .model import always_on_layers, entries, map_title
+from .stacks import apply_ops
 
 BUTTONS = {("switch", "left_bumper"): "LB", ("switch", "right_bumper"): "RB",
            ("switch", "button_escape"): "Start", ("switch", "button_menu"): "Select",
@@ -53,10 +67,14 @@ BUTTONS = {("switch", "left_bumper"): "LB", ("switch", "right_bumper"): "RB",
            ("left_trigger", "edge"): "LT", ("right_trigger", "edge"): "RT",
            ("left_trackpad", "touch"): "LTP", ("right_trackpad", "touch"): "RTP"}
 THUMBS = frozenset({"LSt", "RSt"})
+PADS = frozenset({"left_trackpad", "right_trackpad"})
 NAMES = frozenset(BUTTONS.values())
-CHECKS = ("outside the guard", "left below", "left above", "hidden cleanup", "never there", "guard mismatch")
+CHECKS = ("outside the guard", "left below", "left above", "hidden cleanup", "never there", "guard mismatch",
+          "hidden exit")
 ENFORCES = {"outside the guard": ("R127", "R131"), "left below": ("R128",), "left above": ("R129",),   # check -> rules
-            "hidden cleanup": ("R130",), "never there": ("R132",), "guard mismatch": ("R127",)}
+            "hidden cleanup": ("R130",), "never there": ("R132",), "guard mismatch": ("R127",),
+            "hidden exit": ("R136",)}
+TOUCHPAD_STALE = "the touchpad exception to R136"
 LISTS = ("recovery", "release")          # the roles whose removal lists follow "never there"
 ROLE = {"recovery": "cleanup function", "release": "release"}
 
@@ -278,6 +296,60 @@ class Cleanups:
                     add(check, host, target, t.role, reason, t, guard)
         return rows
 
+    # --- hidden exits (R136) ----------------------------------------------------------------
+
+    def exits(self, layer):
+        """The inputs whose Release removes `layer`."""
+        return sorted({t.control for t in self.inv.by_layer(layer)
+                       if t.role == "release" and ("remove_layer", layer) in t.ops})
+
+    def keeper_exits(self, layer, exits):
+        """The exits on what keeps `layer` alive: its keeper's buttons, or every exit when no button keeps it."""
+        kind, keep = self.keeper(layer)
+        on_keeper = [e for e in exits if BUTTONS.get(e) in keep] if kind in ("button", "thumb") else []
+        return on_keeper or list(exits)
+
+    def touchpad_layers(self):
+        """Layers that only trackpad bindings add."""
+        return {t for t in self.layers if self._adding.get(t) and all(a.source in PADS for a in self._adding[t])}
+
+    def _settled(self, full, upper, why):
+        """The stack once the binding that added `upper` has run to the end: its array can add more on top."""
+        for _, t in reversed(why.steps):
+            if ("add_layer", upper) in t.ops:
+                return apply_ops(full, t.ops[t.ops.index(("add_layer", upper)) + 1:], self.base)
+        return full
+
+    def covered_exits(self):
+        """{(upper, lower): {"hidden", "side", "stack", "path"}}: every pair where a layer covers a lower layer's exit.
+
+        `upper` is the layer that answers the exit's input instead of `lower`. `hidden` are the covered exits on
+        the lower layer's keeper, `side` the covered exits that aren't. An exit the upper layer's binding also
+        removes the lower layer on is carried, not covered.
+        """
+        pairs = {}
+        for lower in self.layers:
+            exits = self.exits(lower)
+            if not exits:
+                continue
+            keeping = self.keeper_exits(lower, exits)
+            for upper, (stack, why) in self.chains.above(lower).items():
+                full = self._settled(tuple(stack) + (upper,), upper, why)
+                if lower not in full:
+                    continue                       # the same binding removes it again
+                for control in exits:
+                    kind, layer, acts, _ = resolve(self.layout, full, *control)
+                    if kind == "binding" and layer == lower:
+                        continue
+                    if acts and any(("remove_layer", lower) in self.layout.layer_ops(e) for _, e in entries(acts)):
+                        continue                   # carried: the upper layer removes it there
+                    row = pairs.setdefault((layer, lower), {"hidden": [], "side": [], "stack": full,
+                                                            "path": why.describe()})
+                    side = "hidden" if control in keeping else "side"
+                    if control not in row[side]:
+                        row[side].append(control)
+        return pairs
+
     def unreached_by_cleanup(self):
         """Button-kept layers that have no cleanup function and that no cleanup function removes."""
         covered = set()
@@ -327,6 +399,26 @@ def run(data, config=None, only=None, stacks=None):
             keeping.append({**entry, "why": decided[(layer, target)]})
         else:
             findings.append(entry)
+    touchpad = config.get("cleanups", {}).get("touchpad_exits")
+    pads, excepted, information = cleanups.touchpad_layers(), [], []
+    for (upper, lower), row in cleanups.covered_exits().items():
+        if only and upper not in only and lower not in only:
+            continue
+        on_keeper = bool(row["hidden"])
+        inputs = row["hidden"] or row["side"]
+        keeper = cleanups.keeper(lower)
+        entry = {"check": "hidden exit", "layer": upper, "target": lower,
+                 "kind": "window" if upper in cleanups.windows else "layer",
+                 "reason": "it answers the input of the lower layer's exit and doesn't remove the lower layer there",
+                 "inputs": sorted(name(c) for c in inputs), "bindings": len(inputs), "guard": [],
+                 "example": " > ".join(row["stack"]), "path": row["path"],
+                 "keeper": " ".join(filter(None, [keeper[0], plus(keeper[1]) if keeper[1] else ""]))}
+        if touchpad and (upper in pads or lower in pads or any(source in PADS for source, _ in inputs)):
+            excepted.append({**entry, "on_keeper": on_keeper, "why": touchpad})
+        elif on_keeper:
+            findings.append(entry)
+        else:
+            information.append(entry)
     order = {check: i for i, check in enumerate(CHECKS)}
     findings.sort(key=lambda f: (order[f["check"]], f["layer"], f["target"] or "", f["kind"]))
     counts = {check: {"findings": sum(1 for f in findings if f["check"] == check),
@@ -334,7 +426,9 @@ def run(data, config=None, only=None, stacks=None):
     hosts = [t for t in cleanups.layers if any(True for _ in cleanups.cleanups(t))]
     return {"layout": {"title": layout.cm.get("title"), "variant": variant},
             "ok": not findings, "findings": findings, "kept": keeping, "counts": counts,
-            "stale_decisions": [] if only else [f"{layer} removes {target}" for layer, target in sorted(set(decided) - used)],
+            "excepted": excepted, "information": {"hidden exit": information},
+            "stale_decisions": [] if only else [f"{layer} removes {target}" for layer, target in sorted(set(decided) - used)]
+            + ([TOUCHPAD_STALE] if touchpad and not excepted else []),
             "omitted": cleanups.omitted,
             "summary": {"layers": len(cleanups.layers), "layers_with_cleanup": len(hosts),
                         "cleanup_functions": sum(1 for t in hosts for _ in cleanups.cleanups(t)),

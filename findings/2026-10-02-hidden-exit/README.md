@@ -1,6 +1,11 @@
 # Hidden exit: a layer on top covers the lower layer's exit (brainstorm)
 
-**Status, 2026-10-02:** prototype only, not an audit. Rule and discussion from
+**Status, 2026-10-02:** built into the Cleanup audit as its seventh check,
+"hidden exit" (rule R136), later the same day
+(`steam_layout/cleanups.py`, `audit_cleanups.py`). It reproduces this page's
+numbers on 90.13: 0 findings, 68 touchpad pairs set aside through the
+exceptions register, 26 more that cover a side exit, and the 2 information
+pairs. `prototype.py` is kept as the record of how it was worked out. Rule and discussion from
 the 90.11 Fallback Hold work ([record](../2026-10-02-steering-fallback-hold/README.md)).
 
 ## The rule

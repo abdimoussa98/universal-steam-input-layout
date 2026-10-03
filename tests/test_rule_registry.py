@@ -166,7 +166,7 @@ class DeclarationTests(unittest.TestCase):
 
     def test_unchecked_lists_the_rules_nothing_fails_on(self):
         nothing, partly = rules.unchecked(self.rules)
-        self.assertIn("R136", nothing)                 # the hidden-exit rule has no check yet
+        self.assertIn("R112", nothing)                 # "nothing depends on a chord hand-over" has no check
         self.assertIn("R137", partly)                  # one test, on the two temporary guards only
         self.assertNotIn("R108", nothing + partly)     # the Budget audit fails on it
         self.assertFalse(set(nothing) & set(partly))

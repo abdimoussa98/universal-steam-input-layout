@@ -215,8 +215,8 @@ python3 audit_flow_inheritance.py <layout> --inventory --layer 'L1: Modifier 0' 
 Checks every cleanup function and release against the six cleanup rules: a
 layer takes care of itself and what is below it, and of what is above it if it
 has that responsibility
-([rules](findings/2026-10-02-cleanup-boundaries/README.md#the-rules)). It
-fails on six things:
+([rules](findings/2026-10-02-cleanup-boundaries/README.md#the-rules)), and
+checks that no layer hides another's exit (R136). It fails on seven things:
 
 | Check | Fails when |
 |---|---|
@@ -226,6 +226,7 @@ fails on six things:
 | Hidden cleanup | A layer binds an input that has a cleanup below without carrying it |
 | Never there | A cleanup, a release or a Modifier 2 quick tap removes a layer that can never be on the stack with it |
 | Guard mismatch | One layer's cleanups have different guard buttons |
+| Hidden exit | A layer that can land on top of another covers an exit on what keeps the lower layer alive, and doesn't remove it there |
 
 The stacks are the backward chains. Deliberate clears and the stick-touch
 release's fixed layers are exempt from "Never there", and layers that only

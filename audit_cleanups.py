@@ -14,6 +14,7 @@ that can be on the stack with it (findings/2026-10-02-cleanup-boundaries/README.
 | Hidden cleanup | a layer binds an input that has a cleanup below without carrying it |
 | Never there | a cleanup, a release or a Modifier 2 quick tap removes a layer that can never be on the stack with it |
 | Guard mismatch | one layer's cleanups have different guard buttons |
+| Hidden exit | a layer that can land on top of another covers an exit on what keeps the lower layer alive, and doesn't remove it there |
 
 The stacks are the backward chains (steam_layout/chains.py). Chords are ignored,
 and timing and missed releases are not modelled. Deliberate clears and the
@@ -71,6 +72,9 @@ def print_report(report, checks):
                     print(f"    {f['reason']}: {where}")
                 elif check == "hidden cleanup":
                     print(f"    hides the cleanup of {f['target']} on {', '.join(f['inputs'])}{guard}")
+                elif check == "hidden exit":
+                    print(f"    covers the exit of {f['target']} ({f['keeper']}) on {', '.join(f['inputs'])}: "
+                          f"on {f['example']}")
                 else:
                     verb = "leaves" if check.startswith("left") else "removes"
                     print(f"    {verb} {f['target']} ({f['keeper']}): {f['reason']}; {where}{guard}")
@@ -78,6 +82,14 @@ def print_report(report, checks):
         print("\nKept by decision")
         for k in report["kept"]:
             print(f"  {k['layer']} removes {k['target']}: {k['why']}")
+    if report["excepted"]:
+        on_keeper = sum(1 for e in report["excepted"] if e["on_keeper"])
+        print(f"\nSet aside by the touchpad exception {tag(ENFORCES['hidden exit'])}: {on_keeper} pair(s) that cover "
+              f"a keeper's exit, {len(report['excepted']) - on_keeper} that cover another exit (--json lists them)")
+    if report["information"]["hidden exit"]:
+        print("\nInformation: covers an exit that isn't on the keeper, so the keeper's exit still works")
+        for i in report["information"]["hidden exit"]:
+            print(f"  {i['layer']} over {i['target']} ({i['keeper']}): {', '.join(i['inputs'])}")
     for stale in report["stale_decisions"]:
         print("\nStale decision (matches no finding): " + stale)
     if report["no_cleanup_reaches"]:

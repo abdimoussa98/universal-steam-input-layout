@@ -12,6 +12,9 @@ wrong; this fix resolves exactly those findings, so the two can't drift apart:
                        with either of its guard buttons, beside a repeating removal of
                        the list its other cleanups use
 
+The audit's seventh check, hidden exit (R136), is not resolved here: it needs a
+design decision (stop the upper layer landing, or remove the lower layer there).
+
 Rules and decisions: findings/2026-10-02-cleanup-boundaries/README.md and
 findings/2026-10-02-cleanup-audit/README.md. A removal kept by an exception to
 R132 in the exceptions register (steam_layout/flow_config.json) is never dropped.
@@ -25,7 +28,7 @@ from collections import Counter
 import json
 from pathlib import Path
 
-from ..cleanups import BUTTONS, Cleanups, kept, name, run
+from ..cleanups import BUTTONS, CHECKS, Cleanups, kept, name, run
 from ..exceptions import load_config
 from ..flow_model import BITS
 from ..model import EMPTY, TARGET, Layout, actions, entries
@@ -151,6 +154,14 @@ def _hidden(layout, c, keep):
     return changed
 
 
+RESOLVES = tuple(check for check in CHECKS if check != "hidden exit")
+
+
+def _open(report):
+    """The findings this fix resolves."""
+    return [f for f in report["findings"] if f["check"] in RESOLVES]
+
+
 def fix(data, config=None):
     """Resolve every Cleanup audit finding in place. Returns what changed and what is left.
 
@@ -159,7 +170,7 @@ def fix(data, config=None):
     """
     config = load_config(RULES) if config is None else config
     first, stacks = run(data, config)
-    if first["ok"]:
+    if not _open(first):
         return {"changed": [], "remaining": 0}     # already clean: the usual case in the pipeline
     variant = "alternative" if "alternative" in data["controller_mappings"].get("title", "") else "default"
     keep = kept(config, variant)
@@ -167,4 +178,4 @@ def fix(data, config=None):
     for phase in (_guards, _missing, _unneeded, _hidden):
         layout = Layout(data)
         changed += phase(layout, Cleanups(layout, stacks), keep)
-    return {"changed": changed, "remaining": len(run(data, config, stacks=stacks)[0]["findings"])}
+    return {"changed": changed, "remaining": len(_open(run(data, config, stacks=stacks)[0]))}

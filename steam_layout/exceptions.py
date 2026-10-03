@@ -18,10 +18,11 @@ Scope, by rule:
     R144         {"cover": "...", "checks": [...]}                        the cover check
     R132         {"layers": [...], "removes": [...]}                      a removal the Cleanup audit keeps
     R140         {"target": "...", "source": "...", "input": "..."}       a route the Window audit allows
+    R136         {"kind": "touchpad"}                                     the hidden-exit pairs set aside
     other rules  any object, for example {"note": "..."}: a record that no audit reads
 
 The audits still read the sections they always read. `expand` fills
-`decisions`, `covers.allow` and `cleanups.keep` from the register, and `window`
+`decisions`, `covers.allow`, `cleanups.keep` and `cleanups.touchpad_exits` from the register, and `window`
 adds the R140 entries to the Window audit's stacks config, so one entry format
 serves all four. Titles use default-layout names, as everywhere in this file.
 """
@@ -36,7 +37,7 @@ STATUSES = ("allow", "todo")
 FIELDS = ("rule", "scope", "status", "why", "decided", "todo")
 FLOW = ("R139", "R145")
 SCOPES = {"R139": ("layers", "inputs"), "R145": ("layers", "inputs"), "R144": ("cover", "checks"),
-          "R132": ("layers", "removes"), "R140": ("target", "source", "input")}
+          "R132": ("layers", "removes"), "R140": ("target", "source", "input"), "R136": ("kind",)}
 
 
 def check(entries):
@@ -83,6 +84,8 @@ def expand(config):
         elif rule == "R132":
             config.setdefault("cleanups", {}).setdefault("keep", []).append(
                 {"layers": scope["layers"], "removes": scope["removes"], "why": entry["why"]})
+        elif rule == "R136" and scope["kind"] == "touchpad":
+            config.setdefault("cleanups", {})["touchpad_exits"] = entry["why"]
     return config
 
 

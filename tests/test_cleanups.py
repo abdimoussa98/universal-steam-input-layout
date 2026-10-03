@@ -153,6 +153,91 @@ class HiddenTests(unittest.TestCase):
         self.assertEqual(found(data, "hidden cleanup"), set())
 
 
+class HiddenExitTests(unittest.TestCase):
+    """R136: a layer on top may not cover an exit on what keeps the lower layer alive, unless it removes it there."""
+
+    def test_a_layer_that_takes_the_release_without_removing_the_layer_below(self):
+        data = owner(cover={"left_bumper": release(remove("C"))})
+        self.assertEqual(found(data, "hidden exit"), {("hidden exit", "C", "P")})
+        finding = next(f for f in audit(data, {})["findings"] if f["check"] == "hidden exit")
+        self.assertEqual((finding["inputs"], finding["kind"], finding["keeper"]), (["LB"], "layer", "button LB"))
+        self.assertFalse(audit(data, {})["ok"])
+
+    def test_a_layer_that_removes_the_layer_below_there_is_fine(self):
+        self.assertEqual(found(owner(), "hidden exit"), set())
+
+    def test_a_different_source_mode_covers_the_exit_too(self):
+        data = build({"Base": {"switch": (SW, {"button_a": press(add("P"))})},
+                      "P": {"switch": (SW, {"button_b": press(add("C"))}),
+                            "joystick": ("dpad", {"edge": release(remove("P"))})},
+                      "C": {"joystick": ("joystick_move", {"click": press(KEY)})}})
+        self.assertEqual(found(data, "hidden exit"), {("hidden exit", "C", "P")})
+
+    def test_covering_an_exit_that_is_not_on_the_keeper_is_information(self):
+        # LB keeps P. C covers P's stick-edge Release but leaves LB alone, so LB still ends P.
+        data = build({"Base": {"switch": (SW, {"left_bumper": press(add("P"))})},
+                      "P": {"switch": (SW, {"left_bumper": release(remove("P")), "button_b": press(add("C"))}),
+                            "joystick": ("dpad", {"edge": release(remove("P"))})},
+                      "C": {"joystick": ("dpad", {"edge": press(EMPTY)})}})
+        report = audit(data, {})
+        self.assertEqual(found(data, "hidden exit"), set())
+        self.assertEqual([(i["layer"], i["target"], i["inputs"]) for i in report["information"]["hidden exit"]],
+                         [("C", "P", ["joystick/edge"])])
+
+    def touchpad(self):
+        """The left pad adds T. W, added from T, clears the pad touch that T's Release is on."""
+        return build({"Base": {"left_trackpad": ("dpad", {"touch": press(add("T"))})},
+                      "T": {"left_trackpad": ("dpad", {"touch": release(remove("T"))}),
+                            "switch": (SW, {"button_a": press(add("W"))})},
+                      "W": {"left_trackpad": ("dpad", {"touch": press(EMPTY)})}})
+
+    def test_a_touchpad_pair_is_a_finding_without_the_exception(self):
+        self.assertEqual(found(self.touchpad(), "hidden exit"), {("hidden exit", "W", "T")})
+
+    def test_the_touchpad_exception_sets_the_pair_aside(self):
+        config = {"cleanups": {"touchpad_exits": "set aside for now"}}
+        report = audit(self.touchpad(), config)
+        self.assertEqual(found(self.touchpad(), "hidden exit", config), set())
+        self.assertEqual([(e["layer"], e["target"], e["why"]) for e in report["excepted"]],
+                         [("W", "T", "set aside for now")])
+        self.assertEqual(report["stale_decisions"], [])
+
+    def test_an_exception_that_sets_nothing_aside_is_stale(self):
+        report = audit(owner(), {"cleanups": {"touchpad_exits": "set aside for now"}})
+        self.assertEqual(report["stale_decisions"], ["the touchpad exception to R136"])
+
+    def test_the_register_entry_reaches_the_audit(self):
+        from steam_layout import exceptions
+        entry = {"rule": "R136", "scope": {"kind": "touchpad"}, "status": "todo", "why": "for now",
+                 "decided": "Author, 2026-10-02", "todo": "todos.md"}
+        config = exceptions.expand({"exceptions": [entry]})
+        self.assertEqual(found(self.touchpad(), "hidden exit", config), set())
+
+
+class HiddenExitSnapshotTests(unittest.TestCase):
+    """The frozen 90.13 snapshots: the check reproduces the prototype's result of 2026-10-02."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.data = {v: json.loads((ROOT / f"versions/neptune/90.13/single-set-{v}_hold-gyro_90.13.json")
+                                  .read_text(encoding="utf-8")) for v in ("default", "alternative")}
+
+    def test_no_finding_outside_the_touchpad_exception(self):
+        for variant, data in self.data.items():
+            with self.subTest(variant):
+                report = audit(data, {"cleanups": {"touchpad_exits": "set aside"}})
+                self.assertEqual([f for f in report["findings"] if f["check"] == "hidden exit"], [])
+                self.assertEqual(len([e for e in report["excepted"] if e["on_keeper"]]), 68)
+                self.assertEqual(len([e for e in report["excepted"] if not e["on_keeper"]]), 26)
+                self.assertEqual({(i["layer"], i["target"]) for i in report["information"]["hidden exit"]},
+                                 {("Menu Buttons: Tap Cover", "Menu Buttons: Left Stick Guard"),
+                                  ("Menu Buttons: Tap Cover", "Menu Buttons: Right Stick Guard")})
+
+    def test_the_touchpad_pairs_fail_without_the_exception(self):
+        report = audit(self.data["default"], {})
+        self.assertEqual(len([f for f in report["findings"] if f["check"] == "hidden exit"]), 68)
+
+
 class NeverThereTests(unittest.TestCase):
     def test_a_cleanup_that_removes_a_layer_that_is_never_there(self):
         data = owner({"button_a": guarded(remove("P"), remove("C"), remove("Ghost"))},
@@ -395,14 +480,16 @@ class FixTests(unittest.TestCase):
 
 
 class FixedSnapshotTests(unittest.TestCase):
-    """The fix on the frozen 90.10 snapshots: the audit comes out clean, within the entry budget."""
+    """The fix on the frozen 90.10 snapshots: the six list checks come out clean, within the entry budget.
+
+    The fix doesn't resolve hidden exits (R136), and 90.10 predates that rule."""
 
     def test_the_audit_is_clean_after_the_fix(self):
         for variant in ("default", "alternative"):
             data = json.loads((ROOT / f"versions/neptune/90.10/single-set-{variant}_hold-gyro_90.10.json").read_text())
             report = cleanup_lists.fix(data, {})
             with self.subTest(variant):
-                self.assertEqual(audit(data, {})["findings"], [])
+                self.assertEqual([f for f in audit(data, {})["findings"] if f["check"] != "hidden exit"], [])
                 self.assertEqual(report["remaining"], 0)
                 layout = Layout(data)
                 for title in layout.presets:

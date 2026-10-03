@@ -360,7 +360,7 @@ Four words these rules use ([Vocabulary](Layout%20Vocabulary.md#terms)):
 | R133 | A cleanup function has the guarded recovery shape: on one input, a chord for each valid owner beside an interruptible Regular Press with Hold to Repeat that removes the layers | Right-stick touch in `L1: Modifier 0`: an empty chord with LB, and a repeating Regular Press that removes LB's layers when LB isn't held | Standardised 2026-09-28 | `test_neptune_recovery.test_all_guarded_removals_repeat_and_rtp_stays_out_of_ls_scope` | — | None |
 | R134 | A stick edge gets a cleanup function only where the layer needs one: the left edge costs the WASD modifier and the right edge costs ramp-up | `L1: Modifier 0` has one on both stick edges; `RTP: Entry Point` was left without a left-edge one | Author, 2026-09-28 | Not checked yet | — | None |
 | R135 | A cancellation removes only itself, repeats, is uninterruptible and has no guard | Each of `L1: Temp Cursor Gyro`'s 15 cancel inputs removes only the cursor, which exposes the modifier's own binding | Author, 2026-10-02 | `test_neptune_cursor.test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent` | — | None |
-| R136 | Hidden exit: a layer that can land on top of another may not cover an exit on what keeps the lower layer alive, unless it removes the lower layer there | In the first 90.11 build a Start tap put a menu Double Tap window over `Steering \| LS: Fallback Hold`. Recentring inside the window missed the layer's Release and left it on | Author, 2026-10-02 | Not checked yet | — | Touchpad layers are set aside for now, 68 cases on 90.13 (author, 2026-10-02; [to-do](../todos.md#steering)) |
+| R136 | Hidden exit: a layer that can land on top of another may not cover an exit on what keeps the lower layer alive, unless it removes the lower layer there | In the first 90.11 build a Start tap put a menu Double Tap window over `Steering \| LS: Fallback Hold`. Recentring inside the window missed the layer's Release and left it on | Author, 2026-10-02 | Cleanup audit: hidden exit | — | Touchpad layers are set aside for now, 68 cases on 90.13 (author, 2026-10-02; [to-do](../todos.md#steering)) |
 | R138 | The held button's layer owns its combos. No layer exists only to protect a second button that is still held | Hold Start, hold LB for F10, lift Start: LB falls through to Base and becomes the L1 modifier. `Menu Left: Backspace` and `Menu Right: Enter` were removed in 90.9 | Author, 2026-10-01 | `menu_combo_keys` fix (part); `test_fixes.test_overlays_are_gone_and_nothing_references_them` (part) | — | None |
 
 Notes:
@@ -380,8 +380,12 @@ Notes:
 - **R132, other layers' lists:** add a new layer's removal only to a list
   whose host can be on the stack with it. Never add it to the other side's
   lists or to a persistent mode's lists.
-- **R136** has a prototype, not a check yet
-  ([record](../findings/2026-10-02-hidden-exit/README.md)).
+- **R136** is the Cleanup audit's seventh check since 2026-10-02
+  ([record](../findings/2026-10-02-hidden-exit/README.md)). The stack is
+  taken after the whole binding that added the upper layer has run. A layer
+  that covers an exit which isn't on the keeper is listed as information: the
+  keeper's exit still works. No fix resolves a finding; either the upper
+  layer is kept from landing, or it removes the lower layer on that input.
 - **Inheritance and blocking** have their own section, [§8](#8-inheritance-and-blocking).
 
 See: [Cleanup Functions](Cleanup%20Functions.md) (draft definitions of every kind) ·
@@ -645,7 +649,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       | Budget audit | `audit_command_budget.py` | Three entries per input, no banned activators, and no layer command on an inverted D-pad stick edge ([§3](#3-activators)) |
       | Window audit | `audit_inheritance.py` | No undecided layer command under an Always On window ([§8](#8-inheritance-and-blocking), [§9](#9-always-on-layers)) |
       | Flow audit | `audit_flow_inheritance.py` | A chain of adding bindings reaches every layer, and no cover finding is open ([§5](#5-stick-touch-release), [§8](#8-inheritance-and-blocking)) |
-      | Cleanup audit | `audit_cleanups.py` | Every cleanup function and release follows the six cleanup rules ([§7](#7-cleanup)) |
+      | Cleanup audit | `audit_cleanups.py` | Every cleanup function and release follows the six cleanup rules, and no layer hides another's exit ([§7](#7-cleanup)) |
 
       What a clean build audit doesn't prove: it follows the intended flows,
       not every runtime interleaving, missed release or timer race. Those are

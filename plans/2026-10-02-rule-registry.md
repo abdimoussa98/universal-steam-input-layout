@@ -14,7 +14,8 @@ folded in (see [Decisions](#decisions)).
 | 5. Tests that check rules | Done: the 59 length checks are sorted in the [inventory](../findings/2026-10-02-rule-inventory/README.md#the-tests-length-checks-sorted-phase-5). 12 release-specific numbers in eight test files were replaced by the rule they stood for, or removed where another assertion already covers them; the other 49 length checks are the rule's own number, or sit on a made-up layout or a frozen snapshot |
 | **Part A** | **Complete on 2026-10-02.** The author said to continue on 2026-10-02 |
 | 6. Change report | Done: `change_report.py` on `steam_layout/changes.py`. On 90.12 to 90.13 it shows the decided change and the one the `window_routes` fix made on its own. New rule R164: the report is read before shipping |
-| 7 to 9 | Not started |
+| 7. Hidden-exit check | Done: the Cleanup audit's seventh check, "hidden exit" (R136). On 90.13 it gives the prototype's result: 0 findings, 68 touchpad pairs set aside through the register, 2 information pairs. The cleanup fix leaves these findings alone: they need a design decision |
+| 8 and 9 | Not started |
 | Parts B and C | Not started; each waits for the author's review of the part before it |
 
 **Baseline:** commits `601b61b` (archive) and `1fa38ac` (90.11 to 90.13, the
