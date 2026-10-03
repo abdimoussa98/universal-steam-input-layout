@@ -10,19 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## Default trigger reference match
-
-- [ ] DT1: Load the default layout fresh and confirm both Base triggers match the July reference's trigger settings and mouse outputs (LT → left click, RT → right click)
-- [ ] DT2: Check partial/full pulls, quick pulls, held firing, and release in Base, Gyro, and both ramp stages; a pull during Gyro Off Ramp Up restores gyro and registers the intended click
-- [ ] DT3: Check inherited trigger behavior through modifier/cover layers, menu Fn outputs, and all seven Double Tap windows, including a trigger already held across entry/exit. Existing trigger overrides and blocks must retain their behavior
-
-This change removes only Base's explicit `adaptive_threshold: "0"` settings.
-Upper layers retain their existing settings and bindings: inherited trigger
-settings may be affected, while explicit click/edge overrides remain in place.
-No new layer mutations or timer operations were introduced. This follows the
-reference configuration; it does not add a Soft Press hip-fire activator.
-The alternative layout is unchanged.
-
 ## Left-stick recovery and Transition Sets
 
 - [ ] LR1: Validate the new LS-edge recovery and Transition Set depth on the Deck in both layouts

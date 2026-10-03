@@ -242,6 +242,10 @@ WENT = {
                                      "what the editor shows is A30",
     ("Triggers and ramp-up", "TR9"): "A12: the 300 ms reset restarts the interrupted stage change",
     ("Triggers and ramp-up", "TR12"): "`test_static_checks.test_bases_right_stick_edge_has_three_entries_with_any_chords_and_no_haptic`",
+    ("Default trigger reference match", "DT1"): "`test_static_checks.test_the_defaults_base_triggers_match_the_july_reference`",
+    ("Default trigger reference match", "DT2"): "`tests/test_scenarios_triggers_and_recovery.py`",
+    ("Default trigger reference match", "DT3"): "`test_double_tap_windows.test_default_windows_keep_the_mouse_buttons_on_the_trigger_edges`, "
+                                                "and the Window audit on every build",
 }
 
 
