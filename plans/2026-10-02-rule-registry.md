@@ -1,9 +1,15 @@
 # Rule registry and an automated definition of done
 
-**Status, 2026-10-02:** draft plan, not started. Nothing here is built. The
-author asked for it to be done slowly, one step at a time, with nothing
-breaking. Reviewed against the repo the same day; the review's changes and the
-author's answers are folded in (see [Decisions](#decisions)).
+**Status, 2026-10-02:** in progress. The author said to implement it on
+2026-10-02, slowly, one step at a time, with nothing breaking. Reviewed against
+the repo the same day; the review's changes and the author's answers are
+folded in (see [Decisions](#decisions)).
+
+| Phase | State |
+|---|---|
+| 1. Inventory | Done: [findings/2026-10-02-rule-inventory](../findings/2026-10-02-rule-inventory/README.md) |
+| 2 to 5 | Not started |
+| Parts B and C | Not started; each waits for the author's review of the part before it |
 
 **Baseline:** commits `601b61b` (archive) and `1fa38ac` (90.11 to 90.13, the
 Cleanup audit, the hidden-exit prototype). The working layouts are 90.13, the
@@ -121,9 +127,10 @@ changing anything:
 | `resources/Steam Input JSON Structure.md` (1,802 lines) | Rules mixed with explanations of Steam behaviour, and the held-input rules |
 | `resources/Cleanup Functions.md`, `Stateful Layer Transitions.md`, `Layout Vocabulary.md`, `Layer Reverse Lookup.md` | Definitions and design rules |
 | The four skills in `.claude/skills/` | Restated rules (three entries per input, banned activators, execution order) |
+| `.cursor/skills/` | A second, older copy of those skills (found by the inventory) |
 | Findings READMEs and plans | Decided rules (the six cleanup rules, the keeper rule, the temporary-guard rule) and listed assumptions and Deck gates |
 | `todos.md` | Decisions recorded inside to-dos |
-| `steam_layout/flow_config.json` | Accepted exceptions |
+| `steam_layout/flow_config.json`, `traced_stacks.json` | Accepted exceptions |
 | The audits and fixes (`audit_*.py`, `steam_layout/*.py`, `steam_layout/fixes/`) | What each check enforces, and exemptions written into the code (deliberate clears, the stick-touch trio, `hold_layer` left out) |
 | The tests | Rules that exist only as an assertion, and the rule each updated test cites |
 | The four builders' comments | Rules as they stood when each was frozen |
@@ -182,11 +189,12 @@ An **exception** is one accepted finding: a place where the layout breaks a
 rule and the author accepted it, with a to-do that ends it.
 
 Move every exception into one file, extending `flow_config.json`: rule ID,
-scope, reason, decided by and when, and the to-do that ends it. Today that
-file has three shapes for this (`decisions`, `covers.allow`, `cleanups.keep`)
-and one entry in all: the accepted decision for the two Steering stick
-modifiers. The touchpad exception moves here from the prototype. One entry can
-cover several inputs with one reason, as the existing decision does.
+scope, reason, decided by and when, and the to-do that ends it. Today there
+are four shapes in two files (`decisions`, `covers.allow` and `cleanups.keep`
+in `flow_config.json`, and `targets` in `traced_stacks.json`) and one entry in
+all: the accepted decision for the two Steering stick modifiers. The touchpad
+exception moves here from the prototype. One entry can cover several inputs
+with one reason, as the existing decision does.
 
 A test fails on an exception with no reason; the audits already report
 exceptions that no longer match anything.
@@ -308,9 +316,10 @@ Seeded from the inventory. Known entries include:
   (held-input rule 3); a key output fires on an input that is already held
   when its layer is added (the author's experience, not tested on its own); a
   delay's clock starts when its layer is added, not at the physical press; a
-  Release fires in a layer added while that input was already held (stick
-  guards, Fallback Hold); a repeated `remove_layer` restarts a stuck delay;
-  analog sticks inherit only from the top layer and the action set.
+  stick edge's Release fires in a layer added while the stick was already out
+  (stick guards, Fallback Hold; the same on a button is established); a delay
+  starts again when a removal exposes it under a held button; analog sticks
+  inherit through the middle of the stack.
 - **From the archived replay's timing contract**
   (`findings/2026-09-30-stack-search/TIMED-MODEL.md`, five policies), to be
   sorted the same way. Two aren't listed above: a repeat keeps its schedule
