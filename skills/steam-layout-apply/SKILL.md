@@ -5,7 +5,7 @@ description: Finalize an edited Steam Input layout for loading into Steam. Runs 
 
 # Finalize a layout for Steam
 
-Rule IDs (R108 and so on) point at the [Layer Definition of Done](../../../resources/Layer%20Definition%20of%20Done.md#rule-tables), which holds each rule's full text, example and check.
+Rule IDs (R108 and so on) point at the [Layer Definition of Done](../../resources/Layer%20Definition%20of%20Done.md#rule-tables), which holds each rule's full text, example and check.
 
 ## Required completion: JSON and VDF together
 
@@ -23,7 +23,7 @@ or an upload to Steam.
 
 **R151.** Every publication of a changed layout must include a reviewed description and
 a version bump. Before committing layout changes, exporting for delivery, or
-publishing to Steam, follow [Publishing layout changes](../../../README.md#publishing-layout-changes):
+publishing to Steam, follow [Publishing layout changes](../../README.md#publishing-layout-changes):
 
 - Read the complete `controller_mappings.description` against the final layout.
   Correct stale behavior, control mappings, tuning, and implemented/planned status;
@@ -64,7 +64,7 @@ with the release's record. Every change in it should be one somebody decided;
 a fix can change a binding on its own.
 
 For binding, source, or layer-transition changes, confirm the
-[inheritance review](../../../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes)
+[inheritance review](../../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes)
 records affected upper layers, intended inheritance/blocks, and protected timer
 entry/exit behavior. Numeric-reference and command-budget checks do not verify
 effective inherited behavior. Write the held-across-transition and newly activated
@@ -75,10 +75,10 @@ Steam was seen to do (an assumption's status).
 **R165 to R167.** The press sequences of a new or changed layer are scenario
 tests in `tests/test_scenarios_*.py`: an input held across the change, a press
 inside the layer, and a release missed while the Steam menu is open
-([how to write one](../../../tests/scenario.py)). The tests fail while a layer
+([how to write one](../../tests/scenario.py)). The tests fail while a layer
 that changed since the newest snapshot is on the stack in no scenario, so run
 them before saving the snapshot. A Steam behaviour the change depends on gets a
-row in [Steam Behaviour Assumptions](../../../resources/Steam%20Behaviour%20Assumptions.md),
+row in [Steam Behaviour Assumptions](../../resources/Steam%20Behaviour%20Assumptions.md),
 and the scenario names it. Then
 `python3 -m tests.scenario --out findings/<date>-<slug>/` writes
 `unverified-assumptions.txt` into the release's record: every assumption that
@@ -88,7 +88,7 @@ pass but rest on one of those is done, and listed.
 **R150.** Run the build audit first: `python3 audit_build.py`. It runs the Budget audit,
 the Window audit, the Flow audit and the Cleanup audit on both working layouts and must exit
 **0** before any version is finalized
-([Layer Definition of Done §10](../../../resources/Layer%20Definition%20of%20Done.md#10-ship-it)).
+([Layer Definition of Done §10](../../resources/Layer%20Definition%20of%20Done.md#10-ship-it)).
 The paragraphs below describe the individual audits it runs.
 
 The Budget audit (R108, R109, R111) is `python3 audit_command_budget.py path/to/layout.json`. It must exit **0**
@@ -107,7 +107,7 @@ its `blocks_needed` (replace only if the underlying output is identical in
 every stack, otherwise clear). The install runs
 `steam_layout.fixes` pipeline, which does
 this (`python3 -m steam_layout.fixes <layout> --dry-run` shows what it would change). See
-[Layer Definition of Done §8](../../../resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking).
+[Layer Definition of Done §8](../../resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking).
 
 The Flow audit (R144, R145) is `python3 audit_flow_inheritance.py path/to/layout.json`. It
 must exit **0**: a chain of adding bindings reaches every layer, and no cover

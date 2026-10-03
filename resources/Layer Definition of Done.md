@@ -130,8 +130,8 @@ Notes:
 - **R101, R102:** see [runtime rules and existing conflicts](Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30).
 - **R104:** otherwise a fresh load can swap layers.
 
-See: [layout-prep skill](../.claude/skills/steam-layout-prep/SKILL.md) ·
-[layer-duplicate skill](../.claude/skills/steam-layer-duplicate/SKILL.md) ·
+See: [layout-prep skill](../skills/steam-layout-prep/SKILL.md) ·
+[layer-duplicate skill](../skills/steam-layer-duplicate/SKILL.md) ·
 [layer-order swap](../findings/2026-07-11-layer-order-swap/FINDINGS.md)
 
 ## 3. Activators
@@ -164,7 +164,7 @@ Notes:
 See: [Allowed activators](Steam%20Input%20JSON%20Structure.md#allowed-activation-types) ·
 [Entry budget](Steam%20Input%20JSON%20Structure.md#command-entry-budget) ·
 [Execution order](Steam%20Input%20JSON%20Structure.md#binding-execution-order) ·
-[binding-order skill](../.claude/skills/steam-binding-order/SKILL.md)
+[binding-order skill](../skills/steam-binding-order/SKILL.md)
 
 ## 4. Entry
 
@@ -724,7 +724,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       writes `unverified-assumptions.txt` there: each assumption with the
       rules and the scenarios that rest on it. A layer whose tests pass but
       rest on one of them is done, and listed (author, 2026-10-02).
-- [ ] **R151:** the [layout-apply skill](../.claude/skills/steam-layout-apply/SKILL.md)
+- [ ] **R151:** the [layout-apply skill](../skills/steam-layout-apply/SKILL.md)
       has run: description, version bump, `to-ids`, VDF export and snapshot.
 
 **What the checks don't prove.** A scenario test passes on a simulator that

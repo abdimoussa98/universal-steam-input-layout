@@ -111,7 +111,7 @@ class RegistryTests(unittest.TestCase):
 
     def test_rule_ids_named_elsewhere_exist(self):
         places = [ROOT / "README.md", ROOT / "todos.md", *sorted((ROOT / "resources").glob("*.md")),
-                  *sorted((ROOT / ".claude" / "skills").glob("*/SKILL.md")), *sorted(ROOT.glob("audit_*.py")),
+                  *sorted((ROOT / "skills").glob("*/SKILL.md")), *sorted(ROOT.glob("audit_*.py")),
                   *sorted((ROOT / "steam_layout").rglob("*.py")), *sorted((ROOT / "tests").glob("test_*.py"))]
         for path in places:
             if path.name == Path(__file__).name:
@@ -247,7 +247,7 @@ class AssumptionTests(unittest.TestCase):
 
     def test_assumption_ids_named_elsewhere_exist(self):
         places = [ROOT / "README.md", ROOT / "todos.md", *sorted((ROOT / "resources").glob("*.md")),
-                  *sorted((ROOT / ".claude" / "skills").glob("*/SKILL.md")), *sorted(ROOT.glob("audit_*.py")),
+                  *sorted((ROOT / "skills").glob("*/SKILL.md")), *sorted(ROOT.glob("audit_*.py")),
                   *sorted((ROOT / "steam_layout").rglob("*.py")), *sorted((ROOT / "tests").glob("test_*.py"))]
         for path in places:
             if path.name in (Path(__file__).name, "rules.py"):
@@ -262,7 +262,7 @@ class SkillTests(unittest.TestCase):
 
     def test_every_skill_names_rules_that_exist(self):
         known = set(rules.load())
-        skills = sorted((ROOT / ".claude" / "skills").glob("*/SKILL.md"))
+        skills = sorted((ROOT / "skills").glob("*/SKILL.md"))
         self.assertTrue(skills)
         for path in skills:
             with self.subTest(path.parent.name):

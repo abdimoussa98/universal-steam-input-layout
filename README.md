@@ -442,7 +442,7 @@ it for delivery, or publishing it to Steam:
    says that.
 
 Read-only audits and documentation-only changes do not publish a changed layout.
-The `.claude` and `.cursor` `steam-layout-apply` skills enforce this workflow.
+The [steam-layout-apply](skills/steam-layout-apply/SKILL.md) skill enforces this workflow.
 
 ## File Formats
 

@@ -5,7 +5,7 @@ description: Duplicate an action layer in a Steam Input layout JSON with duplica
 
 # Duplicate a layer safely
 
-Rule IDs (R108 and so on) point at the [Layer Definition of Done](../../../resources/Layer%20Definition%20of%20Done.md#rule-tables), which holds each rule's full text, example and check.
+Rule IDs (R108 and so on) point at the [Layer Definition of Done](../../resources/Layer%20Definition%20of%20Done.md#rule-tables), which holds each rule's full text, example and check.
 
 `duplicate_layer.py` does three things:
 
