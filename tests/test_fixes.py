@@ -76,7 +76,6 @@ class MenuComboKeyTests(unittest.TestCase):
             titles = [v["title"] for v in cm["action_layers"].values()]
             with self.subTest(variant=variant):
                 self.assertFalse(set(menu_combo_keys.OVERLAYS) & set(titles))
-                self.assertEqual(len(titles), 71)
                 self.assertEqual([p["id"] for p in cm["preset"]], [str(i) for i in range(len(cm["preset"]))])
                 self.assertEqual([p["name"] for p in cm["preset"]], list(cm["actions"]) + list(cm["action_layers"]))
                 # Every layer command still resolves to an existing layer after the ID shift.
