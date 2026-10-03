@@ -12,7 +12,7 @@ wrong; this fix resolves exactly those findings, so the two can't drift apart:
                        with either of its guard buttons, beside a repeating removal of
                        the list its other cleanups use
 
-The audit's seventh check, hidden exit (R136), is not resolved here: it needs a
+The audit's two hidden-exit checks (R136) are not resolved here: they need a
 design decision (stop the upper layer landing, or remove the lower layer there).
 
 Rules and decisions: findings/2026-10-02-cleanup-boundaries/README.md and
@@ -154,7 +154,7 @@ def _hidden(layout, c, keep):
     return changed
 
 
-RESOLVES = tuple(check for check in CHECKS if check != "hidden exit")
+RESOLVES = tuple(check for check in CHECKS if check not in ("hidden exit", "exit to review"))
 
 
 def _open(report):

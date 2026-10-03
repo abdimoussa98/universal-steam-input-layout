@@ -38,6 +38,10 @@ class ShapeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             exceptions.check([entry("R140", {"target": "Win"})])            # the Window audit needs source and input
         exceptions.check([entry("R101", {"note": "five legacy commands"})])  # a rule no audit reads: a note
+        exceptions.check([entry("R139", {"kind": "covers"}), entry("R136", {"kind": "touchpad"}),
+                          entry("R136", {"upper": "C", "lower": "P"})])       # a rule with two shapes of scope
+        with self.assertRaises(ValueError):
+            exceptions.check([entry("R136", {"upper": "C"})])
 
 
 class ExpandTests(unittest.TestCase):
@@ -58,6 +62,13 @@ class ExpandTests(unittest.TestCase):
     def test_kept_removals(self):
         config = exceptions.expand({"exceptions": [entry("R132", {"layers": ["P"], "removes": ["Ghost"]})]})
         self.assertEqual(config["cleanups"]["keep"], [{"layers": ["P"], "removes": ["Ghost"], "why": "by design"}])
+
+    def test_review_scopes(self):
+        config = exceptions.expand({"exceptions": [entry("R139", {"kind": "covers"}),
+                                                   entry("R136", {"upper": "C", "lower": "P"})]})
+        self.assertEqual(config["review"], {"covers": "by design"})
+        self.assertEqual(config["cleanups"]["accepted_exits"], [{"upper": "C", "lower": "P", "why": "by design"}])
+        self.assertNotIn("decisions", config)
 
     def test_sections_written_the_old_way_are_kept(self):
         old = {"layers": ["Q"], "inputs": ["switch/button_b"], "status": "allow", "why": "old"}
@@ -111,9 +122,11 @@ class RegisterTests(unittest.TestCase):
     def test_the_audits_read_the_register(self):
         from steam_layout.covers import load_rules
         expanded = load_rules()
-        flow = [e for e in self.entries if e["rule"] in exceptions.FLOW]
+        flow = [e for e in self.entries if e["rule"] in exceptions.FLOW and "layers" in e["scope"]]
         self.assertEqual(len(expanded.get("decisions", [])), len(flow))
         self.assertTrue(flow)
+        self.assertTrue(expanded["review"]["covers"])                # cover layers aren't reviewed input by input
+        self.assertTrue(expanded["cleanups"]["touchpad_exits"])      # the touchpad exception to the hidden-exit rule
 
 
 if __name__ == "__main__":

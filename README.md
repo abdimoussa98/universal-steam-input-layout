@@ -188,13 +188,16 @@ python3 audit_layer.py <layout> --layer "Menu Right: Fn Layer" --json
 
 For every layer the backward chains reach, reports the stacks that can be
 under it, each with the bindings that built it, and what each input inherits
-on those stacks. Inherited bindings that differ between stacks are listed as
-information only. It fails on two things:
+on those stacks. It fails on three things:
 
 - **A cover finding:** a cover that outlives its owners, sits below its
   owner, or inherits an input through a layer between it and its owner.
 - **A coverage gap:** a layer no chain of adding bindings reaches, or a
   lookup the chains can't model.
+- **An entry to review (R139):** an inherited binding that differs between
+  stacks, on a layer that changed since the newest snapshot or that a changed
+  layer feeds. Fix it, or accept it in the exceptions register with a reason.
+  On unchanged layers these are listed as information.
 
 The chains start from the contexts in `steam_layout/flow_config.json` (Base,
 and Base with `Gyro`) and keep each chain to its own layers, so a cover is

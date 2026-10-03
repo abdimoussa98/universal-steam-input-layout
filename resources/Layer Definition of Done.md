@@ -360,7 +360,7 @@ Four words these rules use ([Vocabulary](Layout%20Vocabulary.md#terms)):
 | R133 | A cleanup function has the guarded recovery shape: on one input, a chord for each valid owner beside an interruptible Regular Press with Hold to Repeat that removes the layers | Right-stick touch in `L1: Modifier 0`: an empty chord with LB, and a repeating Regular Press that removes LB's layers when LB isn't held | Standardised 2026-09-28 | `test_neptune_recovery.test_all_guarded_removals_repeat_and_rtp_stays_out_of_ls_scope` | — | None |
 | R134 | A stick edge gets a cleanup function only where the layer needs one: the left edge costs the WASD modifier and the right edge costs ramp-up | `L1: Modifier 0` has one on both stick edges; `RTP: Entry Point` was left without a left-edge one | Author, 2026-09-28 | Not checked yet | — | None |
 | R135 | A cancellation removes only itself, repeats, is uninterruptible and has no guard | Each of `L1: Temp Cursor Gyro`'s 15 cancel inputs removes only the cursor, which exposes the modifier's own binding | Author, 2026-10-02 | `test_neptune_cursor.test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent` | — | None |
-| R136 | Hidden exit: a layer that can land on top of another may not cover an exit on what keeps the lower layer alive, unless it removes the lower layer there | In the first 90.11 build a Start tap put a menu Double Tap window over `Steering \| LS: Fallback Hold`. Recentring inside the window missed the layer's Release and left it on | Author, 2026-10-02 | Cleanup audit: hidden exit | — | Touchpad layers are set aside for now, 68 cases on 90.13 (author, 2026-10-02; [to-do](../todos.md#steering)) |
+| R136 | Hidden exit: a layer that can land on top of another may not cover an exit on what keeps the lower layer alive, unless it removes the lower layer there | In the first 90.11 build a Start tap put a menu Double Tap window over `Steering \| LS: Fallback Hold`. Recentring inside the window missed the layer's Release and left it on | Author, 2026-10-02 | Cleanup audit: hidden exit; Cleanup audit: exit to review | — | Touchpad layers are set aside for now, 68 cases on 90.13 (author, 2026-10-02; [to-do](../todos.md#steering)) |
 | R138 | The held button's layer owns its combos. No layer exists only to protect a second button that is still held | Hold Start, hold LB for F10, lift Start: LB falls through to Base and becomes the L1 modifier. `Menu Left: Backspace` and `Menu Right: Enter` were removed in 90.9 | Author, 2026-10-01 | `menu_combo_keys` fix (part); `test_fixes.test_overlays_are_gone_and_nothing_references_them` (part) | — | None |
 
 Notes:
@@ -384,7 +384,9 @@ Notes:
   ([record](../findings/2026-10-02-hidden-exit/README.md)). The stack is
   taken after the whole binding that added the upper layer has run. A layer
   that covers an exit which isn't on the keeper is listed as information: the
-  keeper's exit still works. No fix resolves a finding; either the upper
+  keeper's exit still works. When either layer of such a pair changed since
+  the last snapshot it fails as "exit to review", until it is fixed or
+  accepted in the register. No fix resolves a finding; either the upper
   layer is kept from landing, or it removes the lower layer on that input.
 - **Inheritance and blocking** have their own section, [§8](#8-inheritance-and-blocking).
 
@@ -405,7 +407,7 @@ never changed.
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
-| R139 | Inheritance is the default. An ordinary layer isn't required to block an input because the layers below would give it different bindings; the Flow audit lists such an input for review | The left-pad key layers inherit the L1 and R1 modifier entries from Base | Author, 2026-10-01 | Not checked yet | — | Accepted: the two Steering stick modifiers inherit the drivers from the W and S layers, by design |
+| R139 | Inheritance is the default: an ordinary layer isn't required to block an input because the layers below would give it different bindings. But such an input is read when it is new: on a layer that changed since the last snapshot, or that a changed layer feeds, it fails until it is fixed or accepted with a reason | The left-pad key layers inherit the L1 and R1 modifier entries from Base. In the first 90.11 build, two such inputs on the new `Steering \| LS: Fallback Hold` were the menu taps that could strand it | Author, 2026-10-01; the review on changed layers 2026-10-02 | Flow audit: needs review | — | Accepted: the two Steering stick modifiers inherit the drivers from the W and S layers, by design. Cover layers aren't reviewed this way: the cover check judges them (R144) |
 | R140 | Window rule. Under a layer with an Always On action, an input the layer leaves open is handled when any stack can put a layer command under it: replaced with the keybind when only one is possible, cleared otherwise. A stack whose binding is only a layer command adds no keybind | Every default window replaces the trigger edge with Base's mouse button: `Gyro Off Ramp Up` can sit under the window, and its edge only removes it | Author, 2026-09-30, restated 2026-10-01 | Window audit: open routes; Window audit: unchecked window; `window_routes` fix | — | None |
 | R141 | A block clears the input by default and replaces it only where the use is obvious. It targets only routes that change layers, and it is never a removal | The modifier Double Tap windows replace the bumper, which normally adds a layer, with the scroll wheel | Author, 2026-09-30 | `window_routes` fix (part) | — | None |
 | R137 | Temporary guards: no layer is added over a temporary guard; only removals happen there | In `Steering \| LS: Entry Guard` and `Steering \| LS: Fallback Hold`, Start and Select type Tab and Escape, so no menu layer can land and hide their Releases | Author, 2026-10-02 | `test_steering_fallback_hold.test_no_menu_layer_lands_on_the_hold_or_the_entry_guard` (part) | — | None |
@@ -508,9 +510,13 @@ The **Window audit** ([audit_inheritance.py](../audit_inheritance.py)) checks
 this rule. The **Flow audit**
 ([audit_flow_inheritance.py](../audit_flow_inheritance.py)) runs the cover
 check ([§5](#5-stick-touch-release)), checks that a chain reaches every
-layer, and lists inherited bindings that differ between stacks as
-information. Until 2026-10-01 it failed on those for every layer, which
-misread step 4 as a rule of its own. Both audits build their stacks from the
+layer, and lists inherited bindings that differ between stacks ("varies" and
+"review"). Until 2026-10-01 it failed on those for every layer, which
+misread step 4 as a rule of its own. Since 2026-10-02 it fails on them only
+where they are new (R139): on a layer that changed since the last snapshot,
+or that a changed layer feeds. There each one is fixed, or accepted in the
+[exceptions register](#exceptions-register) with a reason. Accepting isn't
+blocking; the entry was read, and inheriting is what is wanted. Both audits build their stacks from the
 same backward chains and run in the build audit ([§10](#10-ship-it)):
 
 ```bash
@@ -648,7 +654,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       |---|---|---|
       | Budget audit | `audit_command_budget.py` | Three entries per input, no banned activators, and no layer command on an inverted D-pad stick edge ([§3](#3-activators)) |
       | Window audit | `audit_inheritance.py` | No undecided layer command under an Always On window ([§8](#8-inheritance-and-blocking), [§9](#9-always-on-layers)) |
-      | Flow audit | `audit_flow_inheritance.py` | A chain of adding bindings reaches every layer, and no cover finding is open ([§5](#5-stick-touch-release), [§8](#8-inheritance-and-blocking)) |
+      | Flow audit | `audit_flow_inheritance.py` | A chain of adding bindings reaches every layer, no cover finding is open, and no changed layer has an unread inherited input ([§5](#5-stick-touch-release), [§8](#8-inheritance-and-blocking)) |
       | Cleanup audit | `audit_cleanups.py` | Every cleanup function and release follows the six cleanup rules, and no layer hides another's exit ([§7](#7-cleanup)) |
 
       What a clean build audit doesn't prove: it follows the intended flows,

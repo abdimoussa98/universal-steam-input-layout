@@ -184,6 +184,32 @@ class HiddenExitTests(unittest.TestCase):
         self.assertEqual([(i["layer"], i["target"], i["inputs"]) for i in report["information"]["hidden exit"]],
                          [("C", "P", ["joystick/edge"])])
 
+    def side_exit(self):
+        """LB keeps P. C covers P's stick-edge Release but leaves LB alone."""
+        return build({"Base": {"switch": (SW, {"left_bumper": press(add("P"))})},
+                      "P": {"switch": (SW, {"left_bumper": release(remove("P")), "button_b": press(add("C"))}),
+                            "joystick": ("dpad", {"edge": release(remove("P"))})},
+                      "C": {"joystick": ("dpad", {"edge": press(EMPTY)})}})
+
+    def test_a_covered_side_exit_on_a_changed_layer_fails_until_accepted(self):
+        data = self.side_exit()
+        self.assertEqual(found(data, "exit to review"), set())                     # nothing changed: information
+        for changed in ({"C"}, {"P"}):
+            report = audit(data, {}, changed=changed)
+            self.assertEqual({(f["check"], f["layer"], f["target"]) for f in report["findings"]},
+                             {("exit to review", "C", "P")}, changed)
+            self.assertFalse(report["ok"])
+        self.assertTrue(audit(data, {}, changed={"Base"})["ok"])                   # another layer changed
+        config = {"cleanups": {"accepted_exits": [{"upper": "C", "lower": "P", "why": "LB still ends P"}]}}
+        report = audit(data, config, changed={"C"})
+        self.assertTrue(report["ok"])
+        self.assertEqual([(e["layer"], e["target"], e["why"]) for e in report["excepted"]], [("C", "P", "LB still ends P")])
+        self.assertEqual(report["stale_decisions"], [])
+
+    def test_an_accepted_exit_that_matches_no_pair_is_stale(self):
+        config = {"cleanups": {"accepted_exits": [{"upper": "C", "lower": "P", "why": "old"}]}}
+        self.assertEqual(audit(owner(), config)["stale_decisions"], ["C over P"])
+
     def touchpad(self):
         """The left pad adds T. W, added from T, clears the pad touch that T's Release is on."""
         return build({"Base": {"left_trackpad": ("dpad", {"touch": press(add("T"))})},

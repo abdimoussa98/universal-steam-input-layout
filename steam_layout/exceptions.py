@@ -15,14 +15,17 @@ Scope, by rule:
 
     R139, R145   {"layers": [...], "inputs": [...]}                      the Flow audit's inherited inputs
                  (`inputs` may be {"default": [...], "alternative": [...]})
+    R139         {"kind": "covers"}                                       cover layers' inherited inputs need no review
     R144         {"cover": "...", "checks": [...]}                        the cover check
     R132         {"layers": [...], "removes": [...]}                      a removal the Cleanup audit keeps
     R140         {"target": "...", "source": "...", "input": "..."}       a route the Window audit allows
     R136         {"kind": "touchpad"}                                     the hidden-exit pairs set aside
+    R136         {"upper": "...", "lower": "..."}                         a covered side exit that was reviewed
     other rules  any object, for example {"note": "..."}: a record that no audit reads
 
 The audits still read the sections they always read. `expand` fills
-`decisions`, `covers.allow`, `cleanups.keep` and `cleanups.touchpad_exits` from the register, and `window`
+`decisions`, `covers.allow`, `cleanups.keep`, `cleanups.touchpad_exits`,
+`cleanups.accepted_exits` and `review.covers` from the register, and `window`
 adds the R140 entries to the Window audit's stacks config, so one entry format
 serves all four. Titles use default-layout names, as everywhere in this file.
 """
@@ -36,8 +39,9 @@ REGISTER = Path(__file__).with_name("flow_config.json")
 STATUSES = ("allow", "todo")
 FIELDS = ("rule", "scope", "status", "why", "decided", "todo")
 FLOW = ("R139", "R145")
-SCOPES = {"R139": ("layers", "inputs"), "R145": ("layers", "inputs"), "R144": ("cover", "checks"),
-          "R132": ("layers", "removes"), "R140": ("target", "source", "input"), "R136": ("kind",)}
+SCOPES = {"R139": (("layers", "inputs"), ("kind",)), "R145": (("layers", "inputs"),),     # rule -> the shapes it takes
+          "R144": (("cover", "checks"),), "R132": (("layers", "removes"),), "R140": (("target", "source", "input"),),
+          "R136": (("kind",), ("upper", "lower"))}
 
 
 def check(entries):
@@ -54,9 +58,9 @@ def check(entries):
             raise ValueError(f"an exception needs a why and who decided it: {entry}")
         if entry["status"] == "todo" and not entry["todo"]:
             raise ValueError(f"an exception with status todo names the to-do that ends it: {entry}")
-        scope = entry["scope"]
-        if not scope or any(key not in scope for key in SCOPES.get(entry["rule"], ())):
-            raise ValueError(f"{entry['rule']}: the scope needs {SCOPES.get(entry['rule'], 'something')}: {entry}")
+        scope, shapes = entry["scope"], SCOPES.get(entry["rule"])
+        if not scope or (shapes and not any(all(key in scope for key in shape) for shape in shapes)):
+            raise ValueError(f"{entry['rule']}: the scope needs one of {shapes or 'something'}: {entry}")
     return entries
 
 
@@ -75,7 +79,9 @@ def expand(config):
     config = copy.deepcopy(config)
     for entry in check(config.get("exceptions", [])):
         scope, rule = entry["scope"], entry["rule"]
-        if rule in FLOW:
+        if rule == "R139" and scope.get("kind") == "covers":
+            config.setdefault("review", {})["covers"] = entry["why"]
+        elif rule in FLOW:
             config.setdefault("decisions", []).append(
                 {"layers": scope["layers"], "inputs": scope["inputs"], "status": entry["status"], "why": entry["why"]})
         elif rule == "R144":
@@ -84,8 +90,11 @@ def expand(config):
         elif rule == "R132":
             config.setdefault("cleanups", {}).setdefault("keep", []).append(
                 {"layers": scope["layers"], "removes": scope["removes"], "why": entry["why"]})
-        elif rule == "R136" and scope["kind"] == "touchpad":
+        elif rule == "R136" and scope.get("kind") == "touchpad":
             config.setdefault("cleanups", {})["touchpad_exits"] = entry["why"]
+        elif rule == "R136" and "upper" in scope:
+            config.setdefault("cleanups", {}).setdefault("accepted_exits", []).append(
+                {"upper": scope["upper"], "lower": scope["lower"], "why": entry["why"]})
     return config
 
 

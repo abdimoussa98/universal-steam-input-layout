@@ -9,7 +9,8 @@ variant. The target's own handling is reported too: inherits, clears,
 replaces or disables.
 
 Each input whose lower bindings differ between stacks gets a label. They are
-information, not failures:
+information here. The Flow audit fails on the first two where the layer changed
+since the last snapshot (R139), until each is fixed or accepted:
 
     varies     the target inherits, and two or more distinct non-Base bindings
                reach it

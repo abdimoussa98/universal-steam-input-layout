@@ -160,17 +160,21 @@ class GateTests(unittest.TestCase):
     2026-10-01): blocking is only required under an Always On layer, which the Window audit checks."""
     RULES = {"version": 1, "covers": {"titles": ["Cover"]}}   # no families: the chains need none
 
-    def audit(self, layout, *args, rules=None):
+    def audit(self, layout, *args, rules=None, baseline=None):
         with tempfile.TemporaryDirectory() as tmp:
             path, rules_path = Path(tmp, "layout.json"), Path(tmp, "rules.json")
             path.write_text(json.dumps({"controller_mappings": layout.cm}))
             rules_path.write_text(json.dumps(rules or self.RULES))
             rules = rules_path
+            against = []
+            if baseline is not None:
+                Path(tmp, "before.json").write_text(json.dumps({"controller_mappings": baseline.cm}))
+                against = ["--baseline", str(Path(tmp, "before.json"))]
             out = subprocess.run([sys.executable, str(ROOT / "audit_flow_inheritance.py"), str(path),
-                                  "--config", str(rules), *args], capture_output=True, text=True)
+                                  "--config", str(rules), *against, *args], capture_output=True, text=True)
             return out, json.loads(subprocess.run(
-                [sys.executable, str(ROOT / "audit_flow_inheritance.py"), str(path), "--config", str(rules), "--json"],
-                capture_output=True, text=True).stdout)
+                [sys.executable, str(ROOT / "audit_flow_inheritance.py"), str(path), "--config", str(rules),
+                 *against, "--json"], capture_output=True, text=True).stdout)
 
     def varying(self):
         """T sits on A or on B, and button_y is a different binding in each (InheritanceFixtureTests)."""
@@ -189,6 +193,57 @@ class GateTests(unittest.TestCase):
     def test_the_varying_binding_is_still_shown_for_the_layer(self):
         out, _ = self.audit(self.varying(), "--layer", "T")
         self.assertIn("varies: button_diamond/button_y", out.stdout)
+
+    # --- on a changed layer, an entry fails until it is fixed or accepted (author, 2026-10-02) ---
+
+    def before(self, layer, name, binding="key_press OLD, , "):
+        """The varying layout as it was before `layer`'s face button `name` changed."""
+        import copy
+        old = Layout(copy.deepcopy({"controller_mappings": self.varying().cm}))
+        old.active(layer)["button_diamond"]["inputs"][name] = inp(Full_Press=entry(binding))
+        return old
+
+    def review(self, report):
+        return {(row["layer"], row["input"], row["finding"]) for row in report["needs_review"]}
+
+    def test_an_unchanged_layout_needs_no_review(self):
+        out, report = self.audit(self.varying(), baseline=self.varying())
+        self.assertEqual((report["needs_review"], report["changed_layers"], out.returncode), ([], [], 0))
+
+    def test_a_changed_provider_puts_the_entries_it_feeds_up_for_review(self):
+        out, report = self.audit(self.varying(), baseline=self.before("A", "button_x"))
+        self.assertEqual(report["changed_layers"], ["A"])
+        self.assertLessEqual({("T", "button_diamond/button_y", "varies"), ("T", "button_diamond/button_b", "review")},
+                             self.review(report))
+        self.assertFalse(report["clean"])
+        self.assertEqual(out.returncode, 1)
+        self.assertIn("Needs review [R139]", out.stdout)
+        self.assertIn("T: button_diamond/button_y (varies)", out.stdout)
+
+    def test_a_changed_target_puts_its_own_entries_up_for_review(self):
+        _, report = self.audit(self.varying(), baseline=self.before("T2", "button_y"))
+        self.assertEqual(report["changed_layers"], ["T2"])
+        self.assertEqual({layer for layer, _, _ in self.review(report)}, {"T2"})
+
+    def test_an_accepted_entry_passes(self):
+        accepted = {"rule": "R139", "status": "allow", "why": "T is meant to take either owner's Y",
+                    "decided": "Author, 2026-10-02", "todo": None,
+                    "scope": {"layers": ["T", "T2"], "inputs": ["button_diamond/button_y", "button_diamond/button_b",
+                                                                "switch/left_bumper", "switch/right_bumper"]}}
+        out, report = self.audit(self.varying(), baseline=self.before("A", "button_x"),
+                                 rules={**self.RULES, "exceptions": [accepted]})
+        self.assertEqual(report["needs_review"], [])
+        self.assertEqual(out.returncode, 0, out.stdout)
+
+    def test_cover_layers_are_accepted_by_the_cover_rule_when_the_register_says_so(self):
+        covers = {"version": 1, "covers": {"titles": ["T", "T2"]}}
+        _, report = self.audit(self.varying(), baseline=self.before("A", "button_x"), rules=covers)
+        self.assertTrue(self.review(report))                      # without the entry, a cover's inputs are reviewed too
+        entry_ = {"rule": "R139", "scope": {"kind": "covers"}, "status": "allow", "why": "the cover check judges them",
+                  "decided": "Author, 2026-10-02", "todo": None}
+        _, report = self.audit(self.varying(), baseline=self.before("A", "button_x"),
+                               rules={**covers, "exceptions": [entry_]})
+        self.assertEqual(report["needs_review"], [])
 
     def test_a_layer_outside_every_family_still_fails(self):
         layout = self.varying()

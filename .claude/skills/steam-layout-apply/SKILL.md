@@ -98,8 +98,9 @@ The Flow audit (R144, R145) is `python3 audit_flow_inheritance.py path/to/layout
 must exit **0**: a chain of adding bindings reaches every layer, and no cover
 finding is open. A new or renamed layer needs no declaration; only a cover
 whose title doesn't end in a cover suffix, or an accepted finding as an entry
-in the exceptions register with its reason, goes in `steam_layout/flow_config.json`. Inherited bindings that
-differ between stacks are listed as information and don't fail it.
+in the exceptions register with its reason, goes in `steam_layout/flow_config.json`. An inherited binding that
+differs between stacks fails it on a layer that changed since the newest snapshot (R139): fix it, or accept it
+in the register with a reason. The Cleanup audit does the same for a covered side exit (R136).
 
 The Cleanup audit (R127 to R132) is `python3 audit_cleanups.py path/to/layout.json`. It must
 exit **0**: every cleanup function and release follows the six cleanup rules

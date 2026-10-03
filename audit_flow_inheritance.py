@@ -3,11 +3,14 @@
 
 For every layer a chain of adding bindings reaches (steam_layout/chains.py), reports the stacks that can
 be under it, each with the bindings that built it, and what each input inherits on those stacks. Inputs
-whose inherited binding differs between stacks are listed as information ("varies"); they don't fail the
-audit. An ordinary layer inherits by default, and the one blocking rule, for layers with an Always On
-action, is checked by the Window audit (audit_inheritance.py).
+whose inherited binding differs between stacks are listed ("varies", "review"). An ordinary layer inherits
+by default, and the one blocking rule, for layers with an Always On action, is checked by the Window audit
+(audit_inheritance.py).
 
 What fails:
+- an entry to review: a "varies" or "review" input on a layer that changed since the baseline, or that a
+  changed layer feeds, until it is fixed or accepted in the exceptions register (author, 2026-10-02). The
+  baseline is a working layout's newest snapshot, or --baseline. On an unchanged layer they stay information
 - a cover finding (steam_layout/covers.py): a cover that outlives its owners, sits below its owner, or
   inherits an input through a layer between it and its owner
 - a coverage gap: a layer no chain reaches (a layer only added by hold_layer is out of scope and listed),
@@ -34,6 +37,7 @@ from pathlib import Path
 import sys
 import time
 
+from steam_layout import changes
 from steam_layout.chains import NOT_FOLLOWED, SETTLE
 from steam_layout.covers import RULES, check_cover, family_view, load_rules
 from steam_layout.flow_inheritance import inspect_target
@@ -41,7 +45,8 @@ from steam_layout.model import TARGET, Layout, map_title
 from steam_layout.rules import tag
 
 FINDINGS = ("varies", "review", "replaced", "satisfied")
-ENFORCES = {"cover check": ("R144",), "coverage": ("R145",)}   # check -> rules (Layer Definition of Done)
+REVIEW = FINDINGS[:2]           # the entries a changed layer has to fix or accept
+ENFORCES = {"cover check": ("R144",), "coverage": ("R145",), "needs review": ("R139",)}   # check -> rules
 
 
 def sha(path):
@@ -69,7 +74,28 @@ def is_cover(title, config, mapping):
     return title in titles or any(title.endswith(s) for s in covers.get("suffixes", []))
 
 
-def run(layout_path, config_path=None, layers=None):
+def needs_review(reached, changed, covers_accepted):
+    """The inherited inputs that differ between stacks on a layer that changed, or that a changed layer feeds.
+
+    Each one fails until it is fixed or accepted in the exceptions register (author, 2026-10-02). Accepting isn't
+    blocking: inheritance stays the default. A cover's inputs are judged by the cover check instead, when the
+    register says so.
+    """
+    rows = []
+    for title, target in reached.items():
+        if target["cover"] and covers_accepted:
+            continue
+        for i in target["inputs"]:
+            if i["finding"] not in REVIEW or i.get("decision"):
+                continue
+            touched = ({title} | {p for v in i["variants"] for p in v["providers"]}) & changed
+            if touched:
+                rows.append({"layer": title, "input": f"{i['source']}/{i['input']}", "finding": i["finding"],
+                             "changed": sorted(touched)})
+    return rows
+
+
+def run(layout_path, config_path=None, layers=None, baseline=None):
     data = json.loads(Path(layout_path).read_text(encoding="utf-8"))
     config = load_rules(config_path)
     layout = Layout(data)
@@ -125,7 +151,12 @@ def run(layout_path, config_path=None, layers=None):
     gaps = report["uncovered"] or report["unreached"] or report["unsupported"] \
         or any(i["unsupported"] and not i.get("decision") for t in reached.values() for i in t["inputs"])
     cover_findings = any(not f["allowed"] for c in report["covers"] for f in c["findings"])
-    report["clean"] = not gaps and not cover_findings
+    against = changes.baseline_for(layout_path, baseline)
+    changed = changes.changed_since(data, against)
+    report["baseline"] = str(against) if against else None
+    report["changed_layers"] = sorted(changed)
+    report["needs_review"] = needs_review(reached, changed, config.get("review", {}).get("covers"))
+    report["clean"] = not gaps and not cover_findings and not report["needs_review"]
     return report
 
 
@@ -223,7 +254,14 @@ def print_report(report, detail, layout=None):
                     print(f"    above: {upper} takes {taken}")
             elif c["above"]:
                 print(f"    above: {len(c['above'])} layer(s) take some of its controls (--layer shows them)")
-    print("\nResult: " + ("clean" if report["clean"] else "not clean (cover findings or coverage gaps above)"))
+    if report.get("needs_review"):
+        print(f"\nNeeds review {tag(ENFORCES['needs review'])}: on a layer changed since {Path(report['baseline']).name}, "
+              "an inherited input differs between stacks.\nFix each one, or accept it in the exceptions register "
+              "(steam_layout/flow_config.json) with a reason.")
+        for row in report["needs_review"]:
+            print(f"  {row['layer']}: {row['input']} ({row['finding']}); changed: {', '.join(row['changed'])}")
+    print("\nResult: " + ("clean" if report["clean"] else
+                          "not clean (cover findings, coverage gaps or entries to review above)"))
 
 
 def print_inventory(layout_path, config_path, layers):
@@ -253,6 +291,8 @@ def main():
     parser.add_argument("layout", type=Path)
     parser.add_argument("--config", type=Path, help="rules (default: steam_layout/flow_config.json)")
     parser.add_argument("--layer", action="append", help="report only this layer, in full (repeatable)")
+    parser.add_argument("--baseline", type=Path, help="the layout to compare with, to find the changed layers "
+                        "(default: a working layout's newest snapshot)")
     parser.add_argument("--inventory", action="store_true",
                         help="list every layer-changing binding and whether the chains follow it")
     parser.add_argument("--json", action="store_true")
@@ -261,7 +301,7 @@ def main():
         if args.inventory:
             print_inventory(args.layout, args.config, args.layer)
             return 0
-        report = run(args.layout, args.config, args.layer)
+        report = run(args.layout, args.config, args.layer, args.baseline)
     except (OSError, ValueError, KeyError) as error:
         print(f"Audit error: {error}", file=sys.stderr)
         return 2

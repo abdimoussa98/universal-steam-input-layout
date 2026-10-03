@@ -15,6 +15,7 @@ that can be on the stack with it (findings/2026-10-02-cleanup-boundaries/README.
 | Never there | a cleanup, a release or a Modifier 2 quick tap removes a layer that can never be on the stack with it |
 | Guard mismatch | one layer's cleanups have different guard buttons |
 | Hidden exit | a layer that can land on top of another covers an exit on what keeps the lower layer alive, and doesn't remove it there |
+| Exit to review | such a layer covers an exit that isn't on the keeper, and either layer changed since the baseline; fix it or accept it in the register |
 
 The stacks are the backward chains (steam_layout/chains.py). Chords are ignored,
 and timing and missed releases are not modelled. Deliberate clears and the
@@ -36,6 +37,7 @@ import json
 from pathlib import Path
 import sys
 
+from steam_layout import changes
 from steam_layout.cleanups import CHECKS, ENFORCES, audit
 from steam_layout.exceptions import load_config
 from steam_layout.rules import tag
@@ -72,7 +74,7 @@ def print_report(report, checks):
                     print(f"    {f['reason']}: {where}")
                 elif check == "hidden cleanup":
                     print(f"    hides the cleanup of {f['target']} on {', '.join(f['inputs'])}{guard}")
-                elif check == "hidden exit":
+                elif check in ("hidden exit", "exit to review"):
                     print(f"    covers the exit of {f['target']} ({f['keeper']}) on {', '.join(f['inputs'])}: "
                           f"on {f['example']}")
                 else:
@@ -84,7 +86,7 @@ def print_report(report, checks):
             print(f"  {k['layer']} removes {k['target']}: {k['why']}")
     if report["excepted"]:
         on_keeper = sum(1 for e in report["excepted"] if e["on_keeper"])
-        print(f"\nSet aside by the touchpad exception {tag(ENFORCES['hidden exit'])}: {on_keeper} pair(s) that cover "
+        print(f"\nSet aside by an exception {tag(ENFORCES['hidden exit'])}: {on_keeper} pair(s) that cover "
               f"a keeper's exit, {len(report['excepted']) - on_keeper} that cover another exit (--json lists them)")
     if report["information"]["hidden exit"]:
         print("\nInformation: covers an exit that isn't on the keeper, so the keeper's exit still works")
@@ -101,6 +103,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("layout", type=Path)
     parser.add_argument("--rules", type=Path, default=RULES, help="decisions file (default: steam_layout/flow_config.json)")
+    parser.add_argument("--baseline", type=Path, help="the layout to compare with, to find the changed layers "
+                        "(default: a working layout's newest snapshot)")
     parser.add_argument("--layer", action="append", metavar="TITLE", help="only this layer's lists (repeatable)")
     parser.add_argument("--check", action="append", choices=CHECKS, metavar="CHECK", help="only print this check's findings")
     parser.add_argument("--json", action="store_true")
@@ -108,7 +112,8 @@ def main():
     try:
         data = json.loads(args.layout.read_text(encoding="utf-8"))
         config = load_config(args.rules)
-        report = audit(data, config, only=args.layer)
+        changed = changes.changed_since(data, changes.baseline_for(args.layout, args.baseline))
+        report = audit(data, config, only=args.layer, changed=changed)
     except (OSError, ValueError, KeyError, TypeError, IndexError) as error:
         print(f"Audit error: {error}", file=sys.stderr)
         return 2

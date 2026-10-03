@@ -44,6 +44,10 @@ it with a disabled source or another source mode. The stack is taken after the
 whole binding that added the upper layer has run. Covering an exit that is not on
 the keeper is information, not a finding: the keeper's exit still works.
 
+    exit to review      such a pair, where either layer changed since the last snapshot:
+                        it fails until it is fixed or accepted in the exceptions register
+                        (author, 2026-10-02). `changed` names the changed layers.
+
 The touchpad exception (author, 2026-10-02) sets a hidden-exit pair aside when
 either layer is a touchpad layer (only trackpad bindings add it) or the covered
 exit is a trackpad input. It applies while the exceptions register has it
@@ -70,10 +74,10 @@ THUMBS = frozenset({"LSt", "RSt"})
 PADS = frozenset({"left_trackpad", "right_trackpad"})
 NAMES = frozenset(BUTTONS.values())
 CHECKS = ("outside the guard", "left below", "left above", "hidden cleanup", "never there", "guard mismatch",
-          "hidden exit")
+          "hidden exit", "exit to review")
 ENFORCES = {"outside the guard": ("R127", "R131"), "left below": ("R128",), "left above": ("R129",),   # check -> rules
             "hidden cleanup": ("R130",), "never there": ("R132",), "guard mismatch": ("R127",),
-            "hidden exit": ("R136",)}
+            "hidden exit": ("R136",), "exit to review": ("R136",)}
 TOUCHPAD_STALE = "the touchpad exception to R136"
 LISTS = ("recovery", "release")          # the roles whose removal lists follow "never there"
 ROLE = {"recovery": "cleanup function", "release": "release"}
@@ -372,13 +376,15 @@ def kept(config, variant):
     return result
 
 
-def audit(data, config=None, only=None):
+def audit(data, config=None, only=None, changed=None):
     """The Cleanup audit's report for one layout: findings, kept removals, stale decisions."""
-    return run(data, config, only)[0]
+    return run(data, config, only, changed=changed)[0]
 
 
-def run(data, config=None, only=None, stacks=None):
-    """(report, Cleanups). `stacks`: an earlier Cleanups whose stacks still hold for `data`."""
+def run(data, config=None, only=None, stacks=None, changed=None):
+    """(report, Cleanups). `stacks`: an earlier Cleanups whose stacks still hold for `data`.
+
+    `changed`: the layers that are new or changed since the last snapshot (steam_layout/changes.py)."""
     from .model import Layout
     layout = Layout(data)
     config = config or {}
@@ -400,6 +406,10 @@ def run(data, config=None, only=None, stacks=None):
         else:
             findings.append(entry)
     touchpad = config.get("cleanups", {}).get("touchpad_exits")
+    mapping = config.get("variants", {}).get(variant, {})
+    accepted = {(map_title(a["upper"], mapping), map_title(a["lower"], mapping)): a["why"]
+                for a in config.get("cleanups", {}).get("accepted_exits", [])}
+    reviewed = set()
     pads, excepted, information = cleanups.touchpad_layers(), [], []
     for (upper, lower), row in cleanups.covered_exits().items():
         if only and upper not in only and lower not in only:
@@ -417,6 +427,12 @@ def run(data, config=None, only=None, stacks=None):
             excepted.append({**entry, "on_keeper": on_keeper, "why": touchpad})
         elif on_keeper:
             findings.append(entry)
+        elif (upper, lower) in accepted:
+            reviewed.add((upper, lower))
+            excepted.append({**entry, "on_keeper": False, "why": accepted[(upper, lower)]})
+        elif {upper, lower} & set(changed or ()):
+            findings.append({**entry, "check": "exit to review",
+                             "reason": "it covers an exit that isn't on the keeper, on a layer that changed"})
         else:
             information.append(entry)
     order = {check: i for i, check in enumerate(CHECKS)}
@@ -428,7 +444,8 @@ def run(data, config=None, only=None, stacks=None):
             "ok": not findings, "findings": findings, "kept": keeping, "counts": counts,
             "excepted": excepted, "information": {"hidden exit": information},
             "stale_decisions": [] if only else [f"{layer} removes {target}" for layer, target in sorted(set(decided) - used)]
-            + ([TOUCHPAD_STALE] if touchpad and not excepted else []),
+            + ([TOUCHPAD_STALE] if touchpad and not any(e["why"] == touchpad for e in excepted) else [])
+            + [f"{upper} over {lower}" for upper, lower in sorted(set(accepted) - reviewed)],
             "omitted": cleanups.omitted,
             "summary": {"layers": len(cleanups.layers), "layers_with_cleanup": len(hosts),
                         "cleanup_functions": sum(1 for t in hosts for _ in cleanups.cleanups(t)),

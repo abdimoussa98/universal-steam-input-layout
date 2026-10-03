@@ -192,3 +192,18 @@ def newest_snapshot(working_name, versions=VERSIONS):
     found = [path for folder in Path(versions).iterdir() if folder.is_dir() and version(folder.name)
              for path in [folder / f"{stem}_{folder.name}.json"] if path.exists()]
     return max(found, key=lambda path: version(path.parent.name)) if found else None
+
+
+def baseline_for(layout_path, baseline=None):
+    """The layout to compare with: `baseline` when given, else a working layout's newest snapshot, else None."""
+    if baseline:
+        return Path(baseline)
+    name = Path(layout_path).name
+    return newest_snapshot(name) if name.endswith("_latest.json") and VERSIONS.is_dir() else None
+
+
+def changed_since(data, baseline):
+    """The layers of `data` that are new or changed against the layout at `baseline`; none without a baseline."""
+    if baseline is None:
+        return set()
+    return changed_layers(diff(json.loads(Path(baseline).read_text(encoding="utf-8")), data))

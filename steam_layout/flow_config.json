@@ -57,6 +57,16 @@
       "todo": null
     },
     {
+      "rule": "R139",
+      "scope": {
+        "kind": "covers"
+      },
+      "status": "allow",
+      "why": "A cover inherits its owner, so different bindings below it are expected, and the cover check (R144) judges it. Its inherited inputs are not reviewed one by one; without this, changing one Tap Cover brings 15 to 18 entries.",
+      "decided": "Proposed in the plan review, 2026-10-02 (decision 10); the author continued without objecting",
+      "todo": null
+    },
+    {
       "rule": "R101",
       "scope": {
         "note": "Five hold_layer commands in each layout: Base's left-pad click holds LTP: Arrow Keys and its right-pad click holds RTP: Mouse Buttons."
