@@ -138,7 +138,8 @@ class NeptuneCursorTests(unittest.TestCase):
             timed = [title for title in layout["presets"]
                      if any("always_on_action" in group.get("inputs", {})
                             for _, group in self.active_groups(layout, title))]
-            self.assertEqual(len(timed), 9)
+            # The Always On layers are exactly the Double Tap windows, so the loop below skips none.
+            self.assertEqual(sorted(timed), sorted(t for t in layout["presets"] if t.endswith(": Double Tap")))
             for button, _, regular, source, name in owners(variant):
                 target = removal(button + ": Temp Cursor Gyro")
                 for title in (regular, "Gyro | " + regular):
