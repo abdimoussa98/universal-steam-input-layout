@@ -3,8 +3,10 @@
 **Status:** draft for author review, 2026-09-30.
 
 A layer is done when every section below holds for both variants (default and
-alternative). Each section gives the rule in a few bullets and then links to the
-full explanation. The linked docs are the source of truth.
+alternative). This page is the one list of the layout's rules. Each section
+starts with its rules, one row each, and then gives the notes and links that
+explain them. Other documents explain a rule and point at its ID here; they
+don't restate it.
 
 ## Contents
 
@@ -21,12 +23,32 @@ full explanation. The linked docs are the source of truth.
 | 9 | [Always On layers](#9-always-on-layers) | Ordering rules for the Double Tap windows. What they block comes from §8 |
 | 10 | [Ship it](#10-ship-it) | Audits, tests, Deck checks and publishing |
 | 11 | [Stateful layers](#11-stateful-layers) | A stateful layer is entered and left through the transition structure. Only for stateful layers |
+| – | [Rule tables](#rule-tables) | How to read a rule row, and what each column means |
 | – | [Open questions](#open-questions) | Decisions for the author |
 
 Main references: [Steam Input JSON Structure](Steam%20Input%20JSON%20Structure.md)
 (**JSON Structure** below) and [Layout Vocabulary](Layout%20Vocabulary.md).
 
 ---
+
+## Rule tables
+
+Every rule has one row, always in these columns. A test reads them
+([test_rule_registry.py](../tests/test_rule_registry.py), through
+[rules.py](../steam_layout/rules.py)), so the shape is fixed.
+
+| Column | What it holds |
+|---|---|
+| ID | `R` plus a number from 101. It is never reused or renumbered, and it says nothing about the section. R1 to R5 are buttons, so no rule has those |
+| Rule | One plain statement of what the layout must do. A case the rule itself leaves out is part of this statement |
+| Example | One case from the layout |
+| Decided | Who decided it, and when |
+| Checked by | What fails when the rule is broken: an audit check (`Budget audit: banned activators`), a step of the fix pipeline (`` `cleanup_lists` fix ``) or a test (`` `test_file.test_name` ``), separated by `;`. "(part)" after one means it covers only some layers. **Not checked yet** means nothing fails |
+| Rests on | The Steam assumptions the rule depends on, by ID. A dash until the assumptions have IDs |
+| Exceptions | Places where the layout breaks the rule and that is accepted or still to fix, with the reason. **None** otherwise |
+
+A rule that stops applying keeps its row and its ID, with "Retired", the date
+and the reason under Checked by.
 
 ## 1. Layer type
 
@@ -70,26 +92,31 @@ See: [layout-prep skill](../.claude/skills/steam-layout-prep/SKILL.md) ·
 
 ## 3. Activators
 
-- Use only **Regular, Chorded, Start, Release and Soft Press**. Never use Long
-  Press or Double Press. Build a hold as a chorded delay and a multi-tap as a
-  layer window.
-- Each input can have **at most three command entries**. Subcommands inside an
-  entry don't count toward the three. The limit exists because Steam's desktop
-  configuration drops every entry after the third. The only exception is a
-  delayed-apply reset as a 4th entry, and it must be **last** so it's the one
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R108 | Use only Regular, Chorded, Start, Release and Soft Press. Never Long Press or Double Press, in any group, active or not | A hold is a chord with a delay: `Menu Left: Entry Point` adds its Fn layer after 200 ms. A double tap is a window layer: `L1: Double Tap` | Author, 2026-09-30 | Budget audit: banned activators; `test_layout_hygiene.test_only_allowed_activation_types_in_any_bank` | — | None |
+| R109 | An input has at most three command entries, counted across all activator types. Subcommands inside an entry don't count. A delayed-apply reset may be a 4th entry when it is the last one | Select in `Menu Left: Entry Point` has three: the hold chord, the reset and the Release. Select in `Menu Left: Escape` has four, with the cover's reset last | Author, 2026-09-27; the 4th entry on 2026-09-30 | Budget audit: entry budget; `test_layout_hygiene.test_only_second_press_cover_resets_use_a_last_fourth_entry` | — | None |
+| R110 | In a new array the removals sit below the add, so they run first. An existing array keeps its order unless the order changes the result | `L1: Modifier 0`'s Release removes the modifier first and adds `L1: Double Tap` last, so the add is stored on top | Author, 2026-09-27 and 2026-09-30 | Not checked yet | — | None |
+| R111 | On a D-pad-mode stick, an inverted edge never adds or removes a layer. One that only sends output is allowed, and mouse-mode sticks are not covered | Steering's stick modifiers end on the outer edge's Release. The WASD modifier is an inverted edge that only sends a key | Author, 2026-10-01 | Budget audit: inverted edges; `test_stateful_transitions.test_no_steering_layer_uses_an_inverted_edge` | — | None |
+| R112 | Nothing depends on a chord handing over to another activator when the chord button is released | A chord beside a repeating Regular Press on one input doesn't hand over when the chord button goes up, so Steering's modifiers end on a Release instead | Author, 2026-10-01 | Not checked yet | — | None |
+
+Notes:
+
+- **R108:** build a hold as a chorded delay and a multi-tap as a layer window.
+- **R109:** the limit exists because Steam's desktop configuration drops every
+  entry after the third. The 4th-entry reset must be **last** so it's the one
   that gets dropped.
-- Subcommand arrays run **bottom to top**.
-- **On a D-pad-mode stick, an inverted edge never adds or removes a layer**
-  (author rule, 2026-10-01). It isn't caught reliably there. Use a normal
-  outer edge and its Release. An inverted edge that only sends output, such
-  as a walk bind or the WASD modifier, is fine. Mouse-mode sticks aren't
-  affected; the ramp-up's Soft Press exits work.
+- **R110:** subcommand arrays run **bottom to top**. A stick-touch Release is
+  the one shape that stores its add last so it runs first
+  ([§6](#6-hold-tap-and-double-tap)).
+- **R111:** an inverted edge isn't caught reliably on a D-pad-mode stick. Use
+  a normal outer edge and its Release. The ramp-up's Soft Press exits, on a
+  mouse-mode stick, work.
   - The Budget audit fails on it since 90.10 (`inverted_edges`). Steering's
     left-stick layers were the only violators and now end on the edge's
     Release.
-- **Chords latch** (author's test, 2026-10-01). A bind can't hand over from a
-  chord to another activator when the chord button is released; it stays in
-  the chord until its own button is released.
+- **R112:** chords latch (author's test, 2026-10-01). A bind stays in the
+  chord until its own button is released.
 
 See: [Allowed activators](Steam%20Input%20JSON%20Structure.md#allowed-activation-types) ·
 [Entry budget](Steam%20Input%20JSON%20Structure.md#command-entry-budget) ·
