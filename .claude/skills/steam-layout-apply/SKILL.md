@@ -67,8 +67,23 @@ For binding, source, or layer-transition changes, confirm the
 [inheritance review](../../../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes)
 records affected upper layers, intended inheritance/blocks, and protected timer
 entry/exit behavior. Numeric-reference and command-budget checks do not verify
-effective inherited behavior. Include held-across-transition and newly activated
-input cases in the Deck handoff; distinguish static checks from runtime results.
+effective inherited behavior. Write the held-across-transition and newly activated
+input cases as scenario tests (below). When reporting, keep three things apart:
+what a static check shows, what a scenario shows on the simulator, and what
+Steam was seen to do (an assumption's status).
+
+**R165 to R167.** The press sequences of a new or changed layer are scenario
+tests in `tests/test_scenarios_*.py`: an input held across the change, a press
+inside the layer, and a release missed while the Steam menu is open
+([how to write one](../../../tests/scenario.py)). The tests fail while a layer
+that changed since the newest snapshot is on the stack in no scenario, so run
+them before saving the snapshot. A Steam behaviour the change depends on gets a
+row in [Steam Behaviour Assumptions](../../../resources/Steam%20Behaviour%20Assumptions.md),
+and the scenario names it. Then
+`python3 -m tests.scenario --out findings/<date>-<slug>/` writes
+`unverified-assumptions.txt` into the release's record: every assumption that
+isn't verified, with the rules and scenarios resting on it. A layer whose tests
+pass but rest on one of those is done, and listed.
 
 **R150.** Run the build audit first: `python3 audit_build.py`. It runs the Budget audit,
 the Window audit, the Flow audit and the Cleanup audit on both working layouts and must exit

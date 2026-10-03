@@ -1,6 +1,12 @@
 # Todo:
 
-Manual Deck validation is tracked in [the separate testing checklist](manual-testing.md).
+The Deck checklist was retired on 2026-10-03. Press-by-press checks are scenario
+tests now (`python3 -m tests.scenario`), and what is left for the Deck is the
+unverified rows of [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md),
+one procedure each. A link below to a section of `manual-testing.md` lands on
+its retired note; [the migration record](findings/2026-10-03-deck-check-sorting/README.md)
+says where each check went. The "validate on Deck" items below still read as
+they did before that; they haven't been re-sorted.
 
 Reviewed 2026-10-01 against release 90.9 (69 layers per layout). Every version
 has to pass the build audit, `python3 audit_build.py`

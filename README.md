@@ -330,8 +330,10 @@ applied to both JSON files: each edge has three entries using two multi-button
 Any chords, and the full command-budget checks pass. The
 [implementation record](findings/2026-09-27-neptune-command-budget/IMPLEMENTATION.md)
 tracks the results. Both 90.4 JSONs and regenerated VDFs include the cursor tuning and hold-entry haptic
-and refreshed descriptions; export verification passes. Fresh-load Deck tests
-remain pending.
+and refreshed descriptions; export verification passes. That Steam loads an
+exported VDF as written is assumption A33 in
+[Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md):
+reported, with no fresh-load check on record.
 See [counting and chord rules](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget).
 
 ## Runtime ID System
@@ -429,8 +431,15 @@ it for delivery, or publishing it to Steam:
    remains the live working copy. Follow-up edits in the same release batch
    refresh that version's snapshot; snapshots of other versions are never
    changed. The `steam-layout-apply` skills have the copy command.
-5. Keep manual Deck checks explicitly pending until performed. Committing JSON
-   is not evidence of a successful Steam upload or runtime test.
+5. Write the change's press sequences as scenario tests, and list the
+   assumptions that aren't verified in the release's record:
+   `python3 -m tests.scenario --out findings/<date>-<slug>/`
+   ([Definition of Done §10](resources/Layer%20Definition%20of%20Done.md#10-ship-it),
+   R165 to R167). Committing JSON is not evidence of a successful Steam
+   upload, and a passing scenario is not evidence of what Steam does: an
+   assumption's status in
+   [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md)
+   says that.
 
 Read-only audits and documentation-only changes do not publish a changed layout.
 The `.claude` and `.cursor` `steam-layout-apply` skills enforce this workflow.
@@ -467,8 +476,9 @@ Unsupported values (including numbers, booleans, null, and empty arrays) and
 unresolved `controller_action {{title}}` targets fail before writing.
 
 Run the command-budget and layer-order checks before exporting, and use
-`convert_runtime_ids.py to-ids` first when editing with title tokens. Fresh-load
-Deck testing remains necessary. Converter tests: `node --test tests/test_convert_vdf.mjs`.
+`convert_runtime_ids.py to-ids` first when editing with title tokens. Only a
+fresh load in Steam shows that Steam reads the file as written (assumptions A22
+and A33). Converter tests: `node --test tests/test_convert_vdf.mjs`.
 
 python3 convert_runtime_ids.py to-ids neptune/single-set-alternative_hold-gyro_latest.json &&
 python3 convert_runtime_ids.py to-ids neptune/single-set-default_hold-gyro_latest.json
@@ -488,4 +498,4 @@ is lost on the next install. See the
 [90.11 build record](findings/2026-10-02-steering-fallback-hold/README.md),
 the [90.10 build record](findings/2026-10-01-stateful-transitions/README.md),
 the earlier [lean steering record](findings/2026-09-30-steering-lean/README.md)
-and the [Deck checks](manual-testing.md#9011-steering-fallback-hold).
+and the [scenario tests](tests/test_scenarios_90_11.py) of 90.11 and 90.13.

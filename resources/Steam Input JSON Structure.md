@@ -840,8 +840,10 @@ See the [held-input audit](../findings/2026-09-29-held-input-layer-transitions/A
 for the ramp-up walkthrough, per-layout inventory, the alternative layout's
 former missing R2 → Mod 2 repeat, and the open questions. The
 [regression tests](../tests/test_neptune_held_inputs.py) protect the delays and
-repeats listed here. Real-layout checks are in
-[manual testing](../manual-testing.md#held-inputs-across-layer-changes).
+repeats listed here. The staggered Gyro toggle is a scenario test (HI2 in
+[test_scenarios_triggers_and_recovery.py](../tests/test_scenarios_triggers_and_recovery.py)),
+and what Steam does with a held input is A5 to A11 in
+[Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md).
 
 ### Gyro Settings Inheritance
 
@@ -1316,8 +1318,12 @@ inversion off). Every Always On Double Tap window retains its explicit
 empty edge block, and the two menu Fn LS mode-shift groups also explicitly
 block the edge. Those overrides intentionally displace the modifier. No upper
 bindings or layer-mutation order changed in the scaffold update. Inherited source settings can still
-affect contexts without their own settings, so test held-input entry/exit and
-release behavior using the [manual checklist](../manual-testing.md#wasd-modifier-scaffold).
+affect contexts without their own settings. Which stacks leave Base's edge
+exposed, and which displace it, is a scenario test (WM3 in
+[test_scenarios_triggers_and_recovery.py](../tests/test_scenarios_triggers_and_recovery.py)).
+What a removal exposes under a stick that is already out is assumption A11,
+and the feel of the modifier is a tuning note, both in
+[Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md#tuning-notes).
 
 ### Cleanup Scopes and Concrete Examples
 

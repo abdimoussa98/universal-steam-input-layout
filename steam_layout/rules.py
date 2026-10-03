@@ -14,10 +14,12 @@ or renumbered; a retired rule keeps its row.
     Build audit                        an audit as a whole
     `cleanup_lists` fix                a step of the fix pipeline
     `test_file.test_name`              one test, or `test_file` for the whole file
+    Scenario tests (part)              the press-by-press scenarios that name the rule (tests/scenario.py)
     Not checked yet                    nothing fails on this rule
     Retired, 2026-10-02: why           the rule no longer applies
 
-A checker may end in " (part)" when it covers only some layers. "Rests on"
+A checker may end in " (part)" when it covers only some layers. Scenario tests
+always do: they cover the press sequences that are written down. "Rests on"
 names Steam assumptions by ID (`A3, A12`), or is a dash. The assumptions have
 their own table, in resources/Steam Behaviour Assumptions.md (`load_assumptions`).
 
@@ -43,6 +45,7 @@ STATUSES = ("Verified", "Reported", "Unverified", "Refuted")
 LAYOUT_FLAGS = ("Relies on it", "Works either way")
 AUDITS = ("Budget", "Window", "Flow", "Cleanup", "Build")
 NOT_CHECKED = "Not checked yet"
+SCENARIO_TESTS = "Scenario tests"
 PART = " (part)"
 RULE_ID = re.compile(r"R[1-9]\d\d")
 REFERENCE = re.compile(r"(?<![A-Za-z0-9])R[1-9]\d\d(?![0-9])")
@@ -59,7 +62,7 @@ SOURCES = (                                # (kind, audit name, module holding i
 
 Rule = namedtuple("Rule", "id statement example decided checked_by rests_on exceptions section")
 Assumption = namedtuple("Assumption", "id statement status verified layout procedure rests rules")
-Checker = namedtuple("Checker", "kind name check part")   # kind: audit, fix, test, none or retired
+Checker = namedtuple("Checker", "kind name check part")   # kind: audit, fix, test, scenario, none or retired
 
 
 def cells(line):
@@ -83,6 +86,10 @@ def checkers(text):
             found.append(Checker("fix", match[1], None, part))
         elif match := re.fullmatch(r"`(test_\w+)(?:\.(test_\w+))?`", item):
             found.append(Checker("test", match[1], match[2], part))
+        elif item == SCENARIO_TESTS:
+            if not part:
+                raise ValueError(f"{SCENARIO_TESTS!r} is always{PART}: the scenarios cover the sequences that are written")
+            found.append(Checker("scenario", None, None, True))
         else:
             raise ValueError(f"unknown checker {item!r}")
     if len(found) > 1 and any(c.kind == "none" for c in found):

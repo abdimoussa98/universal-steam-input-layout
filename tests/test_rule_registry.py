@@ -53,6 +53,8 @@ class ReaderTests(unittest.TestCase):
         self.assertEqual(read(HEAD + row())["R101"].checked_by, (rules.Checker("none", None, None, False),))
         retired = read(HEAD + row(checked="Retired, 2026-10-02: replaced by scenario tests"))["R101"]
         self.assertEqual(retired.checked_by[0].kind, "retired")
+        scenarios = read(HEAD + row(checked="Build audit; Scenario tests (part)"))["R101"]
+        self.assertEqual(scenarios.checked_by[1], rules.Checker("scenario", None, None, True))
 
     def test_rests_on_lists_assumption_ids(self):
         self.assertEqual(read(HEAD + row(rests="A3, A12"))["R101"].rests_on, ("A3", "A12"))
@@ -65,6 +67,7 @@ class ReaderTests(unittest.TestCase):
                 ("an empty field", HEAD + row(statement="")),
                 ("an unknown checker", HEAD + row(checked="The author looks at it")),
                 ("not checked beside a checker", HEAD + row(checked="Not checked yet; Build audit")),
+                ("scenario tests that claim to cover everything", HEAD + row(checked="Scenario tests")),
                 ("a bad assumption ID", HEAD + row(rests="gate 2"))):
             with self.subTest(label):
                 with self.assertRaises(ValueError):
@@ -122,6 +125,13 @@ class RegistryTests(unittest.TestCase):
             text = " ".join((rule.statement, rule.example, rule.exceptions))
             with self.subTest(rule.id):
                 self.assertFalse(rules.references(text) - set(self.rules))
+
+    def test_only_the_retired_rule_names_the_deck_checklist(self):
+        """Phase 15: nothing in the definition of done waits for a Deck check. R155 keeps its row, retired."""
+        self.assertEqual(self.rules["R155"].checked_by[0].kind, "retired")
+        lines = rules.REGISTRY.read_text(encoding="utf-8").splitlines()
+        named = [line[:40] for line in lines if re.search(r"\bDeck\b|manual-testing|manual testing", line)]
+        self.assertEqual(named, [line[:40] for line in lines if line.startswith("| R155 |")])
 
 
 class DeclarationTests(unittest.TestCase):

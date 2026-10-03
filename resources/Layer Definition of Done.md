@@ -1,7 +1,8 @@
 # Layer definition of done
 
 **Status:** in use since 2026-09-30. The rule tables, the checks behind them
-and the exceptions register were added on 2026-10-02
+and the exceptions register were added on 2026-10-02, and since 2026-10-03
+everything on this page is checked by a script or listed as not checked yet
 ([plan](../plans/2026-10-02-rule-registry.md)).
 
 A layer is done when every section below holds for both variants (default and
@@ -23,7 +24,7 @@ don't restate it.
 | 7 | [Cleanup](#7-cleanup) | Normal exit, recovery from stuck layers, and which other layers must remove this one |
 | 8 | [Inheritance and blocking](#8-inheritance-and-blocking) | What a layer picks up from the layers below it, when to block that, and what a block looks like |
 | 9 | [Always On layers](#9-always-on-layers) | Ordering rules for the Double Tap windows. What they block comes from §8 |
-| 10 | [Ship it](#10-ship-it) | Audits, tests, Deck checks and publishing |
+| 10 | [Ship it](#10-ship-it) | Audits, tests, scenarios, assumptions and publishing |
 | 11 | [Stateful layers](#11-stateful-layers) | A stateful layer is entered and left through the transition structure. Only for stateful layers |
 | – | [Rule tables](#rule-tables) | How to read a rule row, and what each column means |
 | – | [Open questions](#open-questions) | Decisions for the author |
@@ -45,7 +46,7 @@ Every rule has one row, always in these columns. A test reads them
 | Rule | One plain statement of what the layout must do. A case the rule itself leaves out is part of this statement |
 | Example | One case from the layout |
 | Decided | Who decided it, and when |
-| Checked by | What fails when the rule is broken: an audit check (`Budget audit: banned activators`), a step of the fix pipeline (`` `cleanup_lists` fix ``) or a test (`` `test_file.test_name` ``), separated by `;`. "(part)" after one means it covers only some layers. **Not checked yet** means nothing fails |
+| Checked by | What fails when the rule is broken: an audit check (`Budget audit: banned activators`), a step of the fix pipeline (`` `cleanup_lists` fix ``) or a test (`` `test_file.test_name` ``), separated by `;`. "(part)" after one means it covers only some layers. `Scenario tests (part)` means the press-by-press scenarios that name the rule ([below](#checks-and-rules)); they are always "(part)", because they cover the sequences that are written down. **Not checked yet** means nothing fails |
 | Rests on | The Steam assumptions the rule depends on, by ID, from [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md). A dash when it depends on none |
 | Exceptions | Places where the layout breaks the rule and that is accepted or still to fix, with the reason. **None** otherwise |
 
@@ -71,6 +72,19 @@ check:
 
 ```bash
 python3 -m steam_layout.rules      # not checked yet, and checked only in part
+```
+
+A **scenario test** is one press sequence run on both layouts by a press
+simulator: hold this, tap that, wait, then say which layers are on the stack
+and which keys went down ([scenario.py](../tests/scenario.py),
+`tests/test_scenarios_*.py`). Each one names the rules it checks and the
+assumptions its outcome rests on. A test fails when a rule's row and the
+scenarios disagree about whether a scenario checks it
+([test_scenario_registry.py](../tests/test_scenario_registry.py)).
+
+```bash
+python3 -m tests.scenario R133     # the scenarios that check one rule
+python3 -m tests.scenario          # the assumptions that aren't verified, and what rests on each
 ```
 
 ## 1. Layer type
@@ -125,7 +139,7 @@ See: [layout-prep skill](../.claude/skills/steam-layout-prep/SKILL.md) ·
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
 | R108 | Use only Regular, Chorded, Start, Release and Soft Press. Never Long Press or Double Press, in any group, active or not | A hold is a chord with a delay: `Menu Left: Entry Point` adds its Fn layer after 200 ms. A double tap is a window layer: `L1: Double Tap` | Author, 2026-09-30 | Budget audit: banned activators; `rtp_scroll` fix (part); `test_layout_hygiene.test_only_allowed_activation_types_in_any_bank` | A20 | None |
-| R109 | An input has at most three command entries, counted across all activator types. Subcommands inside an entry don't count. A delayed-apply reset may be a 4th entry when it is the last one | Select in `Menu Left: Entry Point` has three: the hold chord, the reset and the Release. Select in `Menu Left: Escape` has four, with the cover's reset last | Author, 2026-09-27; the 4th entry on 2026-09-30 | Budget audit: entry budget; `test_layout_hygiene.test_only_second_press_cover_resets_use_a_last_fourth_entry` | A21 | None |
+| R109 | An input has at most three command entries, counted across all activator types. Subcommands inside an entry don't count. A delayed-apply reset may be a 4th entry when it is the last one | Select in `Menu Left: Entry Point` has three: the hold chord, the reset and the Release. Select in `Menu Left: Escape` has four, with the cover's reset last | Author, 2026-09-27; the 4th entry on 2026-09-30 | Budget audit: entry budget; `test_layout_hygiene.test_only_second_press_cover_resets_use_a_last_fourth_entry`; Scenario tests (part) | A21 | None |
 | R110 | In a new array the removals sit below the add, so they run first. An existing array keeps its order unless the order changes the result | `L1: Modifier 0`'s Release removes the modifier first and adds `L1: Double Tap` last, so the add is stored on top | Author, 2026-09-27 and 2026-09-30 | Not checked yet | A3, A4 | None |
 | R111 | On a D-pad-mode stick, an inverted edge never adds or removes a layer. One that only sends output is allowed, and mouse-mode sticks are not covered | Steering's stick modifiers end on the outer edge's Release. The WASD modifier is an inverted edge that only sends a key | Author, 2026-10-01 | Budget audit: inverted edges; `test_stateful_transitions.test_no_steering_layer_uses_an_inverted_edge` | A8, A19 | None |
 | R112 | Nothing depends on a chord handing over to another activator when the chord button is released | A chord beside a repeating Regular Press on one input doesn't hand over when the chord button goes up, so Steering's modifiers end on a Release instead | Author, 2026-10-01 | Not checked yet | A17 | None |
@@ -156,8 +170,8 @@ See: [Allowed activators](Steam%20Input%20JSON%20Structure.md#allowed-activation
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
-| R113 | A layer command that must fire on an input already held when its layer is added has Hold to Repeat, or the next layer is added in the same array | The Menu Entry Points' stick-edge chord repeats every 50 ms, so a stick guard lands when the stick is already out. Modifier 0's chord adds both covers and Modifier 2 in one array | Author, 2026-09-29 | `test_neptune_held_inputs.test_layers_added_over_a_held_input_repeat_their_next_add`; `test_neptune_held_inputs.test_no_held_input_violations_remain` | A5, A6 | None |
-| R114 | A layer command that must fire after a removal has Hold to Repeat | Base is never added, so its menu, modifier, stick-touch and right-stick-edge entries all repeat | Author, 2026-09-29 | `test_neptune_held_inputs.test_base_entries_repeat_so_exposure_after_a_removal_is_guaranteed`; `test_neptune_held_inputs.test_threshold_exits_that_change_layers_repeat` | A9, A31 | None |
+| R113 | A layer command that must fire on an input already held when its layer is added has Hold to Repeat, or the next layer is added in the same array | The Menu Entry Points' stick-edge chord repeats every 50 ms, so a stick guard lands when the stick is already out. Modifier 0's chord adds both covers and Modifier 2 in one array | Author, 2026-09-29 | `test_neptune_held_inputs.test_layers_added_over_a_held_input_repeat_their_next_add`; `test_neptune_held_inputs.test_no_held_input_violations_remain`; Scenario tests (part) | A5, A6 | None |
+| R114 | A layer command that must fire after a removal has Hold to Repeat | Base is never added, so its menu, modifier, stick-touch and right-stick-edge entries all repeat | Author, 2026-09-29 | `test_neptune_held_inputs.test_base_entries_repeat_so_exposure_after_a_removal_is_guaranteed`; `test_neptune_held_inputs.test_threshold_exits_that_change_layers_repeat`; Scenario tests (part) | A9, A31 | None |
 | R115 | A delay that exists so a command fires over a held input is kept, and a delayed add gets no repeat for that purpose | The 5 ms delay from `Gyro Off Ramp Up` to `Turning Ramp Up 0`: the stick is already past its threshold when the layer appears | Author, 2026-09-29 | `test_neptune_held_inputs.test_ramp_handoffs_keep_their_start_delays` | A5, A6 | None |
 
 Notes:
@@ -167,7 +181,8 @@ Notes:
 - **R113 covers the layer API only** (author, 2026-10-01): `add_layer`,
   `remove_layer` and `hold_layer`. It doesn't cover key or mouse outputs. The
   author's experience is that an output does fire on an already-held input
-  when its layer is added; this hasn't been tested on the Deck in isolation.
+  when its layer is added. That is assumption A10: reported, and not yet
+  verified in isolation.
 - **R115:** delayed applies do fire on a held input.
 - **R114:** how removals affect held inputs is unverified.
 
@@ -179,7 +194,7 @@ See: [Held inputs](Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
 | R116 | Every layer binds both stick-touch Releases itself. Only a cover-type layer may inherit them. `Gyro` inherits Base's, and the `LST` and `RST` helpers bind only their own stick | `L1: Modifier 0` binds both. `L1: Temp Cursor Gyro`, a cover-type layer, inherits them | Author, 2026-09-30 | Not checked yet | A1 | None |
-| R117 | A stick-touch Release clears only its own side's three helpers: the `LST` or `RST` `Entry Point`, `Tap Cover` and `Temporary Gyro`. It never removes `Gyro`, the other stick's helpers or an owner that is still valid | In `L1: Modifier 0` the left-stick touch Release removes the three `LST` layers and leaves `Gyro`, the `RST` layers and R1's layers | Author, 2026-09-30 | `test_neptune_recovery.test_transitions_block_the_stick_edges_and_touch_only_clears_the_trio` (part) | — | None |
+| R117 | A stick-touch Release clears only its own side's three helpers: the `LST` or `RST` `Entry Point`, `Tap Cover` and `Temporary Gyro`. It never removes `Gyro`, the other stick's helpers or an owner that is still valid | In `L1: Modifier 0` the left-stick touch Release removes the three `LST` layers and leaves `Gyro`, the `RST` layers and R1's layers | Author, 2026-09-30 | `test_neptune_recovery.test_transitions_block_the_stick_edges_and_touch_only_clears_the_trio` (part); Scenario tests (part) | — | None |
 | R118 | An Always On window's stick-touch Release removes the window first, then that side's helpers. The `LST` and `RST` windows bind no Release on their own stick | `L1: Double Tap`'s left-stick touch Release stores the window's removal last, so it runs first | Author, 2026-09-30 | `test_double_tap_windows.test_stick_touch_release_removes_the_window_first_then_the_side_trio` | A4 | None |
 
 **R116.** A cover-type layer is a lightweight layer that is only
@@ -235,11 +250,11 @@ out and why.** Recorded so far: the steering double tap
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
 | R119 | A layer that adds a delay or a double tap implements the whole recipe below, or records which part it leaves out and why | The Menu Left chain: `Menu Left: Entry Point`, `Menu Left: Double Tap`, `Menu Left: Escape`, `Menu Left: Double Tap Cover` | Author, 2026-09-30 | Not checked yet | — | The Steering double tap leaves parts out; recorded in its [deviations](../findings/2026-09-30-steering-lean/README.md#recipe-deviations-dod-6) |
-| R120 | Every delayed `add_layer` has a reset on the same input: a Regular Press that removes only that target, with Hold to Repeat and `interruptable: 0` | Select in `Menu Left: Entry Point` adds the Fn layer after 200 ms and removes it every 250 ms | Author's workaround, since the July layout | `cover_resets` fix (part); `test_neptune_cursor.test_delayed_cursor_reset_is_scoped_and_replaced_by_upper_inputs` (part) | A12, A28 | RTP touch has no reset, because a repeated removal breaks trackball momentum (author) |
+| R120 | Every delayed `add_layer` has a reset on the same input: a Regular Press that removes only that target, with Hold to Repeat and `interruptable: 0` | Select in `Menu Left: Entry Point` adds the Fn layer after 200 ms and removes it every 250 ms | Author's workaround, since the July layout | `cover_resets` fix (part); `test_neptune_cursor.test_delayed_cursor_reset_is_scoped_and_replaced_by_upper_inputs` (part); Scenario tests (part) | A12, A28 | RTP touch has no reset, because a repeated removal breaks trackball momentum (author) |
 | R121 | The reset's interval is longer than its delay, so a healthy add lands before the first reset | The pairs in use are 150/200, 200/250, 250/300 and 300/350 ms | Convention | Not checked yet | A12 | None |
-| R122 | The hold target binds the parent's primary input, so the reset can't remove the target once it has landed | `L1: Temp Cursor Gyro` and `L1: Tap Cover` both bind LB, which ends `L1: Modifier 0`'s 300 ms add and its 350 ms reset | Author, 2026-09-29 | `test_neptune_cursor.test_overlays_retire_primary_timers_but_only_normal_covers_replace_touches` (part) | A12, A15 | None |
-| R123 | A stick-touch Release completes the pending add first, then clears that side's helpers. Once the add has landed, a cover's touch Release only cleans up | In `L1: Modifier 0` the right-stick touch Release adds `L1: Temp Cursor Gyro` (stored last, so it runs first), then removes the three `RST` layers | Author, 2026-09-29 | `test_neptune_cursor.test_only_primary_delay_and_touch_completion_enter_cursor` (part) | A4, A13 | None |
-| R124 | A cover's Release doesn't reopen the window | Hold L1, press A, let go of L1: `L1: Tap Cover`'s Release clears the modifier and opens no `L1: Double Tap` | Author | `test_modifier_rocking.test_a_used_bumper_exits_cleanly_without_a_window` (part) | A7 | None |
+| R122 | The hold target binds the parent's primary input, so the reset can't remove the target once it has landed | `L1: Temp Cursor Gyro` and `L1: Tap Cover` both bind LB, which ends `L1: Modifier 0`'s 300 ms add and its 350 ms reset | Author, 2026-09-29 | `test_neptune_cursor.test_overlays_retire_primary_timers_but_only_normal_covers_replace_touches` (part); Scenario tests (part) | A12, A15 | None |
+| R123 | A stick-touch Release completes the pending add first, then clears that side's helpers. Once the add has landed, a cover's touch Release only cleans up | In `L1: Modifier 0` the right-stick touch Release adds `L1: Temp Cursor Gyro` (stored last, so it runs first), then removes the three `RST` layers | Author, 2026-09-29 | `test_neptune_cursor.test_only_primary_delay_and_touch_completion_enter_cursor` (part); Scenario tests (part) | A4, A13 | None |
+| R124 | A cover's Release doesn't reopen the window | Hold L1, press A, let go of L1: `L1: Tap Cover`'s Release clears the modifier and opens no `L1: Double Tap` | Author | `test_modifier_rocking.test_a_used_bumper_exits_cleanly_without_a_window` (part); Scenario tests (part) | A7 | None |
 | R125 | A delay that sends an output, a haptic or an exit, or that routes by direction, is not completed on thumb release | Steering's 1.5 s hold exit doesn't fire when a thumb lifts off the stick | Author, 2026-09-30 | Not checked yet | — | None |
 | R126 | While a delay is pending, unrelated layer changes that could reach it are blocked, because a removal restarts the delay | `L1!R1: Modifier 2`'s cleanup wasn't widened to the other Modifier 2 order: extra removals could restart the 200 ms combined-cover delay | Author | Not checked yet | A13 | None |
 
@@ -356,17 +371,17 @@ Four words these rules use ([Vocabulary](Layout%20Vocabulary.md#terms)):
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
-| R127 | The guard is the boundary: a cleanup function removes only layers its guard's buttons keep alive, and all of a layer's cleanup functions have the same guard | `L1: Modifier 0`'s cleanup functions are guarded by LB and remove LB's layers. `L1!R1: Modifier 2`'s are guarded by LB and RB and remove both sides' | Author, 2026-10-02 | Cleanup audit: outside the guard; Cleanup audit: guard mismatch; `cleanup_lists` fix | A30 | None |
-| R128 | Below: a cleanup function removes, in one step, every layer under its host that the guard's buttons keep alive. It stops at Base, a stateful layer, a window, or a layer another button keeps alive | `Menu Left: Fn Layer`'s cleanup function also removes `Menu Left: Entry Point` under it | Author, 2026-10-02 | Cleanup audit: left below; `cleanup_lists` fix | — | None |
-| R129 | Above: a cleanup function removes a layer on top of its host that the same buttons keep alive and that leaves the cleanup's input alone | `L1: Tap Cover` binds three inputs. On the others `L1: Modifier 0`'s cleanup function still fires, so it removes the cover | Author, 2026-10-02 | Cleanup audit: left above; `cleanup_lists` fix | — | None |
-| R130 | A layer that binds an input with a cleanup function below carries that cleanup on the input, with the same guard | `L1: Tap Cover` binds both stick touches, so it carries the modifier's cleanup function there | Author, 2026-10-02 | Cleanup audit: hidden cleanup; `cleanup_lists` fix | A1 | None |
-| R131 | A cleanup function never removes a stateful layer, a stick-touch helper, a window, or a layer another button keeps alive | `L1: Modifier 0`'s cleanup function leaves `Gyro`, the `RST` helpers, `L1: Double Tap` and R1's layers | Author, 2026-10-02 | Cleanup audit: outside the guard; `cleanup_lists` fix | — | None |
+| R127 | The guard is the boundary: a cleanup function removes only layers its guard's buttons keep alive, and all of a layer's cleanup functions have the same guard | `L1: Modifier 0`'s cleanup functions are guarded by LB and remove LB's layers. `L1!R1: Modifier 2`'s are guarded by LB and RB and remove both sides' | Author, 2026-10-02 | Cleanup audit: outside the guard; Cleanup audit: guard mismatch; `cleanup_lists` fix; Scenario tests (part) | A30 | None |
+| R128 | Below: a cleanup function removes, in one step, every layer under its host that the guard's buttons keep alive. It stops at Base, a stateful layer, a window, or a layer another button keeps alive | `Menu Left: Fn Layer`'s cleanup function also removes `Menu Left: Entry Point` under it | Author, 2026-10-02 | Cleanup audit: left below; `cleanup_lists` fix; Scenario tests (part) | — | None |
+| R129 | Above: a cleanup function removes a layer on top of its host that the same buttons keep alive and that leaves the cleanup's input alone | `L1: Tap Cover` binds three inputs. On the others `L1: Modifier 0`'s cleanup function still fires, so it removes the cover | Author, 2026-10-02 | Cleanup audit: left above; `cleanup_lists` fix; Scenario tests (part) | — | None |
+| R130 | A layer that binds an input with a cleanup function below carries that cleanup on the input, with the same guard | `L1: Tap Cover` binds both stick touches, so it carries the modifier's cleanup function there | Author, 2026-10-02 | Cleanup audit: hidden cleanup; `cleanup_lists` fix; Scenario tests (part) | A1 | None |
+| R131 | A cleanup function never removes a stateful layer, a stick-touch helper, a window, or a layer another button keeps alive | `L1: Modifier 0`'s cleanup function leaves `Gyro`, the `RST` helpers, `L1: Double Tap` and R1's layers | Author, 2026-10-02 | Cleanup audit: outside the guard; `cleanup_lists` fix; Scenario tests (part) | — | None |
 | R132 | A cleanup function, a Release and the Modifier 2 quick tap list only layers that can be on the stack with their host. A deliberate clear keeps its whole list, and a stick-touch Release keeps its three helpers | `L1: Modifier 0`'s cleanup function doesn't list `Gyro \| L1: Modifier 0`: the two are never on the stack together | Author, 2026-10-02 | Cleanup audit: never there; `cleanup_lists` fix | — | None |
-| R133 | A cleanup function has the guarded recovery shape: on one input, a chord for each valid owner beside an interruptible Regular Press with Hold to Repeat that removes the layers | Right-stick touch in `L1: Modifier 0`: an empty chord with LB, and a repeating Regular Press that removes LB's layers when LB isn't held | Standardised 2026-09-28 | `test_neptune_recovery.test_all_guarded_removals_repeat_and_rtp_stays_out_of_ls_scope` | A25, A27, A30 | None |
-| R134 | A stick edge gets a cleanup function only where the layer needs one: the left edge costs the WASD modifier and the right edge costs ramp-up | `L1: Modifier 0` has one on both stick edges; `RTP: Entry Point` was left without a left-edge one | Author, 2026-09-28 | Not checked yet | — | None |
-| R135 | A cancellation removes only itself, repeats, is uninterruptible and has no guard | Each of `L1: Temp Cursor Gyro`'s 15 cancel inputs removes only the cursor, which exposes the modifier's own binding | Author, 2026-10-02 | `test_neptune_cursor.test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent` | A27 | None |
-| R136 | Hidden exit: a layer that can land on top of another may not cover an exit on what keeps the lower layer alive, unless it removes the lower layer there | In the first 90.11 build a Start tap put a menu Double Tap window over `Steering \| LS: Fallback Hold`. Recentring inside the window missed the layer's Release and left it on | Author, 2026-10-02 | Cleanup audit: hidden exit; Cleanup audit: exit to review | — | Touchpad layers are set aside for now, 68 cases on 90.13 (author, 2026-10-02; [to-do](../todos.md#steering)) |
-| R138 | The held button's layer owns its combos. No layer exists only to protect a second button that is still held | Hold Start, hold LB for F10, lift Start: LB falls through to Base and becomes the L1 modifier. `Menu Left: Backspace` and `Menu Right: Enter` were removed in 90.9 | Author, 2026-10-01 | `menu_combo_keys` fix (part); `test_fixes.test_overlays_are_gone_and_nothing_references_them` (part) | A10 | None |
+| R133 | A cleanup function has the guarded recovery shape: on one input, a chord for each valid owner beside an interruptible Regular Press with Hold to Repeat that removes the layers | Right-stick touch in `L1: Modifier 0`: an empty chord with LB, and a repeating Regular Press that removes LB's layers when LB isn't held | Standardised 2026-09-28 | `test_neptune_recovery.test_all_guarded_removals_repeat_and_rtp_stays_out_of_ls_scope`; Scenario tests (part) | A25, A27, A30 | None |
+| R134 | A stick edge gets a cleanup function only where the layer needs one: the left edge costs the WASD modifier and the right edge costs ramp-up | `L1: Modifier 0` has one on both stick edges; `RTP: Entry Point` was left without a left-edge one | Author, 2026-09-28 | Scenario tests (part) | — | None |
+| R135 | A cancellation removes only itself, repeats, is uninterruptible and has no guard | Each of `L1: Temp Cursor Gyro`'s 15 cancel inputs removes only the cursor, which exposes the modifier's own binding | Author, 2026-10-02 | `test_neptune_cursor.test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent`; Scenario tests (part) | A27 | None |
+| R136 | Hidden exit: a layer that can land on top of another may not cover an exit on what keeps the lower layer alive, unless it removes the lower layer there | In the first 90.11 build a Start tap put a menu Double Tap window over `Steering \| LS: Fallback Hold`. Recentring inside the window missed the layer's Release and left it on | Author, 2026-10-02 | Cleanup audit: hidden exit; Cleanup audit: exit to review; Scenario tests (part) | — | Touchpad layers are set aside for now, 68 cases on 90.13 (author, 2026-10-02; [to-do](../todos.md#steering)) |
+| R138 | The held button's layer owns its combos. No layer exists only to protect a second button that is still held | Hold Start, hold LB for F10, lift Start: LB falls through to Base and becomes the L1 modifier. `Menu Left: Backspace` and `Menu Right: Enter` were removed in 90.9 | Author, 2026-10-01 | `menu_combo_keys` fix (part); `test_fixes.test_overlays_are_gone_and_nothing_references_them` (part); Scenario tests (part) | A10 | None |
 
 Notes:
 
@@ -413,9 +428,9 @@ never changed.
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
 | R139 | Inheritance is the default: an ordinary layer isn't required to block an input because the layers below would give it different bindings. But such an input is read when it is new: on a layer that changed since the last snapshot, or that a changed layer feeds, it fails until it is fixed or accepted with a reason | The left-pad key layers inherit the L1 and R1 modifier entries from Base. In the first 90.11 build, two such inputs on the new `Steering \| LS: Fallback Hold` were the menu taps that could strand it | Author, 2026-10-01; the review on changed layers 2026-10-02 | Flow audit: needs review | A1 | Accepted: the two Steering stick modifiers inherit the drivers from the W and S layers, by design. Cover layers aren't reviewed this way: the cover check judges them (R144) |
-| R140 | Window rule. Under a layer with an Always On action, an input the layer leaves open is handled when any stack can put a layer command under it: replaced with the keybind when only one is possible, cleared otherwise. A stack whose binding is only a layer command adds no keybind | Every default window replaces the trigger edge with Base's mouse button: `Gyro Off Ramp Up` can sit under the window, and its edge only removes it | Author, 2026-09-30, restated 2026-10-01 | Window audit: open routes; Window audit: unchecked window; `window_routes` fix | A1, A2, A24, A26, A29 | None |
+| R140 | Window rule. Under a layer with an Always On action, an input the layer leaves open is handled when any stack can put a layer command under it: replaced with the keybind when only one is possible, cleared otherwise. A stack whose binding is only a layer command adds no keybind | Every default window replaces the trigger edge with Base's mouse button: `Gyro Off Ramp Up` can sit under the window, and its edge only removes it | Author, 2026-09-30, restated 2026-10-01 | Window audit: open routes; Window audit: unchecked window; `window_routes` fix; Scenario tests (part) | A1, A2, A24, A26, A29 | None |
 | R141 | A block clears the input by default and replaces it only where the use is obvious. It targets only routes that change layers, and it is never a removal | The modifier Double Tap windows replace the bumper, which normally adds a layer, with the scroll wheel | Author, 2026-09-30 | `window_routes` fix (part) | A13, A29 | None |
-| R137 | Temporary guards: no layer is added over a temporary guard; only removals happen there | In `Steering \| LS: Entry Guard` and `Steering \| LS: Fallback Hold`, Start and Select type Tab and Escape, so no menu layer can land and hide their Releases | Author, 2026-10-02 | `test_steering_fallback_hold.test_no_menu_layer_lands_on_the_hold_or_the_entry_guard` (part) | A8 | None |
+| R137 | Temporary guards: no layer is added over a temporary guard; only removals happen there | In `Steering \| LS: Entry Guard` and `Steering \| LS: Fallback Hold`, Start and Select type Tab and Escape, so no menu layer can land and hide their Releases | Author, 2026-10-02 | `test_steering_fallback_hold.test_no_menu_layer_lands_on_the_hold_or_the_entry_guard` (part); Scenario tests (part) | A8 | None |
 | R142 | Menu layers keep gyro disabled and the right-stick edge blocked | `Menu Left: Escape` has a disabled gyro group and an empty right-stick edge | Author, 2026-09-28 | `test_neptune_gyro.test_gyro_sources_only_override_owned_properties_or_explicitly_disable` (part) | — | None |
 | R143 | Base owns the gyro response. An activation layer sets only its selector fields, and the cursor only its four response settings | `Gyro` sets `layer: 1` and its activation selector. `L1: Temp Cursor Gyro` sets precision speed 750 and three haptic and threshold values | From the July reference | `test_neptune_gyro.test_gyro_sources_only_override_owned_properties_or_explicitly_disable`; `test_neptune_cursor.test_cursor_profile_preserves_sensitivity_and_owner_activation` | — | None |
 | R144 | A cover never outlives its owners, never sits below its owner, and inherits nothing through a layer between it and its owner | `L1: Tap Cover` sits directly on `L1: Modifier 0` and is removed with it | Author-approved plan, 2026-09-30 | Flow audit: cover check | — | None |
@@ -585,9 +600,9 @@ means the nine Double Tap windows.
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
-| R146 | Entry: every other layer change runs first, and the Always On layer is added last | `L1: Modifier 0`'s Release removes the modifier, then adds `L1: Double Tap` | Author, documented 2026-09-28 | `test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries` | A4, A24 | None |
-| R147 | Timeout: an Always On layer's timed action removes only itself | `Menu Left: Double Tap` removes itself after 150 ms | Author, documented 2026-09-28 | `test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries` (part) | A4, A24 | None |
-| R148 | Early exit: the Always On layer is removed first, then the other changes run | `L1: Double Tap`'s second press removes the window, then adds `L1: Scroll Down` | Author, documented 2026-09-28 | `test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries`; `test_double_tap_windows.test_stick_touch_release_removes_the_window_first_then_the_side_trio` | A4, A24 | None |
+| R146 | Entry: every other layer change runs first, and the Always On layer is added last | `L1: Modifier 0`'s Release removes the modifier, then adds `L1: Double Tap` | Author, documented 2026-09-28 | `test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries`; Scenario tests (part) | A4, A24 | None |
+| R147 | Timeout: an Always On layer's timed action removes only itself | `Menu Left: Double Tap` removes itself after 150 ms | Author, documented 2026-09-28 | `test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries` (part); Scenario tests (part) | A4, A24 | None |
+| R148 | Early exit: the Always On layer is removed first, then the other changes run | `L1: Double Tap`'s second press removes the window, then adds `L1: Scroll Down` | Author, documented 2026-09-28 | `test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries`; `test_double_tap_windows.test_stick_touch_release_removes_the_window_first_then_the_side_trio`; Scenario tests (part) | A4, A24 | None |
 | R149 | Both trackpads stay off the layer API during every window. `RTP: Double Tap` keeps its own D-pad pad for the second tap | In `L1: Double Tap` a left-pad swipe types Escape, Enter, Tab or Backspace directly, and the right pad stays the mouse with click and touch cleared | Author, 2026-09-30 | `window_pads` fix; `test_double_tap_windows.test_left_pad_swipes_send_keys_without_the_layer_api`; `test_double_tap_windows.test_right_pad_stays_the_mouse_with_click_and_touch_cleared` | A24 | None |
 
 While a window is active, every inherited layer command is blocked (R140,
@@ -648,7 +663,10 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 | R152 | The working layouts are a fixed point of the fix pipeline: running it again changes nothing | `python3 -m steam_layout.fixes neptune/*_latest.json --dry-run` reports nothing to change | Since the pipeline, 2026-09-30 | `test_fixes.test_working_layouts_are_a_fixed_point` | — | None |
 | R153 | A layout has no dead groups: no plain-inactive slot and no unreferenced group | 90.6 pruned the four inactive stick-touch Double Press groups | 2026-09-30 | `dead_groups` fix; `test_layout_hygiene.test_no_unreferenced_groups_or_plain_inactive_slots` | — | None |
 | R154 | The tests pass, a new invariant gets a new test, and the change is recorded in `findings/<date>-<slug>/` | 90.11 came with `tests/test_steering_fallback_hold.py` and `findings/2026-10-02-steering-fallback-hold/` | Author | Not checked yet | — | None |
-| R155 | A Deck section is added to `manual-testing.md` for the change | 90.13 added "90.13: no turn assist in Steering", checks N1 to N4 | Author | Not checked yet | — | None |
+| R155 | A Deck section is added to `manual-testing.md` for the change | 90.13 added "90.13: no turn assist in Steering", checks N1 to N4 | Author | Retired, 2026-10-03: the Deck checklist is retired. Its press sequences are scenario tests (R165), and what Steam does is in the assumptions document (R166) | — | None |
+| R165 | A layer that is new or changed has scenario tests for its press sequences: an input held across the change, a press inside the layer, and a release missed while the Steam menu is open | The 90.10 transitions have 18, in `tests/test_scenarios_90_10.py`: D6 holds a driver across a Steering window, T8 presses the other menu button before the Fn layer is up, and T4 leaves a transition by a missed release | Author, 2026-10-02: part C of the [plan](../plans/2026-10-02-rule-registry.md). The three kinds of sequence come from R155 | `test_scenario_registry.test_every_changed_layer_is_on_the_stack_in_a_scenario` (part) | — | None |
+| R166 | A Steam behaviour that a rule, a design or a test depends on has a row in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md): its status, whether the layout relies on it, one way to verify it, and what rests on it | A37 was written down when the press simulator had to choose one: a key stays down when the layer answering a held input changes and the new binding sends the same key | Author, 2026-10-02: part C of the [plan](../plans/2026-10-02-rule-registry.md) | `test_rule_registry.test_every_assumption_a_rule_rests_on_exists` (part); `test_rule_registry.test_rests_on_and_what_rests_on_it_agree` (part); `test_scenario_registry.test_the_rules_and_assumptions_a_scenario_names_exist` (part) | — | None |
+| R167 | The release's record lists every assumption that isn't verified, with the rules and scenario tests that rest on it. A layer whose tests pass but rest on one is done, and listed | For 90.13 the list has 18 assumptions, and 38 of the 87 scenarios rest on one of them; A8, the stick edge's Release in a layer added with the stick out, carries nine | Author, 2026-10-02: "done, and listed" | Not checked yet | — | None |
 | R164 | Before a release ships, its change report is written to the release's findings folder and read: every change in it is one somebody decided | The report for 90.13 shows `Steering` gaining an empty right-stick edge, which was decided, and the two Steering stick windows losing their trigger-edge mouse buttons, which the `window_routes` fix did on its own | Author, 2026-10-02 | Not checked yet | — | None |
 | R156 | The working layouts are generated: they equal the current builder's output run through the fix pipeline. A hand edit there is lost on the next install | `neptune/*_latest.json` equals the output of `findings/2026-10-02-steering-fallback-hold/build_candidate.py`, apart from title and description | Since the 09-30 builder | `test_steering_fallback_hold.test_working_layouts_are_this_build` | — | None |
 
@@ -664,8 +682,9 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       | Cleanup audit | `audit_cleanups.py` | Every cleanup function and release follows the six cleanup rules, and no layer hides another's exit ([§7](#7-cleanup)) |
 
       What a clean build audit doesn't prove: it follows the intended flows,
-      not every runtime interleaving, missed release or timer race. Those are
-      what the Deck checks are for.
+      not every runtime interleaving, missed release or timer race. The
+      scenario tests below run the sequences somebody wrote down, and nothing
+      runs the rest.
 - [ ] **A new layer needs no declaration.** The audits pick it up from the
       layout. If no binding adds it, the Flow audit reports it as a coverage
       gap. Only two things go in
@@ -679,18 +698,42 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       folder. A change nobody decided is looked at before the release ships.
 - [ ] **R154:** the tests pass, and a new invariant gets a new test.
 - [ ] **R154:** the change is recorded in `findings/<date>-<slug>/`.
-- [ ] **R155:** a Deck section is added to [manual-testing.md](../manual-testing.md). It
-      covers an input held across the change, a press inside the layer, and a
-      release missed while the Steam menu is open.
+- [ ] **R165:** the new layer's press sequences are scenario tests, in a
+      `tests/test_scenarios_*.py` file. They cover an input held across the
+      change, a press inside the layer, and a release missed while the Steam
+      menu is open. The check behind this rule is narrower: it fails while a
+      layer that is new or changed since the newest snapshot is on the stack
+      in no scenario. Whether the three kinds of sequence are there is read
+      by a person.
+- [ ] **R166:** every Steam behaviour the change depends on has a row in
+      [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md), with
+      what rests on it. A scenario names the assumptions its outcome rests on
+      (`rests`), and one the layout must work either way under is run both
+      ways (`either`). The tests fail on an ID that has no row; they can't
+      tell that a behaviour was never written down.
+- [ ] **R167:** the release's record lists the assumptions that aren't
+      verified. `python3 -m tests.scenario --out findings/<date>-<slug>/`
+      writes `unverified-assumptions.txt` there: each assumption with the
+      rules and the scenarios that rest on it. A layer whose tests pass but
+      rest on one of them is done, and listed (author, 2026-10-02).
 - [ ] **R151:** the [layout-apply skill](../.claude/skills/steam-layout-apply/SKILL.md)
       has run: description, version bump, `to-ids`, VDF export and snapshot.
+
+**What the checks don't prove.** A scenario test passes on a simulator that
+does what the assumptions say Steam does. So it proves the layout's bindings
+give the expected result for one written sequence, if those assumptions hold.
+It doesn't cover a sequence nobody wrote, an interleaving of two inputs in the
+same millisecond beyond the two orders it tries (A32), or a timer race. And it
+says nothing about whether an assumption is true: each assumption has one
+procedure for settling that, in its row, and its status changes only when
+somebody has run it.
 
 ## 11. Stateful layers
 
 This section applies only when a stateful layer is added or changed. The
 structure is in [Stateful Layer Transitions](Stateful%20Layer%20Transitions.md).
-It was agreed on 2026-10-01 and is built since 90.10; Deck validation is
-pending.
+It was agreed on 2026-10-01 and is built since 90.10. Its press sequences are
+scenario tests ([test_scenarios_90_10.py](../tests/test_scenarios_90_10.py)).
 
 The check is whether the transitions behave as that document says.
 [test_stateful_transitions.py](../tests/test_stateful_transitions.py) asserts
@@ -699,13 +742,13 @@ until all four gestures are taken.
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
-| R157 | A stateful layer is entered and left through a transition, by one of the four menu-plus-stick-click gestures. Stateful layers never add each other directly. `Gyro` is the one stateful layer outside this: the Modifier 2 Release toggles it | Start plus left-stick click enters `Steering`: the click's Release adds `Transition Set 1`, and that layer's Start Release adds `Steering` | Author, 2026-10-01 | `test_stateful_transitions.test_entry_point_clicks_release_into_their_transition`; `test_stateful_transitions.test_transition_menu_releases` | A7 | Steering's 1.5 s hold exit and the Modifier 2 clear leave without a transition (author, 2026-10-01) |
-| R158 | Inside a stateful layer, any menu button plus any stick click clears it and everything above Base except `Gyro`. The layer has its own Entry Points for that | In `Steering`, both stick clicks in both of its Entry Points lead to `Transition Set 0`, the clear | Author, 2026-10-01 | `test_stateful_transitions.test_entry_point_clicks_release_into_their_transition` | — | None |
+| R157 | A stateful layer is entered and left through a transition, by one of the four menu-plus-stick-click gestures. Stateful layers never add each other directly. `Gyro` is the one stateful layer outside this: the Modifier 2 Release toggles it | Start plus left-stick click enters `Steering`: the click's Release adds `Transition Set 1`, and that layer's Start Release adds `Steering` | Author, 2026-10-01 | `test_stateful_transitions.test_entry_point_clicks_release_into_their_transition`; `test_stateful_transitions.test_transition_menu_releases`; Scenario tests (part) | A7 | Steering's 1.5 s hold exit and the Modifier 2 clear leave without a transition (author, 2026-10-01) |
+| R158 | Inside a stateful layer, any menu button plus any stick click clears it and everything above Base except `Gyro`. The layer has its own Entry Points for that | In `Steering`, both stick clicks in both of its Entry Points lead to `Transition Set 0`, the clear | Author, 2026-10-01 | `test_stateful_transitions.test_entry_point_clicks_release_into_their_transition`; Scenario tests (part) | — | None |
 | R159 | The Modifier 2 clear removes every stateful layer and its helpers | In `Steering`, a quick tap of both bumpers clears to Base | Author, 2026-09-30 and 2026-10-01 | `test_steering_fallback_hold.test_only_steering_the_clears_and_the_hold_name_the_hold` (part) | — | Open since 2026-10-01: an older to-do keeps Gamepad through this clear ([to-do](../todos.md#global-stateful-behavior)) |
-| R160 | No layer is entered from a transition: every input that would add a layer underneath is cleared | `Transition Set 1` clears both bumpers, so no modifier can be entered while it is on | Author, 2026-10-01 | `test_stateful_transitions.test_nothing_is_entered_from_a_transition` | — | None |
-| R161 | Every menu Release in a transition beeps and gives a strong pulse | `Transition Set 1`'s Start Release has `haptic_intensity` 3, and its `add_layer` of `Steering` carries the beep flag | Author, 2026-10-02 | `test_stateful_transitions.test_every_transition_beeps_and_pulses_on_its_menu_release` | — | None |
+| R160 | No layer is entered from a transition: every input that would add a layer underneath is cleared | `Transition Set 1` clears both bumpers, so no modifier can be entered while it is on | Author, 2026-10-01 | `test_stateful_transitions.test_nothing_is_entered_from_a_transition`; Scenario tests (part) | — | None |
+| R161 | Every menu Release in a transition beeps and gives a strong pulse | `Transition Set 1`'s Start Release has `haptic_intensity` 3, and its `add_layer` of `Steering` carries the beep flag | Author, 2026-10-02 | `test_stateful_transitions.test_every_transition_beeps_and_pulses_on_its_menu_release`; Scenario tests (part) | — | None |
 | R162 | At entry a stateful layer has no Release and no delayed binding on Start or Select. A repeating press that adds its Entry Point is allowed | `Steering` adds its Entry Points with a repeating press, as Base does | Author, 2026-10-01 | `test_stateful_transitions.test_base_and_steering_add_their_entry_points_with_a_repeating_press` (part) | — | None |
-| R163 | Entering a transition clears the whole stack first, keeping `Gyro`, and adds the transition last | The left-stick click Release in `Menu Right: Entry Point` removes every layer except `Gyro`, then adds `Transition Set 1` | Author, 2026-10-02 | `test_stateful_transitions.test_entry_point_clicks_release_into_their_transition` | — | None |
+| R163 | Entering a transition clears the whole stack first, keeping `Gyro`, and adds the transition last | The left-stick click Release in `Menu Right: Entry Point` removes every layer except `Gyro`, then adds `Transition Set 1` | Author, 2026-10-02 | `test_stateful_transitions.test_entry_point_clicks_release_into_their_transition`; Scenario tests (part) | — | None |
 
 - [ ] **Gesture (R157).** The layer is entered by one of the four menu-plus-stick-click
       gestures, and the gesture map is updated.
@@ -728,7 +771,8 @@ until all four gestures are taken.
 - [ ] **Recipes (R111, R112).** Nothing depends on a chord handing over when the chord
       button is released, or on an inverted edge of a D-pad stick adding or
       removing a layer ([§3](#3-activators)).
-- [ ] **Test and Deck checklist (R154, R155)** are updated for the new layer.
+- [ ] **Tests (R154, R165).** `test_stateful_transitions.py` and the scenario
+      tests are extended for the new layer.
 
 **Exceptions (author, 2026-10-01):**
 - `Gyro` is toggled by the Modifier 2 release and is left on by the clear.
@@ -744,4 +788,6 @@ See: [Stateful Layer Transitions](Stateful%20Layer%20Transitions.md) ·
 
 ## Open questions
 
-None. Deck validation is tracked in [manual testing](../manual-testing.md).
+None. The Steam behaviours that are still unverified are in
+[Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md), each with
+what rests on it.

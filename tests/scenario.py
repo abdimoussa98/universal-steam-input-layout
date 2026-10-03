@@ -1,6 +1,6 @@
 """Press-by-press scenario tests: readable gestures over the press simulator, on the working layouts.
 
-A scenario is one Deck check written as a test: hold this, tap that, wait, and then
+A scenario is one press sequence written as a test: hold this, tap that, wait, and then
 say which layers are on the stack and which keys went down.
 
     class FallbackHold(ScenarioCase):
@@ -11,12 +11,19 @@ say which layers are on the stack and which keys went down.
                 pad.tap("Start")
                 self.assertEqual(pad.typed_since_mark(), ["TAB"])
 
-`scenario(check, rules, rests, either)` records which Deck check the test replaces, the
-rules it checks and the Steam assumptions its outcome rests on. `self.each()` runs the
-body on both layouts, and once per way of every assumption named in `either` (the ones
-the layout must work either way under: A9, A32).
+`scenario(label, rules, rests, either)` records the scenario's label, the rules it checks
+and the Steam assumptions its outcome rests on. The label is the release and a number
+(`90.14 S1`); a scenario that replaced a check of the retired Deck checklist carries that
+check's section and ID. `self.each()` runs the body on both layouts, and once per way of
+every assumption named in `either` (the ones the layout must work either way under: A9, A32).
 
-    python3 -m tests.scenario      # the scenarios, and which rest on an unverified assumption
+    python3 -m tests.scenario           # the assumptions that aren't verified, and what rests on each
+    python3 -m tests.scenario R133      # the scenarios that check a rule
+    python3 -m tests.scenario --out findings/<date>-<slug>/    # also write unverified-assumptions.txt there
+
+The first form also says which layers no scenario puts on the stack. A layer that is new or
+changed since the newest snapshot has to be on the stack in at least one scenario (R165,
+`uncovered`).
 
 Names. Buttons: Start, Select, A, B, X, Y, Up, Down, Left, Right, LB, RB, and the back
 buttons. L1 and R1 are the modifier buttons: the bumpers in the default layout, the
@@ -25,14 +32,16 @@ soft pull in the default, the bumpers in the alternative. Sticks are LS and RS, 
 and RP. A layer title is written with the default layout's names; `pad.title()` and the
 expectations turn L1 and R1 into L2 and R2 for the alternative.
 
-Plan: plans/2026-10-02-rule-registry.md, phases 13 and 14.
+Plan: plans/2026-10-02-rule-registry.md, phases 13 to 15.
 """
+import argparse
 from collections import namedtuple
 import itertools
 import json
 from pathlib import Path
 import unittest
 
+from steam_layout import changes
 from steam_layout.model import Layout, map_title
 from steam_layout.simulator import Simulator, desktop, typed
 
@@ -58,22 +67,29 @@ BACK = {new: old for old, new in RENAME.items()}
 
 Meta = namedtuple("Meta", "check name rules rests either")
 SCENARIOS = []
+REACHED = {}                                 # layout -> the layers a scenario has put on the stack so far
+RELEASE_LIST = "unverified-assumptions.txt"
 _layouts = {}
+_ran = []
 
 
 def scenario(check, rules=(), rests=(), either=()):
-    """Mark a test as the scenario for a Deck check (section plus ID, as in the sorting)."""
+    """Mark a test as a scenario: its label, the rules it checks and the assumptions its outcome rests on."""
     def mark(function):
         function.scenario = Meta(check, function.__qualname__, tuple(rules), tuple(rests) + tuple(either), tuple(either))
-        SCENARIOS.append(function.scenario)
+        if function.scenario not in SCENARIOS:               # a test file can be imported under two names
+            SCENARIOS.append(function.scenario)
         return function
     return mark
 
 
+def layout_path(variant):
+    return ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json"
+
+
 def layout_data(variant):
     if variant not in _layouts:
-        path = ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json"
-        _layouts[variant] = json.loads(path.read_text(encoding="utf-8"))
+        _layouts[variant] = json.loads(layout_path(variant).read_text(encoding="utf-8"))
     return _layouts[variant]
 
 
@@ -84,7 +100,7 @@ class Pad:
         self.variant, self.options = variant, options
         self.layout = Layout(data or layout_data(variant))
         self.sim = Simulator(self.layout, start=tuple(self.title(t) for t in start) if start else None, **options)
-        self._mark = 0
+        self._mark, self._began = 0, tuple(self.sim.stack)
 
     def __repr__(self):
         return f"{self.variant}{' ' + str(self.options) if self.options else ''}"
@@ -236,6 +252,10 @@ class Pad:
     def gyro_off(self):
         return self.sim.gyro_disabled()
 
+    def reached(self):
+        """Every layer that has been on the stack in this scenario."""
+        return set(self._began) | {title for _, what, title in self.sim.log if what == "add"}
+
 
 class ScenarioCase(unittest.TestCase):
     """Runs a scenario on both layouts, once per way of each assumption it names in `either`."""
@@ -260,31 +280,94 @@ class ScenarioCase(unittest.TestCase):
                 elif start:
                     pad = Pad(variant, start=start, data=data, **chosen)
                 self._pad = pad
-                yield pad.mark()
+                try:
+                    yield pad.mark()
+                finally:
+                    REACHED.setdefault(variant, set()).update(pad.reached())
+
+
+def modules():
+    """Every scenario test file, imported (which registers its scenarios)."""
+    return [__import__(f"tests.{path.stem}", fromlist=["*"]) for path in sorted((ROOT / "tests").glob("test_scenarios_*.py"))]
+
+
+def for_rule(rule_id):
+    """The scenarios that name a rule."""
+    modules()
+    return [meta for meta in SCENARIOS if rule_id in meta.rules]
+
+
+def reached():
+    """{layout: the layers some scenario puts on the stack}. Runs every scenario test once."""
+    if not _ran:
+        suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromModule(module) for module in modules())
+        suite.run(unittest.TestResult())             # a failure here shows when the tests themselves run
+        _ran.append(True)
+    return REACHED
+
+
+def uncovered(variant, baseline=None):
+    """The layers changed since the newest snapshot (or since `baseline`) that no scenario puts on the stack (R165)."""
+    changed = changes.changed_since(layout_data(variant), changes.baseline_for(layout_path(variant), baseline))
+    return sorted(changed - reached().get(variant, set()))
 
 
 def report():
-    """The scenarios, and which of them rest on an assumption that isn't verified."""
+    """Every assumption that isn't verified, with the rules and the scenarios that rest on it."""
     from steam_layout import rules
-    for path in sorted((ROOT / "tests").glob("test_scenarios_*.py")):
-        __import__(f"tests.{path.stem}")
-    assumptions = rules.load_assumptions()
-    lines = [f"{len(SCENARIOS)} scenarios for {len({m.check for m in SCENARIOS})} Deck checks"]
-    resting = {}
-    for meta in SCENARIOS:
-        for assumption in meta.rests:
-            if not assumptions[assumption].verified:
-                resting.setdefault(assumption, []).append(meta)
-    lines.append(f"\nResting on an assumption that isn't verified: "
-                 f"{len({m.name for found in resting.values() for m in found})}")
-    for assumption in sorted(resting, key=lambda a: int(a[1:])):
-        entry = assumptions[assumption]
-        way = "run both ways" if assumption in SWITCHES else entry.layout.lower()
-        lines.append(f"\n{assumption} ({entry.status.split(':')[0].split(',')[0].lower()}; {way}): {entry.statement}")
-        lines.extend(f"  {meta.check}  {meta.name}" for meta in resting[assumption])
+    modules()
+    assumptions, registry = rules.load_assumptions(), rules.load()
+    waiting = [entry for entry in assumptions.values() if not entry.verified]
+    resting = {entry.id: [meta for meta in SCENARIOS if entry.id in meta.rests] for entry in waiting}
+    lines = [f"{len(SCENARIOS)} scenarios",
+             f"Resting on an assumption that isn't verified: {len({m.name for found in resting.values() for m in found})}",
+             f"Assumptions that aren't verified: {len(waiting)}"]
+    for entry in waiting:
+        way = "run both ways" if entry.id in SWITCHES else entry.layout.lower()
+        lines.append(f"\n{entry.id} ({entry.status.split(':')[0].split(',')[0].lower()}; {way}): {entry.statement}")
+        ruled = [rule.id for rule in registry.values() if entry.id in rule.rests_on]
+        if ruled:
+            lines.append("  Rules: " + ", ".join(ruled))
+        lines.extend(f"  {meta.check}  {meta.name}" for meta in resting[entry.id])
+        if not ruled and not resting[entry.id]:
+            lines.append("  No rule and no scenario rests on it")
     return "\n".join(lines)
 
 
+def coverage():
+    """Which layers no scenario puts on the stack, and which of those changed since the newest snapshot."""
+    lines = []
+    for variant in VARIANTS:
+        titles = set(Layout(layout_data(variant)).titles.values())
+        missing = sorted(titles - reached().get(variant, set()))
+        lines.append(f"\n{variant}: {len(titles) - len(missing)} of {len(titles)} layers are on the stack in a scenario")
+        lines.extend(f"  never: {title}" for title in missing)
+        changed = uncovered(variant)
+        lines.append("  Changed since the newest snapshot and in no scenario (R165): " + (", ".join(changed) or "none"))
+    return "\n".join(lines)
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="The scenario tests: what rests on an unverified assumption, and what they reach.")
+    parser.add_argument("rule", nargs="?", help="a rule ID: list the scenarios that check it")
+    parser.add_argument("--out", type=Path, help=f"folder of the release's record: write {RELEASE_LIST} there")
+    args = parser.parse_args(argv)
+    if args.rule:
+        found = for_rule(args.rule)
+        print(f"{len(found)} scenarios check {args.rule}")
+        for meta in found:
+            print(f"  {meta.check}  {meta.name}")
+        return 0
+    shown = report()
+    print(shown)
+    print(coverage())
+    if args.out:
+        args.out.mkdir(parents=True, exist_ok=True)
+        (args.out / RELEASE_LIST).write_text(shown + "\n", encoding="utf-8")
+    return 0
+
+
 if __name__ == "__main__":
-    from tests.scenario import report as registered      # the test files register with the imported module
-    print(registered())
+    import sys
+    from tests import scenario as registered             # the test files register with the imported module
+    sys.exit(registered.main())
