@@ -1,12 +1,16 @@
-# Manual testing (Deck)
+# Manual testing (retired)
 
-Implementation work is tracked in [todos.md](todos.md). Unchecked items below remain pending runtime validation.
+**Retired on 2026-10-03.** This was the Deck checklist: 137 checks in 17
+sections, none of which was ever ticked. Every check now lives somewhere a
+script can run it, or where it belongs:
 
-- Covers every release from 90.6 to 90.13, newest first, and below them the
-  areas from before 90.6 that were never run (menu buttons, modifiers, cursor
-  gyro, triggers and ramp-up, recovery, held inputs)
-- Nothing here has been run on the Deck
-- Load both VDFs fresh, not in the live editing session, and run every check on both layouts
-- Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
-- If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
+- **Press-by-press checks** are scenario tests: `tests/test_scenarios_*.py`,
+  run on both layouts by a press simulator (`python3 -m tests.scenario` lists
+  them, and which rest on an unverified Steam assumption).
+- **What Steam does** is in
+  [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md),
+  each entry with one Deck procedure. The Deck is for settling those, once.
+- **Feel** is in the tuning notes at the end of that document.
 
+Where each of the 137 went, with its original wording:
+[the migration record](findings/2026-10-03-deck-check-sorting/README.md).

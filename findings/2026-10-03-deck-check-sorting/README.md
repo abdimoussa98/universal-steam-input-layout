@@ -1,9 +1,11 @@
 # The 137 Deck checks, sorted
 
-**Status, 2026-10-03:** read-only sorting, phase 11 of the
-[rule registry plan](../../plans/2026-10-02-rule-registry.md). No check was
-deleted or reworded. `manual-testing.md` changed in one way only: the 62
-checks that had no ID got one.
+**Status, 2026-10-03:** sorted (phase 11 of the
+[rule registry plan](../../plans/2026-10-02-rule-registry.md)) and then
+migrated, one checklist section per commit (phase 14). All 137 checks have
+gone somewhere, `manual-testing.md` is retired, and this page is the record:
+the table at the end says where each check went, and
+[checks.json](checks.json) keeps every check's original wording.
 
 ## Why sort before building the simulator
 
@@ -100,11 +102,31 @@ haptics, desktop).
 - **A34:** a trackpad's `inactive modeshift` target takes effect when its mode
   shift fires (TC18).
 
+## What the scenarios showed that the checklist didn't expect
+
+Writing 87 checks as tests meant replaying each one. All of them came out as
+the checklist predicted, except for the points below. They are the
+simulator's answers, so each one rests on the assumptions the simulator
+models; none has been seen on the Deck.
+
+| Check | The checklist said | The replay shows |
+|---|---|---|
+| 90.6 C4/C5/S7 | After a Modifier 2 exit with the stick held, centre never scrolls | Since 90.10 the stick's map is entered afresh at that point. It is silent once held 250 ms, and scrolls once if the stick recentres sooner, as 90.10 D4 says for any fresh entry |
+| Temp cursor gyro TC9 | A lost modifier clears while the sticks stay out | A chord latches (A17), so the guard that was active when the stick went out stays active. The cleanup function runs on the next fresh input, and nothing is left over once it has |
+| Held inputs HI2 | Record whether letting go of the bumper scrolls after a staggered Gyro toggle | It scrolls once: the still-held side's modifier came on fresh in the new mode and wasn't used, so its Release is a tap |
+| 90.10 T3 | Note what the click's release does after a cancelled gesture | Base's click key (Q) goes down when the menu button lets go with the click still held (A11), then the menu tap types Tab |
+| 90.10 T4 | In a stuck transition everything is blocked | Every way into a layer is blocked. A key that adds no layer still types |
+| 90.10 T10 | Note whether a held click is interrupted when a window lands or ends | The binding hands the button over at the same moment both times (A37); if Steam doesn't keep it down across a hand-over, the click blips |
+| 90.12 C7 | A stuck layer clears on A or a stick touch | Each clears on the inputs where it has cleanup functions: a modifier on both, the Fn layer on a face button or a stick edge, a Steering driver on a stick touch |
+| Left-stick recovery LR1 | The left-stick edge clears a stuck menu Entry Point | Not since 90.10: the Entry Points' stick edges add the stick guards. A stuck Entry Point clears on the other menu button |
+| 90.12 C6, Menu buttons MB5 | A quick double tap scrolls, or types its key, "two or three times (known)" | Two when the second tap comes inside 50 ms, three after: the window's single-tap output at 50 ms is the extra one |
+
 ## The table
 
-Generated from [sorting.py](sorting.py), which fails if a check is missing or
-listed twice (`python3 findings/2026-10-03-deck-check-sorting/sorting.py --check`).
-It becomes the migration record in phase 14.
+Generated from [sorting.py](sorting.py), which fails if a check is missing,
+listed twice, or migrated to something that doesn't exist
+(`python3 findings/2026-10-03-deck-check-sorting/sorting.py --check`).
+"Went to" is where the check lives now.
 
 <!-- table:start -->
 | Section | Check | It says | Becomes | Notes | Went to |

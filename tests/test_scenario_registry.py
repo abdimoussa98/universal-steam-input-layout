@@ -68,6 +68,12 @@ class ScenarioRegistryTests(unittest.TestCase):
                 elif kind == "Tuning":
                     self.assertIn(key, notes)
 
+    def test_every_check_of_the_retired_checklist_went_somewhere(self):
+        module = sorting()
+        self.assertEqual(len(module.checks()), 137)                   # the checklist as it was frozen
+        self.assertEqual(set(module.WENT), set(module.SORT))
+        self.assertEqual(module.remaining(), set())                   # manual-testing.md holds no check any more
+
     def test_the_record_and_the_checklist_agree(self):
         module = sorting()
         left = module.remaining()
