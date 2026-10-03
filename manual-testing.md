@@ -10,30 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## Menu buttons
-
-- [ ] MB1: Tapping Select sends Escape, and tapping Start sends Tab
-- [ ] MB2: Holding either for 300 ms brings up its Fn layer, and the F-keys work
-  - On release nothing is sent
-  - The face buttons are back to normal
-  - The next tap still sends Tab / Escape
-- [ ] MB3: Start-delay reset: after an interrupted hold, keep holding or hold again, and the Fn layer comes up
-- [ ] MB4: Enter / Backspace: Select → Start sends Enter, and Start → Select sends Backspace. Try both quickly (under 300 ms) and with the Fn layer up
-  - Releasing the second button first sends nothing extra. Lifting the first button first drops the still-held second button to Base (accepted since 90.9; see the 90.9 checks)
-  - Holding the second button repeats the key, and pressing it again while holding the first sends it again
-- [ ] MB5: Double tap and hold repeats Escape / Tab, and releasing stops it
-  - Note whether a quick double tap sends the key two or three times (known, not fixed)
-- [ ] MB6: Menu button + stick click opens a Transition Set, and with the menu button held, the stick directions type punctuation
-- [ ] MB7: In each Menu Fn layer, its eight directional keybinds (four LS + four RS) give haptic feedback with their punctuation keys. Check holds, direction changes, and inherited Fn directions in Transition Sets for unwanted buzzing or duplicate keys. Separate held-click mode-shift bindings retain their previous haptic settings
-- [ ] MB8: Stick touch release: hold Start, touch a stick and lift off, then release Start. Menu Right: Fn comes up on the lift, and no Tab is sent. Select does the same with Menu Left: Fn, and no Escape
-- [ ] MB9: Steam button recovery:
-  - Hold a menu button until its Fn layer is up, press the Steam button, let go, and close the Steam menu
-  - RS to the edge (or a face button) clears the Fn and entry layers, and the menu buttons work normally again
-  - Enter / Backspace are plain chords since 90.9, so nothing of theirs can be left behind. Gyro suppression during menu use is intentional
-- [ ] MB10: Stuck entry layer (for example, the Steam button within 300 ms of a menu press)
-  - The other menu button clears it and then works normally
-  - In the alternative, RS to the edge no longer makes it worse
-
 ## Modifier layers
 
 - [ ] ML1: Nav keys with Start / Select: LB gives Insert / Delete, RB gives Home / End, and LB + RB (either order) gives PgUp / PgDn

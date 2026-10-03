@@ -218,6 +218,9 @@ WENT = {
                     "`test_double_tap_windows.test_right_pad_stays_the_mouse_with_click_and_touch_cleared`; the swipe feel is a tuning note",
     ("90.6", "B1"): "`test_double_tap_windows.test_rtp_double_tap_keeps_its_touch_selection_and_clears_the_fn_back_buttons`; "
                     "its trigger part was replaced by 90.10 T10",
+    **{("Menu buttons", f"MB{n}"): "`tests/test_scenarios_menu_and_modifiers.py`" for n in (1, 2, 4, 5, 6, 8, 9, 10)},
+    ("Menu buttons", "MB3"): "A12: it is that assumption's Deck procedure",
+    ("Menu buttons", "MB7"): "Tuning note",
 }
 
 
