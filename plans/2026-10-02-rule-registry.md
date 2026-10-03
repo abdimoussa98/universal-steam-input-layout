@@ -19,7 +19,8 @@ folded in (see [Decisions](#decisions)).
 | 9. Stale text | Done: the 17 places the inventory flagged are corrected, dated, or left with a note (the frozen builder, the `.cursor/skills/` copies). The record is at the end of the [inventory](../findings/2026-10-02-rule-inventory/README.md#stale-text-fixed-phase-9) |
 | **Part B** | **Complete on 2026-10-02.** The author said to start Part C on 2026-10-02 |
 | 10. Assumptions document | Done: [Steam Behaviour Assumptions](../resources/Steam%20Behaviour%20Assumptions.md), 32 entries (19 verified, 4 reported but never isolated, 9 unverified), each with whether the layout relies on it and a Deck procedure. Every rule's "Rests on" is filled, and a test keeps the two in step |
-| 11 to 15 | Not started |
+| 11. Sort the Deck checks | Done: [findings/2026-10-03-deck-check-sorting](../findings/2026-10-03-deck-check-sorting/README.md). All 137 checks have an ID (62 were unlabelled) and one row each: 90 become scenario tests, 21 static tests (most exist already), 14 join an assumption, 3 are tuning notes and 9 are obsolete. The simulator's scope is set from the 90: buttons and chords, sticks, time and the key log first; then missed releases, triggers, pads, and three small ones. Analog values, `hold_layer`, mode shifts and feel are not modelled. Two new assumptions, A33 and A34 |
+| 12 to 15 | Not started |
 | Parts B and C | Not started; each waits for the author's review of the part before it |
 
 **Baseline:** commits `601b61b` (archive) and `1fa38ac` (90.11 to 90.13, the

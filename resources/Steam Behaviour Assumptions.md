@@ -1,6 +1,6 @@
 # Steam behaviour assumptions
 
-**Status:** started 2026-10-02 from the
+**Status:** started 2026-10-02, 34 entries on 2026-10-03, from the
 [rule inventory](../findings/2026-10-02-rule-inventory/README.md), phase 10 of
 the [rule registry plan](../plans/2026-10-02-rule-registry.md).
 
@@ -64,8 +64,11 @@ through [rules.py](../steam_layout/rules.py)), so the shape is fixed.
 | A30 | A chord selector's Any is `0` and All is `1`. Legacy `chord_button` values are selector IDs, not bitmasks | Verified in the installed Steam chord UI schema, 2026-09-27 | Relies on it | Open a merged chord in the editor: both buttons show, set to Any | R127, R133; the guards the Cleanup audit reads |
 | A31 | A repeating activator keeps its schedule when another layer is removed | Unverified | Works either way | In a test layout: a button repeating a key every 500 ms. Fire an unrelated removal at 300 ms. If the next repeat still lands at 500 ms, it holds | R114 |
 | A32 | When two separate activators on one input are due at the same moment, their order is not fixed. Inside one activator the array still runs bottom to top | Unverified | Works either way | In `L1: Modifier 0` press A with L1 held: the output chord and the cover chord both fire, in either order | The cursor parents' two chords on each cancel input |
+| A33 | Steam loads an exported VDF as written: the same layers, groups and bindings as the JSON it was made from | Reported: the author plays on exported layouts, but no fresh-load check is recorded for 90.6 to 90.13 | Relies on it | Load both VDFs fresh, not in the live editing session, and spot-check a modifier, Modifier 2, both Fn layers and the Steering entry | R151; every release; `convert_vdf.mjs` |
+| A34 | A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held | Unverified | Relies on it | Under a regular and a Gyro modifier, touch each trackpad and press the face buttons and the D-pad: record the keys, and whether the normal Tap Cover still lands | The face and D-pad mode-shift targets under Base's trackpads; the cursor's cancel inputs |
 
-A31 and A32 come from the timing contract of the archived replay
+A33 and A34 were found while sorting the Deck checks
+([record](../findings/2026-10-03-deck-check-sorting/README.md)). A31 and A32 come from the timing contract of the archived replay
 ([TIMED-MODEL.md](../findings/2026-09-30-stack-search/TIMED-MODEL.md)), which
 had to choose a behaviour for each.
 
