@@ -319,26 +319,49 @@ See: [Complete delayed applies](Steam%20Input%20JSON%20Structure.md#complete-del
 
 ## 7. Cleanup
 
+Four words these rules use ([Vocabulary](Layout%20Vocabulary.md#terms)):
+
+- A **cleanup function** is the backup exit for a stuck layer: a repeating
+  removal that fires when the layer's button is no longer held.
+- Its **guard** is the buttons whose chords suppress it.
+- A layer's **keeper** is what keeps it alive: usually the button whose
+  Release removes it, otherwise a thumb on a stick, a timer or a mode.
+- A layer's **exit** is a Release that removes it.
+
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R127 | The guard is the boundary: a cleanup function removes only layers its guard's buttons keep alive, and all of a layer's cleanup functions have the same guard | `L1: Modifier 0`'s cleanup functions are guarded by LB and remove LB's layers. `L1!R1: Modifier 2`'s are guarded by LB and RB and remove both sides' | Author, 2026-10-02 | Cleanup audit: outside the guard; Cleanup audit: guard mismatch; `cleanup_lists` fix | — | None |
+| R128 | Below: a cleanup function removes, in one step, every layer under its host that the guard's buttons keep alive. It stops at Base, a stateful layer, a window, or a layer another button keeps alive | `Menu Left: Fn Layer`'s cleanup function also removes `Menu Left: Entry Point` under it | Author, 2026-10-02 | Cleanup audit: left below; `cleanup_lists` fix | — | None |
+| R129 | Above: a cleanup function removes a layer on top of its host that the same buttons keep alive and that leaves the cleanup's input alone | `L1: Tap Cover` binds three inputs. On the others `L1: Modifier 0`'s cleanup function still fires, so it removes the cover | Author, 2026-10-02 | Cleanup audit: left above; `cleanup_lists` fix | — | None |
+| R130 | A layer that binds an input with a cleanup function below carries that cleanup on the input, with the same guard | `L1: Tap Cover` binds both stick touches, so it carries the modifier's cleanup function there | Author, 2026-10-02 | Cleanup audit: hidden cleanup; `cleanup_lists` fix | — | None |
+| R131 | A cleanup function never removes a stateful layer, a stick-touch helper, a window, or a layer another button keeps alive | `L1: Modifier 0`'s cleanup function leaves `Gyro`, the `RST` helpers, `L1: Double Tap` and R1's layers | Author, 2026-10-02 | Cleanup audit: outside the guard; `cleanup_lists` fix | — | None |
+| R132 | A cleanup function, a Release and the Modifier 2 quick tap list only layers that can be on the stack with their host. A deliberate clear keeps its whole list, and a stick-touch Release keeps its three helpers | `L1: Modifier 0`'s cleanup function doesn't list `Gyro \| L1: Modifier 0`: the two are never on the stack together | Author, 2026-10-02 | Cleanup audit: never there; `cleanup_lists` fix | — | None |
+| R133 | A cleanup function has the guarded recovery shape: on one input, a chord for each valid owner beside an interruptible Regular Press with Hold to Repeat that removes the layers | Right-stick touch in `L1: Modifier 0`: an empty chord with LB, and a repeating Regular Press that removes LB's layers when LB isn't held | Standardised 2026-09-28 | `test_neptune_recovery.test_all_guarded_removals_repeat_and_rtp_stays_out_of_ls_scope` | — | None |
+| R134 | A stick edge gets a cleanup function only where the layer needs one: the left edge costs the WASD modifier and the right edge costs ramp-up | `L1: Modifier 0` has one on both stick edges; `RTP: Entry Point` was left without a left-edge one | Author, 2026-09-28 | Not checked yet | — | None |
+| R135 | A cancellation removes only itself, repeats, is uninterruptible and has no guard | Each of `L1: Temp Cursor Gyro`'s 15 cancel inputs removes only the cursor, which exposes the modifier's own binding | Author, 2026-10-02 | `test_neptune_cursor.test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent` | — | None |
+| R136 | Hidden exit: a layer that can land on top of another may not cover an exit on what keeps the lower layer alive, unless it removes the lower layer there | In the first 90.11 build a Start tap put a menu Double Tap window over `Steering \| LS: Fallback Hold`. Recentring inside the window missed the layer's Release and left it on | Author, 2026-10-02 | Not checked yet | — | Touchpad layers are set aside for now, 68 cases on 90.13 (author, 2026-10-02; [to-do](../todos.md#steering)) |
+| R138 | The held button's layer owns its combos. No layer exists only to protect a second button that is still held | Hold Start, hold LB for F10, lift Start: LB falls through to Base and becomes the L1 modifier. `Menu Left: Backspace` and `Menu Right: Enter` were removed in 90.9 | Author, 2026-10-01 | `menu_combo_keys` fix (part); `test_fixes.test_overlays_are_gone_and_nothing_references_them` (part) | — | None |
+
+Notes:
+
 - **Normal exit:** it fits the layer's type ([§1](#1-layer-type)) and removes
   only the state it owns.
-- **Stuck-layer recovery (owners only):** put an owner-held chord and an
+- **R133, stuck-layer recovery (owners only):** put an owner-held chord and an
   interruptible, repeating Regular Press removal on the inputs likely to be
-  used next. Guard against every valid owner. Remove the family and the
-  overlays it applied.
-- **Stick edges:** add edge cleanup only where it's needed. Using the LS edge
-  costs the WASD modifier, and using the RS edge costs ramp-up.
-- **Other layers' cleanup lists:** add the new layer's removal only where that
-  list's scope covers it. Overlays go into their owner's recovery, and family
-  members go into their family's exits. Never add it to the other side's lists
-  or to a persistent mode's lists.
-- **Inheritance and blocking** have their own section, [§8](#8-inheritance-and-blocking).
-- **The six cleanup rules** (author, 2026-10-02): every layer takes care of
-  itself and what is below it, and of what is above it if it has that
-  responsibility. A cleanup removes only layers its guard's buttons keep alive,
-  in one step, and a list names only layers that can be on the stack with it.
-  [Rules](../findings/2026-10-02-cleanup-boundaries/README.md#the-rules) ·
+  used next. Guard against every valid owner.
+- **R134, stick edges:** add edge cleanup only where it's needed.
+- **R127 to R132** are the six cleanup rules (author, 2026-10-02): every
+  layer takes care of itself and what is below it, and of what is above it if
+  it has that responsibility.
+  [Full text and measurements](../findings/2026-10-02-cleanup-boundaries/README.md#the-rules) ·
   the Cleanup audit checks them ([§10](#10-ship-it)) and the `cleanup_lists`
   fix applies them.
+- **R132, other layers' lists:** add a new layer's removal only to a list
+  whose host can be on the stack with it. Never add it to the other side's
+  lists or to a persistent mode's lists.
+- **R136** has a prototype, not a check yet
+  ([record](../findings/2026-10-02-hidden-exit/README.md)).
+- **Inheritance and blocking** have their own section, [§8](#8-inheritance-and-blocking).
 
 See: [Cleanup Functions](Cleanup%20Functions.md) (draft definitions of every kind) ·
 [Stuck layers](Steam%20Input%20JSON%20Structure.md#stuck-layers-and-why-there-is-so-much-cleanup) ·
@@ -355,6 +378,17 @@ by a missed release, not only the usual parent. So a layer inherits more than
 its JSON shows, and a change to a lower layer reaches upper layers whose JSON
 never changed.
 
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R139 | Inheritance is the default. An ordinary layer isn't required to block an input because the layers below would give it different bindings; the Flow audit lists such an input for review | The left-pad key layers inherit the L1 and R1 modifier entries from Base | Author, 2026-10-01 | Not checked yet | — | None |
+| R140 | Window rule. Under a layer with an Always On action, an input the layer leaves open is handled when any stack can put a layer command under it: replaced with the keybind when only one is possible, cleared otherwise. A stack whose binding is only a layer command adds no keybind | Every default window replaces the trigger edge with Base's mouse button: `Gyro Off Ramp Up` can sit under the window, and its edge only removes it | Author, 2026-09-30, restated 2026-10-01 | Window audit: open routes; Window audit: unchecked window; `window_routes` fix | — | None |
+| R141 | A block clears the input by default and replaces it only where the use is obvious. It targets only routes that change layers, and it is never a removal | The modifier Double Tap windows replace the bumper, which normally adds a layer, with the scroll wheel | Author, 2026-09-30 | `window_routes` fix (part) | — | None |
+| R137 | Temporary guards: no layer is added over a temporary guard; only removals happen there | In `Steering \| LS: Entry Guard` and `Steering \| LS: Fallback Hold`, Start and Select type Tab and Escape, so no menu layer can land and hide their Releases | Author, 2026-10-02 | `test_steering_fallback_hold.test_no_menu_layer_lands_on_the_hold_or_the_entry_guard` (part) | — | None |
+| R142 | Menu layers keep gyro disabled and the right-stick edge blocked | `Menu Left: Escape` has a disabled gyro group and an empty right-stick edge | Author, 2026-09-28 | `test_neptune_gyro.test_gyro_sources_only_override_owned_properties_or_explicitly_disable` (part) | — | None |
+| R143 | Base owns the gyro response. An activation layer sets only its selector fields, and the cursor only its four response settings | `Gyro` sets `layer: 1` and its activation selector. `L1: Temp Cursor Gyro` sets precision speed 750 and three haptic and threshold values | From the July reference | `test_neptune_gyro.test_gyro_sources_only_override_owned_properties_or_explicitly_disable`; `test_neptune_cursor.test_cursor_profile_preserves_sensitivity_and_owner_activation` | — | None |
+| R144 | A cover never outlives its owners, never sits below its owner, and inherits nothing through a layer between it and its owner | `L1: Tap Cover` sits directly on `L1: Modifier 0` and is removed with it | Author-approved plan, 2026-09-30 | Flow audit: cover check | — | None |
+| R145 | A chain of adding bindings reaches every layer | `L1: Double Tap` is reached from Base through `L1: Modifier 0`'s Release | 2026-10-01 | Flow audit: coverage | — | `LTP: Arrow Keys` and `RTP: Mouse Buttons` are added only by `hold_layer`, which the chains don't follow (R101) |
+
 ### When to block
 
 Inheritance is the default, and usually it's what we want. Overlays inherit
@@ -366,11 +400,12 @@ not be disturbed:
 | An Always On layer is active | Every inherited layer command | Historical crash ([§9](#9-always-on-layers)) |
 | A delayed add is pending | Inherited removals that could reset its timer | Removals restart delays ([§6](#6-hold-tap-and-double-tap)) |
 | A valid owner is held | The owner's own stale-state recovery, using a guard chord | Recovery would tear down a live interaction ([§7](#7-cleanup)) |
-| A menu interaction is active | Gameplay routes such as gyro and RS edge | The author's deliberate menu suppression |
+| A menu interaction is active | Gameplay routes such as gyro and RS edge | The author's deliberate menu suppression (R142) |
+| A temporary guard is on | Every bind that adds a layer | A layer added over it could hide its exit (R137) |
 
 ### What a block looks like
 
-**Author rule, 2026-09-30: clear first, and replace only where the context
+**R141 (author, 2026-09-30): clear first, and replace only where the context
 makes it obvious.**
 
 - **Block only the routes that change layers.** Target an inherited input only
@@ -419,7 +454,7 @@ apply this rule.
 
 ### How to check it
 
-**Author rule, 2026-09-30, restated by the author on 2026-10-01. It applies
+**R140 (author, 2026-09-30, restated by the author on 2026-10-01). It applies
 to a layer with an Always On action, and to no other layer:**
 
 1. Trace every stack the layer can be applied on.
@@ -441,8 +476,8 @@ to a layer with an Always On action, and to no other layer:**
 
 If none of the bindings it could inherit is a layer command, the input is
 left alone, even when the keybinds differ between stacks. An ordinary layer
-inherits by default; it is never required to block an input because the
-layers below would give it different bindings.
+inherits by default (R139); it is never required to block an input because
+the layers below would give it different bindings.
 
 The **Window audit** ([audit_inheritance.py](../audit_inheritance.py)) checks
 this rule. The **Flow audit**
@@ -511,15 +546,17 @@ See: [Inheritance review](Steam%20Input%20JSON%20Structure.md#inheritance-review
 This section applies to any layer with an `always_on_action`, which currently
 means the nine Double Tap windows.
 
-1. **Entry:** make every other layer change first, and add the Always On layer
-   **last**.
-2. **While it's active:** block every inherited layer command, as described in
-   [§8](#8-inheritance-and-blocking).
-3. **Timeout:** remove only this layer.
-4. **Early exit:** remove this layer **first**, then make the other changes.
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R146 | Entry: every other layer change runs first, and the Always On layer is added last | `L1: Modifier 0`'s Release removes the modifier, then adds `L1: Double Tap` | Author, documented 2026-09-28 | `test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries` | — | None |
+| R147 | Timeout: an Always On layer's timed action removes only itself | `Menu Left: Double Tap` removes itself after 150 ms | Author, documented 2026-09-28 | `test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries` (part) | — | None |
+| R148 | Early exit: the Always On layer is removed first, then the other changes run | `L1: Double Tap`'s second press removes the window, then adds `L1: Scroll Down` | Author, documented 2026-09-28 | `test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries`; `test_double_tap_windows.test_stick_touch_release_removes_the_window_first_then_the_side_trio` | — | None |
+| R149 | Both trackpads stay off the layer API during every window. `RTP: Double Tap` keeps its own D-pad pad for the second tap | In `L1: Double Tap` a left-pad swipe types Escape, Enter, Tab or Backspace directly, and the right pad stays the mouse with click and touch cleared | Author, 2026-09-30 | `window_pads` fix; `test_double_tap_windows.test_left_pad_swipes_send_keys_without_the_layer_api`; `test_double_tap_windows.test_right_pad_stays_the_mouse_with_click_and_touch_cleared` | — | None |
 
-**Trackpads (author, 2026-09-30):** both pads stay off the layer API during
-every window.
+While a window is active, every inherited layer command is blocked (R140,
+[§8](#8-inheritance-and-blocking)).
+
+**R149, trackpads (author, 2026-09-30):**
 - **Left pad:** the swipes send their keys directly: back is Escape, forward is
   Enter, up is Tab, down is Backspace. They don't add the key layers. Click
   and touch are cleared.
