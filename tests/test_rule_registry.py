@@ -122,6 +122,29 @@ class RegistryTests(unittest.TestCase):
                 self.assertFalse(rules.references(text) - set(self.rules))
 
 
+class DeclarationTests(unittest.TestCase):
+    """The audits and fixes say which rules they enforce; the registry says what checks each rule."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.rules = rules.load()
+        cls.declared = rules.declared()
+
+    def checked_by(self, rule_id, kind):
+        return {(c.name, c.check) for c in self.rules[rule_id].checked_by if c.kind == kind}
+
+    def test_every_declared_check_names_a_rule_that_lists_it(self):
+        self.assertTrue(self.declared)
+        for (kind, name, check), ids in self.declared.items():
+            for rule_id in ids:
+                with self.subTest(checker=f"{name} {check or ''}".strip(), rule=rule_id):
+                    self.assertIn(rule_id, self.rules)
+                    self.assertIn((name, check), self.checked_by(rule_id, kind))
+
+    def test_tag_prints_the_ids_in_brackets(self):
+        self.assertEqual(rules.tag(("R127", "R131")), "[R127, R131]")
+
+
 class SkillTests(unittest.TestCase):
     """A skill restates a rule in one line next to its ID, so an agent has it in front of it."""
 

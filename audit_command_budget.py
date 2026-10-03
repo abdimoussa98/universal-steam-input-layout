@@ -31,7 +31,10 @@ import json
 from pathlib import Path
 import sys
 
+from steam_layout.rules import tag
+
 MAX_COMMANDS = 3
+ENFORCES = {"entry budget": ("R109",), "banned activators": ("R108",), "inverted edges": ("R111",)}   # check -> rules
 BANNED_ACTIVATORS = ("Long_Press", "Double_Press")
 REMOVE = "controller_action remove_layer "
 LAYER_COMMANDS = tuple(f"controller_action {verb}_layer " for verb in ("add", "remove", "hold"))
@@ -194,11 +197,11 @@ def main():
                   f"group(s), {s['plain_inactive_slots']} plain-inactive slot(s)")
             for row in report["banned_activators"]:
                 labels = "; ".join(f"{owner['title']} ({owner['source_state']})" for owner in row["owners"])
-                print(f"  banned {row['activation']}: group {row['group_id']} / {row['input']} "
+                print(f"  banned {row['activation']} {tag(ENFORCES['banned activators'])}: group {row['group_id']} / {row['input']} "
                       f"— {labels or 'unreferenced'}")
             for row in report["inverted_edges"]:
                 labels = "; ".join(f"{owner['title']} ({owner['source_state']})" for owner in row["owners"])
-                print(f"  layer command on an inverted D-pad edge: group {row['group_id']} / "
+                print(f"  layer command on an inverted D-pad edge {tag(ENFORCES['inverted edges'])}: group {row['group_id']} / "
                       f"{row['activation']} — {labels}")
             for row in report["allowed_fourth"]:
                 labels = "; ".join(owner["title"] for owner in row["owners"])
@@ -206,8 +209,8 @@ def main():
                       f"{row['input']} — {labels or 'unreferenced'}")
             for row in report["violations"]:
                 labels = "; ".join(f"{owner['title']} ({owner['source_state']})" for owner in row["owners"])
-                print(f"  group {row['group_id']} / {row['input']}: {row['count']} "
-                      f"{row['bank']} entries — {labels or 'unreferenced'}")
+                print(f"  over the entry budget {tag(ENFORCES['entry budget'])}: group {row['group_id']} / {row['input']}: "
+                      f"{row['count']} {row['bank']} entries — {labels or 'unreferenced'}")
                 print(f"  {row['path']}/{row['bank']}")
     return 1 if any(report["violations"] or report["banned_activators"] or report["inverted_edges"]
                     for report in reports) else 0

@@ -145,6 +145,20 @@ class CommandBudgetTests(unittest.TestCase):
                 if expected != 2:
                     self.assertEqual(len(json.loads(result.stdout)), 1)
 
+    def test_cli_prints_the_rule_id_next_to_each_finding(self):
+        script = Path(__file__).resolve().parents[1] / "audit_command_budget.py"
+        over = layout({"chord": [command()] * 4, "Long_Press": command()})
+        inverted = layout({"Full_Press": command("controller_action remove_layer 9 0 0, , ")})
+        inverted["controller_mappings"]["group"][0].update(mode="dpad", settings={"edge_binding_invert": "1"})
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "layout.json"
+            for data, expected in ((over, ("over the entry budget [R109]", "banned Long_Press [R108]")),
+                                   (inverted, ("inverted D-pad edge [R111]",))):
+                path.write_text(json.dumps(data))
+                out = subprocess.run([sys.executable, str(script), str(path)], capture_output=True, text=True).stdout
+                for text in expected:
+                    self.assertIn(text, out)
+
 
 if __name__ == "__main__":
     unittest.main()

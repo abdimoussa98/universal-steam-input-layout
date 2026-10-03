@@ -20,11 +20,17 @@ or renumbered; a retired rule keeps its row.
 A checker may end in " (part)" when it covers only some layers. "Rests on"
 names Steam assumptions by ID (`A3, A12`), or is a dash.
 
+The other direction is declared in the code: each audit and the fix pipeline
+has an `ENFORCES` table, check or fix -> the rule IDs it enforces. `declared()`
+collects them, and tests/test_rule_registry.py keeps the two in step.
+
 Plan: plans/2026-10-02-rule-registry.md.
 """
 from collections import namedtuple
+import importlib
 from pathlib import Path
 import re
+import sys
 
 REGISTRY = Path(__file__).resolve().parent.parent / "resources" / "Layer Definition of Done.md"
 HEADER = ("ID", "Rule", "Example", "Decided", "Checked by", "Rests on", "Exceptions")
@@ -34,6 +40,14 @@ PART = " (part)"
 RULE_ID = re.compile(r"R[1-9]\d\d")
 REFERENCE = re.compile(r"(?<![A-Za-z0-9])R[1-9]\d\d(?![0-9])")
 ASSUMPTION_ID = re.compile(r"A[1-9]\d*")
+SOURCES = (                                # (kind, audit name, module holding its ENFORCES)
+    ("audit", "Budget", "audit_command_budget"),
+    ("audit", "Window", "steam_layout.inheritance"),
+    ("audit", "Flow", "audit_flow_inheritance"),
+    ("audit", "Cleanup", "steam_layout.cleanups"),
+    ("audit", "Build", "audit_build"),
+    ("fix", None, "steam_layout.fixes"),
+)
 
 Rule = namedtuple("Rule", "id statement example decided checked_by rests_on exceptions section")
 Checker = namedtuple("Checker", "kind name check part")   # kind: audit, fix, test, none or retired
@@ -107,3 +121,23 @@ def load(path=REGISTRY):
 def references(text):
     """The rule IDs a text names. R1 to R5 (buttons) and Deck check IDs like R3 never match."""
     return set(REFERENCE.findall(text))
+
+
+def tag(ids):
+    """Rule IDs as printed next to a finding: [R127, R131]."""
+    return "[" + ", ".join(ids) + "]"
+
+
+def declared():
+    """{(kind, name, check): rule IDs} from every audit and fix that declares `ENFORCES`.
+
+    An audit's key is one of its checks, or None for the audit as a whole; a fix's key is its name.
+    """
+    root = str(REGISTRY.parent.parent)
+    if root not in sys.path:
+        sys.path.insert(0, root)
+    found = {}
+    for kind, name, module in SOURCES:
+        for key, ids in getattr(importlib.import_module(module), "ENFORCES", {}).items():
+            found[(kind, name or key, key if name else None)] = tuple(ids)
+    return found
