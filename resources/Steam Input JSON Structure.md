@@ -8,6 +8,8 @@ This document describes the structure and relationships within Steam Input contr
 
 ## Current project policy
 
+**Rules: R101, R102** (Layer Definition of Done [§2](Layer%20Definition%20of%20Done.md#2-placement)). This section explains them; the rule text is there.
+
 The API descriptions below include historical and generic format capabilities.
 Current layouts must use explicit `add_layer` / `remove_layer`, never
 `hold_layer` or action-set switching (`CHANGE_PRESET`). See the
@@ -205,6 +207,8 @@ Groups define the actual input configurations—what physical inputs do and how 
 
 #### Allowed Activation Types
 
+**Rule: R108** (Layer Definition of Done [§3](Layer%20Definition%20of%20Done.md#3-activators)). This section explains it; the rule text is there.
+
 **Hard requirement for this repository: use only these activation types.**
 The layout author reports that Steam's Long Press and Double Press activators
 misbehave when combined with the action layers this layout depends on. Build
@@ -254,6 +258,8 @@ pre-flight already requires exit 0. Release 90.6 removed the last violations:
   [record](../findings/2026-09-30-dead-group-prune/README.md)).
 
 #### Command Entry Budget
+
+**Rule: R109** (Layer Definition of Done [§3](Layer%20Definition%20of%20Done.md#3-activators)). This section explains it; the rule text is there.
 
 **Hard requirement for this repository: at most three GUI command entries per
 input.** The layout author confirmed on 2026-09-27 that subcommands are allowed
@@ -324,6 +330,8 @@ specific masks, the alternative variant's swapped roles, and regression checks.
 
 #### Binding Execution Order
 
+**Rule: R110** (Layer Definition of Done [§3](Layer%20Definition%20of%20Done.md#3-activators)). This section explains it; the rule text is there.
+
 **IMPORTANT:** When a binding contains an array of `controller_action` commands, they execute **from bottom to top** (reverse order).
 The array below is subcommands within **one** GUI command entry; it does not
 violate the three-entry budget. This execution-order rule does not specify
@@ -351,6 +359,8 @@ priority or timing between separate activator objects.
   remove it first before changing other layers
 
 #### Interrupted Delayed Layer Applies
+
+**Rules: R120, R121** (Layer Definition of Done [§6](Layer%20Definition%20of%20Done.md#6-hold-tap-and-double-tap)). This section explains them; the rule text is there.
 
 The layout author observed a Steam Input bug where interrupting an `add_layer` command
 before its Fire Start Delay completes can prevent the command from firing on the next
@@ -415,6 +425,8 @@ last**; this is the only allowed exception to the
 [change record](../findings/2026-09-30-second-press-cover-reset/README.md).
 
 #### Complete Delayed Applies on Stick-Touch Release
+
+**Rules: R116, R117, R123, R125** (Layer Definition of Done [§5](Layer%20Definition%20of%20Done.md#5-stick-touch-release) and [§6](Layer%20Definition%20of%20Done.md#6-hold-tap-and-double-tap)). This section explains them; the rule text is there.
 
 **Author-confirmed cleanup rule, 2026-09-30:** every layer must **explicitly**
 bind the appropriate stick-touch **release** cleanup. Only cover-type layers,
@@ -512,6 +524,8 @@ race timing still needs Deck validation.
 
 #### Blocking to Protect Layer Timers
 
+**Rule: R126** (Layer Definition of Done [§6](Layer%20Definition%20of%20Done.md#6-hold-tap-and-double-tap)). This section explains it; the rule text is there.
+
 Blocking is part of the layout's state management. The author reports that layer
 removals can reset Fire Start Delay timers. A repeating removal is useful when
 deliberately restarting an interrupted apply, but an unrelated removal can
@@ -540,6 +554,8 @@ binding, or an inactive group is not evidence of an explicit input block.
 Layer/source inheritance and the currently exposed input must be considered.
 
 #### Always-On Layer Isolation and the Historical Crash Workaround
+
+**Rules: R140, R146 to R149** (Layer Definition of Done [§8](Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking) and [§9](Layer%20Definition%20of%20Done.md#9-always-on-layers)). This section explains them; the rule text is there.
 
 **Author-reported historical bug, documented 2026-09-28:** adding or removing
 other layers while a layer with an Always On binding remained active caused
@@ -719,6 +735,8 @@ L2 released:
 
 ### Held Inputs Across Layer Changes
 
+**Rules: R113 to R115** (Layer Definition of Done [§4](Layer%20Definition%20of%20Done.md#4-entry)). This section explains them; the rule text is there.
+
 **Documented 2026-09-29 from the author's runtime experience.** A layer added
 over an input that is already held treats that input as already pressed:
 
@@ -821,6 +839,8 @@ repeats listed here. Real-layout checks are in
 
 ### Gyro Settings Inheritance
 
+**Rule: R143** (Layer Definition of Done [§8](Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking)). This section explains it; the rule text is there.
+
 Keep the normal gyro response in Base. Ordinary layers inherit the exposed lower
 stack's settings; do not copy a complete Base gyro group into every layer. Follow
 the [July reference](../findings/2026-07-11-layer-order-swap/MOST_RECENT_LAYOUT.post-fix.json)
@@ -847,6 +867,8 @@ to synchronize. Do not overwrite activation gates while importing response value
 lists exact settings and pending runtime checks.
 
 ### Cursor Cancellation and Repeating Cover Chords
+
+**Rule: R135** (Layer Definition of Done [§7](Layer%20Definition%20of%20Done.md#7-cleanup)). This section explains it; the rule text is there.
 
 Each regular/Gyro Mod 0/1 parent splits its twelve ordinary cancellation inputs
 (face buttons, D-pad directions, stick clicks, and Start/Select) into exactly
@@ -891,6 +913,8 @@ than a cursor cancellation's self-only removal. See the
 for affected stacks and validation.
 
 ### Inheritance Review for Binding Changes
+
+**Rules: R139, R140** (Layer Definition of Done [§8](Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking)). This section explains them; the rule text is there.
 
 **Review a binding change in the stacks that can expose it, not only in the
 layer that defines it.** Adding or changing a lower binding can change upper
@@ -1021,6 +1045,8 @@ After the [cursor-overlay additions](../findings/2026-09-29-temp-cursor-gyro/IMP
 each current layout has 390 activators in active groups that explicitly remove layers.
 
 #### Guarded Recovery Binding Shape
+
+**Rule: R133** (Layer Definition of Done [§7](Layer%20Definition%20of%20Done.md#7-cleanup)). This section explains it; the rule text is there.
 
 Use **guarded recovery binding** for the fallback that clears stale state when
 the button/touch owning an interaction is no longer held. This is the cleanup
@@ -1193,6 +1219,8 @@ new Steam runtime test.
 
 ### Stick-Edge Cleanup and Inherited Actions
 
+**Rules: R134, R142** (Layer Definition of Done [§7](Layer%20Definition%20of%20Done.md#7-cleanup) and [§8](Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking)). This section explains them; the rule text is there.
+
 **Author's design rule: limit left- and right-stick edge cleanup to layers that
 really need it.** Adding an edge fallback consumes an input that otherwise serves
 the inherited layout. It is not a free extra recovery path.
@@ -1286,6 +1314,8 @@ release behavior using the [manual checklist](../manual-testing.md#wasd-modifier
 
 ### Cleanup Scopes and Concrete Examples
 
+**Rules: R127 to R132** (Layer Definition of Done [§7](Layer%20Definition%20of%20Done.md#7-cleanup)). This section explains them; the rule text is there.
+
 Describe a cleanup by both **when it fires** and **what it removes**. A release
 can remove one layer or a family; a guarded fallback does not inherently mean
 clear every active layer. A "stack cleanup" here means a named interaction's
@@ -1309,6 +1339,8 @@ Menu Right names and their Select / Start roles do not change.
 <a id="lightweight-covers-and-inherited-cleanup"></a>
 
 #### Button Overlays and Inherited Cleanup
+
+**Rules: R138, R142** (Layer Definition of Done [§7](Layer%20Definition%20of%20Done.md#7-cleanup) and [§8](Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking)). This section explains them; the rule text is there.
 
 The [vocabulary](Layout%20Vocabulary.md) calls a layer with one button/action
 responsibility a **button overlay**, or **overlay** for short. Combined covers
@@ -1357,6 +1389,8 @@ See the [blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md)
 <a id="cover-cleanup-ownership"></a>
 
 #### Overlay Cleanup Ownership
+
+**Rule: R129** (Layer Definition of Done [§7](Layer%20Definition%20of%20Done.md#7-cleanup)). This section explains it; the rule text is there.
 
 Use **button overlay** for a layer with one button/action responsibility and
 **owning layer** for a layer that applies it; see [definitions and examples](Layout%20Vocabulary.md).
@@ -1597,6 +1631,8 @@ Examples:
 
 ### ⚠️ CAVEAT: Steam's loader may use Preset numeric key order instead (found 2026-07-11)
 
+**Rule: R104** (Layer Definition of Done [§2](Layer%20Definition%20of%20Done.md#2-placement)). This section explains it; the rule text is there.
+
 The "order of appearance" rule above describes how the GUI/session writes runtime IDs. On a
 **fresh VDF load**, Steam has been observed resolving the same positional runtime IDs against
 the **`Preset_10000XX` numeric key order** instead. The two orderings normally coincide, but
@@ -1724,6 +1760,8 @@ controller_action add_layer 32 0 0, ,
 | Temporary layers (hold_layer) | `0` | `0` | Too frequent to notify |
 
 ### ⚠️ CRITICAL WARNING: ID Shift on Deletion
+
+**Rule: R103** (Layer Definition of Done [§2](Layer%20Definition%20of%20Done.md#2-placement)). This section explains it; the rule text is there.
 
 **If you delete an action set or action layer, ALL subsequent IDs will shift down by one.**
 

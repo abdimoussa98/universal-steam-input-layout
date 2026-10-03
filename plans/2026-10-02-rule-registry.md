@@ -8,7 +8,8 @@ folded in (see [Decisions](#decisions)).
 | Phase | State |
 |---|---|
 | 1. Inventory | Done: [findings/2026-10-02-rule-inventory](../findings/2026-10-02-rule-inventory/README.md) |
-| 2 to 5 | Not started |
+| 2. The registry | Done: 63 rules, R101 to R163, in the [Layer Definition of Done](../resources/Layer%20Definition%20of%20Done.md#rule-tables); `steam_layout/rules.py` reads them and `tests/test_rule_registry.py` checks them. 18 rules are not checked yet and 13 are checked only in part. The reference documents and the skills point at the IDs. Sentences that restate a rule in the structure reference are still there, under the pointer; cutting them belongs with the stale-text pass (phase 9) |
+| 3 to 5 | Not started |
 | Parts B and C | Not started; each waits for the author's review of the part before it |
 
 **Baseline:** commits `601b61b` (archive) and `1fa38ac` (90.11 to 90.13, the
@@ -53,7 +54,7 @@ rule to what checks it. On 2026-10-02 that caused real problems:
 
 | Field | Example |
 |---|---|
-| ID | R12 |
+| ID | R136 |
 | One plain-English statement | A layer that can land on top of another may not cover an exit on what keeps the lower layer alive, unless it removes the lower layer there |
 | One example from the layout | `L1: Modifier 0` under `RTP: Double Tap`: let go of L1 inside the window and the modifier stays on |
 | Decided by, and when | Author, 2026-10-02 |
@@ -468,10 +469,11 @@ Decided by the author on 2026-10-02:
 
 Settled in the review, not yet confirmed by the author:
 
-- **Decision 2. ID scheme.** `R` plus a number for rules (R12), `A` plus a
-  number for assumptions (A3). No section number in the ID, because sections
-  move (phase 15 rewrites §10 and §11). Never reused or renumbered; a retired
-  entry keeps its ID, marked retired.
+- **Decision 2. ID scheme.** `R` plus a number for rules (R136), `A` plus a
+  number for assumptions (A3). Rule numbers start at 101, because R1 to R5
+  are buttons and the Deck checklist has its own R1 to R3. No section number
+  in the ID, because sections move (phase 15 rewrites §10 and §11). Never
+  reused or renumbered; a retired entry keeps its ID, marked retired.
 - **Decision 3. Memory notes.** Rules and Steam facts that live only in my
   memory notes move into the repo. The note keeps a one-line statement and its
   how-to-apply next to the ID, for the same reason a skill does.

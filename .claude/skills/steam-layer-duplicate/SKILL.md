@@ -5,11 +5,13 @@ description: Duplicate an action layer in a Steam Input layout JSON with duplica
 
 # Duplicate a layer safely
 
+Rule IDs (R108 and so on) point at the [Layer Definition of Done](../../../resources/Layer%20Definition%20of%20Done.md#rule-tables), which holds each rule's full text, example and check.
+
 `duplicate_layer.py` does three things:
 
 - Copies the layer, its preset entry, and every group in its `group_source_bindings`, giving them fresh group IDs.
 - Gives the new layer `Preset_<max+1>`.
-- Appends the new layer to the **end** of `action_layers`.
+- Appends the new layer to the **end** of `action_layers` (R103).
 
 Because it appends, no existing runtime ID shifts. List order and `Preset_` numeric order also stay aligned, as long as they were aligned before.
 
@@ -72,7 +74,7 @@ Nothing adds it yet.
 Re-run step 4 and the pre-flight check, then finalize with the `steam-layout-apply` skill.
 Run `python3 audit_command_budget.py path/to/layout.json` after retargeting and wiring
 the copy: each input may have at most three GUI command entries across activator
-types. `binding` array subcommands are allowed beyond three. Duplicating a layer
+types (R109). `binding` array subcommands are allowed beyond three. Duplicating a layer
 also duplicates any existing command-budget violations; do not carry them forward.
 
 ## Guardrails

@@ -173,6 +173,11 @@ menu Tap Cover where the Entry Point would bring in Fn.
 
 ## Rules
 
+Their registry rows are R157 to R163 in the
+[Layer Definition of Done §11](Layer%20Definition%20of%20Done.md#11-stateful-layers):
+rule 1 here is R157, rule 3 is R160, rule 4 is R158, and rule 6 is R111 and
+R112.
+
 1. **Every stateful layer is entered and left through a transition**, apart
    from the exceptions below. Stateful layers never add each other directly.
    A stateful layer may have an extra exit of its own, but it always keeps

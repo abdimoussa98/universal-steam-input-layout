@@ -269,6 +269,9 @@ and [findings/2026-10-01-backward-chain-stacks](findings/2026-10-01-backward-cha
 
 ## Command entry limit and audit
 
+**Rule: R109** ([Layer Definition of Done §3](resources/Layer%20Definition%20of%20Done.md#3-activators)).
+This section explains it; the rule text is there.
+
 Every input in these layouts must have **at most three GUI command entries**.
 Count each activator object across all activation types, including every element
 of a repeated `chord` or `Soft_Press` list. A `bindings.binding` array is

@@ -5,6 +5,8 @@ description: Finalize an edited Steam Input layout for loading into Steam. Runs 
 
 # Finalize a layout for Steam
 
+Rule IDs (R108 and so on) point at the [Layer Definition of Done](../../../resources/Layer%20Definition%20of%20Done.md#rule-tables), which holds each rule's full text, example and check.
+
 ## Required completion: JSON and VDF together
 
 Standing user instruction: after successfully editing and validating a layout
@@ -19,7 +21,7 @@ or an upload to Steam.
 
 ## Required publication metadata
 
-Every publication of a changed layout must include a reviewed description and
+**R151.** Every publication of a changed layout must include a reviewed description and
 a version bump. Before committing layout changes, exporting for delivery, or
 publishing to Steam, follow [Publishing layout changes](../../../README.md#publishing-layout-changes):
 
@@ -63,13 +65,13 @@ entry/exit behavior. Numeric-reference and command-budget checks do not verify
 effective inherited behavior. Include held-across-transition and newly activated
 input cases in the Deck handoff; distinguish static checks from runtime results.
 
-Run the build audit first: `python3 audit_build.py`. It runs the Budget audit,
+**R150.** Run the build audit first: `python3 audit_build.py`. It runs the Budget audit,
 the Window audit, the Flow audit and the Cleanup audit on both working layouts and must exit
 **0** before any version is finalized
 ([Layer Definition of Done §10](../../../resources/Layer%20Definition%20of%20Done.md#10-ship-it)).
 The paragraphs below describe the individual audits it runs.
 
-The Budget audit is `python3 audit_command_budget.py path/to/layout.json`. It must exit **0**
+The Budget audit (R108, R109, R111) is `python3 audit_command_budget.py path/to/layout.json`. It must exit **0**
 before finalizing a layout for Steam. It also fails on any Long Press or Double
 Press, which are banned (see `steam-binding-order`). The limit is **three GUI command entries per
 input**, across activator types; `binding` array subcommands do not consume extra
@@ -78,7 +80,7 @@ banks separately. Resolve failures using `steam-binding-order`; do not truncate
 cleanup subcommands to make a count pass. Read-only audits may report failures
 without changing the layout.
 
-The Window audit is `python3 audit_inheritance.py path/to/layout.json`. It must also exit
+The Window audit (R140) is `python3 audit_inheritance.py path/to/layout.json`. It must also exit
 **0**. It derives every stack each Always On layer can be applied on and fails
 on any undecided layer command underneath, or on an unsaturated search. Apply
 its `blocks_needed` (replace only if the underlying output is identical in
@@ -87,14 +89,14 @@ every stack, otherwise clear). The install runs
 this (`python3 -m steam_layout.fixes <layout> --dry-run` shows what it would change). See
 [Layer Definition of Done §8](../../../resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking).
 
-The Flow audit is `python3 audit_flow_inheritance.py path/to/layout.json`. It
+The Flow audit (R144, R145) is `python3 audit_flow_inheritance.py path/to/layout.json`. It
 must exit **0**: a chain of adding bindings reaches every layer, and no cover
 finding is open. A new or renamed layer needs no declaration; only a cover
 whose title doesn't end in a cover suffix, or an accepted cover finding with
 its reason, goes in `steam_layout/flow_config.json`. Inherited bindings that
 differ between stacks are listed as information and don't fail it.
 
-The Cleanup audit is `python3 audit_cleanups.py path/to/layout.json`. It must
+The Cleanup audit (R127 to R132) is `python3 audit_cleanups.py path/to/layout.json`. It must
 exit **0**: every cleanup function and release follows the six cleanup rules
 (Layer Definition of Done §7). The `cleanup_lists` step of the fix pipeline
 resolves its findings (`python3 -m steam_layout.fixes <layout> --dry-run`
@@ -115,7 +117,7 @@ print("dup titles:   ", dups or "none")
 EOF
 ```
 
-Continue only if every line is `OK` and `dup titles` is `none`:
+Continue only if every line is `OK` and `dup titles` is `none` (R104, R105):
 
 - **Out of order or mismatched:** the generated IDs could be resolved against the wrong ordering on a fresh load, which silently swaps layers. Normalize first, while the file is still in title form. The procedure is in the `steam-layout-prep` skill and `findings/2026-07-11-layer-order-swap/FINDINGS.md`.
 - **Duplicate titles:** every duplicate token becomes the ID of the *last* layer with that title. `to-ids` gives no warning about this. Stop and tell the user. The fix is to rename the layers, and then work out which `{{Base::<title>}}` tokens belong to which layer.

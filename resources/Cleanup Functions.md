@@ -39,7 +39,11 @@ The trigger-by-scope classification is from the
 
 ## The kinds
 
-Each kind has a required shape, so a script can recognize it.
+Each kind has a required shape, so a script can recognize it. The rules for
+what each may remove are R127 to R135 in the
+[Layer Definition of Done §7](Layer%20Definition%20of%20Done.md#7-cleanup);
+the stick-touch release is R116 to R118 and R123, the reset R120 to R122, and
+the timed self-exit and transition R146 to R148.
 
 | Kind | Trigger | Shape | Scope | Reference |
 |---|---|---|---|---|

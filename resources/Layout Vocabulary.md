@@ -12,24 +12,28 @@ switching Steam action sets.
 
 ## Runtime rules (author-confirmed, 2026-09-30)
 
-- Never use Steam's `hold_layer` API: the author considers it too buggy.
+The rules themselves are in the
+[Layer Definition of Done](Layer%20Definition%20of%20Done.md#rule-tables),
+by ID. This list says what the author observed behind them.
+
+- **R101:** never use Steam's `hold_layer` API: the author considers it too buggy.
   Implement every layer lifetime with explicit `add_layer` and `remove_layer`
   commands, including layers active while a button is held.
-- Never switch Steam action sets (`CHANGE_PRESET`). Keep the structural Base
+- **R102:** never switch Steam action sets (`CHANGE_PRESET`). Keep the structural Base
   action set and implement modes with action layers. Historical “Transition
   Set” names refer to layers, not action-set switching.
 - For the removal/reset behavior discussed in the stack investigation, the
   timer **restarts**, then waits **300 ms**; it is not cancelled. This is the
   author's runtime observation, not a claim that every configured delay is
   300 ms. The untimed search model does not yet represent this behavior.
-- **Chords latch** (author's manual test, 2026-10-01). Once a chorded
+- **Chords latch** (author's manual test, 2026-10-01; rule R112). Once a chorded
   activator is active, releasing the chord button doesn't re-evaluate it. The
   input stays in the chord until the button the chord is bound to is released.
   A bind therefore can't hand over from a chord to a Regular Press when the
   chord button goes up. Hypothesis, not yet tested: a `remove_layer` call
   re-evaluates held inputs, the same way it restarts delays.
 - **An inverted edge on a D-pad-mode stick isn't caught reliably** (author's
-  Deck testing, 2026-10-01). Never use one to add or remove a layer. A normal
+  Deck testing, 2026-10-01; rule R111). Never use one to add or remove a layer. A normal
   outer edge and its Release are reliable there. An inverted edge that only
   sends output (a walk bind, the WASD modifier) is fine, and mouse-mode sticks
   aren't affected.
@@ -52,6 +56,13 @@ format/parser documentation may retain historical APIs.
 | **Interaction stack** | The active layers belonging to one interaction, regardless of their position relative to unrelated active layers. | `Menu Left: Escape` + its Double Tap Cover; or L1's modifier + Tap Cover + Temp Cursor Gyro. |
 | **Guarded recovery** | An owner-held chord suppresses an interruptible, repeating Regular Press removal on the same input. It clears invalid state when no protecting owner is held. | L1's RS-edge fallback removes its regular/Gyro modifier pair, Tap Cover, and Temp Cursor Gyro. |
 | **Lifecycle exit** | A normal release, timer expiry, or deliberate transition with its own removal scope and conditions. | A Double Tap window removes itself on timeout. This is not a guarded recovery binding. |
+| **Cleanup function** | The backup exit for a stuck layer: a guarded recovery. It fires when a likely next input is pressed and no owner is held (R133). | `L1: Modifier 0`'s right-stick touch removes LB's layers when LB isn't held. |
+| **Guard** | The buttons whose chords suppress a cleanup function. Holding any of them stops it (R127). | LB for `L1: Modifier 0`; LB and RB for `L1!R1: Modifier 2`. |
+| **Exit** | A Release that removes the layer it is bound in. | LB's Release in `L1: Modifier 0`. |
+| **Keeper** | What keeps a layer alive: usually the button whose Release removes it, otherwise a thumb on a stick, a timer, or a mode. The Cleanup audit computes it. | LB keeps `L1: Modifier 0`; a thumb on the left stick keeps `LST: Entry Point`; its 150 ms timer keeps `L1: Double Tap`; `Steering` is a mode. |
+| **Cover (an input)** | An upper layer covers an input when it binds it, so a lower layer's binding on that input can't fire. Cover-type layers (Tap Covers, Double Tap Covers, Temp Cursor Gyro) are built to do this on one button. | `L1: Tap Cover` covers LB over `L1: Modifier 0`: its Release fires, not the modifier's. |
+| **Pair** | For the hidden-exit rule (R136): one lower layer plus one layer that can sit on top of it and covers one of its exits. | `Tab` under `L1: Double Tap`: lifting the thumb off the left pad inside the window misses `Tab`'s Release. |
+| **Temporary guard** | A short-lived layer that waits for one input to return to rest. Nothing is added over it (R137). | `Steering \| LS: Entry Guard`, `Steering \| LS: Fallback Hold`. |
 
 These are repository design terms, not new Steam Input object types. In
 particular, an action layer is not automatically a button overlay just because

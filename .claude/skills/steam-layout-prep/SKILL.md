@@ -5,6 +5,8 @@ description: Prepare a Steam Input layout in this repo for editing or analysis. 
 
 # Prep a layout for editing
 
+Rule IDs (R108 and so on) point at the [Layer Definition of Done](../../../resources/Layer%20Definition%20of%20Done.md#rule-tables), which holds each rule's full text, example and check.
+
 Runtime IDs in `controller_action` commands are positional: action sets are numbered first (from 1), then layers, in the order they appear. That makes numeric IDs fragile, so all editing happens in `{{title}}` token form.
 
 ## 1. Get to JSON
@@ -28,7 +30,7 @@ print("title form:   ", "yes" if "controller_action add_layer {{" in open(sys.ar
 EOF
 ```
 
-What each result means:
+What each result means (R104, R105):
 
 - **dup titles** (for example the two `DEPRECATED` layers): rename them so each title is unique *before* step 3. `to-titles` turns both IDs into the same token, and after that they can't be told apart. `to-ids` resolves every duplicate token to the last layer with that title.
 - **layer order OUT OF ORDER**: the `action_layers` list order and the `Preset_` numeric order disagree. On a fresh VDF load Steam can resolve runtime IDs by either order, which silently swaps layers. This is the July 2026 bug; see `findings/2026-07-11-layer-order-swap/FINDINGS.md`. Fix it after step 3, while the file is in title form:
@@ -66,7 +68,7 @@ Token format:
 - **Audit blocking as well as cleanup.** Distinguish explicit empty bindings, active `disabled` source modes, conditional chord protection, and replacement outputs/releases. Empty `inputs` objects and inactive groups are not explicit blocks. Find every active `always_on_action` owner and trace its entry/exit order: add it last; remove it first before other layer changes. This preserves the author's historical crash workaround and timer isolation. Read [the documented contract](../../../resources/Steam%20Input%20JSON%20Structure.md#always-on-layer-isolation-and-the-historical-crash-workaround); do not treat a blocked input as an invitation to add cleanup.
 - **Classify the cleanup shape.** Guarded recovery pairs an owner-held chord with an interruptible Regular Press removal on the same input; every guarded recovery removal must enable Hold to Repeat. Inspect both siblings and interruption settings before calling a removal guarded. Release cleanup, timed expiry, threshold exits, and uninterruptible delayed-apply resets are different types. See [the exact recovery structure](../../../resources/Steam%20Input%20JSON%20Structure.md#guarded-recovery-binding-shape) and [owning-layer responsibility for overlays](../../../resources/Steam%20Input%20JSON%20Structure.md#overlay-cleanup-ownership).
 - **Recognize touch-release completion paths.** A stick-touch release may intentionally apply the pending delayed target before clearing its LST/RST helpers, preventing those removals from postponing the apply. Audit it alongside the primary delay and the upper cover's replacement touch input; do not classify add-before-removal as an ordering defect by itself. See [the documented pattern](../../../resources/Steam%20Input%20JSON%20Structure.md#complete-delayed-applies-on-stick-touch-release).
-- **Check held inputs across layer changes.** A layer added over a held input does not fire its immediate layer command on that input. Its delayed and repeating activators still fire. Short delays (such as `Gyro Off Ramp Up`'s 5 ms), repeating adds outside Base, and repeating threshold exits often exist for this reason, not for timing; don't strip them or "normalize" them. Whether removing a layer fires the newly exposed binding on a held input is **unverified**. Base's repeating entries and the other covering repeats are what guarantee re-entry after a removal, so keep them. Give any new layer command that must fire after a removal Hold to Repeat, and still trace what each removal exposes on inputs that may be held. See [held inputs across layer changes](../../../resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes).
+- **Check held inputs across layer changes (R113 to R115).** A layer added over a held input does not fire its immediate layer command on that input. Its delayed and repeating activators still fire. Short delays (such as `Gyro Off Ramp Up`'s 5 ms), repeating adds outside Base, and repeating threshold exits often exist for this reason, not for timing; don't strip them or "normalize" them. Whether removing a layer fires the newly exposed binding on a held input is **unverified**. Base's repeating entries and the other covering repeats are what guarantee re-entry after a removal, so keep them. Give any new layer command that must fire after a removal Hold to Repeat, and still trace what each removal exposes on inputs that may be held. See [held inputs across layer changes](../../../resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes).
 - **Identify the recovery owner before reporting omissions.** Overlays can inherit recovery and use a local release exit; other layers clear a current branch or the released side. Record intended survivors and actual gyro/edge overrides. Release-only cleanup or a shorter target list is not automatically a defect. Use [cleanup scopes and examples](../../../resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) when evaluating consistency.
 - **Treat unequal edge coverage as a review question.** LS cleanup displaces the WASD modifier; RS cleanup displaces ramp-up, whose layer API/timer constraints make blocking more common. Recommend edge cleanup only where recovery requires that tradeoff, not merely to match the other stick. See [edge cleanup and inheritance](../../../resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions).
 - **Respect menu context.** The author intentionally suppresses gyro and accepts edge blocking in menu layers; WASD modifiers and ramp-up are unnecessary during Start/Select menu use. Do not classify those confirmed overrides as defects or remove them to make overlays pass through all gameplay actions.
@@ -74,7 +76,7 @@ Token format:
 ## Check the command budget
 
 Run `python3 audit_command_budget.py path/to/layout.json` for a complete scan, or add
-`--json` for every input's counts and exact violation paths. The maximum is **three
+`--json` for every input's counts and exact violation paths. The maximum (R109) is **three
 GUI command entries per input**, summed over all activator types/list elements.
 Subcommands in a `binding` array share one entry and may exceed three. Inactive and
 unreferenced groups are included; disabled banks are checked separately. A failure
