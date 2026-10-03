@@ -121,17 +121,17 @@ It becomes the migration record in phase 14.
 | 90.12 | C6 | (taps): tap L1 twice quickly: scroll down. Hold L1 and press A, let go… | Scenario | B, T, K: double tap scrolls, a used bumper doesn't, the quick tap toggles Gyro | Not migrated yet |
 | 90.12 | C7 | (stuck, still clears): miss the release of L1 alone, of Start's Fn lay… | Scenario | B, Miss, St: a stuck modifier, Fn layer and Steering driver each clear | Not migrated yet |
 | 90.12 | C8 | (menu): hold Start, push a stick (guard), release: Tab or the window a… | Scenario | B, St, T, K: the menu hold with a stick guard, and the Fn release | Not migrated yet |
-| 90.11 | F1 | (the fix): hold the left stick up for about 1 s, roll to A or D withou… | Scenario | St, T, Hap: rolling to A or D removes the Fallback Hold, so no exit and no pulse | Not migrated yet |
-| 90.11 | F2 | (exit): hold the left stick up: W, pulses from the start, and Steering… | Scenario | St, T, K, Hap: W, the pulse, and the exit with its beep at 1.5 s. The pulse strength is a tuning note | Not migrated yet |
-| 90.11 | F3 | (early release): hold up for 1 s, recentre, hold up again: the exit co… | Scenario | St, T: the exit counts from the second push | Not migrated yet |
-| 90.11 | F4 | (after A or D): hold A for 3 s, roll up and hold: the exit comes about… | Assumption | A16: does a delay's clock start when its layer is added | Not migrated yet |
-| 90.11 | F5 | (diagonal): hold up-left: W and A together, pulses carry on, exit at 1… | Scenario | St, T, K: a diagonal holds two directions | Not migrated yet |
-| 90.11 | F6 | (driver): hold up, press R1 before 1.5 s: the pulses stop, no exit, an… | Scenario | B, St, T: a driver press removes the hold. Whether W returns after the driver's release rests on A11 | Not migrated yet |
-| 90.11 | F7 | (entry): enter Steering with the stick centred, push up and hold: W wi… | Scenario | St, T: the Entry Guard, entered with the stick centred or already up. The second rests on A8 | Not migrated yet |
-| 90.11 | F8 | (menu while holding up): hold up, tap Start: one Tab, W carries on, an… | Scenario | B, St, T, K: a Start tap types Tab and adds nothing over the hold | Not migrated yet |
-| 90.11 | F10 | (menu held, then push up): hold Start with the stick centred, push up… | Scenario | B, St, T, K: the menu Entry Point types W on stick up and adds no hold | Not migrated yet |
-| 90.11 | F11 | (Entry Guard): enter Steering and leave the stick centred: Start and S… | Scenario | B, St, T, K: Start and Select type their keys in the Entry Guard | Not migrated yet |
-| 90.11 | F9 | (desktop): apply the layout to the desktop configuration and repeat F1… | Scenario | Desk: F1 and F2 again on the layout with every entry past the third dropped. Rests on A21 | Not migrated yet |
+| 90.11 | F1 | (the fix): hold the left stick up for about 1 s, roll to A or D withou… | Scenario | St, T, Hap: rolling to A or D removes the Fallback Hold, so no exit and no pulse | `tests/test_scenarios_90_11.py` |
+| 90.11 | F2 | (exit): hold the left stick up: W, pulses from the start, and Steering… | Scenario | St, T, K, Hap: W, the pulse, and the exit with its beep at 1.5 s. The pulse strength is a tuning note | `tests/test_scenarios_90_11.py` |
+| 90.11 | F3 | (early release): hold up for 1 s, recentre, hold up again: the exit co… | Scenario | St, T: the exit counts from the second push | `tests/test_scenarios_90_11.py` |
+| 90.11 | F4 | (after A or D): hold A for 3 s, roll up and hold: the exit comes about… | Assumption | A16: does a delay's clock start when its layer is added | A16: it is that assumption's Deck procedure |
+| 90.11 | F5 | (diagonal): hold up-left: W and A together, pulses carry on, exit at 1… | Scenario | St, T, K: a diagonal holds two directions | `tests/test_scenarios_90_11.py` |
+| 90.11 | F6 | (driver): hold up, press R1 before 1.5 s: the pulses stop, no exit, an… | Scenario | B, St, T: a driver press removes the hold. Whether W returns after the driver's release rests on A11 | `tests/test_scenarios_90_11.py` |
+| 90.11 | F7 | (entry): enter Steering with the stick centred, push up and hold: W wi… | Scenario | St, T: the Entry Guard, entered with the stick centred or already up. The second rests on A8 | `tests/test_scenarios_90_11.py` |
+| 90.11 | F8 | (menu while holding up): hold up, tap Start: one Tab, W carries on, an… | Scenario | B, St, T, K: a Start tap types Tab and adds nothing over the hold | `tests/test_scenarios_90_11.py` |
+| 90.11 | F10 | (menu held, then push up): hold Start with the stick centred, push up… | Scenario | B, St, T, K: the menu Entry Point types W on stick up and adds no hold | `tests/test_scenarios_90_11.py` |
+| 90.11 | F11 | (Entry Guard): enter Steering and leave the stick centred: Start and S… | Scenario | B, St, T, K: Start and Select type their keys in the Entry Guard | `tests/test_scenarios_90_11.py` |
+| 90.11 | F9 | (desktop): apply the layout to the desktop configuration and repeat F1… | Scenario | Desk: F1 and F2 again on the layout with every entry past the third dropped. Rests on A21 | `tests/test_scenarios_90_11.py` |
 | 90.10 | G1 | (gate 1, stick inheritance from the middle of the stack): hold the lef… | Assumption | A26: do stick inputs inherit through the middle of the stack | Not migrated yet |
 | 90.10 | G2 | (gate 1, Fn): hold Start past 200 ms so Fn is up, click and release th… | Assumption | A26: the same shape, with the Fn layer over the Entry Point | Not migrated yet |
 | 90.10 | G3 | (gate 2, edge Release in a layer added with the stick already out): ho… | Assumption | A8: a stick edge's Release in a layer added with the stick already out. Its last branch is A14 | Not migrated yet |

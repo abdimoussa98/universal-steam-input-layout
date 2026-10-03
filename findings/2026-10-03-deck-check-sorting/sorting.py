@@ -184,6 +184,8 @@ SCENARIOS_90_11 = "`tests/test_scenarios_90_11.py`"
 WENT = {
     ("90.13", "N1"): SCENARIOS_90_11, ("90.13", "N2"): SCENARIOS_90_11, ("90.13", "N3"): SCENARIOS_90_11,
     ("90.13", "N4"): SCENARIOS_90_11,
+    **{("90.11", check): SCENARIOS_90_11 for check in ("F1", "F2", "F3", "F5", "F6", "F7", "F8", "F9", "F10", "F11")},
+    ("90.11", "F4"): "A16: it is that assumption's Deck procedure",
 }
 
 

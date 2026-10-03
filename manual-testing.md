@@ -28,22 +28,6 @@ Unchanged, check they still work:
 - [ ] C7 (stuck, still clears): miss the release of L1 alone, of Start's Fn layer, and of a Steering driver, then press A or touch a stick: each clears
 - [ ] C8 (menu): hold Start, push a stick (guard), release: Tab or the window as before; hold Start past 200 ms for Fn, release: Fn gone, nothing left behind
 
-## 90.11: Steering fallback hold
-
-Load 90.11 fresh in both variants (71 layers). Record: [build](findings/2026-10-02-steering-fallback-hold/README.md). Nothing here has run on the Deck. These replace D2 (90.10) and C1 (90.6). All checks are in Steering with no driver held.
-
-- [ ] F1 (the fix): hold the left stick up for about 1 s, roll to A or D without recentring and hold for 3 s: the pulses stop on A or D and Steering stays. Repeat from down
-- [ ] F2 (exit): hold the left stick up: W, pulses from the start, and Steering exits with one beep at about 1.5 s. Repeat with down and S
-- [ ] F3 (early release): hold up for 1 s, recentre, hold up again: the exit comes 1.5 s after the second push, not sooner
-- [ ] F4 (after A or D): hold A for 3 s, roll up and hold: the exit comes about 1.5 s after reaching up. An instant exit means the timer counted the time on A; an exit near 3 s means the reset on the edge restarted it
-- [ ] F5 (diagonal): hold up-left: W and A together, pulses carry on, exit at 1.5 s
-- [ ] F6 (driver): hold up, press R1 before 1.5 s: the pulses stop, no exit, and the R1 modifier map is up. Release R1 with the stick still up: note whether W and the pulses come back
-- [ ] F7 (entry): enter Steering with the stick centred, push up and hold: W with no pulse and no exit until the stick has been back to centre once (D9 in 90.10). Repeat entering with the stick already held up
-- [ ] F8 (menu while holding up): hold up, tap Start: one Tab, W carries on, and the exit still comes 1.5 s after the push. Hold Start for 1 s: Tab held, no Fn. Recentre, push A: no pulse. Repeat with Select (Escape)
-- [ ] F10 (menu held, then push up): hold Start with the stick centred, push up and hold for 3 s: W, no pulses, and Steering stays. Release Start: Fn or Tab as usual
-- [ ] F11 (Entry Guard): enter Steering and leave the stick centred: Start and Select type Tab and Escape, with no Fn and no leave gesture. Push the stick out and back once, or press a driver: Start's tap and Fn come back
-- [ ] F9 (desktop): apply the layout to the desktop configuration and repeat F1 and F2
-
 ## 90.10: stateful transitions
 
 Load 90.10 fresh in both variants (70 layers). Record: [build](findings/2026-10-01-stateful-transitions/README.md) · [design](resources/Stateful%20Layer%20Transitions.md) · [plan](plans/2026-10-01-stateful-transitions-implementation.md). Nothing here has run on the Deck; the two gates were assumed. These replace K1 (90.9) and S5 and S8 (90.7), which test behaviour this release changed.
