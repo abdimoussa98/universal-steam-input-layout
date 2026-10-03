@@ -633,6 +633,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 | R153 | A layout has no dead groups: no plain-inactive slot and no unreferenced group | 90.6 pruned the four inactive stick-touch Double Press groups | 2026-09-30 | `dead_groups` fix; `test_layout_hygiene.test_no_unreferenced_groups_or_plain_inactive_slots` | — | None |
 | R154 | The tests pass, a new invariant gets a new test, and the change is recorded in `findings/<date>-<slug>/` | 90.11 came with `tests/test_steering_fallback_hold.py` and `findings/2026-10-02-steering-fallback-hold/` | Author | Not checked yet | — | None |
 | R155 | A Deck section is added to `manual-testing.md` for the change | 90.13 added "90.13: no turn assist in Steering", checks N1 to N4 | Author | Not checked yet | — | None |
+| R164 | Before a release ships, its change report is written to the release's findings folder and read: every change in it is one somebody decided | The report for 90.13 shows `Steering` gaining an empty right-stick edge, which was decided, and the two Steering stick windows losing their trigger-edge mouse buttons, which the `window_routes` fix did on its own | Author, 2026-10-02 | Not checked yet | — | None |
 | R156 | The working layouts are generated: they equal the current builder's output run through the fix pipeline. A hand edit there is lost on the next install | `neptune/*_latest.json` equals the output of `findings/2026-10-02-steering-fallback-hold/build_candidate.py`, apart from title and description | Since the 09-30 builder | `test_steering_fallback_hold.test_working_layouts_are_this_build` | — | None |
 
 - [ ] **R150: the build audit is clean, on every version.** `python3 audit_build.py`
@@ -656,6 +657,10 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       title doesn't end in a cover suffix, and an entry in the
       [exceptions register](#exceptions-register). An exception that no
       longer matches anything is reported as stale.
+- [ ] **R164:** the change report is read. `python3 change_report.py --out findings/<date>-<slug>/`
+      compares each working layout with its newest snapshot, layer by layer
+      and input by input, and writes the result into the release's findings
+      folder. A change nobody decided is looked at before the release ships.
 - [ ] **R154:** the tests pass, and a new invariant gets a new test.
 - [ ] **R154:** the change is recorded in `findings/<date>-<slug>/`.
 - [ ] **R155:** a Deck section is added to [manual-testing.md](../manual-testing.md). It

@@ -58,6 +58,11 @@ final step of a completed layout edit (step 4, item 2 below).
 
 ## 1. Run the pre-flight check
 
+**R164.** Read the change report first: `python3 change_report.py --out findings/<date>-<slug>/`
+lists what differs from the newest snapshot, by layer and input, and saves it
+with the release's record. Every change in it should be one somebody decided;
+a fix can change a binding on its own.
+
 For binding, source, or layer-transition changes, confirm the
 [inheritance review](../../../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes)
 records affected upper layers, intended inheritance/blocks, and protected timer

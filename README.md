@@ -243,6 +243,21 @@ python3 audit_cleanups.py <layout> --layer "L1: Modifier 0"
 python3 audit_cleanups.py <layout> --check "never there" --json
 ```
 
+### 4d. `change_report.py` - Change Report (What Differs Between Two Layouts)
+
+Compares two layouts by layer and input: mode, settings and each input's
+activators, with layer commands compared by title so a shifted runtime ID is
+not a change. With no arguments it compares each working layout with its
+newest snapshot under `versions/neptune/`. Read it before shipping (rule R164):
+a fix or a builder can change a binding nobody decided, and this is where it
+shows. It is a report, not a check.
+
+```bash
+python3 change_report.py                                   # working layouts against their newest snapshots
+python3 change_report.py BEFORE.json AFTER.json            # any two layouts
+python3 change_report.py --out findings/<date>-<slug>/     # also write <name>-changes.txt there
+```
+
 ### 5. `steam_layout/` - Shared Library and Fix Pipeline
 
 The reusable code behind the scripts above. Import it from the repo root.
