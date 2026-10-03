@@ -29,7 +29,8 @@ Names. Buttons: Start, Select, A, B, X, Y, Up, Down, Left, Right, LB, RB, and th
 buttons. L1 and R1 are the modifier buttons: the bumpers in the default layout, the
 triggers' soft pull in the alternative. LF and RF are the firing buttons: the triggers'
 soft pull in the default, the bumpers in the alternative. Sticks are LS and RS, pads LP
-and RP. A layer title is written with the default layout's names; `pad.title()` and the
+and RP. A pad click is `press_pad(pad, where)`: "centre", a direction for the outer part, or
+"ring left" for the ring where the two ranges overlap (A39). A layer title is written with the default layout's names; `pad.title()` and the
 expectations turn L1 and R1 into L2 and R2 for the alternative.
 
 Plan: plans/2026-10-02-rule-registry.md, phases 13 to 15.
@@ -200,6 +201,46 @@ class Pad:
         self.wait(ms)
         self.sim.release((SOURCES[stick], "click"))
         return self
+
+    def press_pad(self, pad, where="centre"):
+        """Click a pad and keep it down: the thumb on it at `where`, then the click.
+
+        "centre" is inside the centre range only. A direction ("left") is the outer part, past the D-pad
+        deadzone. "ring left" is the ring where the centre and outer ranges overlap, on that side (A39).
+        The direction goes down after the click: Base's left pad uses the same input names for its
+        swipes, and a click isn't a swipe.
+        """
+        source = SOURCES[pad]
+        self.touch(pad)
+        ring, direction = (where.split() + [None])[:2] if where.startswith("ring") else (None, where)
+        if direction != "centre":
+            (self.sim.press_between if ring else self.sim.press)((source, "edge"))
+        self.sim.press((source, "click"))
+        if direction != "centre":
+            self.sim.press((source, DIRECTIONS[direction]))
+        return self
+
+    def slide_pad(self, pad, where):
+        """Move the thumb on a pad that is clicked: to "centre", or out to a direction."""
+        source = SOURCES[pad]
+        self.recentre(pad)
+        if where != "centre":
+            self.sim.press((source, "edge"))
+            self.sim.press((source, DIRECTIONS[where]))
+        return self
+
+    def let_go_pad(self, pad, lift=True):
+        """Stop pressing a pad; `lift` also takes the thumb off it. The direction lets go before the click,
+        so that it isn't left held over Base's swipe of the same name."""
+        source = SOURCES[pad]
+        for part in DIRECTIONS.values():
+            if self._held(pad, part):
+                self.sim.release((source, part))
+        self.sim.release((source, "click"))
+        return self.lift(pad) if lift else self
+
+    def click_pad(self, pad, where="centre", ms=120):
+        return self.press_pad(pad, where).wait(ms).let_go_pad(pad)
 
     def enter_steering(self, settle=True):
         """Start plus left-stick click, the click released first. `settle` moves the stick out and back

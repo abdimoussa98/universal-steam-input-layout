@@ -12,7 +12,10 @@
 It answers the three questions a Deck check asks: which layer gets an input,
 what is on the stack, and which keys are down. It does not know how far a stick
 or trigger is (a control is held or not), and it does not simulate `hold_layer`,
-mode shifts or gyro motion.
+mode shifts or gyro motion. The one exception to "held or not" is
+`press_between`: an input that sits inside an inverted Soft Press's range and
+past a normal one's threshold at once, such as a thumb on the ring where a
+pad's centre and outer ranges overlap.
 
 Every behaviour below is an assumption about Steam, by ID from
 resources/Steam Behaviour Assumptions.md. An unverified one is modelled as
@@ -41,6 +44,8 @@ stated; the ones the layout must work either way under are switches.
     A35      `default_repeat_ms`: Hold to Repeat with no stated rate uses this interval
     A37      a key handed from one binding to another at the same moment stays down (`typed`)
     A38      a stick edge is inverted only where its own group says so
+    A39      `soft_press_interrupts`: an active uninterruptible Soft Press suppresses an interruptible
+             Soft Press on the same input (`press_between` puts an input in both of two ranges)
     A21      `desktop(data)`: the layout with every entry past the third dropped
     A25      `lose(control)`: a release the layout never saw
 
@@ -110,13 +115,15 @@ class Act:
 
 class Simulator:
     def __init__(self, layout, start=None, *, exposed_fires=True, any_removal_resets=True, reverse_ties=False,
-                 default_repeat_ms=100):
+                 default_repeat_ms=100, soft_press_interrupts=True):
         self.layout = layout if isinstance(layout, Layout) else Layout(layout)
         self.base = self.layout.base
         self.stack = tuple(start or (self.base,))
         self.exposed_fires, self.any_removal_resets = exposed_fires, any_removal_resets
         self.reverse_ties, self.default_repeat_ms = reverse_ties, default_repeat_ms
+        self.soft_press_interrupts = soft_press_interrupts
         self.now, self.held, self.log = 0, set(), []
+        self.between = set()            # held controls that are also inside an inverted range (`press_between`)
         self.acts = {}                  # (control, phase, kind, index) -> Act
         self.bound = {}                 # (control, phase) -> the layer whose binding is established there
         self._cache, self._order = {}, 0
@@ -211,6 +218,21 @@ class Simulator:
         self._drain()
         return self
 
+    def press_between(self, control):
+        """Hold an input where an inverted Soft Press's range and a normal one's overlap: both are active."""
+        control = tuple(control)
+        if control in self.held:
+            raise ValueError(f"{'/'.join(control)} is already held")
+        self._note("press", "/".join(control) + " (between)")
+        self.held.add(control)
+        self.between.add(control)
+        if (control, "up") not in self.bound:
+            self._establish(control, "up", "pressed")
+        self._establish(control, "down", "pressed")
+        self._rebind()
+        self._drain()
+        return self
+
     def release(self, control):
         control = tuple(control)
         if control not in self.held:
@@ -219,7 +241,9 @@ class Simulator:
         _, found = self.binding(control)                      # the layer that answers it now (A7, A8)
         self._end(control, "down")
         self.held.discard(control)
-        if control in self._inverted:
+        was_between = control in self.between
+        self.between.discard(control)
+        if control in self._inverted and not (was_between and (control, "up") in self.bound):
             self._establish(control, "up", "pressed")        # an inverted activator starts when the input lets go
         for entry in self._ordered(e for e in found if e.kind == "release" and not e.inverted):
             self._run(entry, tap=True)
@@ -235,6 +259,7 @@ class Simulator:
         self._note("lose", "/".join(control))
         self._end(control, "down")
         self.held.discard(control)
+        self.between.discard(control)
         self._rebind()
         self._drain()
         return self
@@ -259,7 +284,7 @@ class Simulator:
     def _live(self):
         """The (control, phase) pairs that can have live activators now."""
         pairs = {(control, "down") for control in self.held}
-        pairs |= {(control, "up") for control in self._inverted if control not in self.held}
+        pairs |= {(control, "up") for control in self._inverted if control not in self.held or control in self.between}
         for title in self.stack:
             for source, group in self.layout.active(title).items():
                 if ALWAYS_ON in group.get("inputs", {}):
@@ -277,7 +302,10 @@ class Simulator:
         """The binding that answers `control` starts answering it: decide which of its activators are live."""
         layer, found = self.binding(control)
         self.bound[(control, phase)] = layer
+        active = [e for e in found if e.kind == "Soft_Press" and (control in self.between or e.inverted == (phase == "up"))]
         found = [e for e in found if e.kind != "release" and e.inverted == (phase == "up")]
+        if self.soft_press_interrupts and any(e.settings.get("interruptable") == "0" for e in active):   # A39
+            found = [e for e in found if e.kind != "Soft_Press" or e.settings.get("interruptable") == "0"]
         for entry in found:
             if entry.condition is not None and not entry.condition.known:
                 raise NotImplementedError(f"{layer} {'/'.join(control)}: unknown chord button ({entry.condition.label})")

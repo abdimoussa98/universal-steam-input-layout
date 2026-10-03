@@ -2,8 +2,8 @@
 	"controller_mappings": {
 		"version": "3",
 		"revision": "12896",
-		"title": "single-set-default :: always-gyro :: 90.13",
-		"description": "Keyboard & mouse layout with WASD movement, gyro aiming, and right-stick turn assist. L2/R2 fire left/right mouse buttons; L1/R1 are the modifiers. Hold Start or Select for the Fn layers. While either is held the camera stick is off, and Fn waits until both sticks are centered.\n\nConfigure normal gyro and right-stick response in Base; modifier and ramp layers have their own stick overrides. The empty left-stick edge bind is the WASD Modifier slot. Ramp Up 0 and Ramp Up 1, the first two layers, control turn-assist speed and timing.\n\nTemp Cursor Gyro: hold either modifier for 300 ms, or lift a thumb from either stick during the hold, for cursor response. The 300 ms hold gives a high-intensity haptic pulse; thumb-lift entry stays silent. Ongoing gyro vibration is off and minimum movement threshold is 5. Face buttons, D-pad, stick clicks, Start/Select, the opposite modifier, or both sticks deflected cancel cursor response for the rest of that hold. Release and hold again to re-enable it.\n\nSteering (Deck testing pending): hold Start, click and release the left stick, then release Start. A beep and a strong pulse confirm it. The left stick drives with WASD. Hold R1 for W or L1 for S; the left stick then steers with A/D. While driving, hold the left stick down or up for the L1 or R1 modifier map. It stays while the stick rolls sideways and ends when the stick returns to center. A quick flick back to center scrolls once instead, and a second flick held keeps scrolling. Hold the other bumper for the two-modifier map, where left stick up/down scrolls. A quick tap of the other bumper clears every layer, including Gyro, back to Base. Releasing the driving bumper hands over to the other one if it is held; otherwise the left stick returns to WASD, and holding it up or down pulses at once and exits Steering at 1.5 s; rolling to A or D stops the timer. Start and Select send Tab and Escape while driving, while the left stick is held up or down with no bumper, and after entering until the left stick has been moved once; otherwise they keep their taps and Fn layers. To leave Steering, hold Start or Select, click and release either stick, then release the button, with the same beep and pulse; Gyro stays as it was. While steering, right-pad touch modes such as circular scroll are off, so the pad is just the mouse, and right-stick turn assist is off, so the gyro also stays on while the right stick turns.\n\nBase and Gyro (L1+R1 toggle) retain their activation rules. Stateful Cursor Gyro and Gamepad remain planned; until they exist, the other Start or Select plus stick-click gestures clear every layer above Base except Gyro.",
+		"title": "single-set-default :: always-gyro :: 90.15",
+		"description": "Keyboard & mouse layout with WASD movement, gyro aiming, and right-stick turn assist. L2/R2 fire left/right mouse buttons; L1/R1 are the modifiers. Hold Start or Select for the Fn layers. While either is held the camera stick is off, and Fn waits until both sticks are centered.\n\nConfigure normal gyro and right-stick response in Base; modifier and ramp layers have their own stick overrides. The empty left-stick edge bind is the WASD Modifier slot. Ramp Up 0 and Ramp Up 1, the first two layers, control turn-assist speed and timing.\n\nTemp Cursor Gyro: hold either modifier for 300 ms, or lift a thumb from either stick during the hold, for cursor response. The 300 ms hold gives a high-intensity haptic pulse; thumb-lift entry stays silent. Ongoing gyro vibration is off and minimum movement threshold is 5. Face buttons, D-pad, stick clicks, Start/Select, the opposite modifier, or both sticks deflected cancel cursor response for the rest of that hold. Release and hold again to re-enable it.\n\nSteering (Deck testing pending): hold Start, click and release the left stick, then release Start. A beep and a strong pulse confirm it. The left stick drives with WASD. Hold R1 for W or L1 for S; the left stick then steers with A/D. While driving, hold the left stick down or up for the L1 or R1 modifier map. It stays while the stick rolls sideways and ends when the stick returns to center. A quick flick back to center scrolls once instead, and a second flick held keeps scrolling. Hold the other bumper for the two-modifier map, where left stick up/down scrolls. A quick tap of the other bumper clears every layer, including Gyro, back to Base. Releasing the driving bumper hands over to the other one if it is held; otherwise the left stick returns to WASD, and holding it up or down pulses at once and exits Steering at 1.5 s; rolling to A or D stops the timer. Start and Select send Tab and Escape while driving, while the left stick is held up or down with no bumper, and after entering until the left stick has been moved once; otherwise they keep their taps and Fn layers. To leave Steering, hold Start or Select, click and release either stick, then release the button, with the same beep and pulse; Gyro stays as it was. While steering, right-pad touch modes such as circular scroll are off, so the pad is just the mouse, and right-stick turn assist is off, so the gyro also stays on while the right stick turns.\n\nTrackpad clicks (Deck testing pending): a click is read once, when it starts, and holds until release. Pressed near the centre, the right pad is the middle mouse button and the left pad shows the keyboard. Further out, the right pad is Back, Forward and scroll up/down, and the left pad is the arrow keys. The output comes about 50 ms after the press, so a very short click may send nothing.\n\nBase and Gyro (L1+R1 toggle) retain their activation rules. Stateful Cursor Gyro and Gamepad remain planned; until they exist, the other Start or Select plus stick-click gestures clear every layer above Base except Gyro.",
 		"creator": "76561198079670632",
 		"progenitor": "",
 		"url": "workshop://3660206238",
@@ -442,6 +442,30 @@
 			},
 			"Preset_1000173": {
 				"title": "Steering | LS: Fallback Hold",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000174": {
+				"title": "LTP: Click Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000175": {
+				"title": "RTP: Click Entry Point",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000176": {
+				"title": "LTP: Middle Click",
+				"legacy_set": "1",
+				"set_layer": "1",
+				"parent_set_name": "Preset_1000001"
+			},
+			"Preset_1000177": {
+				"title": "RTP: Middle Click",
 				"legacy_set": "1",
 				"set_layer": "1",
 				"parent_set_name": "Preset_1000001"
@@ -1689,82 +1713,6 @@
 				}
 			},
 			{
-				"id": "190",
-				"mode": "2dscroll",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"click": {
-						"activators": {
-							"Soft_Press": {
-								"bindings": {
-									"binding": "controller_action hold_layer 16 0 0, , "
-								},
-								"settings": {
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_west": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 21 0 0, , "
-								},
-								"settings": {
-									"haptic_intensity": "1"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_east": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 24 0 0, , "
-								},
-								"settings": {
-									"haptic_intensity": "1"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_north": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 22 0 0, , "
-								},
-								"settings": {
-									"haptic_intensity": "1"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_south": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 23 0 0, , "
-								},
-								"settings": {
-									"haptic_intensity": "1"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"sensitivity": "50"
-				}
-			},
-			{
 				"id": "203",
 				"mode": "joystick_mouse",
 				"name": "",
@@ -1959,253 +1907,11 @@
 				}
 			},
 			{
-				"id": "242",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"dpad_north": {
-						"activators": {
-							"chord": {
-								"bindings": {
-									"binding": "mouse_wheel SCROLL_UP, , "
-								},
-								"settings": {
-									"gyro_ratchet_button_mask": "1048576",
-									"gyro_ratchet_button_requireany_or_all": "0",
-									"delay_start": "150",
-									"hold_repeats": "1",
-									"haptic_intensity": "0"
-								}
-							},
-							"Full_Press": {
-								"bindings": {
-									"binding": "mouse_wheel SCROLL_UP, , "
-								},
-								"settings": {
-									"haptic_intensity": "0",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_south": {
-						"activators": {
-							"chord": {
-								"bindings": {
-									"binding": "mouse_wheel SCROLL_DOWN, , "
-								},
-								"settings": {
-									"gyro_ratchet_button_mask": "1048576",
-									"gyro_ratchet_button_requireany_or_all": "0",
-									"delay_start": "150",
-									"hold_repeats": "1",
-									"haptic_intensity": "0"
-								}
-							},
-							"Full_Press": {
-								"bindings": {
-									"binding": "mouse_wheel SCROLL_DOWN, , "
-								},
-								"settings": {
-									"haptic_intensity": "0",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_east": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "mouse_button FORWARD, , "
-								},
-								"settings": {
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_west": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "mouse_button BACK, , "
-								},
-								"settings": {
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"edge": {
-						"activators": {
-							"chord": {
-								"bindings": {
-									"binding": "mouse_button MIDDLE, , "
-								},
-								"settings": {
-									"chord_button": "19",
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"click": {
-						"activators": {
-							"Soft_Press": [
-								{
-									"bindings": {
-										"binding": "controller_action hold_layer 17 0 0, , "
-									},
-									"settings": {
-										"haptic_intensity": "0",
-										"interruptable": "0"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "controller_action remove_layer 17 0 0, , "
-									},
-									"settings": {
-										"hold_repeats": "1",
-										"haptic_intensity": "0",
-										"interruptable": "0",
-										"edge_binding_invert": "1"
-									}
-								}
-							]
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1",
-					"layout": "0",
-					"deadzone": "23000",
-					"edge_binding_invert": "1",
-					"haptic_intensity_override": "3"
-				}
-			},
-			{
 				"id": "246",
 				"mode": "2dscroll",
 				"name": "",
 				"description": "",
 				"inputs": {}
-			},
-			{
-				"id": "251",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"dpad_north": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "key_press UP_ARROW, , "
-								},
-								"settings": {
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_south": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "key_press DOWN_ARROW, , "
-								},
-								"settings": {
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_east": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "key_press RIGHT_ARROW, , "
-								},
-								"settings": {
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"dpad_west": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "key_press LEFT_ARROW, , "
-								},
-								"settings": {
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"edge": {
-						"activators": {
-							"chord": {
-								"bindings": {
-									"binding": "controller_action SHOW_KEYBOARD, , "
-								},
-								"settings": {
-									"chord_button": "18",
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"click": {
-						"activators": {
-							"Soft_Press": [
-								{
-									"bindings": {
-										"binding": "controller_action hold_layer 16 0 0, , "
-									},
-									"settings": {
-										"haptic_intensity": "0",
-										"interruptable": "0"
-									}
-								},
-								{
-									"bindings": {
-										"binding": "controller_action remove_layer 16 0 0, , "
-									},
-									"settings": {
-										"hold_repeats": "1",
-										"haptic_intensity": "0",
-										"interruptable": "0",
-										"edge_binding_invert": "1"
-									}
-								}
-							]
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1",
-					"layout": "0",
-					"deadzone": "23000",
-					"edge_binding_invert": "1",
-					"haptic_intensity_override": "3"
-				}
 			},
 			{
 				"id": "256",
@@ -2762,47 +2468,6 @@
 					"layer": "1",
 					"sensitivity": "200",
 					"sensitivity_vert_scale": "67"
-				}
-			},
-			{
-				"id": "562",
-				"mode": "absolute_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"click": {
-						"activators": {
-							"Soft_Press": {
-								"bindings": {
-									"binding": "controller_action hold_layer 17 0 0, , "
-								},
-								"settings": {
-									"haptic_intensity": "3"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"touch": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 31 0 0, , "
-								},
-								"settings": {
-									"hold_repeats": "1",
-									"haptic_intensity": "0",
-									"interruptable": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"haptic_intensity": "0",
-					"friction": "3",
-					"acceleration": "1"
 				}
 			},
 			{
@@ -3546,186 +3211,6 @@
 				}
 			},
 			{
-				"id": "669",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"touch": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action remove_layer 17 0 0, , "
-								},
-								"settings": {
-									"hold_repeats": "1"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"chord_button": "17",
-									"interruptable": "0"
-								}
-							},
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 13 0 0, , ",
-										"controller_action remove_layer 46 0 0, , ",
-										"controller_action remove_layer 29 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
-				"id": "670",
-				"mode": "joystick_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"touch": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action remove_layer 17 0 0, , "
-								},
-								"settings": {
-									"hold_repeats": "1"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"chord_button": "17",
-									"interruptable": "0"
-								}
-							},
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 14 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
-										"controller_action remove_layer 30 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
-				"id": "671",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"touch": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action remove_layer 16 0 0, , "
-								},
-								"settings": {
-									"hold_repeats": "1"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"chord_button": "16",
-									"interruptable": "0"
-								}
-							},
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 13 0 0, , ",
-										"controller_action remove_layer 46 0 0, , ",
-										"controller_action remove_layer 29 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
-				"id": "672",
-				"mode": "joystick_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"touch": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "controller_action remove_layer 16 0 0, , "
-								},
-								"settings": {
-									"hold_repeats": "1"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"chord_button": "16",
-									"interruptable": "0"
-								}
-							},
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 14 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
-										"controller_action remove_layer 30 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
 				"id": "673",
 				"mode": "joystick_mouse",
 				"name": "",
@@ -4359,164 +3844,6 @@
 					"layer": "1",
 					"edge_binding_radius": "21000",
 					"edge_binding_invert": "0"
-				}
-			},
-			{
-				"id": "721",
-				"mode": "scrollwheel",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"scroll_clockwise": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "mouse_wheel SCROLL_DOWN, , "
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"scroll_counterclockwise": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": "mouse_wheel SCROLL_UP, , "
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"click": {
-						"activators": {
-							"Soft_Press": {
-								"bindings": {
-									"binding": "controller_action hold_layer 17 0 0, , "
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					},
-					"touch": {
-						"activators": {
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 18 0 0, , ",
-										"controller_action remove_layer 17 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1",
-					"scroll_angle": "145",
-					"haptic_intensity": "0"
-				}
-			},
-			{
-				"id": "722",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"touch": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 18 0 0, , ",
-										"controller_action remove_layer 17 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"chord_button": "17",
-									"interruptable": "0"
-								}
-							},
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 13 0 0, , ",
-										"controller_action remove_layer 46 0 0, , ",
-										"controller_action remove_layer 29 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
-				"id": "723",
-				"mode": "joystick_mouse",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"touch": {
-						"activators": {
-							"Full_Press": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 18 0 0, , ",
-										"controller_action remove_layer 17 0 0, , "
-									]
-								},
-								"settings": {
-									"hold_repeats": "1"
-								}
-							},
-							"chord": {
-								"bindings": {
-									"binding": "controller_action empty_binding, , "
-								},
-								"settings": {
-									"chord_button": "17",
-									"interruptable": "0"
-								}
-							},
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 14 0 0, , ",
-										"controller_action remove_layer 47 0 0, , ",
-										"controller_action remove_layer 30 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1"
 				}
 			},
 			{
@@ -8073,6 +7400,9 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 17 0 0, , ",
 										"controller_action remove_layer 31 0 0, , ",
 										"controller_action remove_layer 48 0 0, , "
 									]
@@ -8384,35 +7714,6 @@
 				}
 			},
 			{
-				"id": "1170",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"touch": {
-						"activators": {
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 13 0 0, , ",
-										"controller_action remove_layer 46 0 0, , ",
-										"controller_action remove_layer 29 0 0, , ",
-										"controller_action add_layer 51 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
 				"id": "1171",
 				"mode": "joystick_mouse",
 				"name": "",
@@ -8436,35 +7737,6 @@
 										"controller_action remove_layer 14 0 0, , ",
 										"controller_action remove_layer 47 0 0, , ",
 										"controller_action remove_layer 30 0 0, , ",
-										"controller_action add_layer 52 0 0, , "
-									]
-								},
-								"settings": {
-									"haptic_intensity": "0"
-								}
-							}
-						},
-						"disabled_activators": {}
-					}
-				},
-				"settings": {
-					"layer": "1"
-				}
-			},
-			{
-				"id": "1172",
-				"mode": "dpad",
-				"name": "",
-				"description": "",
-				"inputs": {
-					"touch": {
-						"activators": {
-							"release": {
-								"bindings": {
-									"binding": [
-										"controller_action remove_layer 13 0 0, , ",
-										"controller_action remove_layer 46 0 0, , ",
-										"controller_action remove_layer 29 0 0, , ",
 										"controller_action add_layer 52 0 0, , "
 									]
 								},
@@ -17290,6 +16562,10 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 53 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -17428,6 +16704,10 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 54 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -17703,6 +16983,10 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 53 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -17867,6 +17151,10 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 53 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -19196,6 +18484,10 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 54 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -19334,6 +18626,10 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 53 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -19609,6 +18905,10 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 53 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -19773,6 +19073,10 @@
 								"bindings": {
 									"binding": [
 										"controller_action add_layer 53 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -22273,7 +21577,1402 @@
 				}
 			},
 			{
+				"id": "13167",
+				"mode": "2dscroll",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"Soft_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer 73 0 0, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_west": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer 21 0 0, , "
+								},
+								"settings": {
+									"haptic_intensity": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_east": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer 24 0 0, , "
+								},
+								"settings": {
+									"haptic_intensity": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_north": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer 22 0 0, , "
+								},
+								"settings": {
+									"haptic_intensity": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer 23 0 0, , "
+								},
+								"settings": {
+									"haptic_intensity": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"sensitivity": "50"
+				}
+			},
+			{
 				"id": "13168",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"dpad_north": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press UP_ARROW, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press DOWN_ARROW, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_east": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press RIGHT_ARROW, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_west": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press LEFT_ARROW, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"click": {
+						"activators": {
+							"Soft_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 16 0 0, , ",
+										"controller_action remove_layer 73 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"interruptable": "0",
+									"edge_binding_invert": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1",
+					"layout": "0",
+					"deadzone": "23000",
+					"edge_binding_invert": "1",
+					"haptic_intensity_override": "3"
+				}
+			},
+			{
+				"id": "13169",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"edge": {
+						"activators": {
+							"Soft_Press": [
+								{
+									"bindings": {
+										"binding": "controller_action add_layer 75 0 0, , "
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"repeat_rate": "50",
+										"haptic_intensity": "0",
+										"activation_threshold": "24996",
+										"interruptable": "0",
+										"edge_binding_invert": "1"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action add_layer 16 0 0, , "
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"repeat_rate": "50",
+										"haptic_intensity": "0",
+										"activation_threshold": "23000"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"click": {
+						"activators": {
+							"Soft_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 73 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"interruptable": "0",
+									"edge_binding_invert": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13170",
+				"mode": "single_button",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action SHOW_KEYBOARD, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							},
+							"Soft_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 73 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"interruptable": "0",
+									"edge_binding_invert": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13171",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 16 0 0, , ",
+										"controller_action remove_layer 73 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "16",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 46 0 0, , ",
+										"controller_action remove_layer 29 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13172",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 73 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "16",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 46 0 0, , ",
+										"controller_action remove_layer 29 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13173",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 73 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "16",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 46 0 0, , ",
+										"controller_action remove_layer 29 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13174",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 16 0 0, , ",
+										"controller_action remove_layer 73 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "16",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 30 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13175",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 73 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "16",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 30 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13176",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 73 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "16",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 30 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13177",
+				"mode": "absolute_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"Soft_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer 74 0 0, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer 31 0 0, , "
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"haptic_intensity": "0",
+					"friction": "3",
+					"acceleration": "1"
+				}
+			},
+			{
+				"id": "13178",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"dpad_north": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_UP, , "
+								},
+								"settings": {
+									"gyro_ratchet_button_mask": "1048576",
+									"gyro_ratchet_button_requireany_or_all": "0",
+									"delay_start": "150",
+									"hold_repeats": "1",
+									"haptic_intensity": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_UP, , "
+								},
+								"settings": {
+									"haptic_intensity": "0",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"chord": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_DOWN, , "
+								},
+								"settings": {
+									"gyro_ratchet_button_mask": "1048576",
+									"gyro_ratchet_button_requireany_or_all": "0",
+									"delay_start": "150",
+									"hold_repeats": "1",
+									"haptic_intensity": "0"
+								}
+							},
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_DOWN, , "
+								},
+								"settings": {
+									"haptic_intensity": "0",
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_east": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_button FORWARD, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_west": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_button BACK, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"edge": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"click": {
+						"activators": {
+							"Soft_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 17 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"interruptable": "0",
+									"edge_binding_invert": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1",
+					"layout": "0",
+					"deadzone": "23000",
+					"edge_binding_invert": "1",
+					"haptic_intensity_override": "3"
+				}
+			},
+			{
+				"id": "13179",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"edge": {
+						"activators": {
+							"Soft_Press": [
+								{
+									"bindings": {
+										"binding": "controller_action add_layer 76 0 0, , "
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"repeat_rate": "50",
+										"haptic_intensity": "0",
+										"activation_threshold": "24996",
+										"interruptable": "0",
+										"edge_binding_invert": "1"
+									}
+								},
+								{
+									"bindings": {
+										"binding": "controller_action add_layer 17 0 0, , "
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"repeat_rate": "50",
+										"haptic_intensity": "0",
+										"activation_threshold": "23000"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"click": {
+						"activators": {
+							"Soft_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"interruptable": "0",
+									"edge_binding_invert": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13180",
+				"mode": "single_button",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"click": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_button MIDDLE, , "
+								},
+								"settings": {
+									"haptic_intensity": "3"
+								}
+							},
+							"Soft_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1",
+									"haptic_intensity": "0",
+									"interruptable": "0",
+									"edge_binding_invert": "1"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13181",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 17 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "17",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 46 0 0, , ",
+										"controller_action remove_layer 29 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13182",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "17",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 46 0 0, , ",
+										"controller_action remove_layer 29 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13183",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "17",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 46 0 0, , ",
+										"controller_action remove_layer 29 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13184",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 17 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "17",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 30 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13185",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "17",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 30 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13186",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "17",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 30 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13187",
+				"mode": "scrollwheel",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"scroll_clockwise": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_DOWN, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"scroll_counterclockwise": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "mouse_wheel SCROLL_UP, , "
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"click": {
+						"activators": {
+							"Soft_Press": {
+								"bindings": {
+									"binding": "controller_action add_layer 74 0 0, , "
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 17 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1",
+					"scroll_angle": "145",
+					"haptic_intensity": "0"
+				}
+			},
+			{
+				"id": "13188",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 17 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "17",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 46 0 0, , ",
+										"controller_action remove_layer 29 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13189",
+				"mode": "joystick_mouse",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 17 0 0, , ",
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 74 0 0, , "
+									]
+								},
+								"settings": {
+									"hold_repeats": "1"
+								}
+							},
+							"chord": {
+								"bindings": {
+									"binding": "controller_action empty_binding, , "
+								},
+								"settings": {
+									"chord_button": "17",
+									"interruptable": "0"
+								}
+							},
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 14 0 0, , ",
+										"controller_action remove_layer 47 0 0, , ",
+										"controller_action remove_layer 30 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13190",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 46 0 0, , ",
+										"controller_action remove_layer 29 0 0, , ",
+										"controller_action add_layer 51 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_north": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press W, , "
+								},
+								"settings": {
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press S, , "
+								},
+								"settings": {
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13191",
+				"mode": "dpad",
+				"name": "",
+				"description": "",
+				"inputs": {
+					"touch": {
+						"activators": {
+							"release": {
+								"bindings": {
+									"binding": [
+										"controller_action remove_layer 13 0 0, , ",
+										"controller_action remove_layer 46 0 0, , ",
+										"controller_action remove_layer 29 0 0, , ",
+										"controller_action add_layer 52 0 0, , "
+									]
+								},
+								"settings": {
+									"haptic_intensity": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_north": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press W, , "
+								},
+								"settings": {
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					},
+					"dpad_south": {
+						"activators": {
+							"Full_Press": {
+								"bindings": {
+									"binding": "key_press S, , "
+								},
+								"settings": {
+									"interruptable": "0"
+								}
+							}
+						},
+						"disabled_activators": {}
+					}
+				},
+				"settings": {
+					"layer": "1"
+				}
+			},
+			{
+				"id": "13193",
 				"mode": "switches",
 				"name": "",
 				"description": "",
@@ -22345,7 +23044,7 @@
 				}
 			},
 			{
-				"id": "13169",
+				"id": "13194",
 				"mode": "trigger",
 				"name": "",
 				"description": "",
@@ -22355,7 +23054,7 @@
 				}
 			},
 			{
-				"id": "13170",
+				"id": "13195",
 				"mode": "trigger",
 				"name": "",
 				"description": "",
@@ -22365,7 +23064,7 @@
 				}
 			},
 			{
-				"id": "13171",
+				"id": "13196",
 				"mode": "2dscroll",
 				"name": "",
 				"description": "",
@@ -22449,7 +23148,7 @@
 				}
 			},
 			{
-				"id": "13172",
+				"id": "13197",
 				"mode": "absolute_mouse",
 				"name": "",
 				"description": "",
@@ -22480,7 +23179,7 @@
 				}
 			},
 			{
-				"id": "13174",
+				"id": "13199",
 				"mode": "switches",
 				"name": "",
 				"description": "",
@@ -22552,7 +23251,7 @@
 				}
 			},
 			{
-				"id": "13175",
+				"id": "13200",
 				"mode": "trigger",
 				"name": "",
 				"description": "",
@@ -22562,7 +23261,7 @@
 				}
 			},
 			{
-				"id": "13176",
+				"id": "13201",
 				"mode": "trigger",
 				"name": "",
 				"description": "",
@@ -22572,7 +23271,7 @@
 				}
 			},
 			{
-				"id": "13177",
+				"id": "13202",
 				"mode": "2dscroll",
 				"name": "",
 				"description": "",
@@ -22656,7 +23355,7 @@
 				}
 			},
 			{
-				"id": "13178",
+				"id": "13203",
 				"mode": "absolute_mouse",
 				"name": "",
 				"description": "",
@@ -22687,7 +23386,7 @@
 				}
 			},
 			{
-				"id": "13179",
+				"id": "13204",
 				"mode": "switches",
 				"name": "",
 				"description": "",
@@ -22757,6 +23456,10 @@
 							"release": {
 								"bindings": {
 									"binding": [
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -22863,7 +23566,7 @@
 				}
 			},
 			{
-				"id": "13180",
+				"id": "13205",
 				"mode": "switches",
 				"name": "",
 				"description": "",
@@ -22892,7 +23595,7 @@
 				}
 			},
 			{
-				"id": "13181",
+				"id": "13206",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -22942,7 +23645,7 @@
 				}
 			},
 			{
-				"id": "13182",
+				"id": "13207",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -22992,7 +23695,7 @@
 				}
 			},
 			{
-				"id": "13183",
+				"id": "13208",
 				"mode": "switches",
 				"name": "",
 				"description": "",
@@ -23062,6 +23765,10 @@
 							"release": {
 								"bindings": {
 									"binding": [
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action remove_layer 74 0 0, , ",
+										"controller_action remove_layer 73 0 0, , ",
 										"controller_action remove_layer 72 0 0, , ",
 										"controller_action remove_layer 71 0 0, , ",
 										"controller_action remove_layer 70 0 0, , ",
@@ -23168,7 +23875,7 @@
 				}
 			},
 			{
-				"id": "13184",
+				"id": "13209",
 				"mode": "switches",
 				"name": "",
 				"description": "",
@@ -23197,7 +23904,7 @@
 				}
 			},
 			{
-				"id": "13185",
+				"id": "13210",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -23247,7 +23954,7 @@
 				}
 			},
 			{
-				"id": "13186",
+				"id": "13211",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -23297,7 +24004,7 @@
 				}
 			},
 			{
-				"id": "13187",
+				"id": "13212",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -23485,7 +24192,7 @@
 				}
 			},
 			{
-				"id": "13189",
+				"id": "13214",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -23673,7 +24380,7 @@
 				}
 			},
 			{
-				"id": "13191",
+				"id": "13216",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -23825,7 +24532,7 @@
 				}
 			},
 			{
-				"id": "13193",
+				"id": "13218",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -23977,7 +24684,7 @@
 				}
 			},
 			{
-				"id": "13195",
+				"id": "13220",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -24100,7 +24807,7 @@
 				}
 			},
 			{
-				"id": "13196",
+				"id": "13221",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -24152,7 +24859,7 @@
 				}
 			},
 			{
-				"id": "13197",
+				"id": "13222",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -24275,7 +24982,7 @@
 				}
 			},
 			{
-				"id": "13198",
+				"id": "13223",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -24327,7 +25034,7 @@
 				}
 			},
 			{
-				"id": "13199",
+				"id": "13224",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -24422,7 +25129,7 @@
 				}
 			},
 			{
-				"id": "13200",
+				"id": "13225",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -24450,7 +25157,7 @@
 				}
 			},
 			{
-				"id": "13201",
+				"id": "13226",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -24549,7 +25256,7 @@
 				}
 			},
 			{
-				"id": "13203",
+				"id": "13228",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -24651,7 +25358,7 @@
 				}
 			},
 			{
-				"id": "13204",
+				"id": "13229",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -24699,7 +25406,7 @@
 				}
 			},
 			{
-				"id": "13205",
+				"id": "13230",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -24792,7 +25499,7 @@
 				}
 			},
 			{
-				"id": "13207",
+				"id": "13232",
 				"mode": "dpad",
 				"name": "",
 				"description": "",
@@ -24885,7 +25592,7 @@
 				}
 			},
 			{
-				"id": "13209",
+				"id": "13234",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -24924,7 +25631,7 @@
 				}
 			},
 			{
-				"id": "13210",
+				"id": "13235",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -24963,7 +25670,7 @@
 				}
 			},
 			{
-				"id": "13211",
+				"id": "13236",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -25071,7 +25778,7 @@
 				}
 			},
 			{
-				"id": "13212",
+				"id": "13237",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -25179,7 +25886,7 @@
 				}
 			},
 			{
-				"id": "13213",
+				"id": "13238",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -25270,7 +25977,7 @@
 				}
 			},
 			{
-				"id": "13214",
+				"id": "13239",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -25361,7 +26068,7 @@
 				}
 			},
 			{
-				"id": "13215",
+				"id": "13240",
 				"mode": "joystick_mouse",
 				"name": "",
 				"description": "",
@@ -25411,14 +26118,14 @@
 					"15": "right_joystick active",
 					"16": "dpad active",
 					"86": "button_diamond inactive modeshift",
-					"190": "left_trackpad active",
 					"212": "right_joystick inactive modeshift",
 					"246": "left_trackpad inactive modeshift",
-					"562": "right_trackpad active",
 					"576": "gyro active",
 					"1039": "dpad inactive modeshift",
 					"1043": "button_diamond inactive modeshift",
-					"13163": "switch active"
+					"13163": "switch active",
+					"13167": "left_trackpad active",
+					"13177": "right_trackpad active"
 				}
 			},
 			{
@@ -25599,11 +26306,11 @@
 				"name": "Preset_1000061",
 				"group_source_bindings": {
 					"250": "switch active",
-					"251": "left_trackpad active",
 					"266": "left_trigger active",
 					"267": "right_trigger active",
-					"671": "joystick active",
-					"672": "right_joystick active"
+					"13168": "left_trackpad active",
+					"13171": "joystick active",
+					"13174": "right_joystick active"
 				}
 			},
 			{
@@ -25611,11 +26318,11 @@
 				"name": "Preset_1000064",
 				"group_source_bindings": {
 					"240": "switch active",
-					"242": "right_trackpad active",
 					"264": "left_trigger active",
 					"265": "right_trigger active",
-					"669": "joystick active",
-					"670": "right_joystick active"
+					"13178": "right_trackpad active",
+					"13181": "joystick active",
+					"13184": "right_joystick active"
 				}
 			},
 			{
@@ -25625,9 +26332,9 @@
 					"368": "left_trigger active",
 					"369": "right_trigger active",
 					"370": "switch active",
-					"721": "right_trackpad active",
-					"722": "joystick active",
-					"723": "right_joystick active"
+					"13187": "right_trackpad active",
+					"13188": "joystick active",
+					"13189": "right_joystick active"
 				}
 			},
 			{
@@ -25709,8 +26416,8 @@
 					"1114": "right_trigger active",
 					"1115": "switch active",
 					"1169": "right_joystick active",
-					"1170": "joystick active",
-					"1203": "gyro active"
+					"1203": "gyro active",
+					"13190": "joystick active"
 				}
 			},
 			{
@@ -25736,8 +26443,8 @@
 					"1118": "right_trigger active",
 					"1119": "switch active",
 					"1171": "right_joystick active",
-					"1172": "joystick active",
-					"1204": "gyro active"
+					"1204": "gyro active",
+					"13191": "joystick active"
 				}
 			},
 			{
@@ -25915,9 +26622,9 @@
 				"group_source_bindings": {
 					"775": "left_trigger active",
 					"776": "right_trigger active",
-					"13180": "switch active",
-					"13181": "joystick active",
-					"13182": "right_joystick active"
+					"13205": "switch active",
+					"13206": "joystick active",
+					"13207": "right_joystick active"
 				}
 			},
 			{
@@ -25926,9 +26633,9 @@
 				"group_source_bindings": {
 					"779": "left_trigger active",
 					"780": "right_trigger active",
-					"13184": "switch active",
-					"13185": "joystick active",
-					"13186": "right_joystick active"
+					"13209": "switch active",
+					"13210": "joystick active",
+					"13211": "right_joystick active"
 				}
 			},
 			{
@@ -26058,34 +26765,34 @@
 					"13153": "switch active",
 					"13154": "left_trigger active",
 					"13155": "right_trigger active",
-					"13203": "joystick active",
-					"13204": "right_joystick active"
+					"13228": "joystick active",
+					"13229": "right_joystick active"
 				}
 			},
 			{
 				"id": "54",
 				"name": "Preset_1000156",
 				"group_source_bindings": {
-					"13168": "switch active",
-					"13169": "left_trigger active",
-					"13170": "right_trigger active",
-					"13171": "left_trackpad active",
-					"13172": "right_trackpad active",
-					"13205": "joystick active",
-					"13209": "right_joystick active"
+					"13193": "switch active",
+					"13194": "left_trigger active",
+					"13195": "right_trigger active",
+					"13196": "left_trackpad active",
+					"13197": "right_trackpad active",
+					"13230": "joystick active",
+					"13234": "right_joystick active"
 				}
 			},
 			{
 				"id": "55",
 				"name": "Preset_1000157",
 				"group_source_bindings": {
-					"13174": "switch active",
-					"13175": "left_trigger active",
-					"13176": "right_trigger active",
-					"13177": "left_trackpad active",
-					"13178": "right_trackpad active",
-					"13207": "joystick active",
-					"13210": "right_joystick active"
+					"13199": "switch active",
+					"13200": "left_trigger active",
+					"13201": "right_trigger active",
+					"13202": "left_trackpad active",
+					"13203": "right_trackpad active",
+					"13232": "joystick active",
+					"13235": "right_joystick active"
 				}
 			},
 			{
@@ -26109,8 +26816,8 @@
 					"13080": "button_diamond active",
 					"13081": "dpad active",
 					"13082": "switch active",
-					"13187": "joystick active",
-					"13211": "right_joystick active"
+					"13212": "joystick active",
+					"13236": "right_joystick active"
 				}
 			},
 			{
@@ -26120,8 +26827,8 @@
 					"13085": "button_diamond active",
 					"13086": "dpad active",
 					"13087": "switch active",
-					"13189": "joystick active",
-					"13212": "right_joystick active"
+					"13214": "joystick active",
+					"13237": "right_joystick active"
 				}
 			},
 			{
@@ -26130,9 +26837,9 @@
 				"group_source_bindings": {
 					"13090": "button_diamond active",
 					"13091": "dpad active",
-					"13179": "switch active",
-					"13191": "joystick active",
-					"13213": "right_joystick active"
+					"13204": "switch active",
+					"13216": "joystick active",
+					"13238": "right_joystick active"
 				}
 			},
 			{
@@ -26141,9 +26848,9 @@
 				"group_source_bindings": {
 					"13096": "button_diamond active",
 					"13097": "dpad active",
-					"13183": "switch active",
-					"13193": "joystick active",
-					"13214": "right_joystick active"
+					"13208": "switch active",
+					"13218": "joystick active",
+					"13239": "right_joystick active"
 				}
 			},
 			{
@@ -26151,8 +26858,8 @@
 				"name": "Preset_1000164",
 				"group_source_bindings": {
 					"13077": "switch active",
-					"13195": "joystick active",
-					"13196": "right_joystick active"
+					"13220": "joystick active",
+					"13221": "right_joystick active"
 				}
 			},
 			{
@@ -26160,8 +26867,8 @@
 				"name": "Preset_1000165",
 				"group_source_bindings": {
 					"13079": "switch active",
-					"13197": "joystick active",
-					"13198": "right_joystick active"
+					"13222": "joystick active",
+					"13223": "right_joystick active"
 				}
 			},
 			{
@@ -26169,8 +26876,8 @@
 				"name": "Preset_1000166",
 				"group_source_bindings": {
 					"13166": "switch active",
-					"13199": "joystick active",
-					"13200": "right_joystick active"
+					"13224": "joystick active",
+					"13225": "right_joystick active"
 				}
 			},
 			{
@@ -26179,8 +26886,8 @@
 				"group_source_bindings": {
 					"13073": "switch active",
 					"13074": "right_trackpad active",
-					"13201": "joystick active",
-					"13215": "right_joystick active"
+					"13226": "joystick active",
+					"13240": "right_joystick active"
 				}
 			},
 			{
@@ -26240,6 +26947,42 @@
 				"group_source_bindings": {
 					"13164": "joystick active",
 					"13165": "switch active"
+				}
+			},
+			{
+				"id": "72",
+				"name": "Preset_1000174",
+				"group_source_bindings": {
+					"13169": "left_trackpad active",
+					"13172": "joystick active",
+					"13175": "right_joystick active"
+				}
+			},
+			{
+				"id": "73",
+				"name": "Preset_1000175",
+				"group_source_bindings": {
+					"13179": "right_trackpad active",
+					"13182": "joystick active",
+					"13185": "right_joystick active"
+				}
+			},
+			{
+				"id": "74",
+				"name": "Preset_1000176",
+				"group_source_bindings": {
+					"13170": "left_trackpad active",
+					"13173": "joystick active",
+					"13176": "right_joystick active"
+				}
+			},
+			{
+				"id": "75",
+				"name": "Preset_1000177",
+				"group_source_bindings": {
+					"13180": "right_trackpad active",
+					"13183": "joystick active",
+					"13186": "right_joystick active"
 				}
 			}
 		],

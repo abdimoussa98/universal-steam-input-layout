@@ -184,6 +184,47 @@ class HiddenExitTests(unittest.TestCase):
         self.assertEqual([(i["layer"], i["target"], i["inputs"]) for i in report["information"]["hidden exit"]],
                          [("C", "P", ["joystick/edge"])])
 
+    def landing(self, hold=None, second=None):
+        """S is a mode on Base; entering it clears the stack. Its button_x adds H, which takes LB. Base's LB adds
+        E (which binds button_x), and E's button_b adds P, which ends on the LB Release and leaves button_x open. P takes two steps to
+        arrive, so it is in none of H's chains, and it can't be under S as a bystander. H lands on P through
+        S's binding, which P inherits (the Fallback Hold over a menu second-press layer)."""
+        clear = press(remove("E"), remove("P"), remove("H"), add("S"))
+        return build({"Base": {"switch": (SW, {"button_a": clear, "left_bumper": press(add("E"))})},
+                      "S": {"switch": (SW, {"button_a": press(remove("H"), remove("S")), "button_x": press(add("H"))})},
+                      "E": {"switch": (SW, {"left_bumper": release(remove("E")), "button_b": press(remove("E"), add("P")),
+                                            "button_x": press(KEY)})},
+                      "P": {"switch": (SW, {"left_bumper": release(remove("P")), **(second or {})})},
+                      "H": {"switch": (SW, {"button_y": release(remove("H")), **(hold or {"left_bumper": press(KEY)})})}})
+
+    def test_a_layer_that_lands_through_a_lower_layers_binding_is_on_top_too(self):
+        data = self.landing()
+        chains = Chains(Layout(data))
+        self.assertNotIn("H", chains.above("P"))                                   # no chain of H's has P under it
+        self.assertIn(("Base", "S", "P", "H"), [after for _, _, after in chains.landings()])
+        self.assertEqual(found(data, "hidden exit"), {("hidden exit", "H", "P")})
+        finding = next(f for f in audit(data, {})["findings"] if f["check"] == "hidden exit")
+        self.assertEqual((finding["example"], finding["inputs"]), ("Base > S > P > H", ["LB"]))
+        self.assertTrue(finding["path"][-1].startswith("landing: S switch/button_x"))
+
+    def test_a_landing_that_leaves_the_exit_alone_or_cannot_happen_is_fine(self):
+        alone = self.landing(hold={"right_bumper": press(KEY)})                          # H doesn't take LB
+        self.assertEqual(found(alone, "hidden exit"), set())
+        blocked = self.landing(second={"button_x": press(KEY)})                         # P binds button_x itself
+        self.assertEqual(found(blocked, "hidden exit"), set())
+        carried = self.landing(hold={"left_bumper": release(remove("P"), remove("H"))})  # H removes P there
+        self.assertEqual(found(carried, "hidden exit"), set())
+
+    def test_a_mode_block_is_charged_to_the_layer_that_changed_the_mode(self):
+        # P ends on its stick click. M, in the middle, puts the stick in another mode; T on top has P's mode.
+        data = build({"Base": {"switch": (SW, {"button_a": press(add("P"))})},
+                      "P": {"switch": (SW, {"button_b": press(add("M"))}),
+                            "joystick": ("dpad", {"click": release(remove("P"))})},
+                      "M": {"switch": (SW, {"button_x": press(add("T"))}),
+                            "joystick": ("joystick_move", {"touch": press(KEY)})},
+                      "T": {"joystick": ("dpad", {"touch": press(KEY)})}})
+        self.assertEqual(found(data, "hidden exit"), {("hidden exit", "M", "P")})        # not T, which only sits on top
+
     def side_exit(self):
         """LB keeps P. C covers P's stick-edge Release but leaves LB alone."""
         return build({"Base": {"switch": (SW, {"left_bumper": press(add("P"))})},
@@ -241,18 +282,25 @@ class HiddenExitTests(unittest.TestCase):
 
 
 class HiddenExitSnapshotTests(unittest.TestCase):
-    """The frozen 90.13 snapshots: the check reproduces the prototype's result of 2026-10-02."""
+    """The frozen 90.13 snapshots: the prototype's result of 2026-10-02, plus the gap the check missed until
+    landings were counted (2026-10-03). The gap was in the layouts from 90.11 to 90.14 and is fixed in 90.15."""
+    FALLBACK_HOLD = {("Steering | LS: Fallback Hold", lower) for lower in (
+        "Menu Left: Escape", "Menu Left: Double Tap Cover", "Menu Right: Tab", "Menu Right: Double Tap Cover")}
 
     @classmethod
     def setUpClass(cls):
         cls.data = {v: json.loads((ROOT / f"versions/neptune/90.13/single-set-{v}_hold-gyro_90.13.json")
                                   .read_text(encoding="utf-8")) for v in ("default", "alternative")}
 
-    def test_no_finding_outside_the_touchpad_exception(self):
+    def test_the_only_findings_outside_the_touchpad_exception_are_the_fallback_hold_landings(self):
         for variant, data in self.data.items():
             with self.subTest(variant):
                 report = audit(data, {"cleanups": {"touchpad_exits": "set aside"}})
-                self.assertEqual([f for f in report["findings"] if f["check"] == "hidden exit"], [])
+                hidden = [f for f in report["findings"] if f["check"] == "hidden exit"]
+                self.assertEqual({(f["layer"], f["target"]) for f in hidden}, self.FALLBACK_HOLD)
+                for finding in hidden:                     # the stack, and the lower layer's binding that built it
+                    self.assertTrue(finding["example"].startswith("Base > Steering > Menu "), finding["example"])
+                    self.assertTrue(finding["path"][-1].startswith("landing: Steering joystick/dpad_"), finding["path"])
                 self.assertEqual(len([e for e in report["excepted"] if e["on_keeper"]]), 68)
                 self.assertEqual(len([e for e in report["excepted"] if not e["on_keeper"]]), 26)
                 self.assertEqual({(i["layer"], i["target"]) for i in report["information"]["hidden exit"]},
@@ -261,7 +309,14 @@ class HiddenExitSnapshotTests(unittest.TestCase):
 
     def test_the_touchpad_pairs_fail_without_the_exception(self):
         report = audit(self.data["default"], {})
-        self.assertEqual(len([f for f in report["findings"] if f["check"] == "hidden exit"]), 68)
+        self.assertEqual(len([f for f in report["findings"] if f["check"] == "hidden exit"]), 68 + 4)
+
+    def test_the_working_layouts_have_no_landing_over_a_keepers_exit(self):
+        for variant in ("default", "alternative"):
+            data = json.loads((ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json").read_text(encoding="utf-8"))
+            report = audit(data, {"cleanups": {"touchpad_exits": "set aside"}})
+            with self.subTest(variant):
+                self.assertEqual([f for f in report["findings"] if f["check"] == "hidden exit"], [])
 
 
 class NeverThereTests(unittest.TestCase):

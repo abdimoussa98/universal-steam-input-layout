@@ -22,32 +22,36 @@ because the author reports buggy behavior with Steam action sets.
 The Deck is used to settle an assumption, once, and again after a Steam update
 that could change it. Each has one procedure in its row of
 [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md).
-What rests on each one, [as of 90.13](findings/2026-10-03-deck-check-sorting/unverified-assumptions.txt);
+What rests on each one, [as of 90.15](findings/2026-10-03-menu-second-press-keys/unverified-assumptions.txt);
 `python3 -m tests.scenario` prints the current list.
 
-The layout relies on these twelve. If one is false, something is broken:
+The layout relies on these fifteen. If one is false, something is broken. The
+last three came with 90.14, and the pad clicks rest on them: check them first.
 
 - [ ] A8: A stick edge's Release fires in a layer that was added while the stick was already out (unverified; rests on it: 9 scenarios; R111, R137)
-- [ ] A10: A key or mouse output fires on an input that is already held when its layer is added (reported by the author; rests on it: 10 scenarios; R138)
+- [ ] A10: A key or mouse output fires on an input that is already held when its layer is added (reported by the author; rests on it: 21 scenarios; R138)
 - [ ] A11: A key or mouse output fires when a removal exposes it under an input that is held (unverified; rests on it: 7 scenarios)
 - [ ] A13: Any `remove_layer` can reset a running start delay; an `add_layer` doesn't (reported by the author; rests on it: R123, R126, R141)
 - [ ] A14: A delay starts again when a removal exposes it under a button that is held (unverified; rests on it: 2 scenarios)
-- [ ] A16: A delay's clock starts when its layer is added, not at the physical press (unverified; rests on it: 8 scenarios)
+- [ ] A16: A delay's clock starts when its layer is added, not at the physical press (unverified; rests on it: 9 scenarios)
 - [ ] A26: Stick inputs inherit through the middle of the stack like any other input (unverified; rests on it: R140)
-- [ ] A27: An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known (reported; rests on it: 3 scenarios; R133, R135)
+- [ ] A27: An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known (reported; rests on it: 4 scenarios; R133, R135)
 - [ ] A33: Steam loads an exported VDF as written: the same layers, groups and bindings as the JSON it was made from (reported; rests on it: R151)
 - [ ] A34: A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held (unverified)
 - [ ] A36: A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it (unverified)
 - [ ] A38: A stick group that doesn't state `edge_binding_invert` has a normal edge. It doesn't take the inverted setting of the group it replaces in a lower layer (unverified; rests on it: 2 scenarios; R111)
+- [ ] A39: An active Soft Press that is not interruptible suppresses an interruptible Soft Press on the same input (unverified; rests on it: 1 scenario). If it is false, a click where a pad's centre and outer ranges overlap gives one output, and which one isn't known
+- [ ] A40: A Soft Press on a pad's outer ring reads the thumb's distance from the centre, on the scale of the D-pad deadzone and the outer ring radius, and an inverted one fires reliably on a D-pad-mode pad (unverified; rests on it: 7 scenarios). If it is false, a pad click may send nothing
+- [ ] A41: A D-pad group that inverts its outer ring and states no radius uses a radius of about 24996 of 32767 (unverified; rests on it: 7 scenarios). Read the slider on 90.13's `RTP: Mouse Buttons`; a different number goes into `CENTRE_RADIUS` in the 90.14 builder
 
 The layout is built to work either way under these seven. Settling one takes a
 branch out of the tests:
 
-- [ ] A9: Removing a layer fires the exposed layer command on an input that is held (held-input rule 3) (unverified; rests on it: 7 scenarios; R114)
+- [ ] A9: Removing a layer fires the exposed layer command on an input that is held (held-input rule 3) (unverified; rests on it: 9 scenarios; R114)
 - [ ] A18: A `remove_layer` call makes Steam re-evaluate held inputs (unverified)
 - [ ] A24: Adding or removing another layer while a layer with an Always On action is active caused crashes (reported by the author; rests on it: R140, R146, R147, R148, R149)
 - [ ] A31: A repeating activator keeps its schedule when another layer is removed (unverified; rests on it: R114)
-- [ ] A32: When two separate activators on one input are due at the same moment, their order is not fixed. Inside one activator the array still runs bottom to top (unverified; rests on it: 1 scenario)
+- [ ] A32: When two separate activators on one input are due at the same moment, their order is not fixed. Inside one activator the array still runs bottom to top (unverified; rests on it: 2 scenarios)
 - [ ] A35: Hold to Repeat with no stated rate repeats at one fixed default interval (unverified; rests on it: 1 scenario)
 - [ ] A37: When the layer that answers a held input changes and the new binding sends the same key, the key stays down with no release in between (unverified; rests on it: 2 scenarios)
 
@@ -167,7 +171,9 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
 - [x] Audit check for a hidden exit (built 2026-10-02 as the Cleanup audit's seventh check, rule R136): a layer that can be added over another binds an input whose Release is that layer's exit, without carrying it (the 90.11 menu-tap case). Prototype and 90.12 results in [findings/2026-10-02-hidden-exit](findings/2026-10-02-hidden-exit/README.md); goes in the cleanup audit as a seventh check
   - Touchpad pairs are an exception for now (author, 2026-10-02; next item). On 90.13, 2 pairs remain, both passing: the menu Tap Cover over a stick guard (its menu Release still removes the guard). The 4 turn-assist pairs over the driver layers were fixed in 90.13 by blocking the right-stick edge in `Steering` (author). (A first run also listed 8 modifier pairs; that was a prototype bug, corrected)
   - Decided (author, 2026-10-02): a cleanup function removing the layer later is not a pass. The prototype uses the keeper rule: 0 findings outside the touchpad exception
-- [ ] **Touchpad exception to the hidden-exit rule: address it** (author, 2026-10-02). For now every pair where either layer is a touchpad layer (`Tab`, `Escape`, `Backspace`, `Enter`, `RTP: Entry Point`, `RTP: Circular Scroll`, `RTP: Double Tap`) or the covered exit is a trackpad input is set aside, not a finding. Under the keeper rule (a pair counts only if it covers an exit on what keeps the lower layer alive; a later cleanup doesn't count), that is 68 pairs in 90.13: 40 windows over pad layers and 28 `RTP: Double Tap` over button layers. 26 more (pad layers over the menu hold) are information: no stuck layer, but they block the right-stick click transition gesture ([list](findings/2026-10-02-hidden-exit/README.md#touchpad-exception))
+- [x] The menu second-press layers inherited the Fallback Hold add (found 2026-10-03 by the 90.14 review; present since 90.11; fixed in 90.15). In Steering, a double-tap-and-hold of Select or Start with the left stick pushed up or down put `Steering | LS: Fallback Hold` over `Menu Left: Escape` or `Menu Right: Tab`, which took the menu button's Release and left the layer on. Both layers now type W and S on stick up and down, as Steering's Entry Points and the menu windows do ([record](findings/2026-10-03-menu-second-press-keys/README.md); scenarios [M1 to M4](tests/test_scenarios_90_15.py))
+  - [x] The hidden-exit check missed it, and now counts landings (2026-10-03): any adding binding that answers on a stack the chains visited puts its layer on top of that whole stack. It finds the four pairs on 90.13 and 90.14 and none on 90.15 ([record](findings/2026-10-03-menu-second-press-keys/README.md#why-the-hidden-exit-check-missed-it))
+- [ ] **Touchpad exception to the hidden-exit rule: address it** (author, 2026-10-02). For now every pair where either layer is a touchpad layer (`Tab`, `Escape`, `Backspace`, `Enter`, `RTP: Entry Point`, `RTP: Circular Scroll`, `RTP: Double Tap`) or the covered exit is a trackpad input is set aside, not a finding. Under the keeper rule (a pair counts only if it covers an exit on what keeps the lower layer alive; a later cleanup doesn't count), that is 68 pairs in 90.13 (71 in 90.15, where `RTP: Click Entry Point` covers the pad-touch Release of `RTP: Entry Point`, `RTP: Tap Cover` and `RTP: Circular Scroll`): 40 windows over pad layers and 28 `RTP: Double Tap` over button layers. 26 more (pad layers over the menu hold) are information: no stuck layer, but they block the right-stick click transition gesture ([list](findings/2026-10-02-hidden-exit/README.md#touchpad-exception))
   - Worst first: the 12 pairs where the lower layer has no cleanup function. `RTP: Double Tap` over `Menu Left: Escape`, `Menu Right: Tab`, the four Double Tap Covers, `L1&R1: Tap Cover` and `Menu Buttons: Tap Cover`; the L1, R1, Menu Left and Menu Right windows over `RTP: Tap Cover`. Example: double-tap and hold Select, tap the right pad, let go of Select inside the window: `Menu Left: Escape` stays on
   - Windows can't carry the exit without breaking their isolation, so the choice is a cleanup function on the lower layer or stopping the window from landing
   - Then the 25 mode blocks: the left-pad and RTP layers keep the right stick in mouse mode, which blocks the menu Entry Points' right-stick click Release and the right stick guard's edge Release
@@ -231,6 +237,14 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
 - [x] Match default trigger configuration to the July reference (clarified scope of the hip-fire TODO; alternative excluded)
   - Both Base trigger groups now match the reference's bindings and settings, retaining their own group IDs. Removed only the explicit `adaptive_threshold: "0"` settings; no Soft Press/hip-fire activator was added, since the reference triggers do not use one
   - Reference: [MOST_RECENT_LAYOUT.post-fix.json](findings/2026-07-11-layer-order-swap/MOST_RECENT_LAYOUT.post-fix.json). The checks are static tests (`test_static_checks.test_the_defaults_base_triggers_match_the_july_reference`) and one scenario (DT2 in [test_scenarios_triggers_and_recovery.py](tests/test_scenarios_triggers_and_recovery.py)); a fresh load is A33
+
+## Trackpads
+
+- [x] Decide a pad click once, through a Click Entry Point (90.14, author 2026-10-02 and 2026-10-03): the centre and the D-pad buttons were live in one layer, and a click near their boundary could send both. A click now adds `LTP: Click Entry Point` or `RTP: Click Entry Point`, whose two repeating Soft Presses on the pad's edge add `LTP: Middle Click` / `RTP: Middle Click` (centre, uninterruptible) or the D-pad layer (outer, interruptible). The five `hold_layer` commands are gone ([record](findings/2026-10-03-pad-middle-click/README.md); 75 layers)
+  - The ranges are the sizes of 90.13: the outer one is the D-pad deadzone (23000), the centre one the default outer ring radius, taken as 24996 (A41)
+  - The Click Entry Point has no haptics; the click's pulse on Base and the outputs' pulses are unchanged
+  - [ ] Confirm the choices made while building ([list](findings/2026-10-03-pad-middle-click/README.md#choices-made-while-building)): the layer names, the 50 ms repeat, the eleven inherited inputs accepted under R139, and the Window audit's time limit
+  - [ ] On the Deck, in this order: A10 for a pad click, A39, A40, A41, then a click shorter than 50 ms, which sends nothing on the simulator ([P7](tests/test_scenarios_90_14.py))
 
 ## Sticks
 

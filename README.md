@@ -489,12 +489,17 @@ python3 convert_runtime_ids.py to-titles neptune/single-set-default_hold-gyro_la
 
 ### Steering in the Neptune layouts
 
-Both `neptune/*_hold-gyro_latest` JSON/VDF pairs are generated (71 layers
-since 90.11). The builder in `findings/2026-10-02-steering-fallback-hold/`
-extends the frozen 10-01 stateful transitions builder, which extends the
-09-30 lean steering builder and the 09-29 baseline; `install_neptune.py`
-there runs the fix pipeline and writes `neptune/`. A hand edit in `neptune/`
-is lost on the next install. See the
+Both `neptune/*_hold-gyro_latest` JSON/VDF pairs are generated (75 layers
+since 90.14). The builder in `findings/2026-10-03-menu-second-press-keys/`
+extends the frozen 10-03 pad click builder, which extends the 10-02 fallback
+hold builder, the 10-01 stateful transitions builder, the 09-30 lean steering
+builder and the 09-29 baseline; `install_neptune.py` there runs the fix
+pipeline and writes `neptune/`. A hand edit in `neptune/` is lost on the next
+install. See the
+[90.15 build record](findings/2026-10-03-menu-second-press-keys/README.md)
+(menu second-press keys), the
+[90.14 build record](findings/2026-10-03-pad-middle-click/README.md) (pad
+clicks), the
 [90.11 build record](findings/2026-10-02-steering-fallback-hold/README.md),
 the [90.10 build record](findings/2026-10-01-stateful-transitions/README.md),
 the earlier [lean steering record](findings/2026-09-30-steering-lean/README.md)

@@ -51,7 +51,7 @@ class ScenarioRegistryTests(unittest.TestCase):
         listed = {rule.id for rule in self.rules.values() if any(c.kind == "scenario" for c in rule.checked_by)}
         self.assertEqual(sorted(named - listed), [], 'add "Scenario tests (part)" to these rules\' "Checked by"')
         self.assertEqual(sorted(listed - named), [], "no scenario names these rules")
-        self.assertEqual([meta.check for meta in scenario.for_rule("R136")], ["90.11 F8", "90.13 N2"])
+        self.assertEqual([meta.check for meta in scenario.for_rule("R136")], ["90.11 F8", "90.13 N2", "90.15 M1"])
 
     def test_the_rules_and_assumptions_a_scenario_names_exist(self):
         for meta in self.scenarios:
@@ -143,8 +143,8 @@ class ReachTests(unittest.TestCase):
                 self.assertLessEqual(self.reached[variant], set(pad.layout.titles.values()))
 
     def test_a_changed_layer_that_no_scenario_reaches_is_reported(self):
-        """`LTP: Arrow Keys` is added by `hold_layer` only (R101's exception), which the simulator doesn't run."""
-        title = "LTP: Arrow Keys"
+        """`Tab` is added by a left-pad swipe, which no scenario makes."""
+        title = "Tab"
         for variant in scenario.VARIANTS:
             before = copy.deepcopy(scenario.layout_data(variant))
             layers = before["controller_mappings"]["action_layers"]

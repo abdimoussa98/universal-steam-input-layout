@@ -67,14 +67,200 @@
       "todo": null
     },
     {
-      "rule": "R101",
+      "rule": "R139",
       "scope": {
-        "note": "Five hold_layer commands in each layout: Base's left-pad click holds LTP: Arrow Keys and its right-pad click holds RTP: Mouse Buttons."
+        "layers": [
+          "LTP: Click Entry Point",
+          "RTP: Click Entry Point",
+          "LTP: Middle Click",
+          "RTP: Middle Click",
+          "LTP: Arrow Keys",
+          "RTP: Mouse Buttons",
+          "RTP: Circular Scroll",
+          "RTP: Entry Point"
+        ],
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ],
+          "alternative": [
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ]
+        }
       },
-      "status": "todo",
-      "why": "Legacy bindings from before the rule. They are migration work, not an accepted exception.",
-      "decided": "Author, 2026-09-30",
-      "todo": "resources/Layout Vocabulary.md, known implementation conflicts: migrate the five hold_layer commands"
+      "status": "allow",
+      "why": "The pad layers bind only their pad and the stick touches, so L1 and R1 stay live while a pad is touched or clicked: the modifier entry comes from Base, or from Gyro when Gyro is on. This is the rule's own example, for the left-pad key layers. The two D-pad layers inherited the same way while hold_layer kept them out of the audit.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Escape",
+          "Tab",
+          "Backspace",
+          "Enter",
+          "LST: Entry Point",
+          "RST: Entry Point",
+          "LST: Tap Cover",
+          "RST: Tap Cover",
+          "LST: Temporary Gyro",
+          "RST: Temporary Gyro"
+        ],
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ],
+          "alternative": [
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "Unchanged since 90.13 and read because Base changed in 90.14 (its two pad clicks). The left-pad key layers and the stick-touch helpers leave L1 and R1 open; the modifier entry comes from Base, or from Gyro when Gyro is on.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Turning Ramp Up 0",
+          "Turning Ramp Up 1"
+        ],
+        "inputs": {
+          "default": [
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ],
+          "alternative": [
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "Unchanged since 90.13 and read because Base changed in 90.14. The ramp layers leave the firing inputs open on purpose: with Gyro Off Ramp Up underneath a shot first removes it, otherwise it is Base's mouse button.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left: Escape",
+          "Menu Right: Tab"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "Unchanged since 90.13 and read because Base changed in 90.14. Both bindings underneath are empty: Base's WASD modifier slot, or Steering's cleared edge.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left: Escape",
+          "Menu Right: Tab",
+          "Menu Left: Fn Layer",
+          "Menu Right: Fn Layer",
+          "Menu Buttons: Left Stick Guard",
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": [
+          "right_trackpad/touch"
+        ]
+      },
+      "status": "allow",
+      "why": "Unchanged since 90.13 and read because Base changed in 90.14. A right-pad touch adds RTP: Entry Point from Base and does nothing in Steering, which clears it on purpose.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left: Fn Layer"
+        ],
+        "inputs": [
+          "right_joystick/click"
+        ]
+      },
+      "status": "allow",
+      "why": "By design: Fn inherits both stick clicks from the Entry Point underneath, the normal one or Steering's, and they lead to different transitions. In 90.14 each click's clear list gained the four pad click layers.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Right: Fn Layer"
+        ],
+        "inputs": [
+          "joystick/click"
+        ]
+      },
+      "status": "allow",
+      "why": "By design: Fn inherits both stick clicks from the Entry Point underneath, the normal one or Steering's, and they lead to different transitions. In 90.14 each click's clear list gained the four pad click layers.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard",
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": [
+          "joystick/click",
+          "right_joystick/click"
+        ]
+      },
+      "status": "allow",
+      "why": "By design: one guard per stick serves all four Entry Points and inherits the stick clicks from whichever is underneath. In 90.14 each click's clear list gained the four pad click layers.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard"
+        ],
+        "inputs": [
+          "right_joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "By design: the other stick's edge comes from the Entry Point underneath (it adds the right guard) or from the right guard when both sticks are out. Read because the Entry Points changed in 90.14; this input did not.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "By design: the other stick's edge comes from the Entry Point underneath (it adds the left guard) or from the left guard when both sticks are out. Read because the Entry Points changed in 90.14; this input did not.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
     },
     {
       "rule": "R119",
@@ -100,7 +286,7 @@
       "rule": "R136",
       "scope": {
         "kind": "touchpad",
-        "note": "A pair is set aside when either layer is a touchpad layer (every binding that adds it is on a trackpad) or the covered exit is a trackpad input. 68 pairs on 90.13."
+        "note": "A pair is set aside when either layer is a touchpad layer (every binding that adds it is on a trackpad) or the covered exit is a trackpad input. 68 pairs on 90.13, 71 on 90.14 and 90.15: RTP: Click Entry Point covers the pad-touch Release of RTP: Entry Point, RTP: Tap Cover and RTP: Circular Scroll."
       },
       "status": "todo",
       "why": "The windows clear both pads' touch, so a thumb leaving a pad inside a window misses a pad layer's Release; RTP: Double Tap binds the buttons whose Releases other layers need. The fixes are proposed, not decided.",

@@ -306,6 +306,31 @@ class EdgeTests(unittest.TestCase):
         s.wait(80)
         self.assertEqual(s.stack, ("Base",))
 
+    def ring(self, **options):
+        """A pad edge with two Soft Presses: an inverted one inside 3, not interruptible, and a normal one past 2."""
+        def soft(name, **settings):
+            return {"bindings": {"binding": f"key_press {name}, , "}, "settings": {k: str(v) for k, v in settings.items()}}
+        edge = {"Soft_Press": [soft("IN", activation_threshold=3, edge_binding_invert=1, interruptable=0),
+                               soft("OUT", activation_threshold=2)]}
+        return sim({"Base": {"joystick": ("dpad", {"edge": edge})}}, **options)
+
+    def test_an_input_is_inside_the_inverted_range_or_past_the_normal_one(self):
+        s = self.ring()
+        self.assertEqual(s.down(), ["IN"])                    # not held: inside
+        self.assertEqual(s.press(EDGE).down(), ["OUT"])       # held: past the threshold
+        self.assertEqual(s.release(EDGE).down(), ["IN"])
+
+    def test_between_the_two_the_uninterruptible_soft_press_suppresses_the_other(self):   # A39
+        s = self.ring()
+        self.assertEqual(s.press_between(EDGE).down(), ["IN"])
+        self.assertEqual(s.release(EDGE).down(), ["IN"])      # still inside: it never let go
+        self.assertEqual(s.typed(), ["IN"])
+
+    def test_between_the_two_both_fire_when_the_switch_is_off(self):                      # A39 false
+        s = self.ring(soft_press_interrupts=False)
+        self.assertEqual(s.press_between(EDGE).down(), ["IN", "OUT"])
+        self.assertEqual(s.release(EDGE).down(), ["IN"])
+
     def test_hold_layer_and_mode_shifts_are_refused(self):
         s = sim({"Base": {"switch": (SW, {"button_a": press("controller_action hold_layer {{Base::P}} 0 0, , ")})}, "P": {}})
         with self.assertRaises(NotImplementedError):

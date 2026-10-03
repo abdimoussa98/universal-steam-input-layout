@@ -1,0 +1,16 @@
+Changes from single-set-alternative_hold-gyro_90.14.json to single-set-alternative_hold-gyro_latest.json
+Layers: 75 -> 75 (added: none; removed: none)
+
+== Menu Left: Escape
+  joystick/dpad_north: input added
+    after:  Full_Press(interruptable=0): key_press W
+  joystick/dpad_south: input added
+    after:  Full_Press(interruptable=0): key_press S
+
+== Menu Right: Tab
+  joystick/dpad_north: input added
+    after:  Full_Press(interruptable=0): key_press W
+  joystick/dpad_south: input added
+    after:  Full_Press(interruptable=0): key_press S
+
+2 layers changed, 4 changes

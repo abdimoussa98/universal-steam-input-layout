@@ -330,7 +330,7 @@ class NeptuneFlowTests(unittest.TestCase):
             self.assertEqual(report["view"]["contexts"], [["Base"], ["Base", "Gyro"]])
             self.assertEqual(report["layout"]["variant"], variant)
             self.assertEqual(report["unreached"], [])
-            self.assertEqual(report["legacy_only"], ["LTP: Arrow Keys", "RTP: Mouse Buttons"])
+            self.assertEqual(report["legacy_only"], [])                 # the pad layers left hold_layer in 90.14
             self.assertEqual(report["unsupported"], [])
             self.assertEqual(report["stale_decisions"], [])
             layout = Layout(json.loads((ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json").read_text()))

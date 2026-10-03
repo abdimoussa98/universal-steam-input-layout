@@ -12,6 +12,11 @@ Hold tests pass, and both descriptions keep the fallback and menu sentences.
 Rebuilds keep going through this folder's `install_neptune.py`; the pipeline
 step is applied there.
 
+**Since 90.14 the working layouts are a later build.**
+[findings/2026-10-03-pad-middle-click](../2026-10-03-pad-middle-click/README.md)
+extends this builder, and rebuilds go through that folder's
+`install_neptune.py`. This builder stays frozen.
+
 ## 90.13: no turn assist in Steering
 
 Author, 2026-10-02: "just block it in the steering base". `Steering` binds the

@@ -41,7 +41,9 @@ Checks, each a failing finding:
 An exit is a Release that removes its own layer. For the hidden-exit check a
 layer on top covers it when it answers that input instead: it binds it, or blocks
 it with a disabled source or another source mode. The stack is taken after the
-whole binding that added the upper layer has run. Covering an exit that is not on
+whole binding that added the upper layer has run. Since 2026-10-03 "on top" also
+counts a landing: any adding binding that answers on a stack the chains visited,
+whichever layer it belongs to (chains.landings). Covering an exit that is not on
 the keeper is information, not a finding: the keeper's exit still works.
 
     exit to review      such a pair, where either layer changed since the last snapshot:
@@ -330,28 +332,48 @@ class Cleanups:
         `upper` is the layer that answers the exit's input instead of `lower`. `hidden` are the covered exits on
         the lower layer's keeper, `side` the covered exits that aren't. An exit the upper layer's binding also
         removes the lower layer on is carried, not covered.
+
+        Two sources of stacks. The first is `above`: the upper layer's own chain, or one bystander under it.
+        The second is every landing (chains.landings): one more adding binding on a stack the walk visited.
+        Without it a layer that lands through a lower layer's binding is missed, as the Fallback Hold over
+        the menu second-press layers was from 90.11 to 90.14.
         """
         pairs = {}
-        for lower in self.layers:
-            exits = self.exits(lower)
-            if not exits:
-                continue
-            keeping = self.keeper_exits(lower, exits)
+        exits = {lower: found for lower in self.layers if (found := self.exits(lower))}
+        keeping = {lower: self.keeper_exits(lower, found) for lower, found in exits.items()}
+
+        def cover(lower, full, path):
+            for control in exits[lower]:
+                kind, layer, acts, _ = resolve(self.layout, full, *control)
+                if kind == "binding" and layer == lower:
+                    continue
+                if kind == "mode":
+                    # Nobody answers: a source mode changed somewhere above. `resolve` names the top layer of
+                    # that source; the layer that covers this exit is the first one above `lower` in another mode.
+                    mine = self.layout.active(lower)[control[0]]["mode"]
+                    layer = next((t for t in full[full.index(lower) + 1:]
+                                  if (g := self.layout.active(t).get(control[0])) and g["mode"] != mine), layer)
+                if acts and any(("remove_layer", lower) in self.layout.layer_ops(e) for _, e in entries(acts)):
+                    continue                   # carried: the upper layer removes it there
+                row = pairs.setdefault((layer, lower), {"hidden": [], "side": [], "stack": full, "path": path()})
+                side = "hidden" if control in keeping[lower] else "side"
+                if control not in row[side]:
+                    row[side].append(control)
+
+        for lower in exits:
             for upper, (stack, why) in self.chains.above(lower).items():
                 full = self._settled(tuple(stack) + (upper,), upper, why)
-                if lower not in full:
-                    continue                       # the same binding removes it again
-                for control in exits:
-                    kind, layer, acts, _ = resolve(self.layout, full, *control)
-                    if kind == "binding" and layer == lower:
-                        continue
-                    if acts and any(("remove_layer", lower) in self.layout.layer_ops(e) for _, e in entries(acts)):
-                        continue                   # carried: the upper layer removes it there
-                    row = pairs.setdefault((layer, lower), {"hidden": [], "side": [], "stack": full,
-                                                            "path": why.describe()})
-                    side = "hidden" if control in keeping else "side"
-                    if control not in row[side]:
-                        row[side].append(control)
+                if lower in full:              # else the same binding removes it again
+                    cover(lower, full, why.describe)
+        visited = self.chains.stacks()
+        for before, t, after in self.chains.landings():
+            landed = [x for op, x in t.ops if op == "add_layer" and x in after and x not in before]
+            if not landed:
+                continue
+            first = min(after.index(x) for x in landed)
+            for lower in after[:first]:
+                if lower in exits:
+                    cover(lower, after, lambda: visited[before].describe() + ["landing: " + t.describe()])
         return pairs
 
     def unreached_by_cleanup(self):

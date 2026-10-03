@@ -6,12 +6,13 @@ Author direction, 2026-09-30:
   layers. Each window's left pad was a disabled source. It now swipes straight
   to those keys instead, with no layer command. The keys are read from the key
   layers Base adds, and the swipe settings are copied from Base. The pad click
-  (Base: hold_layer LTP: Arrow Keys) and touch (the key layers' own touch-release
-  cleanup, if one is ever below) are cleared.
+  (Base: add_layer LTP: Click Entry Point; a hold_layer of LTP: Arrow Keys until
+  90.13) and touch (the key layers' own touch-release cleanup, if one is ever
+  below) are cleared.
 - **Right pad:** it stays the mouse, so the cursor keeps moving during the
   window. The windows that disabled it now use Base's mode, with click (Base:
-  hold_layer RTP: Mouse Buttons) and touch (Base: add_layer RTP: Entry Point)
-  cleared. Settings are only `layer: "1"`, so the mouse feel inherits from Base.
+  add_layer RTP: Click Entry Point; a hold_layer of RTP: Mouse Buttons until
+  90.13) and touch (Base: add_layer RTP: Entry Point) cleared. Settings are only `layer: "1"`, so the mouse feel inherits from Base.
   RTP Double Tap keeps its dpad-mode selection pad, clears `click`, and binds
   no touch: a second tap north or south goes to Circular Scroll, and anywhere
   else stays in mouse mode.

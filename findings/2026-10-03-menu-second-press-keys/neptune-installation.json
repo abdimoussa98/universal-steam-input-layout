@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "11945da93c84c30bbcf289585c7e6eab89312d0fdd29d1a6435fb3c8afe4d8e9",
+      "version_snapshot": "versions/neptune/90.15/single-set-default_hold-gyro_90.15.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "593f3f2731fdd1e46dede9776099684a376b76ffcdc8dfe751d7da8d47a6f11f",
+      "version_snapshot": "versions/neptune/90.15/single-set-default_hold-gyro_90.15.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "cb520a236df460cb535b96c1dda5eab0e525b35629b437163e2a12fdfd41c3d4",
+      "version_snapshot": "versions/neptune/90.15/single-set-alternative_hold-gyro_90.15.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "8409b5402019cff657ea452b318ad8eba02ad2d082e7bd8ed08016309644f285",
+      "version_snapshot": "versions/neptune/90.15/single-set-alternative_hold-gyro_90.15.vdf"
+    }
+  },
+  "release": "90.15",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-03-menu-second-press-keys/default-menu-second-press-keys.json",
+      "sha256": "02d34dcdeafb7fbea74d3eb55cd83e44b739aa3efcde707a8835b56533ba6f06"
+    },
+    "alternative": {
+      "path": "findings/2026-10-03-menu-second-press-keys/alternative-menu-second-press-keys.json",
+      "sha256": "f3b07171ae1e1e640ab0585d3b900a473068a4e8842908563b9b44f70bd1191e"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}
