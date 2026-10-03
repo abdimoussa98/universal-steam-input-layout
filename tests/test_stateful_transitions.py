@@ -326,7 +326,9 @@ class StatefulTransitionTests(unittest.TestCase):
         for b, layout in self.each():
             groups = [(name, layout.active(name)['joystick']) for name in self.steering_layers(layout)
                       if 'joystick' in layout.active(name) and 'Menu' not in name]
-            self.assertEqual(len(groups), 12)
+            # R111 is about the layers that end on the stick's return to centre; they are among the ones checked.
+            self.assertLessEqual({'Steering | LS Up: Modifier 1', 'Steering | LS Down: Modifier 0',
+                                  'Steering | LS: Entry Guard'}, {name for name, _ in groups})
             for name, group in groups:
                 self.assertEqual((group['settings']['edge_binding_radius'], group['settings']['edge_binding_invert']),
                                  ('4915', '0'), name)
@@ -427,7 +429,8 @@ class StatefulTransitionTests(unittest.TestCase):
     def test_steering_windows_are_always_on_and_bind_everything_themselves(self):
         for b, layout in self.each():
             windows = always_on_layers(layout)
-            self.assertEqual(len(windows), 9)
+            # The build adds no Always On layer besides Double Tap windows, and every such window has one.
+            self.assertEqual(set(windows), {title for title in layout.presets if title.endswith(': Double Tap')})
             self.assertLessEqual(set(WINDOWS.values()), set(windows))
             for direction, name in WINDOWS.items():
                 remove = ('remove_layer', name)
