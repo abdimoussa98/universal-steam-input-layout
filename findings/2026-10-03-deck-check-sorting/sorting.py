@@ -247,6 +247,12 @@ WENT = {
     ("Default trigger reference match", "DT3"): "`test_double_tap_windows.test_default_windows_keep_the_mouse_buttons_on_the_trigger_edges`, "
                                                 "and the Window audit on every build",
     ("Left-stick recovery and Transition Sets", "LR1"): "`tests/test_scenarios_triggers_and_recovery.py`",
+    ("WASD modifier scaffold", "WM1"): "`test_static_checks.test_bases_left_stick_edge_is_the_empty_wasd_modifier`",
+    ("WASD modifier scaffold", "WM2"): "Tuning note",
+    ("WASD modifier scaffold", "WM3"): "`tests/test_scenarios_triggers_and_recovery.py`",
+    ("WASD modifier scaffold", "WM4"): "`test_neptune_recovery.test_selected_edges_have_expected_guards_scope_and_outer_geometry` and "
+                                       "`test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries`",
+    ("WASD modifier scaffold", "WM5"): "A11: an output exposed or hidden under a stick that is already out",
 }
 
 
