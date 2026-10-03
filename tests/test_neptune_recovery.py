@@ -176,12 +176,13 @@ class NeptuneRecoveryTests(unittest.TestCase):
         for variant, layout in self.layouts.items():
             timed = {title for title in layout["presets"]
                      if any("always_on_action" in g.get("inputs", {}) for g in self.active_groups(layout, title))}
-            self.assertEqual(len(timed), 9)
+            # The Always On layers are exactly the Double Tap windows, so none is skipped below.
+            self.assertEqual(timed, {title for title in layout["presets"] if title.endswith(": Double Tap")})
             for title in timed:
                 with self.subTest(variant=variant, layer=title):
                     for source in ("joystick", "right_joystick"):
                         self.assertEqual(self.source(layout, title, source)["inputs"]["edge"], blank)
-            incoming, outgoing = 0, 0
+            entered, left = set(), set()
             for owner in layout["presets"]:
                 for group in self.active_groups(layout, owner):
                     for value in group.get("inputs", {}).values():
@@ -191,12 +192,13 @@ class NeptuneRecoveryTests(unittest.TestCase):
                             for title in timed:
                                 add = "controller_action add_layer {{Base::" + title + "}}"
                                 if any(b.startswith(add) for b in operations):
-                                    self.assertTrue(actions[0].startswith(add), (owner, title))
-                                    incoming += 1
+                                    self.assertTrue(actions[0].startswith(add), (owner, title))     # R146
+                                    entered.add(title)
                             if owner in timed and operations:
-                                self.assertEqual(actions[-1], removal(owner), owner)
-                                outgoing += 1
-            self.assertEqual((incoming, outgoing), (21, 44))
+                                self.assertEqual(actions[-1], removal(owner), owner)                # R147, R148
+                                left.add(owner)
+            # Every window has an entry and an exit that the loop checked: neither rule passed on nothing.
+            self.assertEqual((entered, left), (timed, timed))
 
     def test_all_guarded_removals_repeat_and_rtp_stays_out_of_ls_scope(self):
         for variant, layout in self.layouts.items():
