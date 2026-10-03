@@ -40,16 +40,17 @@ def load_layouts():
 def recovery_specs(variant):
     left, right, lc, rc = ("L1", "R1", "1", "2") if variant == "default" else ("L2", "R2", "7", "8")
     singles = [left + ": Modifier 0", right + ": Modifier 1"]
-    all_singles = {title for name in singles for title in (name, "Gyro | " + name)}
-    covers = {left + ": Tap Cover", right + ": Tap Cover", left + "&" + right + ": Tap Cover",
-              left + ": Temp Cursor Gyro", right + ": Temp Cursor Gyro"}
+    covers = {left + ": Tap Cover", right + ": Tap Cover", left + "&" + right + ": Tap Cover"}
+    # Cleanup rules (author, 2026-10-02; findings/2026-10-02-cleanup-boundaries): a list names only
+    # layers that can be on the stack with its host. The Gyro and normal modifiers never are, and a
+    # cursor is cancelled before Modifier 2 goes on, so neither is listed.
     specs = {}
     for name, button, selector in zip(singles, (left, right), (lc, rc)):
-        for title in (name, "Gyro | " + name):
-            specs[title] = ({selector}, {name, "Gyro | " + name, button + ": Tap Cover", button + ": Temp Cursor Gyro"})
+        for prefix in ("", "Gyro | "):
+            specs[prefix + name] = ({selector}, {prefix + name, button + ": Tap Cover", button + ": Temp Cursor Gyro"})
     for name in (left + "!" + right + ": Modifier 2", right + "!" + left + ": Modifier 2"):
-        for title in (name, "Gyro | " + name):
-            specs[title] = ({lc, rc}, {name, "Gyro | " + name} | all_singles | covers)
+        for prefix in ("", "Gyro | "):
+            specs[prefix + name] = ({lc, rc}, {prefix + name} | {prefix + single for single in singles} | covers)
     for side, selector in (("Left", "15"), ("Right", "14")):
         prefix = "Menu " + side
         specs[prefix + ": Entry Point"] = ({selector}, {prefix + ": Entry Point", prefix + ": Fn Layer"})

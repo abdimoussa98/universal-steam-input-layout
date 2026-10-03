@@ -1437,47 +1437,75 @@ release list or its Gyro toggle into the combined cover or guarded fallback.
 
 #### Rocking Between Modifiers 0, 1 and 2
 
-**Author-confirmed purpose, 2026-09-30.** The released-side exit exists so you
-can *rock* between the modifiers. Hold both bumpers for Mod 2, let go of one,
-and you're back on the other side's single modifier. Press it again and you're
-straight back in Mod 2. You never pass through Base, and you never wait out a
-Double Tap window. This works because of **stack order** and the **execution
-order** inside each array. Both are deliberate, so don't normalize either one.
+**Author-confirmed purpose, 2026-09-30, re-confirmed 2026-10-02.** You can
+*rock* between the modifiers to type fast: hold both bumpers for Mod 2, let go
+of one and you're on the other side's single modifier, press it again and
+you're straight back in Mod 2. You never pass through Base, you never wait out
+a Double Tap window, and you **never get an accidental scroll**. The author
+calls the add order behind this very sensitive: it depends on **stack order**
+and on the **execution order** inside each array. Don't normalize either one.
 
-The walkthrough below uses the default layout; alternative is the same on the
-L2/R2 trigger soft pulls. Stacks are bottom to top.
+**The one rule behind it.** A release fires on the topmost layer that binds
+that bumper. A Double Tap window, and so a scroll, only opens from a single
+modifier's own release, and that only happens when the modifier is the top
+binder, meaning you tapped the bumper without using it. Every way of using a
+bumper puts a layer with a clean release above its modifier first:
+
+| You | Goes on top of the modifier | Its release |
+|---|---|---|
+| Tap the bumper and let go | Nothing | The modifier's: opens the window. A second tap inside 150 ms scrolls |
+| Press any button with the bumper held | Its Tap Cover | Clean exit, no window |
+| Hold the bumper 300 ms | Temp Cursor Gyro | Clean exit, no window |
+| Press the other bumper too | Both covers, then Mod 2 | See the walkthrough |
+
+The walkthrough uses the default layout; alternative is the same on the L2/R2
+trigger soft pulls, and with Gyro on the modifiers and Mod 2 are the `Gyro |`
+layers while the covers are shared. Stacks are bottom to top.
 
 | Step | Input | Binding that fires | Stack after |
 |---|---|---|---|
 | 1 | Hold L1 | Base LB chord adds `L1: Modifier 0` | Base, L1 Mod 0 |
-| 2 | Hold R1 too | L1 Mod 0's RB chord adds, in order: `L1: Tap Cover`, `R1: Modifier 1`, `R1: Tap Cover`, `L1!R1: Modifier 2` | Base, L1 Mod 0, L1 Tap Cover, R1 Mod 1, R1 Tap Cover, L1!R1 Mod 2 |
-| 3 | Keep both held 200 ms | Mod 2's delayed RB chord adds `L1&R1: Tap Cover` (with the 250 ms reset) | … , L1!R1 Mod 2, L1&R1 Tap Cover |
-| 4 | Let go of L1 | The combined cover's LB release removes the left side and both Mod 2 orders | Base, R1 Mod 1, R1 Tap Cover |
-| 5 | Press L1 again | R1 Mod 1's LB chord re-adds `R1: Tap Cover` (already there, so it doesn't move), then `L1: Modifier 0`, `L1: Tap Cover`, `R1!L1: Modifier 2` | Base, R1 Mod 1, R1 Tap Cover, L1 Mod 0, L1 Tap Cover, R1!L1 Mod 2 |
+| 2 | Hold R1 too | L1 Mod 0's RB chord adds, in execution order: `L1: Tap Cover`, `R1: Modifier 1`, `R1: Tap Cover`, `L1!R1: Modifier 2` | Base, L1 Mod 0, L1 Tap Cover, R1 Mod 1, R1 Tap Cover, L1!R1 Mod 2 |
+| 3 | Keep both held 200 ms | Mod 2's delayed RB chord (chord with LB) adds `L1&R1: Tap Cover`, with the 250 ms reset | … , L1!R1 Mod 2, L1&R1 Tap Cover |
+| 4 | Let go of L1 | The combined cover is the top LB binder. Its LB release removes itself, the left side (modifier, Gyro twin, Tap Cover, cursor) and both Mod 2 orders | Base, R1 Mod 1, R1 Tap Cover |
+| 5 | Press L1 again | R1's cover doesn't bind LB, so R1 Mod 1 answers. Its LB chord re-adds `R1: Tap Cover` (already there, so it doesn't move), then `L1: Modifier 0`, `L1: Tap Cover`, `R1!L1: Modifier 2` | Base, R1 Mod 1, R1 Tap Cover, L1 Mod 0, L1 Tap Cover, R1!L1 Mod 2 |
 | 6 | Keep both held 200 ms | R1!L1's delayed chord is on **L1**, the side pressed second | … , R1!L1 Mod 2, L1&R1 Tap Cover |
-| 7 | Let go of R1 | The combined cover's RB release removes the right side | Base, L1 Mod 0, L1 Tap Cover |
+| 7 | Let go of R1 | The combined cover's RB release removes the right side and both orders | Base, L1 Mod 0, L1 Tap Cover |
+| 8 | Let go of L1 | `L1: Tap Cover` is the top LB binder: clean exit, no window | Base |
 
 What makes it work:
 
-- **Each side's cover sits directly above its modifier.** After step 4,
-  `R1: Tap Cover` is above `R1: Modifier 1`, so releasing R1 fires the cover's
-  clean family exit instead of the modifier's release, which would open
-  `R1: Double Tap`. The entry chord's add order is what places the covers:
-  its array adds the first side's cover, then the second modifier, then its
-  cover, then Mod 2.
+- **Each side's cover sits above its modifier.** The entry chord adds the
+  first side's cover, then the second modifier, then its cover, then Mod 2
+  last. If a cover were added before its modifier, the modifier would end up
+  on top, its release would open the Double Tap window, and pressing that
+  bumper again quickly would scroll.
 - **Re-adding an active layer doesn't move it.** In step 5, R1 Mod 1's chord
   re-adds `R1: Tap Cover`, which stays where it is. Only the new layers go on
-  top.
-- **The release removes only the released side, never the held one.** The
-  held side's modifier, its Tap Cover and its cursor survive, and so does
+  top. The re-add is there for the case where R1 was pressed first and not
+  used yet: it puts R1's cover above R1's modifier before L1's layers go on.
+- **The combined cover's release removes only the released side.** The held
+  side's modifier, its Tap Cover and its cursor survive, and so does
   persistent Gyro. That is why an owner release can have a narrower scope
-  than a cleanup function.
-- **Without the combined cover** (both released within 200 ms), Mod 2's own
-  release fires instead. It clears everything and toggles Gyro, which is the
-  quick two-bumper tap.
+  than a cleanup function. Its lists remove **both** Mod 2 orders, because the
+  combined cover can sit on either; keep both there.
 
-[test_stacks.py](../tests/test_stacks.py) replays this sequence on both layouts
-with `steam_layout.stacks.walk` and fails if any stack changes.
+**Two timing rules:**
+
+- **Be in Mod 2 for 200 ms before rocking.** Until the combined cover lands,
+  letting go of **either** bumper fires Mod 2's own release: the quick tap,
+  which clears every modifier and toggles Gyro.
+- **The 200 ms runs on the bumper pressed second**, as a delayed chord with
+  the first bumper, protected by a 250 ms repeating reset on the same button.
+
+**Tests.** [test_modifier_rocking.py](../tests/test_modifier_rocking.py)
+replays every sequence above with `steam_layout.stacks.walk`, on both layouts,
+with Gyro off and on: the double tap that scrolls, the used bumper and the
+cursor that don't, the exact add order of both Mod 2 entries, the quick tap
+inside 200 ms, rocking in both directions and back and forth, and the
+combined cover's lists. It checks that no window opens during rocking and that
+each cover stays above its modifier. Swapping two adds in the entry chord
+fails eight of its tests.
 
 These scopes remain subject to the [Always On ordering contract](#always-on-layer-isolation-and-the-historical-crash-workaround)
 and the three-command-entry limit. Subcommand arrays can contain all the listed

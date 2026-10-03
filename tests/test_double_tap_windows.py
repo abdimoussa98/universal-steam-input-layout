@@ -5,6 +5,7 @@ import re
 import unittest
 
 from audit_inheritance import Layout, always_on_layers, bindings
+from steam_layout.flow_model import resolve
 
 ROOT = Path(__file__).resolve().parents[1]
 LAYER_COMMAND = re.compile(r"controller_action (add_layer|remove_layer|hold_layer)\b")
@@ -77,21 +78,31 @@ class DoubleTapWindowTests(unittest.TestCase):
     def test_default_windows_keep_the_mouse_buttons_on_the_trigger_edges(self):
         # Gyro Off Ramp Up can sit under any window, and its soft pull removes it. That is a layer
         # command and no keybind, so the one possible keybind is Base's mouse button (since 90.10).
+        # The Steering windows inherit it: Steering blocks the right-stick edge, so no ramp layer
+        # is under them (90.13).
         layout = Layout(load("default"))
         for title in always_on_layers(layout):
             for source, button in (("left_trigger", "LEFT"), ("right_trigger", "RIGHT")):
                 with self.subTest(window=title, source=source):
-                    edge = layout.active(title)[source]["inputs"]["edge"]["activators"]
+                    if title.startswith("Steering | "):
+                        self.assertNotIn("edge", layout.active(title).get(source, {}).get("inputs", {}))
+                        kind, layer, edge, _ = resolve(layout, ("Base", "Steering", title), source, "edge")
+                    else:
+                        edge = layout.active(title)[source]["inputs"]["edge"]["activators"]
                     self.assertEqual(list(bindings(edge)), [f"mouse_button {button}, , "])
                     self.assertEqual(edge, layout.active("Base")[source]["inputs"]["edge"]["activators"])
 
     def test_alternative_steering_windows_keep_the_mouse_buttons_on_the_bumpers(self):
-        # Turning Ramp Up 0 can be underneath, and its bumpers only remove the ramp layers.
+        # The windows inherit Base's mouse buttons. Before 90.13 Turning Ramp Up 0 could be
+        # underneath and they bound them themselves; Steering now blocks the right-stick edge.
         layout = Layout(load("alternative"))
         for title in ("Steering | LS Up: Double Tap", "Steering | LS Down: Double Tap"):
             for name, button in (("left_bumper", "LEFT"), ("right_bumper", "RIGHT")):
                 with self.subTest(window=title, input=name):
-                    acts = layout.active(title)["switch"]["inputs"][name]["activators"]
+                    self.assertNotIn(name, layout.active(title)["switch"]["inputs"])
+                    kind, layer, acts, _ = resolve(layout, ("Base", "Steering", "Steering | R2: W Key", title),
+                                                   "switch", name)
+                    self.assertEqual(layer, "Base")
                     self.assertEqual(list(bindings(acts)), [f"mouse_button {button}, , "])
 
     def test_right_pad_stays_the_mouse_with_click_and_touch_cleared(self):

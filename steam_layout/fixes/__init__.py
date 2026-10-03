@@ -17,6 +17,7 @@ the steam-layout-apply skill.
 | cover_resets | 4th-entry cover resets on the second-press layers | findings/2026-09-30-second-press-cover-reset |
 | menu_combo_keys | Backspace/Enter typed by the menu chords; the two overlay layers removed | findings/2026-10-01-intended-flow-checker |
 | window_pads | trackpads off the layer API in Double Tap windows | findings/2026-09-30-double-tap-pad-blocks |
+| cleanup_lists | resolve every Cleanup audit finding: trim, complete and guard the cleanup lists | findings/2026-10-02-cleanup-audit |
 | window_routes | block derived layer-API routes under the windows | findings/2026-09-30-derived-window-blocks |
 
 `window_routes` runs last because it audits the layout the others produce.
@@ -25,7 +26,7 @@ Retired: `transition_set_0` (2026-10-01, now in archived/retired-fixes/). The
 stateful transitions build writes both transition layers whole, with their
 stick-touch releases.
 """
-from . import cover_resets, dead_groups, menu_combo_keys, rtp_scroll, window_pads, window_routes
+from . import cleanup_lists, cover_resets, dead_groups, menu_combo_keys, rtp_scroll, window_pads, window_routes
 
 PIPELINE = [
     ("rtp_scroll", rtp_scroll.fix),
@@ -33,6 +34,7 @@ PIPELINE = [
     ("cover_resets", cover_resets.fix),
     ("menu_combo_keys", menu_combo_keys.fix),
     ("window_pads", window_pads.fix),
+    ("cleanup_lists", cleanup_lists.fix),
     ("window_routes", window_routes.fix),
 ]
 

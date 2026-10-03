@@ -278,6 +278,13 @@ See: [Complete delayed applies](Steam%20Input%20JSON%20Structure.md#complete-del
   members go into their family's exits. Never add it to the other side's lists
   or to a persistent mode's lists.
 - **Inheritance and blocking** have their own section, [§8](#8-inheritance-and-blocking).
+- **The six cleanup rules** (author, 2026-10-02): every layer takes care of
+  itself and what is below it, and of what is above it if it has that
+  responsibility. A cleanup removes only layers its guard's buttons keep alive,
+  in one step, and a list names only layers that can be on the stack with it.
+  [Rules](../findings/2026-10-02-cleanup-boundaries/README.md#the-rules) ·
+  the Cleanup audit checks them ([§10](#10-ship-it)) and the `cleanup_lists`
+  fix applies them.
 
 See: [Cleanup Functions](Cleanup%20Functions.md) (draft definitions of every kind) ·
 [Stuck layers](Steam%20Input%20JSON%20Structure.md#stuck-layers-and-why-there-is-so-much-cleanup) ·
@@ -506,7 +513,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 ## 10. Ship it
 
 - [ ] **The build audit is clean, on every version.** `python3 audit_build.py`
-      runs the three audits below on both variants and exits 0 only when all
+      runs the four audits below on both variants and exits 0 only when all
       pass. No version ships with a failing line.
 
       | Audit | Script | Clean means |
@@ -514,6 +521,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       | Budget audit | `audit_command_budget.py` | Three entries per input, no banned activators, and no layer command on an inverted D-pad stick edge ([§3](#3-activators)) |
       | Window audit | `audit_inheritance.py` | No undecided layer command under an Always On window ([§8](#8-inheritance-and-blocking), [§9](#9-always-on-layers)) |
       | Flow audit | `audit_flow_inheritance.py` | A chain of adding bindings reaches every layer, and no cover finding is open ([§5](#5-stick-touch-release), [§8](#8-inheritance-and-blocking)) |
+      | Cleanup audit | `audit_cleanups.py` | Every cleanup function and release follows the six cleanup rules ([§7](#7-cleanup)) |
 
       What a clean build audit doesn't prove: it follows the intended flows,
       not every runtime interleaving, missed release or timer race. Those are

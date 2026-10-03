@@ -12,6 +12,49 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
+## 90.13: no turn assist in Steering
+
+Load 90.13 fresh in both variants (71 layers). Record: [build](findings/2026-10-02-steering-fallback-hold/README.md#9013-no-turn-assist-in-steering).
+
+- [ ] N1: in Steering, push the right stick fully out and hold, with and without a driver held: no turn-assist speed-up, and the gyro keeps aiming while the stick turns
+- [ ] N2: hold R1, hold a trigger (firing), push the right stick out, let go of R1: you're back in fallback (WASD), with no W stuck on. In the alternative: hold R2, hold a bumper
+- [ ] N3: in a Steering stick Double Tap window (flick the left stick while driving), pull a trigger: the mouse button still fires. In the alternative, the bumpers
+- [ ] N4: outside Steering, turn assist and gyro-off-while-turning work as before
+
+## 90.12: cleanup lists
+
+Load 90.12 fresh in both variants (71 layers). Record: [first run and fix](findings/2026-10-02-cleanup-audit/README.md) · [rules](findings/2026-10-02-cleanup-boundaries/README.md#the-rules). Nothing here has run on the Deck. 90.12 changes only cleanup and release lists: about a third fewer removals, three new or changed cleanups, no add and no add order. "Miss the release" means: hold the buttons, press the Steam button, let go of everything, close the Steam menu.
+
+New behaviour:
+
+- [ ] C1 (Modifier 2, stick touch): hold L1 then R1, miss both releases, touch either stick: back to Base, typing works. Repeat with Gyro on (you return to Gyro) and R1 first
+- [ ] C2 (Modifier 2 held, stick touch): hold L1 and R1 and rest a thumb on each stick: nothing clears, Modifier 2 keys still work. Repeat holding only one bumper of a stuck Modifier 2: nothing clears until that bumper is released too
+- [ ] C3 (cursor, one step): hold L1 for 300 ms (cursor), miss the release, push the right stick to the edge once: cursor and modifier are both gone in that one push (before: cursor first, modifier on the repeat). Repeat with R1 and with the left stick
+- [ ] C4 (Steering Modifier 2): in Steering hold R1 then L1, miss R1's release only (keep L1 held), touch a stick: nothing clears. Release L1: back to Steering
+
+Unchanged, check they still work:
+
+- [ ] C5 (rocking): hold L1, add R1, wait 200 ms, let go of L1, press L1 again, wait, let go of R1, let go of L1: no scroll at any point, Base at the end. Repeat starting with R1, and with Gyro on
+- [ ] C6 (taps): tap L1 twice quickly: scroll down. Hold L1 and press A, let go, tap L1 at once: no scroll. Hold L1 and tap R1 within 200 ms: Gyro toggles
+- [ ] C7 (stuck, still clears): miss the release of L1 alone, of Start's Fn layer, and of a Steering driver, then press A or touch a stick: each clears
+- [ ] C8 (menu): hold Start, push a stick (guard), release: Tab or the window as before; hold Start past 200 ms for Fn, release: Fn gone, nothing left behind
+
+## 90.11: Steering fallback hold
+
+Load 90.11 fresh in both variants (71 layers). Record: [build](findings/2026-10-02-steering-fallback-hold/README.md). Nothing here has run on the Deck. These replace D2 (90.10) and C1 (90.6). All checks are in Steering with no driver held.
+
+- [ ] F1 (the fix): hold the left stick up for about 1 s, roll to A or D without recentring and hold for 3 s: the pulses stop on A or D and Steering stays. Repeat from down
+- [ ] F2 (exit): hold the left stick up: W, pulses from the start, and Steering exits with one beep at about 1.5 s. Repeat with down and S
+- [ ] F3 (early release): hold up for 1 s, recentre, hold up again: the exit comes 1.5 s after the second push, not sooner
+- [ ] F4 (after A or D): hold A for 3 s, roll up and hold: the exit comes about 1.5 s after reaching up. An instant exit means the timer counted the time on A; an exit near 3 s means the reset on the edge restarted it
+- [ ] F5 (diagonal): hold up-left: W and A together, pulses carry on, exit at 1.5 s
+- [ ] F6 (driver): hold up, press R1 before 1.5 s: the pulses stop, no exit, and the R1 modifier map is up. Release R1 with the stick still up: note whether W and the pulses come back
+- [ ] F7 (entry): enter Steering with the stick centred, push up and hold: W with no pulse and no exit until the stick has been back to centre once (D9 in 90.10). Repeat entering with the stick already held up
+- [ ] F8 (menu while holding up): hold up, tap Start: one Tab, W carries on, and the exit still comes 1.5 s after the push. Hold Start for 1 s: Tab held, no Fn. Recentre, push A: no pulse. Repeat with Select (Escape)
+- [ ] F10 (menu held, then push up): hold Start with the stick centred, push up and hold for 3 s: W, no pulses, and Steering stays. Release Start: Fn or Tab as usual
+- [ ] F11 (Entry Guard): enter Steering and leave the stick centred: Start and Select type Tab and Escape, with no Fn and no leave gesture. Push the stick out and back once, or press a driver: Start's tap and Fn come back
+- [ ] F9 (desktop): apply the layout to the desktop configuration and repeat F1 and F2
+
 ## 90.10: stateful transitions
 
 Load 90.10 fresh in both variants (70 layers). Record: [build](findings/2026-10-01-stateful-transitions/README.md) · [design](resources/Stateful%20Layer%20Transitions.md) · [plan](plans/2026-10-01-stateful-transitions-implementation.md). Nothing here has run on the Deck; the two gates were assumed. These replace K1 (90.9) and S5 and S8 (90.7), which test behaviour this release changed.
@@ -41,7 +84,7 @@ Menu flow and transitions:
 Steering:
 
 - [ ] D1 (menu): with no driver held, tap Start: one Tab and Steering stays; hold Start: Fn. Hold R1 and tap Start: Tab; Select: Escape
-- [ ] D2 (hold exit): hold the left stick up, then down, with no driver for 2.5 s: warning from 1 s, then exit
+- [ ] D2 (hold exit): replaced by F1 to F5 in 90.11
 - [ ] D3 (modifier and roll): hold R1, hold the left stick up: the R1 modifier map. Roll to the side: A or D steers and the map stays until the stick is back at centre. Roll straight to down inside 250 ms: the L1 modifier map takes over
 - [ ] D4 (stick first): hold the left stick up, then press R1: the modifier map is there at once; held 250 ms, recentring is silent; recentred sooner, one scroll
 - [ ] D5 (double taps): flick up and back: one scroll about 150 ms after centre. Flick, then flick and hold: repeating scroll; releasing stops it and adds nothing. Flick up, then push down inside 150 ms: no scroll, the down modifier map. Flick, then push sideways inside 150 ms: A or D at once and the scroll still lands at 150 ms

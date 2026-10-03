@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build audit: every layout audit on every working layout, as one gate.
 
-Runs the three audits on each layout and prints one line per audit. A release
+Runs the four audits on each layout and prints one line per audit. A release
 is clean only when every line passes (Layer Definition of Done, section 10).
 
 | Audit | Script | Clean means |
@@ -9,6 +9,7 @@ is clean only when every line passes (Layer Definition of Done, section 10).
 | Budget audit | audit_command_budget.py | three entries per input, no banned activators, no inverted D-pad edge layer command |
 | Window audit | audit_inheritance.py | no undecided layer command under an Always On window |
 | Flow audit | audit_flow_inheritance.py | a chain of adding bindings reaches every layer, no open cover finding |
+| Cleanup audit | audit_cleanups.py | every cleanup function and release follows the six cleanup rules |
 
 Read-only. Exit codes: 0 = every audit passed, 1 = at least one failed.
 
@@ -27,6 +28,7 @@ AUDITS = [
     ("Budget audit", "audit_command_budget.py"),
     ("Window audit", "audit_inheritance.py"),
     ("Flow audit", "audit_flow_inheritance.py"),
+    ("Cleanup audit", "audit_cleanups.py"),
 ]
 
 

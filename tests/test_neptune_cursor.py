@@ -236,11 +236,15 @@ class NeptuneCursorTests(unittest.TestCase):
                         self.assertEqual(entry["settings"]["interruptable"], "0")
                         self.assertNotIn("delay_start", entry["settings"])
                         self.assertIn(entry["settings"].get("haptic_intensity"), (None, "0"))
-                # Cursor owns cancellations and primary release, never key/cover/Mod 2 outputs.
+                # Cursor owns cancellations and primary release, never key/cover/Mod 2 outputs. Its two
+                # edge cleanups also remove the modifier under it, in one step (author, 2026-10-02).
+                owner = list(owners(variant))[side][2]
                 for source, name, entry in self.entries(layout, title):
                     if entry["activation"] != "release":
-                        self.assertTrue(set(entry["actions"]) <= {removal(title), EMPTY},
-                                        (variant, title, source, name, entry))
+                        allowed = {removal(title), EMPTY}
+                        if name == "edge" and entry["activation"] == "Full_Press":
+                            allowed |= {removal(owner), removal("Gyro | " + owner)}
+                        self.assertTrue(set(entry["actions"]) <= allowed, (variant, title, source, name, entry))
 
     def test_opposite_modifier_transitions_repeat_and_preserve_branch_and_execution_order(self):
         for variant, layout in self.layouts.items():
@@ -286,18 +290,22 @@ class NeptuneCursorTests(unittest.TestCase):
                         self.assertEqual(dual["settings"]["interruptable"], "0")
                         self.assertEqual(dual["settings"]["hold_repeats"], "1")
                         self.assertEqual(bindings(dual), [removal(title)])
+                        # One step (author, 2026-10-02): the cleanup removes the cursor first, then the
+                        # modifier it sits on, normal or Gyro. Stored arrays run bottom to top.
                         fallback = activators["Full_Press"]
-                        self.assertEqual(bindings(fallback), [removal(title)])
+                        self.assertEqual(bindings(fallback), [removal("Gyro | " + owner), removal(owner), removal(title)])
                         self.assertEqual(fallback["settings"]["hold_repeats"], "1")
                         self.assertNotEqual(fallback["settings"].get("interruptable"), "0")
 
     def test_overlays_retire_primary_timers_but_only_normal_covers_replace_touches(self):
         for variant, layout in self.layouts.items():
             for button, selector, owner, source, name in owners(variant):
-                targets = recovery_specs(variant)[owner][1]
+                # An overlay is shared by the normal and the Gyro modifier, so its lists keep both. The
+                # cursor and the Tap Cover are never on the stack together, so neither lists the other
+                # (cleanup rule 6, author 2026-10-02).
                 for suffix in (": Tap Cover", ": Temp Cursor Gyro"):
                     title = button + suffix
-                    overlay_targets = set(targets)
+                    overlay_targets = {title, owner, "Gyro | " + owner}
                     if suffix == ": Tap Cover":
                         left, right = ('L1', 'R1') if variant == 'default' else ('L2', 'R2')
                         opposite = right if button == left else left
@@ -370,7 +378,7 @@ class NeptuneCursorTests(unittest.TestCase):
             for name in ("dpad_east", "dpad_west", "edge"):
                 self.assertEqual(bindings(trackpad["inputs"][name]["activators"]["Full_Press"]), [removal(title)])
 
-    def test_family_removals_include_cursor_and_combined_release_preserves_other_side(self):
+    def test_combined_release_removes_only_its_side_and_preserves_the_other(self):
         for variant, layout in self.layouts.items():
             specs = list(owners(variant))
             left, right = specs[0][0], specs[1][0]
@@ -378,17 +386,14 @@ class NeptuneCursorTests(unittest.TestCase):
             mod2 = {name for order in (left + "!" + right, right + "!" + left)
                     for name in (order + ": Modifier 2", "Gyro | " + order + ": Modifier 2")}
             for button, _, owner, source, name in specs:
+                # The rocking list: the released side's modifiers (normal and Gyro, as the combined cover
+                # sits on either) and Tap Cover, both Modifier 2 orders, and itself. No cursor: it is
+                # cancelled before Modifier 2 goes on (cleanup rule 6, author 2026-10-02).
                 release = self.source(layout, combined, source)["inputs"][name]["activators"]["release"]
                 actions = [b for b in bindings(release) if b != EMPTY]
-                expected = mod2 | recovery_specs(variant)[owner][1] | {combined}
+                expected = mod2 | {owner, "Gyro | " + owner, button + ": Tap Cover", combined}
                 with self.subTest(variant=variant, side=button):
                     self.assert_removals(actions, expected)
-                for title in layout["presets"]:
-                    for _, _, entry in self.entries(layout, title):
-                        removed_pair = {removal(owner), removal("Gyro | " + owner)}
-                        if removed_pair.issubset(entry["actions"]):
-                            self.assertIn(removal(button + ": Temp Cursor Gyro"), entry["actions"],
-                                          (variant, title, entry["activation"]))
 
 
 if __name__ == "__main__":

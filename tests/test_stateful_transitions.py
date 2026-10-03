@@ -3,6 +3,8 @@
 Builds both variants with the 2026-10-01 builder and runs the fix pipeline, as
 the install does (plans/2026-10-01-stateful-transitions-implementation.md).
 These verify saved configuration contracts, not Steam's runtime scheduling.
+The working layouts are pinned to the build that extends this one
+(tests/test_steering_fallback_hold.py).
 """
 import importlib.util
 import json
@@ -13,7 +15,6 @@ import unittest
 
 from audit_command_budget import audit_layout
 import audit_flow_inheritance
-from convert_runtime_ids import generate_lookup, titles_to_ids
 from steam_layout.fixes import apply_all
 from steam_layout.inheritance import audit, check_stack
 from steam_layout.model import EMPTY, Layout, actions, always_on_layers, bindings, entries
@@ -69,18 +70,6 @@ class StatefulTransitionTests(unittest.TestCase):
 
     def steering_layers(self, layout):
         return [name for name in layout.presets if name == 'Steering' or name.startswith('Steering | ')]
-
-    def test_working_layouts_are_this_build(self):
-        # neptune/ is generated: a hand edit there would be lost on the next install.
-        for variant, data in self.data.items():
-            with self.subTest(variant=variant):
-                numeric, _ = titles_to_ids(json.dumps(data), generate_lookup(data))
-                built = json.loads(numeric)['controller_mappings']
-                working = json.loads((ROOT / f'neptune/single-set-{variant}_hold-gyro_latest.json').read_text())[
-                    'controller_mappings']
-                for cm in (built, working):
-                    cm.pop('title'); cm.pop('description')
-                self.assertEqual(built, working)
 
     def test_layers_keep_their_positions(self):
         renamed = {'Steering | LS: Entry Point': 'Steering | LS: Entry Guard',
@@ -165,12 +154,13 @@ class StatefulTransitionTests(unittest.TestCase):
                 for source in STICKS.values():
                     self.assertEqual(layout.active(name)[source]['mode'], 'dpad', (name, source))
 
-    def test_fn_exits_retire_the_guards_and_both_entry_points(self):
+    def test_fn_exits_retire_both_entry_points(self):
+        # A stick guard cancels Fn's 200 ms delay, so the guards and the menu Tap Cover are never on the
+        # stack with Fn. The fix pipeline drops them (cleanup rule 6; no race rule, author 2026-10-02).
         for b, layout in self.each():
             for side, (button, _) in SIDES.items():
                 fn = st.fn_layer(side)
-                expected = [('remove_layer', t) for t in [st.COVER] + GUARDS + [
-                    st.entry_point(side, steering=True), st.entry_point(side), fn]]
+                expected = [('remove_layer', t) for t in [st.entry_point(side, steering=True), st.entry_point(side), fn]]
                 self.assertEqual(self.ops(layout, self.acts(layout, fn, 'switch', button)['release']), expected)
                 recoveries = [self.ops(layout, e) for g in layout.active(fn).values()
                               for v in g.get('inputs', {}).values() for kind, e in entries(v.get('activators', {}))
@@ -179,7 +169,8 @@ class StatefulTransitionTests(unittest.TestCase):
                 self.assertTrue(all(ops == expected for ops in recoveries), fn)
 
     def test_guards_hold_into_the_tap_cover_and_tap_into_the_window(self):
-        left_behind = {('remove_layer', t) for t in GUARDS + ENTRY_POINTS + FN_LAYERS}
+        # No Fn layer: it is never on the stack with a guard (cleanup rule 6, author 2026-10-02).
+        left_behind = {('remove_layer', t) for t in GUARDS + ENTRY_POINTS}
         for b, layout in self.each():
             for stick_side, own in STICKS.items():
                 name = st.guard(stick_side)
@@ -227,7 +218,8 @@ class StatefulTransitionTests(unittest.TestCase):
                 self.assertEqual(acts['Full_Press']['settings'], {'interruptable': '0'})
                 release = self.ops(layout, acts['release'])
                 self.assertEqual(release[0], ('remove_layer', st.COVER))
-                self.assertEqual(set(release), {('remove_layer', t) for t in [st.COVER] + GUARDS + ENTRY_POINTS + FN_LAYERS})
+                # No Fn layer: it is never on the stack with the cover (cleanup rule 6, author 2026-10-02).
+                self.assertEqual(set(release), {('remove_layer', t) for t in [st.COVER] + GUARDS + ENTRY_POINTS})
                 self.assertFalse([x for x in actions(acts['release']) if 'key_press' in x])
             for source in STICKS.values():
                 # Empty edges: no guard can be added on top of the cover.
@@ -391,7 +383,8 @@ class StatefulTransitionTests(unittest.TestCase):
                 self.assertEqual(list(edge), ['release'])
                 ops = self.ops(layout, edge['release'])
                 self.assertEqual(ops[-1], ('add_layer', WINDOWS[direction]))   # the Always On window is added last
-                self.assertEqual(set(ops[:-1]), {('remove_layer', t) for t in [LS_COVER] + list(MODIFIERS.values())})
+                # Only its own modifier: the other one is never on the stack with it (cleanup rule 6).
+                self.assertEqual(set(ops[:-1]), {('remove_layer', t) for t in (LS_COVER, name)})
 
     def test_modifier_0_and_1_cleanup_is_guarded_by_two_all_chords(self):
         for b, layout in self.each():

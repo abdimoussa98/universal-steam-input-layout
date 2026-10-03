@@ -132,10 +132,10 @@ The `Parent::Title` format for layers ensures unique identification when multipl
 ### Build audit: `audit_build.py`
 
 The gate for every version. It runs the Budget audit
-(`audit_command_budget.py`), the Window audit (`audit_inheritance.py`) and the
-Flow audit (`audit_flow_inheritance.py`) on both working layouts, prints one
-line per audit and exits **0** only when all pass. Read-only, about ten
-seconds. See [Layer Definition of Done §10](resources/Layer%20Definition%20of%20Done.md#10-ship-it).
+(`audit_command_budget.py`), the Window audit (`audit_inheritance.py`), the
+Flow audit (`audit_flow_inheritance.py`) and the Cleanup audit
+(`audit_cleanups.py`) on both working layouts, prints one line per audit and
+exits **0** only when all pass. Read-only, about ten seconds. See [Layer Definition of Done §10](resources/Layer%20Definition%20of%20Done.md#10-ship-it).
 
 ```bash
 python3 audit_build.py              # both neptune/*_latest.json
@@ -209,6 +209,38 @@ python3 audit_flow_inheritance.py <layout> --layer 'L1: Tap Cover'              
 python3 audit_flow_inheritance.py <layout> --inventory --layer 'L1: Modifier 0'  # what the chains follow
 ```
 
+### 4c. `audit_cleanups.py` - Cleanup Audit (What Cleanups and Releases Remove)
+
+Checks every cleanup function and release against the six cleanup rules: a
+layer takes care of itself and what is below it, and of what is above it if it
+has that responsibility
+([rules](findings/2026-10-02-cleanup-boundaries/README.md#the-rules)). It
+fails on six things:
+
+| Check | Fails when |
+|---|---|
+| Outside the guard | A cleanup removes a layer kept by another button, a stateful layer, a stick-touch helper or a window |
+| Left below | A layer under the host has the same keeper and isn't removed |
+| Left above | A layer on top has the same keeper, leaves the cleanup's input alone, and isn't removed |
+| Hidden cleanup | A layer binds an input that has a cleanup below without carrying it |
+| Never there | A cleanup, a release or a Modifier 2 quick tap removes a layer that can never be on the stack with it |
+| Guard mismatch | One layer's cleanups have different guard buttons |
+
+The stacks are the backward chains. Deliberate clears and the stick-touch
+release's fixed layers are exempt from "Never there", and layers that only
+`hold_layer` adds are left out. A removal that is kept on purpose goes under
+`cleanups.keep` in `steam_layout/flow_config.json`, with a reason. Part of
+the build audit since 90.12; the `cleanup_lists` step of the fix pipeline
+resolves its findings ([first run and fix](findings/2026-10-02-cleanup-audit/README.md)).
+About two seconds.
+Read-only. Exit codes: **0** = clean, **1** = findings, **2** = invalid input.
+
+```bash
+python3 audit_cleanups.py neptune/single-set-default_hold-gyro_latest.json
+python3 audit_cleanups.py <layout> --layer "L1: Modifier 0"
+python3 audit_cleanups.py <layout> --check "never there" --json
+```
+
 ### 5. `steam_layout/` - Shared Library and Fix Pipeline
 
 The reusable code behind the scripts above. Import it from the repo root.
@@ -219,10 +251,11 @@ The reusable code behind the scripts above. Import it from the repo root.
 | `steam_layout.chains` | `Chains`: the stacks under a layer from backward chains (who adds it, back to Base, plus bystanders), each with its reason; `below`, `above`, `lineage`, `reached` |
 | `steam_layout.layer_report` | The per-layer report that `audit_layer.py` wraps |
 | `steam_layout.covers` | The cover check on chains, and the rules loader for `flow_config.json` |
+| `steam_layout.cleanups` | `Cleanups`: guard and keeper of every layer, and the six cleanup checks that `audit_cleanups.py` wraps |
 | `steam_layout.flow_model`, `steam_layout.flow_inheritance` | Every layer-changing binding, classified by role, and what a layer inherits on each lower stack |
 | `steam_layout.inheritance` | The inheritance and blocking audit that `audit_inheritance.py` wraps |
 | `steam_layout.stacks` | `apply_ops`, `definer` and `effective_input`, which the chains build on, and `walk` / `fire` to replay one concrete input sequence |
-| `steam_layout.fixes` | The ordered, idempotent post-install fixes that `install_neptune.py` runs |
+| `steam_layout.fixes` | The ordered, idempotent post-install fixes that `install_neptune.py` runs, including `cleanup_lists`, which resolves every Cleanup audit finding |
 
 ```bash
 python3 -m steam_layout.fixes neptune/*_latest.json --dry-run   # what the pipeline would change
@@ -420,11 +453,13 @@ python3 convert_runtime_ids.py to-titles neptune/single-set-default_hold-gyro_la
 
 ### Steering in the Neptune layouts
 
-Both `neptune/*_hold-gyro_latest` JSON/VDF pairs are generated (70 layers
-since 90.10). The builder in `findings/2026-10-01-stateful-transitions/`
-extends the frozen 09-30 lean steering builder, which extends the 09-29
-baseline; `install_neptune.py` there runs the fix pipeline and writes
-`neptune/`. A hand edit in `neptune/` is lost on the next install. See the
-[90.10 build record](findings/2026-10-01-stateful-transitions/README.md),
+Both `neptune/*_hold-gyro_latest` JSON/VDF pairs are generated (71 layers
+since 90.11). The builder in `findings/2026-10-02-steering-fallback-hold/`
+extends the frozen 10-01 stateful transitions builder, which extends the
+09-30 lean steering builder and the 09-29 baseline; `install_neptune.py`
+there runs the fix pipeline and writes `neptune/`. A hand edit in `neptune/`
+is lost on the next install. See the
+[90.11 build record](findings/2026-10-02-steering-fallback-hold/README.md),
+the [90.10 build record](findings/2026-10-01-stateful-transitions/README.md),
 the earlier [lean steering record](findings/2026-09-30-steering-lean/README.md)
-and the [Deck checks](manual-testing.md#9010-stateful-transitions).
+and the [Deck checks](manual-testing.md#9011-steering-fallback-hold).

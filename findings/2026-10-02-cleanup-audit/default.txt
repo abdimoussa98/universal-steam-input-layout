@@ -1,0 +1,253 @@
+Layout: single-set-default :: always-gyro :: 90.10 (default)
+257 cleanup functions on 34 of 68 layers; stateful: Gyro, Steering
+Left out (only hold_layer adds them): LTP: Arrow Keys, RTP: Mouse Buttons
+
+FAIL  outside the guard    18 finding(s) in 132 binding(s)
+FAIL  left below            4 finding(s) in 8 binding(s)
+ok    left above            0 finding(s) in 0 binding(s)
+FAIL  hidden cleanup       16 finding(s) in 32 binding(s)
+FAIL  never there         150 finding(s) in 1040 binding(s)
+FAIL  guard mismatch        2 finding(s) in 4 binding(s)
+
+== Outside the guard
+  Steering | L1!R1: Modifier 2
+    removes R1: Tap Cover (button RB): kept by RB; 2 cleanup function binding(s) on LSt, RSt, guard LB
+    removes Steering | LS Down: Double Tap (timer): a window: it always clears itself; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, guard LB / LB+RB
+    removes Steering | LS Up: Double Tap (timer): a window: it always clears itself; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, guard LB / LB+RB
+  Steering | L1: S Key
+    removes R1: Tap Cover (button RB): kept by RB; 2 cleanup function binding(s) on LSt, RSt, guard LB
+    removes Steering | L1!R1: Modifier 2 (button RB): kept by RB; 2 cleanup function binding(s) on LSt, RSt, guard LB
+    removes Steering | LS Down: Double Tap (timer): a window: it always clears itself; 2 cleanup function binding(s) on LSt, RSt, guard LB
+    removes Steering | LS Up: Double Tap (timer): a window: it always clears itself; 2 cleanup function binding(s) on LSt, RSt, guard LB
+  Steering | LS Down: Modifier 0
+    removes Steering | LS Down: Double Tap (timer): a window: it always clears itself; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, guard LB+RB
+    removes Steering | LS Up: Double Tap (timer): a window: it always clears itself; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, guard LB+RB
+  Steering | LS Up: Modifier 1
+    removes Steering | LS Down: Double Tap (timer): a window: it always clears itself; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, guard LB+RB
+    removes Steering | LS Up: Double Tap (timer): a window: it always clears itself; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, guard LB+RB
+  Steering | R1!L1: Modifier 2
+    removes L1: Tap Cover (button LB): kept by LB; 2 cleanup function binding(s) on LSt, RSt, guard RB
+    removes Steering | LS Down: Double Tap (timer): a window: it always clears itself; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, guard LB+RB / RB
+    removes Steering | LS Up: Double Tap (timer): a window: it always clears itself; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, guard LB+RB / RB
+  Steering | R1: W Key
+    removes L1: Tap Cover (button LB): kept by LB; 2 cleanup function binding(s) on LSt, RSt, guard RB
+    removes Steering | LS Down: Double Tap (timer): a window: it always clears itself; 2 cleanup function binding(s) on LSt, RSt, guard RB
+    removes Steering | LS Up: Double Tap (timer): a window: it always clears itself; 2 cleanup function binding(s) on LSt, RSt, guard RB
+    removes Steering | R1!L1: Modifier 2 (button LB): kept by LB; 2 cleanup function binding(s) on LSt, RSt, guard RB
+
+== Left below
+  L1: Temp Cursor Gyro
+    leaves Gyro | L1: Modifier 0 (button LB): under it, kept by the same button; 2 cleanup function binding(s) on joystick/edge, right_joystick/edge, guard LB
+    leaves L1: Modifier 0 (button LB): under it, kept by the same button; 2 cleanup function binding(s) on joystick/edge, right_joystick/edge, guard LB
+  R1: Temp Cursor Gyro
+    leaves Gyro | R1: Modifier 1 (button RB): under it, kept by the same button; 2 cleanup function binding(s) on joystick/edge, right_joystick/edge, guard RB
+    leaves R1: Modifier 1 (button RB): under it, kept by the same button; 2 cleanup function binding(s) on joystick/edge, right_joystick/edge, guard RB
+
+== Hidden cleanup
+  Gyro | L1!R1: Modifier 2
+    hides the cleanup of Gyro | L1: Modifier 0 on LSt, RSt, guard LB
+    hides the cleanup of Gyro | R1: Modifier 1 on LSt, RSt, guard RB
+    hides the cleanup of L1: Tap Cover on LSt, RSt, guard LB
+    hides the cleanup of R1: Tap Cover on LSt, RSt, guard RB
+  Gyro | R1!L1: Modifier 2
+    hides the cleanup of Gyro | L1: Modifier 0 on LSt, RSt, guard LB
+    hides the cleanup of Gyro | R1: Modifier 1 on LSt, RSt, guard RB
+    hides the cleanup of L1: Tap Cover on LSt, RSt, guard LB
+    hides the cleanup of R1: Tap Cover on LSt, RSt, guard RB
+  L1!R1: Modifier 2
+    hides the cleanup of L1: Modifier 0 on LSt, RSt, guard LB
+    hides the cleanup of L1: Tap Cover on LSt, RSt, guard LB
+    hides the cleanup of R1: Modifier 1 on LSt, RSt, guard RB
+    hides the cleanup of R1: Tap Cover on LSt, RSt, guard RB
+  R1!L1: Modifier 2
+    hides the cleanup of L1: Modifier 0 on LSt, RSt, guard LB
+    hides the cleanup of L1: Tap Cover on LSt, RSt, guard LB
+    hides the cleanup of R1: Modifier 1 on LSt, RSt, guard RB
+    hides the cleanup of R1: Tap Cover on LSt, RSt, guard RB
+
+== Never there
+  Gyro | L1!R1: Modifier 2
+    removes Gyro | R1!L1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes L1!R1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes L1!R1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes L1: Modifier 0 (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes L1: Modifier 0 (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1!L1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1: Modifier 1 (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes R1: Modifier 1 (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+  Gyro | L1: Modifier 0
+    removes L1: Modifier 0 (button LB): it can never be on the stack with this layer; 17 cleanup function binding(s) on L3, LSt, R3, RB, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes L1: Modifier 0 (button LB): it can never be on the stack with this layer; 1 release binding(s) on LB
+  Gyro | R1!L1: Modifier 2
+    removes Gyro | L1!R1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes L1!R1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes L1: Modifier 0 (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes L1: Modifier 0 (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1!L1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes R1!L1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1: Modifier 1 (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes R1: Modifier 1 (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+  Gyro | R1: Modifier 1
+    removes R1: Modifier 1 (button RB): it can never be on the stack with this layer; 17 cleanup function binding(s) on L3, LB, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes R1: Modifier 1 (button RB): it can never be on the stack with this layer; 1 release binding(s) on RB
+  L1!R1: Modifier 2
+    removes Gyro | L1!R1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes Gyro | L1!R1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Gyro | L1: Modifier 0 (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes Gyro | L1: Modifier 0 (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Gyro | R1!L1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Gyro | R1: Modifier 1 (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes Gyro | R1: Modifier 1 (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1!L1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+  L1&R1: Tap Cover
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 1 release binding(s) on LB
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 1 release binding(s) on RB
+  L1: Modifier 0
+    removes Gyro | L1: Modifier 0 (button LB): it can never be on the stack with this layer; 17 cleanup function binding(s) on L3, LSt, R3, RB, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes Gyro | L1: Modifier 0 (button LB): it can never be on the stack with this layer; 1 release binding(s) on LB
+  L1: Tap Cover
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 1 release binding(s) on LB
+  L1: Temp Cursor Gyro
+    removes L1: Tap Cover (button LB): it can never be on the stack with this layer; 1 release binding(s) on LB
+  Menu Buttons: Left Stick Guard
+    removes Menu Left: Fn Layer (button Select): it can never be on the stack with this layer; 2 release binding(s) on Select, Start
+    removes Menu Right: Fn Layer (button Start): it can never be on the stack with this layer; 2 release binding(s) on Select, Start
+  Menu Buttons: Right Stick Guard
+    removes Menu Left: Fn Layer (button Select): it can never be on the stack with this layer; 2 release binding(s) on Select, Start
+    removes Menu Right: Fn Layer (button Start): it can never be on the stack with this layer; 2 release binding(s) on Select, Start
+  Menu Buttons: Tap Cover
+    removes Menu Left: Fn Layer (button Select): it can never be on the stack with this layer; 2 release binding(s) on Select, Start
+    removes Menu Right: Fn Layer (button Start): it can never be on the stack with this layer; 2 release binding(s) on Select, Start
+  Menu Left: Fn Layer
+    removes Menu Buttons: Left Stick Guard (button Select+Start): it can never be on the stack with this layer; 19 cleanup function binding(s) on LB, LT, RB, RT, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge, switch/button_back_left, switch/button_back_left_upper, switch/button_back_right, switch/button_back_right_upper
+    removes Menu Buttons: Left Stick Guard (button Select+Start): it can never be on the stack with this layer; 1 release binding(s) on Select
+    removes Menu Buttons: Right Stick Guard (button Select+Start): it can never be on the stack with this layer; 19 cleanup function binding(s) on LB, LT, RB, RT, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge, switch/button_back_left, switch/button_back_left_upper, switch/button_back_right, switch/button_back_right_upper
+    removes Menu Buttons: Right Stick Guard (button Select+Start): it can never be on the stack with this layer; 1 release binding(s) on Select
+    removes Menu Buttons: Tap Cover (button Select+Start): it can never be on the stack with this layer; 19 cleanup function binding(s) on LB, LT, RB, RT, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge, switch/button_back_left, switch/button_back_left_upper, switch/button_back_right, switch/button_back_right_upper
+    removes Menu Buttons: Tap Cover (button Select+Start): it can never be on the stack with this layer; 1 release binding(s) on Select
+  Menu Right: Fn Layer
+    removes Menu Buttons: Left Stick Guard (button Select+Start): it can never be on the stack with this layer; 19 cleanup function binding(s) on LB, LT, RB, RT, Select, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge, switch/button_back_left, switch/button_back_left_upper, switch/button_back_right, switch/button_back_right_upper
+    removes Menu Buttons: Left Stick Guard (button Select+Start): it can never be on the stack with this layer; 1 release binding(s) on Start
+    removes Menu Buttons: Right Stick Guard (button Select+Start): it can never be on the stack with this layer; 19 cleanup function binding(s) on LB, LT, RB, RT, Select, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge, switch/button_back_left, switch/button_back_left_upper, switch/button_back_right, switch/button_back_right_upper
+    removes Menu Buttons: Right Stick Guard (button Select+Start): it can never be on the stack with this layer; 1 release binding(s) on Start
+    removes Menu Buttons: Tap Cover (button Select+Start): it can never be on the stack with this layer; 19 cleanup function binding(s) on LB, LT, RB, RT, Select, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge, switch/button_back_left, switch/button_back_left_upper, switch/button_back_right, switch/button_back_right_upper
+    removes Menu Buttons: Tap Cover (button Select+Start): it can never be on the stack with this layer; 1 release binding(s) on Start
+  R1!L1: Modifier 2
+    removes Gyro | L1!R1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Gyro | L1: Modifier 0 (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes Gyro | L1: Modifier 0 (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Gyro | R1!L1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes Gyro | R1!L1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Gyro | R1: Modifier 1 (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes Gyro | R1: Modifier 1 (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes L1!R1: Modifier 2 (button LB+RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes L1: Temp Cursor Gyro (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, R3, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+  R1: Modifier 1
+    removes Gyro | R1: Modifier 1 (button RB): it can never be on the stack with this layer; 17 cleanup function binding(s) on L3, LB, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, joystick/edge, right_joystick/edge
+    removes Gyro | R1: Modifier 1 (button RB): it can never be on the stack with this layer; 1 release binding(s) on RB
+  R1: Tap Cover
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes R1: Temp Cursor Gyro (button RB): it can never be on the stack with this layer; 1 release binding(s) on RB
+  R1: Temp Cursor Gyro
+    removes R1: Tap Cover (button RB): it can never be on the stack with this layer; 1 release binding(s) on RB
+  Steering | L1!R1: Modifier 2
+    removes L1: Tap Cover (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS Down: Modifier 0 (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS Up: Modifier 1 (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS: Double Tap Cover (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS: Tap Cover (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | R1!L1: Modifier 2 (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | R1: W Key (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+  Steering | L1: S Key
+    removes L1: Tap Cover (button LB): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes L1: Tap Cover (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 1 release binding(s) on LB
+    removes Steering | R1!L1: Modifier 2 (button LB): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes Steering | R1!L1: Modifier 2 (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | R1: W Key (button RB): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes Steering | R1: W Key (button RB): it can never be on the stack with this layer; 1 release binding(s) on LB
+  Steering | LS Down: Double Tap
+    removes L1: Tap Cover (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1: Tap Cover (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | L1!R1: Modifier 2 (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS Down: Modifier 0 (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS Up: Double Tap (timer): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS Up: Modifier 1 (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS: Double Tap Cover (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS: Tap Cover (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | R1!L1: Modifier 2 (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+  Steering | LS Down: Modifier 0
+    removes L1: Tap Cover (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes R1: Tap Cover (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | L1!R1: Modifier 2 (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS Up: Modifier 1 (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS Up: Modifier 1 (inside): it can never be on the stack with this layer; 1 release binding(s) on joystick/edge
+    removes Steering | LS: Double Tap Cover (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | R1!L1: Modifier 2 (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+  Steering | LS Up: Double Tap
+    removes L1: Tap Cover (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes R1: Tap Cover (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | L1!R1: Modifier 2 (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS Down: Double Tap (timer): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS Down: Modifier 0 (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS Up: Modifier 1 (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS: Double Tap Cover (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | LS: Tap Cover (inside): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | R1!L1: Modifier 2 (button LB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+  Steering | LS Up: Modifier 1
+    removes L1: Tap Cover (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes R1: Tap Cover (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | L1!R1: Modifier 2 (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS Down: Modifier 0 (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS Down: Modifier 0 (inside): it can never be on the stack with this layer; 1 release binding(s) on joystick/edge
+    removes Steering | LS: Double Tap Cover (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | R1!L1: Modifier 2 (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+  Steering | R1!L1: Modifier 2
+    removes R1: Tap Cover (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | L1!R1: Modifier 2 (button RB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | L1: S Key (button LB): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS Down: Modifier 0 (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS Up: Modifier 1 (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS: Double Tap Cover (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+    removes Steering | LS: Tap Cover (inside): it can never be on the stack with this layer; 14 cleanup function binding(s) on L3, LSt, R3, RSt, Select, Start, button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west
+  Steering | R1: W Key
+    removes R1: Tap Cover (button RB): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes R1: Tap Cover (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | L1!R1: Modifier 2 (button RB): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes Steering | L1!R1: Modifier 2 (button RB): it can never be on the stack with this layer; 2 release binding(s) on LB, RB
+    removes Steering | L1: S Key (button LB): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes Steering | L1: S Key (button LB): it can never be on the stack with this layer; 1 release binding(s) on RB
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 2 cleanup function binding(s) on LSt, RSt
+    removes Steering | LS: Entry Guard (inside): it can never be on the stack with this layer; 1 release binding(s) on RB
+
+== Guard mismatch
+  Steering | L1!R1: Modifier 2
+    the guard is LB here and LB+RB on the layer's other cleanups: 2 cleanup function binding(s) on LSt, RSt
+  Steering | R1!L1: Modifier 2
+    the guard is RB here and LB+RB on the layer's other cleanups: 2 cleanup function binding(s) on LSt, RSt
+
+Information: no cleanup function removes these, and they have none of their own
+  Menu Left: Double Tap Cover, Menu Left: Escape, Menu Right: Double Tap Cover, Menu Right: Tab, Transition Set 0, Transition Set 1

@@ -198,7 +198,7 @@ menu Tap Cover where the Entry Point would bring in Fn.
 | Exception | What it does |
 |---|---|
 | Modifier 2 clear | Both modifiers together (bumpers in default, triggers in alternative) clear everything to Base, including `Gyro`. No transition. It is the fallback from any state |
-| Steering's hold exit | Holding W or S with no driver exits Steering after 2.5 s, warning from 1 s |
+| Steering's hold exit | Holding W or S with no driver exits Steering after 1.5 s, pulsing from the start. The timer lives in `Steering \| LS: Fallback Hold`, which is on only while the stick is up or down ([90.11 record](../findings/2026-10-02-steering-fallback-hold/README.md)) |
 | Stateful Cursor Gyro's own clear (not built) | Besides the menu-plus-click clear and the Modifier 2 clear, it can be left the same way Temp Cursor Gyro clears, with both sticks deflected. No transition |
 | `Gyro` | Entered and left by the uncovered Modifier 2 release. It doesn't remap the controls that toggle it. The menu-plus-click clear leaves it on |
 | Menu stateful layer | Will not use this structure. It stays in the [todos](../todos.md#menu-stateful-layer) as its own design |

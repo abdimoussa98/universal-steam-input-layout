@@ -64,7 +64,7 @@ effective inherited behavior. Include held-across-transition and newly activated
 input cases in the Deck handoff; distinguish static checks from runtime results.
 
 Run the build audit first: `python3 audit_build.py`. It runs the Budget audit,
-the Window audit and the Flow audit on both working layouts and must exit
+the Window audit, the Flow audit and the Cleanup audit on both working layouts and must exit
 **0** before any version is finalized
 ([Layer Definition of Done §10](../../../resources/Layer%20Definition%20of%20Done.md#10-ship-it)).
 The paragraphs below describe the individual audits it runs.
@@ -93,6 +93,13 @@ finding is open. A new or renamed layer needs no declaration; only a cover
 whose title doesn't end in a cover suffix, or an accepted cover finding with
 its reason, goes in `steam_layout/flow_config.json`. Inherited bindings that
 differ between stacks are listed as information and don't fail it.
+
+The Cleanup audit is `python3 audit_cleanups.py path/to/layout.json`. It must
+exit **0**: every cleanup function and release follows the six cleanup rules
+(Layer Definition of Done §7). The `cleanup_lists` step of the fix pipeline
+resolves its findings (`python3 -m steam_layout.fixes <layout> --dry-run`
+shows what it would change). A removal kept on purpose goes under
+`cleanups.keep` in `steam_layout/flow_config.json`, with its reason.
 
 ```bash
 python3 - path/to/layout.json <<'EOF'

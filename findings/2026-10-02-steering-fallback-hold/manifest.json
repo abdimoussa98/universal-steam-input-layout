@@ -1,0 +1,74 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "stateful_generator_sha256": "f179c8e4ab120670608f9437da707a5f66fbcd192255908e6353f69d3282273d",
+    "candidate_sha256": "bbe8849a71c49fc79e48d2ba1ff5c5b9f405f76e990f3a327c294acca235b0b8",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R1!L1: Modifier 2",
+      "Steering | L1!R1: Modifier 2",
+      "Steering | R1: W Key",
+      "Steering | L1: S Key",
+      "Steering | LS: Entry Guard",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Steering | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover",
+      "Steering | LS: Fallback Hold"
+    ],
+    "new_layer_count": 18,
+    "total_layer_count": 73,
+    "resolved_references": 3944,
+    "device_status": "UNTESTED",
+    "timing_ms": {
+      "fallback_exit": 1500,
+      "fallback_reset": 1550,
+      "fallback_pulse": 250,
+      "fallback_pulse_delay": 5,
+      "fallback_add_repeat": 50
+    }
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "stateful_generator_sha256": "f179c8e4ab120670608f9437da707a5f66fbcd192255908e6353f69d3282273d",
+    "candidate_sha256": "078aa2ec49036326cf0175b15503228ed3643322de52ab3a659a24a7a6c67a3d",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R2!L2: Modifier 2",
+      "Steering | L2!R2: Modifier 2",
+      "Steering | R2: W Key",
+      "Steering | L2: S Key",
+      "Steering | LS: Entry Guard",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Steering | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover",
+      "Steering | LS: Fallback Hold"
+    ],
+    "new_layer_count": 18,
+    "total_layer_count": 73,
+    "resolved_references": 3944,
+    "device_status": "UNTESTED",
+    "timing_ms": {
+      "fallback_exit": 1500,
+      "fallback_reset": 1550,
+      "fallback_pulse": 250,
+      "fallback_pulse_delay": 5,
+      "fallback_add_repeat": 50
+    }
+  }
+}

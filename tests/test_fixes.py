@@ -19,7 +19,8 @@ def load(variant):
 class PipelineTests(unittest.TestCase):
     def test_pipeline_order(self):
         self.assertEqual([name for name, _ in PIPELINE],
-                         ["rtp_scroll", "dead_groups", "cover_resets", "menu_combo_keys", "window_pads", "window_routes"])
+                         ["rtp_scroll", "dead_groups", "cover_resets", "menu_combo_keys", "window_pads", "cleanup_lists",
+                          "window_routes"])
 
     def test_working_layouts_are_a_fixed_point(self):
         # Every fix has already been applied: running the pipeline again changes nothing.
@@ -75,7 +76,7 @@ class MenuComboKeyTests(unittest.TestCase):
             titles = [v["title"] for v in cm["action_layers"].values()]
             with self.subTest(variant=variant):
                 self.assertFalse(set(menu_combo_keys.OVERLAYS) & set(titles))
-                self.assertEqual(len(titles), 70)
+                self.assertEqual(len(titles), 71)
                 self.assertEqual([p["id"] for p in cm["preset"]], [str(i) for i in range(len(cm["preset"]))])
                 self.assertEqual([p["name"] for p in cm["preset"]], list(cm["actions"]) + list(cm["action_layers"]))
                 # Every layer command still resolves to an existing layer after the ID shift.

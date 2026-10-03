@@ -7,6 +7,10 @@ are built and installed in `neptune/` as **90.10**, with the snapshot in
 gates were assumed, at the author's request, and are the first checks in
 [manual-testing.md](../../manual-testing.md#9010-stateful-transitions).
 
+**Since 90.11** this builder is frozen and extended by the
+[fallback hold build](../2026-10-02-steering-fallback-hold/README.md), which
+is what `neptune/` holds and what `test_working_layouts_are_this_build` pins.
+
 Design: [Stateful Layer Transitions](../../resources/Stateful%20Layer%20Transitions.md).
 
 ## Files

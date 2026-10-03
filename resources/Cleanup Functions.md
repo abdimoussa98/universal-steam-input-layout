@@ -89,7 +89,7 @@ This relies on:
 See the step-by-step walkthrough in
 [Rocking Between Modifiers](Steam%20Input%20JSON%20Structure.md#rocking-between-modifiers-0-1-and-2).
 `steam_layout.stacks.walk` replays any sequence like it, and
-[test_stacks.py](../tests/test_stacks.py) pins the rocking sequence in both
+[test_modifier_rocking.py](../tests/test_modifier_rocking.py) pins the rocking sequence in both
 layouts. A generator must never reorder these arrays or change which layer
 ends up on top.
 
@@ -134,6 +134,9 @@ show the value:
   owner release has to be stated per gesture.
 
 **Still open.** Each question comes with real examples from the default layout.
+**Answered by the cleanup rules (author, 2026-10-02):** all four, in the
+[cleanup boundaries findings](../findings/2026-10-02-cleanup-boundaries/README.md#how-this-answers-the-open-questions).
+The Cleanup audit (`audit_cleanups.py`) checks them since 90.12.
 
 1. **Who belongs to a family: computed, or listed by hand?**
    A computed rule could be "a layer belongs to the L1 family if only L1's
