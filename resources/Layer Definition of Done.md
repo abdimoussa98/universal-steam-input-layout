@@ -52,8 +52,12 @@ and the reason under Checked by.
 
 ## 1. Layer type
 
-Choose the layer's type first. The type sets how much its cleanup removes.
-The author accepted these types on 2026-09-30, and more may be added later.
+Choose the layer's type first. The author accepted these types on
+2026-09-30, and more may be added later.
+
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R107 | A layer has one type: stateful, owner, overlay, stick-touch helper, Always On window, or ramp. The type decides what removes the layer; what its own cleanup removes follows the cleanup rules in [§7](#7-cleanup) | `Steering` is stateful, `L1: Modifier 0` an owner, `L1: Tap Cover` an overlay, `L1: Double Tap` an Always On window | Author, 2026-09-30 | Not checked yet | — | None |
 
 | Type | Examples | What its cleanup removes |
 |---|---|---|
@@ -75,16 +79,19 @@ See: [Vocabulary](Layout%20Vocabulary.md#terms) ·
 
 ## 2. Placement
 
-- Use explicit `add_layer` / `remove_layer` for every lifetime; never
-  `hold_layer`. Never switch action sets (`CHANGE_PRESET`); modes are layers
-  within Base. See [runtime rules and existing conflicts](Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30).
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R101 | Every layer lifetime uses `add_layer` and `remove_layer`. Never `hold_layer` | Base's LB chord adds `L1: Modifier 0`, and the modifier's own LB Release removes it | Author, 2026-09-30 | Not checked yet | — | Still to migrate, not accepted: five `hold_layer` commands in each layout add `LTP: Arrow Keys` and `RTP: Mouse Buttons` |
+| R102 | Never switch action sets (`CHANGE_PRESET`). A mode is a layer on Base | `Gyro` and `Steering` are layers; each layout has one action set, Base | Author, 2026-09-30 | Not checked yet | — | None |
+| R103 | A new layer is appended to the end of `action_layers` as `Preset_<max+1>`, so no existing runtime ID shifts | `Steering \| LS: Fallback Hold` was appended as the last layer in 90.11 | Since the July layouts | `test_stateful_transitions.test_layers_keep_their_positions` (part); `test_steering_fallback_hold.test_the_hold_is_appended` (part) | — | None |
+| R104 | The `action_layers` order equals the `Preset_` numeric order, the preset blocks follow it, and the preset ids run from 0 | In the July layout the two orders disagreed, and Split Stick and `Gyro Off Ramp Up` swapped on a fresh load | Found 2026-07-11 | `test_neptune_recovery.test_command_budget_and_runtime_reference_order` | — | None |
+| R105 | Layer titles are unique, and a layout is edited in `{{Base::Title}}` form | Two layers titled `DEPRECATED` both resolved to the last one's ID | Since the converter | Not checked yet | — | None |
+| R106 | A layer exists in both layouts. In the alternative, L1 and R1 become L2 and R2 | `L1: Modifier 0` is `L2: Modifier 0` in the alternative, on the trigger's soft pull | Since the two variants | Not checked yet | — | None |
 
-- Append the layer to the **end** of `action_layers` as `Preset_<max+1>`, so
-  no existing runtime ID shifts.
-- Keep the list order the same as the `Preset_` numeric order. Otherwise a
-  fresh load can swap layers.
-- Give it a unique title, and edit in `{{Base::Title}}` token form.
-- Mirror it into the alternative layout, where L1/R1 become L2/R2.
+Notes:
+
+- **R101, R102:** see [runtime rules and existing conflicts](Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30).
+- **R104:** otherwise a fresh load can swap layers.
 
 See: [layout-prep skill](../.claude/skills/steam-layout-prep/SKILL.md) ·
 [layer-duplicate skill](../.claude/skills/steam-layer-duplicate/SKILL.md) ·
@@ -107,8 +114,7 @@ Notes:
   entry after the third. The 4th-entry reset must be **last** so it's the one
   that gets dropped.
 - **R110:** subcommand arrays run **bottom to top**. A stick-touch Release is
-  the one shape that stores its add last so it runs first
-  ([§6](#6-hold-tap-and-double-tap)).
+  the one shape that stores its add last so it runs first (R123).
 - **R111:** an inverted edge isn't caught reliably on a D-pad-mode stick. Use
   a normal outer edge and its Release. The ramp-up's Soft Press exits, on a
   mouse-mode stick, work.
@@ -125,25 +131,35 @@ See: [Allowed activators](Steam%20Input%20JSON%20Structure.md#allowed-activation
 
 ## 4. Entry
 
-- When a layer is added, its immediate layer command **doesn't fire on an
-  input that's already held**. Give that command Hold to Repeat, or add the next
-  layer in the same array.
-- **This rule covers the layer API only** (author, 2026-10-01): `add_layer`,
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R113 | A layer command that must fire on an input already held when its layer is added has Hold to Repeat, or the next layer is added in the same array | The Menu Entry Points' stick-edge chord repeats every 50 ms, so a stick guard lands when the stick is already out. Modifier 0's chord adds both covers and Modifier 2 in one array | Author, 2026-09-29 | `test_neptune_held_inputs.test_layers_added_over_a_held_input_repeat_their_next_add`; `test_neptune_held_inputs.test_no_held_input_violations_remain` | — | None |
+| R114 | A layer command that must fire after a removal has Hold to Repeat | Base is never added, so its menu, modifier, stick-touch and right-stick-edge entries all repeat | Author, 2026-09-29 | `test_neptune_held_inputs.test_base_entries_repeat_so_exposure_after_a_removal_is_guaranteed`; `test_neptune_held_inputs.test_threshold_exits_that_change_layers_repeat` | — | None |
+| R115 | A delay that exists so a command fires over a held input is kept, and a delayed add gets no repeat for that purpose | The 5 ms delay from `Gyro Off Ramp Up` to `Turning Ramp Up 0`: the stick is already past its threshold when the layer appears | Author, 2026-09-29 | `test_neptune_held_inputs.test_ramp_handoffs_keep_their_start_delays` | — | None |
+
+Notes:
+
+- **R113:** when a layer is added, its immediate layer command **doesn't fire
+  on an input that's already held**.
+- **R113 covers the layer API only** (author, 2026-10-01): `add_layer`,
   `remove_layer` and `hold_layer`. It doesn't cover key or mouse outputs. The
   author's experience is that an output does fire on an already-held input
   when its layer is added; this hasn't been tested on the Deck in isolation.
-- Delayed applies do fire on a held input. Keep short delays such as the 5 ms
-  delay.
-- Anything that must fire after a removal needs Hold to Repeat. How removals
-  affect held inputs is unverified.
+- **R115:** delayed applies do fire on a held input.
+- **R114:** how removals affect held inputs is unverified.
 
 See: [Held inputs](Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes) ·
 [Held-input audit](../findings/2026-09-29-held-input-layer-transitions/AUDIT.md)
 
 ## 5. Stick-touch release
 
-**Author rule, 2026-09-30: every layer binds this explicitly. Only cover-type
-layers may inherit it.** A cover-type layer is a lightweight layer that is only
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R116 | Every layer binds both stick-touch Releases itself. Only a cover-type layer may inherit them. `Gyro` inherits Base's, and the `LST` and `RST` helpers bind only their own stick | `L1: Modifier 0` binds both. `L1: Temp Cursor Gyro`, a cover-type layer, inherits them | Author, 2026-09-30 | Not checked yet | — | None |
+| R117 | A stick-touch Release clears only its own side's three helpers: the `LST` or `RST` `Entry Point`, `Tap Cover` and `Temporary Gyro`. It never removes `Gyro`, the other stick's helpers or an owner that is still valid | In `L1: Modifier 0` the left-stick touch Release removes the three `LST` layers and leaves `Gyro`, the `RST` layers and R1's layers | Author, 2026-09-30 | `test_neptune_recovery.test_transitions_block_the_stick_edges_and_touch_only_clears_the_trio` (part) | — | None |
+| R118 | An Always On window's stick-touch Release removes the window first, then that side's helpers. The `LST` and `RST` windows bind no Release on their own stick | `L1: Double Tap`'s left-stick touch Release stores the window's removal last, so it runs first | Author, 2026-09-30 | `test_double_tap_windows.test_stick_touch_release_removes_the_window_first_then_the_side_trio` | — | None |
+
+**R116.** A cover-type layer is a lightweight layer that is only
 ever added on top of another layer. There's no strict definition yet; it's a
 judgment call. Current cover-type layers:
 - the Tap Covers and the Double Tap Covers, including the steering
@@ -155,22 +171,21 @@ judgment call. Current cover-type layers:
   `Turning Ramp Up 0`, which is a threshold handoff rather than a hold, so a
   thumb release has nothing to complete.
 
-**Always On windows bind it too, but remove themselves first.** Each Double
-Tap window's touch release removes the window, then that side's trio (the
-self-removal is stored last, so it runs first). The LST/RST windows' own stick
-has no release: touching it again is the second-touch transition, which also
-removes the window first ([§9](#9-always-on-layers)).
+**R118.** Each Double Tap window's touch release removes the window, then
+that side's trio (the self-removal is stored last, so it runs first). The
+LST/RST windows' own stick has no release: touching it again is the
+second-touch transition, which also removes the window first
+([§9](#9-always-on-layers)).
 
-- **LS touch release** removes `LST: Entry Point`, `LST: Tap Cover` and
-  `LST: Temporary Gyro`. **RS touch release** removes the same three RST layers.
-- Each release clears only its own side. It never removes `Gyro`, the other
-  stick's layers, or an owner that's still valid.
+- **R117:** the LS touch release removes `LST: Entry Point`, `LST: Tap Cover`
+  and `LST: Temporary Gyro`. The RS touch release removes the same three RST
+  layers.
 - Defining any activator on a stick's touch input **replaces the whole
   inherited input**, so include that input's guarded recovery as well.
-- Every other layer defines both touch inputs itself, even if a trace suggests
-  inheritance would work. That includes stateful layers, owners, helpers and
-  ramp layers.
-- **Other accepted exceptions** (author, 2026-09-30):
+- **R116:** every other layer defines both touch inputs itself, even if a
+  trace suggests inheritance would work. That includes stateful layers,
+  owners, helpers and ramp layers.
+- **The two cases R116 leaves out** (author, 2026-09-30):
   - `Gyro` is the base stateful layer and always sits directly on Base, so it
     inherits Base's touch inputs.
   - `LST/RST: Entry Point`, `Tap Cover` and `Temporary Gyro` are the layers
@@ -190,6 +205,17 @@ release all belong to the same recipe. **Any layer that adds a delay or a
 double tap must implement the whole recipe, or record which part it leaves
 out and why.** Recorded so far: the steering double tap
 ([deviations](../findings/2026-09-30-steering-lean/README.md#recipe-deviations-dod-6)).
+
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R119 | A layer that adds a delay or a double tap implements the whole recipe below, or records which part it leaves out and why | The Menu Left chain: `Menu Left: Entry Point`, `Menu Left: Double Tap`, `Menu Left: Escape`, `Menu Left: Double Tap Cover` | Author, 2026-09-30 | Not checked yet | — | The Steering double tap leaves parts out; recorded in its [deviations](../findings/2026-09-30-steering-lean/README.md#recipe-deviations-dod-6) |
+| R120 | Every delayed `add_layer` has a reset on the same input: a Regular Press that removes only that target, with Hold to Repeat and `interruptable: 0` | Select in `Menu Left: Entry Point` adds the Fn layer after 200 ms and removes it every 250 ms | Author's workaround, since the July layout | `cover_resets` fix (part); `test_neptune_cursor.test_delayed_cursor_reset_is_scoped_and_replaced_by_upper_inputs` (part) | — | RTP touch has no reset, because a repeated removal breaks trackball momentum (author) |
+| R121 | The reset's interval is longer than its delay, so a healthy add lands before the first reset | The pairs in use are 150/200, 200/250, 250/300 and 300/350 ms | Convention | Not checked yet | — | None |
+| R122 | The hold target binds the parent's primary input, so the reset can't remove the target once it has landed | `L1: Temp Cursor Gyro` and `L1: Tap Cover` both bind LB, which ends `L1: Modifier 0`'s 300 ms add and its 350 ms reset | Author, 2026-09-29 | `test_neptune_cursor.test_overlays_retire_primary_timers_but_only_normal_covers_replace_touches` (part) | — | None |
+| R123 | A stick-touch Release completes the pending add first, then clears that side's helpers. Once the add has landed, a cover's touch Release only cleans up | In `L1: Modifier 0` the right-stick touch Release adds `L1: Temp Cursor Gyro` (stored last, so it runs first), then removes the three `RST` layers | Author, 2026-09-29 | `test_neptune_cursor.test_only_primary_delay_and_touch_completion_enter_cursor` (part) | — | None |
+| R124 | A cover's Release doesn't reopen the window | Hold L1, press A, let go of L1: `L1: Tap Cover`'s Release clears the modifier and opens no `L1: Double Tap` | Author | `test_modifier_rocking.test_a_used_bumper_exits_cleanly_without_a_window` (part) | — | None |
+| R125 | A delay that sends an output, a haptic or an exit, or that routes by direction, is not completed on thumb release | Steering's 1.5 s hold exit doesn't fire when a thumb lifts off the stick | Author, 2026-09-30 | Not checked yet | — | None |
+| R126 | While a delay is pending, unrelated layer changes that could reach it are blocked, because a removal restarts the delay | `L1!R1: Modifier 2`'s cleanup wasn't widened to the other Modifier 2 order: extra removals could restart the 200 ms combined-cover delay | Author | Not checked yet | — | None |
 
 ### The bug it works around: the stuck delay
 
@@ -254,7 +280,7 @@ without opening another window. It has no Always On action.
 
 ### Checks for this recipe
 
-- [ ] **Reset present.** Every delayed `add_layer` has a Regular Press on the
+- [ ] **Reset present (R120).** Every delayed `add_layer` has a Regular Press on the
       same input in the parent that removes only that target, with
       `hold_repeats: 1` and `interruptable: 0`. If there's no reset, record the
       exception. The known deliberate exception is RTP touch, because the
@@ -262,28 +288,29 @@ without opening another window. It has no Always On action.
       reset as a **last** 4th entry ([§3](#3-activators)).
 
       See the [reset coverage table](../findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md#coverage-at-a-glance).
-- [ ] **Reset interval is longer than the delay**, so a healthy apply lands
+- [ ] **Reset interval is longer than the delay (R121)**, so a healthy apply lands
       before the first reset. The current pairs are 150/200, 200/250, 250/300
       and 300/350. The +50 ms spacing is a convention, not a proven formula.
-- [ ] **The hold target overrides the parent's primary input.** That is what
+- [ ] **The hold target overrides the parent's primary input (R122).** That is what
       stops the reset from removing the target once it has been applied. The
       reset must never strip a cover that has already been applied.
       ([cursor follow-up](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#delayed-apply-reset-follow-up))
 - [ ] **The release adds the window last**, and the window's second press
       removes the window first ([§9](#9-always-on-layers)).
-- [ ] **Touch releases complete the pending add**, then clear the trio. Once the
+- [ ] **Touch releases complete the pending add (R123)**, then clear the trio. Once the
       add completes, covers get cleanup-only touch releases so a thumb lift
       can't re-add the parent's target.
-- [ ] **The cover's release doesn't reopen the window.**
-- [ ] **A delayed apply needs no repeat** to fire over a held input. Keep short
+- [ ] **The cover's release doesn't reopen the window (R124).**
+- [ ] **A delayed apply needs no repeat (R115)** to fire over a held input. Keep short
       delays such as 5 ms ([Held inputs](Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes)).
 
 ### Other delays
 
-- **Output, haptic, exit timer or direction-dependent routing:** don't complete
-  these on thumb release. Direction routing keeps its direction condition.
-- **Any pending timer:** block unrelated layer changes while it's pending,
-  because removals reset timers.
+- **Output, haptic, exit timer or direction-dependent routing (R125):** don't
+  complete these on thumb release. Direction routing keeps its direction
+  condition.
+- **Any pending timer (R126):** block unrelated layer changes while it's
+  pending, because removals reset timers.
 
 See: [Complete delayed applies](Steam%20Input%20JSON%20Structure.md#complete-delayed-applies-on-stick-touch-release) ·
 [Blocking for timers](Steam%20Input%20JSON%20Structure.md#blocking-to-protect-layer-timers) ·
