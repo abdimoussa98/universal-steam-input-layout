@@ -196,6 +196,9 @@ WENT = {
     ("90.10", "G6"): "A14: it is that assumption's Deck procedure",
     ("90.10", "D2"): "Obsolete: replaced by 90.11 F1 to F5",
     ("90.10", "D9"): "Same as 90.11 F7",
+    **{("90.9", check): "`tests/test_scenarios_90_6_to_90_9.py`" for check in ("K2", "K3", "K4", "M5")},
+    ("90.9", "K1"): "Obsolete: replaced by 90.10 T8",
+    ("90.9", "K5"): "`test_fixes.test_overlays_are_gone_and_nothing_references_them`; the fresh load is A33",
 }
 
 

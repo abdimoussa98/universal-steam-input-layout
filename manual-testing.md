@@ -10,17 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## 90.9: Enter / Backspace typed by the menu chords
-
-Load 90.9 fresh in both variants. The `Menu Left: Backspace` and `Menu Right: Enter` layers are gone (69 layers). Record: [author decisions](findings/2026-10-01-intended-flow-checker/README.md#author-decisions-2026-10-01). 90.8 was an intermediate build; don't test it.
-
-- [ ] K1 (early path): hold Start and press Select within 300 ms, before Fn is up: Backspace types on that first press, repeats while Select is held, and stops cleanly on release with no stuck key. Then release Start: no Tab. Mirror with Select then Start for Enter (no Escape)
-- [ ] K2: with Fn up (hold Start past 300 ms), Select types Backspace on every press and repeats while held. Mirror for Enter
-- [ ] K3 (accepted): hold Start, press and keep holding Select, lift Start first. Select falls through to Base and opens Menu Left; releasing it within 300 ms sends Escape. Mirror: Tab. Confirm this is the only extra output, and that releasing Select first never sends anything extra
-- [ ] K4: other Fn keys behave the same way (hold Start, hold LB for F10, lift Start: LB becomes the L1 modifier)
-- [ ] K5: every layer still does what it did: spot-check a modifier, Mod 2, both menus' Fn keys, the Transition Sets and steering entry. The two removed layers shifted later runtime IDs, so this must be a fresh load
-- [ ] M5: RTP double tap: tap the right pad, tap again north or south within 150 ms for Circular Scroll; a second tap elsewhere returns to mouse mode. The bumpers keep their modifiers right after
-
 ## 90.7: slim steering overlays
 
 Load 90.7 fresh in both variants. Record: [steering 90.7](findings/2026-09-30-steering-lean/README.md#slim-overlays-and-dod-fixes-907).

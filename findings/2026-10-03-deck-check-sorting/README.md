@@ -157,12 +157,12 @@ It becomes the migration record in phase 14.
 | 90.10 | D7 | (other driver in the window): flick the stick, bump the other driver i… | Scenario | B, St, T, K: the other driver inside the window | `tests/test_scenarios_90_10.py` |
 | 90.10 | D8 | (mapped buttons): in a modifier map, press a face button: its key, and… | Scenario | B, St, Miss, K: a mapped button uses up the tap; a stuck modifier map clears | `tests/test_scenarios_90_10.py` |
 | 90.10 | D9 | (entry with the stick centred): enter Steering with the stick centred,… | Scenario | The same sequence as 90.11 F7, first half | Same as 90.11 F7 |
-| 90.9 | K1 | (early path): hold Start and press Select within 300 ms, before Fn is… | Obsolete | Replaced by 90.10 T8 | Not migrated yet |
-| 90.9 | K2 | with Fn up (hold Start past 300 ms), Select types Backspace on every p… | Scenario | B, T, K: Backspace on every press with Fn up, repeating | Not migrated yet |
-| 90.9 | K3 | (accepted): hold Start, press and keep holding Select, lift Start firs… | Scenario | B, T, K: the accepted stray Escape when the first button is lifted first | Not migrated yet |
-| 90.9 | K4 | other Fn keys behave the same way (hold Start, hold LB for F10, lift S… | Scenario | B, K: a held Fn key falls through to Base (R138) | Not migrated yet |
-| 90.9 | K5 | every layer still does what it did: spot-check a modifier, Mod 2, both… | Static | Every layer command resolves to a layer after the ID shift: test_fixes already checks it. The fresh load is A33 | Not migrated yet |
-| 90.9 | M5 | RTP double tap: tap the right pad, tap again north or south within 150… | Scenario | Pad, T: the right-pad double tap and Circular Scroll | Not migrated yet |
+| 90.9 | K1 | (early path): hold Start and press Select within 300 ms, before Fn is… | Obsolete | Replaced by 90.10 T8 | Obsolete: replaced by 90.10 T8 |
+| 90.9 | K2 | with Fn up (hold Start past 300 ms), Select types Backspace on every p… | Scenario | B, T, K: Backspace on every press with Fn up, repeating | `tests/test_scenarios_90_6_to_90_9.py` |
+| 90.9 | K3 | (accepted): hold Start, press and keep holding Select, lift Start firs… | Scenario | B, T, K: the accepted stray Escape when the first button is lifted first | `tests/test_scenarios_90_6_to_90_9.py` |
+| 90.9 | K4 | other Fn keys behave the same way (hold Start, hold LB for F10, lift S… | Scenario | B, K: a held Fn key falls through to Base (R138) | `tests/test_scenarios_90_6_to_90_9.py` |
+| 90.9 | K5 | every layer still does what it did: spot-check a modifier, Mod 2, both… | Static | Every layer command resolves to a layer after the ID shift: test_fixes already checks it. The fresh load is A33 | `test_fixes.test_overlays_are_gone_and_nothing_references_them`; the fresh load is A33 |
+| 90.9 | M5 | RTP double tap: tap the right pad, tap again north or south within 150… | Scenario | Pad, T: the right-pad double tap and Circular Scroll | `tests/test_scenarios_90_6_to_90_9.py` |
 | 90.7 | S1 | drive, flick LS up to center, press A within 150 ms: F fires once, one… | Scenario | B, St, T, K: a face button inside the stick window | Not migrated yet |
 | 90.7 | S2 | flick, then flick and hold: repeat scroll; releasing stops it; the nex… | Scenario | St, T, K: flick, then flick and hold repeats the scroll | Not migrated yet |
 | 90.7 | S3 | hold LS up past 250 ms, lift the left thumb, put it back: LST layers c… | Scenario | B, St, T: lifting the thumb during a stick modifier | Not migrated yet |

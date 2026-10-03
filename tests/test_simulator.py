@@ -89,6 +89,8 @@ class OutputTests(unittest.TestCase):
         self.assertEqual((s.down(), s.typed()), (["W"], ["W"]))
         s.release(B)                                  # P leaves: Base's W takes over
         self.assertEqual((s.down(), s.typed()), (["W"], ["W"]))
+        s.release(A).press(A)                         # a real release and press at the same moment is typed again
+        self.assertEqual(s.typed(), ["W", "W"])
 
     def test_haptics_and_beeps_are_logged(self):
         beep = "controller_action add_layer {{Base::P}} 1 0, , "

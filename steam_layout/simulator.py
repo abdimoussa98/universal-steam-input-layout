@@ -79,12 +79,13 @@ def desktop(data, keep=3):
 def typed(log):
     """The outputs a log shows going down or ticking, in order.
 
-    A key that one binding lets go of and another presses at the same moment was handed over, not typed
-    again (A37): W carries on when a window above the driver's layer times out.
+    A key that one binding lets go of and another presses at the same moment, under an input that stays
+    held, was handed over, not typed again (A37): W carries on when a window above the driver's layer times
+    out. The log says "handover" for that kind of up; a physical release says "up".
     """
     found, released = [], {}
     for ms, what, detail in log:
-        if what == "up":
+        if what == "handover":
             released[detail] = ms
         elif what == "down" and released.get(detail) == ms:
             released.pop(detail)
@@ -264,10 +265,11 @@ class Simulator:
                     pairs.add(((source, ALWAYS_ON), "down"))
         return pairs
 
-    def _end(self, control, phase):
+    def _end(self, control, phase, handover=False):
+        """End the activators of one input. `handover`: the input is still held and another layer takes over."""
         for key in [k for k in self.acts if k[0] == control and k[1] == phase]:
             for output in self.acts.pop(key).down:
-                self._note("up", output)
+                self._note("handover" if handover else "up", output)
         self.bound.pop((control, phase), None)
 
     def _establish(self, control, phase, mode):
@@ -389,6 +391,6 @@ class Simulator:
             layer, _ = self.binding(control)
             if (control, phase) in self.bound and self.bound[(control, phase)] == layer:
                 continue
-            self._end(control, phase)
+            self._end(control, phase, handover=True)
             how = "pressed" if control[1] == ALWAYS_ON else ("exposed" if layer in before else "landed")
             self._establish(control, phase, how)
