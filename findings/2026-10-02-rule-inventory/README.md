@@ -348,3 +348,32 @@ The IDs were given on 2026-10-02 in the
   test covers the transitions.
 - **The registry has 63 rules.** 18 are "Not checked yet". 13 more are
   checked only in part: a test pins some layers, not every layer.
+
+## The tests' length checks, sorted (phase 5)
+
+A **length check** is an `assertEqual(len(...), ...)` line. The tests had 59
+at the baseline. Each was sorted by what its number is:
+
+| Kind | Count | What happened | Example |
+|---|---|---|---|
+| The rule's own number, or a structural "exactly one" | 27 | Kept | "Exactly three entries" on a cursor input; the 12 mapped buttons of a Steering modifier; the 15 inputs that apply the Tap Cover |
+| On a made-up layout | 6 | Kept | "One violation" in a four-chord test layout |
+| On a frozen builder or a pinned snapshot | 16 | Kept: the number can't move | "16 new layers" from the 09-30 builder; six Steering layers in the 90.10 snapshot |
+| A release-specific number on the working layouts or the current build | 10 | Replaced or removed | "71 layers", "69 targets", "9 windows" |
+
+Two more pinned totals weren't length checks: "21 entries" and "44 exits" in
+the Always On ordering test. They were replaced too, so 12 numbers went.
+
+| Test file | Number | Now checks |
+|---|---|---|
+| `test_audit_inheritance.py` | 9 targets | The audited layers are exactly the layers with an Always On action (R140) |
+| `test_double_tap_windows.py` | 9 windows | The Always On layers are exactly the layers titled "…: Double Tap" |
+| `test_fixes.py` | 71 layers | Removed: the line above already checks the two overlay layers are gone (R138) |
+| `test_flow_inheritance.py` | 69 targets, 14 covers | Every layer is reached except the ones only `hold_layer` adds (R145); the cover-checked layers are exactly the cover-type ones (R144) |
+| `test_neptune_recovery.py` | 9 windows, 21 entries, 44 exits | The same window check, and every window has an entry and an exit that the loop checked (R146 to R148) |
+| `test_neptune_cursor.py` | 9 windows | The same window check |
+| `test_stateful_transitions.py` | 12 stick groups, 9 windows | The layers R111 is about are among the ones checked; the same window check |
+| `test_steering_fallback_hold.py` | 72 presets | Removed: `test_the_hold_is_appended` already checks the whole layer list (R103) |
+
+Each replacement was run against the working layouts, and the first one was
+also tried with a window dropped from the audit, which it catches.
