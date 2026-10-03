@@ -22,7 +22,9 @@ class DoubleTapWindowTests(unittest.TestCase):
         for variant in ("default", "alternative"):
             layout = Layout(load(variant))
             windows = always_on_layers(layout)
-            self.assertEqual(len(windows), 9, variant)
+            # The Always On layers are exactly the Double Tap windows, so none is skipped below.
+            self.assertEqual(set(windows), {title for title in layout.presets if title.endswith(": Double Tap")}, variant)
+            self.assertTrue(windows, variant)
             for title in windows:
                 yield variant, layout, title
 
