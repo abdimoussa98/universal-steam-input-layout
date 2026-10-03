@@ -132,31 +132,31 @@ It becomes the migration record in phase 14.
 | 90.11 | F10 | (menu held, then push up): hold Start with the stick centred, push up… | Scenario | B, St, T, K: the menu Entry Point types W on stick up and adds no hold | `tests/test_scenarios_90_11.py` |
 | 90.11 | F11 | (Entry Guard): enter Steering and leave the stick centred: Start and S… | Scenario | B, St, T, K: Start and Select type their keys in the Entry Guard | `tests/test_scenarios_90_11.py` |
 | 90.11 | F9 | (desktop): apply the layout to the desktop configuration and repeat F1… | Scenario | Desk: F1 and F2 again on the layout with every entry past the third dropped. Rests on A21 | `tests/test_scenarios_90_11.py` |
-| 90.10 | G1 | (gate 1, stick inheritance from the middle of the stack): hold the lef… | Assumption | A26: do stick inputs inherit through the middle of the stack | Not migrated yet |
-| 90.10 | G2 | (gate 1, Fn): hold Start past 200 ms so Fn is up, click and release th… | Assumption | A26: the same shape, with the Fn layer over the Entry Point | Not migrated yet |
-| 90.10 | G3 | (gate 2, edge Release in a layer added with the stick already out): ho… | Assumption | A8: a stick edge's Release in a layer added with the stick already out. Its last branch is A14 | Not migrated yet |
-| 90.10 | G4 | (stick already out): hold the left stick north, then hold Start for 50… | Assumption | A15: a guard that lands inside the Fn delay cancels it | Not migrated yet |
-| 90.10 | G5 | (tap with a stick out): hold the left stick north, tap Start: one Tab | Scenario | B, St, T, K: a Start tap with a stick out types one Tab | Not migrated yet |
-| 90.10 | G6 | (eaten delay comes back): push both sticks out while holding Start, re… | Assumption | A14: a delay starts again when a removal exposes it | Not migrated yet |
-| 90.10 | T1 | each gesture from Base and from Gyro: Start + LS click enters Steering… | Scenario | B, St, K, Hap: the four gestures from Base and from Gyro, with the beep and pulse | Not migrated yet |
-| 90.10 | T2 | (clear): in Steering, each of the four gestures leaves it, with the be… | Scenario | B, St, Hap: the four gestures clear Steering and keep Gyro | Not migrated yet |
-| 90.10 | T3 | (cancel): hold Start, click and hold the left stick, release Start fir… | Scenario | B, St: letting go of the menu button first cancels | Not migrated yet |
-| 90.10 | T4 | (missed release): in each transition, release the menu button while th… | Scenario | B, St, Miss: a transition left by a missed release ends on the next menu tap | Not migrated yet |
-| 90.10 | T5 | (guards): guard on and off for each stick, and both together; with a g… | Scenario | B, St, T, K: guards on and off; rests on A8 | Not migrated yet |
-| 90.10 | T6 | (stale guard): with a stick out, release the menu button while the Ste… | Scenario | B, St, Miss: a stick touch clears a stale guard | Not migrated yet |
-| 90.10 | T7 | (accepted): under the menu Tap Cover, bump the other menu button: the… | Scenario | B, St, T, K: the accepted gap under the menu Tap Cover | Not migrated yet |
-| 90.10 | T8 | (K1 reworded): hold Start, press Select before Fn is up: exactly one B… | Scenario | B, T, K: one Backspace before Fn is up; rests on A10 | Not migrated yet |
-| 90.10 | T9 | the camera stick is dead while a menu button is held, and comes back o… | Scenario | B, St, K: the right stick types nothing while a menu button is held | Not migrated yet |
-| 90.10 | T10 | (mouse buttons through a window): tap L1, or flick the left stick whil… | Scenario | B, St, Tr, T, K: mouse buttons through a window. Whether a held click is interrupted rests on A11 | Not migrated yet |
-| 90.10 | D1 | (menu): with no driver held, tap Start: one Tab and Steering stays; ho… | Scenario | B, T, K: menu buttons in Steering, with and without a driver | Not migrated yet |
-| 90.10 | D2 | (hold exit): replaced by F1 to F5 in 90.11 | Obsolete | Replaced by 90.11 F1 to F5 | Not migrated yet |
-| 90.10 | D3 | (modifier and roll): hold R1, hold the left stick up: the R1 modifier… | Scenario | B, St, T: the stick modifier holds through a roll to the side | Not migrated yet |
-| 90.10 | D4 | (stick first): hold the left stick up, then press R1: the modifier map… | Scenario | B, St, T, K: stick first, then the driver; rests on A8 | Not migrated yet |
-| 90.10 | D5 | (double taps): flick up and back: one scroll about 150 ms after centre… | Scenario | B, St, T, K: the stick double tap and its window | Not migrated yet |
-| 90.10 | D6 | (W and S through the window): hold a driver, flick the stick once: W o… | Scenario | B, St, T, K: W and S through the window; rests on A10 and A11 | Not migrated yet |
-| 90.10 | D7 | (other driver in the window): flick the stick, bump the other driver i… | Scenario | B, St, T, K: the other driver inside the window | Not migrated yet |
-| 90.10 | D8 | (mapped buttons): in a modifier map, press a face button: its key, and… | Scenario | B, St, Miss, K: a mapped button uses up the tap; a stuck modifier map clears | Not migrated yet |
-| 90.10 | D9 | (entry with the stick centred): enter Steering with the stick centred,… | Scenario | The same sequence as 90.11 F7, first half | Not migrated yet |
+| 90.10 | G1 | (gate 1, stick inheritance from the middle of the stack): hold the lef… | Assumption | A26: do stick inputs inherit through the middle of the stack | A26: it is that assumption's Deck procedure |
+| 90.10 | G2 | (gate 1, Fn): hold Start past 200 ms so Fn is up, click and release th… | Assumption | A26: the same shape, with the Fn layer over the Entry Point | A26: the same question with the Fn layer on top |
+| 90.10 | G3 | (gate 2, edge Release in a layer added with the stick already out): ho… | Assumption | A8: a stick edge's Release in a layer added with the stick already out. Its last branch is A14 | A8: it is that assumption's Deck procedure; its last branch is A14 |
+| 90.10 | G4 | (stick already out): hold the left stick north, then hold Start for 50… | Assumption | A15: a guard that lands inside the Fn delay cancels it | A15: it is that assumption's Deck procedure |
+| 90.10 | G5 | (tap with a stick out): hold the left stick north, tap Start: one Tab | Scenario | B, St, T, K: a Start tap with a stick out types one Tab | `tests/test_scenarios_90_10.py` |
+| 90.10 | G6 | (eaten delay comes back): push both sticks out while holding Start, re… | Assumption | A14: a delay starts again when a removal exposes it | A14: it is that assumption's Deck procedure |
+| 90.10 | T1 | each gesture from Base and from Gyro: Start + LS click enters Steering… | Scenario | B, St, K, Hap: the four gestures from Base and from Gyro, with the beep and pulse | `tests/test_scenarios_90_10.py` |
+| 90.10 | T2 | (clear): in Steering, each of the four gestures leaves it, with the be… | Scenario | B, St, Hap: the four gestures clear Steering and keep Gyro | `tests/test_scenarios_90_10.py` |
+| 90.10 | T3 | (cancel): hold Start, click and hold the left stick, release Start fir… | Scenario | B, St: letting go of the menu button first cancels | `tests/test_scenarios_90_10.py` |
+| 90.10 | T4 | (missed release): in each transition, release the menu button while th… | Scenario | B, St, Miss: a transition left by a missed release ends on the next menu tap | `tests/test_scenarios_90_10.py` |
+| 90.10 | T5 | (guards): guard on and off for each stick, and both together; with a g… | Scenario | B, St, T, K: guards on and off; rests on A8 | `tests/test_scenarios_90_10.py` |
+| 90.10 | T6 | (stale guard): with a stick out, release the menu button while the Ste… | Scenario | B, St, Miss: a stick touch clears a stale guard | `tests/test_scenarios_90_10.py` |
+| 90.10 | T7 | (accepted): under the menu Tap Cover, bump the other menu button: the… | Scenario | B, St, T, K: the accepted gap under the menu Tap Cover | `tests/test_scenarios_90_10.py` |
+| 90.10 | T8 | (K1 reworded): hold Start, press Select before Fn is up: exactly one B… | Scenario | B, T, K: one Backspace before Fn is up; rests on A10 | `tests/test_scenarios_90_10.py` |
+| 90.10 | T9 | the camera stick is dead while a menu button is held, and comes back o… | Scenario | B, St, K: the right stick types nothing while a menu button is held | `tests/test_scenarios_90_10.py` |
+| 90.10 | T10 | (mouse buttons through a window): tap L1, or flick the left stick whil… | Scenario | B, St, Tr, T, K: mouse buttons through a window. Whether a held click is interrupted rests on A11 | `tests/test_scenarios_90_10.py` |
+| 90.10 | D1 | (menu): with no driver held, tap Start: one Tab and Steering stays; ho… | Scenario | B, T, K: menu buttons in Steering, with and without a driver | `tests/test_scenarios_90_10.py` |
+| 90.10 | D2 | (hold exit): replaced by F1 to F5 in 90.11 | Obsolete | Replaced by 90.11 F1 to F5 | Obsolete: replaced by 90.11 F1 to F5 |
+| 90.10 | D3 | (modifier and roll): hold R1, hold the left stick up: the R1 modifier… | Scenario | B, St, T: the stick modifier holds through a roll to the side | `tests/test_scenarios_90_10.py` |
+| 90.10 | D4 | (stick first): hold the left stick up, then press R1: the modifier map… | Scenario | B, St, T, K: stick first, then the driver; rests on A8 | `tests/test_scenarios_90_10.py` |
+| 90.10 | D5 | (double taps): flick up and back: one scroll about 150 ms after centre… | Scenario | B, St, T, K: the stick double tap and its window | `tests/test_scenarios_90_10.py` |
+| 90.10 | D6 | (W and S through the window): hold a driver, flick the stick once: W o… | Scenario | B, St, T, K: W and S through the window; rests on A10 and A11 | `tests/test_scenarios_90_10.py` |
+| 90.10 | D7 | (other driver in the window): flick the stick, bump the other driver i… | Scenario | B, St, T, K: the other driver inside the window | `tests/test_scenarios_90_10.py` |
+| 90.10 | D8 | (mapped buttons): in a modifier map, press a face button: its key, and… | Scenario | B, St, Miss, K: a mapped button uses up the tap; a stuck modifier map clears | `tests/test_scenarios_90_10.py` |
+| 90.10 | D9 | (entry with the stick centred): enter Steering with the stick centred,… | Scenario | The same sequence as 90.11 F7, first half | Same as 90.11 F7 |
 | 90.9 | K1 | (early path): hold Start and press Select within 300 ms, before Fn is… | Obsolete | Replaced by 90.10 T8 | Not migrated yet |
 | 90.9 | K2 | with Fn up (hold Start past 300 ms), Select types Backspace on every p… | Scenario | B, T, K: Backspace on every press with Fn up, repeating | Not migrated yet |
 | 90.9 | K3 | (accepted): hold Start, press and keep holding Select, lift Start firs… | Scenario | B, T, K: the accepted stray Escape when the first button is lifted first | Not migrated yet |

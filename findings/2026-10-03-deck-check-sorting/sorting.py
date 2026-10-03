@@ -187,6 +187,15 @@ WENT = {
     **{("90.11", check): SCENARIOS_90_11 for check in ("F1", "F2", "F3", "F5", "F6", "F7", "F8", "F9", "F10", "F11")},
     ("90.11", "F4"): "A16: it is that assumption's Deck procedure",
     **{("90.12", f"C{n}"): "`tests/test_scenarios_90_12.py`" for n in range(1, 9)},
+    **{("90.10", check): "`tests/test_scenarios_90_10.py`" for check in
+       ("G5", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "D1", "D3", "D4", "D5", "D6", "D7", "D8")},
+    ("90.10", "G1"): "A26: it is that assumption's Deck procedure",
+    ("90.10", "G2"): "A26: the same question with the Fn layer on top",
+    ("90.10", "G3"): "A8: it is that assumption's Deck procedure; its last branch is A14",
+    ("90.10", "G4"): "A15: it is that assumption's Deck procedure",
+    ("90.10", "G6"): "A14: it is that assumption's Deck procedure",
+    ("90.10", "D2"): "Obsolete: replaced by 90.11 F1 to F5",
+    ("90.10", "D9"): "Same as 90.11 F7",
 }
 
 

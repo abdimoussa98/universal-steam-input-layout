@@ -146,10 +146,20 @@ class Pad:
         return self
 
     def roll(self, stick, direction):
-        """Move a stick that is out to another direction without passing through centre."""
-        self.sim.press((SOURCES[stick], DIRECTIONS[direction]))
-        for part in DIRECTIONS.values():
-            if part != DIRECTIONS[direction] and self._held(stick, part):
+        """Move a stick that is out to another direction; the outer edge stays out.
+
+        To a neighbouring direction the stick passes through the diagonal, so both are held for a moment.
+        Opposite directions can't be held together: the old one lets go before the new one presses.
+        """
+        new = DIRECTIONS[direction]
+        old = [part for part in DIRECTIONS.values() if part != new and self._held(stick, part)]
+        opposite = {"dpad_north": "dpad_south", "dpad_south": "dpad_north", "dpad_west": "dpad_east", "dpad_east": "dpad_west"}
+        for part in old:
+            if opposite[part] == new:
+                self.sim.release((SOURCES[stick], part))
+        self.sim.press((SOURCES[stick], new))
+        for part in old:
+            if opposite[part] != new:
                 self.sim.release((SOURCES[stick], part))
         return self
 
