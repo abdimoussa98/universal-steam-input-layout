@@ -116,7 +116,7 @@ class RegisterTests(unittest.TestCase):
         self.assertFalse(self.config.get("decisions"))
         self.assertFalse(self.config.get("covers", {}).get("allow"))
         self.assertFalse(self.config.get("cleanups", {}).get("keep"))
-        stacks = json.loads((ROOT / "traced_stacks.json").read_text(encoding="utf-8"))
+        stacks = json.loads((ROOT / "steam_layout" / "traced_stacks.json").read_text(encoding="utf-8"))
         self.assertFalse([t for t, spec in stacks.get("targets", {}).items() if spec.get("decisions")])
 
     def test_the_audits_read_the_register(self):

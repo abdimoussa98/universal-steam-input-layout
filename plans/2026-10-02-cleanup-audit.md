@@ -8,7 +8,7 @@ which resolves exactly the audit's findings; 90.12 is the release. Step 5 is
 done: the audit is the fourth gate of `audit_build.py`. One change from the
 plan, by the author: layers that only `hold_layer` adds are left out of the
 audit instead of counting `hold_layer` as an add. Deck checks are C1 to C8 in
-[manual-testing.md](../manual-testing.md#9012-cleanup-lists).
+[manual-testing.md](../archived/manual-testing.md).
 
 It builds on the
 [cleanup boundaries findings](../findings/2026-10-02-cleanup-boundaries/README.md)

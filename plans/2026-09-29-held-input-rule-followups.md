@@ -144,7 +144,7 @@ Review changes from the original proposal:
 ## Phase 2: real-layout Deck checks (you)
 
 Fresh load, both layouts. These are listed in
-[manual testing](../manual-testing.md#held-inputs-across-layer-changes):
+[manual testing](../archived/manual-testing.md):
 
 - One held stick click from Menu Entry reaches a Transition Set.
 - The staggered Gyro toggle: which modifier variants appear, and whether

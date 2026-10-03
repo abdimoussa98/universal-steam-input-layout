@@ -462,7 +462,7 @@ class StatefulTransitionTests(unittest.TestCase):
                         ('remove_layer', f'{trio}: {kind}') for kind in ('Entry Point', 'Tap Cover', 'Temporary Gyro')])
 
     def test_audits_are_clean(self):
-        config = json.loads((ROOT / 'traced_stacks.json').read_text())
+        config = json.loads((ROOT / 'steam_layout' / 'traced_stacks.json').read_text())
         for variant, data in self.data.items():
             with self.subTest(variant=variant):
                 budget = audit_layout(data)

@@ -1817,7 +1817,7 @@ R2 Layer (Preset_1000007) → ID 4  ← SHIFTED from 5
 1. **Never hardcode runtime IDs** - Calculate them dynamically based on current order
 2. **Count carefully** - Action sets come first (starting at 1), then layers
 3. **Revalidate after modifications** - Any structural change affects all downstream IDs
-4. **Use Layer Reverse Lookup.md** - Cross-reference with the ID mapping documentation
+4. **Read IDs as titles** - `python3 -m tools.convert_runtime_ids to-titles` shows every ID as `{{Base::Title}}`, and `python3 -m tools.duplicate_layer <layout> --list` prints the current ID table. The old hand-kept table, `Layer Reverse Lookup.md`, is in `archived/`: it maps release 31.0
 
 ---
 
@@ -1860,6 +1860,5 @@ def calculate_runtime_id(preset_name, actions_dict, action_layers_dict):
 
 ## See Also
 
-- `Layer Reverse Lookup.md` - Complete mapping of layer IDs to names and parents
-- `Neptune Chorded Button Ids.md` - Chord button ID reference for Steam Deck
-- `Ramp Up Layers Comparison.md` - Comparison of turning/ramp up layer configurations
+- [Neptune Chorded Button Ids](Neptune%20Chorded%20Button%20Ids.md) - Chord button ID reference for Steam Deck
+- In `archived/`, for the older multi-set layouts: [Layer Reverse Lookup](../archived/Layer%20Reverse%20Lookup.md) (layer IDs as of release 31.0) and [Ramp Up Layers Comparison](../archived/Ramp%20Up%20Layers%20Comparison.md)

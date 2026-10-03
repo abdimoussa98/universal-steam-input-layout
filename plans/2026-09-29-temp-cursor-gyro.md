@@ -3,7 +3,7 @@
 Implemented in both Neptune JSON layouts on 2026-09-29, from baseline `c820d22`.
 Version remains 90.2. The actual converters were used before editing and after
 validation. See the [implementation record](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md)
-and [pending Deck checks](../manual-testing.md#temp-cursor-gyro).
+and [pending Deck checks](../archived/manual-testing.md).
 Stateful Cursor Gyro is outside this change.
 
 **Historical design, superseded by the implemented

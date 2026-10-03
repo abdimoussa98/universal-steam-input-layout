@@ -144,7 +144,7 @@ python3 -m tools.audit_build --verbose    # also print each failing audit's outp
 
 ### 4. `audit_inheritance.py` - Window Audit (Inheritance and Blocking Check)
 
-For each Always On layer (and any layer named in `traced_stacks.json`), works
+For each Always On layer (and any layer named in `steam_layout/traced_stacks.json`), works
 out the stacks it can sit on and checks whether any of them puts a layer
 command under an input the layer leaves open. Each such route must be blocked,
 or be an exception to R140 in the
@@ -384,8 +384,6 @@ See the `resources/` folder for additional documentation:
   - [Cleanup scopes and concrete examples](resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) - overlays and inherited recovery, nine-layer Mod 2 branch cleanup, and eight-layer combined-cover cleanup that preserves the still-held side
   - [Stick-edge cleanup and inherited actions](resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions) - why edge recovery is selective: LS overrides the WASD modifier, RS overrides ramp-up
   - [Inheritance review for binding changes](resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes) - trace effects through upper layers, protected timers, and stale stacks; the seven Double Tap LS-edge blocks are the worked example
-- `Action Sets.md` - List of action set IDs
-- `Layer Reverse Lookup.md` - Complete mapping of layer IDs to names
 
 Detailed comparisons and runtime observations:
 

@@ -11,9 +11,9 @@ layer many inputs from the action set (the Steering layers) is checked like
 any other. Chords are ignored: a chain follows every adding binding, which can
 add a stack that can't happen but never drops one that can.
 
-`traced_stacks.json` can add extra stacks. The decisions are exceptions to R140
-in the exceptions register (steam_layout/flow_config.json). A target no stack
-reaches is **not checked**, which fails.
+`steam_layout/traced_stacks.json` can add extra stacks. The decisions are
+exceptions to R140 in the exceptions register (steam_layout/flow_config.json).
+A target no stack reaches is **not checked**, which fails.
 
 For every input the target doesn't define, the effective lower binding is the
 topmost layer below that defines it. If that binding changes layers (`add_layer`, `remove_layer`,
@@ -97,7 +97,7 @@ def print_report(report, show_untraced=False):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("layout", type=Path)
-    parser.add_argument("--stacks", type=Path, default=ROOT / "traced_stacks.json")
+    parser.add_argument("--stacks", type=Path, default=ROOT / "steam_layout" / "traced_stacks.json")
     parser.add_argument("--register", type=Path, default=exceptions.REGISTER,
                         help="exceptions register (default: steam_layout/flow_config.json)")
     parser.add_argument("--entries", metavar="TITLE", help="list bindings that add TITLE, then exit")

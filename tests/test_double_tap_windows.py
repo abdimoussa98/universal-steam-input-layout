@@ -62,7 +62,7 @@ class DoubleTapWindowTests(unittest.TestCase):
         # Author, 2026-10-01: a source-mode change blocks inheritance, so Base's mouse-mode
         # touch doesn't reach the window's dpad pad; no traced_stacks decision is needed.
         from steam_layout.inheritance import check_stack
-        targets = json.loads((ROOT / "traced_stacks.json").read_text())["targets"]
+        targets = json.loads((ROOT / "steam_layout" / "traced_stacks.json").read_text())["targets"]
         self.assertNotIn("RTP: Double Tap", targets)
         for variant in ("default", "alternative"):
             layout = Layout(load(variant))

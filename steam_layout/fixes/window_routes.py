@@ -29,7 +29,8 @@ EMPTY = "controller_action empty_binding, , "
 
 def fix(data, config=None):
     if config is None:
-        config = exceptions.window(json.loads((ROOT / "traced_stacks.json").read_text()), exceptions.load())
+        stacks = json.loads((ROOT / "steam_layout" / "traced_stacks.json").read_text())
+        config = exceptions.window(stacks, exceptions.load())
     report = audit(data, config)
     layout = Layout(data)
     windows = set(always_on_layers(layout))

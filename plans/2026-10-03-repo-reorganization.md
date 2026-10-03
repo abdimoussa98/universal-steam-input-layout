@@ -1,8 +1,8 @@
 # Plan: reorganize the repo, one skills directory, a short README
 
 **Status, 2026-10-03:** in progress. The author said to run it on 2026-10-03,
-and the 90.16 to 90.19 work was committed first (`90ed6c8`). Parts 1 (skills)
-and 2 (`tools/`) are done. Written against release 90.19 (75 layers per layout).
+and the 90.16 to 90.19 work was committed first (`90ed6c8`). Parts 1 (skills),
+2 (`tools/`), 3 (loose files) and 6 (resources) are done. Written against release 90.19 (75 layers per layout).
 
 ## Why
 
@@ -248,9 +248,12 @@ All ten files, checked against 90.19 (one action set, 75 layers).
   only chord-ID table. The
   [exploratory layout audit](../findings/2026-09-27-exploratory-layout-audit/AUDIT.md)
   found 14 and 15 labelled the wrong way round (the layouts bind 14 to Menu
-  Right and 15 to Menu Left), and six rows are still `?`. Fix 14 and 15, fill
-  in what the layouts prove, and add a dated header saying these are the older
-  `chord_button` IDs and that current work uses mask selectors.
+  Right and 15 to Menu Left), and 22 rows were `?`. Done: 14 and 15 are fixed,
+  and seven more IDs are filled in from that audit's table and checked against
+  90.19 (16, 17, 20, 23, 24, and the mask bits). The buttons the layouts don't
+  chord on stay "not known". The header says the layouts use both forms:
+  `chord_button` for one button, a mask for several buttons and for stick
+  deflection.
 - **`Steam Input JSON Structure.md`, lines 1820 and 1863 to 1865,** point at
   the lookup and at `Ramp Up Layers Comparison.md`, which is already in
   `archived/`. Repoint them. Nothing else in that document changes.

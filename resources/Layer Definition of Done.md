@@ -587,7 +587,7 @@ for review against [§7](#7-cleanup); they aren't a check.
    applies the recommendations to the Always On windows during the install.
 5. **Exceptions go in the [exceptions register](#exceptions-register):**
    `allow` with a reason, or `todo` while it awaits the author.
-   [traced_stacks.json](../traced_stacks.json) can still add stacks the
+   [traced_stacks.json](../steam_layout/traced_stacks.json) can still add stacks the
    chains can't reach. An undecided `open` route fails the check.
    A different source mode above the definer is a block, not a route
    ([below](#a-source-mode-change-blocks-inheritance)).

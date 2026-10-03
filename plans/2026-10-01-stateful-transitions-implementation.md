@@ -407,7 +407,7 @@ mirror it.
   `test_fixes.py`, `test_neptune_recovery.py`,
   `test_neptune_held_inputs.py`, `test_flow_inheritance.py` (its CLI test
   counts 15 covers and 67 reached layers),
-  `test_audit_inheritance.py` with [traced_stacks.json](../traced_stacks.json),
+  `test_audit_inheritance.py` with [traced_stacks.json](../steam_layout/traced_stacks.json),
   `test_double_tap_windows.py` (asserts seven windows and checks every
   window's pads) and `test_neptune_gyro.py` (names the affected layers). Two
   deprecated `timed_*` tests read the working layouts: `test_timed_spec.py`
