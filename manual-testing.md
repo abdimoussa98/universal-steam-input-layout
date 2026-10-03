@@ -10,15 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## 90.13: no turn assist in Steering
-
-Load 90.13 fresh in both variants (71 layers). Record: [build](findings/2026-10-02-steering-fallback-hold/README.md#9013-no-turn-assist-in-steering).
-
-- [ ] N1: in Steering, push the right stick fully out and hold, with and without a driver held: no turn-assist speed-up, and the gyro keeps aiming while the stick turns
-- [ ] N2: hold R1, hold a trigger (firing), push the right stick out, let go of R1: you're back in fallback (WASD), with no W stuck on. In the alternative: hold R2, hold a bumper
-- [ ] N3: in a Steering stick Double Tap window (flick the left stick while driving), pull a trigger: the mouse button still fires. In the alternative, the bumpers
-- [ ] N4: outside Steering, turn assist and gyro-off-while-turning work as before
-
 ## 90.12: cleanup lists
 
 Load 90.12 fresh in both variants (71 layers). Record: [first run and fix](findings/2026-10-02-cleanup-audit/README.md) · [rules](findings/2026-10-02-cleanup-boundaries/README.md#the-rules). Nothing here has run on the Deck. 90.12 changes only cleanup and release lists: about a third fewer removals, three new or changed cleanups, no add and no add order. "Miss the release" means: hold the buttons, press the Steam button, let go of everything, close the Steam menu.

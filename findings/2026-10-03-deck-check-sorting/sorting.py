@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-"""The sorting of the 137 Deck checks (rule registry plan, phase 11), as data.
+"""The sorting and the migration of the 137 Deck checks (rule registry plan, phases 11 and 14), as data.
 
-`SORT[(section, check ID)] = (what it becomes, detail)`. build() joins it with
-manual-testing.md and writes README.md's table, so every check is there once.
+`SORT[(section, check ID)] = (what it becomes, detail)`, and once a check has been
+migrated, `WENT[(section, check ID)]` says where it went: the scenario or static
+test that replaced it, the assumption it joined, a tuning note, or what made it
+obsolete. checks.json holds the original wording of every check, frozen on
+2026-10-03, so the record survives the checklist.
 
-    python3 findings/2026-10-02-deck-check-sorting/sorting.py          # rewrite the table in README.md
-    python3 findings/2026-10-02-deck-check-sorting/sorting.py --check  # fail if a check is missing or unknown
+    python3 findings/2026-10-03-deck-check-sorting/sorting.py          # rewrite the table in README.md
+    python3 findings/2026-10-03-deck-check-sorting/sorting.py --check  # fail if the record and the checklist disagree
 """
 from collections import Counter
+import json
 from pathlib import Path
 import re
 import sys
@@ -175,24 +179,41 @@ SORT = {
 }
 
 
+# Where each migrated check went (phase 14). Filled one checklist section at a time.
+SCENARIOS_90_11 = "`tests/test_scenarios_90_11.py`"
+WENT = {
+    ("90.13", "N1"): SCENARIOS_90_11, ("90.13", "N2"): SCENARIOS_90_11, ("90.13", "N3"): SCENARIOS_90_11,
+    ("90.13", "N4"): SCENARIOS_90_11,
+}
+
+
 def checks():
-    """[(section, check ID, text)] from manual-testing.md, in file order."""
-    found, section = [], None
-    for line in (ROOT / "manual-testing.md").read_text(encoding="utf-8").splitlines():
+    """[(section, check ID, text)]: every check as it was worded, from checks.json."""
+    frozen = json.loads((HERE / "checks.json").read_text(encoding="utf-8"))
+    return [(c["section"], c["id"], c["text"]) for c in frozen]
+
+
+def remaining():
+    """{(section, check ID)} still in manual-testing.md, if the file is still there."""
+    path, found, section = ROOT / "manual-testing.md", set(), None
+    if not path.exists():
+        return found
+    for line in path.read_text(encoding="utf-8").splitlines():
         if line.startswith("## "):
             section = re.sub(r":.*", "", line[3:]).strip()
-        match = re.match(r"- \[.\] ([A-Z]+[0-9]+(?:/[A-Z]+[0-9]+)*)\b[: ]*(.*)", line)
+        match = re.match(r"- \[.\] ([A-Z]+[0-9]+(?:/[A-Z]+[0-9]+)*)\b", line)
         if match:
-            found.append((section, match.group(1), match.group(2)))
+            found.add((section, match.group(1)))
     return found
 
 
 def table(rows):
-    out = ["| Section | Check | It says | Becomes | Where it goes, or what the simulator needs |", "|---|---|---|---|---|"]
+    out = ["| Section | Check | It says | Becomes | Notes | Went to |", "|---|---|---|---|---|---|"]
     for section, check, text in rows:
         kind, detail = SORT[(section, check)]
         words = re.sub(r"\s+", " ", re.sub(r"[`*\[\]|]", "", text))
-        out.append(f"| {section} | {check} | {words[:70].rstrip()}{'…' if len(words) > 70 else ''} | {kind} | {detail} |")
+        out.append(f"| {section} | {check} | {words[:70].rstrip()}{'…' if len(words) > 70 else ''} | {kind} | {detail} "
+                   f"| {WENT.get((section, check), 'Not migrated yet')} |")
     return "\n".join(out)
 
 
@@ -201,11 +222,16 @@ def main():
     keys = [(section, check) for section, check, _ in rows]
     problems = [f"not sorted: {k}" for k in keys if k not in SORT] + [f"no such check: {k}" for k in SORT if k not in keys]
     problems += [f"listed twice: {k}" for k, n in Counter(keys).items() if n > 1]
+    left = remaining()
+    problems += [f"migrated, but still in manual-testing.md: {k}" for k in WENT if k in left]
+    problems += [f"not migrated, and gone from manual-testing.md: {k}" for k in keys if k not in WENT and k not in left]
+    problems += [f"went somewhere, but was never sorted: {k}" for k in WENT if k not in SORT]
     if problems:
         print("\n".join(problems), file=sys.stderr)
         return 1
     counts = Counter(SORT[k][0] for k in keys)
-    print(f"{len(keys)} checks: " + ", ".join(f"{counts[kind]} {kind.lower()}" for kind in KINDS))
+    print(f"{len(keys)} checks: " + ", ".join(f"{counts[kind]} {kind.lower()}" for kind in KINDS)
+          + f"; {len(WENT)} migrated, {len(keys) - len(WENT)} still in manual-testing.md")
     if "--check" not in sys.argv:
         readme = HERE / "README.md"
         text = readme.read_text(encoding="utf-8")

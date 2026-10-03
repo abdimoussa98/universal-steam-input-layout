@@ -80,6 +80,16 @@ A35, A36 and A37 are choices the press simulator
 which assumption each of its behaviours models: A1 to A17, A21, A25, A27, A31,
 A32 and A35 to A37.
 
+## Tuning notes
+
+Things to try on the Deck that are about feel, not about which layer answers.
+None of them is a gate. Each comes from a check in the retired Deck checklist
+([migration record](../findings/2026-10-03-deck-check-sorting/README.md)).
+
+| From | What to try |
+|---|---|
+| 90.11 F2 | The Fallback Hold's warning: a strong pulse every 250 ms from the moment the stick goes up or down, and the exit with one beep at 1.5 s. Is the pulse too strong, and is 1.5 s the right length? (90.6 C1 had pulses from 1 s and the exit at 2.5 s.) |
+
 ## Two that are kept apart
 
 A7 and A8 look like one assumption and were written as one in places. A

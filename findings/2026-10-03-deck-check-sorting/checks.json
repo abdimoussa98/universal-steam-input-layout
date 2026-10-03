@@ -1,0 +1,687 @@
+[
+ {
+  "section": "90.13",
+  "id": "N1",
+  "text": "in Steering, push the right stick fully out and hold, with and without a driver held: no turn-assist speed-up, and the gyro keeps aiming while the stick turns"
+ },
+ {
+  "section": "90.13",
+  "id": "N2",
+  "text": "hold R1, hold a trigger (firing), push the right stick out, let go of R1: you're back in fallback (WASD), with no W stuck on. In the alternative: hold R2, hold a bumper"
+ },
+ {
+  "section": "90.13",
+  "id": "N3",
+  "text": "in a Steering stick Double Tap window (flick the left stick while driving), pull a trigger: the mouse button still fires. In the alternative, the bumpers"
+ },
+ {
+  "section": "90.13",
+  "id": "N4",
+  "text": "outside Steering, turn assist and gyro-off-while-turning work as before"
+ },
+ {
+  "section": "90.12",
+  "id": "C1",
+  "text": "(Modifier 2, stick touch): hold L1 then R1, miss both releases, touch either stick: back to Base, typing works. Repeat with Gyro on (you return to Gyro) and R1 first"
+ },
+ {
+  "section": "90.12",
+  "id": "C2",
+  "text": "(Modifier 2 held, stick touch): hold L1 and R1 and rest a thumb on each stick: nothing clears, Modifier 2 keys still work. Repeat holding only one bumper of a stuck Modifier 2: nothing clears until that bumper is released too"
+ },
+ {
+  "section": "90.12",
+  "id": "C3",
+  "text": "(cursor, one step): hold L1 for 300 ms (cursor), miss the release, push the right stick to the edge once: cursor and modifier are both gone in that one push (before: cursor first, modifier on the repeat). Repeat with R1 and with the left stick"
+ },
+ {
+  "section": "90.12",
+  "id": "C4",
+  "text": "(Steering Modifier 2): in Steering hold R1 then L1, miss R1's release only (keep L1 held), touch a stick: nothing clears. Release L1: back to Steering"
+ },
+ {
+  "section": "90.12",
+  "id": "C5",
+  "text": "(rocking): hold L1, add R1, wait 200 ms, let go of L1, press L1 again, wait, let go of R1, let go of L1: no scroll at any point, Base at the end. Repeat starting with R1, and with Gyro on"
+ },
+ {
+  "section": "90.12",
+  "id": "C6",
+  "text": "(taps): tap L1 twice quickly: scroll down. Hold L1 and press A, let go, tap L1 at once: no scroll. Hold L1 and tap R1 within 200 ms: Gyro toggles"
+ },
+ {
+  "section": "90.12",
+  "id": "C7",
+  "text": "(stuck, still clears): miss the release of L1 alone, of Start's Fn layer, and of a Steering driver, then press A or touch a stick: each clears"
+ },
+ {
+  "section": "90.12",
+  "id": "C8",
+  "text": "(menu): hold Start, push a stick (guard), release: Tab or the window as before; hold Start past 200 ms for Fn, release: Fn gone, nothing left behind"
+ },
+ {
+  "section": "90.11",
+  "id": "F1",
+  "text": "(the fix): hold the left stick up for about 1 s, roll to A or D without recentring and hold for 3 s: the pulses stop on A or D and Steering stays. Repeat from down"
+ },
+ {
+  "section": "90.11",
+  "id": "F2",
+  "text": "(exit): hold the left stick up: W, pulses from the start, and Steering exits with one beep at about 1.5 s. Repeat with down and S"
+ },
+ {
+  "section": "90.11",
+  "id": "F3",
+  "text": "(early release): hold up for 1 s, recentre, hold up again: the exit comes 1.5 s after the second push, not sooner"
+ },
+ {
+  "section": "90.11",
+  "id": "F4",
+  "text": "(after A or D): hold A for 3 s, roll up and hold: the exit comes about 1.5 s after reaching up. An instant exit means the timer counted the time on A; an exit near 3 s means the reset on the edge restarted it"
+ },
+ {
+  "section": "90.11",
+  "id": "F5",
+  "text": "(diagonal): hold up-left: W and A together, pulses carry on, exit at 1.5 s"
+ },
+ {
+  "section": "90.11",
+  "id": "F6",
+  "text": "(driver): hold up, press R1 before 1.5 s: the pulses stop, no exit, and the R1 modifier map is up. Release R1 with the stick still up: note whether W and the pulses come back"
+ },
+ {
+  "section": "90.11",
+  "id": "F7",
+  "text": "(entry): enter Steering with the stick centred, push up and hold: W with no pulse and no exit until the stick has been back to centre once (D9 in 90.10). Repeat entering with the stick already held up"
+ },
+ {
+  "section": "90.11",
+  "id": "F8",
+  "text": "(menu while holding up): hold up, tap Start: one Tab, W carries on, and the exit still comes 1.5 s after the push. Hold Start for 1 s: Tab held, no Fn. Recentre, push A: no pulse. Repeat with Select (Escape)"
+ },
+ {
+  "section": "90.11",
+  "id": "F10",
+  "text": "(menu held, then push up): hold Start with the stick centred, push up and hold for 3 s: W, no pulses, and Steering stays. Release Start: Fn or Tab as usual"
+ },
+ {
+  "section": "90.11",
+  "id": "F11",
+  "text": "(Entry Guard): enter Steering and leave the stick centred: Start and Select type Tab and Escape, with no Fn and no leave gesture. Push the stick out and back once, or press a driver: Start's tap and Fn come back"
+ },
+ {
+  "section": "90.11",
+  "id": "F9",
+  "text": "(desktop): apply the layout to the desktop configuration and repeat F1 and F2"
+ },
+ {
+  "section": "90.10",
+  "id": "G1",
+  "text": "(gate 1, stick inheritance from the middle of the stack): hold the left stick out, then hold Start (the guard lands), click and release the stick, release Start: Steering is on (R1 drives W). A Q typed at the click means the click skipped the Entry Point under the guard"
+ },
+ {
+  "section": "90.10",
+  "id": "G2",
+  "text": "(gate 1, Fn): hold Start past 200 ms so Fn is up, click and release the left stick, release Start: Steering is on"
+ },
+ {
+  "section": "90.10",
+  "id": "G3",
+  "text": "(gate 2, edge Release in a layer added with the stick already out): hold Start, flick the left stick out and back inside 200 ms, keep holding Start for 1 s, then press a face button: an F-key means the guard came off on the edge Release and Fn followed. If there is no F-key, release Start: a silent release means the guard never came off (gate 2 fails, the Tap Cover landed on it); a Tab means the guard came off but the Fn delay didn't come back (assumption 6)"
+ },
+ {
+  "section": "90.10",
+  "id": "G4",
+  "text": "(stick already out): hold the left stick north, then hold Start for 500 ms: no `\\` is typed, and the release is silent. A `\\` means the guard landed after the 200 ms Fn delay"
+ },
+ {
+  "section": "90.10",
+  "id": "G5",
+  "text": "(tap with a stick out): hold the left stick north, tap Start: one Tab"
+ },
+ {
+  "section": "90.10",
+  "id": "G6",
+  "text": "(eaten delay comes back): push both sticks out while holding Start, recentre the right one before 200 ms, keep holding for 1 s, release Start: silent. A Tab means the first guard's Tap Cover delay didn't come back (assumption 6)"
+ },
+ {
+  "section": "90.10",
+  "id": "T1",
+  "text": "each gesture from Base and from `Gyro`: Start + LS click enters Steering; Select + RS click, Start + RS click and Select + LS click clear to Base and keep `Gyro`. The stick click is released first, then the menu button. Every one of them beeps and gives a strong haptic pulse on the menu release, with no on-screen notification"
+ },
+ {
+  "section": "90.10",
+  "id": "T2",
+  "text": "(clear): in Steering, each of the four gestures leaves it, with the beep and pulse on the menu release; `Gyro` stays as it was"
+ },
+ {
+  "section": "90.10",
+  "id": "T3",
+  "text": "(cancel): hold Start, click and hold the left stick, release Start first, then the click: no Steering. Note what the click's release does"
+ },
+ {
+  "section": "90.10",
+  "id": "T4",
+  "text": "(missed release): in each transition, release the menu button while the Steam menu is open, close it: everything is blocked until the next tap of either menu button, which ends the transition (a Start tap in the cross transition enters Steering)"
+ },
+ {
+  "section": "90.10",
+  "id": "T5",
+  "text": "(guards): guard on and off for each stick, and both together; with a guard on, a quick menu tap types Tab or Escape, and a 200 ms hold or a thumb lift makes the release silent"
+ },
+ {
+  "section": "90.10",
+  "id": "T6",
+  "text": "(stale guard): with a stick out, release the menu button while the Steam menu is open, close it: touching a stick clears the guard, and the next menu tap behaves normally"
+ },
+ {
+  "section": "90.10",
+  "id": "T7",
+  "text": "(accepted): under the menu Tap Cover, bump the other menu button: the cover returns within about 200 ms, and a release inside that gap types its key. With a stick out and no cover yet, a bump of the other menu button types its key"
+ },
+ {
+  "section": "90.10",
+  "id": "T8",
+  "text": "(K1 reworded): hold Start, press Select before Fn is up: exactly one Backspace, repeating while held. Mirror for Enter"
+ },
+ {
+  "section": "90.10",
+  "id": "T9",
+  "text": "the camera stick is dead while a menu button is held, and comes back on release"
+ },
+ {
+  "section": "90.10",
+  "id": "T10",
+  "text": "(mouse buttons through a window): tap L1, or flick the left stick while driving, and pull a trigger inside the 150 ms window: the mouse button fires. Repeat with the right stick past the ramp threshold first, so `Gyro Off Ramp Up` is underneath: the mouse button still fires. Then hold a trigger and tap L1: note whether the click is interrupted when the window lands and when it times out. In the alternative, the same with the bumpers inside a Steering window"
+ },
+ {
+  "section": "90.10",
+  "id": "D1",
+  "text": "(menu): with no driver held, tap Start: one Tab and Steering stays; hold Start: Fn. Hold R1 and tap Start: Tab; Select: Escape"
+ },
+ {
+  "section": "90.10",
+  "id": "D2",
+  "text": "(hold exit): replaced by F1 to F5 in 90.11"
+ },
+ {
+  "section": "90.10",
+  "id": "D3",
+  "text": "(modifier and roll): hold R1, hold the left stick up: the R1 modifier map. Roll to the side: A or D steers and the map stays until the stick is back at centre. Roll straight to down inside 250 ms: the L1 modifier map takes over"
+ },
+ {
+  "section": "90.10",
+  "id": "D4",
+  "text": "(stick first): hold the left stick up, then press R1: the modifier map is there at once; held 250 ms, recentring is silent; recentred sooner, one scroll"
+ },
+ {
+  "section": "90.10",
+  "id": "D5",
+  "text": "(double taps): flick up and back: one scroll about 150 ms after centre. Flick, then flick and hold: repeating scroll; releasing stops it and adds nothing. Flick up, then push down inside 150 ms: no scroll, the down modifier map. Flick, then push sideways inside 150 ms: A or D at once and the scroll still lands at 150 ms"
+ },
+ {
+  "section": "90.10",
+  "id": "D6",
+  "text": "(W and S through the window): hold a driver, flick the stick once: W or S carries on through the window and after it. Release the driver inside the window: back on `Steering` with plain WASD"
+ },
+ {
+  "section": "90.10",
+  "id": "D7",
+  "text": "(other driver in the window): flick the stick, bump the other driver inside 150 ms: its key for that moment, no two-modifier map, and driving carries on"
+ },
+ {
+  "section": "90.10",
+  "id": "D8",
+  "text": "(mapped buttons): in a modifier map, press a face button: its key, and recentring is then silent. Missed release: in a modifier map, release the driver while the Steam menu is open, close it, press a face button: the steering branch clears"
+ },
+ {
+  "section": "90.10",
+  "id": "D9",
+  "text": "(entry with the stick centred): enter Steering with the stick centred, push up and hold: W with no exit warning until the stick has been back to centre once"
+ },
+ {
+  "section": "90.9",
+  "id": "K1",
+  "text": "(early path): hold Start and press Select within 300 ms, before Fn is up: Backspace types on that first press, repeats while Select is held, and stops cleanly on release with no stuck key. Then release Start: no Tab. Mirror with Select then Start for Enter (no Escape)"
+ },
+ {
+  "section": "90.9",
+  "id": "K2",
+  "text": "with Fn up (hold Start past 300 ms), Select types Backspace on every press and repeats while held. Mirror for Enter"
+ },
+ {
+  "section": "90.9",
+  "id": "K3",
+  "text": "(accepted): hold Start, press and keep holding Select, lift Start first. Select falls through to Base and opens Menu Left; releasing it within 300 ms sends Escape. Mirror: Tab. Confirm this is the only extra output, and that releasing Select first never sends anything extra"
+ },
+ {
+  "section": "90.9",
+  "id": "K4",
+  "text": "other Fn keys behave the same way (hold Start, hold LB for F10, lift Start: LB becomes the L1 modifier)"
+ },
+ {
+  "section": "90.9",
+  "id": "K5",
+  "text": "every layer still does what it did: spot-check a modifier, Mod 2, both menus' Fn keys, the Transition Sets and steering entry. The two removed layers shifted later runtime IDs, so this must be a fresh load"
+ },
+ {
+  "section": "90.9",
+  "id": "M5",
+  "text": "RTP double tap: tap the right pad, tap again north or south within 150 ms for Circular Scroll; a second tap elsewhere returns to mouse mode. The bumpers keep their modifiers right after"
+ },
+ {
+  "section": "90.7",
+  "id": "S1",
+  "text": "drive, flick LS up to center, press A within 150 ms: F fires once, one scroll lands about 150 ms after center, and nothing is left stuck"
+ },
+ {
+  "section": "90.7",
+  "id": "S2",
+  "text": "flick, then flick and hold: repeat scroll; releasing stops it; the next push gives no scroll until center. Sideways during the repeat steers with A/D and a true diagonal keeps scrolling until up/down is released"
+ },
+ {
+  "section": "90.7",
+  "id": "S3",
+  "text": "hold LS up past 250 ms, lift the left thumb, put it back: LST layers clear, the stick stays consumed until center, no phantom scroll"
+ },
+ {
+  "section": "90.7",
+  "id": "S4",
+  "text": "hold LS up past 250 ms, release the driver while the Steam menu is open, close it and touch a stick: owner recovery clears the steering branch through the cover"
+ },
+ {
+  "section": "90.7",
+  "id": "S5",
+  "text": "protected menu entry (Start with a stick deflected), hold past 300 ms, release: silent release, both protected layers gone, gyro stays off throughout; repeat with a thumb lift during the hold"
+ },
+ {
+  "section": "90.7",
+  "id": "S6",
+  "text": "while steering, tap and touch the right pad: the cursor moves and pad clicks work, but no RTP touch mode (Circular Scroll) starts. Outside steering, RTP double tap is unchanged"
+ },
+ {
+  "section": "90.7",
+  "id": "S7",
+  "text": "while steering, turn assist (RS past the ramp threshold) works while just driving, and does nothing while LS holds a modifier map, in the two-modifier map, or right after a scroll flick"
+ },
+ {
+  "section": "90.7",
+  "id": "S8",
+  "text": "flick LS up to center, then push sideways within 150 ms: one scroll fires at once, A/D steers, and pushing up again before center gives no scroll or modifier map"
+ },
+ {
+  "section": "90.6",
+  "id": "D1",
+  "text": "both variants load without error; every layer's sources look the same as 90.5 in the editor"
+ },
+ {
+  "section": "90.6",
+  "id": "D2/D3",
+  "text": "right pad clicked, tap up/down gives one wheel tick; hold repeats from 150 ms at the old cadence and stops on release; forward/back and edge middle click unchanged"
+ },
+ {
+  "section": "90.6",
+  "id": "D4/D5",
+  "text": "Base dpad/face and Menu Fn stick mode shifts unchanged; stick double-touch temporary gyro unchanged"
+ },
+ {
+  "section": "90.6",
+  "id": "C1",
+  "text": "steering fallback, hold LS up: warning pulses from 1 s, exit with one beep at 2.5 s; releasing early cancels both"
+ },
+ {
+  "section": "90.6",
+  "id": "C2",
+  "text": "enter Steering with W held for more than 3 s: no warning or exit until center and a fresh push"
+ },
+ {
+  "section": "90.6",
+  "id": "C3",
+  "text": "short flick to center scrolls once about 150 ms after center; flick-flick-hold still repeats"
+ },
+ {
+  "section": "90.6",
+  "id": "C4/C5/S7",
+  "text": "holding down/up past 250 ms consumes the tap and keeps the modifier map while held; an interrupted hold never blocks the next; after that, reversing does nothing and center never scrolls. After a driver takeover or Mod 2 exit with the stick held, center never scrolls"
+ },
+ {
+  "section": "90.6",
+  "id": "R1",
+  "text": "second-press cover. Double-tap Select and hold past 150 ms: Escape holds, and release ends cleanly with no extra Escape. Repeat with Start/Tab and with a modifier double-tap-hold scroll ([change record](findings/2026-09-30-second-press-cover-reset/README.md))"
+ },
+ {
+  "section": "90.6",
+  "id": "R2",
+  "text": "interrupt that hold (release before 150 ms, then double-tap-hold again); the cover still arrives, so the release ends cleanly. A fast tap chain still re-enters the window"
+ },
+ {
+  "section": "90.6",
+  "id": "R3",
+  "text": "apply either layout to the **desktop** configuration; those four inputs show three entries, the reset is the one missing, and tap, double tap and hold still work"
+ },
+ {
+  "section": "90.6",
+  "id": "T1",
+  "text": "`Transition Set 0` (Fn + RS click). While either menu button is held, touching a stick doesn't clear the menu stack. With both menu buttons released, touching still clears it. Lifting a thumb clears only that side's LST/RST layers. Confirm in the editor that the merged chord shows both Select and Start set to Any ([record](findings/2026-09-30-touch-release-rule/README.md))"
+ },
+ {
+  "section": "90.6",
+  "id": "P1",
+  "text": "during any Double Tap window (within 150 ms of a tap), a left-pad swipe sends Escape, Enter, Tab or Backspace directly and adds no key layer; left-pad click and touch do nothing. In the six other windows, the right pad still moves the cursor with Base's feel, and right-pad click and touch do nothing. In RTP Double Tap, right-pad click does nothing and north/south/east/west still select or cancel. Check that the swipe feel (sensitivity and haptics) matches Base ([record](findings/2026-09-30-double-tap-pad-blocks/README.md))"
+ },
+ {
+  "section": "90.6",
+  "id": "B1",
+  "text": "derived window blocks. Default only: push RS past the ramp threshold (Gyro Off Ramp Up), tap L1, and pull a trigger inside the window. Nothing fires and gyro stays off until the window ends. Both layouts: quick-tap the right pad while holding Start or Select (Fn). In RTP Double Tap, the four back buttons do nothing. Right-pad selection is unchanged: a second tap north or south goes to Circular Scroll, and anywhere else returns to mouse mode ([record](findings/2026-09-30-derived-window-blocks/README.md))"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB1",
+  "text": "Tapping Select sends Escape, and tapping Start sends Tab"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB2",
+  "text": "Holding either for 300 ms brings up its Fn layer, and the F-keys work\n- On release nothing is sent\n- The face buttons are back to normal\n- The next tap still sends Tab / Escape"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB3",
+  "text": "Start-delay reset: after an interrupted hold, keep holding or hold again, and the Fn layer comes up"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB4",
+  "text": "Enter / Backspace: Select → Start sends Enter, and Start → Select sends Backspace. Try both quickly (under 300 ms) and with the Fn layer up\n- Releasing the second button first sends nothing extra. Lifting the first button first drops the still-held second button to Base (accepted since 90.9; see the 90.9 checks)\n- Holding the second button repeats the key, and pressing it again while holding the first sends it again"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB5",
+  "text": "Double tap and hold repeats Escape / Tab, and releasing stops it\n- Note whether a quick double tap sends the key two or three times (known, not fixed)"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB6",
+  "text": "Menu button + stick click opens a Transition Set, and with the menu button held, the stick directions type punctuation"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB7",
+  "text": "In each Menu Fn layer, its eight directional keybinds (four LS + four RS) give haptic feedback with their punctuation keys. Check holds, direction changes, and inherited Fn directions in Transition Sets for unwanted buzzing or duplicate keys. Separate held-click mode-shift bindings retain their previous haptic settings"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB8",
+  "text": "Stick touch release: hold Start, touch a stick and lift off, then release Start. Menu Right: Fn comes up on the lift, and no Tab is sent. Select does the same with Menu Left: Fn, and no Escape"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB9",
+  "text": "Steam button recovery:\n- Hold a menu button until its Fn layer is up, press the Steam button, let go, and close the Steam menu\n- RS to the edge (or a face button) clears the Fn and entry layers, and the menu buttons work normally again\n- Enter / Backspace are plain chords since 90.9, so nothing of theirs can be left behind. Gyro suppression during menu use is intentional"
+ },
+ {
+  "section": "Menu buttons",
+  "id": "MB10",
+  "text": "Stuck entry layer (for example, the Steam button within 300 ms of a menu press)\n- The other menu button clears it and then works normally\n- In the alternative, RS to the edge no longer makes it worse"
+ },
+ {
+  "section": "Modifier layers",
+  "id": "ML1",
+  "text": "Nav keys with Start / Select: LB gives Insert / Delete, RB gives Home / End, and LB + RB (either order) gives PgUp / PgDn"
+ },
+ {
+  "section": "Modifier layers",
+  "id": "ML2",
+  "text": "The same nav keys in Gyro mode"
+ },
+ {
+  "section": "Modifier layers",
+  "id": "ML3",
+  "text": "Holding Start or Select in any modifier layer, in Base or Gyro mode, doesn't change the gyro. Confirm that's what you want"
+ },
+ {
+  "section": "Modifier layers",
+  "id": "ML4",
+  "text": "After a nav chord, releasing the modifier doesn't fire its tap / scroll action, and Start or Select alone in a modifier layer still clears it"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC1",
+  "text": "Hold the primary modifier for 300 ms: its Temp Cursor Gyro overlay applies,\nwith precision speed 750, haptic intensity 0, haptic bump 1, and movement\nthreshold 5. Natural sensitivity remains 300 and activation follows the\nexisting regular/Gyro rules. Releasing the modifier sends no tap/scroll output"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC2",
+  "text": "The 300 ms hold entry gives one high-intensity haptic pulse. Keep holding:\nno ongoing gyro vibration or repeated entry pulse. Early thumb-lift entry and\nsubsequent touch releases remain silent. Check both regular/Gyro owners and\ninterrupted/retried holds in both layouts"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC3",
+  "text": "Before 300 ms, lift either thumb: cursor applies immediately, then only\nthat stick's LST/RST helpers clear. Repeated thumb lifts after cursor entry\ninherit the same cursor-add-before-helper-removal path; an already-active cursor\nstays active. After cancellation, normal-cover touch releases only clean up"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC4",
+  "text": "Check every ordinary face/D-pad/click input, Start/Select, and opposite\nmodifier before, at, and after 300 ms. Active cursor removes itself, exposing\nthe parent's output and repeating normal-cover add. Gyro inherits normal\nprecision/haptic/bump/threshold 300/0/5/0. The cover wins for the whole hold,\npreserves the intended key/mouse output, and blocks cursor on later thumb lifts"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC5",
+  "text": "Check the twelve ordinary inputs in all four regular/Gyro owners: output\nchord and cover-add chord are both uninterruptible; only the cover chord gains\nrepeat. Test owner-first and input-first presses, with inputs held across cursor\nentry/removal. Both chords must run without lost/duplicate keys, new key repeats,\nor stuck mouse buttons. Same-selector chord order is not a binding-array order"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC6",
+  "text": "Trigger a normal-cover input and thumb release together near the 300 ms\nboundary. No delayed or release-driven cursor add may defeat the normal cover"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC7",
+  "text": "Confirm each single-modifier edge has three entries: interruptible owner\nguard, uninterruptible All chord selecting the owner and opposite deflection,\nand repeating interruptible cleanup. The All chord repeats: parents add the\nnormal cover; cursor edges remove only cursor. Alternative ownership uses soft pulls"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC8",
+  "text": "One stick alone preserves cursor; both sticks around 25% should override\nit. Test both activation orders, simultaneous movement, sticks already held\nbefore modifier entry, and crossing the threshold while the other stick stays\ndeflected. LS radius 4915 and RS 7209 account for different native hysteresis;\nverify physical travel and the opposing-stick selector threshold separately"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC9",
+  "text": "Release/lose the modifier while sticks stay deflected: recovery clears its\nfour-target family, and no chord keeps adding covers. Repeat via Steam-menu\ninterruption, including a thumb already touching before the owner is lost\nand lifted afterward; no orphan cursor overlay should remain"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC10",
+  "text": "Test both Mod 2 orders and release orders, including alternative partial/\nfull pulls. Normal properties remain in effect, the still-held opposite side\nsurvives, and persistent Gyro changes only through its existing intended exit"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC11",
+  "text": "Alternative R2 regular/Gyro → L2 now repeats its Mod 2 entry. With LT already\npulled before the R2 layer appears, entry must work without re-pulling; keep the\nexisting destination and cleanup order"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC12",
+  "text": "Fresh modifier holds become eligible for cursor again. A short primary\ntap before either overlay retains Double Tap behavior. Check repeated attempts\nafter an interrupted delay: the parent's 350 ms reset must let the 300 ms\ncursor apply recover without releasing/repressing indefinitely"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC13",
+  "text": "Confirm each cursor-entry primary input has exactly three entries: release,\nthe 300 ms chorded cursor apply, and an uninterruptible Regular Press that\nremoves only the owning cursor overlay with Hold to Repeat and interval 350 ms"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC14",
+  "text": "Keep holding for several 350 ms intervals after cursor entry, early\nstick-touch completion, and an early/late normal-cover override. Either overlay\nmust retire the parent's apply/reset pair: no flickering or repeated removals,\nno normal-cover loss, and no cursor re-entry after an override. Include the\nreset boundary and held inputs across transitions into Always On windows"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC15",
+  "text": "Hold/move/touch inputs across all seven Double Tap windows and menu/Fn/\nTransition stacks. Timer isolation, self-first exits, menu gyro suppression,\nmovement, and existing mode shifts must remain intact"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC16",
+  "text": "During a modifier hold, quickly touch/release RTP, before and after cursor\nentry. RTP Double Tap must block face buttons, D-pad directions, and both stick\nclicks while its Always On window is active. Test inputs already held and newly\npressed; no inherited cover-add or cursor removal may run before its safe exit"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC17",
+  "text": "Cancel cursor during RTP Entry's 150 ms wait: check the touch/trackball\nlifecycle still completes acceptably if that removal restarts its delay. Keep\nRTP touch's intentional reset exclusion. In RTP Double Tap, confirm its existing\ntrackpad source-mode replacement prevents Base click/touch layer mutations"
+ },
+ {
+  "section": "Temp cursor gyro",
+  "id": "TC18",
+  "text": "First verify whether touching either trackpad actually activates face/D-pad\nmode-shift targets 1039/1043 under regular/Gyro modifiers in both layouts. They\nare marked `inactive modeshift`; enabled Base references alone do not prove\nactivation. Record key outputs and normal-cover behavior before and after the\n300 ms cursor apply, including trackpad touches held across layer transitions.\nOnly propose a fix if an actual cover bypass is reproduced; otherwise close\nthis concern without changing bindings"
+ },
+ {
+  "section": "Reference gyro and right-stick tuning",
+  "id": "RG1",
+  "text": "Base gyro matches the July reference's feel and settings: natural sensitivity\n300, rotation calibration 3853, vertical ratio 200, conversion style 4, speed\ndeadzone 0, precision 300. Existing Base All and Gyro Any activation rules remain\nintact; LST/RST Temporary Gyro change activation without changing response"
+ },
+ {
+  "section": "Reference gyro and right-stick tuning",
+  "id": "RG2",
+  "text": "In regular and Gyro modifier holds, cursor response is 750/0/1/5 and removing\ncursor exposes 300/0/5/0 for precision/haptic/bump/threshold. Normal covers have\nno active gyro source. Both responses inherit\nnatural sensitivity 300 and the new Base calibration/conversion. Exercise\nLST/RST helpers before and during each profile; menu and Gyro Off modes still\ndisable gyro when intended"
+ },
+ {
+  "section": "Reference gyro and right-stick tuning",
+  "id": "RG3",
+  "text": "Base right stick retains its reference settings and feel. Ramp 0 changes\nsensitivity/vertical scale to 150/80, then Ramp 1 to 200/67; recentering restores\nthe exposed lower settings. Modifier sensitivity 75 and its local edge region\nremain intact; repeat the trigger-held and gyro-off ramp paths below"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR1",
+  "text": "LT / RT fire left / right click, and Start / Select work while a trigger is held"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR2",
+  "text": "In the Deck GUI, Base's right-stick outer edge shows three command entries, and both chords are set to Any\n- Default: the trigger chord selects LT / RT (partial and full pull), and the modifier chord selects LB / RB\n- Alternative: the other way around"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR3",
+  "text": "RS to the edge with nothing held:\n- The gyro turns off and Turning Ramp Up 0 starts\n- Turning Ramp Up 1 follows after about 250 ms\n- Moving back in restores the gyro and ends ramp-up, at either stage"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR4",
+  "text": "RS to the edge while holding a trigger keeps the gyro on during ramp-up, with no unwanted mouse repeats\n- Try each trigger alone at partial and full pull, then both"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR5",
+  "text": "Pulling a trigger after the gyro turns off, in both stages, brings the gyro back, and the first click registers\n- Letting go of one of two held triggers keeps the chord\n- Partial ↔ full pull changes work"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR6",
+  "text": "Holding a modifier on the way to the edge lets no ramp-up or gyro-off leak through\n- Try each modifier alone, then both\n- Try it again with a trigger held, and with the press / release order reversed"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR7",
+  "text": "Pressing a modifier during ramp-up ends ramp-up and enters the right modifier, the `Gyro |` version in Gyro mode\n- In the alternative, a partial pull keeps the block, and a full pull exits"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR8",
+  "text": "The edge / trigger / modifier checks above work the same in Gyro mode"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR9",
+  "text": "Interrupting the 250 ms stage change, recentering and retrying still reaches Turning Ramp Up 1 (the 300 ms reset)"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR10",
+  "text": "Stuck right trackpad:\n- Hold RB, touch the right trackpad, let go of both (try both orders), then push RS to the edge\n- Ramp-up works, and trackball momentum is intact\n- A thumb on the trackpad still blocks the edge"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR11",
+  "text": "Two-bumper tap cover:\n- A quick LB + RB tap still toggles Gyro mode\n- Holding both past 200 ms and releasing doesn't, even right after an interrupted attempt"
+ },
+ {
+  "section": "Triggers and ramp-up",
+  "id": "TR12",
+  "text": "No new haptic pulse when RS hits the edge"
+ },
+ {
+  "section": "Default trigger reference match",
+  "id": "DT1",
+  "text": "Load the default layout fresh and confirm both Base triggers match the July reference's trigger settings and mouse outputs (LT → left click, RT → right click)"
+ },
+ {
+  "section": "Default trigger reference match",
+  "id": "DT2",
+  "text": "Check partial/full pulls, quick pulls, held firing, and release in Base, Gyro, and both ramp stages; a pull during Gyro Off Ramp Up restores gyro and registers the intended click"
+ },
+ {
+  "section": "Default trigger reference match",
+  "id": "DT3",
+  "text": "Check inherited trigger behavior through modifier/cover layers, menu Fn outputs, and all seven Double Tap windows, including a trigger already held across entry/exit. Existing trigger overrides and blocks must retain their behavior"
+ },
+ {
+  "section": "Left-stick recovery and Transition Sets",
+  "id": "LR1",
+  "text": "Validate the new LS-edge recovery and Transition Set depth on the Deck in both layouts\n- Follow the [fresh-load checks](findings/2026-09-28-left-stick-recovery/CHANGES.md#verification-and-deck-checks), including both Mod 2 orders/Gyro variants, either-owner guards, outer-region behavior, and LS deflection held across every Double Tap window"
+ },
+ {
+  "section": "WASD modifier scaffold",
+  "id": "WM1",
+  "text": "Base left stick shows one empty Soft Press command named **WASD Modifier** on its edge, with the reference's style/threshold settings. No `*` or other modifier key is sent by the shipped layout; WASD and Q click still work"
+ },
+ {
+  "section": "WASD modifier scaffold",
+  "id": "WM2",
+  "text": "With a test modifier assigned, check slow deflection, quick deflection, held deflection, and return to neutral. Verify the intended WASD-only, modifier-only, and combined regions; adjust the user's key and preferred Hip Fire Aggressive/Relaxed style as needed, without changing the shared scaffold just to fit one game"
+ },
+ {
+  "section": "WASD modifier scaffold",
+  "id": "WM3",
+  "text": "Verify inherited modifier behavior in Base, Gyro, ramp stages, stick-touch layers, and button overlays where the underlying stack exposes Base's LS edge"
+ },
+ {
+  "section": "WASD modifier scaffold",
+  "id": "WM4",
+  "text": "Verify the modifier is displaced by the 16 LS-edge recovery layers (including both Fn layers), all seven Double Tap windows, and both menu Fn left-stick mode shifts; their cleanup, timers, and punctuation outputs retain their behavior"
+ },
+ {
+  "section": "WASD modifier scaffold",
+  "id": "WM5",
+  "text": "Enter and leave those overrides while the stick is already deflected, as well as deflecting after entry. Check that no modifier stays held after release or after Steam-button recovery"
+ },
+ {
+  "section": "Missed releases and cleanup scope",
+  "id": "MR1",
+  "text": "Validate recovery on the Deck after missed releases, in both layouts\n- Trace the underlying recovery owner and which overlays expose or block it; do not require every overlay to duplicate that recovery\n- Stale-state fallbacks must preserve valid held interactions. Normal releases, delayed-apply resets, timed expiry, and deliberate transitions are allowed during normal use\n- Verify intended survivors, including persistent Gyro, the still-held modifier side, and valid shared overlays; flag invalid residual overlays requiring another gesture for the ownership review"
+ },
+ {
+  "section": "Missed releases and cleanup scope",
+  "id": "MR2",
+  "text": "Verify whether interrupted transitions can leave both Mod 2 press orders active and cause a recovery problem\n- Retain current-branch fallback unless that problem is demonstrated. Its eleven targets include both cursor overlays but still exclude the opposite Mod 2 order\n- Preserve the combined tap cover's nine-layer released-side cleanup and persistent Gyro. The uncovered Mod 2 release has a separate thirteen-layer cleanup plus an intentional Gyro state change"
+ },
+ {
+  "section": "Held inputs across layer changes",
+  "id": "HI1",
+  "text": "One held stick click from Menu Left / Right Entry (before 300 ms) goes Entry → Fn → Transition Set without a second click. This relies on Fn's repeating click chord"
+ },
+ {
+  "section": "Held inputs across layer changes",
+  "id": "HI2",
+  "text": "Staggered Gyro toggle: hold LB, press RB, then release RB about 100 ms before LB. Gyro toggles, and `Gyro | L1: Modifier 0` becomes active while LB is held. Record whether the regular L1 modifier also appears, and whether releasing LB then scrolls down through L1: Double Tap. Repeat for Gyro → regular, with both press orders, and in the alternative with L2 / R2"
+ },
+ {
+  "section": "Held inputs across layer changes",
+  "id": "HI3",
+  "text": "Alternative only: soft-pull both triggers during ramp-up, then fully pull one to exit. Mod 2 should enter without re-pulling, in both regular and Gyro mode. Also pull both triggers together from Base. This checks the F1 fix: `R2: Modifier 1` and its Gyro variant now repeat their LT → Mod 2 chord, like the other three pairs"
+ },
+ {
+  "section": "Held inputs across layer changes",
+  "id": "HI4",
+  "text": "Output scope: the existing first-click check (a trigger pulled during Gyro Off Ramp Up) tests whether a removal fires an exposed **mouse** output. The double-tap-hold Escape / Tab checks test whether **key** outputs fire on the press that adds their layer; since 90.9 Enter / Backspace are typed by the chord itself (check K1). Record both results in the audit"
+ }
+]
