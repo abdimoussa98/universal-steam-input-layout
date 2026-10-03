@@ -7,7 +7,7 @@ import tempfile
 import time
 import unittest
 
-from audit_inheritance import audit, entries, map_title
+from audit_inheritance import Layout, always_on_layers, audit, entries, map_title
 
 ROOT = Path(__file__).resolve().parents[1]
 EMPTY = "controller_action empty_binding, , "
@@ -380,7 +380,8 @@ class NeptuneLayoutTests(unittest.TestCase):
             with self.subTest(variant=variant):
                 report = audit(data, cfg)
                 self.assertEqual(report["variant"], variant)
-                self.assertEqual(len(report["targets"]), 9)
+                # R140 covers every layer with an Always On action: each one is audited, whatever their number.
+                self.assertEqual(set(report["targets"]), set(always_on_layers(Layout(data))))
                 undecided = [(t, r["source"], r["input"], r["status"]) for t, row in report["targets"].items()
                              for r in row["routes"] if r["status"] == "open"]
                 self.assertEqual(undecided, [])
