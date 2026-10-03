@@ -7,7 +7,7 @@ import tempfile
 import time
 import unittest
 
-from audit_inheritance import Layout, audit, entries, explore, map_title
+from audit_inheritance import audit, entries, map_title
 
 ROOT = Path(__file__).resolve().parents[1]
 EMPTY = "controller_action empty_binding, , "
@@ -182,65 +182,8 @@ def release(binding):
     return {"release": {"bindings": {"binding": binding}}}
 
 
-class ExploreTests(unittest.TestCase):
-    """Stacks below a layer are derived from the layout's own transitions."""
-
-    def below(self, data, title, depth=5):
-        return set(explore(Layout(data), depth)["below"].get(title, {}))
-
-    def test_window_entry_removes_the_parent_first(self):
-        data = build({"Base": {"switch": ("switches", {"left_bumper": act(add("Mod"))})},
-                      "Mod": {"switch": ("switches", {"left_bumper": release([add("Win"), remove("Mod")])})},
-                      "Win": {}})
-        self.assertEqual(self.below(data, "Win"), {("Base",)})
-
-    def test_every_context_the_parent_can_be_in_is_found(self):
-        data = build({"Base": {"switch": ("switches", {"left_bumper": act(add("Mod")),
-                                                       "button_a": act(add("Gyro"))})},
-                      "Gyro": {},
-                      "Mod": {"switch": ("switches", {"left_bumper": release([add("Win"), remove("Mod")])})},
-                      "Win": {}})
-        self.assertEqual(self.below(data, "Win"), {("Base",), ("Base", "Gyro")})
-
-    def test_an_upper_override_stops_lower_transitions(self):
-        data = build({"Base": {"switch": ("switches", {"button_a": act(add("Cover")),
-                                                       "button_b": act(add("Win"))})},
-                      "Cover": {"switch": ("switches", {"button_b": act("key_press B, , ")})},
-                      "Win": {}})
-        self.assertEqual(self.below(data, "Win"), {("Base",)})
-
-    def test_disabled_source_stops_lower_transitions(self):
-        data = build({"Base": {"right_trackpad": ("absolute_mouse", {"touch": act(add("Win"))}),
-                               "switch": ("switches", {"button_a": act(add("Quiet"))})},
-                      "Quiet": {"right_trackpad": ("disabled", {})},
-                      "Win": {}})
-        self.assertEqual(self.below(data, "Win"), {("Base",)})
-
-    def test_reapplying_an_active_layer_does_not_reorder_it(self):
-        data = build({"Base": {"switch": ("switches", {"button_a": act(add("A"))})},
-                      "A": {"switch": ("switches", {"button_b": act(add("B"))})},
-                      "B": {"switch": ("switches", {"button_x": act([add("Win"), add("A")])})},
-                      "Win": {}})
-        self.assertEqual(self.below(data, "Win"), {("Base", "A", "B")})
-
-    def test_hold_layer_can_be_released_and_mode_shift_groups_can_fire(self):
-        data = build({"Base": {"left_trackpad": ("absolute_mouse", {"click": act("controller_action hold_layer {{Base::Held}} 0 0, , ")}),
-                               "joystick": ("joystick_mouse", {"click": act("mode_shift joystick 90, , ")})},
-                      "Held": {}, "Win": {}},
-                     modeshift={"90": ("joystick", "dpad", {"dpad_north": act(add("Win"))})})
-        self.assertEqual(self.below(data, "Win"), {("Base",), ("Base", "Held")})
-
-    def test_depth_limits_the_search(self):
-        chain = {"Base": {"switch": ("switches", {"button_a": act(add("A"))})},
-                 "A": {"switch": ("switches", {"button_a": act([add("B"), remove("A")])})},
-                 "B": {"switch": ("switches", {"button_a": act([add("Win"), remove("B")])})},
-                 "Win": {}}
-        self.assertEqual(self.below(build(chain), "Win", depth=2), set())
-        self.assertEqual(self.below(build(chain), "Win", depth=3), {("Base",)})
-
-
-class DerivedAuditTests(unittest.TestCase):
-    """The depth-limited search on its own (`chains=False`): an opt-in comparison since the switch to chains."""
+class BlocksNeededTests(unittest.TestCase):
+    """What the audit recommends for an open route: replace with the one possible keybind, or clear."""
 
     def test_always_on_layers_are_audited_from_derived_stacks_without_config(self):
         data = build({"Base": {"switch": ("switches", {"left_bumper": act(add("Ramp")),
@@ -249,11 +192,10 @@ class DerivedAuditTests(unittest.TestCase):
                       "Ramp": {"left_trigger": ("trigger", {"edge": act([remove("Ramp"), "mouse_button LEFT, , "])})},
                       "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")),
                                                       "left_bumper": act(EMPTY), "right_bumper": act(EMPTY)})}})
-        report = audit(data, {"targets": {}}, depth=4, chains=False)
+        report = audit(data, {"targets": {}})
         row = report["targets"]["Win"]
         self.assertEqual({(r["source"], r["input"], r["from_layer"]) for r in row["routes"]},
                          {("left_trigger", "edge", "Ramp")})
-        self.assertTrue(row["saturated"])
         self.assertFalse(report["ok"])
         self.assertEqual(row["blocks_needed"], [{
             "source": "left_trigger", "input": "edge", "action": "replace", "stacks": 2,
@@ -269,13 +211,13 @@ class DerivedAuditTests(unittest.TestCase):
                           "Ramp": {"left_trigger": ("trigger", {"edge": act(remove("Ramp"))})},
                           "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")),
                                                           "left_bumper": act(EMPTY), "right_bumper": act(EMPTY)})}})
-        needed = audit(layout("mouse_button LEFT, , "), {"targets": {}}, depth=4, chains=False)["targets"]["Win"][
+        needed = audit(layout("mouse_button LEFT, , "), {"targets": {}})["targets"]["Win"][
             "blocks_needed"]
         self.assertEqual(needed, [{
             "source": "left_trigger", "input": "edge", "action": "replace", "stacks": 2,
             "activators": {"Full_Press": {"bindings": {"binding": "mouse_button LEFT, , "}}}}])
         # No keybind in any stack: nothing to replace with.
-        needed = audit(layout(EMPTY), {"targets": {}}, depth=4, chains=False)["targets"]["Win"]["blocks_needed"]
+        needed = audit(layout(EMPTY), {"targets": {}})["targets"]["Win"]["blocks_needed"]
         self.assertEqual([(b["input"], b["action"], b["activators"]) for b in needed], [("edge", "clear", None)])
 
     def test_varying_underlying_binds_must_be_cleared(self):
@@ -285,18 +227,8 @@ class DerivedAuditTests(unittest.TestCase):
                       "Mod": {"joystick": ("dpad", {"click": act([add("Mod"), "mouse_button MIDDLE, , "])})},
                       "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")),
                                                       "left_bumper": act(EMPTY), "right_bumper": act(EMPTY)})}})
-        needed = audit(data, {"targets": {}}, depth=4, chains=False)["targets"]["Win"]["blocks_needed"]
+        needed = audit(data, {"targets": {}})["targets"]["Win"]["blocks_needed"]
         self.assertEqual([(b["input"], b["action"], b["activators"]) for b in needed], [("click", "clear", None)])
-
-    def test_routes_found_only_at_the_depth_limit_mean_not_saturated(self):
-        chain = build({"Base": {"switch": ("switches", {"button_a": act(add("A")), "button_b": act(add("Win"))})},
-                       "A": {"switch": ("switches", {"button_a": act([add("B"), remove("A")])})},
-                       "B": {"switch": ("switches", {"button_x": act(remove("B"))})},
-                       "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")),
-                                                       "button_a": act(EMPTY), "button_b": act(EMPTY)})}})
-        shallow = audit(chain, {"targets": {}}, depth=3, chains=False)["targets"]["Win"]
-        self.assertFalse(shallow["saturated"])
-        self.assertTrue(audit(chain, {"targets": {}}, depth=5, chains=False)["targets"]["Win"]["saturated"])
 
 
 def deep_window():
@@ -335,11 +267,9 @@ class ChainStackTests(unittest.TestCase):
 
     def test_chains_check_a_window_three_inputs_deep_with_no_depth(self):
         report = audit(deep_window(), {"targets": {}})
-        self.assertEqual(report["depth"], 0)
         row = report["targets"]["Win"]
         self.assertTrue(row["checked"])
         self.assertEqual((row["stacks"], row["chain_stacks"]), (1, 1))
-        self.assertTrue(row["saturated"])
         self.assertEqual({(r["source"], r["input"], r["from_layer"], tuple(r["stack"])) for r in row["routes"]},
                          {("switch", "button_y", "Owner", ("Base", "Mode", "Owner"))})
         self.assertEqual([(b["input"], b["action"]) for b in row["blocks_needed"]], [("button_y", "clear")])
@@ -363,16 +293,6 @@ class ChainStackTests(unittest.TestCase):
         data = build({"Base": {"switch": ("switches", {"button_a": act(add("Mod"))})}, "Mod": {}, "Win": {}})
         route = audit(data, config([["Base"]]))["targets"]["Win"]["routes"][0]
         self.assertEqual(route["reason"], ["declared in the config"])
-
-    def test_the_depth_search_is_an_opt_in_comparison(self):
-        # On its own it can't reach the window at depth 2, and finds it only at its limit at depth 3.
-        alone = audit(deep_window(), {"targets": {}}, depth=2, chains=False)
-        self.assertFalse(alone["targets"]["Win"]["checked"])
-        self.assertFalse(audit(deep_window(), {"targets": {}}, depth=3, chains=False)["targets"]["Win"]["saturated"])
-        # With chains the same stack is already traced, so the depth limit doesn't break saturation.
-        both = audit(deep_window(), {"targets": {}}, depth=3)["targets"]["Win"]
-        self.assertTrue(both["saturated"])
-        self.assertEqual(both["chain_stacks"], 1)
 
 
 class ConfigTests(unittest.TestCase):
@@ -420,7 +340,6 @@ class CliTests(unittest.TestCase):
     def test_chains_are_the_default_and_print_the_reason(self):
         out = self.run_cli(deep_window(), {"targets": {}})
         self.assertEqual(out.returncode, 1)
-        self.assertIn("depth 0", out.stdout)
         self.assertIn("1 stack(s) (1 from chains)", out.stdout)
         self.assertIn("switch/button_y from Owner", out.stdout)
         self.assertIn("because: Owner switch/button_x Full_Press#0: +Win", out.stdout)
@@ -436,7 +355,6 @@ class CliTests(unittest.TestCase):
                              capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, out.stderr)
         report = json.loads(out.stdout)
-        self.assertEqual(report["depth"], 0)
         self.assertTrue(all(row["chain_stacks"] for row in report["targets"].values()))
 
     def test_exit_codes(self):
@@ -461,7 +379,6 @@ class NeptuneLayoutTests(unittest.TestCase):
                 report = audit(data, cfg)
                 self.assertEqual(report["variant"], variant)
                 self.assertEqual(len(report["targets"]), 9)
-                self.assertTrue(all(row["saturated"] for row in report["targets"].values()))
                 undecided = [(t, r["source"], r["input"], r["status"]) for t, row in report["targets"].items()
                              for r in row["routes"] if r["status"] == "open"]
                 self.assertEqual(undecided, [])
@@ -473,23 +390,21 @@ class NeptuneLayoutTests(unittest.TestCase):
             data = json.loads((ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json").read_text())
             with self.subTest(variant=variant):
                 report = audit(data, cfg)
-                self.assertEqual(report["depth"], 0)
                 self.assertEqual([t for t, row in report["targets"].items() if not row["chain_stacks"]], [])
                 self.assertTrue(report["ok"])
 
     def test_a_steering_window_is_checked_with_no_config(self):
-        # Seven inputs from Base: the depth-5 search never reaches it.
+        # Seven inputs from Base: the old depth-5 search never reached it.
         title = "Steering | LS Up: Double Tap"
         cfg = {"targets": {title: {}}}
         data = json.loads((ROOT / "neptune/single-set-default_hold-gyro_latest.json").read_text())
-        self.assertFalse(audit(data, cfg, depth=5, chains=False)["targets"][title]["checked"])
         row = audit(data, cfg)["targets"][title]
         self.assertTrue(row["checked"])
         self.assertIn(("Base", "Steering", "Steering | R1: W Key"),
                       {tuple(b["stack"]) for b in row["blocked"]} | {tuple(r["stack"]) for r in row["routes"]})
 
     def test_the_window_audit_takes_under_a_second(self):
-        # Plan step 3b: mid-chain arrivals must not make the audit slow. The depth-5 search took 3.3 s.
+        # Plan step 3b: mid-chain arrivals must not make the audit slow. The old depth-5 search took 3.3 s.
         cfg = json.loads((ROOT / "traced_stacks.json").read_text())
         data = json.loads((ROOT / "neptune/single-set-default_hold-gyro_latest.json").read_text())
         started = time.perf_counter()

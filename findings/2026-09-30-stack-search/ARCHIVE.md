@@ -6,6 +6,12 @@ dependency file; do not delete them. They remain useful building blocks and
 can investigate a specific disputed result. Deprecation does not disable the
 CLIs or change their semantics.
 
+**Moved on 2026-10-02:** the modules, tests, C++ engine and
+`requirements-proof.txt` are in
+[archived/exhaustive-stack-search/](../../archived/README.md). They import
+each other by their old paths, so to run them check out the commit named in
+that README.
+
 The next task is the [intended-flow inheritance checker](../../plans/2026-09-30-cleanup-generator.md#intended-flow-inheritance-audit-author-approved),
 tracked in [todos](../../todos.md). It follows intended layer-addition paths,
 compares inherited bindings per button, recommends clear/block for competing

@@ -7,8 +7,8 @@ normal directional state lives in Modifier 0/1, and normal repeat uses one cover
 
 [Exports, implementation and layer inventory](../findings/2026-09-30-steering-lean/README.md)
 · [Acceptance](../findings/2026-09-30-steering-lean/ACCEPTANCE.md)
-· [Previous 25-layer plan](2026-09-30-steering-implementation-plan.25-layer.md)
-· [Original baseline plan](2026-09-29-steering-implementation-plan.baseline.md)
+· [Previous 25-layer plan](../archived/plans/2026-09-30-steering-implementation-plan.25-layer.md)
+· [Original baseline plan](../archived/plans/2026-09-29-steering-implementation-plan.baseline.md)
 
 ## Architecture and naming
 

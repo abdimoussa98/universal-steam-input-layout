@@ -118,8 +118,8 @@ The plan left these open; the defaults it named were used.
   nine default windows are left and right mouse (18 binds), and the bumpers in
   the alternative's two Steering windows are left and right mouse (4 binds).
   Replaced binds no longer carry an empty `settings` block.
-- `transition_set_0` is retired from the pipeline. The module stays as the
-  record of the 90.6 patch.
+- `transition_set_0` is retired from the pipeline. The module is in
+  `archived/retired-fixes/` as the record of the 90.6 patch.
 
 ## Checks run
 
@@ -135,7 +135,9 @@ The plan left these open; the defaults it named were used.
   `test_flow_inheritance`, `test_audit_inheritance`, `test_double_tap_windows`
   and `test_timed_spec`. `test_steering_lean.py` is unchanged: it tests the
   frozen 09-30 builder.
-- Full suite: 684 tests pass, 155 skipped.
+- Full suite at release: 684 tests pass, 155 skipped. Since 2026-10-02 the
+  deprecated tooling and its tests are in `archived/`; the live suite is 252
+  tests.
 
 ## Not verified
 

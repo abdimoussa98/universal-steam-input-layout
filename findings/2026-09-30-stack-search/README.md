@@ -9,6 +9,10 @@ On 2026-10-01 the depth-limited `StackSpace` search and the intended-flow
 family walk were deprecated too; every audit now builds its stacks from
 those chains.
 See the [decision, next steps and preserved checkpoint](ARCHIVE.md).
+**Moved on 2026-10-02:** the code, tests and C++ engine this record names
+are in [archived/exhaustive-stack-search/](../../archived/README.md). Paths
+written as `steam_layout/…`, `tests/…` and `tools/stack_search/…` below are
+the old locations.
 Historical commands below may reference disposable files under `out/`.
 
 
@@ -105,8 +109,8 @@ every stack if witnesses and checked exclusions cover every alternative.
 
 ## Current timed fact audit
 
-[`timed_facts.py`](../../steam_layout/timed_facts.py) catalogues every alternative
-and stores replayable witnesses. [`timed_discover.py`](../../steam_layout/timed_discover.py)
+[`timed_facts.py`](../../archived/exhaustive-stack-search/steam_layout/timed_facts.py) catalogues every alternative
+and stores replayable witnesses. [`timed_discover.py`](../../archived/exhaustive-stack-search/steam_layout/timed_discover.py)
 finds additional witnesses under resource budgets; those budgets never prove
 absence. The symbolic envelope and timed induction provide the independent
 upper bound. `timed_audit` reports the three answers with X anywhere in the

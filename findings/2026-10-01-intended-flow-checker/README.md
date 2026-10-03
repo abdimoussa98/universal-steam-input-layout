@@ -38,9 +38,9 @@ Exit 0 means clean; 1 means open findings or coverage gaps; 2 means invalid inpu
 |---|---|---|
 | [`steam_layout/flow_model.py`](../../steam_layout/flow_model.py) | 1 | Classifies every layer-changing entry. Followed: entry, second-press, hold, release, expiry, removal, cancel, center. Listed with a reason, not followed: reset, recovery, legacy-hold, mode-shift. Also the mode-aware input lookup |
 | [`steam_layout/flow_config.json`](../../steam_layout/flow_config.json) | 1 | What bindings can't say: nine families with their contexts (and which context layers are live), starting controls, controls held at the start or held only for chords, exclusions at family boundaries, the cover list, and decisions |
-| [`steam_layout/flow_paths.py`](../../steam_layout/flow_paths.py) | 2 | Walks (ordered stack, held controls) states; resolves the effective input per stack; checks chords against held controls |
+| [`steam_layout/flow_paths.py`](../../archived/depth-search-and-family-walk/steam_layout/flow_paths.py) | 2 | Walks (ordered stack, held controls) states; resolves the effective input per stack; checks chords against held controls |
 | [`steam_layout/flow_inheritance.py`](../../steam_layout/flow_inheritance.py) | 3 | Nearest lower definition per input and lower stack; normalized comparison; conflict / review / replaced / satisfied |
-| [`steam_layout/flow_covers.py`](../../steam_layout/flow_covers.py) | 6 | Cover check: owners from the flows, then outlives owners, below its owner, intervening layer; layers above each cover for review |
+| [`steam_layout/flow_covers.py`](../../archived/depth-search-and-family-walk/steam_layout/flow_covers.py) | 6 | Cover check: owners from the flows, then outlives owners, below its owner, intervening layer; layers above each cover for review |
 | [`audit_flow_inheritance.py`](../../audit_flow_inheritance.py) | 4 | Text and JSON report; coverage gaps, inheritance findings and cover findings kept separate |
 | [`tests/test_flow_inheritance.py`](../../tests/test_flow_inheritance.py) | 5 | 23 fixture tests with hand-known paths and bindings, 3 on both Neptune variants |
 

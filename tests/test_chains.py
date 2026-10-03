@@ -1,21 +1,13 @@
 """Backward chains: what can be below a layer (plans/2026-10-01-backward-chain-audit.md).
 
-Tiny layouts first, one rule per test, then both Neptune layouts against the
-two existing stack sources.
+Tiny layouts, one rule per test. The comparison against the two older stack
+sources on the 90.9 layouts is in archived/depth-search-and-family-walk/.
 """
-import json
-from pathlib import Path
 import unittest
 
 from steam_layout.chains import Chains
-from steam_layout.flow_paths import FlowWalker, families
-from steam_layout.inheritance import check_stack
-from steam_layout.model import Layout, always_on_layers
-from steam_layout.stacks import StackSpace
+from steam_layout.model import Layout
 from tests.test_audit_inheritance import EMPTY, add, build, remove
-
-ROOT = Path(__file__).resolve().parents[1]
-FROZEN_RULES = ROOT / "tests/data/flow_families_90.9.json"   # the family rules as they were at 90.9
 
 SW = "switches"
 
@@ -329,111 +321,6 @@ class FamilyViewTests(unittest.TestCase):
         self.assertEqual(set(c.added("Cover")), {("Base", "A", "Cover")})
         self.assertIn(("Base", "Cover", "A"), c.stacks())
         self.assertEqual(set(c.added("A")), {("Base", "A")})
-
-
-def beneath(layout, title, stacks):
-    """The inputs that have a layer command somewhere under `title`, over these lower stacks."""
-    found = set()
-    for stack in stacks:
-        routes, blocked = check_stack(layout, title, list(stack))
-        found |= {(row["source"], row["input"]) for row in routes + blocked}
-    return found
-
-
-class NeptuneParityTests(unittest.TestCase):
-    """Step 4: chains against the depth-5 search and the family walk, on both 90.9 layouts.
-
-    These guarded the switch-over. Both older searches were deprecated on 2026-10-01, so the comparison
-    is frozen: the 90.9 snapshots and the family rules of that day. It stays as the record that chains
-    found everything the old searches did, and is not meant to follow later layouts.
-    """
-    HOLD_ONLY = {"LTP: Arrow Keys", "RTP: Mouse Buttons"}   # added by hold_layer only: out of scope (author)
-    # Inputs chains report under the two Steering windows that neither old search can see, traced
-    # 2026-10-01 (findings/2026-10-01-backward-chain-stacks/README.md, "Under the Steering windows").
-    # Both come from a layer Base adds while Steering is already on: a ramp layer from the right
-    # stick, or a left-pad key layer from a swipe. Not failures today: these windows aren't Always On yet.
-    RAMPS = {"Gyro Off Ramp Up", "Turning Ramp Up 0", "Turning Ramp Up 1"}
-    PAD_KEYS = {"Escape", "Enter", "Tab", "Backspace"}
-    STEERING_ONLY = {
-        "default": {("left_trigger", "edge"): RAMPS, ("right_trigger", "edge"): RAMPS,
-                    ("left_trackpad", "touch"): PAD_KEYS},
-        "alternative": {("left_trigger", "click"): RAMPS, ("right_trigger", "click"): RAMPS,
-                        ("switch", "left_bumper"): RAMPS, ("switch", "right_bumper"): RAMPS,
-                        ("left_trackpad", "touch"): PAD_KEYS},
-    }
-
-    @classmethod
-    def setUpClass(cls):
-        cls.cases = {}
-        for variant in ("default", "alternative"):
-            layout = Layout(json.loads(
-                (ROOT / f"versions/neptune/90.9/single-set-{variant}_hold-gyro_90.9.json").read_text()))
-            flow = {}
-            walker = FlowWalker(layout)
-            for family in families(layout, json.loads(FROZEN_RULES.read_text())).values():
-                result = walker.walk(family)
-                for title in result.layers():
-                    flow.setdefault(title, set()).update(result.lower_stacks(title))
-            steering = [t for t in layout.presets if t.startswith("Steering | LS") and t.endswith(": Double Tap")]
-            cls.cases[variant] = (layout, Chains.of(layout), StackSpace.of(layout, 5), flow,
-                                  always_on_layers(layout), steering)
-
-    def test_every_window_has_a_stack(self):
-        for variant, (layout, chains, _, _, windows, steering) in self.cases.items():
-            self.assertEqual((len(windows), len(steering)), (7, 2), variant)
-            for title in windows + steering:
-                with self.subTest(variant=variant, window=title):
-                    self.assertTrue(chains.below(title))
-
-    def test_always_on_windows_match_the_depth_search_and_the_flow_walk(self):
-        for variant, (layout, chains, space, flow, windows, _) in self.cases.items():
-            for title in windows:
-                with self.subTest(variant=variant, window=title):
-                    old = beneath(layout, title, space.below(title)) | beneath(layout, title, flow[title])
-                    self.assertEqual(beneath(layout, title, chains.below(title)), old)
-
-    def test_steering_windows_find_everything_the_flow_walk_finds(self):
-        # The depth search can't reach these (seven inputs from Base).
-        for variant, (layout, chains, space, flow, _, steering) in self.cases.items():
-            for title in steering:
-                with self.subTest(variant=variant, window=title):
-                    self.assertEqual(space.below(title), {})
-                    new = beneath(layout, title, chains.below(title))
-                    self.assertEqual(beneath(layout, title, flow[title]) - new, set())
-                    expected = self.STEERING_ONLY[variant]
-                    self.assertEqual(new - beneath(layout, title, flow[title]), set(expected))
-                    providers = {}
-                    for lower in chains.below(title):
-                        routes, blocked = check_stack(layout, title, list(lower))
-                        for row in routes + blocked:
-                            providers.setdefault((row["source"], row["input"]), set()).add(row["from_layer"])
-                    for key, allowed in expected.items():
-                        self.assertLessEqual(providers[key], allowed, key)
-
-    def test_chains_contain_every_flow_stack(self):
-        for variant, (layout, chains, _, flow, _, _) in self.cases.items():
-            missing = {title: len(stacks - set(chains.below(title)))
-                       for title, stacks in flow.items() if stacks - set(chains.below(title))}
-            with self.subTest(variant=variant):
-                self.assertEqual(missing, {})
-                unreached = {t for t in layout.presets if t != layout.base and not chains.reached(t)}
-                self.assertEqual(unreached, set(self.HOLD_ONLY))
-
-    def test_two_bystanders_find_the_same_inputs_as_one(self):
-        # Guards the "one bystander at a time" default. Arrivals are off to keep this to a few seconds.
-        for variant, (layout, _, _, _, windows, steering) in self.cases.items():
-            chains = Chains(layout, arrivals=0)
-            starts = {lower + (title,) for title in layout.presets if title != layout.base
-                      for lower in chains.below(title)}
-            for title in windows + steering:
-                two = set(chains.below(title))
-                for (own, _), why in chains.states[title].items():
-                    for start in starts:
-                        done = chains.replay(why, start)
-                        if done and title in done:
-                            two.add(done[:done.index(title)])
-                with self.subTest(variant=variant, window=title):
-                    self.assertEqual(beneath(layout, title, two), beneath(layout, title, chains.below(title)))
 
 
 if __name__ == "__main__":

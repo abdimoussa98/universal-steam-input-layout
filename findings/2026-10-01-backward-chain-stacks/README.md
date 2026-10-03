@@ -306,6 +306,13 @@ Decision: the author, 2026-10-01. Two older ways of finding stacks are no
 longer used by any audit. Their code and tests are kept, as with the earlier
 [stack search archive](../2026-09-30-stack-search/ARCHIVE.md).
 
+**Moved on 2026-10-02:** both are in
+[archived/depth-search-and-family-walk/](../../archived/README.md), with the
+90.9 comparison tests and family rules. `audit_inheritance.py --depth` and
+the `depth` and `chains` arguments of the audit are gone. The two prototype
+scripts in this folder import the archived modules, so they only run at the
+commit named in that README. The "Where" column below gives the old paths.
+
 | Deprecated | Where | Replaced by | Why |
 |---|---|---|---|
 | Depth-limited search | `StackSpace` and `explore` in `steam_layout/stacks.py`; `audit_inheritance.py --depth N` | `chains.py`, the default view | It can't reach layers more than five inputs from Base, and took 3.3 s |
@@ -340,8 +347,7 @@ would not handle.
 | Coverage gap | A layer outside every family | A layer no chain reaches |
 | `flow_config.json` | Families, covers, decisions | Contexts, covers, decisions |
 
-**What is still usable from the old code:** `--depth N` on the Window audit
-runs the depth search as a comparison, and `walk` / `fire` in `stacks.py`
+**What is still usable from the old code:** `walk` / `fire` in `stacks.py`
 replay one concrete input sequence. `apply_ops`, `definer` and the transition
 inventory in `flow_model.py` are not deprecated; the chains are built on them.
 

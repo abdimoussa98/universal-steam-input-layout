@@ -421,8 +421,7 @@ for review against [§7](#7-cleanup); they aren't a check.
      can. Missed releases, `hold_layer` and three families overlapping are
      not covered.
 2. **A window no stack reaches fails** as "not checked". Each open route is
-   printed with the bindings that built its stack. `--depth 5` adds the older
-   depth-limited search as a comparison; it is off by default and deprecated.
+   printed with the bindings that built its stack.
 3. **It finds the routes.** For each input the layer doesn't define, the
    topmost lower binding in each stack is the effective one. If it changes
    layers, directly or through a mode shift, that's a route. Inputs the layer

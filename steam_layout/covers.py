@@ -19,9 +19,9 @@ the single covers, for example).
 The stacks come from the family view of the chains (chains.py): chains start
 from each declared context (Base, and Base with Gyro), and only layers the
 chain itself added may arrive mid-chain. That keeps each cover with its own
-family, as the family walk this replaces did (flow_covers.py, deprecated
-2026-10-01); tests/test_covers.py checks both give the same result on the
-90.9 layouts.
+family, as the family walk this replaced did (deprecated 2026-10-01, now in
+archived/depth-search-and-family-walk/ with the test that both gave the same
+result on the 90.9 layouts).
 
 `covers.allow` in the rules accepts named checks for a cover with a reason;
 accepted findings stay listed.

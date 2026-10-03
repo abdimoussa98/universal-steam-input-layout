@@ -46,7 +46,7 @@ The LS and RS edges keep their original two-chord guards.
 
 ## Tools and checks
 
-- [steam_layout/fixes/transition_set_0.py](../../steam_layout/fixes/transition_set_0.py) applies the patch. It is
+- [steam_layout/fixes/transition_set_0.py](../../archived/retired-fixes/transition_set_0.py) applies the patch. It is
   idempotent, works on numeric-ID or title-token files, and runs in the
   `python3 -m steam_layout.fixes` pipeline.
   [install_neptune.py](../2026-09-30-steering-lean/install_neptune.py) runs it,

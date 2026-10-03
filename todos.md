@@ -42,9 +42,9 @@ The audit now fails on Long/Double Press. Completion awaits the Deck checks.
   - Blocks are covered by the Window audit, which checks the one blocking rule: under an Always On layer, an inherited layer command must be cleared or overridden. Cleanup lists are not checked by any audit; see the Cleanup audit under [Layer cleanup](#layer-cleanup)
   - The per-layer report is now `audit_layer.py` (2026-10-01)
 - [x] Name the audits and add one gate for every version: `audit_build.py` runs the Budget, Window and Flow audits on both layouts. In [definition of done §10](resources/Layer%20Definition%20of%20Done.md#10-ship-it) and the layout-apply skill (2026-10-01)
-- [x] Deprecate the exhaustive stack/timed-proof audit as the default workflow; preserve code, tests and a compact research checkpoint for reuse ([archive](findings/2026-09-30-stack-search/ARCHIVE.md))
+- [x] Deprecate the exhaustive stack/timed-proof audit as the default workflow; preserve code, tests and a compact research checkpoint for reuse, moved to [archived/](archived/README.md) on 2026-10-02 ([archive](findings/2026-09-30-stack-search/ARCHIVE.md))
 - [x] Deprecate the depth-limited stack search and the family walk; every audit builds its stacks from backward chains (2026-10-01, [record](findings/2026-10-01-backward-chain-stacks/README.md#deprecated))
-  - `flow_config.json` no longer declares families: a new layer needs no entry. Code and tests of both older searches are kept, with comparisons frozen at 90.9
+  - `flow_config.json` no longer declares families: a new layer needs no entry. Code and tests of both older searches are kept in [archived/](archived/README.md) since 2026-10-02, with comparisons frozen at 90.9
 - [ ] Decide RTP Double Tap's LB and RB: their inherited values change with the stack, so §8 says clear ([finding](findings/2026-09-30-stack-search/README.md#what-we-learned))
   - At 90.9 the menu buttons and both trigger stages are cleared in that window. LB and RB are replaced with the scroll wheel, like the other windows. What's left to decide is whether that replacement stays or becomes a clear
 - [ ] Periodically recheck whether Steam's desktop configuration still drops entries after the third; consider filing a Valve bug report. If it's fixed, revisit the [command entry budget](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget)

@@ -6,7 +6,7 @@ Updated 2026-09-30. [Implementation plan](2026-09-29-steering-implementation-pla
 
 This revision replaces the earlier both-controls-released rearm rule, Mod 2
 tap/double recognition and separate directional entry/repeat helpers. The
-[previous brainstorm](2026-09-30-steering-entry-brainstorm.previous.md) preserves
+[previous brainstorm](../archived/plans/2026-09-30-steering-entry-brainstorm.previous.md) preserves
 historical discussion and matrix rows; conflicting older policies are superseded.
 
 Steering remains stateful action layers within Base, not another action set.

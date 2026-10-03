@@ -16,8 +16,8 @@ What fails:
 
 The chains start from the contexts in the rules (Base, and Base with Gyro) and keep each chain to its own
 layers, so a cover is judged with its own family. No families are declared: a new layer is picked up from
-the layout. Until 2026-10-01 this audit walked families declared in the rules (steam_layout/flow_paths.py,
-deprecated); tests/test_covers.py checks the cover results are unchanged on the 90.9 layouts.
+the layout. Until 2026-10-01 this audit walked families declared in the rules; that walk is deprecated and
+lives in archived/depth-search-and-family-walk/.
 
 Read-only. Exit codes: 0 = clean, 1 = cover findings or coverage gaps, 2 = invalid input.
 

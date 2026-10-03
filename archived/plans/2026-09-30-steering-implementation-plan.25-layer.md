@@ -1,12 +1,12 @@
 # Steering implementation plan — lean revision
 
 Updated 2026-09-30. **Lean candidates generated; native acceptance pending.**
-The [implementation handoff](../findings/2026-09-30-steering-lean/README.md) contains
+The [implementation handoff](../../findings/2026-09-30-steering-lean/README.md) contains
 both variants: **25 added definitions, 80 total, no new Always On actions**.
 The design target below remains 16; nine explicit state helpers were retained
 under the failure branches rather than removing their safety behavior.
 
-The existing [36-layer candidate](../findings/2026-09-29-steering-implementation/README.md)
+The existing [36-layer candidate](../../findings/2026-09-29-steering-implementation/README.md)
 remains unchanged as the comparison baseline. The user reports that it looked
 good when tested on their Deck. That is useful positive feedback; the tested
 export, variant, client build and individual edge cases have not been recorded,
@@ -14,15 +14,15 @@ so it does not mark every acceptance gate passed. The
 [previous plan](2026-09-29-steering-implementation-plan.baseline.md) preserves the
 original architecture and audit context.
 
-The [brainstorm and transition matrix](2026-09-29-steering-entry-brainstorm.md)
-remain the behavior contract; the [short overview](steering-overview.html) shows
+The [brainstorm and transition matrix](../../plans/2026-09-29-steering-entry-brainstorm.md)
+remain the behavior contract; the [short overview](../../plans/steering-overview.html) shows
 that behavior. This revision replaces the old mandatory owner/context/direction
 window allocation. Keep the baseline's behavior while moving cleanup into the
 owners, directional state into the banks, and timing onto ordinary inputs.
 
 ## Implemented consolidation and deviations
 
-The separate [lean generator and exports](../findings/2026-09-30-steering-lean/README.md)
+The separate [lean generator and exports](../../findings/2026-09-30-steering-lean/README.md)
 implement inherited two-entry W/S cleanup, two required ordered Modifier 2
 variants, shared gesture state between W/S, ordinary-input windows and four
 prefixed menu helpers. Explicit Fn routing is preserved; automatic-Fn copies
@@ -45,7 +45,7 @@ extra “already emitted” state. Same-direction second hold repeats at 50 ms.
 68 Python and 8 Node tests pass, including 14 new binding tests; VDF keys,
 values/order and runtime references round-trip. These are static results, not
 native timer/held-output acceptance. See the
-[lean acceptance checklist](../findings/2026-09-30-steering-lean/ACCEPTANCE.md).
+[lean acceptance checklist](../../findings/2026-09-30-steering-lean/ACCEPTANCE.md).
 
 ## Contract and provisional implementation choices
 
@@ -337,8 +337,8 @@ valid generic both-triggers condition.
 
 ## First milestone: native contract probes
 
-Existing [probes](../findings/2026-09-29-steering-native-probes/README.md) and
-[observer](../findings/2026-09-29-steering-native-probes/observer.html) remain useful.
+Existing [probes](../../findings/2026-09-29-steering-native-probes/README.md) and
+[observer](../../findings/2026-09-29-steering-native-probes/observer.html) remain useful.
 The HTML state model demonstrates policy; it cannot prove native scheduling.
 
 | Gate | Required lean comparison |

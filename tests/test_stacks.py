@@ -1,10 +1,10 @@
-"""StackSpace: the reusable stack helper (steam_layout.stacks)."""
+"""Firing one input and walking a sequence (steam_layout.stacks)."""
 import json
 from pathlib import Path
 import unittest
 
 from steam_layout.model import Layout
-from steam_layout.stacks import StackSpace, fire, walk
+from steam_layout.stacks import fire, walk
 
 from test_audit_inheritance import EMPTY, act, add, build, release, remove
 
@@ -22,44 +22,6 @@ def modifier_layout():
         "Win": {"switch": ("switches", {"always_on_action": act(remove("Win")), "left_bumper": act(EMPTY),
                                         "button_a": act(EMPTY)})},
     })
-
-
-class StackSpaceTests(unittest.TestCase):
-    def setUp(self):
-        self.space = StackSpace(Layout(modifier_layout()), depth=6)
-
-    def test_below_lists_the_stacks_under_a_layer_on_top(self):
-        self.assertEqual(set(self.space.below("Win")), {("Base",), ("Base", "Gyro")})
-
-    def test_containing_lists_every_stack_with_the_layer_anywhere(self):
-        found = set(self.space.containing("Cover"))
-        self.assertIn(("Base", "Mod", "Cover"), found)
-        self.assertIn(("Base", "Gyro", "Mod", "Cover"), found)
-        self.assertTrue(all("Cover" in s for s in found))
-
-    def test_when_effective_lists_stacks_where_that_binding_actually_fires(self):
-        # Mod's LB release fires only while Mod is the topmost layer defining LB.
-        stacks = set(self.space.when_effective("Mod", "switch", "left_bumper"))
-        self.assertIn(("Base", "Mod"), stacks)
-        self.assertIn(("Base", "Mod", "Cover"), stacks)
-        self.assertIn(("Base", "Gyro", "Mod", "Cover"), stacks)
-        self.assertNotIn(("Base", "Mod", "Cover", "Win"), stacks)  # Win overrides LB
-
-    def test_co_active_counts_the_layers_present_when_a_binding_fires(self):
-        # What a cleanup on Mod's LB release could find active: its own Cover, plus Gyro below.
-        together = self.space.co_active("Mod", "switch", "left_bumper")
-        self.assertEqual(set(together), {"Mod", "Cover", "Gyro"})
-        self.assertEqual(together["Mod"], len(self.space.when_effective("Mod", "switch", "left_bumper")))
-
-    def test_effective_input_and_depth_bookkeeping(self):
-        stack = ("Base", "Mod", "Cover")
-        self.assertEqual(self.space.effective(stack, "right_joystick", "click")[0], "Cover")
-        self.assertEqual(self.space.events(stack), 2)
-        self.assertEqual(self.space.events(("Base",)), 0)
-
-    def test_explore_is_cached_per_layout_and_depth(self):
-        layout = Layout(modifier_layout())
-        self.assertIs(StackSpace.of(layout, 6), StackSpace.of(layout, 6))
 
 
 class FireTests(unittest.TestCase):

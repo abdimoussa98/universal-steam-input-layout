@@ -17,7 +17,7 @@ separates an **owner release**, the normal way out of an interaction, from a
 | [The kinds](#the-kinds) | Every kind of layer-removing binding and its required shape |
 | [Owner release vs cleanup function](#owner-release-vs-cleanup-function) | The difference, side by side |
 | [Order matters](#order-matters) | Why stack order and execution order decide what a release does |
-| [Computing a scope](#computing-a-scope) | How `StackSpace` finds the candidates and the family filters them |
+| [Computing a scope](#computing-a-scope) | How the layer report finds the candidates and the family filters them |
 | [Questions for the author](#questions-for-the-author) | What needs defining before the generator is built |
 
 ## Terms
@@ -52,7 +52,8 @@ Each kind has a required shape, so a script can recognize it.
 | **Cancellation** | Any listed input during an overlay | Uninterruptible, repeating Regular Press that removes **only itself**, exposing the parent | Self only | [Cursor cancellation](Steam%20Input%20JSON%20Structure.md#cursor-cancellation-and-repeating-cover-chords) |
 
 A recognizer needs only the shape: trigger, activation type, settings and
-order. Fed to [`StackSpace`](../steam_layout/stacks.py), each kind's scope can be
+order. With the stacks from the backward chains
+([`layer_report`](../steam_layout/layer_report.py)), each kind's scope can be
 checked and computed.
 
 ## Owner release vs cleanup function
@@ -94,16 +95,20 @@ ends up on top.
 
 ## Computing a scope
 
-[`StackSpace`](../steam_layout/stacks.py) answers the first half:
+The layer report answers the first half. For each binding of a layer that
+removes layers, its Exits section lists what the binding removes that can be
+present, what can be present and is left, and what it removes that is never
+there:
 
-```python
-space.when_effective(host, source, input)  # every stack in which this binding fires
-space.co_active(host, source, input)       # every layer that can be present then
+```bash
+python3 audit_layer.py neptune/single-set-default_hold-gyro_latest.json --layer "L1: Modifier 0"
 ```
 
-The candidates are not the scope, though. For `L1: Modifier 0`'s RS edge, the
-binding fires in 9,471 stacks, and 20 layers can be co-active. Most of them
-belong to other interactions: stick helpers, RTP layers and the key layers.
+The candidates are not the scope, though. Measured with the older
+depth-limited search (now in [archived/](../archived/README.md)), `L1:
+Modifier 0`'s RS edge fired in 9,471 stacks, and 20 layers could be present.
+Most of them belong to other interactions: stick helpers, RTP layers and the
+key layers.
 The scope is:
 
 > **scope = co-active candidates ∩ the host's family − survivors**

@@ -102,21 +102,21 @@ map to their corresponding physical pad/stick controls. Physical checks retain
 the thumb-location restrictions and require touch before dependent pad/stick
 inputs, and trigger edge before full click when those controls are present.
 
-- [`timed_spec.py`](../../steam_layout/timed_spec.py) provides
+- [`timed_spec.py`](../../archived/exhaustive-stack-search/steam_layout/timed_spec.py) provides
   `TimedSpec(layout, ignore_hold_bindings=False, default_repeat_ms=None)` and
   immutable `EntrySpec` records. They preserve numeric delays, repeat intervals,
   chord selectors, thresholds, inversion, full settings, ordered layer
   operations and mode-shift targets. Stable entry IDs distinguish separate
   activators; fingerprints include the complete serialized entry, including
   non-layer outputs, plus source/input/kind.
-- [`timed_model.py`](../../steam_layout/timed_model.py) provides
+- [`timed_model.py`](../../archived/exhaustive-stack-search/steam_layout/timed_model.py) provides
   `TimedModel(layout, *, ignore_hold_bindings=False, default_repeat_ms=None)`.
   `start()` returns a set of initial `TimedState` values. `press(state, control)`,
   `release(state, control)`, `analog(state, control, value)` and
   `wait(state, milliseconds)` each return a set of successor states.
   `snapshot(state)` returns a JSON-compatible view; `semantics` exposes the
   current contract and scenario choices.
-- [`timed_trace.py`](../../steam_layout/timed_trace.py) provides
+- [`timed_trace.py`](../../archived/exhaustive-stack-search/steam_layout/timed_trace.py) provides
   `parse_trace(trace)` and `replay(model, trace, *, layout_data, options=None)`
   as well as the CLI. Replay follows all branches and records edges between
   successive event snapshots rather than arbitrarily choosing one outcome.
@@ -187,7 +187,7 @@ behavior are not reproduced. In particular, `analog(edge, 1)` can activate
 ordinary edge bindings in this contract; it does not establish that a tiny
 physical deflection activates the saved layout's outer ring.
 
-[`source_geometry.py`](../../steam_layout/source_geometry.py) separately
+[`source_geometry.py`](../../archived/exhaustive-stack-search/steam_layout/source_geometry.py) separately
 resolves explicitly saved source settings and their defining layers. For
 example, Base RST has ring radius 32767 and deadzones 3280/32000. Sensitivity
 overlays preserve inherited geometry. The helper requires explicit defaults
@@ -251,7 +251,7 @@ witness node/trace IDs. A report for selected layers also records
 
 The production compiler retains the full stack and each batch's entry order.
 It inherits six phase rules from
-[`TimedPhaseEnvelope`](../../steam_layout/timed_phase_envelope.py), extended
+[`TimedPhaseEnvelope`](../../archived/exhaustive-stack-search/steam_layout/timed_phase_envelope.py), extended
 to positive analog first batches as described below:
 
 1. A positive-start-delay entry cannot share a due batch with a zero-start,
@@ -299,7 +299,7 @@ need witnesses or further checked exclusions before completeness is claimed.
 
 ### Ordered-owner progress restriction
 
-[`TimedProgressEnvelope`](../../steam_layout/timed_progress_envelope.py)
+[`TimedProgressEnvelope`](../../archived/exhaustive-stack-search/steam_layout/timed_progress_envelope.py)
 adds the following restriction on automatic batches and is inherited by the
 production compiler. All five compiler files are included in the certificate's
 algorithm identity. These refinements
@@ -346,7 +346,7 @@ the unshifted-source case does not require physical incompatibility.
 
 ### Elapsed-repeat batches
 
-[`TimedElapsedEnvelope`](../../steam_layout/timed_elapsed_envelope.py) extends
+[`TimedElapsedEnvelope`](../../archived/exhaustive-stack-search/steam_layout/timed_elapsed_envelope.py) extends
 the phase and progress restrictions. Repeating versions of the qualifying
 unconditional Full Press and positive-chord families can first fire immediately
 on a press or positive sample. A binding exposed later while held waits one
@@ -364,7 +364,7 @@ and Always On activators keep their automatic exceptions.
 
 ### Positive analog first batches
 
-[`TimedAnalogEnvelope`](../../steam_layout/timed_analog_envelope.py) is the
+[`TimedAnalogEnvelope`](../../archived/exhaustive-stack-search/steam_layout/timed_analog_envelope.py) is the
 production compiler. It exposes five stable transition families:
 `press`, `release`, `analog_positive`, `analog_zero`, and `automatic`.
 
@@ -495,7 +495,7 @@ uses the phase, progress, elapsed-repeat and analog refinements described above.
 
 ### Seek witnesses for selected facts
 
-[`timed_seek.py`](../../steam_layout/timed_seek.py) searches for concrete traces
+[`timed_seek.py`](../../archived/exhaustive-stack-search/steam_layout/timed_seek.py) searches for concrete traces
 for selected catalogue alternatives. Targets are JSON rows `[kind, x, y, j]`,
 either in a list or an object with `facts` and optional text `scope`. `kind` is
 `below` or `inherit`; `below` uses `j=-1`. All indices are checked against the
@@ -525,7 +525,7 @@ summary must have a separate path from all inputs and the output archive.
 
 ### Minimize a checked certificate
 
-[`timed_minimize.py`](../../steam_layout/timed_minimize.py) removes predicates
+[`timed_minimize.py`](../../archived/exhaustive-stack-search/steam_layout/timed_minimize.py) removes predicates
 that follow from the remaining conjunction under the symbolic state domain.
 It independently validates both the input certificate and the reduced output:
 
@@ -545,7 +545,7 @@ and never turns unvalidated hypotheses into a checked proof.
 
 ### Mine conditional family hypotheses
 
-[`timed_between.py`](../../steam_layout/timed_between.py) suggests a small
+[`timed_between.py`](../../archived/exhaustive-stack-search/steam_layout/timed_between.py) suggests a small
 family of binding owners that appears between a witnessed ordered pair. For
 an unresolved inheritance alternative, a proved `RequiresBetweenAny(X, Y,
 members)` excludes ownership by Y when every member defines that raw input:
@@ -575,7 +575,7 @@ model and search-budget options.
 
 ### Refine an existing certificate
 
-[`timed_refine.py`](../../steam_layout/timed_refine.py) replays a matching
+[`timed_refine.py`](../../archived/exhaustive-stack-search/steam_layout/timed_refine.py) replays a matching
 witness archive, independently checks the baseline certificate, and recomputes
 which alternatives remain unresolved. It proposes one `FactExclusion` for each
 distinct unresolved formula, sharing hypotheses across raw inputs with the

@@ -11,8 +11,7 @@ have Gyro Off Ramp Up underneath is replaced with Base's mouse button.
 
 This applies audit_inheritance.py's `blocks_needed` to the Always On windows,
 using the backward-chain stacks (steam_layout/chains.py: no depth cap, no
-config) and the decisions in traced_stacks.json. `depth` adds the older
-depth-limited search (deprecated 2026-10-01). Idempotent: a second run finds
+config) and the decisions in traced_stacks.json. Idempotent: a second run finds
 nothing to block. Works with numeric IDs or title tokens.
 """
 import copy
@@ -27,9 +26,9 @@ ROOT = Path(__file__).resolve().parents[2]
 EMPTY = "controller_action empty_binding, , "
 
 
-def fix(data, config=None, depth=0):
+def fix(data, config=None):
     config = config if config is not None else json.loads((ROOT / "traced_stacks.json").read_text())
-    report = audit(data, config, depth)
+    report = audit(data, config)
     layout = Layout(data)
     windows = set(always_on_layers(layout))
     changed = []

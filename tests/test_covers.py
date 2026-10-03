@@ -1,40 +1,18 @@
 """The cover check on backward chains (steam_layout/covers.py).
 
-Small fixtures first, then both 90.9 layouts against the cover check it
-replaces, which ran on the family walk (steam_layout/flow_covers.py).
+Small fixtures, one rule per test. The comparison against the family-walk
+cover check it replaced is in archived/depth-search-and-family-walk/.
 """
-import json
-from pathlib import Path
 import unittest
 
-from steam_layout import flow_covers
-from steam_layout.chains import Chains
 from steam_layout.covers import check_cover, family_view
-from steam_layout.flow_paths import FlowWalker, families
-from steam_layout.model import Layout, map_title
-from tests.test_flow_inheritance import EMPTY, add, entry, fixture, inp, rem, switches
-
-ROOT = Path(__file__).resolve().parents[1]
-FROZEN_RULES = ROOT / "tests/data/flow_families_90.9.json"   # the family rules as they were at 90.9
-
-
-def frozen(variant):
-    return Layout(json.loads((ROOT / f"versions/neptune/90.9/single-set-{variant}_hold-gyro_90.9.json").read_text()))
+from steam_layout.model import Layout
+from tests.test_flow_inheritance import EMPTY, add, cover_layout, entry, fixture, inp, rem, switches
 
 
 class CoverFixtureTests(unittest.TestCase):
     def layout(self):
-        return fixture({
-            "Base": switches(left_bumper=inp(chord=entry(add("A"), chord_button=1))),
-            "A": {"switch": {"mode": "switches", "inputs": {
-                "left_bumper": inp(release=entry(rem("A"), add("W")))}},
-                "button_diamond": {"mode": "four_buttons", "inputs": {
-                    "button_a": inp(chord=entry(add("Cover"), chord_button=1)),
-                    "button_b": inp(chord=entry(add("Mid"), chord_button=1))}}},
-            "Mid": {"button_diamond": {"mode": "four_buttons", "inputs": {"button_y": inp(Full_Press=entry("key_press Y, , "))}}},
-            # The cover only changes the release: it removes the owner, then itself.
-            "Cover": switches(left_bumper=inp(release=entry(rem("A"), rem("Cover")))),
-            "W": switches(always_on_action=inp(Full_Press=entry(rem("W"), delay_start=150)))})
+        return cover_layout()
 
     def check(self, layout, allowed=None):
         return check_cover(layout, family_view(layout), "Cover", allowed)
@@ -95,33 +73,6 @@ class CoverFixtureTests(unittest.TestCase):
         view = family_view(layout, {"contexts": [["Base"], ["Base", "G"]]})
         self.assertIn(("Base", "G", "A", "Cover"), view.stacks())
         self.assertEqual(check_cover(layout, view, "Cover")["owners"], ["A", "Mid"])
-
-
-class NeptuneCoverParityTests(unittest.TestCase):
-    """On both 90.9 layouts the chain-based check gives what the family-walk check gave, cover by cover."""
-
-    def test_owners_findings_and_layers_above_match_the_family_walk(self):
-        rules = json.loads(FROZEN_RULES.read_text())
-        for variant in ("default", "alternative"):
-            layout = frozen(variant)
-            mapping = rules["variants"].get(variant, {})
-            walker = FlowWalker(layout)
-            results = {name: walker.walk(family) for name, family in families(layout, rules).items()}
-            view = family_view(layout, {"contexts": [["Base"], ["Base", "Gyro"]]})
-            suffixes = rules["covers"]["suffixes"]
-            not_covers = {map_title(t, mapping) for t in rules["covers"]["not_covers"]}
-            titles = {map_title(t, mapping) for t in rules["covers"]["titles"]}
-            covers = sorted(t for t in layout.presets if t not in not_covers
-                            and (t in titles or any(t.endswith(s) for s in suffixes)) and view.reached(t))
-            self.assertEqual(len(covers), 15, variant)
-            for cover in covers:
-                old = flow_covers.check_cover(layout, results, cover)
-                new = check_cover(layout, view, cover)
-                with self.subTest(variant=variant, cover=cover):
-                    self.assertEqual(new["owners"], old["owners"])
-                    self.assertEqual({(f["check"], f["detail"]) for f in new["findings"]},
-                                     {(f["check"], f["detail"]) for f in old["findings"]})
-                    self.assertEqual(new["above"], old["above"])
 
 
 if __name__ == "__main__":

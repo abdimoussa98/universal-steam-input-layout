@@ -21,8 +21,9 @@ the steam-layout-apply skill.
 
 `window_routes` runs last because it audits the layout the others produce.
 
-Retired: `transition_set_0` (2026-10-01). The stateful transitions build writes
-both transition layers whole, with their stick-touch releases.
+Retired: `transition_set_0` (2026-10-01, now in archived/retired-fixes/). The
+stateful transitions build writes both transition layers whole, with their
+stick-touch releases.
 """
 from . import cover_resets, dead_groups, menu_combo_keys, rtp_scroll, window_pads, window_routes
 

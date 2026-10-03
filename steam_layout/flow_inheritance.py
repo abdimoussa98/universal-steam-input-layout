@@ -1,7 +1,7 @@
 """What a layer inherits on each intended lower stack.
 
-For a target and every lower stack an intended flow puts under it
-(flow_paths.FlowResult.lower_stacks), each input resolves to the nearest lower
+For a target and every lower stack the backward chains put under it
+(chains.Chains.lineage), each input resolves to the nearest lower
 definition, walking down to the action set: an inherited binding, a disabled
 source, or nothing. Definitions are compared as normalized JSON (activators,
 settings and command order), so the same binding from two owners is one

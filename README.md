@@ -156,8 +156,7 @@ the layer, ask which bindings add it, then which add those layers, back to
 Base. Other layers that leave the chain's inputs alone are placed underneath
 as bystanders. There is no depth cap and no config, and each open route is
 printed with the bindings that built its stack. A layer no stack reaches is
-"not checked", which fails. `--depth 5` adds the older depth-limited search as
-a comparison; that search is deprecated. Runs in under a second per layout. Read-only. Exit codes:
+"not checked", which fails. Runs in under a second per layout. Read-only. Exit codes:
 **0** = pass, **1** = undecided route or unchecked layer, **2** = invalid
 input.
 See [Layer Definition of Done §8](resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking)
@@ -167,7 +166,6 @@ and the [record](findings/2026-10-01-backward-chain-stacks/README.md).
 python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json
 python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --entries "RTP: Double Tap"
 python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --untraced   # review list
-python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --depth 5    # compare with the old search
 ```
 
 ### 4a. `audit_layer.py` - Layer Report (Below, Above, Inherited, Exits)
@@ -221,137 +219,20 @@ The reusable code behind the scripts above. Import it from the repo root.
 | `steam_layout.chains` | `Chains`: the stacks under a layer from backward chains (who adds it, back to Base, plus bystanders), each with its reason; `below`, `above`, `lineage`, `reached` |
 | `steam_layout.layer_report` | The per-layer report that `audit_layer.py` wraps |
 | `steam_layout.covers` | The cover check on chains, and the rules loader for `flow_config.json` |
-| `steam_layout.stacks` | `walk` and `fire` for one concrete sequence, and the helpers the chains build on. Its `StackSpace` depth-limited search is deprecated (2026-10-01) and kept as an opt-in comparison |
-| `steam_layout.flow_paths`, `steam_layout.flow_covers` | Deprecated (2026-10-01): the family walk and its cover check, kept for reference with their tests |
+| `steam_layout.flow_model`, `steam_layout.flow_inheritance` | Every layer-changing binding, classified by role, and what a layer inherits on each lower stack |
 | `steam_layout.inheritance` | The inheritance and blocking audit that `audit_inheritance.py` wraps |
+| `steam_layout.stacks` | `apply_ops`, `definer` and `effective_input`, which the chains build on, and `walk` / `fire` to replay one concrete input sequence |
 | `steam_layout.fixes` | The ordered, idempotent post-install fixes that `install_neptune.py` runs |
-| `steam_layout.held_model` | Historical untimed stack model: held buttons, chords, boolean delays/repeats and generic legacy `hold_layer` support |
-| `steam_layout.timed_model` | Replay presses, releases, analog thresholds and individual millisecond timers with explicit layer commands |
-| `steam_layout.timed_search` | Resumable timed search, replayed witnesses and independently checked graph closure; `run`, `show`, `witness`, `check` |
-| `steam_layout.timed_trace` | Run a JSON event trace and record all timed model branches, clocks and model identity |
-| `steam_layout.timed_facts`, `steam_layout.timed_discover` | Catalogue the three layer-query alternatives and discover independently replayed timed witnesses; compact witness archives |
-| `steam_layout.timed_seek` | Target selected unresolved facts with a bounded concrete search and save compact verified witnesses ([usage](findings/2026-09-30-stack-search/TIMED-MODEL.md#seek-witnesses-for-selected-facts)) |
-| `steam_layout.timed_envelope`, `steam_layout.timed_proof` | Check inductive exclusions over a full-stack relaxation of the timed runtime |
-| `steam_layout.timed_phase_envelope` | Six runtime-derived press/timer restrictions; included in certificate identity |
-| `steam_layout.timed_progress_envelope` | Ordered-owner repeater/delay restrictions; included in certificate identity |
-| `steam_layout.timed_elapsed_envelope` | Separate elapsed repeats from newly activated one-shots; included in certificate identity |
-| `steam_layout.timed_analog_envelope` | Production compiler: the preceding rules plus atomic first batches for positive analog samples and five event families |
-| `steam_layout.timed_predicates` | Family-order and exact-fact hypotheses for additional checked induction |
-| `steam_layout.timed_mine`, `steam_layout.timed_between` | Suggest small lower-layer or conditional between-layer families from replayed samples; every output still requires induction |
-| `steam_layout.timed_audit` | Combine witnesses and checked induction into per-layer reports; `run` / `show` with identity-bound certificates |
-| `steam_layout.timed_refine` | Extend a checked baseline with unresolved fact hypotheses; independently validate a new certificate and full report |
-| `steam_layout.timed_minimize` | Remove logically redundant predicates from a checked certificate, then independently validate the smaller proof |
-| `steam_layout.timed_reduction` | Exact relevance quotient for stack reachability, reusable with the timed search APIs |
-| `steam_layout.source_geometry` | Resolve saved source geometry and its inherited owners without inventing omitted defaults |
-| `steam_layout.stackdb` | Run the exhaustive search (`tools/stack_search`, C++) and query its results: what every input does in any stack, what a layer inherits, the button sequence that reaches a state |
-
-```python
-from steam_layout.model import Layout
-from steam_layout.stacks import StackSpace
-
-space = StackSpace.of(Layout(data), depth=5)
-space.when_effective("L1: Modifier 0", "switch", "left_bumper")  # stacks where that binding fires
-space.co_active("L1: Modifier 0", "switch", "left_bumper")       # layers a cleanup there could find
-```
 
 ```bash
 python3 -m steam_layout.fixes neptune/*_latest.json --dry-run   # what the pipeline would change
 ```
 
-The exhaustive search visits every state (stack plus held buttons) reachable from Base, breadth first, one button event per level. `--disk` keeps it within a memory budget by storing states on disk; it can be stopped (Ctrl-C) and continued with `--resume`. `summary.json` records `exact_depth`: every state within that many events is included.
-
-```bash
-python3 -m steam_layout.stackdb run neptune/single-set-default_hold-gyro_latest.json out/stack_search/default \
-    --disk --memory 12 --disk-limit 150 --max-depth 12
-python3 -m steam_layout.stackdb sqlite neptune/single-set-default_hold-gyro_latest.json out/stack_search/default
-```
-
-```python
-db = StackDB("out/stack_search/default", Layout(data))
-db.inheritance("L1: Double Tap")          # every input: what the layers below it give it, with stack counts
-db.values(("Base", "L1: Modifier 0"))     # what every input does in that stack
-db.moment(gid)                            # a state: stack, held buttons, every input, the events that reach it
-db.sql("SELECT name, owner, summary FROM inherited WHERE top = 'L1: Double Tap' GROUP BY name, owner")
-```
-
-**Deprecated for routine audits (2026-09-30):** exhaustive stack search and
-timed proof tooling are retained for reference, reuse and targeted investigations.
-The replacement is an intended-flow inheritance checker, still to be built.
-See the [decision, next steps and preserved checkpoint](findings/2026-09-30-stack-search/ARCHIVE.md).
-Historical commands below may reference disposable files under `out/`.
-
-The historical HeldModel inductive bound remains available. Install the
-optional proof dependency and query a matching untimed search:
-
-```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-proof.txt
-.venv/bin/python -m steam_layout.stackdb show 'L1: Double Tap' --search out/stack_search/default-held
-```
-
-This reports layers below/above X and inherited binding owners with X anywhere
-in the stack. `proven` has a search witness; `possible` remains unresolved.
-All claims are relative to the current untimed model, which has known runtime
-gaps. See [usage and proof scope](findings/2026-09-30-stack-search/README.md#the-helper)
-and [model limits](findings/2026-09-30-stack-search/MODEL-LIMITS.md).
-
-The new timed simulator can replay a supplied input sequence with numeric
-clock deadlines, including removal-driven timer restarts:
-
-```bash
-python3 -m steam_layout.timed_trace versions/neptune/90.6/single-set-default_hold-gyro_90.6.json \
-    findings/2026-09-30-stack-search/timed-example.json \
-    --ignore-hold-bindings --default-repeat-ms 50
-```
-
-The author accepted 50 ms for omitted repeat intervals in this analysis;
-it is not a verified Steam default. Hold commands are omitted only from the
-simulation. Analog events supply logical threshold coordinates, not raw
-sensor readings. See [timed replay and its contract](findings/2026-09-30-stack-search/TIMED-MODEL.md).
-
-The current timed audit targets the original default **90.6** layout, as
-requested after `latest` advanced to 90.7. The tracked versioned file matches
-the frozen input's [recorded identity](findings/2026-09-30-stack-search/TIMED-MODEL.md).
-The newer 90.7 layout is not covered by these results.
-
-**The timed audit tools are implemented and checked; the full 90.6
-classification remains incomplete.** The audit combines replayed timed
-witnesses with independently checked induction over all 46,904 below/above
-and raw-inheritance alternatives. Every alternative needs a witness or a
-checked exclusion; a time budget or solver timeout never establishes one.
-The current checkpoint has **11,491 witnessed, 31,644 excluded and 3,769
-unresolved** alternatives. Its 901 invariants passed 3,409 independent checks.
-Read the [current summary](out/stack_search/timed-facts/default-summary.json),
-[full report](out/stack_search/timed-facts/default-audit.json), and
-[certificate](out/stack_search/timed-facts/default-certificate.json).
-The [four readable layer reports](findings/2026-09-30-stack-search/README.md#checked-current-checkpoint)
-provide smaller examples. The full regression suite passed **531 tests**.
-
-Inspect a layer in the saved checkpoint with:
-
-```bash
-.venv/bin/python -m steam_layout.timed_audit show \
-    versions/neptune/90.6/single-set-default_hold-gyro_90.6.json \
-    out/stack_search/timed-facts/default-evidence.sqlite \
-    out/stack_search/timed-facts/default-certificate.json \
-    'L1: Double Tap' --json --ignore-hold-bindings --default-repeat-ms 50
-```
-
-To collect more evidence or rebuild a baseline, use the
-[discovery, compaction and certificate workflow](findings/2026-09-30-stack-search/TIMED-MODEL.md#discover-compact-and-check).
-A fresh `timed_audit run` infers primitive invariants and may produce a weaker
-baseline than the saved proof; the workflow writes separate `regenerated-*`
-outputs. Use `timed_refine` to retain and extend the checked baseline.
-`show` replays archived edges and independently validates the loaded invariant
-certificate before using exclusions. Check `complete_for_model` and unresolved
-counts in the output; exit 0 only means the report was generated. The older
-[exhaustive timed search](findings/2026-09-30-stack-search/TIMED-MODEL.md#reachability-search-and-proof-checks)
-and its graph-closure certificates remain available. Neither timed route
-imports HeldModel exclusions or certifies Steam hardware equivalence.
-To strengthen an existing certificate, use the [refinement command](findings/2026-09-30-stack-search/TIMED-MODEL.md#refine-an-existing-certificate).
-It accepts the latest matching witness archive and preserves the checked
-baseline. Even with `--layer`, its output report remains global and separately
-records whether the selected questions are complete.
+**Deprecated tooling is in [archived/](archived/README.md):** the exhaustive
+stack search and timed proofs (2026-09-30), and the depth-limited search and
+family walk (2026-10-01). Nothing live imports them. Their records stay in
+[findings/2026-09-30-stack-search](findings/2026-09-30-stack-search/ARCHIVE.md)
+and [findings/2026-10-01-backward-chain-stacks](findings/2026-10-01-backward-chain-stacks/README.md#deprecated).
 
 ## Command entry limit and audit
 
@@ -539,11 +420,11 @@ python3 convert_runtime_ids.py to-titles neptune/single-set-default_hold-gyro_la
 
 ### Steering in the Neptune layouts
 
-Both `neptune/*_hold-gyro_latest` JSON/VDF pairs now include the 16-layer steering
-implementation (71 layers total), including scoped delayed-apply resets and
-reused Mod 2 covers. Release 90.6 replaced its Long Press timers with chorded
-delays, fixed the RTP scroll Long Press and pruned dead groups
-([record](findings/2026-09-30-dead-group-prune/README.md)). Reinstall with
-`findings/2026-09-30-steering-lean/install_neptune.py`, which repeats that cleanup. See the [implementation and exports](findings/2026-09-30-steering-lean/README.md),
-[installation hashes and backups](findings/2026-09-30-steering-lean/neptune-installation.json),
-and [pending Deck checks](findings/2026-09-30-steering-lean/ACCEPTANCE.md).
+Both `neptune/*_hold-gyro_latest` JSON/VDF pairs are generated (70 layers
+since 90.10). The builder in `findings/2026-10-01-stateful-transitions/`
+extends the frozen 09-30 lean steering builder, which extends the 09-29
+baseline; `install_neptune.py` there runs the fix pipeline and writes
+`neptune/`. A hand edit in `neptune/` is lost on the next install. See the
+[90.10 build record](findings/2026-10-01-stateful-transitions/README.md),
+the earlier [lean steering record](findings/2026-09-30-steering-lean/README.md)
+and the [Deck checks](manual-testing.md#9010-stateful-transitions).

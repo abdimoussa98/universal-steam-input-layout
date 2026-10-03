@@ -3,7 +3,7 @@
 Every activator entry that changes layers becomes a `Transition`: its owner
 layer, input, activator, settings, chord condition and ordered layer ops, with
 the original JSON as evidence. Each one gets a role, and the role decides
-whether intended-flow traversal (flow_paths.py) follows it:
+whether the backward chains (chains.py) follow it:
 
     entry         Regular/Start/chord press that adds layers
     center        a repeating removal on an inverted stick edge: the stick
@@ -27,8 +27,28 @@ Plan: plans/2026-10-01-intended-flow-inheritance.md, section 1.
 """
 from dataclasses import dataclass, field
 
-from .held_model import BITS, LEGACY
 from .model import EMPTY, LAYER_COMMAND, MODE_SHIFT, actions, always_on_layers, defined, entries
+
+# What a chord's button stands for: legacy `chord_button` IDs and `gyro_ratchet_button_mask` bits.
+# A list is the (source, input) controls that satisfy it; "pad:" means a thumb on that pad and
+# "deflect:" means that stick is off centre. See resources/Neptune Chorded Button Ids.md.
+LEGACY = {"1": [("switch", "left_bumper")], "2": [("switch", "right_bumper")],
+          "5": [("left_trigger", "click")], "6": [("right_trigger", "click")],
+          "7": [("left_trigger", "edge"), ("left_trigger", "click")],
+          "8": [("right_trigger", "edge"), ("right_trigger", "click")],
+          "9": [("joystick", "click")], "20": [("right_joystick", "click")],
+          "14": [("switch", "button_escape")], "15": [("switch", "button_menu")],
+          "16": "pad:left_trackpad", "17": "pad:right_trackpad",
+          "23": [("joystick", "touch")], "24": [("right_joystick", "touch")]}
+BITS = {3: [("switch", "left_bumper")], 2: [("switch", "right_bumper")],
+        1: [("left_trigger", "click")], 0: [("right_trigger", "click")],
+        25: [("left_trigger", "edge"), ("left_trigger", "click")],
+        24: [("right_trigger", "edge"), ("right_trigger", "click")],
+        22: [("joystick", "click")], 26: [("right_joystick", "click")],
+        14: [("switch", "button_escape")], 12: [("switch", "button_menu")],
+        19: "pad:left_trackpad", 20: "pad:right_trackpad",
+        46: [("joystick", "touch")], 47: [("right_joystick", "touch")],
+        30: "deflect:joystick", 31: "deflect:right_joystick"}
 
 FOLLOWED = ("entry", "second-press", "hold", "release", "expiry", "removal", "cancel", "center")
 DIRECTIONS = ("dpad_north", "dpad_east", "dpad_south", "dpad_west")

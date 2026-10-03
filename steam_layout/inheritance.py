@@ -3,8 +3,7 @@
 For each target layer (every Always On layer, plus any named in the config),
 the stacks beneath it come from the backward chains (chains.py: who adds the
 layer, back to the action set, plus bystanders; no depth cap and no config)
-and from any stacks the config declares. `depth` adds the older chord-blind,
-depth-limited search (`StackSpace`, deprecated 2026-10-01) as a comparison. For each input
+and from any stacks the config declares. For each input
 the target doesn't define, the topmost lower binding is the effective one; if
 it changes layers (directly or through a mode shift) it is a route. Routes
 need a block or a recorded decision, and each carries the reason its stack
@@ -16,7 +15,7 @@ import copy
 from .chains import Chains
 from .model import EMPTY, LAYER_COMMAND, MODE_SHIFT, Layout, always_on_layers, bindings, defined, map_title
 from .model import entries as model_entries
-from .stacks import StackSpace, effective_input
+from .stacks import effective_input
 
 STATUSES = ("allow", "todo")
 
@@ -168,16 +167,14 @@ def blocks_needed(layout, stacks, routes):
     return result
 
 
-def audit(data, config, depth=0, chains=True):
-    """`depth` > 0 adds the depth-limited search; `chains=False` leaves only it and the declared stacks."""
+def audit(data, config):
     layout = Layout(data)
     variant = "alternative" if "alternative" in layout.cm.get("title", "") else "default"
     mapping = config.get("variants", {}).get(variant, {})
     specs = {map_title(t, mapping): spec for t, spec in config.get("targets", {}).items()}
     for title in always_on_layers(layout):
         specs.setdefault(title, {})
-    space = StackSpace.of(layout, depth) if depth else None
-    lineage = Chains.of(layout) if chains else None
+    lineage = Chains.of(layout)
     targets = {}
     for title, spec in specs.items():
         layout.active(title)
@@ -187,15 +184,11 @@ def audit(data, config, depth=0, chains=True):
                 raise ValueError(f"{title}: decision needs status {STATUSES} and a why: {decision}")
             decisions[(decision["source"], decision["input"])] = decision
         declared = [tuple(map_title(t, mapping) for t in s["layers"]) for s in spec.get("stacks", [])]
-        chained = lineage.below(title) if lineage else {}
-        derived = space.below(title) if space else {}
-        stacks = list(dict.fromkeys(declared + list(chained) + sorted(derived, key=lambda s: (derived[s], s))))
+        chained = lineage.below(title)
+        stacks = list(dict.fromkeys(declared + list(chained)))
         routes, blocked, used = [], [], set()
-        earlier = set()
         for stack in stacks:
             found, stopped = check_stack(layout, title, list(stack))
-            if derived.get(stack, 0) < depth or stack in declared or stack in chained:
-                earlier |= {(r["source"], r["input"], r["from_layer"]) for r in found}
             blocked += stopped
             for route in found:
                 decision = decisions.get((route["source"], route["input"]))
@@ -203,31 +196,25 @@ def audit(data, config, depth=0, chains=True):
                     used.add((route["source"], route["input"]))
                     route["status"] = "allowed" if decision["status"] == "allow" else "todo"
                     route["why"] = decision["why"]
-                route["reason"] = reason(stack, declared, chained, derived)
+                route["reason"] = reason(stack, declared, chained)
                 routes.append(route)
         stale = [d for key, d in decisions.items() if key not in used]
-        final = {(r["source"], r["input"], r["from_layer"]) for r in routes}
         pending = [r for r in routes if r["status"] in ("open", "todo")]
         targets[title] = {"stacks": len(stacks), "chain_stacks": len(chained), "checked": bool(stacks),
                           "routes": routes, "blocked": blocked,
-                          "saturated": not depth or final == earlier,
                           "blocks_needed": blocks_needed(layout, stacks, pending) if pending else [],
                           "stale_decisions": stale, "untraced": untraced(layout, title, routes)}
     undecided = any(r["status"] == "open" for t in targets.values() for r in t["routes"])
-    unsaturated = any(not t["saturated"] for t in targets.values())
     unchecked = any(not t["checked"] for t in targets.values())
-    return {"variant": variant, "depth": depth, "targets": targets,
-            "ok": not undecided and not unsaturated and not unchecked}
+    return {"variant": variant, "targets": targets, "ok": not undecided and not unchecked}
 
 
-def reason(stack, declared, chained, derived):
-    """Why a stack is checked: the bindings that built it, or which other source supplied it."""
+def reason(stack, declared, chained):
+    """Why a stack is checked: declared in the config, or the bindings that built it."""
     if stack in declared:
         return ["declared in the config"]
-    if stack in chained:
-        why = chained[stack]
-        return why.describe() + ([f"bystander: {why.bystander}"] if why.bystander else [])
-    return [f"depth search, {derived[stack]} input(s) from the action set"]
+    why = chained[stack]
+    return why.describe() + ([f"bystander: {why.bystander}"] if why.bystander else [])
 
 
 def entries(data, title):

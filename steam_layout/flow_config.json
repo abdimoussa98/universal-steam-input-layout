@@ -1,5 +1,5 @@
 {
-  "_about": "Rules for audit_flow_inheritance.py, which runs on backward chains (steam_layout/chains.py, covers.py). The stacks are derived from the layout; this file only declares what bindings can't say: the starting contexts the chains may begin from (Base alone, and Base with the stateful Gyro layer on it), which layers are covers, and recorded decisions with reasons. Titles use default-layout names; 'variants' maps them for the alternative layout. Until 2026-10-01 this file also declared a 'families' section for the family walk (steam_layout/flow_paths.py, deprecated); that version is kept as tests/data/flow_families_90.9.json.",
+  "_about": "Rules for audit_flow_inheritance.py, which runs on backward chains (steam_layout/chains.py, covers.py). The stacks are derived from the layout; this file only declares what bindings can't say: the starting contexts the chains may begin from (Base alone, and Base with the stateful Gyro layer on it), which layers are covers, and recorded decisions with reasons. Titles use default-layout names; 'variants' maps them for the alternative layout. Until 2026-10-01 this file also declared a 'families' section for the family walk (deprecated); that version is kept as archived/depth-search-and-family-walk/tests/data/flow_families_90.9.json.",
   "version": 5,
   "variants": {
     "alternative": {
@@ -17,7 +17,7 @@
     ]
   ],
   "covers": {
-    "_about": "Cover-type layers (Layer Definition of Done section 5). They inherit their owner, so differing lower bindings are expected; the cover check (flow_covers.py) judges them instead.",
+    "_about": "Cover-type layers (Layer Definition of Done section 5). They inherit their owner, so differing lower bindings are expected; the cover check (covers.py) judges them instead.",
     "suffixes": [
       ": Tap Cover",
       ": Double Tap Cover",

@@ -14,13 +14,6 @@ add a stack that can't happen but never drops one that can.
 `traced_stacks.json` can add extra stacks and holds the decisions. A target no
 stack reaches is **not checked**, which fails.
 
-`--depth N` adds the older search as a comparison (deprecated 2026-10-01; the
-audits no longer use it): from the action set, every
-effective binding's layer commands are applied, chord conditions ignored, up
-to N input events. It counts as complete (**saturated**) only if its last
-level finds no route that an earlier level, a chain stack or a declared stack
-didn't.
-
 For every input the target doesn't define, the effective lower binding is the
 topmost layer below that defines it. If that binding changes layers (`add_layer`, `remove_layer`,
 `hold_layer`, or a `mode_shift` to a group that does), it is a **route**.
@@ -41,17 +34,17 @@ and which aren't already routes. They are a call-out for review (for example
 Fn and menu-entry stick clicks), not a failure.
 
 For each unblocked route, `blocks_needed` recommends the block: **replace**
-with the underlying output when every stack below gives the identical
-non-layer output (for example always E, or always middle mouse), otherwise
-**clear**, because a hard-coded replacement would be wrong in some stack.
+with the underlying keybind when only one is possible across the stacks (for
+example always E, or always middle mouse), otherwise **clear**, because a
+hard-coded replacement would be wrong in some stack. A stack whose binding is
+only a layer command adds no keybind.
 
 Every Always On layer is audited automatically. Titles in the config use
 default-layout names; `variants` maps them (L1 -> L2, R1 -> R2) for
 the alternative layout, which is detected from controller_mappings.title.
 
 Read-only. Works with numeric IDs or title tokens. Exit codes: 0 = ok,
-1 = undecided routes, an unchecked target or an unsaturated depth search,
-2 = invalid input.
+1 = undecided routes or an unchecked target, 2 = invalid input.
 `--entries TITLE` lists every binding that adds TITLE and the removals that run
 before the add, to help trace stacks.
 """
@@ -64,13 +57,13 @@ from steam_layout.inheritance import (  # noqa: F401  (re-exported for tools and
     STATUSES, audit, blocks_needed, changes_layers, check_stack, entries, strip_layer_api, untraced)
 from steam_layout.model import (  # noqa: F401
     EMPTY, LAYER_COMMAND, MODE_SHIFT, TARGET, Layout, always_on_layers, bindings, defined, map_title)
-from steam_layout.stacks import StackSpace, effective_input, explore, operations  # noqa: F401
+from steam_layout.stacks import effective_input  # noqa: F401
 
 ROOT = Path(__file__).resolve().parent
 
 
 def print_report(report, show_untraced=False):
-    print(f"variant: {report['variant']}; depth {report['depth']}; {'PASS' if report['ok'] else 'FAIL'}")
+    print(f"variant: {report['variant']}; {'PASS' if report['ok'] else 'FAIL'}")
     for title, row in report["targets"].items():
         if not row["checked"]:
             print(f"{title}: NOT CHECKED (no chain or declared stack reaches it)")
@@ -79,7 +72,7 @@ def print_report(report, show_untraced=False):
         for route in row["routes"]:
             counts[route["status"]] = counts.get(route["status"], 0) + 1
         print(f"{title}: {row['stacks']} stack(s) ({row['chain_stacks']} from chains), {len(row['blocked'])} blocked, "
-              f"routes {counts or 'none'}" + ("" if row["saturated"] else "; NOT SATURATED (raise --depth)"))
+              f"routes {counts or 'none'}")
         for need in row["blocks_needed"]:
             what = json.dumps(need["activators"]) if need["activators"] else ""
             print(f"  block needed: {need['source']}/{need['input']} -> {need['action']} {what}")
@@ -104,9 +97,6 @@ def main():
     parser.add_argument("--stacks", type=Path, default=ROOT / "traced_stacks.json")
     parser.add_argument("--entries", metavar="TITLE", help="list bindings that add TITLE, then exit")
     parser.add_argument("--untraced", action="store_true", help="list untraced candidates in full")
-    parser.add_argument("--depth", type=int, default=0,
-                        help="deprecated: also run the old depth-limited search to this many input events, "
-                             "as a comparison (default 0: off)")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     try:
@@ -119,7 +109,7 @@ def main():
                 print(f"{row['layer']} [{row['source_state']}] {row['input']} {row['activation']}: "
                       f"removes first {row['removes_first'] or 'nothing'}")
             return 0
-        report = audit(data, json.loads(args.stacks.read_text(encoding="utf-8")), args.depth)
+        report = audit(data, json.loads(args.stacks.read_text(encoding="utf-8")))
     except (OSError, ValueError, KeyError, TypeError, IndexError) as error:
         print(f"Audit error: {error}", file=sys.stderr)
         return 2

@@ -2,15 +2,15 @@
 
 Date: 2026-09-29. **Status: full Default/Alternative candidate bindings generated;
 static validation passes; native acceptance remains open.** The
-[implementation handoff](../findings/2026-09-29-steering-implementation/README.md)
+[implementation handoff](../../findings/2026-09-29-steering-implementation/README.md)
 contains complete candidate exports, source generator, exact layer count and
 remaining device limitations. Working Neptune layouts have not been replaced.
 
 
-This implements the [steering interaction contract](2026-09-29-steering-entry-brainstorm.md)
-using action layers within Base. The [review record](../findings/2026-09-29-steering-design-review/AUDIT.md)
+This implements the [steering interaction contract](../../plans/2026-09-29-steering-entry-brainstorm.md)
+using action layers within Base. The [review record](../../findings/2026-09-29-steering-design-review/AUDIT.md)
 lists the documentation inspected, current-layout checks, and findings that
-changed this plan. The [HTML](steering-overview.html) illustrates intended behavior;
+changed this plan. The [HTML](../../plans/steering-overview.html) illustrates intended behavior;
 its JavaScript is not an implementation of Steam activators or a proof of their
 ordering. A static audit cannot establish absence of runtime bugs.
 
@@ -72,7 +72,7 @@ table, including the swapped firing controls and their ramp-up behavior.
 ## Architecture and the layer budget
 
 The table below preserves the allocation used to plan implementation. The
-[implemented breakdown](../findings/2026-09-29-steering-implementation/README.md#layer-count-and-reuse)
+[implemented breakdown](../../findings/2026-09-29-steering-implementation/README.md#layer-count-and-reuse)
 is now 36 new definitions; do not treat the earlier 19-definition subtotal as
 the completed count. The native comparison is generated, but has no device result.
 The complete candidate therefore uses the explicit layered path pending comparison.
@@ -124,7 +124,7 @@ definitions, maximum active stack, and command entries separately.
 
 ## First milestone: native contract probes
 
-First run the existing [held-input rule-test](../findings/2026-09-29-held-input-layer-transitions/AUDIT.md#deck-checks), especially its T4 removal exposure and key-output probes. Record results rather than treating the existence of the harness as evidence. Steering gates use S1–S10 to avoid its T-numbering.
+First run the existing [held-input rule-test](../../findings/2026-09-29-held-input-layer-transitions/AUDIT.md#deck-checks), especially its T4 removal exposure and key-output probes. Record results rather than treating the existence of the harness as evidence. Steering gates use S1–S10 to avoid its T-numbering.
 
 Build a small diagnostic harness before integrating the whole feature. Follow
 the existing held-input `rule-test` pattern: human-readable JSON, numeric JSON,
@@ -399,9 +399,9 @@ user-confirmed requirements. Do not relax the stated contract to make a gate pas
 
 ## First actionable implementation slice
 
-**Implemented:** the [first probes](../findings/2026-09-29-steering-native-probes/README.md),
-[native gesture comparison](../findings/2026-09-29-steering-native-probes/native-gestures.vdf),
-and [complete candidate layouts](../findings/2026-09-29-steering-implementation/README.md)
+**Implemented:** the [first probes](../../findings/2026-09-29-steering-native-probes/README.md),
+[native gesture comparison](../../findings/2026-09-29-steering-native-probes/native-gestures.vdf),
+and [complete candidate layouts](../../findings/2026-09-29-steering-implementation/README.md)
 are generated. The candidate has 30 steering and 6 menu definitions (36 added,
 91 total), with shared maps/consumption/repeats and no separate Mod2 routing
 layers. The following sequence remains the device-validation order, rather than

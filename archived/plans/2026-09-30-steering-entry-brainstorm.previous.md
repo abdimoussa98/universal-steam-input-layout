@@ -1,23 +1,23 @@
 # Brainstorm: steering behavior and deflection-safe entry
 
 Updated 2026-09-30. **Behavior contract retained; lean candidate generated.**
-The [implemented lean candidate](../findings/2026-09-30-steering-lean/README.md)
+The [implemented lean candidate](../../findings/2026-09-30-steering-lean/README.md)
 adds **25 layers with zero new Always On actions**; nine safety helpers remain
 beyond the conditional 16-layer target. Native verification is pending.
-The [lean plan](2026-09-29-steering-implementation-plan.md) targets **16 added
+The [lean plan](../../plans/2026-09-29-steering-implementation-plan.md) targets **16 added
 layers with no new Always On actions**, subject to complete binding and native
-proof. The [existing 36-layer candidate](../findings/2026-09-29-steering-implementation/README.md)
+proof. The [existing 36-layer candidate](../../findings/2026-09-29-steering-implementation/README.md)
 remains unchanged. The user reports it looked good on their Deck; individual
 acceptance cases and the tested build/variant are not yet recorded.
-Linked from the [Steering todo](../todos.md#steering). Read the short
-[interactive overview](steering-overview.html) for the behavior; its model is
+Linked from the [Steering todo](../../todos.md#steering). Read the short
+[interactive overview](../../plans/steering-overview.html) for the behavior; its model is
 not Steam Input validation.
 
 The [previous plan](2026-09-29-steering-implementation-plan.baseline.md) preserves
 the audit-era architecture. Its owner-specific Always On windows are no longer
 mandatory: ordinary-input windows can inherit cleanup from W/S owners if their
 timing and lifecycle pass the lean plan's gates. The
-[documentation review](../findings/2026-09-29-steering-design-review/AUDIT.md)
+[documentation review](../../findings/2026-09-29-steering-design-review/AUDIT.md)
 remains historical evidence, especially for inheritance and timer hazards.
 
 **Steering is a stateful layer:** it persists after a driving control is released
@@ -452,11 +452,11 @@ their presence does not impose AO self-first isolation on inherited owner cleanu
 
 ## Smallest useful architecture to prototype
 
-The [lean implementation plan](2026-09-29-steering-implementation-plan.md) is the
+The [lean implementation plan](../../plans/2026-09-29-steering-implementation-plan.md) is the
 current architecture authority. Its layer-title table uses `Steering | control: function`
 like the Gyro family, with required separate W-owner and S-owner Modifier 2 layers. It follows the earlier
-[trigger/ramp-up removal](2026-09-27-neptune-trigger-rampup-port.md) and
-[Base selector consolidation](2026-09-27-neptune-command-budget.md): put selection
+[trigger/ramp-up removal](../../plans/2026-09-27-neptune-trigger-rampup-port.md) and
+[Base selector consolidation](../../plans/2026-09-27-neptune-command-budget.md): put selection
 in existing inputs and inherit unchanged behavior instead of allocating a layer
 for each control combination.
 
@@ -516,8 +516,8 @@ windows with ordinary-input timing. The rules below still apply to existing
 Base/menu/RTP Always On windows and to any explicitly justified AO fallback;
 they do not require owner-specific windows in the lean architecture.
 
-Follow the repository's [Always On isolation rule](../resources/Steam%20Input%20JSON%20Structure.md#always-on-layer-isolation-and-the-historical-crash-workaround)
-and [inheritance review](../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes).
+Follow the repository's [Always On isolation rule](../../resources/Steam%20Input%20JSON%20Structure.md#always-on-layer-isolation-and-the-historical-crash-workaround)
+and [inheritance review](../../resources/Steam%20Input%20JSON%20Structure.md#inheritance-review-for-binding-changes).
 The reported historical crash is not claimed to reproduce on every current
 client, but its ordering/isolation contract remains required here. Its rule
 that normal key/mouse/movement outputs may continue is important: **a timed
@@ -585,12 +585,12 @@ helpers in its 16 target and separately lists state that may require additions. 
   Arrays execute bottom-to-top; place removals/applies accordingly and test
   transient W/S exclusivity and inherited binding exposure.
 - Do not generate W/S from an Always On owner while changing banks above it.
-  The repository's [Always On isolation rule](../resources/Steam%20Input%20JSON%20Structure.md#always-on-layer-isolation-and-the-historical-crash-workaround)
+  The repository's [Always On isolation rule](../../resources/Steam%20Input%20JSON%20Structure.md#always-on-layer-isolation-and-the-historical-crash-workaround)
   applies. Any reused timed Always On helper must remove itself before other
   layer mutations; add it only after its entry changes are complete.
 - Immediate layer commands on already-held inputs do not fire merely because
   a layer was added. Held-input removals and key/mouse output handoff are still
-  unverified. Use the [held-input contract](../resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes)
+  unverified. Use the [held-input contract](../../resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes)
   to design delayed/repeating reconciliation, not as proof that every press,
   release, or timer will replay correctly.
 - Reconciliation must be owner guarded and idempotent: apply only the desired
@@ -607,7 +607,7 @@ helpers in its 16 target and separately lists state that may require additions. 
   outputs, touch/click paths, A/D movement, gyro/ramp-up, and global recovery.
   Preserve useful behavior without importing Base's modifier entry or release
   side effects on steering controls.
-- The [global stateful cleanup todo](../todos.md#global-stateful-behavior) uses
+- The [global stateful cleanup todo](../../todos.md#global-stateful-behavior) uses
   L1 + R1. In Default steering those same controls express owner + Mod 2:
   steering must mask that global chord or every Mod 2 interaction could exit.
   Recommend reserving both steering controls for this flow while Steering is
@@ -631,11 +631,11 @@ helpers in its 16 target and separately lists state that may require additions. 
 ## Historical implementation reference
 
 The author supplied the July
-[MOST_RECENT_LAYOUT.post-fix.json](../findings/2026-07-11-layer-order-swap/MOST_RECENT_LAYOUT.post-fix.json)
+[MOST_RECENT_LAYOUT.post-fix.json](../../findings/2026-07-11-layer-order-swap/MOST_RECENT_LAYOUT.post-fix.json)
 as a partially implemented, partially broken reference. It was inspected
 statically on 2026-09-29. The requirements above remain authoritative; the
 snapshot has not been runtime-validated for this design. Its “post-fix” label
-refers to the [layer-order repair](../findings/2026-07-11-layer-order-swap/FINDINGS.md),
+refers to the [layer-order repair](../../findings/2026-07-11-layer-order-swap/FINDINGS.md),
 not to completion or repair of steering behavior.
 
 The historical name is **Split Stick**, implemented as four layers under Base:
@@ -680,7 +680,7 @@ Specific limits to account for before adapting any bindings:
   alone does not establish runtime behavior.
 - **Always On:** W/S helpers add Mod 2 while their own Always On output remains
   active. This conflicts with the current
-  [Always On isolation rule](../resources/Steam%20Input%20JSON%20Structure.md#always-on-layer-isolation-and-the-historical-crash-workaround).
+  [Always On isolation rule](../../resources/Steam%20Input%20JSON%20Structure.md#always-on-layer-isolation-and-the-historical-crash-workaround).
   Reusing continuous W/S output needs a design compatible with bank changes;
   this static conflict is not a diagnosis of the author's historical breakage.
 - **Command budget:** each bumper in active group 383 has four command entries
@@ -715,6 +715,6 @@ Specific limits to account for before adapting any bindings:
   of the transition matrix on the Deck. No controller JSON/VDF is changed by
   this brainstorming revision.
 
-Additional references: the [earlier menu split](2026-09-27-split-menu-entry-point.md)
-and [layout vocabulary](../resources/Layout%20Vocabulary.md). Earlier plans and
+Additional references: the [earlier menu split](../../plans/2026-09-27-split-menu-entry-point.md)
+and [layout vocabulary](../../resources/Layout%20Vocabulary.md). Earlier plans and
 historical bindings are evidence to inspect, not implementations of this contract.
