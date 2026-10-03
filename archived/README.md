@@ -26,6 +26,15 @@ Not archived, although they look old:
 - `findings/2026-09-29-steering-implementation/` and
   `findings/2026-09-30-steering-lean/`: frozen, but the current builder
   extends them.
-- `findings/`, `plans/` and `versions/`: dated records and snapshots.
+- `findings/`, `plans/` and `versions/`: dated records and snapshots. One
+  thing in them was changed after the fact: on 2026-10-03 the scripts at the
+  repo root moved to `tools/`, and the 26 builders, installers and inventory
+  scripts under `findings/` had their imports (`from tools.audit_command_budget
+  import ...`) and the exporter's path (`tools/convert_vdf.mjs`) updated, because
+  the current builder loads the earlier ones by path. Nothing else in them
+  changed, and the commands in their prose are as they were run that day.
+  The `*_generator_sha256` values in each `manifest.json` are the builders'
+  hashes as built, before that edit; a rebuild writes the new hash and the
+  same candidate.
 - `out/`: generated search data, ignored by Git. It can be deleted
   ([note](../findings/2026-09-30-stack-search/ARCHIVE.md#deleting-out)).

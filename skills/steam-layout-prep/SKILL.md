@@ -11,7 +11,7 @@ Runtime IDs in `controller_action` commands are positional: action sets are numb
 
 ## 1. Get to JSON
 
-The editing scripts read JSON. VDF → JSON conversion uses the VS Code extension `pfwobcke.vscode-vdf`. If you only have a `.vdf`, ask the user to convert it, and keep the `.vdf` as the source export. After every successful, validated JSON edit, the agent **must** regenerate the sibling VDF with `node convert_vdf.mjs path/to/layout.json` after the `steam-layout-apply` checks. This is a standing user instruction, including metadata-only edits, and supersedes the earlier leave-VDFs-alone preference. Do not ask for separate export permission or finish with only the JSON updated.
+The editing scripts read JSON. VDF → JSON conversion uses the VS Code extension `pfwobcke.vscode-vdf`. If you only have a `.vdf`, ask the user to convert it, and keep the `.vdf` as the source export. After every successful, validated JSON edit, the agent **must** regenerate the sibling VDF with `node tools/convert_vdf.mjs path/to/layout.json` after the `steam-layout-apply` checks. This is a standing user instruction, including metadata-only edits, and supersedes the earlier leave-VDFs-alone preference. Do not ask for separate export permission or finish with only the JSON updated.
 
 ## 2. Run the pre-flight check
 
@@ -45,8 +45,8 @@ What each result means (R104, R105):
 ## 3. Convert IDs to titles
 
 ```bash
-python3 convert_runtime_ids.py to-titles path/to/layout.json                                   # in place
-python3 convert_runtime_ids.py to-titles path/to/layout.json --output path/to/layout_readable.json
+python3 -m tools.convert_runtime_ids to-titles path/to/layout.json                                   # in place
+python3 -m tools.convert_runtime_ids to-titles path/to/layout.json --output path/to/layout_readable.json
 ```
 
 Token format:
@@ -75,7 +75,7 @@ Token format:
 
 ## Check the command budget
 
-Run `python3 audit_command_budget.py path/to/layout.json` for a complete scan, or add
+Run `python3 -m tools.audit_command_budget path/to/layout.json` for a complete scan, or add
 `--json` for every input's counts and exact violation paths. The maximum (R109) is **three
 GUI command entries per input**, summed over all activator types/list elements.
 Subcommands in a `binding` array share one entry and may exceed three. Inactive and
@@ -92,7 +92,7 @@ See `steam-binding-order` for consolidation rules.
 - Never hand-edit numeric runtime IDs; convert to titles first.
 - In a numeric file, don't reorder or insert entries in `actions` / `action_layers`, because every ID after the change shifts. In title form, reordering is safe as long as the `preset` blocks move in step.
 - Use `--output` while experimenting so you can diff and roll back.
-- Watch out for a numeric file whose layers were reordered or deleted without remapping. Its IDs no longer match list order, so `to-titles` would mislabel every bind. Either re-export from Steam, or remap using a known old→new mapping with the legacy `id_replacement/replace_layer_ids_flexible.py` (`-i`, `-m`, `-o`, `--dry-run`).
+- Watch out for a numeric file whose layers were reordered or deleted without remapping. Its IDs no longer match list order, so `to-titles` would mislabel every bind. Either re-export from Steam, or remap using a known old→new mapping with the legacy `tools/id_replacement/replace_layer_ids_flexible.py` (`-i`, `-m`, `-o`, `--dry-run`).
 
 ## References
 

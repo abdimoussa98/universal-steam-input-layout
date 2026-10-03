@@ -1,8 +1,8 @@
 # Plan: reorganize the repo, one skills directory, a short README
 
 **Status, 2026-10-03:** in progress. The author said to run it on 2026-10-03,
-and the 90.16 to 90.19 work was committed first (`90ed6c8`). Part 1 (skills) is
-done. Written against release 90.19 (75 layers per layout).
+and the 90.16 to 90.19 work was committed first (`90ed6c8`). Parts 1 (skills)
+and 2 (`tools/`) are done. Written against release 90.19 (75 layers per layout).
 
 ## Why
 
@@ -153,8 +153,14 @@ Notes:
   be avoided: the installer in `findings/2026-10-03-pad-click-holds/` loads all
   ten builders by file path. The change is the import line and the exporter
   path, nothing else. `archived/README.md` gets one line saying so.
-- `steam_layout/rules.py` doesn't change. The Definition of Done names audits
-  by title ("Budget audit"), not by file name.
+- `steam_layout/rules.py`: the Definition of Done names audits by title
+  ("Budget audit"), not by file name, so the parser doesn't change. Its
+  `SOURCES` table does: it imports three of the scripts by module name to read
+  their `ENFORCES` tables (found while building; the plan first said no change).
+- **The manifests keep their hashes.** Each builder's `manifest.json` records a
+  SHA-256 of the builder before it. The import edit changes those files, so the
+  recorded hashes are of the builders as built. Nothing reads them. A rebuild
+  of 90.19 from the edited builders gives the same layouts, byte for byte.
 - The next release's builder is made by copying the previous one, so it gets
   the new form. `docs/building.md` says this in one line.
 

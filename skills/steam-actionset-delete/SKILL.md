@@ -22,7 +22,7 @@ Look under `controller_mappings.actions` for the key to delete, such as `Preset_
 ## 3. Delete it
 
 ```bash
-python3 delete_action_set_complete.py path/to/layout.json Preset_1000014
+python3 -m tools.delete_action_set_complete path/to/layout.json Preset_1000014
 ```
 
 It edits the file in place and writes `<file>_backup_before_delete_<preset>.json` next to it first.
@@ -51,5 +51,5 @@ Run the pre-flight check from the `steam-layout-prep` skill: `layer order` must 
 
 ## References
 
-- Script: `delete_action_set_complete.py`
+- Script: `tools/delete_action_set_complete.py`
 - Runtime ID rules: `README.md`, `resources/Steam Input JSON Structure.md`

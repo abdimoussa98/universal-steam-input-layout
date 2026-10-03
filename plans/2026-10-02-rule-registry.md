@@ -102,7 +102,7 @@ shipped.
 "Nothing breaking" means each step ends with all of these, and is its own
 commit:
 
-1. `python3 audit_build.py` is clean.
+1. `python3 -m tools.audit_build` is clean.
 2. `python3 -m unittest discover -s tests` and `node --test tests/*.mjs` pass
    (321 and 8 tests at the baseline).
 3. The working layouts are byte-identical to the 90.13 snapshot, JSON and VDF.

@@ -5,7 +5,7 @@ physical deflection thresholds, and overlapping chords still need Deck testing.
 """
 import unittest
 
-from audit_command_budget import command_entries
+from tools.audit_command_budget import command_entries
 from test_neptune_recovery import EMPTY, addition, load_layouts, removal, recovery_specs
 
 

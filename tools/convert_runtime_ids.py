@@ -14,17 +14,17 @@ Modes:
   e.g., "controller_action add_layer {{L2}} 0 0" -> "controller_action add_layer 5 0 0"
 
 Usage:
-    python convert_runtime_ids.py <mode> <json_file> [--output <file>]
+    python3 -m tools.convert_runtime_ids <mode> <json_file> [--output <file>]
 
 Examples:
     # Convert IDs to titles (modifies file in place)
-    python convert_runtime_ids.py to-titles layout.json
+    python3 -m tools.convert_runtime_ids to-titles layout.json
     
     # Convert titles back to IDs (modifies file in place)
-    python convert_runtime_ids.py to-ids layout.json
+    python3 -m tools.convert_runtime_ids to-ids layout.json
     
     # Output to a different file instead
-    python convert_runtime_ids.py to-titles layout.json -o layout_readable.json
+    python3 -m tools.convert_runtime_ids to-titles layout.json -o layout_readable.json
 """
 
 import json

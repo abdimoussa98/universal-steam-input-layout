@@ -7,7 +7,7 @@ import tempfile
 import time
 import unittest
 
-from audit_inheritance import Layout, always_on_layers, audit, entries, map_title
+from tools.audit_inheritance import Layout, always_on_layers, audit, entries, map_title
 
 ROOT = Path(__file__).resolve().parents[1]
 EMPTY = "controller_action empty_binding, , "
@@ -335,8 +335,8 @@ class CliTests(unittest.TestCase):
             layout.write_text(json.dumps(data))
             stacks.write_text(json.dumps(cfg))
             register.write_text(json.dumps({"exceptions": []}))
-            return subprocess.run([sys.executable, str(ROOT / "audit_inheritance.py"), str(layout), "--stacks",
-                                   str(stacks), "--register", str(register), *extra], capture_output=True, text=True)
+            return subprocess.run([sys.executable, "-m", "tools.audit_inheritance", str(layout), "--stacks",
+                                   str(stacks), "--register", str(register), *extra], capture_output=True, text=True, cwd=ROOT)
 
     def test_chains_are_the_default_and_print_the_reason(self):
         out = self.run_cli(deep_window(), {"targets": {}})
@@ -353,8 +353,8 @@ class CliTests(unittest.TestCase):
 
     def test_the_working_layout_passes_on_chains_alone(self):
         layout = ROOT / "neptune/single-set-default_hold-gyro_latest.json"
-        out = subprocess.run([sys.executable, str(ROOT / "audit_inheritance.py"), str(layout), "--json"],
-                             capture_output=True, text=True)
+        out = subprocess.run([sys.executable, "-m", "tools.audit_inheritance", str(layout), "--json"],
+                             capture_output=True, text=True, cwd=ROOT)
         self.assertEqual(out.returncode, 0, out.stderr)
         report = json.loads(out.stdout)
         self.assertTrue(all(row["chain_stacks"] for row in report["targets"].values()))

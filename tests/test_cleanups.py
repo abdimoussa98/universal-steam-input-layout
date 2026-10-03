@@ -585,8 +585,8 @@ class ScriptTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "layout.json"
             path.write_text(json.dumps(data), encoding="utf-8")
-            return subprocess.run([sys.executable, str(ROOT / "audit_cleanups.py"), str(path), *args],
-                                  capture_output=True, text=True)
+            return subprocess.run([sys.executable, "-m", "tools.audit_cleanups", str(path), *args],
+                                  capture_output=True, text=True, cwd=ROOT)
 
     def test_exit_codes(self):
         self.assertEqual(self.run_script(owner()).returncode, 0)

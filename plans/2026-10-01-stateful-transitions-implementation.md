@@ -367,7 +367,7 @@ mirror it.
 - **Audit check:** fail on any layer command on an inverted edge of a
   D-pad-mode stick. Mouse-mode sticks are out of scope: the three ramp layers
   use inverted-edge layer commands there. Add it to
-  [audit_command_budget.py](../audit_command_budget.py), which already fails
+  [audit_command_budget.py](../tools/audit_command_budget.py), which already fails
   on Long and Double Press, with a test.
   - **It reports in its own list, like `banned_activators`,** and the CLI
     fails on it. It must not go into `violations`: `Lean.finish()` raises on
@@ -424,7 +424,7 @@ mirror it.
   `test_menu_entry_early_chord_types_its_key_itself` in
   `test_neptune_held_inputs.py`, which reads the working layouts. It is
   inverted, so it asserts the Entry Point adds Fn and types nothing.
-- **Build audit:** `python3 audit_build.py` is clean. It runs the Budget,
+- **Build audit:** `python3 -m tools.audit_build` is clean. It runs the Budget,
   Window and Flow audits on both layouts.
 - **Docs:** move the built parts of the structure document from "not built"
   to built; Definition of Done type table (Always On windows, guards, the

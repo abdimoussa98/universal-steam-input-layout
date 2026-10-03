@@ -300,7 +300,7 @@ inputs together. Audit active groups, dormant groups, mode-shift targets, and
 unreferenced groups. Check disabled activator banks separately before restoring
 them; disabling overflow is not a repair.
 
-Run `python3 audit_command_budget.py path/to/layout.json` before finalizing.
+Run `python3 -m tools.audit_command_budget path/to/layout.json` before finalizing.
 It is read-only and supports numeric IDs and title tokens. Exit 0 is required;
 exit 1 reports violations, exit 2 reports invalid input. `--json` emits every
 input's counts and every violation's activators, bindings, settings, and path.

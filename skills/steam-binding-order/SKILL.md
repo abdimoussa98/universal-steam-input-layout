@@ -35,7 +35,7 @@ activation types on one input**, not the strings in `bindings.binding`:
 - Count each `group.inputs.<input>` separately, including edge, touch, click, and trigger pulls. Scan inactive groups, mode-shift groups, and unreferenced groups too. Check disabled activator banks separately before restoring them.
 - The limit exists because Steam's **desktop** configuration drops every entry after the third. The only exception is a delayed-apply reset as a 4th entry, and it must be **last** so it's the one desktop drops. When a type has several entries, JSON keeps them together as one list, so move that list to the end of `activators`. The audit reports these as `allowed_fourth`. See [the exception](../../resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget).
 
-Run `python3 audit_command_budget.py path/to/layout.json` after edits. A nonzero exit
+Run `python3 -m tools.audit_command_budget path/to/layout.json` after edits. A nonzero exit
 means the file is not ready to finalize (1 = over budget, 2 = malformed input). Allowed 4th-entry resets don't fail it.
 
 To consolidate identical chord outputs/settings, use one multi-button chord with **Any**

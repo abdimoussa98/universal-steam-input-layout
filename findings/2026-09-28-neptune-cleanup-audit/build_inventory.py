@@ -238,8 +238,8 @@ if __name__ == '__main__':
     args=parser.parse_args()
     TEMP=str(args.readable_dir)
     sys.path.insert(0,str(ROOT))
-    from convert_runtime_ids import generate_lookup, titles_to_ids
-    from audit_command_budget import audit_layout, unique_object
+    from tools.convert_runtime_ids import generate_lookup, titles_to_ids
+    from tools.audit_command_budget import audit_layout, unique_object
     for variant in ('default','alternative'):
         path=ROOT/f'neptune/single-set-{variant}_hold-gyro_latest.json'
         raw=path.read_text()

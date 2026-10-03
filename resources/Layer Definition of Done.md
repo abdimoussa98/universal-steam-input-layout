@@ -503,8 +503,8 @@ Example: the RTP Double Tap window's right pad is in `dpad` mode and binds no
 `touch`. Base's mouse-mode `touch` (which adds `RTP: Entry Point`) does not
 fire inside the window, so a second touch only fires the window's own regions.
 
-Both [audit_inheritance.py](../audit_inheritance.py) (blocked kind
-`mode replaced`) and [audit_flow_inheritance.py](../audit_flow_inheritance.py)
+Both [audit_inheritance.py](../tools/audit_inheritance.py) (blocked kind
+`mode replaced`) and [audit_flow_inheritance.py](../tools/audit_flow_inheritance.py)
 apply this rule.
 
 ### How to check it
@@ -534,9 +534,9 @@ left alone, even when the keybinds differ between stacks. An ordinary layer
 inherits by default (R139); it is never required to block an input because
 the layers below would give it different bindings.
 
-The **Window audit** ([audit_inheritance.py](../audit_inheritance.py)) checks
+The **Window audit** ([audit_inheritance.py](../tools/audit_inheritance.py)) checks
 this rule. The **Flow audit**
-([audit_flow_inheritance.py](../audit_flow_inheritance.py)) runs the cover
+([audit_flow_inheritance.py](../tools/audit_flow_inheritance.py)) runs the cover
 check ([§5](#5-stick-touch-release)), checks that a chain reaches every
 layer, and lists inherited bindings that differ between stacks ("varies" and
 "review"). Until 2026-10-01 it failed on those for every layer, which
@@ -548,12 +548,12 @@ blocking; the entry was read, and inheriting is what is wanted. Both audits buil
 same backward chains and run in the build audit ([§10](#10-ship-it)):
 
 ```bash
-python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json
-python3 audit_inheritance.py <layout> --entries "Menu Left: Double Tap"   # who adds it, what they remove first
-python3 audit_layer.py <layout> --layer "Menu Left: Fn Layer"             # below, above, inherited, exits
+python3 -m tools.audit_inheritance neptune/single-set-default_hold-gyro_latest.json
+python3 -m tools.audit_inheritance <layout> --entries "Menu Left: Double Tap"   # who adds it, what they remove first
+python3 -m tools.audit_layer <layout> --layer "Menu Left: Fn Layer"             # below, above, inherited, exits
 ```
 
-For one layer, [audit_layer.py](../audit_layer.py) prints what can be below
+For one layer, [audit_layer.py](../tools/audit_layer.py) prints what can be below
 and above it, each inherited input with the layer it comes from, and what
 each of its exits removes against what can be present. The exits lists are
 for review against [§7](#7-cleanup); they aren't a check.
@@ -666,7 +666,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
-| R150 | The build audit is clean on every version | `python3 audit_build.py` runs the four audits on both layouts and exits 0 | Author | Build audit; `test_stateful_transitions.test_audits_are_clean` | — | None |
+| R150 | The build audit is clean on every version | `python3 -m tools.audit_build` runs the four audits on both layouts and exits 0 | Author | Build audit; `test_stateful_transitions.test_audits_are_clean` | — | None |
 | R151 | A published layout has a reviewed description, one version bump per release, a regenerated VDF and a snapshot under `versions/neptune/<version>/`. Another version's snapshot never changes | 90.13: the title ends in `90.13`, and `versions/neptune/90.13/` holds both variants' JSON and VDF | Author, standing instruction | `test_layout_rules.test_every_snapshot_holds_both_layouts_under_its_own_version` (part) | A33 | None |
 | R152 | The working layouts are a fixed point of the fix pipeline: running it again changes nothing | `python3 -m steam_layout.fixes neptune/*_latest.json --dry-run` reports nothing to change | Since the pipeline, 2026-09-30 | `test_fixes.test_working_layouts_are_a_fixed_point` | — | None |
 | R153 | A layout has no dead groups: no plain-inactive slot and no unreferenced group | 90.6 pruned the four inactive stick-touch Double Press groups | 2026-09-30 | `dead_groups` fix; `test_layout_hygiene.test_no_unreferenced_groups_or_plain_inactive_slots` | — | None |
@@ -678,7 +678,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 | R164 | Before a release ships, its change report is written to the release's findings folder and read: every change in it is one somebody decided | The report for 90.13 shows `Steering` gaining an empty right-stick edge, which was decided, and the two Steering stick windows losing their trigger-edge mouse buttons, which the `window_routes` fix did on its own | Author, 2026-10-02 | Not checked yet | — | None |
 | R156 | The working layouts are generated: they equal the current builder's output run through the fix pipeline. A hand edit there is lost on the next install | `neptune/*_latest.json` equals the output of `findings/2026-10-03-pad-click-holds/build_candidate.py`, apart from title and description | Since the 09-30 builder | `test_pad_click_holds.test_working_layouts_are_this_build` | — | None |
 
-- [ ] **R150: the build audit is clean, on every version.** `python3 audit_build.py`
+- [ ] **R150: the build audit is clean, on every version.** `python3 -m tools.audit_build`
       runs the four audits below on both variants and exits 0 only when all
       pass. No version ships with a failing line.
 
@@ -700,7 +700,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       title doesn't end in a cover suffix, and an entry in the
       [exceptions register](#exceptions-register). An exception that no
       longer matches anything is reported as stale.
-- [ ] **R164:** the change report is read. `python3 change_report.py --out findings/<date>-<slug>/`
+- [ ] **R164:** the change report is read. `python3 -m tools.change_report --out findings/<date>-<slug>/`
       compares each working layout with its newest snapshot, layer by layer
       and input by input, and writes the result into the release's findings
       folder. A change nobody decided is looked at before the release ships.

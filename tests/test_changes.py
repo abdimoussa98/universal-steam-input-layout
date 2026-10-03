@@ -136,7 +136,8 @@ class SnapshotTests(unittest.TestCase):
 
 class ScriptTests(unittest.TestCase):
     def run_script(self, *args):
-        return subprocess.run([sys.executable, str(ROOT / "change_report.py"), *args], capture_output=True, text=True)
+        return subprocess.run([sys.executable, "-m", "tools.change_report", *args], capture_output=True, text=True,
+                              cwd=ROOT)
 
     def test_two_files_and_out(self):
         after = base()

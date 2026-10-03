@@ -111,7 +111,7 @@ class RegistryTests(unittest.TestCase):
 
     def test_rule_ids_named_elsewhere_exist(self):
         places = [ROOT / "README.md", ROOT / "todos.md", *sorted((ROOT / "resources").glob("*.md")),
-                  *sorted((ROOT / "skills").glob("*/SKILL.md")), *sorted(ROOT.glob("audit_*.py")),
+                  *sorted((ROOT / "skills").glob("*/SKILL.md")), *sorted((ROOT / "tools").glob("audit_*.py")),
                   *sorted((ROOT / "steam_layout").rglob("*.py")), *sorted((ROOT / "tests").glob("test_*.py"))]
         for path in places:
             if path.name == Path(__file__).name:
@@ -169,8 +169,8 @@ class DeclarationTests(unittest.TestCase):
         self.assertEqual(rules.tag(("R127", "R131")), "[R127, R131]")
 
     def test_the_build_audit_prints_its_rule(self):
-        out = subprocess.run([sys.executable, str(ROOT / "audit_build.py"), str(ROOT / "no-such-layout.json")],
-                             capture_output=True, text=True)
+        out = subprocess.run([sys.executable, "-m", "tools.audit_build", str(ROOT / "no-such-layout.json")],
+                             capture_output=True, text=True, cwd=ROOT)
         self.assertEqual(out.returncode, 1)
         self.assertIn("Build audit [R150]: 4 audit(s) failed", out.stdout)
 
@@ -247,7 +247,7 @@ class AssumptionTests(unittest.TestCase):
 
     def test_assumption_ids_named_elsewhere_exist(self):
         places = [ROOT / "README.md", ROOT / "todos.md", *sorted((ROOT / "resources").glob("*.md")),
-                  *sorted((ROOT / "skills").glob("*/SKILL.md")), *sorted(ROOT.glob("audit_*.py")),
+                  *sorted((ROOT / "skills").glob("*/SKILL.md")), *sorted((ROOT / "tools").glob("audit_*.py")),
                   *sorted((ROOT / "steam_layout").rglob("*.py")), *sorted((ROOT / "tests").glob("test_*.py"))]
         for path in places:
             if path.name in (Path(__file__).name, "rules.py"):

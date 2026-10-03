@@ -9,8 +9,8 @@ import json
 from pathlib import Path
 import unittest
 
-from audit_command_budget import audit_layout
-from convert_runtime_ids import generate_lookup, titles_to_ids
+from tools.audit_command_budget import audit_layout
+from tools.convert_runtime_ids import generate_lookup, titles_to_ids
 from steam_layout import changes
 from steam_layout.fixes import apply_all
 from steam_layout.model import TARGET, Layout, bindings, entries

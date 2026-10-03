@@ -13,8 +13,8 @@ import re
 import tempfile
 import unittest
 
-from audit_command_budget import audit_layout
-import audit_flow_inheritance
+from tools.audit_command_budget import audit_layout
+from tools import audit_flow_inheritance
 from steam_layout.fixes import apply_all
 from steam_layout.inheritance import audit, check_stack
 from steam_layout.model import EMPTY, Layout, actions, always_on_layers, bindings, entries

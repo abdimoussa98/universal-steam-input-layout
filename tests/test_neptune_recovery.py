@@ -7,8 +7,8 @@ from pathlib import Path
 import re
 import unittest
 
-from audit_command_budget import audit_layout, command_entries, unique_object
-from convert_runtime_ids import generate_lookup, ids_to_titles, titles_to_ids
+from tools.audit_command_budget import audit_layout, command_entries, unique_object
+from tools.convert_runtime_ids import generate_lookup, ids_to_titles, titles_to_ids
 
 ROOT = Path(__file__).resolve().parents[1]
 EMPTY = "controller_action empty_binding, , "

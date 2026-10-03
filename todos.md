@@ -9,7 +9,7 @@ None of them was run on the Deck: a layer whose tests pass but rest on an
 unverified assumption is done, and listed (author, 2026-10-02).
 
 Reviewed 2026-10-01 against release 90.9 (69 layers per layout). Every version
-has to pass the build audit, `python3 audit_build.py`
+has to pass the build audit, `python3 -m tools.audit_build`
 ([definition of done §10](resources/Layer%20Definition%20of%20Done.md#10-ship-it)).
 
 Terminology: use **stateful layer** for a persistent action layer and refer to
@@ -319,7 +319,7 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
   - **Done in 90.12:** the `cleanup_lists` fix-pipeline step resolves every finding; both layouts are clean and the audit is the fourth gate of `audit_build.py`. C1 to C8 are scenario tests since 2026-10-03 ([test_scenarios_90_12.py](tests/test_scenarios_90_12.py))
   - The gap (2026-10-01): the build audit validates blocks and inheritance, but nothing checks that a cleanup function or an owner release removes the right layers. A list can miss a layer, remove a survivor, or a new layer can be removed by nothing. Today only the Flow audit's cover check and hand-written tests such as `test_neptune_recovery.py` touch this
   - Read-only checker first (`audit_cleanups.py`, steps 1 to 3 of the [cleanup generator plan](plans/2026-09-30-cleanup-generator.md)); no automatic rewriting of lists
-  - **The raw lists exist (2026-10-01):** `python3 audit_layer.py <layout> --layer TITLE` prints, for each binding of a layer that removes layers, what it removes that is present, what is present and left, what it removes that is never present, and which layers above intercept it. It is a report, not a check; it passes and fails nothing ([record](findings/2026-10-01-backward-chain-stacks/README.md#the-per-layer-report))
+  - **The raw lists exist (2026-10-01):** `python3 -m tools.audit_layer <layout> --layer TITLE` prints, for each binding of a layer that removes layers, what it removes that is present, what is present and left, what it removes that is never present, and which layers above intercept it. It is a report, not a check; it passes and fails nothing ([record](findings/2026-10-01-backward-chain-stacks/README.md#the-per-layer-report))
   - Base the audit on those lists. They use the backward chains (`steam_layout/chains.py`) in the view that sees overlaps between families
   - Was blocked on the author's review of the exits lists; answered on 2026-10-02 by the cleanup rules. The tool can see what an exit leaves behind, but not whether that is wrong. "Present, not removed" holds both kinds:
     - left on purpose: `Gyro`, a ramp layer or a stick-touch helper under `Menu Right: Fn Layer`. They belong to something else

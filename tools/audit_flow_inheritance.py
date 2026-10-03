@@ -24,10 +24,10 @@ lives in archived/depth-search-and-family-walk/.
 
 Read-only. Exit codes: 0 = clean, 1 = cover findings or coverage gaps, 2 = invalid input.
 
-    python3 audit_flow_inheritance.py neptune/single-set-default_hold-gyro_latest.json
-    python3 audit_flow_inheritance.py <layout> --layer 'Menu Left: Fn Layer'
-    python3 audit_flow_inheritance.py <layout> --inventory --layer 'L1: Modifier 0'
-    python3 audit_flow_inheritance.py <layout> --json
+    python3 -m tools.audit_flow_inheritance neptune/single-set-default_hold-gyro_latest.json
+    python3 -m tools.audit_flow_inheritance <layout> --layer 'Menu Left: Fn Layer'
+    python3 -m tools.audit_flow_inheritance <layout> --inventory --layer 'L1: Modifier 0'
+    python3 -m tools.audit_flow_inheritance <layout> --json
 """
 import argparse
 from collections import Counter

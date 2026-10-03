@@ -54,7 +54,7 @@ def main():
         cm["title"], cm["description"] = title, current["description"]
         reports = apply_all(data)
         target.write_text(json.dumps(data, indent="\t") + "\n", encoding="utf-8")
-        subprocess.run(["node", str(ROOT / "convert_vdf.mjs"), str(target)], check=True)
+        subprocess.run(["node", str(ROOT / "tools" / "convert_vdf.mjs"), str(target)], check=True)
         changed = {name: len(r.get("changed", r.get("removed_groups", []))) for name, r in reports.items()}
         print(f"{target.relative_to(ROOT)}: {title}; fixes {changed}")
         version = title.rsplit(" :: ", 1)[-1]

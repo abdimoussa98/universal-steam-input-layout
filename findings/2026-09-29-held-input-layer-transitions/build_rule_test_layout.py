@@ -19,7 +19,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT))
 
-from convert_runtime_ids import generate_lookup, titles_to_ids  # noqa: E402
+from tools.convert_runtime_ids import generate_lookup, titles_to_ids  # noqa: E402
 
 LAYERS = ("X1 Immediate", "X2 Delayed", "X3 Repeating", "K Key Output", "R Remover", "Target")
 PROBE = {"Base": "0", "X1 Immediate": "1", "X2 Delayed": "2", "X3 Repeating": "3",

@@ -62,7 +62,7 @@ from steam_layout import exceptions
 from steam_layout.rules import tag
 from steam_layout.stacks import effective_input  # noqa: F401
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def print_report(report, show_untraced=False):

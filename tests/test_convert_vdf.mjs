@@ -5,12 +5,12 @@ import { homedir, tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
-import { convertJson, loadConverter } from '../convert_vdf.mjs';
+import { convertJson, loadConverter } from '../tools/convert_vdf.mjs';
 
 // Exercise the installed converter; a missing extension must fail this suite.
 const VDF = await loadConverter();
 const convert = value => convertJson(JSON.stringify(value), VDF);
-const cli = fileURLToPath(new URL('../convert_vdf.mjs', import.meta.url));
+const cli = fileURLToPath(new URL('../tools/convert_vdf.mjs', import.meta.url));
 
 test('preserves repeated bindings, group order, and empty blocks', () => {
   const result = convert({ controller_mappings: {

@@ -111,11 +111,11 @@ into analog geometry or timer simulation.
 Add `audit_flow_inheritance.py` with proposed usage:
 
 ```sh
-python3 audit_flow_inheritance.py \
+python3 -m tools.audit_flow_inheritance \
   neptune/single-set-default_hold-gyro_latest.json \
   --layer 'RTP: Double Tap'
 
-python3 audit_flow_inheritance.py \
+python3 -m tools.audit_flow_inheritance \
   neptune/single-set-default_hold-gyro_latest.json --json
 ```
 

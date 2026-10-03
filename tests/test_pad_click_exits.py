@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 import unittest
 
-from audit_command_budget import audit_layout
+from tools.audit_command_budget import audit_layout
 from steam_layout import changes
 from steam_layout.fixes import apply_all
 from steam_layout.model import Layout, entries

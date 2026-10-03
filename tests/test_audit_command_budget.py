@@ -6,7 +6,7 @@ import sys
 import tempfile
 import unittest
 
-from audit_command_budget import audit_layout, unique_object
+from tools.audit_command_budget import audit_layout, unique_object
 
 
 def command(actions="controller_action empty_binding, , "):
@@ -130,7 +130,7 @@ class CommandBudgetTests(unittest.TestCase):
             json.loads('{"chord": {}, "chord": {}}', object_pairs_hook=unique_object)
 
     def test_cli_pass_fail_and_parse_error_exit_codes(self):
-        script = Path(__file__).resolve().parents[1] / "audit_command_budget.py"
+        root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "layout.json"
             for content, expected in (
@@ -140,13 +140,14 @@ class CommandBudgetTests(unittest.TestCase):
                 ("not json", 2),
             ):
                 path.write_text(content)
-                result = subprocess.run([sys.executable, str(script), str(path), "--json"], capture_output=True)
+                result = subprocess.run([sys.executable, "-m", "tools.audit_command_budget", str(path), "--json"],
+                                        capture_output=True, cwd=root)
                 self.assertEqual(result.returncode, expected)
                 if expected != 2:
                     self.assertEqual(len(json.loads(result.stdout)), 1)
 
     def test_cli_prints_the_rule_id_next_to_each_finding(self):
-        script = Path(__file__).resolve().parents[1] / "audit_command_budget.py"
+        root = Path(__file__).resolve().parents[1]
         over = layout({"chord": [command()] * 4, "Long_Press": command()})
         inverted = layout({"Full_Press": command("controller_action remove_layer 9 0 0, , ")})
         inverted["controller_mappings"]["group"][0].update(mode="dpad", settings={"edge_binding_invert": "1"})
@@ -155,7 +156,8 @@ class CommandBudgetTests(unittest.TestCase):
             for data, expected in ((over, ("over the entry budget [R109]", "banned Long_Press [R108]")),
                                    (inverted, ("inverted D-pad edge [R111]",))):
                 path.write_text(json.dumps(data))
-                out = subprocess.run([sys.executable, str(script), str(path)], capture_output=True, text=True).stdout
+                out = subprocess.run([sys.executable, "-m", "tools.audit_command_budget", str(path)],
+                                     capture_output=True, text=True, cwd=root).stdout
                 for text in expected:
                     self.assertIn(text, out)
 

@@ -22,7 +22,7 @@ Run the check from the `steam-layout-prep` skill. `layer order` must be `OK`. Wo
 ## 2. Find the source layer
 
 ```bash
-python3 duplicate_layer.py path/to/layout.json --list        # Preset ID, runtime ID, title
+python3 -m tools.duplicate_layer path/to/layout.json --list        # Preset ID, runtime ID, title
 ```
 
 ## 3. Duplicate it
@@ -30,7 +30,7 @@ python3 duplicate_layer.py path/to/layout.json --list        # Preset ID, runtim
 Pick a unique title. The default is `<title> (Copy)`, and a duplicate title breaks `to-ids`.
 
 ```bash
-python3 duplicate_layer.py path/to/layout.json Preset_1000055 "New Title" --output path/to/out.json
+python3 -m tools.duplicate_layer path/to/layout.json Preset_1000055 "New Title" --output path/to/out.json
 ```
 
 - Without `--output`, the script edits in place and writes `<file>_backup_before_duplicate.json` alongside it. That backup is overwritten on every run and isn't gitignored.
@@ -72,7 +72,7 @@ Nothing adds it yet.
 ## 7. Re-check
 
 Re-run step 4 and the pre-flight check, then finalize with the `steam-layout-apply` skill.
-Run `python3 audit_command_budget.py path/to/layout.json` after retargeting and wiring
+Run `python3 -m tools.audit_command_budget path/to/layout.json` after retargeting and wiring
 the copy: each input may have at most three GUI command entries across activator
 types (R109). `binding` array subcommands are allowed beyond three. Duplicating a layer
 also duplicates any existing command-budget violations; do not carry them forward.
@@ -84,5 +84,5 @@ also duplicates any existing command-budget violations; do not carry them forwar
 
 ## References
 
-- Script: `duplicate_layer.py`
+- Script: `tools/duplicate_layer.py`
 - Runtime ID rules: `README.md`, `resources/Steam Input JSON Structure.md`

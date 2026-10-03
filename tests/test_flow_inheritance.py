@@ -5,6 +5,7 @@ covers.py). The family walk it first ran on is deprecated; its tests are in
 archived/depth-search-and-family-walk/.
 """
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -170,11 +171,11 @@ class GateTests(unittest.TestCase):
             if baseline is not None:
                 Path(tmp, "before.json").write_text(json.dumps({"controller_mappings": baseline.cm}))
                 against = ["--baseline", str(Path(tmp, "before.json"))]
-            out = subprocess.run([sys.executable, str(ROOT / "audit_flow_inheritance.py"), str(path),
-                                  "--config", str(rules), *against, *args], capture_output=True, text=True)
+            out = subprocess.run([sys.executable, "-m", "tools.audit_flow_inheritance", str(path),
+                                  "--config", str(rules), *against, *args], capture_output=True, text=True, cwd=ROOT)
             return out, json.loads(subprocess.run(
-                [sys.executable, str(ROOT / "audit_flow_inheritance.py"), str(path), "--config", str(rules),
-                 *against, "--json"], capture_output=True, text=True).stdout)
+                [sys.executable, "-m", "tools.audit_flow_inheritance", str(path), "--config", str(rules),
+                 *against, "--json"], capture_output=True, text=True, cwd=ROOT).stdout)
 
     def varying(self):
         """T sits on A or on B, and button_y is a different binding in each (InheritanceFixtureTests)."""
@@ -259,7 +260,7 @@ class GateTests(unittest.TestCase):
     def test_a_cover_finding_is_printed_with_its_rule(self):
         import contextlib
         import io
-        import audit_flow_inheritance as flow
+        from tools import audit_flow_inheritance as flow
         finding = {"check": "outlives owners", "detail": "no owner is present", "stacks": 1,
                    "stack": ["Base", "Cover"], "allowed": None, "path": ["Base a: +Cover"]}
         report = {"layout": {"title": "T", "variant": "default", "sha256": "0" * 64},
@@ -321,9 +322,9 @@ class NeptuneFlowTests(unittest.TestCase):
 
     def test_cli_runs_without_out_and_reports_json(self):
         for variant in ("default", "alternative"):
-            run = subprocess.run([sys.executable, str(ROOT / "audit_flow_inheritance.py"),
+            run = subprocess.run([sys.executable, "-m", "tools.audit_flow_inheritance",
                                   str(ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json"), "--json"],
-                                 capture_output=True, text=True, cwd="/")
+                                 capture_output=True, text=True, cwd="/", env={**os.environ, "PYTHONPATH": str(ROOT)})
             self.assertEqual(run.returncode, 0, run.stderr)
             report = json.loads(run.stdout)
             self.assertNotIn("families", report)

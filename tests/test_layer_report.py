@@ -108,8 +108,8 @@ class CliTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp, "layout.json")
             path.write_text(json.dumps(data))
-            return subprocess.run([sys.executable, str(ROOT / "audit_layer.py"), str(path), *args],
-                                  capture_output=True, text=True)
+            return subprocess.run([sys.executable, "-m", "tools.audit_layer", str(path), *args],
+                                  capture_output=True, text=True, cwd=ROOT)
 
     def test_text_report_has_the_four_sections(self):
         out = self.run_cli(family(), "--layer", "P")

@@ -4,7 +4,7 @@ from pathlib import Path
 import re
 import unittest
 
-from audit_inheritance import Layout, always_on_layers, bindings
+from tools.audit_inheritance import Layout, always_on_layers, bindings
 from steam_layout.flow_model import resolve
 
 ROOT = Path(__file__).resolve().parents[1]

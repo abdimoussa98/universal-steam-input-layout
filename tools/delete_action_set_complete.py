@@ -23,10 +23,10 @@ Runtime ID System:
 - This script uses a two-pass replacement to safely update all IDs
 
 Usage:
-    python delete_action_set_complete.py <json_file> <preset_id>
+    python3 -m tools.delete_action_set_complete <json_file> <preset_id>
 
 Example:
-    python delete_action_set_complete.py "neptune/universal-layout-default__hold-gyro__latest.json" "Preset_1000014"
+    python3 -m tools.delete_action_set_complete "neptune/universal-layout-default__hold-gyro__latest.json" "Preset_1000014"
 """
 
 import json
@@ -319,9 +319,9 @@ def delete_action_set_complete(layout_data: Dict[str, Any], target_preset_id: st
 def main():
     """Main function to handle command line arguments and execute the deletion."""
     if len(sys.argv) != 3:
-        print("Usage: python delete_action_set_complete.py <json_file> <preset_id>")
+        print("Usage: python3 -m tools.delete_action_set_complete <json_file> <preset_id>")
         print("\nExample:")
-        print("  python delete_action_set_complete.py 'neptune/universal-layout-default__hold-gyro__latest.json' 'Preset_1000014'")
+        print("  python3 -m tools.delete_action_set_complete 'neptune/universal-layout-default__hold-gyro__latest.json' 'Preset_1000014'")
         print("\nThis will delete:")
         print("  - The action set (Preset_1000014)")
         print("  - All action layers with parent_set_name = Preset_1000014")

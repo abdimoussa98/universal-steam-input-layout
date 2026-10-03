@@ -16,7 +16,7 @@ import copy
 import re
 import unittest
 
-from audit_command_budget import command_entries
+from tools.audit_command_budget import command_entries
 from test_neptune_cursor import owners, primary_input
 from test_neptune_recovery import addition, load_layouts, removal
 

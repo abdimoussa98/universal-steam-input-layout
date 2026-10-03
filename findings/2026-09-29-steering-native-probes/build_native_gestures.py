@@ -9,8 +9,8 @@ import sys
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
 sys.path.insert(0,str(ROOT))
-from convert_runtime_ids import generate_lookup,titles_to_ids
-from audit_command_budget import audit_layout
+from tools.convert_runtime_ids import generate_lookup,titles_to_ids
+from tools.audit_command_budget import audit_layout
 spec=importlib.util.spec_from_file_location('probe_base',HERE/'build_probes.py')
 p=importlib.util.module_from_spec(spec);spec.loader.exec_module(p)
 
@@ -61,7 +61,7 @@ def main():
     numeric,_=titles_to_ids(readable,generate_lookup(data));assert '{{' not in numeric
     for suffix,content in [('readable.json',readable),('json',numeric)]:
         (HERE/('native-gestures.'+suffix)).write_text(content)
-    subprocess.run(['node',str(ROOT/'convert_vdf.mjs'),str(HERE/'native-gestures.json')],check=True)
+    subprocess.run(['node',str(ROOT/'tools'/'convert_vdf.mjs'),str(HERE/'native-gestures.json')],check=True)
 
 
 if __name__=='__main__':main()

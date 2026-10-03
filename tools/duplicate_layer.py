@@ -12,14 +12,14 @@ The duplicated layer is added to the END of action_layers to preserve
 runtime ID ordering (critical for controller_action commands).
 
 Usage:
-    python duplicate_layer.py <json_file> <source_layer_id> [new_title]
+    python3 -m tools.duplicate_layer <json_file> <source_layer_id> [new_title]
 
 Examples:
     # Duplicate a layer with auto-generated title
-    python duplicate_layer.py layout.json Preset_1000006
+    python3 -m tools.duplicate_layer layout.json Preset_1000006
 
     # Duplicate with a custom title
-    python duplicate_layer.py layout.json Preset_1000006 "L2 Copy"
+    python3 -m tools.duplicate_layer layout.json Preset_1000006 "L2 Copy"
 """
 
 import json

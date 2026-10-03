@@ -27,9 +27,9 @@ Read-only. One of the four audits in audit_build.py since 90.12; the
 `cleanup_lists` fix (steam_layout/fixes) resolves its findings. Exit codes:
 0 = clean, 1 = findings, 2 = invalid input.
 
-    python3 audit_cleanups.py neptune/single-set-default_hold-gyro_latest.json
-    python3 audit_cleanups.py <layout> --layer "L1: Modifier 0"
-    python3 audit_cleanups.py <layout> --check "never there" --json
+    python3 -m tools.audit_cleanups neptune/single-set-default_hold-gyro_latest.json
+    python3 -m tools.audit_cleanups <layout> --layer "L1: Modifier 0"
+    python3 -m tools.audit_cleanups <layout> --check "never there" --json
 """
 import argparse
 from collections import defaultdict
@@ -42,7 +42,7 @@ from steam_layout.cleanups import CHECKS, ENFORCES, audit
 from steam_layout.exceptions import load_config
 from steam_layout.rules import tag
 
-RULES = Path(__file__).resolve().parent / "steam_layout" / "flow_config.json"
+RULES = Path(__file__).resolve().parents[1] / "steam_layout" / "flow_config.json"
 
 
 def print_report(report, checks):

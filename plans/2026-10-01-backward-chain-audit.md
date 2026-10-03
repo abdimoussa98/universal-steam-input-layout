@@ -17,7 +17,7 @@ and its [prototype](../findings/2026-10-01-backward-chain-stacks/prototype.py).
 | 3b Mid-chain arrivals | Done, one per chain. The Window audit takes about 0.55 s per layout |
 | 4 Parity | Done. Exact on the seven windows in both layouts; the Steering extras are traced and recorded in the test |
 | 5 Window audit and `window_routes` | Done. Build audit clean, fix pipeline unchanged, 610 tests pass |
-| 6 Per-layer report and cleanup lists | Done. [audit_layer.py](../audit_layer.py), [layer_report.py](../steam_layout/layer_report.py), [test_layer_report.py](../tests/test_layer_report.py). About two seconds per layer |
+| 6 Per-layer report and cleanup lists | Done. [audit_layer.py](../tools/audit_layer.py), [layer_report.py](../steam_layout/layer_report.py), [test_layer_report.py](../tests/test_layer_report.py). About two seconds per layer |
 | 7 Flow audit | Done, with a different outcome. On chain stacks the count of inputs with differing inherited bindings went from 8 to 296. The author then clarified that "more than one inherited keybind means block" only applies under an Always On layer with an inherited layer command. The Flow audit now lists these as "varies" and doesn't fail on them; it keeps its family walk for the cover check and coverage ([details](../findings/2026-10-01-backward-chain-stacks/README.md#the-flow-audit-on-chain-stacks)) |
 | 9 Deprecation (added by the author, 2026-10-01) | Done. The depth-limited search and the family walk are deprecated; the Flow audit runs on chains with identical cover results on the 90.9 layouts, and `flow_config.json` no longer has families ([record](../findings/2026-10-01-backward-chain-stacks/README.md#deprecated)) |
 | 8 Docs | Done: README, Definition of Done §8, `traced_stacks.json`, the stack search record, the stateful transitions plan, the finding |
@@ -290,7 +290,7 @@ independent of each other. Step 8 follows whatever was built.
 
 ## Done when
 
-- `python3 audit_build.py` is clean on both layouts with no depth search and
+- `python3 -m tools.audit_build` is clean on both layouts with no depth search and
   no flow stacks in the Window audit.
 - The parity tests pass, with every exception listed and explained.
 - The full test suite passes.

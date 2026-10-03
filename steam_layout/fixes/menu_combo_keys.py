@@ -23,7 +23,7 @@ the overlays is left untouched.
 import json
 import re
 
-from convert_runtime_ids import generate_lookup, ids_to_titles, titles_to_ids
+from tools.convert_runtime_ids import generate_lookup, ids_to_titles, titles_to_ids
 
 OVERLAYS = ("Menu Left: Backspace", "Menu Right: Enter")
 EMPTY = "controller_action empty_binding, , "

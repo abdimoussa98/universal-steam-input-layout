@@ -135,7 +135,7 @@ function main(args) {
   let input;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '-h' || args[i] === '--help') {
-      console.log('Usage: node convert_vdf.mjs input.json [-o output.vdf] [--extension /path/to/extension]');
+      console.log('Usage: node tools/convert_vdf.mjs input.json [-o output.vdf] [--extension /path/to/extension]');
       return;
     }
     if (['-o', '--output', '--extension'].includes(args[i])) {

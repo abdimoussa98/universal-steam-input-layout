@@ -4,8 +4,8 @@ import json
 from pathlib import Path
 import re
 import unittest
-from audit_command_budget import audit_layout
-from convert_runtime_ids import generate_lookup, titles_to_ids, ids_to_titles
+from tools.audit_command_budget import audit_layout
+from tools.convert_runtime_ids import generate_lookup, titles_to_ids, ids_to_titles
 
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('steering_candidate',ROOT/'findings/2026-09-29-steering-implementation/build_candidate.py')

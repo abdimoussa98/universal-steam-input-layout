@@ -2,8 +2,8 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
-from audit_command_budget import audit_layout
-from convert_runtime_ids import generate_lookup,titles_to_ids
+from tools.audit_command_budget import audit_layout
+from tools.convert_runtime_ids import generate_lookup,titles_to_ids
 
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('native_gestures',ROOT/'findings/2026-09-29-steering-native-probes/build_native_gestures.py')

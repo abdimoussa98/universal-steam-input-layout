@@ -15,8 +15,8 @@ import sys
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT))
-from convert_runtime_ids import generate_lookup, ids_to_titles, titles_to_ids
-from audit_command_budget import audit_layout
+from tools.convert_runtime_ids import generate_lookup, ids_to_titles, titles_to_ids
+from tools.audit_command_budget import audit_layout
 
 EMPTY = 'controller_action empty_binding, , '
 DIRECTIONS = {'Up': 'dpad_north', 'Down': 'dpad_south'}
@@ -509,7 +509,7 @@ def main():
         stem=HERE/f'{variant}-steering-candidate'
         stem.with_suffix('.readable.json').write_text(readable)
         stem.with_suffix('.json').write_text(numeric)
-        if args.vdf:subprocess.run(['node',str(ROOT/'convert_vdf.mjs'),str(stem.with_suffix('.json'))],check=True)
+        if args.vdf:subprocess.run(['node',str(ROOT/'tools'/'convert_vdf.mjs'),str(stem.with_suffix('.json'))],check=True)
         binding_rows=[]
         for layer in b.new:
             for source,g in b.sources(layer).items():

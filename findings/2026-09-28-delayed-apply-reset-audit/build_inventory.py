@@ -13,8 +13,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from audit_command_budget import audit_layout
-from convert_runtime_ids import generate_lookup, titles_to_ids
+from tools.audit_command_budget import audit_layout
+from tools.convert_runtime_ids import generate_lookup, titles_to_ids
 
 spec = importlib.util.spec_from_file_location(
     "cleanup", ROOT / "findings/2026-09-28-neptune-cleanup-audit/build_inventory.py")

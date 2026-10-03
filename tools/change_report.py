@@ -9,10 +9,10 @@ with layer commands compared by title, so a shifted runtime ID is not a change
 
 Read-only. Exit codes: 0 = report printed, 2 = invalid input.
 
-    python3 change_report.py                         # each working layout against its newest snapshot
-    python3 change_report.py BEFORE.json AFTER.json  # any two layouts
-    python3 change_report.py --out findings/<date>-<slug>/   # also write <name>-changes.txt there
-    python3 change_report.py --json
+    python3 -m tools.change_report                         # each working layout against its newest snapshot
+    python3 -m tools.change_report BEFORE.json AFTER.json  # any two layouts
+    python3 -m tools.change_report --out findings/<date>-<slug>/   # also write <name>-changes.txt there
+    python3 -m tools.change_report --json
 """
 import argparse
 import json
@@ -21,7 +21,7 @@ import sys
 
 from steam_layout import changes
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def pairs(files):

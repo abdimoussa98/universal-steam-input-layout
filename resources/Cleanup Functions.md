@@ -108,7 +108,7 @@ present, what can be present and is left, and what it removes that is never
 there:
 
 ```bash
-python3 audit_layer.py neptune/single-set-default_hold-gyro_latest.json --layer "L1: Modifier 0"
+python3 -m tools.audit_layer neptune/single-set-default_hold-gyro_latest.json --layer "L1: Modifier 0"
 ```
 
 The candidates are not the scope, though. Measured with the older

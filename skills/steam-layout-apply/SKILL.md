@@ -58,7 +58,7 @@ final step of a completed layout edit (step 4, item 2 below).
 
 ## 1. Run the pre-flight check
 
-**R164.** Read the change report first: `python3 change_report.py --out findings/<date>-<slug>/`
+**R164.** Read the change report first: `python3 -m tools.change_report --out findings/<date>-<slug>/`
 lists what differs from the newest snapshot, by layer and input, and saves it
 with the release's record. Every change in it should be one somebody decided;
 a fix can change a binding on its own.
@@ -85,13 +85,13 @@ and the scenario names it. Then
 isn't verified, with the rules and scenarios resting on it. A layer whose tests
 pass but rest on one of those is done, and listed.
 
-**R150.** Run the build audit first: `python3 audit_build.py`. It runs the Budget audit,
+**R150.** Run the build audit first: `python3 -m tools.audit_build`. It runs the Budget audit,
 the Window audit, the Flow audit and the Cleanup audit on both working layouts and must exit
 **0** before any version is finalized
 ([Layer Definition of Done §10](../../resources/Layer%20Definition%20of%20Done.md#10-ship-it)).
 The paragraphs below describe the individual audits it runs.
 
-The Budget audit (R108, R109, R111) is `python3 audit_command_budget.py path/to/layout.json`. It must exit **0**
+The Budget audit (R108, R109, R111) is `python3 -m tools.audit_command_budget path/to/layout.json`. It must exit **0**
 before finalizing a layout for Steam. It also fails on any Long Press or Double
 Press, which are banned (see `steam-binding-order`). The limit is **three GUI command entries per
 input**, across activator types; `binding` array subcommands do not consume extra
@@ -100,7 +100,7 @@ banks separately. Resolve failures using `steam-binding-order`; do not truncate
 cleanup subcommands to make a count pass. Read-only audits may report failures
 without changing the layout.
 
-The Window audit (R140) is `python3 audit_inheritance.py path/to/layout.json`. It must also exit
+The Window audit (R140) is `python3 -m tools.audit_inheritance path/to/layout.json`. It must also exit
 **0**. It derives every stack each Always On layer can be applied on and fails
 on any undecided layer command underneath, or on a window no stack reaches. Apply
 its `blocks_needed` (replace only if the underlying output is identical in
@@ -109,7 +109,7 @@ every stack, otherwise clear). The install runs
 this (`python3 -m steam_layout.fixes <layout> --dry-run` shows what it would change). See
 [Layer Definition of Done §8](../../resources/Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking).
 
-The Flow audit (R144, R145) is `python3 audit_flow_inheritance.py path/to/layout.json`. It
+The Flow audit (R144, R145) is `python3 -m tools.audit_flow_inheritance path/to/layout.json`. It
 must exit **0**: a chain of adding bindings reaches every layer, and no cover
 finding is open. A new or renamed layer needs no declaration; only a cover
 whose title doesn't end in a cover suffix, or an accepted finding as an entry
@@ -117,7 +117,7 @@ in the exceptions register with its reason, goes in `steam_layout/flow_config.js
 differs between stacks fails it on a layer that changed since the newest snapshot (R139): fix it, or accept it
 in the register with a reason. The Cleanup audit does the same for a covered side exit (R136).
 
-The Cleanup audit (R127 to R132) is `python3 audit_cleanups.py path/to/layout.json`. It must
+The Cleanup audit (R127 to R132) is `python3 -m tools.audit_cleanups path/to/layout.json`. It must
 exit **0**: every cleanup function and release follows the six cleanup rules
 (Layer Definition of Done §7). The `cleanup_lists` step of the fix pipeline
 resolves its findings (`python3 -m steam_layout.fixes <layout> --dry-run`
@@ -146,8 +146,8 @@ Continue only if every line is `OK` and `dup titles` is `none` (R104, R105):
 ## 2. Convert titles to IDs
 
 ```bash
-python3 convert_runtime_ids.py to-ids path/to/layout.json                                   # in place
-python3 convert_runtime_ids.py to-ids path/to/layout.json --output path/to/layout_final.json
+python3 -m tools.convert_runtime_ids to-ids path/to/layout.json                                   # in place
+python3 -m tools.convert_runtime_ids to-ids path/to/layout.json --output path/to/layout_final.json
 ```
 
 The script prints `Warning: Could not find runtime ID for '<title>'` for any token that doesn't match a current `Parent::Title`. The usual cause is a renamed layer. Those tokens stay in the file unchanged.
@@ -160,7 +160,7 @@ grep -c 'controller_action [A-Za-z_]* {{' path/to/layout_final.json   # must pri
 
 ## 4. Hand off for Steam
 
-1. **JSON → VDF:** run `node convert_vdf.mjs path/to/layout_final.json`. This writes/replaces the sibling `.vdf` using the installed `pfwobcke.vscode-vdf` serializer and verifies keys, values, repeated bindings, and order before writing. Use `-o path/to/output.vdf` for a different destination. See `README.md#file-formats` for requirements and extension discovery. The agent can complete this export directly.
+1. **JSON → VDF:** run `node tools/convert_vdf.mjs path/to/layout_final.json`. This writes/replaces the sibling `.vdf` using the installed `pfwobcke.vscode-vdf` serializer and verifies keys, values, repeated bindings, and order before writing. Use `-o path/to/output.vdf` for a different destination. See `README.md#file-formats` for requirements and extension discovery. The agent can complete this export directly.
 2. **Save the version snapshot:** once every exported variant has its final description and version, copy each one into `versions/neptune/<version>/` (see [Required version snapshot](#required-version-snapshot)):
 
    ```bash

@@ -17,18 +17,18 @@ A JSON object with one entry per set or layer, each with `old_id` and `new_id`:
 { "Preset_1000006": { "title": "L2", "old_id": 5, "new_id": 6 } }
 ```
 
-`id_replacement/old_to_new_ids.json` is an example, from the April migration. It does not describe the current layouts.
+`tools/id_replacement/old_to_new_ids.json` is an example, from the April migration. It does not describe the current layouts.
 
 ## 2. Dry run
 
 ```bash
-python3 id_replacement/replace_layer_ids_flexible.py -i path/to/layout.json -m path/to/mapping.json --dry-run
+python3 tools/id_replacement/replace_layer_ids_flexible.py -i path/to/layout.json -m path/to/mapping.json --dry-run
 ```
 
 ## 3. Write the result
 
 ```bash
-python3 id_replacement/replace_layer_ids_flexible.py -i path/to/layout.json -m path/to/mapping.json -o path/to/layout_updated.json
+python3 tools/id_replacement/replace_layer_ids_flexible.py -i path/to/layout.json -m path/to/mapping.json -o path/to/layout_updated.json
 ```
 
 ## 4. Review the diff
@@ -49,5 +49,5 @@ Without the placeholder, mapping 5 → 6 and 6 → 7 would turn every 5 into 7.
 
 ## References
 
-- Script: `id_replacement/replace_layer_ids_flexible.py`
-- Background: `id_replacement/README_replace_layer_ids.md`
+- Script: `tools/id_replacement/replace_layer_ids_flexible.py`
+- Background: `tools/id_replacement/README_replace_layer_ids.md`

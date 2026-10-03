@@ -52,11 +52,11 @@ REFERENCE = re.compile(r"(?<![A-Za-z0-9])R[1-9]\d\d(?![0-9])")
 ASSUMPTION_ID = re.compile(r"A[1-9]\d*")
 ASSUMPTION_REFERENCE = re.compile(r"(?<![A-Za-z0-9])A[1-9]\d?(?![0-9A-Za-z])")
 SOURCES = (                                # (kind, audit name, module holding its ENFORCES)
-    ("audit", "Budget", "audit_command_budget"),
+    ("audit", "Budget", "tools.audit_command_budget"),
     ("audit", "Window", "steam_layout.inheritance"),
-    ("audit", "Flow", "audit_flow_inheritance"),
+    ("audit", "Flow", "tools.audit_flow_inheritance"),
     ("audit", "Cleanup", "steam_layout.cleanups"),
-    ("audit", "Build", "audit_build"),
+    ("audit", "Build", "tools.audit_build"),
     ("fix", None, "steam_layout.fixes"),
 )
 

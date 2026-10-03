@@ -18,8 +18,8 @@ spec = importlib.util.spec_from_file_location('cleanup_audit', HERE.parent / '20
 cleanup = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(cleanup)
 sys.path.insert(0, str(ROOT))
-from audit_command_budget import audit_layout, unique_object
-from convert_runtime_ids import generate_lookup, titles_to_ids
+from tools.audit_command_budget import audit_layout, unique_object
+from tools.convert_runtime_ids import generate_lookup, titles_to_ids
 
 def empty(b):
     return b.startswith('controller_action empty_binding')

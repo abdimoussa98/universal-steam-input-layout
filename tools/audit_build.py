@@ -13,9 +13,9 @@ is clean only when every line passes (Layer Definition of Done, section 10).
 
 Read-only. Exit codes: 0 = every audit passed, 1 = at least one failed.
 
-    python3 audit_build.py                      # both neptune/*_latest.json
-    python3 audit_build.py path/to/layout.json  # one layout
-    python3 audit_build.py --verbose            # show each failing audit's output
+    python3 -m tools.audit_build                      # both neptune/*_latest.json
+    python3 -m tools.audit_build path/to/layout.json  # one layout
+    python3 -m tools.audit_build --verbose            # show each failing audit's output
 """
 import argparse
 from pathlib import Path
@@ -25,13 +25,13 @@ import time
 
 from steam_layout.rules import tag
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 ENFORCES = {None: ("R150",)}               # the audit as a whole -> rules (Layer Definition of Done)
 AUDITS = [
-    ("Budget audit", "audit_command_budget.py"),
-    ("Window audit", "audit_inheritance.py"),
-    ("Flow audit", "audit_flow_inheritance.py"),
-    ("Cleanup audit", "audit_cleanups.py"),
+    ("Budget audit", "tools.audit_command_budget"),
+    ("Window audit", "tools.audit_inheritance"),
+    ("Flow audit", "tools.audit_flow_inheritance"),
+    ("Cleanup audit", "tools.audit_cleanups"),
 ]
 
 
@@ -47,15 +47,15 @@ def main():
     failed = 0
     for layout in layouts:
         print(layout.name)
-        for name, script in AUDITS:
+        for name, module in AUDITS:
             start = time.monotonic()
-            result = subprocess.run([sys.executable, str(ROOT / script), str(layout)],
+            result = subprocess.run([sys.executable, "-m", module, str(layout)],
                                     capture_output=True, text=True, cwd=ROOT)
             status = "pass" if result.returncode == 0 else f"FAIL (exit {result.returncode})"
             print(f"  {name:<13} {status:<15} {time.monotonic() - start:.1f}s")
             if result.returncode:
                 failed += 1
-                print(f"    rerun: python3 {script} {layout}")
+                print(f"    rerun: python3 -m {module} {layout}")
                 if args.verbose:
                     print((result.stdout + result.stderr).rstrip())
     print(f"Build audit {tag(ENFORCES[None])}:", "clean" if not failed else f"{failed} audit(s) failed")

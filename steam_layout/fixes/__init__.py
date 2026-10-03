@@ -7,7 +7,7 @@ the working layouts are a fixed point of the pipeline, which the tests check.
     python3 -m steam_layout.fixes neptune/*_latest.json            # apply, write
     python3 -m steam_layout.fixes neptune/*_latest.json --dry-run  # report only
 
-After a real run, regenerate the VDFs (`node convert_vdf.mjs <json>`) and follow
+After a real run, regenerate the VDFs (`node tools/convert_vdf.mjs <json>`) and follow
 the steam-layout-apply skill.
 
 | Fix | What it does | Rules | Record |

@@ -44,19 +44,19 @@ Duplicates an action layer along with all its children relationships (groups, bi
 
 ```bash
 # List all available layers in a layout
-python3 duplicate_layer.py layout.json --list
+python3 -m tools.duplicate_layer layout.json --list
 
 # Duplicate a layer (auto-generates title with " (Copy)" suffix)
-python3 duplicate_layer.py layout.json Preset_1000006
+python3 -m tools.duplicate_layer layout.json Preset_1000006
 
 # Duplicate with a custom title
-python3 duplicate_layer.py layout.json Preset_1000006 "My Custom Layer"
+python3 -m tools.duplicate_layer layout.json Preset_1000006 "My Custom Layer"
 
 # Output to a different file instead of modifying in-place
-python3 duplicate_layer.py layout.json Preset_1000006 --output new_layout.json
+python3 -m tools.duplicate_layer layout.json Preset_1000006 --output new_layout.json
 
 # Skip creating a backup file
-python3 duplicate_layer.py layout.json Preset_1000006 --no-backup
+python3 -m tools.duplicate_layer layout.json Preset_1000006 --no-backup
 ```
 
 **What gets duplicated:**
@@ -80,7 +80,7 @@ Deletes an entire action set and **all** its associations from a layout file. Th
 **Usage:**
 
 ```bash
-python3 delete_action_set_complete.py layout.json Preset_1000014
+python3 -m tools.delete_action_set_complete layout.json Preset_1000014
 ```
 
 **What gets deleted:**
@@ -111,14 +111,14 @@ Converts between numeric runtime IDs and human-readable titles in `controller_ac
 ```bash
 # Convert numeric IDs to readable titles
 # e.g., "controller_action add_layer 5 0 0" -> "controller_action add_layer {{L2}} 0 0"
-python3 convert_runtime_ids.py to-titles layout.json
+python3 -m tools.convert_runtime_ids to-titles layout.json
 
 # Convert titles back to numeric IDs
 # e.g., "controller_action add_layer {{L2}} 0 0" -> "controller_action add_layer 5 0 0"
-python3 convert_runtime_ids.py to-ids layout.json
+python3 -m tools.convert_runtime_ids to-ids layout.json
 
 # Output to a different file instead of modifying in-place
-python3 convert_runtime_ids.py to-titles layout.json --output readable_layout.json
+python3 -m tools.convert_runtime_ids to-titles layout.json --output readable_layout.json
 ```
 
 **Title Format:**
@@ -138,8 +138,8 @@ Flow audit (`audit_flow_inheritance.py`) and the Cleanup audit
 exits **0** only when all pass. Read-only, about ten seconds. See [Layer Definition of Done §10](resources/Layer%20Definition%20of%20Done.md#10-ship-it).
 
 ```bash
-python3 audit_build.py              # both neptune/*_latest.json
-python3 audit_build.py --verbose    # also print each failing audit's output
+python3 -m tools.audit_build              # both neptune/*_latest.json
+python3 -m tools.audit_build --verbose    # also print each failing audit's output
 ```
 
 ### 4. `audit_inheritance.py` - Window Audit (Inheritance and Blocking Check)
@@ -164,9 +164,9 @@ See [Layer Definition of Done §8](resources/Layer%20Definition%20of%20Done.md#8
 and the [record](findings/2026-10-01-backward-chain-stacks/README.md).
 
 ```bash
-python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json
-python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --entries "RTP: Double Tap"
-python3 audit_inheritance.py neptune/single-set-default_hold-gyro_latest.json --untraced   # review list
+python3 -m tools.audit_inheritance neptune/single-set-default_hold-gyro_latest.json
+python3 -m tools.audit_inheritance neptune/single-set-default_hold-gyro_latest.json --entries "RTP: Double Tap"
+python3 -m tools.audit_inheritance neptune/single-set-default_hold-gyro_latest.json --untraced   # review list
 ```
 
 ### 4a. `audit_layer.py` - Layer Report (Below, Above, Inherited, Exits)
@@ -180,8 +180,8 @@ two seconds. Read-only. Exit codes: **0** = report printed, **2** = invalid
 input or unknown layer.
 
 ```bash
-python3 audit_layer.py neptune/single-set-default_hold-gyro_latest.json --layer "L1: Modifier 0"
-python3 audit_layer.py <layout> --layer "Menu Right: Fn Layer" --json
+python3 -m tools.audit_layer neptune/single-set-default_hold-gyro_latest.json --layer "L1: Modifier 0"
+python3 -m tools.audit_layer <layout> --layer "Menu Right: Fn Layer" --json
 ```
 
 ### 4b. `audit_flow_inheritance.py` - Flow Audit (Cover Check and Coverage)
@@ -208,9 +208,9 @@ Until 2026-10-01 it walked families declared in the rules; see the
 [deprecation record](findings/2026-10-01-backward-chain-stacks/README.md#deprecated).
 
 ```bash
-python3 audit_flow_inheritance.py neptune/single-set-default_hold-gyro_latest.json
-python3 audit_flow_inheritance.py <layout> --layer 'L1: Tap Cover'               # stacks, bindings, layers above
-python3 audit_flow_inheritance.py <layout> --inventory --layer 'L1: Modifier 0'  # what the chains follow
+python3 -m tools.audit_flow_inheritance neptune/single-set-default_hold-gyro_latest.json
+python3 -m tools.audit_flow_inheritance <layout> --layer 'L1: Tap Cover'               # stacks, bindings, layers above
+python3 -m tools.audit_flow_inheritance <layout> --inventory --layer 'L1: Modifier 0'  # what the chains follow
 ```
 
 ### 4c. `audit_cleanups.py` - Cleanup Audit (What Cleanups and Releases Remove)
@@ -242,9 +242,9 @@ About two seconds.
 Read-only. Exit codes: **0** = clean, **1** = findings, **2** = invalid input.
 
 ```bash
-python3 audit_cleanups.py neptune/single-set-default_hold-gyro_latest.json
-python3 audit_cleanups.py <layout> --layer "L1: Modifier 0"
-python3 audit_cleanups.py <layout> --check "never there" --json
+python3 -m tools.audit_cleanups neptune/single-set-default_hold-gyro_latest.json
+python3 -m tools.audit_cleanups <layout> --layer "L1: Modifier 0"
+python3 -m tools.audit_cleanups <layout> --check "never there" --json
 ```
 
 ### 4d. `change_report.py` - Change Report (What Differs Between Two Layouts)
@@ -257,9 +257,9 @@ a fix or a builder can change a binding nobody decided, and this is where it
 shows. It is a report, not a check.
 
 ```bash
-python3 change_report.py                                   # working layouts against their newest snapshots
-python3 change_report.py BEFORE.json AFTER.json            # any two layouts
-python3 change_report.py --out findings/<date>-<slug>/     # also write <name>-changes.txt there
+python3 -m tools.change_report                                   # working layouts against their newest snapshots
+python3 -m tools.change_report BEFORE.json AFTER.json            # any two layouts
+python3 -m tools.change_report --out findings/<date>-<slug>/     # also write <name>-changes.txt there
 ```
 
 ### 5. `steam_layout/` - Shared Library and Fix Pipeline
@@ -303,7 +303,7 @@ allowed exception is a delayed-apply reset as a **last** 4th entry, which is the
 entry desktop drops; see [the exception](resources/Steam%20Input%20JSON%20Structure.md#command-entry-budget).
 
 ```bash
-python3 audit_command_budget.py neptune/single-set-default_hold-gyro_latest.json neptune/single-set-alternative_hold-gyro_latest.json
+python3 -m tools.audit_command_budget neptune/single-set-default_hold-gyro_latest.json neptune/single-set-alternative_hold-gyro_latest.json
 ```
 
 The read-only checker scans all groups, including inactive, mode-shift, and
@@ -319,8 +319,8 @@ and reports unreferenced groups and plain-inactive slots. To remove dead groups
 mode-shift-target groups are kept, and no ID is renumbered):
 
 ```bash
-python3 prune_dead_groups.py --dry-run neptune/*_latest.json   # report only
-python3 prune_dead_groups.py neptune/*_latest.json
+python3 -m tools.prune_dead_groups --dry-run neptune/*_latest.json   # report only
+python3 -m tools.prune_dead_groups neptune/*_latest.json
 ```
 
 The baseline 90.1 [audit](findings/2026-09-27-neptune-command-budget/AUDIT.md) found one
@@ -453,9 +453,9 @@ Export JSON directly using the serializer from the installed
 `pfwobcke.vscode-vdf` VS Code extension:
 
 ```bash
-node convert_vdf.mjs neptune/single-set-default_hold-gyro_latest.json
-node convert_vdf.mjs neptune/single-set-alternative_hold-gyro_latest.json
-node convert_vdf.mjs findings/2026-09-29-held-input-layer-transitions/rule-test.json
+node tools/convert_vdf.mjs neptune/single-set-default_hold-gyro_latest.json
+node tools/convert_vdf.mjs neptune/single-set-alternative_hold-gyro_latest.json
+node tools/convert_vdf.mjs findings/2026-09-29-held-input-layer-transitions/rule-test.json
 ```
 
 Each command writes/replaces the sibling `.vdf`, leaving the JSON intact. Use
@@ -480,11 +480,11 @@ Run the command-budget and layer-order checks before exporting, and use
 fresh load in Steam shows that Steam reads the file as written (assumptions A22
 and A33). Converter tests: `node --test tests/test_convert_vdf.mjs`.
 
-python3 convert_runtime_ids.py to-ids neptune/single-set-alternative_hold-gyro_latest.json &&
-python3 convert_runtime_ids.py to-ids neptune/single-set-default_hold-gyro_latest.json
+python3 -m tools.convert_runtime_ids to-ids neptune/single-set-alternative_hold-gyro_latest.json &&
+python3 -m tools.convert_runtime_ids to-ids neptune/single-set-default_hold-gyro_latest.json
 
-python3 convert_runtime_ids.py to-titles neptune/single-set-alternative_hold-gyro_latest.json &&
-python3 convert_runtime_ids.py to-titles neptune/single-set-default_hold-gyro_latest.json
+python3 -m tools.convert_runtime_ids to-titles neptune/single-set-alternative_hold-gyro_latest.json &&
+python3 -m tools.convert_runtime_ids to-titles neptune/single-set-default_hold-gyro_latest.json
 
 
 ### Steering in the Neptune layouts

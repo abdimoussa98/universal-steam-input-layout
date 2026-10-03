@@ -31,8 +31,8 @@ import sys
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT))
-from audit_command_budget import audit_layout
-from convert_runtime_ids import generate_lookup, titles_to_ids, ids_to_titles
+from tools.audit_command_budget import audit_layout
+from tools.convert_runtime_ids import generate_lookup, titles_to_ids, ids_to_titles
 
 FALLBACK = ROOT / 'findings/2026-10-02-steering-fallback-hold/build_candidate.py'
 spec = importlib.util.spec_from_file_location('fallback_hold', FALLBACK)
@@ -211,7 +211,7 @@ def main():
         stem.with_suffix('.readable.json').write_text(readable)
         stem.with_suffix('.json').write_text(numeric)
         if args.vdf:
-            subprocess.run(['node', str(ROOT / 'convert_vdf.mjs'), str(stem.with_suffix('.json'))], check=True)
+            subprocess.run(['node', str(ROOT / 'tools' / 'convert_vdf.mjs'), str(stem.with_suffix('.json'))], check=True)
         manifest[variant] = {
             'source_sha256': hashlib.sha256(b.source.read_bytes()).hexdigest(),
             'fallback_hold_generator_sha256': hashlib.sha256(FALLBACK.read_bytes()).hexdigest(),

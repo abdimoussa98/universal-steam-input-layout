@@ -20,7 +20,7 @@ import sys
 import time
 
 sys.path.insert(0, ".")
-from audit_flow_inheritance import run
+from tools.audit_flow_inheritance import run
 from steam_layout.chains import Chains
 from steam_layout.flow_inheritance import inspect_target
 from steam_layout.model import Layout

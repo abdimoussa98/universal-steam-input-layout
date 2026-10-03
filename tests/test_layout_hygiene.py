@@ -4,7 +4,7 @@ from pathlib import Path
 import re
 import unittest
 
-from audit_command_budget import audit_layout
+from tools.audit_command_budget import audit_layout
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = {"Full_Press", "chord", "Start_Press", "release", "Soft_Press"}
