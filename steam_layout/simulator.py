@@ -39,6 +39,7 @@ stated; the ones the layout must work either way under are switches.
     A31      a repeat keeps its schedule when another layer is removed
     A32      `reverse_ties`: activators due at the same moment run in file order, or reversed
     A35      `default_repeat_ms`: Hold to Repeat with no stated rate uses this interval
+    A37      a key handed from one binding to another at the same moment stays down (`typed`)
     A21      `desktop(data)`: the layout with every entry past the third dropped
     A25      `lose(control)`: a release the layout never saw
 
@@ -75,6 +76,23 @@ def desktop(data, keep=3):
     return data
 
 
+def typed(log):
+    """The outputs a log shows going down or ticking, in order.
+
+    A key that one binding lets go of and another presses at the same moment was handed over, not typed
+    again (A37): W carries on when a window above the driver's layer times out.
+    """
+    found, released = [], {}
+    for ms, what, detail in log:
+        if what == "up":
+            released[detail] = ms
+        elif what == "down" and released.get(detail) == ms:
+            released.pop(detail)
+        elif what in ("down", "tap"):
+            found.append(detail)
+    return found
+
+
 Entry = namedtuple("Entry", "control layer kind index settings ops outputs taps beeps inverted condition unsupported")
 
 
@@ -101,7 +119,7 @@ class Simulator:
         self.bound = {}                 # (control, phase) -> the layer whose binding is established there
         self._cache, self._order = {}, 0
         self._inverted = self._inverted_controls()
-        self._rebind("landed")
+        self._rebind()
         self._drain()
 
     # --- reading the layout ---------------------------------------------------------------
@@ -172,7 +190,7 @@ class Simulator:
 
     def typed(self, since=0):
         """Every output that went down or ticked, in order: keys, mouse buttons and wheel steps."""
-        return [detail for ms, what, detail in self.log if what in ("down", "tap") and ms >= since]
+        return typed([event for event in self.log if event[0] >= since])
 
     def events(self, *kinds, since=0):
         return [(ms, what, detail) for ms, what, detail in self.log if what in kinds and ms >= since]
@@ -187,7 +205,7 @@ class Simulator:
         self._end(control, "up")
         self.held.add(control)
         self._establish(control, "down", "pressed")
-        self._rebind("landed")
+        self._rebind()
         self._drain()
         return self
 
@@ -203,7 +221,7 @@ class Simulator:
             self._establish(control, "up", "pressed")        # an inverted activator starts when the input lets go
         for entry in self._ordered(e for e in found if e.kind == "release" and not e.inverted):
             self._run(entry, tap=True)
-        self._rebind("landed")
+        self._rebind()
         self._drain()
         return self
 
@@ -215,7 +233,7 @@ class Simulator:
         self._note("lose", "/".join(control))
         self._end(control, "down")
         self.held.discard(control)
-        self._rebind("landed")
+        self._rebind()
         self._drain()
         return self
 
@@ -301,12 +319,19 @@ class Simulator:
         else:
             for output in entry.outputs:
                 self._note("tap", output)                                                          # a repeat types it again
-        if act.allow_ops:
-            self._run(entry, act=act)
+        self._run(entry, act=act, commands=act.allow_ops)
         act.allow_ops = True                    # a later repeat does run the commands (A6)
 
-    def _run(self, entry, act=None, tap=False):
-        """Run an entry's commands: wheel steps, haptics, then the layer commands in order."""
+    def _run(self, entry, act=None, tap=False, commands=True):
+        """Run an entry: wheel steps and haptics, then its layer commands in order.
+
+        `commands=False` is a binding that landed on a held input: its outputs fire (A10), its layer
+        commands don't (A5).
+        """
+        if not commands:
+            for output in entry.taps:
+                self._note("tap", output)
+            return
         if entry.unsupported:
             raise NotImplementedError(f"{entry.layer} {'/'.join(entry.control)}: {entry.unsupported[0]} is not simulated")
         if tap:
@@ -318,7 +343,7 @@ class Simulator:
             self._note("haptic", f"{entry.settings['haptic_intensity']} {entry.layer} {'/'.join(entry.control)}")
         if act is not None and entry.ops:
             act.fired = True
-        removed = []
+        removed, before = [], self.stack
         for op, title in entry.ops:
             if op == "remove_layer":
                 removed.append(title)
@@ -333,7 +358,7 @@ class Simulator:
         if removed:
             self._reset(removed, skip=act)
         if entry.ops:
-            self._rebind("exposed" if removed else "landed")
+            self._rebind(before)
 
     def _reset(self, removed, skip=None):
         """A removal restarts start delays (A12, A13)."""
@@ -350,18 +375,20 @@ class Simulator:
                     self._note("up", output)
                 act.down = []
 
-    def _rebind(self, mode):
-        """After the stack or the held set changed: end activators whose layer no longer answers, start the new ones."""
+    def _rebind(self, before=None):
+        """After the stack or the held set changed: end activators whose layer no longer answers, start the new ones.
+
+        `before` is the stack before the commands that just ran. A layer that wasn't on it has landed on the
+        held input (A5); one that was there, under a layer that left, has been exposed (A9).
+        """
+        before = self.stack if before is None else before
         live = self._live()
         for control, phase in [pair for pair in self.bound if pair not in live]:
             self._end(control, phase)
         for control, phase in sorted(live):
             layer, _ = self.binding(control)
-            if (control, phase) not in self.bound:
-                self._establish(control, phase, "pressed" if control[1] == ALWAYS_ON else mode)
-            elif self.bound[(control, phase)] != layer:
-                old = self.bound[(control, phase)]
-                self._end(control, phase)
-                exposed = old is not None and old not in self.stack
-                how = "pressed" if control[1] == ALWAYS_ON else ("exposed" if exposed else "landed")
-                self._establish(control, phase, how)
+            if (control, phase) in self.bound and self.bound[(control, phase)] == layer:
+                continue
+            self._end(control, phase)
+            how = "pressed" if control[1] == ALWAYS_ON else ("exposed" if layer in before else "landed")
+            self._establish(control, phase, how)

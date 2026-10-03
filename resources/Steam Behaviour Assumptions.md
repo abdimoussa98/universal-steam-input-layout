@@ -1,6 +1,6 @@
 # Steam behaviour assumptions
 
-**Status:** started 2026-10-02, 36 entries on 2026-10-03, from the
+**Status:** started 2026-10-02, 37 entries on 2026-10-03, from the
 [rule inventory](../findings/2026-10-02-rule-inventory/README.md), phase 10 of
 the [rule registry plan](../plans/2026-10-02-rule-registry.md).
 
@@ -68,16 +68,17 @@ through [rules.py](../steam_layout/rules.py)), so the shape is fixed.
 | A34 | A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held | Unverified | Relies on it | Under a regular and a Gyro modifier, touch each trackpad and press the face buttons and the D-pad: record the keys, and whether the normal Tap Cover still lands | The face and D-pad mode-shift targets under Base's trackpads; the cursor's cancel inputs |
 | A35 | Hold to Repeat with no stated rate repeats at one fixed default interval | Unverified: the interval isn't known. The simulator uses 100 ms | Works either way | In a test layout: a key with Hold to Repeat and no rate. Count the repeats in one second | Most repeating entries state no rate, the cleanup functions among them; the simulator's `default_repeat_ms` |
 | A36 | A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it | Unverified | Relies on it | Hold A, then hold LB: if A's chord with LB doesn't start, it holds | Every cleanup function's guard; the simulator |
+| A37 | When the layer that answers a held input changes and the new binding sends the same key, the key stays down with no release in between | Unverified | Works either way | In Steering hold a driver, flick the left stick, and watch W through the 150 ms window in a key tester: a gap means it doesn't hold | W and S through a Steering window; the simulator's `typed` |
 
 A33 and A34 were found while sorting the Deck checks
 ([record](../findings/2026-10-03-deck-check-sorting/README.md)). A31 and A32 come from the timing contract of the archived replay
 ([TIMED-MODEL.md](../findings/2026-09-30-stack-search/TIMED-MODEL.md)), which
 had to choose a behaviour for each.
 
-A35 and A36 are choices the press simulator
+A35, A36 and A37 are choices the press simulator
 ([simulator.py](../steam_layout/simulator.py)) had to make. Its docstring says
 which assumption each of its behaviours models: A1 to A17, A21, A25, A27, A31,
-A32, A35 and A36.
+A32 and A35 to A37.
 
 ## Two that are kept apart
 

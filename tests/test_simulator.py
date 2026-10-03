@@ -82,6 +82,14 @@ class OutputTests(unittest.TestCase):
         s.release(A).press(B).wait(250)
         self.assertEqual(s.typed(since=450), ["Y", "Y", "Y"])  # at 0, 100 and 200 ms after the press
 
+    def test_a_key_handed_to_another_binding_at_the_same_moment_is_not_typed_again(self):   # A37
+        s = sim({"Base": {"switch": (SW, {"button_a": key("W"), "button_b": press(add("P"))})},
+                 "P": {"switch": (SW, {"button_a": key("W"), "button_b": release(remove("P"))})}})
+        s.press(A).press(B)                           # P lands on held A and sends the same key
+        self.assertEqual((s.down(), s.typed()), (["W"], ["W"]))
+        s.release(B)                                  # P leaves: Base's W takes over
+        self.assertEqual((s.down(), s.typed()), (["W"], ["W"]))
+
     def test_haptics_and_beeps_are_logged(self):
         beep = "controller_action add_layer {{Base::P}} 1 0, , "
         s = sim({"Base": {"switch": (SW, {"button_a": on("Full_Press", beep, haptic_intensity=3)})}, "P": {}})
@@ -231,6 +239,18 @@ class HeldInputTests(unittest.TestCase):
         s.press(A).press(LB)
         self.assertEqual((s.down(), s.typed()), (["F"], ["Q", "F"]))
 
+    def test_a_wheel_step_fires_on_a_held_input_too(self):                        # A10: the second-press scroll
+        s = sim(self.landing(on("Full_Press", "mouse_wheel SCROLL_DOWN, , ")))
+        s.press(A).press(LB)
+        self.assertEqual(s.typed(), ["Q", "mouse_wheel SCROLL_DOWN"])
+
+    def test_a_layer_added_beside_a_removal_has_landed_not_been_exposed(self):    # A5
+        s = sim({"Base": {"switch": (SW, {"button_a": press(add("Old")), "button_b": press(remove("Old"), add("New"))})},
+                 "Old": {"switch": (SW, {"button_x": key("O")})},
+                 "New": {"switch": (SW, {"button_x": press(add("T"))})}, "T": {}})
+        s.press(A).press(X).press(B)                  # B swaps Old for New under a held X
+        self.assertEqual(s.stack, ("Base", "New"))    # New's command on X doesn't fire: the press came first
+
     def exposing(self):
         """A is held in L, whose A removes L; Base's A then adds T and holds Q."""
         return {"Base": {"switch": (SW, {"left_bumper": press(add("L")),
@@ -354,8 +374,8 @@ class WalkCrossCheck(unittest.TestCase):
 
     def test_the_quick_tap_inside_200_ms(self):
         """Modifier 2's own release clears every modifier and toggles Gyro. `walk` stops there. The simulator
-        knows the other side is still held: its modifier comes back in the new mode, at once if a removal
-        fires the exposed command (A9), on Base's 50 ms repeat if it doesn't. The layout works either way."""
+        knows the other side is still held: its modifier comes back in the new mode within 50 ms, on the
+        repeating entry of Base or Gyro, whichever way a removal treats an exposed command (A9)."""
         from tests.test_modifier_rocking import Names
         for label, layout, L, R, entry, n in self.cases():
             other = Names((n.l, n.r), not n.g)
@@ -366,7 +386,7 @@ class WalkCrossCheck(unittest.TestCase):
                     waits = self.compare(layout, n, steps, exposed_fires=False)
                     self.assertEqual(waits.wait(50).stack, other.base + (other.mod(held),))
                     fires = Simulator(layout, start=n.base, exposed_fires=True)
-                    fires.press(L).press(R).release(let_go)
+                    fires.press(L).press(R).release(let_go).wait(50)
                     self.assertEqual(fires.stack, other.base + (other.mod(held),))
 
     def test_a_double_tap_a_used_bumper_and_the_cursor(self):
