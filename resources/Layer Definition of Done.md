@@ -50,6 +50,15 @@ Every rule has one row, always in these columns. A test reads them
 A rule that stops applying keeps its row and its ID, with "Retired", the date
 and the reason under Checked by.
 
+The link runs both ways. Each audit and each fix declares the rule IDs it
+enforces and prints them next to its findings, and a test fails when that
+declaration and a row's "Checked by" disagree. To see which rules still need a
+check:
+
+```bash
+python3 -m steam_layout.rules      # not checked yet, and checked only in part
+```
+
 ## 1. Layer type
 
 Choose the layer's type first. The author accepted these types on
@@ -101,7 +110,7 @@ See: [layout-prep skill](../.claude/skills/steam-layout-prep/SKILL.md) ·
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
-| R108 | Use only Regular, Chorded, Start, Release and Soft Press. Never Long Press or Double Press, in any group, active or not | A hold is a chord with a delay: `Menu Left: Entry Point` adds its Fn layer after 200 ms. A double tap is a window layer: `L1: Double Tap` | Author, 2026-09-30 | Budget audit: banned activators; `test_layout_hygiene.test_only_allowed_activation_types_in_any_bank` | — | None |
+| R108 | Use only Regular, Chorded, Start, Release and Soft Press. Never Long Press or Double Press, in any group, active or not | A hold is a chord with a delay: `Menu Left: Entry Point` adds its Fn layer after 200 ms. A double tap is a window layer: `L1: Double Tap` | Author, 2026-09-30 | Budget audit: banned activators; `rtp_scroll` fix (part); `test_layout_hygiene.test_only_allowed_activation_types_in_any_bank` | — | None |
 | R109 | An input has at most three command entries, counted across all activator types. Subcommands inside an entry don't count. A delayed-apply reset may be a 4th entry when it is the last one | Select in `Menu Left: Entry Point` has three: the hold chord, the reset and the Release. Select in `Menu Left: Escape` has four, with the cover's reset last | Author, 2026-09-27; the 4th entry on 2026-09-30 | Budget audit: entry budget; `test_layout_hygiene.test_only_second_press_cover_resets_use_a_last_fourth_entry` | — | None |
 | R110 | In a new array the removals sit below the add, so they run first. An existing array keeps its order unless the order changes the result | `L1: Modifier 0`'s Release removes the modifier first and adds `L1: Double Tap` last, so the add is stored on top | Author, 2026-09-27 and 2026-09-30 | Not checked yet | — | None |
 | R111 | On a D-pad-mode stick, an inverted edge never adds or removes a layer. One that only sends output is allowed, and mouse-mode sticks are not covered | Steering's stick modifiers end on the outer edge's Release. The WASD modifier is an inverted edge that only sends a key | Author, 2026-10-01 | Budget audit: inverted edges; `test_stateful_transitions.test_no_steering_layer_uses_an_inverted_edge` | — | None |

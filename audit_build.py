@@ -23,7 +23,10 @@ import subprocess
 import sys
 import time
 
+from steam_layout.rules import tag
+
 ROOT = Path(__file__).resolve().parent
+ENFORCES = {None: ("R150",)}               # the audit as a whole -> rules (Layer Definition of Done)
 AUDITS = [
     ("Budget audit", "audit_command_budget.py"),
     ("Window audit", "audit_inheritance.py"),
@@ -55,7 +58,7 @@ def main():
                 print(f"    rerun: python3 {script} {layout}")
                 if args.verbose:
                     print((result.stdout + result.stderr).rstrip())
-    print("Build audit:", "clean" if not failed else f"{failed} audit(s) failed")
+    print(f"Build audit {tag(ENFORCES[None])}:", "clean" if not failed else f"{failed} audit(s) failed")
     return 1 if failed else 0
 
 

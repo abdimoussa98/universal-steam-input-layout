@@ -4,7 +4,8 @@ import json
 from pathlib import Path
 import sys
 
-from . import PIPELINE, __doc__ as PIPELINE_DOC, apply_all
+from . import ENFORCES, PIPELINE, __doc__ as PIPELINE_DOC, apply_all
+from ..rules import tag
 
 
 def summarize(report):
@@ -28,7 +29,7 @@ def main():
             path.write_text(json.dumps(data, indent="\t") + "\n", encoding="utf-8")
         print(f"{path}{' (dry run)' if args.dry_run else ''}:")
         for name, report in reports.items():
-            print(f"  {name}: {summarize(report)}")
+            print(f"  {name} {tag(ENFORCES[name])}: {summarize(report)}")
     return 0
 
 

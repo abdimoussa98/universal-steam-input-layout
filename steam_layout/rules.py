@@ -24,6 +24,8 @@ The other direction is declared in the code: each audit and the fix pipeline
 has an `ENFORCES` table, check or fix -> the rule IDs it enforces. `declared()`
 collects them, and tests/test_rule_registry.py keeps the two in step.
 
+    python3 -m steam_layout.rules      # the rules nothing checks yet, or only in part
+
 Plan: plans/2026-10-02-rule-registry.md.
 """
 from collections import namedtuple
@@ -123,6 +125,14 @@ def references(text):
     return set(REFERENCE.findall(text))
 
 
+def unchecked(rules):
+    """(rules nothing fails on, rules checked only in part), as lists of IDs in file order."""
+    live = [r for r in rules.values() if r.checked_by[0].kind != "retired"]
+    nothing = [r.id for r in live if r.checked_by[0].kind == "none"]
+    partly = [r.id for r in live if r.id not in nothing and all(c.part for c in r.checked_by)]
+    return nothing, partly
+
+
 def tag(ids):
     """Rule IDs as printed next to a finding: [R127, R131]."""
     return "[" + ", ".join(ids) + "]"
@@ -141,3 +151,19 @@ def declared():
         for key, ids in getattr(importlib.import_module(module), "ENFORCES", {}).items():
             found[(kind, name or key, key if name else None)] = tuple(ids)
     return found
+
+
+def main():
+    """python3 -m steam_layout.rules: the rules that still need a check."""
+    rules = load()
+    nothing, partly = unchecked(rules)
+    print(f"{len(rules)} rules in {REGISTRY.name}")
+    for title, ids in (("Not checked yet", nothing), ("Checked only in part", partly)):
+        print(f"\n{title} ({len(ids)})")
+        for rule_id in ids:
+            print(f"  {rule_id}  {rules[rule_id].statement}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

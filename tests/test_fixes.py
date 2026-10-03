@@ -39,7 +39,7 @@ class PipelineTests(unittest.TestCase):
             out = subprocess.run([sys.executable, "-m", "steam_layout.fixes", str(path), "--dry-run"],
                                  cwd=ROOT, capture_output=True, text=True)
             self.assertEqual(out.returncode, 0, out.stderr)
-            self.assertIn("window_routes", out.stdout)
+            self.assertIn("window_routes [R140, R141]:", out.stdout)      # each fix names the rules it applies
             self.assertEqual(path.read_text(), before)
 
 

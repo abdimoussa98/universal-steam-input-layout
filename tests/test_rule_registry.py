@@ -1,6 +1,8 @@
 """The rule registry: the rule tables in resources/Layer Definition of Done.md (steam_layout/rules.py)."""
 from pathlib import Path
 import re
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -141,8 +143,33 @@ class DeclarationTests(unittest.TestCase):
                     self.assertIn(rule_id, self.rules)
                     self.assertIn((name, check), self.checked_by(rule_id, kind))
 
+    def test_every_audit_and_fix_the_registry_names_declares_that_rule(self):
+        for rule in self.rules.values():
+            for checker in rule.checked_by:
+                if checker.kind in ("audit", "fix"):
+                    with self.subTest(rule=rule.id, checker=f"{checker.name} {checker.check or ''}".strip()):
+                        self.assertIn(rule.id, self.declared.get((checker.kind, checker.name, checker.check), ()))
+
+    def test_every_audit_and_every_fix_declares_something(self):
+        audits = {name for kind, name, _ in self.declared if kind == "audit"}
+        self.assertEqual(audits, set(rules.AUDITS))
+        self.assertEqual({name for kind, name, _ in self.declared if kind == "fix"}, {name for name, _ in PIPELINE})
+
     def test_tag_prints_the_ids_in_brackets(self):
         self.assertEqual(rules.tag(("R127", "R131")), "[R127, R131]")
+
+    def test_the_build_audit_prints_its_rule(self):
+        out = subprocess.run([sys.executable, str(ROOT / "audit_build.py"), str(ROOT / "no-such-layout.json")],
+                             capture_output=True, text=True)
+        self.assertEqual(out.returncode, 1)
+        self.assertIn("Build audit [R150]: 4 audit(s) failed", out.stdout)
+
+    def test_unchecked_lists_the_rules_nothing_fails_on(self):
+        nothing, partly = rules.unchecked(self.rules)
+        self.assertIn("R136", nothing)                 # the hidden-exit rule has no check yet
+        self.assertIn("R137", partly)                  # one test, on the two temporary guards only
+        self.assertNotIn("R108", nothing + partly)     # the Budget audit fails on it
+        self.assertFalse(set(nothing) & set(partly))
 
 
 class SkillTests(unittest.TestCase):
