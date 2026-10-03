@@ -603,7 +603,17 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 
 ## 10. Ship it
 
-- [ ] **The build audit is clean, on every version.** `python3 audit_build.py`
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R150 | The build audit is clean on every version | `python3 audit_build.py` runs the four audits on both layouts and exits 0 | Author | Build audit; `test_stateful_transitions.test_audits_are_clean` | — | None |
+| R151 | A published layout has a reviewed description, one version bump per release, a regenerated VDF and a snapshot under `versions/neptune/<version>/`. Another version's snapshot never changes | 90.13: the title ends in `90.13`, and `versions/neptune/90.13/` holds both variants' JSON and VDF | Author, standing instruction | Not checked yet | — | None |
+| R152 | The working layouts are a fixed point of the fix pipeline: running it again changes nothing | `python3 -m steam_layout.fixes neptune/*_latest.json --dry-run` reports nothing to change | Since the pipeline, 2026-09-30 | `test_fixes.test_working_layouts_are_a_fixed_point` | — | None |
+| R153 | A layout has no dead groups: no plain-inactive slot and no unreferenced group | 90.6 pruned the four inactive stick-touch Double Press groups | 2026-09-30 | `dead_groups` fix; `test_layout_hygiene.test_no_unreferenced_groups_or_plain_inactive_slots` | — | None |
+| R154 | The tests pass, a new invariant gets a new test, and the change is recorded in `findings/<date>-<slug>/` | 90.11 came with `tests/test_steering_fallback_hold.py` and `findings/2026-10-02-steering-fallback-hold/` | Author | Not checked yet | — | None |
+| R155 | A Deck section is added to `manual-testing.md` for the change | 90.13 added "90.13: no turn assist in Steering", checks N1 to N4 | Author | Not checked yet | — | None |
+| R156 | The working layouts are generated: they equal the current builder's output run through the fix pipeline. A hand edit there is lost on the next install | `neptune/*_latest.json` equals the output of `findings/2026-10-02-steering-fallback-hold/build_candidate.py`, apart from title and description | Since the 09-30 builder | `test_steering_fallback_hold.test_working_layouts_are_this_build` | — | None |
+
+- [ ] **R150: the build audit is clean, on every version.** `python3 audit_build.py`
       runs the four audits below on both variants and exits 0 only when all
       pass. No version ships with a failing line.
 
@@ -624,12 +634,12 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       title doesn't end in a cover suffix, and an accepted cover finding or
       unsupported lookup, with a reason. A decision that no longer matches
       anything is reported as stale.
-- [ ] The tests pass, and a new invariant gets a new test.
-- [ ] The change is recorded in `findings/<date>-<slug>/`.
-- [ ] A Deck section is added to [manual-testing.md](../manual-testing.md). It
+- [ ] **R154:** the tests pass, and a new invariant gets a new test.
+- [ ] **R154:** the change is recorded in `findings/<date>-<slug>/`.
+- [ ] **R155:** a Deck section is added to [manual-testing.md](../manual-testing.md). It
       covers an input held across the change, a press inside the layer, and a
       release missed while the Steam menu is open.
-- [ ] The [layout-apply skill](../.claude/skills/steam-layout-apply/SKILL.md)
+- [ ] **R151:** the [layout-apply skill](../.claude/skills/steam-layout-apply/SKILL.md)
       has run: description, version bump, `to-ids`, VDF export and snapshot.
 
 ## 11. Stateful layers
@@ -644,28 +654,38 @@ The check is whether the transitions behave as that document says.
 it on the generated layouts, and is extended with every new stateful layer
 until all four gestures are taken.
 
-- [ ] **Gesture.** The layer is entered by one of the four menu-plus-stick-click
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R157 | A stateful layer is entered and left through a transition, by one of the four menu-plus-stick-click gestures. Stateful layers never add each other directly. `Gyro` is the one stateful layer outside this: the Modifier 2 Release toggles it | Start plus left-stick click enters `Steering`: the click's Release adds `Transition Set 1`, and that layer's Start Release adds `Steering` | Author, 2026-10-01 | `test_stateful_transitions.test_entry_point_clicks_release_into_their_transition`; `test_stateful_transitions.test_transition_menu_releases` | — | Steering's 1.5 s hold exit and the Modifier 2 clear leave without a transition (author, 2026-10-01) |
+| R158 | Inside a stateful layer, any menu button plus any stick click clears it and everything above Base except `Gyro`. The layer has its own Entry Points for that | In `Steering`, both stick clicks in both of its Entry Points lead to `Transition Set 0`, the clear | Author, 2026-10-01 | `test_stateful_transitions.test_entry_point_clicks_release_into_their_transition` | — | None |
+| R159 | The Modifier 2 clear removes every stateful layer and its helpers | In `Steering`, a quick tap of both bumpers clears to Base | Author, 2026-09-30 and 2026-10-01 | `test_steering_fallback_hold.test_only_steering_the_clears_and_the_hold_name_the_hold` (part) | — | Open since 2026-10-01: an older to-do keeps Gamepad through this clear ([to-do](../todos.md#global-stateful-behavior)) |
+| R160 | No layer is entered from a transition: every input that would add a layer underneath is cleared | `Transition Set 1` clears both bumpers, so no modifier can be entered while it is on | Author, 2026-10-01 | `test_stateful_transitions.test_nothing_is_entered_from_a_transition` | — | None |
+| R161 | Every menu Release in a transition beeps and gives a strong pulse | `Transition Set 1`'s Start Release has `haptic_intensity` 3, and its `add_layer` of `Steering` carries the beep flag | Author, 2026-10-02 | `test_stateful_transitions.test_every_transition_beeps_and_pulses_on_its_menu_release` | — | None |
+| R162 | At entry a stateful layer has no Release and no delayed binding on Start or Select. A repeating press that adds its Entry Point is allowed | `Steering` adds its Entry Points with a repeating press, as Base does | Author, 2026-10-01 | `test_stateful_transitions.test_base_and_steering_add_their_entry_points_with_a_repeating_press` (part) | — | None |
+| R163 | Entering a transition clears the whole stack first, keeping `Gyro`, and adds the transition last | The left-stick click Release in `Menu Right: Entry Point` removes every layer except `Gyro`, then adds `Transition Set 1` | Author, 2026-10-02 | `test_stateful_transitions.test_entry_point_clicks_release_into_their_transition` | — | None |
+
+- [ ] **Gesture (R157).** The layer is entered by one of the four menu-plus-stick-click
       gestures, and the gesture map is updated.
-- [ ] **Entry.** The Base Entry Point sends that click's Release to the right
+- [ ] **Entry (R157, R163).** The Base Entry Point sends that click's Release to the right
       transition, and the transition's menu Release adds the layer.
-- [ ] **Transition feedback.** Every menu Release in a transition beeps and
+- [ ] **Transition feedback (R161).** Every menu Release in a transition beeps and
       gives a high haptic pulse (author, 2026-10-02), entering or clearing:
       `haptic_intensity` 3 on the Release, and the beep flag on the stateful
       layer's `add_layer`, or on the transition's own removal when nothing
       is added. No on-screen notification.
-- [ ] **Exit.** Inside the layer, every one of the four gestures leads to the
+- [ ] **Exit (R158).** Inside the layer, every one of the four gestures leads to the
       clear transition. The layer has Entry Points for that, added by its own
       menu press.
-- [ ] **Fallback.** The Modifier 2 clear removes the layer and its helpers.
-- [ ] **Clean entry.** At entry the layer has no Release or delayed binding on
+- [ ] **Fallback (R159).** The Modifier 2 clear removes the layer and its helpers.
+- [ ] **Clean entry (R162).** At entry the layer has no Release or delayed binding on
       Start or Select. A repeating press that adds its Entry Point, like
       Base's, is allowed (author, 2026-10-01).
-- [ ] **No layer is entered from a transition.** Every layer-adding input
+- [ ] **No layer is entered from a transition (R160).** Every layer-adding input
       underneath is blocked with an empty binding.
-- [ ] **Recipes.** Nothing depends on a chord handing over when the chord
+- [ ] **Recipes (R111, R112).** Nothing depends on a chord handing over when the chord
       button is released, or on an inverted edge of a D-pad stick adding or
       removing a layer ([§3](#3-activators)).
-- [ ] **Test and Deck checklist** are updated for the new layer.
+- [ ] **Test and Deck checklist (R154, R155)** are updated for the new layer.
 
 **Exceptions (author, 2026-10-01):**
 - `Gyro` is toggled by the Modifier 2 release and is left on by the clear.

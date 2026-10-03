@@ -331,3 +331,20 @@ Checked against the 90.13 layouts on 2026-10-02.
 - Rule 55 is kept until phase 15 removes it.
 - The 19 rules that nothing checks go on the "not checked yet" list.
 - The 30 assumptions get IDs in phase 10, with H and G kept apart.
+
+## Corrections made in phase 2
+
+The IDs were given on 2026-10-02 in the
+[Layer Definition of Done](../../resources/Layer%20Definition%20of%20Done.md#rule-tables).
+
+- **Row n here is rule R(100 + n).** Row 8 is R108. The IDs start at 101
+  because R1 to R5 are buttons.
+- **Seven "one layer" decisions are rules for every stateful layer** and got
+  IDs: L3 is R157, L5 is R158, L2 is R159, L4 is R160, L7 is R161, L8 is R162
+  and L6 is R163. L1 and L9 to L14 stay in their design documents.
+- **Row 17 was wrong about its check.** The Cleanup audit's "outside the
+  guard" stops a cleanup function from removing a stick-touch helper (row
+  31). Nothing general checks what a stick-touch Release itself removes; one
+  test covers the transitions.
+- **The registry has 63 rules.** 18 are "Not checked yet". 13 more are
+  checked only in part: a test pins some layers, not every layer.
