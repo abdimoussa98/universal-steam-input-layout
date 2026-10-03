@@ -256,6 +256,10 @@ WENT = {
     ("Missed releases and cleanup scope", "MR1"): "`tests/test_scenarios_triggers_and_recovery.py`",
     ("Missed releases and cleanup scope", "MR2"): "`test_static_checks.test_the_two_modifier_2_orders_are_never_on_the_stack_together`, "
                                                   "and the Cleanup audit's \"never there\" on every build",
+    ("Held inputs across layer changes", "HI1"): "Obsolete: the stick click is a Release in the Entry Point since 90.10 (90.10 G2 and T1)",
+    ("Held inputs across layer changes", "HI2"): "`tests/test_scenarios_triggers_and_recovery.py`",
+    ("Held inputs across layer changes", "HI3"): "Same as Temp cursor gyro TC11",
+    ("Held inputs across layer changes", "HI4"): "A10 and A11: they are those assumptions' Deck procedures",
 }
 
 
