@@ -521,8 +521,10 @@ other normal-cover inputs remain overrides, even before 300 ms. Cursor overlays
 omit both stick-touch inputs, deliberately inheriting the parent's completion
 and helper cleanup; adding the already-active cursor does not establish a new
 hold. Normal covers keep their cleanup-only replacements so a thumb lift cannot
-reactivate cursor after cancellation. The saved bindings implement this lifecycle;
-race timing still needs Deck validation.
+reactivate cursor after cancellation. The saved bindings implement this lifecycle,
+and the scenario tests replay it ([test_scenarios_cursor.py](../tests/test_scenarios_cursor.py)).
+What Steam does when two of these fall in the same moment is not verified
+(A13 and A32 in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md)).
 
 #### Blocking to Protect Layer Timers
 
@@ -779,13 +781,13 @@ held.
 - **Outputs when a layer is added:** the author's experience is that they do
   fire. Before the menu split, the Entry Point's opposite-button chord only
   added Fn, and Fn's own chord typed Backspace / Enter for the button that was
-  already down. **Not tested on the Deck in isolation.** The Escape / Tab
+  already down. **Reported, never verified in isolation (A10).** The Escape / Tab
   second-press layers and Steering's W / S layers rely on the same thing.
-- **Outputs when a removal exposes them:** unverified. The first click after a
+- **Outputs when a removal exposes them:** unverified (A11). The first click after a
   trigger removes `Gyro Off Ramp Up`, and keys exposed by cursor self-removal,
   rely on it.
 
-Existing manual checks cover these.
+Each has one procedure in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md).
 
 How these layouts use it:
 
@@ -900,7 +902,8 @@ local cancellation entries contain no key output, cover addition, or Mod 2
 selection. Removing cursor exposes the actual regular/Gyro parent, which
 provides the original output and repeating cover/transition. This follows the
 author's [held-input rule](#held-inputs-across-layer-changes); output delivery,
-release, and same-selector chord arbitration still require Deck validation.
+release, and same-selector chord arbitration are not verified (A10, A11 and
+A27 in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md)).
 Do not claim chord-list order preserves the old combined array's add-before-key
 execution order.
 
@@ -1014,9 +1017,10 @@ RTP Double Tap still relies on its `absolute_mouse` → `dpad` source replacemen
 to suppress Base's RTP click/touch layer actions, as recorded in the
 [blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md#inherited-route-review-and-remaining-uncertainty).
 The inactive-marked trackpad mode-shift targets contain only key outputs;
-whether they become effective in these stacks remains a separate runtime check.
+whether they become effective in these stacks is assumption A34.
 RTP Entry and Circular Scroll have no Always On action and keep useful modifier
-inheritance. Check cursor cancellation during RTP Entry's pending delay on Deck;
+inheritance. What a cursor cancellation does to RTP Entry's pending delay is
+assumption A13 (both in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md));
 this change does not add a repeating reset to the author's RTP touch exception.
 
 ### Stuck Layers and Why There Is So Much Cleanup
@@ -1306,8 +1310,9 @@ W/A/S/D remain Regular Press bindings and use the reference's
 This is an output scaffold, not a guarded cleanup: it adds or removes no
 layers and needs no repeating removal. The user's chosen modifier, deflection,
 and preferred Soft Press style determine the useful movement/modifier behavior.
-Validate WASD-only, modifier-only, and combined behavior on the Deck after
-assigning a key; the empty slot alone cannot demonstrate modifier output.
+How WASD-only, modifier-only and combined pushes behave after assigning a key
+is a [tuning note](Steam%20Behaviour%20Assumptions.md#tuning-notes) (WM2); the
+empty slot alone cannot demonstrate modifier output.
 
 **Scaffold inheritance review:** this scaffold change modified only Base's LS
 group. Upper layers without an explicit LS-edge binding can inherit the exposed lower

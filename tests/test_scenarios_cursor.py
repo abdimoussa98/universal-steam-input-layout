@@ -74,7 +74,7 @@ class TempCursorGyro(ScenarioCase):
                     self.assertEqual(pad.top, cover)                         # the cover wins either way
                     self.assertTrue(pad.lacks(cursor))
 
-    @scenario("Temp cursor gyro TC8")
+    @scenario("Temp cursor gyro TC8", rests=("A38",))
     def test_one_stick_keeps_the_cursor_and_both_remove_it(self):
         """How far the sticks have to travel is a tuning note; a stick here is in or out."""
         for side, _, _ in SIDES:
@@ -89,7 +89,7 @@ class TempCursorGyro(ScenarioCase):
                 pad.push("LS", "up").push("RS").hold(side).wait(400)         # both out before the modifier
                 self.assertEqual(pad.top, cover)
 
-    @scenario("Temp cursor gyro TC9", rules=("R128", "R133"), rests=("A17", "A25"))
+    @scenario("Temp cursor gyro TC9", rules=("R128", "R133"), rests=("A17", "A25", "A38"))
     def test_a_lost_modifier_clears_with_its_overlays(self):
         """The checklist expected the recovery to run while the sticks stay out. A chord latches (A17): the
         guard that was active when the stick went out stays active, so the cleanup function runs on the next

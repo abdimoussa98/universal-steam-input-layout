@@ -40,6 +40,7 @@ stated; the ones the layout must work either way under are switches.
     A32      `reverse_ties`: activators due at the same moment run in file order, or reversed
     A35      `default_repeat_ms`: Hold to Repeat with no stated rate uses this interval
     A37      a key handed from one binding to another at the same moment stays down (`typed`)
+    A38      a stick edge is inverted only where its own group says so
     A21      `desktop(data)`: the layout with every entry past the third dropped
     A25      `lose(control)`: a release the layout never saw
 

@@ -1,6 +1,6 @@
 # Steam behaviour assumptions
 
-**Status:** started 2026-10-02, 37 entries on 2026-10-03, from the
+**Status:** started 2026-10-02, 38 entries on 2026-10-03, from the
 [rule inventory](../findings/2026-10-02-rule-inventory/README.md), phase 10 of
 the [rule registry plan](../plans/2026-10-02-rule-registry.md).
 
@@ -69,6 +69,7 @@ through [rules.py](../steam_layout/rules.py)), so the shape is fixed.
 | A35 | Hold to Repeat with no stated rate repeats at one fixed default interval | Unverified: the interval isn't known. The simulator uses 100 ms | Works either way | In a test layout: a key with Hold to Repeat and no rate. Count the repeats in one second | Most repeating entries state no rate, the cleanup functions among them; the simulator's `default_repeat_ms` |
 | A36 | A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it | Unverified | Relies on it | Hold A, then hold LB: if A's chord with LB doesn't start, it holds | Every cleanup function's guard; the simulator |
 | A37 | When the layer that answers a held input changes and the new binding sends the same key, the key stays down with no release in between | Unverified | Works either way | In Steering hold a driver, flick the left stick, and watch W through the 150 ms window in a key tester: a gap means it doesn't hold | W and S through a Steering window; the simulator's `typed` |
+| A38 | A stick group that doesn't state `edge_binding_invert` has a normal edge. It doesn't take the inverted setting of the group it replaces in a lower layer | Unverified | Relies on it | Under a held modifier wait for the cursor (300 ms). Push the right stick out: the cursor stays. Push the left stick out as well: the normal cover replaces it. If the cursor already ends with only the right stick out, its left edge is inverted | R111; the left-stick edge of the two Temp Cursor Gyro layers, which removes the layer over Base's inverted edge and states no setting; the Budget audit's inverted-edge check and the simulator, which read a group's own setting |
 
 A33 and A34 were found while sorting the Deck checks
 ([record](../findings/2026-10-03-deck-check-sorting/README.md)). A31 and A32 come from the timing contract of the archived replay
@@ -78,7 +79,10 @@ had to choose a behaviour for each.
 A35, A36 and A37 are choices the press simulator
 ([simulator.py](../steam_layout/simulator.py)) had to make. Its docstring says
 which assumption each of its behaviours models: A1 to A17, A21, A25, A27, A31,
-A32 and A35 to A37.
+A32 and A35 to A38.
+
+A38 was an open Deck check in the [to-do list](../todos.md#cursor-gyro) since
+2026-10-01. It got its row when that list was re-sorted at the end of the plan.
 
 ## Tuning notes
 

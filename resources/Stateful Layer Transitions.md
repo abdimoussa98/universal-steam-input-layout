@@ -4,8 +4,8 @@
 plan reviews the same day (decisions 37 to 46 in the brainstorm record).
 **Built in 90.10** for both layouts
 ([build record](../findings/2026-10-01-stateful-transitions/README.md)).
-**Not validated on the Deck yet:** the [Deck gates](#steerings-left-stick-and-the-deck-gates)
-are still assumed. The decisions and the options that were rejected
+**Rests on two assumptions that aren't verified:** A26 and A8 in
+[Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md), the two [Deck gates](#steerings-left-stick-and-the-deck-gates) below. The decisions and the options that were rejected
 are in the [brainstorm record](../plans/2026-10-01-stateful-layer-transitions.md),
 and the build steps are in the
 [implementation plan](../plans/2026-10-01-stateful-transitions-implementation.md).
@@ -224,7 +224,8 @@ R112.
 - [ ] Both layouts are changed.
 - [ ] Its commit beeps and pulses like every other transition release: the
       beep flag on its `add_layer` and `haptic_intensity` 3 on the Release.
-- [ ] The transition test and the Deck checklist are updated.
+- [ ] The transition test and the scenario tests are updated
+      ([definition of done](Layer%20Definition%20of%20Done.md#10-ship-it), R154 and R165).
 
 ## Accepted consequences
 
@@ -253,7 +254,8 @@ R112.
 ## Steering's left stick and the Deck gates
 
 Steering's part below is built in 90.10. The Deck gates at the end of this
-section are still open.
+section are still open: they are assumptions A26 and A8 in
+[Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md), which holds the procedure for each.
 
 - **Steering's left-stick centre detection.** `Steering | LS: Entry Point`,
   the two LS covers, Modifier 0 and 1 and the two Double Tap windows use an
