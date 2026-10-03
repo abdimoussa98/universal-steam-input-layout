@@ -13,7 +13,7 @@ below records the agreed implementation scope, not outstanding coding work.
 
 Subsequent publication preparation updates both JSON titles to 90.4 and reviews
 their descriptions, following the author's
-[required publication workflow](../README.md#publishing-layout-changes). This
+[required publication workflow](../docs/publishing.md). This
 supersedes the original no-version-bump scope for the release. Both sibling VDFs
 have been regenerated and verified; Deck checks remain pending. Version 90.4 adds
 a high haptic pulse only to the initial 300 ms hold-entry chord. Touch entry and

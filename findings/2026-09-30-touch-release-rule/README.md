@@ -54,6 +54,6 @@ The LS and RS edges keep their original two-chord guards.
 - [test_neptune_recovery.py](../../tests/test_neptune_recovery.py) pins the new
   touch shape in both variants.
 - Deck gate T1 is in
-  [manual testing](../../manual-testing.md#906-chorded-delays-and-dead-group-prune).
+  [manual testing](../../archived/manual-testing.md#906-chorded-delays-and-dead-group-prune).
   It is untested, including whether the editor shows the merged chord as
   Select + Start with Any.

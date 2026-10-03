@@ -57,4 +57,4 @@ before. The exported VDF was parsed to confirm this order.
 
 ## Deck checks (untested)
 
-See [manual testing](../../manual-testing.md#906-chorded-delays-and-dead-group-prune), gates R1–R3.
+See [manual testing](../../archived/manual-testing.md#906-chorded-delays-and-dead-group-prune), gates R1–R3.

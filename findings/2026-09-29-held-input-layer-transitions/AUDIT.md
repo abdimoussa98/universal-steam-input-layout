@@ -316,7 +316,7 @@ questions below cover scope and interactions.
 
 ## Deck checks
 
-Tracked in [manual testing](../../manual-testing.md#held-inputs-across-layer-changes).
+Tracked in [manual testing](../../archived/manual-testing.md#held-inputs-across-layer-changes).
 These run in the real layouts:
 
 - One held stick click from Menu Entry reaches a Transition Set (rule 1 plus repeat).

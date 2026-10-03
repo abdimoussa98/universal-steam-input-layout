@@ -206,7 +206,7 @@ Author decisions on 2026-09-30; implementation in the
 Checks after the fix: both variants pass `audit_command_budget.py` and
 `audit_inheritance.py`; 31 steering tests pass; only 11 steering layers differ
 from 90.6, with identical layer order. Deck checks are in
-[manual-testing.md](../../manual-testing.md#907-slim-steering-overlays).
+[manual-testing.md](../../archived/manual-testing.md#907-slim-steering-overlays).
 
 ## Per-layer summary
 
@@ -236,7 +236,7 @@ In the §9 column, ❌ means the layer contributes an inherited route under `RTP
 | Python suite | 410 tests, 1 error: untracked `tests/test_timed_audit.py` needs `z3` (unrelated work in progress) |
 | Node suite | ✅ 8/8 |
 | Findings recorded | ✅ [steering-lean](../2026-09-30-steering-lean/README.md), [cleanup audit](../2026-09-30-steering-lean/CLEANUP-AUDIT.md) |
-| Deck section | ⚠️ present in [manual-testing.md](../../manual-testing.md), C1–C5 unchecked; no steering item for "release missed while the Steam menu is open" |
+| Deck section | ⚠️ present in [manual-testing.md](../../archived/manual-testing.md), C1–C5 unchecked; no steering item for "release missed while the Steam menu is open" |
 | Applied and snapshotted | ✅ `versions/neptune/90.6/` |
 
 ## Reproduce

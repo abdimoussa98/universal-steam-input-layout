@@ -37,5 +37,7 @@ Not archived, although they look old:
   The `*_generator_sha256` values in each `manifest.json` are the builders'
   hashes as built, before that edit; a rebuild writes the new hash and the
   same candidate.
+  In 14 records, 31 links to files that moved the same day had their target
+  repointed; the link text is unchanged.
 - `out/`: generated search data, ignored by Git. It can be deleted
   ([note](../findings/2026-09-30-stack-search/ARCHIVE.md#deleting-out)).

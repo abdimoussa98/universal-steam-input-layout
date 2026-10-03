@@ -41,7 +41,7 @@ Exit 0 means clean; 1 means open findings or coverage gaps; 2 means invalid inpu
 | [`steam_layout/flow_paths.py`](../../archived/depth-search-and-family-walk/steam_layout/flow_paths.py) | 2 | Walks (ordered stack, held controls) states; resolves the effective input per stack; checks chords against held controls |
 | [`steam_layout/flow_inheritance.py`](../../steam_layout/flow_inheritance.py) | 3 | Nearest lower definition per input and lower stack; normalized comparison; conflict / review / replaced / satisfied |
 | [`steam_layout/flow_covers.py`](../../archived/depth-search-and-family-walk/steam_layout/flow_covers.py) | 6 | Cover check: owners from the flows, then outlives owners, below its owner, intervening layer; layers above each cover for review |
-| [`audit_flow_inheritance.py`](../../audit_flow_inheritance.py) | 4 | Text and JSON report; coverage gaps, inheritance findings and cover findings kept separate |
+| [`audit_flow_inheritance.py`](../../tools/audit_flow_inheritance.py) | 4 | Text and JSON report; coverage gaps, inheritance findings and cover findings kept separate |
 | [`tests/test_flow_inheritance.py`](../../tests/test_flow_inheritance.py) | 5 | 23 fixture tests with hand-known paths and bindings, 3 on both Neptune variants |
 
 ## Families
@@ -141,7 +141,7 @@ The first full run (90.7) left three open items; the author decided all three.
    with their menu's family, which protected nothing and reintroduced the
    stray Escape/Tab. 90.9 replaces it; the 90.8 snapshot is kept, untested.
    The fix runs in the install pipeline, so a steering reinstall keeps it.
-   Deck checks K1–K5 are in [manual testing](../../manual-testing.md).
+   Deck checks K1–K5 are in [manual testing](../../archived/manual-testing.md).
 
 ## Benchmark
 

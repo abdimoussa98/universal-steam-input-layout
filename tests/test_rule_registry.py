@@ -111,6 +111,7 @@ class RegistryTests(unittest.TestCase):
 
     def test_rule_ids_named_elsewhere_exist(self):
         places = [ROOT / "README.md", ROOT / "todos.md", *sorted((ROOT / "resources").glob("*.md")),
+                  *sorted((ROOT / "docs").glob("*.md")),
                   *sorted((ROOT / "skills").glob("*/SKILL.md")), *sorted((ROOT / "tools").glob("audit_*.py")),
                   *sorted((ROOT / "steam_layout").rglob("*.py")), *sorted((ROOT / "tests").glob("test_*.py"))]
         for path in places:
@@ -247,6 +248,7 @@ class AssumptionTests(unittest.TestCase):
 
     def test_assumption_ids_named_elsewhere_exist(self):
         places = [ROOT / "README.md", ROOT / "todos.md", *sorted((ROOT / "resources").glob("*.md")),
+                  *sorted((ROOT / "docs").glob("*.md")),
                   *sorted((ROOT / "skills").glob("*/SKILL.md")), *sorted((ROOT / "tools").glob("audit_*.py")),
                   *sorted((ROOT / "steam_layout").rglob("*.py")), *sorted((ROOT / "tests").glob("test_*.py"))]
         for path in places:

@@ -85,4 +85,4 @@ also duplicates any existing command-budget violations; do not carry them forwar
 ## References
 
 - Script: `tools/duplicate_layer.py`
-- Runtime ID rules: `README.md`, `resources/Steam Input JSON Structure.md`
+- Runtime ID rules: `docs/runtime-ids.md`, `resources/Steam Input JSON Structure.md`

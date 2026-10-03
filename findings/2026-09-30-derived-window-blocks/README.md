@@ -11,7 +11,7 @@ If one would, the window blocks that input for its lifetime:
 
 ## How the stacks are derived
 
-[audit_inheritance.py](../../audit_inheritance.py) starts from Base and
+[audit_inheritance.py](../../tools/audit_inheritance.py) starts from Base and
 applies every effective binding's layer commands. It respects bottom-to-top
 order, whole-input overrides and disabled sources, and it ignores chord
 conditions, so missed releases and stale stacks are included. It goes up to
@@ -49,7 +49,7 @@ dpad-mode right pad is its own second-tap selection. A second tap in the north
 or south region transitions to Circular Scroll, and a tap anywhere else leaves
 the window and stays in mouse mode. It's a unique edge case, so no touch bind
 is added, and the `allow` decision with this reason is in
-[traced_stacks.json](../../traced_stacks.json). An earlier version cleared
+[traced_stacks.json](../../steam_layout/traced_stacks.json). An earlier version cleared
 touch there; that clear was removed.
 
 **Not blocked:** stick clicks, face buttons and D-pad. No derived stack puts a

@@ -66,7 +66,7 @@ findings, because the old steering Long Presses were its only entries.
 
 ## Tools
 
-- [`prune_dead_groups.py`](../../prune_dead_groups.py) (repo root): generic and
+- [`prune_dead_groups.py`](../../tools/prune_dead_groups.py) (repo root): generic and
   idempotent, with `--dry-run` and `--json`.
 - [`steam_layout/fixes/rtp_scroll.py`](../../steam_layout/fixes/rtp_scroll.py): idempotent RTP fix.
 - [`check_equivalence.py`](check_equivalence.py): live-binding diff with an

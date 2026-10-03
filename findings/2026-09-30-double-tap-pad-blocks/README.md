@@ -36,7 +36,7 @@ route through the pad.
 **RTP Double Tap** keeps its dpad-mode selection pad. A second tap north or
 south goes to Circular Scroll, and anywhere else stays in mouse mode. Touch
 isn't bound there; it's an `allow` decision in
-[traced_stacks.json](../../traced_stacks.json).
+[traced_stacks.json](../../steam_layout/traced_stacks.json).
 
 ## Tools and checks
 
@@ -52,6 +52,6 @@ isn't bound there; it's an `allow` decision in
     RTP Double Tap's dpad selection pad, with click cleared
   - every window's stick-touch release removing the window first, then the
     side trio
-- [audit_inheritance.py](../../audit_inheritance.py) now blocks the right-pad
+- [audit_inheritance.py](../../tools/audit_inheritance.py) now blocks the right-pad
   `click` route and passes both layouts.
-- Deck gate P1 is in [manual testing](../../manual-testing.md#906-chorded-delays-and-dead-group-prune).
+- Deck gate P1 is in [manual testing](../../archived/manual-testing.md#906-chorded-delays-and-dead-group-prune).

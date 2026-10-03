@@ -1861,4 +1861,5 @@ def calculate_runtime_id(preset_name, actions_dict, action_layers_dict):
 ## See Also
 
 - [Neptune Chorded Button Ids](Neptune%20Chorded%20Button%20Ids.md) - Chord button ID reference for Steam Deck
+- [Runtime IDs](../docs/runtime-ids.md) - how the IDs are numbered, and the list-order hazard
 - In `archived/`, for the older multi-set layouts: [Layer Reverse Lookup](../archived/Layer%20Reverse%20Lookup.md) (layer IDs as of release 31.0) and [Ramp Up Layers Comparison](../archived/Ramp%20Up%20Layers%20Comparison.md)

@@ -5,7 +5,7 @@
 are built and installed in `neptune/` as **90.10**, with the snapshot in
 `versions/neptune/90.10/`. Device status: **untested**. The plan's two Deck
 gates were assumed, at the author's request, and are the first checks in
-[manual-testing.md](../../manual-testing.md#9010-stateful-transitions).
+[manual-testing.md](../../archived/manual-testing.md#9010-stateful-transitions).
 
 **Since 90.11** this builder is frozen and extended by the
 [fallback hold build](../2026-10-02-steering-fallback-hold/README.md), which

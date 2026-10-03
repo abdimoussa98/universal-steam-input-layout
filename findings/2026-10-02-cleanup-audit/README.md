@@ -5,9 +5,9 @@
 decided all of them, and **90.12 fixes them**: the `cleanup_lists` step of the
 fix pipeline resolves exactly the audit's findings, and the audit is now the
 fourth gate of the build audit. Both layouts are clean. Deck checks are C1 to
-C8 in [manual-testing.md](../../manual-testing.md#9012-cleanup-lists).
+C8 in [manual-testing.md](../../archived/manual-testing.md#9012-cleanup-lists).
 
-- Tool: [audit_cleanups.py](../../audit_cleanups.py), on
+- Tool: [audit_cleanups.py](../../tools/audit_cleanups.py), on
   [steam_layout/cleanups.py](../../steam_layout/cleanups.py), with
   [40 tests](../../tests/test_cleanups.py)
 - Rules: [cleanup boundaries](../2026-10-02-cleanup-boundaries/README.md#the-rules)

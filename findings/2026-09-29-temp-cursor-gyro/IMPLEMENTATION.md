@@ -6,7 +6,7 @@ vibration 0, movement threshold 5, and reviewed descriptions. Both sibling VDFs
 are regenerated with verified keys, values, and order; Deck checks remain pending.
 The July reference is unchanged.
 [Current design](../../plans/2026-09-29-cursor-self-removal.md) ·
-[Deck checklist](../../manual-testing.md#temp-cursor-gyro)
+[Deck checklist](../../archived/manual-testing.md#temp-cursor-gyro)
 
 The self-removal follow-up is implemented. It supersedes the original normal-cover
 property restoration and cursor touch replacements in `50758b3`; the
@@ -112,7 +112,7 @@ its old trigger mode-shift wiring are not copied.
 
 This is a settings audit, not a Deck result. Verify the reference response feel,
 activation-only layers over both responses, cursor removal, and both
-ramp stages using the [manual checklist](../../manual-testing.md#reference-gyro-and-right-stick-tuning).
+ramp stages using the [manual checklist](../../archived/manual-testing.md#reference-gyro-and-right-stick-tuning).
 
 ## Delayed-apply reset follow-up
 
@@ -349,4 +349,4 @@ These checks establish saved configuration. Pending-delay cancellation at the
 300 ms boundary, both same-selector uninterruptible chords firing together,
 output delivery/release after self-removal, simultaneous override/touch-release
 dispatch, missed-owner recovery, inherited mode shifts, and physical stick behavior require the
-[manual checklist](../../manual-testing.md#temp-cursor-gyro).
+[manual checklist](../../archived/manual-testing.md#temp-cursor-gyro).

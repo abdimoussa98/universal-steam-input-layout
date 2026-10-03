@@ -1,8 +1,24 @@
 # Plan: reorganize the repo, one skills directory, a short README
 
-**Status, 2026-10-03:** in progress. The author said to run it on 2026-10-03,
-and the 90.16 to 90.19 work was committed first (`90ed6c8`). Parts 1 (skills),
-2 (`tools/`), 3 (loose files) and 6 (resources) are done. Written against release 90.19 (75 layers per layout).
+**Status, 2026-10-03:** done, in four commits after `90ed6c8` (the 90.16 to
+90.19 work, committed first). The README is 118 lines. Checked at the end:
+build audit clean, 627 tests pass, 6 exporter tests pass, the change report
+shows no changes, and a rebuild of 90.19 from the edited builders gives the
+working layouts byte for byte.
+
+What differs from the plan as written:
+
+- `docs/` has a sixth page, `reading-guide.md`, for the README's annotated list
+  of resources and findings.
+- `steam_layout/rules.py` did change: its `SOURCES` table names three of the
+  moved modules (Part 2).
+- The chord-ID table had 22 unknown rows, not six (Part 6).
+- The plan left `findings/` as written. But 38 links in 14 records pointed at
+  files that moved. The targets of 31 were repointed (the scripts, to `tools/`;
+  `traced_stacks.json`; and what went to `archived/`); the text of each link
+  is unchanged. Seven links in
+  `findings/2026-09-29-steering-design-review/AUDIT.md` point at the deleted
+  `.cursor/skills/` files and stay broken: it lists what was read that day.
 
 ## Why
 

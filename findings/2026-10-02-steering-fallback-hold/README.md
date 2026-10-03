@@ -2,7 +2,7 @@
 
 **Status, 2026-10-02:** built and installed in `neptune/` as **90.11**, with the
 snapshot in `versions/neptune/90.11/`. Device status: **untested**. The Deck
-checks are first in [manual-testing.md](../../manual-testing.md#9011-steering-fallback-hold).
+checks are first in [manual-testing.md](../../archived/manual-testing.md#9011-steering-fallback-hold).
 
 **90.12 carries all of it.** 90.12 is this build plus the fix pipeline's new
 `cleanup_lists` step ([cleanup audit](../2026-10-02-cleanup-audit/README.md)).

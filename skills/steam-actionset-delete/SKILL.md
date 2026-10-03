@@ -52,4 +52,4 @@ Run the pre-flight check from the `steam-layout-prep` skill: `layer order` must 
 ## References
 
 - Script: `tools/delete_action_set_complete.py`
-- Runtime ID rules: `README.md`, `resources/Steam Input JSON Structure.md`
+- Runtime ID rules: `docs/runtime-ids.md`, `resources/Steam Input JSON Structure.md`

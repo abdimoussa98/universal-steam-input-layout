@@ -23,7 +23,7 @@ or an upload to Steam.
 
 **R151.** Every publication of a changed layout must include a reviewed description and
 a version bump. Before committing layout changes, exporting for delivery, or
-publishing to Steam, follow [Publishing layout changes](../../README.md#publishing-layout-changes):
+publishing to Steam, follow [Publishing layout changes](../../docs/publishing.md):
 
 - Read the complete `controller_mappings.description` against the final layout.
   Correct stale behavior, control mappings, tuning, and implemented/planned status;
@@ -160,7 +160,7 @@ grep -c 'controller_action [A-Za-z_]* {{' path/to/layout_final.json   # must pri
 
 ## 4. Hand off for Steam
 
-1. **JSON → VDF:** run `node tools/convert_vdf.mjs path/to/layout_final.json`. This writes/replaces the sibling `.vdf` using the installed `pfwobcke.vscode-vdf` serializer and verifies keys, values, repeated bindings, and order before writing. Use `-o path/to/output.vdf` for a different destination. See `README.md#file-formats` for requirements and extension discovery. The agent can complete this export directly.
+1. **JSON → VDF:** run `node tools/convert_vdf.mjs path/to/layout_final.json`. This writes/replaces the sibling `.vdf` using the installed `pfwobcke.vscode-vdf` serializer and verifies keys, values, repeated bindings, and order before writing. Use `-o path/to/output.vdf` for a different destination. See `docs/file-formats.md` for requirements and extension discovery. The agent can complete this export directly.
 2. **Save the version snapshot:** once every exported variant has its final description and version, copy each one into `versions/neptune/<version>/` (see [Required version snapshot](#required-version-snapshot)):
 
    ```bash
@@ -188,4 +188,4 @@ grep -c 'controller_action [A-Za-z_]* {{' path/to/layout_final.json   # must pri
 ## References
 
 - Converter: `convert_runtime_ids.py`
-- Runtime ID rules and the load-order caveat: `README.md`, `resources/Steam Input JSON Structure.md`
+- Runtime ID rules and the load-order caveat: `docs/runtime-ids.md`, `resources/Steam Input JSON Structure.md`

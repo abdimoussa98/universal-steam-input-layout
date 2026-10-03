@@ -101,5 +101,5 @@ was changed, and no new early-exit behavior was introduced.
   activator that was already pending. Confirm key/mouse delivery and release
   when cursor self-removal exposes both uninterruptible parent chords.
 
-See [manual testing](../../manual-testing.md) for the fresh-load checks. No VDF
+See [manual testing](../../archived/manual-testing.md) for the fresh-load checks. No VDF
 export or Steam client runtime test is represented by this audit.

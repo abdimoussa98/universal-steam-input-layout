@@ -262,9 +262,9 @@ were parsed exhaustively rather than treated as current runtime evidence.
 | [findings/2026-09-29-held-input-layer-transitions/AUDIT.md](../../findings/2026-09-29-held-input-layer-transitions/AUDIT.md) | 398 | Full narrative/reference review |
 | [findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md](../../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md) | 352 | Full narrative/reference review |
 | [findings/2026-09-29-temp-cursor-gyro/SELF-REMOVAL-INHERITANCE.md](../../findings/2026-09-29-temp-cursor-gyro/SELF-REMOVAL-INHERITANCE.md) | 105 | Full narrative/reference review |
-| [id_replacement/README_replace_layer_ids.md](../../id_replacement/README_replace_layer_ids.md) | 125 | Full narrative/reference review |
-| [id_replacement/SUMMARY.md](../../id_replacement/SUMMARY.md) | 128 | Full narrative/reference review |
-| [manual-testing.md](../../manual-testing.md) | 226 | Full narrative/reference review |
+| [id_replacement/README_replace_layer_ids.md](../../tools/id_replacement/README_replace_layer_ids.md) | 125 | Full narrative/reference review |
+| [id_replacement/SUMMARY.md](../../tools/id_replacement/SUMMARY.md) | 128 | Full narrative/reference review |
+| [manual-testing.md](../../archived/manual-testing.md) | 226 | Full narrative/reference review |
 | [plans/2026-09-27-neptune-command-budget.md](../../plans/2026-09-27-neptune-command-budget.md) | 156 | Full narrative/reference review |
 | [plans/2026-09-27-neptune-gyro-shifts-navkeys.md](../../plans/2026-09-27-neptune-gyro-shifts-navkeys.md) | 168 | Full narrative/reference review |
 | [plans/2026-09-27-neptune-trigger-rampup-port.md](../../plans/2026-09-27-neptune-trigger-rampup-port.md) | 172 | Full narrative/reference review |
@@ -274,14 +274,14 @@ were parsed exhaustively rather than treated as current runtime evidence.
 | [plans/2026-09-29-steering-entry-brainstorm.md](../../plans/2026-09-29-steering-entry-brainstorm.md) | 716 | Full narrative/reference review |
 | [plans/2026-09-29-temp-cursor-gyro.md](../../plans/2026-09-29-temp-cursor-gyro.md) | 423 | Full narrative/reference review |
 | [plans/steering-overview.html](../../plans/steering-overview.html) | 492 | Proposal text and interaction model reviewed |
-| [resources/Layer Reverse Lookup.md](../../resources/Layer%20Reverse%20Lookup.md) | 712 | Legacy lookup; full table parsed, not current IDs |
+| [resources/Layer Reverse Lookup.md](../../archived/Layer%20Reverse%20Lookup.md) | 712 | Legacy lookup; full table parsed, not current IDs |
 | [resources/Layout Vocabulary.md](../../resources/Layout%20Vocabulary.md) | 72 | Full narrative/reference review |
 | [resources/Neptune Chorded Button Ids.md](../../resources/Neptune%20Chorded%20Button%20Ids.md) | 63 | Full narrative/reference review |
 | [resources/Steam Input JSON Structure.md](../../resources/Steam%20Input%20JSON%20Structure.md) | 1557 | Full narrative/reference review |
-| [resources/scratch paper/LST.md](../../resources/scratch%20paper/LST.md) | 195 | Full narrative/reference review |
-| [resources/scratch paper/RST.md](../../resources/scratch%20paper/RST.md) | 195 | Full narrative/reference review |
-| [resources/scratch paper/all.md](../../resources/scratch%20paper/all.md) | 0 | Empty file; confirmed |
-| [resources/scratch paper/alt.md](../../resources/scratch%20paper/alt.md) | 0 | Empty file; confirmed |
-| [resources/scratch paper/base.md](../../resources/scratch%20paper/base.md) | 0 | Empty file; confirmed |
-| [resources/scratch paper/gyro.md](../../resources/scratch%20paper/gyro.md) | 0 | Empty file; confirmed |
+| [resources/scratch paper/LST.md](../../archived/scratch-paper/LST.md) | 195 | Full narrative/reference review |
+| [resources/scratch paper/RST.md](../../archived/scratch-paper/RST.md) | 195 | Full narrative/reference review |
+| [resources/scratch paper/all.md](../../archived/scratch-paper/all.md) | 0 | Empty file; confirmed |
+| [resources/scratch paper/alt.md](../../archived/scratch-paper/alt.md) | 0 | Empty file; confirmed |
+| [resources/scratch paper/base.md](../../archived/scratch-paper/base.md) | 0 | Empty file; confirmed |
+| [resources/scratch paper/gyro.md](../../archived/scratch-paper/gyro.md) | 0 | Empty file; confirmed |
 | [todos.md](../../todos.md) | 157 | Full narrative/reference review |

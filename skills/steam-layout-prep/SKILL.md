@@ -87,7 +87,7 @@ See `steam-binding-order` for consolidation rules.
 
 - Plan publication metadata with every layout change: before commit/export/publication,
   revalidate the full description and bump the title's release version once for that
-  release batch. See [the publication rule](../../README.md#publishing-layout-changes)
+  release batch. See [the publication rule](../../docs/publishing.md)
   and `steam-layout-apply`; schema versions and runtime IDs are unrelated.
 - Never hand-edit numeric runtime IDs; convert to titles first.
 - In a numeric file, don't reorder or insert entries in `actions` / `action_layers`, because every ID after the change shifts. In title form, reordering is safe as long as the `preset` blocks move in step.
@@ -96,7 +96,7 @@ See `steam-binding-order` for consolidation rules.
 
 ## References
 
-- Script usage: `README.md`
+- Script usage: `docs/tools.md`
 - JSON structure and runtime ID rules: `resources/Steam Input JSON Structure.md`
 - Converter: `convert_runtime_ids.py`
 
