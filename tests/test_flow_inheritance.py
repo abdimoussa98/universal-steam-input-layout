@@ -278,8 +278,15 @@ class NeptuneFlowTests(unittest.TestCase):
             self.assertEqual(report["legacy_only"], ["LTP: Arrow Keys", "RTP: Mouse Buttons"])
             self.assertEqual(report["unsupported"], [])
             self.assertEqual(report["stale_decisions"], [])
-            self.assertEqual(len(report["covers"]), 14)
-            self.assertEqual(len(report["targets"]), 69)   # 71 layers, less the two hold_layer ones
+            layout = Layout(json.loads((ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json").read_text()))
+            # R145: a chain reaches every layer, except the ones only hold_layer adds.
+            self.assertEqual(set(report["targets"]), set(layout.presets) - {layout.base} - set(report["legacy_only"]))
+            # R144: every cover-type layer is cover-checked, and nothing else is.
+            checked = {c["cover"] for c in report["covers"]}
+            self.assertEqual(checked, {title for title, row in report["targets"].items() if row["cover"]})
+            modifier = "L2" if variant == "alternative" else "L1"
+            self.assertLessEqual({f"{modifier}: Tap Cover", "Gyro Off Ramp Up"}, checked)   # by suffix, and by title
+            self.assertNotIn("LST: Tap Cover", checked)                                     # a stick-touch helper
             self.assertLess(report["view"]["seconds"], 5)
             # Inherited bindings that vary between stacks are listed, and don't decide the result.
             self.assertTrue([i for x in report["targets"].values() for i in x["inputs"] if i["finding"] == "varies"])
