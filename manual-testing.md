@@ -10,37 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## Triggers and ramp-up
-
-- [ ] TR1: LT / RT fire left / right click, and Start / Select work while a trigger is held
-- [ ] TR2: In the Deck GUI, Base's right-stick outer edge shows three command entries, and both chords are set to Any
-  - Default: the trigger chord selects LT / RT (partial and full pull), and the modifier chord selects LB / RB
-  - Alternative: the other way around
-- [ ] TR3: RS to the edge with nothing held:
-  - The gyro turns off and Turning Ramp Up 0 starts
-  - Turning Ramp Up 1 follows after about 250 ms
-  - Moving back in restores the gyro and ends ramp-up, at either stage
-- [ ] TR4: RS to the edge while holding a trigger keeps the gyro on during ramp-up, with no unwanted mouse repeats
-  - Try each trigger alone at partial and full pull, then both
-- [ ] TR5: Pulling a trigger after the gyro turns off, in both stages, brings the gyro back, and the first click registers
-  - Letting go of one of two held triggers keeps the chord
-  - Partial ↔ full pull changes work
-- [ ] TR6: Holding a modifier on the way to the edge lets no ramp-up or gyro-off leak through
-  - Try each modifier alone, then both
-  - Try it again with a trigger held, and with the press / release order reversed
-- [ ] TR7: Pressing a modifier during ramp-up ends ramp-up and enters the right modifier, the `Gyro |` version in Gyro mode
-  - In the alternative, a partial pull keeps the block, and a full pull exits
-- [ ] TR8: The edge / trigger / modifier checks above work the same in Gyro mode
-- [ ] TR9: Interrupting the 250 ms stage change, recentering and retrying still reaches Turning Ramp Up 1 (the 300 ms reset)
-- [ ] TR10: Stuck right trackpad:
-  - Hold RB, touch the right trackpad, let go of both (try both orders), then push RS to the edge
-  - Ramp-up works, and trackball momentum is intact
-  - A thumb on the trackpad still blocks the edge
-- [ ] TR11: Two-bumper tap cover:
-  - A quick LB + RB tap still toggles Gyro mode
-  - Holding both past 200 ms and releasing doesn't, even right after an interrupted attempt
-- [ ] TR12: No new haptic pulse when RS hits the edge
-
 ## Default trigger reference match
 
 - [ ] DT1: Load the default layout fresh and confirm both Base triggers match the July reference's trigger settings and mouse outputs (LT → left click, RT → right click)

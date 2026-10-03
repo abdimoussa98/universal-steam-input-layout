@@ -237,6 +237,11 @@ WENT = {
     ("Reference gyro and right-stick tuning", "RG2"): "`test_neptune_gyro.test_gyro_sources_only_override_owned_properties_or_explicitly_disable` and "
                                                       "`test_neptune_cursor.test_cursor_profile_preserves_sensitivity_and_owner_activation`; the feel is a tuning note",
     ("Reference gyro and right-stick tuning", "RG3"): "`test_neptune_gyro.test_base_and_ramp_tuning_match_reference_without_replacing_modifier_edges`; the feel is a tuning note",
+    **{("Triggers and ramp-up", f"TR{n}"): "`tests/test_scenarios_triggers_and_recovery.py`" for n in (1, 3, 4, 5, 6, 7, 8, 10, 11)},
+    ("Triggers and ramp-up", "TR2"): "`test_static_checks.test_bases_right_stick_edge_has_three_entries_with_any_chords_and_no_haptic`; "
+                                     "what the editor shows is A30",
+    ("Triggers and ramp-up", "TR9"): "A12: the 300 ms reset restarts the interrupted stage change",
+    ("Triggers and ramp-up", "TR12"): "`test_static_checks.test_bases_right_stick_edge_has_three_entries_with_any_chords_and_no_haptic`",
 }
 
 
