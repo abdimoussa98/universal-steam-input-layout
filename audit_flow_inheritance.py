@@ -38,8 +38,10 @@ from steam_layout.chains import NOT_FOLLOWED, SETTLE
 from steam_layout.covers import RULES, check_cover, family_view, load_rules
 from steam_layout.flow_inheritance import inspect_target
 from steam_layout.model import TARGET, Layout, map_title
+from steam_layout.rules import tag
 
 FINDINGS = ("varies", "review", "replaced", "satisfied")
+ENFORCES = {"cover check": ("R144",), "coverage": ("R145",)}   # check -> rules (Layer Definition of Done)
 
 
 def sha(path):
@@ -162,7 +164,7 @@ def print_report(report, detail, layout=None):
     print(f"Chains: {view['stacks']} stacks from " + " and ".join(" > ".join(c) for c in view["contexts"])
           + f", {len(report['targets'])} layers reached, {view['seconds']} s")
     for u in report["unsupported"]:
-        print("Coverage gap: unsupported: " + u)
+        print(f"Coverage gap {tag(ENFORCES['coverage'])}: unsupported: " + u)
     print("\nInherited bindings that differ between stacks (information), and unsupported lookups (gaps)")
     print("Target                                  Lower    Varies Review Replaced Satisfied Unsupported")
     for title, t in sorted(report["targets"].items()):
@@ -173,14 +175,14 @@ def print_report(report, detail, layout=None):
         print(f"{title[:39]:39} {len(t['lower_stacks']):5}  " + " ".join(f"{c.get(k, 0):8}" for k in FINDINGS[:2])
               + f" {c.get('replaced', 0):8} {c.get('satisfied', 0):9} {u:11}{note}")
     if report["uncovered"]:
-        print("\nCoverage gap: no chain of adding bindings reaches " + ", ".join(report["uncovered"]))
+        print(f"\nCoverage gap {tag(ENFORCES['coverage'])}: no chain of adding bindings reaches " + ", ".join(report["uncovered"]))
     for stale in report.get("stale_decisions", []):
         print("\nStale decision (matches no finding): " + stale)
     if report.get("legacy_only"):
         print("\nOut of scope: reached only by legacy hold_layer (not followed): "
               + ", ".join(report["legacy_only"]))
     if report["unreached"]:
-        print(f"\nCoverage gap: no chain of adding bindings reaches: " + ", ".join(report["unreached"]))
+        print(f"\nCoverage gap {tag(ENFORCES['coverage'])}: no chain of adding bindings reaches: " + ", ".join(report["unreached"]))
     shown = [(title, t) for title, t in sorted(report["targets"].items()) if detail or not t["cover"]]
     for title, t in shown:
         rows = [i for i in t["inputs"] if detail or (not i.get("decision") and i["unsupported"])]
@@ -191,7 +193,7 @@ def print_report(report, detail, layout=None):
             for s in t["lower_stacks"]:
                 print(f"  lower: {' > '.join(s['stack'])}\n    via " + " | ".join(s["path"]))
         for i in rows:
-            label = i["finding"] or "unsupported"
+            label = i["finding"] or f"unsupported {tag(ENFORCES['coverage'])}"
             print(f"  {label}: {i['source']}/{i['input']} (target {i['target']})" +
                   (f" - {i['unsupported']}" if i["unsupported"] else ""))
             if i.get("decision"):
@@ -211,7 +213,7 @@ def print_report(report, detail, layout=None):
             print(f"  {c['cover']}: owners {', '.join(c['owners']) or 'none'}"
                   + ("" if c["findings"] else " - ok"))
             for f in c["findings"]:
-                print(f"    {f['check']}: {f['detail']} ({f['stacks']} stack(s), e.g. {' > '.join(f['stack'])})"
+                print(f"    {f['check']} {tag(ENFORCES['cover check'])}: {f['detail']} ({f['stacks']} stack(s), e.g. {' > '.join(f['stack'])})"
                       + (f"\n      accepted: {f['allowed']}" if f["allowed"] else ""))
                 if detail or not f["allowed"]:
                     print("      via " + " | ".join(f["path"]))

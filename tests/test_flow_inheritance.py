@@ -199,7 +199,23 @@ class GateTests(unittest.TestCase):
         self.assertEqual(report["unreached"], ["Orphan"])
         self.assertFalse(report["clean"])
         self.assertEqual(out.returncode, 1)
-        self.assertIn("no chain of adding bindings reaches: Orphan", out.stdout)
+        self.assertIn("Coverage gap [R145]: no chain of adding bindings reaches: Orphan", out.stdout)
+
+    def test_a_cover_finding_is_printed_with_its_rule(self):
+        import contextlib
+        import io
+        import audit_flow_inheritance as flow
+        finding = {"check": "outlives owners", "detail": "no owner is present", "stacks": 1,
+                   "stack": ["Base", "Cover"], "allowed": None, "path": ["Base a: +Cover"]}
+        report = {"layout": {"title": "T", "variant": "default", "sha256": "0" * 64},
+                  "rules": {"version": 1, "sha256": "0" * 64, "path": "rules.json"},
+                  "view": {"stacks": 1, "contexts": [["Base"]], "seconds": 0}, "targets": {}, "unsupported": [],
+                  "uncovered": [], "unreached": [], "clean": False,
+                  "covers": [{"cover": "Cover", "owners": [], "above": {}, "findings": [finding]}]}
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            flow.print_report(report, detail=False)
+        self.assertIn("outlives owners [R144]: no owner is present", out.getvalue())
 
     def test_a_layer_only_added_by_hold_layer_is_out_of_scope_not_a_gap(self):
         layout = self.varying()
