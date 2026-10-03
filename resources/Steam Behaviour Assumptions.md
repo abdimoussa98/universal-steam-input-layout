@@ -88,6 +88,8 @@ None of them is a gate. Each comes from a check in the retired Deck checklist
 
 | From | What to try |
 |---|---|
+| Temp cursor gyro TC2 | The cursor's entry gives one strong pulse at 300 ms and nothing after. Is one pulse right, and is there any buzzing while the cursor stays on, or on a retried hold? |
+| Temp cursor gyro TC8 | Both sticks at about a quarter of their travel end the cursor (radius 4915 on the left, 7209 on the right). Do the two sticks feel alike, and is a quarter the right distance? |
 | Menu buttons MB7 | In each Menu Fn layer the eight stick directions type punctuation with a haptic tick. Hold them, change direction, and try the same directions inside a transition: is there unwanted buzzing, or a duplicate key? |
 | 90.6 P1 | In a Double Tap window a left-pad swipe types its key directly. Does the swipe feel like Base's, in sensitivity and haptics? |
 | 90.11 F2 | The Fallback Hold's warning: a strong pulse every 250 ms from the moment the stick goes up or down, and the exit with one beep at 1.5 s. Is the pulse too strong, and is 1.5 s the right length? (90.6 C1 had pulses from 1 s and the exit at 2.5 s.) |

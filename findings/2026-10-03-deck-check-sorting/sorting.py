@@ -222,6 +222,17 @@ WENT = {
     ("Menu buttons", "MB3"): "A12: it is that assumption's Deck procedure",
     ("Menu buttons", "MB7"): "Tuning note",
     **{("Modifier layers", f"ML{n}"): "`tests/test_scenarios_menu_and_modifiers.py`" for n in (1, 2, 3, 4)},
+    **{("Temp cursor gyro", f"TC{n}"): "`tests/test_scenarios_cursor.py`" for n in (1, 3, 4, 6, 8, 9, 10, 11, 12, 14)},
+    ("Temp cursor gyro", "TC2"): "Tuning note",
+    ("Temp cursor gyro", "TC5"): "`test_neptune_cursor.test_output_and_cover_chords_are_separate_uninterruptible_entries`; "
+                                 "the order of the two chords is A32",
+    ("Temp cursor gyro", "TC7"): "`test_neptune_cursor.test_cursor_edges_preserve_one_stick_hold_and_repeat_self_removal_for_two`",
+    ("Temp cursor gyro", "TC13"): "`test_neptune_cursor.test_delayed_cursor_reset_is_scoped_and_replaced_by_upper_inputs`",
+    ("Temp cursor gyro", "TC15"): "`test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries`, "
+                                  "and the Window audit on every build",
+    ("Temp cursor gyro", "TC16"): "`test_neptune_cursor.test_rtp_timer_replaces_inherited_cancellation_and_repeating_cover_inputs`",
+    ("Temp cursor gyro", "TC17"): "A13 and A28: a removal during RTP Entry's delay, and trackball momentum",
+    ("Temp cursor gyro", "TC18"): "A34: it is that assumption's Deck procedure",
 }
 
 
