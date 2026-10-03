@@ -20,7 +20,8 @@ folded in (see [Decisions](#decisions)).
 | **Part B** | **Complete on 2026-10-02.** The author said to start Part C on 2026-10-02 |
 | 10. Assumptions document | Done: [Steam Behaviour Assumptions](../resources/Steam%20Behaviour%20Assumptions.md), 32 entries (19 verified, 4 reported but never isolated, 9 unverified), each with whether the layout relies on it and a Deck procedure. Every rule's "Rests on" is filled, and a test keeps the two in step |
 | 11. Sort the Deck checks | Done: [findings/2026-10-03-deck-check-sorting](../findings/2026-10-03-deck-check-sorting/README.md). All 137 checks have an ID (62 were unlabelled) and one row each: 90 become scenario tests, 21 static tests (most exist already), 14 join an assumption, 3 are tuning notes and 9 are obsolete. The simulator's scope is set from the 90: buttons and chords, sticks, time and the key log first; then missed releases, triggers, pads, and three small ones. Analog values, `hold_layer`, mode shifts and feel are not modelled. Two new assumptions, A33 and A34 |
-| 12 to 15 | Not started |
+| 12. The press simulator | Done: `steam_layout/simulator.py`. Step 0 reused the archived replay's design and timing policies, not its code (it tracks no keys, returns sets of states, and predates the chord latch and the eaten delay). It replays presses, releases, missed releases and time along one path, with a log of keys, wheel steps, haptics and beeps; each behaviour names its assumption, and A9, A13, A32 and A35 are switches. 35 unit tests on tiny layouts. On both working layouts, with Gyro off and on, it reaches the same stacks as `walk` for the rocking sequences. Two new assumptions it had to choose: A35 and A36 |
+| 13 to 15 | Not started |
 | Parts B and C | Not started; each waits for the author's review of the part before it |
 
 **Baseline:** commits `601b61b` (archive) and `1fa38ac` (90.11 to 90.13, the

@@ -1,6 +1,6 @@
 # Steam behaviour assumptions
 
-**Status:** started 2026-10-02, 34 entries on 2026-10-03, from the
+**Status:** started 2026-10-02, 36 entries on 2026-10-03, from the
 [rule inventory](../findings/2026-10-02-rule-inventory/README.md), phase 10 of
 the [rule registry plan](../plans/2026-10-02-rule-registry.md).
 
@@ -66,11 +66,18 @@ through [rules.py](../steam_layout/rules.py)), so the shape is fixed.
 | A32 | When two separate activators on one input are due at the same moment, their order is not fixed. Inside one activator the array still runs bottom to top | Unverified | Works either way | In `L1: Modifier 0` press A with L1 held: the output chord and the cover chord both fire, in either order | The cursor parents' two chords on each cancel input |
 | A33 | Steam loads an exported VDF as written: the same layers, groups and bindings as the JSON it was made from | Reported: the author plays on exported layouts, but no fresh-load check is recorded for 90.6 to 90.13 | Relies on it | Load both VDFs fresh, not in the live editing session, and spot-check a modifier, Modifier 2, both Fn layers and the Steering entry | R151; every release; `convert_vdf.mjs` |
 | A34 | A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held | Unverified | Relies on it | Under a regular and a Gyro modifier, touch each trackpad and press the face buttons and the D-pad: record the keys, and whether the normal Tap Cover still lands | The face and D-pad mode-shift targets under Base's trackpads; the cursor's cancel inputs |
+| A35 | Hold to Repeat with no stated rate repeats at one fixed default interval | Unverified: the interval isn't known. The simulator uses 100 ms | Works either way | In a test layout: a key with Hold to Repeat and no rate. Count the repeats in one second | Most repeating entries state no rate, the cleanup functions among them; the simulator's `default_repeat_ms` |
+| A36 | A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it | Unverified | Relies on it | Hold A, then hold LB: if A's chord with LB doesn't start, it holds | Every cleanup function's guard; the simulator |
 
 A33 and A34 were found while sorting the Deck checks
 ([record](../findings/2026-10-03-deck-check-sorting/README.md)). A31 and A32 come from the timing contract of the archived replay
 ([TIMED-MODEL.md](../findings/2026-09-30-stack-search/TIMED-MODEL.md)), which
 had to choose a behaviour for each.
+
+A35 and A36 are choices the press simulator
+([simulator.py](../steam_layout/simulator.py)) had to make. Its docstring says
+which assumption each of its behaviours models: A1 to A17, A21, A25, A27, A31,
+A32, A35 and A36.
 
 ## Two that are kept apart
 
