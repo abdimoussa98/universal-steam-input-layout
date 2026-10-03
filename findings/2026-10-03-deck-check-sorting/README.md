@@ -121,6 +121,14 @@ models; none has been seen on the Deck.
 | Left-stick recovery LR1 | The left-stick edge clears a stuck menu Entry Point | Not since 90.10: the Entry Points' stick edges add the stick guards. A stuck Entry Point clears on the other menu button |
 | 90.12 C6, Menu buttons MB5 | A quick double tap scrolls, or types its key, "two or three times (known)" | Two when the second tap comes inside 50 ms, three after: the window's single-tap output at 50 ms is the extra one |
 
+## What 90.13 rests on
+
+[unverified-assumptions.txt](unverified-assumptions.txt) is the list a release's
+record carries (R167), written on 2026-10-03 for the layouts as they are, 90.13:
+19 assumptions that aren't verified, with the rules and the scenarios resting
+on each. 40 of the 87 scenarios rest on at least one. `python3 -m tests.scenario`
+prints the current list, and `--out` writes it into a release's folder.
+
 ## The table
 
 Generated from [sorting.py](sorting.py), which fails if a check is missing,
