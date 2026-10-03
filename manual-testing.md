@@ -10,16 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## Missed releases and cleanup scope
-
-- [ ] MR1: Validate recovery on the Deck after missed releases, in both layouts
-  - Trace the underlying recovery owner and which overlays expose or block it; do not require every overlay to duplicate that recovery
-  - Stale-state fallbacks must preserve valid held interactions. Normal releases, delayed-apply resets, timed expiry, and deliberate transitions are allowed during normal use
-  - Verify intended survivors, including persistent Gyro, the still-held modifier side, and valid shared overlays; flag invalid residual overlays requiring another gesture for the ownership review
-- [ ] MR2: Verify whether interrupted transitions can leave both Mod 2 press orders active and cause a recovery problem
-  - Retain current-branch fallback unless that problem is demonstrated. Its eleven targets include both cursor overlays but still exclude the opposite Mod 2 order
-  - Preserve the combined tap cover's nine-layer released-side cleanup and persistent Gyro. The uncovered Mod 2 release has a separate thirteen-layer cleanup plus an intentional Gyro state change
-
 ## Held inputs across layer changes
 
 Real-layout checks for [Held Inputs Across Layer Changes](resources/Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-changes).

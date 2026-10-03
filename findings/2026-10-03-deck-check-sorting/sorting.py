@@ -253,6 +253,9 @@ WENT = {
     ("WASD modifier scaffold", "WM4"): "`test_neptune_recovery.test_selected_edges_have_expected_guards_scope_and_outer_geometry` and "
                                        "`test_neptune_recovery.test_timed_windows_block_both_edges_and_preserve_ordered_boundaries`",
     ("WASD modifier scaffold", "WM5"): "A11: an output exposed or hidden under a stick that is already out",
+    ("Missed releases and cleanup scope", "MR1"): "`tests/test_scenarios_triggers_and_recovery.py`",
+    ("Missed releases and cleanup scope", "MR2"): "`test_static_checks.test_the_two_modifier_2_orders_are_never_on_the_stack_together`, "
+                                                  "and the Cleanup audit's \"never there\" on every build",
 }
 
 
