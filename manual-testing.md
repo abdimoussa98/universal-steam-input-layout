@@ -10,19 +10,6 @@ Implementation work is tracked in [todos.md](todos.md). Unchecked items below re
 - Written for the default. In the alternative, swap LB / RB ↔ LT / RT: the bumpers fire, and the soft-pull triggers are the modifiers
 - If a bind applies the wrong layer, suspect the load-order swap (`findings/2026-07-11-layer-order-swap/`)
 
-## 90.7: slim steering overlays
-
-Load 90.7 fresh in both variants. Record: [steering 90.7](findings/2026-09-30-steering-lean/README.md#slim-overlays-and-dod-fixes-907).
-
-- [ ] S1: drive, flick LS up to center, press A within 150 ms: F fires once, one scroll lands about 150 ms after center, and nothing is left stuck
-- [ ] S2: flick, then flick and hold: repeat scroll; releasing stops it; the next push gives no scroll until center. Sideways during the repeat steers with A/D and a true diagonal keeps scrolling until up/down is released
-- [ ] S3: hold LS up past 250 ms, lift the left thumb, put it back: LST layers clear, the stick stays consumed until center, no phantom scroll
-- [ ] S4: hold LS up past 250 ms, release the driver while the Steam menu is open, close it and touch a stick: owner recovery clears the steering branch through the cover
-- [ ] S5: protected menu entry (Start with a stick deflected), hold past 300 ms, release: silent release, both protected layers gone, gyro stays off throughout; repeat with a thumb lift during the hold
-- [ ] S6: while steering, tap and touch the right pad: the cursor moves and pad clicks work, but no RTP touch mode (Circular Scroll) starts. Outside steering, RTP double tap is unchanged
-- [ ] S7: while steering, turn assist (RS past the ramp threshold) works while just driving, and does nothing while LS holds a modifier map, in the two-modifier map, or right after a scroll flick
-- [ ] S8: flick LS up to center, then push sideways within 150 ms: one scroll fires at once, A/D steers, and pushing up again before center gives no scroll or modifier map
-
 ## 90.6: chorded delays and dead-group prune
 
 Load 90.6 fresh in both variants. Gate details: [steering C1–C5](findings/2026-09-30-steering-lean/ACCEPTANCE.md#chorded-delays-906)

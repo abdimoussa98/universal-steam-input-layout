@@ -199,6 +199,10 @@ WENT = {
     **{("90.9", check): "`tests/test_scenarios_90_6_to_90_9.py`" for check in ("K2", "K3", "K4", "M5")},
     ("90.9", "K1"): "Obsolete: replaced by 90.10 T8",
     ("90.9", "K5"): "`test_fixes.test_overlays_are_gone_and_nothing_references_them`; the fresh load is A33",
+    **{("90.7", check): "`tests/test_scenarios_90_6_to_90_9.py`" for check in ("S1", "S2", "S3", "S4", "S6")},
+    ("90.7", "S5"): "Obsolete: the protected menu layers were replaced by the stick guards in 90.10 (90.10 T5)",
+    ("90.7", "S7"): "Obsolete: turn assist is off in Steering since 90.13 (90.13 N1)",
+    ("90.7", "S8"): "Obsolete: replaced by 90.10 D5",
 }
 
 

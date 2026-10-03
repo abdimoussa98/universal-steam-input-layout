@@ -163,14 +163,14 @@ It becomes the migration record in phase 14.
 | 90.9 | K4 | other Fn keys behave the same way (hold Start, hold LB for F10, lift S… | Scenario | B, K: a held Fn key falls through to Base (R138) | `tests/test_scenarios_90_6_to_90_9.py` |
 | 90.9 | K5 | every layer still does what it did: spot-check a modifier, Mod 2, both… | Static | Every layer command resolves to a layer after the ID shift: test_fixes already checks it. The fresh load is A33 | `test_fixes.test_overlays_are_gone_and_nothing_references_them`; the fresh load is A33 |
 | 90.9 | M5 | RTP double tap: tap the right pad, tap again north or south within 150… | Scenario | Pad, T: the right-pad double tap and Circular Scroll | `tests/test_scenarios_90_6_to_90_9.py` |
-| 90.7 | S1 | drive, flick LS up to center, press A within 150 ms: F fires once, one… | Scenario | B, St, T, K: a face button inside the stick window | Not migrated yet |
-| 90.7 | S2 | flick, then flick and hold: repeat scroll; releasing stops it; the nex… | Scenario | St, T, K: flick, then flick and hold repeats the scroll | Not migrated yet |
-| 90.7 | S3 | hold LS up past 250 ms, lift the left thumb, put it back: LST layers c… | Scenario | B, St, T: lifting the thumb during a stick modifier | Not migrated yet |
-| 90.7 | S4 | hold LS up past 250 ms, release the driver while the Steam menu is ope… | Scenario | B, St, Miss: the driver's recovery through the cover | Not migrated yet |
-| 90.7 | S5 | protected menu entry (Start with a stick deflected), hold past 300 ms,… | Obsolete | The protected menu layers were replaced by the stick guards in 90.10 (T5) | Not migrated yet |
-| 90.7 | S6 | while steering, tap and touch the right pad: the cursor moves and pad… | Scenario | Pad, St: no RTP touch mode starts while steering | Not migrated yet |
-| 90.7 | S7 | while steering, turn assist (RS past the ramp threshold) works while j… | Obsolete | Turn assist is off in Steering since 90.13 (N1) | Not migrated yet |
-| 90.7 | S8 | flick LS up to center, then push sideways within 150 ms: one scroll fi… | Obsolete | Replaced by 90.10 D5 | Not migrated yet |
+| 90.7 | S1 | drive, flick LS up to center, press A within 150 ms: F fires once, one… | Scenario | B, St, T, K: a face button inside the stick window | `tests/test_scenarios_90_6_to_90_9.py` |
+| 90.7 | S2 | flick, then flick and hold: repeat scroll; releasing stops it; the nex… | Scenario | St, T, K: flick, then flick and hold repeats the scroll | `tests/test_scenarios_90_6_to_90_9.py` |
+| 90.7 | S3 | hold LS up past 250 ms, lift the left thumb, put it back: LST layers c… | Scenario | B, St, T: lifting the thumb during a stick modifier | `tests/test_scenarios_90_6_to_90_9.py` |
+| 90.7 | S4 | hold LS up past 250 ms, release the driver while the Steam menu is ope… | Scenario | B, St, Miss: the driver's recovery through the cover | `tests/test_scenarios_90_6_to_90_9.py` |
+| 90.7 | S5 | protected menu entry (Start with a stick deflected), hold past 300 ms,… | Obsolete | The protected menu layers were replaced by the stick guards in 90.10 (T5) | Obsolete: the protected menu layers were replaced by the stick guards in 90.10 (90.10 T5) |
+| 90.7 | S6 | while steering, tap and touch the right pad: the cursor moves and pad… | Scenario | Pad, St: no RTP touch mode starts while steering | `tests/test_scenarios_90_6_to_90_9.py` |
+| 90.7 | S7 | while steering, turn assist (RS past the ramp threshold) works while j… | Obsolete | Turn assist is off in Steering since 90.13 (N1) | Obsolete: turn assist is off in Steering since 90.13 (90.13 N1) |
+| 90.7 | S8 | flick LS up to center, then push sideways within 150 ms: one scroll fi… | Obsolete | Replaced by 90.10 D5 | Obsolete: replaced by 90.10 D5 |
 | 90.6 | D1 | both variants load without error; every layer's sources look the same… | Static | The prune removes only dead groups: test_layout_hygiene. Loading without error is A33 | Not migrated yet |
 | 90.6 | D2/D3 | right pad clicked, tap up/down gives one wheel tick; hold repeats from… | Static | RTP: Mouse Buttons' wheel bindings: test_layout_hygiene. The layer is added by hold_layer, which isn't simulated | Not migrated yet |
 | 90.6 | D4/D5 | Base dpad/face and Menu Fn stick mode shifts unchanged; stick double-t… | Static | The prune kept every mode-shift target: test_layout_hygiene and the fix pipeline's fixed point | Not migrated yet |
