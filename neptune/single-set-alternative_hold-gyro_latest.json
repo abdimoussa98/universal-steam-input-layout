@@ -2,8 +2,8 @@
 	"controller_mappings": {
 		"version": "3",
 		"revision": "12834",
-		"title": "single-set-alternative :: always-gyro :: 90.15",
-		"description": "Keyboard & mouse layout with WASD movement, gyro aiming, and right-stick turn assist. L1/R1 fire left/right mouse buttons; L2/R2 are the modifiers. Hold Start or Select for the Fn layers. While either is held the camera stick is off, and Fn waits until both sticks are centered.\n\nConfigure normal gyro and right-stick response in Base; modifier and ramp layers have their own stick overrides. The empty left-stick edge bind is the WASD Modifier slot. Ramp Up 0 and Ramp Up 1, the first two layers, control turn-assist speed and timing.\n\nTemp Cursor Gyro: hold either modifier for 300 ms, or lift a thumb from either stick during the hold, for cursor response. The 300 ms hold gives a high-intensity haptic pulse; thumb-lift entry stays silent. Ongoing gyro vibration is off and minimum movement threshold is 5. Face buttons, D-pad, stick clicks, Start/Select, the opposite modifier, or both sticks deflected cancel cursor response for the rest of that hold. Release and hold again to re-enable it.\n\nSteering (Deck testing pending): hold Start, click and release the left stick, then release Start. A beep and a strong pulse confirm it. The left stick drives with WASD. Hold R2 for W or L2 for S; the left stick then steers with A/D. While driving, hold the left stick down or up for the L2 or R2 modifier map. It stays while the stick rolls sideways and ends when the stick returns to center. A quick flick back to center scrolls once instead, and a second flick held keeps scrolling. Hold the other trigger for the two-modifier map, where left stick up/down scrolls. A quick tap of the other trigger clears every layer, including Gyro, back to Base. Releasing the driving trigger hands over to the other one if it is held; otherwise the left stick returns to WASD, and holding it up or down pulses at once and exits Steering at 1.5 s; rolling to A or D stops the timer. Start and Select send Tab and Escape while driving, while the left stick is held up or down with no trigger, and after entering until the left stick has been moved once; otherwise they keep their taps and Fn layers. To leave Steering, hold Start or Select, click and release either stick, then release the button, with the same beep and pulse; Gyro stays as it was. While steering, right-pad touch modes such as circular scroll are off, so the pad is just the mouse, and right-stick turn assist is off, so the gyro also stays on while the right stick turns.\n\nTrackpad clicks (Deck testing pending): a click is read once, when it starts, and holds until release. Pressed near the centre, the right pad is the middle mouse button and the left pad shows the keyboard. Further out, the right pad is Back, Forward and scroll up/down, and the left pad is the arrow keys. The output comes about 50 ms after the press, so a very short click may send nothing.\n\nBase and Gyro (L2+R2 toggle) retain their activation rules. Stateful Cursor Gyro and Gamepad remain planned; until they exist, the other Start or Select plus stick-click gestures clear every layer above Base except Gyro.",
+		"title": "single-set-alternative :: always-gyro :: 90.19",
+		"description": "Keyboard & mouse layout with WASD movement, gyro aiming, and right-stick turn assist. L1/R1 fire left/right mouse buttons; L2/R2 are the modifiers. Hold Start or Select for the Fn layers. While either is held the camera stick is off, and Fn waits until both sticks are centered.\n\nConfigure normal gyro and right-stick response in Base; modifier and ramp layers have their own stick overrides. The empty left-stick edge bind is the WASD Modifier slot. Ramp Up 0 and Ramp Up 1, the first two layers, control turn-assist speed and timing.\n\nTemp Cursor Gyro: hold either modifier for 300 ms, or lift a thumb from either stick during the hold, for cursor response. The 300 ms hold gives a high-intensity haptic pulse; thumb-lift entry stays silent. Ongoing gyro vibration is off and minimum movement threshold is 5. Face buttons, D-pad, stick clicks, Start/Select, the opposite modifier, or both sticks deflected cancel cursor response for the rest of that hold. Release and hold again to re-enable it.\n\nSteering (Deck testing pending): hold Start, click and release the left stick, then release Start. A beep and a strong pulse confirm it. The left stick drives with WASD. Hold R2 for W or L2 for S; the left stick then steers with A/D. While driving, hold the left stick down or up for the L2 or R2 modifier map. It stays while the stick rolls sideways and ends when the stick returns to center. A quick flick back to center scrolls once instead, and a second flick held keeps scrolling. Hold the other trigger for the two-modifier map, where left stick up/down scrolls. A quick tap of the other trigger clears every layer, including Gyro, back to Base. Releasing the driving trigger hands over to the other one if it is held; otherwise the left stick returns to WASD, and holding it up or down pulses at once and exits Steering at 1.5 s; rolling to A or D stops the timer. Start and Select send Tab and Escape while driving, while the left stick is held up or down with no trigger, and after entering until the left stick has been moved once; otherwise they keep their taps and Fn layers. To leave Steering, hold Start or Select, click and release either stick, then release the button, with the same beep and pulse; Gyro stays as it was. While steering, right-pad touch modes such as circular scroll are off, so the pad is just the mouse, and right-stick turn assist is off, so the gyro also stays on while the right stick turns.\n\nTrackpad clicks (Deck testing pending): a click is read once, when it starts, and holds until release. Pressed near the centre, the right pad is the middle mouse button and the left pad is Caps Lock. Further out, the right pad is Back, Forward and scroll up/down, and the left pad is the arrow keys. The outer buttons come at once; the middle click comes about 50 ms after the press, so a very short click there may send nothing.\n\nBase and Gyro (L2+R2 toggle) retain their activation rules. Stateful Cursor Gyro and Gamepad remain planned; until they exist, the other Start or Select plus stick-click gestures clear every layer above Base except Gyro.",
 		"creator": "76561198079670632",
 		"progenitor": "",
 		"url": "workshop://3660203920",
@@ -21994,14 +21994,26 @@
 				"inputs": {
 					"click": {
 						"activators": {
-							"Soft_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 73 0 0, , "
+							"Soft_Press": [
+								{
+									"bindings": {
+										"binding": "controller_action add_layer 73 0 0, , "
+									},
+									"settings": {
+										"haptic_intensity": "3"
+									}
 								},
-								"settings": {
-									"haptic_intensity": "3"
+								{
+									"bindings": {
+										"binding": "controller_action add_layer 73 0 0, , "
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"repeat_rate": "50",
+										"haptic_intensity": "0"
+									}
 								}
-							}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -22132,18 +22144,43 @@
 					},
 					"click": {
 						"activators": {
-							"Soft_Press": {
+							"Soft_Press": [
+								{
+									"bindings": {
+										"binding": "controller_action hold_layer 16 0 0, , "
+									},
+									"settings": {
+										"haptic_intensity": "0",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 16 0 0, , "
+										]
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"haptic_intensity": "0",
+										"interruptable": "0",
+										"edge_binding_invert": "1"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 16 0 0, , ",
-										"controller_action remove_layer 73 0 0, , "
+										"controller_action remove_layer 16 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"haptic_intensity": "0",
-									"interruptable": "0",
-									"edge_binding_invert": "1"
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -22169,7 +22206,10 @@
 							"Soft_Press": [
 								{
 									"bindings": {
-										"binding": "controller_action add_layer 75 0 0, , "
+										"binding": [
+											"controller_action remove_layer 73 0 0, , ",
+											"controller_action add_layer 75 0 0, , "
+										]
 									},
 									"settings": {
 										"hold_repeats": "1",
@@ -22182,32 +22222,34 @@
 								},
 								{
 									"bindings": {
-										"binding": "controller_action add_layer 16 0 0, , "
+										"binding": [
+											"controller_action remove_layer 73 0 0, , ",
+											"controller_action add_layer 16 0 0, , "
+										]
 									},
 									"settings": {
 										"hold_repeats": "1",
 										"repeat_rate": "50",
 										"haptic_intensity": "0",
-										"activation_threshold": "23000"
+										"activation_threshold": "23000",
+										"delay_start": "5",
+										"interruptable": "0"
 									}
 								}
 							]
 						},
 						"disabled_activators": {}
 					},
-					"click": {
+					"touch": {
 						"activators": {
-							"Soft_Press": {
+							"release": {
 								"bindings": {
 									"binding": [
 										"controller_action remove_layer 73 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"haptic_intensity": "0",
-									"interruptable": "0",
-									"edge_binding_invert": "1"
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -22215,7 +22257,8 @@
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"haptic_intensity_override": "0"
 				}
 			},
 			{
@@ -22228,24 +22271,49 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action SHOW_KEYBOARD, , "
+									"binding": "key_press CAPSLOCK, , "
 								},
 								"settings": {
 									"haptic_intensity": "3"
 								}
 							},
-							"Soft_Press": {
+							"Soft_Press": [
+								{
+									"bindings": {
+										"binding": "controller_action hold_layer 75 0 0, , "
+									},
+									"settings": {
+										"haptic_intensity": "0",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 75 0 0, , "
+										]
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"haptic_intensity": "0",
+										"interruptable": "0",
+										"edge_binding_invert": "1"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 75 0 0, , ",
-										"controller_action remove_layer 73 0 0, , "
+										"controller_action remove_layer 75 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"haptic_intensity": "0",
-									"interruptable": "0",
-									"edge_binding_invert": "1"
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -22267,8 +22335,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 16 0 0, , ",
-										"controller_action remove_layer 73 0 0, , "
+										"controller_action remove_layer 16 0 0, , "
 									]
 								},
 								"settings": {
@@ -22362,8 +22429,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 75 0 0, , ",
-										"controller_action remove_layer 73 0 0, , "
+										"controller_action remove_layer 75 0 0, , "
 									]
 								},
 								"settings": {
@@ -22410,8 +22476,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 16 0 0, , ",
-										"controller_action remove_layer 73 0 0, , "
+										"controller_action remove_layer 16 0 0, , "
 									]
 								},
 								"settings": {
@@ -22505,8 +22570,7 @@
 							"Full_Press": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 75 0 0, , ",
-										"controller_action remove_layer 73 0 0, , "
+										"controller_action remove_layer 75 0 0, , "
 									]
 								},
 								"settings": {
@@ -22550,14 +22614,26 @@
 				"inputs": {
 					"click": {
 						"activators": {
-							"Soft_Press": {
-								"bindings": {
-									"binding": "controller_action add_layer 74 0 0, , "
+							"Soft_Press": [
+								{
+									"bindings": {
+										"binding": "controller_action add_layer 74 0 0, , "
+									},
+									"settings": {
+										"haptic_intensity": "3"
+									}
 								},
-								"settings": {
-									"haptic_intensity": "3"
+								{
+									"bindings": {
+										"binding": "controller_action add_layer 74 0 0, , "
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"repeat_rate": "50",
+										"haptic_intensity": "0"
+									}
 								}
-							}
+							]
 						},
 						"disabled_activators": {}
 					},
@@ -22679,18 +22755,46 @@
 					},
 					"click": {
 						"activators": {
-							"Soft_Press": {
+							"Soft_Press": [
+								{
+									"bindings": {
+										"binding": "controller_action hold_layer 17 0 0, , "
+									},
+									"settings": {
+										"haptic_intensity": "0",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 17 0 0, , "
+										]
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"haptic_intensity": "0",
+										"interruptable": "0",
+										"edge_binding_invert": "1"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 17 0 0, , ",
-										"controller_action remove_layer 74 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 17 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"haptic_intensity": "0",
-									"interruptable": "0",
-									"edge_binding_invert": "1"
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -22716,7 +22820,10 @@
 							"Soft_Press": [
 								{
 									"bindings": {
-										"binding": "controller_action add_layer 76 0 0, , "
+										"binding": [
+											"controller_action remove_layer 74 0 0, , ",
+											"controller_action add_layer 76 0 0, , "
+										]
 									},
 									"settings": {
 										"hold_repeats": "1",
@@ -22729,32 +22836,37 @@
 								},
 								{
 									"bindings": {
-										"binding": "controller_action add_layer 17 0 0, , "
+										"binding": [
+											"controller_action remove_layer 74 0 0, , ",
+											"controller_action add_layer 17 0 0, , "
+										]
 									},
 									"settings": {
 										"hold_repeats": "1",
 										"repeat_rate": "50",
 										"haptic_intensity": "0",
-										"activation_threshold": "23000"
+										"activation_threshold": "23000",
+										"delay_start": "5",
+										"interruptable": "0"
 									}
 								}
 							]
 						},
 						"disabled_activators": {}
 					},
-					"click": {
+					"touch": {
 						"activators": {
-							"Soft_Press": {
+							"release": {
 								"bindings": {
 									"binding": [
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 18 0 0, , ",
 										"controller_action remove_layer 74 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"haptic_intensity": "0",
-									"interruptable": "0",
-									"edge_binding_invert": "1"
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -22762,7 +22874,8 @@
 					}
 				},
 				"settings": {
-					"layer": "1"
+					"layer": "1",
+					"haptic_intensity_override": "0"
 				}
 			},
 			{
@@ -22781,18 +22894,46 @@
 									"haptic_intensity": "3"
 								}
 							},
-							"Soft_Press": {
+							"Soft_Press": [
+								{
+									"bindings": {
+										"binding": "controller_action hold_layer 76 0 0, , "
+									},
+									"settings": {
+										"haptic_intensity": "0",
+										"interruptable": "0"
+									}
+								},
+								{
+									"bindings": {
+										"binding": [
+											"controller_action remove_layer 76 0 0, , "
+										]
+									},
+									"settings": {
+										"hold_repeats": "1",
+										"haptic_intensity": "0",
+										"interruptable": "0",
+										"edge_binding_invert": "1"
+									}
+								}
+							]
+						},
+						"disabled_activators": {}
+					},
+					"touch": {
+						"activators": {
+							"release": {
 								"bindings": {
 									"binding": [
-										"controller_action remove_layer 76 0 0, , ",
-										"controller_action remove_layer 74 0 0, , "
+										"controller_action remove_layer 48 0 0, , ",
+										"controller_action remove_layer 31 0 0, , ",
+										"controller_action remove_layer 18 0 0, , ",
+										"controller_action remove_layer 76 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"haptic_intensity": "0",
-									"interruptable": "0",
-									"edge_binding_invert": "1"
+									"haptic_intensity": "0"
 								}
 							}
 						},
@@ -22817,8 +22958,7 @@
 										"controller_action remove_layer 48 0 0, , ",
 										"controller_action remove_layer 31 0 0, , ",
 										"controller_action remove_layer 18 0 0, , ",
-										"controller_action remove_layer 17 0 0, , ",
-										"controller_action remove_layer 74 0 0, , "
+										"controller_action remove_layer 17 0 0, , "
 									]
 								},
 								"settings": {
@@ -22918,8 +23058,7 @@
 										"controller_action remove_layer 48 0 0, , ",
 										"controller_action remove_layer 31 0 0, , ",
 										"controller_action remove_layer 18 0 0, , ",
-										"controller_action remove_layer 76 0 0, , ",
-										"controller_action remove_layer 74 0 0, , "
+										"controller_action remove_layer 76 0 0, , "
 									]
 								},
 								"settings": {
@@ -22969,8 +23108,7 @@
 										"controller_action remove_layer 48 0 0, , ",
 										"controller_action remove_layer 31 0 0, , ",
 										"controller_action remove_layer 18 0 0, , ",
-										"controller_action remove_layer 17 0 0, , ",
-										"controller_action remove_layer 74 0 0, , "
+										"controller_action remove_layer 17 0 0, , "
 									]
 								},
 								"settings": {
@@ -23070,8 +23208,7 @@
 										"controller_action remove_layer 48 0 0, , ",
 										"controller_action remove_layer 31 0 0, , ",
 										"controller_action remove_layer 18 0 0, , ",
-										"controller_action remove_layer 76 0 0, , ",
-										"controller_action remove_layer 74 0 0, , "
+										"controller_action remove_layer 76 0 0, , "
 									]
 								},
 								"settings": {

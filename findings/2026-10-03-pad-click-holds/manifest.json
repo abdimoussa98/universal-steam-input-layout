@@ -1,0 +1,80 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "handoff_generator_sha256": "77867edff14154257fb357fa710485746d224a22b59df4d98fed6cf8d0b8e930",
+    "candidate_sha256": "b0a1950476aeedf55c414db7c5bce304efd3842ab833071835906da6e6562258",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R1!L1: Modifier 2",
+      "Steering | L1!R1: Modifier 2",
+      "Steering | R1: W Key",
+      "Steering | L1: S Key",
+      "Steering | LS: Entry Guard",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Steering | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover",
+      "Steering | LS: Fallback Hold",
+      "LTP: Click Entry Point",
+      "RTP: Click Entry Point",
+      "LTP: Middle Click",
+      "RTP: Middle Click"
+    ],
+    "new_layer_count": 22,
+    "total_layer_count": 77,
+    "held_layers": [
+      "LTP: Middle Click",
+      "LTP: Arrow Keys",
+      "RTP: Middle Click",
+      "RTP: Mouse Buttons"
+    ],
+    "resolved_references": 4051,
+    "device_status": "UNTESTED"
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "handoff_generator_sha256": "77867edff14154257fb357fa710485746d224a22b59df4d98fed6cf8d0b8e930",
+    "candidate_sha256": "6e715531bbda1f29ed96c4769962c79ced20455c57758bc643e1b66e5a603336",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R2!L2: Modifier 2",
+      "Steering | L2!R2: Modifier 2",
+      "Steering | R2: W Key",
+      "Steering | L2: S Key",
+      "Steering | LS: Entry Guard",
+      "Steering",
+      "Steering | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Steering | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover",
+      "Steering | LS: Fallback Hold",
+      "LTP: Click Entry Point",
+      "RTP: Click Entry Point",
+      "LTP: Middle Click",
+      "RTP: Middle Click"
+    ],
+    "new_layer_count": 22,
+    "total_layer_count": 77,
+    "held_layers": [
+      "LTP: Middle Click",
+      "LTP: Arrow Keys",
+      "RTP: Middle Click",
+      "RTP: Mouse Buttons"
+    ],
+    "resolved_references": 4051,
+    "device_status": "UNTESTED"
+  }
+}

@@ -1,0 +1,84 @@
+"""Scenarios for 90.16: more exits on the pad click layers, a 5 ms outer delay, and a repeating add on Base.
+
+The author played 90.14 and 90.15 on the Deck: pad click layers got stuck, and a click gave three
+or four bumps. The record is findings/2026-10-03-pad-click-exits/README.md. The simulator can't
+say why a layer stuck on the Deck; these check that each new exit clears the layers by itself.
+"""
+import unittest
+
+from tests.scenario import ScenarioCase, scenario
+
+RP = "right_trackpad"
+CLICK_LAYERS = ("RTP: Click Entry Point", "RTP: Middle Click", "RTP: Mouse Buttons")
+
+
+class PadClickExits(ScenarioCase):
+    @scenario("90.16 X1", rules=("R136",), rests=("A7",), either=("A9",))
+    def test_a_thumb_that_lifts_takes_the_click_layers_and_what_is_under_them(self):
+        for where in ("centre", "left"):
+            for pad in self.each():
+                pad.press_pad("RP", where).wait(100)
+                self.assertTrue(pad.has("RTP: Entry Point") and pad.top in ("RTP: Middle Click", "RTP: Mouse Buttons"))
+                pad.recentre("RP")
+                pad.sim.release((RP, "touch"))                                    # the touch Release, before the click's
+                self.assertTrue(pad.lacks("RTP: Entry Point", "RTP: Tap Cover", "RTP: Middle Click", "RTP: Mouse Buttons"))
+                self.assertEqual(pad.down(), [])
+                pad.sim.release((RP, "click"))
+                pad.wait(300)
+                self.assertEqual(pad.stack, pad.layers("Base"))                   # and no Double Tap window opened
+
+    @scenario("90.16 X2", rules=("R136",), rests=("A7",))
+    def test_a_thumb_that_lifts_in_circular_scroll_ends_the_scroll_too(self):
+        touch = (RP, "touch")
+        for pad in self.each():
+            pad.sim.press(touch).release(touch)
+            pad.wait(50)
+            pad.sim.press(touch).press((RP, "dpad_north")).release((RP, "dpad_north"))
+            pad.wait(200).hold("RP click").wait(100)
+            self.assertEqual(pad.names()[-2:], ("RTP: Circular Scroll", "RTP: Middle Click"))
+            pad.sim.release(touch)
+            self.assertTrue(pad.lacks("RTP: Circular Scroll", "RTP: Middle Click"))
+            pad.let_go("RP click").wait(300)
+            self.assertEqual(pad.stack, pad.layers("Base"))
+
+    @scenario("90.16 X3", rules=("R114",), rests=("A6", "A10"), either=("A9",))
+    def test_base_brings_the_entry_point_back_under_a_click_that_is_still_held(self):
+        for pad in self.each(start="steering"):
+            pad.hold("L1").wait(50).hold("R1").wait(50).press_pad("RP", "centre").wait(100)
+            self.assertEqual((pad.top, pad.down()), ("RTP: Middle Click", ["S", "mouse_button MIDDLE"]))
+            pad.let_go("R1").wait(5)                                              # the quick tap clears every layer
+            self.assertTrue(pad.lacks("Steering", "RTP: Middle Click"))
+            pad.wait(150)
+            self.assertTrue(pad.has("RTP: Middle Click"))                             # the pad is still pressed
+            self.assertIn("mouse_button MIDDLE", pad.down())
+            pad.let_go_pad("RP").wait(400)
+            self.assertTrue(pad.lacks(*CLICK_LAYERS))
+
+    @scenario("90.16 X4", rules=("R113",), rests=("A6", "A10"))
+    def test_the_outer_buttons_come_after_5_ms_and_the_middle_click_on_its_repeat(self):
+        for pad in self.each():
+            pad.press_pad("RP", "left").wait(4)
+            self.assertEqual((pad.top, pad.down()), ("RTP: Click Entry Point", []))
+            pad.wait(1)
+            self.assertEqual((pad.top, pad.down()), ("RTP: Mouse Buttons", ["mouse_button BACK"]))
+        for pad in self.each():
+            pad.press_pad("RP", "centre").wait(49)
+            self.assertEqual((pad.top, pad.down()), ("RTP: Click Entry Point", []))
+            pad.wait(1)
+            self.assertEqual((pad.top, pad.down()), ("RTP: Middle Click", ["mouse_button MIDDLE"]))
+
+    @scenario("90.16 X5")
+    def test_a_click_bumps_once_on_base_and_the_entry_point_adds_none(self):
+        """The simulator logs a haptic when an entry's commands run. The output's own bump, on the layer
+        that lands, is the second one on the Deck (tests/test_pad_click_exits.py checks its setting)."""
+        for where in ("centre", "left", "ring left"):
+            for pad in self.each():
+                pad.click_pad("RP", where, ms=600).wait(400)
+                self.assertEqual(pad.seen("haptic"), [("haptic", "3 Base right_trackpad/click")])
+        for pad in self.each():
+            pad.click_pad("LP", "up", ms=600).wait(400)
+            self.assertEqual(pad.seen("haptic"), [("haptic", "3 Base left_trackpad/click")])
+
+
+if __name__ == "__main__":
+    unittest.main()

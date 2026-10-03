@@ -22,14 +22,14 @@ because the author reports buggy behavior with Steam action sets.
 The Deck is used to settle an assumption, once, and again after a Steam update
 that could change it. Each has one procedure in its row of
 [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md).
-What rests on each one, [as of 90.15](findings/2026-10-03-menu-second-press-keys/unverified-assumptions.txt);
+What rests on each one, [as of 90.19](findings/2026-10-03-pad-click-holds/unverified-assumptions.txt);
 `python3 -m tests.scenario` prints the current list.
 
-The layout relies on these fifteen. If one is false, something is broken. The
-last three came with 90.14, and the pad clicks rest on them: check them first.
+The layout relies on these fourteen. If one is false, something is broken. The
+last two came with 90.14, and the pad clicks rest on them: check them first.
 
 - [ ] A8: A stick edge's Release fires in a layer that was added while the stick was already out (unverified; rests on it: 9 scenarios; R111, R137)
-- [ ] A10: A key or mouse output fires on an input that is already held when its layer is added (reported by the author; rests on it: 21 scenarios; R138)
+- [ ] A10: A key or mouse output fires on an input that is already held when its layer is added (reported by the author; rests on it: 26 scenarios; R138)
 - [ ] A11: A key or mouse output fires when a removal exposes it under an input that is held (unverified; rests on it: 7 scenarios)
 - [ ] A13: Any `remove_layer` can reset a running start delay; an `add_layer` doesn't (reported by the author; rests on it: R123, R126, R141)
 - [ ] A14: A delay starts again when a removal exposes it under a button that is held (unverified; rests on it: 2 scenarios)
@@ -40,20 +40,21 @@ last three came with 90.14, and the pad clicks rest on them: check them first.
 - [ ] A34: A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held (unverified)
 - [ ] A36: A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it (unverified)
 - [ ] A38: A stick group that doesn't state `edge_binding_invert` has a normal edge. It doesn't take the inverted setting of the group it replaces in a lower layer (unverified; rests on it: 2 scenarios; R111)
-- [ ] A39: An active Soft Press that is not interruptible suppresses an interruptible Soft Press on the same input (unverified; rests on it: 1 scenario). If it is false, a click where a pad's centre and outer ranges overlap gives one output, and which one isn't known
-- [ ] A40: A Soft Press on a pad's outer ring reads the thumb's distance from the centre, on the scale of the D-pad deadzone and the outer ring radius, and an inverted one fires reliably on a D-pad-mode pad (unverified; rests on it: 7 scenarios). If it is false, a pad click may send nothing
-- [ ] A41: A D-pad group that inverts its outer ring and states no radius uses a radius of about 24996 of 32767 (unverified; rests on it: 7 scenarios). Read the slider on 90.13's `RTP: Mouse Buttons`; a different number goes into `CENTRE_RADIUS` in the 90.14 builder
+- [ ] A40: A Soft Press on a pad's outer ring reads the thumb's distance from the centre, on the scale of the D-pad deadzone and the outer ring radius, and an inverted one fires reliably on a D-pad-mode pad (unverified; rests on it: 10 scenarios). If it is false, a pad click may send nothing
+- [ ] A41: A D-pad group that inverts its outer ring and states no radius uses a radius of about 24996 of 32767 (unverified; rests on it: 8 scenarios). Read the slider on 90.13's `RTP: Mouse Buttons`; a different number goes into `CENTRE_RADIUS` in the 90.14 builder
 
-The layout is built to work either way under these seven. Settling one takes a
+The layout is built to work either way under these nine. Settling one takes a
 branch out of the tests:
 
-- [ ] A9: Removing a layer fires the exposed layer command on an input that is held (held-input rule 3) (unverified; rests on it: 9 scenarios; R114)
+- [ ] A9: Removing a layer fires the exposed layer command on an input that is held (held-input rule 3) (unverified; rests on it: 19 scenarios; R114)
 - [ ] A18: A `remove_layer` call makes Steam re-evaluate held inputs (unverified)
 - [ ] A24: Adding or removing another layer while a layer with an Always On action is active caused crashes (reported by the author; rests on it: R140, R146, R147, R148, R149)
 - [ ] A31: A repeating activator keeps its schedule when another layer is removed (unverified; rests on it: R114)
-- [ ] A32: When two separate activators on one input are due at the same moment, their order is not fixed. Inside one activator the array still runs bottom to top (unverified; rests on it: 2 scenarios)
+- [ ] A32: When two separate activators on one input are due at the same moment, their order is not fixed. Inside one activator the array still runs bottom to top (unverified; rests on it: 1 scenario)
 - [ ] A35: Hold to Repeat with no stated rate repeats at one fixed default interval (unverified; rests on it: 1 scenario)
 - [ ] A37: When the layer that answers a held input changes and the new binding sends the same key, the key stays down with no release in between (unverified; rests on it: 2 scenarios)
+- [ ] A39: An active Soft Press that is not interruptible suppresses an interruptible Soft Press on the same input (unverified). Nothing rests on it since 90.16; 90.14 and 90.15 did
+- [ ] A42: A layer held with `hold_layer` is taken off when the activator that holds it is no longer active, also when `add_layer` put it on first and the layer holds itself (unverified; rests on it: 3 scenarios)
 
 ## Rules without a check
 
@@ -173,7 +174,7 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
   - Decided (author, 2026-10-02): a cleanup function removing the layer later is not a pass. The prototype uses the keeper rule: 0 findings outside the touchpad exception
 - [x] The menu second-press layers inherited the Fallback Hold add (found 2026-10-03 by the 90.14 review; present since 90.11; fixed in 90.15). In Steering, a double-tap-and-hold of Select or Start with the left stick pushed up or down put `Steering | LS: Fallback Hold` over `Menu Left: Escape` or `Menu Right: Tab`, which took the menu button's Release and left the layer on. Both layers now type W and S on stick up and down, as Steering's Entry Points and the menu windows do ([record](findings/2026-10-03-menu-second-press-keys/README.md); scenarios [M1 to M4](tests/test_scenarios_90_15.py))
   - [x] The hidden-exit check missed it, and now counts landings (2026-10-03): any adding binding that answers on a stack the chains visited puts its layer on top of that whole stack. It finds the four pairs on 90.13 and 90.14 and none on 90.15 ([record](findings/2026-10-03-menu-second-press-keys/README.md#why-the-hidden-exit-check-missed-it))
-- [ ] **Touchpad exception to the hidden-exit rule: address it** (author, 2026-10-02). For now every pair where either layer is a touchpad layer (`Tab`, `Escape`, `Backspace`, `Enter`, `RTP: Entry Point`, `RTP: Circular Scroll`, `RTP: Double Tap`) or the covered exit is a trackpad input is set aside, not a finding. Under the keeper rule (a pair counts only if it covers an exit on what keeps the lower layer alive; a later cleanup doesn't count), that is 68 pairs in 90.13 (71 in 90.15, where `RTP: Click Entry Point` covers the pad-touch Release of `RTP: Entry Point`, `RTP: Tap Cover` and `RTP: Circular Scroll`): 40 windows over pad layers and 28 `RTP: Double Tap` over button layers. 26 more (pad layers over the menu hold) are information: no stuck layer, but they block the right-stick click transition gesture ([list](findings/2026-10-02-hidden-exit/README.md#touchpad-exception))
+- [ ] **Touchpad exception to the hidden-exit rule: address it** (author, 2026-10-02). For now every pair where either layer is a touchpad layer (`Tab`, `Escape`, `Backspace`, `Enter`, `RTP: Entry Point`, `RTP: Circular Scroll`, `RTP: Double Tap`) or the covered exit is a trackpad input is set aside, not a finding. Under the keeper rule (a pair counts only if it covers an exit on what keeps the lower layer alive; a later cleanup doesn't count), that is 68 pairs in 90.13 (99 in 90.16: 31 more windows over the six pad click layers, whose touch Release is new there): 40 windows over pad layers and 28 `RTP: Double Tap` over button layers. 26 more (pad layers over the menu hold) are information: no stuck layer, but they block the right-stick click transition gesture ([list](findings/2026-10-02-hidden-exit/README.md#touchpad-exception))
   - Worst first: the 12 pairs where the lower layer has no cleanup function. `RTP: Double Tap` over `Menu Left: Escape`, `Menu Right: Tab`, the four Double Tap Covers, `L1&R1: Tap Cover` and `Menu Buttons: Tap Cover`; the L1, R1, Menu Left and Menu Right windows over `RTP: Tap Cover`. Example: double-tap and hold Select, tap the right pad, let go of Select inside the window: `Menu Left: Escape` stays on
   - Windows can't carry the exit without breaking their isolation, so the choice is a cleanup function on the lower layer or stopping the window from landing
   - Then the 25 mode blocks: the left-pad and RTP layers keep the right stick in mouse mode, which blocks the menu Entry Points' right-stick click Release and the right stick guard's edge Release
@@ -244,7 +245,17 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
   - The ranges are the sizes of 90.13: the outer one is the D-pad deadzone (23000), the centre one the default outer ring radius, taken as 24996 (A41)
   - The Click Entry Point has no haptics; the click's pulse on Base and the outputs' pulses are unchanged
   - [ ] Confirm the choices made while building ([list](findings/2026-10-03-pad-middle-click/README.md#choices-made-while-building)): the layer names, the 50 ms repeat, the eleven inherited inputs accepted under R139, and the Window audit's time limit
-  - [ ] On the Deck, in this order: A10 for a pad click, A39, A40, A41, then a click shorter than 50 ms, which sends nothing on the simulator ([P7](tests/test_scenarios_90_14.py))
+  - [ ] On the Deck, in this order: A10 for a pad click, A40, A41, then a very short click ([P7](tests/test_scenarios_90_14.py))
+- [x] More exits and quieter haptics after the first Deck run (90.16, author 2026-10-03): on 90.14 and 90.15 pad click layers got stuck and a click gave three or four bumps. Every pad click layer now also ends on the click's Release and when the thumb lifts; Base adds the Click Entry Point with a silent repeat as well; both Soft Presses are uninterruptible and the outer one has a 5 ms delay; the Click Entry Point's pad states its haptic override as off ([record](findings/2026-10-03-pad-click-exits/README.md))
+  - [x] Haptics: right on the Deck in 90.16 (author, 2026-10-03)
+- [x] Pad click layers moved by Soft Presses only (90.17, author 2026-10-03, after playing 90.16): the click's Release is gone from all six pad click layers, because it fires at the full-click threshold and everything else here is a Soft Press; the outer add repeats again, with its 5 ms delay; the left pad's centre is Caps Lock ([record](findings/2026-10-03-pad-click-soft-press-only/README.md))
+  - [ ] On the Deck: are layers still stuck? The author reports there are still issues without `hold_layer`; which ones isn't recorded yet. If they stay, the pad clicks go back to `hold_layer` (R101 would need its exception again). How 90.13 did it is in the [record](findings/2026-10-03-pad-click-soft-press-only/README.md#how-9013-did-it-with-hold_layer)
+- [x] The Click Entry Point hands over (90.18, author 2026-10-03): each of its two Soft Presses removes it and then adds the chosen layer, and its own Soft Press removal on the click is gone, so it binds no click. The chosen layers no longer name it ([record](findings/2026-10-03-pad-click-handoff/README.md))
+  - [ ] On the Deck: a click shorter than the hand-over (5 ms at the rim, 50 ms at the centre) leaves the Click Entry Point on until the hand-over fires or the thumb lifts. With no thumb on the pad, it only ends if an inverted Soft Press counts as true there (A40)
+- [x] The final pad click layers hold themselves (90.19, author 2026-10-03, after playing 90.18: it works, but the haptics repeat while a click is held): `LTP: Arrow Keys`, `RTP: Mouse Buttons` and the two Middle Click layers have the 90.13 self-hold on the click's Soft Press, with the inverted repeating removal as the backup; the Click Entry Point adds the layer first and then removes itself. R101 has its exception back, as a decision ([record](findings/2026-10-03-pad-click-holds/README.md))
+  - [ ] On the Deck: do the haptics still repeat while a click is held? The cause wasn't found. My suspect, Base's repeating add putting the Click Entry Point back every 50 ms, is unchanged in 90.19 (the author said not to change it)
+  - [ ] A42: does the self-hold take the layer off? On the simulator it never fires in an ordinary click, because the layer lands on a pad that is already pressed (A5); the backup removal does the work
+  - [ ] Where the two ranges overlap, the simulator sends the D-pad button, not the middle click: the centre Soft Press has no delay, and by A5 it waits for its 50 ms repeat while the outer one fires at 5 ms. Check which one the Deck sends there
 
 ## Sticks
 

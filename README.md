@@ -490,12 +490,21 @@ python3 convert_runtime_ids.py to-titles neptune/single-set-default_hold-gyro_la
 ### Steering in the Neptune layouts
 
 Both `neptune/*_hold-gyro_latest` JSON/VDF pairs are generated (75 layers
-since 90.14). The builder in `findings/2026-10-03-menu-second-press-keys/`
-extends the frozen 10-03 pad click builder, which extends the 10-02 fallback
-hold builder, the 10-01 stateful transitions builder, the 09-30 lean steering
-builder and the 09-29 baseline; `install_neptune.py` there runs the fix
-pipeline and writes `neptune/`. A hand edit in `neptune/` is lost on the next
-install. See the
+since 90.14). The builder in `findings/2026-10-03-pad-click-holds/` extends
+the frozen 10-03 pad click (hand-over, Soft Press only, exits, first build)
+and menu second-press builders, which extend the
+10-02 fallback hold builder, the 10-01 stateful transitions builder, the 09-30
+lean steering builder and the 09-29 baseline; `install_neptune.py` there runs
+the fix pipeline and writes `neptune/`. A hand edit in `neptune/` is lost on
+the next install. See the
+[90.19 build record](findings/2026-10-03-pad-click-holds/README.md) (the final
+pad click layers hold themselves), the
+[90.18 build record](findings/2026-10-03-pad-click-handoff/README.md) (the
+Click Entry Point hands over), the
+[90.17 build record](findings/2026-10-03-pad-click-soft-press-only/README.md)
+(pad clicks on Soft Presses only), the
+[90.16 build record](findings/2026-10-03-pad-click-exits/README.md) (pad
+click exits), the
 [90.15 build record](findings/2026-10-03-menu-second-press-keys/README.md)
 (menu second-press keys), the
 [90.14 build record](findings/2026-10-03-pad-middle-click/README.md) (pad

@@ -263,6 +263,16 @@
       "todo": null
     },
     {
+      "rule": "R101",
+      "scope": {
+        "note": "Four hold_layer commands in each layout: LTP: Arrow Keys, RTP: Mouse Buttons, LTP: Middle Click and RTP: Middle Click each hold themselves on a Soft Press of the pad click. add_layer puts them on; the hold is there to take them off."
+      },
+      "status": "allow",
+      "why": "The author's exception for the trackpad click layers: the hold tracks the removal at the Soft Press threshold, and the inverted repeating Soft Press removal stays behind it as the backup, because holds are unreliable.",
+      "decided": "Author, 2026-10-03",
+      "todo": null
+    },
+    {
       "rule": "R119",
       "scope": {
         "note": "The Steering double tap leaves parts of the recipe out."
@@ -286,7 +296,7 @@
       "rule": "R136",
       "scope": {
         "kind": "touchpad",
-        "note": "A pair is set aside when either layer is a touchpad layer (every binding that adds it is on a trackpad) or the covered exit is a trackpad input. 68 pairs on 90.13, 71 on 90.14 and 90.15: RTP: Click Entry Point covers the pad-touch Release of RTP: Entry Point, RTP: Tap Cover and RTP: Circular Scroll."
+        "note": "A pair is set aside when either layer is a touchpad layer (every binding that adds it is on a trackpad) or the covered exit is a trackpad input. 68 pairs on 90.13, 71 on 90.14 and 90.15, 99 on 90.16: the pad click layers gained a touch Release, which the Double Tap windows cover as they cover the other pad layers' (31 pairs), and they now carry the touch Release of the three right-pad layers under them (3 fewer)."
       },
       "status": "todo",
       "why": "The windows clear both pads' touch, so a thumb leaving a pad inside a window misses a pad layer's Release; RTP: Double Tap binds the buttons whose Releases other layers need. The fixes are proposed, not decided.",

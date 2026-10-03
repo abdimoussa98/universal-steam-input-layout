@@ -11,8 +11,8 @@
 
 It answers the three questions a Deck check asks: which layer gets an input,
 what is on the stack, and which keys are down. It does not know how far a stick
-or trigger is (a control is held or not), and it does not simulate `hold_layer`,
-mode shifts or gyro motion. The one exception to "held or not" is
+or trigger is (a control is held or not), and it does not simulate mode shifts
+or gyro motion. The one exception to "held or not" is
 `press_between`: an input that sits inside an inverted Soft Press's range and
 past a normal one's threshold at once, such as a thumb on the ring where a
 pad's centre and outer ranges overlap.
@@ -44,6 +44,8 @@ stated; the ones the layout must work either way under are switches.
     A35      `default_repeat_ms`: Hold to Repeat with no stated rate uses this interval
     A37      a key handed from one binding to another at the same moment stays down (`typed`)
     A38      a stick edge is inverted only where its own group says so
+    A42      `hold_releases`: `hold_layer` puts a layer on, and takes it off when the activator
+             that holds it ends, whoever added the layer first (False: it only puts it on)
     A39      `soft_press_interrupts`: an active uninterruptible Soft Press suppresses an interruptible
              Soft Press on the same input (`press_between` puts an input in both of two ranges)
     A21      `desktop(data)`: the layout with every entry past the third dropped
@@ -62,8 +64,8 @@ from .model import TARGET, Layout, actions, entries
 ALWAYS_ON = "always_on_action"
 LEVEL = re.compile(r"(key_press|mouse_button) ([^,\s]+)")
 MOMENTARY = re.compile(r"(mouse_wheel) ([^,\s]+)")
-COMMAND = re.compile(r"controller_action (add_layer|remove_layer) (\{\{.+?\}\}|\d+)(?: (\d+))?")
-UNSUPPORTED = re.compile(r"controller_action hold_layer|mode_shift |CHANGE_PRESET")
+COMMAND = re.compile(r"controller_action (add_layer|remove_layer|hold_layer) (\{\{.+?\}\}|\d+)(?: (\d+))?")
+UNSUPPORTED = re.compile(r"mode_shift |CHANGE_PRESET")
 
 def desktop(data, keep=3):
     """A copy of the layout as the desktop configuration runs it: every entry past the third dropped (A21)."""
@@ -109,19 +111,20 @@ class Act:
     def __init__(self, entry, due, first, order):
         self.entry, self.due, self.first, self.order = entry, due, first, order
         self.down = []          # outputs this activator holds down
+        self.holds = []         # layers this activator holds (`hold_layer`): they go when it ends
         self.fired = False      # its layer commands have run at least once
         self.allow_ops = True   # False for the first firing of a command that landed on a held input
 
 
 class Simulator:
     def __init__(self, layout, start=None, *, exposed_fires=True, any_removal_resets=True, reverse_ties=False,
-                 default_repeat_ms=100, soft_press_interrupts=True):
+                 default_repeat_ms=100, soft_press_interrupts=True, hold_releases=True):
         self.layout = layout if isinstance(layout, Layout) else Layout(layout)
         self.base = self.layout.base
         self.stack = tuple(start or (self.base,))
         self.exposed_fires, self.any_removal_resets = exposed_fires, any_removal_resets
         self.reverse_ties, self.default_repeat_ms = reverse_ties, default_repeat_ms
-        self.soft_press_interrupts = soft_press_interrupts
+        self.soft_press_interrupts, self.hold_releases = soft_press_interrupts, hold_releases
         self.now, self.held, self.log = 0, set(), []
         self.between = set()            # held controls that are also inside an inverted range (`press_between`)
         self.acts = {}                  # (control, phase, kind, index) -> Act
@@ -293,10 +296,21 @@ class Simulator:
 
     def _end(self, control, phase, handover=False):
         """End the activators of one input. `handover`: the input is still held and another layer takes over."""
+        released = []
         for key in [k for k in self.acts if k[0] == control and k[1] == phase]:
-            for output in self.acts.pop(key).down:
+            act = self.acts.pop(key)
+            for output in act.down:
                 self._note("handover" if handover else "up", output)
+            if not handover:                            # covered, not let go: the hold is left alone
+                released += act.holds
         self.bound.pop((control, phase), None)
+        if self.hold_releases:                          # A42: a hold lets go with the activator that made it
+            gone = [title for title in dict.fromkeys(released) if title in self.stack and title != self.base]
+            for title in gone:
+                self.stack = tuple(t for t in self.stack if t != title)
+                self._note("remove", title)
+            if gone:
+                self._reset(gone)
 
     def _establish(self, control, phase, mode):
         """The binding that answers `control` starts answering it: decide which of its activators are live."""
@@ -381,9 +395,12 @@ class Simulator:
                 if title in self.stack and title != self.base:
                     self.stack = tuple(t for t in self.stack if t != title)
                     self._note("remove", title)
-            elif title not in self.stack:                                                          # A3
-                self.stack += (title,)
-                self._note("add", title)
+            else:
+                if title not in self.stack:                                                        # A3
+                    self.stack += (title,)
+                    self._note("add", title)
+                if op == "hold_layer" and act is not None and title not in act.holds:
+                    act.holds.append(title)
             if title in entry.beeps:
                 self._note("beep", title)
         if removed:

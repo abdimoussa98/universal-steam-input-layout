@@ -51,7 +51,7 @@ class ScenarioRegistryTests(unittest.TestCase):
         listed = {rule.id for rule in self.rules.values() if any(c.kind == "scenario" for c in rule.checked_by)}
         self.assertEqual(sorted(named - listed), [], 'add "Scenario tests (part)" to these rules\' "Checked by"')
         self.assertEqual(sorted(listed - named), [], "no scenario names these rules")
-        self.assertEqual([meta.check for meta in scenario.for_rule("R136")], ["90.11 F8", "90.13 N2", "90.15 M1"])
+        self.assertEqual([meta.check for meta in scenario.for_rule("R136")], ["90.11 F8", "90.13 N2", "90.15 M1", "90.16 X1", "90.16 X2", "90.18 H3", "90.19 K3"])
 
     def test_the_rules_and_assumptions_a_scenario_names_exist(self):
         for meta in self.scenarios:

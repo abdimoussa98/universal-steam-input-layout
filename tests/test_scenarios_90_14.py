@@ -6,9 +6,11 @@ layer, the outer range adds the D-pad layer (`LTP: Arrow Keys`, `RTP: Mouse Butt
 record is findings/2026-10-03-pad-middle-click/README.md.
 
 The simulator knows a pad's edge as held or not: held is the outer range, not held is the
-centre. `press_pad(pad, "ring left")` is the ring where the two ranges overlap. Show Keyboard,
-the left pad's centre output, is not a key the simulator shows, so the left pad's centre is
-checked by its layer.
+centre. `press_pad(pad, "ring left")` is the ring where the two ranges overlap. Since 90.18 the
+Click Entry Point removes itself when it adds the chosen layer, so the two are never on the stack
+together. P5 and P7 were
+rewritten for 90.16, and P6 (the ring without the interruption) went with A39. The left pad's
+centre was Show Keyboard until 90.16, which the simulator doesn't show; it is Caps Lock since 90.17.
 """
 import unittest
 
@@ -55,13 +57,13 @@ class PadClick(ScenarioCase):
     def test_the_left_pad_has_the_same_two_layers(self):
         for pad in self.each():
             pad.press_pad("LP", "centre").wait(50)
-            self.assertEqual(pad.names()[1:], ("LTP: Click Entry Point", "LTP: Middle Click"))
+            self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Middle Click",), ["CAPSLOCK"]))
             pad.let_go_pad("LP").wait(400)
-            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))          # no arrow key, no swipe key
+            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["CAPSLOCK"]))   # Caps Lock since 90.17
         for where, key in (("up", "UP_ARROW"), ("down", "DOWN_ARROW"), ("left", "LEFT_ARROW"), ("right", "RIGHT_ARROW")):
             for pad in self.each():
                 pad.press_pad("LP", where).wait(50)
-                self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Click Entry Point", "LTP: Arrow Keys"), [key]))
+                self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Arrow Keys",), [key]))
                 pad.let_go_pad("LP").wait(400)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), [key]))
 
@@ -80,41 +82,34 @@ class PadClick(ScenarioCase):
             pad.let_go_pad("RP").wait(400)
             self.assertEqual(pad.typed(), ["mouse_button BACK", "mouse_button FORWARD"])
 
-    @scenario("90.14 P5", rests=RANGES + ("A39",))
-    def test_the_middle_click_wins_where_the_two_ranges_overlap(self):
+    @scenario("90.14 P5", rests=RANGES + ("A5",))
+    def test_the_overlap_of_the_two_ranges_sends_one_output(self):
+        """Changed in 90.16. Until 90.15 the centre Soft Press was meant to interrupt the outer one (A39), and the
+        middle click won the ring. Now both are uninterruptible and the outer one has a 5 ms delay. The centre one
+        has no delay, but its condition is already true when the layer lands, so it waits for its repeat (A5):
+        the D-pad layer lands first, covers the edge, and the middle click never comes. If Steam fires the centre
+        one at once, the middle click wins instead. Either way it is one output."""
         for pad in self.each():
             pad.press_pad("RP", "ring left").wait(300)
-            self.assertEqual((pad.top, pad.down()), ("RTP: Middle Click", ["mouse_button MIDDLE"]))
-            self.assertTrue(pad.lacks("RTP: Mouse Buttons"))
+            self.assertEqual((pad.top, pad.down()), ("RTP: Mouse Buttons", ["mouse_button BACK"]))
+            self.assertTrue(pad.lacks("RTP: Middle Click"))
             pad.let_go_pad("RP").wait(400)
-            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["mouse_button MIDDLE"]))
+            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["mouse_button BACK"]))
         for pad in self.each():
             pad.press_pad("LP", "ring up").wait(300)
-            self.assertEqual((pad.top, pad.down()), ("LTP: Middle Click", []))            # no arrow key
+            self.assertEqual((pad.top, pad.down()), ("LTP: Arrow Keys", ["UP_ARROW"]))
             pad.let_go_pad("LP").wait(400)
-            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
-
-    @scenario("90.14 P6", rests=RANGES, either=("A32",))
-    def test_without_the_interruption_the_overlap_still_sends_one_output(self):
-        """If A39 is false, both Soft Presses fire in the ring. The first layer to land covers the edge, so
-        the other add never runs: one output, not two as in 90.13. Which one isn't known; the simulator
-        always lands the D-pad layer."""
-        for pad in self.each(soft_press_interrupts=False):
-            pad.press_pad("RP", "ring left").wait(300)
-            landed = [title for title in ("RTP: Middle Click", "RTP: Mouse Buttons") if pad.has(title)]
-            self.assertEqual((len(landed), len(pad.down())), (1, 1))
-            pad.let_go_pad("RP").wait(400)
-            self.assertEqual((pad.stack, len(pad.typed())), (pad.layers("Base"), 1))
+            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["UP_ARROW"]))
 
     @scenario("90.14 P7", rules=("R113",), rests=("A6",))
-    def test_a_click_shorter_than_the_repeat_sends_nothing(self):
-        """The cost of deciding on a repeat: the layer that carries the output lands 50 ms after the press."""
-        for where in ("centre", "left"):
+    def test_a_very_short_click_sends_nothing(self):
+        """Changed in 90.16: the outer buttons come after a 5 ms delay, the middle click on a 50 ms repeat."""
+        for where, too_short, enough in (("centre", 40, 60), ("left", 3, 10)):
             for pad in self.each():
-                pad.click_pad("RP", where, ms=40).wait(400)
+                pad.click_pad("RP", where, ms=too_short).wait(400)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
             for pad in self.each():
-                pad.click_pad("RP", where, ms=60).wait(400)
+                pad.click_pad("RP", where, ms=enough).wait(400)
                 self.assertEqual(len(pad.typed()), 1)
 
     @scenario("90.14 P8", rules=("R113",), rests=("A10",))
@@ -140,7 +135,7 @@ class PadClick(ScenarioCase):
                 pad.press_pad("RP", "left").wait(100).touch(stick).wait(300)
                 self.assertEqual((pad.down(), pad.has("RTP: Mouse Buttons")), (["mouse_button BACK"], True))
                 pad.lift(stick).wait(300)
-                self.assertTrue(pad.has("RTP: Click Entry Point", "RTP: Mouse Buttons"))  # the thumb on the pad guards it
+                self.assertTrue(pad.has("RTP: Mouse Buttons"))                            # the thumb on the pad guards it
                 pad.let_go_pad("RP").wait(400)
                 self.assertEqual(pad.stack, pad.layers("Base"))
 
@@ -163,8 +158,8 @@ class PadClick(ScenarioCase):
             pad.sim.press(touch).press(("right_trackpad", "dpad_north")).release(("right_trackpad", "dpad_north"))
             self.assertEqual(pad.top, "RTP: Circular Scroll")
             pad.wait(200).mark().hold("RP click").wait(100)
-            self.assertEqual((pad.names()[-3:], pad.down()),
-                             (("RTP: Circular Scroll", "RTP: Click Entry Point", "RTP: Middle Click"), ["mouse_button MIDDLE"]))
+            self.assertEqual((pad.names()[-2:], pad.down()),
+                             (("RTP: Circular Scroll", "RTP: Middle Click"), ["mouse_button MIDDLE"]))
             pad.let_go("RP click").wait(100)
             self.assertEqual(pad.top, "RTP: Circular Scroll")                             # back to scrolling
             pad.sim.release(touch)
@@ -176,7 +171,7 @@ class PadClick(ScenarioCase):
         for pad in self.each(start="steering"):
             pad.press_pad("RP", "centre").wait(100)
             self.assertEqual((pad.names()[1:], pad.down()),
-                             (("Steering", "RTP: Click Entry Point", "RTP: Middle Click"), ["mouse_button MIDDLE"]))
+                             (("Steering", "RTP: Middle Click"), ["mouse_button MIDDLE"]))
             pad.let_go_pad("RP").wait(300)
             self.assertEqual(pad.names(), ("Base", "Steering"))
         for pad in self.each(start="steering"):

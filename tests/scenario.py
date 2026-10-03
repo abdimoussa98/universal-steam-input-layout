@@ -15,7 +15,7 @@ say which layers are on the stack and which keys went down.
 and the Steam assumptions its outcome rests on. The label is the release and a number
 (`90.14 S1`); a scenario that replaced a check of the retired Deck checklist carries that
 check's section and ID. `self.each()` runs the body on both layouts, and once per way of
-every assumption named in `either` (the ones the layout must work either way under: A9, A32).
+every assumption named in `either` (the ones the layout must work either way under: A9, A32, A42).
 
     python3 -m tests.scenario           # the assumptions that aren't verified, and what rests on each
     python3 -m tests.scenario R133      # the scenarios that check a rule
@@ -62,7 +62,8 @@ ROLES = {"default": {"L1": "LB", "R1": "RB", "LF": "LT", "RF": "RT"},
          "alternative": {"L1": "LT", "R1": "RT", "LF": "LB", "RF": "RB"}}
 SOURCES = {"LS": "joystick", "RS": "right_joystick", "LP": "left_trackpad", "RP": "right_trackpad"}
 DIRECTIONS = {"up": "dpad_north", "down": "dpad_south", "left": "dpad_west", "right": "dpad_east"}
-SWITCHES = {"A9": ("exposed_fires", (True, False)), "A32": ("reverse_ties", (False, True))}   # the either-way assumptions
+SWITCHES = {"A9": ("exposed_fires", (True, False)), "A32": ("reverse_ties", (False, True)),
+            "A42": ("hold_releases", (True, False))}                                             # the either-way assumptions
 RENAME = {"L1": "L2", "R1": "R2"}
 BACK = {new: old for old, new in RENAME.items()}
 

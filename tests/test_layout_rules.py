@@ -11,7 +11,7 @@ from steam_layout import changes, exceptions
 from steam_layout.model import Layout, bindings, entries, map_title
 from tests.scenario import RENAME, VARIANTS, layout_data
 
-LEGACY_HOLDS = {"LTP: Arrow Keys", "RTP: Mouse Buttons"}      # R101's entry in the exceptions register
+LEGACY_HOLDS = {"LTP: Arrow Keys", "RTP: Mouse Buttons", "LTP: Middle Click", "RTP: Middle Click"}   # R101's entry in the register
 
 
 class LayoutRules(unittest.TestCase):

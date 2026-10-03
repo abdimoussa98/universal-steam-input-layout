@@ -40,11 +40,13 @@ is an entry in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md)
   sends output (a walk bind, the WASD modifier) is fine, and mouse-mode sticks
   aren't affected.
 
-**Known implementation conflicts:** none since 90.14. Until 90.13 both Neptune
+**Known implementation conflicts:** one, accepted. Until 90.13 both Neptune
 layouts contained five `hold_layer` commands, on the trackpad `click` inputs:
 three added `RTP: Mouse Buttons` and two added `LTP: Arrow Keys`. 90.14
-replaced them with `add_layer` and explicit removals (R101;
-[record](../findings/2026-10-03-pad-middle-click/README.md)). Neither
+replaced them with `add_layer` and explicit removals
+([record](../findings/2026-10-03-pad-middle-click/README.md)). Since 90.19 the
+four final pad click layers hold themselves again, as the author's exception
+to R101 ([record](../findings/2026-10-03-pad-click-holds/README.md)). Neither
 current variant contains `CHANGE_PRESET`. Archived snapshots and generic
 format/parser documentation may retain historical APIs.
 

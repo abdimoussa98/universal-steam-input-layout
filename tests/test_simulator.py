@@ -331,8 +331,34 @@ class EdgeTests(unittest.TestCase):
         self.assertEqual(s.press_between(EDGE).down(), ["IN", "OUT"])
         self.assertEqual(s.release(EDGE).down(), ["IN"])
 
-    def test_hold_layer_and_mode_shifts_are_refused(self):
-        s = sim({"Base": {"switch": (SW, {"button_a": press("controller_action hold_layer {{Base::P}} 0 0, , ")})}, "P": {}})
+    HOLD_P = "controller_action hold_layer {{Base::P}} 0 0, , "
+
+    def test_a_hold_puts_the_layer_on_and_takes_it_off_with_the_press(self):      # A42
+        s = sim({"Base": {"switch": (SW, {"button_a": press(self.HOLD_P)})}, "P": {}})
+        self.assertEqual(s.press(A).stack, ("Base", "P"))
+        self.assertEqual(s.release(A).stack, ("Base",))
+
+    def test_a_hold_only_puts_the_layer_on_when_the_switch_is_off(self):          # A42 false
+        s = sim({"Base": {"switch": (SW, {"button_a": press(self.HOLD_P)})}, "P": {}}, hold_releases=False)
+        self.assertEqual(s.press(A).release(A).stack, ("Base", "P"))
+
+    def test_a_layer_that_holds_itself_on_a_held_input_never_gets_its_hold(self):  # A5: the hold is a layer command
+        own = {"switch": (SW, {"button_a": press(self.HOLD_P)})}
+        s = sim({"Base": {"switch": (SW, {"button_a": press(add("P"))})}, "P": own})
+        s.press(A)                                    # P lands on A, which is already down: its hold doesn't fire
+        self.assertEqual(s.release(A).stack, ("Base", "P"))
+        self.assertEqual(s.press(A).release(A).stack, ("Base",))    # a fresh press in P holds it, and the release ends it
+
+    def test_a_hold_that_is_covered_is_left_alone(self):
+        s = sim({"Base": {"switch": (SW, {"button_a": press(self.HOLD_P)})},
+                 "P": {"switch": (SW, {"button_b": press(add("C"))})},
+                 "C": {"switch": (SW, {"button_a": press(EMPTY)})}})
+        s.press(A).press(B)                           # C takes A's binding while A is down
+        self.assertEqual(s.stack, ("Base", "P", "C"))
+        self.assertEqual(s.release(A).stack, ("Base", "P", "C"))    # the release went to C: nothing lets go of P
+
+    def test_mode_shifts_are_refused(self):
+        s = sim({"Base": {"switch": (SW, {"button_a": press("controller_action mode_shift joystick 7, , ")})}})
         with self.assertRaises(NotImplementedError):
             s.press(A)
 

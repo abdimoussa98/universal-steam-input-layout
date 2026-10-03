@@ -1,0 +1,82 @@
+Changes from single-set-alternative_hold-gyro_90.15.json to single-set-alternative_hold-gyro_latest.json
+Layers: 75 -> 75 (added: none; removed: none)
+
+== Base
+  left_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=3): add_layer LTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=3): add_layer LTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer LTP: Click Entry Point
+  right_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=3): add_layer RTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=3): add_layer RTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer RTP: Click Entry Point
+
+== LTP: Arrow Keys
+  left_trackpad/click: binding
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Click Entry Point ; remove_layer LTP: Arrow Keys
+    after:  Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Click Entry Point ; remove_layer LTP: Arrow Keys
+    after:  release(haptic_intensity=0): remove_layer LTP: Click Entry Point ; remove_layer LTP: Arrow Keys
+  left_trackpad/touch: input added
+    after:  release(haptic_intensity=0): remove_layer LTP: Click Entry Point ; remove_layer LTP: Arrow Keys
+
+== RTP: Mouse Buttons
+  right_trackpad/click: binding
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons
+    after:  Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons
+    after:  release(haptic_intensity=0): remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons
+  right_trackpad/touch: input added
+    after:  release(haptic_intensity=0): remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+
+== LTP: Click Entry Point
+  left_trackpad: settings
+    before: {"haptic_intensity_override": null}
+    after:  {"haptic_intensity_override": "0"}
+  left_trackpad/edge: binding
+    before: Soft_Press(activation_threshold=24996,edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer LTP: Middle Click
+    before: Soft_Press(activation_threshold=23000,haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer LTP: Arrow Keys
+    after:  Soft_Press(activation_threshold=24996,edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer LTP: Middle Click
+    after:  Soft_Press(activation_threshold=23000,delay_start=5,haptic_intensity=0,interruptable=0): add_layer LTP: Arrow Keys
+  left_trackpad/click: binding
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Click Entry Point
+    after:  Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Click Entry Point
+    after:  release(haptic_intensity=0): remove_layer LTP: Click Entry Point
+  left_trackpad/touch: input added
+    after:  release(haptic_intensity=0): remove_layer LTP: Click Entry Point
+
+== RTP: Click Entry Point
+  right_trackpad: settings
+    before: {"haptic_intensity_override": null}
+    after:  {"haptic_intensity_override": "0"}
+  right_trackpad/edge: binding
+    before: Soft_Press(activation_threshold=24996,edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer RTP: Middle Click
+    before: Soft_Press(activation_threshold=23000,haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer RTP: Mouse Buttons
+    after:  Soft_Press(activation_threshold=24996,edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer RTP: Middle Click
+    after:  Soft_Press(activation_threshold=23000,delay_start=5,haptic_intensity=0,interruptable=0): add_layer RTP: Mouse Buttons
+  right_trackpad/click: binding
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Click Entry Point
+    after:  Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Click Entry Point
+    after:  release(haptic_intensity=0): remove_layer RTP: Click Entry Point
+  right_trackpad/touch: input added
+    after:  release(haptic_intensity=0): remove_layer RTP: Click Entry Point ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+
+== LTP: Middle Click
+  left_trackpad/click: binding
+    before: Full_Press(haptic_intensity=3): SHOW_KEYBOARD
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Click Entry Point ; remove_layer LTP: Middle Click
+    after:  Full_Press(haptic_intensity=3): SHOW_KEYBOARD
+    after:  Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Click Entry Point ; remove_layer LTP: Middle Click
+    after:  release(haptic_intensity=0): remove_layer LTP: Click Entry Point ; remove_layer LTP: Middle Click
+  left_trackpad/touch: input added
+    after:  release(haptic_intensity=0): remove_layer LTP: Click Entry Point ; remove_layer LTP: Middle Click
+
+== RTP: Middle Click
+  right_trackpad/click: binding
+    before: Full_Press(haptic_intensity=3): mouse_button MIDDLE
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Click Entry Point ; remove_layer RTP: Middle Click
+    after:  Full_Press(haptic_intensity=3): mouse_button MIDDLE
+    after:  Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Click Entry Point ; remove_layer RTP: Middle Click
+    after:  release(haptic_intensity=0): remove_layer RTP: Click Entry Point ; remove_layer RTP: Middle Click
+  right_trackpad/touch: input added
+    after:  release(haptic_intensity=0): remove_layer RTP: Click Entry Point ; remove_layer RTP: Middle Click ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+
+7 layers changed, 18 changes

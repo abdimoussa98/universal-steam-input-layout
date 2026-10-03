@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "571e3f836b9a7355b593e279725f4ace6d2d48f51c9aac90577d51237e5f6fd1",
+      "version_snapshot": "versions/neptune/90.18/single-set-default_hold-gyro_90.18.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "9b986b7cd9502fe65cc6e31edd7716af5771be6483ed6c417eb14b6ee0ef5156",
+      "version_snapshot": "versions/neptune/90.18/single-set-default_hold-gyro_90.18.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "93da1813eae0af082bcff8c10fcbe7d3fa729d32bf197bf84243b6388b22a7d4",
+      "version_snapshot": "versions/neptune/90.18/single-set-alternative_hold-gyro_90.18.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "d5279b31dba598c57d3b6577364772f5f9d12fd3d31785d9b778e4bb792d0db7",
+      "version_snapshot": "versions/neptune/90.18/single-set-alternative_hold-gyro_90.18.vdf"
+    }
+  },
+  "release": "90.18",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-03-pad-click-handoff/default-pad-click-handoff.json",
+      "sha256": "19f9b53dc54157699d8c2bd2be715f1086f4e2e35fceaad0f011886cd9c96faa"
+    },
+    "alternative": {
+      "path": "findings/2026-10-03-pad-click-handoff/alternative-pad-click-handoff.json",
+      "sha256": "fa3b388ffacbf2208981d26ba5d90b2ee5ff79406937066964724b745a507294"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}
