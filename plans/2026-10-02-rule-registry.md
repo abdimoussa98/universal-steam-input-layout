@@ -10,7 +10,8 @@ folded in (see [Decisions](#decisions)).
 | 1. Inventory | Done: [findings/2026-10-02-rule-inventory](../findings/2026-10-02-rule-inventory/README.md) |
 | 2. The registry | Done: 63 rules, R101 to R163, in the [Layer Definition of Done](../resources/Layer%20Definition%20of%20Done.md#rule-tables); `steam_layout/rules.py` reads them and `tests/test_rule_registry.py` checks them. 18 rules are not checked yet and 13 are checked only in part. The reference documents and the skills point at the IDs. Sentences that restate a rule in the structure reference are still there, under the pointer; cutting them belongs with the stale-text pass (phase 9) |
 | 3. Code tied to the IDs | Done: the four audits, the build audit and the seven fixes each declare `ENFORCES` and print the rule ID next to a finding. A test keeps those declarations and the registry's "Checked by" in step, both ways. `python3 -m steam_layout.rules` lists the rules that still need a check. No finding or exit code changed |
-| 4 and 5 | Not started |
+| 4. One exceptions register | Done: `exceptions` in `steam_layout/flow_config.json`, read through `steam_layout/exceptions.py`. Seven entries: the one decision that existed, the touchpad exception (the prototype now reads it from there), and five that were only written in prose. The audits' results are unchanged. A test fails on an entry with no reason, and on a rule whose Exceptions column and the register disagree |
+| 5 | Not started |
 | Parts B and C | Not started; each waits for the author's review of the part before it |
 
 **Baseline:** commits `601b61b` (archive) and `1fa38ac` (90.11 to 90.13, the

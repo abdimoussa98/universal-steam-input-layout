@@ -11,13 +11,14 @@ have Gyro Off Ramp Up underneath is replaced with Base's mouse button.
 
 This applies audit_inheritance.py's `blocks_needed` to the Always On windows,
 using the backward-chain stacks (steam_layout/chains.py: no depth cap, no
-config) and the decisions in traced_stacks.json. Idempotent: a second run finds
+config) and the R140 exceptions in the register (exceptions.py). Idempotent: a second run finds
 nothing to block. Works with numeric IDs or title tokens.
 """
 import copy
 import json
 from pathlib import Path
 
+from .. import exceptions
 from ..inheritance import audit
 from ..model import Layout, always_on_layers
 
@@ -27,7 +28,8 @@ EMPTY = "controller_action empty_binding, , "
 
 
 def fix(data, config=None):
-    config = config if config is not None else json.loads((ROOT / "traced_stacks.json").read_text())
+    if config is None:
+        config = exceptions.window(json.loads((ROOT / "traced_stacks.json").read_text()), exceptions.load())
     report = audit(data, config)
     layout = Layout(data)
     windows = set(always_on_layers(layout))

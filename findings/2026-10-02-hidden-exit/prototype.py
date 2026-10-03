@@ -95,7 +95,15 @@ def touchpad_layers(c):
     return {t for t in c.layers if c._adding.get(t) and all(a.source in PADS for a in c._adding[t])}
 
 
+def touchpad_exception():
+    """True while the exceptions register sets the touchpad pairs aside (rule R136)."""
+    from steam_layout import exceptions
+    return any(e['scope'].get('kind') == 'touchpad' for e in exceptions.of(exceptions.load(), 'R136'))
+
+
 def is_touchpad(pads, lower, upper, info):
+    if not touchpad_exception():
+        return False
     return lower in pads or upper in pads or any(source in PADS for source, _ in info['hidden'])
 
 

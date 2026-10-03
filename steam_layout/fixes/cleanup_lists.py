@@ -13,8 +13,8 @@ wrong; this fix resolves exactly those findings, so the two can't drift apart:
                        the list its other cleanups use
 
 Rules and decisions: findings/2026-10-02-cleanup-boundaries/README.md and
-findings/2026-10-02-cleanup-audit/README.md. A removal recorded under
-`cleanups.keep` in steam_layout/flow_config.json is never dropped.
+findings/2026-10-02-cleanup-audit/README.md. A removal kept by an exception to
+R132 in the exceptions register (steam_layout/flow_config.json) is never dropped.
 
 It only removes entries from removal lists or adds removals and cleanup
 entries. It never touches an add or the order of the entries it keeps, so the
@@ -26,6 +26,7 @@ import json
 from pathlib import Path
 
 from ..cleanups import BUTTONS, Cleanups, kept, name, run
+from ..exceptions import load_config
 from ..flow_model import BITS
 from ..model import EMPTY, TARGET, Layout, actions, entries
 
@@ -156,7 +157,7 @@ def fix(data, config=None):
     The stacks are built once. Every edit here is to a list the backward chains don't follow (a cleanup
     function) or drops a layer that is never on the stack at that point, so the stacks stay valid.
     """
-    config = json.loads(RULES.read_text(encoding="utf-8")) if config is None else config
+    config = load_config(RULES) if config is None else config
     first, stacks = run(data, config)
     if first["ok"]:
         return {"changed": [], "remaining": 0}     # already clean: the usual case in the pipeline

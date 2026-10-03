@@ -11,8 +11,9 @@ layer many inputs from the action set (the Steering layers) is checked like
 any other. Chords are ignored: a chain follows every adding binding, which can
 add a stack that can't happen but never drops one that can.
 
-`traced_stacks.json` can add extra stacks and holds the decisions. A target no
-stack reaches is **not checked**, which fails.
+`traced_stacks.json` can add extra stacks. The decisions are exceptions to R140
+in the exceptions register (steam_layout/flow_config.json). A target no stack
+reaches is **not checked**, which fails.
 
 For every input the target doesn't define, the effective lower binding is the
 topmost layer below that defines it. If that binding changes layers (`add_layer`, `remove_layer`,
@@ -20,7 +21,7 @@ topmost layer below that defines it. If that binding changes layers (`add_layer`
 
 Each route is one of:
   open           nothing blocks it and nobody has decided it -> fails
-  allowed        a decision in traced_stacks.json allows it, with a reason
+  allowed        an exception in the register allows it, with a reason
   todo           a known gap recorded for the author's decision
 
 Blocked inputs are reported as cleared (empty binding), replaced (other
@@ -57,6 +58,7 @@ from steam_layout.inheritance import (  # noqa: F401  (re-exported for tools and
     ENFORCES, STATUSES, audit, blocks_needed, changes_layers, check_stack, entries, strip_layer_api, untraced)
 from steam_layout.model import (  # noqa: F401
     EMPTY, LAYER_COMMAND, MODE_SHIFT, TARGET, Layout, always_on_layers, bindings, defined, map_title)
+from steam_layout import exceptions
 from steam_layout.rules import tag
 from steam_layout.stacks import effective_input  # noqa: F401
 
@@ -96,6 +98,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("layout", type=Path)
     parser.add_argument("--stacks", type=Path, default=ROOT / "traced_stacks.json")
+    parser.add_argument("--register", type=Path, default=exceptions.REGISTER,
+                        help="exceptions register (default: steam_layout/flow_config.json)")
     parser.add_argument("--entries", metavar="TITLE", help="list bindings that add TITLE, then exit")
     parser.add_argument("--untraced", action="store_true", help="list untraced candidates in full")
     parser.add_argument("--json", action="store_true")
@@ -110,7 +114,8 @@ def main():
                 print(f"{row['layer']} [{row['source_state']}] {row['input']} {row['activation']}: "
                       f"removes first {row['removes_first'] or 'nothing'}")
             return 0
-        report = audit(data, json.loads(args.stacks.read_text(encoding="utf-8")))
+        config = exceptions.window(json.loads(args.stacks.read_text(encoding="utf-8")), exceptions.load(args.register))
+        report = audit(data, config)
     except (OSError, ValueError, KeyError, TypeError, IndexError) as error:
         print(f"Audit error: {error}", file=sys.stderr)
         return 2

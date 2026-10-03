@@ -50,6 +50,18 @@ Every rule has one row, always in these columns. A test reads them
 A rule that stops applying keeps its row and its ID, with "Retired", the date
 and the reason under Checked by.
 
+### Exceptions register
+
+Every exception is one entry under `exceptions` in
+[flow_config.json](../steam_layout/flow_config.json): the rule's ID, what the
+exception covers, `allow` (accepted) or `todo` (a known gap), the reason, who
+decided it and when, and the to-do that ends it. The audits read their
+exceptions from there ([exceptions.py](../steam_layout/exceptions.py)). A rule's
+Exceptions column says "None" exactly when the register has no entry for it; a
+test checks that ([test_exceptions.py](../tests/test_exceptions.py)).
+
+### Checks and rules
+
 The link runs both ways. Each audit and each fix declares the rule IDs it
 enforces and prints them next to its findings, and a test fails when that
 declaration and a row's "Checked by" disagree. To see which rules still need a
@@ -389,14 +401,14 @@ never changed.
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
-| R139 | Inheritance is the default. An ordinary layer isn't required to block an input because the layers below would give it different bindings; the Flow audit lists such an input for review | The left-pad key layers inherit the L1 and R1 modifier entries from Base | Author, 2026-10-01 | Not checked yet | — | None |
+| R139 | Inheritance is the default. An ordinary layer isn't required to block an input because the layers below would give it different bindings; the Flow audit lists such an input for review | The left-pad key layers inherit the L1 and R1 modifier entries from Base | Author, 2026-10-01 | Not checked yet | — | Accepted: the two Steering stick modifiers inherit the drivers from the W and S layers, by design |
 | R140 | Window rule. Under a layer with an Always On action, an input the layer leaves open is handled when any stack can put a layer command under it: replaced with the keybind when only one is possible, cleared otherwise. A stack whose binding is only a layer command adds no keybind | Every default window replaces the trigger edge with Base's mouse button: `Gyro Off Ramp Up` can sit under the window, and its edge only removes it | Author, 2026-09-30, restated 2026-10-01 | Window audit: open routes; Window audit: unchecked window; `window_routes` fix | — | None |
 | R141 | A block clears the input by default and replaces it only where the use is obvious. It targets only routes that change layers, and it is never a removal | The modifier Double Tap windows replace the bumper, which normally adds a layer, with the scroll wheel | Author, 2026-09-30 | `window_routes` fix (part) | — | None |
 | R137 | Temporary guards: no layer is added over a temporary guard; only removals happen there | In `Steering \| LS: Entry Guard` and `Steering \| LS: Fallback Hold`, Start and Select type Tab and Escape, so no menu layer can land and hide their Releases | Author, 2026-10-02 | `test_steering_fallback_hold.test_no_menu_layer_lands_on_the_hold_or_the_entry_guard` (part) | — | None |
 | R142 | Menu layers keep gyro disabled and the right-stick edge blocked | `Menu Left: Escape` has a disabled gyro group and an empty right-stick edge | Author, 2026-09-28 | `test_neptune_gyro.test_gyro_sources_only_override_owned_properties_or_explicitly_disable` (part) | — | None |
 | R143 | Base owns the gyro response. An activation layer sets only its selector fields, and the cursor only its four response settings | `Gyro` sets `layer: 1` and its activation selector. `L1: Temp Cursor Gyro` sets precision speed 750 and three haptic and threshold values | From the July reference | `test_neptune_gyro.test_gyro_sources_only_override_owned_properties_or_explicitly_disable`; `test_neptune_cursor.test_cursor_profile_preserves_sensitivity_and_owner_activation` | — | None |
 | R144 | A cover never outlives its owners, never sits below its owner, and inherits nothing through a layer between it and its owner | `L1: Tap Cover` sits directly on `L1: Modifier 0` and is removed with it | Author-approved plan, 2026-09-30 | Flow audit: cover check | — | None |
-| R145 | A chain of adding bindings reaches every layer | `L1: Double Tap` is reached from Base through `L1: Modifier 0`'s Release | 2026-10-01 | Flow audit: coverage | — | `LTP: Arrow Keys` and `RTP: Mouse Buttons` are added only by `hold_layer`, which the chains don't follow (R101) |
+| R145 | A chain of adding bindings reaches every layer. A layer that only `hold_layer` adds is out of scope: the chains don't follow `hold_layer` (R101) | `L1: Double Tap` is reached from Base through `L1: Modifier 0`'s Release. `LTP: Arrow Keys` and `RTP: Mouse Buttons` are the two out of scope | 2026-10-01; `hold_layer` left out by the author | Flow audit: coverage | — | None |
 
 ### When to block
 
@@ -535,9 +547,10 @@ for review against [§7](#7-cleanup); they aren't a check.
    activators) or clear, following the rule above.
    [window_routes.py](../steam_layout/fixes/window_routes.py)
    applies the recommendations to the Always On windows during the install.
-5. **Exceptions go in [traced_stacks.json](../traced_stacks.json):** `allow`
-   with a reason, or `todo` while it awaits the author. The file can also add
-   stacks the search can't reach. An undecided `open` route fails the check.
+5. **Exceptions go in the [exceptions register](#exceptions-register):**
+   `allow` with a reason, or `todo` while it awaits the author.
+   [traced_stacks.json](../traced_stacks.json) can still add stacks the
+   chains can't reach. An undecided `open` route fails the check.
    A different source mode above the definer is a block, not a route
    ([below](#a-source-mode-change-blocks-inheritance)).
 6. **The test enforces it.** [test_audit_inheritance.py](../tests/test_audit_inheritance.py)
@@ -640,9 +653,9 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       layout. If no binding adds it, the Flow audit reports it as a coverage
       gap. Only two things go in
       [flow_config.json](../steam_layout/flow_config.json): a cover whose
-      title doesn't end in a cover suffix, and an accepted cover finding or
-      unsupported lookup, with a reason. A decision that no longer matches
-      anything is reported as stale.
+      title doesn't end in a cover suffix, and an entry in the
+      [exceptions register](#exceptions-register). An exception that no
+      longer matches anything is reported as stale.
 - [ ] **R154:** the tests pass, and a new invariant gets a new test.
 - [ ] **R154:** the change is recorded in `findings/<date>-<slug>/`.
 - [ ] **R155:** a Deck section is added to [manual-testing.md](../manual-testing.md). It

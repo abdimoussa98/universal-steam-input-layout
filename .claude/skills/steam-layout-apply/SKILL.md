@@ -92,16 +92,16 @@ this (`python3 -m steam_layout.fixes <layout> --dry-run` shows what it would cha
 The Flow audit (R144, R145) is `python3 audit_flow_inheritance.py path/to/layout.json`. It
 must exit **0**: a chain of adding bindings reaches every layer, and no cover
 finding is open. A new or renamed layer needs no declaration; only a cover
-whose title doesn't end in a cover suffix, or an accepted cover finding with
-its reason, goes in `steam_layout/flow_config.json`. Inherited bindings that
+whose title doesn't end in a cover suffix, or an accepted finding as an entry
+in the exceptions register with its reason, goes in `steam_layout/flow_config.json`. Inherited bindings that
 differ between stacks are listed as information and don't fail it.
 
 The Cleanup audit (R127 to R132) is `python3 audit_cleanups.py path/to/layout.json`. It must
 exit **0**: every cleanup function and release follows the six cleanup rules
 (Layer Definition of Done §7). The `cleanup_lists` step of the fix pipeline
 resolves its findings (`python3 -m steam_layout.fixes <layout> --dry-run`
-shows what it would change). A removal kept on purpose goes under
-`cleanups.keep` in `steam_layout/flow_config.json`, with its reason.
+shows what it would change). A removal kept on purpose is an exception to
+R132 in the exceptions register (`steam_layout/flow_config.json`), with its reason.
 
 ```bash
 python3 - path/to/layout.json <<'EOF'

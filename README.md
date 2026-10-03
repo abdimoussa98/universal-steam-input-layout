@@ -147,7 +147,8 @@ python3 audit_build.py --verbose    # also print each failing audit's output
 For each Always On layer (and any layer named in `traced_stacks.json`), works
 out the stacks it can sit on and checks whether any of them puts a layer
 command under an input the layer leaves open. Each such route must be blocked,
-or have a recorded decision in `traced_stacks.json`. The tool recommends the
+or be an exception to R140 in the
+[exceptions register](resources/Layer%20Definition%20of%20Done.md#exceptions-register). The tool recommends the
 block: replace with the underlying output if it's identical in every stack,
 otherwise clear.
 
@@ -228,8 +229,9 @@ fails on six things:
 
 The stacks are the backward chains. Deliberate clears and the stick-touch
 release's fixed layers are exempt from "Never there", and layers that only
-`hold_layer` adds are left out. A removal that is kept on purpose goes under
-`cleanups.keep` in `steam_layout/flow_config.json`, with a reason. Part of
+`hold_layer` adds are left out. A removal that is kept on purpose is an
+exception to R132 in the exceptions register (`steam_layout/flow_config.json`),
+with a reason. Part of
 the build audit since 90.12; the `cleanup_lists` step of the fix pipeline
 resolves its findings ([first run and fix](findings/2026-10-02-cleanup-audit/README.md)).
 About two seconds.

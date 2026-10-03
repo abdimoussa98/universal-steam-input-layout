@@ -288,7 +288,7 @@ class Cleanups:
 
 
 def kept(config, variant):
-    """{(layer, removed layer): why} from the config's `cleanups.keep` decisions."""
+    """{(layer, removed layer): why} from the config's `cleanups.keep`, which the exceptions register fills (R132)."""
     mapping = config.get("variants", {}).get(variant, {})
     result = {}
     for decision in config.get("cleanups", {}).get("keep", []):

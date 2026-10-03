@@ -18,8 +18,8 @@ that can be on the stack with it (findings/2026-10-02-cleanup-boundaries/README.
 The stacks are the backward chains (steam_layout/chains.py). Chords are ignored,
 and timing and missed releases are not modelled. Deliberate clears and the
 stick-touch release's fixed layers are exempt from "Never there". Layers that
-only hold_layer adds are left out. A removal the author keeps is recorded under
-`cleanups.keep` in steam_layout/flow_config.json, with a reason.
+only hold_layer adds are left out. A removal the author keeps is an exception
+to R132 in the exceptions register (steam_layout/flow_config.json), with a reason.
 
 Read-only. One of the four audits in audit_build.py since 90.12; the
 `cleanup_lists` fix (steam_layout/fixes) resolves its findings. Exit codes:
@@ -36,6 +36,7 @@ from pathlib import Path
 import sys
 
 from steam_layout.cleanups import CHECKS, ENFORCES, audit
+from steam_layout.exceptions import load_config
 from steam_layout.rules import tag
 
 RULES = Path(__file__).resolve().parent / "steam_layout" / "flow_config.json"
@@ -94,7 +95,7 @@ def main():
     args = parser.parse_args()
     try:
         data = json.loads(args.layout.read_text(encoding="utf-8"))
-        config = json.loads(args.rules.read_text(encoding="utf-8"))
+        config = load_config(args.rules)
         report = audit(data, config, only=args.layer)
     except (OSError, ValueError, KeyError, TypeError, IndexError) as error:
         print(f"Audit error: {error}", file=sys.stderr)

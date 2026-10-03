@@ -331,11 +331,12 @@ class EntriesTests(unittest.TestCase):
 class CliTests(unittest.TestCase):
     def run_cli(self, data, cfg, *extra):
         with tempfile.TemporaryDirectory() as tmp:
-            layout, stacks = Path(tmp, "l.json"), Path(tmp, "s.json")
+            layout, stacks, register = Path(tmp, "l.json"), Path(tmp, "s.json"), Path(tmp, "r.json")
             layout.write_text(json.dumps(data))
             stacks.write_text(json.dumps(cfg))
-            return subprocess.run([sys.executable, str(ROOT / "audit_inheritance.py"), str(layout),
-                                   "--stacks", str(stacks), *extra], capture_output=True, text=True)
+            register.write_text(json.dumps({"exceptions": []}))
+            return subprocess.run([sys.executable, str(ROOT / "audit_inheritance.py"), str(layout), "--stacks",
+                                   str(stacks), "--register", str(register), *extra], capture_output=True, text=True)
 
     def test_chains_are_the_default_and_print_the_reason(self):
         out = self.run_cli(deep_window(), {"targets": {}})

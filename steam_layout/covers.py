@@ -23,8 +23,8 @@ family, as the family walk this replaced did (deprecated 2026-10-01, now in
 archived/depth-search-and-family-walk/ with the test that both gave the same
 result on the 90.9 layouts).
 
-`covers.allow` in the rules accepts named checks for a cover with a reason;
-accepted findings stay listed.
+An exception to R144 in the exceptions register (exceptions.py) accepts named
+checks for a cover with a reason; accepted findings stay listed.
 """
 import json
 from pathlib import Path
@@ -37,7 +37,9 @@ RULES = Path(__file__).with_name("flow_config.json")
 
 
 def load_rules(path=None):
-    return json.loads(Path(path or RULES).read_text(encoding="utf-8"))
+    """The rules file, with the exceptions register expanded into the sections the audits read."""
+    from .exceptions import load_config
+    return load_config(path or RULES)
 
 
 def family_view(layout, rules=None):

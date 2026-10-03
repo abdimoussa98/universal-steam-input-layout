@@ -1,6 +1,6 @@
 {
-  "_about": "Rules for audit_flow_inheritance.py, which runs on backward chains (steam_layout/chains.py, covers.py). The stacks are derived from the layout; this file only declares what bindings can't say: the starting contexts the chains may begin from (Base alone, and Base with the stateful Gyro layer on it), which layers are covers, and recorded decisions with reasons. Titles use default-layout names; 'variants' maps them for the alternative layout. Until 2026-10-01 this file also declared a 'families' section for the family walk (deprecated); that version is kept as archived/depth-search-and-family-walk/tests/data/flow_families_90.9.json.",
-  "version": 5,
+  "_about": "Rules for the Flow, cover and Cleanup audits, which run on backward chains (steam_layout/chains.py, covers.py, cleanups.py). The stacks are derived from the layout; this file only declares what bindings can't say: the starting contexts the chains may begin from (Base alone, and Base with the stateful Gyro layer on it), which layers are covers, and the exceptions register. Titles use default-layout names; 'variants' maps them for the alternative layout. Until 2026-10-01 this file also declared a 'families' section for the family walk (deprecated); that version is kept as archived/depth-search-and-family-walk/tests/data/flow_families_90.9.json.",
+  "version": 6,
   "variants": {
     "alternative": {
       "L1": "L2",
@@ -29,27 +29,93 @@
     "not_covers": [
       "LST: Tap Cover",
       "RST: Tap Cover"
-    ],
-    "allow": []
+    ]
   },
-  "decisions": [
+  "exceptions_about": "The exceptions register (steam_layout/exceptions.py): every place where the layout breaks a rule and that is accepted (status allow) or is a known gap a to-do will close (status todo). Each entry names its rule (resources/Layer Definition of Done.md), what it covers, why, who decided it and when, and the to-do that ends it. Until 2026-10-02 these lived in four shapes: 'decisions', 'covers.allow' and 'cleanups.keep' here, and per-target decisions in traced_stacks.json. An entry that matches nothing is reported as stale by the audit that reads it.",
+  "exceptions": [
     {
-      "layers": [
-        "Steering | LS Down: Modifier 0",
-        "Steering | LS Up: Modifier 1"
-      ],
-      "inputs": {
-        "default": [
-          "switch/left_bumper",
-          "switch/right_bumper"
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS Up: Modifier 1"
         ],
-        "alternative": [
-          "left_trigger/edge",
-          "right_trigger/edge"
-        ]
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ],
+          "alternative": [
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ]
+        }
       },
       "status": "allow",
-      "why": "Documented steering design: helpers inherit the active W/S owner's driver bindings so the dominant press, owner release and takeover work in every phase (findings/2026-09-30-steering-lean/README.md, reused single-side covers; pinned by test_dominant_two_entries_inherit_through_every_helper)."
+      "why": "Documented steering design: helpers inherit the active W/S owner's driver bindings so the dominant press, owner release and takeover work in every phase (findings/2026-09-30-steering-lean/README.md, reused single-side covers; pinned by test_dominant_two_entries_inherit_through_every_helper).",
+      "decided": "Recorded 2026-10-01 from the Steering design of 2026-09-30",
+      "todo": null
+    },
+    {
+      "rule": "R101",
+      "scope": {
+        "note": "Five hold_layer commands in each layout: Base's left-pad click holds LTP: Arrow Keys and its right-pad click holds RTP: Mouse Buttons."
+      },
+      "status": "todo",
+      "why": "Legacy bindings from before the rule. They are migration work, not an accepted exception.",
+      "decided": "Author, 2026-09-30",
+      "todo": "resources/Layout Vocabulary.md, known implementation conflicts: migrate the five hold_layer commands"
+    },
+    {
+      "rule": "R119",
+      "scope": {
+        "note": "The Steering double tap leaves parts of the recipe out."
+      },
+      "status": "allow",
+      "why": "Recorded deviations of the Steering build (findings/2026-09-30-steering-lean/README.md, recipe deviations).",
+      "decided": "Recorded with the Steering build, 2026-09-30",
+      "todo": null
+    },
+    {
+      "rule": "R120",
+      "scope": {
+        "note": "RTP touch's 150 ms delayed add of RTP: Tap Cover has no repeating reset."
+      },
+      "status": "allow",
+      "why": "A repeated layer removal breaks trackball momentum.",
+      "decided": "Author; confirmed in the reset audit of 2026-09-28",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "kind": "touchpad",
+        "note": "A pair is set aside when either layer is a touchpad layer (every binding that adds it is on a trackpad) or the covered exit is a trackpad input. 68 pairs on 90.13."
+      },
+      "status": "todo",
+      "why": "The windows clear both pads' touch, so a thumb leaving a pad inside a window misses a pad layer's Release; RTP: Double Tap binds the buttons whose Releases other layers need. The fixes are proposed, not decided.",
+      "decided": "Author, 2026-10-02",
+      "todo": "todos.md, Steering: Touchpad exception to the hidden-exit rule: address it"
+    },
+    {
+      "rule": "R157",
+      "scope": {
+        "note": "Steering's 1.5 s hold exit and the Modifier 2 clear leave a stateful layer without a transition."
+      },
+      "status": "allow",
+      "why": "Extra exits are allowed; the menu-plus-click clear and the Modifier 2 clear are never dropped.",
+      "decided": "Author, 2026-10-01",
+      "todo": null
+    },
+    {
+      "rule": "R159",
+      "scope": {
+        "note": "An older to-do keeps Gamepad through the Modifier 2 clear, which conflicts with the rule."
+      },
+      "status": "todo",
+      "why": "Left open by the author until Gamepad is built.",
+      "decided": "Author, 2026-10-01",
+      "todo": "todos.md, Global stateful behavior: settle the Gamepad-preservation exception"
     }
   ]
 }
