@@ -194,10 +194,10 @@ It becomes the migration record in phase 14.
 | Menu buttons | MB8 | Stick touch release: hold Start, touch a stick and lift off, then rele… | Scenario | B, St, T, K: a thumb lift completes the Fn hold (R123) | `tests/test_scenarios_menu_and_modifiers.py` |
 | Menu buttons | MB9 | Steam button recovery: - Hold a menu button until its Fn layer is up,… | Scenario | B, St, Miss: a stuck Fn layer clears on the next input | `tests/test_scenarios_menu_and_modifiers.py` |
 | Menu buttons | MB10 | Stuck entry layer (for example, the Steam button within 300 ms of a me… | Scenario | B, Miss: a stuck Entry Point clears on the other menu button | `tests/test_scenarios_menu_and_modifiers.py` |
-| Modifier layers | ML1 | Nav keys with Start / Select: LB gives Insert / Delete, RB gives Home… | Scenario | B, K: the nav keys in each modifier | Not migrated yet |
-| Modifier layers | ML2 | The same nav keys in Gyro mode | Scenario | B, K: the same in Gyro | Not migrated yet |
-| Modifier layers | ML3 | Holding Start or Select in any modifier layer, in Base or Gyro mode, d… | Scenario | B, Gyro: Start or Select in a modifier leaves the gyro source alone. Whether that is wanted is a question for the author | Not migrated yet |
-| Modifier layers | ML4 | After a nav chord, releasing the modifier doesn't fire its tap / scrol… | Scenario | B, T, K: no tap or scroll after a nav chord | Not migrated yet |
+| Modifier layers | ML1 | Nav keys with Start / Select: LB gives Insert / Delete, RB gives Home… | Scenario | B, K: the nav keys in each modifier | `tests/test_scenarios_menu_and_modifiers.py` |
+| Modifier layers | ML2 | The same nav keys in Gyro mode | Scenario | B, K: the same in Gyro | `tests/test_scenarios_menu_and_modifiers.py` |
+| Modifier layers | ML3 | Holding Start or Select in any modifier layer, in Base or Gyro mode, d… | Scenario | B, Gyro: Start or Select in a modifier leaves the gyro source alone. Whether that is wanted is a question for the author | `tests/test_scenarios_menu_and_modifiers.py` |
+| Modifier layers | ML4 | After a nav chord, releasing the modifier doesn't fire its tap / scrol… | Scenario | B, T, K: no tap or scroll after a nav chord | `tests/test_scenarios_menu_and_modifiers.py` |
 | Temp cursor gyro | TC1 | Hold the primary modifier for 300 ms: its Temp Cursor Gyro overlay app… | Scenario | B, T: the cursor lands at 300 ms; its settings are checked by test_neptune_cursor | Not migrated yet |
 | Temp cursor gyro | TC2 | The 300 ms hold entry gives one high-intensity haptic pulse. Keep hold… | Tuning | The entry pulse's feel; its setting is checked by test_neptune_cursor | Not migrated yet |
 | Temp cursor gyro | TC3 | Before 300 ms, lift either thumb: cursor applies immediately, then onl… | Scenario | B, St, T: a thumb lift enters the cursor early (R123) | Not migrated yet |

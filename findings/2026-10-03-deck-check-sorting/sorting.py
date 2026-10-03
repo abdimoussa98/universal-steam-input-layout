@@ -221,6 +221,7 @@ WENT = {
     **{("Menu buttons", f"MB{n}"): "`tests/test_scenarios_menu_and_modifiers.py`" for n in (1, 2, 4, 5, 6, 8, 9, 10)},
     ("Menu buttons", "MB3"): "A12: it is that assumption's Deck procedure",
     ("Menu buttons", "MB7"): "Tuning note",
+    **{("Modifier layers", f"ML{n}"): "`tests/test_scenarios_menu_and_modifiers.py`" for n in (1, 2, 3, 4)},
 }
 
 
