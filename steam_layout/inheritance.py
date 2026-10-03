@@ -18,6 +18,7 @@ from .model import entries as model_entries
 from .stacks import effective_input
 
 STATUSES = ("allow", "todo")
+ENFORCES = {"open routes": ("R140",), "unchecked window": ("R140",)}   # check -> rules (Layer Definition of Done)
 
 
 def changes_layers(layout, activators):

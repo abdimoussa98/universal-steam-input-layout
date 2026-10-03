@@ -342,12 +342,13 @@ class CliTests(unittest.TestCase):
         self.assertEqual(out.returncode, 1)
         self.assertIn("1 stack(s) (1 from chains)", out.stdout)
         self.assertIn("switch/button_y from Owner", out.stdout)
+        self.assertIn("open [R140]: switch/button_y", out.stdout)      # the rule the finding breaks
         self.assertIn("because: Owner switch/button_x Full_Press#0: +Win", out.stdout)
 
     def test_an_unreached_window_is_reported_and_fails(self):
         out = self.run_cli(build({"Base": {}, "Win": {"switch": ("switches", AOA)}}), {"targets": {}})
         self.assertEqual(out.returncode, 1)
-        self.assertIn("Win: NOT CHECKED", out.stdout)
+        self.assertIn("Win: NOT CHECKED [R140]", out.stdout)
 
     def test_the_working_layout_passes_on_chains_alone(self):
         layout = ROOT / "neptune/single-set-default_hold-gyro_latest.json"

@@ -54,9 +54,10 @@ from pathlib import Path
 import sys
 
 from steam_layout.inheritance import (  # noqa: F401  (re-exported for tools and tests)
-    STATUSES, audit, blocks_needed, changes_layers, check_stack, entries, strip_layer_api, untraced)
+    ENFORCES, STATUSES, audit, blocks_needed, changes_layers, check_stack, entries, strip_layer_api, untraced)
 from steam_layout.model import (  # noqa: F401
     EMPTY, LAYER_COMMAND, MODE_SHIFT, TARGET, Layout, always_on_layers, bindings, defined, map_title)
+from steam_layout.rules import tag
 from steam_layout.stacks import effective_input  # noqa: F401
 
 ROOT = Path(__file__).resolve().parent
@@ -66,7 +67,7 @@ def print_report(report, show_untraced=False):
     print(f"variant: {report['variant']}; {'PASS' if report['ok'] else 'FAIL'}")
     for title, row in report["targets"].items():
         if not row["checked"]:
-            print(f"{title}: NOT CHECKED (no chain or declared stack reaches it)")
+            print(f"{title}: NOT CHECKED {tag(ENFORCES['unchecked window'])} (no chain or declared stack reaches it)")
             continue
         counts = {}
         for route in row["routes"]:
@@ -75,10 +76,10 @@ def print_report(report, show_untraced=False):
               f"routes {counts or 'none'}")
         for need in row["blocks_needed"]:
             what = json.dumps(need["activators"]) if need["activators"] else ""
-            print(f"  block needed: {need['source']}/{need['input']} -> {need['action']} {what}")
+            print(f"  block needed {tag(ENFORCES['open routes'])}: {need['source']}/{need['input']} -> {need['action']} {what}")
         for route in row["routes"]:
             if route["status"] == "open":
-                print(f"  {route['status']}: {route['source']}/{route['input']} from {route['from_layer']} "
+                print(f"  {route['status']} {tag(ENFORCES['open routes'])}: {route['source']}/{route['input']} from {route['from_layer']} "
                       f"({route['via']}) under {' > '.join(route['stack'])}")
                 for line in route["reason"]:
                     print(f"    because: {line}")
