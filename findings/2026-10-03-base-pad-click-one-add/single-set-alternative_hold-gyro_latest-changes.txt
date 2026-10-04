@@ -1,0 +1,14 @@
+Changes from single-set-alternative_hold-gyro_90.19.json to single-set-alternative_hold-gyro_latest.json
+Layers: 75 -> 75 (added: none; removed: none)
+
+== Base
+  left_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=3): add_layer LTP: Click Entry Point
+    before: Soft_Press(haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer LTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=3): add_layer LTP: Click Entry Point
+  right_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=3): add_layer RTP: Click Entry Point
+    before: Soft_Press(haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer RTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=3): add_layer RTP: Click Entry Point
+
+1 layer changed, 2 changes

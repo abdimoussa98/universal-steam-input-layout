@@ -7,13 +7,13 @@ is lost on the next install.
 
 ## The builder
 
-The current builder is in the newest build folder under `findings/`: at 90.19,
-[findings/2026-10-03-pad-click-holds](../findings/2026-10-03-pad-click-holds/README.md).
+The current builder is in the newest build folder under `findings/`: at 90.20,
+[findings/2026-10-03-base-pad-click-one-add](../findings/2026-10-03-base-pad-click-one-add/README.md).
 
 ```bash
-python3 findings/2026-10-03-pad-click-holds/build_candidate.py            # builds the candidates in that folder
-python3 findings/2026-10-03-pad-click-holds/install_neptune.py --deck     # a trial copy in that folder's deck/
-python3 findings/2026-10-03-pad-click-holds/install_neptune.py --version 90.20   # writes neptune/ and exports the VDFs
+python3 findings/2026-10-03-base-pad-click-one-add/build_candidate.py            # builds the candidates in that folder
+python3 findings/2026-10-03-base-pad-click-one-add/install_neptune.py --deck     # a trial copy in that folder's deck/
+python3 findings/2026-10-03-base-pad-click-one-add/install_neptune.py --version 90.21   # writes neptune/ and exports the VDFs
 ```
 
 `install_neptune.py` runs the fix pipeline (`steam_layout.fixes`) and writes
@@ -27,6 +27,7 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.20 | [base-pad-click-one-add](../findings/2026-10-03-base-pad-click-one-add/README.md) | Base adds the Click Entry Point with one Soft Press |
 | 90.19 | [pad-click-holds](../findings/2026-10-03-pad-click-holds/README.md) | The final pad click layers hold themselves |
 | 90.18 | [pad-click-handoff](../findings/2026-10-03-pad-click-handoff/README.md) | The Click Entry Point hands over |
 | 90.17 | [pad-click-soft-press-only](../findings/2026-10-03-pad-click-soft-press-only/README.md) | Pad clicks on Soft Presses only |

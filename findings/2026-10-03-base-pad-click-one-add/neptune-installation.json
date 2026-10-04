@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "358afcae826c9954e34608d45a179c63fa0bcefcc1dfb1a1d95cde8d2b1a238e",
+      "version_snapshot": "versions/neptune/90.20/single-set-default_hold-gyro_90.20.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "abc7aee7eb9232fde8f97f4c1651e16decf2c038012d91c3922ed4e39af3f40d",
+      "version_snapshot": "versions/neptune/90.20/single-set-default_hold-gyro_90.20.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "df8381f568fdd4b37f09b04827d284036f496420212bb22345a20b7f32b1fd40",
+      "version_snapshot": "versions/neptune/90.20/single-set-alternative_hold-gyro_90.20.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "33f32e1796ab26c94c39cef9e6cf8d606a74c092b04c2fdfecaa110625ee28db",
+      "version_snapshot": "versions/neptune/90.20/single-set-alternative_hold-gyro_90.20.vdf"
+    }
+  },
+  "release": "90.20",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-03-base-pad-click-one-add/default-base-pad-click-one-add.json",
+      "sha256": "f3b203b54864a918dc7e58638a94ff12127caea848eceef104093dd1c16a485b"
+    },
+    "alternative": {
+      "path": "findings/2026-10-03-base-pad-click-one-add/alternative-base-pad-click-one-add.json",
+      "sha256": "33b19673430db90267d9fc9258db2193802aa9135a2eb9b923ba55fc1164f03b"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

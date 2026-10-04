@@ -350,7 +350,7 @@ PYTHONPATH=.:tests python3 -m unittest $(ls tests/test_*.py | sed 's#/#.#; s#\.p
 node --test tests/test_convert_vdf.mjs
 ```
 
-The first command runs every Python test: 627 at release 90.19, in about five
+The first command runs every Python test: 632 at release 90.20, in about five
 minutes. `tests/` has to be on the path because four test modules import a
 sibling by its bare name, and `python3 -m unittest discover` does not work
 here. One module: `PYTHONPATH=.:tests python3 -m unittest tests.test_rule_registry`.

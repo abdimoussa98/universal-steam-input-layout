@@ -1,7 +1,9 @@
 # The final pad click layers hold themselves (90.19)
 
 **Status, 2026-10-03:** built and installed in `neptune/` as **90.19**, with the
-snapshot in `versions/neptune/90.19/`. Device status: **untested**. The build
+snapshot in `versions/neptune/90.19/`. Played on the Deck: it works and looks
+good. [90.20](../2026-10-03-base-pad-click-one-add/README.md) took Base's
+second, repeating add out. Device status: **untested**. The build
 audit is clean and the tests pass.
 
 The author played [90.18](../2026-10-03-pad-click-handoff/README.md): it works

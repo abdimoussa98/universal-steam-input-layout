@@ -10,16 +10,17 @@ from tests.scenario import ScenarioCase, scenario
 
 
 class SoftPressOnly(ScenarioCase):
-    @scenario("90.17 S1", rules=("R114",), rests=("A6", "A10"), either=("A9",))
-    def test_the_outer_add_repeats_so_the_d_pad_layer_comes_back_under_a_held_click(self):
+    @scenario("90.17 S1", rests=("A6", "A10"), either=("A9",))
+    def test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add(self):
+        """Changed in 90.20, with Base's repeating add gone: see 90.16 X3."""
         for pad in self.each(start="steering"):
             pad.hold("L1").wait(50).hold("R1").wait(50).press_pad("RP", "left").wait(100)
             self.assertEqual((pad.top, "mouse_button BACK" in pad.down()), ("RTP: Mouse Buttons", True))
             pad.let_go("R1").wait(2)                                              # the quick tap clears every layer
             self.assertTrue(pad.lacks("Steering", "RTP: Mouse Buttons"))
             pad.wait(150)
-            self.assertTrue(pad.has("RTP: Mouse Buttons"))                            # the pad is still pressed at the rim
-            self.assertIn("mouse_button BACK", pad.down())
+            self.assertEqual((pad.has("RTP: Mouse Buttons"), "mouse_button BACK" in pad.down()),
+                             (pad.sim.exposed_fires, pad.sim.exposed_fires))
             pad.let_go_pad("RP").wait(400)
             self.assertTrue(pad.lacks("RTP: Click Entry Point", "RTP: Mouse Buttons", "RTP: Middle Click"))
 

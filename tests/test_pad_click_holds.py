@@ -10,7 +10,6 @@ from pathlib import Path
 import unittest
 
 from tools.audit_command_budget import audit_layout
-from tools.convert_runtime_ids import generate_lookup, titles_to_ids
 from steam_layout import changes
 from steam_layout.fixes import apply_all
 from steam_layout.model import TARGET, Layout, bindings, entries
@@ -40,18 +39,6 @@ class HoldsTests(unittest.TestCase):
             for pad, (source, dpad, _) in pc.PADS.items():
                 with self.subTest(variant=variant, pad=pad):
                     yield variant, layout, pad, source, dpad
-
-    def test_working_layouts_are_this_build(self):
-        # neptune/ is generated: a hand edit there would be lost on the next install (R156).
-        for variant, data in self.data.items():
-            with self.subTest(variant=variant):
-                numeric, _ = titles_to_ids(json.dumps(data), generate_lookup(data))
-                built = json.loads(numeric)['controller_mappings']
-                working = json.loads((ROOT / f'neptune/single-set-{variant}_hold-gyro_latest.json').read_text())[
-                    'controller_mappings']
-                for cm in (built, working):
-                    cm.pop('title'); cm.pop('description')
-                self.assertEqual(built, working)
 
     def test_only_the_six_pad_click_layers_changed_and_only_on_the_pads(self):
         for variant, data in self.data.items():

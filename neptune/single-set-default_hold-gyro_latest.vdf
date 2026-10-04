@@ -2,7 +2,7 @@
 {
 	"version"				"3"
 	"revision"				"12896"
-	"title"					"single-set-default :: always-gyro :: 90.19"
+	"title"					"single-set-default :: always-gyro :: 90.20"
 	"description"			"Keyboard & mouse layout with WASD movement, gyro aiming, and right-stick turn assist. L2/R2 fire left/right mouse buttons; L1/R1 are the modifiers. Hold Start or Select for the Fn layers. While either is held the camera stick is off, and Fn waits until both sticks are centered.\n\nConfigure normal gyro and right-stick response in Base; modifier and ramp layers have their own stick overrides. The empty left-stick edge bind is the WASD Modifier slot. Ramp Up 0 and Ramp Up 1, the first two layers, control turn-assist speed and timing.\n\nTemp Cursor Gyro: hold either modifier for 300 ms, or lift a thumb from either stick during the hold, for cursor response. The 300 ms hold gives a high-intensity haptic pulse; thumb-lift entry stays silent. Ongoing gyro vibration is off and minimum movement threshold is 5. Face buttons, D-pad, stick clicks, Start/Select, the opposite modifier, or both sticks deflected cancel cursor response for the rest of that hold. Release and hold again to re-enable it.\n\nSteering (Deck testing pending): hold Start, click and release the left stick, then release Start. A beep and a strong pulse confirm it. The left stick drives with WASD. Hold R1 for W or L1 for S; the left stick then steers with A/D. While driving, hold the left stick down or up for the L1 or R1 modifier map. It stays while the stick rolls sideways and ends when the stick returns to center. A quick flick back to center scrolls once instead, and a second flick held keeps scrolling. Hold the other bumper for the two-modifier map, where left stick up/down scrolls. A quick tap of the other bumper clears every layer, including Gyro, back to Base. Releasing the driving bumper hands over to the other one if it is held; otherwise the left stick returns to WASD, and holding it up or down pulses at once and exits Steering at 1.5 s; rolling to A or D stops the timer. Start and Select send Tab and Escape while driving, while the left stick is held up or down with no bumper, and after entering until the left stick has been moved once; otherwise they keep their taps and Fn layers. To leave Steering, hold Start or Select, click and release either stick, then release the button, with the same beep and pulse; Gyro stays as it was. While steering, right-pad touch modes such as circular scroll are off, so the pad is just the mouse, and right-stick turn assist is off, so the gyro also stays on while the right stick turns.\n\nTrackpad clicks (Deck testing pending): a click is read once, when it starts, and holds until release. Pressed near the centre, the right pad is the middle mouse button and the left pad is Caps Lock. Further out, the right pad is Back, Forward and scroll up/down, and the left pad is the arrow keys. The outer buttons come at once; the middle click comes about 50 ms after the press, so a very short click there may send nothing.\n\nBase and Gyro (L1+R1 toggle) retain their activation rules. Stateful Cursor Gyro and Gamepad remain planned; until they exist, the other Start or Select plus stick-click gestures clear every layer above Base except Gyro."
 	"creator"				"76561198079670632"
 	"progenitor"			""
@@ -27871,19 +27871,6 @@
 							"haptic_intensity"		"3"
 						}
 					}
-					"Soft_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 73 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"			"1"
-							"repeat_rate"			"50"
-							"haptic_intensity"		"0"
-						}
-					}
 				}
 				"disabled_activators"
 				{
@@ -28677,19 +28664,6 @@
 						"settings"
 						{
 							"haptic_intensity"		"3"
-						}
-					}
-					"Soft_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action add_layer 74 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"			"1"
-							"repeat_rate"			"50"
-							"haptic_intensity"		"0"
 						}
 					}
 				}
