@@ -34,8 +34,37 @@ deflection, which has no `chord_button` ID; see
 "Same bind in both exports" means the bind appears in the Neptune export with
 this `chord_button` and in the Triton export with this mask bit.
 
-**Not known:** L4, R4, L5, R5, A, B, X, Y, left and right pad click, and the
-four D-pad directions. The layouts don't chord on them.
+## Mask bits from the Steam client
+
+Read on 2026-10-03 from the enum `k_eGamepadButtonBitMask_…` in the installed
+Steam client (macOS, `steamui/chunk~2dcc5aaf7.js`, file dated 2026-09-25). It
+is the list the chord and gyro-button pickers are built from, and it agrees
+with every bit in the table above, so the two "inferred" stick deflection rows
+are confirmed. A web search the same day found no published table.
+
+| Mask bit | Button | Mask bit | Button |
+|---|---|---|---|
+| 0 | Right trigger, full pull | 16 | R5 (right lower grip) |
+| 1 | Left trigger, full pull | 17 | Left pad click |
+| 2 | Right bumper | 18 | Right pad click |
+| 3 | Left bumper | 19 | Left pad touch |
+| 4 | Y (north) | 20 | Right pad touch |
+| 5 | B (east) | 22 | Left stick click |
+| 6 | X (west) | 24 | Right trigger, soft pull |
+| 7 | A (south) | 25 | Left trigger, soft pull |
+| 8 | D-pad up | 26 | Right stick click |
+| 9 | D-pad right | 30 | Left stick deflection |
+| 10 | D-pad left | 31 | Right stick deflection |
+| 11 | D-pad down | 41 | L4 (left upper grip) |
+| 12 | Select / View (Menu Left) | 42 | R4 (right upper grip) |
+| 13 | Steam | 46 | Left stick touch |
+| 14 | Start (Menu Right) | 47 | Right stick touch |
+| 15 | L5 (left lower grip) | 50 | Quick Access |
+
+The four face buttons and the four D-pad directions together are bits 4 to 11,
+`4080`. The legacy `chord_button` IDs of these buttons are still not known;
+the layouts don't chord on them. That a chord on these bits behaves like the
+ones in use is not tested on the Deck.
 
 `neptune_chord_ids.json` and `.vdf` in this folder are the probe layout the
 first IDs were read from. In it, the two inputs Steam lists as "Left Stick or
