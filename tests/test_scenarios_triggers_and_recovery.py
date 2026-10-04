@@ -134,7 +134,7 @@ class TriggersAndRampUp(ScenarioCase):
 
 
 class RecoveryAndHeldInputs(ScenarioCase):
-    @scenario("Left-stick recovery and Transition Sets LR1", rules=("R133", "R134"), rests=("A25",))
+    @scenario("Left-stick recovery and Transition Sets LR1", rules=("R133", "R170"), rests=("A25",))
     def test_the_left_stick_edge_clears_a_stuck_modifier_or_scroll_layer(self):
         """Its menu and Transition Set parts were replaced in 90.10: a stuck Entry Point clears on the other
         menu button (MB10), and a transition on the next menu tap (90.10 T4)."""

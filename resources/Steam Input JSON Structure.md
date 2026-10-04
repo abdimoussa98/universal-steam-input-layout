@@ -1239,11 +1239,19 @@ new Steam runtime test.
 
 ### Stick-Edge Cleanup and Inherited Actions
 
-**Rules: R134, R142** (Layer Definition of Done [§7](Layer%20Definition%20of%20Done.md#7-cleanup) and [§8](Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking)). This section explains them; the rule text is there.
+**Rules: R170, R142** (Layer Definition of Done [§7](Layer%20Definition%20of%20Done.md#7-cleanup) and [§8](Layer%20Definition%20of%20Done.md#8-inheritance-and-blocking)). This section explains them; the rule text is there.
 
-**Author's design rule: limit left- and right-stick edge cleanup to layers that
-really need it.** Adding an edge fallback consumes an input that otherwise serves
-the inherited layout. It is not a free extra recovery path.
+**Which layers need one is R170 since 2026-10-04.** A layer that binds or
+blocks a stick's edge has a cleanup function on that edge, and a layer that
+binds or blocks a face button, a D-pad direction, Start, Select or a back
+button has one on both. It replaces R134, "only where the layer needs one",
+which left that to judgment. The cost below is why the rule stops there: the
+layers that let ramp-up through (the stick-touch helpers, the pad layers,
+`Gyro` and the single Tap Covers) bind none of those inputs and stay outside
+it.
+
+**Adding an edge fallback consumes an input that otherwise serves the
+inherited layout.** It is not a free extra recovery path.
 
 | Edge overridden by cleanup | Inherited behavior displaced while that override owns the input |
 |---|---|

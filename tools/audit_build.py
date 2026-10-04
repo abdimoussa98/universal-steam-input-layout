@@ -9,7 +9,7 @@ is clean only when every line passes (Layer Definition of Done, section 10).
 | Budget audit | audit_command_budget.py | three entries per input, no banned activators, no inverted D-pad edge layer command |
 | Window audit | audit_inheritance.py | no undecided layer command under an Always On window |
 | Flow audit | audit_flow_inheritance.py | a chain of adding bindings reaches every layer, no open cover finding |
-| Cleanup audit | audit_cleanups.py | every cleanup function and release follows the six cleanup rules; no hidden exit |
+| Cleanup audit | audit_cleanups.py | every cleanup function and release follows the six cleanup rules; no hidden exit; every required cleanup is there |
 
 Read-only. Exit codes: 0 = every audit passed, 1 = at least one failed.
 

@@ -56,6 +56,7 @@ SOURCES = (                                # (kind, audit name, module holding i
     ("audit", "Window", "steam_layout.inheritance"),
     ("audit", "Flow", "tools.audit_flow_inheritance"),
     ("audit", "Cleanup", "steam_layout.cleanups"),
+    ("audit", "Cleanup", "steam_layout.required_cleanups"),
     ("audit", "Build", "tools.audit_build"),
     ("fix", None, "steam_layout.fixes"),
 )

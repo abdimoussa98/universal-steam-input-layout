@@ -1,0 +1,959 @@
+Changes from single-set-alternative_hold-gyro_90.23.json to single-set-alternative_hold-gyro_latest.json
+Layers: 78 -> 78 (added: none; removed: none)
+
+== L2: Modifier 0
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer L2: Modifier 0 ; remove_layer L2: Temp Cursor Gyro ; remove_layer L2: Tap Cover
+    after:  chord(chord_button=7,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer L2: Modifier 0 ; remove_layer L2: Temp Cursor Gyro ; remove_layer L2: Tap Cover
+    after:  chord(chord_button=7,interruptable=0): mouse_button RIGHT
+
+== R2: Modifier 1
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer R2: Modifier 1 ; remove_layer R2: Temp Cursor Gyro ; remove_layer R2: Tap Cover
+    after:  chord(chord_button=8,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer R2: Modifier 1 ; remove_layer R2: Temp Cursor Gyro ; remove_layer R2: Tap Cover
+    after:  chord(chord_button=8,interruptable=0): mouse_button RIGHT
+
+== L2!R2: Modifier 2
+  left_trigger/click: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer L2!R2: Modifier 2 ; remove_layer R2: Modifier 1 ; remove_layer R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/click: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer L2!R2: Modifier 2 ; remove_layer L2: Modifier 0 ; remove_layer L2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer L2!R2: Modifier 2 ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer L2!R2: Modifier 2 ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button RIGHT
+
+== R2!L2: Modifier 2
+  left_trigger/click: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer R2!L2: Modifier 2 ; remove_layer R2: Modifier 1 ; remove_layer R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/click: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer R2!L2: Modifier 2 ; remove_layer L2: Modifier 0 ; remove_layer L2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer R2!L2: Modifier 2 ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer R2!L2: Modifier 2 ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button RIGHT
+
+== Gyro | L2: Modifier 0
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | L2: Modifier 0 ; remove_layer L2: Temp Cursor Gyro ; remove_layer L2: Tap Cover
+    after:  chord(chord_button=7,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | L2: Modifier 0 ; remove_layer L2: Temp Cursor Gyro ; remove_layer L2: Tap Cover
+    after:  chord(chord_button=7,interruptable=0): mouse_button RIGHT
+
+== Gyro | R2: Modifier 1
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | R2: Modifier 1 ; remove_layer R2: Temp Cursor Gyro ; remove_layer R2: Tap Cover
+    after:  chord(chord_button=8,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | R2: Modifier 1 ; remove_layer R2: Temp Cursor Gyro ; remove_layer R2: Tap Cover
+    after:  chord(chord_button=8,interruptable=0): mouse_button RIGHT
+
+== Gyro | L2!R2: Modifier 2
+  left_trigger/click: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/click: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer L2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button RIGHT
+
+== Gyro | R2!L2: Modifier 2
+  left_trigger/click: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/click: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer L2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button RIGHT
+
+== L2: Scroll Down
+  right_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_UP
+    after:  Full_Press(hold_repeats=1): remove_layer L2: Scroll Down ; remove_layer L2: Double Tap Cover
+    after:  chord(chord_button=7,interruptable=0): mouse_wheel SCROLL_UP
+  switch/button_escape: binding
+    before: Full_Press: mouse_button MIDDLE
+    after:  Full_Press(hold_repeats=1): remove_layer L2: Scroll Down ; remove_layer L2: Double Tap Cover
+    after:  chord(chord_button=7,interruptable=0): mouse_button MIDDLE
+  switch/button_menu: binding
+    before: Full_Press: key_press BACK_TICK
+    after:  Full_Press(hold_repeats=1): remove_layer L2: Scroll Down ; remove_layer L2: Double Tap Cover
+    after:  chord(chord_button=7,interruptable=0): key_press BACK_TICK
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer L2: Scroll Down ; remove_layer L2: Double Tap Cover
+    after:  chord(chord_button=7,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer L2: Scroll Down ; remove_layer L2: Double Tap Cover
+    after:  chord(chord_button=7,interruptable=0): mouse_button RIGHT
+
+== R2: Scroll Up
+  left_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_DOWN
+    after:  Full_Press(hold_repeats=1): remove_layer R2: Scroll Up ; remove_layer R2: Double Tap Cover
+    after:  chord(chord_button=8,interruptable=0): mouse_wheel SCROLL_DOWN
+  switch/button_escape: binding
+    before: Full_Press: mouse_button MIDDLE
+    after:  Full_Press(hold_repeats=1): remove_layer R2: Scroll Up ; remove_layer R2: Double Tap Cover
+    after:  chord(chord_button=8,interruptable=0): mouse_button MIDDLE
+  switch/button_menu: binding
+    before: Full_Press: key_press BACK_TICK
+    after:  Full_Press(hold_repeats=1): remove_layer R2: Scroll Up ; remove_layer R2: Double Tap Cover
+    after:  chord(chord_button=8,interruptable=0): key_press BACK_TICK
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer R2: Scroll Up ; remove_layer R2: Double Tap Cover
+    after:  chord(chord_button=8,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer R2: Scroll Up ; remove_layer R2: Double Tap Cover
+    after:  chord(chord_button=8,interruptable=0): mouse_button RIGHT
+
+== Menu Left: Escape
+  left_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape ; remove_layer Menu Left: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  left_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_DOWN
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape ; remove_layer Menu Left: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_wheel SCROLL_DOWN
+  right_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape ; remove_layer Menu Left: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_UP
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape ; remove_layer Menu Left: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_wheel SCROLL_UP
+  switch/button_escape: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape ; remove_layer Menu Left: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape ; remove_layer Menu Left: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape ; remove_layer Menu Left: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button RIGHT
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Left: Double Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer Menu Left: Double Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+  joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "4915"}
+  joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Left: Double Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer Menu Left: Double Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Escape
+    after:  chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Menu Left: Fn Layer
+  left_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Fn Layer ; remove_layer Menu Left: Entry Point ; remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Fn Layer ; remove_layer Menu Left: Entry Point ; remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Fn Layer ; remove_layer Menu Left: Entry Point ; remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Fn Layer ; remove_layer Menu Left: Entry Point ; remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== Menu Right: Tab
+  left_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab ; remove_layer Menu Right: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  left_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_DOWN
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab ; remove_layer Menu Right: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_wheel SCROLL_DOWN
+  right_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab ; remove_layer Menu Right: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_UP
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab ; remove_layer Menu Right: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_wheel SCROLL_UP
+  switch/button_menu: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab ; remove_layer Menu Right: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab ; remove_layer Menu Right: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab ; remove_layer Menu Right: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button RIGHT
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Right: Double Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer Menu Right: Double Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+  joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "4915"}
+  joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Right: Double Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer Menu Right: Double Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Tab
+    after:  chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Menu Right: Fn Layer
+  left_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Fn Layer ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Fn Layer ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Fn Layer ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Fn Layer ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== RTP: Entry Point
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer RTP: Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer RTP: Middle Click ; remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+    after:  chord(chord_button=17,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer RTP: Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+  joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer RTP: Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer RTP: Middle Click ; remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+    after:  chord(chord_button=17,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer RTP: Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+
+== Menu Left: Entry Point
+  left_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): empty_binding
+  left_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_DOWN
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): mouse_wheel SCROLL_DOWN
+  right_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_UP
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): mouse_wheel SCROLL_UP
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): mouse_button RIGHT
+  joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Left: Fn Layer ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    before: chord(chord_button=15,interruptable=0): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  release(haptic_intensity=0): add_layer Menu Left: Fn Layer ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  chord(chord_button=15,interruptable=0): empty_binding
+  joystick/edge: binding
+    before: chord(chord_button=15,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Left Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  chord(chord_button=15,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Left Stick Guard
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Left: Fn Layer ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    before: chord(chord_button=15,interruptable=0): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  release(haptic_intensity=0): add_layer Menu Left: Fn Layer ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  chord(chord_button=15,interruptable=0): empty_binding
+  right_joystick/edge: binding
+    before: chord(chord_button=15,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Right Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Left: Entry Point
+    after:  chord(chord_button=15,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Right Stick Guard
+
+== Menu Right: Entry Point
+  left_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): empty_binding
+  left_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_DOWN
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): mouse_wheel SCROLL_DOWN
+  right_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_UP
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): mouse_wheel SCROLL_UP
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): mouse_button RIGHT
+  joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Right: Fn Layer ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    before: chord(chord_button=14,interruptable=0): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  release(haptic_intensity=0): add_layer Menu Right: Fn Layer ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  chord(chord_button=14,interruptable=0): empty_binding
+  joystick/edge: binding
+    before: chord(chord_button=14,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Left Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  chord(chord_button=14,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Left Stick Guard
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Right: Fn Layer ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    before: chord(chord_button=14,interruptable=0): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  release(haptic_intensity=0): add_layer Menu Right: Fn Layer ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  chord(chord_button=14,interruptable=0): empty_binding
+  right_joystick/edge: binding
+    before: chord(chord_button=14,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Right Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Right: Entry Point
+    after:  chord(chord_button=14,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Right Stick Guard
+
+== L2&R2: Tap Cover
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer L2&R2: Tap Cover ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2!R2: Modifier 2 ; remove_layer R2!L2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer L2&R2: Tap Cover ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2!R2: Modifier 2 ; remove_layer R2!L2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): mouse_button RIGHT
+  joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer L2&R2: Tap Cover ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2!R2: Modifier 2 ; remove_layer R2!L2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover
+    after:  touch: chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer L2&R2: Tap Cover ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2!R2: Modifier 2 ; remove_layer R2!L2: Modifier 2 ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover
+    after:  touch: chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== L2: Temp Cursor Gyro
+  joystick/touch: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | L2: Modifier 0 ; remove_layer L2: Modifier 0 ; remove_layer L2: Temp Cursor Gyro
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick/touch: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | L2: Modifier 0 ; remove_layer L2: Modifier 0 ; remove_layer L2: Temp Cursor Gyro
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== R2: Temp Cursor Gyro
+  joystick/touch: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | R2: Modifier 1 ; remove_layer R2: Modifier 1 ; remove_layer R2: Temp Cursor Gyro
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick/touch: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Gyro | R2: Modifier 1 ; remove_layer R2: Modifier 1 ; remove_layer R2: Temp Cursor Gyro
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== RTP: Tap Cover
+  joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer RTP: Tap Cover ; remove_layer RTP: Entry Point
+    after:  touch: chord(gyro_ratchet_button_mask=1048576,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer RTP: Tap Cover ; remove_layer RTP: Entry Point
+    after:  touch: chord(gyro_ratchet_button_mask=1048576,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== L2: Double Tap Cover
+  joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer L2: Double Tap Cover ; remove_layer L2: Scroll Down
+    after:  touch: chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer L2: Double Tap Cover ; remove_layer L2: Scroll Down
+    after:  touch: chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== R2: Double Tap Cover
+  joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer R2: Double Tap Cover ; remove_layer R2: Scroll Up
+    after:  touch: chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer R2: Double Tap Cover ; remove_layer R2: Scroll Up
+    after:  touch: chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== Menu Left: Double Tap Cover
+  joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Left: Escape
+    after:  touch: chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  edge: Full_Press(hold_repeats=1): remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Left: Escape
+    after:  edge: chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Left: Escape
+    after:  touch: chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  edge: Full_Press(hold_repeats=1): remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Left: Escape
+    after:  edge: chord(gyro_ratchet_button_mask=4096,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Menu Right: Double Tap Cover
+  joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer Menu Right: Double Tap Cover ; remove_layer Menu Right: Tab
+    after:  touch: chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  edge: Full_Press(hold_repeats=1): remove_layer Menu Right: Double Tap Cover ; remove_layer Menu Right: Tab
+    after:  edge: chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer Menu Right: Double Tap Cover ; remove_layer Menu Right: Tab
+    after:  touch: chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  edge: Full_Press(hold_repeats=1): remove_layer Menu Right: Double Tap Cover ; remove_layer Menu Right: Tab
+    after:  edge: chord(gyro_ratchet_button_mask=16384,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Transition Set 2
+  switch/left_bumper: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  switch/right_bumper: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  left_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  left_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 2
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== Transition Set 1
+  switch/left_bumper: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  switch/right_bumper: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  left_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  left_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 1
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== Steering | LS Up: Double Tap
+  switch/button_escape: input added
+    after:  Full_Press: key_press TAB
+  switch/button_menu: input added
+    after:  Full_Press: key_press ESCAPE
+
+== Steering | LS Down: Double Tap
+  switch/button_escape: input added
+    after:  Full_Press: key_press TAB
+  switch/button_menu: input added
+    after:  Full_Press: key_press ESCAPE
+
+== Steering | LS: Double Tap Cover
+  joystick/edge: binding
+    before: release: remove_layer Steering | LS: Double Tap Cover
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release: remove_layer Steering | LS: Double Tap Cover
+  joystick/touch: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  touch: chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== Steering | LS: Tap Cover
+  joystick/edge: binding
+    before: release: remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS: Tap Cover
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release: remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS: Tap Cover
+  joystick/touch: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  touch: chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== Steering | LS Down: Modifier 0
+  joystick/edge: binding
+    before: release: remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; add_layer Steering | LS Down: Double Tap
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release: remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; add_layer Steering | LS Down: Double Tap
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=1107296256,gyro_ratchet_button_requireany_or_all=1,interruptable=0): empty_binding
+    after:  chord(gyro_ratchet_button_mask=1090519040,gyro_ratchet_button_requireany_or_all=1,interruptable=0): empty_binding
+
+== Steering | LS Up: Modifier 1
+  joystick/edge: binding
+    before: release: remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Up: Modifier 1 ; add_layer Steering | LS Up: Double Tap
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release: remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Up: Modifier 1 ; add_layer Steering | LS Up: Double Tap
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=1107296256,gyro_ratchet_button_requireany_or_all=1,interruptable=0): empty_binding
+    after:  chord(gyro_ratchet_button_mask=1090519040,gyro_ratchet_button_requireany_or_all=1,interruptable=0): empty_binding
+
+== Steering | R2!L2: Modifier 2
+  joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | R2: W Key ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer L2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | R2: W Key ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer L2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Steering | L2!R2: Modifier 2
+  joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer R2: Tap Cover
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Steering | R2: W Key
+  left_trigger/edge: binding
+    before: Full_Press: remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; add_layer Steering | R2!L2: Modifier 2
+    before: release: remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; add_layer Steering | R2!L2: Modifier 2
+    after:  release: remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2
+  switch/button_menu: binding
+    before: Full_Press: key_press ESCAPE
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): key_press ESCAPE
+  switch/button_escape: binding
+    before: Full_Press: key_press TAB
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): key_press TAB
+  joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=16777217,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Steering | L2: S Key
+  right_trigger/edge: binding
+    before: Full_Press: remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; add_layer Steering | L2!R2: Modifier 2
+    before: release: remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | L2!R2: Modifier 2
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; add_layer Steering | L2!R2: Modifier 2
+    after:  release: remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | L2!R2: Modifier 2
+  switch/button_menu: binding
+    before: Full_Press: key_press ESCAPE
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): key_press ESCAPE
+  switch/button_escape: binding
+    before: Full_Press: key_press TAB
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): key_press TAB
+  joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS: Double Tap Cover
+    after:  chord(gyro_ratchet_button_mask=33554434,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Steering | LS: Entry Guard
+  switch/button_menu: binding
+    before: Full_Press: key_press ESCAPE
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Entry Guard
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): key_press ESCAPE
+  switch/button_escape: binding
+    before: Full_Press: key_press TAB
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Entry Guard
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): key_press TAB
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Entry Guard
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Entry Guard
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+  right_joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Entry Guard
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Stateful | Menu Left: Entry Point
+  left_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): empty_binding
+  left_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_DOWN
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): mouse_wheel SCROLL_DOWN
+  right_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_UP
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): mouse_wheel SCROLL_UP
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(chord_button=15,interruptable=0): mouse_button RIGHT
+  joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Left: Fn Layer ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    before: chord(chord_button=15,interruptable=0): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  release(haptic_intensity=0): add_layer Menu Left: Fn Layer ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  chord(chord_button=15,interruptable=0): empty_binding
+  joystick/edge: binding
+    before: chord(chord_button=15,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Left Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(chord_button=15,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Left Stick Guard
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Left: Fn Layer ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    before: chord(chord_button=15,interruptable=0): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  release(haptic_intensity=0): add_layer Menu Left: Fn Layer ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  chord(chord_button=15,interruptable=0): empty_binding
+  right_joystick/edge: binding
+    before: chord(chord_button=15,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Right Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Left: Entry Point
+    after:  chord(chord_button=15,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Right Stick Guard
+
+== Menu Buttons: Left Stick Guard
+  joystick/edge: binding
+    before: release: remove_layer Menu Buttons: Left Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Menu Left: Entry Point ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Left Stick Guard
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release: remove_layer Menu Buttons: Left Stick Guard
+
+== Stateful | Menu Right: Entry Point
+  left_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): empty_binding
+  left_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_DOWN
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): mouse_wheel SCROLL_DOWN
+  right_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: mouse_wheel SCROLL_UP
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): mouse_wheel SCROLL_UP
+  switch/left_bumper: binding
+    before: Full_Press: mouse_button LEFT
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): mouse_button LEFT
+  switch/right_bumper: binding
+    before: Full_Press: mouse_button RIGHT
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(chord_button=14,interruptable=0): mouse_button RIGHT
+  joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Right: Fn Layer ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    before: chord(chord_button=14,interruptable=0): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  release(haptic_intensity=0): add_layer Menu Right: Fn Layer ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  chord(chord_button=14,interruptable=0): empty_binding
+  joystick/edge: binding
+    before: chord(chord_button=14,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Left Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(chord_button=14,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Left Stick Guard
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): add_layer Menu Right: Fn Layer ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    before: chord(chord_button=14,interruptable=0): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  release(haptic_intensity=0): add_layer Menu Right: Fn Layer ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  chord(chord_button=14,interruptable=0): empty_binding
+  right_joystick/edge: binding
+    before: chord(chord_button=14,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Right Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(chord_button=14,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Menu Buttons: Right Stick Guard
+
+== Menu Buttons: Right Stick Guard
+  right_joystick/edge: binding
+    before: release: remove_layer Menu Buttons: Right Stick Guard
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Menu Left: Entry Point ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Left Stick Guard
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release: remove_layer Menu Buttons: Right Stick Guard
+
+== Menu Buttons: Tap Cover
+  joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Menu Left: Entry Point ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Left Stick Guard
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Stateful | Menu Right: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Menu Left: Entry Point ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Left Stick Guard
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Steering | LS: Fallback Hold
+  joystick/touch: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Fallback Hold
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  switch/button_menu: binding
+    before: Full_Press: key_press ESCAPE
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Fallback Hold
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): key_press ESCAPE
+  switch/button_escape: binding
+    before: Full_Press: key_press TAB
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Fallback Hold
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): key_press TAB
+  right_joystick: source added
+    after:  touch: Full_Press(hold_repeats=1): remove_layer Steering | LS: Fallback Hold
+    after:  touch: chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  edge: Full_Press(hold_repeats=1): remove_layer Steering | LS: Fallback Hold
+    after:  edge: chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+
+== Transition Set 0
+  switch/left_bumper: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  switch/right_bumper: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  left_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  left_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/click: binding
+    before: Full_Press(haptic_intensity=2): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_trigger/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick: settings
+    before: {"edge_binding_invert": null, "edge_binding_radius": null}
+    after:  {"edge_binding_invert": "0", "edge_binding_radius": "7209"}
+  right_joystick/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer Transition Set 0
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+45 layers changed, 209 changes

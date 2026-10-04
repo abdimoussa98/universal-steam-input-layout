@@ -8,3 +8,5 @@ __pycache__/
 archived/exhaustive-stack-search/tools/stack_search/build/
 out/
 .venv/
+# The compiled chain engine (built on first use from steam_layout/engine/chain_engine.cpp)
+steam_layout/engine/build/

@@ -22,13 +22,14 @@ Scope, by rule:
     R140         {"target": "...", "source": "...", "input": "..."}       a route the Window audit allows
     R136         {"kind": "touchpad"}                                     the hidden-exit pairs set aside
     R136         {"upper": "...", "lower": "..."}                         a covered side exit that was reviewed
+    R169 to R171 {"layers": [...], "inputs": ["joystick/edge", ...]}      an input the layer may leave without a cleanup function
     other rules  any object, for example {"note": "..."}: a record that no audit reads
 
 The audits still read the sections they always read. `expand` fills
 `decisions`, `covers.allow`, `cleanups.keep`, `cleanups.touchpad_exits`,
-`cleanups.accepted_exits` and `review.covers` from the register, and `window`
-adds the R140 entries to the Window audit's stacks config, so one entry format
-serves all four. Titles use default-layout names, as everywhere in this file.
+`cleanups.accepted_exits`, `cleanups.required` and `review.covers` from the
+register, and `window` adds the R140 entries to the Window audit's stacks
+config, so one entry format serves all four. Titles use default-layout names, as everywhere in this file.
 """
 import copy
 import json
@@ -40,10 +41,11 @@ REGISTER = Path(__file__).with_name("flow_config.json")
 STATUSES = ("allow", "todo")
 FIELDS = ("rule", "scope", "status", "why", "decided", "todo")
 FLOW = ("R139", "R145")
+REQUIRED = ("R169", "R170", "R171")                # the required-cleanup rules (steam_layout/required_cleanups.py)
 SCOPES = {"R108": (("layers", "inputs"),),                                                # rule -> the shapes it takes
           "R139": (("layers", "inputs"), ("kind",)), "R145": (("layers", "inputs"),),
           "R144": (("cover", "checks"),), "R132": (("layers", "removes"),), "R140": (("target", "source", "input"),),
-          "R136": (("kind",), ("upper", "lower"))}
+          "R136": (("kind",), ("upper", "lower")), **{rule: (("layers", "inputs"),) for rule in REQUIRED}}
 
 
 def check(entries):
@@ -97,6 +99,9 @@ def expand(config):
         elif rule == "R136" and "upper" in scope:
             config.setdefault("cleanups", {}).setdefault("accepted_exits", []).append(
                 {"upper": scope["upper"], "lower": scope["lower"], "why": entry["why"]})
+        elif rule in REQUIRED:
+            config.setdefault("cleanups", {}).setdefault("required", []).append(
+                {"rule": rule, "layers": scope["layers"], "inputs": scope["inputs"], "why": entry["why"]})
     return config
 
 

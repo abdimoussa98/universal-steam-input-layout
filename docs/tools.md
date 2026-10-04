@@ -10,7 +10,7 @@ modules: `python3 -m tools.<name>`. The exporter is `node tools/convert_vdf.mjs`
 | [`audit_command_budget`](#budget-audit-audit_command_budget) | Budget audit: three entries per input, no banned activators | Nothing |
 | [`audit_inheritance`](#window-audit-audit_inheritance) | Window audit: what an Always On layer inherits, and whether it is blocked | Nothing |
 | [`audit_flow_inheritance`](#flow-audit-audit_flow_inheritance) | Flow audit: covers, coverage, entries to review | Nothing |
-| [`audit_cleanups`](#cleanup-audit-audit_cleanups) | Cleanup audit: what cleanups and releases remove | Nothing |
+| [`audit_cleanups`](#cleanup-audit-audit_cleanups) | Cleanup audit: what cleanups and releases remove, and where a layer must have one | Nothing |
 | [`audit_layer`](#layer-report-audit_layer) | Report on one layer: below, above, inherited, exits | Nothing |
 | [`change_report`](#change-report-change_report) | What differs between two layouts | Only with `--out` |
 | [`convert_runtime_ids`](#convert_runtime_ids-ids-and-titles) | Numeric runtime IDs to `{{Base::Title}}` tokens and back | The layout |
@@ -162,8 +162,9 @@ python3 -m tools.audit_flow_inheritance <layout> --inventory --layer 'L1: Modifi
 Checks every cleanup function and release against the six cleanup rules: a
 layer takes care of itself and what is below it, and of what is above it if it
 has that responsibility
-([rules](../findings/2026-10-02-cleanup-boundaries/README.md#the-rules)), and
-checks that no layer hides another's exit (R136). It fails on seven things:
+([rules](../findings/2026-10-02-cleanup-boundaries/README.md#the-rules)),
+checks that no layer hides another's exit (R136), and checks that every layer
+has the cleanup functions it must have (R169 to R171). It fails on ten things:
 
 | Check | Fails when |
 |---|---|
@@ -174,22 +175,71 @@ checks that no layer hides another's exit (R136). It fails on seven things:
 | Never there | A cleanup, a release or a Modifier 2 quick tap removes a layer that can never be on the stack with it |
 | Guard mismatch | One layer's cleanups have different guard buttons |
 | Hidden exit | A layer that can land on top of another covers an exit on what keeps the lower layer alive, and doesn't remove it there |
+| Touch without cleanup | A layer has no cleanup function on a stick touch (R169) |
+| Edge without cleanup | A layer binds or blocks a stick edge, or a face, D-pad, menu or back button, and has no cleanup function on that edge (R170) |
+| Button without cleanup | A layer retypes or blocks a button and has no cleanup function on it (R171) |
 
-The stacks are the backward chains. Deliberate clears and the stick-touch
-release's fixed layers are exempt from "Never there", and layers that only
-`hold_layer` adds are left out. A removal that is kept on purpose is an
-exception to R132 in the exceptions register (`steam_layout/flow_config.json`),
-with a reason. Part of
-the build audit since 90.12; the `cleanup_lists` step of the fix pipeline
-resolves its findings ([first run and fix](../findings/2026-10-02-cleanup-audit/README.md)).
-About two seconds.
-Read-only. Exit codes: **0** = clean, **1** = findings, **2** = invalid input.
+The last three are the **required cleanups** (author, 2026-10-04,
+[`required_cleanups.py`](../steam_layout/required_cleanups.py)). They read each
+layer on its own, with no stacks:
+
+- A cleanup function counts when it is on that input and removes the layer
+  itself.
+- Windows, stateful layers and ramp layers are left out. The six stick-touch
+  helpers are left out of the touch check.
+- In the button check the layer's own button passes, and so does a button that
+  removes the layer by cancellation. A block with an empty binding counts as a
+  retype; the finding says when the block covers nothing.
+- An input the author accepts without one is an exception to R169, R170 or R171
+  in the register, with the layers and the inputs (`joystick/edge`).
+- 90.23 failed them, on 174 inputs in the default layout and 196 in the
+  alternative. **90.24 gave each one a cleanup function**
+  ([record](../findings/2026-10-04-required-cleanups/README.md)).
+
+The stacks of the six list checks are the backward chains. Deliberate clears
+and the stick-touch release's fixed layers are exempt from "Never there", and
+layers that only `hold_layer` adds are left out. A removal that is kept on
+purpose is an exception to R132 in the exceptions register
+(`steam_layout/flow_config.json`), with a reason. Part of the build audit
+since 90.12; the `cleanup_lists` step of the fix pipeline resolves the list
+checks' findings ([first run and fix](../findings/2026-10-02-cleanup-audit/README.md)).
+Read-only. Exit codes: **0** = clean, **1** = findings, **2** = invalid input
+or no C++ compiler.
 
 ```bash
 python3 -m tools.audit_cleanups neptune/single-set-default_hold-gyro_latest.json
 python3 -m tools.audit_cleanups <layout> --layer "L1: Modifier 0"
 python3 -m tools.audit_cleanups <layout> --check "never there" --json
+python3 -m tools.audit_cleanups <layout> --extras 4
 ```
+
+**The hidden-exit check reads more stacks than the others** (author,
+2026-10-04). The chains allow one extra press along a layer's chain. This
+check walks the same chains with **six**, tests every layer of every stack it
+builds, and tests every stack one more adding binding past them.
+
+- A compiled engine does the walk: `steam_layout/native.py` builds
+  `steam_layout/engine/chain_engine.cpp` on first use and runs it. The audit
+  needs a C++ compiler (`clang++`, `c++` or `g++`) and stops with a message
+  without one.
+- `--extras K` changes the number of extra presses, from 0 to 14. `--memory GB`
+  (default 12) stops the walk, and the audit then fails as not finished.
+- Each finding names the smallest stack that shows it and the bindings that
+  build that stack with the fewest extra presses.
+- Nothing is stored on disk: the stacks live in the engine's memory for the
+  length of the run.
+
+| Extra presses | Stacks on 90.22 and 90.23 | Time for one layout | Memory |
+|---|---|---|---|
+| 4 | 784,861 | 1 s | 0.2 GB |
+| 6 (default) | 7,728,211 | 20 s | 2 GB |
+| 7 | 19,035,805 | 50 s | 6 GB |
+| 8 | 40,275,669 | 8 minutes | 11 GB |
+
+With the other checks the Cleanup audit takes about 27 seconds for one layout.
+From 4 extra presses on, 90.22 shows the same 12 findings
+([record](../findings/2026-10-03-simultaneous-cap/README.md)). 90.23 fixed them
+([record](../findings/2026-10-04-tap-cover-stick-touches/README.md)).
 
 ### Change report: `change_report`
 
@@ -329,7 +379,9 @@ The reusable code behind the scripts above. Import it from the repo root.
 | `steam_layout.chains` | `Chains`: the stacks under a layer from backward chains (who adds it, back to Base, plus bystanders), each with its reason; `below`, `above`, `lineage`, `reached` |
 | `steam_layout.layer_report` | The per-layer report that `audit_layer.py` wraps |
 | `steam_layout.covers` | The cover check on chains, and the rules loader for `flow_config.json` |
-| `steam_layout.cleanups` | `Cleanups`: guard and keeper of every layer, and the six cleanup checks that `audit_cleanups.py` wraps |
+| `steam_layout.cleanups` | `Cleanups`: guard and keeper of every layer, the six cleanup checks and the two exit checks that `audit_cleanups.py` wraps |
+| `steam_layout.required_cleanups` | The three required-cleanup checks (R169 to R171) that `audit_cleanups.py` adds to that report: how a layer answers each stick touch, stick edge and button |
+| `steam_layout.native` | The compiled engine for the chain walk with extra presses (`engine/chain_engine.cpp`), which the exit checks read. `chains` is its reference |
 | `steam_layout.flow_model`, `steam_layout.flow_inheritance` | Every layer-changing binding, classified by role, and what a layer inherits on each lower stack |
 | `steam_layout.inheritance` | The inheritance and blocking audit that `audit_inheritance.py` wraps |
 | `steam_layout.stacks` | `apply_ops`, `definer` and `effective_input`, which the chains build on, and `walk` / `fire` to replay one concrete input sequence |
@@ -340,8 +392,9 @@ python3 -m steam_layout.fixes neptune/*_latest.json --dry-run   # what the pipel
 ```
 
 **Deprecated tooling is in [archived/](../archived/README.md):** the exhaustive
-stack search and timed proofs (2026-09-30), and the depth-limited search and
-family walk (2026-10-01). Nothing live imports them. Their records stay in
+stack search and timed proofs (2026-09-30), the depth-limited search and
+family walk (2026-10-01), and the capped walk and the first engines
+(2026-10-04). Nothing live imports them. Their records stay in
 [findings/2026-09-30-stack-search](../findings/2026-09-30-stack-search/ARCHIVE.md)
 and [findings/2026-10-01-backward-chain-stacks](../findings/2026-10-01-backward-chain-stacks/README.md#deprecated).
 
@@ -352,8 +405,8 @@ PYTHONPATH=.:tests python3 -m unittest $(ls tests/test_*.py | sed 's#/#.#; s#\.p
 node --test tests/test_convert_vdf.mjs
 ```
 
-The first command runs every Python test: 681 at release 90.22, in about five
-minutes. `tests/` has to be on the path because four test modules import a
+The first command runs every Python test: 701 on 2026-10-04, in a little over
+five minutes. `tests/` has to be on the path because four test modules import a
 sibling by its bare name, and `python3 -m unittest discover` does not work
 here. One module: `PYTHONPATH=.:tests python3 -m unittest tests.test_rule_registry`.
 

@@ -238,12 +238,13 @@ class NeptuneCursorTests(unittest.TestCase):
                         self.assertNotIn("delay_start", entry["settings"])
                         self.assertIn(entry["settings"].get("haptic_intensity"), (None, "0"))
                 # Cursor owns cancellations and primary release, never key/cover/Mod 2 outputs. Its two
-                # edge cleanups also remove the modifier under it, in one step (author, 2026-10-02).
+                # edge cleanups also remove the modifier under it, in one step (author, 2026-10-02), and
+                # so do its two stick-touch cleanups since 90.24 (R169).
                 owner = list(owners(variant))[side][2]
                 for source, name, entry in self.entries(layout, title):
                     if entry["activation"] != "release":
                         allowed = {removal(title), EMPTY}
-                        if name == "edge" and entry["activation"] == "Full_Press":
+                        if name in ("edge", "touch") and entry["activation"] == "Full_Press":
                             allowed |= {removal(owner), removal("Gyro | " + owner)}
                         self.assertTrue(set(entry["actions"]) <= allowed, (variant, title, source, name, entry))
 
@@ -321,9 +322,15 @@ class NeptuneCursorTests(unittest.TestCase):
                             self.assertEqual(group["mode"], "dpad" if stick == "joystick" else "joystick_mouse")
                             self.assertEqual(group["settings"], {"layer": "1"})
                             if suffix == ": Temp Cursor Gyro":
-                                # Omission inherits completion/recovery; an empty bind would block it.
-                                self.assertNotIn("touch", group["inputs"])
-                                self.assertEqual(set(group["inputs"]), {"click", "edge"})
+                                # Until 90.23 the cursor left the touch out and inherited the modifier's. Since
+                                # 90.24 it has its own cleanup there (R169), beside a Release that clears the trio.
+                                self.assertEqual(set(group["inputs"]), {"click", "edge", "touch"})
+                                touch = group["inputs"]["touch"]["activators"]
+                                self.assertEqual(set(touch), {"Full_Press", "chord", "release"})
+                                self.assert_removals(bindings(touch["release"]), [
+                                    f"{prefix}: {part}" for part in ("Entry Point", "Tap Cover", "Temporary Gyro")])
+                                self.assert_removals(bindings(touch["Full_Press"]), overlay_targets)
+                                self.assertEqual(bindings(touch["chord"]), [EMPTY])
                                 continue
                             self.assertEqual(set(group["inputs"]), {"touch"})
                             touch = group["inputs"]["touch"]

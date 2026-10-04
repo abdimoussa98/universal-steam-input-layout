@@ -85,6 +85,8 @@ See `steam-binding-order` for consolidation rules.
 
 ## Guardrails
 
+- Work on `main`. Don't create a branch or a worktree for an edit (author, 2026-10-03;
+  [skills README](../README.md#git-all-work-is-on-main)).
 - Plan publication metadata with every layout change: before commit/export/publication,
   revalidate the full description and bump the title's release version once for that
   release batch. See [the publication rule](../../docs/publishing.md)

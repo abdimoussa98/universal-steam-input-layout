@@ -1,0 +1,14 @@
+Changes from single-set-alternative_hold-gyro_90.22.json to single-set-alternative_hold-gyro_latest.json
+Layers: 78 -> 78 (added: none; removed: none)
+
+== Menu Buttons: Tap Cover
+  joystick/touch: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Left: Entry Point ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick/touch: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Left: Entry Point ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Stateful | Menu Right: Entry Point
+    after:  chord(gyro_ratchet_button_mask=20480,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+1 layer changed, 2 changes

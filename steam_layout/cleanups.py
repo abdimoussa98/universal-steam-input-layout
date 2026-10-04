@@ -38,17 +38,22 @@ Checks, each a failing finding:
     hidden exit         a layer that can land on top of another covers an exit on what
                         keeps the lower layer alive, and doesn't remove it there (R136)
 
-An exit is a Release that removes its own layer. For the hidden-exit check a
-layer on top covers it when it answers that input instead: it binds it, or blocks
-it with a disabled source or another source mode. The stack is taken after the
-whole binding that added the upper layer has run. Since 2026-10-03 "on top" also
-counts a landing: any adding binding that answers on a stack the chains visited,
-whichever layer it belongs to (chains.landings). Covering an exit that is not on
-the keeper is information, not a finding: the keeper's exit still works.
+An exit is a Release that removes its own layer. A layer on top covers it when it
+answers that input instead: it binds it, or blocks it with a disabled source or another
+source mode. Covering an exit that is not on the keeper is information, not a finding:
+the keeper's exit still works.
 
     exit to review      such a pair, where either layer changed since the last snapshot:
                         it fails until it is fixed or accepted in the exceptions register
                         (author, 2026-10-02). `changed` names the changed layers.
+
+The stacks of the two exit checks (author, 2026-10-04) are the chain walk with
+`DEFAULT_EXTRAS` (6) extra presses: one layer's chain, back to the action set, with up to
+six arrivals along it, where the other checks allow one. Every layer of every such stack
+is tested, and every stack one landing past it (one more adding binding, whichever layer
+it belongs to). A compiled engine does the walk (native.py); chains.py is its reference.
+Without a C++ compiler the audit stops with a message. `extras=None` leaves the two exit
+checks out, for the cleanup fix, which resolves none of them.
 
 The touchpad exception (author, 2026-10-02) sets a hidden-exit pair aside when
 either layer is a touchpad layer (only trackpad bindings add it) or the covered
@@ -63,7 +68,7 @@ from collections import defaultdict
 from .chains import Chains
 from .flow_model import Inventory, chord_condition, resolve
 from .model import always_on_layers, entries, map_title
-from .stacks import apply_ops
+from . import native
 
 BUTTONS = {("switch", "left_bumper"): "LB", ("switch", "right_bumper"): "RB",
            ("switch", "button_escape"): "Start", ("switch", "button_menu"): "Select",
@@ -80,6 +85,7 @@ CHECKS = ("outside the guard", "left below", "left above", "hidden cleanup", "ne
 ENFORCES = {"outside the guard": ("R127", "R131"), "left below": ("R128",), "left above": ("R129",),   # check -> rules
             "hidden cleanup": ("R130",), "never there": ("R132",), "guard mismatch": ("R127",),
             "hidden exit": ("R136",), "exit to review": ("R136",)}
+DEFAULT_EXTRAS = 6         # extra presses per chain in the two exit checks (author, 2026-10-04)
 TOUCHPAD_STALE = "the touchpad exception to R136"
 LISTS = ("recovery", "release")          # the roles whose removal lists follow "never there"
 ROLE = {"recovery": "cleanup function", "release": "release"}
@@ -319,61 +325,58 @@ class Cleanups:
         """Layers that only trackpad bindings add."""
         return {t for t in self.layers if self._adding.get(t) and all(a.source in PADS for a in self._adding[t])}
 
-    def _settled(self, full, upper, why):
-        """The stack once the binding that added `upper` has run to the end: its array can add more on top."""
-        for _, t in reversed(why.steps):
-            if ("add_layer", upper) in t.ops:
-                return apply_ops(full, t.ops[t.ops.index(("add_layer", upper)) + 1:], self.base)
-        return full
-
-    def covered_exits(self):
-        """{(upper, lower): {"hidden", "side", "stack", "path"}}: every pair where a layer covers a lower layer's exit.
+    def covered_exits(self, extras=DEFAULT_EXTRAS, memory=None, progress=None, threads=None):
+        """{(upper, lower): {"hidden", "side", "stack", "path", "cost"}}: every pair where a layer covers a lower layer's exit.
 
         `upper` is the layer that answers the exit's input instead of `lower`. `hidden` are the covered exits on
         the lower layer's keeper, `side` the covered exits that aren't. An exit the upper layer's binding also
-        removes the lower layer on is carried, not covered.
+        removes the lower layer on is carried, not covered. When a source mode change is what covers the exit,
+        the pair names the first layer above `lower` in another mode, not the layer on top.
 
-        Two sources of stacks. The first is `above`: the upper layer's own chain, or one bystander under it.
-        The second is every landing (chains.landings): one more adding binding on a stack the walk visited.
-        Without it a layer that lands through a lower layer's binding is missed, as the Fallback Hold over
-        the menu second-press layers was from 90.11 to 90.14.
+        The stacks are the chain walk with `extras` extra presses per chain, and every stack one landing past
+        them (native.py). `stack` is the smallest stack that shows the pair, `path` the bindings that build it
+        with the fewest extra presses, and `cost` that number. `self.walked` is the engine's own summary.
+
+        Past `native.PATHS_UP_TO` extra presses the walk keeps no paths, to fit in memory, and each pair's stack
+        and path come from a second run at `PATHS_UP_TO`. A pair that only shows with more keeps its stack and
+        says that no path was kept.
         """
-        pairs = {}
-        exits = {lower: found for lower in self.layers if (found := self.exits(lower))}
-        keeping = {lower: self.keeper_exits(lower, found) for lower, found in exits.items()}
-
-        def cover(lower, full, path):
-            for control in exits[lower]:
-                kind, layer, acts, _ = resolve(self.layout, full, *control)
-                if kind == "binding" and layer == lower:
-                    continue
-                if kind == "mode":
-                    # Nobody answers: a source mode changed somewhere above. `resolve` names the top layer of
-                    # that source; the layer that covers this exit is the first one above `lower` in another mode.
-                    mine = self.layout.active(lower)[control[0]]["mode"]
-                    layer = next((t for t in full[full.index(lower) + 1:]
-                                  if (g := self.layout.active(t).get(control[0])) and g["mode"] != mine), layer)
-                if acts and any(("remove_layer", lower) in self.layout.layer_ops(e) for _, e in entries(acts)):
-                    continue                   # carried: the upper layer removes it there
-                row = pairs.setdefault((layer, lower), {"hidden": [], "side": [], "stack": full, "path": path()})
-                side = "hidden" if control in keeping[lower] else "side"
-                if control not in row[side]:
-                    row[side].append(control)
-
-        for lower in exits:
-            for upper, (stack, why) in self.chains.above(lower).items():
-                full = self._settled(tuple(stack) + (upper,), upper, why)
-                if lower in full:              # else the same binding removes it again
-                    cover(lower, full, why.describe)
-        visited = self.chains.stacks()
-        for before, t, after in self.chains.landings():
-            landed = [x for op, x in t.ops if op == "add_layer" and x in after and x not in before]
-            if not landed:
+        tables = native.Tables(self.layout, self.inv)
+        listed, table = [], {}
+        for lower in self.layers:
+            found = self.exits(lower)
+            if not found:
                 continue
-            first = min(after.index(x) for x in landed)
-            for lower in after[:first]:
-                if lower in exits:
-                    cover(lower, after, lambda: visited[before].describe() + ["landing: " + t.describe()])
+            keeping = self.keeper_exits(lower, found)
+            modes = {source: mode for source, mode, _ in tables.groups[tables.ident[lower]]}
+            rows = table[tables.ident[lower]] = []
+            for control in found:
+                rows.append((len(listed), tables.control(*control), control[0], control in keeping, modes[control[0]]))
+                listed.append((control, control in keeping))
+
+        def pairs_of(result):
+            pairs = {}
+            for found in result["pairs"]:
+                row = {"hidden": [], "side": [], "stack": tables.named(found["stack"]),
+                       "path": native.describe(tables, found["path"]), "cost": found["cost"]}
+                for number in found["exits"]:
+                    control, on_keeper = listed[number]
+                    row["hidden" if on_keeper else "side"].append(control)
+                pairs[(tables.titles[found["who"]], tables.titles[found["lower"]])] = row
+            return pairs
+
+        whole = extras <= native.PATHS_UP_TO
+        result = native.run(tables, table, extras, memory=memory, progress=progress, threads=threads, paths=whole)
+        pairs = pairs_of(result)
+        if not whole:
+            shown = pairs_of(native.run(tables, table, native.PATHS_UP_TO, memory=memory, threads=threads))
+            for pair, row in pairs.items():
+                if pair in shown:
+                    row.update(stack=shown[pair]["stack"], path=shown[pair]["path"], cost=shown[pair]["cost"])
+                else:
+                    row["path"] = [f"no path kept: this stack needs {row['cost']} extra presses"]
+        self.walked = {key: result[key] for key in ("extras", "stacks", "states", "settled", "longest", "seconds")}
+        self.walked["stopped"] = result["stopped"] or None
         return pairs
 
     def unreached_by_cleanup(self):
@@ -398,15 +401,17 @@ def kept(config, variant):
     return result
 
 
-def audit(data, config=None, only=None, changed=None):
+def audit(data, config=None, only=None, changed=None, extras=DEFAULT_EXTRAS, memory=None, progress=None):
     """The Cleanup audit's report for one layout: findings, kept removals, stale decisions."""
-    return run(data, config, only, changed=changed)[0]
+    return run(data, config, only, changed=changed, extras=extras, memory=memory, progress=progress)[0]
 
 
-def run(data, config=None, only=None, stacks=None, changed=None):
+def run(data, config=None, only=None, stacks=None, changed=None, extras=DEFAULT_EXTRAS, memory=None, progress=None):
     """(report, Cleanups). `stacks`: an earlier Cleanups whose stacks still hold for `data`.
 
-    `changed`: the layers that are new or changed since the last snapshot (steam_layout/changes.py)."""
+    `changed`: the layers that are new or changed since the last snapshot (steam_layout/changes.py).
+    `extras`: the extra presses per chain in the two exit checks; None leaves those checks out.
+    `memory` (bytes) stops their walk; the report is then not ok. `progress` is `native.run`'s."""
     from .model import Layout
     layout = Layout(data)
     config = config or {}
@@ -433,7 +438,9 @@ def run(data, config=None, only=None, stacks=None, changed=None):
                 for a in config.get("cleanups", {}).get("accepted_exits", [])}
     reviewed = set()
     pads, excepted, information = cleanups.touchpad_layers(), [], []
-    for (upper, lower), row in cleanups.covered_exits().items():
+    covered = cleanups.covered_exits(extras, memory, progress) if extras is not None else {}
+    walked = cleanups.walked if extras is not None else None
+    for (upper, lower), row in covered.items():
         if only and upper not in only and lower not in only:
             continue
         on_keeper = bool(row["hidden"])
@@ -463,7 +470,8 @@ def run(data, config=None, only=None, stacks=None, changed=None):
                       "bindings": sum(f["bindings"] for f in findings if f["check"] == check)} for check in CHECKS}
     hosts = [t for t in cleanups.layers if any(True for _ in cleanups.cleanups(t))]
     return {"layout": {"title": layout.cm.get("title"), "variant": variant},
-            "ok": not findings, "findings": findings, "kept": keeping, "counts": counts,
+            "ok": not findings and (walked is None or walked["settled"]), "findings": findings, "kept": keeping,
+            "counts": counts, "walk": walked,
             "excepted": excepted, "information": {"hidden exit": information},
             "stale_decisions": [] if only else [f"{layer} removes {target}" for layer, target in sorted(set(decided) - used)]
             + ([TOUCHPAD_STALE] if touchpad and not any(e["why"] == touchpad for e in excepted) else [])

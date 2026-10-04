@@ -89,17 +89,18 @@ class MenuButtons(ScenarioCase):
                 pad.hold(button).wait(250).miss(button).hold("A").let_go("A").wait(300).mark().tap(button).wait(300)
                 self.assertEqual(pad.typed(), [key])                         # the menu buttons work normally again
 
-    @scenario("Menu buttons MB10", rules=("R133",), rests=("A25",))
+    @scenario("Menu buttons MB10", rules=("R133", "R169"), rests=("A25",))
     def test_a_stuck_entry_point_clears_on_the_other_menu_button(self):
         for pad in self.each():
             pad.hold("Start").wait(50).miss("Start")
             self.assertEqual(pad.top, "Menu Right: Entry Point")
-            pad.push("RS").wait(300).recentre("RS")                          # the right-stick edge doesn't make it worse
-            self.assertEqual(pad.names()[:2], ("Base", "Menu Right: Entry Point"))
             pad.mark().tap("Select").wait(300)
             self.assertFalse([t for t in pad.stack if "Menu" in t])
             pad.mark().tap("Select").wait(300)
             self.assertEqual(pad.typed(), ["ESCAPE"])                        # and then works normally
+        for pad in self.each():                                              # since 90.24 a stick touch clears it too (R169);
+            pad.hold("Start").wait(50).miss("Start").touch("RS")             # until 90.23 only the other menu button did
+            self.assertFalse([t for t in pad.stack if "Menu" in t])
 
 
 class ModifierLayers(ScenarioCase):

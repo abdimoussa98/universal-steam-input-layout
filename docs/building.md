@@ -7,13 +7,13 @@ is lost on the next install.
 
 ## The builder
 
-The current builder is in the newest build folder under `findings/`: at 90.22,
-[findings/2026-10-03-gamepad](../findings/2026-10-03-gamepad/README.md).
+The current builder is in the newest build folder under `findings/`: at 90.24,
+[findings/2026-10-04-required-cleanups](../findings/2026-10-04-required-cleanups/README.md).
 
 ```bash
-python3 findings/2026-10-03-gamepad/build_candidate.py            # builds the candidates in that folder
-python3 findings/2026-10-03-gamepad/install_neptune.py --deck     # a trial copy in that folder's deck/
-python3 findings/2026-10-03-gamepad/install_neptune.py --version 90.23   # writes neptune/ and exports the VDFs
+python3 findings/2026-10-04-required-cleanups/build_candidate.py            # builds the candidates in that folder
+python3 findings/2026-10-04-required-cleanups/install_neptune.py --deck     # a trial copy in that folder's deck/
+python3 findings/2026-10-04-required-cleanups/install_neptune.py --version 90.25   # writes neptune/ and exports the VDFs
 ```
 
 `install_neptune.py` runs the fix pipeline (`steam_layout.fixes`) and writes
@@ -27,6 +27,8 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.24 | [required-cleanups](../findings/2026-10-04-required-cleanups/README.md) | Every layer has a cleanup function on both stick touches, the stick edges and every button it retypes or blocks (R169 to R171) |
+| 90.23 | [tap-cover-stick-touches](../findings/2026-10-04-tap-cover-stick-touches/README.md) | The menu Tap Cover binds both stick touches |
 | 90.22 | [gamepad](../findings/2026-10-03-gamepad/README.md) | The Gamepad layer and the third transition (78 layers) |
 | 90.21 | [cursor-gyro](../findings/2026-10-03-cursor-gyro/README.md) | The stateful Cursor Gyro layer (76 layers) |
 | 90.20 | [base-pad-click-one-add](../findings/2026-10-03-base-pad-click-one-add/README.md) | Base adds the Click Entry Point with one Soft Press |

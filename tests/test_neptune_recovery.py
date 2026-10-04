@@ -122,9 +122,8 @@ class NeptuneRecoveryTests(unittest.TestCase):
                     self.assertEqual(ls["mode"], "dpad")
                     self.assertEqual(ls["settings"]["edge_binding_invert"], "0")
                     if title in ('Transition Set 0', 'Transition Set 1', 'Transition Set 2'):
-                        for group in (ls, rs):
-                            self.assertEqual(group['inputs']['edge']['activators'],
-                                             {'Full_Press': {'bindings': {'binding': EMPTY}}})
+                        for group in (ls, rs):                      # a cleanup since 90.24 (R170)
+                            self.assert_menu_cleanup(group['inputs']['edge']['activators'], title)
                     elif title in ('Menu Left: Entry Point', 'Menu Right: Entry Point'):
                         # Both sticks are D-pads with the same edge; each adds its own stick guard.
                         for group, stick in ((ls, 'Left'), (rs, 'Right')):
@@ -132,7 +131,10 @@ class NeptuneRecoveryTests(unittest.TestCase):
                             self.assertEqual(group['settings']['edge_binding_radius'], '4915')
                             self.assertEqual(group['settings']['edge_binding_invert'], '0')
                             activators = group['inputs']['edge']['activators']
-                            self.assertEqual(set(activators), {'chord'})
+                            self.assertEqual(set(activators), {'chord', 'Full_Press'})
+                            cleanup = activators['Full_Press']      # since 90.24 (R170); the chord is its guard
+                            self.assertEqual(cleanup['settings'], {'hold_repeats': '1'})
+                            self.assertIn(removal(title), cleanup['bindings']['binding'])
                             chord = activators['chord']
                             self.assertEqual(chord['settings'], {'chord_button': next(iter(selectors)), 'hold_repeats': '1',
                                                                  'repeat_rate': '50', 'interruptable': '0'})
@@ -152,9 +154,19 @@ class NeptuneRecoveryTests(unittest.TestCase):
                         self.assert_recovery(ls["inputs"]["edge"], selectors, targets)
                         self.assertEqual(ls["inputs"]["edge"], rs["inputs"]["edge"])
 
-    def test_transitions_block_the_stick_edges_and_touch_only_clears_the_trio(self):
-        # A transition has no stick-touch or edge recovery (since 90.10): a stuck one ends on the
-        # next tap of either menu button.
+    def assert_menu_cleanup(self, activators, title, also=()):
+        """A cleanup function guarded by either menu button, beside the entries named in `also`."""
+        self.assertEqual(set(activators), {'Full_Press', 'chord', *also})
+        self.assertEqual(activators['chord'], {'bindings': {'binding': EMPTY}, 'settings': {
+            'gyro_ratchet_button_mask': '20480', 'gyro_ratchet_button_requireany_or_all': '0', 'interruptable': '0'}})
+        cleanup = activators['Full_Press']
+        self.assertEqual(cleanup['settings'], {'hold_repeats': '1'})
+        stored = cleanup['bindings']['binding']
+        self.assertIn(removal(title), stored if isinstance(stored, list) else [stored])
+
+    def test_transitions_have_a_cleanup_on_the_stick_edges_and_touches_and_the_release_only_clears_the_trio(self):
+        # From 90.10 to 90.23 a transition had no stick-touch or edge recovery: a stuck one ended on the
+        # next tap of either menu button. Since 90.24 it has a cleanup function on both (R169, R170).
         for variant, layout in self.layouts.items():
             for title in ("Transition Set 0", "Transition Set 1", "Transition Set 2"):
                 for source in ("joystick", "right_joystick"):
@@ -162,10 +174,9 @@ class NeptuneRecoveryTests(unittest.TestCase):
                         with self.subTest(variant=variant, layer=title, source=source, input=name):
                             value = self.source(layout, title, source)["inputs"][name]
                             if name == 'edge':
-                                self.assertEqual(value['activators'],
-                                                 {'Full_Press': {'bindings': {'binding': EMPTY}}})
+                                self.assert_menu_cleanup(value['activators'], title)
                             else:
-                                self.assertEqual(set(value['activators']), {'release'})
+                                self.assert_menu_cleanup(value['activators'], title, also=('release',))
                                 prefix = 'LST' if source == 'joystick' else 'RST'
                                 self.assertEqual(value['activators']['release']['bindings']['binding'],
                                     [removal(prefix + ': ' + suffix) for suffix in

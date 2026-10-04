@@ -398,6 +398,136 @@
       "why": "The commit is the menu button's own Release, so that button is up when Gamepad lands and its Long Press can't be running. Only a second menu button still held at the commit lands in Gamepad held, and may send its button once (A10).",
       "decided": "Proposed in plans/2026-10-03-cursor-gyro-and-gamepad.md; the author told me to build it, 2026-10-03",
       "todo": null
+    },
+    {
+      "rule": "R170",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard"
+        ],
+        "inputs": [
+          "right_joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "Each menu stick guard handles only its own stick. It leaves the other stick's edge open, so the Entry Point's add of the other guard still comes through.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R170",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "Each menu stick guard handles only its own stick. It leaves the other stick's edge open, so the Entry Point's add of the other guard still comes through.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R170",
+      "scope": {
+        "layers": [
+          "Steering | LS: Entry Guard",
+          "Steering | LS: Fallback Hold"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "The left stick being out is what keeps these two layers on, and its edge Release is their exit, so nothing can guard a cleanup function there. Their cleanup function goes on the right-stick edge, guarded by the left stick being out.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Menu Buttons: Right Stick Guard"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Menu Left: Entry Point"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Menu Right: Entry Point"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Stateful | Menu Left: Entry Point"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Stateful | Menu Right: Entry Point"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard",
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper",
+            "left_trigger/click",
+            "right_trigger/click"
+          ],
+          "alternative": [
+            "switch/left_bumper",
+            "switch/right_bumper",
+            "left_trigger/edge",
+            "right_trigger/edge",
+            "left_trigger/click",
+            "right_trigger/click"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "The guards bind only the menu buttons and the sticks, so the bumpers and triggers come from the Entry Point underneath. Since 90.24 each of those carries the Entry Point's cleanup function (R171), whose chord and list name that Entry Point, so the input differs between the four. The player sees the same thing in every stack: with the menu button held the input does what it did, and with it not held the stale menu layers are removed.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
     }
   ]
 }

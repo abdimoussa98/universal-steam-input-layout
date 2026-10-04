@@ -201,11 +201,10 @@ class HiddenExitTests(unittest.TestCase):
         data = self.landing()
         chains = Chains(Layout(data))
         self.assertNotIn("H", chains.above("P"))                                   # no chain of H's has P under it
-        self.assertIn(("Base", "S", "P", "H"), [after for _, _, after in chains.landings()])
         self.assertEqual(found(data, "hidden exit"), {("hidden exit", "H", "P")})
         finding = next(f for f in audit(data, {})["findings"] if f["check"] == "hidden exit")
         self.assertEqual((finding["example"], finding["inputs"]), ("Base > S > P > H", ["LB"]))
-        self.assertTrue(finding["path"][-1].startswith("landing: S switch/button_x"))
+        self.assertIn("S switch/button_x", finding["path"][-1])                    # S's binding puts H on top
 
     def test_a_landing_that_leaves_the_exit_alone_or_cannot_happen_is_fine(self):
         alone = self.landing(hold={"right_bumper": press(KEY)})                          # H doesn't take LB
@@ -282,10 +281,15 @@ class HiddenExitTests(unittest.TestCase):
 
 
 class HiddenExitSnapshotTests(unittest.TestCase):
-    """The frozen 90.13 snapshots: the prototype's result of 2026-10-02, plus the gap the check missed until
-    landings were counted (2026-10-03). The gap was in the layouts from 90.11 to 90.14 and is fixed in 90.15."""
+    """The frozen 90.13 snapshots: the prototype's result of 2026-10-02, plus two gaps the check missed at first.
+
+    The Fallback Hold over the menu second-press layers needed landings (2026-10-03); it was in the layouts
+    from 90.11 to 90.14 and is fixed in 90.15. The menu Tap Cover over a pad layer needed every stack of the
+    walk with extra presses to be tested (2026-10-04); it has been in the layouts since 90.10."""
     FALLBACK_HOLD = {("Steering | LS: Fallback Hold", lower) for lower in (
         "Menu Left: Escape", "Menu Left: Double Tap Cover", "Menu Right: Tab", "Menu Right: Double Tap Cover")}
+    TAP_COVER = {(upper, lower) for upper in ("Menu Left: Entry Point", "Menu Right: Entry Point")
+                 for lower in ("RST: Entry Point", "RST: Tap Cover", "RST: Temporary Gyro")}
 
     @classmethod
     def setUpClass(cls):
@@ -297,10 +301,13 @@ class HiddenExitSnapshotTests(unittest.TestCase):
             with self.subTest(variant):
                 report = audit(data, {"cleanups": {"touchpad_exits": "set aside"}})
                 hidden = [f for f in report["findings"] if f["check"] == "hidden exit"]
-                self.assertEqual({(f["layer"], f["target"]) for f in hidden}, self.FALLBACK_HOLD)
-                for finding in hidden:                     # the stack, and the lower layer's binding that built it
-                    self.assertTrue(finding["example"].startswith("Base > Steering > Menu "), finding["example"])
-                    self.assertTrue(finding["path"][-1].startswith("landing: Steering joystick/dpad_"), finding["path"])
+                self.assertEqual({(f["layer"], f["target"]) for f in hidden}, self.FALLBACK_HOLD | self.TAP_COVER)
+                for finding in hidden:                     # the stack, and the binding that put the upper layer on it
+                    if (finding["layer"], finding["target"]) in self.FALLBACK_HOLD:
+                        self.assertTrue(finding["example"].startswith("Base > Steering > Menu "), finding["example"])
+                        self.assertIn("Steering joystick/dpad_", finding["path"][-1], finding["path"])
+                    else:
+                        self.assertTrue(finding["example"].endswith("Menu Buttons: Tap Cover"), finding["example"])
                 self.assertEqual(len([e for e in report["excepted"] if e["on_keeper"]]), 68)
                 self.assertEqual(len([e for e in report["excepted"] if not e["on_keeper"]]), 26)
                 self.assertEqual({(i["layer"], i["target"]) for i in report["information"]["hidden exit"]},
@@ -309,14 +316,15 @@ class HiddenExitSnapshotTests(unittest.TestCase):
 
     def test_the_touchpad_pairs_fail_without_the_exception(self):
         report = audit(self.data["default"], {})
-        self.assertEqual(len([f for f in report["findings"] if f["check"] == "hidden exit"]), 68 + 4)
+        self.assertEqual(len([f for f in report["findings"] if f["check"] == "hidden exit"]), 68 + 4 + 6)
 
-    def test_the_working_layouts_have_no_landing_over_a_keepers_exit(self):
+    def test_the_working_layouts_have_no_hidden_exit(self):
         for variant in ("default", "alternative"):
             data = json.loads((ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json").read_text(encoding="utf-8"))
             report = audit(data, {"cleanups": {"touchpad_exits": "set aside"}})
             with self.subTest(variant):
-                self.assertEqual([f for f in report["findings"] if f["check"] == "hidden exit"], [])
+                self.assertEqual(sorted(f"{f['layer']} over {f['target']}" for f in report["findings"]
+                                        if f["check"] == "hidden exit"), [])
 
 
 class NeverThereTests(unittest.TestCase):
@@ -399,7 +407,7 @@ class SnapshotTests(unittest.TestCase):
             path = ROOT / f"versions/neptune/90.10/single-set-{variant}_hold-gyro_90.10.json"
             data = json.loads(path.read_text(encoding="utf-8"))
             cls.cleanups[variant] = Cleanups(Layout(data))
-            cls.reports[variant] = audit(data, {})
+            cls.reports[variant] = audit(data, {}, extras=None)       # the six list checks; 90.10 predates R136
 
     def pairs(self, variant, check):
         return {(f["layer"], f["target"]) for f in self.reports[variant]["findings"] if f["check"] == check}
@@ -570,7 +578,7 @@ class FixedSnapshotTests(unittest.TestCase):
             data = json.loads((ROOT / f"versions/neptune/90.10/single-set-{variant}_hold-gyro_90.10.json").read_text())
             report = cleanup_lists.fix(data, {})
             with self.subTest(variant):
-                self.assertEqual([f for f in audit(data, {})["findings"] if f["check"] != "hidden exit"], [])
+                self.assertEqual(audit(data, {}, extras=None)["findings"], [])
                 self.assertEqual(report["remaining"], 0)
                 layout = Layout(data)
                 for title in layout.presets:
@@ -585,8 +593,8 @@ class ScriptTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "layout.json"
             path.write_text(json.dumps(data), encoding="utf-8")
-            return subprocess.run([sys.executable, "-m", "tools.audit_cleanups", str(path), *args],
-                                  capture_output=True, text=True, cwd=ROOT)
+            return subprocess.run([sys.executable, "-m", "tools.audit_cleanups", str(path), "--no-required", *args],
+                                  capture_output=True, text=True, cwd=ROOT)        # the toys show the list checks alone
 
     def test_exit_codes(self):
         self.assertEqual(self.run_script(owner()).returncode, 0)

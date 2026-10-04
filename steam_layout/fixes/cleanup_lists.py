@@ -169,7 +169,7 @@ def fix(data, config=None):
     function) or drops a layer that is never on the stack at that point, so the stacks stay valid.
     """
     config = load_config(RULES) if config is None else config
-    first, stacks = run(data, config)
+    first, stacks = run(data, config, extras=None)             # no fix resolves an exit finding (R136)
     if not _open(first):
         return {"changed": [], "remaining": 0}     # already clean: the usual case in the pipeline
     variant = "alternative" if "alternative" in data["controller_mappings"].get("title", "") else "default"
@@ -178,4 +178,4 @@ def fix(data, config=None):
     for phase in (_guards, _missing, _unneeded, _hidden):
         layout = Layout(data)
         changed += phase(layout, Cleanups(layout, stacks), keep)
-    return {"changed": changed, "remaining": len(_open(run(data, config, stacks=stacks)[0]))}
+    return {"changed": changed, "remaining": len(_open(run(data, config, stacks=stacks, extras=None)[0]))}

@@ -70,15 +70,17 @@ class FallbackHold(ScenarioCase):
             pad.let_go("R1").wait(50)                                    # the checklist asked: do W and the pulses come back?
             self.assertEqual((pad.top, pad.down()), (HOLD, ["W"]))       # yes, by either way of A9
 
-    @scenario("90.11 F7", rules=("R137",), rests=("A8",))
+    @scenario("90.11 F7", rules=("R137", "R169"), rests=("A6", "A8"))
     def test_the_entry_guard_holds_w_with_no_exit_until_the_stick_has_been_back_to_centre(self):
+        """Until 90.23 the guard also stayed after an entry with the stick centred, through the first push.
+        Since 90.24 its stick-touch cleanup is guarded by the left stick being out (R169): with the stick
+        centred and the thumb resting on it, the cleanup's repeat removes the guard about 100 ms after it
+        lands (A6), and the first push gets the Fallback Hold."""
         for pad in self.each():
             pad.enter_steering(settle=False)                             # stick centred at entry
-            pad.mark().push("LS", "up").wait(3000)
-            self.assertEqual((pad.top, pad.down()), (GUARD, ["W"]))
-            self.assertEqual(pad.seen("haptic", "beep"), [])
-            pad.recentre("LS").push("LS", "up")
-            self.assertEqual(pad.top, HOLD)
+            self.assertEqual(pad.top, GUARD)
+            pad.mark().push("LS", "up").wait(200)
+            self.assertEqual((pad.top, pad.down()), (HOLD, ["W"]))
         for pad in self.each():
             pad.push("LS", "up").hold("Start").click("LS").let_go("Start")   # stick already up at entry
             pad.mark().wait(3000)
@@ -123,21 +125,27 @@ class FallbackHold(ScenarioCase):
             pad.mark().let_go("Start")
             self.assertNotIn("TAB", pad.typed())                         # held past 200 ms with a stick out: silent
 
-    @scenario("90.11 F11", rules=("R137",))
+    @scenario("90.11 F11", rules=("R137", "R171"))
     def test_start_and_select_type_their_keys_in_the_entry_guard(self):
         for pad in self.each():
-            pad.enter_steering(settle=False).mark()
+            pad.push("LS", "up").hold("Start").click("LS").let_go("Start").mark()   # the stick is out at entry
             pad.tap("Start").tap("Select")
             self.assertEqual((pad.typed(), pad.top), (["TAB", "ESCAPE"], GUARD))
             pad.hold("Start").wait(1000)
-            self.assertEqual((pad.top, pad.down()), (GUARD, ["TAB"]))    # no Fn
-            pad.let_go("Start").flick("LS", "left").wait(300)            # out and back once ends the guard
+            self.assertEqual((pad.top, sorted(pad.down())), (GUARD, ["TAB", "W"]))   # no Fn
+            pad.let_go("Start").recentre("LS").wait(300).mark()          # back to centre ends the guard
             pad.hold("Start").wait(300)
             self.assertEqual(pad.top, "Menu Right: Fn Layer")            # Start's Fn is back
             pad.let_go("Start")
         for pad in self.each():
             pad.enter_steering(settle=False).hold("R1").let_go("R1")      # a driver press ends it too
             self.assertTrue(pad.lacks(GUARD))
+        for pad in self.each():                # since 90.24: with the stick centred, a Start press removes the guard
+            pad.enter_steering(settle=False).mark()                      # (its cleanup, R171), and Steering's Start answers
+            pad.hold("Start")
+            self.assertTrue(pad.lacks(GUARD))
+            pad.let_go("Start").wait(300)
+            self.assertEqual((pad.typed(), pad.stack), (["TAB"], pad.layers("Base", "Steering")))
 
 
 class NoTurnAssistInSteering(ScenarioCase):

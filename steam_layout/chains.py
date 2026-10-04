@@ -34,9 +34,9 @@ Rules:
   layers: it may start from a declared context such as Base with Gyro, and
   only layers the chain itself added may arrive, not Base's or a context
   layer's (the cover check).
-- `landings()` lists one more adding binding on every visited stack, for the
-  hidden-exit check: a layer that lands through a lower layer's binding is on
-  top of the whole stack, though it is in nobody's chain there (2026-10-03).
+- The Cleanup audit's hidden-exit check wants more than one arrival. A compiled
+  engine does this same walk with up to six of them (native.py,
+  engine/chain_engine.cpp), and tests keep the two in step.
 - Chords are ignored (author, 2026-10-01): every adding binding is followed as
   if its chord could fire. That can add a stack that can't happen, never drop
   one that can.
@@ -84,7 +84,6 @@ class Chains:
             if t.role in SETTLE and t.ops and all(op == "remove_layer" for op, _ in t.ops):
                 self._removing.setdefault(t.layer, []).append(t)
         self._states = None
-        self._landings = None
         self._stacks = {}        # every stack the walk visited -> Why
         self._added = {}         # layer -> {stack right after it was freshly added: Why}
         self._below = {}
@@ -187,24 +186,6 @@ class Chains:
         """{stack: Why} for every stack the walk visited: after each add, and settled or with an arrival."""
         self.states
         return self._stacks
-
-    def landings(self):
-        """[(stack before, binding, stack after)]: every adding binding that answers on a stack the walk visited.
-
-        This is "what can land on this stack next", one binding at a time, whichever layer of the stack the
-        binding belongs to. `above` doesn't see these: it only knows a layer's own chain and one bystander, so a
-        layer that a lower layer's binding adds on top of another layer's stack (an arrival) is missing there.
-        The hidden-exit check reads them (cleanups.covered_exits).
-        """
-        if self._landings is None:
-            self._landings = []
-            for stack in list(self.stacks()):
-                for t in (t for layer in stack for t in self._adding.get(layer, ())):
-                    if self.fires(t, stack):
-                        after = apply_ops(stack, t.ops, self.layout.base)
-                        if after != stack:
-                            self._landings.append((stack, t, after))
-        return self._landings
 
     def added(self, title):
         """{stack: Why} right after `title` was added by a binding that didn't already have it on the stack."""

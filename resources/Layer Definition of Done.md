@@ -193,8 +193,8 @@ See: [Held inputs](Steam%20Input%20JSON%20Structure.md#held-inputs-across-layer-
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
-| R116 | Every layer binds both stick-touch Releases itself. Only a cover-type layer may inherit them. `Gyro` and `Cursor Gyro` inherit Base's, and the `LST` and `RST` helpers bind only their own stick | `L1: Modifier 0` binds both. `L1: Temp Cursor Gyro`, a cover-type layer, inherits them | Author, 2026-09-30 | Not checked yet | A1 | None |
-| R117 | A stick-touch Release clears only its own side's three helpers: the `LST` or `RST` `Entry Point`, `Tap Cover` and `Temporary Gyro`. It never removes `Gyro`, the other stick's helpers or an owner that is still valid | In `L1: Modifier 0` the left-stick touch Release removes the three `LST` layers and leaves `Gyro`, the `RST` layers and R1's layers | Author, 2026-09-30 | `test_neptune_recovery.test_transitions_block_the_stick_edges_and_touch_only_clears_the_trio` (part); Scenario tests (part) | — | None |
+| R116 | Every layer binds both stick-touch Releases itself, covers included since 90.24 (R169). `Gyro`, `Cursor Gyro` and `Gyro Off Ramp Up` inherit them, and the `LST` and `RST` helpers bind only their own stick | `L1: Modifier 0` binds both. `L1: Temp Cursor Gyro`, a cover-type layer, inherited them until 90.23 and binds both since 90.24 | Author, 2026-09-30 | `test_tap_cover_stick_touches.test_the_cover_binds_both_stick_touches_itself` (part); Scenario tests (part) | A1 | None |
+| R117 | A stick-touch Release clears only its own side's three helpers: the `LST` or `RST` `Entry Point`, `Tap Cover` and `Temporary Gyro`. It never removes `Gyro`, the other stick's helpers or an owner that is still valid | In `L1: Modifier 0` the left-stick touch Release removes the three `LST` layers and leaves `Gyro`, the `RST` layers and R1's layers | Author, 2026-09-30 | `test_neptune_recovery.test_transitions_have_a_cleanup_on_the_stick_edges_and_touches_and_the_release_only_clears_the_trio` (part); Scenario tests (part) | — | None |
 | R118 | An Always On window's stick-touch Release removes the window first, then that side's helpers. The `LST` and `RST` windows bind no Release on their own stick | `L1: Double Tap`'s left-stick touch Release stores the window's removal last, so it runs first | Author, 2026-09-30 | `test_double_tap_windows.test_stick_touch_release_removes_the_window_first_then_the_side_trio` | A4 | None |
 
 **R116.** A cover-type layer is a lightweight layer that is only
@@ -204,9 +204,13 @@ is `Gyro Off Ramp Up`; the `LST` and `RST` Tap Covers are helpers, not covers
 ([flow_config.json](../steam_layout/flow_config.json), `covers`). Whether a
 new kind of layer counts is still a judgment call. Current cover-type layers:
 - the Tap Covers and the Double Tap Covers, including the steering
-  `LS: Tap Cover` and `LS: Double Tap Cover` (since 90.7) and
-  `Menu Buttons: Tap Cover` (since 90.10). The two menu stick guards are not
-  covers: they bind both stick touches with their own recovery
+  `LS: Tap Cover` and `LS: Double Tap Cover` (since 90.7). The two menu
+  stick guards are not covers: they bind both stick touches with their own
+  recovery. `Menu Buttons: Tap Cover` (since 90.10) is a cover by its title
+  but binds both stick touches itself since 90.23, with the guards' recovery:
+  a pad layer under it can change the right stick's mode, and then nothing
+  was inherited
+  ([record](../findings/2026-10-04-tap-cover-stick-touches/README.md))
 - Temp Cursor Gyro
 - `Gyro Off Ramp Up`. Its only delay is a 5 ms right-stick handoff to
   `Turning Ramp Up 0`, which is a threshold handoff rather than a hold, so a
@@ -232,6 +236,12 @@ second-touch transition, which also removes the window first
   - `LST/RST: Entry Point`, `Tap Cover` and `Temporary Gyro` are the layers
     that the release removes. They need a release only on their own stick,
     not the opposite one.
+- **R169 ended the cover case** (author, 2026-10-04): a cover needs a cleanup
+  function on both stick touches, so it binds them and restates the Release.
+  90.24 did that for the ten covers that inherited
+  ([record](../findings/2026-10-04-required-cleanups/README.md)). On a cover
+  the Release only clears that side's three helpers: the owner's Release is
+  what adds the cover. `Gyro Off Ramp Up` is a ramp layer and still inherits.
 - A static check on 2026-09-30 found every other layer compliant after
   [`Transition Set 0` was patched](../findings/2026-09-30-touch-release-rule/README.md).
 
@@ -378,9 +388,12 @@ Four words these rules use ([Vocabulary](Layout%20Vocabulary.md#terms)):
 | R131 | A cleanup function never removes a stateful layer, a stick-touch helper, a window, or a layer another button keeps alive | `L1: Modifier 0`'s cleanup function leaves `Gyro`, the `RST` helpers, `L1: Double Tap` and R1's layers | Author, 2026-10-02 | Cleanup audit: outside the guard; `cleanup_lists` fix; Scenario tests (part) | — | None |
 | R132 | A cleanup function, a Release and the Modifier 2 quick tap list only layers that can be on the stack with their host. A deliberate clear keeps its whole list, and a stick-touch Release keeps its three helpers | `L1: Modifier 0`'s cleanup function doesn't list `Gyro \| L1: Modifier 0`: the two are never on the stack together | Author, 2026-10-02 | Cleanup audit: never there; `cleanup_lists` fix | — | None |
 | R133 | A cleanup function has the guarded recovery shape: on one input, a chord for each valid owner beside an interruptible Regular Press with Hold to Repeat that removes the layers | Right-stick touch in `L1: Modifier 0`: an empty chord with LB, and a repeating Regular Press that removes LB's layers when LB isn't held | Standardised 2026-09-28 | `test_neptune_recovery.test_all_guarded_removals_repeat_and_rtp_stays_out_of_ls_scope`; Scenario tests (part) | A25, A27, A30 | None |
-| R134 | A stick edge gets a cleanup function only where the layer needs one: the left edge costs the WASD modifier and the right edge costs ramp-up | `L1: Modifier 0` has one on both stick edges; `RTP: Entry Point` was left without a left-edge one | Author, 2026-09-28 | Scenario tests (part) | — | None |
+| R134 | A stick edge gets a cleanup function only where the layer needs one: the left edge costs the WASD modifier and the right edge costs ramp-up | `L1: Modifier 0` has one on both stick edges; `RTP: Entry Point` was left without a left-edge one | Author, 2026-09-28 | Retired, 2026-10-04: R170 replaces it. It says which layers need a cleanup function on a stick edge, where this rule left it to judgment | — | None |
 | R135 | A cancellation removes only itself, repeats, is uninterruptible and has no guard | Each of `L1: Temp Cursor Gyro`'s 15 cancel inputs removes only the cursor, which exposes the modifier's own binding | Author, 2026-10-02 | `test_neptune_cursor.test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent`; `test_cursor_gyro.test_both_sticks_out_remove_only_the_layer`; Scenario tests (part) | A27 | None |
 | R136 | Hidden exit: a layer that can land on top of another may not cover an exit on what keeps the lower layer alive, unless it removes the lower layer there | In the first 90.11 build a Start tap put a menu Double Tap window over `Steering \| LS: Fallback Hold`. Recentring inside the window missed the layer's Release and left it on | Author, 2026-10-02 | Cleanup audit: hidden exit; Cleanup audit: exit to review; Scenario tests (part) | — | Touchpad layers are set aside for now, 68 cases on 90.13, 71 on 90.15 and 99 on 90.16 (author, 2026-10-02; [to-do](../todos.md#steering)) |
+| R169 | Stick touches: every layer has a cleanup function on both stick touches, covers included. Left out: an Always On window, a stateful layer, a ramp layer and the six stick-touch helpers | `L1: Modifier 0` has one on both touches, guarded by LB. Until 90.23 `Menu Left: Double Tap Cover` bound neither touch and `Menu Left: Escape` only the Release; 90.24 gave both one | Author, 2026-10-04 | Cleanup audit: touch without cleanup; Scenario tests (part) | — | None |
+| R170 | Stick edges: a layer that binds or blocks a stick's edge has a cleanup function on that edge. A layer that binds or blocks a face button, a D-pad direction, Start, Select or a back button has one on both edges. Left out: an Always On window, a stateful layer and a ramp layer | `L1: Modifier 0` retypes the face buttons and has one on both edges. `RTP: Entry Point` binds only the right-stick edge, has one there, and leaves the left edge open. Until 90.23 the three transitions blocked both edges with an empty binding; since 90.24 each edge is a cleanup guarded by either menu button | Author, 2026-10-04 | Cleanup audit: edge without cleanup; Scenario tests (part) | — | Each menu stick guard handles only its own stick: the other stick's edge stays open, so the Entry Point's add of the other guard comes through. `Steering \| LS: Entry Guard` and `Steering \| LS: Fallback Hold` have none on the left-stick edge: that stick keeps them on (author, 2026-10-04) |
+| R171 | Buttons: every button a layer retypes or blocks carries a cleanup function on that button. The buttons are the face buttons, the D-pad, Start, Select, the back buttons, the bumpers, and each trigger's pull and full pull. A block with an empty binding counts as a retype. Left out: the layer's own button (its Release removes the layer), a button that removes the layer by cancellation (R135), an Always On window, a stateful layer and a ramp layer | `L1: Modifier 0` carries one on A; LB is its own button. Each button of `L1: Temp Cursor Gyro` removes the cursor, so it passes. Until 90.23 `L1: Scroll Down` retyped Start and Select without one; since 90.24 the key is in the guard chord and the cleanup is the Regular Press | Author, 2026-10-04 | Cleanup audit: button without cleanup; Scenario tests (part) | — | None |
 | R138 | The held button's layer owns its combos. No layer exists only to protect a second button that is still held | Hold Start, hold LB for F10, lift Start: LB falls through to Base and becomes the L1 modifier. `Menu Left: Backspace` and `Menu Right: Enter` were removed in 90.9 | Author, 2026-10-01 | `menu_combo_keys` fix (part); `test_fixes.test_overlays_are_gone_and_nothing_references_them` (part); Scenario tests (part) | A10 | None |
 
 Notes:
@@ -390,13 +403,25 @@ Notes:
 - **R133, stuck-layer recovery (owners only):** put an owner-held chord and an
   interruptible, repeating Regular Press removal on the inputs likely to be
   used next. Guard against every valid owner.
-- **R134, stick edges:** add edge cleanup only where it's needed.
-- **R127 to R132** are the six cleanup rules (author, 2026-10-02): every
-  layer takes care of itself and what is below it, and of what is above it if
-  it has that responsibility.
-  [Full text and measurements](../findings/2026-10-02-cleanup-boundaries/README.md#the-rules) ·
-  the Cleanup audit checks them ([§10](#10-ship-it)) and the `cleanup_lists`
-  fix applies them.
+- **R169 to R171** are the required cleanups (author, 2026-10-04): a layer
+  has a cleanup function on both stick touches, on the stick edges, and on
+  every button it retypes or blocks. They replace R134, which left the
+  stick edges to judgment. The guard is the layer's own: the button that
+  keeps it on, either menu button for the stick guards and the transitions,
+  a driver for the Steering stick modifiers, and the left stick being out
+  for the Entry Guard and the Fallback Hold.
+  - The Cleanup audit reads each layer on its own
+    ([required_cleanups.py](../steam_layout/required_cleanups.py)). A
+    cleanup function counts when it is on that input and removes the layer
+    itself. An input the author accepts without one is an exception to
+    R169, R170 or R171 in the register.
+  - A ramp layer is one that no button, thumb or stick keeps on: a
+    cancellation or a return to centre ends it.
+  - Not read: a group in another mode than the layer below also blocks an
+    input (A2). That depends on the stack, so R136 covers it.
+  - **90.24 applies them** to 174 inputs in the default layout and 196 in the
+    alternative, with the author's five decisions
+    ([record](../findings/2026-10-04-required-cleanups/README.md)).
 - **R132, other layers' lists:** add a new layer's removal only to a list
   whose host can be on the stack with it. Never add it to the other side's
   lists or to a persistent mode's lists.
@@ -409,6 +434,13 @@ Notes:
   chain or as one bystander, and the Fallback Hold over the menu second-press
   layers went unseen from 90.11 to 90.14
   ([record](../findings/2026-10-03-menu-second-press-keys/README.md#why-the-hidden-exit-check-missed-it)).
+  Since 2026-10-04 the check reads the chain walk with **six extra presses**
+  (author): one layer's chain with up to six arrivals along it, every layer of
+  every stack tested, and every stack one landing past them. A compiled engine
+  does the walk, so the audit needs a C++ compiler. Before that the check
+  tested one example stack for each pair of layers, and `Menu Buttons: Tap
+  Cover` over a pad layer went unseen from 90.10 to 90.22
+  ([record](../findings/2026-10-03-simultaneous-cap/README.md)); 90.23 fixed it.
   When a source mode change is what covers the exit, the pair names the first
   layer above that changed the mode, not the layer on top. A layer
   that covers an exit which isn't on the keeper is listed as information: the
@@ -676,7 +708,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 | R166 | A Steam behaviour that a rule, a design or a test depends on has a row in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md): its status, whether the layout relies on it, one way to verify it, and what rests on it | A37 was written down when the press simulator had to choose one: a key stays down when the layer answering a held input changes and the new binding sends the same key | Author, 2026-10-02: part C of the [plan](../plans/2026-10-02-rule-registry.md) | `test_rule_registry.test_every_assumption_a_rule_rests_on_exists` (part); `test_rule_registry.test_rests_on_and_what_rests_on_it_agree` (part); `test_scenario_registry.test_the_rules_and_assumptions_a_scenario_names_exist` (part) | — | None |
 | R167 | The release's record lists every assumption that isn't verified, with the rules and scenario tests that rest on it. A layer whose tests pass but rest on one is done, and listed | For 90.13 the list has 19 assumptions, and 40 of the 87 scenarios rest on one of them; A8, the stick edge's Release in a layer added with the stick out, carries nine | Author, 2026-10-02: "done, and listed" | Not checked yet | — | None |
 | R164 | Before a release ships, its change report is written to the release's findings folder and read: every change in it is one somebody decided | The report for 90.13 shows `Steering` gaining an empty right-stick edge, which was decided, and the two Steering stick windows losing their trigger-edge mouse buttons, which the `window_routes` fix did on its own | Author, 2026-10-02 | Not checked yet | — | None |
-| R156 | The working layouts are generated: they equal the current builder's output run through the fix pipeline. A hand edit there is lost on the next install | `neptune/*_latest.json` equals the output of `findings/2026-10-03-base-pad-click-one-add/build_candidate.py`, apart from title and description | Since the 09-30 builder | `test_gamepad.test_working_layouts_are_this_build` | — | None |
+| R156 | The working layouts are generated: they equal the current builder's output run through the fix pipeline. A hand edit there is lost on the next install | `neptune/*_latest.json` equals the output of `findings/2026-10-04-required-cleanups/build_candidate.py`, apart from title and description | Since the 09-30 builder | `test_required_cleanups_build.test_working_layouts_are_this_build` | — | None |
 
 - [ ] **R150: the build audit is clean, on every version.** `python3 -m tools.audit_build`
       runs the four audits below on both variants and exits 0 only when all
@@ -687,7 +719,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
       | Budget audit | `audit_command_budget.py` | Three entries per input, no banned activators, and no layer command on an inverted D-pad stick edge ([§3](#3-activators)) |
       | Window audit | `audit_inheritance.py` | No undecided layer command under an Always On window ([§8](#8-inheritance-and-blocking), [§9](#9-always-on-layers)) |
       | Flow audit | `audit_flow_inheritance.py` | A chain of adding bindings reaches every layer, no cover finding is open, and no changed layer has an unread inherited input ([§5](#5-stick-touch-release), [§8](#8-inheritance-and-blocking)) |
-      | Cleanup audit | `audit_cleanups.py` | Every cleanup function and release follows the six cleanup rules, and no layer hides another's exit ([§7](#7-cleanup)) |
+      | Cleanup audit | `audit_cleanups.py` | Every cleanup function and release follows the six cleanup rules, no layer hides another's exit, and every layer has the cleanup functions R169 to R171 require ([§7](#7-cleanup)) |
 
       What a clean build audit doesn't prove: it follows the intended flows,
       not every runtime interleaving, missed release or timer race. The

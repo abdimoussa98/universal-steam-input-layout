@@ -5,6 +5,9 @@
 - `chains`: backward chains, the stacks that can be under a layer (who adds it,
   back to the action set, plus bystanders), each with the bindings that built
   it. The stack source for every audit since 2026-10-01.
+- `native`: the compiled engine for the chain walk with extra presses
+  (`engine/chain_engine.cpp`, built on first use). The Cleanup audit's
+  hidden-exit check reads it, with six extra presses; `chains` is its reference.
 - `inheritance`: the Window audit, the blocking rule for Always On layers
   (resources/Layer Definition of Done.md, section 8).
 - `covers`: the cover check. `layer_report`: the per-layer report.

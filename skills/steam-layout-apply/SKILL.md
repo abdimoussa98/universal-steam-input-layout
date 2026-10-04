@@ -19,6 +19,10 @@ If export fails, report the blocker and keep the task incomplete rather than
 claiming the layout is ready. Exporting a local VDF does not authorize a commit
 or an upload to Steam.
 
+**All work is on `main`** (author, 2026-10-03). Don't create a branch or a
+worktree for a release, also when an agent's own default says to branch before
+committing. When the author asks for a commit, it goes on `main`.
+
 ## Required publication metadata
 
 **R151.** Every publication of a changed layout must include a reviewed description and
@@ -123,6 +127,12 @@ exit **0**: every cleanup function and release follows the six cleanup rules
 resolves its findings (`python3 -m steam_layout.fixes <layout> --dry-run`
 shows what it would change). A removal kept on purpose is an exception to
 R132 in the exceptions register (`steam_layout/flow_config.json`), with its reason.
+
+The same command checks the required cleanups (R169 to R171): a cleanup function
+on both stick touches, on the stick edges, and on every button the layer retypes
+or blocks. No fix resolves these. Add the cleanup function in the builder, or
+record the input as an exception to that rule in the register, with the
+author's reason.
 
 ```bash
 python3 - path/to/layout.json <<'EOF'

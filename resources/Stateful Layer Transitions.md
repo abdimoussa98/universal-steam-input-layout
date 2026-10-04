@@ -135,7 +135,12 @@ menu Tap Cover where the Entry Point would bring in Fn.
 
 - Either menu button: the press does nothing, and the release cleans up (the
   cover, both guards, the Entry Points). No key and no window.
-- Both stick edges are empty, so no guard can be added on top of it.
+- It binds both stick edges, so no guard can be added on top of it: an empty
+  block until 90.23, and its cleanup function since 90.24 (R170).
+- Both stick touches are its own since 90.23: the guards' recovery and chord,
+  and a Release that clears that stick's trio. Before that it inherited them
+  from the guard, and a pad layer between the two lost the right-thumb lift
+  ([record](../findings/2026-10-04-tap-cover-stick-touches/README.md)).
 - Once it has landed it stays until the menu button is released, also when
   the stick recentres.
 
@@ -153,15 +158,20 @@ menu Tap Cover where the Entry Point would bring in Fn.
 - `Transition Set 0` is a copy of `Transition Set 1`. Only the two menu
   Releases differ.
 - **Nothing can be entered from a transition.** Every input that would add a
-  layer underneath is blocked with an empty binding, and gyro and trackpads
-  are disabled. Block, don't replace: the modifier pair no longer scrolls.
-  Outputs that add no layer may pass through.
+  layer underneath is bound in the transition, and gyro and trackpads are
+  disabled. Until 90.23 those inputs were empty blocks. Since 90.24 each holds
+  the transition's cleanup function (R169 to R171): an empty chord with either
+  menu button, beside a repeating removal of the transition. With a menu
+  button held, which is the only valid state, the input still does nothing.
+  The modifier pair no longer scrolls. Outputs that add no layer may pass
+  through.
 - Both layouts get identical transition layers. The modifier and firing
-  pairs are all blocked, so there is nothing to mirror.
+  pairs all hold that cleanup, so there is nothing to mirror.
 - A transition is an Owner for the definition of done: it binds both
-  stick-touch releases. Its recovery for a missed release is the next tap of
-  either menu button, whose Release ends the transition. It has no
-  stick-touch or Select-press recovery.
+  stick-touch releases. Its recovery for a missed release is the next stick
+  touch, stick push, bumper press or trigger pull, which removes it, or the
+  next tap of either menu button, whose Release commits it. From 90.10 to
+  90.23 only the menu tap ended it.
 
 ### (4) The destination
 

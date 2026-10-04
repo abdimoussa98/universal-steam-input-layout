@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "b4d6d14e196580cb6a7f186798a52b93ddc698a965a7cafa3ad0c9c0d51fdaf3",
+      "version_snapshot": "versions/neptune/90.23/single-set-default_hold-gyro_90.23.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "862232403b3ecef7832243c5cf2eeede608b8412f35d4b080079c077fbb2fea4",
+      "version_snapshot": "versions/neptune/90.23/single-set-default_hold-gyro_90.23.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "7272aa2a129f6269e5e8c379b67ac62806070a75a2d8c6d7d5798ce4d9a35217",
+      "version_snapshot": "versions/neptune/90.23/single-set-alternative_hold-gyro_90.23.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "3ce8e12c06337a582cf03906e7ca29a69878d0751b700672e448f35a358b9cd5",
+      "version_snapshot": "versions/neptune/90.23/single-set-alternative_hold-gyro_90.23.vdf"
+    }
+  },
+  "release": "90.23",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-04-tap-cover-stick-touches/default-tap-cover-stick-touches.json",
+      "sha256": "a8dfb1064203bfe1735a77c093332116d687b42e01f1880080a22b49c03efd97"
+    },
+    "alternative": {
+      "path": "findings/2026-10-04-tap-cover-stick-touches/alternative-tap-cover-stick-touches.json",
+      "sha256": "dd5c16515057924c4674199a0363d917fbd50312403ab48256e2672665912aff"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

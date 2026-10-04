@@ -22,7 +22,7 @@ because the author reports buggy behavior with Steam action sets.
 The Deck is used to settle an assumption, once, and again after a Steam update
 that could change it. Each has one procedure in its row of
 [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md).
-What rests on each one, [as of 90.22](findings/2026-10-03-gamepad/unverified-assumptions.txt);
+What rests on each one, [as of 90.24](findings/2026-10-04-required-cleanups/unverified-assumptions.txt);
 `python3 -m tests.scenario` prints the current list.
 
 The layout relies on these seventeen. If one is false, something is broken.
@@ -67,6 +67,12 @@ branch out of the tests:
 
 ## Investigations
 
+- [ ] Why do 19 layers block the trigger's full pull, and can those blocks go? (author, 2026-10-04)
+  - What they are: an empty binding on `left_trigger/click` and `right_trigger/click` in the eight modifiers, the two scroll layers, `Menu Left: Escape`, `Menu Right: Tab`, the four menu Entry Points and the three transitions. 38 inputs in the default layout
+  - What the Cleanup audit says: in the default layout every one covers nothing. Neither Base nor any layer the chains put under them binds the full pull. In the alternative layout 18 cover nothing, and 8 (in `Menu Left: Escape`, `Menu Right: Tab` and Base's two menu Entry Points) cover the two Turning Ramp Up layers, which bind the full pull there
+  - My guess, not checked: they are left from when the full pull added the old trigger layers
+  - The author's decision for now: keep them, and give each a guard and a cleanup under R171 ([suggested fixes](findings/2026-10-04-required-cleanups/suggested-fixes.md), decision 1). If they can go, that is 38 inputs with nothing on them instead of two entries each
+  - To find out: when each block was added (the version snapshots), and whether a stack the chains don't model puts a full-pull binding under one
 - [ ] Could an inverted chord replace the empty guard chord, to free entries under the three-entry rule (R109)? (author, 2026-10-03)
   - The feature: the Steam beta of September 2026 adds **Invert Activation** to the Chorded Press. In the file it is `edge_binding_invert` on the chord, the key the inverted Soft Press uses. Seen in the client installed on the Mac (build of 2026-09-25); not yet in any layout here
   - What it would save: a cleanup function (R133) spends two entries, an empty chord with the owner's button plus the repeating cleanup. One inverted chord, "clean up when the owner's button is not held", would do both. Per layout 140 inputs have that shape, with 152 empty guard chords, and 135 of those inputs are at three entries. A freed entry is what the layers on top of `Cursor Gyro` lack to carry its exit ([plan](plans/2026-10-03-cursor-gyro-and-gamepad.md#decisions))
@@ -215,6 +221,10 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
 - [x] Move the fallback exit timer into `Steering | LS: Fallback Hold` (90.11, author 2026-10-02): the timer ran on while the stick was on A or D. `Steering`'s stick up and down only add the layer; the layer types W or S, exits at 1.5 s and leaves on Release; its edge pulses from the start and carries the reset ([record](findings/2026-10-02-steering-fallback-hold/README.md); 71 layers)
   - Nothing is added over the Fallback Hold or the Entry Guard (author): Start and Select type Tab and Escape there; Steering's Entry Points type W and S on stick up and down instead of inheriting the add
 - [x] Audit check for a hidden exit (built 2026-10-02 as the Cleanup audit's seventh check, rule R136): a layer that can be added over another binds an input whose Release is that layer's exit, without carrying it (the 90.11 menu-tap case). Prototype and 90.12 results in [findings/2026-10-02-hidden-exit](findings/2026-10-02-hidden-exit/README.md); goes in the cleanup audit as a seventh check
+- [x] The hidden-exit check reads the chain walk with six extra presses (author, 2026-10-04): every layer of every stack tested, by a compiled engine (`steam_layout/native.py`, `steam_layout/engine/chain_engine.cpp`); the audit needs a C++ compiler. The capped walk and the first engines of 2026-10-03 are archived ([record](findings/2026-10-03-simultaneous-cap/README.md))
+- [x] **The menu Tap Cover loses a right-thumb lift** (found 2026-10-03; present since 90.10; fixed in 90.23, 2026-10-04: the cover binds both stick touches itself, the author's choice of fix A; [record](findings/2026-10-04-tap-cover-stick-touches/README.md)). `Menu Buttons: Tap Cover` directly over a pad layer that keeps the right stick in mouse mode leaves the right-stick touch unanswered, so `RST: Entry Point`, `RST: Tap Cover` or `RST: Temporary Gyro` stays on: 12 pairs on 90.22, none on 90.23. The build audit failed on them, with no exception (author, 2026-10-04) ([the fixes that were weighed](findings/2026-10-03-simultaneous-cap/suggested-fixes.md))
+  - Not settled, and no longer needed for this: whether a person can hold that stack at all (four thumb controls for two thumbs)
+  - On the Deck: the gesture of scenario 90.23 C1 would also confirm A2 on a stick; it was verified on a pad
   - Touchpad pairs are an exception for now (author, 2026-10-02; next item). On 90.13, 2 pairs remain, both passing: the menu Tap Cover over a stick guard (its menu Release still removes the guard). The 4 turn-assist pairs over the driver layers were fixed in 90.13 by blocking the right-stick edge in `Steering` (author). (A first run also listed 8 modifier pairs; that was a prototype bug, corrected)
   - Decided (author, 2026-10-02): a cleanup function removing the layer later is not a pass. The prototype uses the keeper rule: 0 findings outside the touchpad exception
 - [x] The menu second-press layers inherited the Fallback Hold add (found 2026-10-03 by the 90.14 review; present since 90.11; fixed in 90.15). In Steering, a double-tap-and-hold of Select or Start with the left stick pushed up or down put `Steering | LS: Fallback Hold` over `Menu Left: Escape` or `Menu Right: Tab`, which took the menu button's Release and left the layer on. Both layers now type W and S on stick up and down, as Steering's Entry Points and the menu windows do ([record](findings/2026-10-03-menu-second-press-keys/README.md); scenarios [M1 to M4](tests/test_scenarios_90_15.py))
@@ -359,6 +369,11 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
   - Author confirmed: Start/Select menu interactions are not used during gameplay. Preserve disabled gyro in all six layers and the Escape / Tab RS-edge blocks; WASD modifiers and ramp-up are not required in menu context
   - Superseded 2026-10-01: the Enter / Backspace layers were removed in 90.9, so the still-held second menu button now falls through to Base
   - Background: [button overlays and inherited cleanup](resources/Steam%20Input%20JSON%20Structure.md#button-overlays-and-inherited-cleanup), [vocabulary](resources/Layout%20Vocabulary.md), and both audits
+- [x] **Build the required cleanups (R169 to R171).** Built 2026-10-04 as **90.24** ([record](findings/2026-10-04-required-cleanups/README.md)). Every layer has a cleanup function on both stick touches, the stick edges and every button it retypes or blocks: 174 inputs in the default layout and 196 in the alternative. The rules were enforced first, with 90.23 failing the Cleanup audit on purpose
+  - The author's five decisions (2026-10-04): the full-pull blocks that cover nothing stay and get a cleanup; `RTP: Tap Cover` gets its right-stick group, and the five exits it covers are accepted; in the Steering W and S layers the bind that adds the Modifier 2 layer moved into the guard chord; the two Steering stick covers' left edge is guarded by either driver; the stick guards keep inheriting L1 and R1
+  - Called out by the author: with the right pad touched first and a menu button pressed before `RTP: Tap Cover` lands, the right-stick click starts no transition while the thumb stays on the pad (scenario 90.24 K6)
+  - Four behaviours changed, each with a scenario: a stuck transition ends on a stick or a bumper; `Steering | LS: Entry Guard` only lasts while the left stick is out; the click under `RTP: Tap Cover`; a stale menu cover under a held right pad clears one step later than on 90.23
+- [ ] On the Deck, 90.24: enter Steering with the left stick centred and check the first push (the Entry Guard removes itself about 100 ms after it lands, which rests on A6); rock between the Steering drivers (the bind that adds the Modifier 2 layer is a chord now, A17 and A36)
 
 ## Layer cleanup
 

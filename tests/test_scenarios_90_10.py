@@ -66,17 +66,25 @@ class MenuAndTransitions(ScenarioCase):
             self.assertTrue(pad.lacks("Steering", "Transition Set 0", "Transition Set 1", "Transition Set 2"))
             self.assertEqual(pad.typed(), ["Q", "TAB"])
 
-    @scenario("90.10 T4", rules=("R160",), rests=("A25",))
+    @scenario("90.10 T4", rules=("R160", "R169", "R170", "R171"), rests=("A17", "A25"))
     def test_a_transition_left_by_a_missed_release_ends_on_the_next_menu_tap(self):
-        """The checklist said everything is blocked. What is blocked is every way into a layer; a key that
-        adds no layer still types (Stateful Layer Transitions, the transition layers)."""
+        """From 90.10 to 90.23 only the next menu tap ended a stuck transition: the sticks, bumpers and
+        triggers were blocked. Since 90.24 each of those has a cleanup function guarded by either menu
+        button (R169 to R171), so the next stick touch, push or bumper press ends it as well."""
         for pad in self.each():
-            pad.hold("Start").click("LS").miss("Start")
-            pad.push("RS").recentre("RS").hold("L1").let_go("L1").hold("R1").let_go("R1")
-            self.assertEqual(pad.names()[:2], ("Base", "Transition Set 1"))
-            self.assertFalse([t for t in pad.stack if "Modifier" in t or "Ramp" in t])
+            pad.hold("Start").click("LS").lift("LS").miss("Start").wait(500)
+            self.assertEqual(pad.names()[:2], ("Base", "Transition Set 1"))  # nothing pressed: it is still on
             pad.tap("Start")
             self.assertTrue(pad.has("Steering"))                             # a Start tap in the cross transition
+        for press in (lambda pad: pad.touch("RS"), lambda pad: pad.push("LS", "up"), lambda pad: pad.hold("L1"),
+                      lambda pad: pad.hold("R1")):
+            for pad in self.each():
+                pad.hold("Start").click("LS").lift("LS").miss("Start").wait(500)
+                press(pad)
+                self.assertTrue(pad.lacks("Transition Set 1", "Steering"))   # cleared, and not committed
+        for pad in self.each():                                              # the thumb still on the stick: the guard
+            pad.hold("Start").click("LS").miss("Start").wait(500)            # chord latched while Start was held (A17),
+            self.assertTrue(pad.has("Transition Set 1"))                     # so the held touch does not clear it
         for pad in self.each():
             pad.hold("Select").click("RS").miss("Select").tap("Select")
             self.assertTrue(pad.lacks("Transition Set 0", "Transition Set 1", "Transition Set 2"))

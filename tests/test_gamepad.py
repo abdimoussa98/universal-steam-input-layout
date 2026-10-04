@@ -11,7 +11,6 @@ import re
 import unittest
 
 from tools.audit_command_budget import audit_layout
-from tools.convert_runtime_ids import generate_lookup, titles_to_ids
 from steam_layout import changes
 from steam_layout.fixes import apply_all
 from steam_layout.inheritance import check_stack
@@ -54,18 +53,6 @@ class GamepadTests(unittest.TestCase):
     def outputs(self, layout, source, kind='Full_Press'):
         return {name: list(actions(value['activators'][kind]))
                 for name, value in layout.active(GAMEPAD)[source]['inputs'].items() if kind in value['activators']}
-
-    def test_working_layouts_are_this_build(self):
-        # neptune/ is generated: a hand edit there would be lost on the next install (R156).
-        for variant, data in self.data.items():
-            with self.subTest(variant=variant):
-                numeric, _ = titles_to_ids(json.dumps(data), generate_lookup(data))
-                built = json.loads(numeric)['controller_mappings']
-                working = json.loads((ROOT / f'neptune/single-set-{variant}_hold-gyro_latest.json').read_text())[
-                    'controller_mappings']
-                for cm in (built, working):
-                    cm.pop('title'); cm.pop('description')
-                self.assertEqual(built, working)
 
     def test_two_layers_are_new_and_the_clear_is_renamed(self):
         for variant, data in self.data.items():

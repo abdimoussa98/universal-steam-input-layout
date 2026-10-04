@@ -15,6 +15,18 @@ is how Claude Code finds the skills; another agent can read the files directly.
 | `steam-actionset-delete` | Remove an action set and remap the IDs that shift (older multi-set layouts and imports) |
 | `steam-runtimeid-remap` | Apply an explicit old → new runtime ID mapping to a numeric file |
 
+## Git: all work is on `main`
+
+Author's rule, 2026-10-03. It applies to every skill here and to any other
+work in this repository.
+
+- Stay on `main`. Don't create a branch or a worktree for a change, also when
+  an agent's own default says to branch before committing.
+- If a session finds itself on another branch, say so and ask before moving
+  anything.
+- This changes where commits go, not when: commit only when the author asks,
+  and don't push unless asked.
+
 The skills restate rules next to their IDs (R108 and so on). The rules
 themselves are in the
 [Layer Definition of Done](../resources/Layer%20Definition%20of%20Done.md#rule-tables),
