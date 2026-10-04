@@ -215,7 +215,7 @@ python3 -m tools.audit_cleanups <layout> --extras 4
 
 **The hidden-exit check reads more stacks than the others** (author,
 2026-10-04). The chains allow one extra press along a layer's chain. This
-check walks the same chains with **six**, tests every layer of every stack it
+check walks the same chains with **five** (six until 90.24), tests every layer of every stack it
 builds, and tests every stack one more adding binding past them.
 
 - A compiled engine does the walk: `steam_layout/native.py` builds
@@ -229,14 +229,17 @@ builds, and tests every stack one more adding binding past them.
 - Nothing is stored on disk: the stacks live in the engine's memory for the
   length of the run.
 
-| Extra presses | Stacks on 90.22 and 90.23 | Time for one layout | Memory |
+| Extra presses | Stacks on 90.22 to 90.24 | Time for one layout | Memory |
 |---|---|---|---|
 | 4 | 784,861 | 1 s | 0.2 GB |
-| 6 (default) | 7,728,211 | 20 s | 2 GB |
+| 5 | 2,684,100 | 4 s | 1.5 GB |
+| 6 | 7,728,211 | 20 s | 2 GB |
 | 7 | 19,035,805 | 50 s | 6 GB |
 | 8 | 40,275,669 | 8 minutes | 11 GB |
 
-With the other checks the Cleanup audit takes about 27 seconds for one layout.
+On 90.25 the default of five walks 827,266 stacks, and the whole Cleanup audit
+takes about 4 seconds and 0.9 GB for one layout (six: 2,555,858 stacks, 7
+seconds, 2.3 GB).
 From 4 extra presses on, 90.22 shows the same 12 findings
 ([record](../findings/2026-10-03-simultaneous-cap/README.md)). 90.23 fixed them
 ([record](../findings/2026-10-04-tap-cover-stick-touches/README.md)).

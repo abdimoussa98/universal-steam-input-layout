@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "2cf34a41477946ad2b936c963fadcbaf74b0acdc8aaefefe02d0052115c5b63f",
+      "version_snapshot": "versions/neptune/90.25/single-set-default_hold-gyro_90.25.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "3d0f68f19809511b9f1b635b5c5b27af8f8a813173ae458ecf41ecd7b6ec5aa0",
+      "version_snapshot": "versions/neptune/90.25/single-set-default_hold-gyro_90.25.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "b1e3b5e586260df6d4eb654c5048942c0a1189b9281791bd8c288852d33e83db",
+      "version_snapshot": "versions/neptune/90.25/single-set-alternative_hold-gyro_90.25.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "9f61ac6fc37a4dd15eb2b89964678a2306706b7a62838bb0090b5b24306e17f9",
+      "version_snapshot": "versions/neptune/90.25/single-set-alternative_hold-gyro_90.25.vdf"
+    }
+  },
+  "release": "90.25",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-04-pad-bumps-and-menu-keys/default-pad-bumps-and-menu-keys.json",
+      "sha256": "2b34f3a5f80d1cea0c59acece07c735dcb70b55da006c5a61275d995a1d201fd"
+    },
+    "alternative": {
+      "path": "findings/2026-10-04-pad-bumps-and-menu-keys/alternative-pad-bumps-and-menu-keys.json",
+      "sha256": "dab5c9d72738efcc724a2e147bf7f2f527e20b51d3543ff50e35c32145231d2d"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

@@ -21,10 +21,11 @@ Idempotent; works with numeric IDs or title tokens.
 """
 import copy
 
-from ..model import TARGET, Layout, always_on_layers, bindings
+from ..model import TARGET, Layout, actions, always_on_layers, bindings
 
 EMPTY = "controller_action empty_binding, , "
 SWIPES = ("dpad_west", "dpad_east", "dpad_north", "dpad_south")
+SWIPE_LAYER = "LTP: Entry Point"
 
 
 def cleared():
@@ -32,12 +33,19 @@ def cleared():
 
 
 def swipe_keys(layout):
-    """{direction: (key binding, settings)} from Base's left pad swipe menu."""
+    """{direction: (key binding, settings)} from the left pad's swipe menu.
+
+    The menu is Base's until 90.24. Since 90.25 Base's left pad is a D-pad that only binds the
+    touch, and the swipes are in `LTP: Entry Point`, where each one also removes that layer.
+    """
     base = layout.active(next(iter(layout.presets)))["left_trackpad"]
+    if not all(direction in base.get("inputs", {}) for direction in SWIPES):
+        base = layout.active(SWIPE_LAYER)["left_trackpad"]
     result = {}
     for direction in SWIPES:
         entry = base["inputs"][direction]["activators"]["Full_Press"]
-        match = TARGET.search(entry["bindings"]["binding"])
+        (added,) = [a for a in actions(entry) if a.startswith("controller_action add_layer ")]
+        match = TARGET.search(added)
         key_layer = layout.resolve(match.group(2))
         keys = [b for g in layout.active(key_layer).values() for v in g.get("inputs", {}).values()
                 for b in bindings(v.get("activators", {})) if b.startswith("key_press ")]

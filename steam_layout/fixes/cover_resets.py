@@ -1,7 +1,9 @@
-"""Add the stuck-delay reset to the four second-press layers, as a 4th entry.
+"""Add the stuck-delay reset to the second-press layers, as a 4th entry.
 
 After an accepted double tap, `Menu Left: Escape`, `Menu Right: Tab` and the two
 modifier Scroll layers add their Double Tap Cover with a 150 ms chorded delay.
+Since 90.25 the two chorded menu chains have a second-press layer each as well
+(`Menu Left!Right: Enter`, `Menu Right!Left: Backspace`): six in all.
 That delayed add had no repeating reset (see resources/Steam Input JSON
 Structure.md, Interrupted Delayed Layer Applies). This adds the usual reset:
 a Regular Press removing only the cover, Hold to Repeat every delay + 50 ms,
@@ -19,6 +21,7 @@ Idempotent; works with numeric IDs or title tokens.
 import re
 
 ADD = re.compile(r"^controller_action add_layer (.+?) 0 0, , $")
+SECOND_PRESS_LAYERS = (4, 6)            # until 90.24, and with the two chorded menu chains
 
 
 def fix(data):
@@ -64,6 +67,6 @@ def fix(data):
                     raise ValueError(f"{label}: expected exactly three entries, found {list(acts)}")
                 value["activators"] = {"release": acts["release"], "chord": chord, "Full_Press": [full, reset]}
                 changed.append(label)
-    if len(changed) + len(already) != 4:
-        raise ValueError(f"expected four second-press layers, found {changed + already}")
+    if len(changed) + len(already) not in SECOND_PRESS_LAYERS:
+        raise ValueError(f"expected four or six second-press layers, found {changed + already}")
     return {"changed": changed, "already": already}

@@ -1,6 +1,6 @@
 """Scenarios for the Deck checks of the Temp Cursor Gyro (the checklist's "Temp cursor gyro" section).
 
-The cursor is the overlay a single modifier adds after 300 ms. Its settings and the shape of its
+The cursor is the overlay a single modifier adds after 200 ms (300 ms until 90.25). Its settings and the shape of its
 bindings are checked by tests/test_neptune_cursor.py; these scenarios check what happens over time.
 """
 import unittest
@@ -17,13 +17,13 @@ def names(side):
 
 class TempCursorGyro(ScenarioCase):
     @scenario("Temp cursor gyro TC1", rules=("R120",))
-    def test_the_cursor_lands_at_300_ms_and_the_release_sends_nothing(self):
+    def test_the_cursor_lands_at_200_ms_and_the_release_sends_nothing(self):
         for start in STARTS:
             for side, _, _ in SIDES:
                 cursor, _ = names(side)
                 for pad in self.each(start=start):
                     home = pad.stack
-                    pad.hold(side).wait(299)
+                    pad.hold(side).wait(199)
                     self.assertTrue(pad.lacks(cursor))
                     pad.wait(1)
                     self.assertEqual(pad.top, cursor)
@@ -31,7 +31,7 @@ class TempCursorGyro(ScenarioCase):
                     self.assertEqual((pad.stack, pad.typed()), (home, []))   # no tap or scroll
 
     @scenario("Temp cursor gyro TC3", rules=("R117", "R123"))
-    def test_a_thumb_lift_before_300_ms_enters_the_cursor_at_once(self):
+    def test_a_thumb_lift_before_200_ms_enters_the_cursor_at_once(self):
         for side, _, _ in SIDES:
             cursor, _ = names(side)
             for stick in ("LS", "RS"):
@@ -46,7 +46,7 @@ class TempCursorGyro(ScenarioCase):
     def test_a_cancel_input_puts_the_tap_cover_on_for_the_rest_of_the_hold(self):
         for side, other, _ in SIDES:
             cursor, cover = names(side)
-            for when in (100, 300, 600):                                     # before, at and after 300 ms
+            for when in (100, 200, 600):                                     # before, at and after 200 ms
                 for button in ("A", "Up", "Start"):
                     for pad in self.each():
                         pad.hold(side).wait(when).mark().hold(button).wait(100)
@@ -60,12 +60,12 @@ class TempCursorGyro(ScenarioCase):
                 self.assertIn("Modifier 2", pad.top)
 
     @scenario("Temp cursor gyro TC6", rules=("R122",), either=("A32",))
-    def test_a_cancel_input_and_a_thumb_lift_together_at_300_ms(self):
+    def test_a_cancel_input_and_a_thumb_lift_together_at_200_ms(self):
         for side, _, _ in SIDES:
             cursor, cover = names(side)
             for first in ("button", "thumb"):
                 for pad in self.each():
-                    pad.hold(side).touch("RS").wait(299)
+                    pad.hold(side).touch("RS").wait(199)
                     if first == "button":
                         pad.hold("A").lift("RS")
                     else:

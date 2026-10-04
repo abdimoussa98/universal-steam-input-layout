@@ -285,16 +285,6 @@
       "todo": null
     },
     {
-      "rule": "R120",
-      "scope": {
-        "note": "RTP touch's 150 ms delayed add of RTP: Tap Cover has no repeating reset."
-      },
-      "status": "allow",
-      "why": "A repeated layer removal breaks trackball momentum.",
-      "decided": "Author; confirmed in the reset audit of 2026-09-28",
-      "todo": null
-    },
-    {
       "rule": "R136",
       "scope": {
         "kind": "touchpad",
@@ -308,11 +298,11 @@
     {
       "rule": "R157",
       "scope": {
-        "note": "Steering's 1.5 s hold exit, Cursor Gyro's both-sticks exit and the Modifier 2 clear leave a stateful layer without a transition. Cursor Gyro's entry also adds Gyro underneath."
+        "note": "Steering's 1.5 s hold exit, Cursor Gyro's both-sticks exit and the Modifier 2 clear leave a stateful layer without a transition. Cursor Gyro's entry also adds Gyro underneath. Menu Keys is entered by holding both menu buttons for 150 ms and left by its own three exits, with no transition; only its menu-plus-click exit goes through the clear transition."
       },
       "status": "allow",
       "why": "Extra exits are allowed; the menu-plus-click clear and the Modifier 2 clear are never dropped.",
-      "decided": "Author, 2026-10-01; Cursor Gyro 2026-10-03",
+      "decided": "Author, 2026-10-01; Cursor Gyro 2026-10-03; Menu Keys 2026-10-04",
       "todo": null
     },
     {
@@ -323,6 +313,16 @@
       "status": "allow",
       "why": "The author, asking for the layer: the bumpers can't be the way out of Gamepad, 'it just doesn't make any sense'. This settles the older to-do that kept Gamepad through the clear.",
       "decided": "Author, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R159",
+      "scope": {
+        "note": "Menu Keys isn't left by the Modifier 2 quick tap. It closes the modifier buttons, so no modifier layer can be reached from it. It is left by both sticks out, by a stick out plus a face button or a D-pad direction, and by a menu button held plus a stick click."
+      },
+      "status": "allow",
+      "why": "The author, describing the layer: from it 'you're not able to even go into the mods'; it only puts the arrow keys on the D-pad and Enter, Escape, Backspace and Tab on the face buttons.",
+      "decided": "Author, 2026-10-03; in plans/2026-10-04-pad-bumps-and-menu-layer.md, which the author told me to build on 2026-10-04",
       "todo": null
     },
     {
@@ -387,6 +387,16 @@
       "status": "allow",
       "why": "The author asked for no helper layers in Gamepad. An Entry Point would be a layer over Gamepad, which the Long Press and Double Press on its menu buttons rule out (R168). If the menu button is let go before the stick click, Base is live under a held click and may type one Q or E (A11).",
       "decided": "Proposed in plans/2026-10-03-cursor-gyro-and-gamepad.md; the author told me to build it, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R158",
+      "scope": {
+        "note": "Menu Keys has no Entry Points. It blocks Start and Select, and a chord on each stick click, on Start or Select being held, runs the Entry Points' clear list and adds the clear transition, as in Gamepad. It fires at the click's press, not its Release."
+      },
+      "status": "allow",
+      "why": "An Entry Point's tap opens a Double Tap window. A window that can land on Menu Keys would have to clear the face buttons and the D-pad on every stack, Base included, because Menu Keys has a layer command on them: its stick-plus-button exit (R140). Without Entry Points no window lands there. The plan had the shared Stateful Entry Points; the author asked for the exit, a menu button plus a stick click, not for how it is built. If the menu button is let go before the stick click, Base is live under a held click and may type one Q or E (A11).",
+      "decided": "Claude, while building 90.25 on 2026-10-04; reported to the author with the build, to confirm",
       "todo": null
     },
     {
@@ -501,6 +511,28 @@
       "todo": null
     },
     {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Left!Right: Double Tap",
+        "lower": "Menu Left: Entry Point"
+      },
+      "status": "allow",
+      "why": "The chorded window sits on the Fn layer, which inherits both stick clicks from the Entry Point: the transition gestures. A window must not let a layer change through (R140), so it clears them for its 150 ms. The Entry Point's keeper is its menu button, and the window carries that button's Release: it removes the window first, then the Entry Point and the Fn layer. Nothing is left on.",
+      "decided": "Claude, reading the Cleanup audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Right!Left: Double Tap",
+        "lower": "Menu Right: Entry Point"
+      },
+      "status": "allow",
+      "why": "The chorded window sits on the Fn layer, which inherits both stick clicks from the Entry Point: the transition gestures. A window must not let a layer change through (R140), so it clears them for its 150 ms. The Entry Point's keeper is its menu button, and the window carries that button's Release: it removes the window first, then the Entry Point and the Fn layer. Nothing is left on.",
+      "decided": "Claude, reading the Cleanup audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
       "rule": "R139",
       "scope": {
         "layers": [
@@ -527,6 +559,261 @@
       "status": "allow",
       "why": "The guards bind only the menu buttons and the sticks, so the bumpers and triggers come from the Entry Point underneath. Since 90.24 each of those carries the Entry Point's cleanup function (R171), whose chord and list name that Entry Point, so the input differs between the four. The player sees the same thing in every stack: with the menu button held the input does what it did, and with it not held the stale menu layers are removed.",
       "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "RTP: Touch Entry Point",
+          "LTP: Touch Entry Point",
+          "LTP: Entry Point"
+        ],
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ],
+          "alternative": [
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "New in 90.25. Like the other pad layers they bind only their pad and get the stick touches' cleanup, so L1 and R1 stay live while a pad is touched: the modifier entry comes from Base, or from Gyro when Gyro is on.",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "RTP: Click Entry Point",
+          "RTP: Middle Click",
+          "RTP: Mouse Buttons"
+        ],
+        "inputs": {
+          "default": [
+            "joystick/dpad_north",
+            "joystick/dpad_south",
+            "joystick/edge",
+            "joystick/click",
+            "right_joystick/edge",
+            "switch/button_escape",
+            "switch/button_menu",
+            "left_trigger/click",
+            "right_trigger/click"
+          ],
+          "alternative": [
+            "joystick/dpad_north",
+            "joystick/dpad_south",
+            "joystick/edge",
+            "joystick/click",
+            "right_joystick/edge",
+            "switch/button_escape",
+            "switch/button_menu",
+            "left_trigger/click",
+            "right_trigger/click",
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "Read because Base, Steering and the Entry Points changed in 90.25: their pads, and clear lists that now name the twelve new layers. None of these inputs changed. The pad click layers bind only the pad and the stick touches, so everything else is the layer's below, as it was: Base's keys and adds, Steering's, or a menu layer's. In the alternative layout the bumpers are the firing buttons: Base's mouse button, or the ramp layer's removal.",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left: Escape",
+          "Menu Right: Tab",
+          "Menu Left: Fn Layer",
+          "Menu Right: Fn Layer",
+          "Stateful | Menu Left: Entry Point",
+          "Stateful | Menu Right: Entry Point",
+          "Menu Buttons: Left Stick Guard",
+          "Menu Buttons: Right Stick Guard",
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS Up: Modifier 1",
+          "Steering | R1!L1: Modifier 2",
+          "Steering | L1!R1: Modifier 2",
+          "Steering | R1: W Key",
+          "Steering | L1: S Key",
+          "Steering | LS: Fallback Hold"
+        ],
+        "inputs": [
+          "right_trackpad/click"
+        ]
+      },
+      "status": "allow",
+      "why": "Since 90.25 Base has no pad click. The click's add is in RTP: Entry Point, which a touch puts on top of these layers, and in Steering, whose touch is cleared on purpose. Under these layers the click is therefore Steering's add, a pad layer's own click, or nothing, and the pad still clicks: the thumb is on it first.",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS Up: Modifier 1",
+          "Steering | R1!L1: Modifier 2",
+          "Steering | L1!R1: Modifier 2",
+          "Steering | R1: W Key",
+          "Steering | L1: S Key",
+          "Steering | LS: Fallback Hold"
+        ],
+        "inputs": [
+          "right_trackpad/touch"
+        ]
+      },
+      "status": "allow",
+      "why": "Unchanged, and read because Steering's pad group gained the click's add in 90.25. In Steering the right-pad touch is Steering's empty binding, or the touch Release of the Click Entry Point when a pad click is under these layers.",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left: Fn Layer",
+          "Menu Right: Fn Layer",
+          "Stateful | Menu Left: Entry Point",
+          "Stateful | Menu Right: Entry Point",
+          "Steering | R1!L1: Modifier 2",
+          "Steering | L1!R1: Modifier 2"
+        ],
+        "inputs": [
+          "right_trackpad/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "The pad's ring belongs to a pad layer that can be under these layers: the two Soft Presses of RTP: Click Entry Point, the empty edge of RTP: Mouse Buttons, and since 90.25 the two of RTP: Touch Entry Point, when one of these layers lands during its hand-over, a few milliseconds after a touch. The hand-over then runs as usual: it removes that layer and puts RTP: Entry Point on top. Nothing else binds the ring.",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard"
+        ],
+        "inputs": [
+          "right_joystick/dpad_north",
+          "right_joystick/dpad_south",
+          "right_joystick/dpad_east",
+          "right_joystick/dpad_west"
+        ]
+      },
+      "status": "allow",
+      "why": "Unchanged, and read because the Entry Points changed in 90.25 (they add the chorded Entry Point beside the Fn layer). The right stick's directions under the left guard are the empty ones of the Entry Point underneath, in all four Entry Points.",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left!Right: Enter",
+          "Menu Right!Left: Backspace"
+        ],
+        "inputs": {
+          "default": [
+            "button_diamond/button_a",
+            "button_diamond/button_b",
+            "button_diamond/button_x",
+            "button_diamond/button_y",
+            "dpad/dpad_north",
+            "dpad/dpad_south",
+            "dpad/dpad_east",
+            "dpad/dpad_west",
+            "switch/button_back_left",
+            "switch/button_back_right",
+            "switch/button_back_left_upper",
+            "switch/button_back_right_upper",
+            "right_joystick/dpad_north",
+            "right_joystick/dpad_south",
+            "right_joystick/dpad_east",
+            "right_joystick/dpad_west",
+            "joystick/dpad_east",
+            "joystick/dpad_west",
+            "joystick/click",
+            "right_joystick/click",
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ],
+          "alternative": [
+            "button_diamond/button_a",
+            "button_diamond/button_b",
+            "button_diamond/button_x",
+            "button_diamond/button_y",
+            "dpad/dpad_north",
+            "dpad/dpad_south",
+            "dpad/dpad_east",
+            "dpad/dpad_west",
+            "switch/button_back_left",
+            "switch/button_back_right",
+            "switch/button_back_left_upper",
+            "switch/button_back_right_upper",
+            "right_joystick/dpad_north",
+            "right_joystick/dpad_south",
+            "right_joystick/dpad_east",
+            "right_joystick/dpad_west",
+            "joystick/dpad_east",
+            "joystick/dpad_west",
+            "joystick/click",
+            "right_joystick/click"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "New in 90.25. The second-press layer of a chorded chain sits on the Fn layer while the first menu button is held, and on Base once that button is let go: its Release takes the Fn layer's family and the held second button keeps this layer (the owner leaves, a held button falls through). So these inputs are the Fn layer's keys, or Base's. The stick clicks come from the Entry Point under the Fn layer; a click there starts a transition, whose clear list removes this layer.",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left!Right: Double Tap",
+          "Menu Right!Left: Double Tap"
+        ],
+        "inputs": [
+          "joystick/dpad_north",
+          "joystick/dpad_south",
+          "joystick/dpad_east",
+          "joystick/dpad_west"
+        ]
+      },
+      "status": "allow",
+      "why": "New in 90.25. The window leaves the left stick's directions open, as the two menu windows it copies do. Under it they are the Fn layer's punctuation keys, or Base's WASD once the first menu button is let go: keys only, no layer command (R140).",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left: Escape",
+          "Menu Right: Tab",
+          "Menu Buttons: Left Stick Guard",
+          "Menu Buttons: Right Stick Guard",
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS Up: Modifier 1",
+          "Steering | R1: W Key",
+          "Steering | L1: S Key",
+          "Steering | LS: Fallback Hold"
+        ],
+        "inputs": [
+          "right_trackpad/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "Unchanged, and read because 90.26 changed something else near it: these layers' hold delay, or the touch of RTP: Click Entry Point, which got a reset. The pad's ring is what it is under the layers of the 90.25 entry: the two Soft Presses of RTP: Click Entry Point when a pad click is under one of these layers, otherwise nothing. Those two binds are as they were, and nothing else binds the ring.",
+      "decided": "Claude, reading the Flow audit for the 90.26 build, 2026-10-04; not yet confirmed by the author",
       "todo": null
     }
   ]

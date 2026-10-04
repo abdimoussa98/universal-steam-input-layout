@@ -152,10 +152,10 @@ class EngineTests(unittest.TestCase):
         report = audit(nine_buttons(), {}, extras=9, memory=1)
         self.assertEqual((report["ok"], report["walk"]["settled"]), (False, False))
 
-    def test_the_audit_reads_six_extra_presses_unless_told(self):
-        self.assertEqual(DEFAULT_EXTRAS, 6)
+    def test_the_audit_reads_five_extra_presses_unless_told(self):
+        self.assertEqual(DEFAULT_EXTRAS, 5)
         report = audit(second_landing(), {})
-        self.assertEqual(report["walk"]["extras"], 6)
+        self.assertEqual(report["walk"]["extras"], 5)
         self.assertEqual({(f["layer"], f["target"]) for f in report["findings"] if f["check"] == "hidden exit"}, {("H2", "P")})
         self.assertEqual({f["check"] for f in audit(second_landing(), {}, extras=1)["findings"]}, set())
         skipped = audit(second_landing(), {}, extras=None)                             # the cleanup fix asks for this
@@ -188,7 +188,7 @@ class EngineTests(unittest.TestCase):
                                                capture_output=True, text=True, cwd=ROOT)
             usual = run()
             self.assertEqual(usual.returncode, 1)
-            self.assertIn("Exit checks: the chain walk with 6 extra presses", usual.stdout)
+            self.assertIn("Exit checks: the chain walk with 5 extra presses", usual.stdout)
             self.assertIn("covers the exit of P", usual.stdout)
             self.assertEqual(run("--extras", "1").returncode, 0)
             self.assertEqual(run("--extras", "15").returncode, 2)

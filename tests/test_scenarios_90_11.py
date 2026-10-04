@@ -62,7 +62,7 @@ class FallbackHold(ScenarioCase):
         for pad in self.each(start="steering"):
             pad.push("LS", "up").wait(500).hold("R1").mark()
             self.assertTrue(pad.lacks(HOLD))
-            pad.wait(50)                                                 # the driver's layer adds it on its 50 ms repeat
+            pad.wait(50)                                                 # the driver's layer adds it with a repeating bind
             self.assertEqual(pad.top, "Steering | LS Up: Modifier 1")   # the R1 modifier map
             pad.wait(2000)
             self.assertTrue(pad.has("Steering"))                         # no exit
@@ -74,11 +74,12 @@ class FallbackHold(ScenarioCase):
     def test_the_entry_guard_holds_w_with_no_exit_until_the_stick_has_been_back_to_centre(self):
         """Until 90.23 the guard also stayed after an entry with the stick centred, through the first push.
         Since 90.24 its stick-touch cleanup is guarded by the left stick being out (R169): with the stick
-        centred and the thumb resting on it, the cleanup's repeat removes the guard about 100 ms after it
-        lands (A6), and the first push gets the Fallback Hold."""
+        centred and the thumb resting on it, the cleanup removes the guard as it lands: a repeating action
+        always triggers (A6; until 2026-10-04 this was read as about 100 ms later). The first push gets the
+        Fallback Hold."""
         for pad in self.each():
             pad.enter_steering(settle=False)                             # stick centred at entry
-            self.assertEqual(pad.top, GUARD)
+            self.assertEqual(pad.top, "Steering")
             pad.mark().push("LS", "up").wait(200)
             self.assertEqual((pad.top, pad.down()), (HOLD, ["W"]))
         for pad in self.each():

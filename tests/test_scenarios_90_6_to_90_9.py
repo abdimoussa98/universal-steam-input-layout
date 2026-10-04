@@ -15,9 +15,11 @@ DRIVER = "Steering | R1: W Key"
 class MenuComboKeys(ScenarioCase):
     @scenario("90.9 K2", rules=("R138",))
     def test_with_fn_up_the_other_menu_button_types_its_key_on_every_press(self):
+        """Changed in 90.25: the first press goes through the chorded chain, so a tap types the key from its
+        window (90.25 M1). Once the window has run out, a press types it at once, as every press did."""
         for first, second, key in (("Start", "Select", "BACKSPACE"), ("Select", "Start", "RETURN")):
             for pad in self.each():
-                pad.hold(first).wait(250).mark().tap(second).wait(20).tap(second)
+                pad.hold(first).wait(250).mark().tap(second).wait(300).tap(second)
                 self.assertEqual(pad.typed(), [key, key])
                 pad.hold(second).wait(800)
                 self.assertEqual(pad.down(), [key])                          # held: the system repeats it
@@ -48,10 +50,11 @@ class MenuComboKeys(ScenarioCase):
         for direction, lands in (("dpad_north", "RTP: Circular Scroll"), ("dpad_south", "RTP: Circular Scroll"),
                                  ("dpad_east", "RTP: Entry Point")):         # elsewhere: back in mouse mode
             for pad in self.each():
-                pad.sim.press(touch).release(touch)
+                pad.sim.press(touch).wait(60).release(touch)                 # a centre tap outlasts the 50 ms hand-over (90.25)
                 self.assertEqual(pad.top, "RTP: Double Tap")
                 pad.wait(50)
                 pad.sim.press(touch).press(("right_trackpad", direction))
+                pad.wait(60)                                                 # elsewhere: Base's touch, then its hand-over (90.25)
                 self.assertEqual(pad.top, lands)
                 pad.sim.release(("right_trackpad", direction)).release(touch)
                 pad.wait(300).hold("L1")

@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "d2e7ea7fc06585b1e3f6af7d18cee3e3a3f3fccf16d9ab19e824c3db9612d78f",
+      "version_snapshot": "versions/neptune/90.26/single-set-default_hold-gyro_90.26.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "0b213a21db1db33ce5d7ede17f8a4df1c7b9e03f99985cbd4534c756edfe4a2d",
+      "version_snapshot": "versions/neptune/90.26/single-set-default_hold-gyro_90.26.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "719c1a2db3ffe0057dc1e5315784e980239bd4af004d0ad80c8e6708c6e3a4ac",
+      "version_snapshot": "versions/neptune/90.26/single-set-alternative_hold-gyro_90.26.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "bc3af33afd5c2785da860d6119f8302111bb84e8ea66df500116adca62a9d7ba",
+      "version_snapshot": "versions/neptune/90.26/single-set-alternative_hold-gyro_90.26.vdf"
+    }
+  },
+  "release": "90.26",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-04-standard-delays/default-standard-delays.json",
+      "sha256": "6f0fb33dac0307ddb592fa7f6eacd038fb896da6b8319af64bf84bf2d34d02c3"
+    },
+    "alternative": {
+      "path": "findings/2026-10-04-standard-delays/alternative-standard-delays.json",
+      "sha256": "29cbda1ca96548b2496ff2767899ce2b112a42a7144b9a008c05b775f3ac8eae"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

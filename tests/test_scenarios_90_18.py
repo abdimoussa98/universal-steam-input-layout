@@ -18,7 +18,8 @@ class Handoff(ScenarioCase):
         for (name, where), layer in CHOSEN.items():
             for pad in self.each():
                 pad.press_pad(name, where)
-                self.assertEqual(pad.top, ENTRY[name])                            # until one Soft Press fires
+                if where != "centre":                                             # the centre bind repeats: it fires at once (A6)
+                    self.assertEqual(pad.top, ENTRY[name])                        # until the outer Soft Press fires
                 pad.wait(60)
                 self.assertTrue(pad.has(layer) and pad.lacks(ENTRY[name]))
                 self.assertEqual(len(pad.down()), 1)
@@ -30,8 +31,9 @@ class Handoff(ScenarioCase):
     @scenario("90.18 H2", rules=("R114",), rests=("A6",), either=("A9",))
     def test_a_click_that_ends_before_the_hand_over_sends_nothing_and_clears(self):
         """The entry point has no click exit, so it is still on when a short click ends. With the thumb still
-        on the pad, its Soft Press hands over anyway; the chosen layer finds the pad not pressed and leaves."""
-        for where, ms in (("centre", 30), ("left", 2)):
+        on the pad, its Soft Press hands over anyway; the chosen layer finds the pad not pressed and leaves.
+        Only the outer range can be this short: the centre bind fires as the layer lands (A6)."""
+        for where, ms in (("left", 2),):
             for pad in self.each():
                 pad.press_pad("RP", where).wait(ms).let_go_pad("RP", lift=False)
                 self.assertEqual(pad.top, "RTP: Click Entry Point")
@@ -42,7 +44,7 @@ class Handoff(ScenarioCase):
     @scenario("90.18 H3", rules=("R136",), rests=("A7", "A40"), either=("A9",))
     def test_a_thumb_that_lifts_ends_the_entry_point(self):
         for pad in self.each():
-            pad.press_pad("RP", "centre").wait(20)
+            pad.press_pad("RP", "left").wait(2)                                   # inside the outer bind's 5 ms
             self.assertEqual(pad.top, "RTP: Click Entry Point")
             pad.let_go_pad("RP").wait(400)                                        # the click lets go, then the thumb
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
@@ -50,11 +52,10 @@ class Handoff(ScenarioCase):
     @scenario("90.18 H4", rests=("A40",), either=("A9",))
     def test_a_touch_release_seen_before_the_click_lets_go(self):
         """If Steam reports the thumb gone while the pad still reads as pressed, the touch Release removes the
-        entry point and Base adds it again. It has no click exit now, so what ends it is its centre Soft Press
-        handing over with no thumb on the pad: an inverted Soft Press has to count as true then (A40). If it
-        doesn't, the entry point stays on until the pad is touched again."""
+        entry point. Until 90.24 Base added it again from its click; since 90.25 Base has no click. Read
+        inside the outer bind's 5 ms, the only time the entry point is still on."""
         for pad in self.each():
-            pad.press_pad("RP", "centre").wait(20)
+            pad.press_pad("RP", "left").wait(2)
             pad.sim.release(("right_trackpad", "touch"))
             self.assertTrue(pad.lacks("RTP: Entry Point"))
             pad.wait(10)                                                          # Base may have added the entry point again

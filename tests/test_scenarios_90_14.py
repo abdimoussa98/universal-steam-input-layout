@@ -26,9 +26,7 @@ class PadClick(ScenarioCase):
         for start in GYRO:
             for pad in self.each(start=start):
                 home = pad.stack
-                pad.press_pad("RP", "centre")
-                self.assertEqual((pad.top, pad.down()), ("RTP: Click Entry Point", []))   # the add fires on its repeat
-                pad.wait(50)
+                pad.press_pad("RP", "centre")                                             # at once: the centre bind repeats (A6)
                 self.assertEqual((pad.top, pad.down()), ("RTP: Middle Click", ["mouse_button MIDDLE"]))
                 self.assertTrue(pad.lacks("RTP: Mouse Buttons"))
                 pad.wait(1000)
@@ -57,13 +55,13 @@ class PadClick(ScenarioCase):
     def test_the_left_pad_has_the_same_two_layers(self):
         for pad in self.each():
             pad.press_pad("LP", "centre").wait(50)
-            self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Middle Click",), ["CAPSLOCK"]))
+            self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Entry Point", "LTP: Middle Click"), ["CAPSLOCK"]))   # the Entry Point since 90.25
             pad.let_go_pad("LP").wait(400)
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["CAPSLOCK"]))   # Caps Lock since 90.17
         for where, key in (("up", "UP_ARROW"), ("down", "DOWN_ARROW"), ("left", "LEFT_ARROW"), ("right", "RIGHT_ARROW")):
             for pad in self.each():
                 pad.press_pad("LP", where).wait(50)
-                self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Arrow Keys",), [key]))
+                self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Entry Point", "LTP: Arrow Keys"), [key]))
                 pad.let_go_pad("LP").wait(400)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), [key]))
 
@@ -84,33 +82,39 @@ class PadClick(ScenarioCase):
 
     @scenario("90.14 P5", rests=RANGES + ("A5",))
     def test_the_overlap_of_the_two_ranges_sends_one_output(self):
-        """Changed in 90.16. Until 90.15 the centre Soft Press was meant to interrupt the outer one (A39), and the
-        middle click won the ring. Now both are uninterruptible and the outer one has a 5 ms delay. The centre one
-        has no delay, but its condition is already true when the layer lands, so it waits for its repeat (A5):
-        the D-pad layer lands first, covers the edge, and the middle click never comes. If Steam fires the centre
-        one at once, the middle click wins instead. Either way it is one output."""
+        """Changed in 90.16. Until 90.15 the centre Soft Press was meant to interrupt the outer one (A39). Now both
+        are uninterruptible and the outer one has a 5 ms delay. The centre one has no delay and repeats.
+
+        Changed on 2026-10-04 (author): a repeating action always triggers, so the centre one fires as the layer
+        lands (A6) and the outer one's 5 ms delay gives it priority: the middle click wins the ring. Until then
+        the simulator made the centre one wait for its repeat, and the D-pad button won. Either way it is one
+        output."""
         for pad in self.each():
             pad.press_pad("RP", "ring left").wait(300)
-            self.assertEqual((pad.top, pad.down()), ("RTP: Mouse Buttons", ["mouse_button BACK"]))
-            self.assertTrue(pad.lacks("RTP: Middle Click"))
+            self.assertEqual((pad.top, pad.down()), ("RTP: Middle Click", ["mouse_button MIDDLE"]))
+            self.assertTrue(pad.lacks("RTP: Mouse Buttons"))
             pad.let_go_pad("RP").wait(400)
-            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["mouse_button BACK"]))
+            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["mouse_button MIDDLE"]))
         for pad in self.each():
             pad.press_pad("LP", "ring up").wait(300)
-            self.assertEqual((pad.top, pad.down()), ("LTP: Arrow Keys", ["UP_ARROW"]))
+            self.assertEqual((pad.top, pad.down()), ("LTP: Middle Click", ["CAPSLOCK"]))
             pad.let_go_pad("LP").wait(400)
-            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["UP_ARROW"]))
+            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["CAPSLOCK"]))
 
     @scenario("90.14 P7", rules=("R113",), rests=("A6",))
     def test_a_very_short_click_sends_nothing(self):
-        """Changed in 90.16: the outer buttons come after a 5 ms delay, the middle click on a 50 ms repeat."""
-        for where, too_short, enough in (("centre", 40, 60), ("left", 3, 10)):
+        """Changed in 90.16: the outer buttons come after a 5 ms delay. Changed on 2026-10-04 (author): the
+        middle click comes at once, because its bind repeats (A6), so no centre click is too short."""
+        for where, too_short, enough in (("left", 3, 10),):
             for pad in self.each():
                 pad.click_pad("RP", where, ms=too_short).wait(400)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
             for pad in self.each():
                 pad.click_pad("RP", where, ms=enough).wait(400)
                 self.assertEqual(len(pad.typed()), 1)
+        for pad in self.each():
+            pad.click_pad("RP", "centre", ms=1).wait(400)
+            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["mouse_button MIDDLE"]))
 
     @scenario("90.14 P8", rules=("R113",), rests=("A10",))
     def test_a_modifier_and_a_pad_click_leave_each_other_alone(self):
@@ -153,7 +157,7 @@ class PadClick(ScenarioCase):
     def test_a_click_in_circular_scroll_goes_through_the_entry_point(self):
         touch = ("right_trackpad", "touch")
         for pad in self.each():
-            pad.sim.press(touch).release(touch)
+            pad.sim.press(touch).wait(60).release(touch)                                  # a centre tap outlasts the 50 ms hand-over (90.25)
             pad.wait(50)
             pad.sim.press(touch).press(("right_trackpad", "dpad_north")).release(("right_trackpad", "dpad_north"))
             self.assertEqual(pad.top, "RTP: Circular Scroll")

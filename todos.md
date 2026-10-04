@@ -22,35 +22,39 @@ because the author reports buggy behavior with Steam action sets.
 The Deck is used to settle an assumption, once, and again after a Steam update
 that could change it. Each has one procedure in its row of
 [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md).
-What rests on each one, [as of 90.24](findings/2026-10-04-required-cleanups/unverified-assumptions.txt);
+What rests on each one, [as of 90.26](findings/2026-10-04-standard-delays/unverified-assumptions.txt);
 `python3 -m tests.scenario` prints the current list.
 
-The layout relies on these seventeen. If one is false, something is broken.
+The layout relies on these nineteen. If one is false, something is broken.
 A40 and A41 came with 90.14, and the pad clicks rest on them. A43, A44 and A45
-came with 90.22, and `Gamepad` rests on them. Check those five first.
+came with 90.22, and `Gamepad` rests on them. A46 and A48 came with 90.25, and
+the pads rest on them. Check A46 first, then those six
+([order](findings/2026-10-04-pad-bumps-and-menu-keys/README.md#on-the-deck-in-this-order)).
 
 - [ ] A8: A stick edge's Release fires in a layer that was added while the stick was already out (unverified; rests on it: 9 scenarios; R111, R137)
-- [ ] A10: A key or mouse output fires on an input that is already held when its layer is added (reported by the author; rests on it: 29 scenarios; R138)
-- [ ] A11: A key or mouse output fires when a removal exposes it under an input that is held (unverified; rests on it: 8 scenarios)
-- [ ] A13: Any `remove_layer` can reset a running start delay; an `add_layer` doesn't (reported by the author; rests on it: R123, R126, R141)
+- [ ] A10: A key or mouse output fires on an input that is already held when its layer is added (reported by the author; rests on it: 35 scenarios; R138)
+- [ ] A11: A key or mouse output fires when a removal exposes it under an input that is held (unverified; rests on it: 9 scenarios)
+- [ ] A13: Any `remove_layer` can reset a running start delay; an `add_layer` doesn't (reported by the author; rests on it: 3 scenarios; R123, R126, R141)
 - [ ] A14: A delay starts again when a removal exposes it under a button that is held (unverified; rests on it: 2 scenarios)
-- [ ] A16: A delay's clock starts when its layer is added, not at the physical press (unverified; rests on it: 9 scenarios)
+- [ ] A16: A delay's clock starts when its layer is added, not at the physical press (unverified; rests on it: 18 scenarios)
 - [ ] A26: Stick inputs inherit through the middle of the stack like any other input (unverified; rests on it: R140)
-- [ ] A27: An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known (reported; rests on it: 5 scenarios; R133, R135)
+- [ ] A27: An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known (reported; rests on it: 10 scenarios; R133, R135)
 - [ ] A33: Steam loads an exported VDF as written: the same layers, groups and bindings as the JSON it was made from (reported; rests on it: R151)
 - [ ] A34: A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held (unverified)
-- [ ] A36: A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it (unverified; rests on it: 1 scenario)
+- [ ] A36: A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it (unverified; rests on it: 2 scenarios)
 - [ ] A38: A stick group that doesn't state `edge_binding_invert` has a normal edge. It doesn't take the inverted setting of the group it replaces in a lower layer (unverified; rests on it: 2 scenarios; R111)
-- [ ] A40: A Soft Press on a pad's outer ring reads the thumb's distance from the centre, on the scale of the D-pad deadzone and the outer ring radius, and an inverted one fires reliably on a D-pad-mode pad (unverified; rests on it: 10 scenarios). If it is false, a pad click may send nothing
-- [ ] A41: A D-pad group that inverts its outer ring and states no radius uses a radius of about 24996 of 32767 (unverified; rests on it: 8 scenarios). Read the slider on 90.13's `RTP: Mouse Buttons`; a different number goes into `CENTRE_RADIUS` in the 90.14 builder
+- [ ] A40: A Soft Press on a pad's outer ring reads the thumb's distance from the centre, on the scale of the D-pad deadzone and the outer ring radius, and an inverted one fires reliably on a D-pad-mode pad (unverified; rests on it: 15 scenarios). If it is false, a pad click may send nothing
+- [ ] A41: A D-pad group that inverts its outer ring and states no radius uses a radius of about 24996 of 32767 (unverified; rests on it: 9 scenarios). Read the slider on 90.13's `RTP: Mouse Buttons`; a different number goes into `CENTRE_RADIUS` in the 90.14 builder
 - [ ] A43: On a button with an interruptible Regular Press, a Double Press and a Long Press, a tap sends the Regular Press once after the Double Press time, a hold sends only the Long Press, and a second press sends only the Double Press (unverified; rests on it: 2 scenarios; R108's exception, R168)
 - [ ] A44: Long Press and Double Press behave in a layer that no other layer is added over (unverified; rests on it: 1 scenario; R108's exception, R168)
 - [ ] A45: A chord reads a button as held while that button carries Long Press and Double Press activators (unverified; rests on it: 3 scenarios)
+- [ ] A46: A Soft Press on a pad's outer ring is read on a touch alone, with no click, when the pad's D-pad doesn't require a click (unverified; rests on it: 8 scenarios). If it is false, a touched pad stays in its hand-over layer and does nothing until the thumb lifts
+- [ ] A48: A reset that never fires leaves the trackball glide alone: the right pad's Tap Cover lands before the reset's first repeat (unverified; rests on it: R120). If the glide breaks, the reset comes off `RTP: Entry Point`
 
-The layout is built to work either way under these nine. Settling one takes a
+The layout is built to work either way under these ten. Settling one takes a
 branch out of the tests:
 
-- [ ] A9: Removing a layer fires the exposed layer command on an input that is held (held-input rule 3) (unverified; rests on it: 23 scenarios; R114)
+- [ ] A9: Removing a layer fires the exposed layer command on an input that is held (held-input rule 3) (unverified; rests on it: 24 scenarios; R114)
 - [ ] A18: A `remove_layer` call makes Steam re-evaluate held inputs (unverified)
 - [ ] A24: Adding or removing another layer while a layer with an Always On action is active caused crashes (reported by the author; rests on it: R140, R146, R147, R148, R149)
 - [ ] A31: A repeating activator keeps its schedule when another layer is removed (unverified; rests on it: R114)
@@ -59,6 +63,7 @@ branch out of the tests:
 - [ ] A37: When the layer that answers a held input changes and the new binding sends the same key, the key stays down with no release in between (unverified; rests on it: 2 scenarios)
 - [ ] A39: An active Soft Press that is not interruptible suppresses an interruptible Soft Press on the same input (unverified). Nothing rests on it since 90.16; 90.14 and 90.15 did
 - [ ] A42: A layer held with `hold_layer` is taken off when the activator that holds it is no longer active, also when `add_layer` put it on first and the layer holds itself (unverified; rests on it: 4 scenarios)
+- [ ] A47: A pad in directional swipe mode gives no touch Release (reported by the author; rests on it: 1 scenario). `LTP: Entry Point` binds one anyway and also ends on a swipe or the next stick touch
 
 ## Rules without a check
 
@@ -79,34 +84,45 @@ branch out of the tests:
   - The doubt: Steam describes it as "Fires when this input is released while no chord button is pressed. Pressing this input releases it." That inverts the bound input too, so it would fire on the Release, not on a press with the chord button up. If so it can't replace a guard
   - Deck check to settle it: on one button put an inverted chord with LB that types a key. Press the button without LB: does the key type on the press, on the Release, or while the button is up? It becomes an assumption row when something is built on it
   - If it works: the Cleanup audit, the simulator and R133 read a guard as the chords beside the cleanup, so all three change with it. The layout would also need the beta client until the feature reaches stable
+- [ ] Investigate the Tap Cover reset on the stick Entry Points (author, 2026-10-04). Should `LST: Entry Point`, `RST: Entry Point` and `RTP: Entry Point` get it, and what does it cost? The recommendation below is not the author's
+  - Built in 90.25 on all three (author, 2026-10-04; [record](findings/2026-10-04-pad-bumps-and-menu-keys/README.md#5-the-tap-cover-reset)). This to-do stays open for the Deck checks below, which are how the change is verified. The pad's reset reverses R120's old exception; if the glide breaks, it comes out again (A48)
+  - The reset is R120's repeating removal: beside a delayed add, a Regular Press on the same input that removes only that layer, every delay + 50 ms. Three delayed adds have none: the 150 ms add of the Tap Cover on the touch of these three layers
+  - Recommended: add it to `LST: Entry Point` and `RST: Entry Point`, every 200 ms. R120 asks for it on every delayed add and records no exception for the sticks. The touch has two entries, so it is the third (R109)
+  - Recommended: leave `RTP: Entry Point` without it. That is R120's one exception: a repeated removal on the right pad's touch broke trackball momentum (A28, the author's observation, not rechecked). Changing it starts with a Deck check: add the reset, flick the cursor, see whether it still glides
+  - Checked on a copy of 90.23 with the reset on two and on all three: the Budget, Window and Flow audits pass and the Cleanup audit's output is unchanged. Nothing removes a Tap Cover without its Entry Point (69 removals for each stick, 23 for the pad), so the reset stays silent on a normal touch: the cover lands at 150 ms and takes the input over before the first tick at 200 ms
+  - What it would fix: a delayed add that was interrupted can fail on the next touch (A12). The cover then never lands, the Release after a long rest opens the Double Tap window, and a quick lift and re-touch counts as a double tap: `LST: Temporary Gyro` or `RST: Temporary Gyro` comes on unasked. No such failure is recorded for the sticks
+  - Downside: it takes the last free entry on those two touch inputs. Nothing is waiting for it; the stick-touch helpers are left out of the required cleanups (R169)
+  - Downside: thumbs rest on the sticks most of the time, far longer than a button that has a reset is held. If a cover is late, the reset ticks every 200 ms until it lands, and each tick is a removal that can restart a delay running somewhere else (A13). Example: L1's 300 ms cursor apply is pending, the stick's reset ticks, and the 300 ms start again from that tick. This is timing, so no audit sees it
+  - Downside: a cover that failed lands at 350 ms, not 150. Without the reset it doesn't land at all
+  - Downside for the pad only: A28, above
+  - Deck check, is there a failure to fix: touch a stick for under 150 ms and lift. After a second, rest the thumb on it for a second, lift, and touch again at once. If Temporary Gyro comes on, the cover didn't land
+  - Deck check, the cross-talk: with the reset added, hold L1 and count how often the cursor apply comes later than 300 ms while a thumb settles on a stick
+  - Deck check, the pad (A28), first: with the reset on, flick the cursor and see whether it still glides
+  - Then: keep or take out each reset by what the checks show, and bring R120's exception and A28 in line
 
 ## Brainstormed ideas
 
-- [ ] Implement brainstormed ideas (author, 2026-10-03). Ideas as spoken, not designed or built. Lines that start with "Note" or "Deck check" are not the author's
-  - **A bump on touch when the pad's centre click is available**, on both pads. The centre click wins wherever it overlaps the D-pad buttons, so a bump on touch means a press right there is the centre click
-    - How: Base's pad becomes a D-pad. Its outer ring binding is inverted and carries the haptic bump, so it fires when the thumb lands inside the centre range (the radius the Click Entry Point uses for the middle click, 24996, A41). The pad's touch adds the pad's Entry Point, which has the pad's real mode
-    - Right pad: the touch adds `RTP: Entry Point`, as today. Base's right pad is the mouse today; `RTP: Entry Point` already is one
-    - Left pad: needs a new `LTP: Entry Point` layer with the directional swipes (Base's left pad is in swipe mode today and binds no touch). Swipe mode has no touch Release, so each swipe also removes `LTP: Entry Point`, and the layer needs cleanup functions for when no swipe comes. Their lists have to be accurate
-    - Be explicit about the click (author). With Base's pad a D-pad, a layer that keeps the pad in another mode no longer gets Base's click, the Soft Press that adds the Click Entry Point ([a mode change blocks inheritance](resources/Layer%20Definition%20of%20Done.md#a-source-mode-change-blocks-inheritance)). Three layers inherit it today, all on the right pad: `RTP: Entry Point`, `RTP: Tap Cover` and `Steering`. Each binds the add itself, and so does the new `LTP: Entry Point`. It is the first entry on that input, so the budget holds (R109)
-    - Note: the mouse's settings have to be stated too. Friction 3, acceleration 1 and haptics off are stated only on Base's right pad. Eleven layers keep the pad a mouse and state none of them: those three and the eight Double Tap windows. Whether they take Base's values today isn't known (A38 is the same question for sticks). First read what the Steam editor shows on `RTP: Entry Point`'s pad, then state that on all eleven
-    - Deck check, the glide: when the thumb lifts, the pad falls back to Base. Today that is a mouse. As a D-pad, nothing is in mouse mode after the lift, and the trackball glide may stop there
-    - Deck check, the bump: a touch in the centre makes two things due at the same moment, the touch's add and the ring's bump, and Steam promises no order. If the add goes first, the Entry Point's mode has replaced Base's ring and the bump may not come. Also unknown: whether an inverted ring already counts as on with no thumb on the pad (A40). If it does, a touch in the centre changes nothing and gives no bump. One check settles both: touch the centre ten times and the rim ten times; it should bump every time on the centre and never on the rim
-  - **`RTP: Middle Click` becomes a mouse pad.** Its pad is in `single_button` mode with middle mouse on the click, so the cursor stops while the click is held. Make it the mouse, with middle mouse on the mouse mode's click, so the cursor keeps moving while middle mouse is held. Note: it states the mouse's settings as well
-  - **Menu stateful layer: a new way in and out.** Replaces the entry and exit lines of [Menu stateful layer](#menu-stateful-layer)
-    - Enter: hold both menu buttons for 150 ms. No Enter or Backspace is typed on that path
-    - The keys stay on the menu buttons, on the sides they have today: hold Select and tap Start for Enter, hold Start and tap Select for Backspace. A tap types the key; a double tap and hold holds it down
-    - The flow, with Select held first (the other side mirrored):
-      1. Start adds `Menu Left: Fn Layer`, as today. The Fn layer always comes first, and it adds the menu stateful layer by itself
-      2. In the menu stateful layer Start has the usual pair: a Release for the tap, and the 150 ms hold that keeps the layer
-      3. Start released before 150 ms: remove the menu stateful layer (both, if there are two) and add a Double Tap window for Start
-      4. The window runs out with Select still held: back in the Fn layer, which was never removed
-      5. Start pressed again inside the window: a layer that holds Enter for as long as Start is held, the way `Menu Left: Escape` and `Menu Right: Tab` hold their key on a second press
-    - There may have to be two menu stateful layers, one for each side's chord. Not decided
-    - Note: Enter is then typed on Start's Release in step 3, not on the press, because on the press the 150 ms hold would type it too. The Fn layer's chord types it on the press today
-    - Note: Start is already held when the Fn layer lands, and an add over a held input skips an immediate layer command there. The Fn layer's add needs the 5 ms delay or a repeat, as elsewhere
-    - Note: new layers per layout: one or two menu stateful layers, and a Double Tap window and a key layer for each side
-    - Exit: both sticks deflected, or any one stick deflected plus any face button or D-pad direction. The D-pad is new here
-    - Nothing else is reachable from the layer, not even the modifiers. It only puts the arrow keys on the D-pad and Enter / Tab / Escape / Backspace on the face buttons
+- [x] Implement brainstormed ideas (author, 2026-10-03 and 2026-10-04): built as **90.25**, one release ([record](findings/2026-10-04-pad-bumps-and-menu-keys/README.md) · [plan](plans/2026-10-04-pad-bumps-and-menu-layer.md) · scenarios [P1 to K7](tests/test_scenarios_90_25.py)). Twelve new layers, 78 to 90 per layout. Not run on the Deck
+  - Part 1: a low bump on touch where a click would be the centre click: `RTP: Touch Entry Point` and `LTP: Touch Entry Point`, hand-over layers; Base's left pad is a D-pad and the swipes are in `LTP: Entry Point`
+  - Part 2: `RTP: Middle Click` is a mouse pad, so the cursor moves while middle mouse is held
+  - Part 3: `Menu Keys`: both menu buttons held for 150 ms, from Base or `Gyro`. A chorded tap types Enter or Backspace, a double tap and hold holds it: two chains of four layers
+  - Part 4: five extra presses by default in the hidden-exit check
+  - Part 5: the Tap Cover reset on `LST: Entry Point`, `RST: Entry Point` and `RTP: Entry Point`
+  - [ ] Confirm what the build did differently from the plan ([list](findings/2026-10-04-pad-bumps-and-menu-keys/README.md#what-differs-from-the-plan)): the hand-over layer on the left pad too; `Menu Keys` without Entry Points (an R158 exception); the stick touches off in `Menu Keys`; the tap, hold and double tap only on the first press of a hold
+  - [ ] Confirm the inherited inputs accepted while building: eight R139 entries and two R136 entries in the exceptions register
+  - [ ] On the Deck, in [this order](findings/2026-10-04-pad-bumps-and-menu-keys/README.md#on-the-deck-in-this-order): A46 first, then the glide (A48), the ring, the chorded menu, `Menu Keys`' exits, A47
+  - [ ] A pad touch during a hold that is still counting postpones it, on the simulator: in 90.25 the cursor response at 700 ms where it was 300, the Fn layer at 450 where it was 200 ([table](findings/2026-10-04-pad-bumps-and-menu-keys/README.md#what-it-costs)); since 90.26, with every hold at 200 ms, 210 to 450 ms, and up to about a second with the right pad ([table](findings/2026-10-04-standard-delays/README.md#what-the-margin-does)). It rests on A13. Check on the Deck whether holds feel late with a thumb landing on a pad
+
+## Hold delays and the pad layers' ring binds (90.26)
+
+- [x] Standardize the hold delays and give the pad clicks' outer bind a reset (author, 2026-10-04): built as **90.26** ([record](findings/2026-10-04-standard-delays/README.md) · scenarios [H1 to P2](tests/test_scenarios_90_26.py)). Twelve layers change. Not run on the Deck
+  - Every hold delay over 200 ms is 200 ms: the bumper Modifier 0 and 1 (300), the Steering Modifier 0 and 1 (250). Both menu buttons into `Menu Keys`: 200, not 150
+  - Every reset repeats at its delay + 50 ms, as before (R121). A first build had + 5; the author took it back the same day ([why](findings/2026-10-04-standard-delays/README.md#three-margins-with-every-hold-at-200-ms))
+  - The second-press covers and the touches stay at 150 ms; the ramp-up layers are untouched
+  - `RTP: Click Entry Point` and `LTP: Click Entry Point`: a reset for the 5 ms outer ring bind, on the pad's touch, every 55 ms (R120)
+  - `RTP: Touch Entry Point` and `LTP: Touch Entry Point`: the outer bind starts at the inner one's threshold, 24996, with no delay. The bump stays where a click is the centre click; a touch at the rim hands over at once
+  - [ ] Confirm the R139 entry accepted while building: the right pad's ring under nine layers, read because their hold delay or `RTP: Click Entry Point`'s touch changed
+  - [ ] On the Deck: the touch layers first, since they now rest on a normal Soft Press at 24996 (A40), then the clicks, the holds and a pad touch during a hold ([order](findings/2026-10-04-standard-delays/README.md#on-the-deck-in-this-order))
 
 ## Next: allowed activators and cleanup (90.6)
 
@@ -221,14 +237,14 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
 - [x] Move the fallback exit timer into `Steering | LS: Fallback Hold` (90.11, author 2026-10-02): the timer ran on while the stick was on A or D. `Steering`'s stick up and down only add the layer; the layer types W or S, exits at 1.5 s and leaves on Release; its edge pulses from the start and carries the reset ([record](findings/2026-10-02-steering-fallback-hold/README.md); 71 layers)
   - Nothing is added over the Fallback Hold or the Entry Guard (author): Start and Select type Tab and Escape there; Steering's Entry Points type W and S on stick up and down instead of inheriting the add
 - [x] Audit check for a hidden exit (built 2026-10-02 as the Cleanup audit's seventh check, rule R136): a layer that can be added over another binds an input whose Release is that layer's exit, without carrying it (the 90.11 menu-tap case). Prototype and 90.12 results in [findings/2026-10-02-hidden-exit](findings/2026-10-02-hidden-exit/README.md); goes in the cleanup audit as a seventh check
-- [x] The hidden-exit check reads the chain walk with six extra presses (author, 2026-10-04): every layer of every stack tested, by a compiled engine (`steam_layout/native.py`, `steam_layout/engine/chain_engine.cpp`); the audit needs a C++ compiler. The capped walk and the first engines of 2026-10-03 are archived ([record](findings/2026-10-03-simultaneous-cap/README.md))
-- [x] **The menu Tap Cover loses a right-thumb lift** (found 2026-10-03; present since 90.10; fixed in 90.23, 2026-10-04: the cover binds both stick touches itself, the author's choice of fix A; [record](findings/2026-10-04-tap-cover-stick-touches/README.md)). `Menu Buttons: Tap Cover` directly over a pad layer that keeps the right stick in mouse mode leaves the right-stick touch unanswered, so `RST: Entry Point`, `RST: Tap Cover` or `RST: Temporary Gyro` stays on: 12 pairs on 90.22, none on 90.23. The build audit failed on them, with no exception (author, 2026-10-04) ([the fixes that were weighed](findings/2026-10-03-simultaneous-cap/suggested-fixes.md))
-  - Not settled, and no longer needed for this: whether a person can hold that stack at all (four thumb controls for two thumbs)
-  - On the Deck: the gesture of scenario 90.23 C1 would also confirm A2 on a stick; it was verified on a pad
   - Touchpad pairs are an exception for now (author, 2026-10-02; next item). On 90.13, 2 pairs remain, both passing: the menu Tap Cover over a stick guard (its menu Release still removes the guard). The 4 turn-assist pairs over the driver layers were fixed in 90.13 by blocking the right-stick edge in `Steering` (author). (A first run also listed 8 modifier pairs; that was a prototype bug, corrected)
   - Decided (author, 2026-10-02): a cleanup function removing the layer later is not a pass. The prototype uses the keeper rule: 0 findings outside the touchpad exception
 - [x] The menu second-press layers inherited the Fallback Hold add (found 2026-10-03 by the 90.14 review; present since 90.11; fixed in 90.15). In Steering, a double-tap-and-hold of Select or Start with the left stick pushed up or down put `Steering | LS: Fallback Hold` over `Menu Left: Escape` or `Menu Right: Tab`, which took the menu button's Release and left the layer on. Both layers now type W and S on stick up and down, as Steering's Entry Points and the menu windows do ([record](findings/2026-10-03-menu-second-press-keys/README.md); scenarios [M1 to M4](tests/test_scenarios_90_15.py))
   - [x] The hidden-exit check missed it, and now counts landings (2026-10-03): any adding binding that answers on a stack the chains visited puts its layer on top of that whole stack. It finds the four pairs on 90.13 and 90.14 and none on 90.15 ([record](findings/2026-10-03-menu-second-press-keys/README.md#why-the-hidden-exit-check-missed-it))
+- [x] The hidden-exit check reads the chain walk with six extra presses (author, 2026-10-04): every layer of every stack tested, by a compiled engine (`steam_layout/native.py`, `steam_layout/engine/chain_engine.cpp`); the audit needs a C++ compiler. The capped walk and the first engines of 2026-10-03 are archived ([record](findings/2026-10-03-simultaneous-cap/README.md))
+- [x] **The menu Tap Cover loses a right-thumb lift** (found 2026-10-03; present since 90.10; fixed in 90.23, 2026-10-04: the cover binds both stick touches itself, the author's choice of fix A; [record](findings/2026-10-04-tap-cover-stick-touches/README.md)). `Menu Buttons: Tap Cover` directly over a pad layer that keeps the right stick in mouse mode leaves the right-stick touch unanswered, so `RST: Entry Point`, `RST: Tap Cover` or `RST: Temporary Gyro` stays on: 12 pairs on 90.22, none on 90.23. The build audit failed on them, with no exception (author, 2026-10-04) ([the fixes that were weighed](findings/2026-10-03-simultaneous-cap/suggested-fixes.md))
+  - Not settled, and no longer needed for this: whether a person can hold that stack at all (four thumb controls for two thumbs)
+  - On the Deck: the gesture of scenario 90.23 C1 would also confirm A2 on a stick; it was verified on a pad
 - [ ] **Touchpad exception to the hidden-exit rule: address it** (author, 2026-10-02). For now every pair where either layer is a touchpad layer (`Tab`, `Escape`, `Backspace`, `Enter`, `RTP: Entry Point`, `RTP: Circular Scroll`, `RTP: Double Tap`) or the covered exit is a trackpad input is set aside, not a finding. Under the keeper rule (a pair counts only if it covers an exit on what keeps the lower layer alive; a later cleanup doesn't count), that is 68 pairs in 90.13 (99 in 90.16: 31 more windows over the six pad click layers, whose touch Release is new there): 40 windows over pad layers and 28 `RTP: Double Tap` over button layers. 26 more (pad layers over the menu hold) are information: no stuck layer, but they block the right-stick click transition gesture ([list](findings/2026-10-02-hidden-exit/README.md#touchpad-exception))
   - Worst first: the 12 pairs where the lower layer has no cleanup function. `RTP: Double Tap` over `Menu Left: Escape`, `Menu Right: Tab`, the four Double Tap Covers, `L1&R1: Tap Cover` and `Menu Buttons: Tap Cover`; the L1, R1, Menu Left and Menu Right windows over `RTP: Tap Cover`. Example: double-tap and hold Select, tap the right pad, let go of Select inside the window: `Menu Left: Escape` stays on
   - Windows can't carry the exit without breaking their isolation, so the choice is a cleanup function on the lower layer or stopping the window from landing
@@ -242,13 +258,12 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
 
 ## Menu stateful layer
 
-- [ ] Add menu stateful layer
-  - Exception (author, 2026-10-01): it will not go through the [stateful transition structure](resources/Stateful%20Layer%20Transitions.md#exceptions). The idea is parked here
-  - Entry and exit were reworked on 2026-10-03: see [Brainstormed ideas](#brainstormed-ideas)
-  - Enter: Menu Left + Right
-  - Exit: both sticks deflected, or one stick deflected + any face button
-  - Inputs: D-pad → arrow keys; face buttons → Enter / Tab / Escape / Backspace
-  - On entry: remove gyro stateful layer
+- [x] Add menu stateful layer: built in 90.25 as `Menu Keys` ([record](findings/2026-10-04-pad-bumps-and-menu-keys/README.md) · [plan](plans/2026-10-04-pad-bumps-and-menu-layer.md#3-the-menu-stateful-layer-menu-keys) · scenarios [M1 to K7](tests/test_scenarios_90_25.py)). Not run on the Deck
+  - It doesn't go through the [stateful transition structure](resources/Stateful%20Layer%20Transitions.md#exceptions) (author, 2026-10-01)
+  - Enter: hold Select and Start for 150 ms, from Base or `Gyro`; `Gyro` goes off, with the beep and the strong pulse
+  - Exit: both sticks out; a stick out plus a face button or a D-pad direction (the press then counts as Base's); a menu button held plus a stick click
+  - Inputs: the D-pad is the arrow keys; A, B, X, Y are Enter, Escape, Backspace, Tab. The modifiers, Start, Select and the stick touches do nothing; everything else is Base's
+  - With one menu button held, a tap of the other types Enter or Backspace and a double tap and hold holds it
 
 ## Cursor gyro
 
@@ -316,7 +331,10 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
   - [ ] A42: does the self-hold take the layer off? On the simulator it never fires in an ordinary click, because the layer lands on a pad that is already pressed (A5); the backup removal does the work
 - [x] One add on Base's pad clicks (90.20, author 2026-10-03): each pad click had two Soft Presses adding the Click Entry Point, the second one silent and repeating every 50 ms since 90.16. The repeating one is gone; the first, with the bump and no repeat, is kept ([record](findings/2026-10-03-base-pad-click-one-add/README.md))
   - [ ] The author asked to keep "the one repeating at 100". That one has Hold to Repeat off; 100 is what Steam shows for an unset rate. Confirm that one add per press, with no repeat, is what is wanted
-  - [ ] Where the two ranges overlap, the simulator sends the D-pad button, not the middle click: the centre Soft Press has no delay, and by A5 it waits for its 50 ms repeat while the outer one fires at 5 ms. Check which one the Deck sends there
+  - [x] Where the two ranges overlap, the middle click wins (author, 2026-10-04): a repeating action always triggers, so the centre Soft Press fires as the Click Entry Point lands, before the outer one's 5 ms delay (A6). Until then the simulator made the centre one wait for its 50 ms repeat, and sent the D-pad button there
+- [x] A bump on touch, and the middle click as a mouse (90.25, author 2026-10-03 and 2026-10-04): a pad's touch adds a hand-over layer that reads the thumb once, bumps low inside the centre, and adds the pad's Entry Point. The click's add moved from Base to the Entry Points; `Steering` binds its own. `RTP: Middle Click`'s pad is a mouse ([record](findings/2026-10-04-pad-bumps-and-menu-keys/README.md))
+  - The hand-over's two binds are the Click Entry Point's own: the inner one repeats and bumps, the outer one has the 5 ms delay (author, 2026-10-04). The click's add in the Entry Points repeats. So the bump and the click agree at every spot
+  - [ ] On the Deck: A46 first. If the cursor doesn't move after a touch, the ring isn't read on a touch and the pads need 90.24
 
 ## Sticks
 
@@ -353,7 +371,8 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
   - Both the cursor overlay and normal Tap Cover replace the complete primary input, stopping the reset after cursor entry or override. The reset never removes the normal cover or clears the owner stack. All seven Double Tap windows explicitly replace the primary controls; see [scope and isolation](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#delayed-apply-reset-follow-up) and the [scenario tests](tests/test_scenarios_cursor.py)
 - [x] Split menu entry layer into separate Menu Left / Menu Right layers
   - Both layouts have distinct Menu Left: Entry Point and Menu Right: Entry Point layers and their own Fn paths
-- [ ] Review extending the delayed-apply reset to additional tap-cover paths
+- [x] Review extending the delayed-apply reset to additional tap-cover paths: since 90.25 every delayed add has its reset, the three Entry Points' Tap Cover included
+  - Decided 2026-10-04 (author): the reset goes on all three Entry Points, the pad's included ([plan, part 5](plans/2026-10-04-pad-bumps-and-menu-layer.md#5-the-tap-cover-reset-on-the-three-entry-points)). The downsides and the Deck checks are under [Investigations](#investigations)
   - At 90.9, 21 of 24 delayed-add paths per layout have a reset (static count, 2026-10-01). The three without are LST Entry → Tap Cover, RST Entry → Tap Cover, and RTP Entry → Tap Cover, which is the deliberate exclusion below. The completed fixes above do not imply every delayed apply needs a reset
   - [Binding inventory](findings/2026-09-28-delayed-apply-reset-audit/INVENTORY.md) and [proposed follow-up work](findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md#proposed-todo-split-and-validation); missing resets are not proof of runtime failures
   - Remaining proposed additions: LST/RST Entry → Tap Cover per layout. The four single-modifier paths now target Temp Cursor Gyro and have their resets. Keep resets in the parent owning the pending apply; preserve overlays and the three-command limit
@@ -369,14 +388,14 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
   - Author confirmed: Start/Select menu interactions are not used during gameplay. Preserve disabled gyro in all six layers and the Escape / Tab RS-edge blocks; WASD modifiers and ramp-up are not required in menu context
   - Superseded 2026-10-01: the Enter / Backspace layers were removed in 90.9, so the still-held second menu button now falls through to Base
   - Background: [button overlays and inherited cleanup](resources/Steam%20Input%20JSON%20Structure.md#button-overlays-and-inherited-cleanup), [vocabulary](resources/Layout%20Vocabulary.md), and both audits
+
+## Layer cleanup
+
 - [x] **Build the required cleanups (R169 to R171).** Built 2026-10-04 as **90.24** ([record](findings/2026-10-04-required-cleanups/README.md)). Every layer has a cleanup function on both stick touches, the stick edges and every button it retypes or blocks: 174 inputs in the default layout and 196 in the alternative. The rules were enforced first, with 90.23 failing the Cleanup audit on purpose
   - The author's five decisions (2026-10-04): the full-pull blocks that cover nothing stay and get a cleanup; `RTP: Tap Cover` gets its right-stick group, and the five exits it covers are accepted; in the Steering W and S layers the bind that adds the Modifier 2 layer moved into the guard chord; the two Steering stick covers' left edge is guarded by either driver; the stick guards keep inheriting L1 and R1
   - Called out by the author: with the right pad touched first and a menu button pressed before `RTP: Tap Cover` lands, the right-stick click starts no transition while the thumb stays on the pad (scenario 90.24 K6)
   - Four behaviours changed, each with a scenario: a stuck transition ends on a stick or a bumper; `Steering | LS: Entry Guard` only lasts while the left stick is out; the click under `RTP: Tap Cover`; a stale menu cover under a held right pad clears one step later than on 90.23
 - [ ] On the Deck, 90.24: enter Steering with the left stick centred and check the first push (the Entry Guard removes itself about 100 ms after it lands, which rests on A6); rock between the Steering drivers (the bind that adds the Modifier 2 layer is a chord now, A17 and A36)
-
-## Layer cleanup
-
 - [x] Complete the static [cleanup audit](findings/2026-09-28-neptune-cleanup-audit/AUDIT.md) and [blocking audit](findings/2026-09-28-neptune-blocking-audit/AUDIT.md) for both layouts, including all layers, entry/exit references, dormant groups, and Always On ordering
 - [x] Document per-layer cleanup and blocking, with [concrete scope examples](resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) and guidance in the editing skills
 - [x] Enable Hold to Repeat on every guarded recovery removal in both layouts; see the [separate change record](findings/2026-09-28-repeating-recovery/CHANGES.md). Static validation passed; a missed release and the recovery after it are scenario tests (MR1 in [test_scenarios_triggers_and_recovery.py](tests/test_scenarios_triggers_and_recovery.py), and the missed-release scenarios of each release)

@@ -31,13 +31,13 @@ stick-touch release's fixed layers are exempt from "Never there". Layers that
 only hold_layer adds are left out. A removal the author keeps is an exception
 to R132 in the exceptions register (steam_layout/flow_config.json), with a reason.
 
-The two exit checks read the chain walk with 6 extra presses per chain: one layer's
-chain with up to six arrivals, every stack tested, and every stack one landing past
+The two exit checks read the chain walk with 5 extra presses per chain: one layer's
+chain with up to five arrivals, every stack tested, and every stack one landing past
 it. `--extras K` changes the number (0 to 14). A compiled engine does the walk
 (steam_layout/native.py builds steam_layout/engine/chain_engine.cpp on first use), so
-the audit needs a C++ compiler and stops with a message without one. On 90.23 it adds
-about 15 s and 2 GB per layout; 7 extra presses take 50 s and 6 GB, 8 take 8 minutes
-and 11 GB. `--memory GB` stops the walk; the audit then fails as not finished.
+the audit needs a C++ compiler and stops with a message without one. On 90.25 the whole
+audit takes about 4 s and 0.9 GB per layout; on 90.23 six extra presses added about 15 s
+and 2 GB, 7 took 50 s and 6 GB, 8 took 8 minutes and 11 GB. `--memory GB` stops the walk; the audit then fails as not finished.
 
 Read-only. One of the four audits in audit_build.py since 90.12; the
 `cleanup_lists` fix (steam_layout/fixes) resolves its findings. Exit codes:

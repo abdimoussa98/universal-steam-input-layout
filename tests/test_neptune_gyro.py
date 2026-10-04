@@ -59,6 +59,9 @@ class NeptuneGyroTests(unittest.TestCase):
                      for side in ("Left", "Right")
                      for suffix in ("Entry Point", "Fn Layer", "Double Tap", "Double Tap Cover")}
         disabled |= {"Menu Left: Escape", "Menu Right: Tab"}
+        # The chorded menu chains (90.25) copy the window, the second-press layer and the cover, gyro included.
+        disabled |= {f"Menu {sides}: {part}" for sides, key in (("Left!Right", "Enter"), ("Right!Left", "Backspace"))
+                     for part in ("Double Tap", key, "Double Tap Cover")}
         # The steering Menu Tap Covers sit only on their protected entry and
         # inherit its disabled gyro (90.7). Since 90.21 those Entry Points serve
         # every stateful layer and are named Stateful.

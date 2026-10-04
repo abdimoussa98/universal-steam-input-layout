@@ -23,7 +23,7 @@ class MenuButtons(ScenarioCase):
         for button, key, menu in MENUS:
             for pad in self.each():
                 pad.hold(button).wait(250)
-                self.assertEqual(pad.top, f"{menu}: Fn Layer")
+                self.assertEqual(pad.names()[-2], f"{menu}: Fn Layer")       # under the chorded Entry Point since 90.25
                 pad.mark().tap("A").tap("B")
                 self.assertTrue(all(k.startswith("F") and k[1:].isdigit() for k in pad.typed()), pad.typed())   # F-keys
                 pad.mark().let_go(button).wait(300)
@@ -36,7 +36,7 @@ class MenuButtons(ScenarioCase):
         for first, second, key in (("Select", "Start", "RETURN"), ("Start", "Select", "BACKSPACE")):
             for hold in (50, 250):                                           # before Fn is up, and with it up
                 for pad in self.each():
-                    pad.hold(first).wait(hold).tap(second).wait(30).tap(second)
+                    pad.hold(first).wait(hold).tap(second).wait(300).tap(second)     # 90.25: the first tap types from its window
                     self.assertEqual(pad.typed(), [key, key])                # pressing it again sends it again
                     pad.hold(second).wait(500)
                     self.assertEqual(pad.down(), [key])                      # held: it repeats
@@ -72,7 +72,7 @@ class MenuButtons(ScenarioCase):
             for stick in ("LS", "RS"):
                 for pad in self.each():
                     pad.hold(button).wait(50).touch(stick).wait(20).lift(stick)
-                    self.assertEqual(pad.top, f"{menu}: Fn Layer")           # Fn comes up on the lift
+                    self.assertEqual(pad.names()[-2], f"{menu}: Fn Layer")   # Fn comes up on the lift, under the chorded Entry Point
                     pad.let_go(button).wait(300)
                     self.assertEqual(pad.typed(), [])                        # and no Tab or Escape is sent
 
@@ -82,7 +82,7 @@ class MenuButtons(ScenarioCase):
             for clear in (lambda p: p.push("RS"), lambda p: p.hold("A")):
                 for pad in self.each():
                     pad.hold(button).wait(250).miss(button)
-                    self.assertEqual(pad.top, f"{menu}: Fn Layer")
+                    self.assertEqual(pad.names()[-2], f"{menu}: Fn Layer")
                     clear(pad)
                     self.assertFalse([t for t in pad.stack if "Menu" in t])
             for pad in self.each():

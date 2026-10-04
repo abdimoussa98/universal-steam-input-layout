@@ -166,7 +166,8 @@ class NeptuneHeldInputTests(unittest.TestCase):
                        ("switch", "button_menu", "Menu Left: Entry Point"),
                        ("joystick", "touch", "LST: Entry Point"),
                        ("right_joystick", "touch", "RST: Entry Point"),
-                       ("right_trackpad", "touch", "RTP: Entry Point"),
+                       ("right_trackpad", "touch", "RTP: Touch Entry Point"),   # the hand-over layers since 90.25
+                       ("left_trackpad", "touch", "LTP: Touch Entry Point"),
                        ("right_joystick", "edge", GYRO_OFF),
                        ("right_joystick", "edge", "Turning Ramp Up 0")]
             entries += [(*primary_input(variant, side), owner)
@@ -215,13 +216,20 @@ class NeptuneHeldInputTests(unittest.TestCase):
         # The entry's opposite-button chord adds Fn while that button is already down. The
         # held-input rule covers the layer API only (author, 2026-10-01): Fn's own chord is a
         # key output, and it types the key for this press. The entry types nothing (since 90.10).
+        # Since 90.25 the plain Entry Point adds the chorded Entry Point on top of Fn in the same array,
+        # so the press goes through the chorded chain; Fn's chord types the key where no such layer is
+        # above it: under the Stateful Entry Points, and after the chain's window has run out.
         for variant, layout in self.layouts.items():
-            for entry, button, fn, key in (("Menu Left: Entry Point", "button_escape", "Menu Left: Fn Layer", "RETURN"),
-                                           ("Menu Right: Entry Point", "button_menu", "Menu Right: Fn Layer", "BACKSPACE")):
+            for entry, button, fn, chorded, key in (
+                    ("Menu Left: Entry Point", "button_escape", "Menu Left: Fn Layer", "Menu Left!Right: Entry Point", "RETURN"),
+                    ("Menu Right: Entry Point", "button_menu", "Menu Right: Fn Layer", "Menu Right!Left: Entry Point", "BACKSPACE")):
                 with self.subTest(variant=variant, entry=entry):
                     chord = input_value(layout, entry, "switch", button)["activators"]["chord"]
                     execution = [b for b in reversed(chord["bindings"]["binding"]) if "empty_binding" not in b]
-                    self.assertEqual(execution, [addition(fn)])
+                    self.assertEqual(execution, [addition(fn), addition(chorded)])
+                    stateful = input_value(layout, "Stateful | " + entry, "switch", button)["activators"]["chord"]
+                    self.assertEqual([b for b in reversed(stateful["bindings"]["binding"]) if "empty_binding" not in b],
+                                     [addition(fn)])
                     own = input_value(layout, fn, "switch", button)["activators"]["chord"]
                     self.assertIn(f"key_press {key}, , ", own["bindings"]["binding"])
 

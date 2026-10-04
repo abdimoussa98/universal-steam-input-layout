@@ -2,18 +2,18 @@
 
 Both working layouts, `neptune/single-set-default_hold-gyro_latest` and
 `neptune/single-set-alternative_hold-gyro_latest` (JSON and VDF), are
-**generated**. They have 78 layers each since 90.22. A hand edit in `neptune/`
+**generated**. They have 90 layers each since 90.25. A hand edit in `neptune/`
 is lost on the next install.
 
 ## The builder
 
-The current builder is in the newest build folder under `findings/`: at 90.24,
-[findings/2026-10-04-required-cleanups](../findings/2026-10-04-required-cleanups/README.md).
+The current builder is in the newest build folder under `findings/`: at 90.26,
+[findings/2026-10-04-standard-delays](../findings/2026-10-04-standard-delays/README.md).
 
 ```bash
-python3 findings/2026-10-04-required-cleanups/build_candidate.py            # builds the candidates in that folder
-python3 findings/2026-10-04-required-cleanups/install_neptune.py --deck     # a trial copy in that folder's deck/
-python3 findings/2026-10-04-required-cleanups/install_neptune.py --version 90.25   # writes neptune/ and exports the VDFs
+python3 findings/2026-10-04-standard-delays/build_candidate.py            # builds the candidates in that folder
+python3 findings/2026-10-04-standard-delays/install_neptune.py --deck     # a trial copy in that folder's deck/
+python3 findings/2026-10-04-standard-delays/install_neptune.py --version 90.27   # writes neptune/ and exports the VDFs
 ```
 
 `install_neptune.py` runs the fix pipeline (`steam_layout.fixes`) and writes
@@ -27,6 +27,8 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.26 | [standard-delays](../findings/2026-10-04-standard-delays/README.md) | No hold delay over 200 ms; a reset on the pad's touch for the Click Entry Points' outer bind; the touch layers' outer bind starts at the inner one's radius, with no delay |
+| 90.25 | [pad-bumps-and-menu-keys](../findings/2026-10-04-pad-bumps-and-menu-keys/README.md) | Pad touch bumps, the middle-click mouse, the chorded menu chains and `Menu Keys`, the Tap Cover resets (90 layers). Its class sits under the required-cleanups one, so those run last |
 | 90.24 | [required-cleanups](../findings/2026-10-04-required-cleanups/README.md) | Every layer has a cleanup function on both stick touches, the stick edges and every button it retypes or blocks (R169 to R171) |
 | 90.23 | [tap-cover-stick-touches](../findings/2026-10-04-tap-cover-stick-touches/README.md) | The menu Tap Cover binds both stick touches |
 | 90.22 | [gamepad](../findings/2026-10-03-gamepad/README.md) | The Gamepad layer and the third transition (78 layers) |

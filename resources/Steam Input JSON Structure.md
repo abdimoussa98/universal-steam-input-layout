@@ -399,17 +399,28 @@ unstarred variants. It was absent from the earlier Neptune export; the September
 port added it to all four Neptune Mod 2 layers, regular and gyro. The single-modifier
 cursor follow-up adds the same pattern to all four regular/Gyro parents per layout:
 their primary input applies its own Temp Cursor Gyro after 300 ms and removes only
-that cursor target every 350 ms. Both cursor and normal overlays replace the complete
+that cursor target every 350 ms (200 and 250 since 90.26). Both cursor and normal overlays replace the complete
 primary input to retire the apply/reset pair. The reset must never remove the normal
 cover and reopen cursor eligibility. See the [follow-up and inheritance checks](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#delayed-apply-reset-follow-up).
 The 200/250 ms values describe this implementation, not a general timing formula.
 
-**RTP trackpad exception:** the author deliberately left this workaround out of the RTP
-trackpad layers because repeated layer removal interfered with **trackball momentum**.
-Preserve that exception when copying the bumper fix. RTP's delayed touch binding applies
-`RTP: Tap Cover` after 150 ms without a corresponding repeating removal on that input.
-Other repeated cleanup bindings in RTP-related layers serve separate purposes; their
-presence does not mean this workaround was applied to the trackpad-touch path.
+**Since 90.26** (author, 2026-10-04) no hold delay is over 200 ms, and every reset still repeats
+at its delay plus 50 ms (R121): 200/250 for the modifiers, the Fn layers, the stick guards, the
+Steering modifiers and `Menu Keys`; 150/200 for the second-press covers and the Tap Covers of
+the stick and pad Entry Points. The ramp-up layers keep 250/300. The 5 ms outer ring bind of
+the two Click Entry Points has its reset on the pad's touch, every 55 ms. The audit of every
+delayed add, and what a shorter or longer margin costs, are in
+[the build record](../findings/2026-10-04-standard-delays/README.md).
+
+**RTP trackpad exception, until 90.24:** the author deliberately left this workaround out
+of the RTP trackpad layers because repeated layer removal interfered with **trackball
+momentum** (A28). RTP's delayed touch binding applied `RTP: Tap Cover` after 150 ms without
+a corresponding repeating removal on that input. **Since 90.25 it has the reset** (author,
+2026-10-04), as have the two stick Entry Points: a Regular Press that removes only the Tap
+Cover every 200 ms. On a normal touch the cover lands first and the reset never fires (A48);
+the glide is the first Deck check, and if it breaks the pad's reset comes out again
+([record](../findings/2026-10-04-pad-bumps-and-menu-keys/README.md)).
+Other repeated cleanup bindings in RTP-related layers serve separate purposes.
 
 See the [R1 and L1&R1 tap-cover findings](../findings/2026-09-27-r1-tap-cover/FINDINGS.md)
 for exact groups, source locations, the Neptune comparison, and supporting research.
@@ -478,7 +489,7 @@ state. This is an early-completion path, not an input intended to cancel the
 delayed transition. It does not wait for the rest of the hold delay.
 
 For example, in default `L1: Modifier 0`, the primary hold currently applies
-`L1: Temp Cursor Gyro` after 300 ms. Its RS touch release contains this stored array:
+`L1: Temp Cursor Gyro` after 200 ms. Its RS touch release contains this stored array:
 
 ```json
 "binding": [
@@ -524,7 +535,7 @@ The [Temp Cursor Gyro implementation](../findings/2026-09-29-temp-cursor-gyro/IM
 pattern explicitly: the primary delay and both touch releases apply the
 cursor overlay; normal Tap Covers replace touch inputs with guarded
 recovery and LST/RST removal only. Start/Select, the opposite modifier, and the
-other normal-cover inputs remain overrides, even before 300 ms. Cursor overlays
+other normal-cover inputs remain overrides, even before 200 ms. Cursor overlays
 omit both stick-touch inputs, deliberately inheriting the parent's completion
 and helper cleanup; adding the already-active cursor does not establish a new
 hold. Normal covers keep their cleanup-only replacements so a thumb lift cannot
@@ -650,8 +661,8 @@ the absence of a crash on a current client.
 **Cleanup audits must preserve these protections.** An empty binding is not
 automatically a missing cleanup. Classify the reason for the block first. If a
 new recovery exit is needed inside an Always On layer, remove that layer first
-in the same entry, then perform the recovery. Preserve the separate RTP
-trackball-momentum exception to repeating delayed-apply resets.
+in the same entry, then perform the recovery. The RTP trackball-momentum
+exception to repeating delayed-apply resets ended with 90.25.
 
 **Common Group Modes:**
 
@@ -759,7 +770,7 @@ over an input that is already held treats that input as already pressed:
 |---|---|
 | Immediate layer command: Regular Press, chord, or Soft Press with no Fire Start Delay and no Hold to Repeat | **No.** The press happened before the layer existed |
 | Activator with a Fire Start Delay | Yes, once the delay elapses |
-| Activator with Hold to Repeat | Yes, on its next repeat interval |
+| Activator with Hold to Repeat | Yes, at once: a repeating action always triggers (author, 2026-10-04). Until then this said "on its next repeat interval" |
 | Release activator | Yes, on release |
 
 A layer command is `add_layer`, `remove_layer`, or `hold_layer`.
@@ -829,7 +840,7 @@ How these layouts use it:
 - **Re-entry after a removal is carried by repeats.** These all re-enter through
   a repeating entry on the input that is still held:
   - Ramp modifier exits clear ramp-up, then the Base/Gyro modifier entry
-    re-enters on its 50 ms repeat.
+    re-enters on its repeat (how soon after a removal exposes it is A9).
   - Guarded recovery clears the stale layer, then the input's normal action follows.
   - A Double Tap expiry exposes the Base action under a held input.
 
@@ -901,7 +912,7 @@ Both chords use the same owner selector. The separate repeat retries a layer
 addition without repeating a key or mouse action that was not previously
 repeating. This is 48 split inputs per layout. The opposite-modifier transition
 keeps its own repeating Mod 2 path; the owner primary still uses its three
-entries for release, 300 ms cursor apply, and the independent 350 ms reset.
+entries for release, 200 ms cursor apply, and the independent 250 ms reset.
 
 Temp Cursor Gyro replaces those twelve inputs and the opposite modifier with
 uninterruptible, repeating Regular Press removals of **only itself**. These
@@ -1405,7 +1416,7 @@ completion before helper cleanup. Its cancellation inputs repeatedly remove
 only itself, exposing the parent's output, repeating cover/Mod 2 transition,
 or family recovery. Its two guarded edge exits also remove only cursor; stick
 geometry and movement settings remain inherited. Both overlays replace the
-primary input with their family-release exit, stopping the 300/350 ms apply/reset
+primary input with their family-release exit, stopping the 200/250 ms apply/reset
 pair. These narrow cancellation responsibilities do not replace the modifier's
 broader responsibility for both overlays. Menu Double Tap Covers keep a local
 pair exit with Escape/Tab; neither cover has Always On.
@@ -1529,7 +1540,7 @@ bumper puts a layer with a clean release above its modifier first:
 |---|---|---|
 | Tap the bumper and let go | Nothing | The modifier's: opens the window. A second tap inside 150 ms scrolls |
 | Press any button with the bumper held | Its Tap Cover | Clean exit, no window |
-| Hold the bumper 300 ms | Temp Cursor Gyro | Clean exit, no window |
+| Hold the bumper 200 ms | Temp Cursor Gyro | Clean exit, no window |
 | Press the other bumper too | Both covers, then Mod 2 | See the walkthrough |
 
 The walkthrough uses the default layout; alternative is the same on the L2/R2
@@ -1608,9 +1619,9 @@ state. It does not directly apply ramp-up or remove R1. R1's existing cleanup ca
 exposed, and the Base ramp-up binding remains subject to its own conditions.
 
 This is stick-edge cleanup after leaving the trackpad. It preserves the
-[RTP exception to the delayed-apply workaround](#interrupted-delayed-layer-applies): no
-periodic removal was added to the trackpad-touch apply path, where the author observed
-interference with trackball momentum.
+[RTP exception to the delayed-apply workaround](#interrupted-delayed-layer-applies), which
+held until 90.24: no periodic removal was added to the trackpad-touch apply path, where the
+author observed interference with trackball momentum.
 
 See the [stuck RTP entry / ramp-up findings](../findings/2026-09-27-rtp-entry-ramp-up/FINDINGS.md)
 for the exact bindings, the R1 interaction, and the limits of the static diagnosis.

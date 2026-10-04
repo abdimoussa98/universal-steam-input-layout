@@ -65,8 +65,9 @@ class LayoutHygieneTests(unittest.TestCase):
                         "delay_start": "150", "hold_repeats": "1", "haptic_intensity": "0"})
 
     def test_only_second_press_cover_resets_use_a_last_fourth_entry(self):
-        expected = {"default": {"L1: Scroll Down", "R1: Scroll Up", "Menu Left: Escape", "Menu Right: Tab"},
-                    "alternative": {"L2: Scroll Down", "R2: Scroll Up", "Menu Left: Escape", "Menu Right: Tab"}}
+        chorded = {"Menu Left!Right: Enter", "Menu Right!Left: Backspace"}        # the two chorded menu chains, since 90.25
+        expected = {"default": {"L1: Scroll Down", "R1: Scroll Up", "Menu Left: Escape", "Menu Right: Tab"} | chorded,
+                    "alternative": {"L2: Scroll Down", "R2: Scroll Up", "Menu Left: Escape", "Menu Right: Tab"} | chorded}
         for variant, data in self.layouts.items():
             with self.subTest(variant=variant):
                 allowed = audit_layout(data)["allowed_fourth"]

@@ -229,11 +229,10 @@ class HeldInputTests(unittest.TestCase):
         s.wait(1)
         self.assertEqual(s.stack, ("Base", "L", "T"))
 
-    def test_a_repeating_command_fires_at_its_next_repeat(self):                  # A6
+    def test_a_repeating_command_fires_at_once(self):                             # A6
+        """A repeating action always triggers (author, 2026-10-04). Until then this was read as "on its next repeat"."""
         s = sim(self.landing(press(add("T"), hold_repeats=1, repeat_rate=50)))
         s.press(A).press(LB)
-        self.assertEqual(s.stack, ("Base", "L"))
-        s.wait(50)
         self.assertEqual(s.stack, ("Base", "L", "T"))
 
     def test_a_key_does_go_down_on_a_held_input(self):                            # A10
@@ -351,15 +350,14 @@ class EdgeTests(unittest.TestCase):
         s.release(EDGE)
         self.assertEqual(s.stack, ("Base",))
 
-    def test_an_exit_already_true_when_its_layer_lands_waits_for_its_repeat(self):   # A5, A6 on an inverted edge
+    def test_a_repeating_exit_already_true_when_its_layer_lands_fires_at_once(self):   # A6 on an inverted edge
         ramp = {"Soft_Press": {"bindings": {"binding": remove("Ramp")},
                                "settings": {"edge_binding_invert": "1", "hold_repeats": "1", "repeat_rate": "80"}}}
         s = sim({"Base": {"switch": (SW, {"button_a": press(add("Ramp"))})},
                  "Ramp": {"joystick": ("joystick_mouse", {"edge": ramp})}})
         s.press(A)                                    # the stick is already in when Ramp lands
-        self.assertEqual(s.stack, ("Base", "Ramp"))
-        s.wait(80)
         self.assertEqual(s.stack, ("Base",))
+        self.assertEqual([what for _, what, _ in s.log if what in ("add", "remove")], ["add", "remove"])
 
     def ring(self, **options):
         """A pad edge with two Soft Presses: an inverted one inside 3, not interruptible, and a normal one past 2."""
@@ -483,15 +481,20 @@ class WalkCrossCheck(unittest.TestCase):
     def test_the_quick_tap_inside_200_ms(self):
         """Modifier 2's own release clears every modifier and toggles Gyro. `walk` stops there. The simulator
         knows the other side is still held: its modifier comes back in the new mode within 50 ms, on the
-        repeating entry of Base or Gyro, whichever way a removal treats an exposed command (A9)."""
+        repeating entry of Base or Gyro, whichever way a removal treats an exposed command (A9). When the
+        release turns Gyro on, Gyro lands on the held button and its repeating entry fires at once (A6)."""
         from tests.test_modifier_rocking import Names
         for label, layout, L, R, entry, n in self.cases():
             other = Names((n.l, n.r), not n.g)
             for let_go, held in ((L, n.r), (R, n.l)):
                 with self.subTest(label, let_go=let_go):
-                    steps = [((*L, entry, "hold L"), ("press", L)), ((*R, "chord", "press R"), ("press", R)),
-                             ((*let_go, "release", "let go inside 200 ms"), ("release", let_go))]
-                    waits = self.compare(layout, n, steps, exposed_fires=False)
+                    steps = [((*L, entry, "hold L"), ("press", L)), ((*R, "chord", "press R"), ("press", R))]
+                    last = ((*let_go, "release", "let go inside 200 ms"), ("release", let_go))
+                    if n.g:                           # Gyro goes off: Base is exposed, and waits for its repeat if A9 is false
+                        waits = self.compare(layout, n, steps + [last], exposed_fires=False)
+                    else:                             # Gyro lands on the held button: back at once
+                        waits = self.compare(layout, n, steps, exposed_fires=False).release(let_go)
+                        self.assertEqual(waits.stack, other.base + (other.mod(held),))
                     self.assertEqual(waits.wait(50).stack, other.base + (other.mod(held),))
                     fires = Simulator(layout, start=n.base, exposed_fires=True)
                     fires.press(L).press(R).release(let_go).wait(50)

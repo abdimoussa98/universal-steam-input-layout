@@ -101,7 +101,7 @@ class MenuAndTransitions(ScenarioCase):
             pad.recentre("LS")
             self.assertEqual(pad.top, "Menu Right: Entry Point")
             pad.wait(200)
-            self.assertEqual(pad.top, "Menu Right: Fn Layer")                # Fn follows once the last guard is off
+            self.assertEqual(pad.names()[-2], "Menu Right: Fn Layer")        # Fn follows once the last guard is off, under the chorded Entry Point (90.25)
         for pad in self.each():                                              # a quick tap with a guard on
             pad.push("LS", "left").mark().hold("Select").wait(60)
             self.assertEqual(pad.top, LEFT_GUARD)
@@ -145,13 +145,15 @@ class MenuAndTransitions(ScenarioCase):
 
     @scenario("90.10 T8", rules=("R138",), rests=("A10",))
     def test_the_other_menu_button_types_one_backspace_or_enter_before_fn_is_up(self):
+        """Changed in 90.25. The press no longer types at once: a tap types the key once, from its window, and
+        a hold of 150 ms enters Menu Keys (90.25 M1, M2). The key held down is the double tap and hold (M3)."""
         for first, second, key in (("Start", "Select", "BACKSPACE"), ("Select", "Start", "RETURN")):
             for pad in self.each():
                 pad.hold(first).wait(50).hold(second)
-                self.assertEqual((pad.typed(), pad.down()), ([key], [key]))
-                pad.wait(1000)
-                self.assertEqual((pad.typed(), pad.down()), ([key], [key]))  # one press, held: the system repeats it
-                pad.let_go(second).let_go(first).wait(300)
+                self.assertEqual((pad.typed(), pad.down()), ([], []))
+                pad.wait(100).let_go(second).wait(60)
+                self.assertEqual((pad.typed(), pad.down()), ([key], [key]))  # one tap, one key
+                pad.wait(300).let_go(first).wait(300)
                 self.assertEqual((pad.typed(), pad.stack), ([key], pad.layers("Base")))
 
     @scenario("90.10 T9")

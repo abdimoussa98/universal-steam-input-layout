@@ -17,7 +17,7 @@ Where the knowledge is. `resources/` holds what stays true across releases;
 
 Sections of Steam Input JSON Structure worth knowing by name:
 
-- [Interrupted delayed layer applies](../resources/Steam%20Input%20JSON%20Structure.md#interrupted-delayed-layer-applies) - including the repeating-removal workaround and RTP trackball-momentum exception
+- [Interrupted delayed layer applies](../resources/Steam%20Input%20JSON%20Structure.md#interrupted-delayed-layer-applies) - including the repeating-removal workaround and the RTP trackball-momentum exception that held until 90.24
 - [Stuck layers and why there is so much cleanup](../resources/Steam%20Input%20JSON%20Structure.md#stuck-layers-and-why-there-is-so-much-cleanup) - how the Steam button leaves layers active with no button held, and the chord-guarded cleanup pattern that recovers from it
 - [Cleanup scopes and concrete examples](../resources/Steam%20Input%20JSON%20Structure.md#cleanup-scopes-and-concrete-examples) - overlays and inherited recovery, nine-layer Mod 2 branch cleanup, and eight-layer combined-cover cleanup that preserves the still-held side
 - [Stick-edge cleanup and inherited actions](../resources/Steam%20Input%20JSON%20Structure.md#stick-edge-cleanup-and-inherited-actions) - why edge recovery is selective: LS overrides the WASD modifier, RS overrides ramp-up

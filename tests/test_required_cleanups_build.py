@@ -53,17 +53,18 @@ class RequiredCleanupsBuildTests(unittest.TestCase):
     def acts(self, layout, layer, source, name):
         return layout.active(layer)[source]['inputs'][name]['activators']
 
-    def test_working_layouts_are_this_build(self):
-        # neptune/ is generated: a hand edit there would be lost on the next install (R156).
+    def test_the_90_24_snapshot_is_this_build(self):
+        # The working layouts were this build until 90.25. The newest build's test holds R156
+        # (test_standard_delays.test_working_layouts_are_this_build at 90.26).
         for variant, data in self.data.items():
             with self.subTest(variant=variant):
                 numeric, _ = titles_to_ids(json.dumps(data), generate_lookup(data))
                 built = json.loads(numeric)['controller_mappings']
-                working = json.loads((ROOT / f'neptune/single-set-{variant}_hold-gyro_latest.json').read_text())[
+                snapshot = json.loads((ROOT / f'versions/neptune/90.24/single-set-{variant}_hold-gyro_90.24.json').read_text())[
                     'controller_mappings']
-                for cm in (built, working):
+                for cm in (built, snapshot):
                     cm.pop('title'); cm.pop('description')
-                self.assertEqual(built, working)
+                self.assertEqual(built, snapshot)
 
     def test_every_required_cleanup_is_there_within_three_entries(self):
         config = exceptions.load_config()

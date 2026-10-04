@@ -124,9 +124,13 @@ class RequiredCleanups(ScenarioCase):
         90.24. The pad touched first and a menu button pressed before the cover lands at 150 ms puts the cover
         over the menu Entry Point, whose right stick is a D-pad. The Fn layer on top inherits the right-stick
         click from the Entry Point, and across the mode change nothing is inherited (A2): the click does not
-        start a transition while the thumb is on the pad. On 90.23 it did in this order."""
+        start a transition while the thumb is on the pad. On 90.23 it did in this order.
+
+        Since 90.25 the pad's Entry Point has a reset too, and a reset fires when its layer lands (A6). Here
+        the pad's reset and the menu Entry Point's keep restarting each other's delay (A13) until a quiet gap:
+        the pad's Tap Cover lands about 550 ms after the touch and the Fn layer about 760 ms."""
         for pad in self.each():
-            pad.touch("RP").wait(60).hold("Select").wait(300)
+            pad.touch("RP").wait(60).hold("Select").wait(800)
             self.assertLess(pad.stack.index("Menu Left: Entry Point"), pad.stack.index("RTP: Tap Cover"))
             pad.click("RS")
             self.assertTrue(pad.lacks(*TRANSITIONS))

@@ -97,7 +97,7 @@ class CleanupLists(ScenarioCase):
         for clear in (lambda p: p.hold("A"), lambda p: p.push("RS")):
             for pad in self.each():
                 pad.hold("Start").wait(300).miss("Start")
-                self.assertEqual(pad.top, "Menu Right: Fn Layer")
+                self.assertEqual(pad.names()[-2], "Menu Right: Fn Layer")         # under the chorded Entry Point since 90.25
                 clear(pad)
                 self.assertTrue(pad.lacks("Menu Right: Fn Layer", "Menu Right: Entry Point"))
         for pad in self.each(start="steering"):
@@ -116,7 +116,7 @@ class CleanupLists(ScenarioCase):
             self.assertFalse([t for t in pad.stack if "Menu" in t])
         for pad in self.each():
             pad.hold("Start").wait(250)
-            self.assertEqual(pad.top, "Menu Right: Fn Layer")
+            self.assertEqual(pad.names()[-2], "Menu Right: Fn Layer")
             pad.mark().let_go("Start").wait(300)
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))  # Fn gone, nothing typed
 

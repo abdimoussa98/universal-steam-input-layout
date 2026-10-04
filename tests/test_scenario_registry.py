@@ -143,8 +143,9 @@ class ReachTests(unittest.TestCase):
                 self.assertLessEqual(self.reached[variant], set(pad.layout.titles.values()))
 
     def test_a_changed_layer_that_no_scenario_reaches_is_reported(self):
-        """`Tab` is added by a left-pad swipe, which no scenario makes."""
-        title = "Tab"
+        """`RST: Temporary Gyro` is added by a double tap on the right stick, which no scenario makes.
+        (Until 90.24 the example was `Tab`; 90.25 P5 swipes the left pad.)"""
+        title = "RST: Temporary Gyro"
         for variant in scenario.VARIANTS:
             before = copy.deepcopy(scenario.layout_data(variant))
             layers = before["controller_mappings"]["action_layers"]

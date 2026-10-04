@@ -1,0 +1,34 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "pad_bumps_and_menu_keys_generator_sha256": "c4c74acc63861becb961b89939c7b31c3ea05acf1de8f79cc20cf1310a4c3756",
+    "candidate_sha256": "6f0fb33dac0307ddb592fa7f6eacd038fb896da6b8319af64bf84bf2d34d02c3",
+    "delays_changed": 8,
+    "pad_layers_changed": 4,
+    "total_layer_count": 90,
+    "resolved_references": 4473,
+    "device_status": "UNTESTED",
+    "timing_ms": {
+      "longest_hold_delay": 200,
+      "menu_keys_hold": 200,
+      "reset_margin": 50,
+      "click_outer_bind_reset": 55
+    }
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "pad_bumps_and_menu_keys_generator_sha256": "c4c74acc63861becb961b89939c7b31c3ea05acf1de8f79cc20cf1310a4c3756",
+    "candidate_sha256": "29cbda1ca96548b2496ff2767899ce2b112a42a7144b9a008c05b775f3ac8eae",
+    "delays_changed": 8,
+    "pad_layers_changed": 4,
+    "total_layer_count": 90,
+    "resolved_references": 4543,
+    "device_status": "UNTESTED",
+    "timing_ms": {
+      "longest_hold_delay": 200,
+      "menu_keys_hold": 200,
+      "reset_margin": 50,
+      "click_outer_bind_reset": 55
+    }
+  }
+}

@@ -203,19 +203,26 @@ class Pad:
         self.sim.release((SOURCES[stick], "click"))
         return self
 
-    def press_pad(self, pad, where="centre"):
+    def press_pad(self, pad, where="centre", rest=True):
         """Click a pad and keep it down: the thumb on it at `where`, then the click.
 
         "centre" is inside the centre range only. A direction ("left") is the outer part, past the D-pad
         deadzone. "ring left" is the ring where the centre and outer ranges overlap, on that side (A39).
         The direction goes down after the click: Base's left pad uses the same input names for its
         swipes, and a click isn't a swipe.
+
+        Since 90.25 a touch runs a hand-over first; since 90.26 it is done as the thumb lands, wherever
+        that is. The thumb rests until it is done; `rest=False` clicks at the moment of the touch.
         """
         source = SOURCES[pad]
-        self.touch(pad)
         ring, direction = (where.split() + [None])[:2] if where.startswith("ring") else (None, where)
-        if direction != "centre":
+        if direction != "centre" and not self._held(pad, "edge"):
             (self.sim.press_between if ring else self.sim.press)((source, "edge"))
+        self.touch(pad)
+        for _ in range(100 if rest else 0):
+            if not any(title.endswith(": Touch Entry Point") for title in self.sim.stack):
+                break
+            self.wait(1)
         self.sim.press((source, "click"))
         if direction != "centre":
             self.sim.press((source, DIRECTIONS[direction]))
@@ -240,8 +247,8 @@ class Pad:
         self.sim.release((source, "click"))
         return self.lift(pad) if lift else self
 
-    def click_pad(self, pad, where="centre", ms=120):
-        return self.press_pad(pad, where).wait(ms).let_go_pad(pad)
+    def click_pad(self, pad, where="centre", ms=120, rest=True):
+        return self.press_pad(pad, where, rest).wait(ms).let_go_pad(pad)
 
     def enter_steering(self, settle=True):
         """Start plus left-stick click, the click released first. `settle` moves the stick out and back

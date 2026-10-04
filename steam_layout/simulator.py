@@ -24,7 +24,8 @@ stated; the ones the layout must work either way under are switches.
     A1, A2   the topmost layer that defines an input answers it (flow_model.resolve)
     A3, A4   re-adding doesn't move a layer; an array runs bottom to top
     A5, A6   a layer that lands on a held input doesn't fire its immediate layer command
-             there; a start delay still runs out, and Hold to Repeat fires at its next repeat
+             there; a start delay still runs out, and a Hold to Repeat one fires at once: a
+             repeating action always triggers (author, 2026-10-04)
     A7, A8   a Release fires in the layer that answers the input when it is released,
              also when that layer was added while the input was held
     A9       `exposed_fires`: a layer command exposed by a removal under a held input fires
@@ -108,6 +109,10 @@ def typed(log):
 
 
 Entry = namedtuple("Entry", "control layer kind index settings ops outputs taps beeps inverted condition unsupported")
+
+
+def _threshold(entry):
+    return int(entry.settings.get("activation_threshold") or 0)
 
 
 class Act:
@@ -256,7 +261,8 @@ class Simulator:
         return rest
 
     def press_between(self, control):
-        """Hold an input where an inverted Soft Press's range and a normal one's overlap: both are active."""
+        """Hold an input between a normal Soft Press's threshold and an inverted one's: both are active.
+        A normal one whose threshold is at or past the inverted one's has no overlap with it and stays off."""
         control = tuple(control)
         if control in self.held:
             raise ValueError(f"{'/'.join(control)} is already held")
@@ -354,6 +360,10 @@ class Simulator:
         """The binding that answers `control` starts answering it: decide which of its activators are live."""
         layer, found = self.binding(control)
         self.bound[(control, phase)] = layer
+        if control in self.between:                     # between two ranges: a normal Soft Press that starts at or
+            inner = [_threshold(e) for e in found if e.kind == "Soft_Press" and e.inverted]      # past the inverted
+            found = [e for e in found if not (inner and e.kind == "Soft_Press" and not e.inverted  # one's edge
+                                              and _threshold(e) >= max(inner))]                    # isn't reached
         active = [e for e in found if e.kind == "Soft_Press" and (control in self.between or e.inverted == (phase == "up"))]
         found = [e for e in found if e.kind != "release" and e.inverted == (phase == "up")]
         if self.soft_press_interrupts and any(e.settings.get("interruptable") == "0" for e in active):   # A39
@@ -374,8 +384,10 @@ class Simulator:
         edge = mode == "pressed" or (mode == "exposed" and self.exposed_fires)                   # A5, A9
         self._order += 1
         act = Act(entry, self.now + delay, True, self._order)                                      # A6, A16
-        if not edge and not delay:
-            act.allow_ops = False              # the press came before this binding: outputs only (A5, A10)
+        if not edge and not delay and not (repeat is not None and mode == "landed"):
+            act.allow_ops = False              # the press came before this binding: outputs only (A5, A10).
+                                               # A repeating one that landed runs its commands all the same (A6);
+                                               # one that a removal exposed waits for its next repeat (A9)
         self.acts[(entry.control, phase, entry.kind, entry.index)] = act
 
     def _repeat(self, entry):

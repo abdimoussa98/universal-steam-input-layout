@@ -48,8 +48,8 @@ the keeper's exit still works.
                         (author, 2026-10-02). `changed` names the changed layers.
 
 The stacks of the two exit checks (author, 2026-10-04) are the chain walk with
-`DEFAULT_EXTRAS` (6) extra presses: one layer's chain, back to the action set, with up to
-six arrivals along it, where the other checks allow one. Every layer of every such stack
+`DEFAULT_EXTRAS` (5) extra presses: one layer's chain, back to the action set, with up to
+five arrivals along it, where the other checks allow one. Every layer of every such stack
 is tested, and every stack one landing past it (one more adding binding, whichever layer
 it belongs to). A compiled engine does the walk (native.py); chains.py is its reference.
 Without a C++ compiler the audit stops with a message. `extras=None` leaves the two exit
@@ -85,7 +85,7 @@ CHECKS = ("outside the guard", "left below", "left above", "hidden cleanup", "ne
 ENFORCES = {"outside the guard": ("R127", "R131"), "left below": ("R128",), "left above": ("R129",),   # check -> rules
             "hidden cleanup": ("R130",), "never there": ("R132",), "guard mismatch": ("R127",),
             "hidden exit": ("R136",), "exit to review": ("R136",)}
-DEFAULT_EXTRAS = 6         # extra presses per chain in the two exit checks (author, 2026-10-04)
+DEFAULT_EXTRAS = 5         # extra presses per chain in the two exit checks (author, 2026-10-04: six, then five)
 TOUCHPAD_STALE = "the touchpad exception to R136"
 LISTS = ("recovery", "release")          # the roles whose removal lists follow "never there"
 ROLE = {"recovery": "cleanup function", "release": "release"}

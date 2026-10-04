@@ -117,7 +117,7 @@ class NeptuneCursorTests(unittest.TestCase):
                         primary = self.source(layout, title, source)["inputs"][name]["activators"]
                         delayed = primary["chord"]
                         self.assertEqual(bindings(delayed), [cursor_add])
-                        self.assertEqual(delayed["settings"]["delay_start"], "300")
+                        self.assertEqual(delayed["settings"]["delay_start"], "200")              # 300 until 90.25
                         self.assertEqual(delayed["settings"]["chord_button"], selector)
                         self.assertEqual(delayed["settings"]["interruptable"], "0")
                         self.assertEqual(delayed["settings"]["haptic_intensity"], "3")
@@ -149,7 +149,7 @@ class NeptuneCursorTests(unittest.TestCase):
                         reset = primary["Full_Press"]
                         self.assertEqual(bindings(reset), [target])
                         self.assertEqual(reset["settings"], {
-                            "hold_repeats": "1", "repeat_rate": "350", "interruptable": "0"})
+                            "hold_repeats": "1", "repeat_rate": "250", "interruptable": "0"})    # the delay + 50 ms (R121)
                         self.assertGreater(int(reset["settings"]["repeat_rate"]),
                                            int(primary["chord"]["settings"]["delay_start"]))
                 for suffix in (": Tap Cover", ": Temp Cursor Gyro"):

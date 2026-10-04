@@ -228,7 +228,7 @@ R112.
 | `Gamepad`'s exit | It has no Entry Points. Each stick click has a chord on Start or Select being held that runs the Entry Points' clear list and adds `Transition Set 2`. So the clear is entered at the click's **press**. The menu button's Release in the transition ends it as usual. If the menu button is let go before the click, Base is live under a held click and may type one Q or E (A11) |
 | `Gamepad`'s Start and Select | They use Steam's own Double Press and Long Press, the one exception to R108 (author, 2026-10-03): a tap sends the button after the Double Press time, a double press holds it, a hold sends nothing. It is safe only because `Gamepad` is closed: it binds every input, so no layer can be added over it (R168). Rests on A43 to A45 |
 | `Gyro` | Entered and left by the uncovered Modifier 2 release. It doesn't remap the controls that toggle it. The menu-plus-click clear leaves it on |
-| Menu stateful layer | Will not use this structure. It stays in the [todos](../todos.md#menu-stateful-layer) as its own design |
+| `Menu Keys`, the menu stateful layer (90.25) | Doesn't use this structure. Both menu buttons held for 200 ms enter it, from Base or `Gyro`, through a chorded Entry Point; both sticks out, or a stick out plus a face button or D-pad direction, leave it. Only its menu-plus-click exit goes through the clear transition, by a chord on the stick clicks as in `Gamepad` ([record](../findings/2026-10-04-pad-bumps-and-menu-keys/README.md)) |
 
 ## Adding a stateful layer
 
@@ -298,8 +298,8 @@ section are still open: they are assumptions A26 and A8 in
   - **The entering direction carries the hold** that applies the Tap Cover
     (author, 2026-10-01, replacing the earlier idea of moving it to the
     edge). North in Modifier 1 and south in Modifier 0 have a chord on Any
-    driver with a 250 ms delay that adds the Tap Cover, and the 300 ms
-    repeating reset. This is the pattern `L1: Modifier 0` and
+    driver with a 200 ms delay that adds the Tap Cover, and the 250 ms
+    repeating reset (250 and 300 until 90.25). This is the pattern `L1: Modifier 0` and
     `R1: Modifier 1` use. The edge has only its Release.
   - **Left and right keep A and D and add the Tap Cover in the same bind.**
     Rolling sideways uses up the tap at once, so there is no wait for the
