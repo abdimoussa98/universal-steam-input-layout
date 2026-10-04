@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "8819945f85374b8d2701a9de70b8f6041114b96fef9299d19e158dcc58cd858c",
+      "version_snapshot": "versions/neptune/90.22/single-set-default_hold-gyro_90.22.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "bcd0c954f417be6bf7d58226422bf9281e30fbb42a2769287e253e4bf270369e",
+      "version_snapshot": "versions/neptune/90.22/single-set-default_hold-gyro_90.22.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "d7e1731b1028a5c9b57cf6a989474f8deda044a70909330daa50912329b91f5d",
+      "version_snapshot": "versions/neptune/90.22/single-set-alternative_hold-gyro_90.22.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "c245f7d39cda43f247d67463c520a7f1e81e85e1c4fe70393f1ebde0678b4986",
+      "version_snapshot": "versions/neptune/90.22/single-set-alternative_hold-gyro_90.22.vdf"
+    }
+  },
+  "release": "90.22",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-03-gamepad/default-gamepad.json",
+      "sha256": "0af87805395eca4d870617c0b56f65d97f158c485a7dc9ae9c9062e9d2c783bf"
+    },
+    "alternative": {
+      "path": "findings/2026-10-03-gamepad/alternative-gamepad.json",
+      "sha256": "7247542bc95fc579f83a1486e62b9bdc47f525025a024d75d1e71bcd81957319"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

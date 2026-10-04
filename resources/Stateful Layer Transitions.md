@@ -5,7 +5,9 @@ plan reviews the same day (decisions 37 to 46 in the brainstorm record).
 **Built in 90.10** for both layouts
 ([build record](../findings/2026-10-01-stateful-transitions/README.md)).
 `Cursor Gyro` was added in 90.21
-([build record](../findings/2026-10-03-cursor-gyro/README.md)).
+([build record](../findings/2026-10-03-cursor-gyro/README.md)) and `Gamepad`
+in 90.22 ([build record](../findings/2026-10-03-gamepad/README.md)), so all
+four gestures are taken.
 **Rests on two assumptions that aren't verified:** A26 and A8 in
 [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md), the two [Deck gates](#steerings-left-stick-and-the-deck-gates) below. The decisions and the options that were rejected
 are in the [brainstorm record](../plans/2026-10-01-stateful-layer-transitions.md),
@@ -33,14 +35,14 @@ out of scope.
 |---|---|---|
 | Menu Right + LS click | Steering | Yes |
 | Menu Left + RS click | `Cursor Gyro`, with `Gyro` underneath | Yes, 90.21 |
-| Menu Right + RS click | Gamepad | No |
-| Menu Left + LS click | Gamepad | No |
+| Menu Right + RS click | `Gamepad` | Yes, 90.22 |
+| Menu Left + LS click | `Gamepad` | Yes, 90.22 |
 
-That is the full capacity: four gestures. Until a destination is built, its
-gesture clears to Base, keeping `Gyro`.
+That is the full capacity: four gestures, all taken since 90.22.
 
 **Inside a stateful layer, every one of the four gestures clears instead.**
 It removes the stateful layer and everything above Base except `Gyro`.
+`Gamepad` does it without Entry Points: see [exceptions](#exceptions).
 
 ## The flow
 
@@ -141,15 +143,15 @@ menu Tap Cover where the Entry Point would bring in Fn.
 
 | Layer | Select (Menu Left) release | Start (Menu Right) release | Built |
 |---|---|---|---|
-| Transition 0, same-side gestures | Gamepad | Gamepad | With Gamepad |
-| Transition 1, cross gestures | `Gyro`, then `Cursor Gyro` | Steering | First; Select since 90.21 |
-| Transition 2, clear | Clear, keeping `Gyro` | Clear, keeping `Gyro` | First |
+| `Transition Set 0`, same-side gestures | `Gamepad` | `Gamepad` | 90.22 |
+| `Transition Set 1`, cross gestures | `Gyro`, then `Cursor Gyro` | Steering | 90.10; Select since 90.21 |
+| `Transition Set 2`, clear | Clear, keeping `Gyro` | Clear, keeping `Gyro` | 90.10 |
 
-- The layer titles stay `Transition Set 1` (cross) and `Transition Set 0`
-  (clear) for now. They get sorted out when Transition 0 arrives with
-  Gamepad.
-- Two transition layers are enough until Gamepad exists; the same-side
-  gestures use the clear until then.
+- The titles follow these numbers since 90.22. From 90.10 to 90.21 the clear
+  had the title `Transition Set 0`; it kept its place in the layer list, so
+  no runtime ID moved, and the same-side transition was appended.
+- `Transition Set 0` is a copy of `Transition Set 1`. Only the two menu
+  Releases differ.
 - **Nothing can be entered from a transition.** Every input that would add a
   layer underneath is blocked with an empty binding, and gyro and trackpads
   are disabled. Block, don't replace: the modifier pair no longer scrolls.
@@ -212,16 +214,22 @@ R112.
 | Steering's hold exit | Holding W or S with no driver exits Steering after 1.5 s, pulsing from the start. The timer lives in `Steering \| LS: Fallback Hold`, which is on only while the stick is up or down ([90.11 record](../findings/2026-10-02-steering-fallback-hold/README.md)) |
 | `Cursor Gyro`'s both-sticks exit | Pushing both sticks out about a quarter removes `Cursor Gyro` and nothing else; `Gyro` stays. No transition. It is only in `Cursor Gyro`: a layer on top that binds the stick edges (a held modifier, a held menu button, a window) answers instead, and the exit follows when that layer goes if the sticks are still out (author, 2026-10-03) |
 | `Cursor Gyro`'s entry | Its commit also adds `Gyro`. Leaving by the menu-plus-click clear or by both sticks therefore ends in `Gyro`, also when the player came from Base |
+| `Gamepad` and the Modifier 2 clear | The Modifier 2 quick tap does not leave `Gamepad`: the bumpers and triggers are gamepad buttons there (author, 2026-10-03). The one way out is a menu button held plus a stick click |
+| `Gamepad`'s exit | It has no Entry Points. Each stick click has a chord on Start or Select being held that runs the Entry Points' clear list and adds `Transition Set 2`. So the clear is entered at the click's **press**. The menu button's Release in the transition ends it as usual. If the menu button is let go before the click, Base is live under a held click and may type one Q or E (A11) |
+| `Gamepad`'s Start and Select | They use Steam's own Double Press and Long Press, the one exception to R108 (author, 2026-10-03): a tap sends the button after the Double Press time, a double press holds it, a hold sends nothing. It is safe only because `Gamepad` is closed: it binds every input, so no layer can be added over it (R168). Rests on A43 to A45 |
 | `Gyro` | Entered and left by the uncovered Modifier 2 release. It doesn't remap the controls that toggle it. The menu-plus-click clear leaves it on |
 | Menu stateful layer | Will not use this structure. It stays in the [todos](../todos.md#menu-stateful-layer) as its own design |
 
 ## Adding a stateful layer
 
+All four gestures are taken since 90.22, so a new stateful layer has to
+replace one. The list is kept for that.
+
 - [ ] Its gesture is one of the four in the [gesture map](#gesture-map), and
       the map above is updated.
 - [ ] The Base Entry Point for that menu side sends the click's Release to
       the right transition, and that transition's menu Release adds the new
-      layer. Transition 0 is created if this is Gamepad.
+      layer.
 - [ ] It has Entry Points whose click releases both lead to Transition 2, and
       its own menu press adds them.
 - [ ] Transition 2 and the Modifier 2 clear both remove it and its helpers.
@@ -248,7 +256,10 @@ R112.
 - Steering can sit under the two menu Double Tap windows. They bind
   left-stick up and down as plain W and S, so Steering's hold-exit clock
   doesn't run during the window.
-- The clear happens at the stick click's release, not its press.
+- The clear happens at the stick click's release, not its press. `Gamepad`
+  is the exception: its exit chord fires at the press.
+- In `Gamepad` a single Start or Select tap arrives late by the Double Press
+  time (200 ms). The pad clicks send Select and Start at once.
 - In Transition 1 the two menu buttons lead to different places, so a stray
   tap of the other one commits to the other destination. The first button is
   then still held over Base, and its repeating press starts a fresh menu
@@ -377,6 +388,9 @@ section are still open: they are assumptions A26 and A8 in
 
 ## Tests
 
+[test_gamepad.py](../tests/test_gamepad.py) asserts, on the 90.22 build, all
+four gestures, the three transitions and their feedback, `Gamepad`'s map,
+its native menu activators, its exit chord, and that it is closed (R168).
 [test_cursor_gyro.py](../tests/test_cursor_gyro.py) asserts `Cursor Gyro`'s
 binds, its entry, its three exits and the renamed Entry Points on the 90.21
 build. [test_stateful_transitions.py](../tests/test_stateful_transitions.py) asserts
@@ -384,5 +398,5 @@ for both layouts: each Entry Point's click-release targets, each transition's
 two menu-release destinations, that the transitions leave no layer-adding
 input unblocked, that the Fn layers and guards bind no stick click, the
 guards' and the Tap Cover's binds, and Steering's left-stick recipe and
-windows. It is extended each time a stateful layer is added, until all four
-gestures are taken.
+windows, on the 90.10 build. The later builds have their own test files,
+above.

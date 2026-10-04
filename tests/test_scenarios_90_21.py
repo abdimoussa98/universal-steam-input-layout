@@ -52,7 +52,7 @@ class CursorGyro(ScenarioCase):
                 enter(pad).hold(menu)
                 self.assertEqual(pad.top, ENTRY_POINT[menu])
                 pad.click(stick)
-                self.assertEqual(pad.stack, pad.layers("Base", "Gyro", "Transition Set 0"))
+                self.assertEqual(pad.stack, pad.layers("Base", "Gyro", "Transition Set 2"))    # the clear
                 pad.mark().let_go(menu)
                 self.assertEqual([what for what, _ in pad.seen("haptic", "beep")], FEEDBACK)
                 pad.lift(stick).wait(300)

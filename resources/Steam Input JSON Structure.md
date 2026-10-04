@@ -226,7 +226,14 @@ every hold threshold and multi-tap gesture from the allowed types and layers.
 
 The rule covers every group, including inactive sources, mode-shift targets and
 unreferenced groups, because a dormant activator becomes live when its source
-is enabled or its group is reattached. Timing settings on allowed activators,
+is enabled or its group is reattached.
+
+**One exception (author, 2026-10-03, since 90.22):** Start and Select in the
+`Gamepad` layer each have a Regular Press, a Double Press and a Long Press.
+`Gamepad` binds every input, so no layer can be added over it (R168), and the
+bug is with layers. The exception is one entry in the exceptions register,
+which the Budget audit reads; anywhere else the two types still fail. It rests
+on A43 and A44, which are not verified. Timing settings on allowed activators,
 such as `delay_start`, `hold_repeats` and `repeat_rate`, are fine.
 
 Replacements:

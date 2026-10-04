@@ -46,6 +46,10 @@ stated; the ones the layout must work either way under are switches.
     A38      a stick edge is inverted only where its own group says so
     A42      `hold_releases`: `hold_layer` puts a layer on, and takes it off when the activator
              that holds it ends, whoever added the layer first (False: it only puts it on)
+    A43      an input with a Double Press or a Long Press beside its Regular Press (`_native`): a tap
+             sends the interruptible Regular Press once, after the Double Press time; a hold sends
+             only the Long Press; a second press inside the Double Press time sends only the Double
+             Press, for as long as it is held
     A39      `soft_press_interrupts`: an active uninterruptible Soft Press suppresses an interruptible
              Soft Press on the same input (`press_between` puts an input in both of two ranges)
     A21      `desktop(data)`: the layout with every entry past the third dropped
@@ -62,7 +66,8 @@ from .flow_model import chord_condition, resolve
 from .model import TARGET, Layout, actions, entries
 
 ALWAYS_ON = "always_on_action"
-LEVEL = re.compile(r"(key_press|mouse_button) ([^,\s]+)")
+LEVEL = re.compile(r"(key_press|mouse_button|xinput_button) ([^,\s]+)")
+NATIVE = ("Long_Press", "Double_Press")
 MOMENTARY = re.compile(r"(mouse_wheel) ([^,\s]+)")
 COMMAND = re.compile(r"controller_action (add_layer|remove_layer|hold_layer) (\{\{.+?\}\}|\d+)(?: (\d+))?")
 UNSUPPORTED = re.compile(r"mode_shift |CHANGE_PRESET")
@@ -128,6 +133,7 @@ class Simulator:
         self.now, self.held, self.log = 0, set(), []
         self.between = set()            # held controls that are also inside an inverted range (`press_between`)
         self.acts = {}                  # (control, phase, kind, index) -> Act
+        self.pressed_at = {}            # control -> when its last first press was (for a Double Press, A43)
         self.bound = {}                 # (control, phase) -> the layer whose binding is established there
         self._cache, self._order = {}, 0
         self._inverted = self._inverted_controls()
@@ -221,6 +227,34 @@ class Simulator:
         self._drain()
         return self
 
+    def _native(self, control, phase, mode, found):
+        """An input with a Double Press or a Long Press (A43). Returns the entries left to arm as usual."""
+        doubles = [e for e in found if e.kind == "Double_Press"]
+        longs = [e for e in found if e.kind == "Long_Press"]
+        if not doubles and not longs:
+            return found
+        window = max((int(e.settings.get("double_tap_time") or 0) for e in doubles), default=0)
+        first = self.pressed_at.get(control)
+        self.acts.pop((control, "tap"), None)                 # a new press: the pending tap never fires
+        if mode == "pressed" and doubles and first is not None and self.now - first <= window:
+            self.pressed_at.pop(control)
+            for entry in self._ordered(doubles):                 # the second press: only the Double Press
+                self._arm(entry, phase, mode)
+            return []
+        if mode == "pressed":
+            self.pressed_at[control] = self.now
+        for entry in self._ordered(longs):                       # fires if the input is still held then
+            self._arm(entry, phase, mode, delay=int(entry.settings.get("long_press_time") or 0))
+        rest = []
+        for entry in found:
+            if entry.kind in NATIVE:
+                continue
+            if entry.kind == "Full_Press" and entry.settings.get("interruptable") != "0" and doubles:
+                self._arm(entry, phase, mode, delay=window)      # waits to see whether a second press comes
+            else:
+                rest.append(entry)
+        return rest
+
     def press_between(self, control):
         """Hold an input where an inverted Soft Press's range and a normal one's overlap: both are active."""
         control = tuple(control)
@@ -242,7 +276,11 @@ class Simulator:
             raise ValueError(f"{'/'.join(control)} is not held")
         self._note("release", "/".join(control))
         _, found = self.binding(control)                      # the layer that answers it now (A7, A8)
+        waiting = [act for key, act in self.acts.items() if key[:2] == (control, "down") and act.first
+                   and act.entry.kind == "Full_Press" and any(e.kind == "Double_Press" for e in found)]
         self._end(control, "down")
+        for act in waiting:                                   # a tap: the Regular Press fires once, later (A43)
+            self.acts[(control, "tap")] = Act(act.entry, act.due, True, act.order)
         self.held.discard(control)
         was_between = control in self.between
         self.between.discard(control)
@@ -323,13 +361,15 @@ class Simulator:
         for entry in found:
             if entry.condition is not None and not entry.condition.known:
                 raise NotImplementedError(f"{layer} {'/'.join(control)}: unknown chord button ({entry.condition.label})")
+        if phase == "down":
+            found = self._native(control, phase, mode, found)                                      # A43
         chords = [e for e in found if e.kind == "chord" and e.condition.satisfied(self.held)]     # A17, A36
         others = [e for e in found if e.kind != "chord" and not (chords and e.settings.get("interruptable") != "0")]
         for entry in self._ordered(sorted(chords + others, key=lambda e: e.index)):                # A27
             self._arm(entry, phase, mode)
 
-    def _arm(self, entry, phase, mode):
-        delay = int(entry.settings.get("delay_start") or 0)
+    def _arm(self, entry, phase, mode, delay=None):
+        delay = int(entry.settings.get("delay_start") or 0) if delay is None else delay
         repeat = self._repeat(entry)
         edge = mode == "pressed" or (mode == "exposed" and self.exposed_fires)                   # A5, A9
         self._order += 1
@@ -354,6 +394,15 @@ class Simulator:
         raise RuntimeError(f"activators keep firing at {self.now} ms without time passing")
 
     def _fire(self, key, act):
+        if key[1] == "tap":                                   # a Regular Press that waited out the Double Press time
+            del self.acts[key]
+            self._run(act.entry, tap=True)
+            return
+        if act.entry.kind == "Long_Press" and act.first:      # it interrupts the Regular Press (A43)
+            for other in [k for k, a in self.acts.items() if k[:2] == key[:2] and a.entry.kind == "Full_Press"
+                          and a.entry.settings.get("interruptable") != "0"]:
+                for output in self.acts.pop(other).down:
+                    self._note("up", output)
         entry, repeat = act.entry, self._repeat(act.entry)
         act.due = self.now + repeat if repeat is not None else None                                # A31
         if act.first:
@@ -430,6 +479,8 @@ class Simulator:
         held input (A5); one that was there, under a layer that left, has been exposed (A9).
         """
         before = self.stack if before is None else before
+        for key in [k for k, act in self.acts.items() if k[1] == "tap" and self.binding(k[0])[0] != act.entry.layer]:
+            del self.acts[key]                                # the layer that owed the tap no longer answers
         live = self._live()
         for control, phase in [pair for pair in self.bound if pair not in live]:
             self._end(control, phase)

@@ -57,7 +57,7 @@ def recovery_specs(variant):
     for button, direction, selector in ((left, "Down", lc), (right, "Up", rc)):
         specs[button + ": Scroll " + direction] = ({selector}, {button + ": Scroll " + direction, button + ": Double Tap Cover"})
     parents = {"Menu " + side + ": " + kind for side in ("Left", "Right") for kind in ("Entry Point", "Fn Layer")}
-    for title in ("Transition Set 0", "Transition Set 1"):
+    for title in ("Transition Set 0", "Transition Set 1", "Transition Set 2"):
         specs[title] = ({"14", "15"}, parents | {title})
     return specs
 
@@ -114,14 +114,14 @@ class NeptuneRecoveryTests(unittest.TestCase):
     def test_selected_edges_have_expected_guards_scope_and_outer_geometry(self):
         for variant, layout in self.layouts.items():
             specs = recovery_specs(variant)
-            self.assertEqual(len(specs), 14)
+            self.assertEqual(len(specs), 15)                 # the third transition came with 90.22
             for title, (selectors, targets) in specs.items():
                 with self.subTest(variant=variant, layer=title):
                     ls = self.source(layout, title, "joystick")
                     rs = self.source(layout, title, "right_joystick")
                     self.assertEqual(ls["mode"], "dpad")
                     self.assertEqual(ls["settings"]["edge_binding_invert"], "0")
-                    if title in ('Transition Set 0', 'Transition Set 1'):
+                    if title in ('Transition Set 0', 'Transition Set 1', 'Transition Set 2'):
                         for group in (ls, rs):
                             self.assertEqual(group['inputs']['edge']['activators'],
                                              {'Full_Press': {'bindings': {'binding': EMPTY}}})
@@ -156,7 +156,7 @@ class NeptuneRecoveryTests(unittest.TestCase):
         # A transition has no stick-touch or edge recovery (since 90.10): a stuck one ends on the
         # next tap of either menu button.
         for variant, layout in self.layouts.items():
-            for title in ("Transition Set 0", "Transition Set 1"):
+            for title in ("Transition Set 0", "Transition Set 1", "Transition Set 2"):
                 for source in ("joystick", "right_joystick"):
                     for name in ("touch", "edge"):
                         with self.subTest(variant=variant, layer=title, source=source, input=name):

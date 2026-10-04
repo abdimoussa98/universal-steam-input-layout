@@ -61,8 +61,10 @@ Exit codes: **0** = pass (allowed 4th-entry resets are listed, not failed), **1*
 Run it before finalizing edited layouts; it accepts numeric IDs or title tokens.
 
 The same audit fails on **Long Press** and **Double Press**, which misbehave
-with Steam's layer API (see [allowed activation types](../resources/Steam%20Input%20JSON%20Structure.md#allowed-activation-types)),
-and reports unreferenced groups and plain-inactive slots. To remove dead groups
+with Steam's layer API (see [allowed activation types](../resources/Steam%20Input%20JSON%20Structure.md#allowed-activation-types)).
+An R108 entry in the exceptions register names the layers and inputs where
+they are accepted, and the audit lists those as "allowed": since 90.22, Start
+and Select in `Gamepad`. It also reports unreferenced groups and plain-inactive slots. To remove dead groups
 (unreferenced groups and plain-inactive source slots; active, mode-shift and
 mode-shift-target groups are kept, and no ID is renumbered):
 
@@ -350,7 +352,7 @@ PYTHONPATH=.:tests python3 -m unittest $(ls tests/test_*.py | sed 's#/#.#; s#\.p
 node --test tests/test_convert_vdf.mjs
 ```
 
-The first command runs every Python test: 652 at release 90.21, in about five
+The first command runs every Python test: 681 at release 90.22, in about five
 minutes. `tests/` has to be on the path because four test modules import a
 sibling by its bare name, and `python3 -m unittest discover` does not work
 here. One module: `PYTHONPATH=.:tests python3 -m unittest tests.test_rule_registry`.

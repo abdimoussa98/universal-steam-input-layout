@@ -58,7 +58,7 @@ class MenuButtons(ScenarioCase):
                 "RS": ["SEMICOLON", "SINGLE_QUOTE", "COMMA", "PERIOD"]}
         for pad in self.each():
             pad.hold("Select").click("LS")
-            self.assertEqual(pad.top, "Transition Set 0")
+            self.assertEqual(pad.top, "Transition Set 0")                    # since 90.22 the one that enters Gamepad
         for stick, source in (("LS", "joystick"), ("RS", "right_joystick")):
             for pad in self.each():
                 pad.hold("Select").wait(250).touch(stick).mark()

@@ -54,7 +54,7 @@ class NeptuneGyroTests(unittest.TestCase):
                             "layer": "1", "edge_binding_radius": "4915", "edge_binding_invert": "0"})
 
     def test_gyro_sources_only_override_owned_properties_or_explicitly_disable(self):
-        disabled = {"Gyro Off Ramp Up", "Transition Set 0", "Transition Set 1"}
+        disabled = {"Gyro Off Ramp Up", "Transition Set 0", "Transition Set 1", "Transition Set 2", "Gamepad"}
         disabled |= {"Menu " + side + ": " + suffix
                      for side in ("Left", "Right")
                      for suffix in ("Entry Point", "Fn Layer", "Double Tap", "Double Tap Cover")}

@@ -2,18 +2,18 @@
 
 Both working layouts, `neptune/single-set-default_hold-gyro_latest` and
 `neptune/single-set-alternative_hold-gyro_latest` (JSON and VDF), are
-**generated**. They have 76 layers each since 90.21. A hand edit in `neptune/`
+**generated**. They have 78 layers each since 90.22. A hand edit in `neptune/`
 is lost on the next install.
 
 ## The builder
 
-The current builder is in the newest build folder under `findings/`: at 90.21,
-[findings/2026-10-03-cursor-gyro](../findings/2026-10-03-cursor-gyro/README.md).
+The current builder is in the newest build folder under `findings/`: at 90.22,
+[findings/2026-10-03-gamepad](../findings/2026-10-03-gamepad/README.md).
 
 ```bash
-python3 findings/2026-10-03-cursor-gyro/build_candidate.py            # builds the candidates in that folder
-python3 findings/2026-10-03-cursor-gyro/install_neptune.py --deck     # a trial copy in that folder's deck/
-python3 findings/2026-10-03-cursor-gyro/install_neptune.py --version 90.22   # writes neptune/ and exports the VDFs
+python3 findings/2026-10-03-gamepad/build_candidate.py            # builds the candidates in that folder
+python3 findings/2026-10-03-gamepad/install_neptune.py --deck     # a trial copy in that folder's deck/
+python3 findings/2026-10-03-gamepad/install_neptune.py --version 90.23   # writes neptune/ and exports the VDFs
 ```
 
 `install_neptune.py` runs the fix pipeline (`steam_layout.fixes`) and writes
@@ -27,6 +27,7 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.22 | [gamepad](../findings/2026-10-03-gamepad/README.md) | The Gamepad layer and the third transition (78 layers) |
 | 90.21 | [cursor-gyro](../findings/2026-10-03-cursor-gyro/README.md) | The stateful Cursor Gyro layer (76 layers) |
 | 90.20 | [base-pad-click-one-add](../findings/2026-10-03-base-pad-click-one-add/README.md) | Base adds the Click Entry Point with one Soft Press |
 | 90.19 | [pad-click-holds](../findings/2026-10-03-pad-click-holds/README.md) | The final pad click layers hold themselves |

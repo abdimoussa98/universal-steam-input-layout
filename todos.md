@@ -22,26 +22,30 @@ because the author reports buggy behavior with Steam action sets.
 The Deck is used to settle an assumption, once, and again after a Steam update
 that could change it. Each has one procedure in its row of
 [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md).
-What rests on each one, [as of 90.21](findings/2026-10-03-cursor-gyro/unverified-assumptions.txt);
+What rests on each one, [as of 90.22](findings/2026-10-03-gamepad/unverified-assumptions.txt);
 `python3 -m tests.scenario` prints the current list.
 
-The layout relies on these fourteen. If one is false, something is broken. The
-last two came with 90.14, and the pad clicks rest on them: check them first.
+The layout relies on these seventeen. If one is false, something is broken.
+A40 and A41 came with 90.14, and the pad clicks rest on them. A43, A44 and A45
+came with 90.22, and `Gamepad` rests on them. Check those five first.
 
 - [ ] A8: A stick edge's Release fires in a layer that was added while the stick was already out (unverified; rests on it: 9 scenarios; R111, R137)
 - [ ] A10: A key or mouse output fires on an input that is already held when its layer is added (reported by the author; rests on it: 29 scenarios; R138)
-- [ ] A11: A key or mouse output fires when a removal exposes it under an input that is held (unverified; rests on it: 7 scenarios)
+- [ ] A11: A key or mouse output fires when a removal exposes it under an input that is held (unverified; rests on it: 8 scenarios)
 - [ ] A13: Any `remove_layer` can reset a running start delay; an `add_layer` doesn't (reported by the author; rests on it: R123, R126, R141)
 - [ ] A14: A delay starts again when a removal exposes it under a button that is held (unverified; rests on it: 2 scenarios)
 - [ ] A16: A delay's clock starts when its layer is added, not at the physical press (unverified; rests on it: 9 scenarios)
 - [ ] A26: Stick inputs inherit through the middle of the stack like any other input (unverified; rests on it: R140)
-- [ ] A27: An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known (reported; rests on it: 4 scenarios; R133, R135)
+- [ ] A27: An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known (reported; rests on it: 5 scenarios; R133, R135)
 - [ ] A33: Steam loads an exported VDF as written: the same layers, groups and bindings as the JSON it was made from (reported; rests on it: R151)
 - [ ] A34: A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held (unverified)
 - [ ] A36: A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it (unverified; rests on it: 1 scenario)
 - [ ] A38: A stick group that doesn't state `edge_binding_invert` has a normal edge. It doesn't take the inverted setting of the group it replaces in a lower layer (unverified; rests on it: 2 scenarios; R111)
 - [ ] A40: A Soft Press on a pad's outer ring reads the thumb's distance from the centre, on the scale of the D-pad deadzone and the outer ring radius, and an inverted one fires reliably on a D-pad-mode pad (unverified; rests on it: 10 scenarios). If it is false, a pad click may send nothing
 - [ ] A41: A D-pad group that inverts its outer ring and states no radius uses a radius of about 24996 of 32767 (unverified; rests on it: 8 scenarios). Read the slider on 90.13's `RTP: Mouse Buttons`; a different number goes into `CENTRE_RADIUS` in the 90.14 builder
+- [ ] A43: On a button with an interruptible Regular Press, a Double Press and a Long Press, a tap sends the Regular Press once after the Double Press time, a hold sends only the Long Press, and a second press sends only the Double Press (unverified; rests on it: 2 scenarios; R108's exception, R168)
+- [ ] A44: Long Press and Double Press behave in a layer that no other layer is added over (unverified; rests on it: 1 scenario; R108's exception, R168)
+- [ ] A45: A chord reads a button as held while that button carries Long Press and Double Press activators (unverified; rests on it: 3 scenarios)
 
 The layout is built to work either way under these nine. Settling one takes a
 branch out of the tests:
@@ -171,9 +175,13 @@ Agreed design, built in 90.10. Its 25 Deck checks became 19 scenario tests, 5 as
 
 ## Gamepad layer
 
-- [ ] Move gamepad layer → Menu Right + RS click / Menu Left + LS click
+- [x] Gamepad layer on Menu Right + RS click / Menu Left + LS click: built in 90.22 as `Gamepad` ([record](findings/2026-10-03-gamepad/README.md) · [plan](plans/2026-10-03-cursor-gyro-and-gamepad.md) · scenarios [G1 to G7](tests/test_scenarios_90_22.py)). Not run on the Deck
   - Note: requires same-side input (claw style); not frequent, so acceptable tradeoff
-  - Enters through Transition 0, which is created with this layer ([structure](resources/Stateful%20Layer%20Transitions.md#3-transition-layers))
+  - Enters through `Transition Set 0`, created with this layer. The clear was renamed `Transition Set 2`
+  - Out: Start or Select held plus a stick click. Not the Modifier 2 quick tap (author, 2026-10-03)
+  - Start and Select use Steam's own Double Press and Long Press, the one exception to R108, because nothing can be added over `Gamepad` (R168)
+  - [ ] On the Deck first: A43, A44 and A45 (the tap, the double press and the hold; and the exit chord). `Gamepad` relies on all three and none is verified. The fallback for A43 and A44 needs no layer: Start and Select on the pad clicks alone
+  - [ ] Confirm the choices made while building: the exit fires at the click's press (R158 exception); the Long Press at entry (R162 exception); the grip map L4 L3, L5 B, R4 A, R5 Y from the archived set; the pad clicks as Select and Start
 
 ## Steering
 
@@ -321,7 +329,8 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
 - [ ] L1 + R1 clears all stateful layers
   - Author rule, 2026-10-01: the Modifier 2 clear (both bumpers in default, both triggers in alternative) always clears everything to Base, including Gyro. It is the fallback from any state and the one exit that never uses a transition ([structure](resources/Stateful%20Layer%20Transitions.md#exceptions)). Every new stateful layer must be removed by it ([definition of done §11](resources/Layer%20Definition%20of%20Done.md#11-stateful-layers))
   - Built for Gyro and Steering: the uncovered opposite release in both ordered Mod 2 variants clears every layer to Base; native acceptance pending
-  - The older Gamepad-preservation exception conflicts with this rule. Kept open by the author (2026-10-01); settle it when Gamepad is built
+  - Settled with Gamepad in 90.22 (author, 2026-10-03): the Modifier 2 quick tap does not leave `Gamepad`, whose bumpers and triggers are gamepad buttons. It is a recorded exception to R159
+  - `Cursor Gyro` (90.21) follows the rule: the two `Gyro | … Modifier 2` releases remove it
 
 ## Bugs
 

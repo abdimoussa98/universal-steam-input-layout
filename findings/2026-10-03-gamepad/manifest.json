@@ -1,0 +1,88 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "cursor_gyro_generator_sha256": "e65a32cc62ebc38a43697a61ff736bd6960563ed55978435961db27ecf5b41fd",
+    "candidate_sha256": "0af87805395eca4d870617c0b56f65d97f158c485a7dc9ae9c9062e9d2c783bf",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R1!L1: Modifier 2",
+      "Steering | L1!R1: Modifier 2",
+      "Steering | R1: W Key",
+      "Steering | L1: S Key",
+      "Steering | LS: Entry Guard",
+      "Steering",
+      "Stateful | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Stateful | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover",
+      "Steering | LS: Fallback Hold",
+      "LTP: Click Entry Point",
+      "RTP: Click Entry Point",
+      "LTP: Middle Click",
+      "RTP: Middle Click",
+      "Cursor Gyro",
+      "Transition Set 0",
+      "Gamepad"
+    ],
+    "new_layer_count": 25,
+    "total_layer_count": 80,
+    "renamed_layers": {
+      "Transition Set 0": "Transition Set 2"
+    },
+    "resolved_references": 4259,
+    "device_status": "UNTESTED",
+    "timing_ms": {
+      "long_press": 200,
+      "double_press": 200
+    }
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "cursor_gyro_generator_sha256": "e65a32cc62ebc38a43697a61ff736bd6960563ed55978435961db27ecf5b41fd",
+    "candidate_sha256": "7247542bc95fc579f83a1486e62b9bdc47f525025a024d75d1e71bcd81957319",
+    "new_layers": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R2!L2: Modifier 2",
+      "Steering | L2!R2: Modifier 2",
+      "Steering | R2: W Key",
+      "Steering | L2: S Key",
+      "Steering | LS: Entry Guard",
+      "Steering",
+      "Stateful | Menu Left: Entry Point",
+      "Menu Buttons: Left Stick Guard",
+      "Stateful | Menu Right: Entry Point",
+      "Menu Buttons: Right Stick Guard",
+      "Menu Buttons: Tap Cover",
+      "Steering | LS: Fallback Hold",
+      "LTP: Click Entry Point",
+      "RTP: Click Entry Point",
+      "LTP: Middle Click",
+      "RTP: Middle Click",
+      "Cursor Gyro",
+      "Transition Set 0",
+      "Gamepad"
+    ],
+    "new_layer_count": 25,
+    "total_layer_count": 80,
+    "renamed_layers": {
+      "Transition Set 0": "Transition Set 2"
+    },
+    "resolved_references": 4259,
+    "device_status": "UNTESTED",
+    "timing_ms": {
+      "long_press": 200,
+      "double_press": 200
+    }
+  }
+}

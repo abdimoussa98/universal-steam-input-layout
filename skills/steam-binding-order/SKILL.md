@@ -15,6 +15,11 @@ and Soft Press (`Soft_Press`). **Never use Long Press (`Long_Press`) or Double
 Press (`Double_Press`)**, because they misbehave with Steam's layer API. This applies to
 inactive and unreferenced groups too.
 
+The one exception is Start and Select in the `Gamepad` layer (since 90.22),
+which nothing can be added over (R168). It is an R108 entry in the exceptions
+register (`steam_layout/flow_config.json`); don't add a Long Press or a Double
+Press anywhere else, and don't widen that entry without the author.
+
 - Hold threshold: a chorded delay (`chord` + `delay_start`), conditioned on a
   button or stick deflection (LS deflection is mask bit 30). If it adds a
   layer, pair it with the same input's repeating removal, like the Mod 2

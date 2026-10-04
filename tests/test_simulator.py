@@ -285,6 +285,61 @@ class HeldInputTests(unittest.TestCase):
         self.assertEqual(s.stack, ("Base", "Fn"))
 
 
+class NativeActivatorTests(unittest.TestCase):
+    """A Double Press and a Long Press beside an interruptible Regular Press (A43), as on Gamepad's Start."""
+
+    def menu(self):
+        start = {**key("START"), **key("START", "Double_Press", double_tap_time=200),
+                 **on("Long_Press", EMPTY, long_press_time=200, haptic_intensity=1)}
+        return {"Base": {"switch": (SW, {"button_a": start, "button_b": press(add("G"))})},
+                "G": {"switch": (SW, {"button_a": key("TAB")})}}
+
+    def test_a_tap_sends_the_regular_press_once_after_the_double_press_time(self):
+        s = sim(self.menu())
+        s.press(A).wait(30).release(A).wait(169)
+        self.assertEqual(s.typed(), [])
+        s.wait(1)
+        self.assertEqual((s.typed(), s.down()), (["START"], []))
+
+    def test_a_hold_sends_only_the_long_press(self):
+        s = sim(self.menu())
+        s.press(A).wait(600)
+        self.assertEqual((s.typed(), s.down()), ([], []))
+        self.assertEqual([detail for _, what, detail in s.log if what == "haptic"], ["1 Base switch/button_a"])
+        s.release(A).wait(600)
+        self.assertEqual(s.typed(), [])
+
+    def test_a_second_press_sends_only_the_double_press_for_as_long_as_it_is_held(self):
+        s = sim(self.menu())
+        s.press(A).wait(30).release(A).wait(60).press(A).wait(600)
+        self.assertEqual((s.typed(), s.down()), (["START"], ["START"]))
+        s.release(A).wait(600)
+        self.assertEqual((s.typed(), s.down()), (["START"], []))
+
+    def test_two_slow_taps_are_two_taps(self):
+        s = sim(self.menu())
+        s.press(A).wait(30).release(A).wait(400).press(A).wait(30).release(A).wait(400)
+        self.assertEqual(s.typed(), ["START", "START"])
+
+    def test_a_layer_that_binds_the_button_ends_the_tap_that_was_waiting(self):   # A15
+        s = sim(self.menu())
+        s.press(A).wait(30).release(A).wait(50).press(B).wait(600)
+        self.assertEqual((s.stack, s.typed()), (("Base", "G"), []))
+
+    def test_without_a_double_press_the_regular_press_fires_at_once_and_the_long_press_ends_it(self):
+        start = {**key("START"), **on("Long_Press", EMPTY, long_press_time=200)}
+        s = sim({"Base": {"switch": (SW, {"button_a": start})}})
+        s.press(A).wait(100)
+        self.assertEqual(s.down(), ["START"])
+        s.wait(100)
+        self.assertEqual(s.down(), [])
+
+    def test_a_gamepad_button_is_an_output(self):
+        s = sim({"Base": {"switch": (SW, {"button_a": press("xinput_button A, , ")})}})
+        s.press(A)
+        self.assertEqual(s.down(), ["xinput_button A"])
+
+
 class EdgeTests(unittest.TestCase):
     def test_an_inverted_edge_fires_when_the_stick_comes_back_in(self):
         ramp = {"Soft_Press": {"bindings": {"binding": remove("Ramp")},

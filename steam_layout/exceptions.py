@@ -13,6 +13,7 @@ steam_layout/flow_config.json:
 
 Scope, by rule:
 
+    R108         {"layers": [...], "inputs": [...]}                      where the Budget audit accepts a Long or Double Press
     R139, R145   {"layers": [...], "inputs": [...]}                      the Flow audit's inherited inputs
                  (`inputs` may be {"default": [...], "alternative": [...]})
     R139         {"kind": "covers"}                                       cover layers' inherited inputs need no review
@@ -39,7 +40,8 @@ REGISTER = Path(__file__).with_name("flow_config.json")
 STATUSES = ("allow", "todo")
 FIELDS = ("rule", "scope", "status", "why", "decided", "todo")
 FLOW = ("R139", "R145")
-SCOPES = {"R139": (("layers", "inputs"), ("kind",)), "R145": (("layers", "inputs"),),     # rule -> the shapes it takes
+SCOPES = {"R108": (("layers", "inputs"),),                                                # rule -> the shapes it takes
+          "R139": (("layers", "inputs"), ("kind",)), "R145": (("layers", "inputs"),),
           "R144": (("cover", "checks"),), "R132": (("layers", "removes"),), "R140": (("target", "source", "input"),),
           "R136": (("kind",), ("upper", "lower"))}
 

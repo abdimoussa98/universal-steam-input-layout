@@ -88,6 +88,28 @@ class CommandBudgetTests(unittest.TestCase):
         result = audit_layout(layout({key: command() for key in ("Full_Press", "Start_Press", "release")}))
         self.assertFalse(result["banned_activators"])
 
+    def test_an_exception_allows_them_on_the_named_layers_and_inputs_only(self):
+        data = layout({"Full_Press": command(), "Long_Press": command(), "Double_Press": command()})
+        self.assertEqual(len(audit_layout(data, native=[])["banned_activators"]), 2)
+        named = audit_layout(data, native=[({"Base"}, {"right_joystick/edge"})])
+        self.assertFalse(named["banned_activators"])
+        self.assertEqual([row["activation"] for row in named["allowed_native"]], ["Long_Press", "Double_Press"])
+        self.assertEqual(named["summary"]["allowed_native"], 2)
+        # Another input, another layer, a disabled bank, or a group that a layer outside the exception shares: all fail.
+        for native in ([({"Base"}, {"right_joystick/click"})], [({"Other"}, {"right_joystick/edge"})]):
+            self.assertEqual(len(audit_layout(data, native=native)["banned_activators"]), 2)
+        disabled = layout({"Full_Press": command()}, {"Long_Press": command()})
+        self.assertEqual(len(audit_layout(disabled, native=[({"Base"}, {"right_joystick/edge"})])["banned_activators"]), 1)
+        shared = copy.deepcopy(data)
+        cm = shared["controller_mappings"]
+        cm["action_layers"]["Preset_2"] = {"title": "Other"}
+        cm["preset"].append({"name": "Preset_2", "group_source_bindings": {"1": "right_joystick active"}})
+        self.assertEqual(len(audit_layout(shared, native=[({"Base"}, {"right_joystick/edge"})])["banned_activators"]), 2)
+
+    def test_the_register_holds_one_such_exception(self):
+        from tools.audit_command_budget import native_exceptions
+        self.assertEqual(native_exceptions(), [({"Gamepad"}, {"switch/button_escape", "switch/button_menu"})])
+
     def test_layer_command_on_an_inverted_dpad_stick_edge_fails(self):
         remove = {"bindings": {"binding": "controller_action remove_layer 9 0 0, , "}}
 

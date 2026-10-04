@@ -6,6 +6,12 @@ with Steam's layer API (see resources/Steam Input JSON Structure.md, Allowed
 Activation Types). Builders that only need the budget read `violations`; the
 CLI fails on every list.
 
+An exception to R108 in the exceptions register (steam_layout/flow_config.json)
+names layers and inputs where they are accepted: the menu buttons of `Gamepad`,
+a layer nothing is added over. Those are reported as `allowed_native`, not as
+`banned_activators`. A group shared with a layer outside the exception is not
+covered by it.
+
 And on a layer command on an inverted edge of a D-pad-mode stick: the stick's
 return to centre isn't caught reliably there (Layer Definition of Done,
 section 3). Inverted means the group's own `edge_binding_invert` is 1, or the
@@ -31,6 +37,7 @@ import json
 from pathlib import Path
 import sys
 
+from steam_layout import exceptions
 from steam_layout.rules import tag
 
 MAX_COMMANDS = 3
@@ -92,7 +99,15 @@ def droppable_fourth(entries):
                and entry["actions"] == [target] for entry in entries[:-1])
 
 
-def audit_layout(data, source="<memory>"):
+def native_exceptions(entries=None):
+    """The register's R108 exceptions as [(layers, inputs)]: where a Long Press or a Double Press is accepted."""
+    entries = exceptions.load() if entries is None else exceptions.check(entries)
+    return [(set(entry["scope"]["layers"]), set(entry["scope"]["inputs"])) for entry in exceptions.of(entries, "R108")]
+
+
+def audit_layout(data, source="<memory>", native=None):
+    """`native` is the R108 exceptions to apply; by default the ones in the exceptions register."""
+    native = native_exceptions() if native is None else native
     cm = data["controller_mappings"]
     names = {key: value["title"] for section in ("actions", "action_layers")
              for key, value in cm[section].items()}
@@ -105,6 +120,7 @@ def audit_layout(data, source="<memory>"):
     violations = []
     allowed = []
     banned = []
+    allowed_native = []
     inverted = []
     group_ids = set()
     for group_index, group in enumerate(cm["group"]):
@@ -144,9 +160,13 @@ def audit_layout(data, source="<memory>"):
                         violations.append(over)
                 for entry in entries:
                     if entry["activation"] in BANNED_ACTIVATORS:
-                        banned.append({"group_id": gid, "input": input_name, "owners": owners[gid],
-                                       "bank": bank, "activation": entry["activation"],
-                                       "path": entry["path"]})
+                        found = {"group_id": gid, "input": input_name, "owners": owners[gid],
+                                 "bank": bank, "activation": entry["activation"], "path": entry["path"]}
+                        # Accepted only where every layer that uses the group is named, on a named input.
+                        excepted = bank == "activators" and owners[gid] and any(
+                            all(o["title"] in layers and o["source_state"].split(" ", 1)[0] + "/" + input_name in names_
+                                for o in owners[gid]) for layers, names_ in native)
+                        (allowed_native if excepted else banned).append(found)
     missing = sorted(set(owners) - group_ids)
     if missing:
         raise ValueError(f"Preset references missing groups: {', '.join(missing)}")
@@ -161,10 +181,12 @@ def audit_layout(data, source="<memory>"):
                "max_actions_in_one_command": max(
                    (row["max_actions_in_one_command"] for row in inputs), default=0),
                "violations": len(violations), "allowed_fourth": len(allowed),
-               "banned_activators": len(banned), "inverted_edges": len(inverted)}
+               "banned_activators": len(banned), "allowed_native": len(allowed_native),
+               "inverted_edges": len(inverted)}
     return {"file": source, "limit": MAX_COMMANDS, "summary": summary,
             "violations": violations, "allowed_fourth": allowed,
-            "banned_activators": banned, "inverted_edges": inverted, "inputs": inputs}
+            "banned_activators": banned, "allowed_native": allowed_native,
+            "inverted_edges": inverted, "inputs": inputs}
 
 
 def main():
@@ -199,6 +221,10 @@ def main():
                 labels = "; ".join(f"{owner['title']} ({owner['source_state']})" for owner in row["owners"])
                 print(f"  banned {row['activation']} {tag(ENFORCES['banned activators'])}: group {row['group_id']} / {row['input']} "
                       f"— {labels or 'unreferenced'}")
+            for row in report["allowed_native"]:
+                labels = "; ".join(owner["title"] for owner in row["owners"])
+                print(f"  allowed {row['activation']} (exception to {ENFORCES['banned activators'][0]}): "
+                      f"group {row['group_id']} / {row['input']} — {labels}")
             for row in report["inverted_edges"]:
                 labels = "; ".join(f"{owner['title']} ({owner['source_state']})" for owner in row["owners"])
                 print(f"  layer command on an inverted D-pad edge {tag(ENFORCES['inverted edges'])}: group {row['group_id']} / "

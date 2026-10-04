@@ -1,9 +1,30 @@
 # Plan: the stateful Cursor Gyro layer and the Gamepad layer
 
-**Status, 2026-10-03:** plan only, nothing built. Asked for by the author on
-2026-10-03, who answered every decision the same day
-([list](#decisions)). Starts from 90.20, which is installed in `neptune/` but
-not yet committed.
+**Status, 2026-10-03:** built the same day, in two releases. **90.21** is
+`Cursor Gyro` ([record](../findings/2026-10-03-cursor-gyro/README.md)) and
+**90.22** is `Gamepad` ([record](../findings/2026-10-03-gamepad/README.md)).
+Both are installed in `neptune/` with their snapshots; neither has run on the
+Deck. The author answered every decision before the build ([list](#decisions)).
+
+What differs from the plan as written:
+
+- **The grips.** The plan said "L4, R4, L5, R5 are B, Y, L3, A". That was my
+  misreading of which grip is which. The build uses the archived map as it
+  is: L4 is L3, L5 is B, R4 is A, R5 is Y.
+- **Cursor Gyro under a held modifier.** `Cursor Gyro` stays while the
+  modifier is held, as planned. When the modifier is let go with both sticks
+  still out, the exit's repeating chords are exposed and it ends then
+  (scenario 90.21 C5).
+- **Exceptions written while building**, not in the plan: R139 for the
+  `Stateful` Entry Points' right-pad touch and for the Fn layers' same-side
+  click, and R136 for the menu Tap Cover over the stick guards. The records
+  have the reasons.
+- **The R162 exception** is in the register as planned. The plan's "new rule,
+  next free ID" is R168.
+- **`test_stateful_transitions.py` was not extended.** It tests the frozen
+  90.10 builder. Each release has its own file: `test_cursor_gyro.py` and
+  `test_gamepad.py`.
+
 Design it has to fit: [Stateful Layer Transitions](../resources/Stateful%20Layer%20Transitions.md)
 · [Definition of Done §11](../resources/Layer%20Definition%20of%20Done.md#11-stateful-layers)
 
@@ -109,7 +130,7 @@ Gamepad action set's (`archived/universal-layout-default__hold-gyro__latest.json
 | L1, R1 | LB, RB |
 | L2, R2 | Analog LT, RT. Click and edge empty |
 | Left stick, right stick | Left and right joystick. Clicks are L3 and R3 |
-| L4, R4, L5, R5 | B, Y, L3, A (archived map) |
+| L4, L5, R4, R5 | L3, B, A, Y (archived map) |
 | Left pad click, right pad click | Select, Start, at once with no tap window (archived map) |
 | Stick touches, stick edges, pad touches | Empty |
 | Gyro | Disabled |
@@ -195,7 +216,7 @@ Answered by the author on 2026-10-03:
 | Gamepad's Start and Select | Tap sends the button, double press and hold holds it, hold arms the exit. 200 ms for both times |
 | Releases | Two: 90.21 is Cursor Gyro, 90.22 is Gamepad |
 | Transition titles | No preference; the rename stands: the clear becomes `Transition Set 2`, the Gamepad transition is `Transition Set 0` |
-| Grip buttons and pad clicks in Gamepad | The archived map: L4, R4, L5, R5 are B, Y, L3, A; the pad clicks are Select and Start |
+| Grip buttons and pad clicks in Gamepad | The archived map. As built: L4 is L3, L5 is B, R4 is A, R5 is Y; the pad clicks are Select and Start |
 | The Entry Points' new titles | `Stateful \| Menu Left: Entry Point` and `Stateful \| Menu Right: Entry Point` |
 | Cursor Gyro's third exit | Both sticks out, in `Cursor Gyro` only. Nothing on top carries it. Wider versions (a stick plus a button; carrying it in the windows or the modifiers) were discussed and dropped as too complicated |
 

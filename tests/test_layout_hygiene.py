@@ -21,11 +21,17 @@ class LayoutHygieneTests(unittest.TestCase):
         for variant, data in self.layouts.items():
             report = audit_layout(data)
             self.assertFalse(report["banned_activators"], variant)
+            # The R108 exceptions in the register: since 90.22, Start and Select in Gamepad.
+            excepted = {(row["group_id"], row["input"]): set() for row in report["allowed_native"]}
+            for row in report["allowed_native"]:
+                excepted[(row["group_id"], row["input"])].add(row["activation"])
+                self.assertEqual({owner["title"] for owner in row["owners"]}, {"Gamepad"})
             for group in data["controller_mappings"]["group"]:
                 for name, binding in group.get("inputs", {}).items():
                     for bank in ("activators", "disabled_activators"):
                         with self.subTest(variant=variant, group=group["id"], input=name, bank=bank):
-                            self.assertLessEqual(set(binding.get(bank, {})), ALLOWED)
+                            allowed = ALLOWED | (excepted.get((group["id"], name), set()) if bank == "activators" else set())
+                            self.assertLessEqual(set(binding.get(bank, {})), allowed)
 
     def test_no_unreferenced_groups_or_plain_inactive_slots(self):
         for variant, data in self.layouts.items():

@@ -192,12 +192,13 @@
           "Menu Left: Fn Layer"
         ],
         "inputs": [
+          "joystick/click",
           "right_joystick/click"
         ]
       },
       "status": "allow",
-      "why": "By design: Fn inherits both stick clicks from the Entry Point underneath, the normal one or Steering's, and they lead to different transitions. In 90.14 each click's clear list gained the four pad click layers.",
-      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "why": "By design: Fn inherits both stick clicks from the Entry Point underneath, Base's or the Stateful one, and they lead to different transitions. In 90.14 each click's clear list gained the four pad click layers. Since 90.22 the same-side click differs as well: under Base's Entry Point it leads to the Gamepad transition, under the Stateful one to the clear.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03, and again for 90.22; not yet confirmed by the author",
       "todo": null
     },
     {
@@ -207,12 +208,13 @@
           "Menu Right: Fn Layer"
         ],
         "inputs": [
-          "joystick/click"
+          "joystick/click",
+          "right_joystick/click"
         ]
       },
       "status": "allow",
-      "why": "By design: Fn inherits both stick clicks from the Entry Point underneath, the normal one or Steering's, and they lead to different transitions. In 90.14 each click's clear list gained the four pad click layers.",
-      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "why": "By design: Fn inherits both stick clicks from the Entry Point underneath, Base's or the Stateful one, and they lead to different transitions. In 90.14 each click's clear list gained the four pad click layers. Since 90.22 the same-side click differs as well: under Base's Entry Point it leads to the Gamepad transition, under the Stateful one to the clear.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03, and again for 90.22; not yet confirmed by the author",
       "todo": null
     },
     {
@@ -316,12 +318,12 @@
     {
       "rule": "R159",
       "scope": {
-        "note": "An older to-do keeps Gamepad through the Modifier 2 clear, which conflicts with the rule."
+        "note": "Gamepad isn't left by the Modifier 2 quick tap. Its bumpers and triggers are gamepad buttons, so no modifier layer exists there; it is left only by a menu button held plus a stick click."
       },
-      "status": "todo",
-      "why": "Left open by the author until Gamepad is built.",
-      "decided": "Author, 2026-10-01",
-      "todo": "todos.md, Global stateful behavior: settle the Gamepad-preservation exception"
+      "status": "allow",
+      "why": "The author, asking for the layer: the bumpers can't be the way out of Gamepad, 'it just doesn't make any sense'. This settles the older to-do that kept Gamepad through the clear.",
+      "decided": "Author, 2026-10-03",
+      "todo": null
     },
     {
       "rule": "R139",
@@ -359,6 +361,42 @@
       "status": "allow",
       "why": "The cover clears the guard's stick edge, which holds the guard's own Release. The guard's keeper is the menu button, and the cover's menu Release removes both guards, so nothing is left on. The author read this pair as passing on 2026-10-02 (todos.md, Steering). Read again in 90.21 because the lists of both layers name the renamed Entry Points; the bindings are the same.",
       "decided": "Author, 2026-10-02; re-read by Claude for the 90.21 build, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R108",
+      "scope": {
+        "layers": [
+          "Gamepad"
+        ],
+        "inputs": [
+          "switch/button_escape",
+          "switch/button_menu"
+        ]
+      },
+      "status": "allow",
+      "why": "Gamepad binds every input, so no layer can be added over it (R168), and Long Press and Double Press only misbehave with layers (A20). Start and Select there use Steam's own activators instead of window and cover layers: an interruptible Regular Press sends the button, a Double Press holds it, a Long Press is empty and swallows the tap. Rests on A43 and A44.",
+      "decided": "Author, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R158",
+      "scope": {
+        "note": "Gamepad has no Entry Points. A chord on each stick click, on Start or Select being held, runs the Entry Points' clear list and adds the clear transition. It fires at the click's press, not its Release."
+      },
+      "status": "allow",
+      "why": "The author asked for no helper layers in Gamepad. An Entry Point would be a layer over Gamepad, which the Long Press and Double Press on its menu buttons rule out (R168). If the menu button is let go before the stick click, Base is live under a held click and may type one Q or E (A11).",
+      "decided": "Proposed in plans/2026-10-03-cursor-gyro-and-gamepad.md; the author told me to build it, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R162",
+      "scope": {
+        "note": "Gamepad's Start and Select each have a Long Press, which is a delayed binding on a menu button at entry."
+      },
+      "status": "allow",
+      "why": "The commit is the menu button's own Release, so that button is up when Gamepad lands and its Long Press can't be running. Only a second menu button still held at the commit lands in Gamepad held, and may send its button once (A10).",
+      "decided": "Proposed in plans/2026-10-03-cursor-gyro-and-gamepad.md; the author told me to build it, 2026-10-03",
       "todo": null
     }
   ]
