@@ -138,7 +138,7 @@ class NeptuneHeldInputTests(unittest.TestCase):
             # A Menu Entry Point is often added while a stick is already out (walking, then Start).
             # Its guard add then only fires on a repeat, and has to land inside the 200 ms Fn delay.
             for entry in ("Menu Left: Entry Point", "Menu Right: Entry Point",
-                          "Steering | Menu Left: Entry Point", "Steering | Menu Right: Entry Point"):
+                          "Stateful | Menu Left: Entry Point", "Stateful | Menu Right: Entry Point"):
                 for source, guard in (("joystick", "Menu Buttons: Left Stick Guard"),
                                       ("right_joystick", "Menu Buttons: Right Stick Guard")):
                     with self.subTest(variant=variant, layer=entry, source=source):

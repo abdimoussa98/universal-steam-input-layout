@@ -22,14 +22,14 @@ because the author reports buggy behavior with Steam action sets.
 The Deck is used to settle an assumption, once, and again after a Steam update
 that could change it. Each has one procedure in its row of
 [Steam Behaviour Assumptions](resources/Steam%20Behaviour%20Assumptions.md).
-What rests on each one, [as of 90.20](findings/2026-10-03-base-pad-click-one-add/unverified-assumptions.txt);
+What rests on each one, [as of 90.21](findings/2026-10-03-cursor-gyro/unverified-assumptions.txt);
 `python3 -m tests.scenario` prints the current list.
 
 The layout relies on these fourteen. If one is false, something is broken. The
 last two came with 90.14, and the pad clicks rest on them: check them first.
 
 - [ ] A8: A stick edge's Release fires in a layer that was added while the stick was already out (unverified; rests on it: 9 scenarios; R111, R137)
-- [ ] A10: A key or mouse output fires on an input that is already held when its layer is added (reported by the author; rests on it: 28 scenarios; R138)
+- [ ] A10: A key or mouse output fires on an input that is already held when its layer is added (reported by the author; rests on it: 29 scenarios; R138)
 - [ ] A11: A key or mouse output fires when a removal exposes it under an input that is held (unverified; rests on it: 7 scenarios)
 - [ ] A13: Any `remove_layer` can reset a running start delay; an `add_layer` doesn't (reported by the author; rests on it: R123, R126, R141)
 - [ ] A14: A delay starts again when a removal exposes it under a button that is held (unverified; rests on it: 2 scenarios)
@@ -38,7 +38,7 @@ last two came with 90.14, and the pad clicks rest on them: check them first.
 - [ ] A27: An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known (reported; rests on it: 4 scenarios; R133, R135)
 - [ ] A33: Steam loads an exported VDF as written: the same layers, groups and bindings as the JSON it was made from (reported; rests on it: R151)
 - [ ] A34: A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held (unverified)
-- [ ] A36: A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it (unverified)
+- [ ] A36: A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it (unverified; rests on it: 1 scenario)
 - [ ] A38: A stick group that doesn't state `edge_binding_invert` has a normal edge. It doesn't take the inverted setting of the group it replaces in a lower layer (unverified; rests on it: 2 scenarios; R111)
 - [ ] A40: A Soft Press on a pad's outer ring reads the thumb's distance from the centre, on the scale of the D-pad deadzone and the outer ring radius, and an inverted one fires reliably on a D-pad-mode pad (unverified; rests on it: 10 scenarios). If it is false, a pad click may send nothing
 - [ ] A41: A D-pad group that inverts its outer ring and states no radius uses a radius of about 24996 of 32767 (unverified; rests on it: 8 scenarios). Read the slider on 90.13's `RTP: Mouse Buttons`; a different number goes into `CENTRE_RADIUS` in the 90.14 builder
@@ -46,7 +46,7 @@ last two came with 90.14, and the pad clicks rest on them: check them first.
 The layout is built to work either way under these nine. Settling one takes a
 branch out of the tests:
 
-- [ ] A9: Removing a layer fires the exposed layer command on an input that is held (held-input rule 3) (unverified; rests on it: 20 scenarios; R114)
+- [ ] A9: Removing a layer fires the exposed layer command on an input that is held (held-input rule 3) (unverified; rests on it: 23 scenarios; R114)
 - [ ] A18: A `remove_layer` call makes Steam re-evaluate held inputs (unverified)
 - [ ] A24: Adding or removing another layer while a layer with an Always On action is active caused crashes (reported by the author; rests on it: R140, R146, R147, R148, R149)
 - [ ] A31: A repeating activator keeps its schedule when another layer is removed (unverified; rests on it: R114)
@@ -72,20 +72,31 @@ branch out of the tests:
 
 ## Brainstormed ideas
 
-- [ ] Implement brainstormed ideas (author, 2026-10-03). Ideas as spoken, not designed or built; lines marked "open" are not the author's
+- [ ] Implement brainstormed ideas (author, 2026-10-03). Ideas as spoken, not designed or built. Lines that start with "Note" or "Deck check" are not the author's
   - **A bump on touch when the pad's centre click is available**, on both pads. The centre click wins wherever it overlaps the D-pad buttons, so a bump on touch means a press right there is the centre click
     - How: Base's pad becomes a D-pad. Its outer ring binding is inverted and carries the haptic bump, so it fires when the thumb lands inside the centre range (the radius the Click Entry Point uses for the middle click, 24996, A41). The pad's touch adds the pad's Entry Point, which has the pad's real mode
     - Right pad: the touch adds `RTP: Entry Point`, as today. Base's right pad is the mouse today; `RTP: Entry Point` already is one
     - Left pad: needs a new `LTP: Entry Point` layer with the directional swipes (Base's left pad is in swipe mode today and binds no touch). Swipe mode has no touch Release, so each swipe also removes `LTP: Entry Point`, and the layer needs cleanup functions for when no swipe comes. Their lists have to be accurate
-    - Open: the bump and the touch's add are due at the same moment (A32). Open: the Entry Point changes the pad's mode, which [blocks inheritance](resources/Layer%20Definition%20of%20Done.md#a-source-mode-change-blocks-inheritance), so it would have to bind the click's add itself; today it inherits Base's. Rests on A40 and A41
-  - **`RTP: Middle Click` becomes a mouse pad.** Its pad is in `single_button` mode with middle mouse on the click, so the cursor stops while the click is held. Make it the mouse, with middle mouse on the mouse mode's click, so the cursor keeps moving while middle mouse is held
+    - Be explicit about the click (author). With Base's pad a D-pad, a layer that keeps the pad in another mode no longer gets Base's click, the Soft Press that adds the Click Entry Point ([a mode change blocks inheritance](resources/Layer%20Definition%20of%20Done.md#a-source-mode-change-blocks-inheritance)). Three layers inherit it today, all on the right pad: `RTP: Entry Point`, `RTP: Tap Cover` and `Steering`. Each binds the add itself, and so does the new `LTP: Entry Point`. It is the first entry on that input, so the budget holds (R109)
+    - Note: the mouse's settings have to be stated too. Friction 3, acceleration 1 and haptics off are stated only on Base's right pad. Eleven layers keep the pad a mouse and state none of them: those three and the eight Double Tap windows. Whether they take Base's values today isn't known (A38 is the same question for sticks). First read what the Steam editor shows on `RTP: Entry Point`'s pad, then state that on all eleven
+    - Deck check, the glide: when the thumb lifts, the pad falls back to Base. Today that is a mouse. As a D-pad, nothing is in mouse mode after the lift, and the trackball glide may stop there
+    - Deck check, the bump: a touch in the centre makes two things due at the same moment, the touch's add and the ring's bump, and Steam promises no order. If the add goes first, the Entry Point's mode has replaced Base's ring and the bump may not come. Also unknown: whether an inverted ring already counts as on with no thumb on the pad (A40). If it does, a touch in the centre changes nothing and gives no bump. One check settles both: touch the centre ten times and the rim ten times; it should bump every time on the centre and never on the rim
+  - **`RTP: Middle Click` becomes a mouse pad.** Its pad is in `single_button` mode with middle mouse on the click, so the cursor stops while the click is held. Make it the mouse, with middle mouse on the mouse mode's click, so the cursor keeps moving while middle mouse is held. Note: it states the mouse's settings as well
   - **Menu stateful layer: a new way in and out.** Replaces the entry and exit lines of [Menu stateful layer](#menu-stateful-layer)
     - Enter: hold both menu buttons for 150 ms. No Enter or Backspace is typed on that path
-    - The keys stay on the menu buttons, as a chorded tap and a chorded double tap: with one menu button held, a tap of the other types the key, and a double tap and hold holds the key down. The author's example: hold Start, tap Select, Enter; the other side the same with Backspace
-    - The author calls it a new recipe that should allow clean binds: the 150 ms hold, the tap and the double tap all sit on the second menu button, chorded with the first. How to build it from the allowed activators (R108, no Long or Double Press) within three entries per input (R109) isn't worked out
+    - The keys stay on the menu buttons, on the sides they have today: hold Select and tap Start for Enter, hold Start and tap Select for Backspace. A tap types the key; a double tap and hold holds it down
+    - The flow, with Select held first (the other side mirrored):
+      1. Start adds `Menu Left: Fn Layer`, as today. The Fn layer always comes first, and it adds the menu stateful layer by itself
+      2. In the menu stateful layer Start has the usual pair: a Release for the tap, and the 150 ms hold that keeps the layer
+      3. Start released before 150 ms: remove the menu stateful layer (both, if there are two) and add a Double Tap window for Start
+      4. The window runs out with Select still held: back in the Fn layer, which was never removed
+      5. Start pressed again inside the window: a layer that holds Enter for as long as Start is held, the way `Menu Left: Escape` and `Menu Right: Tab` hold their key on a second press
+    - There may have to be two menu stateful layers, one for each side's chord. Not decided
+    - Note: Enter is then typed on Start's Release in step 3, not on the press, because on the press the 150 ms hold would type it too. The Fn layer's chord types it on the press today
+    - Note: Start is already held when the Fn layer lands, and an add over a held input skips an immediate layer command there. The Fn layer's add needs the 5 ms delay or a repeat, as elsewhere
+    - Note: new layers per layout: one or two menu stateful layers, and a Double Tap window and a key layer for each side
     - Exit: both sticks deflected, or any one stick deflected plus any face button or D-pad direction. The D-pad is new here
     - Nothing else is reachable from the layer, not even the modifiers. It only puts the arrow keys on the D-pad and Enter / Tab / Escape / Backspace on the face buttons
-    - Open: today the sides are the other way round. Hold Select and press Start types Enter (`Menu Left: Fn Layer`); hold Start and press Select types Backspace. Open: the second menu button adds the Fn layer today; what becomes of the Fn layers isn't said
 
 ## Next: allowed activators and cleanup (90.6)
 
@@ -227,9 +238,12 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
   - Their left-stick group doesn't state `edge_binding_invert`, their edge removes the layer, and Base's left-stick edge is inverted. The inverted-edge audit check only counts a layer whose own group says inverted (author, 2026-10-01; [plan](plans/2026-10-01-stateful-transitions-implementation.md#step-6-steerings-left-stick)), so these two pass it either way
   - Assumption A38 since 2026-10-03. The two cursor scenarios that push both sticks (TC8, TC9) rest on it
   - If they do pick it up, they break the rule in [Definition of Done §3](resources/Layer%20Definition%20of%20Done.md#3-activators) and need an explicit setting
-- [ ] Cursor gyro (stateful)
-  - Activate via Left Menu + RS click, through Transition 1 on the Select release ([structure](resources/Stateful%20Layer%20Transitions.md))
-  - Three exits (author, 2026-10-01): any menu button plus any stick click, the Modifier 2 clear, and its own clear, built the same way Temp Cursor Gyro clears (both sticks deflected). The third skips the transition and is a recorded exception
+- [x] Cursor gyro (stateful): built in 90.21 as `Cursor Gyro` ([record](findings/2026-10-03-cursor-gyro/README.md) · [plan](plans/2026-10-03-cursor-gyro-and-gamepad.md) · scenarios [C1 to C9](tests/test_scenarios_90_21.py)). Not run on the Deck
+  - In: Select plus the right-stick click, through `Transition Set 1`. The entry also adds `Gyro` underneath (author, 2026-10-03)
+  - Out: any menu button plus any stick click (ends in `Gyro`), the Modifier 2 quick tap (ends in Base), and both sticks pushed out (ends in `Gyro`)
+  - The both-sticks exit is only in `Cursor Gyro`; nothing on top carries it (author, 2026-10-03). Wider versions were discussed and dropped: a stick plus a button, and carrying the exit in the windows or the modifiers
+  - It reuses Steering's Entry Points, renamed `Stateful | Menu Left: Entry Point` and `Stateful | Menu Right: Entry Point`
+  - [ ] Confirm the R139 exception written while building: the `Stateful` Entry Points' right-pad touch differs between `Cursor Gyro` (Base's `RTP: Entry Point`) and `Steering` (cleared)
 - [x] Temp cursor gyro
   - 90.4: high haptic pulse on the initial 300 ms hold entry only, in all regular/Gyro owners. Touch-release entry stays silent and ongoing gyro vibration remains off
   - Implemented in both JSON layouts: delayed Mod 0/1 holds apply owner-specific cursor overlays in regular/Gyro variants (L1/R1 default, L2/R2 alternative). See the [implementation and inheritance review](findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md), [current design](plans/2026-09-29-cursor-self-removal.md), and the [scenario tests](tests/test_scenarios_cursor.py)

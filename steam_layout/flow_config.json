@@ -306,11 +306,11 @@
     {
       "rule": "R157",
       "scope": {
-        "note": "Steering's 1.5 s hold exit and the Modifier 2 clear leave a stateful layer without a transition."
+        "note": "Steering's 1.5 s hold exit, Cursor Gyro's both-sticks exit and the Modifier 2 clear leave a stateful layer without a transition. Cursor Gyro's entry also adds Gyro underneath."
       },
       "status": "allow",
       "why": "Extra exits are allowed; the menu-plus-click clear and the Modifier 2 clear are never dropped.",
-      "decided": "Author, 2026-10-01",
+      "decided": "Author, 2026-10-01; Cursor Gyro 2026-10-03",
       "todo": null
     },
     {
@@ -322,6 +322,44 @@
       "why": "Left open by the author until Gamepad is built.",
       "decided": "Author, 2026-10-01",
       "todo": "todos.md, Global stateful behavior: settle the Gamepad-preservation exception"
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Stateful | Menu Left: Entry Point",
+          "Stateful | Menu Right: Entry Point"
+        ],
+        "inputs": [
+          "right_trackpad/touch"
+        ]
+      },
+      "status": "allow",
+      "why": "Since 90.21 Steering's two Entry Points serve every stateful layer and are named Stateful. They follow the layer they are on: over Cursor Gyro a right-pad touch adds RTP: Entry Point from Base, as it does under Base's own Entry Points; over Steering it does nothing, because Steering clears that touch on purpose.",
+      "decided": "Claude, reading the Flow audit for the 90.21 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Buttons: Tap Cover",
+        "lower": "Menu Buttons: Left Stick Guard"
+      },
+      "status": "allow",
+      "why": "The cover clears the guard's stick edge, which holds the guard's own Release. The guard's keeper is the menu button, and the cover's menu Release removes both guards, so nothing is left on. The author read this pair as passing on 2026-10-02 (todos.md, Steering). Read again in 90.21 because the lists of both layers name the renamed Entry Points; the bindings are the same.",
+      "decided": "Author, 2026-10-02; re-read by Claude for the 90.21 build, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Buttons: Tap Cover",
+        "lower": "Menu Buttons: Right Stick Guard"
+      },
+      "status": "allow",
+      "why": "The cover clears the guard's stick edge, which holds the guard's own Release. The guard's keeper is the menu button, and the cover's menu Release removes both guards, so nothing is left on. The author read this pair as passing on 2026-10-02 (todos.md, Steering). Read again in 90.21 because the lists of both layers name the renamed Entry Points; the bindings are the same.",
+      "decided": "Author, 2026-10-02; re-read by Claude for the 90.21 build, 2026-10-03",
+      "todo": null
     }
   ]
 }

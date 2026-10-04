@@ -4,6 +4,8 @@
 plan reviews the same day (decisions 37 to 46 in the brainstorm record).
 **Built in 90.10** for both layouts
 ([build record](../findings/2026-10-01-stateful-transitions/README.md)).
+`Cursor Gyro` was added in 90.21
+([build record](../findings/2026-10-03-cursor-gyro/README.md)).
 **Rests on two assumptions that aren't verified:** A26 and A8 in
 [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md), the two [Deck gates](#steerings-left-stick-and-the-deck-gates) below. The decisions and the options that were rejected
 are in the [brainstorm record](../plans/2026-10-01-stateful-layer-transitions.md),
@@ -30,7 +32,7 @@ out of scope.
 | Gesture | Destination | Built |
 |---|---|---|
 | Menu Right + LS click | Steering | Yes |
-| Menu Left + RS click | Stateful Cursor Gyro | No |
+| Menu Left + RS click | `Cursor Gyro`, with `Gyro` underneath | Yes, 90.21 |
 | Menu Right + RS click | Gamepad | No |
 | Menu Left + LS click | Gamepad | No |
 
@@ -73,8 +75,8 @@ where the clicks lead.
 |---|---|---|---|
 | `Menu Left: Entry Point` | Base, `Gyro` | Transition 0 | Transition 1 |
 | `Menu Right: Entry Point` | Base, `Gyro` | Transition 1 | Transition 0 |
-| Steering's Menu Left Entry Point | `Steering`, no driver held | Transition 2 | Transition 2 |
-| Steering's Menu Right Entry Point | `Steering`, no driver held | Transition 2 | Transition 2 |
+| `Stateful \| Menu Left: Entry Point` | `Steering` with no driver held, `Cursor Gyro` | Transition 2 | Transition 2 |
+| `Stateful \| Menu Right: Entry Point` | `Steering` with no driver held, `Cursor Gyro` | Transition 2 | Transition 2 |
 
 - **Both sticks are D-pads in every Entry Point.** The right stick copies the
   left stick's setup with empty directions, so it is dead while a menu button
@@ -90,8 +92,10 @@ where the clicks lead.
 - **Fn delay:** 200 ms with a 250 ms repeating reset (tentative; 300 and 350
   until 90.9). The reset keeps firing on the held button and restarts the Fn
   timer, so Fn always arrives on a continued hold.
-- **Each later stateful layer may need its own pair** of Entry Points like
-  Steering's. Decide when it is built.
+- **Stateful layers share one pair** (author, 2026-10-03). `Cursor Gyro`
+  reuses Steering's two Entry Points, renamed `Stateful | …` in 90.21. They
+  differ from Base's in the click targets and in typing W and S on stick up
+  and down.
 
 ### (2) Stick guards
 
@@ -138,7 +142,7 @@ menu Tap Cover where the Entry Point would bring in Fn.
 | Layer | Select (Menu Left) release | Start (Menu Right) release | Built |
 |---|---|---|---|
 | Transition 0, same-side gestures | Gamepad | Gamepad | With Gamepad |
-| Transition 1, cross gestures | Stateful Cursor Gyro | Steering | First |
+| Transition 1, cross gestures | `Gyro`, then `Cursor Gyro` | Steering | First; Select since 90.21 |
 | Transition 2, clear | Clear, keeping `Gyro` | Clear, keeping `Gyro` | First |
 
 - The layer titles stay `Transition Set 1` (cross) and `Transition Set 0`
@@ -161,6 +165,8 @@ menu Tap Cover where the Entry Point would bring in Fn.
 
 - The commit is one array: remove the transition and whatever the
   destination replaces, then add the stateful layer and its entry guard last.
+  `Cursor Gyro`'s commit adds `Gyro` first, so the layer always sits on it;
+  if `Gyro` is already on, that add does nothing.
 - **Every transition beeps and gives a high haptic pulse on its menu
   release** (author, 2026-10-02), whether it enters a stateful layer or
   clears. The Release has `haptic_intensity` 3, and one layer command
@@ -204,7 +210,8 @@ R112.
 |---|---|
 | Modifier 2 clear | Both modifiers together (bumpers in default, triggers in alternative) clear everything to Base, including `Gyro`. No transition. It is the fallback from any state |
 | Steering's hold exit | Holding W or S with no driver exits Steering after 1.5 s, pulsing from the start. The timer lives in `Steering \| LS: Fallback Hold`, which is on only while the stick is up or down ([90.11 record](../findings/2026-10-02-steering-fallback-hold/README.md)) |
-| Stateful Cursor Gyro's own clear (not built) | Besides the menu-plus-click clear and the Modifier 2 clear, it can be left the same way Temp Cursor Gyro clears, with both sticks deflected. No transition |
+| `Cursor Gyro`'s both-sticks exit | Pushing both sticks out about a quarter removes `Cursor Gyro` and nothing else; `Gyro` stays. No transition. It is only in `Cursor Gyro`: a layer on top that binds the stick edges (a held modifier, a held menu button, a window) answers instead, and the exit follows when that layer goes if the sticks are still out (author, 2026-10-03) |
+| `Cursor Gyro`'s entry | Its commit also adds `Gyro`. Leaving by the menu-plus-click clear or by both sticks therefore ends in `Gyro`, also when the player came from Base |
 | `Gyro` | Entered and left by the uncovered Modifier 2 release. It doesn't remap the controls that toggle it. The menu-plus-click clear leaves it on |
 | Menu stateful layer | Will not use this structure. It stays in the [todos](../todos.md#menu-stateful-layer) as its own design |
 
@@ -370,7 +377,9 @@ section are still open: they are assumptions A26 and A8 in
 
 ## Tests
 
-[test_stateful_transitions.py](../tests/test_stateful_transitions.py) asserts
+[test_cursor_gyro.py](../tests/test_cursor_gyro.py) asserts `Cursor Gyro`'s
+binds, its entry, its three exits and the renamed Entry Points on the 90.21
+build. [test_stateful_transitions.py](../tests/test_stateful_transitions.py) asserts
 for both layouts: each Entry Point's click-release targets, each transition's
 two menu-release destinations, that the transitions leave no layer-adding
 input unblocked, that the Fn layers and guards bind no stick click, the

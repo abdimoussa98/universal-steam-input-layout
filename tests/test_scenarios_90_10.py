@@ -24,6 +24,8 @@ class MenuAndTransitions(ScenarioCase):
 
     @scenario("90.10 T1", rules=("R157", "R161", "R163"))
     def test_one_gesture_enters_steering_and_the_other_three_clear(self):
+        """Since 90.21 Select plus the right-stick click enters Cursor Gyro, which brings Gyro with it
+        (90.21 C1). The two same-side gestures still clear."""
         for start in (None, ("Base", "Gyro")):
             for menu, stick in GESTURES:
                 for pad in self.each(start=start):
@@ -31,8 +33,10 @@ class MenuAndTransitions(ScenarioCase):
                     self.assertIn(pad.top, ("Transition Set 0", "Transition Set 1"))
                     self.assertEqual(len(pad.stack), len(start or ("Base",)) + 1)    # everything else is cleared (R163)
                     pad.mark().let_go(menu)
+                    cursor = (menu, stick) == ("Select", "RS")
                     self.assertEqual(pad.has("Steering"), (menu, stick) == ("Start", "LS"))
-                    self.assertEqual(pad.has("Gyro"), bool(start))                    # Gyro is kept as it was
+                    self.assertEqual(pad.has("Cursor Gyro"), cursor)
+                    self.assertEqual(pad.has("Gyro"), bool(start) or cursor)          # Gyro is kept as it was
                     self.assertEqual([what for what, _ in pad.seen("haptic", "beep")], FEEDBACK)
 
     @scenario("90.10 T2", rules=("R158", "R161"))

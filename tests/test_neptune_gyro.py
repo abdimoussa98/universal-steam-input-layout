@@ -60,8 +60,9 @@ class NeptuneGyroTests(unittest.TestCase):
                      for suffix in ("Entry Point", "Fn Layer", "Double Tap", "Double Tap Cover")}
         disabled |= {"Menu Left: Escape", "Menu Right: Tab"}
         # The steering Menu Tap Covers sit only on their protected entry and
-        # inherit its disabled gyro (90.7).
-        disabled |= {f'Steering | Menu {side}: Entry Point' for side in ('Left', 'Right')}
+        # inherit its disabled gyro (90.7). Since 90.21 those Entry Points serve
+        # every stateful layer and are named Stateful.
+        disabled |= {f'Stateful | Menu {side}: Entry Point' for side in ('Left', 'Right')}
         gyro_activation = {"layer": "1", "gyro_ratchet_button_mask": "211109453758464",
                            "gyro_ratchet_button_requireany_or_all": "0"}
         for variant, layout in self.layouts.items():
@@ -74,6 +75,8 @@ class NeptuneGyroTests(unittest.TestCase):
                     "gyro_to_mouse", {"layer": "1", "gyro_ratchet_button_mask": mask})
             for button, *_ in owners(variant):
                 expected[button + ": Temp Cursor Gyro"] = ("gyro_to_mouse", {"layer": "1", **CURSOR_PROFILE})
+            # The stateful layer (90.21) states the same response and no gate: Gyro is always under it.
+            expected["Cursor Gyro"] = ("gyro_to_mouse", {**CURSOR_PROFILE, "layer": "1"})
 
             actual = {title: sources["gyro"] for title in layout["presets"]
                       if "gyro" in (sources := active_sources(layout, title))}
