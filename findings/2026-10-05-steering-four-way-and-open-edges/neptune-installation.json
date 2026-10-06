@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "1851e393e6db0f393d7729aff7297687db4dbef6232b864e6b57883e0d6bcd1e",
+      "version_snapshot": "versions/neptune/90.34/single-set-default_hold-gyro_90.34.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "d2ed375f39cd13a1997c26209aa3062120a6ba976ac4b584fce46b1b2a19799b",
+      "version_snapshot": "versions/neptune/90.34/single-set-default_hold-gyro_90.34.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "ea2f5af3ab4639c8ba190cef780fcd2b6ab20ca94ed767ea2238c1523d949c3a",
+      "version_snapshot": "versions/neptune/90.34/single-set-alternative_hold-gyro_90.34.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "7b4a76c7f3e7aab2ff8edd7ce0702893d5a4dd4a856e5b0d3e4e8f7cae2ecca1",
+      "version_snapshot": "versions/neptune/90.34/single-set-alternative_hold-gyro_90.34.vdf"
+    }
+  },
+  "release": "90.34",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-05-steering-four-way-and-open-edges/default-four-way-and-open-edges.json",
+      "sha256": "34b4978ca34ca4509b03490d86ea3da44bd5dd99295de91a3cf6239660e8f6ff"
+    },
+    "alternative": {
+      "path": "findings/2026-10-05-steering-four-way-and-open-edges/alternative-four-way-and-open-edges.json",
+      "sha256": "c910289592952ddb4c5cefbe1865b77f1253b1570f3f397e171fbf35a323cf61"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

@@ -1,0 +1,50 @@
+Changes from single-set-alternative_hold-gyro_90.33.json to single-set-alternative_hold-gyro_latest.json
+Layers: 88 -> 88 (added: none; removed: none)
+
+== L2: Double Tap
+  left_trigger/click: input added
+    after:  Full_Press: empty_binding
+  right_trigger/click: input added
+    after:  Full_Press: empty_binding
+
+== R2: Double Tap
+  left_trigger/click: input added
+    after:  Full_Press: empty_binding
+  right_trigger/click: input added
+    after:  Full_Press: empty_binding
+
+== Steering | LS Up: Double Tap
+  switch/left_bumper: input added
+    after:  Full_Press: mouse_button LEFT
+  switch/right_bumper: input added
+    after:  Full_Press: mouse_button RIGHT
+
+== Steering | LS Down: Double Tap
+  switch/left_bumper: input added
+    after:  Full_Press: mouse_button LEFT
+  switch/right_bumper: input added
+    after:  Full_Press: mouse_button RIGHT
+
+== Steering | LS: Fallback Guard
+  joystick: settings
+    before: {"layout": null}
+    after:  {"layout": "1"}
+
+== Steering
+  joystick: settings
+    before: {"layout": null}
+    after:  {"layout": "0"}
+  joystick/dpad_north: binding
+    before: chord(delay_start=100,gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=3,interruptable=0): add_layer Steering | LS: Fallback Guard
+    before: Full_Press(haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=150): remove_layer Steering | LS: Fallback Guard
+    after:  Full_Press(haptic_intensity=3,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Steering | LS: Fallback Guard
+  joystick/dpad_south: binding
+    before: chord(delay_start=100,gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=3,interruptable=0): add_layer Steering | LS: Fallback Guard
+    before: Full_Press(haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=150): remove_layer Steering | LS: Fallback Guard
+    after:  Full_Press(haptic_intensity=3,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Steering | LS: Fallback Guard
+  joystick/edge: input removed
+    before: Full_Press: empty_binding
+  right_joystick/edge: input removed
+    before: Full_Press: empty_binding
+
+6 layers changed, 14 changes
