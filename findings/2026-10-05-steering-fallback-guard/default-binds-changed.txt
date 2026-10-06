@@ -1,0 +1,8 @@
+Steering | LS: Entry Guard is renamed Steering | LS: Fallback Guard: 40 commands
+Steering | joystick up and down: a chord on the left stick being out adds Steering | LS: Fallback Guard after 100 ms with a strong pulse; its reset repeats every 150 ms
+Steering | the two drivers: each only adds its own layer
+Transition Set 1: entering Steering adds no guard
+Steering | LS: Fallback Window is deleted, with 7 groups and 31 removals of it
+Steering | LS: Fallback Hold is deleted, with 3 groups and 16 removals of it
+Steering | LS: Fallback Guard: W and S with no Release; each of the modifier pair adds its Gyro modifier with the left stick out and removes the guard at centre; Start, Select, A, D and the edges are open; a cleanup function on both stick touches
+4 Gyro Modifier 2 quick taps also remove the other Gyro Modifier 2, the Base modifiers, Steering | LS: Fallback Guard and Steering, with the beep
