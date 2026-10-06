@@ -139,6 +139,7 @@ class NeptuneCursorTests(unittest.TestCase):
                      if any("always_on_action" in group.get("inputs", {})
                             for _, group in self.active_groups(layout, title))]
             # The Always On layers are exactly the Double Tap windows, so the loop below skips none.
+            # (In 90.31 and 90.32 the fallback's window was one more; 90.33 deleted it.)
             self.assertEqual(sorted(timed), sorted(t for t in layout["presets"] if t.endswith(": Double Tap")))
             for button, _, regular, source, name in owners(variant):
                 target = removal(button + ": Temp Cursor Gyro")
@@ -162,8 +163,15 @@ class NeptuneCursorTests(unittest.TestCase):
                     # A lower reset must not become inherited inside an Always On window.
                     primary = self.source(layout, title, source)["inputs"][name]
                     self.assertTrue(primary["activators"], (variant, title, name))
-                    for entry in command_entries(primary["activators"], name):
-                        self.assertNotIn(target, entry["actions"], (variant, title, name))
+                    for kind, value in primary["activators"].items():
+                        for entry in value if isinstance(value, list) else [value]:
+                            if kind == "release" and title == "RTP: Double Tap":
+                                # Not a reset: since 90.30 the pad's window carries the modifier button's
+                                # Release, which removes the window first and then the button's layers.
+                                self.assertEqual(bindings(entry)[-1], removal(title), (variant, title, name))
+                                self.assertNotIn("hold_repeats", entry["settings"])
+                                continue
+                            self.assertNotIn(target, bindings(entry), (variant, title, name))
 
     def test_normal_covers_inherit_gyro_without_any_source_override(self):
         for variant, layout in self.layouts.items():

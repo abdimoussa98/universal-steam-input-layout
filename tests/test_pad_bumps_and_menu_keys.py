@@ -60,8 +60,7 @@ class PadBumpsAndMenuKeysTests(unittest.TestCase):
         return found
 
     def test_the_90_25_snapshot_is_this_build(self):
-        # The working layouts were this build until 90.26, whose own test now holds R156
-        # (test_standard_delays.test_working_layouts_are_this_build).
+        # The working layouts were this build until 90.26. The newest build's test holds R156.
         for variant, data in self.data.items():
             with self.subTest(variant=variant):
                 numeric, _ = titles_to_ids(json.dumps(data), generate_lookup(data))

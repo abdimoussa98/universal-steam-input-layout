@@ -128,7 +128,7 @@ class NeptuneRecoveryTests(unittest.TestCase):
                         # Both sticks are D-pads with the same edge; each adds its own stick guard.
                         for group, stick in ((ls, 'Left'), (rs, 'Right')):
                             self.assertEqual(group['mode'], 'dpad')
-                            self.assertEqual(group['settings']['edge_binding_radius'], '4915')
+                            self.assertNotIn('edge_binding_radius', group['settings'])   # Steam's default since 90.31 (R173)
                             self.assertEqual(group['settings']['edge_binding_invert'], '0')
                             activators = group['inputs']['edge']['activators']
                             self.assertEqual(set(activators), {'chord', 'Full_Press'})
@@ -142,10 +142,10 @@ class NeptuneRecoveryTests(unittest.TestCase):
                     elif title.endswith((": Modifier 0", ": Modifier 1")):
                         button = title.removeprefix("Gyro | ").split(":")[0]
                         owner_mask = {"L1": 8, "R1": 4, "L2": 33554432, "R2": 16777216}[button]
-                        # Steam adds source-specific hysteresis when entering the outer region:
-                        # 10% on LS dpad and 3% on RS joystick_mouse. These encode ~25% entry.
-                        for group, opposite_mask, radius in ((ls, 1 << 31, "4915"), (rs, 1 << 30, "7209")):
-                            self.assertEqual(group["settings"]["edge_binding_radius"], radius)
+                        # Until 90.30 these stated 4915 and 7209, from a calculation of about 25% entry. The
+                        # editor's D-pad radius starts at 10,000, so they state none since 90.31 (R173).
+                        for group, opposite_mask in ((ls, 1 << 31), (rs, 1 << 30)):
+                            self.assertNotIn("edge_binding_radius", group["settings"])
                             self.assertEqual(group["settings"]["edge_binding_invert"], "0")
                             self.assert_recovery(group["inputs"]["edge"], selectors, targets,
                                                  (owner_mask | opposite_mask, button + ": Tap Cover"))
@@ -187,12 +187,14 @@ class NeptuneRecoveryTests(unittest.TestCase):
         for variant, layout in self.layouts.items():
             timed = {title for title in layout["presets"]
                      if any("always_on_action" in g.get("inputs", {}) for g in self.active_groups(layout, title))}
-            # The Always On layers are exactly the Double Tap windows, so none is skipped below.
+            # The Always On layers are exactly the Double Tap windows, so none is skipped below. In 90.31 and
+            # 90.32 the fallback had a window whose left edge was a Release; 90.33 deleted it.
             self.assertEqual(timed, {title for title in layout["presets"] if title.endswith(": Double Tap")})
             for title in timed:
                 with self.subTest(variant=variant, layer=title):
                     for source in ("joystick", "right_joystick"):
-                        self.assertEqual(self.source(layout, title, source)["inputs"]["edge"], blank)
+                        edge = self.source(layout, title, source)["inputs"]["edge"]
+                        self.assertEqual(edge, blank)
             entered, left = set(), set()
             for owner in layout["presets"]:
                 for group in self.active_groups(layout, owner):

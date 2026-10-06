@@ -173,7 +173,7 @@ def fix(data, config=None):
     if not _open(first):
         return {"changed": [], "remaining": 0}     # already clean: the usual case in the pipeline
     variant = "alternative" if "alternative" in data["controller_mappings"].get("title", "") else "default"
-    keep = kept(config, variant)
+    keep = kept(config, variant, set(Layout(data).presets))
     changed = []
     for phase in (_guards, _missing, _unneeded, _hidden):
         layout = Layout(data)

@@ -255,7 +255,8 @@ class StatefulTransitionTests(unittest.TestCase):
                     entered = [t for op, t in self.ops(layout, release) if op == 'add_layer' and t in stateful]
                     entering += bool(entered)
                     # One beep per release: on the stateful layer's add, or on the transition's own
-                    # removal when the release only clears.
+                    # removal when the release only clears. This builder wrote the flag first (`1 0`),
+                    # which is the on-screen name; 90.29 moves it to the second, the beep (A49).
                     beeping = entered or [name]
                     for title, flag in flags.items():
                         self.assertEqual(flag, ['1' if title in beeping else '0', '0'], (name, button, title))

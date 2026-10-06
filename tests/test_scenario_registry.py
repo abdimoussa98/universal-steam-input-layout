@@ -51,7 +51,8 @@ class ScenarioRegistryTests(unittest.TestCase):
         listed = {rule.id for rule in self.rules.values() if any(c.kind == "scenario" for c in rule.checked_by)}
         self.assertEqual(sorted(named - listed), [], 'add "Scenario tests (part)" to these rules\' "Checked by"')
         self.assertEqual(sorted(listed - named), [], "no scenario names these rules")
-        self.assertEqual([meta.check for meta in scenario.for_rule("R136")], ["90.11 F8", "90.13 N2", "90.15 M1", "90.16 X1", "90.16 X2", "90.18 H3", "90.19 K3", "90.23 C1", "90.24 K6"])
+        self.assertEqual([meta.check for meta in scenario.for_rule("R136")], ["90.13 N2", "90.15 M1", "90.16 X1", "90.16 X2", "90.18 H3", "90.19 K3", "90.23 C1", "90.24 K6",
+                          "90.30 W1", "90.30 W2", "90.30 W3", "90.30 W4", "90.34 E2", "90.34 E3", "90.35 S6"])
 
     def test_the_rules_and_assumptions_a_scenario_names_exist(self):
         for meta in self.scenarios:
@@ -112,7 +113,7 @@ class ScenarioRegistryTests(unittest.TestCase):
             with self.subTest(entry.id):
                 self.assertEqual(f"\n{entry.id} (" in self.report, not entry.verified)
         self.assertIn("\nA8 (unverified; relies on it)", self.report)
-        self.assertIn("  Rules: R111, R137\n  90.10 T5  MenuAndTransitions.", self.report)
+        self.assertIn("  Rules: R111\n  90.10 T5  MenuAndTransitions.", self.report)
 
     def test_the_release_list_is_written_into_the_record(self):
         with tempfile.TemporaryDirectory() as folder, contextlib.redirect_stdout(io.StringIO()) as shown:
@@ -138,7 +139,7 @@ class ReachTests(unittest.TestCase):
             pad = scenario.Pad(variant)
             with self.subTest(variant):
                 self.assertTrue(pad.has("Base"))
-                for title in ("Steering", "Steering | LS: Fallback Hold", "L1: Modifier 0", "Menu Right: Entry Point"):
+                for title in ("Steering", "Steering | LS: Fallback Guard", "L1: Modifier 0", "Menu Right: Entry Point"):
                     self.assertIn(pad.title(title), self.reached[variant])
                 self.assertLessEqual(self.reached[variant], set(pad.layout.titles.values()))
 

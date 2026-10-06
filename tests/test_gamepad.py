@@ -177,7 +177,8 @@ class GamepadTests(unittest.TestCase):
                 release = acts['release']
                 self.assertEqual(layout.layer_ops(release), ops)
                 # R161: a strong pulse, and one beep: on the stateful layer's add, or on the transition's own
-                # removal when the release only clears.
+                # removal when the release only clears. This builder wrote the flag first (`1 0`), which is
+                # the on-screen name; 90.29 moves it to the second, the beep (A49).
                 self.assertEqual(release['settings'], {'haptic_intensity': '3'}, (name, button))
                 flags = {layout.resolve(m.group(1)): m.group(2) for a in actions(release)
                          if (m := re.search(r'_layer (\{\{.+?\}\}|\d+) (\d) \d', a))}

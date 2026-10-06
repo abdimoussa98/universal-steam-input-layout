@@ -55,13 +55,13 @@ class PadClick(ScenarioCase):
     def test_the_left_pad_has_the_same_two_layers(self):
         for pad in self.each():
             pad.press_pad("LP", "centre").wait(50)
-            self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Entry Point", "LTP: Middle Click"), ["CAPSLOCK"]))   # the Entry Point since 90.25
+            self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Middle Click",), ["CAPSLOCK"]))
             pad.let_go_pad("LP").wait(400)
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["CAPSLOCK"]))   # Caps Lock since 90.17
         for where, key in (("up", "UP_ARROW"), ("down", "DOWN_ARROW"), ("left", "LEFT_ARROW"), ("right", "RIGHT_ARROW")):
             for pad in self.each():
                 pad.press_pad("LP", where).wait(50)
-                self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Entry Point", "LTP: Arrow Keys"), [key]))
+                self.assertEqual((pad.names()[1:], pad.down()), (("LTP: Arrow Keys",), [key]))
                 pad.let_go_pad("LP").wait(400)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), [key]))
 

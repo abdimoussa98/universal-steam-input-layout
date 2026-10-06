@@ -91,6 +91,14 @@ where the clicks lead.
 - **The other menu button only adds Fn** (author, 2026-10-01). Backspace and
   Enter are typed by the Fn layers alone, as before the menu split. The
   Entry Point's own key from 90.9 goes away.
+- **Since 90.28 that is two pairs of Fn layers.** Under Base's Entry Points
+  the Fn layer's bind for the other menu button adds the chorded chain's
+  Entry Point on every press: a tap types Enter or Backspace from the chain's
+  window, a double tap and hold holds it, and a 200 ms hold enters
+  `Menu Keys`. The `Stateful |` Entry Points add their own copies,
+  `Stateful | Menu Left: Fn Layer` and `Stateful | Menu Right: Fn Layer`,
+  which type the key at once, as this paragraph describes
+  ([record](../findings/2026-10-04-menu-chain-and-window-pads/README.md)).
 - **Fn delay:** 200 ms with a 250 ms repeating reset (tentative; 300 and 350
   until 90.9). The reset keeps firing on the held button and restarts the Fn
   timer, so Fn always arrives on a continued hold.
@@ -176,7 +184,9 @@ menu Tap Cover where the Entry Point would bring in Fn.
 ### (4) The destination
 
 - The commit is one array: remove the transition and whatever the
-  destination replaces, then add the stateful layer and its entry guard last.
+  destination replaces, then add the stateful layer last. Until 90.32
+  Steering's commit also added its Entry Guard; since 90.33 Steering's own up
+  and down bring the fallback guard in, at entry too.
   `Cursor Gyro`'s commit adds `Gyro` first, so the layer always sits on it;
   if `Gyro` is already on, that add does nothing.
 - **Every transition beeps and gives a high haptic pulse on its menu
@@ -184,7 +194,9 @@ menu Tap Cover where the Entry Point would bring in Fn.
   clears. The Release has `haptic_intensity` 3, and one layer command
   carries the beep flag: the stateful layer's `add_layer`, or the
   transition's own `remove_layer` when nothing is added. No on-screen
-  notification.
+  notification: the command ends in `0 1`, the name flag and then the beep
+  flag (A49). Until 90.28 the layouts wrote `1 0`, which shows the name and
+  doesn't beep.
 - At entry the stateful layer has no Release or delayed binding on Start or
   Select. A repeating press that adds its Entry Point, like Base's, is
   allowed (author, 2026-10-01).
@@ -220,15 +232,15 @@ R112.
 
 | Exception | What it does |
 |---|---|
-| Modifier 2 clear | Both modifiers together (bumpers in default, triggers in alternative) clear everything to Base, including `Gyro`. No transition. It is the fallback from any state |
-| Steering's hold exit | Holding W or S with no driver exits Steering after 1.5 s, pulsing from the start. The timer lives in `Steering \| LS: Fallback Hold`, which is on only while the stick is up or down ([90.11 record](../findings/2026-10-02-steering-fallback-hold/README.md)) |
+| Modifier 2 clear | Both modifiers together (bumpers in default, triggers in alternative) clear everything to Base, including `Gyro`. No transition. It is the fallback from any state. In Steering's fallback guard the pair are the Gyro modifiers, so since 90.33 the `Gyro \| … Modifier 2` quick tap removes `Steering` and the guard too, with the beep |
+| Steering's fallback guard (90.33) | Not an exit. With no driver held, stick up or down adds `Steering \| LS: Fallback Guard` with a strong pulse: at once since 90.34, after 100 ms in 90.33. Since 90.34 Steering base reads the left stick four ways, so a diagonal counts as one direction, and leaves both stick edges open, so turn assist runs there and in the guard and is off only while a driver is held ([record](../findings/2026-10-05-steering-four-way-and-open-edges/README.md)). Since 90.35 the two swap places: the bind that adds the guard removes `Steering`, and each bind that removes the guard adds `Steering` first, because the guard's eight-way stick did not take effect over the four-way one on the Deck. The guard carries `Steering`'s Start, Select and right pad itself ([record](../findings/2026-10-06-steering-fallback-swap/README.md)). It types W and S and stays when the stick is let go. In it, each of the modifier pair adds its Gyro modifier while the left stick is out, and removes the guard, with a pulse, when the stick is at centre; the button then drives. Start and Select are Steering's own, so the menu-plus-click clear works from there. The author's design of 2026-10-04 and 2026-10-05, after the July layout ([record](../findings/2026-10-05-steering-fallback-guard/README.md)). From 90.11 to 90.32 the fallback was an exit: holding W or S for a time and letting go left Steering ([90.31 record](../findings/2026-10-04-fallback-window/README.md), [90.11 record](../findings/2026-10-02-steering-fallback-hold/README.md)) |
 | `Cursor Gyro`'s both-sticks exit | Pushing both sticks out about a quarter removes `Cursor Gyro` and nothing else; `Gyro` stays. No transition. It is only in `Cursor Gyro`: a layer on top that binds the stick edges (a held modifier, a held menu button, a window) answers instead, and the exit follows when that layer goes if the sticks are still out (author, 2026-10-03) |
 | `Cursor Gyro`'s entry | Its commit also adds `Gyro`. Leaving by the menu-plus-click clear or by both sticks therefore ends in `Gyro`, also when the player came from Base |
 | `Gamepad` and the Modifier 2 clear | The Modifier 2 quick tap does not leave `Gamepad`: the bumpers and triggers are gamepad buttons there (author, 2026-10-03). The one way out is a menu button held plus a stick click |
 | `Gamepad`'s exit | It has no Entry Points. Each stick click has a chord on Start or Select being held that runs the Entry Points' clear list and adds `Transition Set 2`. So the clear is entered at the click's **press**. The menu button's Release in the transition ends it as usual. If the menu button is let go before the click, Base is live under a held click and may type one Q or E (A11) |
 | `Gamepad`'s Start and Select | They use Steam's own Double Press and Long Press, the one exception to R108 (author, 2026-10-03): a tap sends the button after the Double Press time, a double press holds it, a hold sends nothing. It is safe only because `Gamepad` is closed: it binds every input, so no layer can be added over it (R168). Rests on A43 to A45 |
 | `Gyro` | Entered and left by the uncovered Modifier 2 release. It doesn't remap the controls that toggle it. The menu-plus-click clear leaves it on |
-| `Menu Keys`, the menu stateful layer (90.25) | Doesn't use this structure. Both menu buttons held for 200 ms enter it, from Base or `Gyro`, through a chorded Entry Point; both sticks out, or a stick out plus a face button or D-pad direction, leave it. Only its menu-plus-click exit goes through the clear transition, by a chord on the stick clicks as in `Gamepad` ([record](../findings/2026-10-04-pad-bumps-and-menu-keys/README.md)) |
+| `Menu Keys`, the menu stateful layer (90.25) | Doesn't use this structure. Both menu buttons held for 200 ms enter it, from Base or `Gyro`, through a chorded Entry Point that the Fn layer adds on every press of the second button (90.28); both sticks out, or a stick out plus a face button or D-pad direction, leave it. Only its menu-plus-click exit goes through the clear transition, by a chord on the stick clicks as in `Gamepad` ([record](../findings/2026-10-04-pad-bumps-and-menu-keys/README.md)) |
 
 ## Adding a stateful layer
 
@@ -248,7 +260,8 @@ replace one. The list is kept for that.
 - [ ] Nothing in it depends on a chord hand-over or a D-pad centre bind.
 - [ ] Both layouts are changed.
 - [ ] Its commit beeps and pulses like every other transition release: the
-      beep flag on its `add_layer` and `haptic_intensity` 3 on the Release.
+      beep flag on its `add_layer` (`0 1`, A49) and `haptic_intensity` 3 on
+      the Release.
 - [ ] The transition test and the scenario tests are updated
       ([definition of done](Layer%20Definition%20of%20Done.md#10-ship-it), R154 and R165).
 
@@ -264,8 +277,8 @@ replace one. The list is kept for that.
   cover while the first button is still held. It returns within about
   200 ms; a release inside that gap types its key.
 - Steering can sit under the two menu Double Tap windows. They bind
-  left-stick up and down as plain W and S, so Steering's hold-exit clock
-  doesn't run during the window.
+  left-stick up and down as plain W and S, so no fallback guard comes on
+  during the window.
 - The clear happens at the stick click's release, not its press. `Gamepad`
   is the exception: its exit chord fires at the press.
 - In `Gamepad` a single Start or Select tap arrives late by the Double Press
@@ -353,6 +366,9 @@ section are still open: they are assumptions A26 and A8 in
       Modifier 2 can't be entered during the window
   - **`LS: Double Tap Cover` ending adds no Tap Cover,** like
     `L1: Double Tap Cover`.
+- **Since 90.33 there is no Entry Guard.** `Steering | LS: Fallback Guard`
+  took its place and is added by `Steering`'s own up and down, not by the
+  entry. The points below are the 90.10 design.
 - **`Steering | LS: Entry Point` stays** (author, 2026-10-01). Only the
   Steering entry adds it, and it has nothing to do with Modifier 0 and 1,
   which are entered straight from the W and S layers. Its job: W carried

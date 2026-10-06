@@ -54,8 +54,7 @@ class RequiredCleanupsBuildTests(unittest.TestCase):
         return layout.active(layer)[source]['inputs'][name]['activators']
 
     def test_the_90_24_snapshot_is_this_build(self):
-        # The working layouts were this build until 90.25. The newest build's test holds R156
-        # (test_standard_delays.test_working_layouts_are_this_build at 90.26).
+        # The working layouts were this build until 90.25. The newest build's test holds R156.
         for variant, data in self.data.items():
             with self.subTest(variant=variant):
                 numeric, _ = titles_to_ids(json.dumps(data), generate_lookup(data))

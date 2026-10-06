@@ -3,21 +3,19 @@
 The record is findings/2026-10-04-pad-bumps-and-menu-keys/README.md; the plan is
 plans/2026-10-04-pad-bumps-and-menu-layer.md.
 
-- A pad touch adds a hand-over layer that reads the thumb once: a low bump inside the centre, none
-  outside, and then the pad's Entry Point (A46). Its two binds are the Click Entry Point's: the inner
-  one repeats, so it fires as the layer lands, and the outer one fires after its 5 ms delay (A6). The
-  click's add is in the Entry Point, where it repeats.
+- The pad touch bump of 90.25 and 90.26 is gone since 90.27 (findings/2026-10-04-pad-touch-bump/README.md);
+  its scenarios, P1, P2, P4 and P6, went with it. The ones kept here read the pads as they are now.
 - `RTP: Middle Click` is a mouse pad. The simulator has no cursor; the static tests check the mode.
 - With one menu button held, the other goes through the Menu chain's recipe: a tap types Enter or
   Backspace, a double tap and hold holds it, and a 200 ms hold enters `Menu Keys` (150 ms in 90.25).
+  Until 90.27 only the first press of a hold did; 90.28 made it every press, and M4, which pinned the
+  old behaviour, went (tests/test_scenarios_90_28.py).
 - The stick and pad Entry Points' delayed Tap Cover has a reset, which a normal touch never fires.
 """
 import unittest
 
 from tests.scenario import DIRECTIONS, SOURCES, ScenarioCase, scenario
 
-BUMP = "1"                                  # a low haptic
-PADS = {"RP": ("RTP: Touch Entry Point", "RTP: Entry Point"), "LP": ("LTP: Touch Entry Point", "LTP: Entry Point")}
 MENU_KEYS = "Menu Keys"
 # first held, pressed, key, the chain's Entry Point, window, second-press layer and cover, the first button's Entry Point and Fn layer
 CHAINS = (
@@ -34,15 +32,6 @@ def bumps(pad):
     return [tuple(detail.split(" ", 1)[0:1]) + (detail.split(" ", 1)[1].rsplit(" ", 1)[0],) for _, detail in pad.seen("haptic")]
 
 
-def touch_at(pad, name, where):
-    """Put a thumb on a pad: in the centre, at the rim, or on the ring where the two click ranges overlap."""
-    if where == "rim":
-        pad.sim.press((SOURCES[name], "edge"))
-    elif where == "ring":
-        pad.sim.press_between((SOURCES[name], "edge"))
-    return pad.touch(name)
-
-
 def swipe(pad, direction):
     """Swipe on the left pad: its swipe input goes down. The thumb is already on the pad."""
     pad.sim.press((SOURCES["LP"], DIRECTIONS[direction]))
@@ -50,38 +39,7 @@ def swipe(pad, direction):
 
 
 class PadTouch(ScenarioCase):
-    @scenario("90.25 P1", rests=("A5", "A16", "A40", "A46"))
-    def test_a_touch_bumps_in_the_centre_and_nowhere_else(self):
-        for name, (handover, entry) in PADS.items():
-            # Since 90.26 the outer bind starts where the inner one ends: the ring between 23000 and 24996 is the
-            # inner bind's alone, as it is the centre's in a click (90.14 P5), and the rim doesn't wait 5 ms.
-            for where, ms, expected in (("centre", 0, [(BUMP, handover)]), ("rim", 0, []), ("ring", 0, [(BUMP, handover)])):
-                for pad in self.each():
-                    touch_at(pad, name, where)
-                    if ms:                                                   # the outer bind's delay
-                        pad.wait(ms - 1)
-                        self.assertEqual((pad.top, bumps(pad)), (handover, []))
-                        pad.wait(1)
-                    self.assertEqual((bumps(pad), pad.stack), (expected, pad.layers("Base", entry)), (name, where))
-                    pad.mark().wait(300)
-                    self.assertEqual(bumps(pad), [])                         # once
-                    pad.lift(name).wait(300)
-                    self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
-
-    @scenario("90.25 P2", rests=("A5", "A16", "A40", "A46"))
-    def test_a_click_is_what_the_touch_promised(self):
-        expected = {("RP", "centre"): "mouse_button MIDDLE", ("RP", "left"): "mouse_button BACK",
-                    ("RP", "ring left"): "mouse_button MIDDLE", ("LP", "centre"): "CAPSLOCK", ("LP", "left"): "LEFT_ARROW",
-                    ("LP", "ring left"): "CAPSLOCK"}
-        for (name, where), key in expected.items():
-            for pad in self.each():
-                pad.click_pad(name, where)                                   # the thumb rests, then clicks
-                self.assertEqual(pad.typed(), [key], (name, where))
-                self.assertEqual((BUMP, PADS[name][0]) in bumps(pad), where != "left")       # a bump exactly where it is the centre click
-                pad.wait(400)
-                self.assertEqual(pad.stack, pad.layers("Base"))
-
-    @scenario("90.25 P3", rests=("A46",))
+    @scenario("90.25 P3")
     def test_a_click_after_the_thumb_has_rested_still_works(self):
         for name, key in (("RP", "mouse_button MIDDLE"), ("LP", "CAPSLOCK")):
             for pad in self.each():
@@ -93,11 +51,11 @@ class PadTouch(ScenarioCase):
                 pad.lift(name).wait(400)
                 self.assertEqual(pad.stack, pad.layers("Base"))
 
-    @scenario("90.25 P8", rests=("A5", "A6", "A40", "A46"))
+    @scenario("90.25 P8", rests=("A6", "A40"))
     def test_a_click_that_lands_with_the_touch_is_read_all_the_same(self):
-        """The thumb and the click at the same moment. Every step lands on an input that is already held, and
-        every step repeats, so each fires as its layer lands (A6). In the centre the middle click is down at
-        once. At the rim only the click's 5 ms delay is left; the hand-over's went in 90.26."""
+        """The thumb and the click at the same moment. The Click Entry Point lands on a pad that is already
+        pressed, and its centre bind repeats, so it fires as the layer lands (A6): the middle click is down at
+        once. At the rim the outer bind's 5 ms delay is all that is left."""
         for pad in self.each():
             pad.press_pad("RP", "centre", rest=False)
             self.assertEqual((pad.top, pad.down()), ("RTP: Middle Click", ["mouse_button MIDDLE"]))
@@ -112,54 +70,25 @@ class PadTouch(ScenarioCase):
             pad.click_pad("RP", "left", ms=4, rest=False).wait(400)
             self.assertEqual((pad.typed(), pad.stack), ([], pad.layers("Base")))
 
-    @scenario("90.25 P4", rests=("A7",))
-    def test_a_thumb_that_lifts_at_once_from_the_rim_leaves_nothing(self):
-        """Until 90.25 this lift came inside the outer bind's 5 ms, before the hand-over. Since 90.26 the
-        hand-over is done as the thumb lands, at the rim as in the centre."""
-        for name, (_, entry) in PADS.items():
-            for pad in self.each():
-                touch_at(pad, name, "rim").wait(2)
-                self.assertEqual(pad.top, entry)
-                pad.sim.release((SOURCES[name], "touch"))                    # straight up from the rim
-                pad.sim.release((SOURCES[name], "edge"))
-                pad.wait(300)
-                self.assertEqual((pad.stack, bumps(pad)), (pad.layers("Base"), []))
-
     @scenario("90.25 P5", rests=("A10",))
-    def test_a_left_pad_swipe_types_its_key_and_ends_the_entry_point(self):
+    def test_a_left_pad_swipe_types_its_key(self):
+        """From Base again since 90.27; from 90.25 to 90.26 the swipes were in `LTP: Entry Point`."""
         swipes = {"left": ("ESCAPE", "Escape"), "right": ("RETURN", "Enter"), "up": ("TAB", "Tab"), "down": ("BACKSPACE", "Backspace")}
         for direction, (key, layer) in swipes.items():
             for pad in self.each():
-                pad.touch("LP").wait(60).mark()                             # the swipes are in the Entry Point, after the hand-over
+                pad.touch("LP").wait(60).mark()
                 swipe(pad, direction).wait(30)
                 self.assertEqual((pad.typed(), pad.stack), ([key], pad.layers("Base", layer)))
                 pad.sim.release((SOURCES["LP"], DIRECTIONS[direction]))
                 pad.lift("LP").wait(300)
                 self.assertEqual(pad.stack, pad.layers("Base"))
 
-    @scenario("90.25 P6", rules=("R169",), rests=("A25", "A47"))
-    def test_without_a_touch_release_the_left_entry_point_ends_on_a_stick_touch_or_a_swipe(self):
-        entry = PADS["LP"][1]
-        for end in ("LS", "RS", "swipe"):
-            for pad in self.each():
-                pad.touch("LP").wait(60)
-                pad.sim.lose((SOURCES["LP"], "touch"))                       # swipe mode gives no touch Release (A47)
-                pad.wait(400)
-                self.assertEqual(pad.top, entry)
-                if end == "swipe":
-                    swipe(pad.touch("LP"), "left").wait(30)
-                    self.assertTrue(pad.lacks(entry) and pad.has("Escape"))
-                else:
-                    pad.touch(end)
-                    self.assertTrue(pad.lacks(entry))
-
     @scenario("90.25 P7", rests=("A10",))
     def test_a_pad_click_still_works_in_steering(self):
         for pad in self.each(start="steering"):
             pad.mark().click_pad("RP", "centre")
             self.assertEqual(pad.typed(), ["mouse_button MIDDLE"])
-            self.assertEqual(bumps(pad)[0][0], "3")                          # the click's own pulse, from Steering
-            self.assertNotIn(pad.title(PADS["RP"][0]), pad.reached())        # the touch is cleared there: no hand-over
+            self.assertEqual(bumps(pad)[0], ("3", "Base"))                   # the click's own pulse, from Base again (90.27)
             pad.wait(300)
             self.assertEqual(pad.top, "Steering")
 
@@ -174,7 +103,7 @@ class TapCoverResets(ScenarioCase):
                 pad.wait(2)
                 self.assertEqual(pad.top, f"{prefix}: Tap Cover")
                 pad.wait(2000)
-                self.assertEqual(pad.seen("remove"), [("remove", pad.title(PADS["RP"][0]))] if name == "RP" else [])
+                self.assertEqual(pad.seen("remove"), [])
                 pad.lift(name).wait(400)
                 self.assertEqual(pad.stack, pad.layers("Base"))
 
@@ -236,23 +165,12 @@ class ChordedMenu(ScenarioCase):
                 pad.let_go(second).let_go(first).wait(300)
                 self.assertEqual(pad.stack, pad.layers("Base"))
 
-    @scenario("90.25 M4", rests=("A10",))
-    def test_after_the_window_a_later_press_types_at_once_and_the_hold_needs_a_fresh_start(self):
-        for first, second, key, _, _, _, _, plain, fn in CHAINS:
-            for pad in self.each():
-                pad.hold(first).wait(40).tap(second).wait(400).mark().hold(second)
-                self.assertEqual((pad.typed(), pad.down()), ([key], [key]))  # the Fn layer's own chord, as before 90.25
-                pad.wait(400)
-                self.assertEqual(pad.names()[-2:], (plain, fn))              # no Menu Keys from here
-                pad.let_go(second).let_go(first).wait(300)
-                self.assertEqual(pad.stack, pad.layers("Base"))
-
     @scenario("90.25 M5", rests=("A16",))
     def test_the_hold_also_works_once_the_fn_layer_is_up(self):
         for first, second, _, entry, _, _, _, plain, fn in CHAINS:
             for pad in self.each():
                 pad.hold(first).wait(250)
-                self.assertEqual(pad.names()[-3:], (plain, fn, entry))       # the 200 ms hold brings both
+                self.assertEqual(pad.names()[-2:], (plain, fn))              # the hold brings the Fn layer alone (90.28)
                 pad.hold(second).wait(210)
                 self.assertEqual(pad.stack, pad.layers("Base", MENU_KEYS))
 

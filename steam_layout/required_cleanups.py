@@ -155,13 +155,17 @@ def missing(c, only=None):
     return rows
 
 
-def excepted(config, variant):
-    """{(rule, layer, "source/input"): why} from the config's `cleanups.required`, which the register fills."""
+def excepted(config, variant, layers=None):
+    """{(rule, layer, "source/input"): why} from the config's `cleanups.required`, which the register fills.
+
+    A decision with `where` holds only on a layout that has that layer; `layers` is the layout's titles."""
     mapping = config.get("variants", {}).get(variant, {})
     result = {}
     for decision in config.get("cleanups", {}).get("required", []):
         if not decision.get("why"):
             raise ValueError(f"an exception needs a why: {decision}")
+        if decision.get("where") and layers is not None and map_title(decision["where"], mapping) not in layers:
+            continue
         for layer in decision["layers"]:
             for name in decision["inputs"]:
                 result[(decision["rule"], map_title(layer, mapping), name)] = decision["why"]
@@ -175,7 +179,7 @@ def audit(c, config=None, only=None):
     Cleanup audit's, so tools/audit_cleanups.py can print the two reports as one.
     """
     variant = "alternative" if "alternative" in c.layout.cm.get("title", "") else "default"
-    decided = excepted(config or {}, variant)
+    decided = excepted(config or {}, variant, set(c.layout.presets))
     used, grouped, set_aside = set(), defaultdict(list), []
     for check, layer, control, found, reason in missing(c, only):
         key = (RULE[check], layer, "/".join(control))

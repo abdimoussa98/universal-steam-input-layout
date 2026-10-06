@@ -100,7 +100,8 @@ class CursorGyroTests(unittest.TestCase):
                 self.assertEqual(chord['settings'], {
                     'gyro_ratchet_button_mask': str(1 << other), 'gyro_ratchet_button_requireany_or_all': '1',
                     'hold_repeats': '1', 'interruptable': '0', 'haptic_intensity': '0'})
-                self.assertRegex(actions(chord)[0], r'remove_layer \S.* 1 0')              # the beep
+                # Meant as the beep. `1 0` is the on-screen name; 90.29 moves it to `0 1` (A49).
+                self.assertRegex(actions(chord)[0], r'remove_layer \S.* 1 0')
 
     def test_select_in_the_cross_transition_adds_gyro_and_then_the_layer(self):
         for variant, layout in self.each():
@@ -109,7 +110,7 @@ class CursorGyroTests(unittest.TestCase):
             self.assertEqual(layout.layer_ops(release['release']),
                              [('remove_layer', st.CROSS), ('add_layer', GYRO), ('add_layer', CURSOR)])
             self.assertEqual(release['release']['settings'], {'haptic_intensity': '3'})
-            # One beep (R161): on the stateful layer's add.
+            # One beep (R161): on the stateful layer's add. Written first here; the second since 90.29 (A49).
             flags = {layout.resolve(m.group(1)): m.group(2) for a in actions(release['release'])
                      if (m := re.search(r'_layer (\{\{.+?\}\}|\d+) (\d) \d', a))}
             self.assertEqual(flags, {st.CROSS: '0', GYRO: '0', CURSOR: '1'})

@@ -20,10 +20,10 @@ MENU = ("Menu Left: Entry Point", "Menu Right: Entry Point", *GUARD.values(), CO
 def cover_over_a_pad_layer(pad, menu, pushed="LS"):
     """A menu button held, a stick pushed out, and the right pad touched before the cover lands at 200 ms.
 
-    Since 90.25 the cover lands about 750 ms after the menu press here. A centre touch hands over 50 ms
-    later, and the hand-over is a removal, which restarts the cover's delay (A13). After that the guard's
-    reset and the pad Entry Point's new reset each tick before their own cover has landed, and each tick
-    restarts the other's delay: the pad's Tap Cover lands at about 510 ms, the menu one at 750."""
+    From 90.25 to 90.29 the menu cover landed about 750 ms after the menu press here: the guard's reset
+    and the pad Entry Point's reset each ticked before their own cover had landed, and each tick restarted
+    the other's delay (A13). Since 90.30 the pad's reset is off and both covers land on time; the wait is
+    kept."""
     pad.hold(menu).wait(50).push(pushed, "up").wait(60).touch("RP").wait(700)
     return pad
 
@@ -71,13 +71,16 @@ class StickTouches(ScenarioCase):
                 stale = (COVER, GUARD["LS"], "Menu Right: Entry Point")
                 self.assertTrue(pad.has(*stale))                                 # stale: no button is held
                 pad.mark().touch(stick).wait(100)
-                # On 90.23 this touch cleared the three menu layers. On 90.24 `RTP: Tap Cover` was on top and
-                # bound both stick touches itself (R169): its cleanup is guarded by the thumb on the pad, so it
-                # answered the touch and did nothing until the thumb had left the pad. Since 90.25 the menu cover
-                # lands after the pad's cover in this gesture (the helper's note), so it is on top again and its
-                # own cleanup answers: the stale menu layers go at once. 90.22 left them on for good.
-                self.assertTrue(pad.lacks(*stale) and pad.has(PAD))
+                # On 90.23 this touch cleared the three menu layers. Since 90.24 `RTP: Tap Cover` is on top and
+                # binds both stick touches itself (R169): its cleanup is guarded by the thumb on the pad, so it
+                # answers the touch and does nothing. The stale menu layers go on the first stick touch after
+                # the thumb has left the pad. 90.22 left them on for good. From 90.25 to 90.29 the pad Entry
+                # Point's reset made the menu cover land last, so it was on top and they went at once; the
+                # reset is off since 90.30.
+                self.assertTrue(pad.has(*stale))
                 pad.lift(stick).wait(300).lift("RP").wait(600)
+                self.assertTrue(pad.has(*stale) and pad.lacks(PAD))
+                pad.touch(stick).wait(100).lift(stick).wait(600)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
                 pad.mark().tap("Start").wait(300)
                 self.assertEqual((pad.typed(), pad.stack), (["TAB"], pad.layers("Base")))  # the next tap is normal

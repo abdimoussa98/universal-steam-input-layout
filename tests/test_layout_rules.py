@@ -8,6 +8,7 @@ import re
 import unittest
 
 from steam_layout import changes, exceptions
+from steam_layout.cleanups import Cleanups
 from steam_layout.model import Layout, bindings, entries, map_title
 from tests.scenario import RENAME, VARIANTS, layout_data
 
@@ -64,6 +65,34 @@ class LayoutRules(unittest.TestCase):
                                             self.assertGreater(int(reset.get("repeat_rate") or 0), delay)
                                         pairs.add((delay, reset.get("repeat_rate")))
             self.assertTrue(pairs, variant)
+
+    def test_a_cleanup_input_stores_the_regular_press_then_the_guard_then_the_release(self):   # R133
+        # The author, 2026-10-06: "the order: repeated removal of a regular press, then the guard, then a release.
+        # That's how it should always be." The stored order is the order the Steam editor lists the entries in.
+        for variant, layout in self.layouts.items():
+            inputs = {(t.layer, t.source, t.input) for t in Cleanups(layout).inv.transitions if t.role == "recovery"}
+            self.assertGreater(len(inputs), 500, variant)
+            for layer, source, name in sorted(inputs):
+                stored = list(layout.active(layer)[source]["inputs"][name]["activators"])
+                with self.subTest(variant, layer=layer, input=f"{source}/{name}"):
+                    self.assertEqual(stored, [kind for kind in ("Full_Press", "chord", "release") if kind in stored])
+
+    def test_every_value_is_one_the_editor_can_set(self):                                   # R173
+        # resources/Steam Input JSON Structure.md, "Limits the Steam editor sets": at most 1000 ms; a D-pad outer
+        # ring radius from 10,000 to 32,000; a D-pad layout from 0 to 3.
+        for variant, layout in self.layouts.items():
+            for title in layout.presets:
+                for source, group in layout.active(title).items():
+                    settings = group.get("settings") or {}
+                    with self.subTest(variant, layer=title, source=source):
+                        if group["mode"] == "dpad" and "edge_binding_radius" in settings and "joystick" in source:
+                            self.assertTrue(10000 <= int(settings["edge_binding_radius"]) <= 32000)
+                        if group["mode"] == "dpad" and "layout" in settings:
+                            self.assertIn(settings["layout"], {"0", "1", "2", "3"})
+                        for slot in group.get("inputs", {}).values():
+                            for _, entry in entries(slot.get("activators", {})):
+                                for key in ("delay_start", "delay_end", "repeat_rate"):
+                                    self.assertLessEqual(int((entry.get("settings") or {}).get(key) or 0), 1000)
 
     def test_every_snapshot_holds_both_layouts_under_its_own_version(self):                 # R151
         folders = [folder for folder in changes.VERSIONS.iterdir() if folder.is_dir() and changes.version(folder.name)]

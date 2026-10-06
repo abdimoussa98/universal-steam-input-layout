@@ -71,12 +71,16 @@ class RequiredCleanups(ScenarioCase):
         for pad in self.each(start="steering"):                          # the right edge is new in the W Key layer
             pad.hold("R1").wait(100).miss("R1")
             self.assertEqual(pad.top, "Steering | R1: W Key")
-            pad.push("RS")
-            self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
+            pad.push("RS").wait(60)
+            self.assertTrue(pad.lacks("Steering | R1: W Key"))
+            pad.lift("RS").wait(100)                                     # since 90.34 Steering base has turn assist: the
+            self.assertEqual(pad.stack, pad.layers("Base", "Steering"))  # ramp layer the push brought leaves with the stick
         for pad in self.each(start="steering"):                          # both edges were blocks in the Modifier 2 layer
             pad.hold("R1").wait(50).hold("L1").wait(600).miss("L1", "R1")
             self.assertTrue(pad.has("Steering | R1!L1: Modifier 2"))
-            pad.push("RS")
+            pad.push("RS").wait(60)
+            self.assertTrue(pad.lacks("Steering | R1!L1: Modifier 2", "Steering | R1: W Key"))
+            pad.lift("RS").wait(100)
             self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
         for pad in self.each(start="steering"):                          # and nothing happens while the driver is held
             pad.hold("R1").wait(100).push("RS").wait(300)

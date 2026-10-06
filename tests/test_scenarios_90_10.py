@@ -101,7 +101,7 @@ class MenuAndTransitions(ScenarioCase):
             pad.recentre("LS")
             self.assertEqual(pad.top, "Menu Right: Entry Point")
             pad.wait(200)
-            self.assertEqual(pad.names()[-2], "Menu Right: Fn Layer")        # Fn follows once the last guard is off, under the chorded Entry Point (90.25)
+            self.assertEqual(pad.top, "Menu Right: Fn Layer")                # Fn follows once the last guard is off
         for pad in self.each():                                              # a quick tap with a guard on
             pad.push("LS", "left").mark().hold("Select").wait(60)
             self.assertEqual(pad.top, LEFT_GUARD)
@@ -194,7 +194,7 @@ class Steering(ScenarioCase):
             pad.tap("Start").wait(300)
             self.assertEqual((pad.typed(), pad.stack), (["TAB"], pad.layers("Base", "Steering")))
             pad.hold("Start").wait(300)
-            self.assertEqual(pad.top, "Menu Right: Fn Layer")
+            self.assertEqual(pad.top, "Stateful | Menu Right: Fn Layer")     # Steering's own copy since 90.28
             pad.let_go("Start").hold("R1").mark().tap("Start").tap("Select")
             self.assertEqual(pad.typed(), ["TAB", "ESCAPE"])                 # plain keys with a driver held
 
@@ -212,16 +212,17 @@ class Steering(ScenarioCase):
             pad.hold("R1").push("LS", "up").wait(60).roll("LS", "down").wait(50)     # straight to down inside 250 ms
             self.assertEqual(pad.top, MOD0)                                  # the other map takes over
 
-    @scenario("90.10 D4", rests=("A8", "A16"))
-    def test_stick_first_then_the_driver(self):
+    @scenario("90.10 D4", rests=("A36",))
+    def test_stick_first_then_the_driver_is_a_modifier(self):
+        """Until 90.30 the driver took over when it came after the stick: the R1 modifier map was there at once.
+        In 90.31 and 90.32 it left Steering. Since 90.33 stick up or down with no driver brings in the fallback
+        guard, and a driver pressed after that, with the stick out, is its Gyro modifier (the author,
+        2026-10-04). Since 90.34 the guard comes at once, so the order alone decides. The map comes when the
+        driver is held first (D3)."""
         for pad in self.each(start="steering"):
-            pad.push("LS", "up").wait(100).hold("R1").wait(60)
-            self.assertEqual(pad.top, MOD1)                                  # the map is there at once
-            pad.wait(250).mark().recentre("LS").wait(300)
-            self.assertEqual(pad.typed(), [])                                # held 250 ms: recentring is silent
-        for pad in self.each(start="steering"):
-            pad.push("LS", "up").wait(100).hold("R1").wait(60).mark().recentre("LS").wait(300)
-            self.assertEqual(pad.typed(), ["mouse_wheel SCROLL_UP"])         # recentred sooner: one scroll
+            pad.push("LS", "up").wait(20).mark().hold("R1").wait(60)
+            self.assertTrue(pad.has("Steering | LS: Fallback Guard") and pad.lacks("Steering", MOD1))   # they swap (90.35)
+            self.assertEqual((pad.top, pad.typed(), pad.down()), ("Gyro | R1: Modifier 1", [], ["W"]))
 
     @scenario("90.10 D5", rules=("R146", "R147", "R148"), rests=("A16",))
     def test_the_stick_double_tap(self):
@@ -274,7 +275,9 @@ class Steering(ScenarioCase):
         for pad in self.each(start="steering"):
             pad.hold("R1").push("LS", "up").wait(60).miss("R1").hold("A")
             self.assertFalse([t for t in pad.stack if "Modifier" in t or "W Key" in t])   # the steering branch clears
-            self.assertTrue(pad.has("Steering"))
+            # Still in Steering's mode. The stick is up with no driver left, so since 90.35 the fallback guard has
+            # taken Steering's place.
+            self.assertTrue(pad.has("Steering") or pad.has("Steering | LS: Fallback Guard"))
 
 
 if __name__ == "__main__":

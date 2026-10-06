@@ -53,6 +53,7 @@ stated; the ones the layout must work either way under are switches.
              Press, for as long as it is held
     A39      `soft_press_interrupts`: an active uninterruptible Soft Press suppresses an interruptible
              Soft Press on the same input (`press_between` puts an input in both of two ranges)
+    A49      a layer command beeps on its second flag; the first shows the layer's name on screen
     A21      `desktop(data)`: the layout with every entry past the third dropped
     A25      `lose(control)`: a release the layout never saw
 
@@ -70,7 +71,8 @@ ALWAYS_ON = "always_on_action"
 LEVEL = re.compile(r"(key_press|mouse_button|xinput_button) ([^,\s]+)")
 NATIVE = ("Long_Press", "Double_Press")
 MOMENTARY = re.compile(r"(mouse_wheel) ([^,\s]+)")
-COMMAND = re.compile(r"controller_action (add_layer|remove_layer|hold_layer) (\{\{.+?\}\}|\d+)(?: (\d+))?")
+# The two flags after the target are the on-screen name and then the beep (A49).
+COMMAND = re.compile(r"controller_action (add_layer|remove_layer|hold_layer) (\{\{.+?\}\}|\d+)(?: (\d+))?(?: (\d+))?")
 UNSUPPORTED = re.compile(r"mode_shift |CHANGE_PRESET")
 
 def desktop(data, keep=3):
@@ -171,7 +173,7 @@ class Simulator:
                     if command:
                         title = self.layout.resolve(TARGET.search(action).group(2))
                         ops.append((command.group(1), title))
-                        if command.group(3) == "1":
+                        if command.group(4) == "1":
                             beeps.append(title)
                     elif LEVEL.search(action):
                         outputs.append(" ".join(LEVEL.search(action).groups()).replace("key_press ", ""))

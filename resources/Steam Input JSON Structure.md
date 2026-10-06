@@ -417,9 +417,14 @@ of the RTP trackpad layers because repeated layer removal interfered with **trac
 momentum** (A28). RTP's delayed touch binding applied `RTP: Tap Cover` after 150 ms without
 a corresponding repeating removal on that input. **Since 90.25 it has the reset** (author,
 2026-10-04), as have the two stick Entry Points: a Regular Press that removes only the Tap
-Cover every 200 ms. On a normal touch the cover lands first and the reset never fires (A48);
-the glide is the first Deck check, and if it breaks the pad's reset comes out again
-([record](../findings/2026-10-04-pad-bumps-and-menu-keys/README.md)).
+Cover every 200 ms. On a normal touch it fires once, as the Entry Point lands on the thumb
+(A6), and not again: the cover lands at 150 ms, before the first repeat (A48). The author
+felt that one fire on the Deck as a pulse at every touch, kept the reset, and since 90.29
+all three state `haptic_intensity` 0
+([record](../findings/2026-10-04-quiet-resets-and-beeps/README.md)). **Since 90.30 the reset
+is off all three again, for now** (author, 2026-10-04): the author thinks the repeated
+removal stopped the menu buttons while a thumb was on a stick
+([record](../findings/2026-10-04-window-releases-and-tap-cover-resets/README.md)).
 Other repeated cleanup bindings in RTP-related layers serve separate purposes.
 
 See the [R1 and L1&R1 tap-cover findings](../findings/2026-09-27-r1-tap-cover/FINDINGS.md)
@@ -1079,6 +1084,11 @@ removed layers. That count is from then; 90.12 shortened the lists (R132).
 
 **Rule: R133** (Layer Definition of Done [§7](Layer%20Definition%20of%20Done.md#7-cleanup)). This section explains it; the rule text is there.
 
+**Stored order (R133, since 90.36):** on an input with a cleanup function the
+activator types are stored as `Full_Press`, then `chord`, then `release`. It
+is the order the editor lists them in. Whether Steam's behaviour depends on it
+is not known (A52); the author asked for one order everywhere on 2026-10-06.
+
 Use **guarded recovery binding** for the fallback that clears stale state when
 the button/touch owning an interaction is no longer held. This is the cleanup
 shape to preserve when adding LS-edge recovery. Not every `remove_layer` in the
@@ -1657,6 +1667,47 @@ Examples:
 
 ---
 
+## Limits the Steam editor sets
+
+The author, 2026-10-04, reading the Steam editor. A value written to a layout
+file has to be one the editor could set. What Steam does with a value outside
+its range is not known: it may raise or lower it to the nearest end.
+
+| Setting | In the file | Range in the editor | What the layouts hold |
+|---|---|---|---|
+| Fire Start Delay, Repeat Rate | `delay_start`, `repeat_rate` | Up to 1000 ms | Nothing over 1000 since 90.31. Until 90.30, 1500 and 1550 in `Steering \| LS: Fallback Hold` |
+| D-pad Outer Ring Command Radius | `edge_binding_radius` on a D-pad group | 10,000 to 32,000 | 21000 and 21700, inside the range. Until 90.30 also 4915, on the left stick in 34 layers and on the right stick in 7, since the cursor work of 2026-09-29: below the range. Those groups state no radius since 90.31 |
+| Directional Pad Layout | `layout` on a D-pad group | Four choices: 0 Radial Without Overlap (four-way), 1 Radial With Overlap (eight-way), 2 Analog Emulation, 3 Cross Gate. The numbers are the Steam client's (read 2026-10-05) | Not stated on most left-stick groups, which then get eight-way (A51). 0 in the Fn layers since the July layout and in `Steering` since 90.34; 1 in Steering's fallback guard. On the Deck a group that states 1 over a lower layer's group that states 0 stayed four-way (author, 2026-10-06), so since 90.35 the guard replaces `Steering` and is never over it |
+| Outer Ring Command Radius on a mouse-mode stick | `edge_binding_radius` on a `joystick_mouse` group | Not read yet | 32767 in Base. Until 90.30 also 7209 in 21 layers; they state no radius since 90.31 |
+| Soft Press Threshold | `activation_threshold` | The editor showed the author 0 to 20,000. Assumed to be the editor's own scale: the value in the file is taken to run like the outer ring's, 10,000 to 32,000 (author, 2026-10-04) | 23000, 24996, 25807, 26610 and 29031: ten Soft Presses, all inside that assumed range and all above 20,000. Six are the author's own, from the July layout, and turn assist runs on them |
+
+Looked up on 2026-10-04:
+
+- **Online:** nothing states these ranges. Valve's Steam Input pages, the
+  Steam Controller forums and the community guides describe the settings
+  without their limits.
+- **The installed Steam client:** its settings carry a value, a default, a
+  minimum and a maximum. Three have a maximum of 1000: two with a minimum and
+  default of 0, and one with a default of 100 and a minimum of 10. That fits
+  the start delay, the end delay and the repeat rate, and it would make the
+  default repeat rate 100 ms (A35). They were found by their numbers, not by
+  name, so this is a match and not a proof. No setting with a range of 10,000
+  to 32,000 turned up that way.
+
+**The Soft Press range is an assumption.** The author saw 0 to 20,000 on the
+Soft Press Threshold slider, and every threshold in the layouts is above
+that. So what the slider shows and what the file holds are taken to be two
+scales, and the file's is assumed to match the outer ring's. Nothing confirms
+it; read the slider against a known value in the file to settle it.
+
+**The outer ring radius is not an assumption.** It can't go under 10,000 on a
+D-pad, and the 4915 in the layouts is wrong (author).
+
+Fixed in 90.31 ([record](../findings/2026-10-04-fallback-window/README.md)): the
+fallback's 1500 and 1550 are gone, and no stick group states 4915 or 7209. R173
+keeps it that way. Since 90.33 no delay or repeat rate is over 300 ms: the fallback's 1000 ms
+window of 90.31 and 90.32 is deleted.
+
 ## Quick Reference Table
 
 | Section | Contains | References |
@@ -1732,83 +1783,74 @@ Given this structure:
 
 **General format:**
 ```
-controller_action COMMAND RUNTIME_ID BEEP NOTIFICATION, LABEL,
+controller_action COMMAND RUNTIME_ID NAME BEEP, LABEL,
 ```
 
 | Parameter | Description |
 |-----------|-------------|
 | `COMMAND` | The action: `CHANGE_PRESET`, `add_layer`, `remove_layer`, `hold_layer` |
 | `RUNTIME_ID` | Numeric ID of the action set or layer (see ID Assignment Rules above) |
-| `BEEP` | `1` = play haptic/beep feedback on trigger, `0` = silent |
-| `NOTIFICATION` | `1` = show on-screen notification, `0` = no notification |
+| `NAME` | `1` = show the layer's or set's name on screen when it changes, `0` = don't |
+| `BEEP` | `1` = beep when it changes, `0` = silent |
 | `LABEL` | Optional display label (usually empty) |
+
+**The order of the two flags (A49).** Until 90.28 this section had them the other
+way round: the beep first. The Steam client's own message for the command lists
+`display` and then `beep`, and its dialog shows "Display name when changed" above
+"Beep when changed" (read from the installed client on 2026-10-04). On the Deck the
+author heard no beep from any command written `1 0`. The layouts wrote `1 0` for
+"beep, no name" from 90.10 to 90.28; 90.29 moved all of them to `0 1`
+([record](../findings/2026-10-04-quiet-resets-and-beeps/README.md)).
 
 ### controller_action Command Examples
 
-**Change to Base action set (with beep and notification):**
+**Change to Base action set (name and beep):**
 ```
 controller_action CHANGE_PRESET 1 1 1, ,
                                 ↑ ↑ ↑
-                                │ │ └─ Show notification
-                                │ └─── Play beep
+                                │ │ └─ Beep
+                                │ └─── Show the name
                                 └───── Runtime ID 1 = Base
 ```
 
-**Add/activate L2 layer (silent, no notification):**
+**Add or remove a layer silently:**
 ```
 controller_action add_layer 5 0 0, ,
-                            ↑ ↑ ↑
-                            │ │ └─ No notification
-                            │ └─── No beep
-                            └───── Runtime ID 5 = L2 Layer (Preset_1000006)
-```
-
-**Remove L2 layer (silent, no notification):**
-```
 controller_action remove_layer 5 0 0, ,
                                ↑ ↑ ↑
-                               │ │ └─ No notification
-                               │ └─── No beep
-                               └───── Runtime ID 5 = L2 Layer
+                               │ │ └─ No beep
+                               │ └─── No name
+                               └───── Runtime ID 5 = L2 Layer (Preset_1000006)
 ```
 
-**Remove Gyro layer with feedback (beep and notification):**
+**Remove the Gyro layer with the name and the beep** (the Modifier 2 toggle):
 ```
 controller_action remove_layer 2 1 1, ,
-                               ↑ ↑ ↑
-                               │ │ └─ Show notification
-                               │ └─── Play beep
-                               └───── Runtime ID 2 = Gyro layer
 ```
 
-**Hold layer while pressed (silent):**
+**Enter a stateful layer with the beep and no name** (R161):
+```
+controller_action add_layer 88 0 1, ,
+                            ↑↑ ↑ ↑
+                            ││ │ └─ Beep
+                            ││ └─── No name
+                            └┴───── Runtime ID 88 = Menu Keys
+```
+
+**Hold a layer while pressed (silent):**
 ```
 controller_action hold_layer 13 0 0, ,
-                             ↑↑ ↑ ↑
-                             ││ │ └─ No notification
-                             ││ └─── No beep
-                             │└───── Runtime ID 13 = Layer held while button pressed
-                             └────── 
 ```
 
-**Add a later layer (silent):**
-```
-controller_action add_layer 32 0 0, ,
-                            ↑↑ ↑ ↑
-                            ││ │ └─ No notification
-                            ││ └─── No beep
-                            │└───── Runtime ID 32 = 32nd total item
-                            └────── 
-```
+### When to Use the Name and the Beep
 
-### When to Use Beep/Notification
-
-| Scenario | Beep | Notification | Rationale |
-|----------|------|--------------|-----------|
-| Frequent layer toggles (triggers, modifiers) | `0` | `0` | Avoid spam during gameplay |
-| Mode switches (Base ↔ Gyro ↔ Gamepad) | `1` | `1` | User should know mode changed |
-| Debug/testing | `1` | `1` | Helps verify bindings work |
-| Temporary layers (hold_layer) | `0` | `0` | Too frequent to notify |
+| Scenario | Name | Beep | Rationale |
+|----------|------|------|-----------|
+| Frequent layer changes (triggers, modifiers, covers, cleanups) | `0` | `0` | Too frequent to announce |
+| The `Gyro` toggle | `1` | `1` | The author's own, since the July layout |
+| Entering or leaving a stateful layer through a transition, or by its own exit (R161) | `0` | `1` | The author, 2026-10-02: a beep and no on-screen notification |
+| The Fn layers' delayed add | `0` | `1` | The author's own, since February 2026 |
+| Temporary layers (`hold_layer`) | `0` | `0` | Too frequent to announce |
 
 ### ⚠️ CRITICAL WARNING: ID Shift on Deletion
 

@@ -411,11 +411,15 @@ class NeptuneLayoutTests(unittest.TestCase):
         # The limit was 1 s until 90.14. The pad click layers were out of the chains while `hold_layer` added
         # them; with `add_layer` they are bystanders under every window, and the stacks went from 5,092 to
         # 10,426 (0.85 s to about 1.9 s).
+        # The limit was 3 s until 90.34. The layout kept growing: 18,366 stacks and about 2.9 s on 90.34, 18,502
+        # and about 3.2 s on 90.35, where the fallback guard stands in Steering's place under the windows. The
+        # old search's 3.3 s was measured on the 69 layers of 90.9, so the name no longer compares like with
+        # like; what this still guards is that the audit doesn't blow up.
         cfg = json.loads((ROOT / "steam_layout" / "traced_stacks.json").read_text())
         data = json.loads((ROOT / "neptune/single-set-default_hold-gyro_latest.json").read_text())
         started = time.perf_counter()
         audit(data, cfg)
-        self.assertLess(time.perf_counter() - started, 3.0)
+        self.assertLess(time.perf_counter() - started, 5.0)
 
     def test_removing_a_window_block_is_caught(self):
         cfg = json.loads((ROOT / "steam_layout" / "traced_stacks.json").read_text())

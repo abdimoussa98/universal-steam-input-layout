@@ -15,14 +15,15 @@ DRIVER = "Steering | R1: W Key"
 class MenuComboKeys(ScenarioCase):
     @scenario("90.9 K2", rules=("R138",))
     def test_with_fn_up_the_other_menu_button_types_its_key_on_every_press(self):
-        """Changed in 90.25: the first press goes through the chorded chain, so a tap types the key from its
-        window (90.25 M1). Once the window has run out, a press types it at once, as every press did."""
+        """Changed in 90.25 and again in 90.28: every press goes through the chorded chain, so a tap types the
+        key from its window and a hold enters `Menu Keys` (90.28 M1 and M2). Inside `Steering` and `Cursor
+        Gyro` a press still types it at once and a hold repeats it (90.28 M6)."""
         for first, second, key in (("Start", "Select", "BACKSPACE"), ("Select", "Start", "RETURN")):
             for pad in self.each():
-                pad.hold(first).wait(250).mark().tap(second).wait(300).tap(second)
+                pad.hold(first).wait(250).mark().tap(second).wait(300).tap(second).wait(300)
                 self.assertEqual(pad.typed(), [key, key])
                 pad.hold(second).wait(800)
-                self.assertEqual(pad.down(), [key])                          # held: the system repeats it
+                self.assertEqual((pad.down(), pad.stack), ([], pad.layers("Base", "Menu Keys")))
 
     @scenario("90.9 K3", rules=("R138",), rests=("A11",))
     def test_the_accepted_stray_key_when_the_first_menu_button_is_lifted_first(self):
@@ -102,7 +103,10 @@ class SlimSteeringOverlays(ScenarioCase):
             pad.hold("R1").push("LS", "up").wait(300).miss("R1")
             self.assertEqual(pad.top, TAP_COVER)
             pad.touch("RS")
-            self.assertTrue(pad.lacks(TAP_COVER, MOD1, DRIVER) and pad.has("Steering"))
+            self.assertTrue(pad.lacks(TAP_COVER, MOD1, DRIVER))
+            # Still in Steering's mode: the stick is up with no driver left, so since 90.35 the fallback guard
+            # has taken Steering's place.
+            self.assertTrue(pad.has("Steering") or pad.has("Steering | LS: Fallback Guard"))
 
     @scenario("90.7 S6")
     def test_no_right_pad_touch_mode_starts_while_steering(self):

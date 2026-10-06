@@ -68,7 +68,7 @@ format/parser documentation may retain historical APIs.
 | **Cover (an input)** | An upper layer covers an input when it binds it, so a lower layer's binding on that input can't fire. Cover-type layers (Tap Covers, Double Tap Covers, Temp Cursor Gyro) are built to do this on one button. | `L1: Tap Cover` covers LB over `L1: Modifier 0`: its Release fires, not the modifier's. |
 | **Pair** | For the hidden-exit rule (R136): one lower layer plus one layer that can sit on top of it and covers one of its exits. | `Tab` under `L1: Double Tap`: lifting the thumb off the left pad inside the window misses `Tab`'s Release. |
 | **Extra press** | For the hidden-exit rule (R136): a press along a layer's chain that adds a layer but is not one of the chain's own steps. The audits call it an arrival. The hidden-exit check allows five; the other audits allow one. | Select, then the left stick, is the chain to `Menu Buttons: Tap Cover`. A pad click in between is an extra press. |
-| **Temporary guard** | A short-lived layer that waits for one input to return to rest. Nothing is added over it (R137). | `Steering \| LS: Entry Guard`, `Steering \| LS: Fallback Hold`. |
+| **Temporary guard** | A short-lived layer that waits for one input to return to rest. Nothing is added over it (R137). | None since 90.33. Until 90.32: `Steering \| LS: Entry Guard`, `Steering \| LS: Fallback Hold`. |
 
 These are repository design terms, not new Steam Input object types. In
 particular, an action layer is not automatically a button overlay just because

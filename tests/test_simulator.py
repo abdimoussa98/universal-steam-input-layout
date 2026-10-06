@@ -93,10 +93,14 @@ class OutputTests(unittest.TestCase):
         self.assertEqual(s.typed(), ["W", "W"])
 
     def test_haptics_and_beeps_are_logged(self):
-        beep = "controller_action add_layer {{Base::P}} 1 0, , "
+        beep = "controller_action add_layer {{Base::P}} 0 1, , "       # the second flag beeps (A49)
         s = sim({"Base": {"switch": (SW, {"button_a": on("Full_Press", beep, haptic_intensity=3)})}, "P": {}})
         s.press(A)
         self.assertEqual([what for _, what, _ in s.events("haptic", "beep")], ["haptic", "beep"])
+        name = "controller_action add_layer {{Base::P}} 1 0, , "       # the first only shows the name
+        s = sim({"Base": {"switch": (SW, {"button_a": on("Full_Press", name)})}, "P": {}})
+        s.press(A)
+        self.assertEqual(s.events("beep"), [])
 
 
 class ChordTests(unittest.TestCase):

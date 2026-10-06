@@ -388,13 +388,18 @@ class Cleanups:
         return sorted(t for t in self.layers if self.reached(t) and self.keeper(t)[0] == "button" and t not in covered)
 
 
-def kept(config, variant):
-    """{(layer, removed layer): why} from the config's `cleanups.keep`, which the exceptions register fills (R132)."""
+def kept(config, variant, layers=None):
+    """{(layer, removed layer): why} from the config's `cleanups.keep`, which the exceptions register fills (R132).
+
+    A decision with `where` holds only on a layout that has that layer; `layers` is the layout's titles. The
+    frozen builders read the same register, so a decision made for a later build names a layer of that build."""
     mapping = config.get("variants", {}).get(variant, {})
     result = {}
     for decision in config.get("cleanups", {}).get("keep", []):
         if not decision.get("why"):
             raise ValueError(f"a kept removal needs a why: {decision}")
+        if decision.get("where") and layers is not None and map_title(decision["where"], mapping) not in layers:
+            continue
         for layer in decision["layers"]:
             for target in decision["removes"]:
                 result[(map_title(layer, mapping), map_title(target, mapping))] = decision["why"]
@@ -417,7 +422,7 @@ def run(data, config=None, only=None, stacks=None, changed=None, extras=DEFAULT_
     config = config or {}
     variant = "alternative" if "alternative" in layout.cm.get("title", "") else "default"
     cleanups = Cleanups(layout, stacks)
-    decided = kept(config, variant)
+    decided = kept(config, variant, set(layout.presets))
     used, findings, keeping = set(), [], []
     for (check, layer, target, role, reason), row in cleanups.findings(only).items():
         entry = {"check": check, "layer": layer, "target": target, "kind": ROLE[role], "reason": reason,
@@ -427,9 +432,9 @@ def run(data, config=None, only=None, stacks=None, changed=None, extras=DEFAULT_
             entry["keeper"] = " ".join(filter(None, [cleanups.keeper(target)[0], plus(cleanups.keeper(target)[1])
                                                     if cleanups.keeper(target)[1] else ""])) \
                 if target in layout.presets else "unknown layer"
-        if check == "never there" and (layer, target) in decided:
-            used.add((layer, target))
-            keeping.append({**entry, "why": decided[(layer, target)]})
+        if check in ("never there", "outside the guard") and (layer, target) in decided:
+            used.add((layer, target))                  # a removal the register keeps (R132): never there, or, since
+            keeping.append({**entry, "why": decided[(layer, target)]})   # 90.31, a stateful layer (R131's exception)
         else:
             findings.append(entry)
     touchpad = config.get("cleanups", {}).get("touchpad_exits")

@@ -91,16 +91,16 @@ class StandardDelaysTests(unittest.TestCase):
     def title(self, variant, title):
         return map_title(title, {'L1': 'L2', 'R1': 'R2'}) if variant == 'alternative' else title
 
-    def test_working_layouts_are_this_build(self):
-        # neptune/ is generated: a hand edit there would be lost on the next install (R156).
+    def test_the_90_26_snapshot_is_this_build(self):
+        # The working layouts were this build until 90.27. The newest build's test holds R156.
         for variant in self.data:
             with self.subTest(variant=variant):
                 built = copy.deepcopy(self.numeric[variant]['controller_mappings'])
-                working = json.loads((ROOT / f'neptune/single-set-{variant}_hold-gyro_latest.json').read_text())[
+                saved = json.loads((ROOT / f'versions/neptune/90.26/single-set-{variant}_hold-gyro_90.26.json').read_text())[
                     'controller_mappings']
-                for cm in (built, working):
+                for cm in (built, saved):
                     cm.pop('title'); cm.pop('description')
-                self.assertEqual(built, working)
+                self.assertEqual(built, saved)
 
     def test_what_changed_since_90_25_is_the_timers_and_the_four_pad_layers(self):
         for variant in self.data:

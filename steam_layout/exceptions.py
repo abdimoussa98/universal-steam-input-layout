@@ -18,11 +18,15 @@ Scope, by rule:
                  (`inputs` may be {"default": [...], "alternative": [...]})
     R139         {"kind": "covers"}                                       cover layers' inherited inputs need no review
     R144         {"cover": "...", "checks": [...]}                        the cover check
-    R132         {"layers": [...], "removes": [...]}                      a removal the Cleanup audit keeps
+    R132         {"layers": [...], "removes": [...]}                      a removal the Cleanup audit keeps: one that is never there (R132)
+                                                                          or one outside the guard, such as a stateful layer (R127, R131)
+                                                                          `where`, optional: only on a layout that has this layer. The frozen builders
+                                                                          read this register too, so an entry for one build names a layer of that build
     R140         {"target": "...", "source": "...", "input": "..."}       a route the Window audit allows
     R136         {"kind": "touchpad"}                                     the hidden-exit pairs set aside
     R136         {"upper": "...", "lower": "..."}                         a covered side exit that was reviewed
     R169 to R171 {"layers": [...], "inputs": ["joystick/edge", ...]}      an input the layer may leave without a cleanup function
+                                                                          `where`, optional, as for R132
     other rules  any object, for example {"note": "..."}: a record that no audit reads
 
 The audits still read the sections they always read. `expand` fills
@@ -93,7 +97,8 @@ def expand(config):
                 {"cover": scope["cover"], "checks": scope["checks"], "reason": entry["why"]})
         elif rule == "R132":
             config.setdefault("cleanups", {}).setdefault("keep", []).append(
-                {"layers": scope["layers"], "removes": scope["removes"], "why": entry["why"]})
+                {"layers": scope["layers"], "removes": scope["removes"], "why": entry["why"],
+                 **({"where": scope["where"]} if "where" in scope else {})})
         elif rule == "R136" and scope.get("kind") == "touchpad":
             config.setdefault("cleanups", {})["touchpad_exits"] = entry["why"]
         elif rule == "R136" and "upper" in scope:
@@ -101,7 +106,8 @@ def expand(config):
                 {"upper": scope["upper"], "lower": scope["lower"], "why": entry["why"]})
         elif rule in REQUIRED:
             config.setdefault("cleanups", {}).setdefault("required", []).append(
-                {"rule": rule, "layers": scope["layers"], "inputs": scope["inputs"], "why": entry["why"]})
+                {"rule": rule, "layers": scope["layers"], "inputs": scope["inputs"], "why": entry["why"],
+                 **({"where": scope["where"]} if "where" in scope else {})})
     return config
 
 

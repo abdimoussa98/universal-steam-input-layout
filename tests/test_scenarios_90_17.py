@@ -12,15 +12,15 @@ from tests.scenario import ScenarioCase, scenario
 class SoftPressOnly(ScenarioCase):
     @scenario("90.17 S1", rests=("A6", "A10"), either=("A9",))
     def test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add(self):
-        """Changed in 90.20, with Base's repeating add gone, and again in 90.25: see 90.16 X3. It comes back
-        either way now."""
+        """Changed in 90.20, with Base's repeating add gone: see 90.16 X3."""
         for pad in self.each(start="steering"):
             pad.hold("L1").wait(50).hold("R1").wait(50).press_pad("RP", "left").wait(100)
             self.assertEqual((pad.top, "mouse_button BACK" in pad.down()), ("RTP: Mouse Buttons", True))
             pad.let_go("R1").wait(2)                                              # the quick tap clears every layer
             self.assertTrue(pad.lacks("Steering", "RTP: Mouse Buttons"))
-            pad.wait(400)
-            self.assertEqual((pad.has("RTP: Mouse Buttons"), "mouse_button BACK" in pad.down()), (True, True))
+            pad.wait(150)
+            self.assertEqual((pad.has("RTP: Mouse Buttons"), "mouse_button BACK" in pad.down()),
+                             (pad.sim.exposed_fires, pad.sim.exposed_fires))
             pad.let_go_pad("RP").wait(400)
             self.assertTrue(pad.lacks("RTP: Click Entry Point", "RTP: Mouse Buttons", "RTP: Middle Click"))
 
@@ -30,7 +30,7 @@ class SoftPressOnly(ScenarioCase):
             pad.press_pad("LP", "centre").wait(500)
             self.assertEqual((pad.top, pad.down()), ("LTP: Middle Click", ["CAPSLOCK"]))
             pad.let_go_pad("LP", lift=False)                                      # the thumb stays on the pad
-            self.assertEqual((pad.stack, pad.down()), (pad.layers("Base", "LTP: Entry Point"), []))   # the Soft Press exit alone; the Entry Point since 90.25
+            self.assertEqual((pad.stack, pad.down()), (pad.layers("Base"), []))   # the Soft Press exit alone
             pad.lift("LP").wait(300)
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["CAPSLOCK"]))
 

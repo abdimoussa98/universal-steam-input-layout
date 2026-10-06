@@ -49,11 +49,13 @@ class Handoff(ScenarioCase):
             pad.let_go_pad("RP").wait(400)                                        # the click lets go, then the thumb
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
 
-    @scenario("90.18 H4", rests=("A40",), either=("A9",))
+    @scenario("90.18 H4", rests=("A6", "A40"), either=("A9",))
     def test_a_touch_release_seen_before_the_click_lets_go(self):
         """If Steam reports the thumb gone while the pad still reads as pressed, the touch Release removes the
-        entry point. Until 90.24 Base added it again from its click; since 90.25 Base has no click. Read
-        inside the outer bind's 5 ms, the only time the entry point is still on."""
+        entry point. Read at the rim, inside the outer bind's 5 ms, the only time the entry point is still on:
+        in the centre it hands over as it lands (A6). Base's click is then exposed under the held click. If
+        Steam fires it (A9), the entry point comes back and hands over as usual, so the outer button is sent
+        after all. Either way nothing is left when the click lets go."""
         for pad in self.each():
             pad.press_pad("RP", "left").wait(2)
             pad.sim.release(("right_trackpad", "touch"))
@@ -61,7 +63,8 @@ class Handoff(ScenarioCase):
             pad.wait(10)                                                          # Base may have added the entry point again
             pad.sim.release(("right_trackpad", "click"))
             pad.wait(400)
-            self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
+            self.assertEqual((pad.stack, pad.typed()),
+                             (pad.layers("Base"), ["mouse_button BACK"] if pad.sim.exposed_fires else []))
 
 
 if __name__ == "__main__":

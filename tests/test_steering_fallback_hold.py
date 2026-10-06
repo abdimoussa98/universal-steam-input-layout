@@ -74,7 +74,8 @@ class FallbackHoldTests(unittest.TestCase):
                     'gyro_ratchet_button_mask': LS_DEFLECT, 'gyro_ratchet_button_requireany_or_all': '0',
                     'delay_start': '1500', 'haptic_intensity': '3', 'interruptable': '0'})
                 ops = layout.layer_ops(leave)
-                # The hold goes first and Steering last, with the beep.
+                # The hold goes first and Steering last, with the flag meant as the beep: `1 0` in this builder,
+                # `0 1` since 90.29 (A49).
                 self.assertEqual(ops[0], ('remove_layer', HOLD))
                 self.assertEqual(ops[-1], ('remove_layer', 'Steering'))
                 self.assertIn('remove_layer {{Base::Steering}} 1 0', leave['bindings']['binding'][0])

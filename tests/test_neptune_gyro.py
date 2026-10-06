@@ -47,11 +47,11 @@ class NeptuneGyroTests(unittest.TestCase):
                 for title in (owner, "Gyro | " + owner):
                     with self.subTest(variant=variant, layer=title):
                         sources = active_sources(layout, title)
+                        # No outer ring radius since 90.31: 7209 and 4915 were below what the editor can set (R173).
                         self.assertEqual(sources["right_joystick"]["settings"], {
-                            "layer": "1", "sensitivity": "75",
-                            "edge_binding_radius": "7209", "edge_binding_invert": "0"})
+                            "layer": "1", "sensitivity": "75", "edge_binding_invert": "0"})
                         self.assertEqual(sources["joystick"]["settings"], {
-                            "layer": "1", "edge_binding_radius": "4915", "edge_binding_invert": "0"})
+                            "layer": "1", "edge_binding_invert": "0"})
 
     def test_gyro_sources_only_override_owned_properties_or_explicitly_disable(self):
         disabled = {"Gyro Off Ramp Up", "Transition Set 0", "Transition Set 1", "Transition Set 2", "Gamepad"}
@@ -66,6 +66,8 @@ class NeptuneGyroTests(unittest.TestCase):
         # inherit its disabled gyro (90.7). Since 90.21 those Entry Points serve
         # every stateful layer and are named Stateful.
         disabled |= {f'Stateful | Menu {side}: Entry Point' for side in ('Left', 'Right')}
+        # Their own Fn layers (90.28) are copies of the Fn layers, gyro included.
+        disabled |= {f'Stateful | Menu {side}: Fn Layer' for side in ('Left', 'Right')}
         gyro_activation = {"layer": "1", "gyro_ratchet_button_mask": "211109453758464",
                            "gyro_ratchet_button_requireany_or_all": "0"}
         for variant, layout in self.layouts.items():

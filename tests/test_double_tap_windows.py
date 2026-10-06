@@ -22,11 +22,14 @@ class DoubleTapWindowTests(unittest.TestCase):
         for variant in ("default", "alternative"):
             layout = Layout(load(variant))
             windows = always_on_layers(layout)
-            # The Always On layers are exactly the Double Tap windows, so none is skipped below.
-            self.assertEqual(set(windows), {title for title in layout.presets if title.endswith(": Double Tap")}, variant)
-            self.assertTrue(windows, variant)
+            # The Always On layers are exactly the Double Tap windows, so none is skipped. In 90.31 and 90.32 the
+            # fallback had a window of its own; 90.33 deleted it.
+            double_taps = {title for title in layout.presets if title.endswith(": Double Tap")}
+            self.assertEqual(set(windows), double_taps, variant)
+            self.assertTrue(double_taps, variant)
             for title in windows:
-                yield variant, layout, title
+                if title in double_taps:
+                    yield variant, layout, title
 
     def test_stick_touch_release_removes_the_window_first_then_the_side_trio(self):
         for variant, layout, title in self.windows():
@@ -80,8 +83,9 @@ class DoubleTapWindowTests(unittest.TestCase):
     def test_default_windows_keep_the_mouse_buttons_on_the_trigger_edges(self):
         # Gyro Off Ramp Up can sit under any window, and its soft pull removes it. That is a layer
         # command and no keybind, so the one possible keybind is Base's mouse button (since 90.10).
-        # The Steering windows inherit it: Steering blocks the right-stick edge, so no ramp layer
-        # is under them (90.13).
+        # The Steering windows inherit it, because no ramp layer can be under them: from 90.13 to
+        # 90.33 Steering blocked the right-stick edge, and since 90.35 a driver's press removes the
+        # ramp layers before it adds its layer. In 90.34 neither held and they bound it themselves.
         layout = Layout(load("default"))
         for title in always_on_layers(layout):
             for source, button in (("left_trigger", "LEFT"), ("right_trigger", "RIGHT")):
@@ -95,8 +99,9 @@ class DoubleTapWindowTests(unittest.TestCase):
                     self.assertEqual(edge, layout.active("Base")[source]["inputs"]["edge"]["activators"])
 
     def test_alternative_steering_windows_keep_the_mouse_buttons_on_the_bumpers(self):
-        # The windows inherit Base's mouse buttons. Before 90.13 Turning Ramp Up 0 could be
-        # underneath and they bound them themselves; Steering now blocks the right-stick edge.
+        # The windows inherit Base's mouse buttons. Before 90.13, and in 90.34, Turning Ramp Up 0
+        # could be underneath and they bound them themselves. From 90.13 to 90.33 Steering blocked
+        # the right-stick edge; since 90.35 a driver's press removes the ramp layers first.
         layout = Layout(load("alternative"))
         for title in ("Steering | LS Up: Double Tap", "Steering | LS Down: Double Tap"):
             for name, button in (("left_bumper", "LEFT"), ("right_bumper", "RIGHT")):
@@ -107,9 +112,10 @@ class DoubleTapWindowTests(unittest.TestCase):
                     self.assertEqual(layer, "Base")
                     self.assertEqual(list(bindings(acts)), [f"mouse_button {button}, , "])
 
-    def test_right_pad_stays_the_mouse_with_click_and_touch_cleared(self):
-        # Author, 2026-09-30: the cursor keeps moving during a window; only the pad's
-        # layer-API inputs are cleared. RTP Double Tap keeps its own dpad selection pad.
+    def test_right_pad_stays_the_mouse_with_its_click_cleared_and_a_touch_release(self):
+        # Author, 2026-09-30: the cursor keeps moving during a window, and the pad adds no layer.
+        # RTP Double Tap keeps its own dpad selection pad. Since 90.28 the touch isn't an empty press
+        # but a Release that ends the window first, as the stick touches have (author, 2026-10-04; R172).
         for variant, layout, title in self.windows():
             with self.subTest(variant=variant, window=title):
                 group = layout.active(title)["right_trackpad"]
@@ -121,8 +127,12 @@ class DoubleTapWindowTests(unittest.TestCase):
                 self.assertEqual(group["mode"], base["mode"])
                 self.assertEqual(group["settings"], {"layer": "1"})  # mouse feel inherits from Base
                 self.assertEqual(set(group["inputs"]), {"click", "touch"})
-                for name in ("click", "touch"):
-                    self.assertEqual(list(bindings(group["inputs"][name]["activators"])), [EMPTY], name)
+                self.assertEqual(list(bindings(group["inputs"]["click"]["activators"])), [EMPTY])
+                touch = group["inputs"]["touch"]["activators"]
+                self.assertEqual(list(touch), ["release"])
+                removed = layout.layer_ops(touch["release"])
+                self.assertEqual(removed[0], ("remove_layer", title))
+                self.assertTrue(all(op == "remove_layer" for op, _ in removed))
 
 if __name__ == "__main__":
     unittest.main()
