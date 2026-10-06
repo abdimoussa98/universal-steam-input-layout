@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "dfd1813f740646a8c4c14447ca1d1b2dd1041383c0cb997e5cf2e283372ff064",
+      "version_snapshot": "versions/neptune/90.28/single-set-default_hold-gyro_90.28.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "24bd5f6db45c589dda10703a2e11767b62100fc800c9372f9aaa98602db20d16",
+      "version_snapshot": "versions/neptune/90.28/single-set-default_hold-gyro_90.28.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "99ae26489e1d5041ac3a29126f0adebd85ccd3bbbe828623ddaf1eafeac82a54",
+      "version_snapshot": "versions/neptune/90.28/single-set-alternative_hold-gyro_90.28.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "0798b8c18f3937e4959262bdd51d87e0253891fbae993516bda9c0a7a4a9d9e8",
+      "version_snapshot": "versions/neptune/90.28/single-set-alternative_hold-gyro_90.28.vdf"
+    }
+  },
+  "release": "90.28",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-04-menu-chain-and-window-pads/default-menu-chain-and-window-pads.json",
+      "sha256": "7184381283b160337bba2d777b75bee68afb093f68b5dbb1d3c1d6875e49399a"
+    },
+    "alternative": {
+      "path": "findings/2026-10-04-menu-chain-and-window-pads/alternative-menu-chain-and-window-pads.json",
+      "sha256": "ea03a7abc913074c703cb479e10c45c8bcd8bd301f678a301fa6ea21819d1c9a"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

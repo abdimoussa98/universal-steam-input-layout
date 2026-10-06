@@ -1,0 +1,30 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "pad_bump_removal_generator_sha256": "df71d7092d92e381f43eeebc77d839a8f7b540508e60dfdd7afed413a28fe0f7",
+    "candidate_sha256": "7184381283b160337bba2d777b75bee68afb093f68b5dbb1d3c1d6875e49399a",
+    "new_layers": [
+      "Stateful | Menu Left: Fn Layer",
+      "Stateful | Menu Right: Fn Layer"
+    ],
+    "windows_changed": 10,
+    "inputs_given_a_cleanup": 186,
+    "total_layer_count": 89,
+    "resolved_references": 4503,
+    "device_status": "UNTESTED"
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "pad_bump_removal_generator_sha256": "df71d7092d92e381f43eeebc77d839a8f7b540508e60dfdd7afed413a28fe0f7",
+    "candidate_sha256": "ea03a7abc913074c703cb479e10c45c8bcd8bd301f678a301fa6ea21819d1c9a",
+    "new_layers": [
+      "Stateful | Menu Left: Fn Layer",
+      "Stateful | Menu Right: Fn Layer"
+    ],
+    "windows_changed": 10,
+    "inputs_given_a_cleanup": 208,
+    "total_layer_count": 89,
+    "resolved_references": 4573,
+    "device_status": "UNTESTED"
+  }
+}
