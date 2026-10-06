@@ -1,0 +1,54 @@
+Changes from single-set-default_hold-gyro_90.29.json to single-set-default_hold-gyro_latest.json
+Layers: 89 -> 89 (added: none; removed: none)
+
+== LST: Entry Point
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; add_layer LST: Double Tap
+    before: chord(chord_button=23,delay_start=150,interruptable=0): add_layer LST: Tap Cover
+    before: Full_Press(haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=200): remove_layer LST: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; add_layer LST: Double Tap
+    after:  chord(chord_button=23,delay_start=150,interruptable=0): add_layer LST: Tap Cover
+
+== RST: Entry Point
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; add_layer RST: Double Tap
+    before: chord(chord_button=24,delay_start=150,interruptable=0): add_layer RST: Tap Cover
+    before: Full_Press(haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=200): remove_layer RST: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; add_layer RST: Double Tap
+    after:  chord(chord_button=24,delay_start=150,interruptable=0): add_layer RST: Tap Cover
+
+== RTP: Entry Point
+  right_trackpad/touch: binding
+    before: release(haptic_intensity=0): remove_layer RTP: Entry Point ; add_layer RTP: Double Tap
+    before: chord(chord_button=17,delay_start=150,haptic_intensity=0,interruptable=0): add_layer RTP: Tap Cover
+    before: Full_Press(haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=200): remove_layer RTP: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer RTP: Entry Point ; add_layer RTP: Double Tap
+    after:  chord(chord_button=17,delay_start=150,haptic_intensity=0,interruptable=0): add_layer RTP: Tap Cover
+
+== RTP: Double Tap
+  switch/button_escape: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press: empty_binding
+    after:  release(haptic_intensity=0): remove_layer RTP: Double Tap ; remove_layer Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Menu Left: Fn Layer ; remove_layer Menu Right: Fn Layer ; remove_layer Menu Left: Escape ; remove_layer Menu Right: Tab ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Stateful | Menu Right: Entry Point ; remove_layer Stateful | Menu Left: Fn Layer ; remove_layer Stateful | Menu Right: Fn Layer ; remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Left!Right: Entry Point ; remove_layer Menu Right!Left: Entry Point ; remove_layer Menu Left!Right: Enter ; remove_layer Menu Right!Left: Backspace ; remove_layer Menu Left!Right: Double Tap Cover ; remove_layer Menu Right!Left: Double Tap Cover
+  switch/button_menu: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press: empty_binding
+    after:  release(haptic_intensity=0): remove_layer RTP: Double Tap ; remove_layer Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Menu Left: Fn Layer ; remove_layer Menu Right: Fn Layer ; remove_layer Menu Left: Escape ; remove_layer Menu Right: Tab ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Stateful | Menu Right: Entry Point ; remove_layer Stateful | Menu Left: Fn Layer ; remove_layer Stateful | Menu Right: Fn Layer ; remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Left!Right: Entry Point ; remove_layer Menu Right!Left: Entry Point ; remove_layer Menu Left!Right: Enter ; remove_layer Menu Right!Left: Backspace ; remove_layer Menu Left!Right: Double Tap Cover ; remove_layer Menu Right!Left: Double Tap Cover
+  switch/left_bumper: binding
+    before: Full_Press: mouse_wheel SCROLL_DOWN
+    after:  Full_Press: mouse_wheel SCROLL_DOWN
+    after:  release(haptic_intensity=0): remove_layer RTP: Double Tap ; remove_layer L1: Modifier 0 ; remove_layer R1: Modifier 1 ; remove_layer L1!R1: Modifier 2 ; remove_layer R1!L1: Modifier 2 ; remove_layer Gyro | L1: Modifier 0 ; remove_layer Gyro | R1: Modifier 1 ; remove_layer Gyro | L1!R1: Modifier 2 ; remove_layer Gyro | R1!L1: Modifier 2 ; remove_layer L1: Temp Cursor Gyro ; remove_layer R1: Temp Cursor Gyro ; remove_layer L1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1&R1: Tap Cover ; remove_layer L1: Scroll Down ; remove_layer R1: Scroll Up ; remove_layer L1: Double Tap Cover ; remove_layer R1: Double Tap Cover
+  switch/right_bumper: binding
+    before: Full_Press: mouse_wheel SCROLL_UP
+    after:  Full_Press: mouse_wheel SCROLL_UP
+    after:  release(haptic_intensity=0): remove_layer RTP: Double Tap ; remove_layer L1: Modifier 0 ; remove_layer R1: Modifier 1 ; remove_layer L1!R1: Modifier 2 ; remove_layer R1!L1: Modifier 2 ; remove_layer Gyro | L1: Modifier 0 ; remove_layer Gyro | R1: Modifier 1 ; remove_layer Gyro | L1!R1: Modifier 2 ; remove_layer Gyro | R1!L1: Modifier 2 ; remove_layer L1: Temp Cursor Gyro ; remove_layer R1: Temp Cursor Gyro ; remove_layer L1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1&R1: Tap Cover ; remove_layer L1: Scroll Down ; remove_layer R1: Scroll Up ; remove_layer L1: Double Tap Cover ; remove_layer R1: Double Tap Cover
+
+== Steering | LS: Fallback Hold
+  joystick/edge: binding
+    before: chord(delay_start=5,gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=3,hold_repeats=1,interruptable=0,repeat_rate=250): empty_binding
+    before: release: remove_layer Steering | LS: Fallback Hold
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=1550): remove_layer Steering | LS: Entry Guard
+    after:  chord(delay_start=5,gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=3,hold_repeats=1,interruptable=0,repeat_rate=250): empty_binding
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=1550): remove_layer Steering | LS: Entry Guard
+
+5 layers changed, 8 changes

@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "f735a911a2ad0934cd72b57c04b5bbbbfdbe4847c8868859c2cd6b88a928a678",
+      "version_snapshot": "versions/neptune/90.30/single-set-default_hold-gyro_90.30.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "9b2461a7a8324229c9ef5b203875c2253ee5a33aa045f437d596d3d55c54887b",
+      "version_snapshot": "versions/neptune/90.30/single-set-default_hold-gyro_90.30.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "81a600098bebd73d8dbabdb04375df413f8baa96f07bae702beb511d9bca2f66",
+      "version_snapshot": "versions/neptune/90.30/single-set-alternative_hold-gyro_90.30.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "0f56a8a5f8d4273b5923271442327fca73365770f8fc6ca5c8c10cc6f9cac85f",
+      "version_snapshot": "versions/neptune/90.30/single-set-alternative_hold-gyro_90.30.vdf"
+    }
+  },
+  "release": "90.30",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-04-window-releases-and-tap-cover-resets/default-window-releases-and-tap-cover-resets.json",
+      "sha256": "81d487563477894393d31c5ff60b519077e2fd488c72ca5b767276a15cac812a"
+    },
+    "alternative": {
+      "path": "findings/2026-10-04-window-releases-and-tap-cover-resets/alternative-window-releases-and-tap-cover-resets.json",
+      "sha256": "380edf9e5b647cd98c8441a454cf815d5dec61261d5660ce0f4bd5ef9591c6cf"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}
