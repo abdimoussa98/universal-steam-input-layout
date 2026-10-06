@@ -6,6 +6,11 @@ installed in `neptune/` with its snapshot; it has not run on the Deck. Every
 question put to the author was answered before the build
 ([Decisions](#decisions)).
 
+**Part 1, the pad touch bump, was taken out again in 90.27** (author,
+2026-10-04; [removal](../findings/2026-10-04-pad-bump-removal/README.md),
+[how it was built](../findings/2026-10-04-pad-touch-bump/README.md)). The
+other parts stand.
+
 What differs from the plan as written, with the reasons in the
 [record](../findings/2026-10-04-pad-bumps-and-menu-keys/README.md#what-differs-from-the-plan):
 

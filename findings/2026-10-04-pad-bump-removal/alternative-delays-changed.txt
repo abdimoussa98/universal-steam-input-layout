@@ -1,0 +1,10 @@
+L2: Modifier 0 | left_trigger/edge: delay 300 -> 200 ms, reset 350 -> 250 ms
+R2: Modifier 1 | right_trigger/edge: delay 300 -> 200 ms, reset 350 -> 250 ms
+Gyro | L2: Modifier 0 | left_trigger/edge: delay 300 -> 200 ms, reset 350 -> 250 ms
+Gyro | R2: Modifier 1 | right_trigger/edge: delay 300 -> 200 ms, reset 350 -> 250 ms
+Steering | LS Down: Modifier 0 | joystick/dpad_south: delay 250 -> 200 ms, reset 300 -> 250 ms
+Steering | LS Up: Modifier 1 | joystick/dpad_north: delay 250 -> 200 ms, reset 300 -> 250 ms
+Menu Left!Right: Entry Point | switch/button_escape: delay 150 -> 200 ms, reset 200 -> 250 ms
+Menu Right!Left: Entry Point | switch/button_menu: delay 150 -> 200 ms, reset 200 -> 250 ms
+RTP: Click Entry Point | right_trackpad/touch: a reset that removes RTP: Mouse Buttons every 55 ms
+LTP: Click Entry Point | left_trackpad/touch: a reset that removes LTP: Arrow Keys every 55 ms
