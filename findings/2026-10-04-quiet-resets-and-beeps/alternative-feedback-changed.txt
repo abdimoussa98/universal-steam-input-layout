@@ -1,0 +1,25 @@
+LST: Entry Point | joystick/touch: the reset states haptic_intensity 0
+RST: Entry Point | right_joystick/touch: the reset states haptic_intensity 0
+RTP: Entry Point | right_trackpad/touch: the reset states haptic_intensity 0
+Transition Set 2 | switch/button_escape release: remove_layer {{Base::Transition Set 2}} 0 1
+Transition Set 2 | switch/button_menu release: remove_layer {{Base::Transition Set 2}} 0 1
+Transition Set 1 | switch/button_escape release: add_layer {{Base::Steering}} 0 1
+Transition Set 1 | switch/button_menu release: add_layer {{Base::Cursor Gyro}} 0 1
+Steering | LS: Fallback Hold | joystick/dpad_north chord: remove_layer {{Base::Steering}} 0 1
+Steering | LS: Fallback Hold | joystick/dpad_south chord: remove_layer {{Base::Steering}} 0 1
+Cursor Gyro | joystick/edge chord: remove_layer {{Base::Cursor Gyro}} 0 1
+Cursor Gyro | right_joystick/edge chord: remove_layer {{Base::Cursor Gyro}} 0 1
+Transition Set 0 | switch/button_escape release: add_layer {{Base::Gamepad}} 0 1
+Transition Set 0 | switch/button_menu release: add_layer {{Base::Gamepad}} 0 1
+Menu Left!Right: Entry Point | switch/button_escape chord: add_layer {{Base::Menu Keys}} 0 1
+Menu Right!Left: Entry Point | switch/button_menu chord: add_layer {{Base::Menu Keys}} 0 1
+Menu Keys | button_diamond/button_a chord: remove_layer {{Base::Menu Keys}} 0 1
+Menu Keys | button_diamond/button_b chord: remove_layer {{Base::Menu Keys}} 0 1
+Menu Keys | button_diamond/button_x chord: remove_layer {{Base::Menu Keys}} 0 1
+Menu Keys | button_diamond/button_y chord: remove_layer {{Base::Menu Keys}} 0 1
+Menu Keys | dpad/dpad_north chord: remove_layer {{Base::Menu Keys}} 0 1
+Menu Keys | dpad/dpad_south chord: remove_layer {{Base::Menu Keys}} 0 1
+Menu Keys | dpad/dpad_east chord: remove_layer {{Base::Menu Keys}} 0 1
+Menu Keys | dpad/dpad_west chord: remove_layer {{Base::Menu Keys}} 0 1
+Menu Keys | joystick/edge chord: remove_layer {{Base::Menu Keys}} 0 1
+Menu Keys | right_joystick/edge chord: remove_layer {{Base::Menu Keys}} 0 1

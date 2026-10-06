@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "79af9c6951b2014e1b8b959f4c150faa64fb811394491d85cfba774a8019d4ac",
+      "version_snapshot": "versions/neptune/90.29/single-set-default_hold-gyro_90.29.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "8448e618d5bd3aac4d2e08e03ce7dcad0f6b4ea96a40e21401bbd9959396beb3",
+      "version_snapshot": "versions/neptune/90.29/single-set-default_hold-gyro_90.29.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "f4c660ba628ab7e14c3b9e67c73a856501bece75f602c28d293bbd9088600c0b",
+      "version_snapshot": "versions/neptune/90.29/single-set-alternative_hold-gyro_90.29.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "510c6945ef62e459cbab64cad5639832ea18da32f34642138900f8d974edbdf1",
+      "version_snapshot": "versions/neptune/90.29/single-set-alternative_hold-gyro_90.29.vdf"
+    }
+  },
+  "release": "90.29",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-04-quiet-resets-and-beeps/default-quiet-resets-and-beeps.json",
+      "sha256": "ccbc36c7b627924964ed01a8c564d1be5b7d5aa3b8cb0c233def93c08cd66f3e"
+    },
+    "alternative": {
+      "path": "findings/2026-10-04-quiet-resets-and-beeps/alternative-quiet-resets-and-beeps.json",
+      "sha256": "d058489306f25f18f785b779f66dedbc0e677f0d0d67f81e4f7429ebc2b1b2fa"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

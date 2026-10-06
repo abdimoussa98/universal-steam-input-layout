@@ -1,0 +1,145 @@
+Changes from single-set-alternative_hold-gyro_90.28.json to single-set-alternative_hold-gyro_latest.json
+Layers: 89 -> 89 (added: none; removed: none)
+
+== LST: Entry Point
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; add_layer LST: Double Tap
+    before: chord(chord_button=23,delay_start=150,interruptable=0): add_layer LST: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=200): remove_layer LST: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; add_layer LST: Double Tap
+    after:  chord(chord_button=23,delay_start=150,interruptable=0): add_layer LST: Tap Cover
+    after:  Full_Press(haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=200): remove_layer LST: Tap Cover
+
+== RST: Entry Point
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; add_layer RST: Double Tap
+    before: chord(chord_button=24,delay_start=150,interruptable=0): add_layer RST: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=200): remove_layer RST: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; add_layer RST: Double Tap
+    after:  chord(chord_button=24,delay_start=150,interruptable=0): add_layer RST: Tap Cover
+    after:  Full_Press(haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=200): remove_layer RST: Tap Cover
+
+== RTP: Entry Point
+  right_trackpad/touch: binding
+    before: release(haptic_intensity=0): remove_layer RTP: Entry Point ; add_layer RTP: Double Tap
+    before: chord(chord_button=17,delay_start=150,haptic_intensity=0,interruptable=0): add_layer RTP: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=200): remove_layer RTP: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer RTP: Entry Point ; add_layer RTP: Double Tap
+    after:  chord(chord_button=17,delay_start=150,haptic_intensity=0,interruptable=0): add_layer RTP: Tap Cover
+    after:  Full_Press(haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=200): remove_layer RTP: Tap Cover
+
+== Transition Set 2
+  switch/button_escape: binding
+    before: release(haptic_intensity=3): remove_layer Transition Set 2 1 0
+    after:  release(haptic_intensity=3): remove_layer Transition Set 2 0 1
+  switch/button_menu: binding
+    before: release(haptic_intensity=3): remove_layer Transition Set 2 1 0
+    after:  release(haptic_intensity=3): remove_layer Transition Set 2 0 1
+
+== Transition Set 1
+  switch/button_escape: binding
+    before: release(haptic_intensity=3): remove_layer Transition Set 1 ; add_layer Steering 1 0 ; add_layer Steering | LS: Entry Guard
+    after:  release(haptic_intensity=3): remove_layer Transition Set 1 ; add_layer Steering 0 1 ; add_layer Steering | LS: Entry Guard
+  switch/button_menu: binding
+    before: release(haptic_intensity=3): remove_layer Transition Set 1 ; add_layer Gyro ; add_layer Cursor Gyro 1 0
+    after:  release(haptic_intensity=3): remove_layer Transition Set 1 ; add_layer Gyro ; add_layer Cursor Gyro 0 1
+
+== Steering | LS: Fallback Hold
+  joystick/dpad_north: binding
+    before: Full_Press(interruptable=0): key_press W
+    before: chord(delay_start=1500,gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=3,interruptable=0): remove_layer Steering | LS: Fallback Hold ; remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering 1 0
+    before: release: remove_layer Steering | LS: Fallback Hold
+    after:  Full_Press(interruptable=0): key_press W
+    after:  chord(delay_start=1500,gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=3,interruptable=0): remove_layer Steering | LS: Fallback Hold ; remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering 0 1
+    after:  release: remove_layer Steering | LS: Fallback Hold
+  joystick/dpad_south: binding
+    before: Full_Press(interruptable=0): key_press S
+    before: chord(delay_start=1500,gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=3,interruptable=0): remove_layer Steering | LS: Fallback Hold ; remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering 1 0
+    before: release: remove_layer Steering | LS: Fallback Hold
+    after:  Full_Press(interruptable=0): key_press S
+    after:  chord(delay_start=1500,gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=3,interruptable=0): remove_layer Steering | LS: Fallback Hold ; remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering 0 1
+    after:  release: remove_layer Steering | LS: Fallback Hold
+
+== Cursor Gyro
+  joystick/edge: binding
+    before: chord(gyro_ratchet_button_mask=2147483648,gyro_ratchet_button_requireany_or_all=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer Cursor Gyro 1 0
+    after:  chord(gyro_ratchet_button_mask=2147483648,gyro_ratchet_button_requireany_or_all=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer Cursor Gyro 0 1
+  right_joystick/edge: binding
+    before: chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer Cursor Gyro 1 0
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer Cursor Gyro 0 1
+
+== Transition Set 0
+  switch/button_escape: binding
+    before: release(haptic_intensity=3): remove_layer Transition Set 0 ; add_layer Gamepad 1 0
+    after:  release(haptic_intensity=3): remove_layer Transition Set 0 ; add_layer Gamepad 0 1
+  switch/button_menu: binding
+    before: release(haptic_intensity=3): remove_layer Transition Set 0 ; add_layer Gamepad 1 0
+    after:  release(haptic_intensity=3): remove_layer Transition Set 0 ; add_layer Gamepad 0 1
+
+== Menu Left!Right: Entry Point
+  switch/button_escape: binding
+    before: release(haptic_intensity=0): remove_layer Menu Left!Right: Entry Point ; add_layer Menu Left!Right: Double Tap
+    before: chord(chord_button=15,delay_start=200,haptic_intensity=3): remove_layer Turning Ramp Up 0 ; remove_layer Turning Ramp Up 1 ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2!R2: Modifier 2 ; remove_layer R2!L2: Modifier 2 ; remove_layer Gyro ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer LST: Temporary Gyro ; remove_layer RST: Temporary Gyro ; remove_layer Gyro Off Ramp Up ; remove_layer LTP: Arrow Keys ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Circular Scroll ; remove_layer L2: Scroll Down ; remove_layer R2: Scroll Up ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter ; remove_layer Menu Left: Escape ; remove_layer Menu Left: Fn Layer ; remove_layer Menu Right: Tab ; remove_layer Menu Right: Fn Layer ; remove_layer LST: Entry Point ; remove_layer RST: Entry Point ; remove_layer RTP: Entry Point ; remove_layer Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer L2: Double Tap ; remove_layer R2: Double Tap ; remove_layer LST: Double Tap ; remove_layer RST: Double Tap ; remove_layer RTP: Double Tap ; remove_layer Menu Left: Double Tap ; remove_layer Menu Right: Double Tap ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover ; remove_layer L2: Temp Cursor Gyro ; remove_layer R2: Temp Cursor Gyro ; remove_layer LST: Tap Cover ; remove_layer RST: Tap Cover ; remove_layer RTP: Tap Cover ; remove_layer L2: Double Tap Cover ; remove_layer R2: Double Tap Cover ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover ; remove_layer Transition Set 1 ; remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering ; remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Steering | LS: Fallback Hold ; remove_layer LTP: Click Entry Point ; remove_layer RTP: Click Entry Point ; remove_layer LTP: Middle Click ; remove_layer RTP: Middle Click ; remove_layer Cursor Gyro ; remove_layer Gamepad ; remove_layer Menu Left!Right: Entry Point ; remove_layer Menu Left!Right: Double Tap ; remove_layer Menu Left!Right: Enter ; remove_layer Menu Left!Right: Double Tap Cover ; remove_layer Menu Right!Left: Entry Point ; remove_layer Menu Right!Left: Double Tap ; remove_layer Menu Right!Left: Backspace ; remove_layer Menu Right!Left: Double Tap Cover ; remove_layer Stateful | Menu Left: Fn Layer ; remove_layer Stateful | Menu Right: Fn Layer ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Stateful | Menu Right: Entry Point ; remove_layer Transition Set 2 ; remove_layer Transition Set 0 ; add_layer Menu Keys 1 0
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Menu Keys
+    after:  release(haptic_intensity=0): remove_layer Menu Left!Right: Entry Point ; add_layer Menu Left!Right: Double Tap
+    after:  chord(chord_button=15,delay_start=200,haptic_intensity=3): remove_layer Turning Ramp Up 0 ; remove_layer Turning Ramp Up 1 ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2!R2: Modifier 2 ; remove_layer R2!L2: Modifier 2 ; remove_layer Gyro ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer LST: Temporary Gyro ; remove_layer RST: Temporary Gyro ; remove_layer Gyro Off Ramp Up ; remove_layer LTP: Arrow Keys ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Circular Scroll ; remove_layer L2: Scroll Down ; remove_layer R2: Scroll Up ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter ; remove_layer Menu Left: Escape ; remove_layer Menu Left: Fn Layer ; remove_layer Menu Right: Tab ; remove_layer Menu Right: Fn Layer ; remove_layer LST: Entry Point ; remove_layer RST: Entry Point ; remove_layer RTP: Entry Point ; remove_layer Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer L2: Double Tap ; remove_layer R2: Double Tap ; remove_layer LST: Double Tap ; remove_layer RST: Double Tap ; remove_layer RTP: Double Tap ; remove_layer Menu Left: Double Tap ; remove_layer Menu Right: Double Tap ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover ; remove_layer L2: Temp Cursor Gyro ; remove_layer R2: Temp Cursor Gyro ; remove_layer LST: Tap Cover ; remove_layer RST: Tap Cover ; remove_layer RTP: Tap Cover ; remove_layer L2: Double Tap Cover ; remove_layer R2: Double Tap Cover ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover ; remove_layer Transition Set 1 ; remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering ; remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Steering | LS: Fallback Hold ; remove_layer LTP: Click Entry Point ; remove_layer RTP: Click Entry Point ; remove_layer LTP: Middle Click ; remove_layer RTP: Middle Click ; remove_layer Cursor Gyro ; remove_layer Gamepad ; remove_layer Menu Left!Right: Entry Point ; remove_layer Menu Left!Right: Double Tap ; remove_layer Menu Left!Right: Enter ; remove_layer Menu Left!Right: Double Tap Cover ; remove_layer Menu Right!Left: Entry Point ; remove_layer Menu Right!Left: Double Tap ; remove_layer Menu Right!Left: Backspace ; remove_layer Menu Right!Left: Double Tap Cover ; remove_layer Stateful | Menu Left: Fn Layer ; remove_layer Stateful | Menu Right: Fn Layer ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Stateful | Menu Right: Entry Point ; remove_layer Transition Set 2 ; remove_layer Transition Set 0 ; add_layer Menu Keys 0 1
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Menu Keys
+
+== Menu Right!Left: Entry Point
+  switch/button_menu: binding
+    before: release(haptic_intensity=0): remove_layer Menu Right!Left: Entry Point ; add_layer Menu Right!Left: Double Tap
+    before: chord(chord_button=14,delay_start=200,haptic_intensity=3): remove_layer Turning Ramp Up 0 ; remove_layer Turning Ramp Up 1 ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2!R2: Modifier 2 ; remove_layer R2!L2: Modifier 2 ; remove_layer Gyro ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer LST: Temporary Gyro ; remove_layer RST: Temporary Gyro ; remove_layer Gyro Off Ramp Up ; remove_layer LTP: Arrow Keys ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Circular Scroll ; remove_layer L2: Scroll Down ; remove_layer R2: Scroll Up ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter ; remove_layer Menu Left: Escape ; remove_layer Menu Left: Fn Layer ; remove_layer Menu Right: Tab ; remove_layer Menu Right: Fn Layer ; remove_layer LST: Entry Point ; remove_layer RST: Entry Point ; remove_layer RTP: Entry Point ; remove_layer Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer L2: Double Tap ; remove_layer R2: Double Tap ; remove_layer LST: Double Tap ; remove_layer RST: Double Tap ; remove_layer RTP: Double Tap ; remove_layer Menu Left: Double Tap ; remove_layer Menu Right: Double Tap ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover ; remove_layer L2: Temp Cursor Gyro ; remove_layer R2: Temp Cursor Gyro ; remove_layer LST: Tap Cover ; remove_layer RST: Tap Cover ; remove_layer RTP: Tap Cover ; remove_layer L2: Double Tap Cover ; remove_layer R2: Double Tap Cover ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover ; remove_layer Transition Set 1 ; remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering ; remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Steering | LS: Fallback Hold ; remove_layer LTP: Click Entry Point ; remove_layer RTP: Click Entry Point ; remove_layer LTP: Middle Click ; remove_layer RTP: Middle Click ; remove_layer Cursor Gyro ; remove_layer Gamepad ; remove_layer Menu Left!Right: Entry Point ; remove_layer Menu Left!Right: Double Tap ; remove_layer Menu Left!Right: Enter ; remove_layer Menu Left!Right: Double Tap Cover ; remove_layer Menu Right!Left: Entry Point ; remove_layer Menu Right!Left: Double Tap ; remove_layer Menu Right!Left: Backspace ; remove_layer Menu Right!Left: Double Tap Cover ; remove_layer Stateful | Menu Left: Fn Layer ; remove_layer Stateful | Menu Right: Fn Layer ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Stateful | Menu Right: Entry Point ; remove_layer Transition Set 2 ; remove_layer Transition Set 0 ; add_layer Menu Keys 1 0
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Menu Keys
+    after:  release(haptic_intensity=0): remove_layer Menu Right!Left: Entry Point ; add_layer Menu Right!Left: Double Tap
+    after:  chord(chord_button=14,delay_start=200,haptic_intensity=3): remove_layer Turning Ramp Up 0 ; remove_layer Turning Ramp Up 1 ; remove_layer L2: Modifier 0 ; remove_layer R2: Modifier 1 ; remove_layer L2!R2: Modifier 2 ; remove_layer R2!L2: Modifier 2 ; remove_layer Gyro ; remove_layer Gyro | L2: Modifier 0 ; remove_layer Gyro | R2: Modifier 1 ; remove_layer Gyro | L2!R2: Modifier 2 ; remove_layer Gyro | R2!L2: Modifier 2 ; remove_layer LST: Temporary Gyro ; remove_layer RST: Temporary Gyro ; remove_layer Gyro Off Ramp Up ; remove_layer LTP: Arrow Keys ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Circular Scroll ; remove_layer L2: Scroll Down ; remove_layer R2: Scroll Up ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter ; remove_layer Menu Left: Escape ; remove_layer Menu Left: Fn Layer ; remove_layer Menu Right: Tab ; remove_layer Menu Right: Fn Layer ; remove_layer LST: Entry Point ; remove_layer RST: Entry Point ; remove_layer RTP: Entry Point ; remove_layer Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer L2: Double Tap ; remove_layer R2: Double Tap ; remove_layer LST: Double Tap ; remove_layer RST: Double Tap ; remove_layer RTP: Double Tap ; remove_layer Menu Left: Double Tap ; remove_layer Menu Right: Double Tap ; remove_layer L2: Tap Cover ; remove_layer R2: Tap Cover ; remove_layer L2&R2: Tap Cover ; remove_layer L2: Temp Cursor Gyro ; remove_layer R2: Temp Cursor Gyro ; remove_layer LST: Tap Cover ; remove_layer RST: Tap Cover ; remove_layer RTP: Tap Cover ; remove_layer L2: Double Tap Cover ; remove_layer R2: Double Tap Cover ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover ; remove_layer Transition Set 1 ; remove_layer Steering | LS Up: Double Tap ; remove_layer Steering | LS Down: Double Tap ; remove_layer Steering | LS: Double Tap Cover ; remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2!L2: Modifier 2 ; remove_layer Steering | L2!R2: Modifier 2 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering ; remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Steering | LS: Fallback Hold ; remove_layer LTP: Click Entry Point ; remove_layer RTP: Click Entry Point ; remove_layer LTP: Middle Click ; remove_layer RTP: Middle Click ; remove_layer Cursor Gyro ; remove_layer Gamepad ; remove_layer Menu Left!Right: Entry Point ; remove_layer Menu Left!Right: Double Tap ; remove_layer Menu Left!Right: Enter ; remove_layer Menu Left!Right: Double Tap Cover ; remove_layer Menu Right!Left: Entry Point ; remove_layer Menu Right!Left: Double Tap ; remove_layer Menu Right!Left: Backspace ; remove_layer Menu Right!Left: Double Tap Cover ; remove_layer Stateful | Menu Left: Fn Layer ; remove_layer Stateful | Menu Right: Fn Layer ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Stateful | Menu Right: Entry Point ; remove_layer Transition Set 2 ; remove_layer Transition Set 0 ; add_layer Menu Keys 0 1
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Menu Keys
+
+== Menu Keys
+  button_diamond/button_a: binding
+    before: Full_Press: key_press RETURN
+    before: chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 1 0
+    after:  Full_Press: key_press RETURN
+    after:  chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 0 1
+  button_diamond/button_b: binding
+    before: Full_Press: key_press ESCAPE
+    before: chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 1 0
+    after:  Full_Press: key_press ESCAPE
+    after:  chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 0 1
+  button_diamond/button_x: binding
+    before: Full_Press: key_press BACKSPACE
+    before: chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 1 0
+    after:  Full_Press: key_press BACKSPACE
+    after:  chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 0 1
+  button_diamond/button_y: binding
+    before: Full_Press: key_press TAB
+    before: chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 1 0
+    after:  Full_Press: key_press TAB
+    after:  chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 0 1
+  dpad/dpad_north: binding
+    before: Full_Press: key_press UP_ARROW
+    before: chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 1 0
+    after:  Full_Press: key_press UP_ARROW
+    after:  chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 0 1
+  dpad/dpad_south: binding
+    before: Full_Press: key_press DOWN_ARROW
+    before: chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 1 0
+    after:  Full_Press: key_press DOWN_ARROW
+    after:  chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 0 1
+  dpad/dpad_east: binding
+    before: Full_Press: key_press RIGHT_ARROW
+    before: chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 1 0
+    after:  Full_Press: key_press RIGHT_ARROW
+    after:  chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 0 1
+  dpad/dpad_west: binding
+    before: Full_Press: key_press LEFT_ARROW
+    before: chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 1 0
+    after:  Full_Press: key_press LEFT_ARROW
+    after:  chord(gyro_ratchet_button_mask=3221225472,gyro_ratchet_button_requireany_or_all=0,interruptable=0): remove_layer Menu Keys 0 1
+  joystick/edge: binding
+    before: chord(gyro_ratchet_button_mask=2147483648,gyro_ratchet_button_requireany_or_all=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer Menu Keys 1 0
+    after:  chord(gyro_ratchet_button_mask=2147483648,gyro_ratchet_button_requireany_or_all=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer Menu Keys 0 1
+  right_joystick/edge: binding
+    before: chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer Menu Keys 1 0
+    after:  chord(gyro_ratchet_button_mask=1073741824,gyro_ratchet_button_requireany_or_all=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer Menu Keys 0 1
+
+11 layers changed, 25 changes
