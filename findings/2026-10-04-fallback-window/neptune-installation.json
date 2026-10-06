@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "a541d48fa119e097609b4436936d00fe009a703051685168ac8e5ecc03a661f5",
+      "version_snapshot": "versions/neptune/90.31/single-set-default_hold-gyro_90.31.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "08f85d2bad84f9b89b08184f41bbeb6d52854addec3007924cb7627accd60cfc",
+      "version_snapshot": "versions/neptune/90.31/single-set-default_hold-gyro_90.31.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "33c0074510f41a2e5913376459836c6eeae710087d5529482b91e1144c55608b",
+      "version_snapshot": "versions/neptune/90.31/single-set-alternative_hold-gyro_90.31.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "1a0f910ba6c64458cc35ac597294ef1acca50092a512170a7064e0ffc0a0e55f",
+      "version_snapshot": "versions/neptune/90.31/single-set-alternative_hold-gyro_90.31.vdf"
+    }
+  },
+  "release": "90.31",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-04-fallback-window/default-fallback-window.json",
+      "sha256": "79bfd43e99f920c1fbb04c1bc6333050e1882d5643b9b18c94e09aa37c24f1b4"
+    },
+    "alternative": {
+      "path": "findings/2026-10-04-fallback-window/alternative-fallback-window.json",
+      "sha256": "1d4752730a89efb0d950ec070eb0ec4f131ea5c2c4152cf8c5b3fdd942881c04"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

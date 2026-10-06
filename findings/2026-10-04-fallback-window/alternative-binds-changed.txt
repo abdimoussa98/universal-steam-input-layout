@@ -1,0 +1,7 @@
+62 stick groups: the outer ring radius is no longer stated; "not inverted" stays
+Steering | LS: Fallback Window: a new layer at the end of the list, from Steering | LS Up: Double Tap
+Steering | LS: Fallback Window: 1000 ms; W and S with the pulse; up, down, the edge and the touches let go remove it and the Fallback Hold; a driver or a menu button removes it alone
+Steering | joystick up and down: adds the Fallback Hold, then Steering | LS: Fallback Window
+Steering | LS: Fallback Hold: W and S with a Release that clears the Steering layers; a driver or a menu button clears them too; the cleanup binds clear them; nothing on the edge
+31 binds that clear both Steering windows clear Steering | LS: Fallback Window as well
+Steering | LS: Entry Guard: up, down, left and right each get a Release that removes it

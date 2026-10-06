@@ -1,0 +1,26 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "window_releases_generator_sha256": "d5cbea0a69099356098b2d216067a44e21424c7bf9826a5233f13ab7332198ca",
+    "candidate_sha256": "79bfd43e99f920c1fbb04c1bc6333050e1882d5643b9b18c94e09aa37c24f1b4",
+    "new_layers": [
+      "Steering | LS: Fallback Window"
+    ],
+    "inputs_given_a_cleanup": 186,
+    "total_layer_count": 90,
+    "resolved_references": 4739,
+    "device_status": "UNTESTED"
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "window_releases_generator_sha256": "d5cbea0a69099356098b2d216067a44e21424c7bf9826a5233f13ab7332198ca",
+    "candidate_sha256": "1d4752730a89efb0d950ec070eb0ec4f131ea5c2c4152cf8c5b3fdd942881c04",
+    "new_layers": [
+      "Steering | LS: Fallback Window"
+    ],
+    "inputs_given_a_cleanup": 208,
+    "total_layer_count": 90,
+    "resolved_references": 4809,
+    "device_status": "UNTESTED"
+  }
+}
