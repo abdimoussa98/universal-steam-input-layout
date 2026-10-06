@@ -1,0 +1,32 @@
+{
+  "files": {
+    "neptune/single-set-default_hold-gyro_latest.json": {
+      "sha256": "d1d13f560da54f733089ae956fe418ac5831172afee0fafec74572e94f925eec",
+      "version_snapshot": "versions/neptune/90.35/single-set-default_hold-gyro_90.35.json"
+    },
+    "neptune/single-set-default_hold-gyro_latest.vdf": {
+      "sha256": "ab651c54abb690cc32b9de6c33c88edbe2e68c4ef563aa762dd8e4243cc1ea59",
+      "version_snapshot": "versions/neptune/90.35/single-set-default_hold-gyro_90.35.vdf"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.json": {
+      "sha256": "899fa97ded6805df88d164714e9b1d9224bfd3dee123b3cb77f46ed3afbb323f",
+      "version_snapshot": "versions/neptune/90.35/single-set-alternative_hold-gyro_90.35.json"
+    },
+    "neptune/single-set-alternative_hold-gyro_latest.vdf": {
+      "sha256": "c6499e2210857e47c65d2604b78add219109460ff96b4dae04e050bf69a51bae",
+      "version_snapshot": "versions/neptune/90.35/single-set-alternative_hold-gyro_90.35.vdf"
+    }
+  },
+  "release": "90.35",
+  "candidates": {
+    "default": {
+      "path": "findings/2026-10-06-steering-fallback-swap/default-fallback-swap.json",
+      "sha256": "7b6e83f0620b857bd6704ecff3e8d00ebdcb80b2c62bcb5f5f362836301e15cb"
+    },
+    "alternative": {
+      "path": "findings/2026-10-06-steering-fallback-swap/alternative-fallback-swap.json",
+      "sha256": "01634ab4ca7c1e2906aa26748e2f311fce2ee0362d16958aa6f78c9157df74e9"
+    }
+  },
+  "metadata_note": "sha256 is after install_neptune.py: candidate + release title/description, the steam_layout.fixes pipeline."
+}

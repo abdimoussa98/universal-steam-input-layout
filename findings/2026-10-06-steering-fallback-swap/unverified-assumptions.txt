@@ -1,0 +1,263 @@
+213 scenarios
+Resting on an assumption that isn't verified: 128
+Assumptions that aren't verified: 32
+
+A8 (unverified; relies on it): A stick edge's Release fires in a layer that was added while the stick was already out
+  Rules: R111
+  90.10 T5  MenuAndTransitions.test_stick_guards_come_and_go_and_the_menu_tap_or_hold_behaves
+  90.10 T7  MenuAndTransitions.test_the_accepted_gap_under_the_menu_tap_cover
+  90.10 D3  Steering.test_the_stick_modifier_holds_through_a_roll_to_the_side
+  90.12 C8  CleanupLists.test_the_menu_hold_with_a_stick_out_and_the_fn_release_leave_nothing_behind
+  90.6 C4/C5/S7  ChordedDelays.test_holding_the_stick_uses_up_the_tap
+
+A9 (unverified; run both ways): Removing a layer fires the exposed layer command on an input that is held (held-input rule 3)
+  Rules: R114
+  90.10 D3  Steering.test_the_stick_modifier_holds_through_a_roll_to_the_side
+  90.14 P10  PadClick.test_a_missed_click_release_clears_on_its_own
+  90.16 X1  PadClickExits.test_a_thumb_that_lifts_takes_the_click_layers_and_what_is_under_them
+  90.16 X2  PadClickExits.test_a_thumb_that_lifts_in_circular_scroll_ends_the_scroll_too
+  90.16 X3  PadClickExits.test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add
+  90.17 S1  SoftPressOnly.test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add
+  90.17 S3  SoftPressOnly.test_each_click_layer_clears_by_its_soft_press_exit_with_the_thumb_still_down
+  90.18 H2  Handoff.test_a_click_that_ends_before_the_hand_over_sends_nothing_and_clears
+  90.18 H3  Handoff.test_a_thumb_that_lifts_ends_the_entry_point
+  90.18 H4  Handoff.test_a_touch_release_seen_before_the_click_lets_go
+  90.19 K1  Holds.test_an_ordinary_click_comes_and_goes_whether_or_not_the_hold_works
+  90.19 K2  Holds.test_a_press_inside_a_final_layer_is_held_by_the_layer_and_ends_with_it
+  90.19 K3  Holds.test_the_thumb_lifting_and_a_missed_release_still_clear_a_final_layer
+  90.20 B1  OneAdd.test_a_held_click_adds_the_entry_point_once_and_bumps_once
+  90.21 C5  CursorGyro.test_a_held_modifier_answers_both_sticks_and_the_exit_waits_for_it
+  90.21 C6  CursorGyro.test_a_window_answers_both_sticks_and_the_exit_follows_when_it_closes
+  90.21 C9  CursorGyro.test_entering_with_both_sticks_out_leaves_again_at_once
+  90.25 K4  MenuKeys.test_both_sticks_out_leaves
+  90.28 W3  WindowPads.test_a_touch_and_a_click_that_start_inside_a_window_do_nothing_until_it_ends
+  90.30 W3  PadWindow.test_with_both_modifiers_held_the_one_still_down_gets_its_modifier_back
+  90.33 B3  TheBumpersInTheGuard.test_at_centre_a_bumper_ends_the_guard_with_a_pulse_and_drives
+  90.33 B5  TheBumpersInTheGuard.test_after_a_bumper_hold_with_the_stick_let_go_the_next_bumper_drives
+  90.33 L5  LeavingFromTheGuard.test_after_a_menu_hold_with_the_stick_let_go_a_bumper_drives
+  90.34 E1  OpenEdges.test_in_steering_base_turn_assist_runs_and_a_driver_ends_it_and_drives
+  90.9 K4  MenuComboKeys.test_a_held_fn_key_becomes_its_base_binding_when_the_menu_button_lifts
+  Temp cursor gyro TC4  TempCursorGyro.test_a_cancel_input_puts_the_tap_cover_on_for_the_rest_of_the_hold
+  Triggers and ramp-up TR7  TriggersAndRampUp.test_a_modifier_pressed_during_ramp_up_ends_it
+  Triggers and ramp-up TR8  TriggersAndRampUp.test_the_edge_the_triggers_and_the_modifiers_in_gyro
+  Held inputs across layer changes HI2  RecoveryAndHeldInputs.test_the_staggered_gyro_toggle
+
+A10 (reported by the author; relies on it): A key or mouse output fires on an input that is already held when its layer is added
+  Rules: R138
+  90.10 T8  MenuAndTransitions.test_the_other_menu_button_types_one_backspace_or_enter_before_fn_is_up
+  90.10 D6  Steering.test_w_carries_on_through_the_window_and_after_it
+  90.12 C6  CleanupLists.test_a_double_tap_scrolls_a_used_bumper_does_not_and_the_quick_tap_toggles_gyro
+  90.14 P1  PadClick.test_a_centre_click_is_the_middle_click
+  90.14 P2  PadClick.test_an_outer_click_is_the_d_pad_button
+  90.14 P3  PadClick.test_the_left_pad_has_the_same_two_layers
+  90.14 P4  PadClick.test_the_choice_holds_while_the_thumb_slides
+  90.14 P5  PadClick.test_the_overlap_of_the_two_ranges_sends_one_output
+  90.14 P8  PadClick.test_a_modifier_and_a_pad_click_leave_each_other_alone
+  90.14 P11  PadClick.test_a_click_in_circular_scroll_goes_through_the_entry_point
+  90.14 P12  PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it
+  90.15 M1  MenuSecondPressKeys.test_the_fallback_stays_off_the_second_press_layer_and_the_release_is_not_hidden
+  90.15 M3  MenuSecondPressKeys.test_outside_steering_the_second_press_is_as_it_was
+  90.16 X3  PadClickExits.test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add
+  90.16 X4  PadClickExits.test_the_outer_buttons_come_after_5_ms_and_the_middle_click_at_once
+  90.17 S1  SoftPressOnly.test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add
+  90.17 S2  SoftPressOnly.test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click
+  90.18 H1  Handoff.test_the_entry_point_is_gone_once_the_chosen_layer_is_on
+  90.19 K1  Holds.test_an_ordinary_click_comes_and_goes_whether_or_not_the_hold_works
+  90.20 B1  OneAdd.test_a_held_click_adds_the_entry_point_once_and_bumps_once
+  90.20 B2  OneAdd.test_each_new_click_adds_it_again
+  90.21 C7  CursorGyro.test_a_menu_tap_types_its_key_and_the_layer_stays
+  90.24 K4  RequiredCleanups.test_a_button_press_ends_a_stuck_layer_and_then_does_what_it_does_underneath
+  90.25 P5  PadTouch.test_a_left_pad_swipe_types_its_key
+  90.25 P7  PadTouch.test_a_pad_click_still_works_in_steering
+  90.25 M3  ChordedMenu.test_a_double_tap_and_hold_holds_the_key_and_a_third_press_chains
+  90.25 M7  ChordedMenu.test_inside_a_stateful_layer_both_menu_buttons_type_the_key_as_before
+  90.27 B3  Pads.test_a_swipe_needs_no_layer_under_it
+  90.27 B4  Pads.test_steering_and_the_tap_cover_use_bases_click
+  90.28 M3  EveryPress.test_a_double_tap_and_hold_holds_the_key_on_a_later_press_too
+  90.28 M6  EveryPress.test_in_steering_and_cursor_gyro_the_second_button_types_at_once
+  90.28 W4  WindowPads.test_a_swipe_inside_a_window_types_its_key_with_no_layer
+  90.33 G1  TheStickBringsItIn.test_up_or_down_brings_the_guard_in_at_once_with_a_strong_pulse
+  90.33 G4  TheStickBringsItIn.test_entering_steering_with_the_stick_up_brings_the_guard_in_and_with_it_left_does_not
+  90.34 E2  OpenEdges.test_in_the_fallback_turn_assist_runs_and_leaves_nothing_behind
+  90.34 E3  OpenEdges.test_the_guard_can_land_over_a_ramp_stage_and_everything_unwinds
+  90.35 S1  TheSwap.test_one_of_the_two_is_on_through_a_whole_round
+  90.35 S4  TheSwap.test_the_guard_has_steerings_menu_buttons_and_right_pad_of_its_own
+  90.7 S2  SlimSteeringOverlays.test_flick_then_flick_and_hold_repeats_the_scroll
+  90.6 R1  ChordedDelays.test_double_tap_and_hold_then_a_clean_release_through_the_cover
+  Menu buttons MB4  MenuButtons.test_enter_and_backspace_quickly_and_with_fn_up
+  Menu buttons MB5  MenuButtons.test_double_tap_and_hold_holds_the_key
+
+A11 (unverified; relies on it): A key or mouse output fires when a removal exposes it under an input that is held
+  90.10 T3  MenuAndTransitions.test_letting_go_of_the_menu_button_first_cancels
+  90.10 D6  Steering.test_w_carries_on_through_the_window_and_after_it
+  90.12 C7  CleanupLists.test_a_stuck_modifier_fn_layer_and_driver_each_clear
+  90.22 G5  Gamepad.test_letting_go_of_the_menu_button_before_the_click_types_one_key
+  90.25 K5  MenuKeys.test_a_stick_out_plus_a_button_leaves_and_the_press_counts_as_bases
+  90.9 K3  MenuComboKeys.test_the_accepted_stray_key_when_the_first_menu_button_is_lifted_first
+  Temp cursor gyro TC4  TempCursorGyro.test_a_cancel_input_puts_the_tap_cover_on_for_the_rest_of_the_hold
+  Triggers and ramp-up TR5  TriggersAndRampUp.test_a_trigger_pull_brings_the_gyro_back_and_the_first_click_registers
+  Default trigger reference match DT2  TriggersAndRampUp.test_soft_and_full_pulls_in_base_gyro_and_the_ramp_stages
+
+A13 (reported by the author; relies on it): Any `remove_layer` can reset a running start delay; an `add_layer` doesn't
+  Rules: R123, R126, R141
+  90.26 D1  Disturbed.test_a_left_pad_touch_during_a_hold_costs_nothing
+  90.26 D2  Disturbed.test_a_stick_touch_during_a_hold_costs_nothing
+  90.26 D3  Disturbed.test_a_right_pad_touch_around_a_hold_costs_nothing_since_90_30
+  90.30 T1  NoCoverResets.test_a_pad_touch_no_longer_postpones_a_hold
+
+A14 (unverified; relies on it): A delay starts again when a removal exposes it under a button that is held
+  90.10 T5  MenuAndTransitions.test_stick_guards_come_and_go_and_the_menu_tap_or_hold_behaves
+  90.10 T7  MenuAndTransitions.test_the_accepted_gap_under_the_menu_tap_cover
+  90.15 M1  MenuSecondPressKeys.test_the_fallback_stays_off_the_second_press_layer_and_the_release_is_not_hidden
+  90.33 B4  TheBumpersInTheGuard.test_letting_the_driver_go_with_the_stick_up_pushes_back_into_the_guard
+
+A16 (unverified; relies on it): A delay's clock starts when its layer is added, not at the physical press
+  90.10 D5  Steering.test_the_stick_double_tap
+  90.25 T1  TapCoverResets.test_a_normal_touch_never_fires_the_reset
+  90.25 M1  ChordedMenu.test_a_chorded_tap_types_the_key_once
+  90.25 M2  ChordedMenu.test_holding_both_menu_buttons_enters_menu_keys
+  90.25 M5  ChordedMenu.test_the_hold_also_works_once_the_fn_layer_is_up
+  90.26 H1  Holds.test_every_single_button_hold_lands_at_200_ms
+  90.26 H2  Holds.test_modifier_2_and_menu_keys_take_200_ms_from_the_second_button
+  90.26 H3  Holds.test_the_steering_modifiers_take_200_ms
+  90.27 B1  Pads.test_a_touch_gives_no_bump_and_the_right_pads_entry_point_comes_at_once
+  90.28 M2  EveryPress.test_a_hold_enters_menu_keys_on_a_later_press_too
+  90.29 Q2  Beeps.test_menu_keys_beeps_and_pulses_coming_on_and_beeps_going_off
+  90.30 T1  NoCoverResets.test_a_pad_touch_no_longer_postpones_a_hold
+  90.30 T2  NoCoverResets.test_the_tap_covers_still_come_at_150_ms_and_a_short_touch_still_opens_the_window
+  90.7 S1  SlimSteeringOverlays.test_a_face_button_inside_the_stick_window
+
+A18 (unverified (the author's hypothesis); works either way): A `remove_layer` call makes Steam re-evaluate held inputs
+  No rule and no scenario rests on it
+
+A24 (reported by the author; works either way): Adding or removing another layer while a layer with an Always On action is active caused crashes
+  Rules: R140, R146, R147, R148, R149
+
+A26 (unverified. a 2022 community report says sticks inherit only from the top layer and the action set; relies on it): Stick inputs inherit through the middle of the stack like any other input
+  Rules: R140
+
+A27 (reported; relies on it): An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known
+  Rules: R133, R135
+  90.10 T6  MenuAndTransitions.test_a_stick_touch_clears_a_stale_guard
+  90.12 C2  CleanupLists.test_a_held_bumper_keeps_modifier_2_through_a_stick_touch
+  90.12 C4  CleanupLists.test_steering_modifier_2_stays_while_one_bumper_is_held
+  90.14 P9  PadClick.test_a_stick_touch_leaves_a_pad_click_that_is_held
+  90.22 G3  Gamepad.test_a_menu_button_held_plus_a_stick_click_leaves_it
+  90.23 C2  StickTouches.test_a_touch_under_a_held_menu_button_moves_no_layer
+  90.23 C3  StickTouches.test_a_stick_touch_clears_a_stale_cover_over_a_pad_layer
+  90.24 K2  RequiredCleanups.test_a_stick_touch_does_nothing_while_the_layers_button_is_held
+  90.25 K5  MenuKeys.test_a_stick_out_plus_a_button_leaves_and_the_press_counts_as_bases
+  90.25 K6  MenuKeys.test_a_menu_button_plus_a_stick_click_clears
+
+A31 (unverified; works either way): A repeating activator keeps its schedule when another layer is removed
+  Rules: R114
+
+A32 (unverified; run both ways): When two separate activators on one input are due at the same moment, their order is not fixed. Inside one activator the array still runs bottom to top
+  Temp cursor gyro TC6  TempCursorGyro.test_a_cancel_input_and_a_thumb_lift_together_at_200_ms
+
+A33 (reported; relies on it): Steam loads an exported VDF as written: the same layers, groups and bindings as the JSON it was made from
+  Rules: R151
+
+A34 (unverified; relies on it): A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held
+  No rule and no scenario rests on it
+
+A35 (unverified; works either way): Hold to Repeat with no stated rate repeats at one fixed default interval
+  Temp cursor gyro TC4  TempCursorGyro.test_a_cancel_input_puts_the_tap_cover_on_for_the_rest_of_the_hold
+
+A36 (unverified; relies on it): A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it
+  90.10 D4  Steering.test_stick_first_then_the_driver_is_a_modifier
+  90.21 C4  CursorGyro.test_both_sticks_out_remove_only_the_layer
+  90.24 K5  RequiredCleanups.test_the_other_driver_still_adds_the_modifier_2_layer_and_ends_a_stuck_driver_layer
+  90.28 M1  EveryPress.test_every_tap_in_one_hold_types_the_key
+  90.28 M2  EveryPress.test_a_hold_enters_menu_keys_on_a_later_press_too
+  90.28 M3  EveryPress.test_a_double_tap_and_hold_holds_the_key_on_a_later_press_too
+  90.28 M4  EveryPress.test_the_fn_layer_types_nothing_as_it_lands
+  90.28 M5  EveryPress.test_a_thumb_lift_brings_the_fn_layer_and_the_chain_still_runs
+  90.29 Q2  Beeps.test_menu_keys_beeps_and_pulses_coming_on_and_beeps_going_off
+  90.33 G3  TheStickBringsItIn.test_whichever_comes_first_decides_the_stick_or_the_driver
+  90.33 B1  TheBumpersInTheGuard.test_with_the_stick_out_a_bumper_is_its_gyro_modifier_and_w_carries_on
+  90.33 B2  TheBumpersInTheGuard.test_the_stick_held_sideways_also_makes_a_bumper_a_modifier
+  90.33 C1  TheGuardsCleanup.test_a_fresh_stick_touch_at_centre_removes_the_guard_and_one_with_the_stick_out_does_not
+  90.34 E3  OpenEdges.test_the_guard_can_land_over_a_ramp_stage_and_everything_unwinds
+  90.35 S3  TheSwap.test_a_fresh_stick_touch_at_centre_hands_back_too
+
+A37 (unverified; works either way): When the layer that answers a held input changes and the new binding sends the same key, the key stays down with no release in between
+  90.10 T10  MenuAndTransitions.test_a_mouse_button_fires_through_a_window
+  90.10 D6  Steering.test_w_carries_on_through_the_window_and_after_it
+
+A38 (unverified; relies on it): A stick group that doesn't state `edge_binding_invert` has a normal edge. It doesn't take the inverted setting of the group it replaces in a lower layer
+  Rules: R111
+  Temp cursor gyro TC8  TempCursorGyro.test_one_stick_keeps_the_cursor_and_both_remove_it
+  Temp cursor gyro TC9  TempCursorGyro.test_a_lost_modifier_clears_with_its_overlays
+
+A39 (unverified. a web search on 2026-10-02 found no report either way; the community steam input wiki lists the interruptible setting only for regular; works either way): An active Soft Press that is not interruptible suppresses an interruptible Soft Press on the same input
+  No rule and no scenario rests on it
+
+A40 (unverified. the layout used soft presses on stick edges only; relies on it): A Soft Press on a pad's outer ring reads the thumb's distance from the centre, on the scale of the D-pad deadzone and the outer ring radius (0 to 32767). An inverted one is active inside its threshold, and it fires reliably on a D-pad-mode pad
+  90.14 P1  PadClick.test_a_centre_click_is_the_middle_click
+  90.14 P2  PadClick.test_an_outer_click_is_the_d_pad_button
+  90.14 P3  PadClick.test_the_left_pad_has_the_same_two_layers
+  90.14 P5  PadClick.test_the_overlap_of_the_two_ranges_sends_one_output
+  90.14 P11  PadClick.test_a_click_in_circular_scroll_goes_through_the_entry_point
+  90.14 P12  PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it
+  90.17 S2  SoftPressOnly.test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click
+  90.18 H1  Handoff.test_the_entry_point_is_gone_once_the_chosen_layer_is_on
+  90.18 H3  Handoff.test_a_thumb_that_lifts_ends_the_entry_point
+  90.18 H4  Handoff.test_a_touch_release_seen_before_the_click_lets_go
+  90.25 P8  PadTouch.test_a_click_that_lands_with_the_touch_is_read_all_the_same
+  90.26 P2  Pads.test_the_outer_clicks_reset_fires_once_on_nothing_and_leaves_with_its_layer
+  90.27 B2  Pads.test_the_clicks_come_from_base_with_one_pulse
+
+A41 (unverified. inferred on 2026-10-03; relies on it): A D-pad group that inverts its outer ring and states no radius uses a radius of about 24996 of 32767
+  90.14 P1  PadClick.test_a_centre_click_is_the_middle_click
+  90.14 P2  PadClick.test_an_outer_click_is_the_d_pad_button
+  90.14 P3  PadClick.test_the_left_pad_has_the_same_two_layers
+  90.14 P5  PadClick.test_the_overlap_of_the_two_ranges_sends_one_output
+  90.14 P11  PadClick.test_a_click_in_circular_scroll_goes_through_the_entry_point
+  90.14 P12  PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it
+  90.17 S2  SoftPressOnly.test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click
+  90.18 H1  Handoff.test_the_entry_point_is_gone_once_the_chosen_layer_is_on
+  90.27 B2  Pads.test_the_clicks_come_from_base_with_one_pulse
+
+A42 (unverified. the author expects it ("a hold would behave like a release with a removal") and calls holds unreliable; in 90.13 the same self-hold sat on layers that base's own hold had put on; run both ways): A layer held with `hold_layer` is taken off when the activator that holds it is no longer active, also when `add_layer` put the layer on first and the layer holds itself
+  90.19 K1  Holds.test_an_ordinary_click_comes_and_goes_whether_or_not_the_hold_works
+  90.19 K2  Holds.test_a_press_inside_a_final_layer_is_held_by_the_layer_and_ends_with_it
+  90.19 K3  Holds.test_the_thumb_lifting_and_a_missed_release_still_clear_a_final_layer
+  90.20 B1  OneAdd.test_a_held_click_adds_the_entry_point_once_and_bumps_once
+
+A43 (unverified; relies on it): On a button with an interruptible Regular Press, a Double Press and a Long Press: a tap sends the Regular Press once, after the Double Press time; a hold sends only the Long Press; a second press inside the Double Press time sends only the Double Press, for as long as it is held
+  Rules: R108, R168
+  90.22 G2  Gamepad.test_a_tap_a_double_press_and_a_hold_on_start_and_select
+  90.22 G4  Gamepad.test_a_quick_press_and_click_leaves_and_sends_no_start
+
+A44 (unverified; relies on it): Long Press and Double Press behave in a layer that no other layer is added over. This is the limit of A20
+  Rules: R108, R168
+  90.22 G2  Gamepad.test_a_tap_a_double_press_and_a_hold_on_start_and_select
+
+A45 (unverified; relies on it): A chord reads a button as held while that button carries Long Press and Double Press activators
+  Rules: R158
+  90.22 G3  Gamepad.test_a_menu_button_held_plus_a_stick_click_leaves_it
+  90.22 G4  Gamepad.test_a_quick_press_and_click_leaves_and_sends_no_start
+  90.22 G5  Gamepad.test_letting_go_of_the_menu_button_before_the_click_types_one_key
+
+A46 (unverified. the right pad's double tap window has read its ring on a touch since 90.6; works either way): A Soft Press on a pad's outer ring is read on a touch alone, with no click, when the pad's D-pad group doesn't require a click
+  No rule and no scenario rests on it
+
+A47 (reported by the author; works either way): A pad in directional swipe mode gives no touch Release
+  No rule and no scenario rests on it
+
+A48 (reported by the author; works either way): On a normal touch the right pad's Tap Cover reset fires once, as `RTP: Entry Point` lands on the thumb (A6), and not again: the Tap Cover lands at 150 ms and takes the touch over before the first repeat at 200 ms. That one removal leaves the trackball glide alone
+  No rule and no scenario rests on it
+
+A49 (unverified; relies on it): A layer command's two flags are the on-screen name and then the beep: `add_layer <layer> 0 1` beeps and shows no name
+  Rules: R161
+  90.29 Q1  Beeps.test_the_fn_hold_beeps_and_a_tap_does_not
+  90.29 Q2  Beeps.test_menu_keys_beeps_and_pulses_coming_on_and_beeps_going_off
+  90.33 L1  LeavingFromTheGuard.test_the_quick_tap_of_both_bumpers_clears_to_base_with_gyro_on_or_off
+  90.35 S5  TheSwap.test_the_quick_tap_from_the_guard_beeps_on_the_guard
+
+A50 (unverified. the author's july layout states a radius only in base and the fn layers; relies on it): A stick group that states no outer ring radius uses Steam's default, near the rim. It doesn't take the radius of the group it replaces in a lower layer
+  No rule and no scenario rests on it
+
+A51 (reported by the author; relies on it): A D-pad group's `layout` 0 is "Radial Without Overlap": a diagonal presses only the nearest direction. `layout` 1 is "Radial With Overlap", which a group that states none also gets. A layer's group does not change the layout of a four-way group under it
+  No rule and no scenario rests on it
