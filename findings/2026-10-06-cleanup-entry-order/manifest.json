@@ -1,0 +1,20 @@
+{
+  "default": {
+    "source_sha256": "2489201cdf3e1641fcf2f1fb7ff24ee19e45889b7f38e47b19fa9a3d300fee95",
+    "fallback_swap_generator_sha256": "ebc5712a29446e093acc95b6eeb96d6e6946270a389ae3b0d5ef56dac56e55b0",
+    "candidate_sha256": "a4e4200d8f9c3306f64acee5e519ba8f461bf67f9c2f3bc3fb07967b17ce71fc",
+    "inputs_given_a_cleanup": 186,
+    "total_layer_count": 88,
+    "resolved_references": 4554,
+    "device_status": "UNTESTED"
+  },
+  "alternative": {
+    "source_sha256": "087fbbdf230f99139626b65e790b9a3b5021c55bb0122d0cad2fcd5813b2dbe3",
+    "fallback_swap_generator_sha256": "ebc5712a29446e093acc95b6eeb96d6e6946270a389ae3b0d5ef56dac56e55b0",
+    "candidate_sha256": "6e4c98527ada8397351282c3018750f5a3ac1352fb119d9bdf0537096b1f7798",
+    "inputs_given_a_cleanup": 208,
+    "total_layer_count": 88,
+    "resolved_references": 4624,
+    "device_status": "UNTESTED"
+  }
+}
