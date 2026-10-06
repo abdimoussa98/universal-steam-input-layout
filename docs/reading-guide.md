@@ -31,6 +31,7 @@ Sections of Steam Input JSON Structure worth knowing by name:
 | [R1 and L1&R1 tap-cover findings](../findings/2026-09-27-r1-tap-cover/FINDINGS.md) | The tap covers |
 | [Stuck RTP entry layer blocking right-stick ramp-up](../findings/2026-09-27-rtp-entry-ramp-up/FINDINGS.md) | The stuck entry layer |
 | [Delayed-apply reset coverage audit](../findings/2026-09-28-delayed-apply-reset-audit/AUDIT.md) | Every delayed apply in both Neptune layouts, intentional exclusions, and proposed extensions within the three-command limit |
+| [Delays, and what interrupts them](../findings/2026-10-06-delay-interruptions/README.md) | Every start delay of 90.36 with what can interrupt it: its own input or another, removing its layer, landing its target, covering it or restarting it, and the version each came in |
 | [Guarded recovery repeat convention](../findings/2026-09-28-repeating-recovery/CHANGES.md) | The separate change enabling Hold to Repeat on every guarded recovery removal |
 | [Selected LS-edge recovery](../findings/2026-09-28-left-stick-recovery/CHANGES.md) | Fourteen recovery layers, seven timed-window blocks, and the approved Transition Set cleanup depth in both layouts |
 | [Complete Neptune cleanup audit](../findings/2026-09-28-neptune-cleanup-audit/AUDIT.md) and [per-layer blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md) | Every cleanup and every block, per layer |
