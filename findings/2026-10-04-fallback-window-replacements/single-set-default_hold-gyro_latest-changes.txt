@@ -1,0 +1,18 @@
+Changes from single-set-default_hold-gyro_90.31.json to single-set-default_hold-gyro_latest.json
+Layers: 90 -> 90 (added: none; removed: none)
+
+== Steering | LS: Fallback Window
+  switch/right_bumper: binding
+    before: Full_Press(haptic_intensity=0): remove_layer Steering | LS: Fallback Window
+    after:  Full_Press: mouse_wheel SCROLL_UP
+  switch/left_bumper: binding
+    before: Full_Press(haptic_intensity=0): remove_layer Steering | LS: Fallback Window
+    after:  Full_Press: mouse_wheel SCROLL_DOWN
+  switch/button_escape: binding
+    before: Full_Press(haptic_intensity=0): remove_layer Steering | LS: Fallback Window
+    after:  Full_Press: key_press TAB
+  switch/button_menu: binding
+    before: Full_Press(haptic_intensity=0): remove_layer Steering | LS: Fallback Window
+    after:  Full_Press: key_press ESCAPE
+
+1 layer changed, 4 changes
