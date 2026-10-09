@@ -120,7 +120,16 @@ class Cleanups:
                 if op == "add_layer" and target != t.layer:
                     self.adders[target].add(t.layer)
                     self._adding[target].append(t)
-        self.stateful = {t for t in self.layers if self._is_stateful(t)}
+        self.stateful = set()
+        # A persistent mode may also be restored by another persistent mode
+        # without removing that mode (the additive fallback return, 90.38).
+        # Seed with self-removing entry paths, then follow only proven modes;
+        # a cycle alone must not classify held overlays as persistent.
+        while True:
+            found = {t for t in self.layers if self._is_stateful(t)} - self.stateful
+            if not found:
+                break
+            self.stateful.update(found)
         self._keeper = {}
         self._present, self._above = (stacks._present, stacks._above) if stacks else ({}, {})
 
@@ -135,7 +144,7 @@ class Cleanups:
         """It outlives every binding that adds it, has no Always On action and no Release of its own."""
         adding = self._adding.get(layer)
         return bool(adding) and layer not in self.windows and not self._releases(layer) \
-            and all(("remove_layer", t.layer) in t.ops for t in adding)
+            and all(("remove_layer", t.layer) in t.ops or t.layer in self.stateful for t in adding)
 
     def guard(self, host, source, inp):
         """The buttons whose chord sits beside this input's entries. Stick-deflection conditions are dropped."""

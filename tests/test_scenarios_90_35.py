@@ -68,7 +68,7 @@ class TheSwap(ScenarioCase):
                 self.assertEqual((pad.top, pad.down()), ("Steering | R1: W Key", ["W"]))
 
     @scenario("90.35 S4", rules=("R158",), rests=("A10",))
-    def test_the_guard_has_steerings_menu_buttons_and_right_pad_of_its_own(self):
+    def test_the_guard_has_stateful_menus_and_since_90_38_inherits_bases_pad(self):
         for pad in self.each(start=("Base", "Gyro")):
             pad.enter_steering().push("LS", "up").wait(200).recentre("LS").wait(100)
             self.assertEqual(mode(pad), GUARD)
@@ -79,7 +79,8 @@ class TheSwap(ScenarioCase):
             self.assertEqual(pad.seen("beep"), [("beep", "Transition Set 2")])
         for pad in self.each(start="steering"):
             pad.push("LS", "up").wait(200).touch("RP").wait(400)
-            self.assertTrue(pad.lacks(*PAD_LAYERS))                                      # the pad is just the mouse
+            # Author, 90.38: the old Steering touch block goes; Base's RTP route works here.
+            self.assertTrue(pad.has('RTP: Entry Point', 'RTP: Tap Cover'))
             pad.lift("RP").wait(300)
             self.assertTrue(pad.lacks(*PAD_LAYERS))
             self.assertEqual((mode(pad), pad.down()), (GUARD, ["W"]))

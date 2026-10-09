@@ -15,6 +15,10 @@ Where the knowledge is. `resources/` holds what stays true across releases;
 | [Steam Input JSON Structure](../resources/Steam%20Input%20JSON%20Structure.md) | JSON format, binding execution order, and the sections below |
 | [Neptune Chorded Button Ids](../resources/Neptune%20Chorded%20Button%20Ids.md) | The `chord_button` ID and mask bit of each Deck button. `neptune_chord_ids.json` and `.vdf` are its probe layout |
 
+The [inverted Chorded Press observations](../resources/Steam%20Behaviour%20Assumptions.md#inverted-chorded-press-in-action-layers)
+cover owner/chorded-button differences, activation on layer load, the
+Remove Layer limitation, and timing edge cases for a possible cleanup mechanism.
+
 Sections of Steam Input JSON Structure worth knowing by name:
 
 - [Interrupted delayed layer applies](../resources/Steam%20Input%20JSON%20Structure.md#interrupted-delayed-layer-applies) - including the repeating-removal workaround and the RTP trackball-momentum exception that held until 90.24

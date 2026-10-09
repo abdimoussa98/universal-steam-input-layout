@@ -4,6 +4,12 @@
 author. Read-only: no layout, VDF, version, rule or to-do changed. It reads the
 JSON and the backward chains. Nothing was run on the Deck.
 
+**Later on 2026-10-06:** the author deferred the [test rig](../../plans/2026-10-06-delay-test-layout.md)
+to [todos](../../todos.md#deferred-delay-tests-and-the-menu-entry-issue).
+The [Base menu activator difference](../2026-10-06-menu-base-chords/README.md)
+is now the candidate cause to investigate for the missing menu Fn layer.
+This does not retract the historical delay fault or establish its cause.
+
 The author's question: "audit all of the layers that have delays and the
 interactions with the delayed layer ... was the interruption by a release of
 owner of the delay or by another button ... removing the layer that initiated

@@ -1,0 +1,13 @@
+test_a_cleanup_input_stores_the_regular_press_then_the_guard_then_the_release (tests.test_layout_rules.LayoutRules) ... ok
+test_a_reset_repeats_more_slowly_than_its_delay (tests.test_layout_rules.LayoutRules) ... ok
+test_every_snapshot_holds_both_layouts_under_its_own_version (tests.test_layout_rules.LayoutRules) ... ok
+test_every_value_is_one_the_editor_can_set (tests.test_layout_rules.LayoutRules) ... ok
+test_hold_layer_is_used_only_where_the_register_says (tests.test_layout_rules.LayoutRules) ... ok
+test_layer_titles_are_unique (tests.test_layout_rules.LayoutRules) ... ok
+test_no_binding_switches_action_sets_and_there_is_one_set (tests.test_layout_rules.LayoutRules) ... ok
+test_the_alternative_has_the_defaults_layers_with_l2_and_r2 (tests.test_layout_rules.LayoutRules) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.291s
+
+OK

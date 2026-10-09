@@ -1,0 +1,378 @@
+{
+  "default": {
+    "Gyro | L1: Modifier 0": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "Gyro | R1: Modifier 1": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "Gyro | L1!R1: Modifier 2": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "Gyro | R1!L1: Modifier 2": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "L1: Scroll Down": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "R1: Scroll Up": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "alternative": {
+    "Gyro | L2: Modifier 0": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "Gyro | R2: Modifier 1": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "Gyro | L2!R2: Modifier 2": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "Gyro | R2!L2: Modifier 2": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "L2: Scroll Down": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ],
+    "R2: Scroll Up": [
+      {
+        "providers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action empty_binding, , "
+            }
+          }
+        }
+      },
+      {
+        "providers": [
+          "Base"
+        ],
+        "activators": {
+          "Full_Press": {
+            "bindings": {
+              "binding": "controller_action add_layer 31 0 0, , "
+            },
+            "settings": {
+              "hold_repeats": "1",
+              "haptic_intensity": "0",
+              "interruptable": "0"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

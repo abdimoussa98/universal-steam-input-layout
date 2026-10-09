@@ -226,7 +226,19 @@ R112.
    - a chord handing over to another activator when the chord button is
      released (chords latch)
    - an inverted edge of a D-pad stick adding or removing a layer. One that
-     only sends output is fine
+     only sends output is fine. Since 90.38 the author-requested fallback
+     return has one exact R111 exception; physical behavior remains A54
+
+## 90.38 Steering follow-up
+
+The [90.38 record](../findings/2026-10-08-steering-rtp-and-menu-chords/README.md)
+supersedes these parts of the historical fallback description below:
+Steering up/down enter fallback through near-rim Soft Presses (29031),
+Steering and fallback inherit Base's right pad instead of blocking touch,
+and their menu entries are repeating self-chords. Delayed completion adds
+its target before cleaning RTP helpers; windows retain isolation.
+Fallback's requested inverted driver chord adds Steering without removing
+fallback when that local edge answers. Gyro modifiers can cover that edge.
 
 ## Exceptions
 

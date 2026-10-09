@@ -5,6 +5,12 @@ changed by it. [90.36](../2026-10-06-cleanup-entry-order/README.md) then gave
 every cleanup input one stored order, on the author's word. The author sees "some oddities" with Start, Select and the stick
 touches; this does not find the cause, and says what would.
 
+**Later follow-up:** the [July Base-menu comparison and 90.37 change](../2026-10-06-menu-base-chords/README.md)
+restore July's repeating, uninterruptible self-chords on Base's Start/Select.
+The author now wants that activator difference investigated as the candidate
+cause of the missing Fn layer, with the broader delay tests deferred. The
+cleanup-order experiment below remains part of the history, not a proven cause.
+
 - **Menu Entry Points:** `Menu Left: Entry Point` (Select) and
   `Menu Right: Entry Point` (Start), and their `Stateful |` copies for
   `Steering` and `Cursor Gyro`. Each is on while its button is held.

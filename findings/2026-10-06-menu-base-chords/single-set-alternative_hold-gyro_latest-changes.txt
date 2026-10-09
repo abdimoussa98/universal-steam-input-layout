@@ -1,0 +1,12 @@
+Changes from single-set-alternative_hold-gyro_90.36.json to single-set-alternative_hold-gyro_latest.json
+Layers: 88 -> 88 (added: none; removed: none)
+
+== Base
+  switch/button_escape: binding
+    before: Full_Press(hold_repeats=1): add_layer Menu Right: Entry Point
+    after:  chord(gyro_ratchet_button_mask=16384,hold_repeats=1,interruptable=0): add_layer Menu Right: Entry Point
+  switch/button_menu: binding
+    before: Full_Press(hold_repeats=1): add_layer Menu Left: Entry Point
+    after:  chord(gyro_ratchet_button_mask=4096,hold_repeats=1,interruptable=0): add_layer Menu Left: Entry Point
+
+1 layer changed, 2 changes

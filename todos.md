@@ -17,6 +17,18 @@ its supporting layers separately. This replaces the earlier “stateful set”
 wording. These features use layers throughout; action-set switching is excluded
 because the author reports buggy behavior with Steam action sets.
 
+## Menu chords and Steering fallback follow-up
+
+- [x] Build the [2026-10-07 plan](plans/2026-10-07-menu-chords-and-steering-fallback.md): **90.38**, both variants ([record](findings/2026-10-08-steering-rtp-and-menu-chords/README.md)). Repeating menu entry chords, RTP access in Steering/fallback with window restrictions, delayed targets before RTP cleanup, near-rim `29031` directional Soft Presses with strong feedback, and the inverted repeating fallback edge chord.
+- [ ] On a fresh Deck load, verify the near-rim directional threshold (A53), inverted fallback edge (A54), silent right-pad touch and strong entry bump. Numeric thresholds and physical feedback are not established by the simulator.
+- [ ] Decide whether fallback return must also work through Gyro modifier/cover edge overrides. 90.38 implements the local fallback chord; scenario S2 records that these higher bindings still take precedence. Scenario S3 covers the additive fallback-under-Steering stack.
+
+## Deferred delay tests and the menu entry issue
+
+- [ ] Verify the Base menu self-chords on a fresh Deck load. The [July comparison and 90.37 change](findings/2026-10-06-menu-base-chords/README.md) restore repeating, uninterruptible Start/Select chords in both layouts. This is the current candidate cause/workaround for Fn not appearing while a thumb rests on a stick; causation is unverified. Compare with 90.36 using both menu buttons and both sticks.
+- [ ] Resume the [delay test layout and scenario sheet](plans/2026-10-06-delay-test-layout.md) later. Deferred by the author on 2026-10-06 while the menu activator difference is investigated. Keep the [delay audit](findings/2026-10-06-delay-interruptions/README.md), historical fault, proposed slow/real-speed rigs and scenarios; nothing is built. Existing delay fixes remain.
+- [ ] If gyro still differs on the Deck, identify the active stack and triggering gesture. Base, Gyro and all four Gyro Modifier 0–2 active settings already match July in both variants; the [comparison](findings/2026-10-06-menu-base-chords/README.md#the-active-gyro-masks-and-settings-already-match) records the older gyro mode shifts and current response overlays separately.
+
 ## On the Deck: the unverified assumptions
 
 The Deck is used to settle an assumption, once, and again after a Steam update

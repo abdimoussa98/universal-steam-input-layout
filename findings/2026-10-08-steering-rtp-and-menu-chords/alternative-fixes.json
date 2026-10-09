@@ -1,0 +1,56 @@
+{
+  "rtp_scroll": {
+    "group": "13185",
+    "changed": []
+  },
+  "dead_groups": {
+    "removed_inactive_slots": [],
+    "removed_groups": [
+      "13077",
+      "13365"
+    ],
+    "remaining_groups": 546,
+    "mode_shift_targets": [
+      "1039",
+      "1043"
+    ]
+  },
+  "cover_resets": {
+    "changed": [],
+    "already": [
+      "L2: Scroll Down / edge",
+      "R2: Scroll Up / edge",
+      "Menu Left: Escape / button_menu",
+      "Menu Right: Tab / button_escape",
+      "Menu Left!Right: Enter / button_escape",
+      "Menu Right!Left: Backspace / button_menu"
+    ]
+  },
+  "menu_combo_keys": {
+    "changed": []
+  },
+  "window_pads": {
+    "changed": []
+  },
+  "cleanup_lists": {
+    "changed": [
+      "LST: Double Tap / RTP release: drops RTP: Circular Scroll, RTP: Entry Point, RTP: Tap Cover",
+      "RST: Double Tap / RTP release: drops RTP: Circular Scroll, RTP: Entry Point, RTP: Tap Cover",
+      "Steering | LS Up: Double Tap / RTP release: drops RTP: Circular Scroll, RTP: Tap Cover",
+      "Steering | LS Down: Double Tap / RTP release: drops RTP: Circular Scroll, RTP: Tap Cover"
+    ],
+    "remaining": 0
+  },
+  "window_routes": {
+    "changed": [
+      "L2: Double Tap / left_trigger/click (clear)",
+      "L2: Double Tap / right_trigger/click (clear)",
+      "R2: Double Tap / left_trigger/click (clear)",
+      "R2: Double Tap / right_trigger/click (clear)",
+      "RTP: Double Tap / joystick/dpad_north (clear)",
+      "RTP: Double Tap / joystick/dpad_south (clear)",
+      "RTP: Double Tap / joystick/dpad_east (clear)",
+      "RTP: Double Tap / joystick/dpad_west (clear)"
+    ]
+  }
+}

@@ -451,6 +451,15 @@ last**; this is the only allowed exception to the
 
 #### Complete Delayed Applies on Stick-Touch Release
 
+**90.38 RTP extension (author, 2026-10-08):** Steering permits RTP entry
+outside windows. Its six pending Steering/Stateful applies and their
+existing stick-touch completion entries add the target before cleaning
+non-window RTP helpers. The binding order and affected owners are in the
+[release record](../findings/2026-10-08-steering-rtp-and-menu-chords/README.md#rtp-access-and-timed-completion).
+This does not remove an Always On RTP window after another layer change;
+window isolation and self-first exits still apply.
+
+
 **Rules: R116, R117, R123, R125** (Layer Definition of Done [§5](Layer%20Definition%20of%20Done.md#5-stick-touch-release) and [§6](Layer%20Definition%20of%20Done.md#6-hold-tap-and-double-tap)). This section explains them; the rule text is there.
 
 **Author-confirmed cleanup rule, 2026-09-30:** every layer must **explicitly**

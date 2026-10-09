@@ -153,26 +153,6 @@
       "rule": "R139",
       "scope": {
         "layers": [
-          "Menu Left: Escape",
-          "Menu Right: Tab",
-          "Stateful | Menu Left: Fn Layer",
-          "Stateful | Menu Right: Fn Layer",
-          "Menu Buttons: Left Stick Guard",
-          "Menu Buttons: Right Stick Guard"
-        ],
-        "inputs": [
-          "right_trackpad/touch"
-        ]
-      },
-      "status": "allow",
-      "why": "Unchanged since 90.13 and read because Base changed in 90.14. A right-pad touch adds RTP: Entry Point from Base and does nothing in Steering, which clears it on purpose. Since 90.28 the two Fn layers here are the Stateful copies, which sit over Steering or Cursor Gyro; the plain Fn layers are only ever over Base's Entry Point and no longer vary.",
-      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author. The Fn layers swapped for their Stateful copies by Claude for the 90.28 build, 2026-10-04",
-      "todo": null
-    },
-    {
-      "rule": "R139",
-      "scope": {
-        "layers": [
           "Menu Buttons: Left Stick Guard",
           "Menu Buttons: Right Stick Guard"
         ],
@@ -353,22 +333,6 @@
       "status": "allow",
       "why": "The author, describing the layer: from it 'you're not able to even go into the mods'; it only puts the arrow keys on the D-pad and Enter, Escape, Backspace and Tab on the face buttons.",
       "decided": "Author, 2026-10-03; in plans/2026-10-04-pad-bumps-and-menu-layer.md, which the author told me to build on 2026-10-04",
-      "todo": null
-    },
-    {
-      "rule": "R139",
-      "scope": {
-        "layers": [
-          "Stateful | Menu Left: Entry Point",
-          "Stateful | Menu Right: Entry Point"
-        ],
-        "inputs": [
-          "right_trackpad/touch"
-        ]
-      },
-      "status": "allow",
-      "why": "Since 90.21 Steering's two Entry Points serve every stateful layer and are named Stateful. They follow the layer they are on: over Cursor Gyro a right-pad touch adds RTP: Entry Point from Base, as it does under Base's own Entry Points; over Steering it does nothing, because Steering clears that touch on purpose.",
-      "decided": "Claude, reading the Flow audit for the 90.21 build, 2026-10-03; not yet confirmed by the author",
       "todo": null
     },
     {
@@ -670,6 +634,59 @@
       "status": "allow",
       "why": "New in 90.25. The window leaves the left stick's directions open, as the two menu windows it copies do. Under it they are the Fn layer's punctuation keys, or Base's WASD once the first menu button is let go: keys only, no layer command (R140).",
       "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "add_layer",
+            "Steering"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331648",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        }
+      },
+      "status": "allow",
+      "why": "90.38: the author explicitly requested an inverted repeating fallback left-edge chord on either driver that adds Steering. Only this exact command and per-variant settings qualify; the prior ban remains everywhere else. Physical inward-edge behavior remains unverified.",
+      "decided": "Author request 2026-10-07, implementation authorized 2026-10-08",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Steering"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "90.38 additive fallback return: Steering normally inherits Base's empty WASD slot. When the requested fallback edge adds Steering without removing fallback, it inherits that same silent driver-conditioned repeat adding already-active Steering. A3 makes the re-add idempotent; the inverted edge does not run at the rim. No output is displaced except Base's empty placeholder. Preserve this intentional inheritance and review the additive stack in the release scenarios.",
+      "decided": "Codex review of author-requested additive fallback edge, 2026-10-08",
       "todo": null
     }
   ]

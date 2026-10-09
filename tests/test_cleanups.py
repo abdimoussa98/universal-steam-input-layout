@@ -73,6 +73,19 @@ class ReadingTests(unittest.TestCase):
         expected = set().union(*chains.below("P")) | set(chains.above("P")) | {"P"}
         self.assertEqual(Cleanups(layout).present("P"), expected - {"Base"})
 
+    def test_a_persistent_mode_can_restore_another_mode_without_removing_itself(self):
+        data = owner(extra={
+            'T': {'switch': (SW, {'button_y': release(remove('T'), add('Mode'))})},
+            'Mode': {'switch': (SW, {'button_a': press(add('Fallback'), remove('Mode'))})},
+            'Fallback': {'switch': (SW, {'button_b': press(add('Mode'))})}})
+        c = Cleanups(Layout(data))
+        self.assertEqual(c.stateful, {'Mode', 'Fallback'})
+
+    def test_an_additive_cycle_without_a_persistent_entry_does_not_create_modes(self):
+        data = owner(extra={'A': {'switch': (SW, {'button_a': press(add('B'))})},
+                            'B': {'switch': (SW, {'button_b': press(add('A'))})}})
+        self.assertFalse({'A', 'B'} & Cleanups(Layout(data)).stateful)
+
 
 class ScopeTests(unittest.TestCase):
     def test_a_clean_layout_has_no_findings(self):

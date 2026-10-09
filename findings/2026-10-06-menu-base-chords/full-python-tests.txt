@@ -1,0 +1,1010 @@
+Running all 83 active test modules
+test_all_activation_types_share_the_budget (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_an_exception_allows_them_on_the_named_layers_and_inputs_only (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_cli_pass_fail_and_parse_error_exit_codes (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_cli_prints_the_rule_id_next_to_each_finding (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_disabled_bank_is_reported_separately (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_inactive_and_unreferenced_groups_are_scanned (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_last_entry_delay_reset_may_be_a_fourth_entry (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_layer_command_on_an_inverted_dpad_stick_edge_fails (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_long_and_double_press_are_banned_in_every_bank (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_malformed_and_duplicate_data_are_rejected (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_plain_inactive_slots_are_counted (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_seven_entries_under_two_activation_types_fail (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_subcommands_do_not_consume_command_entries (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_the_register_holds_one_such_exception (tests.test_audit_command_budget.CommandBudgetTests) ... ok
+test_a_stack_with_only_a_layer_command_adds_no_keybind (tests.test_audit_inheritance.BlocksNeededTests) ... ok
+test_always_on_layers_are_audited_from_derived_stacks_without_config (tests.test_audit_inheritance.BlocksNeededTests) ... ok
+test_varying_underlying_binds_must_be_cleared (tests.test_audit_inheritance.BlocksNeededTests) ... ok
+test_a_declared_stack_says_so (tests.test_audit_inheritance.ChainStackTests) ... ok
+test_a_route_through_a_bystander_names_it (tests.test_audit_inheritance.ChainStackTests) ... ok
+test_a_window_no_stack_reaches_is_not_checked_and_fails (tests.test_audit_inheritance.ChainStackTests) ... ok
+test_chains_check_a_window_three_inputs_deep_with_no_depth (tests.test_audit_inheritance.ChainStackTests) ... ok
+test_each_route_carries_the_reason_for_its_stack (tests.test_audit_inheritance.ChainStackTests) ... ok
+test_an_unreached_window_is_reported_and_fails (tests.test_audit_inheritance.CliTests) ... ok
+test_chains_are_the_default_and_print_the_reason (tests.test_audit_inheritance.CliTests) ... ok
+test_exit_codes (tests.test_audit_inheritance.CliTests) ... ok
+test_the_working_layout_passes_on_chains_alone (tests.test_audit_inheritance.CliTests) ... ok
+test_alternative_titles_map_l1_r1_to_l2_r2 (tests.test_audit_inheritance.ConfigTests) ... ok
+test_unknown_layer_in_a_stack_is_an_error (tests.test_audit_inheritance.ConfigTests) ... ok
+test_lists_adds_with_removals_that_run_first (tests.test_audit_inheritance.EntriesTests) ... ok
+test_a_steering_window_is_checked_with_no_config (tests.test_audit_inheritance.NeptuneLayoutTests) ... ok
+test_every_window_is_checked_on_chain_stacks (tests.test_audit_inheritance.NeptuneLayoutTests) ... ok
+test_removing_a_window_block_is_caught (tests.test_audit_inheritance.NeptuneLayoutTests) ... ok
+test_the_window_audit_stays_faster_than_the_old_search (tests.test_audit_inheritance.NeptuneLayoutTests) ... ok
+test_working_layouts_have_no_undecided_routes (tests.test_audit_inheritance.NeptuneLayoutTests) ... ok
+test_a_different_source_mode_above_the_definer_blocks_inheritance (tests.test_audit_inheritance.RouteTests) ... ok
+test_clear_and_replace_block_the_whole_input (tests.test_audit_inheritance.RouteTests) ... ok
+test_decision_without_reason_or_bad_status_is_rejected (tests.test_audit_inheritance.RouteTests) ... ok
+test_decisions_allow_or_defer_routes_and_stale_ones_are_reported (tests.test_audit_inheritance.RouteTests) ... ok
+test_disabled_source_blocks_in_the_target_or_below_it (tests.test_audit_inheritance.RouteTests) ... ok
+test_each_stack_is_checked_and_routes_record_their_stack (tests.test_audit_inheritance.RouteTests) ... ok
+test_empty_activators_are_not_a_block (tests.test_audit_inheritance.RouteTests) ... ok
+test_inherited_layer_command_is_an_open_route (tests.test_audit_inheritance.RouteTests) ... ok
+test_mode_shift_to_a_group_with_layer_commands_is_a_route (tests.test_audit_inheritance.RouteTests) ... ok
+test_plain_output_is_not_a_route (tests.test_audit_inheritance.RouteTests) ... ok
+test_topmost_lower_definer_wins (tests.test_audit_inheritance.RouteTests) ... ok
+test_disabled_sources_and_traced_routes_are_not_repeated (tests.test_audit_inheritance.UntracedTests) ... ok
+test_layer_command_inputs_elsewhere_are_called_out (tests.test_audit_inheritance.UntracedTests) ... ok
+test_each_pad_click_adds_the_entry_point_once_with_the_bump_and_no_repeat (tests.test_base_pad_click_one_add.OneAddTests) ... ok
+test_entry_budget (tests.test_base_pad_click_one_add.OneAddTests) ... ok
+test_only_bases_two_pad_clicks_changed (tests.test_base_pad_click_one_add.OneAddTests) ... ok
+test_a_child_that_stays_on_its_parent_is_above_it (tests.test_chains.AboveTests) ... ok
+test_a_layer_is_above_its_bystanders (tests.test_chains.AboveTests) ... ok
+test_a_layer_that_binds_nothing_can_have_anything_added_over_it (tests.test_chains.AboveTests) ... ok
+test_each_layer_above_comes_with_the_stack_and_its_reason (tests.test_chains.AboveTests) ... ok
+test_a_cover_that_lands_before_the_next_step_is_under_the_layer (tests.test_chains.ArrivalTests) ... ok
+test_a_removal_that_also_adds_is_an_arrival_not_a_settle (tests.test_chains.ArrivalTests) ... ok
+test_an_arrival_that_binds_the_next_input_intercepts_it (tests.test_chains.ArrivalTests) ... ok
+test_arrivals_are_on_by_default (tests.test_chains.ArrivalTests) ... ok
+test_at_most_one_arrival_per_chain (tests.test_chains.ArrivalTests) ... ok
+test_the_reason_names_the_arriving_binding (tests.test_chains.ArrivalTests) ... ok
+test_a_bystander_brings_its_own_parent (tests.test_chains.BystanderTests) ... ok
+test_a_layer_never_reached_has_nothing_below (tests.test_chains.BystanderTests) ... ok
+test_a_layer_that_binds_a_chain_input_is_not_under_the_window (tests.test_chains.BystanderTests) ... ok
+test_a_layer_that_leaves_the_chain_inputs_alone_is_under_the_window (tests.test_chains.BystanderTests) ... ok
+test_a_layer_the_chain_removes_is_not_under_the_window (tests.test_chains.BystanderTests) ... ok
+test_the_reason_names_the_bystander_and_keeps_the_chain (tests.test_chains.BystanderTests) ... ok
+test_a_different_source_mode_on_top_stops_the_step (tests.test_chains.ChainTests) ... ok
+test_a_disabled_source_on_top_stops_the_step (tests.test_chains.ChainTests) ... ok
+test_a_layer_added_by_base_has_base_under_it (tests.test_chains.ChainTests) ... ok
+test_a_loop_ends (tests.test_chains.ChainTests) ... ok
+test_a_parent_that_removes_itself_is_not_under_the_layer (tests.test_chains.ChainTests) ... ok
+test_a_parent_that_stays_is_under_the_layer (tests.test_chains.ChainTests) ... ok
+test_a_step_is_intercepted_by_a_layer_on_top_that_binds_its_input (tests.test_chains.ChainTests) ... ok
+test_every_stack_comes_with_the_bindings_that_built_it (tests.test_chains.ChainTests) ... ok
+test_hold_layer_is_not_followed (tests.test_chains.ChainTests) ... ok
+test_layers_added_earlier_in_the_same_binding_sit_below (tests.test_chains.ChainTests) ... ok
+test_the_reason_is_the_shortest_chain (tests.test_chains.ChainTests) ... ok
+test_two_bindings_that_add_the_layer_give_two_stacks (tests.test_chains.ChainTests) ... ok
+test_a_context_is_a_stack_the_chains_may_start_from (tests.test_chains.FamilyViewTests) ... ok
+test_a_context_layer_may_not_arrive_either (tests.test_chains.FamilyViewTests) ... ok
+test_a_context_layer_that_binds_the_input_intercepts_it (tests.test_chains.FamilyViewTests) ... ok
+test_a_layer_the_chain_added_may_arrive_but_a_base_one_may_not (tests.test_chains.FamilyViewTests) ... ok
+test_added_lists_only_the_stacks_where_the_layer_was_just_added (tests.test_chains.FamilyViewTests) ... ok
+test_an_unknown_context_layer_is_an_error (tests.test_chains.FamilyViewTests) ... ok
+test_stacks_lists_every_stack_visited_including_settled_ones (tests.test_chains.FamilyViewTests) ... ok
+test_a_binding_that_also_adds_a_layer_never_settles (tests.test_chains.SettleTests) ... ok
+test_a_cover_lifted_at_stick_centre_settles (tests.test_chains.SettleTests) ... ok
+test_a_cover_lifted_by_a_release_lets_the_next_step_fire (tests.test_chains.SettleTests) ... ok
+test_a_cover_lifted_by_an_edge_release_settles (tests.test_chains.SettleTests) ... ok
+test_a_recovery_removal_never_settles (tests.test_chains.SettleTests) ... ok
+test_both_the_covered_and_the_lifted_stack_are_kept (tests.test_chains.SettleTests) ... ok
+test_plain_and_cancel_removals_settle_too (tests.test_chains.SettleTests) ... ok
+test_a_changed_binding_is_reported_on_its_layer_and_input (tests.test_changes.DiffTests) ... ok
+test_a_mode_shift_target_is_compared_by_content_not_group_id (tests.test_changes.DiffTests) ... ok
+test_a_setting_or_mode_change_is_reported_on_the_group (tests.test_changes.DiffTests) ... ok
+test_a_shifted_runtime_id_is_not_a_change (tests.test_changes.DiffTests) ... ok
+test_added_and_removed_inputs (tests.test_changes.DiffTests) ... ok
+test_an_activator_setting_counts_as_a_binding_change (tests.test_changes.DiffTests) ... ok
+test_identical_layouts_have_no_changes (tests.test_changes.DiffTests) ... ok
+test_new_and_removed_layers_and_sources (tests.test_changes.DiffTests) ... ok
+test_text_names_the_layer_the_input_and_both_sides (tests.test_changes.DiffTests) ... ok
+test_the_working_layouts_against_their_newest_snapshot (tests.test_changes.ScriptTests) ... ok
+test_two_files_and_out (tests.test_changes.ScriptTests) ... ok
+test_90_12_to_90_13_shows_the_change_nobody_decided (tests.test_changes.SnapshotTests) ... ok
+test_the_newest_snapshot_is_found_by_version_number (tests.test_changes.SnapshotTests) ... ok
+test_121_inputs_move_and_no_bind_changes (tests.test_cleanup_entry_order.CleanupEntryOrderTests) ... ok
+test_90_36_snapshot_is_this_build_entry_for_entry_and_in_the_same_order (tests.test_cleanup_entry_order.CleanupEntryOrderTests) ... ok
+test_every_cleanup_input_is_regular_press_then_guard_then_release (tests.test_cleanup_entry_order.CleanupEntryOrderTests) ... ok
+test_the_menu_entry_points_and_the_scroll_layers_have_the_release_last_on_both_stick_touches (tests.test_cleanup_entry_order.CleanupEntryOrderTests) ... ok
+test_a_guard_mismatch_widens_the_odd_chord (tests.test_cleanups.FixTests) ... ok
+test_a_hidden_cleanup_is_carried_with_one_either_button_chord (tests.test_cleanups.FixTests) ... ok
+test_a_kept_removal_stays (tests.test_cleanups.FixTests) ... ok
+test_a_layer_left_above_is_added (tests.test_cleanups.FixTests) ... ok
+test_a_layer_left_below_is_added (tests.test_cleanups.FixTests) ... ok
+test_a_removal_outside_the_guard_is_dropped (tests.test_cleanups.FixTests) ... ok
+test_a_removal_that_is_never_there_is_dropped_and_the_rest_keep_their_order (tests.test_cleanups.FixTests) ... ok
+test_numeric_ids_are_written_as_numeric_ids (tests.test_cleanups.FixTests) ... ok
+test_the_fix_is_idempotent (tests.test_cleanups.FixTests) ... ok
+test_the_audit_is_clean_after_the_fix (tests.test_cleanups.FixedSnapshotTests) ... ok
+test_a_guard_button_cant_guard_its_own_input (tests.test_cleanups.GuardTests) ... ok
+test_cleanups_of_one_layer_share_their_guard (tests.test_cleanups.GuardTests) ... ok
+test_the_only_findings_outside_the_touchpad_exception_are_the_fallback_hold_landings (tests.test_cleanups.HiddenExitSnapshotTests) ... ok
+test_the_touchpad_pairs_fail_without_the_exception (tests.test_cleanups.HiddenExitSnapshotTests) ... ok
+test_the_working_layouts_have_no_hidden_exit (tests.test_cleanups.HiddenExitSnapshotTests) ... ok
+test_a_covered_side_exit_on_a_changed_layer_fails_until_accepted (tests.test_cleanups.HiddenExitTests) ... ok
+test_a_different_source_mode_covers_the_exit_too (tests.test_cleanups.HiddenExitTests) ... ok
+test_a_landing_that_leaves_the_exit_alone_or_cannot_happen_is_fine (tests.test_cleanups.HiddenExitTests) ... ok
+test_a_layer_that_lands_through_a_lower_layers_binding_is_on_top_too (tests.test_cleanups.HiddenExitTests) ... ok
+test_a_layer_that_removes_the_layer_below_there_is_fine (tests.test_cleanups.HiddenExitTests) ... ok
+test_a_layer_that_takes_the_release_without_removing_the_layer_below (tests.test_cleanups.HiddenExitTests) ... ok
+test_a_mode_block_is_charged_to_the_layer_that_changed_the_mode (tests.test_cleanups.HiddenExitTests) ... ok
+test_a_touchpad_pair_is_a_finding_without_the_exception (tests.test_cleanups.HiddenExitTests) ... ok
+test_an_accepted_exit_that_matches_no_pair_is_stale (tests.test_cleanups.HiddenExitTests) ... ok
+test_an_exception_that_sets_nothing_aside_is_stale (tests.test_cleanups.HiddenExitTests) ... ok
+test_covering_an_exit_that_is_not_on_the_keeper_is_information (tests.test_cleanups.HiddenExitTests) ... ok
+test_the_register_entry_reaches_the_audit (tests.test_cleanups.HiddenExitTests) ... ok
+test_the_touchpad_exception_sets_the_pair_aside (tests.test_cleanups.HiddenExitTests) ... ok
+test_a_cancellation_is_an_accepted_shape (tests.test_cleanups.HiddenTests) ... ok
+test_a_cover_that_binds_a_cleanup_input_with_an_output_hides_the_cleanup (tests.test_cleanups.HiddenTests) ... ok
+test_a_window_on_top_is_an_accepted_shape (tests.test_cleanups.HiddenTests) ... ok
+test_the_layers_own_button_is_an_accepted_shape (tests.test_cleanups.HiddenTests) ... ok
+test_a_cleanup_that_removes_a_layer_that_is_never_there (tests.test_cleanups.NeverThereTests) ... ok
+test_a_decision_that_matches_nothing_is_stale (tests.test_cleanups.NeverThereTests) ... ok
+test_a_deliberate_clear_keeps_its_whole_list (tests.test_cleanups.NeverThereTests) ... ok
+test_a_layer_only_hold_layer_adds_is_left_out (tests.test_cleanups.NeverThereTests) ... ok
+test_a_parent_that_removed_itself_is_never_under_the_layer_it_added (tests.test_cleanups.NeverThereTests) ... ok
+test_a_recorded_decision_keeps_a_removal (tests.test_cleanups.NeverThereTests) ... ok
+test_a_release_follows_the_same_rule (tests.test_cleanups.NeverThereTests) ... ok
+test_the_stick_touch_release_keeps_its_fixed_layers (tests.test_cleanups.NeverThereTests) ... ok
+test_a_cleanup_function_has_a_guard_and_a_list (tests.test_cleanups.ReadingTests) ... ok
+test_a_layer_that_outlives_its_adder_and_has_no_release_is_stateful (tests.test_cleanups.ReadingTests) ... ok
+test_a_window_is_kept_by_its_timer (tests.test_cleanups.ReadingTests) ... ok
+test_the_keeper_is_the_button_whose_release_removes_the_layer (tests.test_cleanups.ReadingTests) ... ok
+test_the_stacks_are_the_backward_chains (tests.test_cleanups.ReadingTests) ... ok
+test_a_clean_layout_has_no_findings (tests.test_cleanups.ScopeTests) ... ok
+test_a_cleanup_never_lists_a_stateful_layer (tests.test_cleanups.ScopeTests) ... ok
+test_a_cleanup_never_lists_a_window (tests.test_cleanups.ScopeTests) ... ok
+test_a_cleanup_that_leaves_the_layer_below_is_left_below (tests.test_cleanups.ScopeTests) ... ok
+test_a_cover_the_owner_added_and_left_is_left_above (tests.test_cleanups.ScopeTests) ... ok
+test_a_layer_above_that_binds_the_input_with_its_own_cleanup_is_not_the_owners (tests.test_cleanups.ScopeTests) ... ok
+test_a_layer_another_button_keeps_is_not_expected_either (tests.test_cleanups.ScopeTests) ... ok
+test_a_layer_another_button_keeps_is_outside_the_guard (tests.test_cleanups.ScopeTests) ... ok
+test_a_layer_that_lives_inside_the_owners_hold_takes_the_owners_keeper (tests.test_cleanups.ScopeTests) ... ok
+test_exit_codes (tests.test_cleanups.ScriptTests) ... ok
+test_json_and_layer_filter (tests.test_cleanups.ScriptTests) ... ok
+test_the_text_names_the_binding_and_the_reason (tests.test_cleanups.ScriptTests) ... ok
+test_the_text_names_the_rule_each_check_enforces (tests.test_cleanups.ScriptTests) ... ok
+test_keepers_of_named_layers (tests.test_cleanups.SnapshotTests) ... ok
+test_modifier_2_hides_the_touch_cleanup (tests.test_cleanups.SnapshotTests) ... ok
+test_only_steering_removes_outside_a_guard (tests.test_cleanups.SnapshotTests) ... ok
+test_only_the_cursor_edges_leave_the_layer_below (tests.test_cleanups.SnapshotTests) ... ok
+test_steering_modifier_2_guards_its_touches_differently (tests.test_cleanups.SnapshotTests) ... ok
+test_the_hold_layer_layers_are_left_out (tests.test_cleanups.SnapshotTests) ... ok
+test_the_stateful_layers_are_gyro_and_steering (tests.test_cleanups.SnapshotTests) ... ok
+test_the_twin_is_never_there (tests.test_cleanups.SnapshotTests) ... ok
+test_the_variants_agree (tests.test_cleanups.SnapshotTests) ... ok
+test_a_context_is_part_of_the_view (tests.test_covers.CoverFixtureTests) ... ok
+test_an_input_from_a_layer_between_the_cover_and_its_owner (tests.test_covers.CoverFixtureTests) ... ok
+test_clean_cover_and_owner_is_the_layer_below (tests.test_covers.CoverFixtureTests) ... ok
+test_cover_that_outlives_its_owner (tests.test_covers.CoverFixtureTests) ... ok
+test_layers_above_the_cover_are_listed (tests.test_covers.CoverFixtureTests) ... ok
+test_owner_above_the_cover (tests.test_covers.CoverFixtureTests) ... ok
+test_both_sticks_out_remove_only_the_layer (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_entry_budget (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_every_entry_point_click_clears_the_layer_and_keeps_gyro (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_it_binds_only_the_gyro_the_menu_buttons_and_the_stick_edges (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_its_menu_presses_add_the_stateful_entry_points_with_a_repeating_press (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_no_other_layer_carries_the_both_sticks_exit (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_nothing_refers_to_the_old_entry_point_titles (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_one_layer_is_new_and_two_are_renamed (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_select_in_the_cross_transition_adds_gyro_and_then_the_layer (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_the_gyro_modifier_2_quick_tap_also_removes_the_layer (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_the_layer_states_the_temp_cursor_response_and_no_gate (tests.test_cursor_gyro.CursorGyroTests) ... ok
+test_alternative_steering_windows_keep_the_mouse_buttons_on_the_bumpers (tests.test_double_tap_windows.DoubleTapWindowTests) ... ok
+test_default_windows_keep_the_mouse_buttons_on_the_trigger_edges (tests.test_double_tap_windows.DoubleTapWindowTests) ... ok
+test_left_pad_swipes_send_keys_without_the_layer_api (tests.test_double_tap_windows.DoubleTapWindowTests) ... ok
+test_right_pad_stays_the_mouse_with_its_click_cleared_and_a_touch_release (tests.test_double_tap_windows.DoubleTapWindowTests) ... ok
+test_rtp_double_tap_keeps_its_touch_selection_and_clears_the_fn_back_buttons (tests.test_double_tap_windows.DoubleTapWindowTests) ... ok
+test_stick_touch_release_removes_the_window_first_then_the_side_trio (tests.test_double_tap_windows.DoubleTapWindowTests) ... ok
+test_cover_findings (tests.test_exceptions.ExpandTests) ... ok
+test_flow_decisions (tests.test_exceptions.ExpandTests) ... ok
+test_kept_removals (tests.test_exceptions.ExpandTests) ... ok
+test_of_selects_by_rule (tests.test_exceptions.ExpandTests) ... ok
+test_review_scopes (tests.test_exceptions.ExpandTests) ... ok
+test_sections_written_the_old_way_are_kept (tests.test_exceptions.ExpandTests) ... ok
+test_the_input_is_not_changed (tests.test_exceptions.ExpandTests) ... ok
+test_window_decisions_join_the_stacks_config (tests.test_exceptions.ExpandTests) ... ok
+test_a_rule_lists_exceptions_exactly_when_the_register_has_one (tests.test_exceptions.RegisterTests) ... ok
+test_every_exception_names_a_rule_in_the_registry (tests.test_exceptions.RegisterTests) ... ok
+test_no_exception_lives_anywhere_else (tests.test_exceptions.RegisterTests) ... ok
+test_the_audits_read_the_register (tests.test_exceptions.RegisterTests) ... ok
+test_a_complete_entry_passes (tests.test_exceptions.ShapeTests) ... ok
+test_a_scope_must_fit_its_rule (tests.test_exceptions.ShapeTests) ... ok
+test_an_entry_needs_every_field (tests.test_exceptions.ShapeTests) ... ok
+test_against_90_30_the_change_is_the_fallback_the_radius_the_guard_and_the_clear_lists (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_in_the_hold_a_driver_or_a_menu_button_leaves_steering_and_repeats (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_leaving_the_window_by_hand_takes_the_hold_except_for_a_driver_or_a_menu_button (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_no_delay_or_repeat_rate_is_over_the_editors_1000_ms (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_no_stick_states_a_radius_the_editor_cannot_set (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_steerings_up_and_down_add_the_hold_and_then_the_window (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_the_90_31_snapshot_is_this_build (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_the_entry_guard_ends_on_any_directions_release (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_the_hold_types_w_and_s_and_its_release_leaves_steering (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_the_holds_cleanup_binds_leave_steering_held_back_while_the_left_stick_is_out (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_the_window_counts_one_second_and_types_w_and_s_with_the_pulse (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_the_window_is_one_new_layer_at_the_end (tests.test_fallback_window.FallbackWindowTests) ... ok
+test_against_90_31_only_the_four_inputs_of_the_window_change (tests.test_fallback_window_replacements.FallbackWindowReplacementsTests) ... ok
+test_in_the_window_the_drivers_scroll_and_the_menu_buttons_type_their_keys (tests.test_fallback_window_replacements.FallbackWindowReplacementsTests) ... ok
+test_only_the_timer_and_the_releases_change_a_layer_in_the_window (tests.test_fallback_window_replacements.FallbackWindowReplacementsTests) ... ok
+test_the_90_32_snapshot_is_this_build (tests.test_fallback_window_replacements.FallbackWindowReplacementsTests) ... ok
+test_the_fallback_hold_is_as_it_was (tests.test_fallback_window_replacements.FallbackWindowReplacementsTests) ... ok
+test_fix_rewrites_a_layout_that_still_has_the_overlays (tests.test_fixes.MenuComboKeyTests) ... ok
+test_overlays_are_gone_and_nothing_references_them (tests.test_fixes.MenuComboKeyTests) ... ok
+test_cli_dry_run_reports_without_writing (tests.test_fixes.PipelineTests) ... ok
+test_pipeline_order (tests.test_fixes.PipelineTests) ... ok
+test_working_layouts_are_a_fixed_point (tests.test_fixes.PipelineTests) ... ok
+test_a_route_found_only_through_a_bystander_is_cleared (tests.test_fixes.WindowRouteTests) ... ok
+test_a_route_three_inputs_deep_is_cleared (tests.test_fixes.WindowRouteTests) ... ok
+test_a_binding_that_varies_between_stacks_does_not_fail (tests.test_flow_inheritance.GateTests) ... ok
+test_a_changed_provider_puts_the_entries_it_feeds_up_for_review (tests.test_flow_inheritance.GateTests) ... ok
+test_a_changed_target_puts_its_own_entries_up_for_review (tests.test_flow_inheritance.GateTests) ... ok
+test_a_context_in_the_rules_is_a_starting_stack (tests.test_flow_inheritance.GateTests) ... ok
+test_a_cover_finding_is_printed_with_its_rule (tests.test_flow_inheritance.GateTests) ... ok
+test_a_cover_finding_still_fails (tests.test_flow_inheritance.GateTests) ... ok
+test_a_layer_only_added_by_hold_layer_is_out_of_scope_not_a_gap (tests.test_flow_inheritance.GateTests) ... ok
+test_a_layer_outside_every_family_still_fails (tests.test_flow_inheritance.GateTests) ... ok
+test_an_accepted_entry_passes (tests.test_flow_inheritance.GateTests) ... ok
+test_an_unchanged_layout_needs_no_review (tests.test_flow_inheritance.GateTests) ... ok
+test_cover_layers_are_accepted_by_the_cover_rule_when_the_register_says_so (tests.test_flow_inheritance.GateTests) ... ok
+test_inventory_lists_what_the_chains_follow (tests.test_flow_inheritance.GateTests) ... ok
+test_the_lower_stacks_come_with_the_bindings_that_built_them (tests.test_flow_inheritance.GateTests) ... ok
+test_the_varying_binding_is_still_shown_for_the_layer (tests.test_flow_inheritance.GateTests) ... ok
+test_disabled_source_stops_the_lookup (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_existing_clear_is_satisfied (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_one_non_base_binding_with_base_fallback_is_review (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_same_binding_from_two_owners_is_one_variant (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_two_different_non_base_bindings_are_reported_as_varying (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_inverted_edge_removal_is_a_center_exit (tests.test_flow_inheritance.InventoryTests) ... ok
+test_layers_only_held_by_legacy_commands_are_listed (tests.test_flow_inheritance.InventoryTests) ... ok
+test_cli_runs_without_out_and_reports_json (tests.test_flow_inheritance.NeptuneFlowTests) ... ok
+test_a_stick_click_with_a_menu_button_held_enters_the_clear (tests.test_gamepad.GamepadTests) ... ok
+test_entry_point_clicks_lead_to_their_transition (tests.test_gamepad.GamepadTests) ... ok
+test_gamepad_is_closed (tests.test_gamepad.GamepadTests) ... ok
+test_gamepad_sends_the_archived_map (tests.test_gamepad.GamepadTests) ... ok
+test_nothing_is_entered_from_a_transition (tests.test_gamepad.GamepadTests) ... ok
+test_only_gamepads_menu_buttons_use_a_long_or_double_press (tests.test_gamepad.GamepadTests) ... ok
+test_only_the_same_side_transition_adds_gamepad (tests.test_gamepad.GamepadTests) ... ok
+test_start_and_select_use_three_native_activators (tests.test_gamepad.GamepadTests) ... ok
+test_the_new_transition_only_differs_from_the_cross_one_in_its_menu_releases (tests.test_gamepad.GamepadTests) ... ok
+test_the_two_layouts_have_the_same_gamepad_and_transitions (tests.test_gamepad.GamepadTests) ... ok
+test_transition_menu_releases_and_their_feedback (tests.test_gamepad.GamepadTests) ... ok
+test_two_layers_are_new_and_the_clear_is_renamed (tests.test_gamepad.GamepadTests) ... ok
+test_what_changed_since_the_last_release (tests.test_gamepad.GamepadTests) ... ok
+test_a_layer_above_that_binds_the_exit_input_intercepts_it (tests.test_layer_report.CleanupTests) ... ok
+test_a_layer_above_that_the_exit_leaves_is_listed (tests.test_layer_report.CleanupTests) ... ok
+test_a_removal_of_a_layer_that_is_never_present_is_listed (tests.test_layer_report.CleanupTests) ... ok
+test_an_exit_lists_what_it_removes_that_is_present (tests.test_layer_report.CleanupTests) ... ok
+test_the_action_set_is_never_listed_as_left_behind (tests.test_layer_report.CleanupTests) ... ok
+test_a_layer_never_reached_is_reported_not_shown_as_empty (tests.test_layer_report.CliTests) ... ok
+test_an_unknown_layer_exits_2 (tests.test_layer_report.CliTests) ... ok
+test_exits_with_the_same_removals_and_lists_are_shown_once (tests.test_layer_report.CliTests) ... ok
+test_json_report (tests.test_layer_report.CliTests) ... ok
+test_layer_references_are_shown_as_titles (tests.test_layer_report.CliTests) ... ok
+test_text_report_has_the_four_sections (tests.test_layer_report.CliTests) ... ok
+test_a_modifier_on_the_default_layout (tests.test_layer_report.NeptuneReportTests) ... ok
+test_a_layer_never_reached_says_so (tests.test_layer_report.ThreeQuestionTests) ... ok
+test_above_lists_every_layer_that_has_it_underneath (tests.test_layer_report.ThreeQuestionTests) ... ok
+test_an_input_the_layer_binds_is_not_inherited (tests.test_layer_report.ThreeQuestionTests) ... ok
+test_an_unknown_layer_is_an_error (tests.test_layer_report.ThreeQuestionTests) ... ok
+test_below_lists_the_layers_under_it_with_a_reason (tests.test_layer_report.ThreeQuestionTests) ... ok
+test_inherited_inputs_name_the_provider_and_its_binding (tests.test_layer_report.ThreeQuestionTests) ... ok
+test_no_unreferenced_groups_or_plain_inactive_slots (tests.test_layout_hygiene.LayoutHygieneTests) ... ok
+test_only_allowed_activation_types_in_any_bank (tests.test_layout_hygiene.LayoutHygieneTests) ... ok
+test_only_second_press_cover_resets_use_a_last_fourth_entry (tests.test_layout_hygiene.LayoutHygieneTests) ... ok
+test_rtp_scroll_repeat_is_a_touch_chorded_delay (tests.test_layout_hygiene.LayoutHygieneTests) ... ok
+test_a_cleanup_input_stores_the_regular_press_then_the_guard_then_the_release (tests.test_layout_rules.LayoutRules) ... ok
+test_a_reset_repeats_more_slowly_than_its_delay (tests.test_layout_rules.LayoutRules) ... ok
+test_every_snapshot_holds_both_layouts_under_its_own_version (tests.test_layout_rules.LayoutRules) ... ok
+test_every_value_is_one_the_editor_can_set (tests.test_layout_rules.LayoutRules) ... ok
+test_hold_layer_is_used_only_where_the_register_says (tests.test_layout_rules.LayoutRules) ... ok
+test_layer_titles_are_unique (tests.test_layout_rules.LayoutRules) ... ok
+test_no_binding_switches_action_sets_and_there_is_one_set (tests.test_layout_rules.LayoutRules) ... ok
+test_the_alternative_has_the_defaults_layers_with_l2_and_r2 (tests.test_layout_rules.LayoutRules) ... ok
+test_gyro_and_all_four_modifiers_match_july_active_settings (tests.test_menu_base_chords.MenuBaseChords) ... ok
+test_working_layouts_are_generated_and_only_base_menu_activators_change (tests.test_menu_base_chords.MenuBaseChords) ... ok
+test_a_windows_right_pad_touch_is_a_release_that_ends_the_window_first (tests.test_menu_chain_and_window_pads.MenuChainAndWindowPadsTests) ... ok
+test_against_90_27_the_change_is_the_menu_family_the_windows_and_the_clear_lists (tests.test_menu_chain_and_window_pads.MenuChainAndWindowPadsTests) ... ok
+test_it_is_the_stick_touches_pattern (tests.test_menu_chain_and_window_pads.MenuChainAndWindowPadsTests) ... ok
+test_the_90_28_snapshot_is_this_build (tests.test_menu_chain_and_window_pads.MenuChainAndWindowPadsTests) ... ok
+test_the_chains_entry_point_comes_from_the_other_buttons_press_only (tests.test_menu_chain_and_window_pads.MenuChainAndWindowPadsTests) ... ok
+test_the_fn_layers_bind_for_the_other_button_adds_the_chains_entry_point (tests.test_menu_chain_and_window_pads.MenuChainAndWindowPadsTests) ... ok
+test_the_left_pad_and_the_clicks_keep_their_known_replacements (tests.test_menu_chain_and_window_pads.MenuChainAndWindowPadsTests) ... ok
+test_the_stateful_entry_points_have_fn_layers_of_their_own_that_type_the_key (tests.test_menu_chain_and_window_pads.MenuChainAndWindowPadsTests) ... ok
+test_two_layers_are_added_at_the_end_and_no_runtime_id_moves (tests.test_menu_chain_and_window_pads.MenuChainAndWindowPadsTests) ... ok
+test_no_menu_layer_leaves_stick_up_or_down_to_steering (tests.test_menu_second_press_keys.MenuSecondPressKeysTests)
+Steering's stick up and down add the Fallback Hold, which answers Start and Select. A layer a menu ... ok
+test_nothing_else_changed (tests.test_menu_second_press_keys.MenuSecondPressKeysTests) ... ok
+test_the_second_press_layers_type_w_and_s (tests.test_menu_second_press_keys.MenuSecondPressKeysTests) ... ok
+test_a_double_tap_scrolls (tests.test_modifier_rocking.RockingTests) ... ok
+test_a_used_bumper_exits_cleanly_without_a_window (tests.test_modifier_rocking.RockingTests) ... ok
+test_inside_200_ms_letting_go_of_either_side_is_the_quick_tap (tests.test_modifier_rocking.RockingTests)
+No combined cover yet: Modifier 2's own release clears every modifier and toggles Gyro. ... ok
+test_rock_back_and_forth_several_times (tests.test_modifier_rocking.RockingTests) ... ok
+test_rock_from_left_to_right_and_back_out_without_a_window (tests.test_modifier_rocking.RockingTests) ... ok
+test_rock_from_right_to_left_and_back_out_without_a_window (tests.test_modifier_rocking.RockingTests) ... ok
+test_the_combined_cover_releases_only_its_side_and_both_orders (tests.test_modifier_rocking.RockingTests)
+The rocking lists. Both Modifier 2 orders stay in them: the cover can sit on either. ... ok
+test_the_cursor_exits_cleanly_without_a_window (tests.test_modifier_rocking.RockingTests) ... ok
+test_the_modifier_2_entry_adds_in_this_exact_order (tests.test_modifier_rocking.RockingTests)
+First side's cover, second modifier, second side's cover, Modifier 2 last. ... ok
+test_a_cover_that_removes_the_lower_layer_there_is_fine (tests.test_native.EngineTests) ... ok
+test_a_mode_block_and_a_disabled_source_are_charged_like_the_reference (tests.test_native.EngineTests) ... ok
+test_a_pair_has_its_smallest_stack_its_path_and_its_cost (tests.test_native.EngineTests) ... ok
+test_extra_presses_reach_a_cover_two_landings_away (tests.test_native.EngineTests) ... ok
+test_past_the_paths_limit_the_stack_and_path_come_from_a_second_run (tests.test_native.EngineTests) ... ok
+test_the_audit_reads_five_extra_presses_unless_told (tests.test_native.EngineTests) ... ok
+test_the_command_line (tests.test_native.EngineTests) ... ok
+test_the_memory_limit_stops_it_unsettled (tests.test_native.EngineTests) ... ok
+test_without_a_compiler_the_audit_stops_with_a_message (tests.test_native.EngineTests) ... ok
+test_every_path_replays_in_python (tests.test_native.SnapshotTests) ... ok
+test_it_finds_the_tap_cover_over_a_pad_layer (tests.test_native.SnapshotTests)
+The gap that started this: the chain check with one extra press tested one stack per pair and missed it. ... ok
+test_keeping_paths_and_small_batches_change_nothing_else (tests.test_native.SnapshotTests)
+The waiting states of a cost are taken up in batches; a batch must not pick up what the cost just added. ... ok
+test_the_result_does_not_depend_on_the_threads (tests.test_native.SnapshotTests) ... ok
+test_the_same_stacks_and_pairs_as_the_chains (tests.test_native.SnapshotTests) ... ok
+test_combined_release_removes_only_its_side_and_preserves_the_other (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_cursor_edges_preserve_one_stick_hold_and_repeat_self_removal_for_two (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_cursor_profile_preserves_sensitivity_and_owner_activation (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_delayed_cursor_reset_is_scoped_and_replaced_by_upper_inputs (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_normal_covers_inherit_gyro_without_any_source_override (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_only_primary_delay_and_touch_completion_enter_cursor (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_opposite_modifier_transitions_repeat_and_preserve_branch_and_execution_order (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_output_and_cover_chords_are_separate_uninterruptible_entries (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_overlays_retire_primary_timers_but_only_normal_covers_replace_touches (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_override_inputs_keep_applying_normal_cover (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_rtp_timer_replaces_inherited_cancellation_and_repeating_cover_inputs (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_base_and_ramp_tuning_match_reference_without_replacing_modifier_edges (tests.test_neptune_gyro.NeptuneGyroTests) ... ok
+test_gyro_sources_only_override_owned_properties_or_explicitly_disable (tests.test_neptune_gyro.NeptuneGyroTests) ... ok
+test_base_entries_repeat_so_exposure_after_a_removal_is_guaranteed (tests.test_neptune_held_inputs.NeptuneHeldInputTests) ... ok
+test_gyro_off_ramp_up_firing_controls_remove_it_with_repeat (tests.test_neptune_held_inputs.NeptuneHeldInputTests) ... ok
+test_held_input_guard_catches_known_regressions (tests.test_neptune_held_inputs.NeptuneHeldInputTests) ... ok
+test_layers_added_over_a_held_input_repeat_their_next_add (tests.test_neptune_held_inputs.NeptuneHeldInputTests) ... ok
+test_menu_entry_early_chord_only_adds_fn_and_fn_types_the_key (tests.test_neptune_held_inputs.NeptuneHeldInputTests) ... ok
+test_no_held_input_violations_remain (tests.test_neptune_held_inputs.NeptuneHeldInputTests) ... ok
+test_ramp_handoffs_keep_their_start_delays (tests.test_neptune_held_inputs.NeptuneHeldInputTests) ... ok
+test_threshold_exits_that_change_layers_repeat (tests.test_neptune_held_inputs.NeptuneHeldInputTests) ... ok
+test_all_guarded_removals_repeat_and_rtp_stays_out_of_ls_scope (tests.test_neptune_recovery.NeptuneRecoveryTests) ... ok
+test_command_budget_and_runtime_reference_order (tests.test_neptune_recovery.NeptuneRecoveryTests) ... ok
+test_selected_edges_have_expected_guards_scope_and_outer_geometry (tests.test_neptune_recovery.NeptuneRecoveryTests) ... ok
+test_timed_windows_block_both_edges_and_preserve_ordered_boundaries (tests.test_neptune_recovery.NeptuneRecoveryTests) ... ok
+test_transitions_have_a_cleanup_on_the_stick_edges_and_touches_and_the_release_only_clears_the_trio (tests.test_neptune_recovery.NeptuneRecoveryTests) ... ok
+test_against_90_26_only_the_pad_layers_and_the_clear_lists_change (tests.test_pad_bump_removal.PadBumpRemovalTests) ... ok
+test_base_has_the_clicks_the_swipes_and_the_touch_of_90_24 (tests.test_pad_bump_removal.PadBumpRemovalTests) ... ok
+test_no_other_layer_has_a_copy_of_the_click (tests.test_pad_bump_removal.PadBumpRemovalTests) ... ok
+test_the_90_27_snapshot_is_this_build (tests.test_pad_bump_removal.PadBumpRemovalTests) ... ok
+test_the_pads_are_those_of_90_24_but_for_three_later_changes (tests.test_pad_bump_removal.PadBumpRemovalTests) ... ok
+test_the_three_layers_are_gone_and_the_others_keep_their_order (tests.test_pad_bump_removal.PadBumpRemovalTests) ... ok
+test_what_stays_from_90_25_and_90_26 (tests.test_pad_bump_removal.PadBumpRemovalTests) ... ok
+test_a_touch_adds_the_handover_layer_which_reads_the_ring_once (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_bases_left_pad_is_a_dpad_and_the_swipes_are_in_the_entry_point (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_bases_right_pad_stays_a_mouse_and_the_click_moves_to_the_entry_point (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_menu_keys_closes_the_modifiers_the_menu_buttons_and_the_stick_touches (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_menu_keys_has_the_two_stick_exits (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_menu_keys_is_stateful_and_the_two_windows_are_always_on (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_menu_keys_types_the_arrows_and_the_four_keys (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_no_double_tap_window_can_land_on_menu_keys_but_the_right_pads (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests)
+A window there must clear the face buttons and the D-pad on every stack (R140). Only RTP: Double Tap, ... ok
+test_only_the_plain_entry_points_add_the_chorded_entry_point (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_the_90_25_snapshot_is_this_build (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_the_chorded_entry_point_is_the_menu_chains_parent_for_the_second_button (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_the_middle_click_pad_is_a_mouse_with_its_click_unchanged (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_the_second_press_layer_and_its_cover_hold_the_key (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_the_three_entry_points_reset_their_delayed_tap_cover (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_the_window_types_the_key_and_carries_the_first_buttons_release (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_the_windows_still_read_the_swipe_keys (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_twelve_layers_are_added_at_the_end_and_no_runtime_id_moves (tests.test_pad_bumps_and_menu_keys.PadBumpsAndMenuKeysTests) ... ok
+test_base_adds_the_entry_point_once_with_the_bump_and_then_repeats_silently (tests.test_pad_click_exits.PadClickExitsTests) ... ok
+test_both_soft_presses_are_uninterruptible_and_only_the_outer_one_is_delayed (tests.test_pad_click_exits.PadClickExitsTests) ... ok
+test_entry_budget (tests.test_pad_click_exits.PadClickExitsTests) ... ok
+test_every_pad_click_layer_has_three_exits (tests.test_pad_click_exits.PadClickExitsTests) ... ok
+test_no_hold_layer_came_back (tests.test_pad_click_exits.PadClickExitsTests) ... ok
+test_only_base_and_the_six_pad_click_layers_changed (tests.test_pad_click_exits.PadClickExitsTests) ... ok
+test_the_click_layers_haptics (tests.test_pad_click_exits.PadClickExitsTests)
+One bump on the press (Base) and one on the output, as in 90.13. Nothing else may add one. ... ok
+test_each_soft_press_removes_the_entry_point_and_then_adds_its_layer (tests.test_pad_click_handoff.HandoffTests) ... ok
+test_entry_budget (tests.test_pad_click_handoff.HandoffTests) ... ok
+test_only_the_six_pad_click_layers_changed (tests.test_pad_click_handoff.HandoffTests) ... ok
+test_the_chosen_layers_no_longer_name_the_entry_point (tests.test_pad_click_handoff.HandoffTests) ... ok
+test_the_entry_point_binds_no_click (tests.test_pad_click_handoff.HandoffTests) ... ok
+test_entry_budget (tests.test_pad_click_holds.HoldsTests) ... ok
+test_only_the_four_final_pad_layers_hold_and_only_themselves (tests.test_pad_click_holds.HoldsTests) ... ok
+test_only_the_six_pad_click_layers_changed_and_only_on_the_pads (tests.test_pad_click_holds.HoldsTests) ... ok
+test_the_bumps_are_where_90_13_had_them (tests.test_pad_click_holds.HoldsTests) ... ok
+test_the_entry_point_adds_the_layer_first_and_then_removes_itself (tests.test_pad_click_holds.HoldsTests) ... ok
+test_the_hold_is_the_90_13_shape_with_the_inverted_removal_behind_it (tests.test_pad_click_holds.HoldsTests) ... ok
+test_both_soft_presses_of_the_entry_point_repeat (tests.test_pad_click_soft_press_only.SoftPressOnlyTests) ... ok
+test_entry_budget (tests.test_pad_click_soft_press_only.SoftPressOnlyTests) ... ok
+test_no_release_on_any_pad_click (tests.test_pad_click_soft_press_only.SoftPressOnlyTests)
+A Release fires at the full-click threshold. The layers are moved at the Soft Press threshold. ... ok
+test_only_the_six_pad_click_layers_changed (tests.test_pad_click_soft_press_only.SoftPressOnlyTests) ... ok
+test_the_centre_outputs (tests.test_pad_click_soft_press_only.SoftPressOnlyTests) ... ok
+test_the_pad_click_layers_are_added_and_removed_by_soft_presses_and_the_thumb (tests.test_pad_click_soft_press_only.SoftPressOnlyTests) ... ok
+test_a_click_adds_the_entry_point (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_circular_scroll_removes_the_click_layers_with_the_d_pad_layer (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_entry_budget (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_every_exit_is_a_pressure_exit_that_removes_the_entry_point_first (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_no_hold_layer_is_left (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_stick_touches_are_guarded_by_a_thumb_on_the_pad (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_the_d_pad_layer_has_no_centre_and_covers_the_edge (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_the_entry_point_decides_on_two_repeating_soft_presses (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_the_entry_point_has_no_haptics (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_the_four_layers_are_appended (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_the_middle_click_layer_is_one_button_with_the_old_centre_output (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_the_outputs_keep_their_haptics (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_the_ranges_are_the_sizes_of_the_last_release (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_the_whole_layout_clears_name_the_new_layers (tests.test_pad_middle_click.PadMiddleClickTests) ... ok
+test_against_90_28_only_the_feedback_changes (tests.test_quiet_resets_and_beeps.QuietResetsAndBeepsTests) ... ok
+test_every_layer_command_on_a_pad_states_its_haptic (tests.test_quiet_resets_and_beeps.QuietResetsAndBeepsTests) ... ok
+test_every_transition_and_every_stateful_exit_beeps_on_the_second_flag (tests.test_quiet_resets_and_beeps.QuietResetsAndBeepsTests) ... ok
+test_menu_keys_is_entered_with_the_beep_and_the_pulse_from_both_chains (tests.test_quiet_resets_and_beeps.QuietResetsAndBeepsTests) ... ok
+test_no_layer_command_shows_a_name_without_a_beep (tests.test_quiet_resets_and_beeps.QuietResetsAndBeepsTests) ... ok
+test_the_90_29_snapshot_is_this_build (tests.test_quiet_resets_and_beeps.QuietResetsAndBeepsTests) ... ok
+test_the_tap_cover_resets_state_no_haptic (tests.test_quiet_resets_and_beeps.QuietResetsAndBeepsTests) ... ok
+test_a_block_counts_as_a_retype_and_says_when_it_covers_nothing (tests.test_required_cleanups.ButtonTests) ... ok
+test_a_block_over_a_binding_of_a_layer_that_can_be_under_it_covers_something (tests.test_required_cleanups.ButtonTests)
+Base's RB adds Q, which binds the trigger's full pull and whose button_x adds P on top. ... ok
+test_a_button_that_removes_the_layer_by_cancellation_passes (tests.test_required_cleanups.ButtonTests) ... ok
+test_a_cancellation_of_another_layer_does_not (tests.test_required_cleanups.ButtonTests) ... ok
+test_a_disabled_button_group_fails_on_each_of_its_buttons (tests.test_required_cleanups.ButtonTests) ... ok
+test_a_retyped_button_needs_a_cleanup_function (tests.test_required_cleanups.ButtonTests) ... ok
+test_the_bumpers_and_both_trigger_inputs_are_buttons (tests.test_required_cleanups.ButtonTests) ... ok
+test_the_layers_own_button_passes (tests.test_required_cleanups.ButtonTests) ... ok
+test_it_passes_when_every_required_cleanup_is_there (tests.test_required_cleanups.CommandTests) ... ok
+test_json_carries_the_three_checks (tests.test_required_cleanups.CommandTests) ... ok
+test_the_cleanup_audit_fails_on_a_missing_cleanup_and_names_the_rule (tests.test_required_cleanups.CommandTests) ... ok
+test_a_block_on_such_a_button_asks_for_them_too (tests.test_required_cleanups.EdgeTests) ... ok
+test_a_blocked_edge_needs_a_cleanup_function_on_that_edge_only (tests.test_required_cleanups.EdgeTests) ... ok
+test_a_bound_edge_needs_one_even_when_it_holds_the_layers_exit (tests.test_required_cleanups.EdgeTests) ... ok
+test_a_bumper_or_a_trigger_asks_for_no_edge (tests.test_required_cleanups.EdgeTests) ... ok
+test_a_face_dpad_menu_or_back_button_asks_for_both_edges (tests.test_required_cleanups.EdgeTests) ... ok
+test_a_layer_that_binds_no_edge_and_no_button_needs_none (tests.test_required_cleanups.EdgeTests) ... ok
+test_the_layers_own_menu_button_asks_for_both_edges (tests.test_required_cleanups.EdgeTests)
+Why a menu stick guard needs its exception: Start and Select are its own buttons, and it still ... ok
+test_an_accepted_input_is_set_aside (tests.test_required_cleanups.ExceptionTests) ... ok
+test_an_exception_is_for_one_rule_one_layer_and_one_input (tests.test_required_cleanups.ExceptionTests) ... ok
+test_an_exception_needs_a_why (tests.test_required_cleanups.ExceptionTests) ... ok
+test_only_one_layer (tests.test_required_cleanups.ExceptionTests) ... ok
+test_the_register_fills_the_section_the_audit_reads (tests.test_required_cleanups.ExceptionTests) ... ok
+test_titles_are_mapped_for_the_alternative_layout (tests.test_required_cleanups.ExceptionTests) ... ok
+test_a_layer_that_nothing_ends_is_not_a_ramp_layer (tests.test_required_cleanups.LeftOutTests) ... ok
+test_a_ramp_layer (tests.test_required_cleanups.LeftOutTests)
+R ends on a threshold: no button, thumb or stick keeps it on. ... ok
+test_a_stateful_layer (tests.test_required_cleanups.LeftOutTests)
+S outlives T, the layer whose Release adds it, and has no Release of its own. ... ok
+test_a_stick_touch_helper_is_left_out_of_the_touch_check_only (tests.test_required_cleanups.LeftOutTests) ... ok
+test_a_window (tests.test_required_cleanups.LeftOutTests) ... ok
+test_24_layers_lack_a_touch_cleanup_and_ten_of_them_are_covers (tests.test_required_cleanups.SnapshotTests) ... ok
+test_every_full_pull_block_in_the_default_layout_covers_nothing (tests.test_required_cleanups.SnapshotTests) ... ok
+test_the_four_inputs_the_author_accepted (tests.test_required_cleanups.SnapshotTests) ... ok
+test_the_inputs_without_a_cleanup_function (tests.test_required_cleanups.SnapshotTests) ... ok
+test_the_layers_left_out (tests.test_required_cleanups.SnapshotTests) ... ok
+test_the_modifiers_the_pad_layers_and_the_single_tap_covers_pass (tests.test_required_cleanups.SnapshotTests) ... ok
+test_a_disabled_group_answers_every_input_of_its_source (tests.test_required_cleanups.StateTests) ... ok
+test_how_a_layer_answers_an_input (tests.test_required_cleanups.StateTests) ... ok
+test_a_layer_with_a_cleanup_function_on_both_touches_passes (tests.test_required_cleanups.TouchTests) ... ok
+test_a_release_beside_the_cleanup_function_is_fine (tests.test_required_cleanups.TouchTests) ... ok
+test_a_touch_left_to_the_layer_below_fails (tests.test_required_cleanups.TouchTests) ... ok
+test_a_touch_with_only_a_release_fails (tests.test_required_cleanups.TouchTests) ... ok
+test_one_finding_for_each_layer_and_reason_with_its_inputs (tests.test_required_cleanups.TouchTests) ... ok
+test_the_cleanup_function_has_to_remove_the_layer_itself (tests.test_required_cleanups.TouchTests) ... ok
+test_the_working_layouts_have_every_required_cleanup (tests.test_required_cleanups.WorkingLayoutTests)
+It failed on 90.23 on purpose: the rules were enforced before the layouts followed them. 90.24 ... ok
+test_a_full_pull_block_stays_and_has_a_cleanup (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_an_empty_binding_is_stored_in_full (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_every_required_cleanup_is_there_within_three_entries (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_fifteen_new_stick_groups_in_bases_mode_with_no_direction_bound (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_the_90_24_snapshot_is_this_build (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_the_builder_gave_174_and_196_inputs_a_cleanup (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_the_entry_guard_and_the_fallback_hold_are_guarded_by_the_left_stick_being_out (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_the_layers_the_rules_leave_out_and_the_ones_that_passed_did_not_change (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_the_other_driver_adds_the_modifier_2_layer_from_the_guard_chord (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_the_steering_stick_windows_type_tab_and_escape_themselves (tests.test_required_cleanups_build.RequiredCleanupsBuildTests) ... ok
+test_an_assumption_table_is_read (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_reported_and_refuted_are_statuses_too (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_an_unverified_assumption_says_whether_the_layout_relies_on_it (tests.test_rule_registry.AssumptionTests) ... ok
+test_assumption_ids_named_elsewhere_exist (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_assumption_a_rule_rests_on_exists (tests.test_rule_registry.AssumptionTests) ... ok
+test_rests_on_and_what_rests_on_it_agree (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_audit_and_every_fix_declares_something (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_audit_and_fix_the_registry_names_declares_that_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_declared_check_names_a_rule_that_lists_it (tests.test_rule_registry.DeclarationTests) ... ok
+test_tag_prints_the_ids_in_brackets (tests.test_rule_registry.DeclarationTests) ... ok
+test_the_build_audit_prints_its_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_unchecked_lists_the_rules_nothing_fails_on (tests.test_rule_registry.DeclarationTests) ... ok
+test_a_rule_table_is_read_with_its_section (tests.test_rule_registry.ReaderTests) ... ok
+test_an_escaped_pipe_stays_in_the_cell (tests.test_rule_registry.ReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.ReaderTests) ... ok
+test_checked_by_forms (tests.test_rule_registry.ReaderTests) ... ok
+test_other_tables_are_ignored (tests.test_rule_registry.ReaderTests) ... ok
+test_references_finds_rule_ids_and_skips_buttons (tests.test_rule_registry.ReaderTests) ... ok
+test_rests_on_lists_assumption_ids (tests.test_rule_registry.ReaderTests) ... ok
+test_a_rule_names_only_rules_that_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_named_fixes_are_in_the_pipeline (tests.test_rule_registry.RegistryTests) ... ok
+test_named_tests_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_only_the_retired_rule_names_the_deck_checklist (tests.test_rule_registry.RegistryTests)
+Phase 15: nothing in the definition of done waits for a Deck check. R155 keeps its row, retired. ... ok
+test_rule_ids_named_elsewhere_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_the_definition_of_done_holds_the_rules (tests.test_rule_registry.RegistryTests) ... ok
+test_every_skill_names_rules_that_exist (tests.test_rule_registry.SkillTests) ... ok
+test_a_changed_layer_that_no_scenario_reaches_is_reported (tests.test_scenario_registry.ReachTests)
+`RST: Temporary Gyro` is added by a double tap on the right stick, which no scenario makes. ... ok
+test_every_changed_layer_is_on_the_stack_in_a_scenario (tests.test_scenario_registry.ReachTests) ... ok
+test_the_scenarios_reach_the_layers_they_are_about (tests.test_scenario_registry.ReachTests) ... ok
+test_a_label_from_the_retired_checklist_names_a_check_sorted_as_a_scenario (tests.test_scenario_registry.ScenarioRegistryTests)
+A scenario written since carries its own label (the release and a number), which the sorting doesn't know. ... ok
+test_a_label_names_one_scenario (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_a_rule_lists_the_scenario_tests_exactly_when_a_scenario_names_it (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_an_either_way_assumption_is_run_both_ways (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_every_check_of_the_retired_checklist_went_somewhere (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_every_migrated_check_went_somewhere_that_exists (tests.test_scenario_registry.ScenarioRegistryTests)
+The migration record (phase 14): a check leaves the Deck checklist only for something real. ... ok
+test_the_record_and_the_checklist_agree (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_the_release_list_is_written_into_the_record (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_the_report_lists_every_assumption_that_is_not_verified_with_the_rules_resting_on_it (tests.test_scenario_registry.ScenarioRegistryTests)
+R167: this is the list a release's record carries. ... ok
+test_the_report_lists_the_scenarios_that_rest_on_something_unverified (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_the_rules_and_assumptions_a_scenario_names_exist (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_a_mouse_button_fires_through_a_window (tests.test_scenarios_90_10.MenuAndTransitions)
+The checklist asked whether a held click is interrupted when a window lands or times out. The ... ok
+test_a_start_tap_with_a_stick_out_types_one_tab (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_a_stick_touch_clears_a_stale_guard (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_a_transition_left_by_a_missed_release_ends_on_the_next_menu_tap (tests.test_scenarios_90_10.MenuAndTransitions)
+From 90.10 to 90.23 only the next menu tap ended a stuck transition: the sticks, bumpers and ... ok
+test_all_four_gestures_leave_steering_and_keep_gyro (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_letting_go_of_the_menu_button_first_cancels (tests.test_scenarios_90_10.MenuAndTransitions)
+The checklist asked what the click's release does. Base's click key (Q) goes down when Start is ... ok
+test_one_gesture_enters_steering_and_the_other_three_clear (tests.test_scenarios_90_10.MenuAndTransitions)
+The name is from 90.10, when only Steering was built. Since 90.21 Select plus the right-stick ... ok
+test_stick_guards_come_and_go_and_the_menu_tap_or_hold_behaves (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_the_accepted_gap_under_the_menu_tap_cover (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_the_other_menu_button_types_one_backspace_or_enter_before_fn_is_up (tests.test_scenarios_90_10.MenuAndTransitions)
+Changed in 90.25. The press no longer types at once: a tap types the key once, from its window, and ... ok
+test_the_right_stick_does_nothing_while_a_menu_button_is_held (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_a_mapped_button_uses_up_the_tap_and_a_stuck_map_clears (tests.test_scenarios_90_10.Steering) ... ok
+test_menu_buttons_in_steering (tests.test_scenarios_90_10.Steering) ... ok
+test_stick_first_then_the_driver_is_a_modifier (tests.test_scenarios_90_10.Steering)
+Until 90.30 the driver took over when it came after the stick: the R1 modifier map was there at once. ... ok
+test_the_other_driver_inside_the_window_types_its_key_and_adds_no_map (tests.test_scenarios_90_10.Steering) ... ok
+test_the_stick_double_tap (tests.test_scenarios_90_10.Steering) ... ok
+test_the_stick_modifier_holds_through_a_roll_to_the_side (tests.test_scenarios_90_10.Steering) ... ok
+test_w_carries_on_through_the_window_and_after_it (tests.test_scenarios_90_10.Steering) ... ok
+test_pushing_up_with_a_menu_button_held_types_w_and_adds_no_guard (tests.test_scenarios_90_11.FallbackHold) ... ok
+test_a_trigger_pull_inside_a_steering_window_clicks (tests.test_scenarios_90_11.NoTurnAssistInSteering) ... ok
+test_outside_steering_the_ramp_layers_come_and_go (tests.test_scenarios_90_11.NoTurnAssistInSteering) ... ok
+test_the_drivers_release_still_reaches_its_layer_while_firing_and_turning (tests.test_scenarios_90_11.NoTurnAssistInSteering) ... ok
+test_the_right_stick_adds_no_ramp_layer_while_a_driver_is_held (tests.test_scenarios_90_11.NoTurnAssistInSteering) ... ok
+test_a_double_tap_scrolls_a_used_bumper_does_not_and_the_quick_tap_toggles_gyro (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_a_held_bumper_keeps_modifier_2_through_a_stick_touch (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_a_stick_touch_clears_a_stuck_modifier_2 (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_a_stuck_modifier_fn_layer_and_driver_each_clear (tests.test_scenarios_90_12.CleanupLists)
+Which input clears depends on where the layer has its cleanup functions: a modifier on the face ... ok
+test_one_edge_push_clears_a_stuck_cursor_and_its_modifier (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_rocking_never_scrolls_and_ends_on_base (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_steering_modifier_2_stays_while_one_bumper_is_held (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_the_menu_hold_with_a_stick_out_and_the_fn_release_leave_nothing_behind (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_a_centre_click_is_the_middle_click (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_click_in_circular_scroll_goes_through_the_entry_point (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_missed_click_release_clears_on_its_own (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_modifier_and_a_pad_click_leave_each_other_alone (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_stick_touch_leaves_a_pad_click_that_is_held (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_very_short_click_sends_nothing (tests.test_scenarios_90_14.PadClick)
+Changed in 90.16: the outer buttons come after a 5 ms delay. Changed on 2026-10-04 (author): the ... ok
+test_an_outer_click_is_the_d_pad_button (tests.test_scenarios_90_14.PadClick) ... ok
+test_the_choice_holds_while_the_thumb_slides (tests.test_scenarios_90_14.PadClick) ... ok
+test_the_left_pad_has_the_same_two_layers (tests.test_scenarios_90_14.PadClick) ... ok
+test_the_overlap_of_the_two_ranges_sends_one_output (tests.test_scenarios_90_14.PadClick)
+Changed in 90.16. Until 90.15 the centre Soft Press was meant to interrupt the outer one (A39). Now both ... ok
+test_a_missed_menu_release_clears_on_the_next_tap (tests.test_scenarios_90_15.MenuSecondPressKeys)
+The second-press layers have no cleanup function (the Cleanup audit lists them). That is unchanged: ... ok
+test_outside_steering_the_second_press_is_as_it_was (tests.test_scenarios_90_15.MenuSecondPressKeys) ... ok
+test_the_fallback_stays_off_the_second_press_layer_and_the_release_is_not_hidden (tests.test_scenarios_90_15.MenuSecondPressKeys)
+Until 90.32 the layer kept off was the Fallback Hold. Since 90.33 it is the fallback guard, which ... ok
+test_a_click_bumps_once_on_base_and_the_entry_point_adds_none (tests.test_scenarios_90_16.PadClickExits)
+The simulator logs a haptic when an entry's commands run. The output's own bump, on the layer ... ok
+test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add (tests.test_scenarios_90_16.PadClickExits)
+Changed in 90.20. From 90.16 to 90.19 Base had a second, repeating add, which brought the Click ... ok
+test_a_thumb_that_lifts_in_circular_scroll_ends_the_scroll_too (tests.test_scenarios_90_16.PadClickExits) ... ok
+test_a_thumb_that_lifts_takes_the_click_layers_and_what_is_under_them (tests.test_scenarios_90_16.PadClickExits)
+Base has the click's add (not from 90.25 to 90.26). With the click still down it is exposed: if ... ok
+test_the_outer_buttons_come_after_5_ms_and_the_middle_click_at_once (tests.test_scenarios_90_16.PadClickExits)
+Until 2026-10-04 the middle click was read as coming on its 50 ms repeat. A repeating action always ... ok
+test_each_click_layer_clears_by_its_soft_press_exit_with_the_thumb_still_down (tests.test_scenarios_90_17.SoftPressOnly) ... ok
+test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add (tests.test_scenarios_90_17.SoftPressOnly)
+Changed in 90.20, with Base's repeating add gone: see 90.16 X3. ... ok
+test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click (tests.test_scenarios_90_17.SoftPressOnly) ... ok
+test_a_click_that_ends_before_the_hand_over_sends_nothing_and_clears (tests.test_scenarios_90_18.Handoff)
+The entry point has no click exit, so it is still on when a short click ends. With the thumb still ... ok
+test_a_thumb_that_lifts_ends_the_entry_point (tests.test_scenarios_90_18.Handoff) ... ok
+test_a_touch_release_seen_before_the_click_lets_go (tests.test_scenarios_90_18.Handoff)
+If Steam reports the thumb gone while the pad still reads as pressed, the touch Release removes the ... ok
+test_the_entry_point_is_gone_once_the_chosen_layer_is_on (tests.test_scenarios_90_18.Handoff) ... ok
+test_a_press_inside_a_final_layer_is_held_by_the_layer_and_ends_with_it (tests.test_scenarios_90_19.Holds)
+A click too short for the hand-over leaves the Click Entry Point on; with the thumb still down it ... ok
+test_an_ordinary_click_comes_and_goes_whether_or_not_the_hold_works (tests.test_scenarios_90_19.Holds) ... ok
+test_the_thumb_lifting_and_a_missed_release_still_clear_a_final_layer (tests.test_scenarios_90_19.Holds) ... ok
+test_a_held_click_adds_the_entry_point_once_and_bumps_once (tests.test_scenarios_90_20.OneAdd) ... ok
+test_each_new_click_adds_it_again (tests.test_scenarios_90_20.OneAdd) ... ok
+test_a_held_modifier_answers_both_sticks_and_the_exit_waits_for_it (tests.test_scenarios_90_21.CursorGyro)
+Nothing on top carries the exit (author, 2026-10-03). Under a held modifier both sticks add its ... ok
+test_a_menu_tap_types_its_key_and_the_layer_stays (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_a_modifier_hold_still_brings_the_temp_cursor_and_leaves_the_layer (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_a_window_answers_both_sticks_and_the_exit_follows_when_it_closes (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_all_four_gestures_leave_it_and_keep_gyro (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_both_sticks_out_remove_only_the_layer (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_entering_with_both_sticks_out_leaves_again_at_once (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_select_plus_the_right_stick_click_enters_it_on_top_of_gyro (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_the_modifier_2_quick_tap_clears_to_base (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_a_menu_button_held_plus_a_stick_click_leaves_it (tests.test_scenarios_90_22.Gamepad) ... ok
+test_a_quick_press_and_click_leaves_and_sends_no_start (tests.test_scenarios_90_22.Gamepad)
+The click comes before the Long Press time. The clear transition binds the menu button, which ... ok
+test_a_tap_a_double_press_and_a_hold_on_start_and_select (tests.test_scenarios_90_22.Gamepad) ... ok
+test_every_control_is_a_gamepad_control_and_nothing_lands_on_the_layer (tests.test_scenarios_90_22.Gamepad) ... ok
+test_letting_go_of_the_menu_button_before_the_click_types_one_key (tests.test_scenarios_90_22.Gamepad)
+The accepted cost of entering the clear at the click's press: Base is live under a held click. ... ok
+test_the_modifier_2_quick_tap_does_not_leave_it (tests.test_scenarios_90_22.Gamepad) ... ok
+test_the_two_same_side_gestures_enter_it (tests.test_scenarios_90_22.Gamepad) ... ok
+test_a_stick_touch_clears_a_stale_cover_over_a_pad_layer (tests.test_scenarios_90_23.StickTouches) ... ok
+test_a_thumb_lift_is_seen_with_a_pad_layer_under_the_cover (tests.test_scenarios_90_23.StickTouches) ... ok
+test_a_touch_under_a_held_menu_button_moves_no_layer (tests.test_scenarios_90_23.StickTouches) ... ok
+test_a_button_press_ends_a_stuck_layer_and_then_does_what_it_does_underneath (tests.test_scenarios_90_24.RequiredCleanups) ... ok
+test_a_steering_stick_window_types_tab_and_escape_itself (tests.test_scenarios_90_24.RequiredCleanups)
+The W and S layers' Start and Select hold a cleanup since 90.24, which is a layer command, so the ... ok
+test_a_stick_push_ends_a_steering_layer_whose_release_was_missed (tests.test_scenarios_90_24.RequiredCleanups) ... ok
+test_a_stick_touch_does_nothing_while_the_layers_button_is_held (tests.test_scenarios_90_24.RequiredCleanups) ... ok
+test_a_stick_touch_ends_a_layer_whose_release_was_missed (tests.test_scenarios_90_24.RequiredCleanups) ... ok
+test_the_other_driver_still_adds_the_modifier_2_layer_and_ends_a_stuck_driver_layer (tests.test_scenarios_90_24.RequiredCleanups)
+In the W and S layers the bind that adds the Modifier 2 layer moved into the guard chord ... ok
+test_the_pad_cover_over_a_menu_layer_keeps_the_right_stick_click_from_starting_a_transition (tests.test_scenarios_90_24.RequiredCleanups)
+Called out by the author (2026-10-04). `RTP: Tap Cover` has a right-stick group in mouse mode since ... ok
+test_a_chorded_tap_types_the_key_once (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_a_double_tap_and_hold_holds_the_key_and_a_third_press_chains (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_a_missed_release_of_the_second_button_is_cleaned_up (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_holding_both_menu_buttons_enters_menu_keys (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_inside_a_stateful_layer_both_menu_buttons_type_the_key_as_before (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_letting_go_of_the_first_button_ends_its_family (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_the_hold_also_works_once_the_fn_layer_is_up (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_a_menu_button_plus_a_stick_click_clears (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_a_pad_tap_opens_its_window_over_menu_keys_and_the_face_buttons_wait (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_a_stick_out_plus_a_button_leaves_and_the_press_counts_as_bases (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_both_sticks_out_leaves (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_the_dpad_is_the_arrows_and_the_face_buttons_are_the_four_keys (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_the_modifiers_the_menu_buttons_and_the_stick_touches_do_nothing (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_the_other_inputs_do_what_they_do_on_base (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_a_click_after_the_thumb_has_rested_still_works (tests.test_scenarios_90_25.PadTouch) ... ok
+test_a_click_that_lands_with_the_touch_is_read_all_the_same (tests.test_scenarios_90_25.PadTouch)
+The thumb and the click at the same moment. The Click Entry Point lands on a pad that is already ... ok
+test_a_left_pad_swipe_types_its_key (tests.test_scenarios_90_25.PadTouch)
+From Base again since 90.27; from 90.25 to 90.26 the swipes were in `LTP: Entry Point`. ... ok
+test_a_pad_click_still_works_in_steering (tests.test_scenarios_90_25.PadTouch) ... ok
+test_a_normal_touch_never_fires_the_reset (tests.test_scenarios_90_25.TapCoverResets) ... ok
+test_a_tap_still_opens_the_double_tap_window (tests.test_scenarios_90_25.TapCoverResets) ... ok
+test_a_left_pad_touch_during_a_hold_costs_nothing (tests.test_scenarios_90_26.Disturbed) ... ok
+test_a_right_pad_touch_around_a_hold_costs_nothing_since_90_30 (tests.test_scenarios_90_26.Disturbed) ... ok
+test_a_stick_touch_during_a_hold_costs_nothing (tests.test_scenarios_90_26.Disturbed) ... ok
+test_every_single_button_hold_lands_at_200_ms (tests.test_scenarios_90_26.Holds) ... ok
+test_modifier_2_and_menu_keys_take_200_ms_from_the_second_button (tests.test_scenarios_90_26.Holds) ... ok
+test_the_reset_of_a_hold_that_nothing_disturbs_never_removes_its_layer (tests.test_scenarios_90_26.Holds) ... ok
+test_the_steering_modifiers_take_200_ms (tests.test_scenarios_90_26.Holds) ... ok
+test_the_outer_clicks_reset_fires_once_on_nothing_and_leaves_with_its_layer (tests.test_scenarios_90_26.Pads) ... ok
+test_a_swipe_needs_no_layer_under_it (tests.test_scenarios_90_27.Pads) ... ok
+test_a_touch_gives_no_bump_and_the_right_pads_entry_point_comes_at_once (tests.test_scenarios_90_27.Pads) ... ok
+test_steering_and_the_tap_cover_use_bases_click (tests.test_scenarios_90_27.Pads) ... ok
+test_the_clicks_come_from_base_with_one_pulse (tests.test_scenarios_90_27.Pads) ... ok
+test_a_double_tap_and_hold_holds_the_key_on_a_later_press_too (tests.test_scenarios_90_28.EveryPress) ... ok
+test_a_hold_enters_menu_keys_on_a_later_press_too (tests.test_scenarios_90_28.EveryPress) ... ok
+test_a_thumb_lift_brings_the_fn_layer_and_the_chain_still_runs (tests.test_scenarios_90_28.EveryPress) ... ok
+test_every_tap_in_one_hold_types_the_key (tests.test_scenarios_90_28.EveryPress) ... ok
+test_in_steering_and_cursor_gyro_the_second_button_types_at_once (tests.test_scenarios_90_28.EveryPress) ... ok
+test_the_fn_layer_types_nothing_as_it_lands (tests.test_scenarios_90_28.EveryPress)
+The second button down before the Fn layer is up. The Entry Point's bind adds the Fn layer and ... ok
+test_a_pad_thumb_that_lifts_inside_a_window_ends_it_and_clears_the_pads_layers (tests.test_scenarios_90_28.WindowPads) ... ok
+test_a_swipe_inside_a_window_types_its_key_with_no_layer (tests.test_scenarios_90_28.WindowPads) ... ok
+test_a_touch_and_a_click_that_start_inside_a_window_do_nothing_until_it_ends (tests.test_scenarios_90_28.WindowPads) ... ok
+test_it_ends_a_circular_scroll_too (tests.test_scenarios_90_28.WindowPads) ... ok
+test_menu_keys_beeps_and_pulses_coming_on_and_beeps_going_off (tests.test_scenarios_90_29.Beeps) ... ok
+test_the_fn_hold_beeps_and_a_tap_does_not (tests.test_scenarios_90_29.Beeps) ... ok
+test_a_pad_touch_no_longer_postpones_a_hold (tests.test_scenarios_90_30.NoCoverResets) ... ok
+test_the_tap_covers_still_come_at_150_ms_and_a_short_touch_still_opens_the_window (tests.test_scenarios_90_30.NoCoverResets) ... ok
+test_a_menu_button_let_go_inside_the_pads_window_leaves_nothing_on (tests.test_scenarios_90_30.PadWindow) ... ok
+test_a_modifier_let_go_inside_the_pads_window_leaves_nothing_on (tests.test_scenarios_90_30.PadWindow) ... ok
+test_a_press_that_starts_and_ends_inside_the_window_ends_it_and_does_nothing_else (tests.test_scenarios_90_30.PadWindow) ... ok
+test_in_cursor_gyro_the_stateful_menu_layers_go_too (tests.test_scenarios_90_30.PadWindow) ... ok
+test_the_same_through_several_pad_taps_in_one_hold (tests.test_scenarios_90_30.PadWindow) ... ok
+test_with_both_modifiers_held_the_one_still_down_gets_its_modifier_back (tests.test_scenarios_90_30.PadWindow) ... ok
+test_a_menu_button_and_a_stick_click_clear_steering_and_the_guard_and_keep_gyro (tests.test_scenarios_90_33.LeavingFromTheGuard) ... ok
+test_after_a_menu_hold_with_the_stick_let_go_a_bumper_drives (tests.test_scenarios_90_33.LeavingFromTheGuard) ... ok
+test_start_and_select_keep_steerings_taps_in_the_guard (tests.test_scenarios_90_33.LeavingFromTheGuard) ... ok
+test_the_quick_tap_from_steering_base_still_clears_to_base (tests.test_scenarios_90_33.LeavingFromTheGuard) ... ok
+test_the_quick_tap_of_both_bumpers_clears_to_base_with_gyro_on_or_off (tests.test_scenarios_90_33.LeavingFromTheGuard) ... ok
+test_after_a_bumper_hold_with_the_stick_let_go_the_next_bumper_drives (tests.test_scenarios_90_33.TheBumpersInTheGuard) ... ok
+test_at_centre_a_bumper_ends_the_guard_with_a_pulse_and_drives (tests.test_scenarios_90_33.TheBumpersInTheGuard) ... ok
+test_letting_the_driver_go_with_the_stick_up_pushes_back_into_the_guard (tests.test_scenarios_90_33.TheBumpersInTheGuard) ... ok
+test_the_stick_held_sideways_also_makes_a_bumper_a_modifier (tests.test_scenarios_90_33.TheBumpersInTheGuard) ... ok
+test_with_the_stick_out_a_bumper_is_its_gyro_modifier_and_w_carries_on (tests.test_scenarios_90_33.TheBumpersInTheGuard) ... ok
+test_a_bumper_release_missed_under_the_guards_modifier_recovers_on_the_next_touch (tests.test_scenarios_90_33.TheGuardsCleanup) ... ok
+test_a_fresh_stick_touch_at_centre_removes_the_guard_and_one_with_the_stick_out_does_not (tests.test_scenarios_90_33.TheGuardsCleanup) ... ok
+test_entering_steering_with_the_stick_up_brings_the_guard_in_and_with_it_left_does_not (tests.test_scenarios_90_33.TheStickBringsItIn) ... ok
+test_letting_the_stick_go_leaves_the_guard_on_and_the_next_push_types_at_once (tests.test_scenarios_90_33.TheStickBringsItIn) ... ok
+test_the_guard_and_its_bumpers_on_the_desktop_configuration (tests.test_scenarios_90_33.TheStickBringsItIn) ... ok
+test_up_or_down_brings_the_guard_in_at_once_with_a_strong_pulse (tests.test_scenarios_90_33.TheStickBringsItIn)
+Changed in 90.34: the add is a repeating press and comes at once. 90.33 had July's 100 ms delay. ... ok
+test_whichever_comes_first_decides_the_stick_or_the_driver (tests.test_scenarios_90_33.TheStickBringsItIn)
+Changed in 90.34 (the author, 2026-10-05: "If you deflect the stick up or down you be in fall out unless ... ok
+test_in_steering_base_turn_assist_runs_and_a_driver_ends_it_and_drives (tests.test_scenarios_90_34.OpenEdges) ... ok
+test_in_the_fallback_turn_assist_runs_and_leaves_nothing_behind (tests.test_scenarios_90_34.OpenEdges) ... ok
+test_the_guard_can_land_over_a_ramp_stage_and_everything_unwinds (tests.test_scenarios_90_34.OpenEdges) ... ok
+test_a_bumper_at_centre_hands_back_and_drives_without_waiting_for_an_exposed_bind (tests.test_scenarios_90_35.TheSwap) ... ok
+test_a_driver_ends_turn_assist_whenever_it_comes (tests.test_scenarios_90_35.TheSwap) ... ok
+test_a_fresh_stick_touch_at_centre_hands_back_too (tests.test_scenarios_90_35.TheSwap) ... ok
+test_one_of_the_two_is_on_through_a_whole_round (tests.test_scenarios_90_35.TheSwap) ... ok
+test_the_guard_has_steerings_menu_buttons_and_right_pad_of_its_own (tests.test_scenarios_90_35.TheSwap) ... ok
+test_the_quick_tap_from_the_guard_beeps_on_the_guard (tests.test_scenarios_90_35.TheSwap) ... ok
+test_a_missed_menu_release_clears_and_the_next_hold_works (tests.test_scenarios_90_37.BaseMenuChords) ... ok
+test_held_menu_button_reenters_when_a_stick_window_expires (tests.test_scenarios_90_37.BaseMenuChords) ... ok
+test_menu_hold_with_a_thumb_already_resting (tests.test_scenarios_90_37.BaseMenuChords) ... ok
+test_double_tap_and_hold_then_a_clean_release_through_the_cover (tests.test_scenarios_90_6_to_90_9.ChordedDelays) ... ok
+test_holding_the_stick_uses_up_the_tap (tests.test_scenarios_90_6_to_90_9.ChordedDelays)
+Its last clause said that after a Modifier 2 exit with the stick held, centre never scrolls. Since ... ok
+test_a_held_fn_key_becomes_its_base_binding_when_the_menu_button_lifts (tests.test_scenarios_90_6_to_90_9.MenuComboKeys) ... ok
+test_the_accepted_stray_key_when_the_first_menu_button_is_lifted_first (tests.test_scenarios_90_6_to_90_9.MenuComboKeys) ... ok
+test_the_right_pad_double_tap (tests.test_scenarios_90_6_to_90_9.MenuComboKeys) ... ok
+test_with_fn_up_the_other_menu_button_types_its_key_on_every_press (tests.test_scenarios_90_6_to_90_9.MenuComboKeys)
+Changed in 90.25 and again in 90.28: every press goes through the chorded chain, so a tap types the ... ok
+test_a_face_button_inside_the_stick_window (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays) ... ok
+test_flick_then_flick_and_hold_repeats_the_scroll (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays) ... ok
+test_lifting_the_thumb_during_a_stick_modifier (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays) ... ok
+test_no_right_pad_touch_mode_starts_while_steering (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays)
+The cursor moving and the pad's click are not simulated; what is checked is that no RTP layer starts. ... ok
+test_the_drivers_recovery_clears_through_the_cover (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays) ... ok
+test_a_cancel_input_and_a_thumb_lift_together_at_200_ms (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_a_cancel_input_puts_the_tap_cover_on_for_the_rest_of_the_hold (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_a_fresh_hold_is_eligible_again_and_a_short_tap_still_double_taps (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_a_lost_modifier_clears_with_its_overlays (tests.test_scenarios_cursor.TempCursorGyro)
+The checklist expected the recovery to run while the sticks stay out. A chord latches (A17): the ... ok
+test_a_thumb_lift_before_200_ms_enters_the_cursor_at_once (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_modifier_2_from_the_cursor_and_back (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_nothing_flickers_while_the_cursor_or_the_cover_is_held (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_one_stick_keeps_the_cursor_and_both_remove_it (tests.test_scenarios_cursor.TempCursorGyro)
+How far the sticks have to travel is a tuning note; a stick here is in or out. ... ok
+test_the_alternatives_modifier_2_entry_over_a_trigger_that_is_already_pulled (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_the_cursor_lands_at_200_ms_and_the_release_sends_nothing (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_a_stuck_entry_point_clears_on_the_other_menu_button (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_a_stuck_fn_layer_clears_on_the_next_input (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_a_tap_types_escape_or_tab (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_a_thumb_lift_completes_the_fn_hold (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_double_tap_and_hold_holds_the_key (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_enter_and_backspace_quickly_and_with_fn_up (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_holding_brings_up_the_fn_layer_and_the_release_is_silent (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_the_stick_click_enters_a_transition_and_the_fn_directions_type_punctuation (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_a_menu_button_in_a_modifier_leaves_the_gyro_alone (tests.test_scenarios_menu_and_modifiers.ModifierLayers)
+The checklist added: confirm that's what you want. That question stays with the author. ... ok
+test_nav_keys (tests.test_scenarios_menu_and_modifiers.ModifierLayers) ... ok
+test_nav_keys_in_gyro (tests.test_scenarios_menu_and_modifiers.ModifierLayers) ... ok
+test_no_tap_action_after_a_nav_chord_and_a_menu_button_alone_clears_a_stuck_modifier (tests.test_scenarios_menu_and_modifiers.ModifierLayers) ... ok
+test_a_cleanup_leaves_gyro_and_the_other_sticks_helpers (tests.test_scenarios_triggers_and_recovery.RecoveryAndHeldInputs)
+What each list may hold is the Cleanup audit's job; this checks the survivors on one stack. ... ok
+test_the_left_stick_edge_clears_a_stuck_modifier_or_scroll_layer (tests.test_scenarios_triggers_and_recovery.RecoveryAndHeldInputs)
+Its menu and Transition Set parts were replaced in 90.10: a stuck Entry Point clears on the other ... ok
+test_the_staggered_gyro_toggle (tests.test_scenarios_triggers_and_recovery.RecoveryAndHeldInputs)
+The checklist asked two things. The regular modifier doesn't appear beside the Gyro one. And letting ... ok
+test_which_stacks_leave_bases_left_stick_edge_exposed (tests.test_scenarios_triggers_and_recovery.RecoveryAndHeldInputs) ... ok
+test_a_held_modifier_lets_no_ramp_layer_in (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_a_held_trigger_keeps_the_gyro_on_during_ramp_up (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_a_modifier_pressed_during_ramp_up_ends_it (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp)
+In the alternative a soft pull keeps the block and a full pull exits, as the checklist said. ... ok
+test_a_trigger_pull_brings_the_gyro_back_and_the_first_click_registers (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_soft_and_full_pulls_in_base_gyro_and_the_ramp_stages (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_edge_the_triggers_and_the_modifiers_in_gyro (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_right_pad_blocks_the_edge_only_while_a_thumb_is_on_it (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp)
+Trackball momentum, which the checklist also asked about, is not simulated (A28). ... ok
+test_the_triggers_click_and_a_menu_button_works_with_one_held (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_two_bumper_quick_tap_toggles_gyro_and_a_longer_hold_does_not (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_two_ramp_stages_and_the_way_back (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_a_chord_fires_and_suppresses_an_interruptible_regular_press (tests.test_simulator.ChordTests) ... ok
+test_a_chord_latches_when_the_chord_button_lets_go (tests.test_simulator.ChordTests) ... ok
+test_an_uninterruptible_regular_press_fires_beside_the_chord (tests.test_simulator.ChordTests) ... ok
+test_any_and_all_masks (tests.test_simulator.ChordTests) ... ok
+test_pressing_the_chord_button_afterwards_does_not_start_the_chord (tests.test_simulator.ChordTests) ... ok
+test_without_the_chord_button_the_regular_press_fires (tests.test_simulator.ChordTests) ... ok
+test_a_disabled_gyro_on_the_stack (tests.test_simulator.EdgeTests) ... ok
+test_a_hold_only_puts_the_layer_on_when_the_switch_is_off (tests.test_simulator.EdgeTests) ... ok
+test_a_hold_puts_the_layer_on_and_takes_it_off_with_the_press (tests.test_simulator.EdgeTests) ... ok
+test_a_hold_that_is_covered_is_left_alone (tests.test_simulator.EdgeTests) ... ok
+test_a_layer_that_holds_itself_on_a_held_input_never_gets_its_hold (tests.test_simulator.EdgeTests) ... ok
+test_a_repeating_exit_already_true_when_its_layer_lands_fires_at_once (tests.test_simulator.EdgeTests) ... ok
+test_an_input_is_inside_the_inverted_range_or_past_the_normal_one (tests.test_simulator.EdgeTests) ... ok
+test_an_inverted_edge_fires_when_the_stick_comes_back_in (tests.test_simulator.EdgeTests) ... ok
+test_between_the_two_both_fire_when_the_switch_is_off (tests.test_simulator.EdgeTests) ... ok
+test_between_the_two_the_uninterruptible_soft_press_suppresses_the_other (tests.test_simulator.EdgeTests) ... ok
+test_mode_shifts_are_refused (tests.test_simulator.EdgeTests) ... ok
+test_the_desktop_configuration_keeps_three_entries (tests.test_simulator.EdgeTests) ... ok
+test_a_delayed_command_fires_when_its_delay_ends (tests.test_simulator.HeldInputTests) ... ok
+test_a_key_does_go_down_on_a_held_input (tests.test_simulator.HeldInputTests) ... ok
+test_a_key_exposed_by_a_removal_goes_down (tests.test_simulator.HeldInputTests) ... ok
+test_a_layer_added_beside_a_removal_has_landed_not_been_exposed (tests.test_simulator.HeldInputTests) ... ok
+test_a_layer_that_binds_the_button_ends_the_delay_running_on_it (tests.test_simulator.HeldInputTests) ... ok
+test_a_removal_exposes_the_lower_command_one_way_or_the_other (tests.test_simulator.HeldInputTests) ... ok
+test_a_repeating_command_fires_at_once (tests.test_simulator.HeldInputTests)
+A repeating action always triggers (author, 2026-10-04). Until then this was read as "on its next repeat". ... ok
+test_a_wheel_step_fires_on_a_held_input_too (tests.test_simulator.HeldInputTests) ... ok
+test_an_immediate_layer_command_does_not_fire_on_a_held_input (tests.test_simulator.HeldInputTests) ... ok
+test_a_gamepad_button_is_an_output (tests.test_simulator.NativeActivatorTests) ... ok
+test_a_hold_sends_only_the_long_press (tests.test_simulator.NativeActivatorTests) ... ok
+test_a_layer_that_binds_the_button_ends_the_tap_that_was_waiting (tests.test_simulator.NativeActivatorTests) ... ok
+test_a_second_press_sends_only_the_double_press_for_as_long_as_it_is_held (tests.test_simulator.NativeActivatorTests) ... ok
+test_a_tap_sends_the_regular_press_once_after_the_double_press_time (tests.test_simulator.NativeActivatorTests) ... ok
+test_two_slow_taps_are_two_taps (tests.test_simulator.NativeActivatorTests) ... ok
+test_without_a_double_press_the_regular_press_fires_at_once_and_the_long_press_ends_it (tests.test_simulator.NativeActivatorTests) ... ok
+test_a_key_handed_to_another_binding_at_the_same_moment_is_not_typed_again (tests.test_simulator.OutputTests) ... ok
+test_a_key_is_down_while_its_button_is_held (tests.test_simulator.OutputTests) ... ok
+test_a_release_activator_types_its_key_once (tests.test_simulator.OutputTests) ... ok
+test_a_repeating_key_is_typed_again_each_interval (tests.test_simulator.OutputTests) ... ok
+test_haptics_and_beeps_are_logged (tests.test_simulator.OutputTests) ... ok
+test_a_press_adds_and_the_release_in_the_top_layer_removes (tests.test_simulator.StackTests) ... ok
+test_a_release_that_a_layer_above_takes_never_reaches_the_lower_layer (tests.test_simulator.StackTests) ... ok
+test_an_array_runs_bottom_to_top_and_a_re_add_does_not_move (tests.test_simulator.StackTests) ... ok
+test_the_topmost_layer_that_binds_the_input_answers_it (tests.test_simulator.StackTests) ... ok
+test_a_delayed_add_lands_when_its_delay_ends (tests.test_simulator.TimeTests) ... ok
+test_a_removal_restarts_a_pending_delay (tests.test_simulator.TimeTests) ... ok
+test_an_always_on_window_removes_itself_after_its_delay (tests.test_simulator.TimeTests) ... ok
+test_letting_go_before_the_delay_cancels_it (tests.test_simulator.TimeTests) ... ok
+test_only_the_targets_own_removal_restarts_it_when_the_switch_is_off (tests.test_simulator.TimeTests) ... ok
+test_same_moment_activators_run_in_file_order_or_reversed (tests.test_simulator.TimeTests) ... ok
+test_a_double_tap_a_used_bumper_and_the_cursor (tests.test_simulator.WalkCrossCheck) ... ok
+test_rocking_in_both_directions (tests.test_simulator.WalkCrossCheck) ... ok
+test_the_quick_tap_inside_200_ms (tests.test_simulator.WalkCrossCheck)
+Modifier 2's own release clears every modifier and toggles Gyro. `walk` stops there. The simulator ... ok
+test_fire_needs_a_matching_entry (tests.test_stacks.FireTests) ... ok
+test_fire_runs_the_topmost_definer_in_execution_order (tests.test_stacks.FireTests) ... ok
+test_a_delay_with_no_reset_is_not_a_hold_and_keeps_its_time (tests.test_standard_delays.StandardDelaysTests) ... ok
+test_every_reset_repeats_50_ms_after_its_delay (tests.test_standard_delays.StandardDelaysTests) ... ok
+test_no_hold_delay_is_over_200_ms (tests.test_standard_delays.StandardDelaysTests) ... ok
+test_the_90_26_snapshot_is_this_build (tests.test_standard_delays.StandardDelaysTests) ... ok
+test_the_click_entry_points_outer_bind_has_its_reset_on_the_touch (tests.test_standard_delays.StandardDelaysTests) ... ok
+test_the_holds_the_author_named (tests.test_standard_delays.StandardDelaysTests) ... ok
+test_the_ramp_up_layers_are_untouched (tests.test_standard_delays.StandardDelaysTests) ... ok
+test_the_touch_layers_two_ring_binds_meet_and_neither_waits (tests.test_standard_delays.StandardDelaysTests) ... ok
+test_what_changed_since_90_25_is_the_timers_and_the_four_pad_layers (tests.test_standard_delays.StandardDelaysTests) ... ok
+test_audits_are_clean (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_base_and_steering_add_their_entry_points_with_a_repeating_press (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_entry_point_clicks_release_into_their_transition (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_entry_point_sticks_are_dpads_that_add_the_guard (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_entry_points_only_add_fn_and_fn_types_the_key (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_every_layer_of_a_menu_hold_keeps_both_sticks_in_dpad_mode (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_every_transition_beeps_and_pulses_on_its_menu_release (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_fn_exits_retire_both_entry_points (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_fn_layers_and_guards_bind_no_stick_click (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_guards_carry_the_touch_recovery_on_both_sticks (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_guards_hold_into_the_tap_cover_and_tap_into_the_window (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_layers_keep_their_positions (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_ls_tap_cover_is_only_added_inside_modifier_0_and_1 (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_menu_tap_cover_silences_the_release (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_modifier_0_and_1_cleanup_is_guarded_by_two_all_chords (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_modifier_0_and_1_stick_recipe (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_no_steering_layer_uses_an_inverted_edge (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_nothing_is_entered_from_a_transition (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_steering_can_sit_under_the_menu_windows (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_steering_covers_end_on_the_edge_release (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_steering_drivers_keep_tab_and_escape (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_steering_hold_exit_covers_w_and_s (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_steering_windows_are_always_on_and_bind_everything_themselves (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_transition_menu_releases (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_transitions_match_across_the_two_layouts (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_w_and_s_layers_add_the_modifier_with_a_repeating_bind (tests.test_stateful_transitions.StatefulTransitionTests) ... ok
+test_bases_left_stick_edge_is_the_empty_wasd_modifier (tests.test_static_checks.StaticChecks) ... ok
+test_bases_right_stick_edge_has_three_entries_with_any_chords_and_no_haptic (tests.test_static_checks.StaticChecks) ... ok
+test_the_defaults_base_triggers_match_the_july_reference (tests.test_static_checks.StaticChecks) ... ok
+test_the_two_modifier_2_orders_are_never_on_the_stack_together (tests.test_static_checks.StaticChecks) ... ok
+test_cloned_fn_preserves_inactive_mode_shift_references (tests.test_steering_candidate.CandidateTests) ... ok
+test_complete_exports_have_valid_budgets_and_roundtrip (tests.test_steering_candidate.CandidateTests) ... ok
+test_every_window_entry_adds_last_and_never_two (tests.test_steering_candidate.CandidateTests) ... ok
+test_every_window_mutation_exits_itself_first (tests.test_steering_candidate.CandidateTests) ... ok
+test_exit_feedback_and_warning_have_no_persistent_always_on (tests.test_steering_candidate.CandidateTests) ... ok
+test_maps_preserve_keys_without_base_lifecycle (tests.test_steering_candidate.CandidateTests) ... ok
+test_mod2_boundaries_clear_history_and_restore_consumed (tests.test_steering_candidate.CandidateTests) ... ok
+test_movement_owners_have_no_bank_or_always_on_output (tests.test_steering_candidate.CandidateTests) ... ok
+test_protected_menu_has_no_automatic_fn_route (tests.test_steering_candidate.CandidateTests) ... ok
+test_real_command_traces_for_context_handoff_and_release (tests.test_steering_candidate.CandidateTests) ... ok
+test_rearm_inherits_exit_clock_and_acquisition_has_tie_guard (tests.test_steering_candidate.CandidateTests) ... ok
+test_release_commit_has_no_competing_stick_recovery (tests.test_steering_candidate.CandidateTests) ... ok
+test_window_owns_every_inherited_mutation_input (tests.test_steering_candidate.CandidateTests) ... ok
+test_a_driver_only_adds_its_own_layer (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_against_90_32_the_change_is_the_fallback_the_quick_tap_and_the_lists (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_both_stick_touches_carry_the_guards_cleanup_function (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_entering_steering_adds_no_guard (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_no_delay_or_repeat_rate_is_over_the_editors_1000_ms (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_no_stick_states_a_radius_the_editor_cannot_set (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_nothing_the_modifier_pair_brings_in_binds_the_left_sticks_up_or_down (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_steerings_up_and_down_add_the_guard_after_100_ms_with_a_pulse_and_a_reset (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_the_90_33_snapshot_is_this_build (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_the_guard_types_w_and_s_and_nothing_on_the_stick_ends_it (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_the_gyro_modifier_2_quick_tap_clears_to_base (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_the_modifier_pair_adds_its_gyro_modifier_with_the_stick_out_and_ends_the_guard_at_centre (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_two_layers_are_deleted_and_the_entry_guard_is_the_fallback_guard (tests.test_steering_fallback_guard.SteeringFallbackGuardTests) ... ok
+test_a_driver_press_retires_the_hold (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_entry_budget (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_no_menu_layer_lands_on_the_hold_or_the_entry_guard (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_no_turn_assist_in_steering (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_only_steering_the_clears_and_the_hold_name_the_hold (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_steering_entry_points_type_w_and_s (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_steering_only_adds_the_hold (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_the_edge_pulses_at_once_and_carries_the_reset (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_the_hold_inherits_everything_else (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_the_hold_is_appended (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_up_and_down_type_exit_and_release (tests.test_steering_fallback_hold.FallbackHoldTests) ... ok
+test_a_drivers_press_removes_the_ramp_layers_before_it_adds_its_layer (tests.test_steering_fallback_swap.SteeringFallbackSwapTests) ... ok
+test_against_90_34_the_change_is_steering_the_guard_the_quick_taps_and_the_stick_windows (tests.test_steering_fallback_swap.SteeringFallbackSwapTests) ... ok
+test_every_bind_in_the_guard_that_removes_it_adds_steering_first (tests.test_steering_fallback_swap.SteeringFallbackSwapTests) ... ok
+test_steerings_up_and_down_add_the_guard_and_then_remove_steering (tests.test_steering_fallback_swap.SteeringFallbackSwapTests) ... ok
+test_the_90_35_snapshot_is_this_build (tests.test_steering_fallback_swap.SteeringFallbackSwapTests) ... ok
+test_the_guard_carries_steerings_menu_buttons_and_right_pad (tests.test_steering_fallback_swap.SteeringFallbackSwapTests) ... ok
+test_the_quick_tap_beeps_on_whichever_of_the_two_is_on (tests.test_steering_fallback_swap.SteeringFallbackSwapTests) ... ok
+test_the_two_only_ever_swap (tests.test_steering_fallback_swap.SteeringFallbackSwapTests) ... ok
+test_against_90_33_the_change_is_steering_the_guard_and_what_the_window_fix_wrote (tests.test_steering_four_way_and_open_edges.SteeringFourWayAndOpenEdgesTests) ... ok
+test_no_delay_or_repeat_rate_is_over_the_editors_1000_ms (tests.test_steering_four_way_and_open_edges.SteeringFourWayAndOpenEdgesTests) ... ok
+test_no_stick_states_a_radius_the_editor_cannot_set (tests.test_steering_four_way_and_open_edges.SteeringFourWayAndOpenEdgesTests) ... ok
+test_steering_base_and_the_guard_leave_both_edges_open_and_the_other_steering_layers_do_not (tests.test_steering_four_way_and_open_edges.SteeringFourWayAndOpenEdgesTests) ... ok
+test_steering_base_is_four_way_and_the_guard_states_eight_way (tests.test_steering_four_way_and_open_edges.SteeringFourWayAndOpenEdgesTests) ... ok
+test_the_90_34_snapshot_is_this_build (tests.test_steering_four_way_and_open_edges.SteeringFourWayAndOpenEdgesTests) ... ok
+test_the_guards_binds_are_those_of_90_33 (tests.test_steering_four_way_and_open_edges.SteeringFourWayAndOpenEdgesTests) ... ok
+test_up_and_down_add_the_guard_at_once_with_a_repeating_press_and_the_pulse (tests.test_steering_four_way_and_open_edges.SteeringFourWayAndOpenEdgesTests) ... ok
+test_all_new_layers_have_side_local_touch_release_cleanup (tests.test_steering_lean.LeanTests) ... ok
+test_budget_reference_roundtrip_and_layer_ids (tests.test_steering_lean.LeanTests) ... ok
+test_context_boundaries_cancel_every_history_and_select_correct_mod2 (tests.test_steering_lean.LeanTests) ... ok
+test_covers_define_only_their_own_controls (tests.test_steering_lean.LeanTests) ... ok
+test_covers_inherit_owner_touch_recovery_and_release (tests.test_steering_lean.LeanTests) ... ok
+test_delayed_cover_completion_precedes_touch_removals (tests.test_steering_lean.LeanTests) ... ok
+test_dominant_two_entries_inherit_through_every_helper (tests.test_steering_lean.LeanTests) ... ok
+test_each_mod2_uses_its_source_order_payloads (tests.test_steering_lean.LeanTests) ... ok
+test_effective_owner_release_cleans_real_nested_stacks (tests.test_steering_lean.LeanTests)
+Resolve the topmost whole input before executing its release. ... ok
+test_every_delayed_layer_apply_has_scoped_reset_hidden_by_target (tests.test_steering_lean.LeanTests) ... ok
+test_fn_clicks_not_retargeted_and_menu_helpers_retire_on_commit (tests.test_steering_lean.LeanTests) ... ok
+test_held_opposite_can_take_over_without_rearm (tests.test_steering_lean.LeanTests) ... ok
+test_mod2_actions_apply_matching_cover_before_output (tests.test_steering_lean.LeanTests) ... ok
+test_mod2_is_direct_repeat_without_gesture_layers (tests.test_steering_lean.LeanTests) ... ok
+test_mod2_uncovered_release_and_cover_delay_match_existing_pattern (tests.test_steering_lean.LeanTests) ... ok
+test_modifier_banks_own_center_and_reversal_consumption (tests.test_steering_lean.LeanTests) ... ok
+test_naming_and_two_required_modifier_orders (tests.test_steering_lean.LeanTests) ... ok
+test_no_banned_activators_or_new_orphan_groups (tests.test_steering_lean.LeanTests) ... ok
+test_no_binding_adds_a_bank_while_leaving_an_active_cover_below_it (tests.test_steering_lean.LeanTests) ... ok
+test_no_new_ao_and_existing_ao_sources_unchanged (tests.test_steering_lean.LeanTests) ... ok
+test_one_repeat_cover_delays_ticks_and_consumes_each_exit (tests.test_steering_lean.LeanTests) ... ok
+test_ordinary_single_expiry_and_different_direction_flush_once (tests.test_steering_lean.LeanTests) ... ok
+test_owner_release_clears_full_registry_and_preserves_membership (tests.test_steering_lean.LeanTests) ... ok
+test_pending_steering_timers_clear_rs_edge (tests.test_steering_lean.LeanTests) ... ok
+test_protected_menu_release_and_recovery_retire_owned_helpers_only (tests.test_steering_lean.LeanTests) ... ok
+test_reused_cover_base_behavior_is_removal_only_and_side_local (tests.test_steering_lean.LeanTests) ... ok
+test_reused_covers_preserve_movement_and_distinct_releases (tests.test_steering_lean.LeanTests) ... ok
+test_steering_never_reaches_an_always_on_window (tests.test_steering_lean.LeanTests) ... ok
+test_tap_cover_blocks_directions_and_clears_on_center (tests.test_steering_lean.LeanTests) ... ok
+test_touch_recovery_preserves_driver_and_menu_guards (tests.test_steering_lean.LeanTests) ... ok
+test_warning_guard_and_full_exit_preserve_feedback (tests.test_steering_lean.LeanTests) ... ok
+test_no_always_on_and_valid_references (tests.test_steering_native_gestures.NativeGestureProbeTests) ... ok
+test_ordinary_long_hold_is_silent_and_only_double_repeats (tests.test_steering_native_gestures.NativeGestureProbeTests) ... ok
+test_all_exports_resolve_and_fit_budget (tests.test_steering_probes.ProbeTests) ... ok
+test_clock_markers_and_disturbance (tests.test_steering_probes.ProbeTests) ... ok
+test_entry_and_release_command_order (tests.test_steering_probes.ProbeTests) ... ok
+test_no_inherited_production_hooks_in_stick (tests.test_steering_probes.ProbeTests) ... ok
+test_owner_suppresses_vertical_and_opposing_movement (tests.test_steering_probes.ProbeTests) ... ok
+test_rearm_keeps_movement_but_guards_recovery (tests.test_steering_probes.ProbeTests) ... ok
+test_its_cleanup_is_the_stick_guards (tests.test_tap_cover_stick_touches.TapCoverStickTouchTests) ... ok
+test_the_cover_binds_both_stick_touches_itself (tests.test_tap_cover_stick_touches.TapCoverStickTouchTests) ... ok
+test_what_changed_since_the_last_release (tests.test_tap_cover_stick_touches.TapCoverStickTouchTests) ... ok
+test_against_90_29_only_these_five_layers_change (tests.test_window_releases_and_tap_cover_resets.WindowReleasesAndTapCoverResetsTests) ... ok
+test_the_90_30_snapshot_is_this_build (tests.test_window_releases_and_tap_cover_resets.WindowReleasesAndTapCoverResetsTests) ... ok
+test_the_fallback_hold_leaves_by_up_and_down_only (tests.test_window_releases_and_tap_cover_resets.WindowReleasesAndTapCoverResetsTests) ... ok
+test_the_families_leave_out_the_windows_the_stateful_layers_and_steering (tests.test_window_releases_and_tap_cover_resets.WindowReleasesAndTapCoverResetsTests) ... ok
+test_the_pad_window_gives_the_four_buttons_a_release_that_ends_the_window_first (tests.test_window_releases_and_tap_cover_resets.WindowReleasesAndTapCoverResetsTests) ... ok
+test_the_three_entry_points_touch_is_that_of_90_24 (tests.test_window_releases_and_tap_cover_resets.WindowReleasesAndTapCoverResetsTests) ... ok
+
+----------------------------------------------------------------------
+Ran 941 tests in 1309.680s
+
+OK

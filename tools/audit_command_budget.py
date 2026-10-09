@@ -38,6 +38,7 @@ from pathlib import Path
 import sys
 
 from steam_layout import exceptions
+from steam_layout.model import TARGET, TOKEN
 from steam_layout.rules import tag
 
 MAX_COMMANDS = 3
@@ -105,6 +106,38 @@ def native_exceptions(entries=None):
     return [(set(entry["scope"]["layers"]), set(entry["scope"]["inputs"])) for entry in exceptions.of(entries, "R108")]
 
 
+def allowed_inverted(entry, owners, data):
+    """Exact, registered R111 exceptions; shared groups must qualify in every owner."""
+    candidates = [row for row in exceptions.of(exceptions.load(), 'R111')
+                  if row['status'] == 'allow' and owners
+                  and all(o['title'] in row['scope']['layers']
+                          and o['source_state'] == row['scope']['source'] + ' active' for o in owners)]
+    if not candidates:
+        return False
+    cm = data['controller_mappings']
+    titles = [v['title'] for section in ('actions', 'action_layers') for v in cm[section].values()]
+    variant = 'alternative' if 'alternative' in cm.get('title', '') else 'default'
+    ops = []
+    for action in entry['actions']:
+        match = TARGET.search(action)
+        if not match:
+            return False
+        ref = match.group(2)
+        token = TOKEN.fullmatch(ref)
+        title = token.group(1) if token else titles[int(ref) - 1]
+        ops.append([match.group(1), title])
+    for row in candidates:
+        scope = row['scope']
+        if row['status'] != 'allow' or not owners:
+            continue
+        if (entry['activation'] == scope['activation'] and ops == scope['operations']
+                and entry['settings'] == scope['settings'][variant]
+                and all(o['title'] in scope['layers']
+                        and o['source_state'] == scope['source'] + ' active' for o in owners)):
+            return True
+    return False
+
+
 def audit_layout(data, source="<memory>", native=None):
     """`native` is the R108 exceptions to apply; by default the ones in the exceptions register."""
     native = native_exceptions() if native is None else native
@@ -122,6 +155,7 @@ def audit_layout(data, source="<memory>", native=None):
     banned = []
     allowed_native = []
     inverted = []
+    accepted_inverted = []
     group_ids = set()
     for group_index, group in enumerate(cm["group"]):
         gid = group["id"]
@@ -148,7 +182,8 @@ def audit_layout(data, source="<memory>", native=None):
                     if "1" in (group.get("settings", {}).get("edge_binding_invert"),
                                entry["settings"].get("edge_binding_invert")) \
                             and any(action.startswith(LAYER_COMMANDS) for action in entry["actions"]):
-                        inverted.append({"group_id": gid, "input": input_name, "owners": owners[gid],
+                        destination = accepted_inverted if allowed_inverted(entry, owners[gid], data) else inverted
+                        destination.append({"group_id": gid, "input": input_name, "owners": owners[gid],
                                          "activation": entry["activation"], "path": entry["path"]})
             # Disabled banks are checked too, but never added to the enabled count.
             for bank, entries in (("activators", enabled), ("disabled_activators", disabled)):
@@ -182,11 +217,11 @@ def audit_layout(data, source="<memory>", native=None):
                    (row["max_actions_in_one_command"] for row in inputs), default=0),
                "violations": len(violations), "allowed_fourth": len(allowed),
                "banned_activators": len(banned), "allowed_native": len(allowed_native),
-               "inverted_edges": len(inverted)}
+               "inverted_edges": len(inverted), "allowed_inverted": len(accepted_inverted)}
     return {"file": source, "limit": MAX_COMMANDS, "summary": summary,
             "violations": violations, "allowed_fourth": allowed,
             "banned_activators": banned, "allowed_native": allowed_native,
-            "inverted_edges": inverted, "inputs": inputs}
+            "inverted_edges": inverted, "allowed_inverted": accepted_inverted, "inputs": inputs}
 
 
 def main():

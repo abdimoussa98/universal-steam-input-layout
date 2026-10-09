@@ -47,6 +47,7 @@ FIELDS = ("rule", "scope", "status", "why", "decided", "todo")
 FLOW = ("R139", "R145")
 REQUIRED = ("R169", "R170", "R171")                # the required-cleanup rules (steam_layout/required_cleanups.py)
 SCOPES = {"R108": (("layers", "inputs"),),                                                # rule -> the shapes it takes
+          "R111": (("layers", "source", "activation", "operations", "settings"),),
           "R139": (("layers", "inputs"), ("kind",)), "R145": (("layers", "inputs"),),
           "R144": (("cover", "checks"),), "R132": (("layers", "removes"),), "R140": (("target", "source", "input"),),
           "R136": (("kind",), ("upper", "lower")), **{rule: (("layers", "inputs"),) for rule in REQUIRED}}

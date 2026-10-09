@@ -67,7 +67,7 @@ through [rules.py](../steam_layout/rules.py)), so the shape is fixed.
 | A33 | Steam loads an exported VDF as written: the same layers, groups and bindings as the JSON it was made from | Reported: the author plays on exported layouts, but no fresh-load check is recorded for 90.6 to 90.13 | Relies on it | Load both VDFs fresh, not in the live editing session, and spot-check a modifier, Modifier 2, both Fn layers and the Steering entry | R151; every release; `convert_vdf.mjs` |
 | A34 | A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held | Unverified | Relies on it | Under a regular and a Gyro modifier, touch each trackpad and press the face buttons and the D-pad: record the keys, and whether the normal Tap Cover still lands | The face and D-pad mode-shift targets under Base's trackpads; the cursor's cancel inputs |
 | A35 | Hold to Repeat with no stated rate repeats at one fixed default interval | Unverified: the interval isn't known. The simulator uses 100 ms | Works either way | In a test layout: a key with Hold to Repeat and no rate. Count the repeats in one second | Most repeating entries state no rate, the cleanup functions among them; the simulator's `default_repeat_ms` |
-| A36 | A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it | Unverified | Relies on it | Hold A, then hold LB: if A's chord with LB doesn't start, it holds | Every cleanup function's guard; the simulator; `Cursor Gyro`'s both-sticks exit, which has a chord on each stick edge so that either stick can be the second; since 90.33 the chords of Steering's fallback guard on the left stick being out: on a bumper they choose between its Gyro modifier and ending the guard, and on the stick touches they hold the cleanup function back. In 90.31 and 90.32 the Fallback Hold's cleanup binds as its window closed over resting thumbs |
+| A36 | A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it | Unverified | Relies on it | Hold A, then hold LB: if A's chord with LB doesn't start, it holds | Every cleanup function's guard; the simulator; since 90.37 Base's Start/Select self-chords, including re-exposure after a window; `Cursor Gyro`'s both-sticks exit, which has a chord on each stick edge so that either stick can be the second; since 90.33 the chords of Steering's fallback guard on the left stick being out: on a bumper they choose between its Gyro modifier and ending the guard, and on the stick touches they hold the cleanup function back. In 90.31 and 90.32 the Fallback Hold's cleanup binds as its window closed over resting thumbs |
 | A37 | When the layer that answers a held input changes and the new binding sends the same key, the key stays down with no release in between | Unverified | Works either way | In Steering hold a driver, flick the left stick, and watch W through the 150 ms window in a key tester: a gap means it doesn't hold | W and S through a Steering window; the simulator's `typed` |
 | A38 | A stick group that doesn't state `edge_binding_invert` has a normal edge. It doesn't take the inverted setting of the group it replaces in a lower layer | Unverified | Relies on it | Under a held modifier wait for the cursor (200 ms). Push the right stick out: the cursor stays. Push the left stick out as well: the normal cover replaces it. If the cursor already ends with only the right stick out, its left edge is inverted | R111; the left-stick edge of the two Temp Cursor Gyro layers, which removes the layer over Base's inverted edge and states no setting; the Budget audit's inverted-edge check and the simulator, which read a group's own setting |
 | A39 | An active Soft Press that is not interruptible suppresses an interruptible Soft Press on the same input | Unverified. A web search on 2026-10-02 found no report either way; the community Steam Input Wiki lists the Interruptible setting only for Regular, Release and Chorded Press | Works either way | In a test layout put two Soft Presses on a D-pad pad's outer ring: one inverted at 24996 with Interruptible off, typing A, and one normal at 23000 with Interruptible on, typing B. Rest the thumb about three quarters of the way out, where both are active. Only A means it holds | Nothing since 90.16, where both Soft Presses of the Click Entry Points are uninterruptible. 90.14 and 90.15 relied on it for the middle click's priority where a pad's two ranges overlap |
@@ -84,6 +84,8 @@ through [rules.py](../steam_layout/rules.py)), so the shape is fixed.
 | A50 | A stick group that states no outer ring radius uses Steam's default, near the rim. It doesn't take the radius of the group it replaces in a lower layer | Unverified. The author's July layout states a radius only in Base and the Fn layers, and its stick clears work at the rim | Relies on it | Hold Select outside `Steering` with a stick half way out: the Fn beep comes at 200 ms, because the guard only lands at the rim | The 62 stick groups that stated 4915 or 7209 until 90.30: the modifiers' cursor cancel, the menu stick guards, `Cursor Gyro`'s and `Menu Keys`' both-sticks exits, the Steering layers |
 | A51 | A D-pad group's `layout` 0 is "Radial Without Overlap": a diagonal presses only the nearest direction. `layout` 1 is "Radial With Overlap", which a group that states none also gets. A layer's group does not change the layout of a four-way group under it | Reported by the author, 2026-10-06, on the Deck with 90.34: `Steering`'s four-way took effect over Base, and the fallback guard's eight-way over `Steering` did not. The numbers were read from the installed Steam client on 2026-10-05, whose choices list `RadialWithOverlap` as 1 and `RadialNoOverlap` as 0. Whether a layer that states no layout takes the four-way of the layer under it is not checked | Relies on it | In `Steering` with no driver, hold the stick left and tilt it slowly up: A alone until past the diagonal, then the fallback's pulse and W, and from there W and A together. Then hold a driver and try a diagonal: one direction or two | Steering base's four-way left stick (90.34). Since 90.35 the fallback guard takes `Steering`'s place, so its eight-way group is never over the four-way one. The drivers' layers and the stick modifiers still sit over it. The simulator does not read the setting |
 | A52 | The stored order of an input's entries can change what Steam does: a Release stored between a Regular Press and its guard chord can stop the chord from interrupting the Regular Press | Unverified: the author's suspicion, 2026-10-06. On a first load, with a thumb on a stick and a menu button held, the Fn layer's delayed add never came; the menu Entry Points' stick touches were stored that way from 90.24 to 90.35. Nothing found online says the stored order matters or that it can't (searched 2026-10-06): Valve's activator page is silent on it | Works either way | Load 90.36 fresh, rest a thumb on a stick and hold Select for a second: the Fn beep at 200 ms. If it comes there and did not on 90.35, it holds | R133; since 90.36 every cleanup input stores its Regular Press, then its guard, then its Release, so nothing depends on it |
+| A53 | A Soft Press on a D-pad stick direction with activation_threshold 29031 activates only near full deflection, and its repeating layer add fires on entry above that threshold | Unverified, author requested the right-stick ramp threshold for Steering up/down, 2026-10-07 | Relies on it | In Steering push up/down shallowly: no fallback; approach the rim: one strong pulse and fallback W/S. Enter Steering while already beyond the threshold | 90.38 Steering fallback entry; simulator checks binary full deflection only, not numeric distance |
+| A54 | An activator-local inverted D-pad edge can reliably run a repeating chord on either driver when that edge binding answers the inward input | Unverified; explicitly requested by the author, 2026-10-07, despite the earlier R111 ban | Relies on it | In fallback, inspect the active edge provider while moving inward with either driver held; test re-exposure after a covering layer exits | 90.38 fallback edge return; Gyro modifiers and covers can replace this input (A1), independently of whether inversion works |
 
 A33 and A34 were found while sorting the Deck checks
 ([record](../findings/2026-10-03-deck-check-sorting/README.md)). A31 and A32 come from the timing contract of the archived replay
@@ -101,6 +103,67 @@ A38 was an open Deck check in the [to-do list](../todos.md#cursor-gyro) since
 A43, A44 and A45 came with the `Gamepad` layer in 90.22
 ([record](../findings/2026-10-03-gamepad/README.md)), whose Start and Select
 use Steam's own Double Press and Long Press. The simulator models A43.
+
+## Inverted Chorded Press in action layers
+
+**Reported by the author, 2026-10-07.** These observations concern
+**Chorded Press + Invert** inside action layers. Here, the **owner button**
+is the button carrying the bind; the **chorded button** is the button selected
+in the Chorded Press settings. This use of “owner” describes the binding,
+not necessarily an interaction family's owning layer.
+
+### Owner and chorded buttons
+
+The inverted chord starts active. Pressing the owner button turns the bind
+off; after releasing the owner, the bind can come back on. Pressing the
+owner again can also reactivate or retrigger the inverted bind.
+
+The chorded button behaves differently: pressing it shuts the bind off
+completely. Pressing the chorded button again does not restore it. Once the
+chorded button has killed the bind, it will not reactivate through that
+button alone; the owner button must be pressed again, or the layer loaded
+again as described below.
+
+| Event | Observed effect |
+|---|---|
+| Owner button pressed | Can turn the inverted bind off, and on a later press reactivate or retrigger it |
+| Owner button released | The bind can come back on |
+| Chorded button pressed | Shuts the bind off completely |
+| Chorded button pressed again | Does not reactivate the bind by itself |
+| Layer loaded | Activates the inverted chord again |
+| Remove Layer | Does not stop the active bind as it does with an inverted Regular Press; does not reactivate a stopped inverted chord |
+
+### Layer workaround and removal limitation
+
+Using L1/R1 as the chorded button works as a workaround when those buttons
+also add/remove a layer: loading the layer activates the inverted chord
+again, providing another way to restore a bind that has been shut off.
+
+**Remove Layer does not stop the bind** the way it does with an inverted
+Regular Press. Unlike normal Chorded Press behavior, however, the inverted
+chord **does not reactivate on Remove Layer**.
+
+This is the main limitation for cleanup: **inverted Chorded Press activates
+on layer load, but does not reactivate on Remove Layer.** If removal caused
+it to reevaluate and reactivate the way a normal chord does, this setup
+could provide a clean state-reset mechanism. That is a proposed behavior,
+not the observed behavior.
+
+### Timing edge cases
+
+The bind can also stop when:
+
+- A Release Press is timed just as the owner/chorded-button interaction
+  occurs.
+- A layer is added and removed very quickly.
+
+The fast add/remove case may result from layer removal and the inverted
+chord's activation on layer load happening almost simultaneously. This
+explanation is the author's hypothesis; the timing cause is not confirmed.
+
+These observations describe an alternative cleanup mechanism under
+investigation; they do not change the required guarded-recovery shape in
+[Cleanup Functions](Cleanup%20Functions.md#the-kinds).
 
 ## Tuning notes
 

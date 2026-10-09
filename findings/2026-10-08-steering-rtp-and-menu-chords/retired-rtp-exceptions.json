@@ -1,0 +1,58 @@
+[
+  {
+    "rule": "R139",
+    "scope": {
+      "layers": [
+        "Menu Left: Escape",
+        "Menu Right: Tab",
+        "Stateful | Menu Left: Fn Layer",
+        "Stateful | Menu Right: Fn Layer",
+        "Menu Buttons: Left Stick Guard",
+        "Menu Buttons: Right Stick Guard"
+      ],
+      "inputs": [
+        "right_trackpad/touch"
+      ]
+    },
+    "status": "allow",
+    "why": "Historical through 90.37; retained for frozen builders. Since 90.38 Steering and fallback inherit Base's RTP touch and this allowance is stale in the live layout. Unchanged since 90.13 and read because Base changed in 90.14. A right-pad touch adds RTP: Entry Point from Base and does nothing in Steering, which clears it on purpose. Since 90.28 the two Fn layers here are the Stateful copies, which sit over Steering or Cursor Gyro; the plain Fn layers are only ever over Base's Entry Point and no longer vary.",
+    "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author. The Fn layers swapped for their Stateful copies by Claude for the 90.28 build, 2026-10-04",
+    "todo": null
+  },
+  {
+    "rule": "R139",
+    "scope": {
+      "layers": [
+        "Stateful | Menu Left: Entry Point",
+        "Stateful | Menu Right: Entry Point"
+      ],
+      "inputs": [
+        "right_trackpad/touch"
+      ]
+    },
+    "status": "allow",
+    "why": "Historical through 90.37; retained for frozen builders. Since 90.38 Steering and fallback inherit Base's RTP touch and this allowance is stale in the live layout. Since 90.21 Steering's two Entry Points serve every stateful layer and are named Stateful. They follow the layer they are on: over Cursor Gyro a right-pad touch adds RTP: Entry Point from Base, as it does under Base's own Entry Points; over Steering it does nothing, because Steering clears that touch on purpose.",
+    "decided": "Claude, reading the Flow audit for the 90.21 build, 2026-10-03; not yet confirmed by the author",
+    "todo": null
+  },
+  {
+    "rule": "R139",
+    "scope": {
+      "layers": [
+        "Gyro | L1: Modifier 0",
+        "Gyro | R1: Modifier 1",
+        "Gyro | L1!R1: Modifier 2",
+        "Gyro | R1!L1: Modifier 2",
+        "L1: Scroll Down",
+        "R1: Scroll Up"
+      ],
+      "inputs": [
+        "right_trackpad/touch"
+      ]
+    },
+    "status": "allow",
+    "why": "Historical through 90.37; retained for frozen builders. Since 90.38 Steering and fallback inherit Base's RTP touch and this allowance is stale in the live layout. Reviewed for 90.37 because Base changed. These six layers inherit Base's repeating RTP: Entry Point add in ordinary/Gyro/Cursor Gyro contexts, and the explicit empty touch in Steering | LS: Fallback Guard. Keeping the right pad as just a mouse during Steering (including its fallback) is existing intended behavior. The providers and touch bindings are unchanged from 90.36; only Base's two menu activators changed. See findings/2026-10-06-menu-base-chords/README.md#flow-audit-review.",
+    "decided": "Codex, inheritance review for the requested Base menu chord restoration, 2026-10-06; preserves the existing Steering pad design.",
+    "todo": null
+  }
+]

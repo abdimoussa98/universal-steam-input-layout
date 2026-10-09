@@ -3,8 +3,10 @@
 Agent skills for working on this repository's Steam Input layouts. Each folder
 holds one `SKILL.md`.
 
-This directory belongs to no tool. `.claude/skills` is a symlink to it, which
-is how Claude Code finds the skills; another agent can read the files directly.
+This directory belongs to no tool. `.claude/skills` and `.agents/skills` are
+symlinks to it, so Claude Code and Codex discover the same skills without copies.
+In Codex, use `/skills` to list them or `$<skill-name>` to invoke one. If newly
+added skills do not appear, restart Codex.
 
 | Skill | Use it to |
 |---|---|

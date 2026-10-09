@@ -1,9 +1,12 @@
 # Plan: a test layout for start delays and layer changes
 
-**Status, 2026-10-06:** step 1 of the author's request: the scenarios, for
-review. Nothing is built. The layout and the sheet to fill in come after the
-author has picked the scenarios. Revised the same day, after the author
-redescribed the delay fix: group 1 is new, and comes first.
+**Status, 2026-10-06: deferred to [todos](../todos.md#deferred-delay-tests-and-the-menu-entry-issue)**
+at the author's request. Nothing is built. Investigate the
+[Base menu activator difference](../findings/2026-10-06-menu-base-chords/README.md)
+first as a candidate cause of the missing menu Fn layer; delays are not yet
+established as that issue's cause. The scenarios below are preserved for later
+review, including the separate historical interrupted-delay observation.
+The layout and results sheet follow when this work is resumed and scoped.
 
 The author: "create a layout to help me determine how each of these
 interactions work with audible beeps and haptics with a testing scenarios
@@ -199,7 +202,7 @@ first (A36), and the stored order (A52). A cover with the same delayed chord
 (A16). A window's own timer. The same delays on a stick touch and on a
 trigger's soft pull.
 
-## To decide before the build
+## To decide when the deferred build resumes
 
 My defaults, if the author says nothing:
 

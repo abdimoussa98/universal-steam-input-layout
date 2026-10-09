@@ -175,7 +175,7 @@ class PadClick(ScenarioCase):
         for pad in self.each(start="steering"):
             pad.press_pad("RP", "centre").wait(100)
             self.assertEqual((pad.names()[1:], pad.down()),
-                             (("Steering", "RTP: Middle Click"), ["mouse_button MIDDLE"]))
+                             (("Steering", "RTP: Entry Point", "RTP: Middle Click"), ["mouse_button MIDDLE"]))  # 90.38 opens RTP touch
             pad.let_go_pad("RP").wait(300)
             self.assertEqual(pad.names(), ("Base", "Steering"))
         for pad in self.each(start="steering"):

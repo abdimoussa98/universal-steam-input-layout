@@ -61,13 +61,12 @@ class CleanupEntryOrderTests(unittest.TestCase):
     def title(self, variant, title):
         return map_title(title, fg.RENAME) if variant == 'alternative' else title
 
-    def test_working_layouts_are_this_build_entry_for_entry_and_in_the_same_order(self):
-        # neptune/ is generated: a hand edit there would be lost on the next install (R156). Comparing the
-        # mappings alone would not see a different order, so the stored orders are compared too.
+    def test_90_36_snapshot_is_this_build_entry_for_entry_and_in_the_same_order(self):
+        # The newest builder's test holds R156; preserve this release's order regression.
         for variant in self.data:
             with self.subTest(variant=variant):
                 built = copy.deepcopy(self.numeric[variant]['controller_mappings'])
-                working_data = json.loads((ROOT / f'neptune/single-set-{variant}_hold-gyro_latest.json').read_text())
+                working_data = snapshot(variant, '90.36')
                 working = copy.deepcopy(working_data['controller_mappings'])
                 for cm in (built, working):
                     cm.pop('title'); cm.pop('description')

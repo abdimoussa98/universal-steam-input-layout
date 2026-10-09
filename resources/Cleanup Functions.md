@@ -79,6 +79,14 @@ checked and computed.
 Both use the same scope question: which of the family's layers can be active
 when this fires? That's why the stack helper serves both.
 
+The author's [inverted Chorded Press observations](Steam%20Behaviour%20Assumptions.md#inverted-chorded-press-in-action-layers)
+describe another possible cleanup mechanism: the inverted bind activates
+on layer load and can be restored through its owner button, but its chorded
+button can only shut it off. Remove Layer does not reactivate it, which
+limits its use as a state reset; Release Press timing and very fast layer
+add/remove sequences can also stop it. These observations do not replace
+the guarded-recovery requirements above.
+
 ## Order matters
 
 **Author, 2026-09-30:** what a release does depends on the **current stack

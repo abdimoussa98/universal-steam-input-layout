@@ -68,7 +68,7 @@ install.
 | `tools/` | A script someone runs: `python3 -m tools.<name>`. [Reference](docs/tools.md) | Logic that two scripts share: that goes in `steam_layout/` |
 | `steam_layout/` | Importable code, the fixes in `fixes/`, the chain engine's source in `engine/`, and the two config files: `flow_config.json` (rules and the exceptions register) and `traced_stacks.json` | Scripts with a command line |
 | `tests/` | `test_*.py`, `test_scenarios_<release>.py`, and `scenario.py`, the gesture helpers | One-off scripts for an investigation: those stay with their finding |
-| `skills/` | One folder per skill, each a `SKILL.md`. `.claude/skills` is a symlink to it | Rules: a skill restates a rule beside its ID, the rule itself is in `resources/` |
+| `skills/` | One folder per skill, each a `SKILL.md`. `.claude/skills` and `.agents/skills` symlink here for Claude Code and Codex | Rules: a skill restates a rule beside its ID, the rule itself is in `resources/` |
 | `docs/` | How the repo works: tools, formats, publishing, building | Facts about Steam or the layouts |
 | `resources/` | Rules, assumptions, vocabulary, the JSON format | Anything dated: that is a finding |
 | `plans/` | `<date>-<slug>.md`, written before the work | Results |

@@ -109,15 +109,16 @@ class SlimSteeringOverlays(ScenarioCase):
             self.assertTrue(pad.has("Steering") or pad.has("Steering | LS: Fallback Guard"))
 
     @scenario("90.7 S6")
-    def test_no_right_pad_touch_mode_starts_while_steering(self):
-        """The cursor moving and the pad's click are not simulated; what is checked is that no RTP layer starts."""
+    def test_right_pad_touch_modes_work_in_steering_since_90_38(self):
+        """90.38 supersedes the 90.7 entry block: protect the windows themselves."""
         touch = ("right_trackpad", "touch")
         for pad in self.each(start="steering"):
             pad.sim.press(touch).release(touch)
+            self.assertTrue(pad.has('RTP: Double Tap'))
             pad.wait(50)
             pad.sim.press(touch)
             pad.wait(300)
-            self.assertFalse([t for t in pad.stack if t.startswith("RTP")])
+            self.assertTrue(pad.has('RTP: Entry Point', 'RTP: Tap Cover'))
 
 
 class ChordedDelays(ScenarioCase):

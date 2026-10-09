@@ -1,0 +1,16 @@
+(node:21661) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ preserves repeated bindings, group order, and empty blocks (1.251167ms)
+✔ escapes actual control characters and quotes without doubling VDF escapes (0.132042ms)
+✔ rejects values that the extension would silently lose or change (0.234292ms)
+✔ rejects unresolved controller action targets (0.068667ms)
+✔ rejects malformed or structurally changed converter output (0.09725ms)
+✔ CLI writes a sibling or explicit output and preserves existing output on failure (202.343916ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 308.442333
