@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from steam_layout import rules
 from tests import scenario
@@ -113,7 +114,11 @@ class ScenarioRegistryTests(unittest.TestCase):
             with self.subTest(entry.id):
                 self.assertEqual(f"\n{entry.id} (" in self.report, not entry.verified)
         self.assertIn("\nA8 (unverified; relies on it)", self.report)
-        self.assertIn("  Rules: R111\n  90.10 T5  MenuAndTransitions.", self.report)
+        # Candidate static tests can import their scenario module before the
+        # live scenarios. Check attribution inside A8, not import order.
+        a8 = self.report.split("\nA8 (", 1)[1].split("\n\n", 1)[0]
+        self.assertIn("  Rules: R111\n", a8)
+        self.assertIn("  90.10 T5  MenuAndTransitions.", a8)
 
     def test_the_release_list_is_written_into_the_record(self):
         with tempfile.TemporaryDirectory() as folder, contextlib.redirect_stdout(io.StringIO()) as shown:
@@ -134,18 +139,39 @@ class ReachTests(unittest.TestCase):
             with self.subTest(variant):
                 self.assertEqual(scenario.uncovered(variant), [], "write a scenario that reaches these layers")
 
+    def test_a_frozen_scenario_does_not_count_as_live_coverage(self):
+        class Historical(scenario.ScenarioCase):
+            def runTest(self):
+                pass
+
+        # Attach metadata directly so this harness test adds no registry entry.
+        Historical.runTest.scenario = scenario.Meta('fixture', 'fixture', (), (), (), '90.41')
+        historical = Historical()
+        # The data source is incidental to this bookkeeping check; historical
+        # interaction scenarios separately exercise the actual frozen builder.
+        with patch.object(scenario, 'REACHED', {}), patch.object(scenario, 'FROZEN_REACHED', {}), \
+                patch.object(scenario, 'frozen_layout_data', return_value=scenario.layout_data('default')) as frozen:
+            for pad in historical.each(start=('Base', 'Steering'), variants=('default',)):
+                self.assertTrue(pad.has('Steering'))
+            frozen.assert_called_once_with('default', '90.41')
+            self.assertEqual(scenario.REACHED, {})
+            self.assertIn('Steering', scenario.FROZEN_REACHED['90.41', 'default'])
+
     def test_the_scenarios_reach_the_layers_they_are_about(self):
         for variant in scenario.VARIANTS:
             pad = scenario.Pad(variant)
             with self.subTest(variant):
                 self.assertTrue(pad.has("Base"))
-                for title in ("Steering", "Steering | LS: Fallback Guard", "L1: Modifier 0", "Menu Right: Entry Point"):
+                for title in ("Steering", "Steering | LS: Entry Guard", "L1: Modifier 0", "Menu Right: Entry Point"):
                     self.assertIn(pad.title(title), self.reached[variant])
                 self.assertLessEqual(self.reached[variant], set(pad.layout.titles.values()))
 
     def test_a_changed_layer_that_no_scenario_reaches_is_reported(self):
-        """`RST: Temporary Gyro` is added by a double tap on the right stick, which no scenario makes.
-        (Until 90.24 the example was `Tab`; 90.25 P5 swipes the left pad.)"""
+        """A changed layer missing from recorded reach must fail coverage.
+
+        Since 90.47 both touch-gyro layers have real double-tap scenarios;
+        simulate a missing record instead of depending on a coverage gap.
+        """
         title = "RST: Temporary Gyro"
         for variant in scenario.VARIANTS:
             before = copy.deepcopy(scenario.layout_data(variant))
@@ -155,8 +181,9 @@ class ReachTests(unittest.TestCase):
             with self.subTest(variant), tempfile.TemporaryDirectory() as folder:
                 baseline = Path(folder) / "before.json"
                 baseline.write_text(json.dumps(before), encoding="utf-8")
-                self.assertNotIn(title, self.reached[variant])
-                self.assertIn(title, scenario.uncovered(variant, baseline))
+                self.assertIn(title, self.reached[variant])
+                with patch.dict(scenario.REACHED, {variant: self.reached[variant] - {title}}):
+                    self.assertIn(title, scenario.uncovered(variant, baseline))
 
 
 if __name__ == "__main__":

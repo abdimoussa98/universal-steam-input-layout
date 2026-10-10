@@ -1,0 +1,78 @@
+{
+  "previous_builder_sha256": "58e7f675014aabb285cd6ef2a98fc88dbe8d28913ed17f98e8e73ef2f00486f0",
+  "changes": {
+    "quiet_dual_hold": [
+      [
+        "L2!R2: Modifier 2",
+        "right_trigger",
+        "edge"
+      ],
+      [
+        "R2!L2: Modifier 2",
+        "left_trigger",
+        "edge"
+      ],
+      [
+        "Gyro | L2!R2: Modifier 2",
+        "right_trigger",
+        "edge"
+      ],
+      [
+        "Gyro | R2!L2: Modifier 2",
+        "left_trigger",
+        "edge"
+      ]
+    ],
+    "driver_entries": [
+      [
+        "Steering",
+        "left_trigger",
+        "edge"
+      ],
+      [
+        "Steering",
+        "right_trigger",
+        "edge"
+      ]
+    ]
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 548,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  }
+}

@@ -17,6 +17,10 @@ What fails:
   a requested layer that isn't reached, or a lookup the chains can't model (a mode shift that changes
   layers, an unknown chord button)
 
+An exact R145 dormant-layer declaration can retain an unreachable layer without inventing an entry
+route. It is reported separately, never applies to reachable layers, and never excuses an explicit
+request to audit an unreachable target. Raw binding and command-budget checks still inspect it.
+
 The chains start from the contexts in the rules (Base, and Base with Gyro) and keep each chain to its own
 layers, so a cover is judged with its own family. No families are declared: a new layer is picked up from
 the layout. Until 2026-10-01 this audit walked families declared in the rules; that walk is deprecated and
@@ -53,12 +57,16 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def decisions(config, variant, mapping):
-    """{(layer, "source/input"): {"status", "why"}} from the flow rules' decisions."""
+def decisions(config, variant, mapping, layers):
+    """Applicable input decisions; presence/absence scopes use the audited layout's titles."""
     result = {}
     for d in config.get("decisions", []):
         if d.get("status") not in ("allow", "todo") or not d.get("why"):
             raise ValueError(f"decision needs status allow/todo and a why: {d}")
+        if d.get("where") and map_title(d["where"], mapping) not in layers:
+            continue
+        if d.get("not_where") and map_title(d["not_where"], mapping) in layers:
+            continue
         inputs = d["inputs"].get(variant, d["inputs"].get("default", [])) if isinstance(d["inputs"], dict) else d["inputs"]
         for layer in d["layers"]:
             for name in inputs:
@@ -103,7 +111,7 @@ def run(layout_path, config_path=None, layers=None, baseline=None):
     mapping = config.get("variants", {}).get(variant, {})
     started = time.perf_counter()
     view = family_view(layout, config)
-    decided = decisions(config, variant, mapping)
+    decided = decisions(config, variant, mapping, layout.presets)
     used = set()
     contexts = [[layout.base]] + [list(c) for c in view.contexts]
     report = {"layout": {"path": str(layout_path), "title": layout.cm.get("title"), "variant": variant,
@@ -145,7 +153,15 @@ def run(layout_path, config_path=None, layers=None, baseline=None):
     # Layers added only by legacy hold_layer are out of scope, listed, not gaps.
     legacy = {t for t in outside if view.inventory.legacy_only(t)}
     report["legacy_only"] = sorted(legacy)
-    report["unreached"] = sorted(outside - legacy)
+    dormant = {}
+    for decision in config.get("dormant_layers", []):
+        for title in decision["layers"]:
+            title = map_title(title, mapping)
+            if title in outside - legacy:
+                dormant[title] = {"layer": title, "status": decision["status"],
+                                  "why": decision["why"], "todo": decision.get("todo")}
+    report["dormant"] = [dormant[t] for t in sorted(dormant)]
+    report["unreached"] = sorted(outside - legacy - set(dormant))
     report["view"] = {"contexts": contexts, "stacks": len(view.stacks()),
                       "seconds": round(time.perf_counter() - started, 3)}
     gaps = report["uncovered"] or report["unreached"] or report["unsupported"] \
@@ -212,6 +228,10 @@ def print_report(report, detail, layout=None):
     if report.get("legacy_only"):
         print("\nOut of scope: reached only by legacy hold_layer (not followed): "
               + ", ".join(report["legacy_only"]))
+    for retained in report.get("dormant", []):
+        print(f"\nRetained dormant {tag(ENFORCES['coverage'])}: {retained['layer']} ({retained['status']})"
+              + f"\n  {retained['why']}"
+              + (f"\n  To-do: {retained['todo']}" if retained.get("todo") else ""))
     if report["unreached"]:
         print(f"\nCoverage gap {tag(ENFORCES['coverage'])}: no chain of adding bindings reaches: " + ", ".join(report["unreached"]))
     shown = [(title, t) for title, t in sorted(report["targets"].items()) if detail or not t["cover"]]

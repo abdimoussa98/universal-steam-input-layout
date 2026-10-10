@@ -34,6 +34,101 @@
   "exceptions_about": "The exceptions register (steam_layout/exceptions.py): every place where the layout breaks a rule and that is accepted (status allow) or is a known gap a to-do will close (status todo). Each entry names its rule (resources/Layer Definition of Done.md), what it covers, why, who decided it and when, and the to-do that ends it. Until 2026-10-02 these lived in four shapes: 'decisions', 'covers.allow' and 'cleanups.keep' here, and per-target decisions in traced_stacks.json. An entry that matches nothing is reported as stale by the audit that reads it.",
   "exceptions": [
     {
+      "rule": "R169",
+      "scope": {
+        "layers": [
+          "Steering | LS: Entry Guard"
+        ],
+        "inputs": [
+          "joystick/touch",
+          "right_joystick/touch"
+        ],
+        "where": "Stateful | Menu Left: Fn Layer",
+        "not_where": "Steering | LS: Fallback Hold"
+      },
+      "status": "allow",
+      "why": "90.43: the author chose to protect the first movement after centered Steering entry, including while either thumb rests or lifts. Entry Guard therefore carries only each stick's ordinary helper Release cleanup, with no automatic guard removal. A direction/normal outer-edge Release, driver acquisition or fresh menu Start Press consumes it. Pad-helper and ramp entries are blocked while it is present. The exact Entry Guard title, presence of Stateful Fn and absence of Fallback Hold exclude the frozen pre-90.33 Entry Guard implementations (plans/2026-10-09-steering-entry-guard.md).",
+      "decided": "Author approved implementation, 2026-10-09",
+      "todo": null
+    },
+    {
+      "rule": "R170",
+      "scope": {
+        "layers": [
+          "Steering | LS: Entry Guard"
+        ],
+        "inputs": [
+          "joystick/edge",
+          "right_joystick/edge"
+        ],
+        "where": "Stateful | Menu Left: Fn Layer",
+        "not_where": "Steering | LS: Fallback Hold"
+      },
+      "status": "allow",
+      "why": "90.43: Entry Guard deliberately protects the first movement. Its normal left-stick outer-edge Release disarms it; unconditional active-edge cleanup would end protection on the first push. Since 90.44 its inverted left-edge chord additionally removes only the guard while either driver is held, under the exact R111 exception; centered entry without a driver remains protected. Its right-stick edge is blocked so camera movement cannot remove protection or add a ramp over the left-stick Releases. Direction Releases and explicit driver/menu handoffs remain exits. This exact guard scope requires Stateful Fn and excludes Fallback Hold, so historical Entry Guards keep their original edge rule (plans/2026-10-10-entry-guard-edge-and-quiet-drivers.md).",
+      "decided": "Author approved implementation, 2026-10-09; driver-conditioned inward exit, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Gyro | L1!R1: Modifier 2"
+        ],
+        "removes": [
+          "L1: Modifier 0",
+          "R1: Modifier 1",
+          "L1!R1: Modifier 2",
+          "R1!L1: Modifier 2",
+          "Gyro | R1!L1: Modifier 2",
+          "Steering",
+          "Steering | LS: Entry Guard"
+        ],
+        "where": "Stateful | Menu Left: Fn Layer",
+        "not_where": "Steering | LS: Fallback Hold"
+      },
+      "status": "allow",
+      "why": "90.43 retains the existing Gyro Modifier 2 clear scope while the broader dual-bumper redesign remains deferred. It still clears stale ordinary modifiers, the opposite Gyro Modifier 2 branch and Steering; the renamed Entry Guard replaces the old fallback target. These layers need not coexist in a normal adding chain. This preserves existing recovery removals without introducing a new entry route; feedback is chosen separately once per gesture. Requiring Stateful Fn and excluding Fallback Hold leaves pre-90.33 Entry Guard builds unchanged; the historical fallback-specific keeps remain unchanged too.",
+      "decided": "Author approved entry/recovery/feedback implementation and deferred broader clear redesign, 2026-10-09",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Gyro | R1!L1: Modifier 2"
+        ],
+        "removes": [
+          "L1: Modifier 0",
+          "R1: Modifier 1",
+          "L1!R1: Modifier 2",
+          "R1!L1: Modifier 2",
+          "Gyro | L1!R1: Modifier 2",
+          "Steering",
+          "Steering | LS: Entry Guard"
+        ],
+        "where": "Stateful | Menu Left: Fn Layer",
+        "not_where": "Steering | LS: Fallback Hold"
+      },
+      "status": "allow",
+      "why": "90.43 retains the existing Gyro Modifier 2 clear scope while the broader dual-bumper redesign remains deferred. It still clears stale ordinary modifiers, the opposite Gyro Modifier 2 branch and Steering; the renamed Entry Guard replaces the old fallback target. These layers need not coexist in a normal adding chain. This preserves existing recovery removals without introducing a new entry route; feedback is chosen separately once per gesture. Requiring Stateful Fn and excluding Fallback Hold leaves pre-90.33 Entry Guard builds unchanged; the historical fallback-specific keeps remain unchanged too.",
+      "decided": "Author approved entry/recovery/feedback implementation and deferred broader clear redesign, 2026-10-09",
+      "todo": null
+    },
+    {
+      "rule": "R145",
+      "scope": {
+        "layers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "dormant": true
+      },
+      "status": "todo",
+      "why": "The author replaced Steering's only fallback entries with a Steering-family clear and deferred the larger two-layer clear/recovery redesign. Retain this exact layer and its bindings for that deferred work, without inventing an entry route. This declaration applies only while no adding chain reaches it; historical reachable versions remain fully audited.",
+      "decided": "Author request, 2026-10-09",
+      "todo": "todos.md: deferred Steering two-layer clear and recovery redesign"
+    },
+    {
       "rule": "R139",
       "scope": {
         "layers": [
@@ -254,12 +349,13 @@
           "L1!R1: Modifier 2",
           "R1!L1: Modifier 2",
           "Gyro | R1!L1: Modifier 2",
-          "Steering"
+          "Steering",
+          "Steering | LS: Fallback Guard"
         ],
         "where": "Steering | LS: Fallback Guard"
       },
       "status": "allow",
-      "why": "The Gyro Modifier 2 quick tap is the way to Base from the Steering fallback as well as from Gyro, so it removes the Base modifiers and the other Gyro Modifier 2 layer too, although none of them can be on with it in a normal sequence. The author, 2026-10-04: \"update gyro mod 2 to also clear the related steering layers and base mod layers too ... also want the mod 2 to clear the related gyro layers so that ... it'll take you to the base layer every time\" (plans/2026-10-04-steering-fallback-layer.md). The July layout's quick tap has the same list. It holds only on a layout that has the fallback guard: the frozen builders up to 90.32 read this register too. Since 90.35 Steering is off while its fallback guard is on, so its removal there is one of these too.",
+      "why": "The Gyro Modifier 2 quick tap is the way to Base from the Steering fallback as well as from Gyro, so it removes the Base modifiers and the other Gyro Modifier 2 layer too, although none of them can be on with it in a normal sequence. The author, 2026-10-04: \"update gyro mod 2 to also clear the related steering layers and base mod layers too ... also want the mod 2 to clear the related gyro layers so that ... it'll take you to the base layer every time\" (plans/2026-10-04-steering-fallback-layer.md). The July layout's quick tap has the same list. It holds only on a layout that has the fallback guard: the frozen builders up to 90.32 read this register too. Since 90.35 Steering is off while its fallback guard is on, so its removal there is one of these too. Since 90.42 retain the existing Fallback Guard removal as stale-state cleanup while the guard is dormant; the author deferred the larger modifier clear/recovery redesign.",
       "decided": "Author, 2026-10-04",
       "todo": null
     },
@@ -275,12 +371,13 @@
           "L1!R1: Modifier 2",
           "R1!L1: Modifier 2",
           "Gyro | L1!R1: Modifier 2",
-          "Steering"
+          "Steering",
+          "Steering | LS: Fallback Guard"
         ],
         "where": "Steering | LS: Fallback Guard"
       },
       "status": "allow",
-      "why": "The Gyro Modifier 2 quick tap is the way to Base from the Steering fallback as well as from Gyro, so it removes the Base modifiers and the other Gyro Modifier 2 layer too, although none of them can be on with it in a normal sequence. The author, 2026-10-04: \"update gyro mod 2 to also clear the related steering layers and base mod layers too ... also want the mod 2 to clear the related gyro layers so that ... it'll take you to the base layer every time\" (plans/2026-10-04-steering-fallback-layer.md). The July layout's quick tap has the same list. It holds only on a layout that has the fallback guard: the frozen builders up to 90.32 read this register too. Since 90.35 Steering is off while its fallback guard is on, so its removal there is one of these too.",
+      "why": "The Gyro Modifier 2 quick tap is the way to Base from the Steering fallback as well as from Gyro, so it removes the Base modifiers and the other Gyro Modifier 2 layer too, although none of them can be on with it in a normal sequence. The author, 2026-10-04: \"update gyro mod 2 to also clear the related steering layers and base mod layers too ... also want the mod 2 to clear the related gyro layers so that ... it'll take you to the base layer every time\" (plans/2026-10-04-steering-fallback-layer.md). The July layout's quick tap has the same list. It holds only on a layout that has the fallback guard: the frozen builders up to 90.32 read this register too. Since 90.35 Steering is off while its fallback guard is on, so its removal there is one of these too. Since 90.42 retain the existing Fallback Guard removal as stale-state cleanup while the guard is dormant; the author deferred the larger modifier clear/recovery redesign.",
       "decided": "Author, 2026-10-04",
       "todo": null
     },
@@ -298,11 +395,11 @@
     {
       "rule": "R157",
       "scope": {
-        "note": "Steering's 1.5 s hold exit, Cursor Gyro's both-sticks exit and the Modifier 2 clear leave a stateful layer without a transition. Cursor Gyro's entry also adds Gyro underneath. Menu Keys is entered by holding both menu buttons for 150 ms and left by its own three exits, with no transition; only its menu-plus-click exit goes through the clear transition."
+        "note": "Steering's historical hold exit, its full-deflection up/down exit since 90.42, Cursor Gyro's both-sticks exit and Gyro's Modifier 2 toggle bypass transitions. Cursor Gyro's entry also adds Gyro underneath; since 90.44 the dual-driver gesture can remove Gyro while retaining Cursor Gyro. Menu Keys is entered by holding both menu buttons and left by its own three exits; only its menu-plus-click exit goes through the clear transition."
       },
       "status": "allow",
-      "why": "Extra exits are allowed; the menu-plus-click clear and the Modifier 2 clear are never dropped.",
-      "decided": "Author, 2026-10-01; Cursor Gyro 2026-10-03; Menu Keys 2026-10-04",
+      "why": "Extra exits are allowed; the menu-plus-click clear remains. Since 90.44 Steering Modifier 2 preserves Steering and all six Gyro/Steering Modifier 2 release clears preserve Cursor Gyro, at the author's request.",
+      "decided": "Author, 2026-10-01; Cursor Gyro 2026-10-03; Menu Keys 2026-10-04; stateful preservation 2026-10-10",
       "todo": null
     },
     {
@@ -313,6 +410,16 @@
       "status": "allow",
       "why": "On the Deck the guard's eight-way left stick did not take effect over Steering's four-way one (author, 2026-10-06, 90.34), so the two are never stacked. The pair is still entered and left as one stateful layer: by the transition, the menu-plus-click clear and the Modifier 2 clear.",
       "decided": "Author, 2026-10-06",
+      "todo": null
+    },
+    {
+      "rule": "R159",
+      "scope": {
+        "note": "Since 90.44 both Steering Modifier 2 release clears retain Steering, and all six release clears across the two Steering and two Gyro Modifier 2 layers retain Cursor Gyro. Gyro Modifier 2 still toggles Gyro and retains its existing Steering removal. Other cleanup targets remain unchanged."
+      },
+      "status": "allow",
+      "why": "The author requested removing Steering stateful clears from both Steering Modifier 2 layers and stopping Cursor Gyro stateful clears on the dual-bumper/trigger gesture. Dedicated Steering full-up/down, Cursor Gyro both-stick and menu-plus-click exits remain; the broader release-order redesign stays deferred.",
+      "decided": "Author requested and authorized implementation, 2026-10-10",
       "todo": null
     },
     {
@@ -675,6 +782,50 @@
       "todo": null
     },
     {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS: Entry Guard"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | LS: Entry Guard"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331648",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.44: the author requested the old fallback-style inward left-edge chord on Entry Guard. It quietly removes only Entry Guard while either driver is held, preserving Steering and Gyro. Only this exact self-removal, quiet name/beep flags and per-variant activator settings qualify. The stick group stays non-inverted and normal direction/edge Releases remain independent exits. The general R111 ban and historical fallback exception remain unchanged; physical inward-edge detection is still A54, unverified.",
+      "decided": "Author requested and authorized implementation, 2026-10-10",
+      "todo": null
+    },
+    {
       "rule": "R139",
       "scope": {
         "layers": [
@@ -682,10 +833,11 @@
         ],
         "inputs": [
           "joystick/edge"
-        ]
+        ],
+        "where": "Steering | LS: Fallback Guard"
       },
       "status": "allow",
-      "why": "90.38 additive fallback return: Steering normally inherits Base's empty WASD slot. When the requested fallback edge adds Steering without removing fallback, it inherits that same silent driver-conditioned repeat adding already-active Steering. A3 makes the re-add idempotent; the inverted edge does not run at the rim. No output is displaced except Base's empty placeholder. Preserve this intentional inheritance and review the additive stack in the release scenarios.",
+      "why": "90.38 additive fallback return: Steering normally inherits Base's empty WASD slot. When the requested fallback edge adds Steering without removing fallback, it inherits that same silent driver-conditioned repeat adding already-active Steering. A3 makes the re-add idempotent; the inverted edge does not run at the rim. No output is displaced except Base's empty placeholder. Preserve this intentional inheritance and review the additive stack in the release scenarios. This decision applies only to layouts containing Fallback Guard; 90.43 reuses that slot as Entry Guard and removes the additive return.",
       "decided": "Codex review of author-requested additive fallback edge, 2026-10-08",
       "todo": null
     }

@@ -1,0 +1,1088 @@
+{
+  "default": {
+    "edits": [
+      {
+        "kind": "version",
+        "path": "controller_mappings/title",
+        "before": "single-set-default :: always-gyro :: 90.40",
+        "after": "single-set-default :: always-gyro :: 90.41"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/75/inputs/touch/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/78/inputs/touch/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/111/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/112/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/113/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/114/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/149/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/150/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/152/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/153/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/189/inputs/dpad_north/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/189/inputs/dpad_south/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/227/inputs/left_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/228/inputs/right_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/240/inputs/right_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/241/inputs/left_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/264/inputs/left_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/265/inputs/right_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/266/inputs/right_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/267/inputs/left_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "fn_beep",
+        "path": "controller_mappings/group/309/inputs/button_menu/activators/chord/bindings/binding/0",
+        "before": "controller_action add_layer {{Base::Menu Left: Fn Layer}} 0 1, , ",
+        "after": "controller_action add_layer {{Base::Menu Left: Fn Layer}} 0 0, , "
+      },
+      {
+        "kind": "fn_beep",
+        "path": "controller_mappings/group/312/inputs/button_menu/activators/chord/bindings/binding/6",
+        "before": "controller_action add_layer {{Base::Stateful | Menu Left: Fn Layer}} 0 1, , ",
+        "after": "controller_action add_layer {{Base::Stateful | Menu Left: Fn Layer}} 0 0, , "
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/320/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/320/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/320/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/320/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/321/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/321/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/321/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/321/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "fn_beep",
+        "path": "controller_mappings/group/322/inputs/button_escape/activators/chord/bindings/binding/0",
+        "before": "controller_action add_layer {{Base::Menu Right: Fn Layer}} 0 1, , ",
+        "after": "controller_action add_layer {{Base::Menu Right: Fn Layer}} 0 0, , "
+      },
+      {
+        "kind": "fn_beep",
+        "path": "controller_mappings/group/325/inputs/button_escape/activators/chord/bindings/binding/6",
+        "before": "controller_action add_layer {{Base::Stateful | Menu Right: Fn Layer}} 0 1, , ",
+        "after": "controller_action add_layer {{Base::Stateful | Menu Right: Fn Layer}} 0 0, , "
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/333/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/333/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/333/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/333/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/334/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/334/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/334/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/334/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/344/inputs/button_escape/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/344/inputs/button_menu/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/347/inputs/button_escape/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/347/inputs/button_menu/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/353/inputs/left_bumper/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/353/inputs/right_bumper/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/354/inputs/click/activators/Soft_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/355/inputs/dpad_north/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/355/inputs/dpad_south/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/355/inputs/dpad_east/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/355/inputs/dpad_west/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/355/settings/haptic_intensity_override",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/357/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/364/inputs/click/activators/Soft_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/365/inputs/dpad_east/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/365/inputs/dpad_west/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/365/settings/haptic_intensity_override",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/367/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/386/inputs/button_escape/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/386/inputs/button_menu/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/411/inputs/left_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/415/inputs/right_bumper/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/429/inputs/dpad_north/activators/Soft_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/429/inputs/dpad_south/activators/Soft_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/441/inputs/button_escape/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/445/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/446/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/467/inputs/button_menu/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/471/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/472/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/504/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/504/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/504/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/504/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/505/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/505/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/505/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/505/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/512/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/512/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/512/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/512/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/513/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/513/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/513/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/513/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      }
+    ],
+    "counts": {
+      "version": 1,
+      "haptic": 82,
+      "fn_beep": 4
+    },
+    "intensities": {
+      "0": 365,
+      "1": 133
+    },
+    "description": "unchanged; concise and accurate",
+    "stored_order": "unchanged"
+  },
+  "alternative": {
+    "edits": [
+      {
+        "kind": "version",
+        "path": "controller_mappings/title",
+        "before": "single-set-alternative :: always-gyro :: 90.40",
+        "after": "single-set-alternative :: always-gyro :: 90.41"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/17/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/20/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/52/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/53/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/71/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/72/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/73/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/74/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/75/inputs/touch/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/78/inputs/touch/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/135/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/136/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/147/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/148/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/150/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/151/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/189/inputs/dpad_north/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/189/inputs/dpad_south/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/194/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/201/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/205/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/209/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "fn_beep",
+        "path": "controller_mappings/group/321/inputs/button_menu/activators/chord/bindings/binding/0",
+        "before": "controller_action add_layer {{Base::Menu Left: Fn Layer}} 0 1, , ",
+        "after": "controller_action add_layer {{Base::Menu Left: Fn Layer}} 0 0, , "
+      },
+      {
+        "kind": "fn_beep",
+        "path": "controller_mappings/group/324/inputs/button_menu/activators/chord/bindings/binding/6",
+        "before": "controller_action add_layer {{Base::Stateful | Menu Left: Fn Layer}} 0 1, , ",
+        "after": "controller_action add_layer {{Base::Stateful | Menu Left: Fn Layer}} 0 0, , "
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/332/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/332/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/332/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/332/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/333/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/333/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/333/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/333/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "fn_beep",
+        "path": "controller_mappings/group/334/inputs/button_escape/activators/chord/bindings/binding/0",
+        "before": "controller_action add_layer {{Base::Menu Right: Fn Layer}} 0 1, , ",
+        "after": "controller_action add_layer {{Base::Menu Right: Fn Layer}} 0 0, , "
+      },
+      {
+        "kind": "fn_beep",
+        "path": "controller_mappings/group/337/inputs/button_escape/activators/chord/bindings/binding/6",
+        "before": "controller_action add_layer {{Base::Stateful | Menu Right: Fn Layer}} 0 1, , ",
+        "after": "controller_action add_layer {{Base::Stateful | Menu Right: Fn Layer}} 0 0, , "
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/345/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/345/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/345/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/345/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/346/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/346/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/346/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/346/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/356/inputs/button_escape/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/356/inputs/button_menu/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/359/inputs/button_escape/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/359/inputs/button_menu/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/366/inputs/click/activators/Soft_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/367/inputs/dpad_north/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/367/inputs/dpad_south/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/367/inputs/dpad_east/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/367/inputs/dpad_west/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/367/settings/haptic_intensity_override",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/369/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/376/inputs/click/activators/Soft_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/377/inputs/dpad_east/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/377/inputs/dpad_west/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/377/settings/haptic_intensity_override",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/379/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/398/inputs/button_escape/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/398/inputs/button_menu/activators/release/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/423/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/427/inputs/edge/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/441/inputs/dpad_north/activators/Soft_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/441/inputs/dpad_south/activators/Soft_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/453/inputs/button_escape/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/457/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/458/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/479/inputs/button_menu/activators/chord/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/483/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/484/inputs/click/activators/Full_Press/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/518/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/518/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/518/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/518/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/519/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/519/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/519/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/519/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/526/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/526/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/526/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/526/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/527/inputs/dpad_north/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/527/inputs/dpad_south/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/527/inputs/dpad_east/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/527/inputs/dpad_west/activators/chord/0/settings/haptic_intensity",
+        "before": "2",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/544/inputs/edge/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      },
+      {
+        "kind": "haptic",
+        "path": "controller_mappings/group/545/inputs/edge/activators/Full_Press/settings/haptic_intensity",
+        "before": "3",
+        "after": "1"
+      }
+    ],
+    "counts": {
+      "version": 1,
+      "haptic": 84,
+      "fn_beep": 4
+    },
+    "intensities": {
+      "0": 347,
+      "1": 135
+    },
+    "description": "unchanged; concise and accurate",
+    "stored_order": "unchanged"
+  }
+}

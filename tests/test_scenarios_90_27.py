@@ -54,7 +54,7 @@ class Pads(ScenarioCase):
                         self.assertEqual(pad.down(), [])
                         pad.wait(1)
                     self.assertEqual((pad.top, pad.down()), (layer, [down]), (name, where))
-                    self.assertEqual(haptics(pad), [f"3 Base {source}/click"])
+                    self.assertEqual(haptics(pad), [f"1 Base {source}/click"])
                     pad.let_go_pad(name).wait(400)
                     self.assertEqual(pad.stack, pad.layers("Base"))
 
@@ -75,14 +75,14 @@ class Pads(ScenarioCase):
     def test_steering_and_the_tap_cover_use_bases_click(self):
         for pad in self.each(start="steering"):
             pad.mark().click_pad("RP", "centre")
-            self.assertEqual((pad.typed(), haptics(pad)), (["mouse_button MIDDLE"], ["3 Base right_trackpad/click"]))
+            self.assertEqual((pad.typed(), haptics(pad)), (["mouse_button MIDDLE"], ["1 Base right_trackpad/click"]))
             pad.wait(300)
             self.assertEqual(pad.top, "Steering")
         for pad in self.each():                                              # a thumb that has rested: the Tap Cover is on
             pad.touch("RP").wait(400).mark()
             self.assertEqual(pad.top, "RTP: Tap Cover")
             pad.sim.press((SOURCES["RP"], "click"))
-            self.assertEqual((pad.down(), haptics(pad)), (["mouse_button MIDDLE"], ["3 Base right_trackpad/click"]))
+            self.assertEqual((pad.down(), haptics(pad)), (["mouse_button MIDDLE"], ["1 Base right_trackpad/click"]))
             pad.sim.release((SOURCES["RP"], "click"))
             pad.lift("RP").wait(400)
             self.assertEqual(pad.stack, pad.layers("Base"))

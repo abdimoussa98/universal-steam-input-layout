@@ -1,0 +1,536 @@
+{
+  "previous_builder_sha256": "d57d5d6ed807960dae32d0b917a3bfda3bd2b80cef3fd23ade80d0547437ae5c",
+  "changes": {
+    "quiet_entries": [
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "dpad_east",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "dpad_west",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "dpad_north",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "dpad_north",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "dpad_south",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "dpad_south",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "touch",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick",
+        "input": "touch",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "right_joystick",
+        "input": "touch",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "right_joystick",
+        "input": "touch",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "right_joystick",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "right_joystick",
+        "input": "edge",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "dpad_east",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "dpad_west",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "dpad_north",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "dpad_north",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "dpad_south",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "dpad_south",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "touch",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick",
+        "input": "touch",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "right_joystick",
+        "input": "touch",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "right_joystick",
+        "input": "touch",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "right_joystick",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "right_joystick",
+        "input": "edge",
+        "activation": "chord",
+        "before": null
+      },
+      {
+        "layer": "Steering",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | LS: Entry Guard",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | LS: Entry Guard",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "release",
+        "before": null
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "release",
+        "before": null
+      },
+      {
+        "layer": "Steering | LS Down: Double Tap",
+        "source": "switch",
+        "input": "always_on_action",
+        "activation": "Full_Press",
+        "before": null
+      },
+      {
+        "layer": "Steering | LS Up: Double Tap",
+        "source": "switch",
+        "input": "always_on_action",
+        "activation": "Full_Press",
+        "before": null
+      }
+    ],
+    "quiet_modes": [
+      {
+        "layer": "Steering | L2: S Key",
+        "source": "joystick"
+      },
+      {
+        "layer": "Steering | R2: W Key",
+        "source": "joystick"
+      }
+    ],
+    "removed_commands": [
+      {
+        "layer": "Gyro | L2!R2: Modifier 2",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "command": "controller_action remove_layer {{Base::Cursor Gyro}} 0 0, , "
+      },
+      {
+        "layer": "Gyro | L2!R2: Modifier 2",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "command": "controller_action remove_layer {{Base::Cursor Gyro}} 0 0, , "
+      },
+      {
+        "layer": "Gyro | R2!L2: Modifier 2",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "command": "controller_action remove_layer {{Base::Cursor Gyro}} 0 0, , "
+      },
+      {
+        "layer": "Gyro | R2!L2: Modifier 2",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "command": "controller_action remove_layer {{Base::Cursor Gyro}} 0 0, , "
+      },
+      {
+        "layer": "Steering | R2!L2: Modifier 2",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "command": "controller_action remove_layer {{Base::Cursor Gyro}} 0 0, , "
+      },
+      {
+        "layer": "Steering | R2!L2: Modifier 2",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "command": "controller_action remove_layer {{Base::Steering}} 0 1, , "
+      },
+      {
+        "layer": "Steering | L2!R2: Modifier 2",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "command": "controller_action remove_layer {{Base::Cursor Gyro}} 0 0, , "
+      },
+      {
+        "layer": "Steering | L2!R2: Modifier 2",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "command": "controller_action remove_layer {{Base::Steering}} 0 1, , "
+      }
+    ],
+    "guard_edge": {
+      "bindings": {
+        "binding": "controller_action remove_layer {{Base::Steering | LS: Entry Guard}} 0 0, , "
+      },
+      "settings": {
+        "gyro_ratchet_button_mask": "50331648",
+        "gyro_ratchet_button_requireany_or_all": "0",
+        "edge_binding_invert": "1",
+        "hold_repeats": "1",
+        "interruptable": "0",
+        "haptic_intensity": "0"
+      }
+    },
+    "driver_entries": [
+      [
+        "Steering",
+        "right_trigger",
+        "edge",
+        "Full_Press"
+      ],
+      [
+        "Steering",
+        "left_trigger",
+        "edge",
+        "Full_Press"
+      ],
+      [
+        "Steering | LS: Entry Guard",
+        "left_trigger",
+        "edge",
+        "Full_Press"
+      ],
+      [
+        "Steering | LS: Entry Guard",
+        "right_trigger",
+        "edge",
+        "Full_Press"
+      ]
+    ],
+    "removal_counts": {
+      "Steering": 2,
+      "Cursor Gyro": 6
+    }
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 548,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline_changed_layout": false
+}

@@ -1,0 +1,200 @@
+"""90.44 contracts: exact cleanup exclusions, explicit silence and inherited response."""
+import copy
+import functools
+import importlib.util
+import json
+import unittest
+
+from steam_layout.model import Layout, actions, entries
+from tests.scenario import ROOT, Pad, VARIANTS, layout_data
+from tests.test_steering_entry_feedback import GUARD, commands
+
+
+@functools.lru_cache(maxsize=None)
+def previous(variant):
+    path = ROOT / 'findings/2026-10-09-steering-entry-and-feedback/build_candidate.py'
+    spec = importlib.util.spec_from_file_location('quiet_drivers_previous', path)
+    builder = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(builder)
+    data, _ = builder.build(variant)
+    return Layout(data)
+
+
+def activators(layout, title):
+    for source, group in layout.active(title).items():
+        for name, slot in group.get('inputs', {}).items():
+            for bank in ('activators', 'disabled_activators'):
+                for index, (kind, entry) in enumerate(entries(slot.get(bank) or {})):
+                    yield (source, name, bank, kind, index), entry
+
+
+def without_haptic(entry):
+    result = copy.deepcopy(entry)
+    result.get('settings', {}).pop('haptic_intensity', None)
+    if not result.get('settings'):
+        result.pop('settings', None)
+    return result
+
+
+def gyro_settings(layout, stack):
+    """The same-mode property inheritance promised by the layout, not a sensor model."""
+    settings, mode = {}, None
+    for title in stack:
+        group = layout.active(title).get('gyro')
+        if group:
+            if group['mode'] != mode:
+                settings = {}
+            mode = group['mode']
+            settings.update(group.get('settings', {}))
+    return mode, settings
+
+
+class SteeringEntryQuietDrivers(unittest.TestCase):
+    def each(self):
+        for variant in VARIANTS:
+            data = layout_data(variant)
+            yield variant, Pad(variant, data=data), Layout(data), previous(variant)
+
+    def test_inverted_edge_is_one_quiet_any_driver_self_removal(self):
+        for variant, _, layout, old in self.each():
+            with self.subTest(variant=variant):
+                group = layout.active(GUARD)['joystick']
+                edge = group['inputs']['edge']['activators']
+                self.assertEqual(list(edge), ['chord', 'release'])
+                self.assertEqual(commands(layout, edge['chord']), [('remove_layer', GUARD, '0', '0')])
+                self.assertEqual(edge['chord']['settings'], {
+                    'gyro_ratchet_button_mask': '12' if variant == 'default' else '50331648',
+                    'gyro_ratchet_button_requireany_or_all': '0',
+                    'edge_binding_invert': '1', 'hold_repeats': '1',
+                    'interruptable': '0', 'haptic_intensity': '0'})
+                self.assertEqual(edge['release'], old.active(GUARD)['joystick']['inputs']['edge']['activators']['release'])
+                self.assertEqual(group['settings'], old.active(GUARD)['joystick']['settings'])
+                for direction in ('north', 'south', 'east', 'west'):
+                    name = 'dpad_' + direction
+                    self.assertEqual(group['inputs'][name], old.active(GUARD)['joystick']['inputs'][name])
+                self.assertEqual(layout.order, old.order)
+                self.assertEqual(layout.titles, old.titles)
+                self.assertEqual(len(layout.cm['action_layers']), 88)
+                self.assertEqual(layout.resolve('65'), GUARD)
+
+    def test_mod2_releases_lose_only_the_requested_stateful_removals(self):
+        for variant, pad, layout, old in self.each():
+            changed = []
+            for first, second in (('L1', 'R1'), ('R1', 'L1')):
+                for family in ('', 'Gyro | ', 'Steering | '):
+                    title = pad.title(f'{family}{first}!{second}: Modifier 2')
+                    before = dict(activators(old, title))
+                    after = dict(activators(layout, title))
+                    self.assertEqual(before.keys(), after.keys())
+                    for location, actual in after.items():
+                        expected = copy.deepcopy(before[location])
+                        source, name, _, kind, _ = location
+                        targeted = kind == 'release' and (
+                            family == 'Gyro | ' and (source, name) in (pad.control(first), pad.control(second))
+                            or family == 'Steering | ' and (source, name) == pad.control(second))
+                        if targeted:
+                            protected = {'Cursor Gyro'} | ({'Steering'} if family == 'Steering | ' else set())
+                            old_commands = actions(expected)
+                            expected['bindings']['binding'] = [action for action in old_commands
+                                if not any(op == 'remove_layer' and target in protected
+                                           for op, target in old.layer_ops({'bindings': {'binding': action}}))]
+                            self.assertEqual(len(old_commands) - len(actions(expected)), len(protected))
+                            changed.append((title, source, name))
+                        # 90.48 also silences the ordinary/Gyro combined-cover
+                        # add; the Steering Mod 2 bump remains intentional.
+                        if family in ('', 'Gyro | ') and kind == 'chord' and expected.get('settings', {}).get('delay_start') == '200':
+                            expected['settings']['haptic_intensity'] = '0'
+                        self.assertEqual(actual, expected, (variant, title, location))
+            self.assertEqual(len(changed), 6)
+            self.assertEqual(len({title for title, _, _ in changed}), 4)
+
+    def test_all_driver_owned_activators_are_off_with_only_mod2_repeat_added(self):
+        for variant, pad, layout, old in self.each():
+            count = 0
+            for default_title in ('Steering | R1: W Key', 'Steering | L1: S Key'):
+                title = pad.title(default_title)
+                current = dict(activators(layout, title))
+                before = dict(activators(old, title))
+                self.assertEqual(current.keys(), before.keys())
+                for location, entry in current.items():
+                    self.assertEqual(entry.get('settings', {}).get('haptic_intensity'), '0', (variant, title, location))
+                    expected = without_haptic(before[location])
+                    if location[3] == 'chord' and any(op == 'add_layer' and target.endswith(': Modifier 2')
+                                                     for op, target in layout.layer_ops(entry)):
+                        expected.setdefault('settings', {}).update(hold_repeats='1', repeat_rate='50')
+                    self.assertEqual(without_haptic(entry), expected, (variant, title, location))
+                    if location[2] == 'activators':
+                        count += 1
+                for source, group in layout.active(title).items():
+                    expected = copy.deepcopy(old.active(title)[source].get('settings', {}))
+                    if source == 'joystick':
+                        expected['haptic_intensity_override'] = '0'
+                    self.assertEqual(group.get('settings', {}), expected)
+            self.assertEqual(count, 50)
+
+    def test_driver_handoffs_modifier_releases_and_delayed_completion_are_quiet(self):
+        for variant, pad, layout, old in self.each():
+            checks = []
+            for owner in ('Steering', GUARD):
+                for driver in ('L1', 'R1'):
+                    source, name = pad.control(driver)
+                    checks.append((owner, source, name, 'chord'))
+            for direction, number in (('Down', 0), ('Up', 1)):
+                checks.append((f'Steering | LS {direction}: Modifier {number}', 'joystick', 'edge', 'release'))
+                checks.append((f'Steering | LS {direction}: Double Tap', 'switch', 'always_on_action', 'Full_Press'))
+            for title, source, name, kind in checks:
+                current = layout.active(title)[source]['inputs'][name]['activators'][kind]
+                self.assertEqual(current.get('settings', {}).get('haptic_intensity'), '0', (variant, title))
+                if title in ('Steering', GUARD):
+                    expected_ops = [
+                        ('add_layer', pad.title('Steering | R1: W Key' if (source, name) == pad.control('R1')
+                                               else 'Steering | L1: S Key'))]
+                    if title == GUARD:
+                        expected_ops.insert(0, ('remove_layer', GUARD))
+                    self.assertEqual(layout.layer_ops(current), expected_ops)
+                    expected_mask = ('4' if (source, name) == pad.control('R1') else '8') if variant == 'default' \
+                        else ('16777217' if (source, name) == pad.control('R1') else '33554434')
+                    self.assertEqual(current['settings'], {'hold_repeats': '1', 'repeat_rate': '50',
+                        'haptic_intensity': '0', 'interruptable': '0', 'gyro_ratchet_button_mask': expected_mask,
+                        'gyro_ratchet_button_requireany_or_all': '0'})
+                else:
+                    before = old.active(title)[source]['inputs'][name]['activators'][kind]
+                    self.assertEqual(without_haptic(current), without_haptic(before), (variant, title))
+
+    def test_cursor_response_and_deliberate_exits_are_unchanged_with_gyro_on_or_off(self):
+        selectors = ('gyro_ratchet_button_mask', 'gyro_ratchet_button_requireany_or_all')
+        response = {'gyro_precision_speed': '750', 'haptic_intensity': '0',
+                    'flickstick_haptic_bump_per_angle': '1', 'mouse_move_threshold': '5'}
+        for variant, _, layout, old in self.each():
+            self.assertEqual(layout.active('Cursor Gyro'), old.active('Cursor Gyro'))
+            for stack, activation_owner in ((('Base', 'Gyro', 'Cursor Gyro'), 'Gyro'),
+                                             (('Base', 'Cursor Gyro'), 'Base'),
+                                             (('Base', 'Cursor Gyro', 'Gyro'), 'Gyro')):
+                mode, merged = gyro_settings(layout, stack)
+                self.assertEqual(mode, 'gyro_to_mouse')
+                for key, value in response.items():
+                    self.assertEqual(merged[key], value, (variant, stack, key))
+                for key in selectors:
+                    self.assertEqual(merged[key], layout.active(activation_owner)['gyro']['settings'][key])
+            for title in ('Transition Set 1', 'Transition Set 2'):
+                self.assertEqual(layout.active(title), old.active(title))
+
+    def test_base_and_ramps_keep_reference_settings_except_requested_sensitivity(self):
+        path = ROOT / 'findings/2026-07-11-layer-order-swap/MOST_RECENT_LAYOUT.post-fix.json'
+        reference = Layout(json.loads(path.read_text()))
+        titles = ('Base', 'Turning Ramp Up 0', 'Turning Ramp Up 1', 'Gyro Off Ramp Up')
+        sensitivities = {'Base': '150', 'Turning Ramp Up 0': '200', 'Turning Ramp Up 1': '250'}
+        for variant in VARIANTS:
+            layout = Layout(layout_data(variant))
+            for title in titles:
+                settings = layout.active(title).get('right_joystick', {}).get('settings', {})
+                expected = copy.deepcopy(reference.active(title).get('right_joystick', {}).get('settings', {}))
+                if title in sensitivities:
+                    expected['sensitivity'] = sensitivities[title]
+                    if title != 'Base':
+                        expected['sensitivity_vert_scale'] = str(15000 // int(sensitivities[title]))
+                self.assertEqual(settings, expected, (variant, title))
+
+
+if __name__ == '__main__':
+    unittest.main()

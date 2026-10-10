@@ -1,0 +1,21 @@
+......................F........F......................
+======================================================================
+FAIL: test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver (tests.test_scenarios_90_43.SteeringModifierRecovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/test_scenarios_90_43.py", line 257, in test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver
+    self.assertTrue(pad.lacks('Steering', GUARD, owner, modifier,
+AssertionError: False is not true [on default {'exposed_fires': True, 'reverse_ties': False} at 750 ms, stack ('Base', 'Steering', 'LST: Entry Point', 'LST: Tap Cover', 'Stateful | Menu Right: Entry Point', 'Menu Buttons: Left Stick Guard', 'Menu Buttons: Tap Cover')]
+
+======================================================================
+FAIL: test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear (tests.test_scenarios_90_44.QuietSteeringDrivers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/test_scenarios_90_44.py", line 167, in test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear
+    self.assertTrue(pad.lacks('Steering', mod2))
+AssertionError: False is not true [on default {'exposed_fires': True, 'reverse_ties': False} at 290 ms, stack ('Base', 'Steering', 'LST: Entry Point', 'Steering | L1: S Key', 'Steering | LS Up: Modifier 1', 'Steering | LS: Tap Cover')]
+
+----------------------------------------------------------------------
+Ran 54 tests in 96.550s
+
+FAILED (failures=2)

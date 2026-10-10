@@ -16,6 +16,10 @@ Read-only. Exit codes: 0 = every audit passed, 1 = at least one failed.
     python3 -m tools.audit_build                      # both neptune/*_latest.json
     python3 -m tools.audit_build path/to/layout.json  # one layout
     python3 -m tools.audit_build --verbose            # show each failing audit's output
+    python3 -m tools.audit_build candidate.json --rules candidate-rules.json --baseline baseline.json
+
+Candidate rules are passed to Window, Flow and Cleanup. An explicit baseline
+applies to Flow and Cleanup and requires exactly one input layout.
 """
 import argparse
 from pathlib import Path
@@ -39,8 +43,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("layouts", nargs="*", type=Path, help="default: neptune/*_latest.json")
     parser.add_argument("--verbose", action="store_true", help="print the output of each failing audit")
+    parser.add_argument("--rules", type=Path, help="candidate-specific Flow/Cleanup rules and Window register")
+    parser.add_argument("--baseline", type=Path, help="explicit Flow/Cleanup baseline (requires one layout)")
     args = parser.parse_args()
     layouts = args.layouts or sorted((ROOT / "neptune").glob("*_latest.json"))
+    if args.baseline and len(layouts) != 1:
+        parser.error("--baseline requires exactly one layout")
     if not layouts:
         print("Audit error: no layouts found", file=sys.stderr)
         return 1
@@ -49,13 +57,20 @@ def main():
         print(layout.name)
         for name, module in AUDITS:
             start = time.monotonic()
-            result = subprocess.run([sys.executable, "-m", module, str(layout)],
+            command = [sys.executable, "-m", module, str(layout)]
+            if args.rules and module != "tools.audit_command_budget":
+                flag = {"tools.audit_inheritance": "--register", "tools.audit_flow_inheritance": "--config",
+                        "tools.audit_cleanups": "--rules"}[module]
+                command += [flag, str(args.rules)]
+            if args.baseline and module in ("tools.audit_flow_inheritance", "tools.audit_cleanups"):
+                command += ["--baseline", str(args.baseline)]
+            result = subprocess.run(command,
                                     capture_output=True, text=True, cwd=ROOT)
             status = "pass" if result.returncode == 0 else f"FAIL (exit {result.returncode})"
             print(f"  {name:<13} {status:<15} {time.monotonic() - start:.1f}s")
             if result.returncode:
                 failed += 1
-                print(f"    rerun: python3 -m {module} {layout}")
+                print("    rerun:", " ".join(command))
                 if args.verbose:
                     print((result.stdout + result.stderr).rstrip())
     print(f"Build audit {tag(ENFORCES[None])}:", "clean" if not failed else f"{failed} audit(s) failed")

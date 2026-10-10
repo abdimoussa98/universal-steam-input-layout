@@ -1,0 +1,119 @@
+{
+  "kind": "in-memory diagnostic only, not a saved layout fix",
+  "change": "Remove W/S owner removals only from each LS modifiers right-stick-edge fallback; preserve modifier and cover removals.",
+  "cases": [
+    {
+      "variant": "default",
+      "driver": "R1",
+      "direction": "north",
+      "initial_hold_ms": 30,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "default",
+      "driver": "R1",
+      "direction": "north",
+      "initial_hold_ms": 300,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "default",
+      "driver": "R1",
+      "direction": "south",
+      "initial_hold_ms": 30,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "default",
+      "driver": "R1",
+      "direction": "south",
+      "initial_hold_ms": 300,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "default",
+      "driver": "L1",
+      "direction": "north",
+      "initial_hold_ms": 30,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "default",
+      "driver": "L1",
+      "direction": "north",
+      "initial_hold_ms": 300,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "default",
+      "driver": "L1",
+      "direction": "south",
+      "initial_hold_ms": 30,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "default",
+      "driver": "L1",
+      "direction": "south",
+      "initial_hold_ms": 300,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "alternative",
+      "driver": "R1",
+      "direction": "north",
+      "initial_hold_ms": 30,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "alternative",
+      "driver": "R1",
+      "direction": "north",
+      "initial_hold_ms": 300,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "alternative",
+      "driver": "R1",
+      "direction": "south",
+      "initial_hold_ms": 30,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "alternative",
+      "driver": "R1",
+      "direction": "south",
+      "initial_hold_ms": 300,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "alternative",
+      "driver": "L1",
+      "direction": "north",
+      "initial_hold_ms": 30,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "alternative",
+      "driver": "L1",
+      "direction": "north",
+      "initial_hold_ms": 300,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "alternative",
+      "driver": "L1",
+      "direction": "south",
+      "initial_hold_ms": 30,
+      "stays_in_steering": true
+    },
+    {
+      "variant": "alternative",
+      "driver": "L1",
+      "direction": "south",
+      "initial_hold_ms": 300,
+      "stays_in_steering": true
+    }
+  ],
+  "stale_owner_recovery_cases_passed": 4
+}

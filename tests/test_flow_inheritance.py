@@ -236,6 +236,28 @@ class GateTests(unittest.TestCase):
         self.assertEqual(report["needs_review"], [])
         self.assertEqual(out.returncode, 0, out.stdout)
 
+    def test_a_flow_decision_requires_its_declared_layout_scope(self):
+        accepted = {"rule": "R139", "status": "allow", "why": "historical inheritance",
+                    "decided": "test", "todo": None,
+                    "scope": {"layers": ["T"], "inputs": ["button_diamond/button_y"]}}
+        for gates, applies in (({"where": "A"}, True), ({"where": "Absent"}, False),
+                               ({"not_where": "A"}, False), ({"not_where": "Absent"}, True)):
+            with self.subTest(gates=gates):
+                scoped = {**accepted, "scope": {**accepted["scope"], **gates}}
+                _, report = self.audit(self.varying(), baseline=self.before("A", "button_x"),
+                                       rules={**self.RULES, "exceptions": [scoped]})
+                row = next(i for i in report["targets"]["T"]["inputs"] if i["input"] == "button_y")
+                self.assertEqual(bool(row.get("decision")), applies)
+                self.assertEqual(("T", "button_diamond/button_y", "varies") in self.review(report), not applies)
+                self.assertEqual(report["stale_decisions"], [])
+
+    def test_an_unused_decision_is_still_stale_inside_its_applicable_scope(self):
+        accepted = {"rule": "R139", "status": "allow", "why": "historical inheritance",
+                    "decided": "test", "todo": None,
+                    "scope": {"layers": ["T"], "inputs": ["joystick/edge"], "where": "A"}}
+        _, report = self.audit(self.varying(), rules={**self.RULES, "exceptions": [accepted]})
+        self.assertEqual(report["stale_decisions"], ["T joystick/edge"])
+
     def test_cover_layers_are_accepted_by_the_cover_rule_when_the_register_says_so(self):
         covers = {"version": 1, "covers": {"titles": ["T", "T2"]}}
         _, report = self.audit(self.varying(), baseline=self.before("A", "button_x"), rules=covers)
@@ -256,6 +278,54 @@ class GateTests(unittest.TestCase):
         self.assertFalse(report["clean"])
         self.assertEqual(out.returncode, 1)
         self.assertIn("Coverage gap [R145]: no chain of adding bindings reaches: Orphan", out.stdout)
+
+    def dormant_rules(self, *layers):
+        return {**self.RULES, "exceptions": [{"rule": "R145", "status": "todo",
+                "scope": {"layers": list(layers), "dormant": True}, "why": "Entry disabled pending redesign",
+                "decided": "Author request", "todo": "todos.md: redesign"}]}
+
+    def test_an_explicitly_retained_dormant_layer_is_reported_without_a_fake_entry(self):
+        layout = fixture({"Base": switches(left_bumper=inp(Full_Press=entry(add("Live")))),
+                          "Live": switches(left_bumper=inp(release=entry(rem("Live")))), "Dormant": {}})
+        out, report = self.audit(layout, rules=self.dormant_rules("Dormant"))
+        self.assertEqual(out.returncode, 0, out.stdout)
+        self.assertEqual(report["unreached"], [])
+        self.assertEqual([row["layer"] for row in report["dormant"]], ["Dormant"])
+        self.assertNotIn("Dormant", report["targets"])
+        self.assertEqual(report["view"]["contexts"], [["Base"]])
+        self.assertIn("Retained dormant [R145]: Dormant (todo)", out.stdout)
+
+    def test_a_dormant_declaration_does_not_excuse_another_unreachable_layer(self):
+        layout = fixture({"Base": {}, "Dormant": {}, "Missing": {}})
+        out, report = self.audit(layout, rules=self.dormant_rules("Dormant"))
+        self.assertEqual(out.returncode, 1)
+        self.assertEqual(report["unreached"], ["Missing"])
+        self.assertEqual([row["layer"] for row in report["dormant"]], ["Dormant"])
+
+    def test_an_explicit_dormant_target_audit_still_fails(self):
+        layout = fixture({"Base": {}, "Dormant": {}})
+        out, _ = self.audit(layout, "--layer", "Dormant", rules=self.dormant_rules("Dormant"))
+        self.assertEqual(out.returncode, 1)
+        self.assertIn("Coverage gap [R145]: no chain of adding bindings reaches Dormant", out.stdout)
+
+    def test_a_reachable_declared_layer_still_gets_its_cover_checks(self):
+        layout = cover_layout()
+        layout.active("Cover")["switch"]["inputs"]["left_bumper"] = inp(release=entry(rem("A")))
+        out, report = self.audit(layout, rules=self.dormant_rules("Cover"))
+        self.assertEqual(out.returncode, 1)
+        self.assertEqual(report["dormant"], [])
+        self.assertIn("Cover", report["targets"])
+        self.assertTrue(any(f["check"] == "outlives owners" for c in report["covers"] for f in c["findings"]))
+
+    def test_dormant_bindings_still_have_to_pass_the_command_budget(self):
+        from tools.audit_command_budget import audit_layout
+        layout = fixture({"Base": {}, "Dormant": switches(left_bumper=inp(Full_Press=[entry(EMPTY)] * 4))})
+        out, report = self.audit(layout, rules=self.dormant_rules("Dormant"))
+        self.assertEqual(out.returncode, 0, out.stdout)
+        self.assertEqual([row["layer"] for row in report["dormant"]], ["Dormant"])
+        budget = audit_layout({"controller_mappings": layout.cm})
+        self.assertEqual(len(budget["violations"]), 1)
+        self.assertEqual(budget["violations"][0]["input"], "left_bumper")
 
     def test_a_cover_finding_is_printed_with_its_rule(self):
         import contextlib
@@ -320,6 +390,18 @@ class GateTests(unittest.TestCase):
 
 class NeptuneFlowTests(unittest.TestCase):
 
+    def test_the_reused_entry_guard_is_reachable_without_a_dormant_exemption(self):
+        from tools.audit_flow_inheritance import run
+        for variant in ("default", "alternative"):
+            with self.subTest(variant=variant):
+                live = ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json"
+                report = run(live, baseline=live)
+                self.assertEqual(report["dormant"], [])
+                self.assertIn("Steering | LS: Entry Guard", report["targets"])
+                self.assertNotIn("Steering | LS: Fallback Guard", report["targets"])
+                self.assertEqual(report["unreached"], [])
+                self.assertTrue(report["clean"], report["needs_review"])
+
     def test_cli_runs_without_out_and_reports_json(self):
         for variant in ("default", "alternative"):
             run = subprocess.run([sys.executable, "-m", "tools.audit_flow_inheritance",
@@ -336,7 +418,8 @@ class NeptuneFlowTests(unittest.TestCase):
             self.assertEqual(report["stale_decisions"], [])
             layout = Layout(json.loads((ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json").read_text()))
             # R145: a chain reaches every layer, except the ones only hold_layer adds.
-            self.assertEqual(set(report["targets"]), set(layout.presets) - {layout.base} - set(report["legacy_only"]))
+            self.assertEqual(set(report["targets"]), set(layout.presets) - {layout.base} - set(report["legacy_only"])
+                             - {row["layer"] for row in report["dormant"]})
             # R144: every cover-type layer is cover-checked, and nothing else is.
             checked = {c["cover"] for c in report["covers"]}
             self.assertEqual(checked, {title for title, row in report["targets"].items() if row["cover"]})

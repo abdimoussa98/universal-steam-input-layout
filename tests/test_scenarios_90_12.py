@@ -49,15 +49,28 @@ class CleanupLists(ScenarioCase):
                     pad.miss(side).push(stick, direction)                         # once
                     self.assertFalse([t for t in pad.stack if "Modifier" in t or "Cursor" in t])
 
-    @scenario("90.12 C4", rules=("R127",), rests=("A27",))
+    @scenario("90.12 C4", rules=("R127",), rests=("A25", "A27"))
     def test_steering_modifier_2_stays_while_one_bumper_is_held(self):
-        for pad in self.each(start="steering"):
-            pad.hold("R1", "L1").wait(50)
-            self.assertEqual(pad.top, "Steering | R1!L1: Modifier 2")
-            pad.miss("R1").touch("RS")
-            self.assertEqual(pad.top, "Steering | R1!L1: Modifier 2")             # nothing clears
-            pad.lift("RS").let_go("L1").wait(200)
-            self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
+        for resting_thumb in (False, True):
+            for pad in self.each(start="steering"):
+                if resting_thumb:
+                    pad.touch("LS").wait(300)                                # explicitly keep the old fixture's recovery input
+                pad.hold("R1", "L1").wait(50)
+                self.assertEqual(pad.top, "Steering | R1!L1: Modifier 2")
+                pad.miss("R1").touch("RS")
+                self.assertEqual(pad.top, "Steering | R1!L1: Modifier 2")         # nothing clears
+                pad.lift("RS").let_go("L1").wait(200)
+                self.assertEqual(pad.down(), [])
+                if resting_thumb:
+                    self.assertEqual(pad.stack, pad.layers("Base", "Steering", "LST: Entry Point", "LST: Tap Cover"))
+                else:
+                    # With no recovery input held, the missed driver release waits
+                    # for a fresh touch. This also occurs in the frozen 90.46 layout.
+                    self.assertEqual(pad.stack, pad.layers("Base", "Steering", "Steering | R1: W Key"))
+                    pad.touch("RS").wait(50)
+                    self.assertEqual(pad.stack, pad.layers("Base", "Steering", "RST: Entry Point"))
+                pad.lift("LS").lift("RS").wait(300)
+                self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
 
     @scenario("90.12 C5", rests=("A3",))
     def test_rocking_never_scrolls_and_ends_on_base(self):
@@ -104,6 +117,8 @@ class CleanupLists(ScenarioCase):
             pad.hold("R1").miss("R1")
             self.assertEqual(pad.top, "Steering | R1: W Key")
             pad.touch("RS")
+            self.assertEqual(pad.stack, pad.layers("Base", "Steering", "RST: Entry Point"))
+            pad.lift("RS").wait(300)
             self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
 
     @scenario("90.12 C8", rules=("R128",), rests=("A8",))

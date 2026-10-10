@@ -1,0 +1,13 @@
+F.
+======================================================================
+FAIL: test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver (tests.test_scenarios_90_43.SteeringModifierRecovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/test_scenarios_90_43.py", line 262, in test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver
+    self.assertEqual(pad.has('Steering'), menu)
+AssertionError: False != True [on default {'exposed_fires': False, 'reverse_ties': False} at 750 ms, stack ('Base', 'LST: Entry Point', 'LST: Tap Cover', 'Menu Right: Entry Point', 'Menu Buttons: Left Stick Guard')]
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.632s
+
+FAILED (failures=1)

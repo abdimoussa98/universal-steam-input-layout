@@ -1,0 +1,32 @@
+{
+  "release": "90.43",
+  "method": "Each 90.42 parent was rebuilt with the updated compatibility rules and matched the pre-edit live hash. build_from applied the three 90.43 components, reached the standard pipeline fixed point, round-tripped runtime IDs, and installed the matching candidates.",
+  "components": {
+    "build_candidate.py": "d57d5d6ed807960dae32d0b917a3bfda3bd2b80cef3fd23ade80d0547437ae5c",
+    "entry_guard.py": "166e4fc6cc32fdb8e96d3b38d473c81a04027f7a34b1009f159a3bc49e5aa38f",
+    "modifier_recovery.py": "1f76e64da6110a7a6b5222a0c336d39d5ccb3f38b368638b5bf1a9ffeced8466",
+    "beeps.py": "e88bcbb686222503fc95a73a3bdd36f2735345f783c1504f1c1d5bcb713cce2b"
+  },
+  "variants": [
+    {
+      "variant": "default",
+      "previous_sha256": "a9a60b6049110053b797b8fcd57ea828e5cb5a4e0bab0a3490c63ee90bd0be43",
+      "candidate_sha256": "cb70462d20f13a32c9e86f9ec19238b8aade73bfd0c6e2ef99e7096c78ed0d58",
+      "live_matches_candidate": true,
+      "preflight": "PASS",
+      "layers": 88,
+      "description_reviewed": "WASD movement, gyro aiming, right-stick turn assist, and circular trackpad scrolling. L2/R2: mouse buttons; L1/R1: modifiers. Includes Fn controls, Steering, Cursor Gyro, and Gamepad modes.",
+      "pipeline_changed_layout": false
+    },
+    {
+      "variant": "alternative",
+      "previous_sha256": "254ab239742857b90d24cf566a4e8b9994045a2acf538b2a43a593ec88fa9205",
+      "candidate_sha256": "f8d75259c9d5630f40bbfd6849d199eeae6d8afbb25a437cf3448905a7e11d5b",
+      "live_matches_candidate": true,
+      "preflight": "PASS",
+      "layers": 88,
+      "description_reviewed": "WASD movement, gyro aiming, right-stick turn assist, and circular trackpad scrolling. L1/R1: mouse buttons; L2/R2: modifiers. Includes Fn controls, Steering, Cursor Gyro, and Gamepad modes.",
+      "pipeline_changed_layout": false
+    }
+  ]
+}

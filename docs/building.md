@@ -5,20 +5,29 @@ Both working layouts, `neptune/single-set-default_hold-gyro_latest` and
 **generated**. They have 88 layers each since 90.33. A hand edit in `neptune/`
 is lost on the next install.
 
+The separate [90.39 fallback-window testing candidate](../findings/2026-10-09-fallback-window-backport/README.md)
+extends frozen 90.32 with compatible later fixes. It has 90 layers and writes
+to its findings folder, with distinctly named snapshots under
+`versions/neptune/90.39/`. It is an inactive experiment: the live 90.48 release
+continues from 90.38 through 90.40–90.47. Its build/validation commands, local rules and
+scenario coverage remain separate from the live layouts.
+
 ## The builder
 
-The current builder is in the newest build folder under `findings/`: at 90.36,
-[findings/2026-10-06-cleanup-entry-order](../findings/2026-10-06-cleanup-entry-order/README.md).
+The current live builder is
+[findings/2026-10-10-quiet-gyro-and-guard-handoff](../findings/2026-10-10-quiet-gyro-and-guard-handoff/README.md),
+for 90.48, extending 90.47. A separately named testing candidate does not become the live
+builder merely by having a newer version number.
 
 ```bash
-python3 findings/2026-10-06-cleanup-entry-order/build_candidate.py            # builds the candidates in that folder
-python3 findings/2026-10-06-cleanup-entry-order/install_neptune.py --deck     # a trial copy in that folder's deck/
-python3 findings/2026-10-06-cleanup-entry-order/install_neptune.py --version 90.37   # writes neptune/ and exports the VDFs
+python3 findings/2026-10-10-quiet-gyro-and-guard-handoff/build_candidate.py            # candidates in that folder
+python3 findings/2026-10-10-quiet-gyro-and-guard-handoff/build_candidate.py --install  # writes working JSON
 ```
 
-`install_neptune.py` runs the fix pipeline (`steam_layout.fixes`) and writes
-`neptune/`. Saving the snapshot under `versions/` is a separate step
-([publishing](publishing.md)).
+The builder runs the fix pipeline (`steam_layout.fixes`). After installation,
+validate, export both sibling VDFs and save the version snapshots using
+`steam-layout-apply` ([publishing](publishing.md)). Older builders use a
+separate `install_neptune.py` for installation.
 
 ## The chain
 
@@ -27,6 +36,17 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.48 | [quiet-gyro-and-guard-handoff](../findings/2026-10-10-quiet-gyro-and-guard-handoff/README.md) | Silent normal/Gyro two-driver hold; Steering adds W/S without redundant Guard removal; atomic Guard handoff retained |
+| 90.47 | [quiet-cursor-and-steering-touch](../findings/2026-10-10-quiet-cursor-and-steering-touch/README.md) | Silent delayed Temp Cursor adds; Steering inherits LST/RST; both touch windows override LS up/down with plain W/S |
+| 90.46 | [ramp-menu-and-driver-chords](../findings/2026-10-10-ramp-menu-and-driver-chords/README.md) | Both menu entries clear all three ramps before opening their contextual menu; Steering/Guard use quiet repeating driver self-chords; Gyro Off Ramp Up owns its driver exits |
+| 90.45 | [right-stick-sensitivity](../findings/2026-10-10-right-stick-sensitivity/README.md) | Right-stick sensitivity 150 → 200 → 250; ramp vertical scales 75%/60% keep the configured vertical target at 150 |
+| 90.44 | [steering-entry-and-quiet-drivers](../findings/2026-10-10-steering-entry-and-quiet-drivers/README.md) | Driver-conditioned inward Entry Guard exit; explicit quiet W/S and modifier-release feedback; Steering Modifier 2 retains Steering; dual-driver releases retain Cursor Gyro |
+| 90.43 | [steering-entry-and-feedback](../findings/2026-10-09-steering-entry-and-feedback/README.md) | Reuses the fallback slot as Entry Guard; protects held/first movement; preserves held W/S during modifier recovery and prevents stale re-adds; one beep per mode change |
+| 90.42 | [fn-haptics-and-steering-clear](../findings/2026-10-09-fn-haptics-and-steering-clear/README.md) | Low feedback on every Fn entry; full-deflection Steering up/down clears its family and shared single-side covers; Fallback Guard retained dormant, with no new layers |
+| 90.41 | [low-haptics-and-silent-fn](../findings/2026-10-09-low-haptics-and-silent-fn/README.md) | All explicit enabled haptics use Low; ordinary and Stateful Fn-layer adds are silent |
+| 90.40 | [circular-scroll-haptics](../findings/2026-10-09-circular-scroll-haptics/README.md) | Extends 90.38 directly: right-trackpad circular-scroll haptics change from Off to Low in both variants |
+| 90.38 | [steering-rtp-and-menu-chords](../findings/2026-10-08-steering-rtp-and-menu-chords/README.md) | Repeating menu chords, RTP access and ordered delayed completion in Steering, near-rim fallback entry and the local inverted-edge return |
+| 90.37 | [menu-base-chords](../findings/2026-10-06-menu-base-chords/README.md) | Base's repeating, uninterruptible menu self-chords |
 | 90.36 | [cleanup-entry-order](../findings/2026-10-06-cleanup-entry-order/README.md) | One change to the finished layout and no bind changes: every input with a cleanup function stores its entries as Regular Press, guard, Release. 121 inputs per layout were stored otherwise, among them the stick touches of the four menu Entry Points |
 | 90.35 | [steering-fallback-swap](../findings/2026-10-06-steering-fallback-swap/README.md) | Changes to the finished layout: `Steering` and its fallback guard swap places (the bind that adds one removes the other), so the guard's eight-way stick is never over `Steering`'s four-way one; the guard carries `Steering`'s Start, Select and right pad; a driver's press removes the ramp layers before it adds its layer |
 | 90.34 | [steering-four-way-and-open-edges](../findings/2026-10-05-steering-four-way-and-open-edges/README.md) | Four changes to the finished layout: `Steering` stops blocking both stick edges, so turn assist runs in Steering base and in the fallback guard; its left stick is four-way; up and down add the guard at once with a repeating press; the guard states eight-way |

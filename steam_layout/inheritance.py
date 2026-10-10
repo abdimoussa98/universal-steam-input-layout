@@ -13,6 +13,7 @@ audit_inheritance.py for the CLI.
 import copy
 
 from .chains import Chains
+from .flow_model import resolve
 from .model import EMPTY, LAYER_COMMAND, MODE_SHIFT, Layout, always_on_layers, bindings, defined, map_title
 from .model import entries as model_entries
 from .stacks import effective_input
@@ -168,6 +169,31 @@ def blocks_needed(layout, stacks, routes):
     return result
 
 
+def declared_stacks(layout, spec, mapping):
+    """Extra reviewed stacks, optionally gated by an inherited entry input.
+
+    `when_inherited` scopes a stack to layouts where its top layer exposes the
+    named lower owner's input. This keeps a newly reachable route covered
+    without making frozen builders block inputs on stacks they cannot enter.
+    The normal resolver preserves source-mode and disabled-source isolation.
+    """
+    result = []
+    for row in spec.get("stacks", []):
+        stack = tuple(map_title(t, mapping) for t in row["layers"])
+        condition = row.get("when_inherited")
+        if condition is not None:
+            if not isinstance(condition, dict) or set(condition) != {"source", "input", "from_layer"}:
+                raise ValueError(f"when_inherited needs source, input and from_layer: {condition}")
+            if not stack or any(t not in layout.presets for t in stack):
+                continue
+            owner = map_title(condition["from_layer"], mapping)
+            kind, actual, _, _ = resolve(layout, stack, condition["source"], condition["input"])
+            if kind != "binding" or actual != owner or actual == stack[-1]:
+                continue
+        result.append(stack)
+    return result
+
+
 def audit(data, config):
     layout = Layout(data)
     variant = "alternative" if "alternative" in layout.cm.get("title", "") else "default"
@@ -184,7 +210,7 @@ def audit(data, config):
             if decision.get("status") not in STATUSES or not decision.get("why"):
                 raise ValueError(f"{title}: decision needs status {STATUSES} and a why: {decision}")
             decisions[(decision["source"], decision["input"])] = decision
-        declared = [tuple(map_title(t, mapping) for t in s["layers"]) for s in spec.get("stacks", [])]
+        declared = declared_stacks(layout, spec, mapping)
         chained = lineage.below(title)
         stacks = list(dict.fromkeys(declared + list(chained)))
         routes, blocked, used = [], [], set()

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/Library/Developer/CommandLineTools/usr/bin/python3",
+    "-m",
+    "unittest",
+    "tests.test_flow_inheritance",
+    "tests.test_exceptions",
+    "tests.test_rule_registry",
+    "-v"
+  ],
+  "tests": 77,
+  "seconds": 2.821,
+  "returncode": 0,
+  "passed": true,
+  "scope": "Flow inheritance, exception expansion and rule registry after historical fallback decision scoping"
+}

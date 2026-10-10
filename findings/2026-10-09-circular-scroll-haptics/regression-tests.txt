@@ -1,0 +1,28 @@
+test_a_cleanup_input_stores_the_regular_press_then_the_guard_then_the_release (tests.test_layout_rules.LayoutRules) ... ok
+test_a_reset_repeats_more_slowly_than_its_delay (tests.test_layout_rules.LayoutRules) ... ok
+test_every_snapshot_holds_both_layouts_under_its_own_version (tests.test_layout_rules.LayoutRules) ... ok
+test_every_value_is_one_the_editor_can_set (tests.test_layout_rules.LayoutRules) ... ok
+test_hold_layer_is_used_only_where_the_register_says (tests.test_layout_rules.LayoutRules) ... ok
+test_layer_titles_are_unique (tests.test_layout_rules.LayoutRules) ... ok
+test_no_binding_switches_action_sets_and_there_is_one_set (tests.test_layout_rules.LayoutRules) ... ok
+test_the_alternative_has_the_defaults_layers_with_l2_and_r2 (tests.test_layout_rules.LayoutRules) ... ok
+test_directional_hold_completes_before_rtp_cleanup (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_each_stateful_owner_enters_and_releases_both_menu_fn_layers (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_full_direction_enters_fallback_once_with_a_strong_pulse (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_gyro_modifier_edge_still_takes_precedence_over_the_fallback_chord (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_menu_delay_adds_its_target_before_removing_rtp (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_rtp_window_blocks_steering_direction_mutations_until_it_exits (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_stateful_menu_reenters_after_a_pad_window_and_recovers_a_missed_release (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_the_additive_return_stack_can_drive_reenter_fallback_and_clear (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_touch_hold_and_double_tap_scroll_work_in_steering_and_fallback (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_a_thumb_that_lifts_in_circular_scroll_ends_the_scroll_too (tests.test_scenarios_90_16.PadClickExits) ... ok
+test_a_click_in_circular_scroll_goes_through_the_entry_point (tests.test_scenarios_90_14.PadClick) ... ok
+test_delayed_targets_complete_before_rtp_cleanup_including_touch_completion (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+test_inverted_edge_exception_rejects_changed_action_selector_repeat_or_owner (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+test_menu_entry_conditions_repeat_and_do_not_repeat_key_output (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+test_steering_inherits_pad_and_direction_soft_presses_keep_the_swap (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 1.701s
+
+OK

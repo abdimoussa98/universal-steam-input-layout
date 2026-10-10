@@ -1,0 +1,19 @@
+Changes from alternative-candidate.json to single-set-alternative_hold-gyro_latest.json
+Layers: 88 -> 88 (added: none; removed: none)
+
+== Base
+  right_joystick: settings
+    before: {"sensitivity": "100"}
+    after:  {"sensitivity": "150"}
+
+== Turning Ramp Up 0
+  right_joystick: settings
+    before: {"sensitivity": "150", "sensitivity_vert_scale": "80"}
+    after:  {"sensitivity": "200", "sensitivity_vert_scale": "75"}
+
+== Turning Ramp Up 1
+  right_joystick: settings
+    before: {"sensitivity": "200", "sensitivity_vert_scale": "67"}
+    after:  {"sensitivity": "250", "sensitivity_vert_scale": "60"}
+
+3 layers changed, 3 changes

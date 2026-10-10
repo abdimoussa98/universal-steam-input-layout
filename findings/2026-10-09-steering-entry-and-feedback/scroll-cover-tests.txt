@@ -1,0 +1,9 @@
+Latest component validation, separate from final installed-layout validation.
+Loaded preflighted 90.42 readable copies and applied current entry_guard, modifier_recovery, and beeps components in memory.
+
+test_a_scroll_cover_keeps_its_held_output_and_recovers_a_missed_driver_release (tests.test_scenarios_90_43.SteeringModifierRecovery) ... ok
+
+Ran 1 test in 1.722s
+OK
+
+64 combinations: 2 drivers x 2 directions x 2 Gyro states x 2 variants x 2 A9 outcomes x 2 A32 outcomes.

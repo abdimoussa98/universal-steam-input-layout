@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "scenario_methods": 302,
+  "distinct_regression_methods": 228,
+  "initial_run": "validation.json",
+  "resolved_failure": {
+    "test": "ScenarioRegistryTests.test_a_rule_lists_the_scenario_tests_exactly_when_a_scenario_names_it",
+    "cause": "R110 Checked by lacked the new Scenario tests (part) declaration",
+    "fix": "Updated the rule documentation; all 28 registry follow-up tests pass in registry-fix.log"
+  },
+  "contracts": "All 12 comparison/feedback contracts pass in contracts.log",
+  "uncovered": {
+    "default": [],
+    "alternative": []
+  },
+  "layout_changed_after_audits": false
+}

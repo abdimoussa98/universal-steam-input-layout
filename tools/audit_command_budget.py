@@ -118,6 +118,7 @@ def allowed_inverted(entry, owners, data):
     titles = [v['title'] for section in ('actions', 'action_layers') for v in cm[section].values()]
     variant = 'alternative' if 'alternative' in cm.get('title', '') else 'default'
     ops = []
+    flags = []
     for action in entry['actions']:
         match = TARGET.search(action)
         if not match:
@@ -126,11 +127,13 @@ def allowed_inverted(entry, owners, data):
         token = TOKEN.fullmatch(ref)
         title = token.group(1) if token else titles[int(ref) - 1]
         ops.append([match.group(1), title])
+        flags.append(action[match.end():].split(',', 1)[0].split())
     for row in candidates:
         scope = row['scope']
         if row['status'] != 'allow' or not owners:
             continue
         if (entry['activation'] == scope['activation'] and ops == scope['operations']
+                and ('command_flags' not in scope or flags == scope['command_flags'])
                 and entry['settings'] == scope['settings'][variant]
                 and all(o['title'] in scope['layers']
                         and o['source_state'] == scope['source'] + ' active' for o in owners)):

@@ -22,8 +22,13 @@ class SteeringRtpMenu(unittest.TestCase):
             yield variant, data, Layout(data)
 
     def test_working_layouts_are_generated_including_stored_order(self):
+        # The live release extends 90.38 through the 90.42 directional clear.
+        live_spec = importlib.util.spec_from_file_location(
+            'fn_steering_clear_build', ROOT / 'findings/2026-10-09-fn-haptics-and-steering-clear/build_candidate.py')
+        live_build = importlib.util.module_from_spec(live_spec)
+        live_spec.loader.exec_module(live_build)
         for variant, working, _ in self.each():
-            generated, _ = build.build(variant)
+            generated, _ = live_build.build(variant)
             for data in (working, generated):
                 for field in ('title', 'description'):
                     data['controller_mappings'].pop(field)
@@ -41,12 +46,14 @@ class SteeringRtpMenu(unittest.TestCase):
                 for title in (f'Menu {side}: Entry Point', f'Menu {side}: Fn Layer',
                               f'Stateful | Menu {side}: Entry Point'):
                     chord = layout.active(title)['switch']['inputs'][button]['activators']['chord']
-                    self.assertEqual(chord['settings'], {'chord_button': selector,
-                                                        'interruptable': '0', 'hold_repeats': '1'})
+                    expected = {'chord_button': selector, 'interruptable': '0', 'hold_repeats': '1'}
+                    if title.endswith(': Entry Point'):
+                        expected['haptic_intensity'] = '1'
+                    self.assertEqual(chord['settings'], expected)
                 key = layout.active(f'Stateful | Menu {side}: Fn Layer')['switch']['inputs'][button]['activators']['chord']
                 self.assertNotEqual(key['settings'].get('hold_repeats'), '1')
 
-    def test_steering_inherits_pad_and_direction_soft_presses_keep_the_swap(self):
+    def test_steering_inherits_pad_and_direction_soft_presses_clear_its_family(self):
         for _, _, layout in self.each():
             for title in ('Steering', build.GUARD):
                 self.assertNotIn('right_trackpad', layout.active(title))
@@ -55,8 +62,12 @@ class SteeringRtpMenu(unittest.TestCase):
                 self.assertEqual(list(acts), ['Soft_Press'])
                 entry = acts['Soft_Press']
                 self.assertEqual(entry['settings'], {'hold_repeats': '1', 'repeat_rate': '50',
-                    'interruptable': '0', 'haptic_intensity': '3', 'activation_threshold': '29031'})
-                self.assertEqual(layout.layer_ops(entry), [('add_layer', build.GUARD), ('remove_layer', 'Steering')])
+                    'interruptable': '0', 'haptic_intensity': '1', 'activation_threshold': '29031'})
+                operations = layout.layer_ops(entry)
+                self.assertTrue(all(op == 'remove_layer' for op, _ in operations))
+                self.assertEqual(operations[-1], ('remove_layer', 'Steering'))
+                self.assertIn(('remove_layer', build.GUARD), operations)
+                self.assertNotIn(('remove_layer', 'Gyro'), operations)
 
     def test_delayed_targets_complete_before_rtp_cleanup_including_touch_completion(self):
         for _, _, layout in self.each():

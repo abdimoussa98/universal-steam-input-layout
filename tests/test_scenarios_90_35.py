@@ -5,6 +5,9 @@ The record is findings/2026-10-06-steering-fallback-swap/README.md, the author's
 one, so one layer leaves as the other comes. "R1" and "L1" are the modifier pair, which are also
 Steering's drivers.
 
+These swap scenarios use the frozen 90.41 builder. Since 90.42 a full
+unmodified up/down deflection exits Steering directly, tested in 90.42.
+
 - Stick up or down in Steering base adds the guard and then removes `Steering`.
 - Every bind in the guard that removes it adds `Steering` first: a bumper at centre, and a fresh
   touch of either stick with the left stick at centre.
@@ -26,7 +29,7 @@ def mode(pad):
 
 
 class TheSwap(ScenarioCase):
-    @scenario("90.35 S1", rules=("R157",), rests=("A10",))
+    @scenario("90.35 S1", rules=("R157",), rests=("A10",), frozen="90.41")
     def test_one_of_the_two_is_on_through_a_whole_round(self):
         for pad in self.each(start="steering"):
             self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
@@ -43,7 +46,7 @@ class TheSwap(ScenarioCase):
             pad.lift("LS").wait(200).touch("LS").wait(200).lift("LS").wait(300)              # the touch hands back
             self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
 
-    @scenario("90.35 S2", rules=("R133", "R161"), rests=("A6",))
+    @scenario("90.35 S2", rules=("R133", "R161"), rests=("A6",), frozen="90.41")
     def test_a_bumper_at_centre_hands_back_and_drives_without_waiting_for_an_exposed_bind(self):
         # Steering lands on the held bumper, so its repeating driver bind fires as it lands (A6). In 90.33 and
         # 90.34 Steering was underneath and the bind had to fire on being exposed (A9).
@@ -52,10 +55,10 @@ class TheSwap(ScenarioCase):
                 for pad in self.each(start="steering", exposed_fires=exposed):
                     pad.push("LS", "up").wait(200).recentre("LS").wait(200).mark().hold(driver).wait(5)
                     self.assertEqual((mode(pad), pad.top, pad.down()), ("Steering", layer, [key]), (driver, exposed))
-                    self.assertEqual(len([d for _, d in pad.seen("haptic") if d.startswith(f"3 {pad.title(GUARD)}")]), 1)
+                    self.assertEqual(len([d for _, d in pad.seen("haptic") if d.startswith(f"1 {pad.title(GUARD)}")]), 1)
                     self.assertEqual(pad.seen("beep"), [])                               # a swap, not an entry: no beep
 
-    @scenario("90.35 S3", rules=("R169",), rests=("A17", "A36"))
+    @scenario("90.35 S3", rules=("R169",), rests=("A17", "A36"), frozen="90.41")
     def test_a_fresh_stick_touch_at_centre_hands_back_too(self):
         # The author, 2026-10-06: "it would keep them and they would first add steering back and remove fallback."
         for stick in ("LS", "RS"):
@@ -67,7 +70,7 @@ class TheSwap(ScenarioCase):
                 pad.lift(stick).wait(300).hold("R1").wait(60)                            # and it is Steering base again
                 self.assertEqual((pad.top, pad.down()), ("Steering | R1: W Key", ["W"]))
 
-    @scenario("90.35 S4", rules=("R158",), rests=("A10",))
+    @scenario("90.35 S4", rules=("R158",), rests=("A10",), frozen="90.41")
     def test_the_guard_has_stateful_menus_and_since_90_38_inherits_bases_pad(self):
         for pad in self.each(start=("Base", "Gyro")):
             pad.enter_steering().push("LS", "up").wait(200).recentre("LS").wait(100)
@@ -85,7 +88,7 @@ class TheSwap(ScenarioCase):
             self.assertTrue(pad.lacks(*PAD_LAYERS))
             self.assertEqual((mode(pad), pad.down()), (GUARD, ["W"]))
 
-    @scenario("90.35 S5", rules=("R157", "R161"), rests=("A49",))
+    @scenario("90.35 S5", rules=("R157", "R161"), rests=("A49",), frozen="90.41")
     def test_the_quick_tap_from_the_guard_beeps_on_the_guard(self):
         for pad in self.each(start="steering"):
             pad.push("LS", "up").wait(200).mark().hold("L1").wait(30).hold("R1").wait(40).let_go("R1").wait(10).let_go("L1")
@@ -93,7 +96,7 @@ class TheSwap(ScenarioCase):
             self.assertEqual(pad.stack, pad.layers("Base"))
             self.assertIn(("beep", GUARD), pad.seen("beep"))
 
-    @scenario("90.35 S6", rules=("R136",), rests=("A6",))
+    @scenario("90.35 S6", rules=("R136",), rests=("A6",), frozen="90.41")
     def test_a_driver_ends_turn_assist_whenever_it_comes(self):
         ramp = ("Gyro Off Ramp Up", "Turning Ramp Up 0", "Turning Ramp Up 1")
         for pad in self.each(start="steering"):                 # inside the 5 ms before the first ramp stage

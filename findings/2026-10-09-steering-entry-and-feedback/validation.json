@@ -1,0 +1,38 @@
+{
+  "scenarios": {
+    "tests": 281,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "uncovered": {
+    "default": [],
+    "alternative": []
+  },
+  "initial_regressions": {
+    "tests": 242,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "followup": {
+    "command": [
+      "/Library/Developer/CommandLineTools/usr/bin/python3",
+      "-m",
+      "unittest",
+      "tests.test_flow_inheritance",
+      "tests.test_exceptions",
+      "tests.test_rule_registry",
+      "-v"
+    ],
+    "tests": 77,
+    "seconds": 2.821,
+    "returncode": 0,
+    "passed": true,
+    "scope": "Flow inheritance, exception expansion and rule registry after historical fallback decision scoping"
+  },
+  "resolution": "The sole initial failure was a stale historical R139 decision for Steering joystick/edge. Restricting that decision to layouts containing Fallback Guard resolved it without changing layout bindings or weakening the assertion. All 77 affected-scope tests passed afterward, including four new tests. The remaining 169 regression cases passed in the initial run.",
+  "final_status": "PASS",
+  "distinct_regression_tests_passed": 246,
+  "build_audit": "Budget, Window, Flow and Cleanup PASS on both final layouts after the scope correction; see build-audit.txt."
+}

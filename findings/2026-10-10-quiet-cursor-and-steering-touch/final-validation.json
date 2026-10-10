@@ -1,0 +1,26 @@
+{
+  "version": "90.47",
+  "scenarios": {
+    "tests": 311,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "regressions": {
+    "tests": 304,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "uncovered": {
+    "default": [],
+    "alternative": []
+  },
+  "audit": "all four audits pass for both variants",
+  "runs": {
+    "initial": "validation.log: 311 scenarios with 17 outdated test expectations; 292 regression methods passed and one cursor-module import failed",
+    "final_scenarios": "final-scenarios.log: all 311 pass after explicit touch setup/helper expectation corrections",
+    "cursor_contracts": "cursor-contracts.log: all 12 pass with corrected validation runner sibling-import path"
+  },
+  "layout_changes_after_initial_install": false
+}

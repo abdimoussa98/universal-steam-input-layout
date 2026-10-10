@@ -1,10 +1,39 @@
 {
-  "_about": "Config for audit_inheritance.py (resources/Layer Definition of Done.md, section 8). Stacks below each layer come from the backward chains (steam_layout/chains.py: who adds the layer, back to Base, plus bystanders); 'targets' can add extra stacks (bottom to top, with a why). Decisions for routes that stay open are not kept here any more: they are exceptions to R140 in the exceptions register (steam_layout/flow_config.json). Default-layout names; 'variants' maps them for alternative. Every Always On layer is audited automatically. A source-mode change above a definer blocks inheritance (author, 2026-10-01), so RTP Double Tap's dpad-mode right pad already blocks Base's mouse-mode touch.",
+  "_about": "Config for audit_inheritance.py (resources/Layer Definition of Done.md, section 8). Stacks below each layer come from the backward chains (steam_layout/chains.py: who adds the layer, back to Base, plus bystanders); 'targets' can add extra stacks (bottom to top, with a why). Optional 'when_inherited' includes a declared stack only when its effective source/input binding comes from the named lower from_layer; local bindings, disabled sources and source-mode changes exclude it. This scopes newly exposed routes without changing frozen builds that still block entry. Decisions for routes that stay open are not kept here any more: they are exceptions to R140 in the exceptions register (steam_layout/flow_config.json). Default-layout names; 'variants' maps them for alternative. Every Always On layer is audited automatically. A source-mode change above a definer blocks inheritance (author, 2026-10-01), so RTP Double Tap's dpad-mode right pad already blocks Base's mouse-mode touch.",
   "variants": {
     "alternative": {
       "L1": "L2",
       "R1": "R2"
     }
   },
-  "targets": {}
+  "targets": {
+    "LST: Double Tap": {
+      "stacks": [
+        {
+          "layers": ["Base", "Steering"],
+          "when_inherited": {"source": "joystick", "input": "touch", "from_layer": "Base"},
+          "why": "90.47 exposes Base's LST entry after Steering Entry Guard exits. Its short-touch release opens this window over armed Steering; the window must replace Steering's up/down clear with W/S (R140/R141)."
+        },
+        {
+          "layers": ["Base", "Gyro", "Steering"],
+          "when_inherited": {"source": "joystick", "input": "touch", "from_layer": "Base"},
+          "why": "The same inherited LST gesture is reachable with persistent Gyro below Steering. Gyro does not block this touch entry."
+        }
+      ]
+    },
+    "RST: Double Tap": {
+      "stacks": [
+        {
+          "layers": ["Base", "Steering"],
+          "when_inherited": {"source": "right_joystick", "input": "touch", "from_layer": "Base"},
+          "why": "90.47 exposes Base's RST entry after Steering Entry Guard exits. Its short-touch release opens this window over armed Steering; the window must replace Steering's up/down clear with W/S (R140/R141)."
+        },
+        {
+          "layers": ["Base", "Gyro", "Steering"],
+          "when_inherited": {"source": "right_joystick", "input": "touch", "from_layer": "Base"},
+          "why": "The same inherited RST gesture is reachable with persistent Gyro below Steering. Gyro does not block this touch entry."
+        }
+      ]
+    }
+  }
 }

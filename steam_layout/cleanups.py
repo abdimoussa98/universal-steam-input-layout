@@ -142,7 +142,11 @@ class Cleanups:
 
     def _is_stateful(self, layer):
         """It outlives every binding that adds it, has no Always On action and no Release of its own."""
-        adding = self._adding.get(layer)
+        # An unreachable retained layer cannot add anything in a live stack. Its
+        # additive return must not disqualify a mode entered through a transition.
+        # Keep the complete inventory elsewhere, including raw-binding checks.
+        adding = [t for t in self._adding.get(layer, ())
+                  if t.layer == self.base or self.chains.reached(t.layer)]
         return bool(adding) and layer not in self.windows and not self._releases(layer) \
             and all(("remove_layer", t.layer) in t.ops or t.layer in self.stateful for t in adding)
 
@@ -234,16 +238,55 @@ class Cleanups:
         """A deliberate clear: it removes every layer that isn't stateful."""
         return set(self.layers) - self.stateful <= set(removed)
 
+    def protects_held_owner(self, host, t, target):
+        """Whether this recovery is suppressed while a lower button owner is held.
+
+        90.43 separates Steering stick-modifier cancellation from driver recovery.
+        The old button-union approximation drops deflection from an All chord:
+        (LS out AND RB) does not protect an RB owner while LS is centered.
+        An omitted owner is then intentional, and removing it is unsafe. The
+        modifier still owns its overlays and removes those as before.
+
+        Keep frozen builders' pre-90.43 list semantics. Entry Guard alone is
+        not a release discriminator (90.10 had it without Fallback Hold too):
+        require the modern Steering Soft Press self-clear in both directions.
+        This is a compatibility boundary, not an exemption for unsafe removals
+        in current layouts. No title-version or current-file check is involved.
+        """
+        if host not in ('Steering | LS Down: Modifier 0', 'Steering | LS Up: Modifier 1') \
+                or 'Steering | LS: Entry Guard' not in self.layout.presets \
+                or 'Steering | LS: Fallback Hold' in self.layout.presets:
+            return True
+        stick = self.layout.active('Steering').get('joystick', {}).get('inputs', {})
+        for direction in ('dpad_north', 'dpad_south'):
+            soft = [entry for kind, entry in entries(stick.get(direction, {}).get('activators', {}))
+                    if kind == 'Soft_Press']
+            if not soft or not all(('remove_layer', 'Steering') in self.layout.layer_ops(entry) for entry in soft):
+                return True
+        kind, keep = self.keeper(target)
+        if kind != 'button' or target not in self.below(host):
+            return True
+        activators = self.layout.active(host)[t.source]['inputs'][t.input]['activators']
+        conditions = [chord_condition(entry.get('settings', {}))
+                      for kind, entry in entries(activators) if kind == 'chord']
+        conditions = [condition for condition in conditions if condition and condition.known]
+        # A trigger keeper can be satisfied by a soft or full pull. A chord
+        # that protects only the full pull does not protect the soft-pull owner.
+        controls = [control for control, button in BUTTONS.items() if button in keep]
+        return all(any(condition.satisfied({t.control, control}) for condition in conditions)
+                   for control in controls)
+
     # --- the checks -----------------------------------------------------------------------
 
     def left(self, host, t, guard, removed):
         """[(layer, check)]: what this cleanup should remove and doesn't (rules 2 and 3)."""
         result = []
         for target in sorted(self.below(host) - removed - set(self.omitted)):
-            if self.inside(target, guard, host):
+            if self.inside(target, guard, host) and self.protects_held_owner(host, t, target):
                 result.append((target, "left below"))
         for target in sorted(self.above(host) - removed - set(self.omitted)):
-            if self.leaves_alone(target, host, t.source, t.input) and self.inside(target, guard, host):
+            if self.leaves_alone(target, host, t.source, t.input) and self.inside(target, guard, host) \
+                    and self.protects_held_owner(host, t, target):
                 result.append((target, "left above"))
         return result
 
@@ -277,6 +320,8 @@ class Cleanups:
                 result[target] = ("outside the guard", {
                     "mode": "a stateful layer", "timer": "a window: it always clears itself",
                     "thumb": "a stick-touch helper: only the stick-touch Release removes it"}[kind])
+            elif t.role == "recovery" and target in present and not self.protects_held_owner(host, t, target):
+                result[target] = ("outside the guard", f"the guard can fail while its {plus(keep)} owner is held")
             elif t.role == "recovery" and target in present and not self.inside(target, guard, host):
                 result[target] = ("outside the guard", f"kept by {plus(keep) if keep else 'something else'}")
             elif target not in present and not (on_touch and kind == "thumb"):
@@ -400,14 +445,19 @@ class Cleanups:
 def kept(config, variant, layers=None):
     """{(layer, removed layer): why} from the config's `cleanups.keep`, which the exceptions register fills (R132).
 
-    A decision with `where` holds only on a layout that has that layer; `layers` is the layout's titles. The
-    frozen builders read the same register, so a decision made for a later build names a layer of that build."""
+    A decision with `where` holds only on a layout that has that layer; `not_where` excludes layouts that
+    contain a named historical layer. `layers` is the layout's titles. The frozen builders read the same
+    register, so later decisions must distinguish their layout from every earlier shape they could match."""
     mapping = config.get("variants", {}).get(variant, {})
     result = {}
     for decision in config.get("cleanups", {}).get("keep", []):
         if not decision.get("why"):
             raise ValueError(f"a kept removal needs a why: {decision}")
+        if layers is None and decision.get('not_where'):
+            continue
         if decision.get("where") and layers is not None and map_title(decision["where"], mapping) not in layers:
+            continue
+        if decision.get("not_where") and layers is not None and map_title(decision['not_where'], mapping) in layers:
             continue
         for layer in decision["layers"]:
             for target in decision["removes"]:

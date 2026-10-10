@@ -1,0 +1,66 @@
+Compared with validated 90.44 candidates before the 90.45 release batch.
+{
+  "changed_layers": [
+    "Base",
+    "Turning Ramp Up 0",
+    "Turning Ramp Up 1"
+  ],
+  "uncovered": {
+    "default": [],
+    "alternative": []
+  },
+  "reached": {
+    "default": [
+      "Base",
+      "Gyro",
+      "Gyro Off Ramp Up",
+      "Gyro | L1!R1: Modifier 2",
+      "Gyro | L1: Modifier 0",
+      "Gyro | R1: Modifier 1",
+      "L1!R1: Modifier 2",
+      "L1&R1: Tap Cover",
+      "L1: Double Tap",
+      "L1: Modifier 0",
+      "L1: Tap Cover",
+      "L1: Temp Cursor Gyro",
+      "Menu Right: Double Tap",
+      "Menu Right: Entry Point",
+      "R1: Double Tap",
+      "R1: Modifier 1",
+      "R1: Tap Cover",
+      "R1: Temp Cursor Gyro",
+      "RST: Entry Point",
+      "RTP: Double Tap",
+      "RTP: Entry Point",
+      "RTP: Tap Cover",
+      "Turning Ramp Up 0",
+      "Turning Ramp Up 1"
+    ],
+    "alternative": [
+      "Base",
+      "Gyro",
+      "Gyro Off Ramp Up",
+      "Gyro | L2!R2: Modifier 2",
+      "Gyro | L2: Modifier 0",
+      "Gyro | R2: Modifier 1",
+      "L2!R2: Modifier 2",
+      "L2&R2: Tap Cover",
+      "L2: Double Tap",
+      "L2: Modifier 0",
+      "L2: Tap Cover",
+      "L2: Temp Cursor Gyro",
+      "Menu Right: Double Tap",
+      "Menu Right: Entry Point",
+      "R2: Double Tap",
+      "R2: Modifier 1",
+      "R2: Tap Cover",
+      "R2: Temp Cursor Gyro",
+      "RST: Entry Point",
+      "RTP: Double Tap",
+      "RTP: Entry Point",
+      "RTP: Tap Cover",
+      "Turning Ramp Up 0",
+      "Turning Ramp Up 1"
+    ]
+  }
+}

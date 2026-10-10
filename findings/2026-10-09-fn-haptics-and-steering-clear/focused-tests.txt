@@ -1,0 +1,18 @@
+test_every_fn_add_has_a_low_bump_and_no_beep (tests.test_fn_feedback_steering_clear.FnFeedbackAndSteeringClear) ... ok
+test_steering_full_deflection_removes_its_entire_family_and_keeps_gyro (tests.test_fn_feedback_steering_clear.FnFeedbackAndSteeringClear) ... ok
+test_both_thumb_release_completions_bump_before_helper_cleanup (tests.test_scenarios_90_42.FnEntryFeedback) ... ok
+test_delayed_fn_entry_bumps_once_without_a_beep (tests.test_scenarios_90_42.FnEntryFeedback) ... ok
+test_the_opposite_menu_chord_bumps_on_early_fn_entry (tests.test_scenarios_90_42.FnEntryFeedback) ... ok
+test_a_direction_already_held_when_steering_lands_still_exits (tests.test_scenarios_90_42.SteeringFullDeflectionExit) ... ok
+test_rtp_window_leaves_before_a_held_direction_clears_steering (tests.test_scenarios_90_42.SteeringFullDeflectionExit) ... ok
+test_the_exit_removes_stale_steering_helpers_including_windows_first (tests.test_scenarios_90_42.SteeringFullDeflectionExit) ... ok
+test_up_and_down_exit_once_and_continue_base_movement_with_gyro_preserved (tests.test_scenarios_90_42.SteeringFullDeflectionExit) ... ok
+test_menu_entry_conditions_repeat_and_do_not_repeat_key_output (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+test_steering_inherits_pad_and_direction_soft_presses_clear_its_family (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+test_delayed_targets_complete_before_rtp_cleanup_including_touch_completion (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+test_inverted_edge_exception_rejects_changed_action_selector_repeat_or_owner (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.497s
+
+OK

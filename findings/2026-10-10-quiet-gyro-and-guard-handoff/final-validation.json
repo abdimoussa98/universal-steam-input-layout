@@ -1,0 +1,25 @@
+{
+  "scenarios": {
+    "tests": 315,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "uncovered": {
+    "default": [],
+    "alternative": []
+  },
+  "regressions": {
+    "tests": 83,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "note": "83 distinct methods passed: 82 in full run; the stale imported haptic expectation was corrected and its six-method module replayed against validated 90.43 candidates, all passing.",
+    "recheck": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "fixture": "validated 90.43 candidates"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "default": {
+    "changed_bindings": [
+      [
+        "L1!R1: Modifier 2",
+        "switch",
+        "right_bumper"
+      ],
+      [
+        "R1!L1: Modifier 2",
+        "switch",
+        "left_bumper"
+      ],
+      [
+        "Gyro | L1!R1: Modifier 2",
+        "switch",
+        "right_bumper"
+      ],
+      [
+        "Gyro | R1!L1: Modifier 2",
+        "switch",
+        "left_bumper"
+      ],
+      [
+        "Steering",
+        "switch",
+        "right_bumper"
+      ],
+      [
+        "Steering",
+        "switch",
+        "left_bumper"
+      ]
+    ],
+    "guard_unchanged": true,
+    "steering_clear_unchanged": true,
+    "beep_commands_unchanged": true,
+    "description": "WASD movement, gyro aiming, right-stick turn assist, and circular trackpad scrolling. L2/R2: mouse buttons; L1/R1: modifiers. Includes Fn controls, Steering, Cursor Gyro, and Gamepad modes."
+  },
+  "alternative": {
+    "changed_bindings": [
+      [
+        "L2!R2: Modifier 2",
+        "right_trigger",
+        "edge"
+      ],
+      [
+        "R2!L2: Modifier 2",
+        "left_trigger",
+        "edge"
+      ],
+      [
+        "Gyro | L2!R2: Modifier 2",
+        "right_trigger",
+        "edge"
+      ],
+      [
+        "Gyro | R2!L2: Modifier 2",
+        "left_trigger",
+        "edge"
+      ],
+      [
+        "Steering",
+        "right_trigger",
+        "edge"
+      ],
+      [
+        "Steering",
+        "left_trigger",
+        "edge"
+      ]
+    ],
+    "guard_unchanged": true,
+    "steering_clear_unchanged": true,
+    "beep_commands_unchanged": true,
+    "description": "WASD movement, gyro aiming, right-stick turn assist, and circular trackpad scrolling. L1/R1: mouse buttons; L2/R2: modifiers. Includes Fn controls, Steering, Cursor Gyro, and Gamepad modes."
+  }
+}

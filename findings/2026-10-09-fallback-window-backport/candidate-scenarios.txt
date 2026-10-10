@@ -1,0 +1,37 @@
+test_gyro_clear_removes_stale_steering_helpers (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_gyro_two_driver_quick_clear_both_orders_and_release_orders (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_held_menu_after_rtp_window_and_missed_release (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_menu_and_directional_delays_apply_before_rtp_cleanup (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_menu_holds_with_resting_thumbs_in_each_entry_context (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_menu_plus_stick_clear_preserves_gyro (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_opposite_menu_button_repeats_in_entry_and_fn_contexts (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_pad_clicks_during_the_window_cannot_change_its_timer (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_pad_release_inside_fallback_removes_window_before_other_helpers (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_reordered_modifier_cursor_scroll_and_two_driver_inputs (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_rtp_before_and_during_fallback_keeps_the_timer_isolated (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_rtp_hold_and_scroll_work_in_ordinary_steering_and_entry_guard (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_rtp_window_exits_before_a_held_direction_enters_fallback (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_scroll_and_touch_helpers_clear_on_pad_release_in_each_steering_window (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_stick_touch_completions_preserve_target_before_rtp_cleanup (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_turn_assist_is_cleared_on_steering_entry_and_stays_blocked (tests.test_scenarios_90_39.BackportedInteractions) ... ok
+test_the_entry_guard_ends_when_the_direction_held_at_entry_lets_go (tests.test_scenarios_90_39.EntryGuard) ... ok
+test_a_driver_or_a_menu_button_leaves_steering_once_the_second_is_over (tests.test_scenarios_90_39.FallbackWindow)
+In 90.31 the button also left Steering inside the second: the window removed itself and the Fallback ... ok
+test_a_release_missed_inside_the_second_leaves_steering_alone (tests.test_scenarios_90_39.FallbackWindow) ... ok
+test_a_roll_to_the_side_ends_the_second_and_coming_back_starts_a_new_one (tests.test_scenarios_90_39.FallbackWindow) ... ok
+test_a_thumb_leaving_a_stick_starts_the_second_over (tests.test_scenarios_90_39.FallbackWindow) ... ok
+test_after_a_missed_release_a_fresh_stick_touch_leaves_steering (tests.test_scenarios_90_39.FallbackWindow) ... ok
+test_after_leaving_by_the_stick_the_left_sticks_touch_gestures_work (tests.test_scenarios_90_39.FallbackWindow) ... ok
+test_holding_past_the_second_and_letting_go_leaves_steering (tests.test_scenarios_90_39.FallbackWindow) ... ok
+test_letting_go_inside_the_second_keeps_steering_every_time (tests.test_scenarios_90_39.FallbackWindow) ... ok
+test_thumbs_resting_on_both_sticks_do_nothing_as_the_window_closes (tests.test_scenarios_90_39.FallbackWindow)
+At 1000 ms the Fallback Hold's cleanup binds start answering both stick touches. The chord on ... ok
+test_a_button_held_from_inside_the_second_leaves_steering_when_it_ends (tests.test_scenarios_90_39.Replacements) ... ok
+test_a_tap_inside_the_second_sends_its_replacement_and_the_second_runs_on (tests.test_scenarios_90_39.Replacements) ... ok
+test_after_the_second_a_driver_or_a_menu_button_leaves_steering_at_once (tests.test_scenarios_90_39.Replacements) ... ok
+test_several_taps_and_then_letting_go_inside_the_second_keeps_steering (tests.test_scenarios_90_39.Replacements) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 4.391s
+
+OK

@@ -4,6 +4,9 @@ The record is findings/2026-10-05-steering-four-way-and-open-edges/README.md, th
 of 2026-10-05. "R1" and "L1" are the modifier pair, which are also Steering's drivers; "RF" is the
 right firing button.
 
+E2 and E3 preserve the retired fallback route on the frozen 90.41 builder;
+E1 continues to check the working Steering layout.
+
 - `Steering` no longer blocks the stick edges, so in Steering base and in the fallback guard the
   right stick at the rim starts turn assist, as in Base. A driver's layer still binds the edge.
 - The add of the fallback guard and the order rule are 90.33 G1 and G3, rewritten there.
@@ -36,7 +39,7 @@ class OpenEdges(ScenarioCase):
                 pad.let_go("RT full")
             self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
 
-    @scenario("90.34 E2", rules=("R136",), rests=("A10",))
+    @scenario("90.34 E2", rules=("R136",), rests=("A10",), frozen="90.41")
     def test_in_the_fallback_turn_assist_runs_and_leaves_nothing_behind(self):
         for pad in self.each(start="steering"):
             pad.push("LS", "up").wait(200).push("RS").wait(400)
@@ -46,7 +49,7 @@ class OpenEdges(ScenarioCase):
             self.assertEqual((pad.top, pad.down()), (GUARD, ["W"]))
             self.assertTrue(pad.lacks(*RAMP))
 
-    @scenario("90.34 E3", rules=("R136",), rests=("A10", "A36"))
+    @scenario("90.34 E3", rules=("R136",), rests=("A10", "A36"), frozen="90.41")
     def test_the_guard_can_land_over_a_ramp_stage_and_everything_unwinds(self):
         # Firing while the right stick is at the rim, then the left stick goes up: the guard lands on the ramp stage.
         for pad in self.each(start="steering"):

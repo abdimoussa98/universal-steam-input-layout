@@ -1,0 +1,104 @@
+{
+  "previous_builder_sha256": "9bf72fc498dfe7fc955da03e20c0ace7b3d8382f1e5a3e3828e60f342abbecef",
+  "changes": {
+    "quiet_cursor_adds": [
+      [
+        "L2: Modifier 0",
+        "left_trigger",
+        "edge"
+      ],
+      [
+        "Gyro | L2: Modifier 0",
+        "left_trigger",
+        "edge"
+      ],
+      [
+        "R2: Modifier 1",
+        "right_trigger",
+        "edge"
+      ],
+      [
+        "Gyro | R2: Modifier 1",
+        "right_trigger",
+        "edge"
+      ]
+    ],
+    "inherited_touches": [
+      [
+        "Steering",
+        "joystick",
+        "touch"
+      ],
+      [
+        "Steering",
+        "right_joystick",
+        "touch"
+      ]
+    ],
+    "window_movement": [
+      [
+        "LST: Double Tap",
+        "joystick",
+        "dpad_north",
+        "W"
+      ],
+      [
+        "LST: Double Tap",
+        "joystick",
+        "dpad_south",
+        "S"
+      ],
+      [
+        "RST: Double Tap",
+        "joystick",
+        "dpad_north",
+        "W"
+      ],
+      [
+        "RST: Double Tap",
+        "joystick",
+        "dpad_south",
+        "S"
+      ]
+    ]
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 548,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  }
+}

@@ -14,19 +14,26 @@ steam_layout/flow_config.json:
 Scope, by rule:
 
     R108         {"layers": [...], "inputs": [...]}                      where the Budget audit accepts a Long or Double Press
+    R111         {"layers": [...], "source": "...", "activation": "...", "operations": [...], "settings": {...}}
+                                                                          exact inverted-edge commands and per-variant activator settings;
+                                                                          optional `command_flags` lists each command's name/beep flags in stored order
     R139, R145   {"layers": [...], "inputs": [...]}                      the Flow audit's inherited inputs
                  (`inputs` may be {"default": [...], "alternative": [...]})
+                 `where` and `not_where`, optional: require or exclude a named layer in the audited layout
+    R145         {"layers": [...], "dormant": true}                      retained layers with no reachable adding chain;
+                                                                          reachable layers and explicit target audits are never waived
     R139         {"kind": "covers"}                                       cover layers' inherited inputs need no review
     R144         {"cover": "...", "checks": [...]}                        the cover check
     R132         {"layers": [...], "removes": [...]}                      a removal the Cleanup audit keeps: one that is never there (R132)
                                                                           or one outside the guard, such as a stateful layer (R127, R131)
                                                                           `where`, optional: only on a layout that has this layer. The frozen builders
-                                                                          read this register too, so an entry for one build names a layer of that build
+                                                                          read this register too, so an entry for one build names a layer of that build.
+                                                                          `not_where`, optional: exclude layouts that contain this layer
     R140         {"target": "...", "source": "...", "input": "..."}       a route the Window audit allows
     R136         {"kind": "touchpad"}                                     the hidden-exit pairs set aside
     R136         {"upper": "...", "lower": "..."}                         a covered side exit that was reviewed
     R169 to R171 {"layers": [...], "inputs": ["joystick/edge", ...]}      an input the layer may leave without a cleanup function
-                                                                          `where`, optional, as for R132
+                                                                          `where` and `not_where`, optional, as for R132
     other rules  any object, for example {"note": "..."}: a record that no audit reads
 
 The audits still read the sections they always read. `expand` fills
@@ -48,7 +55,7 @@ FLOW = ("R139", "R145")
 REQUIRED = ("R169", "R170", "R171")                # the required-cleanup rules (steam_layout/required_cleanups.py)
 SCOPES = {"R108": (("layers", "inputs"),),                                                # rule -> the shapes it takes
           "R111": (("layers", "source", "activation", "operations", "settings"),),
-          "R139": (("layers", "inputs"), ("kind",)), "R145": (("layers", "inputs"),),
+          "R139": (("layers", "inputs"), ("kind",)), "R145": (("layers", "inputs"), ("layers", "dormant")),
           "R144": (("cover", "checks"),), "R132": (("layers", "removes"),), "R140": (("target", "source", "input"),),
           "R136": (("kind",), ("upper", "lower")), **{rule: (("layers", "inputs"),) for rule in REQUIRED}}
 
@@ -70,6 +77,10 @@ def check(entries):
         scope, shapes = entry["scope"], SCOPES.get(entry["rule"])
         if not scope or (shapes and not any(all(key in scope for key in shape) for shape in shapes)):
             raise ValueError(f"{entry['rule']}: the scope needs one of {shapes or 'something'}: {entry}")
+        if entry["rule"] == "R145" and "dormant" in scope:
+            if scope["dormant"] is not True or not isinstance(scope.get("layers"), list) or not scope["layers"] \
+                    or not all(isinstance(t, str) and t.strip() for t in scope["layers"]) or "inputs" in scope:
+                raise ValueError(f"R145: a dormant scope needs exact layer titles, dormant true and no inputs: {entry}")
     return entries
 
 
@@ -90,16 +101,20 @@ def expand(config):
         scope, rule = entry["scope"], entry["rule"]
         if rule == "R139" and scope.get("kind") == "covers":
             config.setdefault("review", {})["covers"] = entry["why"]
+        elif rule == "R145" and scope.get("dormant"):
+            config.setdefault("dormant_layers", []).append(
+                {"layers": scope["layers"], "status": entry["status"], "why": entry["why"], "todo": entry["todo"]})
         elif rule in FLOW:
             config.setdefault("decisions", []).append(
-                {"layers": scope["layers"], "inputs": scope["inputs"], "status": entry["status"], "why": entry["why"]})
+                {"layers": scope["layers"], "inputs": scope["inputs"], "status": entry["status"], "why": entry["why"],
+                 **{key: scope[key] for key in ("where", "not_where") if key in scope}})
         elif rule == "R144":
             config.setdefault("covers", {}).setdefault("allow", []).append(
                 {"cover": scope["cover"], "checks": scope["checks"], "reason": entry["why"]})
         elif rule == "R132":
             config.setdefault("cleanups", {}).setdefault("keep", []).append(
                 {"layers": scope["layers"], "removes": scope["removes"], "why": entry["why"],
-                 **({"where": scope["where"]} if "where" in scope else {})})
+                 **{key: scope[key] for key in ("where", "not_where") if key in scope}})
         elif rule == "R136" and scope.get("kind") == "touchpad":
             config.setdefault("cleanups", {})["touchpad_exits"] = entry["why"]
         elif rule == "R136" and "upper" in scope:
@@ -108,7 +123,7 @@ def expand(config):
         elif rule in REQUIRED:
             config.setdefault("cleanups", {}).setdefault("required", []).append(
                 {"rule": rule, "layers": scope["layers"], "inputs": scope["inputs"], "why": entry["why"],
-                 **({"where": scope["where"]} if "where" in scope else {})})
+                 **{key: scope[key] for key in ("where", "not_where") if key in scope}})
     return config
 
 

@@ -27,13 +27,18 @@ is an entry in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md)
 - For the removal/reset behavior discussed in the stack investigation, the
   timer **restarts**, then waits **300 ms**; it is not cancelled. This is the
   author's runtime observation, not a claim that every configured delay is
-  300 ms. The untimed search model does not yet represent this behavior.
+  300 ms. The author later reported inconsistent resets and immediate
+  follow-up delays in some rapid add/remove transitions (2026-10-09); the
+  earlier case is not a universal rule. See
+  [Delay Timers and Repeat Rates](Delay%20Timers%20and%20Repeat%20Rates.md).
+  The untimed search model does not represent this behavior.
 - **Chords latch** (author's manual test, 2026-10-01; rule R112). Once a chorded
   activator is active, releasing the chord button doesn't re-evaluate it. The
   input stays in the chord until the button the chord is bound to is released.
   A bind therefore can't hand over from a chord to a Regular Press when the
   chord button goes up. Hypothesis, not yet tested: a `remove_layer` call
-  re-evaluates held inputs, the same way it restarts delays.
+  re-evaluates held inputs. Its effect on delay and repeat schedules remains
+  unresolved.
 - **An inverted edge on a D-pad-mode stick isn't caught reliably** (author's
   Deck testing, 2026-10-01; rule R111). Never use one to add or remove a layer. A normal
   outer edge and its Release are reliable there. An inverted edge that only
@@ -68,7 +73,7 @@ format/parser documentation may retain historical APIs.
 | **Cover (an input)** | An upper layer covers an input when it binds it, so a lower layer's binding on that input can't fire. Cover-type layers (Tap Covers, Double Tap Covers, Temp Cursor Gyro) are built to do this on one button. | `L1: Tap Cover` covers LB over `L1: Modifier 0`: its Release fires, not the modifier's. |
 | **Pair** | For the hidden-exit rule (R136): one lower layer plus one layer that can sit on top of it and covers one of its exits. | `Tab` under `L1: Double Tap`: lifting the thumb off the left pad inside the window misses `Tab`'s Release. |
 | **Extra press** | For the hidden-exit rule (R136): a press along a layer's chain that adds a layer but is not one of the chain's own steps. The audits call it an arrival. The hidden-exit check allows five; the other audits allow one. | Select, then the left stick, is the chain to `Menu Buttons: Tap Cover`. A pad click in between is an extra press. |
-| **Temporary guard** | A short-lived layer that waits for one input to return to rest. Nothing is added over it (R137). | None since 90.33. Until 90.32: `Steering \| LS: Entry Guard`, `Steering \| LS: Fallback Hold`. |
+| **Temporary guard** | A short-lived layer protecting an initial movement until its direction or edge is released. A deliberate handoff removes it before adding another layer (R137). | `Steering \| LS: Entry Guard` returns in 90.43, protecting the first push even after centered entry. Historical: `Steering \| LS: Fallback Hold` through 90.32. |
 
 These are repository design terms, not new Steam Input object types. In
 particular, an action layer is not automatically a button overlay just because

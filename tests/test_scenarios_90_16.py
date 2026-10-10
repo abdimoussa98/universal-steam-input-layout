@@ -53,10 +53,13 @@ class PadClickExits(ScenarioCase):
         only if Steam fires the add it exposed under the held click (A9). Otherwise the next click does it.
         From 90.25 to 90.26 the add was in the pad's Entry Point and repeated, so it came back either way."""
         for pad in self.each(start="steering"):
+            # Keep the original resting-thumb recovery context explicit now
+            # that the generic Steering fixture starts with both thumbs up.
+            pad.touch("LS").wait(300)
             pad.hold("L1").wait(50).hold("R1").wait(50).press_pad("RP", "centre").wait(100)
             self.assertEqual((pad.top, pad.down()), ("RTP: Middle Click", ["S", "mouse_button MIDDLE"]))
-            pad.let_go("R1").wait(5)                                              # the quick tap clears every layer
-            self.assertTrue(pad.lacks("Steering"))
+            pad.let_go("R1").wait(5)                                              # pad cleanup still runs; Steering stays since 90.44
+            self.assertTrue(pad.has("Steering") and pad.lacks("Steering | L1!R1: Modifier 2"))
             pad.wait(150)
             self.assertEqual((pad.has("RTP: Middle Click"), "mouse_button MIDDLE" in pad.down()),
                              (pad.sim.exposed_fires, pad.sim.exposed_fires))
@@ -64,6 +67,10 @@ class PadClickExits(ScenarioCase):
             self.assertTrue(pad.lacks(*CLICK_LAYERS))
             pad.press_pad("RP", "centre").wait(100)                               # a new click always works
             self.assertTrue(pad.has("RTP: Middle Click"))
+            pad.let_go_pad("RP").let_go("L1").wait(400)
+            self.assertEqual(pad.stack, pad.layers("Base", "Steering", "LST: Entry Point", "LST: Tap Cover"))
+            pad.lift("LS").wait(300)
+            self.assertEqual((pad.stack, pad.down()), (pad.layers("Base", "Steering"), []))
 
     @scenario("90.16 X4", rules=("R113",), rests=("A6", "A10"))
     def test_the_outer_buttons_come_after_5_ms_and_the_middle_click_at_once(self):
@@ -85,10 +92,10 @@ class PadClickExits(ScenarioCase):
         for where in ("centre", "left", "ring left"):
             for pad in self.each():
                 pad.click_pad("RP", where, ms=600).wait(400)
-                self.assertEqual(pad.seen("haptic"), [("haptic", "3 Base right_trackpad/click")])
+                self.assertEqual(pad.seen("haptic"), [("haptic", "1 Base right_trackpad/click")])
         for pad in self.each():
             pad.click_pad("LP", "up", ms=600).wait(400)
-            self.assertEqual(pad.seen("haptic"), [("haptic", "3 Base left_trackpad/click")])
+            self.assertEqual(pad.seen("haptic"), [("haptic", "1 Base left_trackpad/click")])
 
 
 if __name__ == "__main__":

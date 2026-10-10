@@ -1,0 +1,19 @@
+{
+  "scenarios": {
+    "tests": 293,
+    "failures": 4,
+    "errors": 0,
+    "skipped": 0
+  },
+  "regressions": {
+    "tests": 248,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frozen_comparisons_run_separately": true,
+  "uncovered": {
+    "default": [],
+    "alternative": []
+  }
+}

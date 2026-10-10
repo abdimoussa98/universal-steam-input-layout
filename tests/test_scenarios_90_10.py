@@ -8,7 +8,7 @@ import unittest
 from tests.scenario import ScenarioCase, scenario
 
 GESTURES = (("Start", "LS"), ("Select", "RS"), ("Start", "RS"), ("Select", "LS"))
-FEEDBACK = ["haptic", "beep"]              # the strong pulse on the menu Release, then the beep
+FEEDBACK = ["haptic", "beep"]              # the low pulse on the menu Release (since 90.41), then the beep
 LEFT_GUARD, RIGHT_GUARD, COVER = ("Menu Buttons: Left Stick Guard", "Menu Buttons: Right Stick Guard",
                                   "Menu Buttons: Tap Cover")
 MOD1, MOD0 = "Steering | LS Up: Modifier 1", "Steering | LS Down: Modifier 0"
@@ -218,11 +218,12 @@ class Steering(ScenarioCase):
         In 90.31 and 90.32 it left Steering. Since 90.33 stick up or down with no driver brings in the fallback
         guard, and a driver pressed after that, with the stick out, is its Gyro modifier (the author,
         2026-10-04). Since 90.34 the guard comes at once, so the order alone decides. The map comes when the
-        driver is held first (D3)."""
+        driver is held first (D3). Since 90.42 a full deflection clears Steering
+        directly, so the later driver is Base's modifier."""
         for pad in self.each(start="steering"):
             pad.push("LS", "up").wait(20).mark().hold("R1").wait(60)
-            self.assertTrue(pad.has("Steering | LS: Fallback Guard") and pad.lacks("Steering", MOD1))   # they swap (90.35)
-            self.assertEqual((pad.top, pad.typed(), pad.down()), ("Gyro | R1: Modifier 1", [], ["W"]))
+            self.assertTrue(pad.lacks("Steering | LS: Entry Guard", "Steering", MOD1))
+            self.assertEqual((pad.top, pad.typed(), pad.down()), ("R1: Modifier 1", [], ["W"]))
 
     @scenario("90.10 D5", rules=("R146", "R147", "R148"), rests=("A16",))
     def test_the_stick_double_tap(self):
@@ -255,7 +256,10 @@ class Steering(ScenarioCase):
             self.assertEqual((pad.down(), pad.typed().count("W")), (["W"], 0))       # held throughout, never retyped
         for pad in self.each(start="steering"):
             pad.hold("R1").flick("LS", "up").wait(50).let_go("R1")           # the driver released inside the window
-            self.assertEqual((pad.stack, pad.down()), (pad.layers("Base", "Steering"), []))
+            self.assertEqual((pad.stack, pad.down()),
+                             (pad.layers("Base", "Steering", "LST: Entry Point"), []))  # the thumb still rests on LS
+            pad.lift("LS").wait(300)
+            self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
 
     @scenario("90.10 D7")
     def test_the_other_driver_inside_the_window_types_its_key_and_adds_no_map(self):
@@ -275,9 +279,8 @@ class Steering(ScenarioCase):
         for pad in self.each(start="steering"):
             pad.hold("R1").push("LS", "up").wait(60).miss("R1").hold("A")
             self.assertFalse([t for t in pad.stack if "Modifier" in t or "W Key" in t])   # the steering branch clears
-            # Still in Steering's mode. The stick is up with no driver left, so since 90.35 the fallback guard has
-            # taken Steering's place.
-            self.assertTrue(pad.has("Steering") or pad.has("Steering | LS: Fallback Guard"))
+            # The held full direction now exits Steering once recovery exposes it.
+            self.assertTrue(pad.lacks("Steering", "Steering | LS: Entry Guard"))
 
 
 if __name__ == "__main__":

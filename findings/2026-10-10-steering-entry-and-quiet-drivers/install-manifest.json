@@ -1,0 +1,14 @@
+[
+  {
+    "variant": "default",
+    "previous_sha256": "cb70462d20f13a32c9e86f9ec19238b8aade73bfd0c6e2ef99e7096c78ed0d58",
+    "candidate_sha256": "872e20c39b2bfe9f657a339731330bb5aaaf1decae1e01b4e83700601c93416f",
+    "source": "build_from verified live90.43; independently matches full frozen-builder chain byte for byte"
+  },
+  {
+    "variant": "alternative",
+    "previous_sha256": "f8d75259c9d5630f40bbfd6849d199eeae6d8afbb25a437cf3448905a7e11d5b",
+    "candidate_sha256": "31b052cec4def90edd6e342481ee0299f1f172fd6426495747d2a0d1d8cbbc46",
+    "source": "build_from verified live90.43; independently matches full frozen-builder chain byte for byte"
+  }
+]

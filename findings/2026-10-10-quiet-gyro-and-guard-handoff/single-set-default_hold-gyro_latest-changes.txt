@@ -1,0 +1,48 @@
+Changes from single-set-default_hold-gyro_90.47.json to single-set-default_hold-gyro_latest.json
+Layers: 88 -> 88 (added: none; removed: none)
+
+== L1!R1: Modifier 2
+  switch/right_bumper: binding
+    before: release(haptic_intensity=0): remove_layer L1!R1: Modifier 2 ; remove_layer L1&R1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1: Tap Cover ; remove_layer R1: Modifier 1 ; remove_layer L1: Modifier 0 ; add_layer Gyro 1 1
+    before: chord(chord_button=1,delay_start=200,haptic_intensity=1): add_layer L1&R1: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer L1&R1: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer L1!R1: Modifier 2 ; remove_layer L1&R1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1: Tap Cover ; remove_layer R1: Modifier 1 ; remove_layer L1: Modifier 0 ; add_layer Gyro 1 1
+    after:  chord(chord_button=1,delay_start=200,haptic_intensity=0): add_layer L1&R1: Tap Cover
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer L1&R1: Tap Cover
+
+== R1!L1: Modifier 2
+  switch/left_bumper: binding
+    before: release(haptic_intensity=0): remove_layer R1!L1: Modifier 2 ; remove_layer L1&R1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1: Tap Cover ; remove_layer R1: Modifier 1 ; remove_layer L1: Modifier 0 ; add_layer Gyro 1 1
+    before: chord(chord_button=2,delay_start=200,haptic_intensity=1): add_layer L1&R1: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer L1&R1: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer R1!L1: Modifier 2 ; remove_layer L1&R1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1: Tap Cover ; remove_layer R1: Modifier 1 ; remove_layer L1: Modifier 0 ; add_layer Gyro 1 1
+    after:  chord(chord_button=2,delay_start=200,haptic_intensity=0): add_layer L1&R1: Tap Cover
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer L1&R1: Tap Cover
+
+== Gyro | L1!R1: Modifier 2
+  switch/right_bumper: binding
+    before: release(haptic_intensity=0): remove_layer Gyro | L1!R1: Modifier 2 ; remove_layer L1&R1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1: Tap Cover ; remove_layer Gyro | R1: Modifier 1 ; remove_layer Gyro | L1: Modifier 0 ; remove_layer Gyro | R1!L1: Modifier 2 ; remove_layer L1: Modifier 0 ; remove_layer R1: Modifier 1 ; remove_layer L1!R1: Modifier 2 ; remove_layer R1!L1: Modifier 2 ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering ; remove_layer Gyro 1 1
+    before: chord(chord_button=1,delay_start=200,haptic_intensity=1): add_layer L1&R1: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer L1&R1: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer Gyro | L1!R1: Modifier 2 ; remove_layer L1&R1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1: Tap Cover ; remove_layer Gyro | R1: Modifier 1 ; remove_layer Gyro | L1: Modifier 0 ; remove_layer Gyro | R1!L1: Modifier 2 ; remove_layer L1: Modifier 0 ; remove_layer R1: Modifier 1 ; remove_layer L1!R1: Modifier 2 ; remove_layer R1!L1: Modifier 2 ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering ; remove_layer Gyro 1 1
+    after:  chord(chord_button=1,delay_start=200,haptic_intensity=0): add_layer L1&R1: Tap Cover
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer L1&R1: Tap Cover
+
+== Gyro | R1!L1: Modifier 2
+  switch/left_bumper: binding
+    before: release(haptic_intensity=0): remove_layer Gyro | R1!L1: Modifier 2 ; remove_layer L1&R1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1: Tap Cover ; remove_layer Gyro | R1: Modifier 1 ; remove_layer Gyro | L1: Modifier 0 ; remove_layer Gyro | L1!R1: Modifier 2 ; remove_layer L1: Modifier 0 ; remove_layer R1: Modifier 1 ; remove_layer L1!R1: Modifier 2 ; remove_layer R1!L1: Modifier 2 ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering ; remove_layer Gyro 1 1
+    before: chord(chord_button=2,delay_start=200,haptic_intensity=1): add_layer L1&R1: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer L1&R1: Tap Cover
+    after:  release(haptic_intensity=0): remove_layer Gyro | R1!L1: Modifier 2 ; remove_layer L1&R1: Tap Cover ; remove_layer R1: Tap Cover ; remove_layer L1: Tap Cover ; remove_layer Gyro | R1: Modifier 1 ; remove_layer Gyro | L1: Modifier 0 ; remove_layer Gyro | L1!R1: Modifier 2 ; remove_layer L1: Modifier 0 ; remove_layer R1: Modifier 1 ; remove_layer L1!R1: Modifier 2 ; remove_layer R1!L1: Modifier 2 ; remove_layer Steering | LS: Entry Guard ; remove_layer Steering ; remove_layer Gyro 1 1
+    after:  chord(chord_button=2,delay_start=200,haptic_intensity=0): add_layer L1&R1: Tap Cover
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer L1&R1: Tap Cover
+
+== Steering
+  switch/right_bumper: binding
+    before: chord(gyro_ratchet_button_mask=4,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): remove_layer Steering | LS: Entry Guard ; add_layer Steering | R1: W Key
+    after:  chord(gyro_ratchet_button_mask=4,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Steering | R1: W Key
+  switch/left_bumper: binding
+    before: chord(gyro_ratchet_button_mask=8,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): remove_layer Steering | LS: Entry Guard ; add_layer Steering | L1: S Key
+    after:  chord(gyro_ratchet_button_mask=8,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Steering | L1: S Key
+
+5 layers changed, 6 changes

@@ -88,7 +88,7 @@ class PadTouch(ScenarioCase):
         for pad in self.each(start="steering"):
             pad.mark().click_pad("RP", "centre")
             self.assertEqual(pad.typed(), ["mouse_button MIDDLE"])
-            self.assertEqual(bumps(pad)[0], ("3", "Base"))                   # the click's own pulse, from Base again (90.27)
+            self.assertEqual(bumps(pad)[0], ("1", "Base"))                   # the click's own pulse, from Base again (90.27)
             pad.wait(300)
             self.assertEqual(pad.top, "Steering")
 
@@ -136,14 +136,15 @@ class ChordedMenu(ScenarioCase):
     @scenario("90.25 M2", rules=("R157", "R162"), rests=("A16",))
     def test_holding_both_menu_buttons_enters_menu_keys(self):
         for start in (("Base",), ("Base", "Gyro")):
-            for first, second, _, entry, _, _, _, _, _ in CHAINS:
+            for first, second, _, entry, _, _, _, plain, _ in CHAINS:
                 for pad in self.each(start=start):
                     pad.touch("LS").touch("RS").wait(300)                    # resting thumbs: their helpers are cleared too
                     pad.hold(first).wait(40).mark().hold(second).wait(199)
                     self.assertEqual(pad.top, entry)
                     pad.wait(2)
                     self.assertEqual(pad.stack, pad.layers("Base", MENU_KEYS))            # Gyro is gone
-                    self.assertEqual((pad.seen("beep"), bumps(pad)), ([("beep", MENU_KEYS)], [("3", entry)]))
+                    self.assertEqual((pad.seen("beep"), bumps(pad)),
+                                     ([("beep", MENU_KEYS)], [("1", plain), ("1", entry)]))
                     pad.let_go(second).let_go(first).wait(500)
                     self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base", MENU_KEYS), []))
 
@@ -269,7 +270,7 @@ class MenuKeys(ScenarioCase):
                     self.assertEqual((pad.top, pad.typed()), ("Transition Set 2", []))    # the chord, not the stick's key
                     pad.mark().let_go(menu)
                     self.assertTrue(pad.lacks(MENU_KEYS, "Transition Set 2"))
-                    self.assertEqual((pad.seen("beep"), bumps(pad)), ([("beep", "Transition Set 2")], [("3", "Transition Set 2")]))
+                    self.assertEqual((pad.seen("beep"), bumps(pad)), ([("beep", "Transition Set 2")], [("1", "Transition Set 2")]))
                     pad.mark().lift(stick).wait(300).click(stick)
                     self.assertEqual(pad.typed(), [key])                     # Base again
 

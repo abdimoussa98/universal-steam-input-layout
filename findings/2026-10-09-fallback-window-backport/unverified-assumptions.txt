@@ -1,0 +1,48 @@
+90.39 candidate assumptions; simulator results are not Deck verification.
+
+A8 (Unverified): A stick edge's Release fires in a layer that was added while the stick was already out
+  Scenarios: 90.39 P3, 90.39 P4, 90.39 P5, 90.39 F1, 90.39 F2, 90.39 F3, 90.39 G1, 90.39 R2
+
+A9 (Unverified, by the author's choice): Removing a layer fires the exposed layer command on an input that is held (held-input rule 3)
+  Scenarios: 90.39 M2, 90.39 P2, 90.39 P3, 90.39 P4, 90.39 P5, 90.39 F4, 90.39 F5, 90.39 R3
+  Rules: R114
+
+A10 (Reported by the author, not isolated): A key or mouse output fires on an input that is already held when its layer is added
+  Scenarios: 90.39 F1, 90.39 F2, 90.39 F3
+
+A11 (Unverified): A key or mouse output fires when a removal exposes it under an input that is held
+  Scenarios: 90.39 F1
+
+A13 (Reported by the author, not isolated): Any `remove_layer` can reset a running start delay; an `add_layer` doesn't
+  Scenarios: 90.39 D1, 90.39 D2
+  Rules: R123
+
+A16 (Unverified): A delay's clock starts when its layer is added, not at the physical press
+  Scenarios: 90.39 M1, 90.39 M2, 90.39 M3, 90.39 P1, 90.39 P2, 90.39 P3, 90.39 P6, 90.39 D1, 90.39 D2, 90.39 C1, 90.39 C2, 90.39 C3, 90.39 O1, 90.39 E1, 90.39 F1, 90.39 F3, 90.39 F4, 90.39 F5, 90.39 F6, 90.39 R1, 90.39 R3, 90.39 R4
+
+A24 (Reported by the author: a historical bug, not rechecked on a current client): Adding or removing another layer while a layer with an Always On action is active caused crashes
+  Rules: R140, R148
+
+A26 (Unverified. A 2022 community report says sticks inherit only from the top layer and the action set): Stick inputs inherit through the middle of the stack like any other input
+  Scenarios: 90.39 G1
+  Rules: R140
+
+A27 (Reported: relied on since the July layout, not isolated): An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known
+  Scenarios: 90.39 M1
+  Rules: R133
+
+A31 (Unverified): A repeating activator keeps its schedule when another layer is removed
+  Rules: R114
+
+A36 (Unverified): A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it
+  Scenarios: 90.39 M1, 90.39 M2, 90.39 M3, 90.39 O1, 90.39 F6
+
+A49 (Unverified: not heard on the Deck yet. Read from the installed Steam client on 2026-10-04, whose message for the command lists `display` and then `beep`, and whose dialog has "Display name when changed" above "Beep when changed". On the Deck the author heard no beep from the commands written `1 0` (90.28)): A layer command's two flags are the on-screen name and then the beep: `add_layer <layer> 0 1` beeps and shows no name
+  Rules: R161
+
+A50 (Unverified. The author's July layout states a radius only in Base and the Fn layers, and its stick clears work at the rim): A stick group that states no outer ring radius uses Steam's default, near the rim. It doesn't take the radius of the group it replaces in a lower layer
+  Physical check: Retained default stick outer-ring radius; verify on the Deck.
+
+A52 (Unverified: the author's suspicion, 2026-10-06. On a first load, with a thumb on a stick and a menu button held, the Fn layer's delayed add never came; the menu Entry Points' stick touches were stored that way from 90.24 to 90.35. Nothing found online says the stored order matters or that it can't (searched 2026-10-06): Valve's activator page is silent on it): The stored order of an input's entries can change what Steam does: a Release stored between a Regular Press and its guard chord can stop the chord from interrupting the Regular Press
+  Rules: R133
+  Physical check: Stored cleanup-entry order is checked in JSON/VDF; its interruption effect is a Deck check.

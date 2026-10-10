@@ -185,13 +185,16 @@ menu Tap Cover where the Entry Point would bring in Fn.
 
 - The commit is one array: remove the transition and whatever the
   destination replaces, then add the stateful layer last. Until 90.32
-  Steering's commit also added its Entry Guard; since 90.33 Steering's own up
-  and down bring the fallback guard in, at entry too.
-  `Cursor Gyro`'s commit adds `Gyro` first, so the layer always sits on it;
-  if `Gyro` is already on, that add does nothing.
-- **Every transition beeps and gives a high haptic pulse on its menu
+  Steering's commit also added its Entry Guard. That guard returns in 90.43:
+  remove the transition, add Steering with its beep, then add Entry Guard
+  silently. The intervening fallback-entry behavior ended in 90.42.
+  `Cursor Gyro`'s commit adds `Gyro` first; if `Gyro` is already on, that add
+  does nothing. Since 90.44 the dual-driver gesture may subsequently remove
+  `Gyro` while retaining `Cursor Gyro`, which inherits Base's activation
+  selectors until Gyro is toggled back on.
+- **Every transition beeps and gives a Low haptic pulse on its menu
   release** (author, 2026-10-02), whether it enters a stateful layer or
-  clears. The Release has `haptic_intensity` 3, and one layer command
+  clears. Since 90.41 the Release has `haptic_intensity` 1, and one layer command
   carries the beep flag: the stateful layer's `add_layer`, or the
   transition's own `remove_layer` when nothing is added. No on-screen
   notification: the command ends in `0 1`, the name flag and then the beep
@@ -229,6 +232,159 @@ R112.
      only sends output is fine. Since 90.38 the author-requested fallback
      return has one exact R111 exception; physical behavior remains A54
 
+## 90.48 Quiet Gyro gestures and Steering entry cleanup
+
+`Steering` now only adds W/S on the driving bumpers (default) or trigger
+soft pulls (alternative). Its redundant Entry Guard removal is gone.
+The four ordinary/Gyro Modifier 2 delayed combined-cover adds are now
+haptic Off. Quick Base/Gyro toggles were already quiet; their existing
+one-beep feedback is retained. Steering Modifier 2 cover feedback is unchanged.
+
+`Steering | LS: Entry Guard` retains its atomic remove-self-and-add-driver
+handoff. Splitting these across separate bindings exposes the held LS
+up/down clear before W/S can take over. A tested 100 ms delay avoided the
+race in the simulator, but was rejected because the author's native Steam
+observations show that layer transitions can disturb delays. No new delay
+or layer is installed. First-movement, touch and inward-edge protection,
+full-deflection clears and menu handoffs remain unchanged.
+
+See the [90.48 record](../findings/2026-10-10-quiet-gyro-and-guard-handoff/README.md)
+for the proposed split and its unresolved timing problem.
+
+## 90.47 Stick-touch gestures in Steering
+
+After Entry Guard disarms, `Steering` inherits Base's LST/RST touch entries.
+The ordinary Entry Point, Tap Cover, Double Tap and Temporary Gyro families
+work over Steering. Entry Guard keeps its touch overrides, so resting or
+lifting a thumb cannot consume its first-movement protection.
+
+Both `LST: Double Tap` and `RST: Double Tap` explicitly replace left-stick
+up/down with silent Regular Press W/S. Those directions contain no layer
+commands, following R140/R141; Steering's full-deflection clear cannot run
+through an active touch window. Existing driver scroll replacements, menu
+blocks and right-stick edge blocks remain for the window's 200 ms lifetime.
+When the window ends, the exposed lower binding resumes. A still-held full
+up/down in armed Steering can then run its existing repeating clear.
+
+The normal and Gyro Modifier 0/1 owners also apply Temp Cursor Gyro silently.
+Their 200 ms delay and already-silent touch-release completion are unchanged.
+No layers were added; see the
+[90.47 record](../findings/2026-10-10-quiet-cursor-and-steering-touch/README.md).
+
+## 90.46 Ramp/menu cleanup and repeating driver chords
+
+Start and Select clear `Gyro Off Ramp Up`, `Turning Ramp Up 0` and
+`Turning Ramp Up 1` before opening their menu Entry Point. The ramp layers
+inherit this behavior: Base and Steering's existing menu chords perform the
+removals and their appropriate menu add in one command list. Entry Guard's
+menu Start Press does the same before its guard-removal/menu handoff. Removing
+the ramps alone would expose a held right stick and could immediately rebuild
+them before the menu arrived.
+
+Steering and Entry Guard now acquire W/S with a self-button chord, repeating
+every configured 50 ms with haptics Off. Each entry removes only Entry Guard
+and adds its driver; the old opposite-driver empty chord is gone. The W/S
+layers' opposite-driver Mod 2 chords also repeat at 50 ms so both drivers
+carried into Steering can reach Mod 2 without a fresh press. An explicit
+driver handoff still consumes Entry Guard; entering with no driver keeps
+the existing first-movement protection.
+
+Gyro Off Ramp Up now clears the full ramp family on either driver, including
+alternative's soft trigger pull. This covers direct ramp use while already
+in Steering, which does not pass through a menu. Ramp 0/1 retain their
+existing driver exits; alternative still needs a full pull in those stages.
+W/S key outputs remain nonrepeating, and sensitivity/vertical scales remain
+150/100%, 200/75%, 250/60%.
+
+This release does not redesign Mod 2 releases. A full up/down held across
+their cleanup can still expose Steering's independent clear. See the
+[90.46 record](../findings/2026-10-10-ramp-menu-and-driver-chords/README.md).
+
+## 90.44 Entry Guard inward exit and stateful preservation
+
+Entry Guard retains its ordinary direction/outer-edge Releases and driver/menu
+handoffs. It also has an activator-local inverted LS-edge chord, repeating
+silently while **either** driver is held: L1 or R1 in default, L2 or R2 in
+alternative. That chord removes only Entry Guard. It never adds Steering,
+changes Gyro or clears the steering family. The stick group remains
+non-inverted. Without a held driver, centered entry still protects the first
+push until its ordinary Release. Physical inward-edge detection remains A54;
+normal Releases and handoffs provide independent exits.
+
+Both Steering Modifier 2 release clears now preserve Steering and lose the
+beep previously attached to its removal. The other cleanup commands and the
+existing release-order behavior remain. A still-held driver can reacquire
+W/S. Steering's separate full-deflection up/down clear can still fire if the
+cleanup exposes it under a held full push; centered releases preserve Steering.
+
+Cursor Gyro survives six dual-driver release bindings across four layers:
+both driver Releases in each Gyro Modifier 2 layer, and the existing clear
+Release in each Steering Modifier 2 layer. Gyro Modifier 2 still toggles
+Gyro with its one beep and retains its existing Steering removal. The newly
+retained `Base + Cursor Gyro` stack inherits Base's gyro activation selectors
+and keeps Cursor Gyro's response settings. Toggling Gyro on again restores
+its activation override without reapplying Cursor Gyro. The deliberate
+both-stick and menu-plus-click exits still remove Cursor Gyro.
+
+Steering Modifier 0/1 edge Releases and their automatic Double Tap completions
+are explicitly haptic Off. W/S-owned activators, incoming W/S adds and their
+left-stick D-pad mode haptics are also Off. Fn adds retain their Low bump,
+and Steering's full-deflection clear retains its beep and Low bump. No layers
+were added. See the [90.44 plan](../plans/2026-10-10-entry-guard-edge-and-quiet-drivers.md).
+
+## 90.43 Entry Guard, driver recovery and beeps
+
+The existing fallback slot is now `Steering | LS: Entry Guard`; the layout
+still has 88 layers and unchanged runtime IDs. Entry protects an already-held
+movement, or the first movement after centered entry. A direction Release
+or normal outer-edge Release removes the guard silently. Rolling between
+directions can disarm it without centering. The next full up/down reaches
+Steering's existing clear.
+
+The guard uses the same four-way WASD source settings as Steering. Stick
+touches and right-stick movement cannot consume a centered guard. It blocks
+pad-helper and ramp entries while preserving plain movement/camera outputs;
+left-pad swipes send their ordinary keys directly. A driver takeover removes
+the guard before adding the W/S layer. A fresh menu Start Press removes it
+before adding the Stateful Entry Point; a menu button carried into entry
+does not consume protection.
+
+Modifier 0/1 recovery now cancels the invalid stick modifier and cover while
+preserving a still-held W/S owner. The owner's own cleanup handles a missed
+driver release. This closes the gap that exposed Steering's up/down clear
+while the driver was still held.
+The W/S layers' up/down modifier adds are guarded by their driving button;
+without that button, repeating owner-family cleanup replaces the add. This
+also prevents a stale owner from immediately rebuilding a cancelled modifier
+under a still-deflected stick.
+
+Gyro Modifier 2's four quick-clear releases beep only on Gyro removal;
+Steering and guard cleanup are silent. The two existing Steering Modifier 2
+full-clear releases beep only on Steering removal. Fn stays silent. Haptic
+settings and the deferred two-driver release-order behavior are unchanged.
+See the [plan](../plans/2026-10-09-steering-entry-guard.md).
+
+## 90.42 Steering exit and Fn feedback
+
+The [90.42 change](../findings/2026-10-09-fn-haptics-and-steering-clear/README.md)
+replaces Steering base's up/down fallback entry with a direct clear of its
+whole Steering family and the two single-side Tap Covers its Mod 2 uses.
+Both directions remain Soft Presses at `29031`, so this exit requires near
+full deflection. The clear preserves Gyro and unrelated interaction families.
+Driver, directional modifier and protected-window inputs still take precedence
+when they cover this Steering-base binding.
+
+Fallback Guard had no normal entry in 90.42. Its slot was retained dormant
+until it became Entry Guard in 90.43. The fallback
+descriptions below are historical behavior through 90.41. The proposed
+two-new-cover fix for symmetric Mod 2 clearing is deferred; the existing
+release-order limitation remains.
+
+All 16 entry activators into the four ordinary/Stateful Fn layers now give
+Low haptic feedback, including delayed holds, opposite-menu-button entries,
+and stick-touch release completions. The Fn add commands retain their silent
+beep flags from 90.41.
+
 ## 90.38 Steering follow-up
 
 The [90.38 record](../findings/2026-10-08-steering-rtp-and-menu-chords/README.md)
@@ -244,10 +400,10 @@ fallback when that local edge answers. Gyro modifiers can cover that edge.
 
 | Exception | What it does |
 |---|---|
-| Modifier 2 clear | Both modifiers together (bumpers in default, triggers in alternative) clear everything to Base, including `Gyro`. No transition. It is the fallback from any state. In Steering's fallback guard the pair are the Gyro modifiers, so since 90.33 the `Gyro \| … Modifier 2` quick tap removes `Steering` and the guard too, with the beep |
+| Modifier 2 clear | Both modifiers together use the existing release clear (bumpers in default, triggers in alternative). Since 90.44 the two Steering Modifier 2 clear releases keep Steering and all six Gyro/Steering clear releases keep Cursor Gyro. Gyro Modifier 2 still toggles Gyro with one beep and retains its existing Steering removal. Other cleanup targets and release-order behavior remain unchanged; this is no longer a universal return to Base. No transition |
 | Steering's fallback guard (90.33) | Not an exit. With no driver held, stick up or down adds `Steering \| LS: Fallback Guard` with a strong pulse: at once since 90.34, after 100 ms in 90.33. Since 90.34 Steering base reads the left stick four ways, so a diagonal counts as one direction, and leaves both stick edges open, so turn assist runs there and in the guard and is off only while a driver is held ([record](../findings/2026-10-05-steering-four-way-and-open-edges/README.md)). Since 90.35 the two swap places: the bind that adds the guard removes `Steering`, and each bind that removes the guard adds `Steering` first, because the guard's eight-way stick did not take effect over the four-way one on the Deck. The guard carries `Steering`'s Start, Select and right pad itself ([record](../findings/2026-10-06-steering-fallback-swap/README.md)). It types W and S and stays when the stick is let go. In it, each of the modifier pair adds its Gyro modifier while the left stick is out, and removes the guard, with a pulse, when the stick is at centre; the button then drives. Start and Select are Steering's own, so the menu-plus-click clear works from there. The author's design of 2026-10-04 and 2026-10-05, after the July layout ([record](../findings/2026-10-05-steering-fallback-guard/README.md)). From 90.11 to 90.32 the fallback was an exit: holding W or S for a time and letting go left Steering ([90.31 record](../findings/2026-10-04-fallback-window/README.md), [90.11 record](../findings/2026-10-02-steering-fallback-hold/README.md)) |
-| `Cursor Gyro`'s both-sticks exit | Pushing both sticks out about a quarter removes `Cursor Gyro` and nothing else; `Gyro` stays. No transition. It is only in `Cursor Gyro`: a layer on top that binds the stick edges (a held modifier, a held menu button, a window) answers instead, and the exit follows when that layer goes if the sticks are still out (author, 2026-10-03) |
-| `Cursor Gyro`'s entry | Its commit also adds `Gyro`. Leaving by the menu-plus-click clear or by both sticks therefore ends in `Gyro`, also when the player came from Base |
+| `Cursor Gyro`'s both-sticks exit | Pushing both sticks out about a quarter removes `Cursor Gyro` and nothing else; any active `Gyro` stays. No transition. It is only in `Cursor Gyro`: a layer on top that binds the stick edges (a held modifier, a held menu button, a window) answers instead, and the exit follows when that layer goes if the sticks are still out (author, 2026-10-03) |
+| `Cursor Gyro`'s entry | Its commit also adds `Gyro`. Since 90.44 a later dual-driver gesture may remove Gyro while retaining Cursor Gyro. Its menu-plus-click clear and both-stick exit preserve whatever Gyro state is currently active; they do not re-add it |
 | `Gamepad` and the Modifier 2 clear | The Modifier 2 quick tap does not leave `Gamepad`: the bumpers and triggers are gamepad buttons there (author, 2026-10-03). The one way out is a menu button held plus a stick click |
 | `Gamepad`'s exit | It has no Entry Points. Each stick click has a chord on Start or Select being held that runs the Entry Points' clear list and adds `Transition Set 2`. So the clear is entered at the click's **press**. The menu button's Release in the transition ends it as usual. If the menu button is let go before the click, Base is live under a held click and may type one Q or E (A11) |
 | `Gamepad`'s Start and Select | They use Steam's own Double Press and Long Press, the one exception to R108 (author, 2026-10-03): a tap sends the button after the Double Press time, a double press holds it, a hold sends nothing. It is safe only because `Gamepad` is closed: it binds every input, so no layer can be added over it (R168). Rests on A43 to A45 |
@@ -266,14 +422,17 @@ replace one. The list is kept for that.
       layer.
 - [ ] It has Entry Points whose click releases both lead to Transition 2, and
       its own menu press adds them.
-- [ ] Transition 2 and the Modifier 2 clear both remove it and its helpers.
+- [ ] Transition 2 removes it and its helpers. Modifier 2 follows the
+      registered survivor policy: since 90.44 its Steering clears preserve
+      Steering and all Gyro/Steering release clears preserve Cursor Gyro.
 - [ ] It has no Release or delayed binding on Start or Select at entry. A
       repeating press that adds its Entry Point is allowed.
-- [ ] Nothing in it depends on a chord hand-over or a D-pad centre bind.
+- [ ] Nothing depends on chord hand-over or a D-pad centre bind outside the
+      exact registered R111 exceptions.
 - [ ] Both layouts are changed.
 - [ ] Its commit beeps and pulses like every other transition release: the
-      beep flag on its `add_layer` (`0 1`, A49) and `haptic_intensity` 3 on
-      the Release.
+      beep flag on its `add_layer` (`0 1`, A49) and `haptic_intensity` 1 on
+      the Release (Low since 90.41).
 - [ ] The transition test and the scenario tests are updated
       ([definition of done](Layer%20Definition%20of%20Done.md#10-ship-it), R154 and R165).
 
@@ -378,9 +537,9 @@ section are still open: they are assumptions A26 and A8 in
       Modifier 2 can't be entered during the window
   - **`LS: Double Tap Cover` ending adds no Tap Cover,** like
     `L1: Double Tap Cover`.
-- **Since 90.33 there is no Entry Guard.** `Steering | LS: Fallback Guard`
-  took its place and is added by `Steering`'s own up and down, not by the
-  entry. The points below are the 90.10 design.
+- **Entry Guard was absent from 90.33 through 90.42.** Fallback Guard took
+  its slot; 90.43 restores entry protection as described above. The points
+  below are the historical 90.10 design.
 - **`Steering | LS: Entry Point` stays** (author, 2026-10-01). Only the
   Steering entry adds it, and it has nothing to do with Modifier 0 and 1,
   which are entered straight from the W and S layers. Its job: W carried

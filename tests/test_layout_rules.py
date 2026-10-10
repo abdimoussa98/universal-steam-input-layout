@@ -99,16 +99,20 @@ class LayoutRules(unittest.TestCase):
         self.assertTrue(folders)
         for folder in folders:
             for variant in VARIANTS:
-                stem = folder / f"single-set-{variant}_hold-gyro_{folder.name}"
                 with self.subTest(folder.name, variant=variant):
-                    self.assertTrue(stem.with_name(stem.name + ".vdf").exists())
-                    title = json.loads(stem.with_name(stem.name + ".json").read_text(encoding="utf-8"))["controller_mappings"]["title"]
-                    self.assertEqual(title.rsplit(" :: ", 1)[-1], folder.name)
-        newest = max(changes.version(folder.name) for folder in folders)
+                    # A named testing candidate has its own filename lineage;
+                    # saving it must not advance the live layout's baseline.
+                    snapshots = list(folder.glob(f"single-set-{variant}*_hold-gyro_{folder.name}.json"))
+                    self.assertTrue(snapshots)
+                    for snapshot in snapshots:
+                        self.assertTrue(snapshot.with_suffix('.vdf').exists())
+                        title = json.loads(snapshot.read_text(encoding="utf-8"))["controller_mappings"]["title"]
+                        self.assertEqual(title.rsplit(" :: ", 1)[-1], folder.name)
         for variant in VARIANTS:
             working = layout_data(variant)["controller_mappings"]["title"]
             with self.subTest(variant):
-                self.assertGreaterEqual(changes.version(working), newest)
+                newest = changes.newest_snapshot(f"single-set-{variant}_hold-gyro_latest.json")
+                self.assertGreaterEqual(changes.version(working), changes.version(newest.parent.name))
 
 
 if __name__ == "__main__":

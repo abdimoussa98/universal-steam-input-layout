@@ -1,0 +1,22 @@
+...............F...........
+======================================================================
+FAIL: test_mod2_releases_lose_only_the_requested_stateful_removals (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/test_steering_entry_quiet_drivers.py", line 103, in test_mod2_releases_lose_only_the_requested_stateful_removals
+    self.assertEqual(actual, expected, (variant, title, location))
+AssertionError: {'bin[81 chars]d_button': '1', 'haptic_intensity': '0', 'delay_start': '200'}} != {'bin[81 chars]d_button': '1', 'haptic_intensity': '1', 'delay_start': '200'}}
+  {'bindings': {'binding': 'controller_action add_layer 43 0 0, , '},
+   'settings': {'chord_button': '1',
+                'delay_start': '200',
+-               'haptic_intensity': '0'}}
+?                                    ^
+
++               'haptic_intensity': '1'}}
+?                                    ^
+ : ('default', 'L1!R1: Modifier 2', ('switch', 'right_bumper', 'activators', 'chord', 1))
+
+----------------------------------------------------------------------
+Ran 27 tests in 223.278s
+
+FAILED (failures=1)

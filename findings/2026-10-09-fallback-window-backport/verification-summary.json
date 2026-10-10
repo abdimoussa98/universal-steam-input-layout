@@ -1,0 +1,32 @@
+{
+  "full_suite": {
+    "modules": 88,
+    "tests": 996,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 1709.494,
+    "successful": false
+  },
+  "resolved_failures": [
+    {
+      "test": "ScenarioRegistryTests.test_the_report_lists_every_assumption_that_is_not_verified_with_the_rules_resting_on_it",
+      "resolution": "Import-order-independent attribution assertion; focused retest passes",
+      "log": "report-attribution-retest.txt"
+    },
+    {
+      "test": "NeptuneLayoutTests.test_the_window_audit_stays_faster_than_the_old_search",
+      "resolution": "Unchanged five-second bound passes in isolated rerun (4.732 seconds)",
+      "log": "window-timing-retest.txt"
+    }
+  ],
+  "candidate_scenarios": 30,
+  "changed_layers_per_variant": 34,
+  "uncovered_changed_layers": 0,
+  "build_audits": "all four pass for both candidates with candidate rules and explicit 90.32 baseline",
+  "node_exporter_tests": 6,
+  "snapshot_hashes_match": true,
+  "live_90_38_unchanged": true,
+  "automated_failures_remaining": 0,
+  "deck_status": "UNTESTED"
+}

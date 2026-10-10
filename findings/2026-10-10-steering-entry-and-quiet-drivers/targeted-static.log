@@ -1,0 +1,10 @@
+Command: python3 -m unittest tests.test_steering_entry_quiet_drivers tests.test_steering_entry_feedback
+
+............
+----------------------------------------------------------------------
+Ran 12 tests in 184.708s
+
+OK
+
+Both variants were compared with fresh builds from the frozen 90.43 builder.
+No backup files were used as fixtures.

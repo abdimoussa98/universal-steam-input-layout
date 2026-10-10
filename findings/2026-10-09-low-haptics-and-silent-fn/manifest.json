@@ -1,0 +1,30 @@
+{
+  "version": "90.41",
+  "baseline": "90.40",
+  "builder": "findings/2026-10-09-low-haptics-and-silent-fn/build_candidate.py",
+  "previous_builder": "findings/2026-10-09-circular-scroll-haptics/build_candidate.py",
+  "files": [
+    {
+      "source": "neptune/single-set-default_hold-gyro_latest.json",
+      "snapshot": "versions/neptune/90.41/single-set-default_hold-gyro_90.41.json",
+      "sha256": "0f39828dd8659fc43e3de11f30b10a96e03065f070feb0fa1d38083f5be374e5"
+    },
+    {
+      "source": "neptune/single-set-default_hold-gyro_latest.vdf",
+      "snapshot": "versions/neptune/90.41/single-set-default_hold-gyro_90.41.vdf",
+      "sha256": "1d649fee6da6ab08b3be57f389b359070dbb81c31089d0b46e26cd846f57c366"
+    },
+    {
+      "source": "neptune/single-set-alternative_hold-gyro_latest.json",
+      "snapshot": "versions/neptune/90.41/single-set-alternative_hold-gyro_90.41.json",
+      "sha256": "79d87f415828057a576415e9e420648a524aeafa7284caaa09bbd8c470d52f63"
+    },
+    {
+      "source": "neptune/single-set-alternative_hold-gyro_latest.vdf",
+      "snapshot": "versions/neptune/90.41/single-set-alternative_hold-gyro_90.41.vdf",
+      "sha256": "b2615039f8fedf86d626d965eded4fdc017c740cfe1b2fa65f70eaecfa5ecaab"
+    }
+  ],
+  "builder_sha256": "0bc8ae980a8b3785e2426bef264cb92daf501e18a6e7ff4aa4b196a52204a38d",
+  "previous_builder_sha256": "72b2dec85e6c9472b7b1bd3363ba6a32e85faa8e73c7173b792b7e7c97a90bce"
+}

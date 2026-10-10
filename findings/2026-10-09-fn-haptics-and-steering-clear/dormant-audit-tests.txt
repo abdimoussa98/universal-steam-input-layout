@@ -1,0 +1,80 @@
+Dormant-layer audit support verification
+=======================================
+
+This records the completed test results. The streamed verbose output was
+partly truncated by the tool; this is a results record, not a full transcript.
+
+Command:
+python3 -m unittest tests.test_exceptions tests.test_flow_inheritance tests.test_cleanups -v
+
+Final unittest output:
+----------------------------------------------------------------------
+Ran 116 tests in 83.223s
+
+OK
+
+Coverage includes:
+- Exact dormant-layer declaration validation and expansion.
+- An undeclared unreachable layer still fails Flow with R145.
+- A declared dormant layer is reported separately, without a fake entry or context.
+- An explicit --layer request for an unreachable dormant target still fails.
+- Reachable declared layers still receive cover checks.
+- A four-command binding in a dormant layer still fails the Budget audit.
+- Both 90.41 snapshots still reach and audit Fallback Guard normally.
+- An unreachable additive source cannot declassify a reachable persistent mode.
+- A reachable additive source still participates in stateful classification.
+- Existing Cleanup findings, fixes, hidden-exit checks, and frozen snapshots.
+
+After adding the requested R132 keeps for the existing Gyro Mod2 Guard removals:
+
+Command:
+python3 -m unittest tests.test_exceptions -q
+
+Final unittest output:
+----------------------------------------------------------------------
+Ran 17 tests in 0.007s
+
+OK
+
+An additional in-memory check loaded both prepared 90.41 variants, replaced
+the two Steering fallback adds with Steering-family removals, then ran
+cleanup_lists.fix. It compared the complete active groups of both Gyro
+Modifier 2 layers against their pre-fix copies. Exact results:
+
+default both Gyro Mod2 layers preserved exactly by cleanup fix with dormant Guard
+alternative both Gyro Mod2 layers preserved exactly by cleanup fix with dormant Guard
+
+Supporting-tool diff review:
+- R145 exempts only explicitly named unreachable titles in a whole-layout audit.
+- Missing undeclared titles and explicit target audits remain errors.
+- Historical reachable instances ignore the dormant declaration.
+- No runtime context, entry, binding, or layer ID is synthesized by this support.
+- Stateful inference ignores unreachable source adders only; inventory is intact.
+- Cleanup and required-cleanup audits already excluded unreachable hosts. This
+  change adds no new exclusion; raw group and Budget checks remain unchanged.
+- The two R132 additions preserve existing Guard removals instead of allowing
+  the cleanup fixer to trim them after the Guard becomes dormant.
+- git diff --check passed for all seven supporting code/config/test files.
+
+Final review correction: live-fixture reachability check
+------------------------------------------------------
+
+The earlier reachable-Guard regression read saved 90.41 backups. It has been
+replaced to follow the snapshot rule: backups are not test inputs. The new
+test reads each live variant, converts an in-memory copy to title tokens,
+restores only the two Steering-to-Guard entry command arrays in a temporary
+fixture, and verifies normal Flow auditing resumes with no dormant waiver.
+No live layout or backup was edited.
+
+Command:
+python3 -m unittest tests.test_flow_inheritance.NeptuneFlowTests.test_restoring_guard_entries_in_a_live_fixture_restores_normal_flow_auditing -v
+
+Output:
+test_restoring_guard_entries_in_a_live_fixture_restores_normal_flow_auditing (tests.test_flow_inheritance.NeptuneFlowTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.809s
+
+OK
+
+This test exercises both default and alternative variants.

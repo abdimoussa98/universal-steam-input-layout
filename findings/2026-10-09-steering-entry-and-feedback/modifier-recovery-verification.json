@@ -1,0 +1,84 @@
+{
+  "scope": "Isolated modifier-recovery correction on frozen 90.42 inputs; no live files changed",
+  "sources": {
+    "default": {
+      "path": "findings/2026-10-09-fn-haptics-and-steering-clear/default-candidate.json",
+      "sha256": "a9a60b6049110053b797b8fcd57ea828e5cb5a4e0bab0a3490c63ee90bd0be43",
+      "entries_reviewed": 26,
+      "owner_removal_commands_deleted": 52,
+      "owner_direction_entries": 4,
+      "upper_direction_recovery": 8
+    },
+    "alternative": {
+      "path": "findings/2026-10-09-fn-haptics-and-steering-clear/alternative-candidate.json",
+      "sha256": "254ab239742857b90d24cf566a4e8b9994045a2acf538b2a43a593ec88fa9205",
+      "entries_reviewed": 26,
+      "owner_removal_commands_deleted": 52,
+      "owner_direction_entries": 4,
+      "upper_direction_recovery": 8
+    }
+  },
+  "code_sha256": {
+    "findings/2026-10-09-steering-entry-and-feedback/modifier_recovery_probe.py": "251098914c9fe1d9279034db007f2450c60e938937ce14d0be97f0d675a61c4e",
+    "findings/2026-10-09-steering-entry-and-feedback/modifier_recovery.py": "1f76e64da6110a7a6b5222a0c336d39d5ccb3f38b368638b5bf1a9ffeced8466",
+    "steam_layout/cleanups.py": "e023daae57173728db041095b56414d6b1bd81b373f8dbe3a15b4fcc9ec1f4b1",
+    "steam_layout/simulator.py": "91bdc637db0af9991b42991779c07e69b5b7731aa538ebf04226ae35cd5b5880",
+    "steam_layout/flow_model.py": "bf99a6fe7d2b55ecff04138b155200dbafe54f4022d7aae0720c64792b999f10",
+    "tests/scenario.py": "55edf014cf924e3670ba685bd789757948447aec6a9e6e6804a457a52c06b84a"
+  },
+  "held_owner": {
+    "cases": 768,
+    "passed": 768,
+    "owner_removals": 0,
+    "steering_exits": 0,
+    "partial_direction_hold_ms": [
+      1,
+      30,
+      199,
+      200,
+      201,
+      300
+    ],
+    "repush_gap_ms": [
+      0,
+      1,
+      49,
+      50
+    ],
+    "variants": [
+      "default",
+      "alternative"
+    ],
+    "driver_roles": [
+      "R1",
+      "L1"
+    ],
+    "directions": [
+      "up",
+      "down"
+    ],
+    "A9_exposed_fires": [
+      true,
+      false
+    ],
+    "A32_reverse_ties": [
+      true,
+      false
+    ]
+  },
+  "missed_owner_release": {
+    "cases": 16,
+    "passed": 16,
+    "final_stack_after_stick_release": [
+      "Base",
+      "Steering"
+    ],
+    "held_outputs": []
+  },
+  "limitations": [
+    "Uses the runtime model, not Steam hardware.",
+    "Initial shallow movement is a direction without outer edge; the model has no continuous radial threshold.",
+    "The guard is renamed only to isolate the new correction module; these cases never enter it.",
+    "The complete candidate, Entry Guard handoff and fix-pipeline integration are tested separately."
+  ]
+}

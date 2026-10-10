@@ -1,0 +1,13 @@
+90.43 test evidence before final installation
+
+Final new test inventory: 19 registered scenarios in tests/test_scenarios_90_43.py and 6 static tests in tests/test_steering_entry_feedback.py.
+
+The latest live-only suite loaded preflighted 90.42 readable copies and applied the latest entry_guard, modifier_recovery, and beeps components in memory. It excluded the 26 frozen 90.41 scenarios and 30 experimental 90.39 scenarios.
+
+224 live scenario methods passed in 82.805s; full output is live-scenarios.log. This includes the new D4 full-held stale-owner regression across 1,664 combinations and all older live modifier, tap, window, and scroll scenarios.
+
+D5 was added after that process imported its tests. It passed separately in 1.722s across 64 combinations; see scroll-cover-tests.txt. Together these runs cover all 225 current live scenario methods.
+
+The 6 focused static tests passed in the preceding integrated-candidate run (23 tests total in 13.702s, before D4/D5 and the final owner/upper-direction recovery changes). Root release validation runs them again against the final installation.
+
+These records describe component and candidate validation; they do not claim that this agent tested the subsequently installed final JSONs. Final installed-layout validation is recorded separately by the release builder owner.

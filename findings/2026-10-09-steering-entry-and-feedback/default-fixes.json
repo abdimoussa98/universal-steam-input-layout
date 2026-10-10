@@ -1,0 +1,515 @@
+{
+  "previous_builder_sha256": "106365cc7395a4ca4af30707f81824aebf48edb16b5a84c5c032bbc18b9b4f59",
+  "entry_guard": {
+    "renamed": {
+      "from": "Steering | LS: Fallback Guard",
+      "to": "Steering | LS: Entry Guard",
+      "preset_index": 64
+    },
+    "renamed_reference_entries": [
+      [
+        "Gyro | L1!R1: Modifier 2",
+        "switch",
+        "left_bumper",
+        "release"
+      ],
+      [
+        "Gyro | L1!R1: Modifier 2",
+        "switch",
+        "right_bumper",
+        "release"
+      ],
+      [
+        "Gyro | R1!L1: Modifier 2",
+        "switch",
+        "left_bumper",
+        "release"
+      ],
+      [
+        "Gyro | R1!L1: Modifier 2",
+        "switch",
+        "right_bumper",
+        "release"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "joystick",
+        "click",
+        "release"
+      ],
+      [
+        "Menu Left: Entry Point",
+        "right_joystick",
+        "click",
+        "release"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "joystick",
+        "click",
+        "release"
+      ],
+      [
+        "Menu Right: Entry Point",
+        "right_joystick",
+        "click",
+        "release"
+      ],
+      [
+        "Steering | R1!L1: Modifier 2",
+        "switch",
+        "left_bumper",
+        "release"
+      ],
+      [
+        "Steering | L1!R1: Modifier 2",
+        "switch",
+        "right_bumper",
+        "release"
+      ],
+      [
+        "Steering | LS: Entry Guard",
+        "switch",
+        "left_bumper",
+        "Full_Press"
+      ],
+      [
+        "Steering | LS: Entry Guard",
+        "switch",
+        "right_bumper",
+        "Full_Press"
+      ],
+      [
+        "Steering | LS: Entry Guard",
+        "joystick",
+        "touch",
+        "Full_Press"
+      ],
+      [
+        "Steering | LS: Entry Guard",
+        "right_joystick",
+        "touch",
+        "Full_Press"
+      ],
+      [
+        "Steering",
+        "joystick",
+        "dpad_north",
+        "Soft_Press"
+      ],
+      [
+        "Steering",
+        "joystick",
+        "dpad_south",
+        "Soft_Press"
+      ],
+      [
+        "Stateful | Menu Left: Entry Point",
+        "joystick",
+        "click",
+        "release"
+      ],
+      [
+        "Stateful | Menu Left: Entry Point",
+        "right_joystick",
+        "click",
+        "release"
+      ],
+      [
+        "Stateful | Menu Right: Entry Point",
+        "joystick",
+        "click",
+        "release"
+      ],
+      [
+        "Stateful | Menu Right: Entry Point",
+        "right_joystick",
+        "click",
+        "release"
+      ],
+      [
+        "Gamepad",
+        "joystick",
+        "click",
+        "chord"
+      ],
+      [
+        "Gamepad",
+        "right_joystick",
+        "click",
+        "chord"
+      ],
+      [
+        "Menu Left!Right: Entry Point",
+        "switch",
+        "button_escape",
+        "chord"
+      ],
+      [
+        "Menu Right!Left: Entry Point",
+        "switch",
+        "button_menu",
+        "chord"
+      ],
+      [
+        "Menu Keys",
+        "joystick",
+        "click",
+        "chord"
+      ],
+      [
+        "Menu Keys",
+        "right_joystick",
+        "click",
+        "chord"
+      ]
+    ],
+    "new_groups": [
+      {
+        "source": "left_trackpad",
+        "id": "13354"
+      },
+      {
+        "source": "right_trackpad",
+        "id": "13355"
+      }
+    ],
+    "driver_handoffs": [
+      [
+        "switch",
+        "left_bumper"
+      ],
+      [
+        "switch",
+        "right_bumper"
+      ]
+    ],
+    "commit_execution": [
+      [
+        "remove_layer",
+        "Transition Set 1"
+      ],
+      [
+        "add_layer",
+        "Steering"
+      ],
+      [
+        "add_layer",
+        "Steering | LS: Entry Guard"
+      ]
+    ],
+    "disarm": "First direction Release, normal outer-edge Release, driver acquisition or fresh menu Start Press"
+  },
+  "modifier_recovery": {
+    "entries_reviewed": 26,
+    "entries": [
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "button_diamond",
+        "input": "button_a",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "button_diamond",
+        "input": "button_b",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "button_diamond",
+        "input": "button_x",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "button_diamond",
+        "input": "button_y",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "dpad",
+        "input": "dpad_north",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "dpad",
+        "input": "dpad_south",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "dpad",
+        "input": "dpad_east",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "dpad",
+        "input": "dpad_west",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "switch",
+        "input": "button_escape",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "switch",
+        "input": "button_menu",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "joystick",
+        "input": "click",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "right_joystick",
+        "input": "click",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "source": "right_joystick",
+        "input": "edge",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "button_diamond",
+        "input": "button_a",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "button_diamond",
+        "input": "button_b",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "button_diamond",
+        "input": "button_x",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "button_diamond",
+        "input": "button_y",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "dpad",
+        "input": "dpad_north",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "dpad",
+        "input": "dpad_south",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "dpad",
+        "input": "dpad_east",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "dpad",
+        "input": "dpad_west",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "switch",
+        "input": "button_escape",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "switch",
+        "input": "button_menu",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "joystick",
+        "input": "click",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "right_joystick",
+        "input": "click",
+        "removed_owner_commands": 2
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "source": "right_joystick",
+        "input": "edge",
+        "removed_owner_commands": 2
+      }
+    ],
+    "owner_direction_entries": [
+      {
+        "layer": "Steering | R1: W Key",
+        "input": "dpad_north",
+        "owner_mask": "4",
+        "target": "Steering | LS Up: Modifier 1"
+      },
+      {
+        "layer": "Steering | R1: W Key",
+        "input": "dpad_south",
+        "owner_mask": "4",
+        "target": "Steering | LS Down: Modifier 0"
+      },
+      {
+        "layer": "Steering | L1: S Key",
+        "input": "dpad_north",
+        "owner_mask": "8",
+        "target": "Steering | LS Up: Modifier 1"
+      },
+      {
+        "layer": "Steering | L1: S Key",
+        "input": "dpad_south",
+        "owner_mask": "8",
+        "target": "Steering | LS Down: Modifier 0"
+      }
+    ],
+    "upper_direction_recovery": [
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "input": "dpad_south"
+      },
+      {
+        "layer": "Steering | LS Down: Modifier 0",
+        "input": "dpad_north"
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "input": "dpad_north"
+      },
+      {
+        "layer": "Steering | LS Up: Modifier 1",
+        "input": "dpad_south"
+      },
+      {
+        "layer": "Steering | LS: Tap Cover",
+        "input": "dpad_north"
+      },
+      {
+        "layer": "Steering | LS: Tap Cover",
+        "input": "dpad_south"
+      },
+      {
+        "layer": "Steering | LS: Double Tap Cover",
+        "input": "dpad_north"
+      },
+      {
+        "layer": "Steering | LS: Double Tap Cover",
+        "input": "dpad_south"
+      }
+    ]
+  },
+  "beeps": {
+    "counts": {
+      "gyro_releases": 4,
+      "steering_releases": 2,
+      "flags_changed": 10
+    },
+    "entries": [
+      {
+        "layer": "Gyro | L1!R1: Modifier 2",
+        "source": "switch",
+        "input": "left_bumper",
+        "beep_target": "Gyro",
+        "flags_changed": 2
+      },
+      {
+        "layer": "Gyro | L1!R1: Modifier 2",
+        "source": "switch",
+        "input": "right_bumper",
+        "beep_target": "Gyro",
+        "flags_changed": 2
+      },
+      {
+        "layer": "Gyro | R1!L1: Modifier 2",
+        "source": "switch",
+        "input": "left_bumper",
+        "beep_target": "Gyro",
+        "flags_changed": 2
+      },
+      {
+        "layer": "Gyro | R1!L1: Modifier 2",
+        "source": "switch",
+        "input": "right_bumper",
+        "beep_target": "Gyro",
+        "flags_changed": 2
+      },
+      {
+        "layer": "Steering | R1!L1: Modifier 2",
+        "source": "switch",
+        "input": "left_bumper",
+        "beep_target": "Steering",
+        "flags_changed": 1
+      },
+      {
+        "layer": "Steering | L1!R1: Modifier 2",
+        "source": "switch",
+        "input": "right_bumper",
+        "beep_target": "Steering",
+        "flags_changed": 1
+      }
+    ]
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13178",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 532,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L1: Scroll Down / left_bumper",
+        "R1: Scroll Up / right_bumper",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline_changed_layout": false
+}

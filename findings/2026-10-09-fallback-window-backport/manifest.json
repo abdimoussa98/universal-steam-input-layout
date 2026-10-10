@@ -1,0 +1,21 @@
+{
+  "version": "90.39",
+  "role": "testing candidate",
+  "baseline": "90.32",
+  "variants": {
+    "default": {
+      "source_sha256": "5958042f8ead154ef6dff49f943c13b831d212804a74e3643faa1c95947cd021",
+      "candidate_sha256": "7d5daf851f3be0890b5b5b3f965b940912d121b7f36408a150081098053675a9",
+      "json": "findings/2026-10-09-fallback-window-backport/single-set-default-fallback-window_hold-gyro_90.39.json",
+      "layer_count": 90,
+      "device_status": "UNTESTED"
+    },
+    "alternative": {
+      "source_sha256": "f79047e0d31fee46e15fe27659f3a85b5c705a006ad63dffdb420717cd6f2bdd",
+      "candidate_sha256": "54df498b78e9c2646e1d5780423418e055072702330e340ba59bd15197ce1e57",
+      "json": "findings/2026-10-09-fallback-window-backport/single-set-alternative-fallback-window_hold-gyro_90.39.json",
+      "layer_count": 90,
+      "device_status": "UNTESTED"
+    }
+  }
+}

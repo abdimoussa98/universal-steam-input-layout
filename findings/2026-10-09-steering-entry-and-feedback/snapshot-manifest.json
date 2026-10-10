@@ -1,0 +1,26 @@
+[
+  {
+    "live": "neptune/single-set-default_hold-gyro_latest.json",
+    "backup": "versions/neptune/90.43/single-set-default_hold-gyro_90.43.json",
+    "sha256": "cb70462d20f13a32c9e86f9ec19238b8aade73bfd0c6e2ef99e7096c78ed0d58",
+    "byte_equal": true
+  },
+  {
+    "live": "neptune/single-set-default_hold-gyro_latest.vdf",
+    "backup": "versions/neptune/90.43/single-set-default_hold-gyro_90.43.vdf",
+    "sha256": "4802aacedea2089c8f5193a749627d8a3546866664eb57044e493e21736aea90",
+    "byte_equal": true
+  },
+  {
+    "live": "neptune/single-set-alternative_hold-gyro_latest.json",
+    "backup": "versions/neptune/90.43/single-set-alternative_hold-gyro_90.43.json",
+    "sha256": "f8d75259c9d5630f40bbfd6849d199eeae6d8afbb25a437cf3448905a7e11d5b",
+    "byte_equal": true
+  },
+  {
+    "live": "neptune/single-set-alternative_hold-gyro_latest.vdf",
+    "backup": "versions/neptune/90.43/single-set-alternative_hold-gyro_90.43.vdf",
+    "sha256": "44469755dfce3d6def8ab3708a1bdcf42a4683f12eb1dbd68055d71629d5e815",
+    "byte_equal": true
+  }
+]

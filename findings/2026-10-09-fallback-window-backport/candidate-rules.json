@@ -1,0 +1,781 @@
+{
+  "_about": "Rules for the Flow, cover and Cleanup audits, which run on backward chains (steam_layout/chains.py, covers.py, cleanups.py). The stacks are derived from the layout; this file only declares what bindings can't say: the starting contexts the chains may begin from (Base alone, and Base with the stateful Gyro layer on it), which layers are covers, and the exceptions register. Titles use default-layout names; 'variants' maps them for the alternative layout. Until 2026-10-01 this file also declared a 'families' section for the family walk (deprecated); that version is kept as archived/depth-search-and-family-walk/tests/data/flow_families_90.9.json.",
+  "version": 6,
+  "variants": {
+    "alternative": {
+      "L1": "L2",
+      "R1": "R2"
+    }
+  },
+  "contexts": [
+    [
+      "Base"
+    ],
+    [
+      "Base",
+      "Gyro"
+    ]
+  ],
+  "covers": {
+    "_about": "Cover-type layers (Layer Definition of Done section 5). They inherit their owner, so differing lower bindings are expected; the cover check (covers.py) judges them instead.",
+    "suffixes": [
+      ": Tap Cover",
+      ": Double Tap Cover",
+      ": Temp Cursor Gyro"
+    ],
+    "titles": [
+      "Gyro Off Ramp Up"
+    ],
+    "not_covers": [
+      "LST: Tap Cover",
+      "RST: Tap Cover"
+    ]
+  },
+  "exceptions_about": "The exceptions register (steam_layout/exceptions.py): every place where the layout breaks a rule and that is accepted (status allow) or is a known gap a to-do will close (status todo). Each entry names its rule (resources/Layer Definition of Done.md), what it covers, why, who decided it and when, and the to-do that ends it. Until 2026-10-02 these lived in four shapes: 'decisions', 'covers.allow' and 'cleanups.keep' here, and per-target decisions in traced_stacks.json. An entry that matches nothing is reported as stale by the audit that reads it.",
+  "exceptions": [
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS Up: Modifier 1"
+        ],
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ],
+          "alternative": [
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "Documented steering design: helpers inherit the active W/S owner's driver bindings so the dominant press, owner release and takeover work in every phase (findings/2026-09-30-steering-lean/README.md, reused single-side covers; pinned by test_dominant_two_entries_inherit_through_every_helper).",
+      "decided": "Recorded 2026-10-01 from the Steering design of 2026-09-30",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "kind": "covers"
+      },
+      "status": "allow",
+      "why": "A cover inherits its owner, so different bindings below it are expected, and the cover check (R144) judges it. Its inherited inputs are not reviewed one by one; without this, changing one Tap Cover brings 15 to 18 entries.",
+      "decided": "Proposed in the plan review, 2026-10-02 (decision 10); the author continued without objecting",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "LTP: Click Entry Point",
+          "RTP: Click Entry Point",
+          "LTP: Middle Click",
+          "RTP: Middle Click",
+          "LTP: Arrow Keys",
+          "RTP: Mouse Buttons",
+          "RTP: Circular Scroll",
+          "RTP: Entry Point"
+        ],
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ],
+          "alternative": [
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "The pad layers bind only their pad and the stick touches, so L1 and R1 stay live while a pad is touched or clicked: the modifier entry comes from Base, or from Gyro when Gyro is on. This is the rule's own example, for the left-pad key layers. The two D-pad layers inherited the same way while hold_layer kept them out of the audit.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Escape",
+          "Tab",
+          "Backspace",
+          "Enter",
+          "LST: Entry Point",
+          "RST: Entry Point",
+          "LST: Tap Cover",
+          "RST: Tap Cover",
+          "LST: Temporary Gyro",
+          "RST: Temporary Gyro"
+        ],
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ],
+          "alternative": [
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "Unchanged since 90.13 and read because Base changed in 90.14 (its two pad clicks). The left-pad key layers and the stick-touch helpers leave L1 and R1 open; the modifier entry comes from Base, or from Gyro when Gyro is on.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Turning Ramp Up 0",
+          "Turning Ramp Up 1"
+        ],
+        "inputs": {
+          "default": [
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ],
+          "alternative": [
+            "switch/left_bumper",
+            "switch/right_bumper"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "Unchanged since 90.13 and read because Base changed in 90.14. The ramp layers leave the firing inputs open on purpose: with Gyro Off Ramp Up underneath a shot first removes it, otherwise it is Base's mouse button.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard",
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": [
+          "joystick/click",
+          "right_joystick/click"
+        ]
+      },
+      "status": "allow",
+      "why": "By design: one guard per stick serves all four Entry Points and inherits the stick clicks from whichever is underneath. In 90.14 each click's clear list gained the four pad click layers.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard"
+        ],
+        "inputs": [
+          "right_joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "By design: the other stick's edge comes from the Entry Point underneath (it adds the right guard) or from the right guard when both sticks are out. Read because the Entry Points changed in 90.14; this input did not.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "By design: the other stick's edge comes from the Entry Point underneath (it adds the left guard) or from the left guard when both sticks are out. Read because the Entry Points changed in 90.14; this input did not.",
+      "decided": "Claude, reading the Flow audit for the 90.14 build, 2026-10-03; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R101",
+      "scope": {
+        "note": "Four hold_layer commands in each layout: LTP: Arrow Keys, RTP: Mouse Buttons, LTP: Middle Click and RTP: Middle Click each hold themselves on a Soft Press of the pad click. add_layer puts them on; the hold is there to take them off."
+      },
+      "status": "allow",
+      "why": "The author's exception for the trackpad click layers: the hold tracks the removal at the Soft Press threshold, and the inverted repeating Soft Press removal stays behind it as the backup, because holds are unreliable.",
+      "decided": "Author, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R119",
+      "scope": {
+        "note": "The Steering double tap leaves parts of the recipe out."
+      },
+      "status": "allow",
+      "why": "Recorded deviations of the Steering build (findings/2026-09-30-steering-lean/README.md, recipe deviations).",
+      "decided": "Recorded with the Steering build, 2026-09-30",
+      "todo": null
+    },
+    {
+      "rule": "R120",
+      "scope": {
+        "note": "The Tap Cover's 150 ms delayed add on the touch of LST: Entry Point, RST: Entry Point and RTP: Entry Point has no reset."
+      },
+      "status": "allow",
+      "why": "On the Deck with 90.29 the menu buttons did nothing while a thumb was on a stick, and the Fn beep came as the thumb left. The author thinks the reset's repeated removal on the stick touches is behind it and took it off all three, for now. On the simulator the reset fires once per touch and is then covered, so this is the Deck test of that reading (plans/2026-10-04-window-releases-and-tap-cover-resets.md). Until 90.24 the pad's touch had none either, for trackball momentum (A28).",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Steering | LS: Fallback Hold"
+        ],
+        "removes": [
+          "Steering"
+        ],
+        "where": "Steering | LS: Fallback Hold"
+      },
+      "status": "allow",
+      "why": "The Fallback Hold's Release on up and down leaves Steering, so its cleanup binds do what a missed Release would have done: they remove Steering too, held back while the left stick is out. This sets aside R131 for this one layer (a cleanup function never removes a stateful layer). The author's design of the fallback window, 2026-10-04 (plans/2026-10-04-fallback-window.md). The layer is deleted in 90.33, so this holds only on a layout that still has the Fallback Hold: it stays for the frozen 90.31 and 90.32 builds, which the tests still run.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Gyro | L1!R1: Modifier 2"
+        ],
+        "removes": [
+          "L1: Modifier 0",
+          "R1: Modifier 1",
+          "L1!R1: Modifier 2",
+          "R1!L1: Modifier 2",
+          "Gyro | R1!L1: Modifier 2",
+          "Steering"
+        ],
+        "where": "Steering | LS: Fallback Guard"
+      },
+      "status": "allow",
+      "why": "The Gyro Modifier 2 quick tap is the way to Base from the Steering fallback as well as from Gyro, so it removes the Base modifiers and the other Gyro Modifier 2 layer too, although none of them can be on with it in a normal sequence. The author, 2026-10-04: \"update gyro mod 2 to also clear the related steering layers and base mod layers too ... also want the mod 2 to clear the related gyro layers so that ... it'll take you to the base layer every time\" (plans/2026-10-04-steering-fallback-layer.md). The July layout's quick tap has the same list. It holds only on a layout that has the fallback guard: the frozen builders up to 90.32 read this register too. Since 90.35 Steering is off while its fallback guard is on, so its removal there is one of these too.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Gyro | R1!L1: Modifier 2"
+        ],
+        "removes": [
+          "L1: Modifier 0",
+          "R1: Modifier 1",
+          "L1!R1: Modifier 2",
+          "R1!L1: Modifier 2",
+          "Gyro | L1!R1: Modifier 2",
+          "Steering"
+        ],
+        "where": "Steering | LS: Fallback Guard"
+      },
+      "status": "allow",
+      "why": "The Gyro Modifier 2 quick tap is the way to Base from the Steering fallback as well as from Gyro, so it removes the Base modifiers and the other Gyro Modifier 2 layer too, although none of them can be on with it in a normal sequence. The author, 2026-10-04: \"update gyro mod 2 to also clear the related steering layers and base mod layers too ... also want the mod 2 to clear the related gyro layers so that ... it'll take you to the base layer every time\" (plans/2026-10-04-steering-fallback-layer.md). The July layout's quick tap has the same list. It holds only on a layout that has the fallback guard: the frozen builders up to 90.32 read this register too. Since 90.35 Steering is off while its fallback guard is on, so its removal there is one of these too.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "kind": "touchpad",
+        "note": "A pair is set aside when either layer is a touchpad layer (every binding that adds it is on a trackpad) or the covered exit is a trackpad input. 68 pairs on 90.13, 71 on 90.14 and 90.15, 99 on 90.16: the pad click layers gained a touch Release, which the Double Tap windows cover as they cover the other pad layers' (31 pairs), and they now carry the touch Release of the three right-pad layers under them (3 fewer). 125 on 90.29 and 87 on 90.30: RTP: Double Tap carries the Release of Start, Select and the two modifier buttons."
+      },
+      "status": "todo",
+      "why": "The windows clear both pads' touch, so a thumb leaving a pad inside a window misses a pad layer's Release; RTP: Double Tap bound the buttons whose Releases other layers need; since 90.30 it carries the Release of Start, Select and the two modifier buttons (author, 2026-10-04). The rest is proposed, not decided.",
+      "decided": "Author, 2026-10-02",
+      "todo": "todos.md, Steering: Touchpad exception to the hidden-exit rule: address it"
+    },
+    {
+      "rule": "R157",
+      "scope": {
+        "note": "Steering's 1.5 s hold exit, Cursor Gyro's both-sticks exit and the Modifier 2 clear leave a stateful layer without a transition. Cursor Gyro's entry also adds Gyro underneath. Menu Keys is entered by holding both menu buttons for 150 ms and left by its own three exits, with no transition; only its menu-plus-click exit goes through the clear transition."
+      },
+      "status": "allow",
+      "why": "Extra exits are allowed; the menu-plus-click clear and the Modifier 2 clear are never dropped.",
+      "decided": "Author, 2026-10-01; Cursor Gyro 2026-10-03; Menu Keys 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R157",
+      "scope": {
+        "note": "Steering and Steering | LS: Fallback Guard add each other directly and remove themselves in the same bind: Steering's left stick up and down add the guard and then remove Steering, and each bind in the guard that removes it adds Steering first. Only one of the two is on at a time."
+      },
+      "status": "allow",
+      "why": "On the Deck the guard's eight-way left stick did not take effect over Steering's four-way one (author, 2026-10-06, 90.34), so the two are never stacked. The pair is still entered and left as one stateful layer: by the transition, the menu-plus-click clear and the Modifier 2 clear.",
+      "decided": "Author, 2026-10-06",
+      "todo": null
+    },
+    {
+      "rule": "R159",
+      "scope": {
+        "note": "Gamepad isn't left by the Modifier 2 quick tap. Its bumpers and triggers are gamepad buttons, so no modifier layer exists there; it is left only by a menu button held plus a stick click."
+      },
+      "status": "allow",
+      "why": "The author, asking for the layer: the bumpers can't be the way out of Gamepad, 'it just doesn't make any sense'. This settles the older to-do that kept Gamepad through the clear.",
+      "decided": "Author, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R159",
+      "scope": {
+        "note": "Menu Keys isn't left by the Modifier 2 quick tap. It closes the modifier buttons, so no modifier layer can be reached from it. It is left by both sticks out, by a stick out plus a face button or a D-pad direction, and by a menu button held plus a stick click."
+      },
+      "status": "allow",
+      "why": "The author, describing the layer: from it 'you're not able to even go into the mods'; it only puts the arrow keys on the D-pad and Enter, Escape, Backspace and Tab on the face buttons.",
+      "decided": "Author, 2026-10-03; in plans/2026-10-04-pad-bumps-and-menu-layer.md, which the author told me to build on 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Buttons: Tap Cover",
+        "lower": "Menu Buttons: Left Stick Guard"
+      },
+      "status": "allow",
+      "why": "The cover clears the guard's stick edge, which holds the guard's own Release. The guard's keeper is the menu button, and the cover's menu Release removes both guards, so nothing is left on. The author read this pair as passing on 2026-10-02 (todos.md, Steering). Read again in 90.21 because the lists of both layers name the renamed Entry Points; the bindings are the same.",
+      "decided": "Author, 2026-10-02; re-read by Claude for the 90.21 build, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Buttons: Tap Cover",
+        "lower": "Menu Buttons: Right Stick Guard"
+      },
+      "status": "allow",
+      "why": "The cover clears the guard's stick edge, which holds the guard's own Release. The guard's keeper is the menu button, and the cover's menu Release removes both guards, so nothing is left on. The author read this pair as passing on 2026-10-02 (todos.md, Steering). Read again in 90.21 because the lists of both layers name the renamed Entry Points; the bindings are the same.",
+      "decided": "Author, 2026-10-02; re-read by Claude for the 90.21 build, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R108",
+      "scope": {
+        "layers": [
+          "Gamepad"
+        ],
+        "inputs": [
+          "switch/button_escape",
+          "switch/button_menu"
+        ]
+      },
+      "status": "allow",
+      "why": "Gamepad binds every input, so no layer can be added over it (R168), and Long Press and Double Press only misbehave with layers (A20). Start and Select there use Steam's own activators instead of window and cover layers: an interruptible Regular Press sends the button, a Double Press holds it, a Long Press is empty and swallows the tap. Rests on A43 and A44.",
+      "decided": "Author, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R158",
+      "scope": {
+        "note": "Gamepad has no Entry Points. A chord on each stick click, on Start or Select being held, runs the Entry Points' clear list and adds the clear transition. It fires at the click's press, not its Release."
+      },
+      "status": "allow",
+      "why": "The author asked for no helper layers in Gamepad. An Entry Point would be a layer over Gamepad, which the Long Press and Double Press on its menu buttons rule out (R168). If the menu button is let go before the stick click, Base is live under a held click and may type one Q or E (A11).",
+      "decided": "Proposed in plans/2026-10-03-cursor-gyro-and-gamepad.md; the author told me to build it, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R158",
+      "scope": {
+        "note": "Menu Keys has no Entry Points. It blocks Start and Select, and a chord on each stick click, on Start or Select being held, runs the Entry Points' clear list and adds the clear transition, as in Gamepad. It fires at the click's press, not its Release."
+      },
+      "status": "allow",
+      "why": "An Entry Point's tap opens a Double Tap window. A window that can land on Menu Keys would have to clear the face buttons and the D-pad on every stack, Base included, because Menu Keys has a layer command on them: its stick-plus-button exit (R140). Without Entry Points no window lands there. The plan had the shared Stateful Entry Points; the author asked for the exit, a menu button plus a stick click, not for how it is built. If the menu button is let go before the stick click, Base is live under a held click and may type one Q or E (A11).",
+      "decided": "Claude, while building 90.25 on 2026-10-04; reported to the author with the build, to confirm",
+      "todo": null
+    },
+    {
+      "rule": "R162",
+      "scope": {
+        "note": "Gamepad's Start and Select each have a Long Press, which is a delayed binding on a menu button at entry."
+      },
+      "status": "allow",
+      "why": "The commit is the menu button's own Release, so that button is up when Gamepad lands and its Long Press can't be running. Only a second menu button still held at the commit lands in Gamepad held, and may send its button once (A10).",
+      "decided": "Proposed in plans/2026-10-03-cursor-gyro-and-gamepad.md; the author told me to build it, 2026-10-03",
+      "todo": null
+    },
+    {
+      "rule": "R170",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard"
+        ],
+        "inputs": [
+          "right_joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "Each menu stick guard handles only its own stick. It leaves the other stick's edge open, so the Entry Point's add of the other guard still comes through.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R170",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "Each menu stick guard handles only its own stick. It leaves the other stick's edge open, so the Entry Point's add of the other guard still comes through.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R170",
+      "scope": {
+        "layers": [
+          "Steering | LS: Entry Guard",
+          "Steering | LS: Fallback Hold"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ],
+        "where": "Steering | LS: Fallback Hold"
+      },
+      "status": "allow",
+      "why": "The left stick being out is what keeps these two layers on, so nothing can guard a cleanup function on its edge. The Entry Guard's exits are the edge Release and, since 90.31, each direction's Release; the Fallback Hold's are the up and down Releases since 90.30. Their cleanup function goes on the right-stick edge, guarded by the left stick being out. Both layers are gone in 90.33 (the Entry Guard became the fallback guard, which binds no edge), so this holds only on a layout that still has the Fallback Hold: it stays for the frozen 90.24 to 90.32 builds, which read the register as they build.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Menu Buttons: Right Stick Guard"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Menu Left: Entry Point"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Menu Right: Entry Point"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Stateful | Menu Left: Entry Point"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "RTP: Tap Cover",
+        "lower": "Stateful | Menu Right: Entry Point"
+      },
+      "status": "allow",
+      "why": "Since 90.24 the cover has a right-stick group in mouse mode, for its stick-touch cleanup (R169). Over a layer whose right stick is in D-pad mode nothing on that stick is inherited (A2), so the cover hides this exit. The cover is only on while the right thumb rests on the right pad, and the hidden inputs need that thumb on the right stick. A stale cover removes itself on the right-stick touch. Called out by the author: while the thumb is on the pad, a menu button plus the right-stick click does not start a transition, in the Entry Points and in the Fn layers that inherit that click.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Left!Right: Double Tap",
+        "lower": "Menu Left: Entry Point"
+      },
+      "status": "allow",
+      "why": "The chorded window sits on the Fn layer, which inherits both stick clicks from the Entry Point: the transition gestures. A window must not let a layer change through (R140), so it clears them for its 150 ms. The Entry Point's keeper is its menu button, and the window carries that button's Release: it removes the window first, then the Entry Point and the Fn layer. Nothing is left on.",
+      "decided": "Claude, reading the Cleanup audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Right!Left: Double Tap",
+        "lower": "Menu Right: Entry Point"
+      },
+      "status": "allow",
+      "why": "The chorded window sits on the Fn layer, which inherits both stick clicks from the Entry Point: the transition gestures. A window must not let a layer change through (R140), so it clears them for its 150 ms. The Entry Point's keeper is its menu button, and the window carries that button's Release: it removes the window first, then the Entry Point and the Fn layer. Nothing is left on.",
+      "decided": "Claude, reading the Cleanup audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard",
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper",
+            "left_trigger/click",
+            "right_trigger/click"
+          ],
+          "alternative": [
+            "switch/left_bumper",
+            "switch/right_bumper",
+            "left_trigger/edge",
+            "right_trigger/edge",
+            "left_trigger/click",
+            "right_trigger/click"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "The guards bind only the menu buttons and the sticks, so the bumpers and triggers come from the Entry Point underneath. Since 90.24 each of those carries the Entry Point's cleanup function (R171), whose chord and list name that Entry Point, so the input differs between the four. The player sees the same thing in every stack: with the menu button held the input does what it did, and with it not held the stale menu layers are removed.",
+      "decided": "Author, 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left!Right: Enter",
+          "Menu Right!Left: Backspace"
+        ],
+        "inputs": {
+          "default": [
+            "button_diamond/button_a",
+            "button_diamond/button_b",
+            "button_diamond/button_x",
+            "button_diamond/button_y",
+            "dpad/dpad_north",
+            "dpad/dpad_south",
+            "dpad/dpad_east",
+            "dpad/dpad_west",
+            "switch/button_back_left",
+            "switch/button_back_right",
+            "switch/button_back_left_upper",
+            "switch/button_back_right_upper",
+            "right_joystick/dpad_north",
+            "right_joystick/dpad_south",
+            "right_joystick/dpad_east",
+            "right_joystick/dpad_west",
+            "joystick/dpad_east",
+            "joystick/dpad_west",
+            "joystick/click",
+            "right_joystick/click",
+            "left_trigger/edge",
+            "right_trigger/edge"
+          ],
+          "alternative": [
+            "button_diamond/button_a",
+            "button_diamond/button_b",
+            "button_diamond/button_x",
+            "button_diamond/button_y",
+            "dpad/dpad_north",
+            "dpad/dpad_south",
+            "dpad/dpad_east",
+            "dpad/dpad_west",
+            "switch/button_back_left",
+            "switch/button_back_right",
+            "switch/button_back_left_upper",
+            "switch/button_back_right_upper",
+            "right_joystick/dpad_north",
+            "right_joystick/dpad_south",
+            "right_joystick/dpad_east",
+            "right_joystick/dpad_west",
+            "joystick/dpad_east",
+            "joystick/dpad_west",
+            "joystick/click",
+            "right_joystick/click"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "New in 90.25. The second-press layer of a chorded chain sits on the Fn layer while the first menu button is held, and on Base once that button is let go: its Release takes the Fn layer's family and the held second button keeps this layer (the owner leaves, a held button falls through). So these inputs are the Fn layer's keys, or Base's. The stick clicks come from the Entry Point under the Fn layer; a click there starts a transition, whose clear list removes this layer.",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Left!Right: Double Tap",
+          "Menu Right!Left: Double Tap"
+        ],
+        "inputs": [
+          "joystick/dpad_north",
+          "joystick/dpad_south",
+          "joystick/dpad_east",
+          "joystick/dpad_west"
+        ]
+      },
+      "status": "allow",
+      "why": "New in 90.25. The window leaves the left stick's directions open, as the two menu windows it copies do. Under it they are the Fn layer's punctuation keys, or Base's WASD once the first menu button is let go: keys only, no layer command (R140).",
+      "decided": "Claude, reading the Flow audit for the 90.25 build, 2026-10-04; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS: Fallback Guard"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "add_layer",
+            "Steering"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331648",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        }
+      },
+      "status": "allow",
+      "why": "90.38: the author explicitly requested an inverted repeating fallback left-edge chord on either driver that adds Steering. Only this exact command and per-variant settings qualify; the prior ban remains everywhere else. Physical inward-edge behavior remains unverified.",
+      "decided": "Author request 2026-10-07, implementation authorized 2026-10-08",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Steering"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ]
+      },
+      "status": "allow",
+      "why": "90.38 additive fallback return: Steering normally inherits Base's empty WASD slot. When the requested fallback edge adds Steering without removing fallback, it inherits that same silent driver-conditioned repeat adding already-active Steering. A3 makes the re-add idempotent; the inverted edge does not run at the rim. No output is displaced except Base's empty placeholder. Preserve this intentional inheritance and review the additive stack in the release scenarios.",
+      "decided": "Codex review of author-requested additive fallback edge, 2026-10-08",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Steering | LS: Fallback Window",
+          "Steering | LS Up: Double Tap",
+          "Steering | LS Down: Double Tap"
+        ],
+        "removes": [
+          "RTP: Entry Point",
+          "RTP: Tap Cover",
+          "RTP: Circular Scroll"
+        ],
+        "where": "Steering | LS: Fallback Hold"
+      },
+      "status": "allow",
+      "why": "90.39 P4/P5: RTP held or double-tapped before Steering window entry leaves its Tap Cover or Circular Scroll below the window. The pad release must remove those helpers after the window. The cleanup chain approximation misses this arrival order and otherwise drops the removals.",
+      "decided": "Implementation review of approved backport plan, 2026-10-09",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Gyro | L1!R1: Modifier 2"
+        ],
+        "removes": [
+          "L1: Modifier 0",
+          "R1: Modifier 1",
+          "L1!R1: Modifier 2",
+          "R1!L1: Modifier 2",
+          "Gyro | R1!L1: Modifier 2",
+          "Steering",
+          "Steering | LS Up: Double Tap",
+          "Steering | LS Down: Double Tap",
+          "Steering | LS: Double Tap Cover",
+          "Steering | LS: Tap Cover",
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS Up: Modifier 1",
+          "Steering | R1!L1: Modifier 2",
+          "Steering | L1!R1: Modifier 2",
+          "Steering | R1: W Key",
+          "Steering | L1: S Key",
+          "Steering | LS: Entry Guard",
+          "Steering | LS: Fallback Hold",
+          "Steering | LS: Fallback Window"
+        ],
+        "where": "Steering | LS: Fallback Hold"
+      },
+      "status": "allow",
+      "why": "90.39 testing candidate: retain the 90.33 full-clear intent for the restored 90.32 Steering family, including stale helpers. Window removals execute first. This local register is never used by the historical or live builders.",
+      "decided": "Author approved fallback-window backport plan, 2026-10-09",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Gyro | R1!L1: Modifier 2"
+        ],
+        "removes": [
+          "L1: Modifier 0",
+          "R1: Modifier 1",
+          "L1!R1: Modifier 2",
+          "R1!L1: Modifier 2",
+          "Gyro | L1!R1: Modifier 2",
+          "Steering",
+          "Steering | LS Up: Double Tap",
+          "Steering | LS Down: Double Tap",
+          "Steering | LS: Double Tap Cover",
+          "Steering | LS: Tap Cover",
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS Up: Modifier 1",
+          "Steering | R1!L1: Modifier 2",
+          "Steering | L1!R1: Modifier 2",
+          "Steering | R1: W Key",
+          "Steering | L1: S Key",
+          "Steering | LS: Entry Guard",
+          "Steering | LS: Fallback Hold",
+          "Steering | LS: Fallback Window"
+        ],
+        "where": "Steering | LS: Fallback Hold"
+      },
+      "status": "allow",
+      "why": "90.39 testing candidate: retain the 90.33 full-clear intent for the restored 90.32 Steering family, including stale helpers. Window removals execute first. This local register is never used by the historical or live builders.",
+      "decided": "Author approved fallback-window backport plan, 2026-10-09",
+      "todo": null
+    }
+  ]
+}

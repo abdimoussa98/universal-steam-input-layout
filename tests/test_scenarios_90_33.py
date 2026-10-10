@@ -5,6 +5,10 @@ The plan is plans/2026-10-04-steering-fallback-layer.md, the author's design of 
 modifier pair, which are also Steering's drivers: the bumpers in the default layout, the triggers in
 the alternative.
 
+The retired fallback-entry scenarios explicitly use frozen 90.41 data.
+The ordinary Steering Modifier 2 cleanup remains live and retains Steering since 90.44;
+90.42 covers the directional exit. The following fallback behaviors are historical.
+
 - In Steering with no driver held, stick up or down adds `Steering | LS: Fallback Guard`, with a strong
   pulse: after 100 ms in 90.33, at once since 90.34. It types W and S and stays when the stick is let go.
 - In the guard a bumper pressed with the stick out is its Gyro modifier, over the guard. Pressed with
@@ -19,19 +23,19 @@ from tests.scenario import ScenarioCase, scenario
 
 GUARD = "Steering | LS: Fallback Guard"
 BOTH = (("up", "W"), ("down", "S"))
-PULSE = ("haptic", "3 Steering joystick/dpad_{}")
+PULSE = ("haptic", "1 Steering joystick/dpad_{}")
 MODIFIERS = (("L1", "Gyro | L1: Modifier 0", "mouse_wheel SCROLL_DOWN"), ("R1", "Gyro | R1: Modifier 1", "mouse_wheel SCROLL_UP"))
 DRIVERS = (("R1", "Steering | R1: W Key", "W"), ("L1", "Steering | L1: S Key", "S"))
 
 
 def pulses(pad):
-    """The strong pulses since the mark that came from Steering's add of the guard."""
-    return [detail for _, detail in pad.seen("haptic") if detail.startswith("3 Steering joystick/dpad_")]
+    """The low pulses since the mark that came from Steering's add of the guard."""
+    return [detail for _, detail in pad.seen("haptic") if detail.startswith("1 Steering joystick/dpad_")]
 
 
 class TheStickBringsItIn(ScenarioCase):
-    @scenario("90.33 G1", rules=("R161",), rests=("A10",))
-    def test_up_or_down_brings_the_guard_in_at_once_with_a_strong_pulse(self):
+    @scenario("90.33 G1", rules=("R161",), rests=("A10",), frozen="90.41")
+    def test_up_or_down_brings_the_guard_in_at_once_with_a_low_pulse(self):
         """Changed in 90.34: the add is a repeating press and comes at once. 90.33 had July's 100 ms delay."""
         for direction, key in BOTH:
             for pad in self.each(start="steering"):
@@ -42,7 +46,7 @@ class TheStickBringsItIn(ScenarioCase):
                 self.assertEqual((pad.top, pad.down(), pulses(pad)), (GUARD, [key], []))       # no timer, no second pulse
                 self.assertTrue(pad.lacks("Steering"))                                         # since 90.35 they swap
 
-    @scenario("90.33 G2", rules=("R137",))
+    @scenario("90.33 G2", rules=("R137",), frozen="90.41")
     def test_letting_the_stick_go_leaves_the_guard_on_and_the_next_push_types_at_once(self):
         # The author, 2026-10-05: "pushing the stick will get you into the fallback layer, but releasing it won't."
         for pad in self.each(start="steering"):
@@ -55,7 +59,7 @@ class TheStickBringsItIn(ScenarioCase):
             pad.roll("LS", "left").wait(200)                                            # A and D come from Steering
             self.assertEqual((pad.top, pad.down()), (GUARD, ["A"]))
 
-    @scenario("90.33 G3", rules=("R137",), rests=("A36",))
+    @scenario("90.33 G3", rules=("R137",), rests=("A36",), frozen="90.41")
     def test_whichever_comes_first_decides_the_stick_or_the_driver(self):
         """Changed in 90.34 (the author, 2026-10-05: "If you deflect the stick up or down you be in fall out unless
         you press the bumpers/trigger and if you are in steering base itll be the opposite"). In 90.33 a driver
@@ -73,7 +77,7 @@ class TheStickBringsItIn(ScenarioCase):
                 pad.recentre("LS").let_go(driver).wait(300)
                 self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
 
-    @scenario("90.33 G4", rules=("R157",), rests=("A6", "A10"))
+    @scenario("90.33 G4", rules=("R157",), rests=("A6", "A10"), frozen="90.41")
     def test_entering_steering_with_the_stick_up_brings_the_guard_in_and_with_it_left_does_not(self):
         # No guard is added at entry any more: Steering's own up and down do it, as it lands on the held stick.
         for pad in self.each():
@@ -85,7 +89,7 @@ class TheStickBringsItIn(ScenarioCase):
             pad.hold("R1").wait(100)                                                    # the bumper is a driver there
             self.assertTrue(pad.has("Steering | R1: W Key") and pad.lacks("Gyro | R1: Modifier 1"))
 
-    @scenario("90.33 G5", rules=("R109",), rests=("A21",))
+    @scenario("90.33 G5", rules=("R109",), rests=("A21",), frozen="90.41")
     def test_the_guard_and_its_bumpers_on_the_desktop_configuration(self):
         # The desktop configuration keeps three entries on an input. Steering's up and down have two, and the
         # guard's bumpers two, so nothing is dropped. (Until 90.32 this was 90.11 F9, for the fallback hold.)
@@ -99,7 +103,7 @@ class TheStickBringsItIn(ScenarioCase):
 
 
 class TheBumpersInTheGuard(ScenarioCase):
-    @scenario("90.33 B1", rules=("R137",), rests=("A36",))
+    @scenario("90.33 B1", rules=("R137",), rests=("A36",), frozen="90.41")
     def test_with_the_stick_out_a_bumper_is_its_gyro_modifier_and_w_carries_on(self):
         # The author, 2026-10-04: "in there we'll have the gyro mod 0 & 1 add layer on their respective
         # bumpers/triggers."
@@ -115,14 +119,14 @@ class TheBumpersInTheGuard(ScenarioCase):
                 self.assertEqual(pad.typed(), [wheel] * 3)                              # each tap is the modifier's tap
                 self.assertEqual(pulses(pad), [])
 
-    @scenario("90.33 B2", rules=("R137",), rests=("A36",))
+    @scenario("90.33 B2", rules=("R137",), rests=("A36",), frozen="90.41")
     def test_the_stick_held_sideways_also_makes_a_bumper_a_modifier(self):
         # Coming back to driving needs the stick at centre: with A held, R1 is the modifier, not W.
         for pad in self.each(start="steering"):
             pad.push("LS", "up").wait(300).roll("LS", "left").wait(100).hold("R1").wait(100)
             self.assertEqual((pad.top, pad.down()), ("Gyro | R1: Modifier 1", ["A"]))
 
-    @scenario("90.33 B3", rules=("R133", "R171", "R161"), either=("A9",))
+    @scenario("90.33 B3", rules=("R133", "R171", "R161"), either=("A9",), frozen="90.41")
     def test_at_centre_a_bumper_ends_the_guard_with_a_pulse_and_drives(self):
         # The author, 2026-10-05: "the bumpers themselves will release the fallback guard if you're going into
         # steering."
@@ -131,11 +135,11 @@ class TheBumpersInTheGuard(ScenarioCase):
                 pad.push("LS", "up").wait(300).recentre("LS").wait(200).mark().hold(driver).wait(60)
                 self.assertEqual((pad.top, pad.down()), (layer, [key]), driver)
                 self.assertTrue(pad.lacks(GUARD))
-                self.assertEqual(len([d for _, d in pad.seen("haptic") if d.startswith(f"3 {pad.title(GUARD)}")]), 1)
+                self.assertEqual(len([d for _, d in pad.seen("haptic") if d.startswith(f"1 {pad.title(GUARD)}")]), 1)
                 pad.let_go(driver).wait(300)
                 self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
 
-    @scenario("90.33 B4", rules=("R120",), rests=("A14",))
+    @scenario("90.33 B4", rules=("R120",), rests=("A14",), frozen="90.41")
     def test_letting_the_driver_go_with_the_stick_up_pushes_back_into_the_guard(self):
         # The author, 2026-10-05: "if you let go of either bumper and you go all the way back to the base, the
         # stick will be in the correct position to push you back into the fallback layer."
@@ -146,7 +150,7 @@ class TheBumpersInTheGuard(ScenarioCase):
             pad.mark().let_go("R1").wait(400)
             self.assertEqual((pad.top, pad.down(), len(pulses(pad))), (GUARD, ["W"], 1))
 
-    @scenario("90.33 B5", rules=("R137",), either=("A9",))
+    @scenario("90.33 B5", rules=("R137",), either=("A9",), frozen="90.41")
     def test_after_a_bumper_hold_with_the_stick_let_go_the_next_bumper_drives(self):
         # The author, 2026-10-05: "if you hold the bumpers you can actually let go of the stick and it's not going
         # to clean up because you're transferring the hold to the bumpers."
@@ -164,7 +168,7 @@ class TheBumpersInTheGuard(ScenarioCase):
 
 
 class LeavingFromTheGuard(ScenarioCase):
-    @scenario("90.33 L1", rules=("R157", "R161", "R132"), rests=("A49",))
+    @scenario("90.33 L1", rules=("R157", "R161", "R132"), rests=("A49",), frozen="90.41")
     def test_the_quick_tap_of_both_bumpers_clears_to_base_with_gyro_on_or_off(self):
         # The author, 2026-10-04: "whether you are in the fallback layer or are in the steering ones if you press
         # bumpers/triggers together it'll take you to the base layer every time."
@@ -181,13 +185,14 @@ class LeavingFromTheGuard(ScenarioCase):
                         self.assertIn(("beep", "Steering"), pad.seen("beep"))
 
     @scenario("90.33 L2", rules=("R157",))
-    def test_the_quick_tap_from_steering_base_still_clears_to_base(self):
+    def test_the_quick_tap_from_steering_base_cleans_modifiers_and_retains_steering(self):
         for pad in self.each(start=("Base", "Gyro")):
             pad.enter_steering().mark().hold("R1").wait(30).hold("L1").wait(40).let_go("L1").wait(10).let_go("R1")
             pad.lift("LS").wait(500)
-            self.assertEqual(pad.stack, pad.layers("Base"))
+            self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
+            self.assertEqual(pad.seen("beep", "haptic"), [])
 
-    @scenario("90.33 L3", rules=("R158", "R161"))
+    @scenario("90.33 L3", rules=("R158", "R161"), frozen="90.41")
     def test_a_menu_button_and_a_stick_click_clear_steering_and_the_guard_and_keep_gyro(self):
         # The author, 2026-10-04: "stick & menu buttons to clean just your stateful layer."
         for menu in ("Select", "Start"):
@@ -199,7 +204,7 @@ class LeavingFromTheGuard(ScenarioCase):
                     self.assertEqual(pad.stack, pad.layers(*left), (menu, start))
                     self.assertEqual(pad.seen("beep"), [("beep", "Transition Set 2")])
 
-    @scenario("90.33 L4", rules=("R158",))
+    @scenario("90.33 L4", rules=("R158",), frozen="90.41")
     def test_start_and_select_keep_steerings_taps_in_the_guard(self):
         # The author, 2026-10-04: "menu buttons in fallback should inherit from steering base."
         for menu, key in (("Start", "TAB"), ("Select", "ESCAPE")):
@@ -208,7 +213,7 @@ class LeavingFromTheGuard(ScenarioCase):
                 self.assertEqual(pad.typed(), [key])
                 self.assertEqual((pad.top, pad.down()), (GUARD, ["W"]))
 
-    @scenario("90.33 L5", rules=("R137",), either=("A9",))
+    @scenario("90.33 L5", rules=("R137",), either=("A9",), frozen="90.41")
     def test_after_a_menu_hold_with_the_stick_let_go_a_bumper_drives(self):
         for pad in self.each(start="steering"):
             pad.push("LS", "up").wait(300).hold("Select").wait(300).recentre("LS").wait(100).let_go("Select").wait(500)
@@ -218,7 +223,7 @@ class LeavingFromTheGuard(ScenarioCase):
 
 
 class TheGuardsCleanup(ScenarioCase):
-    @scenario("90.33 C1", rules=("R169", "R133"), rests=("A17", "A36"))
+    @scenario("90.33 C1", rules=("R169", "R133"), rests=("A17", "A36"), frozen="90.41")
     def test_a_fresh_stick_touch_at_centre_removes_the_guard_and_one_with_the_stick_out_does_not(self):
         for pad in self.each(start="steering"):
             pad.push("LS", "up").wait(300).touch("RS").wait(200)                        # the left stick is out: held back
@@ -235,7 +240,7 @@ class TheGuardsCleanup(ScenarioCase):
             pad.mark().push("LS", "down").wait(110)                                     # and the next push brings it back
             self.assertEqual((pad.top, pad.down(), len(pulses(pad))), (GUARD, ["S"], 1))
 
-    @scenario("90.33 C2", rules=("R133",), rests=("A25",))
+    @scenario("90.33 C2", rules=("R133",), rests=("A25",), frozen="90.41")
     def test_a_bumper_release_missed_under_the_guards_modifier_recovers_on_the_next_touch(self):
         for pad in self.each(start="steering"):
             pad.push("LS", "up").wait(300).hold("L1").wait(100).miss("L1").lift("LS").wait(300)

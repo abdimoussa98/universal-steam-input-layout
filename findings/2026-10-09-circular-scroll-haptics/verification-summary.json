@@ -1,0 +1,28 @@
+{
+  "baseline": "90.38",
+  "release": "90.40",
+  "exact_diff": "Only title version and RTP: Circular Scroll right_trackpad group haptic_intensity (0 to 1), including stored order",
+  "audits": {
+    "Budget": "pass on both",
+    "Window": "pass on both",
+    "Flow": "pass on both",
+    "Cleanup": "pass on both"
+  },
+  "focused_regression_tests": {
+    "run": 23,
+    "failures": 0
+  },
+  "documentation_registry_tests": {
+    "run": 38,
+    "failures": 0,
+    "checked_by": "timing_docs agent"
+  },
+  "exporter_tests": {
+    "run": 6,
+    "failures": 0
+  },
+  "json_vdf_export": "both passed key, value and order verification",
+  "snapshots": "both JSON/VDF pairs byte-identical to working files",
+  "physical_scroll_haptic_strength": "not tested on Deck",
+  "full_python_suite": "not rerun for this single setting; focused checks used"
+}

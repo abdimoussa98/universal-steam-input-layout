@@ -1,0 +1,30 @@
+test_neptune_cursor (unittest.loader._FailedTest) ... ERROR
+test_a_cleanup_input_stores_the_regular_press_then_the_guard_then_the_release (tests.test_layout_rules.LayoutRules) ... ok
+test_a_reset_repeats_more_slowly_than_its_delay (tests.test_layout_rules.LayoutRules) ... ok
+test_every_snapshot_holds_both_layouts_under_its_own_version (tests.test_layout_rules.LayoutRules) ... ok
+test_every_value_is_one_the_editor_can_set (tests.test_layout_rules.LayoutRules) ... ok
+test_hold_layer_is_used_only_where_the_register_says (tests.test_layout_rules.LayoutRules) ... ok
+test_layer_titles_are_unique (tests.test_layout_rules.LayoutRules) ... ok
+test_no_binding_switches_action_sets_and_there_is_one_set (tests.test_layout_rules.LayoutRules) ... ok
+test_the_alternative_has_the_defaults_layers_with_l2_and_r2 (tests.test_layout_rules.LayoutRules) ... ok
+test_delayed_targets_complete_before_rtp_cleanup_including_touch_completion (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+test_inverted_edge_exception_rejects_changed_action_selector_repeat_or_owner (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+test_menu_entry_conditions_repeat_and_do_not_repeat_key_output (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+test_steering_inherits_pad_and_direction_soft_presses_keep_the_swap (tests.test_steering_rtp_menu_chords.SteeringRtpMenu) ... ok
+
+======================================================================
+ERROR: test_neptune_cursor (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_neptune_cursor
+Traceback (most recent call last):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 154, in loadTestsFromName
+    module = __import__(module_name)
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/test_neptune_cursor.py", line 9, in <module>
+    from test_neptune_recovery import EMPTY, addition, load_layouts, removal, recovery_specs
+ModuleNotFoundError: No module named 'test_neptune_recovery'
+
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.529s
+
+FAILED (errors=1)

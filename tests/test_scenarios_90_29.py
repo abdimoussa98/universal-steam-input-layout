@@ -6,8 +6,8 @@ The record is findings/2026-10-04-quiet-resets-and-beeps/README.md.
   which shows the layer's name, and were silent on the Deck (the author, 2026-10-04). They now set
   the second (A49). The scenarios of 90.10, 90.21, 90.22 and 90.25 check the transitions' feedback
   on the working layout; these two cover what they leave out.
-- The Fn layers' delayed add has ended in `0 1` since February 2026, the author's own. Under A49
-  that is a beep as the Fn layer comes up, and it is the Deck check for the assumption.
+- The Fn layers' delayed add used `0 1` until 90.40. Since 90.41 its beep is
+  disabled; the live scenario checks that entering Fn stays silent.
 
 The Tap Cover resets' haptic has no scenario: a reset that removes nothing leaves no trace on the
 simulator. `test_quiet_resets_and_beeps.py` checks the setting.
@@ -29,7 +29,7 @@ def pulses(pad):
 
 class Beeps(ScenarioCase):
     @scenario("90.29 Q1", rests=("A49", "A6"))
-    def test_the_fn_hold_beeps_and_a_tap_does_not(self):
+    def test_the_fn_hold_and_tap_do_not_beep(self):
         for first, _, fn, _ in CHAINS:
             for pad in self.each():
                 pad.mark().tap(first, 60).wait(400)
@@ -37,9 +37,9 @@ class Beeps(ScenarioCase):
                 pad.mark().hold(first).wait(199)
                 self.assertEqual(pad.seen("beep"), [])
                 pad.wait(2)
-                self.assertEqual((pad.top, pad.seen("beep")), (fn, [("beep", fn)]))
+                self.assertEqual((pad.top, pad.seen("beep")), (fn, []))
                 pad.wait(1000)
-                self.assertEqual(pad.seen("beep"), [("beep", fn)])           # once, however long the hold
+                self.assertEqual(pad.seen("beep"), [])  # no beep during a held Fn entry
 
     @scenario("90.29 Q2", rules=("R161",), rests=("A49", "A6", "A16", "A36"))
     def test_menu_keys_beeps_and_pulses_coming_on_and_beeps_going_off(self):
@@ -50,7 +50,7 @@ class Beeps(ScenarioCase):
                 pad.wait(2)
                 self.assertEqual(pad.stack, pad.layers("Base", MENU_KEYS))
                 self.assertEqual([what for what, _ in pad.seen("haptic", "beep")], ["haptic", "beep"])
-                self.assertEqual((pulses(pad), pad.seen("beep")), ([("3", entry)], [("beep", MENU_KEYS)]))
+                self.assertEqual((pulses(pad), pad.seen("beep")), ([("1", entry)], [("beep", MENU_KEYS)]))
                 pad.let_go(second).let_go(first).wait(300)
                 pad.mark().push("LS", "up").push("RS")                       # both sticks out: the exit
                 self.assertTrue(pad.lacks(MENU_KEYS))

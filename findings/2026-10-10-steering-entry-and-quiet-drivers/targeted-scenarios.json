@@ -1,0 +1,35 @@
+{
+  "initial": {
+    "command": "python3 -m unittest tests.test_scenarios_90_44 tests.test_scenarios_90_43 tests.test_scenarios_90_21",
+    "methods": 39,
+    "elapsed_seconds": 70.728,
+    "failures": 1,
+    "failure": "E3 used RTP: Double Tap as a stale timer fixture, but its existing centered RP-edge exit removes that layer at time zero before either driver is pressed.",
+    "resolution": "Use LST: Double Tap and both Steering LS Double Tap windows. Assert each window and Entry Guard remain at 100 ms, then both leave after expiry while Steering and the prior Gyro state remain."
+  },
+  "focused": {
+    "methods": 2,
+    "elapsed_seconds": 2.196,
+    "failures": 1,
+    "passed": "Updated E3 passed all three window fixtures, both variants, both Gyro states, both driver orders and both A9/A32 values.",
+    "failure": "New S4 held-direction test matched the wrong haptic log spelling ('Steering:joystick/' instead of 'Steering joystick/'). The expected clear and beep assertions had already passed.",
+    "resolution": "Correct the string matcher; the independent clear must occur after Modifier 2 leaves, with exactly one Steering clear bump."
+  },
+  "held_direction_rerun": {
+    "command": "python3 -m unittest tests.test_scenarios_90_44.QuietSteeringDrivers.test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear",
+    "methods": 1,
+    "elapsed_seconds": 1.517,
+    "failures": 0,
+    "log": "held-mod2-scenario.log"
+  },
+  "held_release_orders_rerun": {
+    "methods": 2,
+    "elapsed_seconds": 4.343,
+    "failures": 0,
+    "combinations": 192,
+    "scope": "S2 and C2: both press orders, both release orders during held cover use, missed-both recovery, both variants, both Gyro states, and both A9/A32 values.",
+    "log": "held-release-orders-scenarios.log"
+  },
+  "final_scenario_methods_in_module": 12,
+  "final_full_registry": "Recorded by the release validation run after these fixture corrections."
+}

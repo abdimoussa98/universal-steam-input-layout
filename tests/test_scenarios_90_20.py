@@ -18,7 +18,7 @@ class OneAdd(ScenarioCase):
                 pad.press_pad(name, where).wait(2000)
                 adds = [title for _, title in pad.seen("add") if title == pad.title(ENTRY[name])]
                 self.assertEqual(len(adds), 1)                                    # nothing puts it back while held
-                clicks = [detail for _, detail in pad.seen("haptic") if detail.startswith("3 ")]
+                clicks = [detail for _, detail in pad.seen("haptic") if detail.startswith("1 ")]
                 self.assertEqual(len(clicks), 1)                                  # the press; on the Entry Point since 90.25
                 self.assertEqual(len(pad.down()), 1)
                 pad.let_go_pad(name).wait(400)

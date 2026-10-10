@@ -1,0 +1,53 @@
+test_a_cleanup_input_stores_the_regular_press_then_the_guard_then_the_release (tests.test_layout_rules.LayoutRules) ... ok
+test_a_reset_repeats_more_slowly_than_its_delay (tests.test_layout_rules.LayoutRules) ... ok
+test_every_snapshot_holds_both_layouts_under_its_own_version (tests.test_layout_rules.LayoutRules) ... ok
+test_every_value_is_one_the_editor_can_set (tests.test_layout_rules.LayoutRules) ... ok
+test_hold_layer_is_used_only_where_the_register_says (tests.test_layout_rules.LayoutRules) ... ok
+test_layer_titles_are_unique (tests.test_layout_rules.LayoutRules) ... ok
+test_no_binding_switches_action_sets_and_there_is_one_set (tests.test_layout_rules.LayoutRules) ... ok
+test_the_alternative_has_the_defaults_layers_with_l2_and_r2 (tests.test_layout_rules.LayoutRules) ... ok
+test_combined_release_removes_only_its_side_and_preserves_the_other (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_cursor_edges_preserve_one_stick_hold_and_repeat_self_removal_for_two (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_cursor_profile_preserves_sensitivity_and_owner_activation (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_delayed_cursor_reset_is_scoped_and_replaced_by_upper_inputs (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_normal_covers_inherit_gyro_without_any_source_override (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_only_primary_delay_and_touch_completion_enter_cursor (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_opposite_modifier_transitions_repeat_and_preserve_branch_and_execution_order (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_output_and_cover_chords_are_separate_uninterruptible_entries (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_overlays_retire_primary_timers_but_only_normal_covers_replace_touches (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_override_inputs_keep_applying_normal_cover (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_rtp_timer_replaces_inherited_cancellation_and_repeating_cover_inputs (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_an_assumption_table_is_read (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_reported_and_refuted_are_statuses_too (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_an_unverified_assumption_says_whether_the_layout_relies_on_it (tests.test_rule_registry.AssumptionTests) ... ok
+test_assumption_ids_named_elsewhere_exist (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_assumption_a_rule_rests_on_exists (tests.test_rule_registry.AssumptionTests) ... ok
+test_rests_on_and_what_rests_on_it_agree (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_audit_and_every_fix_declares_something (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_audit_and_fix_the_registry_names_declares_that_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_declared_check_names_a_rule_that_lists_it (tests.test_rule_registry.DeclarationTests) ... ok
+test_tag_prints_the_ids_in_brackets (tests.test_rule_registry.DeclarationTests) ... ok
+test_the_build_audit_prints_its_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_unchecked_lists_the_rules_nothing_fails_on (tests.test_rule_registry.DeclarationTests) ... ok
+test_a_rule_table_is_read_with_its_section (tests.test_rule_registry.ReaderTests) ... ok
+test_an_escaped_pipe_stays_in_the_cell (tests.test_rule_registry.ReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.ReaderTests) ... ok
+test_checked_by_forms (tests.test_rule_registry.ReaderTests) ... ok
+test_other_tables_are_ignored (tests.test_rule_registry.ReaderTests) ... ok
+test_references_finds_rule_ids_and_skips_buttons (tests.test_rule_registry.ReaderTests) ... ok
+test_rests_on_lists_assumption_ids (tests.test_rule_registry.ReaderTests) ... ok
+test_a_rule_names_only_rules_that_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_named_fixes_are_in_the_pipeline (tests.test_rule_registry.RegistryTests) ... ok
+test_named_tests_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_only_the_retired_rule_names_the_deck_checklist (tests.test_rule_registry.RegistryTests)
+Phase 15: nothing in the definition of done waits for a Deck check. R155 keeps its row, retired. ... ok
+test_rule_ids_named_elsewhere_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_the_definition_of_done_holds_the_rules (tests.test_rule_registry.RegistryTests) ... ok
+test_every_skill_names_rules_that_exist (tests.test_rule_registry.SkillTests) ... ok
+
+----------------------------------------------------------------------
+Ran 47 tests in 1.463s
+
+OK

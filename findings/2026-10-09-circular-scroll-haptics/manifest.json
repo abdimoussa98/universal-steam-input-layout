@@ -1,0 +1,31 @@
+{
+  "release": "90.40",
+  "baseline": "90.38",
+  "excluded_experiment": "90.39",
+  "builder": "findings/2026-10-09-circular-scroll-haptics/build_candidate.py",
+  "previous_builder": "findings/2026-10-08-steering-rtp-and-menu-chords/build_candidate.py",
+  "snapshots": [
+    {
+      "source": "neptune/single-set-default_hold-gyro_latest.json",
+      "snapshot": "versions/neptune/90.40/single-set-default_hold-gyro_90.40.json",
+      "sha256": "e8b82fb8ea7a4e688335e6a9d7c4277576960c3e36a52ccfc40f13f5b1e4d237"
+    },
+    {
+      "source": "neptune/single-set-default_hold-gyro_latest.vdf",
+      "snapshot": "versions/neptune/90.40/single-set-default_hold-gyro_90.40.vdf",
+      "sha256": "e2198d544e613964e2bec7fd8396c025d95213b9ecac51aeb435efe2fd5529e7"
+    },
+    {
+      "source": "neptune/single-set-alternative_hold-gyro_latest.json",
+      "snapshot": "versions/neptune/90.40/single-set-alternative_hold-gyro_90.40.json",
+      "sha256": "fa5b53de1d44496bc770db412b991e735ae87f7c098e12af25a77570c13f7fc5"
+    },
+    {
+      "source": "neptune/single-set-alternative_hold-gyro_latest.vdf",
+      "snapshot": "versions/neptune/90.40/single-set-alternative_hold-gyro_90.40.vdf",
+      "sha256": "1e2247ca3fc01a21c660c43b88123a67f6ffc0a316346840577e73ab4c3406c9"
+    }
+  ],
+  "builder_sha256": "72b2dec85e6c9472b7b1bd3363ba6a32e85faa8e73c7173b792b7e7c97a90bce",
+  "previous_builder_sha256": "4a76c1781cfeac51f1fa0f4852fad06d83f034f7670c9692cd2926153754132a"
+}

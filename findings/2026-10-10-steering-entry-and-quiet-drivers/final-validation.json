@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "scenario_methods_verified": 293,
+  "regression_methods_verified": 254,
+  "initial_full_run": "validation.json",
+  "initial_failures_resolved": {
+    "scenarios": "Four stale Steering-removal expectations updated; all four pass in targeted-legacy.log. Pad timing/recovery/output assertions retained.",
+    "regressions": "R111 now lists its new scenario checks; failing registry check and the rule registry pass in registry-followup.log."
+  },
+  "supplemental_passed_method_counts": {
+    "registry-followup.log": 28,
+    "targeted-static.log": 12,
+    "held-release-orders-scenarios.log": 2
+  },
+  "comparison_note": "The static run includes six new preservation tests and six feedback tests already present in the 248-method regression suite; distinct total254. Focused audit exception tests also passed separately.",
+  "coverage": {
+    "default": [],
+    "alternative": []
+  },
+  "build_audits": "All four pass for both variants",
+  "layout_changes_after_initial_validation": false,
+  "model_limits": "Native inward-edge delivery, physical thresholds and audible/tactile feedback remain device checks."
+}

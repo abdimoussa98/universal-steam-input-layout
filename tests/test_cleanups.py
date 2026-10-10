@@ -3,6 +3,8 @@
 Tiny layouts, one rule per test, then the frozen 90.10 snapshots. The rules are in
 findings/2026-10-02-cleanup-boundaries/README.md; the plan is plans/2026-10-02-cleanup-audit.md.
 """
+import copy
+import importlib.util
 import json
 from pathlib import Path
 import subprocess
@@ -11,7 +13,7 @@ import tempfile
 import unittest
 
 from steam_layout.chains import Chains
-from steam_layout.cleanups import Cleanups, audit
+from steam_layout.cleanups import Cleanups, audit, kept
 from steam_layout.fixes import cleanup_lists
 from steam_layout.model import Layout, entries
 from tests.test_audit_inheritance import EMPTY, add, build, remove
@@ -74,7 +76,7 @@ class ReadingTests(unittest.TestCase):
         self.assertEqual(Cleanups(layout).present("P"), expected - {"Base"})
 
     def test_a_persistent_mode_can_restore_another_mode_without_removing_itself(self):
-        data = owner(extra={
+        data = owner(base={"button_y": press(add("T"))}, extra={
             'T': {'switch': (SW, {'button_y': release(remove('T'), add('Mode'))})},
             'Mode': {'switch': (SW, {'button_a': press(add('Fallback'), remove('Mode'))})},
             'Fallback': {'switch': (SW, {'button_b': press(add('Mode'))})}})
@@ -85,6 +87,27 @@ class ReadingTests(unittest.TestCase):
         data = owner(extra={'A': {'switch': (SW, {'button_a': press(add('B'))})},
                             'B': {'switch': (SW, {'button_b': press(add('A'))})}})
         self.assertFalse({'A', 'B'} & Cleanups(Layout(data)).stateful)
+
+    def test_an_unreachable_additive_source_does_not_change_a_live_modes_keeper(self):
+        data = owner(base={"button_y": press(add("T"))}, extra={
+            'T': {'switch': (SW, {'button_y': release(remove('T'), add('Mode'))})},
+            'Mode': {},
+            'Dormant': {'switch': (SW, {'button_b': press(add('Mode'))})}})
+        c = Cleanups(Layout(data))
+        self.assertFalse(c.reached('Dormant'))
+        self.assertEqual(c.keeper('Mode'), ('mode', frozenset()))
+        self.assertNotIn('Dormant', c.stateful)
+        self.assertEqual(c.adders['Mode'], {'T', 'Dormant'})  # raw inventory is preserved
+
+    def test_a_reachable_additive_source_still_prevents_stateful_classification(self):
+        data = owner(base={"button_y": press(add("T")), "button_x": press(add("Held"))}, extra={
+            'T': {'switch': (SW, {'button_y': release(remove('T'), add('Mode'))})},
+            'Mode': {},
+            'Held': {'switch': (SW, {'button_b': press(add('Mode')),
+                                      'button_x': release(remove('Held'))})}})
+        c = Cleanups(Layout(data))
+        self.assertTrue(c.reached('Held'))
+        self.assertNotIn('Mode', c.stateful)
 
 
 class ScopeTests(unittest.TestCase):
@@ -341,6 +364,20 @@ class HiddenExitSnapshotTests(unittest.TestCase):
 
 
 class NeverThereTests(unittest.TestCase):
+    def test_kept_removal_presence_scope_excludes_historical_layouts_in_both_variants(self):
+        config = {'variants': {'alternative': {'L1': 'L2'}}, 'cleanups': {'keep': [{
+            'layers': ['L1: Modifier 0'], 'removes': ['Steering | LS: Entry Guard'],
+            'where': 'Stateful | Menu Left: Fn Layer', 'not_where': 'Steering | LS: Fallback Hold',
+            'why': 'The new Entry Guard only, not the older Fallback Hold builds',
+        }]}}
+        modern = {'Stateful | Menu Left: Fn Layer', 'Steering | LS: Entry Guard'}
+        for variant, layer in (('default', 'L1: Modifier 0'), ('alternative', 'L2: Modifier 0')):
+            with self.subTest(variant=variant):
+                self.assertEqual(set(kept(config, variant, modern)), {(layer, 'Steering | LS: Entry Guard')})
+                self.assertEqual(kept(config, variant, modern | {'Steering | LS: Fallback Hold'}), {})
+                self.assertEqual(kept(config, variant, {'Steering | LS: Entry Guard'}), {})
+                self.assertEqual(kept(config, variant), {})
+
     def test_a_cleanup_that_removes_a_layer_that_is_never_there(self):
         data = owner({"button_a": guarded(remove("P"), remove("C"), remove("Ghost"))},
                      extra={"Ghost": {"switch": (SW, {"left_bumper": release(remove("Ghost"))})}})
@@ -408,6 +445,152 @@ class GuardTests(unittest.TestCase):
                           **press(remove("Q"), hold_repeats=1)}}
         data = build({"Base": {"switch": (SW, {"left_bumper": press(add("Q"))})}, "Q": {"switch": (SW, q)}})
         self.assertEqual(found(data, "guard mismatch"), set())
+
+
+class SteeringConditionalOwnerTests(unittest.TestCase):
+    MOD = 'Steering | LS Up: Modifier 1'
+    DRIVER = 'Steering | R1: W Key'
+    COVER = 'Steering | LS: Tap Cover'
+
+    def layout(self, *, remove_owner=False, all_conditions=True, historical=False, owner_only=False):
+        """Small modern Steering stack with a deflection-conditioned modifier cleanup."""
+        commands = [remove(self.MOD), remove(self.COVER)]
+        if remove_owner:
+            commands.append(remove(self.DRIVER))
+        mask = 4 if owner_only else (1 << 30) | 4
+        recovery = {**press(*commands, hold_repeats=1), **on('chord', EMPTY,
+            gyro_ratchet_button_mask=mask, gyro_ratchet_button_requireany_or_all=int(all_conditions))}
+        clear = {direction: on('Soft_Press', remove('Steering'))
+                 for direction in ('dpad_north', 'dpad_south')}
+        if historical:
+            clear = {direction: press(KEY) for direction in clear}
+        return build({
+            'Base': {'switch': (SW, {'right_bumper': press(add(self.DRIVER))})},
+            'Steering': {'joystick': ('dpad', clear)},
+            'Steering | LS: Entry Guard': {},
+            self.DRIVER: {'switch': (SW, {
+                'right_bumper': release(remove(self.DRIVER)),
+                'button_b': press(add(self.MOD)),
+            })},
+            self.MOD: {
+                'switch': (SW, {'button_a': press(add(self.COVER))}),
+                'right_joystick': ('joystick_mouse', {'edge': recovery}),
+                'joystick': ('dpad', {'edge': release(remove(self.MOD), remove(self.COVER))}),
+            },
+            self.COVER: {'joystick': ('dpad', {'edge': release(remove(self.COVER))})},
+        })
+
+    def owner_findings(self, data):
+        return {(check, host, target) for check, host, target, _, _ in Cleanups(Layout(data)).findings()
+                if host == self.MOD and target == self.DRIVER}
+
+    def test_deflection_guard_must_not_remove_held_driver(self):
+        self.assertEqual(self.owner_findings(self.layout(remove_owner=True)),
+                         {('outside the guard', self.MOD, self.DRIVER)})
+        self.assertEqual(self.owner_findings(self.layout()), set())
+
+    def test_any_or_owner_only_guard_still_requires_driver_cleanup(self):
+        for changes in ({'all_conditions': False}, {'owner_only': True}):
+            with self.subTest(changes=changes):
+                self.assertEqual(self.owner_findings(self.layout(**changes)),
+                                 {('left below', self.MOD, self.DRIVER), ('left above', self.MOD, self.DRIVER)})
+                self.assertEqual(self.owner_findings(self.layout(remove_owner=True, **changes)), set())
+
+    def test_modifier_still_owns_its_cover(self):
+        data = self.layout()
+        value = Layout(data).active(self.MOD)['right_joystick']['inputs']['edge']['activators']['Full_Press']
+        value['bindings']['binding'] = remove(self.MOD)
+        findings = {(check, host, target) for check, host, target, _, _ in Cleanups(Layout(data)).findings()}
+        self.assertIn(('left above', self.MOD, self.COVER), findings)
+        self.assertNotIn(('left below', self.MOD, self.DRIVER), findings)
+
+    def test_fix_drops_invalid_owner_and_does_not_reintroduce_it(self):
+        data = self.layout(remove_owner=True)
+        first = cleanup_lists.fix(data, {})
+        self.assertEqual(first['remaining'], 0)
+        self.assertTrue(any('drops' in change and self.DRIVER in change for change in first['changed']))
+        self.assertEqual(cleanup_lists.fix(data, {}), {'changed': [], 'remaining': 0})
+        self.assertEqual(self.owner_findings(data), set())
+
+    def test_frozen_guard_without_base_soft_clear_keeps_old_generator_semantics(self):
+        self.assertEqual(self.owner_findings(self.layout(historical=True)),
+                         {('left below', self.MOD, self.DRIVER), ('left above', self.MOD, self.DRIVER)})
+        self.assertEqual(self.owner_findings(self.layout(remove_owner=True, historical=True)), set())
+
+
+class SteeringDirectionRecoveryBuildTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        from tools.convert_runtime_ids import generate_lookup, ids_to_titles
+        from tests.scenario import frozen_layout_data
+        path = ROOT / 'findings/2026-10-09-steering-entry-and-feedback/modifier_recovery.py'
+        spec = importlib.util.spec_from_file_location('direction_recovery', path)
+        cls.module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.module)
+        cls.layouts = {}
+        for variant in ('default', 'alternative'):
+            baseline = frozen_layout_data(variant, '90.42')
+            readable, _ = ids_to_titles(json.dumps(baseline), generate_lookup(baseline))
+            before = json.loads(readable.replace('Steering | LS: Fallback Guard', 'Steering | LS: Entry Guard'))
+            after = copy.deepcopy(before)
+            report = cls.module.apply(after, variant)
+            cls.layouts[variant] = before, after, report
+
+    def test_owner_direction_adds_keep_outputs_and_timing_and_gain_owner_guard(self):
+        for variant, (before, after, report) in self.layouts.items():
+            old, new = Layout(before), Layout(after)
+            self.assertEqual(len(report['owner_direction_entries']), 4)
+            for row in report['owner_direction_entries']:
+                with self.subTest(variant=variant, owner=row['layer'], direction=row['input']):
+                    previous = old.active(row['layer'])['joystick']['inputs']
+                    acts = new.active(row['layer'])['joystick']['inputs'][row['input']]['activators']
+                    self.assertEqual(list(acts), ['Full_Press', 'chord'])
+                    self.assertEqual(acts['Full_Press'], previous['edge']['activators']['Full_Press'])
+                    add = copy.deepcopy(acts['chord'])
+                    self.assertEqual(add['settings'].pop('gyro_ratchet_button_mask'), row['owner_mask'])
+                    self.assertEqual(add['settings'].pop('gyro_ratchet_button_requireany_or_all'), '0')
+                    self.assertEqual(add, previous[row['input']]['activators']['Full_Press'])
+
+    def test_upper_modifiers_keep_hold_delays_and_resets_while_carrying_recovery(self):
+        for variant, (before, after, report) in self.layouts.items():
+            old, new = Layout(before), Layout(after)
+            self.assertEqual(len(report['upper_direction_recovery']), 8)
+            for title, primary, opposite in (('Steering | LS Up: Modifier 1', 'dpad_north', 'dpad_south'),
+                                             ('Steering | LS Down: Modifier 0', 'dpad_south', 'dpad_north')):
+                with self.subTest(variant=variant, layer=title):
+                    previous = old.active(title)['joystick']['inputs']
+                    inputs = new.active(title)['joystick']['inputs']
+                    acts = inputs[primary]['activators']
+                    self.assertEqual(acts['chord'], previous[primary]['activators']['chord'])
+                    self.assertEqual(acts['Full_Press'], [previous['edge']['activators']['Full_Press'],
+                                                         previous[primary]['activators']['Full_Press']])
+                    cancellation = copy.deepcopy(inputs[opposite]['activators']['Full_Press'])
+                    self.assertEqual(cancellation['settings'].pop('hold_repeats'), '1')
+                    self.assertEqual(cancellation, previous[opposite]['activators']['Full_Press'])
+
+    def test_repeat_scroll_covers_keep_wheel_timing_and_release(self):
+        title = 'Steering | LS: Double Tap Cover'
+        for variant, (before, after, _) in self.layouts.items():
+            old, new = Layout(before), Layout(after)
+            for direction in ('dpad_north', 'dpad_south'):
+                with self.subTest(variant=variant, direction=direction):
+                    previous = old.active(title)['joystick']['inputs'][direction]['activators']
+                    acts = new.active(title)['joystick']['inputs'][direction]['activators']
+                    self.assertEqual(acts['release'], previous['release'])
+                    wheel = copy.deepcopy(acts['chord'])
+                    self.assertEqual(wheel['settings'].pop('gyro_ratchet_button_mask'),
+                                     '50331648' if variant == 'alternative' else '12')
+                    self.assertEqual(wheel['settings'].pop('gyro_ratchet_button_requireany_or_all'), '0')
+                    self.assertEqual(wheel, previous['Full_Press'])
+
+    def test_guarded_directions_fit_command_budget_and_reapplying_is_idempotent(self):
+        from tools.audit_command_budget import audit_layout
+        for variant, (_, after, _) in self.layouts.items():
+            with self.subTest(variant=variant):
+                self.assertFalse(audit_layout(after)['violations'])
+                reapplied = copy.deepcopy(after)
+                self.module.apply(reapplied, variant)
+                self.assertEqual(reapplied, after)
 
 
 class SnapshotTests(unittest.TestCase):

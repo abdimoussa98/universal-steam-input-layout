@@ -1,0 +1,59 @@
+{
+  "sensitivity": {
+    "Base": {
+      "before": "100",
+      "after": "150"
+    },
+    "Turning Ramp Up 0": {
+      "before": "150",
+      "after": "200",
+      "vertical_before": "80",
+      "vertical_after": "75"
+    },
+    "Turning Ramp Up 1": {
+      "before": "200",
+      "after": "250",
+      "vertical_before": "67",
+      "vertical_after": "60"
+    }
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 548,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  }
+}

@@ -11,7 +11,7 @@ from tests.scenario import ScenarioCase, scenario
 
 SAME_SIDE = (("Start", "RS"), ("Select", "LS"))
 GESTURES = (("Start", "LS"), ("Select", "RS"), ("Start", "RS"), ("Select", "LS"))
-FEEDBACK = ["haptic", "beep"]              # the strong pulse on the menu Release, then the beep
+FEEDBACK = ["haptic", "beep"]              # the low pulse on the menu Release (since 90.41), then the beep
 GAMEPAD, SAME, CLEAR = "Gamepad", "Transition Set 0", "Transition Set 2"
 BUTTON = {"Start": "xinput_button START", "Select": "xinput_button SELECT"}
 SENT = {"A": "A", "B": "B", "X": "X", "Y": "Y", "Up": "DPAD_UP", "Down": "DPAD_DOWN", "Left": "DPAD_LEFT",

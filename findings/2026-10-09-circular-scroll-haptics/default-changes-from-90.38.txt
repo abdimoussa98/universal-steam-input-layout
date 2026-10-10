@@ -1,0 +1,9 @@
+Changes from single-set-default_hold-gyro_90.38.json to single-set-default_hold-gyro_latest.json
+Layers: 88 -> 88 (added: none; removed: none)
+
+== RTP: Circular Scroll
+  right_trackpad: settings
+    before: {"haptic_intensity": "0"}
+    after:  {"haptic_intensity": "1"}
+
+1 layer changed, 1 change

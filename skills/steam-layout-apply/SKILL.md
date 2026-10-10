@@ -29,9 +29,12 @@ committing. When the author asks for a commit, it goes on `main`.
 a version bump. Before committing layout changes, exporting for delivery, or
 publishing to Steam, follow [Publishing layout changes](../../docs/publishing.md):
 
-- Read the complete `controller_mappings.description` against the final layout.
-  Correct stale behavior, control mappings, tuning, and implemented/planned status;
-  keep an accurate description if no wording needs changing.
+- Require a **concise, accurate** `controller_mappings.description` for every
+  published version. Keep it to a short overview of the main features and
+  essential variant-specific controls. Keep detailed gestures, timing, tuning,
+  and implementation notes in repository documentation.
+- Read the complete description against the final layout and correct stale
+  claims or control mappings. Retain wording that is already concise and accurate.
 - Increment the release version in `controller_mappings.title` from the last
   published revision (for example `90.2` → `90.3`). Bump once per release batch,
   not once per edit or converter run; keep jointly released variants aligned.

@@ -120,7 +120,7 @@ class NeptuneCursorTests(unittest.TestCase):
                         self.assertEqual(delayed["settings"]["delay_start"], "200")              # 300 until 90.25
                         self.assertEqual(delayed["settings"]["chord_button"], selector)
                         self.assertEqual(delayed["settings"]["interruptable"], "0")
-                        self.assertEqual(delayed["settings"]["haptic_intensity"], "3")
+                        self.assertEqual(delayed["settings"]["haptic_intensity"], "0")
                         self.assertNotEqual(delayed["settings"].get("hold_repeats"), "1")
                         release = bindings(primary["release"])
                         self.assertEqual(release[0], addition(button + ": Double Tap"))

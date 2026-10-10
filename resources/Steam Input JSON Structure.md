@@ -371,9 +371,13 @@ priority or timing between separate activator objects.
 
 The layout author observed a Steam Input bug where interrupting an `add_layer` command
 before its Fire Start Delay completes can prevent the command from firing on the next
-press. **Repeated `remove_layer` commands reset the start delay and allow the delayed apply
-to trigger again.** This is the author's observed workaround; the exact Steam internals
-were not independently verified.
+press. **Repeated `remove_layer` commands have restarted the delay and recovered the
+apply in observed cases.** The author reports on 2026-10-09 that removal does not reliably
+reset every timer, can accelerate held repeats, and that a following delay can appear
+to fire immediately during rapid or simultaneous add/remove transitions, notably the
+cursor-driver add. The exact triggers remain unresolved. See
+[Delay Timers and Repeat Rates](Delay%20Timers%20and%20Repeat%20Rates.md): delays and
+repeat intervals must not carry mission-critical behavior.
 
 The July layout implements this with two separate activators on the same bumper input:
 a **Button Chord** that applies `L1&R1: Tap Cover` after **200 ms**, and a **Regular Press**
@@ -402,7 +406,8 @@ their primary input applies its own Temp Cursor Gyro after 300 ms and removes on
 that cursor target every 350 ms (200 and 250 since 90.26). Both cursor and normal overlays replace the complete
 primary input to retire the apply/reset pair. The reset must never remove the normal
 cover and reopen cursor eligibility. See the [follow-up and inheritance checks](../findings/2026-09-29-temp-cursor-gyro/IMPLEMENTATION.md#delayed-apply-reset-follow-up).
-The 200/250 ms values describe this implementation, not a general timing formula.
+The 200/250 ms values describe the configured implementation, not a guaranteed
+ordering of the delayed add and the next removal on the Deck.
 
 **Since 90.26** (author, 2026-10-04) no hold delay is over 200 ms, and every reset still repeats
 at its delay plus 50 ms (R121): 200/250 for the modifiers, the Fn layers, the stick guards, the
@@ -563,9 +568,11 @@ What Steam does when two of these fall in the same moment is not verified
 **Rule: R126** (Layer Definition of Done [§6](Layer%20Definition%20of%20Done.md#6-hold-tap-and-double-tap)). This section explains it; the rule text is there.
 
 Blocking is part of the layout's state management. The author reports that layer
-removals can reset Fire Start Delay timers. A repeating removal is useful when
-deliberately restarting an interrupted apply, but an unrelated removal can
-disturb a timer that should be left alone. Unrelated additions can also change
+removals can reset Fire Start Delay timers, but not consistently, and can make held
+repeats faster. Repeating removal has recovered interrupted applies in observed
+cases; it does not guarantee a restart or a full new wait. Rapid or simultaneous
+add/remove transitions can also make a following delay appear to fire immediately
+([timing observations](Delay%20Timers%20and%20Repeat%20Rates.md)). Unrelated additions can change
 which layer owns the input. Do not add broad cleanup or repeated layer commands
 to an apparently unused input without checking the timing state it protects.
 
@@ -789,13 +796,19 @@ over an input that is already held treats that input as already pressed:
 
 A layer command is `add_layer`, `remove_layer`, or `hold_layer`.
 
+These observations describe activation on a held input, not stable scheduling
+through later layer changes. The author reports disrupted repeat intervals and
+premature delays during some transitions; see
+[Delay Timers and Repeat Rates](Delay%20Timers%20and%20Repeat%20Rates.md).
+
 **Unverified: a layer removed while the input is held.** The author expects the
 newly exposed lower binding to fire as if the input had just been pressed, but
 this hasn't been isolated. In these layouts, every layer command that a removal
 is expected to expose on a held input also has Hold to Repeat. That includes
 Base's entries, Gyro's modifier entry, and the cursor parents' cover and Mod 2
-chords. So they fire either way, and the repeat is the guarantee. Until this is
-confirmed:
+chords. Repetition is the existing retry mechanism for the unverified exposure
+case; it does not guarantee an exact firing time or an unaffected held-repeat
+interaction. Until this is confirmed:
 
 - Keep those repeats.
 - Give any new layer command that must fire after a removal Hold to Repeat.
@@ -861,14 +874,15 @@ How these layouts use it:
   Removal pass-through may fire them sooner (see above).
 - **Base is never added.** Its bindings return only through removals, so its
   repeating entries (menu, modifier, stick/trackpad touch, RS edge) are the
-  guarantee for the unverified removal case. The regression tests protect them.
+  retry mechanism for the unverified removal case. The regression tests protect
+  their presence, not Steam's actual repeat schedule.
 
-The timer observations above point the same way: removals restart Fire Start
-Delay timers and can restart a stuck delayed apply; additions don't. One
-possible explanation is that a removal makes Steam re-evaluate held inputs and
-an add doesn't. That would also produce removal pass-through. It isn't verified,
-and the re-evaluation can't be a literal re-press. If it were, a repeating reset
-would re-fire its own Regular Press in a loop.
+The earlier timer observations suggested that removals restart Fire Start Delay
+timers. Later observations do not support a dependable restart rule: some delays
+reset, held repeats can accelerate, and a following delay can appear immediate
+after a rapid add/remove transition. Re-evaluation of held inputs after a removal
+remains a hypothesis (A18); it does not explain all these timing effects. See
+[Delay Timers and Repeat Rates](Delay%20Timers%20and%20Repeat%20Rates.md).
 
 See the [held-input audit](../findings/2026-09-29-held-input-layer-transitions/AUDIT.md)
 for the ramp-up walkthrough, per-layout inventory, the alternative layout's
@@ -1686,7 +1700,7 @@ its range is not known: it may raise or lower it to the nearest end.
 |---|---|---|---|
 | Fire Start Delay, Repeat Rate | `delay_start`, `repeat_rate` | Up to 1000 ms | Nothing over 1000 since 90.31. Until 90.30, 1500 and 1550 in `Steering \| LS: Fallback Hold` |
 | D-pad Outer Ring Command Radius | `edge_binding_radius` on a D-pad group | 10,000 to 32,000 | 21000 and 21700, inside the range. Until 90.30 also 4915, on the left stick in 34 layers and on the right stick in 7, since the cursor work of 2026-09-29: below the range. Those groups state no radius since 90.31 |
-| Directional Pad Layout | `layout` on a D-pad group | Four choices: 0 Radial Without Overlap (four-way), 1 Radial With Overlap (eight-way), 2 Analog Emulation, 3 Cross Gate. The numbers are the Steam client's (read 2026-10-05) | Not stated on most left-stick groups, which then get eight-way (A51). 0 in the Fn layers since the July layout and in `Steering` since 90.34; 1 in Steering's fallback guard. On the Deck a group that states 1 over a lower layer's group that states 0 stayed four-way (author, 2026-10-06), so since 90.35 the guard replaces `Steering` and is never over it |
+| Directional Pad Layout | `layout` on a D-pad group | Four choices: 0 Radial Without Overlap (four-way), 1 Radial With Overlap (eight-way), 2 Analog Emulation, 3 Cross Gate. The numbers are the Steam client's (read 2026-10-05) | Not stated on most left-stick groups, which then get eight-way (A51). 0 in the Fn layers since the July layout and in `Steering` since 90.34; 1 in the historical Steering fallback guard; restored Entry Guard matches Steering at 0 since 90.43. On the Deck a group that states 1 over a lower layer's group that states 0 stayed four-way (author, 2026-10-06), so since 90.35 the guard replaces `Steering` and is never over it |
 | Outer Ring Command Radius on a mouse-mode stick | `edge_binding_radius` on a `joystick_mouse` group | Not read yet | 32767 in Base. Until 90.30 also 7209 in 21 layers; they state no radius since 90.31 |
 | Soft Press Threshold | `activation_threshold` | The editor showed the author 0 to 20,000. Assumed to be the editor's own scale: the value in the file is taken to run like the outer ring's, 10,000 to 32,000 (author, 2026-10-04) | 23000, 24996, 25807, 26610 and 29031: ten Soft Presses, all inside that assumed range and all above 20,000. Six are the author's own, from the July layout, and turn assist runs on them |
 
@@ -1858,7 +1872,7 @@ controller_action hold_layer 13 0 0, ,
 | Frequent layer changes (triggers, modifiers, covers, cleanups) | `0` | `0` | Too frequent to announce |
 | The `Gyro` toggle | `1` | `1` | The author's own, since the July layout |
 | Entering or leaving a stateful layer through a transition, or by its own exit (R161) | `0` | `1` | The author, 2026-10-02: a beep and no on-screen notification |
-| The Fn layers' delayed add | `0` | `1` | The author's own, since February 2026 |
+| The Fn layers' adds | `0` | `0` | Silent since 90.41; their Low haptic bump remains |
 | Temporary layers (`hold_layer`) | `0` | `0` | Too frequent to announce |
 
 ### ⚠️ CRITICAL WARNING: ID Shift on Deletion

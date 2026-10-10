@@ -1,8 +1,9 @@
 """Scenarios for 90.21: the stateful Cursor Gyro layer.
 
 The record is findings/2026-10-03-cursor-gyro/README.md. Select plus the right-stick click enters
-it, on top of Gyro. It is left by any menu button plus any stick click, by the Modifier 2 quick
-tap, and by pushing both sticks out. That last exit is only in Cursor Gyro: a layer on top that
+it, on top of Gyro. It is left by any menu button plus any stick click and by pushing both
+sticks out. Since 90.44 the Modifier 2 quick tap retains Cursor Gyro. The stick exit is only
+in Cursor Gyro: a layer on top that
 binds the stick edges answers instead.
 """
 import unittest
@@ -10,7 +11,7 @@ import unittest
 from tests.scenario import ScenarioCase, scenario
 
 GESTURES = (("Start", "LS"), ("Select", "RS"), ("Start", "RS"), ("Select", "LS"))
-FEEDBACK = ["haptic", "beep"]              # the strong pulse on the menu Release, then the beep
+FEEDBACK = ["haptic", "beep"]              # the low pulse on the menu Release (since 90.41), then the beep
 CURSOR = "Cursor Gyro"
 HOME = ("Base", "Gyro", CURSOR)
 ENTRY_POINT = {"Select": "Stateful | Menu Left: Entry Point", "Start": "Stateful | Menu Right: Entry Point"}
@@ -59,13 +60,13 @@ class CursorGyro(ScenarioCase):
                 self.assertEqual(pad.stack, pad.layers("Base", "Gyro"))
 
     @scenario("90.21 C3", rules=("R159",))
-    def test_the_modifier_2_quick_tap_clears_to_base(self):
+    def test_the_modifier_2_quick_tap_removes_gyro_and_retains_cursor(self):
         for first, second in (("L1", "R1"), ("R1", "L1")):
             for pad in self.each():
                 enter(pad).hold(first).wait(20).hold(second).wait(40)
                 self.assertTrue(pad.has(CURSOR))
                 pad.let_go(second).wait(20).let_go(first).wait(300)
-                self.assertEqual(pad.stack, pad.layers("Base"))                 # Gyro goes too
+                self.assertEqual(pad.stack, pad.layers("Base", CURSOR))
 
     @scenario("90.21 C4", rules=("R135",), rests=("A36",))
     def test_both_sticks_out_remove_only_the_layer(self):

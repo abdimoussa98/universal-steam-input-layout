@@ -1,0 +1,207 @@
+{
+  "cleanup_order": [
+    "531 inputs have a cleanup function; 121 were stored in another order",
+    "  guard, Regular Press: 109 inputs",
+    "  Regular Press, Release, guard: 8 inputs",
+    "  Release, Regular Press, guard: 4 inputs"
+  ],
+  "rtp_completions": [
+    [
+      "Steering | LS Down: Modifier 0",
+      "joystick",
+      "dpad_south",
+      "chord"
+    ],
+    [
+      "Steering | LS Down: Modifier 0",
+      "joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Steering | LS Down: Modifier 0",
+      "right_joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Steering | LS Up: Modifier 1",
+      "joystick",
+      "dpad_north",
+      "chord"
+    ],
+    [
+      "Steering | LS Up: Modifier 1",
+      "joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Steering | LS Up: Modifier 1",
+      "right_joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Steering | R1!L1: Modifier 2",
+      "switch",
+      "left_bumper",
+      "chord"
+    ],
+    [
+      "Steering | R1!L1: Modifier 2",
+      "joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Steering | R1!L1: Modifier 2",
+      "right_joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Steering | L1!R1: Modifier 2",
+      "switch",
+      "right_bumper",
+      "chord"
+    ],
+    [
+      "Steering | L1!R1: Modifier 2",
+      "joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Steering | L1!R1: Modifier 2",
+      "right_joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Stateful | Menu Left: Entry Point",
+      "switch",
+      "button_menu",
+      "chord"
+    ],
+    [
+      "Stateful | Menu Left: Entry Point",
+      "joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Stateful | Menu Left: Entry Point",
+      "right_joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Stateful | Menu Right: Entry Point",
+      "switch",
+      "button_escape",
+      "chord"
+    ],
+    [
+      "Stateful | Menu Right: Entry Point",
+      "joystick",
+      "touch",
+      "release"
+    ],
+    [
+      "Stateful | Menu Right: Entry Point",
+      "right_joystick",
+      "touch",
+      "release"
+    ]
+  ],
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13178",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [
+        "13074"
+      ],
+      "remaining_groups": 540,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L1: Scroll Down / left_bumper",
+        "R1: Scroll Up / right_bumper",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": [
+        "RTP: Double Tap / joystick/dpad_north (clear)",
+        "RTP: Double Tap / joystick/dpad_south (clear)",
+        "RTP: Double Tap / joystick/dpad_east (clear)",
+        "RTP: Double Tap / joystick/dpad_west (clear)"
+      ]
+    }
+  },
+  "final_cleanup_order": [
+    "531 inputs have a cleanup function; 0 were stored in another order"
+  ],
+  "fixed_point": {
+    "rtp_scroll": {
+      "group": "13178",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 540,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L1: Scroll Down / left_bumper",
+        "R1: Scroll Up / right_bumper",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "resolved_references": 4841
+}

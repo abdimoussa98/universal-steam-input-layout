@@ -1,0 +1,17 @@
+test_all_sixteen_fn_adds_keep_low_haptic_and_no_beep (tests.test_steering_entry_feedback.SteeringEntryAndFeedback) ... ok
+test_each_feedback_entry_has_one_beep_and_gyro_cleanup_targets_are_quiet (tests.test_steering_entry_feedback.SteeringEntryAndFeedback) ... ok
+test_entry_and_handoffs_keep_runtime_order_and_feedback (tests.test_steering_entry_feedback.SteeringEntryAndFeedback) ... ok
+test_guard_reuses_the_slot_and_copies_the_four_way_movement_settings (tests.test_steering_entry_feedback.SteeringEntryAndFeedback) ... ok
+test_guard_touches_pads_and_camera_cannot_add_helpers_or_disarm_at_center (tests.test_steering_entry_feedback.SteeringEntryAndFeedback) ... ok
+test_modifier_recovery_removes_only_its_modifier_and_cover (tests.test_steering_entry_feedback.SteeringEntryAndFeedback) ... ok
+test_all_driver_owned_activators_are_off_with_only_mod2_repeat_added (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_base_and_ramps_keep_reference_settings_except_requested_sensitivity (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_cursor_response_and_deliberate_exits_are_unchanged_with_gyro_on_or_off (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_driver_handoffs_modifier_releases_and_delayed_completion_are_quiet (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_inverted_edge_is_one_quiet_any_driver_self_removal (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_mod2_releases_lose_only_the_requested_stateful_removals (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 182.012s
+
+OK

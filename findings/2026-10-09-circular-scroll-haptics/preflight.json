@@ -1,0 +1,28 @@
+{
+  "default": {
+    "baseline": "90.38",
+    "release": "90.40",
+    "layers": 88,
+    "preflight": "pass",
+    "title_numeric_roundtrip": "pass",
+    "exact_diff_including_order": "title and circular-scroll haptic_intensity only",
+    "description": "reviewed; identical to 90.38",
+    "haptic_intensity": {
+      "before": "0",
+      "after": "1"
+    }
+  },
+  "alternative": {
+    "baseline": "90.38",
+    "release": "90.40",
+    "layers": 88,
+    "preflight": "pass",
+    "title_numeric_roundtrip": "pass",
+    "exact_diff_including_order": "title and circular-scroll haptic_intensity only",
+    "description": "reviewed; identical to 90.38",
+    "haptic_intensity": {
+      "before": "0",
+      "after": "1"
+    }
+  }
+}

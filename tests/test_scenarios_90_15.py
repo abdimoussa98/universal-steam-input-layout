@@ -22,9 +22,10 @@ class MenuSecondPressKeys(ScenarioCase):
         return pad
 
     @scenario("90.15 M1", rules=("R136",), rests=("A10", "A14"))
-    def test_the_fallback_stays_off_the_second_press_layer_and_the_release_is_not_hidden(self):
+    def test_the_direction_exit_waits_for_the_second_press_layer_to_release(self):
         """Until 90.32 the layer kept off was the Fallback Hold. Since 90.33 it is the fallback guard, which
-        comes on once the menu button is let go with the stick still out, and then stays (90.33 G2)."""
+        comes on once the menu button is let go with the stick still out. Since
+        90.42 that exposed direction instead clears the Steering family."""
         for button, layer, tap in MENU:
             for direction, key in STICK:
                 for pad in self.each(start="steering"):
@@ -34,10 +35,10 @@ class MenuSecondPressKeys(ScenarioCase):
                     self.assertTrue(pad.lacks(GUARD))                             # until 90.14 the fallback landed here
                     pad.let_go(button).wait(400)
                     self.assertTrue(pad.lacks(layer))                             # the Release was not hidden
-                    self.assertEqual((pad.top, pad.down()), (GUARD, [key]))       # the stick is still out
-                    pad.recentre("LS").wait(300)
-                    self.assertEqual(pad.names()[:2], ("Base", GUARD))            # it stays, in Steering's place (90.35);
-                    self.assertEqual(len(pad.names()), 2 + len([t for t in pad.names() if t.startswith("LST: ")]))   # nothing else
+                    self.assertTrue(pad.lacks('Steering', GUARD))
+                    self.assertEqual(pad.down(), [key])                         # Base movement continues
+                    pad.lift("LS").wait(300)
+                    self.assertEqual(pad.names(), ("Base",))
 
     @scenario("90.15 M3", rests=("A10",))
     def test_outside_steering_the_second_press_is_as_it_was(self):

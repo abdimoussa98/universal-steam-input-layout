@@ -25,6 +25,10 @@ The first form also says which layers no scenario puts on the stack. A layer tha
 changed since the newest snapshot has to be on the stack in at least one scenario (R165,
 `uncovered`).
 
+Retired interactions may specify `frozen="90.41"` on their scenario. Those
+run the named frozen builder and record reach separately; they cannot satisfy
+the working layout's coverage requirement. The assumption report labels them.
+
 Names. Buttons: Start, Select, A, B, X, Y, Up, Down, Left, Right, LB, RB, and the back
 buttons. L1 and R1 are the modifier buttons: the bumpers in the default layout, the
 triggers' soft pull in the alternative. LF and RF are the firing buttons: the triggers'
@@ -37,6 +41,7 @@ Plan: plans/2026-10-02-rule-registry.md, phases 13 to 15.
 """
 import argparse
 from collections import namedtuple
+import importlib.util
 import itertools
 import json
 from pathlib import Path
@@ -67,18 +72,20 @@ SWITCHES = {"A9": ("exposed_fires", (True, False)), "A32": ("reverse_ties", (Fal
 RENAME = {"L1": "L2", "R1": "R2"}
 BACK = {new: old for old, new in RENAME.items()}
 
-Meta = namedtuple("Meta", "check name rules rests either")
+Meta = namedtuple("Meta", "check name rules rests either frozen", defaults=(None,))
 SCENARIOS = []
 REACHED = {}                                 # layout -> the layers a scenario has put on the stack so far
+FROZEN_REACHED = {}                          # (version, layout) -> historical reach, never live coverage
 RELEASE_LIST = "unverified-assumptions.txt"
 _layouts = {}
+_frozen_layouts = {}
 _ran = []
 
 
-def scenario(check, rules=(), rests=(), either=()):
+def scenario(check, rules=(), rests=(), either=(), frozen=None):
     """Mark a test as a scenario: its label, the rules it checks and the assumptions its outcome rests on."""
     def mark(function):
-        function.scenario = Meta(check, function.__qualname__, tuple(rules), tuple(rests) + tuple(either), tuple(either))
+        function.scenario = Meta(check, function.__qualname__, tuple(rules), tuple(rests) + tuple(either), tuple(either), frozen)
         if function.scenario not in SCENARIOS:               # a test file can be imported under two names
             SCENARIOS.append(function.scenario)
         return function
@@ -93,6 +100,20 @@ def layout_data(variant):
     if variant not in _layouts:
         _layouts[variant] = json.loads(layout_path(variant).read_text(encoding="utf-8"))
     return _layouts[variant]
+
+
+def frozen_layout_data(variant, version):
+    """Rebuild a retired interaction from its frozen builder, not a backup file."""
+    builders = {'90.41': 'findings/2026-10-09-low-haptics-and-silent-fn/build_candidate.py',
+                '90.42': 'findings/2026-10-09-fn-haptics-and-steering-clear/build_candidate.py'}
+    key = version, variant
+    if key not in _frozen_layouts:
+        spec = importlib.util.spec_from_file_location('scenario_frozen_' + version.replace('.', '_'),
+                                                      ROOT / builders[version])
+        builder = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(builder)
+        _frozen_layouts[key], _ = builder.build(variant)
+    return _frozen_layouts[key]
 
 
 class Pad:
@@ -322,17 +343,26 @@ class ScenarioCase(unittest.TestCase):
         for variant in variants:
             for way in itertools.product(*ways):
                 chosen = {**options, **dict(zip(names, way))}
-                data = desktop(layout_data(variant)) if desktop_configuration else None
+                frozen = meta.frozen if meta else None
+                data = frozen_layout_data(variant, frozen) if frozen else layout_data(variant)
+                if desktop_configuration:
+                    data = desktop(data)
                 pad = Pad(variant, data=data, **chosen)
                 if start == "steering":
-                    pad.enter_steering()
+                    # A settled baseline has no thumb held by its entry gesture.
+                    # Since 90.47 a resting thumb legitimately owns LST helpers.
+                    # Tests of that state use enter_steering() or touch() explicitly.
+                    pad.enter_steering().lift("LS").wait(300)
                 elif start:
                     pad = Pad(variant, start=start, data=data, **chosen)
                 self._pad = pad
                 try:
                     yield pad.mark()
                 finally:
-                    REACHED.setdefault(variant, set()).update(pad.reached())
+                    if frozen:
+                        FROZEN_REACHED.setdefault((frozen, variant), set()).update(pad.reached())
+                    else:
+                        REACHED.setdefault(variant, set()).update(pad.reached())
 
 
 def modules():
@@ -377,7 +407,8 @@ def report():
         ruled = [rule.id for rule in registry.values() if entry.id in rule.rests_on]
         if ruled:
             lines.append("  Rules: " + ", ".join(ruled))
-        lines.extend(f"  {meta.check}  {meta.name}" for meta in resting[entry.id])
+        lines.extend(f"  {meta.check}  {meta.name}" + (f" [frozen {meta.frozen}]" if meta.frozen else "")
+                     for meta in resting[entry.id])
         if not ruled and not resting[entry.id]:
             lines.append("  No rule and no scenario rests on it")
     return "\n".join(lines)
@@ -405,7 +436,7 @@ def main(argv=None):
         found = for_rule(args.rule)
         print(f"{len(found)} scenarios check {args.rule}")
         for meta in found:
-            print(f"  {meta.check}  {meta.name}")
+            print(f"  {meta.check}  {meta.name}" + (f" [frozen {meta.frozen}]" if meta.frozen else ""))
         return 0
     shown = report()
     print(shown)

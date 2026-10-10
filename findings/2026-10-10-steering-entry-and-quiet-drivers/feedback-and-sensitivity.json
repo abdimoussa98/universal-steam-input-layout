@@ -1,0 +1,848 @@
+[
+  {
+    "variant": "default",
+    "live_sha256": "872e20c39b2bfe9f657a339731330bb5aaaf1decae1e01b4e83700601c93416f",
+    "beep_entries": 30,
+    "beep_flags": 30,
+    "audible_entries": [
+      {
+        "layer": "L1!R1: Modifier 2",
+        "source": "switch",
+        "input": "left_bumper",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "L1!R1: Modifier 2",
+        "source": "switch",
+        "input": "right_bumper",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "R1!L1: Modifier 2",
+        "source": "switch",
+        "input": "left_bumper",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "R1!L1: Modifier 2",
+        "source": "switch",
+        "input": "right_bumper",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Gyro | L1!R1: Modifier 2",
+        "source": "switch",
+        "input": "left_bumper",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Gyro | L1!R1: Modifier 2",
+        "source": "switch",
+        "input": "right_bumper",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Gyro | R1!L1: Modifier 2",
+        "source": "switch",
+        "input": "left_bumper",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Gyro | R1!L1: Modifier 2",
+        "source": "switch",
+        "input": "right_bumper",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 2",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Transition Set 2",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 2",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Transition Set 2",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 1",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Steering",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 1",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Cursor Gyro",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Steering",
+        "source": "joystick",
+        "input": "dpad_north",
+        "activation": "Soft_Press",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Steering",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Steering",
+        "source": "joystick",
+        "input": "dpad_south",
+        "activation": "Soft_Press",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Steering",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Cursor Gyro",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Cursor Gyro",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Cursor Gyro",
+        "source": "right_joystick",
+        "input": "edge",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Cursor Gyro",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 0",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gamepad",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 0",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gamepad",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Left!Right: Entry Point",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Right!Left: Entry Point",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "button_diamond",
+        "input": "button_a",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "button_diamond",
+        "input": "button_b",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "button_diamond",
+        "input": "button_x",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "button_diamond",
+        "input": "button_y",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "dpad",
+        "input": "dpad_north",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "dpad",
+        "input": "dpad_south",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "dpad",
+        "input": "dpad_east",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "dpad",
+        "input": "dpad_west",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "right_joystick",
+        "input": "edge",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      }
+    ],
+    "right_stick_reference_matches": {
+      "Base": {
+        "curve_exponent": "0",
+        "custom_curve_exponent": "59",
+        "edge_binding_radius": "32767",
+        "output_joystick": "2",
+        "deadzone_inner_radius": "3280",
+        "deadzone_outer_radius": "32000",
+        "deadzone_enable_type": "2",
+        "sensitivity": "100"
+      },
+      "Turning Ramp Up 0": {
+        "layer": "1",
+        "sensitivity": "150",
+        "sensitivity_vert_scale": "80"
+      },
+      "Turning Ramp Up 1": {
+        "layer": "1",
+        "sensitivity": "200",
+        "sensitivity_vert_scale": "67"
+      },
+      "Gyro Off Ramp Up": {
+        "layer": "1"
+      }
+    }
+  },
+  {
+    "variant": "alternative",
+    "live_sha256": "31b052cec4def90edd6e342481ee0299f1f172fd6426495747d2a0d1d8cbbc46",
+    "beep_entries": 30,
+    "beep_flags": 30,
+    "audible_entries": [
+      {
+        "layer": "L2!R2: Modifier 2",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "L2!R2: Modifier 2",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "R2!L2: Modifier 2",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "R2!L2: Modifier 2",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Gyro | L2!R2: Modifier 2",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Gyro | L2!R2: Modifier 2",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Gyro | R2!L2: Modifier 2",
+        "source": "left_trigger",
+        "input": "edge",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Gyro | R2!L2: Modifier 2",
+        "source": "right_trigger",
+        "input": "edge",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Gyro",
+            "name_flag": "1"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 2",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Transition Set 2",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 2",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Transition Set 2",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 1",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Steering",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 1",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Cursor Gyro",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Steering",
+        "source": "joystick",
+        "input": "dpad_north",
+        "activation": "Soft_Press",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Steering",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Steering",
+        "source": "joystick",
+        "input": "dpad_south",
+        "activation": "Soft_Press",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Steering",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Cursor Gyro",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Cursor Gyro",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Cursor Gyro",
+        "source": "right_joystick",
+        "input": "edge",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Cursor Gyro",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 0",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gamepad",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Transition Set 0",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "release",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Gamepad",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Left!Right: Entry Point",
+        "source": "switch",
+        "input": "button_escape",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Right!Left: Entry Point",
+        "source": "switch",
+        "input": "button_menu",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "add_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "button_diamond",
+        "input": "button_a",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "button_diamond",
+        "input": "button_b",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "button_diamond",
+        "input": "button_x",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "button_diamond",
+        "input": "button_y",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "dpad",
+        "input": "dpad_north",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "dpad",
+        "input": "dpad_south",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "dpad",
+        "input": "dpad_east",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "dpad",
+        "input": "dpad_west",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "joystick",
+        "input": "edge",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      },
+      {
+        "layer": "Menu Keys",
+        "source": "right_joystick",
+        "input": "edge",
+        "activation": "chord",
+        "beeps": [
+          {
+            "operation": "remove_layer",
+            "target": "Menu Keys",
+            "name_flag": "0"
+          }
+        ]
+      }
+    ],
+    "right_stick_reference_matches": {
+      "Base": {
+        "curve_exponent": "0",
+        "custom_curve_exponent": "59",
+        "edge_binding_radius": "32767",
+        "output_joystick": "2",
+        "deadzone_inner_radius": "3280",
+        "deadzone_outer_radius": "32000",
+        "deadzone_enable_type": "2",
+        "sensitivity": "100"
+      },
+      "Turning Ramp Up 0": {
+        "layer": "1",
+        "sensitivity": "150",
+        "sensitivity_vert_scale": "80"
+      },
+      "Turning Ramp Up 1": {
+        "layer": "1",
+        "sensitivity": "200",
+        "sensitivity_vert_scale": "67"
+      },
+      "Gyro Off Ramp Up": {
+        "layer": "1"
+      }
+    }
+  }
+]

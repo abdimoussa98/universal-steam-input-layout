@@ -1,0 +1,11 @@
+test_all_driver_owned_activators_are_off_with_only_mod2_repeat_added (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_base_and_ramps_keep_reference_settings_except_requested_sensitivity (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_cursor_response_and_deliberate_exits_are_unchanged_with_gyro_on_or_off (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_driver_handoffs_modifier_releases_and_delayed_completion_are_quiet (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_inverted_edge_is_one_quiet_any_driver_self_removal (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_mod2_releases_lose_only_the_requested_stateful_removals (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.179s
+
+OK

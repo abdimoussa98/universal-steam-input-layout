@@ -16,13 +16,15 @@ class SoftPressOnly(ScenarioCase):
         for pad in self.each(start="steering"):
             pad.hold("L1").wait(50).hold("R1").wait(50).press_pad("RP", "left").wait(100)
             self.assertEqual((pad.top, "mouse_button BACK" in pad.down()), ("RTP: Mouse Buttons", True))
-            pad.let_go("R1").wait(2)                                              # the quick tap clears every layer
-            self.assertTrue(pad.lacks("Steering", "RTP: Mouse Buttons"))
+            pad.let_go("R1").wait(2)                                              # pad cleanup still runs; Steering stays since 90.44
+            self.assertTrue(pad.has("Steering") and pad.lacks("Steering | L1!R1: Modifier 2", "RTP: Mouse Buttons"))
             pad.wait(150)
             self.assertEqual((pad.has("RTP: Mouse Buttons"), "mouse_button BACK" in pad.down()),
                              (pad.sim.exposed_fires, pad.sim.exposed_fires))
             pad.let_go_pad("RP").wait(400)
             self.assertTrue(pad.lacks("RTP: Click Entry Point", "RTP: Mouse Buttons", "RTP: Middle Click"))
+            pad.let_go("L1").wait(300)
+            self.assertEqual((pad.stack, pad.down()), (pad.layers("Base", "Steering"), []))
 
     @scenario("90.17 S2", rules=("R113",), rests=("A6", "A10", "A40", "A41"))
     def test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click(self):

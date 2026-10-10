@@ -4,10 +4,12 @@ Every time a changed layout is published, **revalidate its description and bump
 its release version**. Apply this before committing a layout update, exporting
 it for delivery, or publishing it to Steam:
 
-1. Read the full `controller_mappings.description` and compare it with the final
-   layout. Check default/alternative controls, active features, response settings,
-   and which features remain planned. Update stale text; do not rewrite accurate
-   wording just to create a diff.
+1. Require a **concise, accurate** `controller_mappings.description`: a short
+   overview of the main features and essential default/alternative controls.
+   Keep detailed gestures, timing, tuning, and implementation notes in repository
+   documentation. Read the full description against the final layout and correct
+   stale claims or control mappings; retain wording that is already concise and
+   accurate.
 2. Increment the release suffix in `controller_mappings.title`, such as `90.2`
    to `90.3`, from the last published release. Use one bump for the release batch,
    including its follow-up edits and export; align both variants when released

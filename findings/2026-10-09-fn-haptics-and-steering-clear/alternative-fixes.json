@@ -1,0 +1,158 @@
+{
+  "edits": {
+    "fn_feedback": [
+      {
+        "group": "13125",
+        "input": "button_escape",
+        "bank": "activators",
+        "activation": "chord"
+      },
+      {
+        "group": "13125",
+        "input": "button_menu",
+        "bank": "activators",
+        "activation": "chord"
+      },
+      {
+        "group": "13126",
+        "input": "touch",
+        "bank": "activators",
+        "activation": "release"
+      },
+      {
+        "group": "13127",
+        "input": "touch",
+        "bank": "activators",
+        "activation": "release"
+      },
+      {
+        "group": "13128",
+        "input": "button_escape",
+        "bank": "activators",
+        "activation": "chord"
+      },
+      {
+        "group": "13128",
+        "input": "button_menu",
+        "bank": "activators",
+        "activation": "chord"
+      },
+      {
+        "group": "13129",
+        "input": "touch",
+        "bank": "activators",
+        "activation": "release"
+      },
+      {
+        "group": "13130",
+        "input": "touch",
+        "bank": "activators",
+        "activation": "release"
+      },
+      {
+        "group": "13138",
+        "input": "button_escape",
+        "bank": "activators",
+        "activation": "chord"
+      },
+      {
+        "group": "13138",
+        "input": "button_menu",
+        "bank": "activators",
+        "activation": "chord"
+      },
+      {
+        "group": "13139",
+        "input": "touch",
+        "bank": "activators",
+        "activation": "release"
+      },
+      {
+        "group": "13140",
+        "input": "touch",
+        "bank": "activators",
+        "activation": "release"
+      },
+      {
+        "group": "13141",
+        "input": "button_escape",
+        "bank": "activators",
+        "activation": "chord"
+      },
+      {
+        "group": "13141",
+        "input": "button_menu",
+        "bank": "activators",
+        "activation": "chord"
+      },
+      {
+        "group": "13142",
+        "input": "touch",
+        "bank": "activators",
+        "activation": "release"
+      },
+      {
+        "group": "13143",
+        "input": "touch",
+        "bank": "activators",
+        "activation": "release"
+      }
+    ],
+    "steering_removal_order": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R2!L2: Modifier 2",
+      "Steering | L2!R2: Modifier 2",
+      "Steering | R2: W Key",
+      "Steering | L2: S Key",
+      "Steering | LS: Fallback Guard",
+      "L2: Tap Cover",
+      "R2: Tap Cover",
+      "Steering"
+    ]
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 546,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline_changed_layout": false
+}

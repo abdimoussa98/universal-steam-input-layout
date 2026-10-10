@@ -1,0 +1,21 @@
+{
+  "reason": "The full 293-method scenario registry found four earlier live tests that still expected the deliberate Steering Modifier 2 clear to remove Steering. Release 90.44 intentionally preserves that stateful layer.",
+  "files": [
+    "tests/test_scenarios_90_14.py",
+    "tests/test_scenarios_90_16.py",
+    "tests/test_scenarios_90_17.py",
+    "tests/test_scenarios_90_33.py"
+  ],
+  "preserved_intent": [
+    "90.14 P12 still requires the missed pad-click state and Modifier 2 to be removed; releasing the remaining driver must settle at Base plus Steering with no held output.",
+    "90.16 X3 still tests both A9 behaviors for a held center click, verifies click-layer cleanup and confirms a fresh click works; the final driver/pad release leaves only Base plus Steering.",
+    "90.17 S1 still checks the outer click disappears before its 5 ms re-entry delay and returns only under the selected A9 behavior; final release clears all pad helpers and held output.",
+    "90.33 L2 now requires quick cleanup to remove Gyro and all temporary layers while retaining Steering without beep or haptic. Historical frozen fallback expectations remain unchanged."
+  ],
+  "result": {
+    "methods": 4,
+    "failures": 0,
+    "errors": 0,
+    "log": "targeted-legacy.log"
+  }
+}

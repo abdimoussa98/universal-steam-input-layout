@@ -1,0 +1,72 @@
+{
+  "default": {
+    "preflight": "pass",
+    "ordered_numeric_title_roundtrip": "pass",
+    "exact_diff_from_90_41": "16 Fn haptic fields, two Steering command arrays, release title only",
+    "changed_layers": [
+      "Menu Left: Entry Point",
+      "Menu Right: Entry Point",
+      "Steering",
+      "Stateful | Menu Left: Entry Point",
+      "Stateful | Menu Right: Entry Point"
+    ],
+    "changed_inputs": 18,
+    "layers": 88,
+    "runtime_ids_preserved": true,
+    "description_review": "retained accurate concise description",
+    "fix_pipeline_changed_layout": false,
+    "fn_activators": 16,
+    "steering_clear_targets": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R1!L1: Modifier 2",
+      "Steering | L1!R1: Modifier 2",
+      "Steering | R1: W Key",
+      "Steering | L1: S Key",
+      "Steering | LS: Fallback Guard",
+      "L1: Tap Cover",
+      "R1: Tap Cover",
+      "Steering"
+    ],
+    "json_sha256": "a9a60b6049110053b797b8fcd57ea828e5cb5a4e0bab0a3490c63ee90bd0be43"
+  },
+  "alternative": {
+    "preflight": "pass",
+    "ordered_numeric_title_roundtrip": "pass",
+    "exact_diff_from_90_41": "16 Fn haptic fields, two Steering command arrays, release title only",
+    "changed_layers": [
+      "Menu Left: Entry Point",
+      "Menu Right: Entry Point",
+      "Steering",
+      "Stateful | Menu Left: Entry Point",
+      "Stateful | Menu Right: Entry Point"
+    ],
+    "changed_inputs": 18,
+    "layers": 88,
+    "runtime_ids_preserved": true,
+    "description_review": "retained accurate concise description",
+    "fix_pipeline_changed_layout": false,
+    "fn_activators": 16,
+    "steering_clear_targets": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap",
+      "Steering | LS: Double Tap Cover",
+      "Steering | LS: Tap Cover",
+      "Steering | LS Down: Modifier 0",
+      "Steering | LS Up: Modifier 1",
+      "Steering | R2!L2: Modifier 2",
+      "Steering | L2!R2: Modifier 2",
+      "Steering | R2: W Key",
+      "Steering | L2: S Key",
+      "Steering | LS: Fallback Guard",
+      "L2: Tap Cover",
+      "R2: Tap Cover",
+      "Steering"
+    ],
+    "json_sha256": "254ab239742857b90d24cf566a4e8b9994045a2acf538b2a43a593ec88fa9205"
+  }
+}

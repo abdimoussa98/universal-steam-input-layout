@@ -1,0 +1,17 @@
+test_combined_release_removes_only_its_side_and_preserves_the_other (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_cursor_cancellations_remove_only_themselves_and_leave_outputs_to_parent (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_cursor_edges_preserve_one_stick_hold_and_repeat_self_removal_for_two (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_cursor_profile_preserves_sensitivity_and_owner_activation (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_delayed_cursor_reset_is_scoped_and_replaced_by_upper_inputs (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_normal_covers_inherit_gyro_without_any_source_override (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_only_primary_delay_and_touch_completion_enter_cursor (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_opposite_modifier_transitions_repeat_and_preserve_branch_and_execution_order (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_output_and_cover_chords_are_separate_uninterruptible_entries (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_overlays_retire_primary_timers_but_only_normal_covers_replace_touches (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_override_inputs_keep_applying_normal_cover (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+test_rtp_timer_replaces_inherited_cancellation_and_repeating_cover_inputs (tests.test_neptune_cursor.NeptuneCursorTests) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.421s
+
+OK

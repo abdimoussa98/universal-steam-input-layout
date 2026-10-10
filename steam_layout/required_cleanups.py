@@ -96,10 +96,19 @@ def state(c, layer, control):
         return "disabled"
     if not defined(group, name):
         return "open"
-    roles = {t.role for t in c.inv.by_layer(layer) if t.control == control and ("remove_layer", layer) in t.ops}
+    removing = [t for t in c.inv.by_layer(layer)
+                if t.control == control and ("remove_layer", layer) in t.ops]
+    roles = {t.role for t in removing}
     for role, found in (("recovery", "cleanup"), ("cancel", "cancel"), ("release", "own")):
         if role in roles:
             return found
+    # A handoff that removes its source and enters another layer is an
+    # "entry" for the adding-chain walk, but also cancels this source on the
+    # pressed button. It needs no second, redundant self-removal for R171.
+    # Re-entering the same source is not cancellation.
+    if any(t.role == "entry" and not any(op in ("add_layer", "hold_layer") and target == layer
+                                        for op, target in t.ops) for t in removing):
+        return "cancel"
     return "empty" if is_clear(group["inputs"][name]["activators"]) else "bound"
 
 
@@ -158,13 +167,20 @@ def missing(c, only=None):
 def excepted(config, variant, layers=None):
     """{(rule, layer, "source/input"): why} from the config's `cleanups.required`, which the register fills.
 
-    A decision with `where` holds only on a layout that has that layer; `layers` is the layout's titles."""
+    `where` requires a layer and `not_where` excludes one; `layers` is the layout's titles.
+    A negative scope is not granted without titles: old builders that omit them
+    must not skip their cleanup writes because of a newer layout's exception.
+    The legacy where-only lookup keeps its original behavior without titles."""
     mapping = config.get("variants", {}).get(variant, {})
     result = {}
     for decision in config.get("cleanups", {}).get("required", []):
         if not decision.get("why"):
             raise ValueError(f"an exception needs a why: {decision}")
+        if layers is None and decision.get("not_where"):
+            continue
         if decision.get("where") and layers is not None and map_title(decision["where"], mapping) not in layers:
+            continue
+        if decision.get("not_where") and layers is not None and map_title(decision["not_where"], mapping) in layers:
             continue
         for layer in decision["layers"]:
             for name in decision["inputs"]:

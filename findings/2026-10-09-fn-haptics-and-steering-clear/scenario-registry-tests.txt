@@ -1,0 +1,24 @@
+test_a_changed_layer_that_no_scenario_reaches_is_reported (tests.test_scenario_registry.ReachTests)
+`RST: Temporary Gyro` is added by a double tap on the right stick, which no scenario makes. ... ok
+test_a_frozen_scenario_does_not_count_as_live_coverage (tests.test_scenario_registry.ReachTests) ... ok
+test_every_changed_layer_is_on_the_stack_in_a_scenario (tests.test_scenario_registry.ReachTests) ... ok
+test_the_scenarios_reach_the_layers_they_are_about (tests.test_scenario_registry.ReachTests) ... ok
+test_a_label_from_the_retired_checklist_names_a_check_sorted_as_a_scenario (tests.test_scenario_registry.ScenarioRegistryTests)
+A scenario written since carries its own label (the release and a number), which the sorting doesn't know. ... ok
+test_a_label_names_one_scenario (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_a_rule_lists_the_scenario_tests_exactly_when_a_scenario_names_it (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_an_either_way_assumption_is_run_both_ways (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_every_check_of_the_retired_checklist_went_somewhere (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_every_migrated_check_went_somewhere_that_exists (tests.test_scenario_registry.ScenarioRegistryTests)
+The migration record (phase 14): a check leaves the Deck checklist only for something real. ... ok
+test_the_record_and_the_checklist_agree (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_the_release_list_is_written_into_the_record (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_the_report_lists_every_assumption_that_is_not_verified_with_the_rules_resting_on_it (tests.test_scenario_registry.ScenarioRegistryTests)
+R167: this is the list a release's record carries. ... ok
+test_the_report_lists_the_scenarios_that_rest_on_something_unverified (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_the_rules_and_assumptions_a_scenario_names_exist (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.591s
+
+OK

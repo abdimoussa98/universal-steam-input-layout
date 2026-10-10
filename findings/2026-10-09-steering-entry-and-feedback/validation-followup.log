@@ -1,0 +1,85 @@
+Command: /Library/Developer/CommandLineTools/usr/bin/python3 -m unittest tests.test_flow_inheritance tests.test_exceptions tests.test_rule_registry -v
+
+test_a_binding_that_varies_between_stacks_does_not_fail (tests.test_flow_inheritance.GateTests) ... ok
+test_a_changed_provider_puts_the_entries_it_feeds_up_for_review (tests.test_flow_inheritance.GateTests) ... ok
+test_a_changed_target_puts_its_own_entries_up_for_review (tests.test_flow_inheritance.GateTests) ... ok
+test_a_context_in_the_rules_is_a_starting_stack (tests.test_flow_inheritance.GateTests) ... ok
+test_a_cover_finding_is_printed_with_its_rule (tests.test_flow_inheritance.GateTests) ... ok
+test_a_cover_finding_still_fails (tests.test_flow_inheritance.GateTests) ... ok
+test_a_dormant_declaration_does_not_excuse_another_unreachable_layer (tests.test_flow_inheritance.GateTests) ... ok
+test_a_flow_decision_requires_its_declared_layout_scope (tests.test_flow_inheritance.GateTests) ... ok
+test_a_layer_only_added_by_hold_layer_is_out_of_scope_not_a_gap (tests.test_flow_inheritance.GateTests) ... ok
+test_a_layer_outside_every_family_still_fails (tests.test_flow_inheritance.GateTests) ... ok
+test_a_reachable_declared_layer_still_gets_its_cover_checks (tests.test_flow_inheritance.GateTests) ... ok
+test_an_accepted_entry_passes (tests.test_flow_inheritance.GateTests) ... ok
+test_an_explicit_dormant_target_audit_still_fails (tests.test_flow_inheritance.GateTests) ... ok
+test_an_explicitly_retained_dormant_layer_is_reported_without_a_fake_entry (tests.test_flow_inheritance.GateTests) ... ok
+test_an_unchanged_layout_needs_no_review (tests.test_flow_inheritance.GateTests) ... ok
+test_an_unused_decision_is_still_stale_inside_its_applicable_scope (tests.test_flow_inheritance.GateTests) ... ok
+test_cover_layers_are_accepted_by_the_cover_rule_when_the_register_says_so (tests.test_flow_inheritance.GateTests) ... ok
+test_dormant_bindings_still_have_to_pass_the_command_budget (tests.test_flow_inheritance.GateTests) ... ok
+test_inventory_lists_what_the_chains_follow (tests.test_flow_inheritance.GateTests) ... ok
+test_the_lower_stacks_come_with_the_bindings_that_built_them (tests.test_flow_inheritance.GateTests) ... ok
+test_the_varying_binding_is_still_shown_for_the_layer (tests.test_flow_inheritance.GateTests) ... ok
+test_disabled_source_stops_the_lookup (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_existing_clear_is_satisfied (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_one_non_base_binding_with_base_fallback_is_review (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_same_binding_from_two_owners_is_one_variant (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_two_different_non_base_bindings_are_reported_as_varying (tests.test_flow_inheritance.InheritanceFixtureTests) ... ok
+test_inverted_edge_removal_is_a_center_exit (tests.test_flow_inheritance.InventoryTests) ... ok
+test_layers_only_held_by_legacy_commands_are_listed (tests.test_flow_inheritance.InventoryTests) ... ok
+test_cli_runs_without_out_and_reports_json (tests.test_flow_inheritance.NeptuneFlowTests) ... ok
+test_the_reused_entry_guard_is_reachable_without_a_dormant_exemption (tests.test_flow_inheritance.NeptuneFlowTests) ... ok
+test_cleanup_scopes_preserve_presence_and_absence_gates (tests.test_exceptions.ExpandTests) ... ok
+test_cover_findings (tests.test_exceptions.ExpandTests) ... ok
+test_dormant_layers_are_separate_from_inherited_input_decisions (tests.test_exceptions.ExpandTests) ... ok
+test_flow_decisions (tests.test_exceptions.ExpandTests) ... ok
+test_flow_scopes_preserve_presence_and_absence_gates (tests.test_exceptions.ExpandTests) ... ok
+test_kept_removals (tests.test_exceptions.ExpandTests) ... ok
+test_of_selects_by_rule (tests.test_exceptions.ExpandTests) ... ok
+test_review_scopes (tests.test_exceptions.ExpandTests) ... ok
+test_sections_written_the_old_way_are_kept (tests.test_exceptions.ExpandTests) ... ok
+test_the_input_is_not_changed (tests.test_exceptions.ExpandTests) ... ok
+test_window_decisions_join_the_stacks_config (tests.test_exceptions.ExpandTests) ... ok
+test_a_rule_lists_exceptions_exactly_when_the_register_has_one (tests.test_exceptions.RegisterTests) ... ok
+test_every_exception_names_a_rule_in_the_registry (tests.test_exceptions.RegisterTests) ... ok
+test_no_exception_lives_anywhere_else (tests.test_exceptions.RegisterTests) ... ok
+test_the_audits_read_the_register (tests.test_exceptions.RegisterTests) ... ok
+test_the_fallback_edge_decision_does_not_apply_to_the_reused_entry_guard (tests.test_exceptions.RegisterTests) ... ok
+test_a_complete_entry_passes (tests.test_exceptions.ShapeTests) ... ok
+test_a_dormant_scope_names_exact_layers_and_does_not_accept_input_decisions (tests.test_exceptions.ShapeTests) ... ok
+test_a_scope_must_fit_its_rule (tests.test_exceptions.ShapeTests) ... ok
+test_an_entry_needs_every_field (tests.test_exceptions.ShapeTests) ... ok
+test_an_assumption_table_is_read (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_reported_and_refuted_are_statuses_too (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_an_unverified_assumption_says_whether_the_layout_relies_on_it (tests.test_rule_registry.AssumptionTests) ... ok
+test_assumption_ids_named_elsewhere_exist (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_assumption_a_rule_rests_on_exists (tests.test_rule_registry.AssumptionTests) ... ok
+test_rests_on_and_what_rests_on_it_agree (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_audit_and_every_fix_declares_something (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_audit_and_fix_the_registry_names_declares_that_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_declared_check_names_a_rule_that_lists_it (tests.test_rule_registry.DeclarationTests) ... ok
+test_tag_prints_the_ids_in_brackets (tests.test_rule_registry.DeclarationTests) ... ok
+test_the_build_audit_prints_its_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_unchecked_lists_the_rules_nothing_fails_on (tests.test_rule_registry.DeclarationTests) ... ok
+test_a_rule_table_is_read_with_its_section (tests.test_rule_registry.ReaderTests) ... ok
+test_an_escaped_pipe_stays_in_the_cell (tests.test_rule_registry.ReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.ReaderTests) ... ok
+test_checked_by_forms (tests.test_rule_registry.ReaderTests) ... ok
+test_other_tables_are_ignored (tests.test_rule_registry.ReaderTests) ... ok
+test_references_finds_rule_ids_and_skips_buttons (tests.test_rule_registry.ReaderTests) ... ok
+test_rests_on_lists_assumption_ids (tests.test_rule_registry.ReaderTests) ... ok
+test_a_rule_names_only_rules_that_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_named_fixes_are_in_the_pipeline (tests.test_rule_registry.RegistryTests) ... ok
+test_named_tests_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_only_the_retired_rule_names_the_deck_checklist (tests.test_rule_registry.RegistryTests)
+Phase 15: nothing in the definition of done waits for a Deck check. R155 keeps its row, retired. ... ok
+test_rule_ids_named_elsewhere_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_the_definition_of_done_holds_the_rules (tests.test_rule_registry.RegistryTests) ... ok
+test_every_skill_names_rules_that_exist (tests.test_rule_registry.SkillTests) ... ok
+
+----------------------------------------------------------------------
+Ran 77 tests in 2.821s
+
+OK

@@ -1,0 +1,18 @@
+{
+  "default": {
+    "candidate": "findings/2026-10-09-fn-haptics-and-steering-clear/default-candidate.json",
+    "installed": "neptune/single-set-default_hold-gyro_latest.json",
+    "byte_equal": true,
+    "ordered_json_equal": true,
+    "candidate_sha256": "a9a60b6049110053b797b8fcd57ea828e5cb5a4e0bab0a3490c63ee90bd0be43",
+    "installed_sha256": "a9a60b6049110053b797b8fcd57ea828e5cb5a4e0bab0a3490c63ee90bd0be43"
+  },
+  "alternative": {
+    "candidate": "findings/2026-10-09-fn-haptics-and-steering-clear/alternative-candidate.json",
+    "installed": "neptune/single-set-alternative_hold-gyro_latest.json",
+    "byte_equal": true,
+    "ordered_json_equal": true,
+    "candidate_sha256": "254ab239742857b90d24cf566a4e8b9994045a2acf538b2a43a593ec88fa9205",
+    "installed_sha256": "254ab239742857b90d24cf566a4e8b9994045a2acf538b2a43a593ec88fa9205"
+  }
+}

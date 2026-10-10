@@ -1,0 +1,34 @@
+test_a_rule_lists_the_scenario_tests_exactly_when_a_scenario_names_it (tests.test_scenario_registry.ScenarioRegistryTests) ... ok
+test_an_assumption_table_is_read (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_reported_and_refuted_are_statuses_too (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_an_unverified_assumption_says_whether_the_layout_relies_on_it (tests.test_rule_registry.AssumptionTests) ... ok
+test_assumption_ids_named_elsewhere_exist (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_assumption_a_rule_rests_on_exists (tests.test_rule_registry.AssumptionTests) ... ok
+test_rests_on_and_what_rests_on_it_agree (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_audit_and_every_fix_declares_something (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_audit_and_fix_the_registry_names_declares_that_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_declared_check_names_a_rule_that_lists_it (tests.test_rule_registry.DeclarationTests) ... ok
+test_tag_prints_the_ids_in_brackets (tests.test_rule_registry.DeclarationTests) ... ok
+test_the_build_audit_prints_its_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_unchecked_lists_the_rules_nothing_fails_on (tests.test_rule_registry.DeclarationTests) ... ok
+test_a_rule_table_is_read_with_its_section (tests.test_rule_registry.ReaderTests) ... ok
+test_an_escaped_pipe_stays_in_the_cell (tests.test_rule_registry.ReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.ReaderTests) ... ok
+test_checked_by_forms (tests.test_rule_registry.ReaderTests) ... ok
+test_other_tables_are_ignored (tests.test_rule_registry.ReaderTests) ... ok
+test_references_finds_rule_ids_and_skips_buttons (tests.test_rule_registry.ReaderTests) ... ok
+test_rests_on_lists_assumption_ids (tests.test_rule_registry.ReaderTests) ... ok
+test_a_rule_names_only_rules_that_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_named_fixes_are_in_the_pipeline (tests.test_rule_registry.RegistryTests) ... ok
+test_named_tests_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_only_the_retired_rule_names_the_deck_checklist (tests.test_rule_registry.RegistryTests)
+Phase 15: nothing in the definition of done waits for a Deck check. R155 keeps its row, retired. ... ok
+test_rule_ids_named_elsewhere_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_the_definition_of_done_holds_the_rules (tests.test_rule_registry.RegistryTests) ... ok
+test_every_skill_names_rules_that_exist (tests.test_rule_registry.SkillTests) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.303s
+
+OK

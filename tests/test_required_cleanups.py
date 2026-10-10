@@ -214,6 +214,22 @@ class ButtonTests(unittest.TestCase):
         data = layout({("switch", SW): {"right_bumper": CANCEL}})
         self.assertEqual(found(data), set())
 
+    def test_a_self_removing_handoff_passes_without_a_second_cleanup(self):
+        # Driver acquisition repeats; a fresh menu handoff uses Start Press.
+        # Both consume P even though the chain inventory calls them entries.
+        for kind, settings in (("Full_Press", {"hold_repeats": 1}), ("Start_Press", {})):
+            with self.subTest(activation=kind):
+                data = layout({("switch", SW): {"right_bumper": on(
+                    kind, remove("P"), add("Q"), **settings)}}, extra={"Q": {}})
+                self.assertEqual(inputs(data, BUTTON), set())
+                self.assertEqual(required.state(Cleanups(Layout(data)), "P", ("switch", "right_bumper")), "cancel")
+
+    def test_an_entry_that_keeps_or_readds_its_source_still_needs_cleanup(self):
+        for commands in ((add("Q"),), (remove("P"), add("P"), add("Q"))):
+            with self.subTest(commands=commands):
+                data = layout({("switch", SW): {"right_bumper": press(*commands)}}, extra={"Q": {}})
+                self.assertEqual(inputs(data, BUTTON), {"RB"})
+
     def test_a_cancellation_of_another_layer_does_not(self):
         other = press(remove("Q"), hold_repeats=1, interruptable=0)
         data = layout({("switch", SW): {"right_bumper": other}}, extra={"Q": {}})
@@ -265,6 +281,27 @@ class ExceptionTests(unittest.TestCase):
         config["cleanups"]["required"][0]["why"] = ""
         with self.assertRaises(ValueError):
             audit(self.DATA, config)
+
+    def test_presence_and_absence_gates_do_not_waive_historical_layouts(self):
+        config = self.config()
+        config["cleanups"]["required"][0].update(where="New", not_where="Retired")
+        key = ("R170", "P", "right_joystick/edge")
+        for titles, expected in (({"P"}, {}), ({"P", "New", "Retired"}, {}),
+                                 ({"P", "New"}, {key: "decided"})):
+            with self.subTest(titles=titles):
+                self.assertEqual(required.excepted(config, "default", titles), expected)
+
+    def test_unknown_context_does_not_grant_a_negative_scope_waiver(self):
+        # A historical builder once omitted titles and silently treated every
+        # newer exception as applicable, skipping its required cleanup writes.
+        config = self.config()
+        row = config["cleanups"]["required"][0]
+        row.update(where="New", not_where="Retired")
+        self.assertEqual(required.excepted(config, "default"), {})
+        # Existing where-only calls remain compatible with frozen builders.
+        del row["not_where"]
+        self.assertEqual(required.excepted(config, "default"), {
+            ("R170", "P", "right_joystick/edge"): "decided"})
 
     def test_titles_are_mapped_for_the_alternative_layout(self):
         data = build({"Base": {"switch": (SW, {"left_bumper": press(add("L2: P"))})},

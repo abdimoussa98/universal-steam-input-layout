@@ -1,0 +1,18 @@
+test_base_and_ramps_keep_reference_settings_except_requested_sensitivity (tests.test_steering_entry_quiet_drivers.SteeringEntryQuietDrivers) ... ok
+test_a_held_modifier_lets_no_ramp_layer_in (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_a_held_trigger_keeps_the_gyro_on_during_ramp_up (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_a_modifier_pressed_during_ramp_up_ends_it (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp)
+In the alternative a soft pull keeps the block and a full pull exits, as the checklist said. ... ok
+test_a_trigger_pull_brings_the_gyro_back_and_the_first_click_registers (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_soft_and_full_pulls_in_base_gyro_and_the_ramp_stages (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_edge_the_triggers_and_the_modifiers_in_gyro (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_right_pad_blocks_the_edge_only_while_a_thumb_is_on_it (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp)
+Trackball momentum, which the checklist also asked about, is not simulated (A28). ... ok
+test_the_triggers_click_and_a_menu_button_works_with_one_held (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_two_bumper_quick_tap_toggles_gyro_and_a_longer_hold_does_not (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_two_ramp_stages_and_the_way_back (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.607s
+
+OK

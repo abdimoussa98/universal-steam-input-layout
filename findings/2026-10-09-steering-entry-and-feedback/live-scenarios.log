@@ -1,0 +1,270 @@
+Live scenario methods: 224
+test_a_mouse_button_fires_through_a_window (tests.test_scenarios_90_10.MenuAndTransitions)
+The checklist asked whether a held click is interrupted when a window lands or times out. The ... ok
+test_a_start_tap_with_a_stick_out_types_one_tab (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_a_stick_touch_clears_a_stale_guard (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_a_transition_left_by_a_missed_release_ends_on_the_next_menu_tap (tests.test_scenarios_90_10.MenuAndTransitions)
+From 90.10 to 90.23 only the next menu tap ended a stuck transition: the sticks, bumpers and ... ok
+test_all_four_gestures_leave_steering_and_keep_gyro (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_letting_go_of_the_menu_button_first_cancels (tests.test_scenarios_90_10.MenuAndTransitions)
+The checklist asked what the click's release does. Base's click key (Q) goes down when Start is ... ok
+test_one_gesture_enters_steering_and_the_other_three_clear (tests.test_scenarios_90_10.MenuAndTransitions)
+The name is from 90.10, when only Steering was built. Since 90.21 Select plus the right-stick ... ok
+test_stick_guards_come_and_go_and_the_menu_tap_or_hold_behaves (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_the_accepted_gap_under_the_menu_tap_cover (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_the_other_menu_button_types_one_backspace_or_enter_before_fn_is_up (tests.test_scenarios_90_10.MenuAndTransitions)
+Changed in 90.25. The press no longer types at once: a tap types the key once, from its window, and ... ok
+test_the_right_stick_does_nothing_while_a_menu_button_is_held (tests.test_scenarios_90_10.MenuAndTransitions) ... ok
+test_a_mapped_button_uses_up_the_tap_and_a_stuck_map_clears (tests.test_scenarios_90_10.Steering) ... ok
+test_menu_buttons_in_steering (tests.test_scenarios_90_10.Steering) ... ok
+test_stick_first_then_the_driver_is_a_modifier (tests.test_scenarios_90_10.Steering)
+Until 90.30 the driver took over when it came after the stick: the R1 modifier map was there at once. ... ok
+test_the_other_driver_inside_the_window_types_its_key_and_adds_no_map (tests.test_scenarios_90_10.Steering) ... ok
+test_the_stick_double_tap (tests.test_scenarios_90_10.Steering) ... ok
+test_the_stick_modifier_holds_through_a_roll_to_the_side (tests.test_scenarios_90_10.Steering) ... ok
+test_w_carries_on_through_the_window_and_after_it (tests.test_scenarios_90_10.Steering) ... ok
+test_pushing_up_with_a_menu_button_held_types_w_and_adds_no_guard (tests.test_scenarios_90_11.FallbackHold) ... ok
+test_a_trigger_pull_inside_a_steering_window_clicks (tests.test_scenarios_90_11.NoTurnAssistInSteering) ... ok
+test_outside_steering_the_ramp_layers_come_and_go (tests.test_scenarios_90_11.NoTurnAssistInSteering) ... ok
+test_the_drivers_release_still_reaches_its_layer_while_firing_and_turning (tests.test_scenarios_90_11.NoTurnAssistInSteering) ... ok
+test_the_right_stick_adds_no_ramp_layer_while_a_driver_is_held (tests.test_scenarios_90_11.NoTurnAssistInSteering) ... ok
+test_a_double_tap_scrolls_a_used_bumper_does_not_and_the_quick_tap_toggles_gyro (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_a_held_bumper_keeps_modifier_2_through_a_stick_touch (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_a_stick_touch_clears_a_stuck_modifier_2 (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_a_stuck_modifier_fn_layer_and_driver_each_clear (tests.test_scenarios_90_12.CleanupLists)
+Which input clears depends on where the layer has its cleanup functions: a modifier on the face ... ok
+test_one_edge_push_clears_a_stuck_cursor_and_its_modifier (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_rocking_never_scrolls_and_ends_on_base (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_steering_modifier_2_stays_while_one_bumper_is_held (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_the_menu_hold_with_a_stick_out_and_the_fn_release_leave_nothing_behind (tests.test_scenarios_90_12.CleanupLists) ... ok
+test_a_centre_click_is_the_middle_click (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_click_in_circular_scroll_goes_through_the_entry_point (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_missed_click_release_clears_on_its_own (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_modifier_and_a_pad_click_leave_each_other_alone (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_stick_touch_leaves_a_pad_click_that_is_held (tests.test_scenarios_90_14.PadClick) ... ok
+test_a_very_short_click_sends_nothing (tests.test_scenarios_90_14.PadClick)
+Changed in 90.16: the outer buttons come after a 5 ms delay. Changed on 2026-10-04 (author): the ... ok
+test_an_outer_click_is_the_d_pad_button (tests.test_scenarios_90_14.PadClick) ... ok
+test_the_choice_holds_while_the_thumb_slides (tests.test_scenarios_90_14.PadClick) ... ok
+test_the_left_pad_has_the_same_two_layers (tests.test_scenarios_90_14.PadClick) ... ok
+test_the_overlap_of_the_two_ranges_sends_one_output (tests.test_scenarios_90_14.PadClick)
+Changed in 90.16. Until 90.15 the centre Soft Press was meant to interrupt the outer one (A39). Now both ... ok
+test_a_missed_menu_release_clears_on_the_next_tap (tests.test_scenarios_90_15.MenuSecondPressKeys)
+The second-press layers have no cleanup function (the Cleanup audit lists them). That is unchanged: ... ok
+test_outside_steering_the_second_press_is_as_it_was (tests.test_scenarios_90_15.MenuSecondPressKeys) ... ok
+test_the_direction_exit_waits_for_the_second_press_layer_to_release (tests.test_scenarios_90_15.MenuSecondPressKeys)
+Until 90.32 the layer kept off was the Fallback Hold. Since 90.33 it is the fallback guard, which ... ok
+test_a_click_bumps_once_on_base_and_the_entry_point_adds_none (tests.test_scenarios_90_16.PadClickExits)
+The simulator logs a haptic when an entry's commands run. The output's own bump, on the layer ... ok
+test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add (tests.test_scenarios_90_16.PadClickExits)
+Changed in 90.20. From 90.16 to 90.19 Base had a second, repeating add, which brought the Click ... ok
+test_a_thumb_that_lifts_in_circular_scroll_ends_the_scroll_too (tests.test_scenarios_90_16.PadClickExits) ... ok
+test_a_thumb_that_lifts_takes_the_click_layers_and_what_is_under_them (tests.test_scenarios_90_16.PadClickExits)
+Base has the click's add (not from 90.25 to 90.26). With the click still down it is exposed: if ... ok
+test_the_outer_buttons_come_after_5_ms_and_the_middle_click_at_once (tests.test_scenarios_90_16.PadClickExits)
+Until 2026-10-04 the middle click was read as coming on its 50 ms repeat. A repeating action always ... ok
+test_each_click_layer_clears_by_its_soft_press_exit_with_the_thumb_still_down (tests.test_scenarios_90_17.SoftPressOnly) ... ok
+test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add (tests.test_scenarios_90_17.SoftPressOnly)
+Changed in 90.20, with Base's repeating add gone: see 90.16 X3. ... ok
+test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click (tests.test_scenarios_90_17.SoftPressOnly) ... ok
+test_a_click_that_ends_before_the_hand_over_sends_nothing_and_clears (tests.test_scenarios_90_18.Handoff)
+The entry point has no click exit, so it is still on when a short click ends. With the thumb still ... ok
+test_a_thumb_that_lifts_ends_the_entry_point (tests.test_scenarios_90_18.Handoff) ... ok
+test_a_touch_release_seen_before_the_click_lets_go (tests.test_scenarios_90_18.Handoff)
+If Steam reports the thumb gone while the pad still reads as pressed, the touch Release removes the ... ok
+test_the_entry_point_is_gone_once_the_chosen_layer_is_on (tests.test_scenarios_90_18.Handoff) ... ok
+test_a_press_inside_a_final_layer_is_held_by_the_layer_and_ends_with_it (tests.test_scenarios_90_19.Holds)
+A click too short for the hand-over leaves the Click Entry Point on; with the thumb still down it ... ok
+test_an_ordinary_click_comes_and_goes_whether_or_not_the_hold_works (tests.test_scenarios_90_19.Holds) ... ok
+test_the_thumb_lifting_and_a_missed_release_still_clear_a_final_layer (tests.test_scenarios_90_19.Holds) ... ok
+test_a_held_click_adds_the_entry_point_once_and_bumps_once (tests.test_scenarios_90_20.OneAdd) ... ok
+test_each_new_click_adds_it_again (tests.test_scenarios_90_20.OneAdd) ... ok
+test_a_held_modifier_answers_both_sticks_and_the_exit_waits_for_it (tests.test_scenarios_90_21.CursorGyro)
+Nothing on top carries the exit (author, 2026-10-03). Under a held modifier both sticks add its ... ok
+test_a_menu_tap_types_its_key_and_the_layer_stays (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_a_modifier_hold_still_brings_the_temp_cursor_and_leaves_the_layer (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_a_window_answers_both_sticks_and_the_exit_follows_when_it_closes (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_all_four_gestures_leave_it_and_keep_gyro (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_both_sticks_out_remove_only_the_layer (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_entering_with_both_sticks_out_leaves_again_at_once (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_select_plus_the_right_stick_click_enters_it_on_top_of_gyro (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_the_modifier_2_quick_tap_clears_to_base (tests.test_scenarios_90_21.CursorGyro) ... ok
+test_a_menu_button_held_plus_a_stick_click_leaves_it (tests.test_scenarios_90_22.Gamepad) ... ok
+test_a_quick_press_and_click_leaves_and_sends_no_start (tests.test_scenarios_90_22.Gamepad)
+The click comes before the Long Press time. The clear transition binds the menu button, which ... ok
+test_a_tap_a_double_press_and_a_hold_on_start_and_select (tests.test_scenarios_90_22.Gamepad) ... ok
+test_every_control_is_a_gamepad_control_and_nothing_lands_on_the_layer (tests.test_scenarios_90_22.Gamepad) ... ok
+test_letting_go_of_the_menu_button_before_the_click_types_one_key (tests.test_scenarios_90_22.Gamepad)
+The accepted cost of entering the clear at the click's press: Base is live under a held click. ... ok
+test_the_modifier_2_quick_tap_does_not_leave_it (tests.test_scenarios_90_22.Gamepad) ... ok
+test_the_two_same_side_gestures_enter_it (tests.test_scenarios_90_22.Gamepad) ... ok
+test_a_stick_touch_clears_a_stale_cover_over_a_pad_layer (tests.test_scenarios_90_23.StickTouches) ... ok
+test_a_thumb_lift_is_seen_with_a_pad_layer_under_the_cover (tests.test_scenarios_90_23.StickTouches) ... ok
+test_a_touch_under_a_held_menu_button_moves_no_layer (tests.test_scenarios_90_23.StickTouches) ... ok
+test_a_button_press_ends_a_stuck_layer_and_then_does_what_it_does_underneath (tests.test_scenarios_90_24.RequiredCleanups) ... ok
+test_a_steering_stick_window_types_tab_and_escape_itself (tests.test_scenarios_90_24.RequiredCleanups)
+The W and S layers' Start and Select hold a cleanup since 90.24, which is a layer command, so the ... ok
+test_a_stick_push_ends_a_steering_layer_whose_release_was_missed (tests.test_scenarios_90_24.RequiredCleanups) ... ok
+test_a_stick_touch_does_nothing_while_the_layers_button_is_held (tests.test_scenarios_90_24.RequiredCleanups) ... ok
+test_a_stick_touch_ends_a_layer_whose_release_was_missed (tests.test_scenarios_90_24.RequiredCleanups) ... ok
+test_the_other_driver_still_adds_the_modifier_2_layer_and_ends_a_stuck_driver_layer (tests.test_scenarios_90_24.RequiredCleanups)
+In the W and S layers the bind that adds the Modifier 2 layer moved into the guard chord ... ok
+test_the_pad_cover_over_a_menu_layer_keeps_the_right_stick_click_from_starting_a_transition (tests.test_scenarios_90_24.RequiredCleanups)
+Called out by the author (2026-10-04). `RTP: Tap Cover` has a right-stick group in mouse mode since ... ok
+test_a_click_after_the_thumb_has_rested_still_works (tests.test_scenarios_90_25.PadTouch) ... ok
+test_a_click_that_lands_with_the_touch_is_read_all_the_same (tests.test_scenarios_90_25.PadTouch)
+The thumb and the click at the same moment. The Click Entry Point lands on a pad that is already ... ok
+test_a_left_pad_swipe_types_its_key (tests.test_scenarios_90_25.PadTouch)
+From Base again since 90.27; from 90.25 to 90.26 the swipes were in `LTP: Entry Point`. ... ok
+test_a_pad_click_still_works_in_steering (tests.test_scenarios_90_25.PadTouch) ... ok
+test_a_normal_touch_never_fires_the_reset (tests.test_scenarios_90_25.TapCoverResets) ... ok
+test_a_tap_still_opens_the_double_tap_window (tests.test_scenarios_90_25.TapCoverResets) ... ok
+test_a_chorded_tap_types_the_key_once (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_a_double_tap_and_hold_holds_the_key_and_a_third_press_chains (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_a_missed_release_of_the_second_button_is_cleaned_up (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_holding_both_menu_buttons_enters_menu_keys (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_inside_a_stateful_layer_both_menu_buttons_type_the_key_as_before (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_letting_go_of_the_first_button_ends_its_family (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_the_hold_also_works_once_the_fn_layer_is_up (tests.test_scenarios_90_25.ChordedMenu) ... ok
+test_a_menu_button_plus_a_stick_click_clears (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_a_pad_tap_opens_its_window_over_menu_keys_and_the_face_buttons_wait (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_a_stick_out_plus_a_button_leaves_and_the_press_counts_as_bases (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_both_sticks_out_leaves (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_the_dpad_is_the_arrows_and_the_face_buttons_are_the_four_keys (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_the_modifiers_the_menu_buttons_and_the_stick_touches_do_nothing (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_the_other_inputs_do_what_they_do_on_base (tests.test_scenarios_90_25.MenuKeys) ... ok
+test_every_single_button_hold_lands_at_200_ms (tests.test_scenarios_90_26.Holds) ... ok
+test_modifier_2_and_menu_keys_take_200_ms_from_the_second_button (tests.test_scenarios_90_26.Holds) ... ok
+test_the_reset_of_a_hold_that_nothing_disturbs_never_removes_its_layer (tests.test_scenarios_90_26.Holds) ... ok
+test_the_steering_modifiers_take_200_ms (tests.test_scenarios_90_26.Holds) ... ok
+test_a_left_pad_touch_during_a_hold_costs_nothing (tests.test_scenarios_90_26.Disturbed) ... ok
+test_a_right_pad_touch_around_a_hold_costs_nothing_since_90_30 (tests.test_scenarios_90_26.Disturbed) ... ok
+test_a_stick_touch_during_a_hold_costs_nothing (tests.test_scenarios_90_26.Disturbed) ... ok
+test_the_outer_clicks_reset_fires_once_on_nothing_and_leaves_with_its_layer (tests.test_scenarios_90_26.Pads) ... ok
+test_a_swipe_needs_no_layer_under_it (tests.test_scenarios_90_27.Pads) ... ok
+test_a_touch_gives_no_bump_and_the_right_pads_entry_point_comes_at_once (tests.test_scenarios_90_27.Pads) ... ok
+test_steering_and_the_tap_cover_use_bases_click (tests.test_scenarios_90_27.Pads) ... ok
+test_the_clicks_come_from_base_with_one_pulse (tests.test_scenarios_90_27.Pads) ... ok
+test_a_double_tap_and_hold_holds_the_key_on_a_later_press_too (tests.test_scenarios_90_28.EveryPress) ... ok
+test_a_hold_enters_menu_keys_on_a_later_press_too (tests.test_scenarios_90_28.EveryPress) ... ok
+test_a_thumb_lift_brings_the_fn_layer_and_the_chain_still_runs (tests.test_scenarios_90_28.EveryPress) ... ok
+test_every_tap_in_one_hold_types_the_key (tests.test_scenarios_90_28.EveryPress) ... ok
+test_in_steering_and_cursor_gyro_the_second_button_types_at_once (tests.test_scenarios_90_28.EveryPress) ... ok
+test_the_fn_layer_types_nothing_as_it_lands (tests.test_scenarios_90_28.EveryPress)
+The second button down before the Fn layer is up. The Entry Point's bind adds the Fn layer and ... ok
+test_a_pad_thumb_that_lifts_inside_a_window_ends_it_and_clears_the_pads_layers (tests.test_scenarios_90_28.WindowPads) ... ok
+test_a_swipe_inside_a_window_types_its_key_with_no_layer (tests.test_scenarios_90_28.WindowPads) ... ok
+test_a_touch_and_a_click_that_start_inside_a_window_do_nothing_until_it_ends (tests.test_scenarios_90_28.WindowPads) ... ok
+test_it_ends_a_circular_scroll_too (tests.test_scenarios_90_28.WindowPads) ... ok
+test_menu_keys_beeps_and_pulses_coming_on_and_beeps_going_off (tests.test_scenarios_90_29.Beeps) ... ok
+test_the_fn_hold_and_tap_do_not_beep (tests.test_scenarios_90_29.Beeps) ... ok
+test_a_menu_button_let_go_inside_the_pads_window_leaves_nothing_on (tests.test_scenarios_90_30.PadWindow) ... ok
+test_a_modifier_let_go_inside_the_pads_window_leaves_nothing_on (tests.test_scenarios_90_30.PadWindow) ... ok
+test_a_press_that_starts_and_ends_inside_the_window_ends_it_and_does_nothing_else (tests.test_scenarios_90_30.PadWindow) ... ok
+test_in_cursor_gyro_the_stateful_menu_layers_go_too (tests.test_scenarios_90_30.PadWindow) ... ok
+test_the_same_through_several_pad_taps_in_one_hold (tests.test_scenarios_90_30.PadWindow) ... ok
+test_with_both_modifiers_held_the_one_still_down_gets_its_modifier_back (tests.test_scenarios_90_30.PadWindow) ... ok
+test_a_pad_touch_no_longer_postpones_a_hold (tests.test_scenarios_90_30.NoCoverResets) ... ok
+test_the_tap_covers_still_come_at_150_ms_and_a_short_touch_still_opens_the_window (tests.test_scenarios_90_30.NoCoverResets) ... ok
+test_the_quick_tap_from_steering_base_still_clears_to_base (tests.test_scenarios_90_33.LeavingFromTheGuard) ... ok
+test_in_steering_base_turn_assist_runs_and_a_driver_ends_it_and_drives (tests.test_scenarios_90_34.OpenEdges) ... ok
+test_a_missed_menu_release_clears_and_the_next_hold_works (tests.test_scenarios_90_37.BaseMenuChords) ... ok
+test_held_menu_button_reenters_when_a_stick_window_expires (tests.test_scenarios_90_37.BaseMenuChords) ... ok
+test_menu_hold_with_a_thumb_already_resting (tests.test_scenarios_90_37.BaseMenuChords) ... ok
+test_directional_hold_completes_before_rtp_cleanup (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_each_stateful_owner_enters_and_releases_both_menu_fn_layers (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_full_direction_exits_steering_once_with_a_low_pulse (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_menu_delay_adds_its_target_before_removing_rtp (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_rtp_window_blocks_steering_direction_mutations_until_it_exits (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_stateful_menu_reenters_after_a_pad_window_and_recovers_a_missed_release (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_touch_hold_and_double_tap_scroll_work_in_armed_steering (tests.test_scenarios_90_38.SteeringRtp) ... ok
+test_both_thumb_release_completions_bump_before_helper_cleanup (tests.test_scenarios_90_42.FnEntryFeedback) ... ok
+test_delayed_fn_entry_bumps_once_without_a_beep (tests.test_scenarios_90_42.FnEntryFeedback) ... ok
+test_the_opposite_menu_chord_bumps_on_early_fn_entry (tests.test_scenarios_90_42.FnEntryFeedback) ... ok
+test_a_direction_already_held_when_steering_lands_is_protected_until_release (tests.test_scenarios_90_42.SteeringFullDeflectionExit) ... ok
+test_rtp_window_leaves_before_a_held_direction_clears_steering (tests.test_scenarios_90_42.SteeringFullDeflectionExit) ... ok
+test_the_exit_removes_stale_steering_helpers_including_windows_first (tests.test_scenarios_90_42.SteeringFullDeflectionExit) ... ok
+test_up_and_down_exit_once_and_continue_base_movement_with_gyro_preserved (tests.test_scenarios_90_42.SteeringFullDeflectionExit) ... ok
+test_a_carried_opposite_menu_does_not_consume_first_push_protection (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_a_direction_carried_into_entry_is_protected_until_released (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_a_missed_movement_release_recovers_on_a_real_release_or_handoff (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_a_new_full_direction_after_disarming_clears_once_and_keeps_gyro (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_a_shallow_direction_release_disarms_without_an_outer_edge (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_centered_entry_and_resting_thumbs_preserve_the_first_push (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_direction_roll_or_edge_release_can_arm_a_still_held_full_direction (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_every_menu_click_clear_removes_guard_and_preserves_gyro (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_fresh_menu_handoffs_preserve_fn_feedback (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_fresh_or_carried_drivers_remove_the_guard_before_driving (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_left_pad_swipes_keep_plain_keys_without_helpers (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_pad_and_ramp_inputs_do_not_hide_the_protected_release (tests.test_scenarios_90_43.SteeringEntryProtection) ... ok
+test_button_recovery_does_not_take_ownership_of_a_valid_driver (tests.test_scenarios_90_43.SteeringModifierRecovery) ... ok
+test_camera_recovery_keeps_the_held_driver_through_the_old_fifty_ms_gap (tests.test_scenarios_90_43.SteeringModifierRecovery) ... ok
+test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver (tests.test_scenarios_90_43.SteeringModifierRecovery) ... ok
+test_the_driver_still_cleans_itself_after_its_release_was_missed (tests.test_scenarios_90_43.SteeringModifierRecovery) ... ok
+test_gyro_toggle_requests_exactly_one_beep_in_every_press_and_release_order (tests.test_scenarios_90_43.LayerFeedback) ... ok
+test_steering_full_mod2_clear_beeps_once_without_changing_release_order (tests.test_scenarios_90_43.LayerFeedback) ... ok
+test_a_held_fn_key_becomes_its_base_binding_when_the_menu_button_lifts (tests.test_scenarios_90_6_to_90_9.MenuComboKeys) ... ok
+test_the_accepted_stray_key_when_the_first_menu_button_is_lifted_first (tests.test_scenarios_90_6_to_90_9.MenuComboKeys) ... ok
+test_the_right_pad_double_tap (tests.test_scenarios_90_6_to_90_9.MenuComboKeys) ... ok
+test_with_fn_up_the_other_menu_button_types_its_key_on_every_press (tests.test_scenarios_90_6_to_90_9.MenuComboKeys)
+Changed in 90.25 and again in 90.28: every press goes through the chorded chain, so a tap types the ... ok
+test_a_face_button_inside_the_stick_window (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays) ... ok
+test_flick_then_flick_and_hold_repeats_the_scroll (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays) ... ok
+test_lifting_the_thumb_during_a_stick_modifier (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays) ... ok
+test_right_pad_touch_modes_work_in_steering_since_90_38 (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays)
+90.38 supersedes the 90.7 entry block: protect the windows themselves. ... ok
+test_the_drivers_recovery_clears_through_the_cover (tests.test_scenarios_90_6_to_90_9.SlimSteeringOverlays) ... ok
+test_double_tap_and_hold_then_a_clean_release_through_the_cover (tests.test_scenarios_90_6_to_90_9.ChordedDelays) ... ok
+test_holding_the_stick_uses_up_the_tap (tests.test_scenarios_90_6_to_90_9.ChordedDelays)
+Its last clause said that after a Modifier 2 exit with the stick held, centre never scrolls. Since ... ok
+test_a_cancel_input_and_a_thumb_lift_together_at_200_ms (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_a_cancel_input_puts_the_tap_cover_on_for_the_rest_of_the_hold (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_a_fresh_hold_is_eligible_again_and_a_short_tap_still_double_taps (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_a_lost_modifier_clears_with_its_overlays (tests.test_scenarios_cursor.TempCursorGyro)
+The checklist expected the recovery to run while the sticks stay out. A chord latches (A17): the ... ok
+test_a_thumb_lift_before_200_ms_enters_the_cursor_at_once (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_modifier_2_from_the_cursor_and_back (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_nothing_flickers_while_the_cursor_or_the_cover_is_held (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_one_stick_keeps_the_cursor_and_both_remove_it (tests.test_scenarios_cursor.TempCursorGyro)
+How far the sticks have to travel is a tuning note; a stick here is in or out. ... ok
+test_the_alternatives_modifier_2_entry_over_a_trigger_that_is_already_pulled (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_the_cursor_lands_at_200_ms_and_the_release_sends_nothing (tests.test_scenarios_cursor.TempCursorGyro) ... ok
+test_a_stuck_entry_point_clears_on_the_other_menu_button (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_a_stuck_fn_layer_clears_on_the_next_input (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_a_tap_types_escape_or_tab (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_a_thumb_lift_completes_the_fn_hold (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_double_tap_and_hold_holds_the_key (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_enter_and_backspace_quickly_and_with_fn_up (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_holding_brings_up_the_fn_layer_and_the_release_is_silent (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_the_stick_click_enters_a_transition_and_the_fn_directions_type_punctuation (tests.test_scenarios_menu_and_modifiers.MenuButtons) ... ok
+test_a_menu_button_in_a_modifier_leaves_the_gyro_alone (tests.test_scenarios_menu_and_modifiers.ModifierLayers)
+The checklist added: confirm that's what you want. That question stays with the author. ... ok
+test_nav_keys (tests.test_scenarios_menu_and_modifiers.ModifierLayers) ... ok
+test_nav_keys_in_gyro (tests.test_scenarios_menu_and_modifiers.ModifierLayers) ... ok
+test_no_tap_action_after_a_nav_chord_and_a_menu_button_alone_clears_a_stuck_modifier (tests.test_scenarios_menu_and_modifiers.ModifierLayers) ... ok
+test_a_held_modifier_lets_no_ramp_layer_in (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_a_held_trigger_keeps_the_gyro_on_during_ramp_up (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_a_modifier_pressed_during_ramp_up_ends_it (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp)
+In the alternative a soft pull keeps the block and a full pull exits, as the checklist said. ... ok
+test_a_trigger_pull_brings_the_gyro_back_and_the_first_click_registers (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_soft_and_full_pulls_in_base_gyro_and_the_ramp_stages (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_edge_the_triggers_and_the_modifiers_in_gyro (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_right_pad_blocks_the_edge_only_while_a_thumb_is_on_it (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp)
+Trackball momentum, which the checklist also asked about, is not simulated (A28). ... ok
+test_the_triggers_click_and_a_menu_button_works_with_one_held (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_two_bumper_quick_tap_toggles_gyro_and_a_longer_hold_does_not (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_the_two_ramp_stages_and_the_way_back (tests.test_scenarios_triggers_and_recovery.TriggersAndRampUp) ... ok
+test_a_cleanup_leaves_gyro_and_the_other_sticks_helpers (tests.test_scenarios_triggers_and_recovery.RecoveryAndHeldInputs)
+What each list may hold is the Cleanup audit's job; this checks the survivors on one stack. ... ok
+test_the_left_stick_edge_clears_a_stuck_modifier_or_scroll_layer (tests.test_scenarios_triggers_and_recovery.RecoveryAndHeldInputs)
+Its menu and Transition Set parts were replaced in 90.10: a stuck Entry Point clears on the other ... ok
+test_the_staggered_gyro_toggle (tests.test_scenarios_triggers_and_recovery.RecoveryAndHeldInputs)
+The checklist asked two things. The regular modifier doesn't appear beside the Gyro one. And letting ... ok
+test_which_stacks_leave_bases_left_stick_edge_exposed (tests.test_scenarios_triggers_and_recovery.RecoveryAndHeldInputs) ... ok
+
+----------------------------------------------------------------------
+Ran 224 tests in 82.805s
+
+OK
+SUMMARY 224 errors 0 failures 0

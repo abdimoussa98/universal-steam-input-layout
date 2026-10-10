@@ -1,0 +1,140 @@
+test_an_assumption_table_is_read (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_reported_and_refuted_are_statuses_too (tests.test_rule_registry.AssumptionReaderTests) ... ok
+test_an_unverified_assumption_says_whether_the_layout_relies_on_it (tests.test_rule_registry.AssumptionTests) ... ok
+test_assumption_ids_named_elsewhere_exist (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_assumption_a_rule_rests_on_exists (tests.test_rule_registry.AssumptionTests) ... ok
+test_rests_on_and_what_rests_on_it_agree (tests.test_rule_registry.AssumptionTests) ... ok
+test_every_audit_and_every_fix_declares_something (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_audit_and_fix_the_registry_names_declares_that_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_every_declared_check_names_a_rule_that_lists_it (tests.test_rule_registry.DeclarationTests) ... ok
+test_tag_prints_the_ids_in_brackets (tests.test_rule_registry.DeclarationTests) ... ok
+test_the_build_audit_prints_its_rule (tests.test_rule_registry.DeclarationTests) ... ok
+test_unchecked_lists_the_rules_nothing_fails_on (tests.test_rule_registry.DeclarationTests) ... ok
+test_a_rule_table_is_read_with_its_section (tests.test_rule_registry.ReaderTests) ... ok
+test_an_escaped_pipe_stays_in_the_cell (tests.test_rule_registry.ReaderTests) ... ok
+test_bad_rows_are_rejected (tests.test_rule_registry.ReaderTests) ... ok
+test_checked_by_forms (tests.test_rule_registry.ReaderTests) ... ok
+test_other_tables_are_ignored (tests.test_rule_registry.ReaderTests) ... ok
+test_references_finds_rule_ids_and_skips_buttons (tests.test_rule_registry.ReaderTests) ... ok
+test_rests_on_lists_assumption_ids (tests.test_rule_registry.ReaderTests) ... ok
+test_a_rule_names_only_rules_that_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_named_fixes_are_in_the_pipeline (tests.test_rule_registry.RegistryTests) ... ok
+test_named_tests_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_only_the_retired_rule_names_the_deck_checklist (tests.test_rule_registry.RegistryTests)
+Phase 15: nothing in the definition of done waits for a Deck check. R155 keeps its row, retired. ... ok
+test_rule_ids_named_elsewhere_exist (tests.test_rule_registry.RegistryTests) ... ok
+test_the_definition_of_done_holds_the_rules (tests.test_rule_registry.RegistryTests) ... ok
+test_every_skill_names_rules_that_exist (tests.test_rule_registry.SkillTests) ... ok
+Traceback (most recent call last):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/__main__.py", line 18, in <module>
+    main(module=None)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/main.py", line 101, in __init__
+    self.runTests()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/main.py", line 271, in runTests
+    self.result = testRunner.run(self.test)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/runner.py", line 176, in run
+    test(result)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 122, in run
+    test(result)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 122, in run
+    test(result)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 114, in run
+    self._handleClassSetUp(test, result)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 163, in _handleClassSetUp
+    setUpClass()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/test_scenario_registry.py", line 135, in setUpClass
+    cls.reached = scenario.reached()               # runs every scenario test once
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/scenario.py", line 380, in reached
+    suite.run(unittest.TestResult())             # a failure here shows when the tests themselves run
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 122, in run
+    test(result)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 122, in run
+    test(result)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/suite.py", line 122, in run
+    test(result)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/case.py", line 653, in __call__
+    return self.run(*args, **kwds)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/case.py", line 593, in run
+    self._callTestMethod(testMethod)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/case.py", line 550, in _callTestMethod
+    method()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/test_scenarios_90_33.py", line 200, in test_a_menu_button_and_a_stick_click_clear_steering_and_the_guard_and_keep_gyro
+    for pad in self.each(start=start):
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/scenario.py", line 347, in each
+    data = frozen_layout_data(variant, frozen) if frozen else layout_data(variant)
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/tests/scenario.py", line 115, in frozen_layout_data
+    _frozen_layouts[key], _ = builder.build(variant)
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-09-low-haptics-and-silent-fn/build_candidate.py", line 46, in build
+    numeric, report = previous.build(variant)
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-09-circular-scroll-haptics/build_candidate.py", line 28, in build
+    data, report = previous.build(variant)
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-08-steering-rtp-and-menu-chords/build_candidate.py", line 111, in build
+    data = builder.finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-08-steering-rtp-and-menu-chords/build_candidate.py", line 36, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-06-menu-base-chords/build_candidate.py", line 30, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-06-cleanup-entry-order/build_candidate.py", line 79, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-06-steering-fallback-swap/build_candidate.py", line 139, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-05-steering-four-way-and-open-edges/build_candidate.py", line 86, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-05-steering-fallback-guard/build_candidate.py", line 270, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-04-fallback-window-replacements/build_candidate.py", line 72, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-04-fallback-window/build_candidate.py", line 305, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-04-window-releases-and-tap-cover-resets/build_candidate.py", line 132, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-04-quiet-resets-and-beeps/build_candidate.py", line 97, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-04-menu-chain-and-window-pads/build_candidate.py", line 149, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-04-pad-bump-removal/build_candidate.py", line 83, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-04-pad-bumps-and-menu-keys/build_candidate.py", line 384, in finish
+    data = super().finish()
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/findings/2026-10-04-required-cleanups/build_candidate.py", line 214, in finish
+    apply_all(data)                    # the frozen source predates every later fix; the checks read the fixed layout
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/fixes/__init__.py", line 54, in apply_all
+    return {name: fix(data) for name, fix in PIPELINE if only is None or name in only}
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/fixes/__init__.py", line 54, in <dictcomp>
+    return {name: fix(data) for name, fix in PIPELINE if only is None or name in only}
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/fixes/cleanup_lists.py", line 172, in fix
+    first, stacks = run(data, config, extras=None)             # no fix resolves an exit finding (R136)
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/cleanups.py", line 486, in run
+    for (check, layer, target, role, reason), row in cleanups.findings(only).items():
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/cleanups.py", line 360, in findings
+    for target, (check, reason) in self.unneeded(host, t).items():
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/cleanups.py", line 311, in unneeded
+    present = self.present(host)
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/cleanups.py", line 207, in present
+    self._present[layer] = self.below(layer) | self.above(layer) | {layer}
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/cleanups.py", line 201, in above
+    self._above[layer] = set(self.chains.above(layer))
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/chains.py", line 242, in above
+    for stack, why in self.below(layer).items():
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/chains.py", line 227, in below
+    done = self.replay(why, start)
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/chains.py", line 209, in replay
+    if not self.fires(t, stack):
+  File "/Users/abdi/Documents/codes/universal-steam-input-layout/steam_layout/chains.py", line 104, in fires
+    if key not in self._answers:
+KeyboardInterrupt
