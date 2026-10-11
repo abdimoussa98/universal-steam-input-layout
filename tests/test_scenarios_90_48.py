@@ -56,9 +56,11 @@ class GuardHandoff(ScenarioCase):
                             self.assertEqual(pad.seen('remove').count(('remove', GUARD)), 1)
                             if len(drivers) == 1:
                                 self.assertTrue(pad.has(DRIVERS[drivers[0]]))
-                            else:
-                                self.assertTrue(any(': Modifier 2' in t for t in pad.stack))
                             pad.recentre('LS').wait(250)
+                            if len(drivers) == 2:
+                                # With both drivers down before the stick layer landed, Modifier 2 waits for
+                                # the stick since 90.53 (the shared stick modifier's accepted edge).
+                                self.assertTrue(any(': Modifier 2' in t for t in pad.stack))
                             for driver in drivers:
                                 pad.let_go(driver)
                             pad.lift('LS').lift('RS').wait(400)

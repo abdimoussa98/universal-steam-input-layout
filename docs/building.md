@@ -2,26 +2,27 @@
 
 Both working layouts, `neptune/single-set-default_hold-gyro_latest` and
 `neptune/single-set-alternative_hold-gyro_latest` (JSON and VDF), are
-**generated**. They have 88 layers each since 90.33. A hand edit in `neptune/`
+**generated**. They have 90 layers each since 90.52 (88 from 90.33). A hand edit in `neptune/`
 is lost on the next install.
 
 The separate [90.39 fallback-window testing candidate](../findings/2026-10-09-fallback-window-backport/README.md)
 extends frozen 90.32 with compatible later fixes. It has 90 layers and writes
 to its findings folder, with distinctly named snapshots under
-`versions/neptune/90.39/`. It is an inactive experiment: the live 90.48 release
-continues from 90.38 through 90.40–90.47. Its build/validation commands, local rules and
+`versions/neptune/90.39/`. It is an inactive experiment: the live release
+continues from 90.38 through 90.40–90.55. Its build/validation commands, local rules and
 scenario coverage remain separate from the live layouts.
 
 ## The builder
 
 The current live builder is
-[findings/2026-10-10-quiet-gyro-and-guard-handoff](../findings/2026-10-10-quiet-gyro-and-guard-handoff/README.md),
-for 90.48, extending 90.47. A separately named testing candidate does not become the live
+[findings/2026-10-11-edge-soft-press-timers](../findings/2026-10-11-edge-soft-press-timers/README.md),
+for 90.55. Since 90.49 a builder reads the snapshot of the release before it. One line does not: 90.54 reads the
+90.52 snapshot, the author's trial of one change, so 90.53 is a snapshot off the line and 90.55 continues from 90.54. A separately named testing candidate does not become the live
 builder merely by having a newer version number.
 
 ```bash
-python3 findings/2026-10-10-quiet-gyro-and-guard-handoff/build_candidate.py            # candidates in that folder
-python3 findings/2026-10-10-quiet-gyro-and-guard-handoff/build_candidate.py --install  # writes working JSON
+python3 findings/2026-10-10-steering-entry-and-edge-chords/build_candidate.py            # candidates in that folder
+python3 findings/2026-10-10-steering-entry-and-edge-chords/build_candidate.py --install  # writes working JSON
 ```
 
 The builder runs the fix pipeline (`steam_layout.fixes`). After installation,
@@ -36,6 +37,13 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.55 | [edge-soft-press-timers](../findings/2026-10-11-edge-soft-press-timers/README.md) | From 90.54. The four timers of the Steering stick are Soft Presses on the left stick's edge (13276; A64, A65); the left edge of ten Steering layers cleans up with one inverted chord, at the default radius; no right pad removes in the four Steering modifier layers; up and down in the W and S layers carry no cleanup; A and D in the stick modifiers send only the key; three removes leave each Modifier 2 entry |
+| 90.54 | [hold-timer-on-the-edge](../findings/2026-10-11-hold-timer-on-the-edge/README.md) | From 90.52, not 90.53. One change: in the two Steering stick modifiers the 200 ms chord that adds the Tap Cover moves from up or down to the left stick's edge (A64) |
+| 90.53 | [steering-entry-and-edge-chords](../findings/2026-10-10-steering-entry-and-edge-chords/README.md) | The stick's hold timer and cover timer sit on the drivers, in one shared stick modifier, with the reset left on the stick; in the W and S layers up and down add the stick modifier with one chord on the driver and the deflect, with no cleanup; the left stick's edge of ten Steering layers cleans up with one inverted chord, at the default radius; no right pad removes in the Steering modifier layers; left and right send only A and D |
+| 90.52 | [stick-lifecycle-on-bumper-pattern](../findings/2026-10-10-stick-lifecycle-on-bumper-pattern/README.md) | The Steering stick deflect follows the bumper modifier lifecycle: the hold timer chords on the deflect, a tap ends on the direction's own Release, the window scrolls at 50 ms, and a second deflect has its own scroll layer (90 layers) |
+| 90.51 | [ring-bump-and-modifier-direction](../findings/2026-10-10-ring-bump-and-modifier-direction/README.md) | The two ring pads leave haptics to their binds (override 5); the Steering stick modifiers lose the cleanup on their own direction, under an R130 exception |
+| 90.50 | [click-final-feedback](../findings/2026-10-10-click-final-feedback/README.md) | Pad click feedback moves from the entry adds to the final outputs |
+| 90.49 | [steering-scroll-and-pad-click-fix](../findings/2026-10-10-steering-scroll-and-pad-click-fix/README.md) | Outer ring radius 13276 in the eight Steering scroll groups; a thumb lifting in a Steering window scrolls; one pad click bump |
 | 90.48 | [quiet-gyro-and-guard-handoff](../findings/2026-10-10-quiet-gyro-and-guard-handoff/README.md) | Silent normal/Gyro two-driver hold; Steering adds W/S without redundant Guard removal; atomic Guard handoff retained |
 | 90.47 | [quiet-cursor-and-steering-touch](../findings/2026-10-10-quiet-cursor-and-steering-touch/README.md) | Silent delayed Temp Cursor adds; Steering inherits LST/RST; both touch windows override LS up/down with plain W/S |
 | 90.46 | [ramp-menu-and-driver-chords](../findings/2026-10-10-ramp-menu-and-driver-chords/README.md) | Both menu entries clear all three ramps before opening their contextual menu; Steering/Guard use quiet repeating driver self-chords; Gyro Off Ramp Up owns its driver exits |

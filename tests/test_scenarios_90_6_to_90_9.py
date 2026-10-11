@@ -66,10 +66,10 @@ class SlimSteeringOverlays(ScenarioCase):
     @scenario("90.7 S1", rests=("A16",))
     def test_a_face_button_inside_the_stick_window(self):
         for pad in self.each(start="steering"):
-            pad.hold("R1").flick("LS", "up").wait(50).mark().tap("A")
-            self.assertEqual(pad.typed(), ["F"])                             # once
+            pad.hold("R1").flick("LS", "up").wait(20).mark().tap("A")
+            self.assertEqual([x for x in pad.typed() if not x.startswith("mouse_wheel")], ["F"])   # once
             pad.wait(300)
-            self.assertEqual(pad.typed(), ["F", "mouse_wheel SCROLL_UP"])    # one scroll, about 150 ms after centre
+            self.assertEqual(pad.typed(), ["F", "mouse_wheel SCROLL_UP"])    # one scroll, 50 ms after centre since 90.52
             self.assertEqual(pad.top, DRIVER)                                # nothing left stuck
 
     @scenario("90.7 S2", rests=("A10",))
@@ -136,9 +136,9 @@ class ChordedDelays(ScenarioCase):
             pad.push("LS", "down").wait(300)
             self.assertEqual(pad.top, TAP_COVER)                             # never blocks the next
             pad.mark().roll("LS", "up").wait(100)
-            self.assertEqual(pad.names()[-2:], (MOD0, TAP_COVER))            # reversing does nothing
+            self.assertEqual(pad.names()[-2:], (DRIVER, MOD1))               # since 90.52 reversing ends the hold on down's Release and enters up's map
             pad.recentre("LS").wait(300)
-            self.assertEqual(pad.typed(), [])                                # and centre never scrolls
+            self.assertEqual(pad.typed(), ["mouse_wheel SCROLL_UP"])         # up for 100 ms is a tap of its own since 90.52 (until 90.51 centre never scrolled)
         for pad in self.each(start="steering"):
             pad.hold("R1").push("LS", "up").wait(300).hold("L1").wait(300)   # the other driver takes over: Modifier 2
             self.assertTrue(pad.has("Steering | R1!L1: Modifier 2"))

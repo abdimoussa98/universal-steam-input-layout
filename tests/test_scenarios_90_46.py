@@ -1,7 +1,7 @@
 """90.46: ramp-owned menu exits and repeating Steering driver entries."""
 import unittest
 
-from tests.scenario import ScenarioCase, scenario
+from tests.scenario import ScenarioCase, scenario, old_inverted_chord
 from tests.test_scenarios_90_43 import DRIVERS, GUARD, MODIFIERS, RAMP, home
 from tests.test_scenarios_90_44 import ORDERS, enter_with_drivers
 
@@ -85,6 +85,7 @@ class RepeatingSteeringDrivers(ScenarioCase):
                             self.assertFalse(any(title.startswith('Steering | ') for title in pad.stack))
                             self.assertEqual(pad.down(), [])
 
+    @old_inverted_chord
     @scenario('90.46 E4', rules=('R114', 'R137', 'R171'),
               rests=('A5', 'A6', 'A10', 'A36', 'A53'), either=('A9', 'A32'))
     def test_first_or_carried_direction_stays_protected_until_an_explicit_driver_handoff(self):
@@ -179,6 +180,7 @@ class RampMenuExits(ScenarioCase):
                             pad.lift('RS').wait(450)
                             self.assertEqual(pad.stack, pad.layers(*start))
 
+    @old_inverted_chord
     @scenario('90.46 R3', rules=('R110', 'R114', 'R137', 'R161'),
               rests=('A6', 'A7', 'A36'), either=('A9', 'A32'))
     def test_start_and_stick_click_enter_steering_from_every_ramp_stage_without_residue(self):

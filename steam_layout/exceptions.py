@@ -30,6 +30,7 @@ Scope, by rule:
                                                                           read this register too, so an entry for one build names a layer of that build.
                                                                           `not_where`, optional: exclude layouts that contain this layer
     R140         {"target": "...", "source": "...", "input": "..."}       a route the Window audit allows
+    R130         {"layers": [...], "inputs": ["joystick/dpad_north", ...]}  an input on which the layer may hide the cleanup function below
     R136         {"kind": "touchpad"}                                     the hidden-exit pairs set aside
     R136         {"upper": "...", "lower": "..."}                         a covered side exit that was reviewed
     R169 to R171 {"layers": [...], "inputs": ["joystick/edge", ...]}      an input the layer may leave without a cleanup function
@@ -38,7 +39,7 @@ Scope, by rule:
 
 The audits still read the sections they always read. `expand` fills
 `decisions`, `covers.allow`, `cleanups.keep`, `cleanups.touchpad_exits`,
-`cleanups.accepted_exits`, `cleanups.required` and `review.covers` from the
+`cleanups.accepted_exits`, `cleanups.hidden`, `cleanups.required` and `review.covers` from the
 register, and `window` adds the R140 entries to the Window audit's stacks
 config, so one entry format serves all four. Titles use default-layout names, as everywhere in this file.
 """
@@ -56,7 +57,7 @@ REQUIRED = ("R169", "R170", "R171")                # the required-cleanup rules 
 SCOPES = {"R108": (("layers", "inputs"),),                                                # rule -> the shapes it takes
           "R111": (("layers", "source", "activation", "operations", "settings"),),
           "R139": (("layers", "inputs"), ("kind",)), "R145": (("layers", "inputs"), ("layers", "dormant")),
-          "R144": (("cover", "checks"),), "R132": (("layers", "removes"),), "R140": (("target", "source", "input"),),
+          "R144": (("cover", "checks"),), "R130": (("layers", "inputs"),), "R132": (("layers", "removes"),), "R140": (("target", "source", "input"),),
           "R136": (("kind",), ("upper", "lower")), **{rule: (("layers", "inputs"),) for rule in REQUIRED}}
 
 
@@ -115,6 +116,9 @@ def expand(config):
             config.setdefault("cleanups", {}).setdefault("keep", []).append(
                 {"layers": scope["layers"], "removes": scope["removes"], "why": entry["why"],
                  **{key: scope[key] for key in ("where", "not_where") if key in scope}})
+        elif rule == "R130":
+            config.setdefault("cleanups", {}).setdefault("hidden", []).append(
+                {"layers": scope["layers"], "inputs": scope["inputs"], "why": entry["why"]})
         elif rule == "R136" and scope.get("kind") == "touchpad":
             config.setdefault("cleanups", {})["touchpad_exits"] = entry["why"]
         elif rule == "R136" and "upper" in scope:

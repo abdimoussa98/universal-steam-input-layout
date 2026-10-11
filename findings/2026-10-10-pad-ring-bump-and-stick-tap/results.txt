@@ -1,0 +1,102 @@
+Pad clicks: what asks for a bump, per release (the two layouts agree)
+
+  90.48
+    Base, left_trackpad click add          1
+    Base, right_trackpad click add         1
+    LTP: Middle Click, output              1
+    RTP: Middle Click, output              1
+    LTP: Arrow Keys, D-pad override        Low
+    LTP: Arrow Keys, direction outputs     1
+    RTP: Mouse Buttons, D-pad override     Low
+    RTP: Mouse Buttons, direction outputs  0/1
+  90.49
+    Base, left_trackpad click add          1
+    Base, right_trackpad click add         1
+    LTP: Middle Click, output              0
+    RTP: Middle Click, output              0
+    LTP: Arrow Keys, D-pad override        Off
+    LTP: Arrow Keys, direction outputs     0
+    RTP: Mouse Buttons, D-pad override     Off
+    RTP: Mouse Buttons, direction outputs  0
+  90.50
+    Base, left_trackpad click add          0
+    Base, right_trackpad click add         0
+    LTP: Middle Click, output              1
+    RTP: Middle Click, output              1
+    LTP: Arrow Keys, D-pad override        Off
+    LTP: Arrow Keys, direction outputs     1
+    RTP: Mouse Buttons, D-pad override     Off
+    RTP: Mouse Buttons, direction outputs  1
+
+Stick taps in Steering, a driver held (press simulator, both layouts)
+
+  90.48: 1728 pushes
+     384 of  384 scroll once   the thumb stays on
+     384 of  384 scroll once   the thumb stays on, ring before direction
+       0 of  192 scroll once   the thumb lands, taps and leaves before the stick is back
+       0 of  384 scroll once   a resting thumb taps and leaves before the stick is back
+       0 of  384 scroll once   the thumb leaves after the stick is back
+  90.50: 1728 pushes
+     384 of  384 scroll once   the thumb stays on
+     384 of  384 scroll once   the thumb stays on, ring before direction
+       0 of  192 scroll once   the thumb lands, taps and leaves before the stick is back
+       0 of  384 scroll once   a resting thumb taps and leaves before the stick is back
+     384 of  384 scroll once   the thumb leaves after the stick is back
+  candidate: 1728 pushes
+     384 of  384 scroll once   the thumb stays on
+     384 of  384 scroll once   the thumb stays on, ring before direction
+     192 of  192 scroll once   the thumb lands, taps and leaves before the stick is back
+     384 of  384 scroll once   a resting thumb taps and leaves before the stick is back
+     384 of  384 scroll once   the thumb leaves after the stick is back
+
+  90.50: the right thumb leaves its stick during the push: wheel steps [0]
+  candidate: the right thumb leaves its stick during the push: wheel steps [0]
+
+If the ring's Release is lost when the modifier lands with the ring already out (A8 false), on 90.50:
+  wheel steps of four pushes in a row, the thumb on the stick: [(0, 1, 0, 1)]
+
+If a guard's chord does not start when a removal uncovers it under a held input (A36 false for exposure):
+  90.45: four deflects in a row
+    a thumb resting on the stick             the driver held throughout                     wheel steps (1, 1, 1, 1); the W layer is on after the first one
+    a thumb resting on the stick             the driver let go and pressed again each time  wheel steps (1, 1, 1, 1); the W layer is on after the first one
+    no thumb on a stick as the window closes the driver held throughout                     wheel steps (1, 1, 1, 1); the W layer is on after the first one
+    no thumb on a stick as the window closes the driver let go and pressed again each time  wheel steps (1, 1, 1, 1); the W layer is on after the first one
+  90.46: four deflects in a row
+    a thumb resting on the stick             the driver held throughout                     wheel steps (1, 0, 0, 0); the W layer is gone after the first one
+    a thumb resting on the stick             the driver let go and pressed again each time  wheel steps (1, 1, 1, 1); the W layer is gone after the first one
+    no thumb on a stick as the window closes the driver held throughout                     wheel steps (1, 1, 1, 1); the W layer is on after the first one
+    no thumb on a stick as the window closes the driver let go and pressed again each time  wheel steps (1, 1, 1, 1); the W layer is on after the first one
+  90.50: four deflects in a row
+    a thumb resting on the stick             the driver held throughout                     wheel steps (1, 0, 0, 0); the W layer is gone after the first one
+    a thumb resting on the stick             the driver let go and pressed again each time  wheel steps (1, 1, 1, 1); the W layer is gone after the first one
+    no thumb on a stick as the window closes the driver held throughout                     wheel steps (1, 1, 1, 1); the W layer is on after the first one
+    no thumb on a stick as the window closes the driver let go and pressed again each time  wheel steps (1, 1, 1, 1); the W layer is on after the first one
+  candidate: four deflects in a row
+    a thumb resting on the stick             the driver held throughout                     wheel steps (1, 0, 0, 0); the W layer is gone after the first one
+    a thumb resting on the stick             the driver let go and pressed again each time  wheel steps (1, 1, 1, 1); the W layer is gone after the first one
+    no thumb on a stick as the window closes the driver held throughout                     wheel steps (1, 1, 1, 1); the W layer is on after the first one
+    no thumb on a stick as the window closes the driver let go and pressed again each time  wheel steps (1, 1, 1, 1); the W layer is on after the first one
+  wheel steps of four deflects, a thumb resting, the driver held, per release
+    90.38: as it is [(1, 1, 1, 1)]; with the what-if [(1, 1, 1, 1)]
+    90.40: as it is [(1, 1, 1, 1)]; with the what-if [(1, 1, 1, 1)]
+    90.41: as it is [(1, 1, 1, 1)]; with the what-if [(1, 1, 1, 1)]
+    90.42: as it is [(1, 1, 1, 1)]; with the what-if [(1, 1, 1, 1)]
+    90.43: as it is [(1, 1, 1, 1)]; with the what-if [(1, 1, 1, 1)]
+    90.44: as it is [(1, 1, 1, 1)]; with the what-if [(1, 1, 1, 1)]
+    90.45: as it is [(1, 1, 1, 1)]; with the what-if [(1, 1, 1, 1)]
+    90.46: as it is [(1, 1, 1, 1)]; with the what-if [(1, 0, 0, 0)]
+    90.47: as it is [(1, 1, 1, 1)]; with the what-if [(1, 0, 0, 0)]
+    90.48: as it is [(1, 1, 1, 1)]; with the what-if [(1, 0, 0, 0)]
+    90.49: as it is [(1, 1, 1, 1)]; with the what-if [(1, 0, 0, 0)]
+    90.50: as it is [(1, 1, 1, 1)]; with the what-if [(1, 0, 0, 0)]
+  90.50, outside Steering: thumbs resting, L1 held 300 ms, then A
+    as the simulator has it  A types ['G'], the modifier is on
+    with the what-if         A types [], the modifier is gone; A types [], the modifier is on; A types ['F'], the modifier is gone; A types ['F', 'G'], the modifier is on
+
+Cleanup functions whose only guard is a chord with a start delay (the two layouts agree):
+  90.42: 0
+  90.50: 4
+    Steering | LS: Double Tap Cover, joystick/dpad_north: the guard waits 5 ms
+    Steering | LS: Double Tap Cover, joystick/dpad_south: the guard waits 5 ms
+    Steering | LS Down: Modifier 0, joystick/dpad_south: the guard waits 200 ms
+    Steering | LS Up: Modifier 1, joystick/dpad_north: the guard waits 200 ms

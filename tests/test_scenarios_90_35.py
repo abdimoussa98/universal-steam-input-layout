@@ -16,7 +16,7 @@ unmodified up/down deflection exits Steering directly, tested in 90.42.
 """
 import unittest
 
-from tests.scenario import ScenarioCase, scenario
+from tests.scenario import ScenarioCase, scenario, old_inverted_chord
 
 GUARD = "Steering | LS: Fallback Guard"
 PAD_LAYERS = ("RTP: Entry Point", "RTP: Tap Cover", "RTP: Double Tap", "RTP: Circular Scroll", "RTP: Mouse Buttons")
@@ -29,6 +29,7 @@ def mode(pad):
 
 
 class TheSwap(ScenarioCase):
+    @old_inverted_chord
     @scenario("90.35 S1", rules=("R157",), rests=("A10",), frozen="90.41")
     def test_one_of_the_two_is_on_through_a_whole_round(self):
         for pad in self.each(start="steering"):
@@ -46,6 +47,7 @@ class TheSwap(ScenarioCase):
             pad.lift("LS").wait(200).touch("LS").wait(200).lift("LS").wait(300)              # the touch hands back
             self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
 
+    @old_inverted_chord
     @scenario("90.35 S2", rules=("R133", "R161"), rests=("A6",), frozen="90.41")
     def test_a_bumper_at_centre_hands_back_and_drives_without_waiting_for_an_exposed_bind(self):
         # Steering lands on the held bumper, so its repeating driver bind fires as it lands (A6). In 90.33 and
@@ -58,6 +60,7 @@ class TheSwap(ScenarioCase):
                     self.assertEqual(len([d for _, d in pad.seen("haptic") if d.startswith(f"1 {pad.title(GUARD)}")]), 1)
                     self.assertEqual(pad.seen("beep"), [])                               # a swap, not an entry: no beep
 
+    @old_inverted_chord
     @scenario("90.35 S3", rules=("R169",), rests=("A17", "A36"), frozen="90.41")
     def test_a_fresh_stick_touch_at_centre_hands_back_too(self):
         # The author, 2026-10-06: "it would keep them and they would first add steering back and remove fallback."
@@ -70,6 +73,7 @@ class TheSwap(ScenarioCase):
                 pad.lift(stick).wait(300).hold("R1").wait(60)                            # and it is Steering base again
                 self.assertEqual((pad.top, pad.down()), ("Steering | R1: W Key", ["W"]))
 
+    @old_inverted_chord
     @scenario("90.35 S4", rules=("R158",), rests=("A10",), frozen="90.41")
     def test_the_guard_has_stateful_menus_and_since_90_38_inherits_bases_pad(self):
         for pad in self.each(start=("Base", "Gyro")):
@@ -96,6 +100,7 @@ class TheSwap(ScenarioCase):
             self.assertEqual(pad.stack, pad.layers("Base"))
             self.assertIn(("beep", GUARD), pad.seen("beep"))
 
+    @old_inverted_chord
     @scenario("90.35 S6", rules=("R136",), rests=("A6",), frozen="90.41")
     def test_a_driver_ends_turn_assist_whenever_it_comes(self):
         ramp = ("Gyro Off Ramp Up", "Turning Ramp Up 0", "Turning Ramp Up 1")

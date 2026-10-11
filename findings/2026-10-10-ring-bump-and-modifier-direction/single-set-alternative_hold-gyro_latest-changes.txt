@@ -1,0 +1,37 @@
+Changes from single-set-alternative_hold-gyro_90.50.json to single-set-alternative_hold-gyro_latest.json
+Layers: 88 -> 88 (added: none; removed: none)
+
+== LTP: Arrow Keys
+  left_trackpad: settings
+    before: {"haptic_intensity_override": "0"}
+    after:  {"haptic_intensity_override": "5"}
+  left_trackpad/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(haptic_intensity=0): empty_binding
+
+== RTP: Mouse Buttons
+  right_trackpad: settings
+    before: {"haptic_intensity_override": "0"}
+    after:  {"haptic_intensity_override": "5"}
+  right_trackpad/edge: binding
+    before: Full_Press: empty_binding
+    after:  Full_Press(haptic_intensity=0): empty_binding
+
+== Steering | LS Down: Modifier 0
+  joystick/dpad_south: binding
+    before: Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Steering | LS: Tap Cover
+    before: chord(delay_start=200,gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): add_layer Steering | LS: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Steering | LS: Tap Cover
+    after:  chord(delay_start=200,gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): add_layer Steering | LS: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+
+== Steering | LS Up: Modifier 1
+  joystick/dpad_north: binding
+    before: Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Steering | LS: Tap Cover
+    before: chord(delay_start=200,gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): add_layer Steering | LS: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Steering | LS: Tap Cover
+    after:  chord(delay_start=200,gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): add_layer Steering | LS: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+
+4 layers changed, 6 changes
+

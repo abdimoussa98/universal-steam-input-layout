@@ -15,7 +15,7 @@ E1 continues to check the working Steering layout.
 """
 import unittest
 
-from tests.scenario import ScenarioCase, scenario
+from tests.scenario import ScenarioCase, scenario, old_inverted_chord
 
 GUARD = "Steering | LS: Fallback Guard"
 RAMP = ("Gyro Off Ramp Up", "Turning Ramp Up 0", "Turning Ramp Up 1")
@@ -49,6 +49,7 @@ class OpenEdges(ScenarioCase):
             self.assertEqual((pad.top, pad.down()), (GUARD, ["W"]))
             self.assertTrue(pad.lacks(*RAMP))
 
+    @old_inverted_chord
     @scenario("90.34 E3", rules=("R136",), rests=("A10", "A36"), frozen="90.41")
     def test_the_guard_can_land_over_a_ramp_stage_and_everything_unwinds(self):
         # Firing while the right stick is at the rim, then the left stick goes up: the guard lands on the ramp stage.

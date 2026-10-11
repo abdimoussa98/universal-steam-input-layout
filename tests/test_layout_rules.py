@@ -75,7 +75,10 @@ class LayoutRules(unittest.TestCase):
             for layer, source, name in sorted(inputs):
                 stored = list(layout.active(layer)[source]["inputs"][name]["activators"])
                 with self.subTest(variant, layer=layer, input=f"{source}/{name}"):
-                    self.assertEqual(stored, [kind for kind in ("Full_Press", "chord", "release") if kind in stored])
+                    # Since 90.55 the left stick's edge of the four Steering timer layers also holds the timer,
+                    # a Soft Press, stored after the cleanup.
+                    order = ("Full_Press", "chord", "release", "Soft_Press")
+                    self.assertEqual(stored, [kind for kind in order if kind in stored])
 
     def test_every_value_is_one_the_editor_can_set(self):                                   # R173
         # resources/Steam Input JSON Structure.md, "Limits the Steam editor sets": at most 1000 ms; a D-pad outer

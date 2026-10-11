@@ -1,7 +1,7 @@
 """90.43 entry protection, driver ownership during recovery, and layer beeps."""
 import unittest
 
-from tests.scenario import DIRECTIONS, ScenarioCase, scenario
+from tests.scenario import DIRECTIONS, ScenarioCase, scenario, old_inverted_chord
 
 GUARD = 'Steering | LS: Entry Guard'
 DRIVERS = {'R1': 'Steering | R1: W Key', 'L1': 'Steering | L1: S Key'}
@@ -46,6 +46,7 @@ class SteeringEntryProtection(ScenarioCase):
                     self.assertEqual(pad.seen('haptic', 'beep'), [])
                     self.assertEqual(pad.has('Gyro'), gyro)
 
+    @old_inverted_chord
     @scenario('90.43 E2', rules=('R137', 'R169', 'R170'), rests=('A7', 'A8', 'A10'))
     def test_centered_entry_and_resting_thumbs_preserve_the_first_push(self):
         for gyro in (False, True):
@@ -61,6 +62,7 @@ class SteeringEntryProtection(ScenarioCase):
                     pad.recentre('LS')
                     self.assertTrue(pad.has('Steering') and pad.lacks(GUARD))
 
+    @old_inverted_chord
     @scenario('90.43 E3', rules=('R137',), rests=('A7', 'A8', 'A10'))
     def test_a_shallow_direction_release_disarms_without_an_outer_edge(self):
         for direction, key in (('up', 'W'), ('down', 'S'), ('left', 'A'), ('right', 'D')):
@@ -90,6 +92,7 @@ class SteeringEntryProtection(ScenarioCase):
                 self.assertIn('W', pad.down())
                 self.assertEqual(pad.seen('beep'), [('beep', 'Steering')])
 
+    @old_inverted_chord
     @scenario('90.43 E5', rules=('R137', 'R171'), rests=('A4', 'A6', 'A36'), either=('A9',))
     def test_fresh_or_carried_drivers_remove_the_guard_before_driving(self):
         for driver, layer in DRIVERS.items():
@@ -106,6 +109,7 @@ class SteeringEntryProtection(ScenarioCase):
                                     changes.index(('add', pad.title(layer))))
                     self.assertEqual(pad.has('Steering | LS Up: Modifier 1'), not carried)
 
+    @old_inverted_chord
     @scenario('90.43 E6', rules=('R137', 'R171'), rests=('A4', 'A16', 'A36'))
     def test_fresh_menu_handoffs_preserve_fn_feedback(self):
         for menu, side in (('Start', 'Right'), ('Select', 'Left')):
@@ -131,6 +135,7 @@ class SteeringEntryProtection(ScenarioCase):
                         self.assertEqual(pad.stack, pad.layers(*home(gyro)))
                         self.assertEqual(pad.seen('beep'), [('beep', 'Transition Set 2')])
 
+    @old_inverted_chord
     @scenario('90.43 E8', rules=('R137',), rests=('A5', 'A7', 'A36'))
     def test_a_carried_opposite_menu_does_not_consume_first_push_protection(self):
         for gyro, pad in both_home_states(self):
@@ -142,6 +147,7 @@ class SteeringEntryProtection(ScenarioCase):
             self.assertTrue(pad.has('Stateful | Menu Left: Fn Layer'))
             self.assertEqual(pad.seen('beep'), [])
 
+    @old_inverted_chord
     @scenario('90.43 E9', rules=('R137',), rests=('A6', 'A7', 'A8', 'A10'))
     def test_pad_and_ramp_inputs_do_not_hide_the_protected_release(self):
         for gyro in (False, True):
@@ -157,6 +163,7 @@ class SteeringEntryProtection(ScenarioCase):
                 pad.let_go('RP click', 'LP click').lift('RP').lift('LP').lift('RS').lift('LS').wait(500)
                 self.assertEqual(pad.stack, pad.layers(*home(gyro), 'Steering'))
 
+    @old_inverted_chord
     @scenario('90.43 E10', rules=('R137',), rests=('A7', 'A10'))
     def test_left_pad_swipes_keep_plain_keys_without_helpers(self):
         for direction, key in (('left', 'ESCAPE'), ('right', 'RETURN'), ('up', 'TAB'), ('down', 'BACKSPACE')):
@@ -166,6 +173,7 @@ class SteeringEntryProtection(ScenarioCase):
                 self.assertTrue(pad.has(GUARD))
                 self.assertEqual(pad.stack, pad.layers(*home(gyro), 'Steering', GUARD))
 
+    @old_inverted_chord
     @scenario('90.43 E11', rules=('R137', 'R169', 'R170', 'R171'), rests=('A25',), either=('A9',))
     def test_a_missed_movement_release_recovers_on_a_real_release_or_handoff(self):
         for recovery in ('direction', 'driver', 'menu'):
@@ -200,17 +208,18 @@ class SteeringModifierRecovery(ScenarioCase):
     @scenario('90.43 D1', rules=('R133', 'R170'), rests=('A6', 'A17', 'A36', 'A53'), either=('A9', 'A32'))
     def test_camera_recovery_keeps_the_held_driver_through_the_old_fifty_ms_gap(self):
         # The first push is below the outer edge; binary inputs cannot verify
-        # real radial thresholds. It leaves the modifier until RS recovery.
+        # real radial thresholds. Until 90.51 it left the modifier until RS recovery.
+        # Since 90.52 the direction's own Release ends it, so no modifier is left.
         for driver, owner in DRIVERS.items():
             for direction, modifier in MODIFIERS.items():
                 for gap in (0, 49, 50):
                     for gyro, pad in both_armed_states(self):
                         control = 'LS ' + DIRECTIONS[direction]
                         pad.hold(driver).touch('LS').hold(control).wait(30).let_go(control)
-                        self.assertTrue(pad.has(owner, modifier))
+                        self.assertTrue(pad.has(owner) and pad.lacks(modifier))
                         pad.mark().push('RS').wait(gap)
                         self.assertTrue(pad.has(owner) and pad.lacks(modifier))
-                        pad.hold(control).wait(300)
+                        pad.wait(200).hold(control).wait(300)                # past the window: a fresh hold, not a second deflect
                         self.assertTrue(pad.has('Steering', owner, modifier))
                         self.assertNotIn(('remove', pad.title(owner)), pad.seen('remove'))
                         self.assertEqual(pad.seen('beep'), [])
@@ -231,7 +240,9 @@ class SteeringModifierRecovery(ScenarioCase):
             for direction, modifier in MODIFIERS.items():
                 for gyro, pad in both_armed_states(self):
                     control = 'LS ' + DIRECTIONS[direction]
-                    pad.hold(driver).touch('LS').hold(control).wait(30).let_go(control).miss(driver)
+                    # Since 90.52 the partial push opens the window, which blocks the right stick's edge for
+                    # 150 ms; the stale driver's cleanup fires on a push after it.
+                    pad.hold(driver).touch('LS').hold(control).wait(30).let_go(control).miss(driver).wait(200)
                     pad.push('RS').wait(200)
                     self.assertTrue(pad.has('Steering') and pad.lacks(owner, modifier, 'Steering | LS: Tap Cover'))
                     self.assertEqual(pad.seen('beep'), [])

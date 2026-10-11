@@ -26,7 +26,7 @@ class SteeringEntryAndFeedback(unittest.TestCase):
     def test_guard_reuses_the_slot_and_copies_the_four_way_movement_settings(self):
         for variant, data, layout in self.each():
             with self.subTest(variant=variant):
-                self.assertEqual(len(layout.cm['action_layers']), 88)
+                self.assertEqual(len(layout.cm['action_layers']), 90)    # 88 until the two stick scroll layers of 90.52
                 self.assertEqual(layout.resolve('65'), GUARD)
                 self.assertNotIn(OLD_GUARD, json.dumps(data))
                 group = layout.active(GUARD)['joystick']

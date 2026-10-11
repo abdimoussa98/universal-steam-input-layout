@@ -77,12 +77,15 @@ class SteeringRtp(ScenarioCase):
 
     @scenario('90.38 D2', rules=('R123',), rests=('A13', 'A16'))
     def test_directional_hold_completes_before_rtp_cleanup(self):
+        # Since 90.53 the hold removes no right pad layer at all (author, 2026-10-10: no right pad clears in
+        # the Steering modifier layers), so there is no cleanup for the add to come before.
         for direction in ('up', 'down'):
             for pad in self.each(start='steering'):
                 pad.touch('RP').wait(170).hold('R1').push('LS', direction).wait(199).mark().wait(1)
-                self.assertTrue(pad.has('Steering | LS: Tap Cover'))
+                self.assertTrue(pad.has('Steering | LS: Tap Cover', 'RTP: Entry Point'))
                 changes = [(event, detail) for _, event, detail in pad.sim.log[pad._mark:] if event in ('add', 'remove')]
-                self.assertLess(changes.index(('add', 'Steering | LS: Tap Cover')), changes.index(('remove', 'RTP: Entry Point')))
+                self.assertIn(('add', 'Steering | LS: Tap Cover'), changes)
+                self.assertNotIn(('remove', 'RTP: Entry Point'), changes)
 
     @scenario('90.38 S1', rests=('A6', 'A53'))
     def test_full_direction_exits_steering_once_with_a_low_pulse(self):

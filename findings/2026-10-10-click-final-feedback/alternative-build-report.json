@@ -1,0 +1,121 @@
+{
+  "changed": [
+    [
+      "Base",
+      "left_trackpad",
+      "click",
+      "entry off"
+    ],
+    [
+      "Base",
+      "right_trackpad",
+      "click",
+      "entry off"
+    ],
+    [
+      "RTP: Circular Scroll",
+      "right_trackpad",
+      "click",
+      "entry off"
+    ],
+    [
+      "LTP: Middle Click",
+      "left_trackpad",
+      "click",
+      "final on"
+    ],
+    [
+      "RTP: Middle Click",
+      "right_trackpad",
+      "click",
+      "final on"
+    ],
+    [
+      "LTP: Arrow Keys",
+      "left_trackpad",
+      "dpad_north",
+      "final on"
+    ],
+    [
+      "LTP: Arrow Keys",
+      "left_trackpad",
+      "dpad_south",
+      "final on"
+    ],
+    [
+      "LTP: Arrow Keys",
+      "left_trackpad",
+      "dpad_east",
+      "final on"
+    ],
+    [
+      "LTP: Arrow Keys",
+      "left_trackpad",
+      "dpad_west",
+      "final on"
+    ],
+    [
+      "RTP: Mouse Buttons",
+      "right_trackpad",
+      "dpad_north",
+      "final on"
+    ],
+    [
+      "RTP: Mouse Buttons",
+      "right_trackpad",
+      "dpad_south",
+      "final on"
+    ],
+    [
+      "RTP: Mouse Buttons",
+      "right_trackpad",
+      "dpad_east",
+      "final on"
+    ],
+    [
+      "RTP: Mouse Buttons",
+      "right_trackpad",
+      "dpad_west",
+      "final on"
+    ]
+  ],
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 548,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  }
+}

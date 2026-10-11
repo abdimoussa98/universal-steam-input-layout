@@ -19,7 +19,13 @@ whether the backward chains (chains.py) follow it:
 These roles are not followed, and are listed with their reason:
 
     reset         a repeating removal of the same input's delayed-add target
-    recovery      an interruptible repeating removal (guarded or stale-state)
+    relay         a held driver's key carried up into a layer above its own, on a Regular
+                  Press that also repeats the entry of the layer underneath (the other
+                  driver's way into Modifier 2). The held driver never runs it (A5); a
+                  fresh press gives the stack the layer underneath gives by itself
+    recovery      an interruptible repeating removal (guarded or stale-state), or a
+                  repeating removal on a chord with Invert Activation, which runs
+                  while no chord button is held and so carries its own guard
     legacy-hold   a hold_layer command (migration work, not modelled)
     mode-shift    a mode shift whose shifted group changes layers (unsupported)
 
@@ -53,6 +59,8 @@ BITS = {3: [("switch", "left_bumper")], 2: [("switch", "right_bumper")],
 FOLLOWED = ("entry", "second-press", "hold", "release", "expiry", "removal", "cancel", "center")
 DIRECTIONS = ("dpad_north", "dpad_east", "dpad_south", "dpad_west")
 ALWAYS_ON = ("switch", "always_on_action")
+# The layers whose inverted chord is their own exit, registered as such (R111, R170): it stays a "cancel".
+INVERTED_EXITS = frozenset({"Steering | LS: Entry Guard"})
 
 
 @dataclass(frozen=True)
@@ -144,10 +152,43 @@ def _shift_changes_layers(layout, gid):
                for _, e in entries(value.get("activators", {})) for b in actions(e))
 
 
+def _relays(layout, title, source, name, listed):
+    """True if this input carries a driver's key up from a layer underneath: its Regular Press sends the key
+    that a layer this input's Release removes sends on the same input, and adds layers beside it."""
+    press = [e for kind, e in listed if kind == "Full_Press"]
+    if len(press) != 1 or not any(kind == "release" for kind, _ in listed):
+        return False
+    keys = [a for a in actions(press[0]) if a.startswith("key_press ")]
+    if len(keys) != 1 or not any(op == "add_layer" for op, _ in layout.layer_ops(press[0])):
+        return False
+    below = {t for kind, e in listed if kind == "release" for op, t in layout.layer_ops(e)
+             if op == "remove_layer" and t != title and t in layout.presets}
+    for lower in below:
+        found = layout.active(lower).get(source, {}).get("inputs", {}).get(name, {}).get("activators", {})
+        if isinstance(found.get("Full_Press"), dict) and actions(found["Full_Press"]) == keys:
+            return True
+    return False
+
+
 def layer_transitions(layout, title, windows=None):
     """Every layer-changing entry of `title`, classified."""
     windows = set(always_on_layers(layout)) if windows is None else windows
     result = []
+    # A delayed add chorded on a stick's deflect may sit on another input, the held driver (a start delay
+    # owned by a stick direction misfires, author 2026-10-10). Its reset stays on that stick's directions.
+    # The same for a delayed add on the stick's own edge (90.54, and a Soft Press there since 90.55).
+    deflected = {}
+    for source, group in layout.active(title).items():
+        for name, value in group.get("inputs", {}).items():
+            for kind, e in entries(value.get("activators", {})):
+                if name == "edge" and _delay(e.get("settings", {})):
+                    deflected.setdefault(source, set()).update(
+                        t for op, t in layout.layer_ops(e) if op == "add_layer")
+                condition = chord_condition(e.get("settings", {})) if kind == "chord" and _delay(e.get("settings", {})) else None
+                if condition and condition.known:
+                    for stick in {c[0] for c in condition.controls() if c[1] in DIRECTIONS}:
+                        deflected.setdefault(stick, set()).update(
+                            t for op, t in layout.layer_ops(e) if op == "add_layer")
     for source, group in layout.active(title).items():
         if group["mode"] == "disabled":
             continue
@@ -155,6 +196,8 @@ def layer_transitions(layout, title, windows=None):
             listed = list(entries(value.get("activators", {})))
             delayed_targets = {t for kind, e in listed if _delay(e.get("settings", {}))
                                for op, t in layout.layer_ops(e) if op == "add_layer"}
+            if name in DIRECTIONS:
+                delayed_targets |= deflected.get(source, set())
             has_chord = any(kind == "chord" for kind, _ in listed)
             for index, (kind, entry) in enumerate(listed):
                 settings = entry.get("settings", {})
@@ -166,6 +209,8 @@ def layer_transitions(layout, title, windows=None):
                 centered = name == "edge" and group.get("settings", {}).get("edge_binding_invert") == "1"
                 role, reason, event = _classify(title, source, name, kind, settings, ops, delayed_targets,
                                                 has_chord, windows, centered)
+                if kind == "Full_Press" and role == "entry" and _relays(layout, title, source, name, listed):
+                    role, reason = "relay", "a held driver's key with the entry of the layer underneath (A5)"
                 if not ops:
                     role, reason, event = "mode-shift", "mode-shift lookup is not modelled yet", "press"
                 result.append(Transition(
@@ -195,6 +240,10 @@ def _classify(title, source, name, kind, settings, ops, delayed_targets, has_cho
             return "reset", "interrupted-delay reset of this input's delayed add", "press"
         if centered and not has_chord:
             return "center", "stick returns to center (inverted edge)", "press"
+        if kind == "chord" and settings.get("edge_binding_invert") == "1" and title not in INVERTED_EXITS:
+            # Invert Activation on a chord: it runs while its input is released and no chord button
+            # is held, so it is a cleanup function that carries its own guard (author, 2026-10-10).
+            return "recovery", "inverted chord (runs while no chord button is held)", "press"
         if settings.get("interruptable") != "0":
             guard = "guarded recovery (a satisfied chord suppresses it)" if has_chord \
                 else "stale-state recovery (repeating, interruptible)"

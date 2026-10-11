@@ -199,13 +199,13 @@ class Steering(ScenarioCase):
             self.assertEqual(pad.typed(), ["TAB", "ESCAPE"])                 # plain keys with a driver held
 
     @scenario("90.10 D3", rests=("A8",), either=("A9",))
-    def test_the_stick_modifier_holds_through_a_roll_to_the_side(self):
+    def test_the_stick_modifier_ends_on_a_roll_to_the_side(self):
         for pad in self.each(start="steering"):
             pad.hold("R1").push("LS", "up").wait(60)
             self.assertEqual(pad.top, MOD1)                                  # the R1 modifier map
             pad.roll("LS", "left").wait(500)
-            self.assertTrue(pad.has(MOD1))
-            self.assertEqual(pad.down(), ["A", "W"])                         # A steers, the map stays
+            self.assertTrue(pad.lacks(MOD1))                                 # since 90.52 the map ends as up lets go (until 90.51 it stayed
+            self.assertEqual(pad.down(), ["A", "W"])                         # until the ring came back). A steers either way
             pad.mark().recentre("LS").wait(300)
             self.assertEqual((pad.top, pad.typed()), ("Steering | R1: W Key", []))
         for pad in self.each(start="steering"):
@@ -228,10 +228,12 @@ class Steering(ScenarioCase):
     @scenario("90.10 D5", rules=("R146", "R147", "R148"), rests=("A16",))
     def test_the_stick_double_tap(self):
         for pad in self.each(start="steering"):
-            pad.hold("R1").mark().flick("LS", "up").wait(149)
+            pad.hold("R1").mark().flick("LS", "up").wait(49)
             self.assertEqual((pad.top, pad.typed()), (WINDOW, []))
             pad.wait(1)
-            self.assertEqual(pad.typed(), ["mouse_wheel SCROLL_UP"])         # one scroll, 150 ms after centre
+            self.assertEqual(pad.typed(), ["mouse_wheel SCROLL_UP"])         # one scroll, 50 ms after centre since 90.52 (150 before)
+            pad.wait(100)
+            self.assertEqual((pad.top, pad.typed()), ("Steering | R1: W Key", ["mouse_wheel SCROLL_UP"]))   # the window closes at 150 ms
         for pad in self.each(start="steering"):
             pad.hold("R1").flick("LS", "up").wait(50).mark().push("LS", "up").wait(600)
             self.assertGreater(pad.typed().count("mouse_wheel SCROLL_UP"), 3)        # flick, then flick and hold: it repeats
@@ -242,10 +244,10 @@ class Steering(ScenarioCase):
             self.assertTrue(pad.has(MOD0))                                   # down inside 150 ms: the down map
             self.assertEqual(pad.typed(), [])                                # and no scroll
         for pad in self.each(start="steering"):
-            pad.hold("R1").flick("LS", "up").wait(50).mark().push("LS", "left")
+            pad.hold("R1").flick("LS", "up").wait(20).mark().push("LS", "left")
             self.assertEqual(pad.typed(), ["A"])                             # sideways: A at once
             pad.wait(100)
-            self.assertEqual(pad.typed(), ["A", "mouse_wheel SCROLL_UP"])    # and the scroll still lands at 150 ms
+            self.assertEqual(pad.typed(), ["A", "mouse_wheel SCROLL_UP"])    # and the scroll still lands, at 50 ms since 90.52
 
     @scenario("90.10 D6", rests=("A10", "A11", "A37"))
     def test_w_carries_on_through_the_window_and_after_it(self):

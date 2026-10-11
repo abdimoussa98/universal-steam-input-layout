@@ -19,7 +19,7 @@ The ordinary Steering Modifier 2 cleanup remains live and retains Steering since
 """
 import unittest
 
-from tests.scenario import ScenarioCase, scenario
+from tests.scenario import ScenarioCase, scenario, old_inverted_chord
 
 GUARD = "Steering | LS: Fallback Guard"
 BOTH = (("up", "W"), ("down", "S"))
@@ -34,6 +34,7 @@ def pulses(pad):
 
 
 class TheStickBringsItIn(ScenarioCase):
+    @old_inverted_chord
     @scenario("90.33 G1", rules=("R161",), rests=("A10",), frozen="90.41")
     def test_up_or_down_brings_the_guard_in_at_once_with_a_low_pulse(self):
         """Changed in 90.34: the add is a repeating press and comes at once. 90.33 had July's 100 ms delay."""
@@ -46,6 +47,7 @@ class TheStickBringsItIn(ScenarioCase):
                 self.assertEqual((pad.top, pad.down(), pulses(pad)), (GUARD, [key], []))       # no timer, no second pulse
                 self.assertTrue(pad.lacks("Steering"))                                         # since 90.35 they swap
 
+    @old_inverted_chord
     @scenario("90.33 G2", rules=("R137",), frozen="90.41")
     def test_letting_the_stick_go_leaves_the_guard_on_and_the_next_push_types_at_once(self):
         # The author, 2026-10-05: "pushing the stick will get you into the fallback layer, but releasing it won't."
@@ -89,6 +91,7 @@ class TheStickBringsItIn(ScenarioCase):
             pad.hold("R1").wait(100)                                                    # the bumper is a driver there
             self.assertTrue(pad.has("Steering | R1: W Key") and pad.lacks("Gyro | R1: Modifier 1"))
 
+    @old_inverted_chord
     @scenario("90.33 G5", rules=("R109",), rests=("A21",), frozen="90.41")
     def test_the_guard_and_its_bumpers_on_the_desktop_configuration(self):
         # The desktop configuration keeps three entries on an input. Steering's up and down have two, and the
@@ -126,6 +129,7 @@ class TheBumpersInTheGuard(ScenarioCase):
             pad.push("LS", "up").wait(300).roll("LS", "left").wait(100).hold("R1").wait(100)
             self.assertEqual((pad.top, pad.down()), ("Gyro | R1: Modifier 1", ["A"]))
 
+    @old_inverted_chord
     @scenario("90.33 B3", rules=("R133", "R171", "R161"), either=("A9",), frozen="90.41")
     def test_at_centre_a_bumper_ends_the_guard_with_a_pulse_and_drives(self):
         # The author, 2026-10-05: "the bumpers themselves will release the fallback guard if you're going into
@@ -139,6 +143,7 @@ class TheBumpersInTheGuard(ScenarioCase):
                 pad.let_go(driver).wait(300)
                 self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
 
+    @old_inverted_chord
     @scenario("90.33 B4", rules=("R120",), rests=("A14",), frozen="90.41")
     def test_letting_the_driver_go_with_the_stick_up_pushes_back_into_the_guard(self):
         # The author, 2026-10-05: "if you let go of either bumper and you go all the way back to the base, the
@@ -168,6 +173,7 @@ class TheBumpersInTheGuard(ScenarioCase):
 
 
 class LeavingFromTheGuard(ScenarioCase):
+    @old_inverted_chord
     @scenario("90.33 L1", rules=("R157", "R161", "R132"), rests=("A49",), frozen="90.41")
     def test_the_quick_tap_of_both_bumpers_clears_to_base_with_gyro_on_or_off(self):
         # The author, 2026-10-04: "whether you are in the fallback layer or are in the steering ones if you press
@@ -192,6 +198,7 @@ class LeavingFromTheGuard(ScenarioCase):
             self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
             self.assertEqual(pad.seen("beep", "haptic"), [])
 
+    @old_inverted_chord
     @scenario("90.33 L3", rules=("R158", "R161"), frozen="90.41")
     def test_a_menu_button_and_a_stick_click_clear_steering_and_the_guard_and_keep_gyro(self):
         # The author, 2026-10-04: "stick & menu buttons to clean just your stateful layer."
@@ -223,6 +230,7 @@ class LeavingFromTheGuard(ScenarioCase):
 
 
 class TheGuardsCleanup(ScenarioCase):
+    @old_inverted_chord
     @scenario("90.33 C1", rules=("R169", "R133"), rests=("A17", "A36"), frozen="90.41")
     def test_a_fresh_stick_touch_at_centre_removes_the_guard_and_one_with_the_stick_out_does_not(self):
         for pad in self.each(start="steering"):

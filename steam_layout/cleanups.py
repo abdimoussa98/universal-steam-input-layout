@@ -131,6 +131,7 @@ class Cleanups:
                 break
             self.stateful.update(found)
         self._keeper = {}
+        self.accepted_hidden = set()         # (layer, source, input) the register lets hide a cleanup below (R130)
         self._present, self._above = (stacks._present, stacks._above) if stacks else ({}, {})
 
     # --- reading -------------------------------------------------------------------------
@@ -295,7 +296,8 @@ class Cleanups:
         result = []
         for target in sorted(self.above(host) - set(self.omitted)):
             if self.leaves_alone(target, host, t.source, t.input) or target in self.windows \
-                    or not self.same_interaction(target, guard, host):
+                    or not self.same_interaction(target, guard, host) \
+                    or (target, t.source, t.input) in self.accepted_hidden:
                 continue
             mine = [x for x in self.inv.by_layer(target) if x.control == t.control]
             if name(t.control) in self.keeper(target)[1] or any(x.role in ("recovery", "cancel") for x in mine):
@@ -465,6 +467,13 @@ def kept(config, variant, layers=None):
     return result
 
 
+def hidden(config, variant):
+    """{(layer, source, input)} from the config's `cleanups.hidden`, which the exceptions register fills (R130)."""
+    mapping = config.get("variants", {}).get(variant, {})
+    return {(map_title(layer, mapping), *where.split("/")) for decision in config.get("cleanups", {}).get("hidden", [])
+            for layer in decision["layers"] for where in decision["inputs"]}
+
+
 def audit(data, config=None, only=None, changed=None, extras=DEFAULT_EXTRAS, memory=None, progress=None):
     """The Cleanup audit's report for one layout: findings, kept removals, stale decisions."""
     return run(data, config, only, changed=changed, extras=extras, memory=memory, progress=progress)[0]
@@ -481,6 +490,7 @@ def run(data, config=None, only=None, stacks=None, changed=None, extras=DEFAULT_
     config = config or {}
     variant = "alternative" if "alternative" in layout.cm.get("title", "") else "default"
     cleanups = Cleanups(layout, stacks)
+    cleanups.accepted_hidden = hidden(config, variant)
     decided = kept(config, variant, set(layout.presets))
     used, findings, keeping = set(), [], []
     for (check, layer, target, role, reason), row in cleanups.findings(only).items():

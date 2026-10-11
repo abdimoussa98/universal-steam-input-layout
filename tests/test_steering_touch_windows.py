@@ -74,7 +74,7 @@ class SteeringTouchWindowContracts(unittest.TestCase):
                 for source in ('joystick', 'right_joystick'):
                     expected = copy.deepcopy(old.active('Steering')[source])
                     expected['inputs'].pop('touch')
-                    self.assertEqual(current.active('Steering')[source], expected)
+                    self.assertEqual(self.without_scroll_layers(current, current.active('Steering')[source]), expected)
                 self.assertEqual(current.active('Steering | LS: Entry Guard'),
                                  old.active('Steering | LS: Entry Guard'))
                 for window in WINDOWS:
@@ -87,6 +87,21 @@ class SteeringTouchWindowContracts(unittest.TestCase):
                         self.assertFalse(replacement.get('disabled_activators'))
                         expected['joystick']['inputs'][direction] = copy.deepcopy(replacement)
                     self.assertEqual(current.active(window), expected)
+
+    @staticmethod
+    def without_scroll_layers(layout, group):
+        """The group without the removals of the two stick scroll layers, which Steering's exit has had since 90.52."""
+        new = {str(layout.order.index(layout.presets[title]['name']) + 1)
+               for title in ('Steering | LS Up: Scroll Up', 'Steering | LS Down: Scroll Down')}
+        group = copy.deepcopy(group)
+        for item in group['inputs'].values():
+            for value in item.get('activators', {}).values():
+                for one in value if isinstance(value, list) else [value]:
+                    binding = one['bindings']['binding']
+                    if isinstance(binding, list):
+                        one['bindings']['binding'] = [b for b in binding if not (
+                            b.startswith('controller_action remove_layer ') and b.split()[2] in new)]
+        return group
 
     def test_window_audit_covers_steering_clears_with_and_without_gyro(self):
         for variant in VARIANTS:

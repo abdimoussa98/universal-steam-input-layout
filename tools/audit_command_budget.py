@@ -38,7 +38,7 @@ from pathlib import Path
 import sys
 
 from steam_layout import exceptions
-from steam_layout.model import TARGET, TOKEN
+from steam_layout.model import TARGET, TOKEN, map_title
 from steam_layout.rules import tag
 
 MAX_COMMANDS = 3
@@ -108,15 +108,22 @@ def native_exceptions(entries=None):
 
 def allowed_inverted(entry, owners, data):
     """Exact, registered R111 exceptions; shared groups must qualify in every owner."""
-    candidates = [row for row in exceptions.of(exceptions.load(), 'R111')
-                  if row['status'] == 'allow' and owners
-                  and all(o['title'] in row['scope']['layers']
-                          and o['source_state'] == row['scope']['source'] + ' active' for o in owners)]
-    if not candidates:
+    if not owners:
         return False
     cm = data['controller_mappings']
     titles = [v['title'] for section in ('actions', 'action_layers') for v in cm[section].values()]
     variant = 'alternative' if 'alternative' in cm.get('title', '') else 'default'
+    # The register names layers by their default-layout titles; the alternative renames the drivers.
+    mapping = json.loads(exceptions.REGISTER.read_text(encoding='utf-8')).get('variants', {}).get(variant, {})
+    candidates = [{**row, 'scope': {**row['scope'],
+                                    'layers': [map_title(t, mapping) for t in row['scope']['layers']],
+                                    'operations': [[op, map_title(t, mapping)] for op, t in row['scope']['operations']]}}
+                  for row in exceptions.of(exceptions.load(), 'R111') if row['status'] == 'allow']
+    candidates = [row for row in candidates
+                  if all(o['title'] in row['scope']['layers']
+                         and o['source_state'] == row['scope']['source'] + ' active' for o in owners)]
+    if not candidates:
+        return False
     ops = []
     flags = []
     for action in entry['actions']:

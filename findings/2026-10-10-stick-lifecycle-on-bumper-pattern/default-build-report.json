@@ -1,0 +1,108 @@
+{
+  "changed": {
+    "modifiers": [
+      "Steering | LS Up: Modifier 1",
+      "Steering | LS Down: Modifier 0"
+    ],
+    "marker": [
+      "Steering | LS: Tap Cover"
+    ],
+    "windows": [
+      "Steering | LS Up: Double Tap",
+      "Steering | LS Down: Double Tap"
+    ],
+    "cover": [
+      "Steering | LS: Double Tap Cover"
+    ],
+    "scroll layers": [
+      "Steering | LS Up: Scroll Up",
+      "Steering | LS Down: Scroll Down"
+    ],
+    "removal lists": [
+      "Menu Left: Entry Point joystick/click release",
+      "Menu Left: Entry Point right_joystick/click release",
+      "Menu Right: Entry Point joystick/click release",
+      "Menu Right: Entry Point right_joystick/click release",
+      "Steering | R1!L1: Modifier 2 switch/left_bumper release",
+      "Steering | L1!R1: Modifier 2 switch/right_bumper release",
+      "Steering | R1: W Key switch/button_menu Full_Press",
+      "Steering | R1: W Key switch/button_escape Full_Press",
+      "Steering | R1: W Key switch/right_bumper release",
+      "Steering | R1: W Key switch/left_bumper Full_Press",
+      "Steering | R1: W Key switch/left_bumper chord",
+      "Steering | R1: W Key switch/left_bumper release",
+      "Steering | R1: W Key joystick/dpad_north Full_Press",
+      "Steering | R1: W Key joystick/dpad_south Full_Press",
+      "Steering | R1: W Key joystick/edge Full_Press",
+      "Steering | R1: W Key joystick/touch Full_Press",
+      "Steering | R1: W Key right_joystick/touch Full_Press",
+      "Steering | R1: W Key right_joystick/edge Full_Press",
+      "Steering | L1: S Key switch/button_menu Full_Press",
+      "Steering | L1: S Key switch/button_escape Full_Press",
+      "Steering | L1: S Key switch/right_bumper Full_Press",
+      "Steering | L1: S Key switch/right_bumper chord",
+      "Steering | L1: S Key switch/right_bumper release",
+      "Steering | L1: S Key switch/left_bumper release",
+      "Steering | L1: S Key joystick/dpad_north Full_Press",
+      "Steering | L1: S Key joystick/dpad_south Full_Press",
+      "Steering | L1: S Key joystick/edge Full_Press",
+      "Steering | L1: S Key joystick/touch Full_Press",
+      "Steering | L1: S Key right_joystick/touch Full_Press",
+      "Steering | L1: S Key right_joystick/edge Full_Press",
+      "Steering joystick/dpad_north Soft_Press",
+      "Steering joystick/dpad_south Soft_Press",
+      "Stateful | Menu Left: Entry Point joystick/click release",
+      "Stateful | Menu Left: Entry Point right_joystick/click release",
+      "Stateful | Menu Right: Entry Point joystick/click release",
+      "Stateful | Menu Right: Entry Point right_joystick/click release",
+      "Gamepad joystick/click chord",
+      "Gamepad right_joystick/click chord",
+      "Menu Left!Right: Entry Point switch/button_escape chord",
+      "Menu Right!Left: Entry Point switch/button_menu chord",
+      "Menu Keys joystick/click chord",
+      "Menu Keys right_joystick/click chord"
+    ]
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13178",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 536,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L1: Scroll Down / left_bumper",
+        "R1: Scroll Up / right_bumper",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu",
+        "Steering | LS Up: Scroll Up / dpad_north",
+        "Steering | LS Down: Scroll Down / dpad_south"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": false
+}

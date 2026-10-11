@@ -41,6 +41,8 @@ Rules:
   if its chord could fire. That can add a stack that can't happen, never drop
   one that can.
 - Recovery and reset bindings, hold_layer and mode shifts are not followed.
+  Nor is a relay (flow_model): the held driver can't run it, and a fresh
+  press gives the stack the layer underneath gives by its own entry.
 
 Plan: plans/2026-10-01-backward-chain-audit.md. Record:
 findings/2026-10-01-backward-chain-stacks/README.md.
@@ -51,7 +53,7 @@ from dataclasses import dataclass
 from .flow_model import Inventory, resolve
 from .stacks import apply_ops
 
-NOT_FOLLOWED = ("recovery", "reset", "legacy-hold", "mode-shift")
+NOT_FOLLOWED = ("recovery", "reset", "legacy-hold", "mode-shift", "relay")
 # "center" is a repeating removal on an inverted stick edge; "release" covers the
 # normal edge's Release that the stateful transitions plan moves those exits to.
 SETTLE = ("center", "removal", "cancel", "release")

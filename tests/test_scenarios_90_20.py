@@ -11,7 +11,7 @@ ENTRY = {"LP": "LTP: Click Entry Point", "RP": "RTP: Click Entry Point"}
 
 
 class OneAdd(ScenarioCase):
-    @scenario("90.20 B1", rules=("R113",), rests=("A6", "A10"), either=("A9", "A42"))
+    @scenario("90.20 B1", rules=("R113",), rests=("A6", "A10"), either=("A9", "A42"), frozen="90.49")
     def test_a_held_click_adds_the_entry_point_once_and_bumps_once(self):
         for name, where in (("RP", "centre"), ("RP", "left"), ("LP", "centre"), ("LP", "up")):
             for pad in self.each():

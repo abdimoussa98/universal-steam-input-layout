@@ -39,6 +39,10 @@ stated; the ones the layout must work either way under are switches.
     A16      a delay's clock starts when its binding starts answering the input
     A17, A36 a chord is decided when its binding starts answering a held input; pressing
              the chord button later doesn't start it, releasing it doesn't end it
+    A61      a chord with Invert Activation runs while its input is released and no chord button
+             is held; pressing a chord button ends it, and letting that button go doesn't bring
+             it back, nor does a removal that exposes it: the input has to be pressed and let go
+             again, or its layer has to land
     A27      an active chord suppresses an interruptible Regular Press on the same input
     A31      a repeat keeps its schedule when another layer is removed
     A32      `reverse_ties`: activators due at the same moment run in file order, or reversed
@@ -111,6 +115,11 @@ def typed(log):
 
 
 Entry = namedtuple("Entry", "control layer kind index settings ops outputs taps beeps inverted condition unsupported")
+
+
+def _inverted_chord(entry):
+    """A chord with Invert Activation (A61), as opposed to a chord on an edge whose group is inverted."""
+    return entry.kind == "chord" and entry.settings.get("edge_binding_invert") == "1"
 
 
 def _threshold(entry):
@@ -229,6 +238,10 @@ class Simulator:
         self._note("press", "/".join(control))
         self._end(control, "up")
         self.held.add(control)
+        for key in [k for k, act in self.acts.items() if _inverted_chord(act.entry)       # A61: a chord button
+                    and control in act.entry.condition.controls()]:                       # shuts it off
+            for output in self.acts.pop(key).down:
+                self._note("up", output)
         self._establish(control, "down", "pressed")
         self._rebind()
         self._drain()
@@ -375,7 +388,9 @@ class Simulator:
                 raise NotImplementedError(f"{layer} {'/'.join(control)}: unknown chord button ({entry.condition.label})")
         if phase == "down":
             found = self._native(control, phase, mode, found)                                      # A43
-        chords = [e for e in found if e.kind == "chord" and e.condition.satisfied(self.held)]     # A17, A36
+        chords = [e for e in found if e.kind == "chord" and (                                      # A17, A36
+            mode != "exposed" and not any(c in self.held for c in e.condition.controls())          # A61: a removal
+            if _inverted_chord(e) else e.condition.satisfied(self.held))]                          # doesn't start it
         others = [e for e in found if e.kind != "chord" and not (chords and e.settings.get("interruptable") != "0")]
         for entry in self._ordered(sorted(chords + others, key=lambda e: e.index)):                # A27
             self._arm(entry, phase, mode)

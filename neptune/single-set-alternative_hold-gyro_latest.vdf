@@ -2,7 +2,7 @@
 {
 	"version"				"3"
 	"revision"				"12834"
-	"title"					"single-set-alternative :: always-gyro :: 90.48"
+	"title"					"single-set-alternative :: always-gyro :: 90.55"
 	"description"			"WASD movement, gyro aiming, right-stick turn assist, and circular trackpad scrolling. L1/R1: mouse buttons; L2/R2: modifiers. Includes Fn controls, Steering, Cursor Gyro, and Gamepad modes."
 	"creator"				"76561198079670632"
 	"progenitor"			""
@@ -635,6 +635,20 @@
 		"Preset_1000191"
 		{
 			"title"					"Stateful | Menu Right: Fn Layer"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000192"
+		{
+			"title"					"Steering | LS Up: Scroll Up"
+			"legacy_set"			"1"
+			"set_layer"				"1"
+			"parent_set_name"		"Preset_1000001"
+		}
+		"Preset_1000193"
+		{
+			"title"					"Steering | LS Down: Scroll Down"
 			"legacy_set"			"1"
 			"set_layer"				"1"
 			"parent_set_name"		"Preset_1000001"
@@ -21078,6 +21092,8 @@
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 41 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -21116,6 +21132,8 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -21133,13 +21151,12 @@
 						"bindings"
 						{
 							"binding"		"controller_action add_layer 61 0 0, , "
-							"binding"		"controller_action remove_layer 62 0 0, , "
-							"binding"		"controller_action remove_layer 61 0 0, , "
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 42 0 0, , "
 							"binding"		"controller_action remove_layer 41 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -21163,6 +21180,8 @@
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 41 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -21201,6 +21220,8 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -21240,6 +21261,8 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -21293,6 +21316,8 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -21310,13 +21335,12 @@
 						"bindings"
 						{
 							"binding"		"controller_action add_layer 62 0 0, , "
-							"binding"		"controller_action remove_layer 62 0 0, , "
-							"binding"		"controller_action remove_layer 61 0 0, , "
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 42 0 0, , "
-							"binding"		"controller_action remove_layer 41 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -21340,6 +21364,8 @@
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 42 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -21396,6 +21422,8 @@
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 42 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -21434,6 +21462,8 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -21473,6 +21503,8 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -23430,32 +23462,17 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 64 0 0, , "
-							"binding"		"controller_action remove_layer 63 0 0, , "
+							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 58 0 0, , "
 						}
 						"settings"
 						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"interruptable"								"0"
-							"gyro_ratchet_button_mask"					"50331648"
-							"gyro_ratchet_button_requireany_or_all"		"0"
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -23467,32 +23484,17 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 64 0 0, , "
-							"binding"		"controller_action remove_layer 63 0 0, , "
+							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 58 0 0, , "
 						}
 						"settings"
 						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"interruptable"								"0"
-							"gyro_ratchet_button_mask"					"50331648"
-							"gyro_ratchet_button_requireany_or_all"		"0"
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -23504,7 +23506,7 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
@@ -23516,29 +23518,12 @@
 						}
 						"settings"
 						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
 							"interruptable"								"0"
-						}
-					}
-					"release"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 58 0 0, , "
-							"binding"		"controller_action remove_layer 60 0 0, , "
-							"binding"		"controller_action remove_layer 59 0 0, , "
+							"haptic_intensity"							"0"
 						}
 					}
 				}
@@ -23619,36 +23604,25 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 64 0 0, , "
-							"binding"		"controller_action remove_layer 63 0 0, , "
-							"binding"		"controller_action remove_layer 57 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
 							"binding"		"mouse_wheel SCROLL_UP, , "
 						}
 						"settings"
 						{
-							"hold_repeats"								"1"
-							"repeat_rate"								"50"
-							"delay_start"								"5"
-							"interruptable"								"0"
-							"gyro_ratchet_button_mask"					"50331648"
-							"gyro_ratchet_button_requireany_or_all"		"0"
+							"hold_repeats"		"1"
+							"repeat_rate"		"50"
+							"interruptable"		"0"
 						}
 					}
 					"release"
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -23664,36 +23638,25 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 64 0 0, , "
-							"binding"		"controller_action remove_layer 63 0 0, , "
-							"binding"		"controller_action remove_layer 57 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
 							"binding"		"mouse_wheel SCROLL_DOWN, , "
 						}
 						"settings"
 						{
-							"hold_repeats"								"1"
-							"repeat_rate"								"50"
-							"delay_start"								"5"
-							"interruptable"								"0"
-							"gyro_ratchet_button_mask"					"50331648"
-							"gyro_ratchet_button_requireany_or_all"		"0"
+							"hold_repeats"		"1"
+							"repeat_rate"		"50"
+							"interruptable"		"0"
 						}
 					}
 					"release"
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -23705,7 +23668,7 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
@@ -23715,27 +23678,12 @@
 						}
 						"settings"
 						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
 							"interruptable"								"0"
-						}
-					}
-					"release"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 57 0 0, , "
+							"haptic_intensity"							"0"
 						}
 					}
 				}
@@ -24395,6 +24343,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -24593,6 +24543,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -25031,6 +24983,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -25275,6 +25229,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -27156,6 +27112,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -27354,6 +27312,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -27792,6 +27752,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -28036,6 +27998,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -31709,7 +31673,7 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"1"
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -31901,6 +31865,10 @@
 						{
 							"binding"		"controller_action empty_binding, , "
 						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
 					}
 				}
 				"disabled_activators"
@@ -31969,7 +31937,7 @@
 			"layout"						"0"
 			"deadzone"						"23000"
 			"edge_binding_invert"			"1"
-			"haptic_intensity_override"		"1"
+			"haptic_intensity_override"		"5"
 		}
 	}
 	"group"
@@ -32518,7 +32486,7 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"1"
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -32591,7 +32559,7 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"0"
+							"haptic_intensity"		"1"
 							"interruptable"			"0"
 						}
 					}
@@ -32627,7 +32595,7 @@
 						}
 						"settings"
 						{
-							"haptic_intensity"		"0"
+							"haptic_intensity"		"1"
 							"interruptable"			"0"
 						}
 					}
@@ -32685,6 +32653,10 @@
 						"bindings"
 						{
 							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -32757,7 +32729,7 @@
 			"layout"						"0"
 			"deadzone"						"23000"
 			"edge_binding_invert"			"1"
-			"haptic_intensity_override"		"1"
+			"haptic_intensity_override"		"5"
 		}
 	}
 	"group"
@@ -34876,6 +34848,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -35038,6 +35012,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -35576,12 +35552,24 @@
 					{
 						"bindings"
 						{
-							"binding"		"mouse_wheel SCROLL_UP, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
 						}
 						"settings"
 						{
 							"delay_start"			"150"
+							"interruptable"			"0"
+							"haptic_intensity"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_UP, , "
+						}
+						"settings"
+						{
+							"delay_start"			"50"
 							"interruptable"			"0"
 							"haptic_intensity"		"0"
 						}
@@ -35913,12 +35901,24 @@
 					{
 						"bindings"
 						{
-							"binding"		"mouse_wheel SCROLL_DOWN, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 						}
 						"settings"
 						{
 							"delay_start"			"150"
+							"interruptable"			"0"
+							"haptic_intensity"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_DOWN, , "
+						}
+						"settings"
+						{
+							"delay_start"			"50"
 							"interruptable"			"0"
 							"haptic_intensity"		"0"
 						}
@@ -36190,6 +36190,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -36256,12 +36258,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action add_layer 41 0 0, , "
 						}
 						"settings"
@@ -36500,6 +36496,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -36566,12 +36564,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action add_layer 42 0 0, , "
 						}
 						"settings"
@@ -36829,7 +36821,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 58 0 0, , "
 							"binding"		"key_press D, , "
 						}
 						"settings"
@@ -36850,7 +36841,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 58 0 0, , "
 							"binding"		"key_press A, , "
 						}
 						"settings"
@@ -36893,82 +36883,12 @@
 						"bindings"
 						{
 							"binding"		"controller_action remove_layer 58 0 0, , "
-							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 63 0 0, , "
-							"binding"		"controller_action remove_layer 64 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 58 0 0, , "
 						}
 						"settings"
 						{
 							"hold_repeats"		"1"
 							"repeat_rate"		"250"
 							"interruptable"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
-							"binding"		"controller_action add_layer 58 0 0, , "
-						}
-						"settings"
-						{
-							"gyro_ratchet_button_mask"					"50331651"
-							"gyro_ratchet_button_requireany_or_all"		"0"
-							"delay_start"								"200"
-							"interruptable"								"0"
-						}
-					}
-				}
-				"disabled_activators"
-				{
-				}
-			}
-			"edge"
-			{
-				"activators"
-				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 58 0 0, , "
-							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 63 0 0, , "
-							"binding"		"controller_action remove_layer 64 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
-							"gyro_ratchet_button_mask"					"50331651"
-							"gyro_ratchet_button_requireany_or_all"		"0"
-							"interruptable"								"0"
 						}
 					}
 					"release"
@@ -36982,6 +36902,47 @@
 						"settings"
 						{
 							"haptic_intensity"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 59 0 0, , "
+							"binding"		"controller_action remove_layer 63 0 0, , "
+							"binding"		"controller_action remove_layer 64 0 0, , "
+						}
+						"settings"
+						{
+							"gyro_ratchet_button_mask"					"50331651"
+							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
+							"interruptable"								"0"
+							"haptic_intensity"							"0"
+						}
+					}
+					"Soft_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 58 0 0, , "
+						}
+						"settings"
+						{
+							"delay_start"				"200"
+							"activation_threshold"		"13276"
+							"interruptable"				"0"
 						}
 					}
 				}
@@ -37024,12 +36985,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action remove_layer 13 0 0, , "
 							"binding"		"controller_action remove_layer 46 0 0, , "
 							"binding"		"controller_action remove_layer 29 0 0, , "
@@ -37120,7 +37075,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 58 0 0, , "
 							"binding"		"key_press D, , "
 						}
 						"settings"
@@ -37141,7 +37095,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 58 0 0, , "
 							"binding"		"key_press A, , "
 						}
 						"settings"
@@ -37163,20 +37116,6 @@
 						"bindings"
 						{
 							"binding"		"controller_action remove_layer 58 0 0, , "
-							"binding"		"controller_action remove_layer 60 0 0, , "
-							"binding"		"controller_action remove_layer 63 0 0, , "
-							"binding"		"controller_action remove_layer 64 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"		"1"
-						}
-					}
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 58 0 0, , "
 						}
 						"settings"
 						{
@@ -37185,24 +37124,17 @@
 							"interruptable"		"0"
 						}
 					}
-					"chord"
+					"release"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
-							"binding"		"controller_action add_layer 58 0 0, , "
+							"binding"		"controller_action add_layer 55 0 0, , "
+							"binding"		"controller_action remove_layer 60 0 0, , "
+							"binding"		"controller_action remove_layer 58 0 0, , "
 						}
 						"settings"
 						{
-							"gyro_ratchet_button_mask"					"50331651"
-							"gyro_ratchet_button_requireany_or_all"		"0"
-							"delay_start"								"200"
-							"interruptable"								"0"
+							"haptic_intensity"		"0"
 						}
 					}
 				}
@@ -37235,7 +37167,7 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
@@ -37246,33 +37178,25 @@
 						}
 						"settings"
 						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
 							"interruptable"								"0"
+							"haptic_intensity"							"0"
 						}
 					}
-					"release"
+					"Soft_Press"
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 55 0 0, , "
-							"binding"		"controller_action remove_layer 60 0 0, , "
-							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action add_layer 58 0 0, , "
 						}
 						"settings"
 						{
-							"haptic_intensity"		"0"
+							"delay_start"				"200"
+							"activation_threshold"		"13276"
+							"interruptable"				"0"
 						}
 					}
 				}
@@ -37315,12 +37239,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action remove_layer 13 0 0, , "
 							"binding"		"controller_action remove_layer 46 0 0, , "
 							"binding"		"controller_action remove_layer 29 0 0, , "
@@ -37478,7 +37396,7 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
@@ -37488,20 +37406,12 @@
 						}
 						"settings"
 						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
 							"interruptable"								"0"
+							"haptic_intensity"							"0"
 						}
 					}
 				}
@@ -37543,12 +37453,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action remove_layer 13 0 0, , "
 							"binding"		"controller_action remove_layer 46 0 0, , "
 							"binding"		"controller_action remove_layer 29 0 0, , "
@@ -37706,7 +37610,7 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
@@ -37716,20 +37620,12 @@
 						}
 						"settings"
 						{
-							"hold_repeats"		"1"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
 							"interruptable"								"0"
+							"haptic_intensity"							"0"
 						}
 					}
 				}
@@ -37771,12 +37667,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action remove_layer 13 0 0, , "
 							"binding"		"controller_action remove_layer 46 0 0, , "
 							"binding"		"controller_action remove_layer 29 0 0, , "
@@ -37856,22 +37746,6 @@
 			{
 				"activators"
 				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 57 0 0, , "
-							"binding"		"controller_action remove_layer 58 0 0, , "
-							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 60 0 0, , "
-							"binding"		"controller_action remove_layer 63 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"			"1"
-							"haptic_intensity"		"0"
-						}
-					}
 					"chord"
 					{
 						"bindings"
@@ -37897,22 +37771,6 @@
 			{
 				"activators"
 				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 57 0 0, , "
-							"binding"		"controller_action remove_layer 58 0 0, , "
-							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 60 0 0, , "
-							"binding"		"controller_action remove_layer 63 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"			"1"
-							"haptic_intensity"		"0"
-						}
-					}
 					"chord"
 					{
 						"bindings"
@@ -37938,10 +37796,12 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -37950,20 +37810,10 @@
 						}
 						"settings"
 						{
-							"hold_repeats"			"1"
-							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
 							"gyro_ratchet_button_mask"					"16777217"
 							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
 							"interruptable"								"0"
 							"haptic_intensity"							"0"
 						}
@@ -37985,6 +37835,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 						}
 						"settings"
@@ -38056,6 +37908,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 						}
 						"settings"
@@ -38104,6 +37958,8 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -38193,22 +38049,6 @@
 			{
 				"activators"
 				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 57 0 0, , "
-							"binding"		"controller_action remove_layer 58 0 0, , "
-							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 60 0 0, , "
-							"binding"		"controller_action remove_layer 64 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"			"1"
-							"haptic_intensity"		"0"
-						}
-					}
 					"chord"
 					{
 						"bindings"
@@ -38234,22 +38074,6 @@
 			{
 				"activators"
 				{
-					"Full_Press"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action remove_layer 57 0 0, , "
-							"binding"		"controller_action remove_layer 58 0 0, , "
-							"binding"		"controller_action remove_layer 59 0 0, , "
-							"binding"		"controller_action remove_layer 60 0 0, , "
-							"binding"		"controller_action remove_layer 64 0 0, , "
-						}
-						"settings"
-						{
-							"hold_repeats"			"1"
-							"haptic_intensity"		"0"
-						}
-					}
 					"chord"
 					{
 						"bindings"
@@ -38275,10 +38099,12 @@
 			{
 				"activators"
 				{
-					"Full_Press"
+					"chord"
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -38287,20 +38113,10 @@
 						}
 						"settings"
 						{
-							"hold_repeats"			"1"
-							"haptic_intensity"		"0"
-						}
-					}
-					"chord"
-					{
-						"bindings"
-						{
-							"binding"		"controller_action empty_binding, , "
-						}
-						"settings"
-						{
 							"gyro_ratchet_button_mask"					"33554434"
 							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
 							"interruptable"								"0"
 							"haptic_intensity"							"0"
 						}
@@ -38322,6 +38138,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 						}
 						"settings"
@@ -38393,6 +38211,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 						}
 						"settings"
@@ -38441,6 +38261,8 @@
 					{
 						"bindings"
 						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
@@ -38801,6 +38623,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -38838,6 +38662,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -39224,7 +39050,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 57 0 0, , "
+							"binding"		"controller_action add_layer 90 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
 						}
 					}
@@ -39370,7 +39196,7 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action add_layer 57 0 0, , "
+							"binding"		"controller_action add_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 						}
 					}
@@ -39626,12 +39452,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action remove_layer 14 0 0, , "
 							"binding"		"controller_action remove_layer 47 0 0, , "
 							"binding"		"controller_action remove_layer 30 0 0, , "
@@ -39793,12 +39613,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action remove_layer 14 0 0, , "
 							"binding"		"controller_action remove_layer 47 0 0, , "
 							"binding"		"controller_action remove_layer 30 0 0, , "
@@ -39946,12 +39760,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action remove_layer 14 0 0, , "
 							"binding"		"controller_action remove_layer 47 0 0, , "
 							"binding"		"controller_action remove_layer 30 0 0, , "
@@ -40087,12 +39895,6 @@
 					{
 						"bindings"
 						{
-							"binding"		"controller_action remove_layer 75 0 0, , "
-							"binding"		"controller_action remove_layer 17 0 0, , "
-							"binding"		"controller_action remove_layer 73 0 0, , "
-							"binding"		"controller_action remove_layer 18 0 0, , "
-							"binding"		"controller_action remove_layer 48 0 0, , "
-							"binding"		"controller_action remove_layer 31 0 0, , "
 							"binding"		"controller_action remove_layer 14 0 0, , "
 							"binding"		"controller_action remove_layer 47 0 0, , "
 							"binding"		"controller_action remove_layer 30 0 0, , "
@@ -40225,6 +40027,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -42169,6 +41973,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -44507,6 +44313,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -44678,6 +44486,8 @@
 							"binding"		"controller_action remove_layer 60 0 0, , "
 							"binding"		"controller_action remove_layer 59 0 0, , "
 							"binding"		"controller_action remove_layer 58 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
 							"binding"		"controller_action remove_layer 57 0 0, , "
 							"binding"		"controller_action remove_layer 56 0 0, , "
 							"binding"		"controller_action remove_layer 55 0 0, , "
@@ -49013,6 +48823,474 @@
 			"layer"					"1"
 		}
 	}
+	"group"
+	{
+		"id"				"13367"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 55 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_UP, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+							"repeat_rate"		"200"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 90 0 0, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 64 0 0, , "
+							"binding"		"controller_action remove_layer 63 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+						}
+						"settings"
+						{
+							"gyro_ratchet_button_mask"					"50331651"
+							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
+							"interruptable"								"0"
+							"haptic_intensity"							"0"
+						}
+					}
+					"Soft_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"delay_start"				"150"
+							"activation_threshold"		"13276"
+							"interruptable"				"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"touch"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 64 0 0, , "
+							"binding"		"controller_action remove_layer 63 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"gyro_ratchet_button_mask"					"50331651"
+							"gyro_ratchet_button_requireany_or_all"		"0"
+							"interruptable"								"0"
+						}
+					}
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 13 0 0, , "
+							"binding"		"controller_action remove_layer 46 0 0, , "
+							"binding"		"controller_action remove_layer 29 0 0, , "
+							"binding"		"controller_action add_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"						"0"
+			"deadzone"								"13276"
+			"edge_binding_invert"					"0"
+			"analog_emulation_duty_cycle_pct"		"50"
+			"layer"									"1"
+		}
+	}
+	"group"
+	{
+		"id"				"13368"
+		"mode"				"joystick_mouse"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"touch"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 64 0 0, , "
+							"binding"		"controller_action remove_layer 63 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 90 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"gyro_ratchet_button_mask"					"50331651"
+							"gyro_ratchet_button_requireany_or_all"		"0"
+							"interruptable"								"0"
+						}
+					}
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 14 0 0, , "
+							"binding"		"controller_action remove_layer 47 0 0, , "
+							"binding"		"controller_action remove_layer 30 0 0, , "
+							"binding"		"controller_action add_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
+	"group"
+	{
+		"id"				"13369"
+		"mode"				"dpad"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"dpad_north"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 91 0 0, , "
+						}
+						"settings"
+						{
+							"interruptable"		"0"
+							"hold_repeats"		"1"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"dpad_south"
+			{
+				"activators"
+				{
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 56 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"mouse_wheel SCROLL_DOWN, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+							"interruptable"		"0"
+						}
+					}
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+							"repeat_rate"		"200"
+							"interruptable"		"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"edge"
+			{
+				"activators"
+				{
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 64 0 0, , "
+							"binding"		"controller_action remove_layer 63 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
+						}
+						"settings"
+						{
+							"gyro_ratchet_button_mask"					"50331651"
+							"gyro_ratchet_button_requireany_or_all"		"0"
+							"edge_binding_invert"						"1"
+							"hold_repeats"								"1"
+							"interruptable"								"0"
+							"haptic_intensity"							"0"
+						}
+					}
+					"Soft_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action add_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"delay_start"				"150"
+							"activation_threshold"		"13276"
+							"interruptable"				"0"
+						}
+					}
+				}
+				"disabled_activators"
+				{
+				}
+			}
+			"touch"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 64 0 0, , "
+							"binding"		"controller_action remove_layer 63 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"gyro_ratchet_button_mask"					"50331651"
+							"gyro_ratchet_button_requireany_or_all"		"0"
+							"interruptable"								"0"
+						}
+					}
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 13 0 0, , "
+							"binding"		"controller_action remove_layer 46 0 0, , "
+							"binding"		"controller_action remove_layer 29 0 0, , "
+							"binding"		"controller_action add_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+			}
+		}
+		"settings"
+		{
+			"requires_click"						"0"
+			"deadzone"								"13276"
+			"edge_binding_invert"					"0"
+			"analog_emulation_duty_cycle_pct"		"50"
+			"layer"									"1"
+		}
+	}
+	"group"
+	{
+		"id"				"13370"
+		"mode"				"joystick_mouse"
+		"name"				""
+		"description"		""
+		"inputs"
+		{
+			"touch"
+			{
+				"activators"
+				{
+					"Full_Press"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 64 0 0, , "
+							"binding"		"controller_action remove_layer 63 0 0, , "
+							"binding"		"controller_action remove_layer 57 0 0, , "
+							"binding"		"controller_action remove_layer 91 0 0, , "
+						}
+						"settings"
+						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
+							"gyro_ratchet_button_mask"					"50331651"
+							"gyro_ratchet_button_requireany_or_all"		"0"
+							"interruptable"								"0"
+						}
+					}
+					"release"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action remove_layer 14 0 0, , "
+							"binding"		"controller_action remove_layer 47 0 0, , "
+							"binding"		"controller_action remove_layer 30 0 0, , "
+							"binding"		"controller_action add_layer 57 0 0, , "
+						}
+						"settings"
+						{
+							"haptic_intensity"		"0"
+						}
+					}
+				}
+			}
+		}
+		"settings"
+		{
+			"layer"		"1"
+		}
+	}
 	"preset"
 	{
 		"id"						"0"
@@ -50271,6 +50549,26 @@
 			"13344"		"dpad active"
 			"13345"		"joystick active"
 			"13346"		"right_joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"89"
+		"name"						"Preset_1000192"
+		"group_source_bindings"
+		{
+			"13367"		"joystick active"
+			"13368"		"right_joystick active"
+		}
+	}
+	"preset"
+	{
+		"id"						"90"
+		"name"						"Preset_1000193"
+		"group_source_bindings"
+		{
+			"13369"		"joystick active"
+			"13370"		"right_joystick active"
 		}
 	}
 	"settings"

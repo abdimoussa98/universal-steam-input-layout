@@ -3,7 +3,12 @@
 After an accepted double tap, `Menu Left: Escape`, `Menu Right: Tab` and the two
 modifier Scroll layers add their Double Tap Cover with a 150 ms chorded delay.
 Since 90.25 the two chorded menu chains have a second-press layer each as well
-(`Menu Left!Right: Enter`, `Menu Right!Left: Backspace`): six in all.
+(`Menu Left!Right: Enter`, `Menu Right!Left: Backspace`): six in all. Since
+90.52 the two Steering stick scroll layers make eight; their builder writes
+the reset itself. Since 90.53 their 150 ms chord sits on the drivers, chorded
+on the stick's deflect, and the reset stays on the stick's direction: such a
+chord is left alone here, and the count is six again. Since 90.55 that timer
+is a Soft Press on the stick's edge, which this fix does not look at: six.
 That delayed add had no repeating reset (see resources/Steam Input JSON
 Structure.md, Interrupted Delayed Layer Applies). This adds the usual reset:
 a Regular Press removing only the cover, Hold to Repeat every delay + 50 ms,
@@ -21,7 +26,8 @@ Idempotent; works with numeric IDs or title tokens.
 import re
 
 ADD = re.compile(r"^controller_action add_layer (.+?) 0 0, , $")
-SECOND_PRESS_LAYERS = (4, 6)            # until 90.24, and with the two chorded menu chains
+DEFLECT = str(1 << 30)                  # the left stick's deflect as a chord's only button
+SECOND_PRESS_LAYERS = (4, 6, 8)         # until 90.24, with the two chorded menu chains, and with the two Steering stick scroll layers
 
 
 def fix(data):
@@ -52,6 +58,8 @@ def fix(data):
                 target = by_id.get(token) or token.strip("{}").split("::")[-1]
                 if "Double Tap Cover" not in target or not chord.get("settings", {}).get("delay_start"):
                     continue
+                if chord["settings"].get("gyro_ratchet_button_mask") == DEFLECT and not state.startswith("joystick "):
+                    continue                      # a timer on a driver: its reset is on the stick's direction
                 label = f"{layer} / {input_name}"
                 reset = {"bindings": {"binding": binding.replace("add_layer", "remove_layer", 1)},
                          "settings": {"hold_repeats": "1",
@@ -68,5 +76,5 @@ def fix(data):
                 value["activators"] = {"release": acts["release"], "chord": chord, "Full_Press": [full, reset]}
                 changed.append(label)
     if len(changed) + len(already) not in SECOND_PRESS_LAYERS:
-        raise ValueError(f"expected four or six second-press layers, found {changed + already}")
+        raise ValueError(f"expected four, six or eight second-press layers, found {changed + already}")
     return {"changed": changed, "already": already}

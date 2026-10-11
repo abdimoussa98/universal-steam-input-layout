@@ -1,0 +1,47 @@
+{
+  "changed": [
+    "Steering | LS Up: Modifier 1: dpad_north -> edge",
+    "Steering | LS Down: Modifier 0: dpad_south -> edge"
+  ],
+  "fixes not applied": {
+    "rtp_scroll": {
+      "group": "13178",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 536,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L1: Scroll Down / left_bumper",
+        "R1: Scroll Up / right_bumper",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu",
+        "Steering | LS Up: Scroll Up / dpad_north",
+        "Steering | LS Down: Scroll Down / dpad_south"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  }
+}

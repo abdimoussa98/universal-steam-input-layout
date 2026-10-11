@@ -36,6 +36,27 @@ def without_haptic(entry):
     return result
 
 
+SCROLLS = ('Steering | LS Up: Scroll Up', 'Steering | LS Down: Scroll Down')     # the two stick scroll layers, since 90.52
+
+
+def without_scroll_layers(layout, entry):
+    """The entry without the removals of the two stick scroll layers, which the cover's removal lists have had since 90.52."""
+    entry = copy.deepcopy(entry)
+    binding = entry.get('bindings', {}).get('binding')
+    if isinstance(binding, list):
+        entry['bindings']['binding'] = [action for action in binding if not any(
+            op == 'remove_layer' and target in SCROLLS for op, target in layout.layer_ops({'bindings': {'binding': action}}))]
+    return entry
+
+
+def without_right_pad(layout, entry):
+    """(settings, commands) of an entry without its right pad removals. Since 90.53 the Steering modifier
+    layers remove no right pad layer outside the clear to Base (author, 2026-10-10)."""
+    kept = [action for action in actions(entry) if not any(
+        op == 'remove_layer' and target.startswith('RTP:') for op, target in layout.layer_ops({'bindings': {'binding': action}}))]
+    return entry.get('settings', {}), kept
+
+
 def gyro_settings(layout, stack):
     """The same-mode property inheritance promised by the layout, not a sensor model."""
     settings, mode = {}, None
@@ -72,9 +93,10 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
                 for direction in ('north', 'south', 'east', 'west'):
                     name = 'dpad_' + direction
                     self.assertEqual(group['inputs'][name], old.active(GUARD)['joystick']['inputs'][name])
-                self.assertEqual(layout.order, old.order)
-                self.assertEqual(layout.titles, old.titles)
-                self.assertEqual(len(layout.cm['action_layers']), 88)
+                self.assertEqual(layout.order[:-2], old.order)
+                self.assertEqual([layout.titles[key] for key in layout.order[-2:]], list(SCROLLS))
+                self.assertEqual({key: title for key, title in layout.titles.items() if title not in SCROLLS}, old.titles)
+                self.assertEqual(len(layout.cm['action_layers']), 90)           # 88 until 90.52
                 self.assertEqual(layout.resolve('65'), GUARD)
 
     def test_mod2_releases_lose_only_the_requested_stateful_removals(self):
@@ -85,6 +107,10 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
                     title = pad.title(f'{family}{first}!{second}: Modifier 2')
                     before = dict(activators(old, title))
                     after = dict(activators(layout, title))
+                    if family == 'Steering | ':
+                        # 90.53: the left edge's cleanup is one inverted chord (R133, A61); tests/test_scenarios_90_53.py
+                        before = {k: v for k, v in before.items() if k[:2] != ('joystick', 'edge')}
+                        after = {k: v for k, v in after.items() if k[:2] != ('joystick', 'edge')}
                     self.assertEqual(before.keys(), after.keys())
                     for location, actual in after.items():
                         expected = copy.deepcopy(before[location])
@@ -104,7 +130,11 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
                         # add; the Steering Mod 2 bump remains intentional.
                         if family in ('', 'Gyro | ') and kind == 'chord' and expected.get('settings', {}).get('delay_start') == '200':
                             expected['settings']['haptic_intensity'] = '0'
-                        self.assertEqual(actual, expected, (variant, title, location))
+                        if family == 'Steering | ':
+                            self.assertEqual(without_right_pad(layout, without_scroll_layers(layout, actual)),
+                                             without_right_pad(old, expected), (variant, title, location))
+                        else:
+                            self.assertEqual(without_scroll_layers(layout, actual), expected, (variant, title, location))
             self.assertEqual(len(changed), 6)
             self.assertEqual(len({title for title, _, _ in changed}), 4)
 
@@ -122,7 +152,7 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
                     if location[3] == 'chord' and any(op == 'add_layer' and target.endswith(': Modifier 2')
                                                      for op, target in layout.layer_ops(entry)):
                         expected.setdefault('settings', {}).update(hold_repeats='1', repeat_rate='50')
-                    self.assertEqual(without_haptic(entry), expected, (variant, title, location))
+                    self.assertEqual(without_scroll_layers(layout, without_haptic(entry)), expected, (variant, title, location))
                     if location[2] == 'activators':
                         count += 1
                 for source, group in layout.active(title).items():
@@ -139,9 +169,18 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
                 for driver in ('L1', 'R1'):
                     source, name = pad.control(driver)
                     checks.append((owner, source, name, 'chord'))
-            for direction, number in (('Down', 0), ('Up', 1)):
-                checks.append((f'Steering | LS {direction}: Modifier {number}', 'joystick', 'edge', 'release'))
-                checks.append((f'Steering | LS {direction}: Double Tap', 'switch', 'always_on_action', 'Full_Press'))
+            for direction, number, own in (('Down', 0, 'dpad_south'), ('Up', 1, 'dpad_north')):
+                # Since 90.52 the modifier ends on its own direction's Release, which was the ring's until 90.51.
+                modifier = f'Steering | LS {direction}: Modifier {number}'
+                release = layout.active(modifier)['joystick']['inputs'][own]['activators']['release']
+                self.assertEqual(release['settings'].get('haptic_intensity'), '0', (variant, modifier))
+                self.assertEqual(without_haptic(release),
+                                 without_haptic(old.active(modifier)['joystick']['inputs']['edge']['activators']['release']))
+                self.assertNotIn('release', layout.active(modifier)['joystick']['inputs']['edge']['activators'])
+                # Since 90.52 the window has two always-on entries: it closes at 150 ms and scrolls at 50 ms.
+                always = layout.active(f'Steering | LS {direction}: Double Tap')['switch']['inputs']['always_on_action']
+                for entry in always['activators']['Full_Press']:
+                    self.assertEqual(entry['settings'].get('haptic_intensity'), '0', (variant, direction))
             for title, source, name, kind in checks:
                 current = layout.active(title)[source]['inputs'][name]['activators'][kind]
                 self.assertEqual(current.get('settings', {}).get('haptic_intensity'), '0', (variant, title))

@@ -1,0 +1,164 @@
+{
+  "radius": [
+    "Steering | LS Up: Double Tap",
+    "Steering | LS Down: Double Tap",
+    "Steering | LS: Double Tap Cover",
+    "Steering | LS: Tap Cover",
+    "Steering | LS Down: Modifier 0",
+    "Steering | LS Up: Modifier 1",
+    "Steering | R2: W Key",
+    "Steering | L2: S Key"
+  ],
+  "click_survival": [
+    [
+      "Steering | LS Up: Modifier 1",
+      "joystick",
+      "dpad_north"
+    ],
+    [
+      "Steering | LS Up: Modifier 1",
+      "joystick",
+      "touch"
+    ],
+    [
+      "Steering | LS Up: Modifier 1",
+      "right_joystick",
+      "touch"
+    ],
+    [
+      "Steering | LS Down: Modifier 0",
+      "joystick",
+      "dpad_south"
+    ],
+    [
+      "Steering | LS Down: Modifier 0",
+      "joystick",
+      "touch"
+    ],
+    [
+      "Steering | LS Down: Modifier 0",
+      "right_joystick",
+      "touch"
+    ]
+  ],
+  "thumb_completion": [
+    [
+      "Steering | LS Up: Double Tap",
+      "joystick"
+    ],
+    [
+      "Steering | LS Up: Double Tap",
+      "right_joystick"
+    ],
+    [
+      "Steering | LS Down: Double Tap",
+      "joystick"
+    ],
+    [
+      "Steering | LS Down: Double Tap",
+      "right_joystick"
+    ]
+  ],
+  "quiet_click": [
+    [
+      "LTP: Middle Click",
+      "left_trackpad",
+      "click"
+    ],
+    [
+      "RTP: Middle Click",
+      "right_trackpad",
+      "click"
+    ],
+    [
+      "LTP: Arrow Keys",
+      "left_trackpad",
+      "dpad_north",
+      "Full_Press"
+    ],
+    [
+      "LTP: Arrow Keys",
+      "left_trackpad",
+      "dpad_south",
+      "Full_Press"
+    ],
+    [
+      "LTP: Arrow Keys",
+      "left_trackpad",
+      "dpad_east",
+      "Full_Press"
+    ],
+    [
+      "LTP: Arrow Keys",
+      "left_trackpad",
+      "dpad_west",
+      "Full_Press"
+    ],
+    [
+      "LTP: Arrow Keys",
+      "left_trackpad",
+      "mode"
+    ],
+    [
+      "RTP: Mouse Buttons",
+      "right_trackpad",
+      "dpad_east",
+      "Full_Press"
+    ],
+    [
+      "RTP: Mouse Buttons",
+      "right_trackpad",
+      "dpad_west",
+      "Full_Press"
+    ],
+    [
+      "RTP: Mouse Buttons",
+      "right_trackpad",
+      "mode"
+    ],
+    [
+      "RTP: Circular Scroll",
+      "right_trackpad",
+      "click"
+    ]
+  ],
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 548,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  }
+}

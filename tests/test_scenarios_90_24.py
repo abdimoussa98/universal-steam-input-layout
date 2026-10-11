@@ -159,7 +159,7 @@ class RequiredCleanups(ScenarioCase):
             pad.hold("R1").wait(100).push("LS", "up").wait(100).recentre("LS")
             self.assertEqual(pad.top, "Steering | LS Up: Double Tap")
             pad.mark().tap("Start").tap("Select")
-            self.assertEqual(pad.typed(), ["TAB", "ESCAPE"])
+            self.assertEqual([x for x in pad.typed() if not x.startswith("mouse_wheel")], ["TAB", "ESCAPE"])   # the window's own scroll lands at 50 ms since 90.52
             self.assertFalse([t for t in pad.stack if "Menu" in t])
 
 

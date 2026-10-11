@@ -92,6 +92,19 @@ def scenario(check, rules=(), rests=(), either=(), frozen=None):
     return mark
 
 
+def old_inverted_chord(function):
+    """Mark a scenario written to the reading of an inverted chord that A61 replaced.
+
+    Until 90.52 the simulator ran a chord with Invert Activation while a chord button was held. It runs while
+    none is. On the corrected simulator `Steering | LS: Entry Guard` leaves at once after a centred entry with
+    no driver held, and the Fallback Guard of the frozen 90.33 to 90.41 builds hands back to `Steering` at
+    once, so these scenarios no longer hold. The author, 2026-10-11: the guard is only meant to protect a
+    stick held at entry; a first push after a centred entry is not meant to be guarded. They stay as the
+    record of what was believed, as expected failures. 90.53 G1 to G3 state what the guard does.
+    """
+    return unittest.expectedFailure(function)
+
+
 def layout_path(variant):
     return ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json"
 
@@ -103,16 +116,24 @@ def layout_data(variant):
 
 
 def frozen_layout_data(variant, version):
-    """Rebuild a retired interaction from its frozen builder, not a backup file."""
+    """Load a retired interaction from its frozen builder or validated candidate."""
     builders = {'90.41': 'findings/2026-10-09-low-haptics-and-silent-fn/build_candidate.py',
                 '90.42': 'findings/2026-10-09-fn-haptics-and-steering-clear/build_candidate.py'}
+    candidates = {'90.49': 'findings/2026-10-10-steering-scroll-and-pad-click-fix',
+                  '90.51': 'findings/2026-10-10-ring-bump-and-modifier-direction',
+                  '90.53': 'findings/2026-10-10-steering-entry-and-edge-chords',
+                  '90.54': 'findings/2026-10-11-hold-timer-on-the-edge'}
     key = version, variant
     if key not in _frozen_layouts:
-        spec = importlib.util.spec_from_file_location('scenario_frozen_' + version.replace('.', '_'),
-                                                      ROOT / builders[version])
-        builder = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(builder)
-        _frozen_layouts[key], _ = builder.build(variant)
+        if version in candidates:
+            path = ROOT / candidates[version] / f'{variant}-candidate.json'
+            _frozen_layouts[key] = json.loads(path.read_text(encoding='utf-8'))
+        else:
+            spec = importlib.util.spec_from_file_location('scenario_frozen_' + version.replace('.', '_'),
+                                                          ROOT / builders[version])
+            builder = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(builder)
+            _frozen_layouts[key], _ = builder.build(variant)
     return _frozen_layouts[key]
 
 

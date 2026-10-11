@@ -85,10 +85,9 @@ class PadClickExits(ScenarioCase):
             pad.press_pad("RP", "centre")
             self.assertEqual((pad.top, pad.down()), ("RTP: Middle Click", ["mouse_button MIDDLE"]))
 
-    @scenario("90.16 X5")
+    @scenario("90.16 X5", frozen="90.49")
     def test_a_click_bumps_once_on_base_and_the_entry_point_adds_none(self):
-        """The simulator logs a haptic when an entry's commands run. The output's own bump, on the layer
-        that lands, is the second one on the Deck (tests/test_pad_click_exits.py checks its setting)."""
+        """Historical 90.49 entry-feedback behavior; 90.50 moves it to the final output."""
         for where in ("centre", "left", "ring left"):
             for pad in self.each():
                 pad.click_pad("RP", where, ms=600).wait(400)

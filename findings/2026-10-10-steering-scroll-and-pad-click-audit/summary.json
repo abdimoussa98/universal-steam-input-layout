@@ -1,0 +1,11 @@
+{
+  "scroll_cases": 384,
+  "click_cases": 192,
+  "duplicate_click_entry_haptic_cases": 12,
+  "all_characterization_assertions_passed": true,
+  "limits": [
+    "Binary input simulation cannot measure physical stick thresholds.",
+    "Haptic events omit mode feedback and output feedback on held-input landing.",
+    "Native layer timing and exposed held-input behavior remain assumptions."
+  ]
+}

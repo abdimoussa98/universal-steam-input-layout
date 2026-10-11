@@ -1,0 +1,676 @@
+349 scenarios
+Resting on an assumption that isn't verified: 261
+Assumptions that aren't verified: 46
+
+A8 (unverified; relies on it): A stick edge's Release fires in a layer that was added while the stick was already out
+  Rules: R111
+  90.10 T5  MenuAndTransitions.test_stick_guards_come_and_go_and_the_menu_tap_or_hold_behaves
+  90.10 T7  MenuAndTransitions.test_the_accepted_gap_under_the_menu_tap_cover
+  90.10 D3  Steering.test_the_stick_modifier_ends_on_a_roll_to_the_side
+  90.12 C8  CleanupLists.test_the_menu_hold_with_a_stick_out_and_the_fn_release_leave_nothing_behind
+  90.39 P3  BackportedInteractions.test_rtp_before_and_during_fallback_keeps_the_timer_isolated
+  90.39 P4  BackportedInteractions.test_pad_release_inside_fallback_removes_window_before_other_helpers
+  90.39 P5  BackportedInteractions.test_scroll_and_touch_helpers_clear_on_pad_release_in_each_steering_window
+  90.39 F1  FallbackWindow.test_holding_past_the_second_and_letting_go_leaves_steering
+  90.39 F2  FallbackWindow.test_letting_go_inside_the_second_keeps_steering_every_time
+  90.39 F3  FallbackWindow.test_a_roll_to_the_side_ends_the_second_and_coming_back_starts_a_new_one
+  90.39 G1  EntryGuard.test_the_entry_guard_ends_when_the_direction_held_at_entry_lets_go
+  90.39 R2  Replacements.test_several_taps_and_then_letting_go_inside_the_second_keeps_steering
+  90.43 E2  SteeringEntryProtection.test_centered_entry_and_resting_thumbs_preserve_the_first_push
+  90.43 E3  SteeringEntryProtection.test_a_shallow_direction_release_disarms_without_an_outer_edge
+  90.43 E4  SteeringEntryProtection.test_direction_roll_or_edge_release_can_arm_a_still_held_full_direction
+  90.43 E9  SteeringEntryProtection.test_pad_and_ramp_inputs_do_not_hide_the_protected_release
+  90.51 S1  StickDeflect.test_four_deflects_in_one_driver_hold_each_scroll_once
+  90.53 G2  EntryGuard.test_a_stick_held_at_the_rim_through_the_entry_is_guarded_until_it_comes_back
+  90.6 C4/C5/S7  ChordedDelays.test_holding_the_stick_uses_up_the_tap
+
+A9 (unverified; run both ways): Removing a layer fires the exposed layer command on an input that is held (held-input rule 3)
+  Rules: R114
+  90.10 D3  Steering.test_the_stick_modifier_ends_on_a_roll_to_the_side
+  90.14 P10  PadClick.test_a_missed_click_release_clears_on_its_own
+  90.16 X1  PadClickExits.test_a_thumb_that_lifts_takes_the_click_layers_and_what_is_under_them
+  90.16 X2  PadClickExits.test_a_thumb_that_lifts_in_circular_scroll_ends_the_scroll_too
+  90.16 X3  PadClickExits.test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add
+  90.17 S1  SoftPressOnly.test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add
+  90.17 S3  SoftPressOnly.test_each_click_layer_clears_by_its_soft_press_exit_with_the_thumb_still_down
+  90.18 H2  Handoff.test_a_click_that_ends_before_the_hand_over_sends_nothing_and_clears
+  90.18 H3  Handoff.test_a_thumb_that_lifts_ends_the_entry_point
+  90.18 H4  Handoff.test_a_touch_release_seen_before_the_click_lets_go
+  90.19 K1  Holds.test_an_ordinary_click_comes_and_goes_whether_or_not_the_hold_works
+  90.19 K2  Holds.test_a_press_inside_a_final_layer_is_held_by_the_layer_and_ends_with_it
+  90.19 K3  Holds.test_the_thumb_lifting_and_a_missed_release_still_clear_a_final_layer
+  90.20 B1  OneAdd.test_a_held_click_adds_the_entry_point_once_and_bumps_once [frozen 90.49]
+  90.21 C5  CursorGyro.test_a_held_modifier_answers_both_sticks_and_the_exit_waits_for_it
+  90.21 C6  CursorGyro.test_a_window_answers_both_sticks_and_the_exit_follows_when_it_closes
+  90.21 C9  CursorGyro.test_entering_with_both_sticks_out_leaves_again_at_once
+  90.25 K4  MenuKeys.test_both_sticks_out_leaves
+  90.28 W3  WindowPads.test_a_touch_and_a_click_that_start_inside_a_window_do_nothing_until_it_ends
+  90.30 W3  PadWindow.test_with_both_modifiers_held_the_one_still_down_gets_its_modifier_back
+  90.33 B3  TheBumpersInTheGuard.test_at_centre_a_bumper_ends_the_guard_with_a_pulse_and_drives [frozen 90.41]
+  90.33 B5  TheBumpersInTheGuard.test_after_a_bumper_hold_with_the_stick_let_go_the_next_bumper_drives [frozen 90.41]
+  90.33 L5  LeavingFromTheGuard.test_after_a_menu_hold_with_the_stick_let_go_a_bumper_drives [frozen 90.41]
+  90.34 E1  OpenEdges.test_in_steering_base_turn_assist_runs_and_a_driver_ends_it_and_drives
+  90.37 M2  BaseMenuChords.test_held_menu_button_reenters_when_a_stick_window_expires
+  90.38 M1  SteeringRtp.test_each_stateful_owner_enters_and_releases_both_menu_fn_layers
+  90.39 M2  BackportedInteractions.test_held_menu_after_rtp_window_and_missed_release
+  90.39 P2  BackportedInteractions.test_rtp_window_exits_before_a_held_direction_enters_fallback
+  90.39 P3  BackportedInteractions.test_rtp_before_and_during_fallback_keeps_the_timer_isolated
+  90.39 P4  BackportedInteractions.test_pad_release_inside_fallback_removes_window_before_other_helpers
+  90.39 P5  BackportedInteractions.test_scroll_and_touch_helpers_clear_on_pad_release_in_each_steering_window
+  90.39 F4  FallbackWindow.test_a_driver_or_a_menu_button_leaves_steering_once_the_second_is_over
+  90.39 F5  FallbackWindow.test_a_thumb_leaving_a_stick_starts_the_second_over
+  90.39 R3  Replacements.test_a_button_held_from_inside_the_second_leaves_steering_when_it_ends
+  90.42 S1  SteeringFullDeflectionExit.test_up_and_down_exit_once_and_continue_base_movement_with_gyro_preserved
+  90.42 S2  SteeringFullDeflectionExit.test_a_direction_already_held_when_steering_lands_is_protected_until_release
+  90.42 S4  SteeringFullDeflectionExit.test_rtp_window_leaves_before_a_held_direction_clears_steering
+  90.43 E1  SteeringEntryProtection.test_a_direction_carried_into_entry_is_protected_until_released
+  90.43 E4  SteeringEntryProtection.test_direction_roll_or_edge_release_can_arm_a_still_held_full_direction
+  90.43 E5  SteeringEntryProtection.test_fresh_or_carried_drivers_remove_the_guard_before_driving
+  90.43 E11  SteeringEntryProtection.test_a_missed_movement_release_recovers_on_a_real_release_or_handoff
+  90.43 E12  SteeringEntryProtection.test_a_new_full_direction_after_disarming_clears_once_and_keeps_gyro
+  90.43 D1  SteeringModifierRecovery.test_camera_recovery_keeps_the_held_driver_through_the_old_fifty_ms_gap
+  90.43 D2  SteeringModifierRecovery.test_button_recovery_does_not_take_ownership_of_a_valid_driver
+  90.43 D3  SteeringModifierRecovery.test_the_driver_still_cleans_itself_after_its_release_was_missed
+  90.43 D4  SteeringModifierRecovery.test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver
+  90.43 D5  SteeringModifierRecovery.test_a_scroll_cover_keeps_its_held_output_and_recovers_a_missed_driver_release
+  90.43 B1  LayerFeedback.test_gyro_toggle_requests_exactly_one_beep_in_every_press_and_release_order
+  90.43 B2  LayerFeedback.test_steering_mod2_cleanup_preserves_steering_without_a_clear_beep
+  90.44 E1  EntryGuardDriverEdge.test_both_carried_drivers_disarm_centered_entry_without_clearing_steering
+  90.44 E2  EntryGuardDriverEdge.test_deflected_both_driver_entry_hands_off_without_exposing_the_steering_clear
+  90.44 E3  EntryGuardDriverEdge.test_reexposed_guard_recovers_after_a_timed_window_with_both_drivers_held
+  90.44 E4  EntryGuardDriverEdge.test_single_driver_handoffs_remain_quiet_for_carried_and_fresh_inputs
+  90.44 H1  QuietSteeringDrivers.test_modifier_release_and_delayed_wheel_step_are_silent
+  90.44 S1  QuietSteeringDrivers.test_centered_mod2_cleanup_permits_the_still_held_driver_to_reacquire
+  90.44 S2  QuietSteeringDrivers.test_covered_mod2_use_preserves_steering_and_missed_release_recovers
+  90.44 S3  QuietSteeringDrivers.test_full_direction_after_mod2_cleanup_still_uses_the_separate_steering_clear
+  90.44 S4  QuietSteeringDrivers.test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear
+  90.44 C1  RetainedCursorGyro.test_short_gestures_toggle_gyro_off_and_on_while_retaining_cursor_in_every_order
+  90.44 C2  RetainedCursorGyro.test_held_cover_use_and_missed_releases_keep_cursor_and_recover_modifiers
+  90.44 C3  RetainedCursorGyro.test_deliberate_stick_and_menu_exits_still_work_after_gyro_was_toggled_off
+  90.46 E1  RepeatingSteeringDrivers.test_single_fresh_and_carried_drivers_acquire_and_release_quietly
+  90.46 E2  RepeatingSteeringDrivers.test_both_fresh_and_carried_drivers_reach_mod2_in_either_order
+  90.46 E3  RepeatingSteeringDrivers.test_centered_mod2_reacquires_the_remaining_driver_for_each_release_order
+  90.46 E4  RepeatingSteeringDrivers.test_first_or_carried_direction_stays_protected_until_an_explicit_driver_handoff
+  90.46 R1  RampMenuExits.test_either_menu_clears_every_ramp_stage_and_preserves_tap_or_hold
+  90.46 R2  RampMenuExits.test_menu_cleanup_with_a_held_firing_button_keeps_one_mouse_press
+  90.46 R5  RampMenuExits.test_recentering_after_ramp_cleanup_allows_the_normal_menu_tap_and_fn_hold
+  90.46 R3  RampMenuExits.test_start_and_stick_click_enter_steering_from_every_ramp_stage_without_residue
+  90.46 R4  RampMenuExits.test_ramp_owned_driver_recovery_still_clears_initial_gyro_suppression
+  90.47 T1  SteeringStickTouches.test_each_stick_inherits_hold_and_double_tap_after_entry_protection
+  90.47 T2  SteeringStickTouches.test_resting_thumbs_do_not_bypass_the_guard_but_resume_helpers_after_disarming
+  90.47 W1  StickTouchWindows.test_plain_ws_isolates_each_window_and_a_held_full_direction_clears_only_after_expiry
+  90.47 W2  StickTouchWindows.test_a_real_right_stick_tap_protects_a_full_left_stick_push_until_its_window_expires
+  90.47 W3  StickTouchWindows.test_windows_keep_driver_adds_and_menus_blocked_then_held_drivers_resume
+  90.47 T3  SteeringTouchHandoffs.test_existing_helpers_allow_driver_modifiers_and_clean_up_after_release
+  90.47 T4  SteeringTouchHandoffs.test_helpers_allow_ramps_and_contextual_menus_without_residue
+  90.47 T5  SteeringTouchHandoffs.test_fresh_touch_recovers_a_missed_driver_release_and_helpers_recover_a_missed_thumb_lift
+  90.48 H1  QuietGyroSwitch.test_quick_toggle_and_long_dual_hold_have_no_haptic_in_either_order
+  90.48 H2  QuietGyroSwitch.test_missed_dual_hold_release_recovers_without_haptic
+  90.48 E1  GuardHandoff.test_fresh_and_carried_driver_handoffs_with_full_deflection_do_not_clear
+  90.48 E3  GuardHandoff.test_missed_driver_release_after_guard_handoff_recovers
+  90.49 S1  SteeringScroll.test_flick_and_thumb_lift_complete_once [frozen 90.49]
+  90.49 S2  SteeringScroll.test_single_hold_and_second_push_keep_existing_scroll_contract
+  90.50 C1  PadClicks.test_held_right_pad_click_survives_modifier_cover
+  90.50 C3  PadClicks.test_held_right_click_survives_stick_thumb_release_completion
+  90.50 C2  PadClicks.test_no_early_bump_for_each_pad_and_location
+  90.51 S1  StickDeflect.test_four_deflects_in_one_driver_hold_each_scroll_once
+  90.51 S2  StickDeflect.test_a_missed_driver_release_with_the_stick_held_clears_on_the_next_input
+  90.52 S1  StickDeflect.test_four_quick_deflects_scroll_once_each_at_50_ms
+  90.52 S2  StickDeflect.test_a_second_deflect_scrolls_on_the_press_and_reopens_the_window
+  90.52 S3  StickDeflect.test_a_second_deflect_held_past_150_ms_repeats_and_ends_on_its_release
+  90.52 S4  StickDeflect.test_a_hold_past_200_ms_adds_the_marker_and_does_not_scroll
+  90.52 S5  StickDeflect.test_a_roll_into_a_side_ends_the_modifier_without_a_scroll
+  90.52 S6  StickDeflect.test_a_thumb_lifted_in_the_window_only_closes_it
+  90.52 S7  StickDeflect.test_a_thumb_that_leaves_the_stick_in_a_second_deflect_ends_it_clean
+  90.52 S8  StickDeflect.test_a_missed_driver_release_with_the_stick_held_clears_as_the_marker_lands
+  90.53 S1  EntryAndEdge.test_no_stick_movement_removes_the_driver_layer_while_the_driver_is_held
+  90.53 S2  EntryAndEdge.test_every_deflect_in_one_driver_hold_adds_its_modifier_and_scrolls_once
+  90.53 S3  EntryAndEdge.test_a_missed_driver_release_clears_when_the_edge_comes_back
+  90.53 S4  EntryAndEdge.test_pressing_the_driver_again_shuts_the_edge_chord_off
+  90.53 S5  EntryAndEdge.test_a_side_key_never_adds_the_hold_marker
+  90.53 S6  EntryAndEdge.test_the_right_pad_layers_stay_when_the_hold_marker_lands
+  90.53 T1  TimersOnTheDrivers.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.53 T2  TimersOnTheDrivers.test_second_deflects_chain_and_the_cover_waits_its_150_ms_every_time
+  90.53 T3  TimersOnTheDrivers.test_the_other_driver_enters_modifier_2_at_once_from_any_stick_layer
+  90.53 T4  TimersOnTheDrivers.test_the_driver_let_go_ends_the_stick_layers_wherever_the_sequence_is
+  90.53 G3  EntryGuard.test_a_driver_takes_over_from_the_guard
+  90.54 E1  TimerOnTheEdge.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.54 E2  TimerOnTheEdge.test_a_press_during_the_deflect_makes_it_a_hold_at_once
+  90.54 E3  TimerOnTheEdge.test_the_other_driver_enters_modifier_2_during_the_deflect
+  90.54 E4  TimerOnTheEdge.test_a_missed_driver_release_during_the_deflect_leaves_no_steering_stick_layer
+  90.9 K4  MenuComboKeys.test_a_held_fn_key_becomes_its_base_binding_when_the_menu_button_lifts
+  Temp cursor gyro TC4  TempCursorGyro.test_a_cancel_input_puts_the_tap_cover_on_for_the_rest_of_the_hold
+  Triggers and ramp-up TR7  TriggersAndRampUp.test_a_modifier_pressed_during_ramp_up_ends_it
+  Triggers and ramp-up TR8  TriggersAndRampUp.test_the_edge_the_triggers_and_the_modifiers_in_gyro
+  Held inputs across layer changes HI2  RecoveryAndHeldInputs.test_the_staggered_gyro_toggle
+
+A10 (reported by the author; relies on it): A key or mouse output fires on an input that is already held when its layer is added
+  Rules: R138
+  90.10 T8  MenuAndTransitions.test_the_other_menu_button_types_one_backspace_or_enter_before_fn_is_up
+  90.10 D6  Steering.test_w_carries_on_through_the_window_and_after_it
+  90.12 C6  CleanupLists.test_a_double_tap_scrolls_a_used_bumper_does_not_and_the_quick_tap_toggles_gyro
+  90.14 P1  PadClick.test_a_centre_click_is_the_middle_click
+  90.14 P2  PadClick.test_an_outer_click_is_the_d_pad_button
+  90.14 P3  PadClick.test_the_left_pad_has_the_same_two_layers
+  90.14 P4  PadClick.test_the_choice_holds_while_the_thumb_slides
+  90.14 P5  PadClick.test_the_overlap_of_the_two_ranges_sends_one_output
+  90.14 P8  PadClick.test_a_modifier_and_a_pad_click_leave_each_other_alone
+  90.14 P11  PadClick.test_a_click_in_circular_scroll_goes_through_the_entry_point
+  90.14 P12  PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it
+  90.15 M1  MenuSecondPressKeys.test_the_direction_exit_waits_for_the_second_press_layer_to_release
+  90.15 M3  MenuSecondPressKeys.test_outside_steering_the_second_press_is_as_it_was
+  90.16 X3  PadClickExits.test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add
+  90.16 X4  PadClickExits.test_the_outer_buttons_come_after_5_ms_and_the_middle_click_at_once
+  90.17 S1  SoftPressOnly.test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add
+  90.17 S2  SoftPressOnly.test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click
+  90.18 H1  Handoff.test_the_entry_point_is_gone_once_the_chosen_layer_is_on
+  90.19 K1  Holds.test_an_ordinary_click_comes_and_goes_whether_or_not_the_hold_works
+  90.20 B1  OneAdd.test_a_held_click_adds_the_entry_point_once_and_bumps_once [frozen 90.49]
+  90.20 B2  OneAdd.test_each_new_click_adds_it_again
+  90.21 C7  CursorGyro.test_a_menu_tap_types_its_key_and_the_layer_stays
+  90.24 K4  RequiredCleanups.test_a_button_press_ends_a_stuck_layer_and_then_does_what_it_does_underneath
+  90.25 P5  PadTouch.test_a_left_pad_swipe_types_its_key
+  90.25 P7  PadTouch.test_a_pad_click_still_works_in_steering [frozen 90.49]
+  90.25 M3  ChordedMenu.test_a_double_tap_and_hold_holds_the_key_and_a_third_press_chains
+  90.25 M7  ChordedMenu.test_inside_a_stateful_layer_both_menu_buttons_type_the_key_as_before
+  90.27 B3  Pads.test_a_swipe_needs_no_layer_under_it
+  90.27 B4  Pads.test_steering_and_the_tap_cover_use_bases_click [frozen 90.49]
+  90.28 M3  EveryPress.test_a_double_tap_and_hold_holds_the_key_on_a_later_press_too
+  90.28 M6  EveryPress.test_in_steering_and_cursor_gyro_the_second_button_types_at_once
+  90.28 W4  WindowPads.test_a_swipe_inside_a_window_types_its_key_with_no_layer
+  90.33 G1  TheStickBringsItIn.test_up_or_down_brings_the_guard_in_at_once_with_a_low_pulse [frozen 90.41]
+  90.33 G4  TheStickBringsItIn.test_entering_steering_with_the_stick_up_brings_the_guard_in_and_with_it_left_does_not [frozen 90.41]
+  90.34 E2  OpenEdges.test_in_the_fallback_turn_assist_runs_and_leaves_nothing_behind [frozen 90.41]
+  90.34 E3  OpenEdges.test_the_guard_can_land_over_a_ramp_stage_and_everything_unwinds [frozen 90.41]
+  90.35 S1  TheSwap.test_one_of_the_two_is_on_through_a_whole_round [frozen 90.41]
+  90.35 S4  TheSwap.test_the_guard_has_stateful_menus_and_since_90_38_inherits_bases_pad [frozen 90.41]
+  90.39 F1  FallbackWindow.test_holding_past_the_second_and_letting_go_leaves_steering
+  90.39 F2  FallbackWindow.test_letting_go_inside_the_second_keeps_steering_every_time
+  90.39 F3  FallbackWindow.test_a_roll_to_the_side_ends_the_second_and_coming_back_starts_a_new_one
+  90.42 S1  SteeringFullDeflectionExit.test_up_and_down_exit_once_and_continue_base_movement_with_gyro_preserved
+  90.42 S2  SteeringFullDeflectionExit.test_a_direction_already_held_when_steering_lands_is_protected_until_release
+  90.43 E1  SteeringEntryProtection.test_a_direction_carried_into_entry_is_protected_until_released
+  90.43 E2  SteeringEntryProtection.test_centered_entry_and_resting_thumbs_preserve_the_first_push
+  90.43 E3  SteeringEntryProtection.test_a_shallow_direction_release_disarms_without_an_outer_edge
+  90.43 E9  SteeringEntryProtection.test_pad_and_ramp_inputs_do_not_hide_the_protected_release
+  90.43 E10  SteeringEntryProtection.test_left_pad_swipes_keep_plain_keys_without_helpers
+  90.43 E12  SteeringEntryProtection.test_a_new_full_direction_after_disarming_clears_once_and_keeps_gyro
+  90.46 E4  RepeatingSteeringDrivers.test_first_or_carried_direction_stays_protected_until_an_explicit_driver_handoff
+  90.47 T2  SteeringStickTouches.test_resting_thumbs_do_not_bypass_the_guard_but_resume_helpers_after_disarming
+  90.47 W1  StickTouchWindows.test_plain_ws_isolates_each_window_and_a_held_full_direction_clears_only_after_expiry
+  90.47 W2  StickTouchWindows.test_a_real_right_stick_tap_protects_a_full_left_stick_push_until_its_window_expires
+  90.51 C1  RingBump.test_a_ring_click_types_its_output_on_both_pads
+  90.52 S5  StickDeflect.test_a_roll_into_a_side_ends_the_modifier_without_a_scroll
+  90.52 P1  HeldPadClick.test_a_held_pad_click_stays_when_a_thumb_lifts_from_a_stick
+  90.53 S5  EntryAndEdge.test_a_side_key_never_adds_the_hold_marker
+  90.53 T3  TimersOnTheDrivers.test_the_other_driver_enters_modifier_2_at_once_from_any_stick_layer
+  90.53 T4  TimersOnTheDrivers.test_the_driver_let_go_ends_the_stick_layers_wherever_the_sequence_is
+  90.53 G2  EntryGuard.test_a_stick_held_at_the_rim_through_the_entry_is_guarded_until_it_comes_back
+  90.54 E2  TimerOnTheEdge.test_a_press_during_the_deflect_makes_it_a_hold_at_once
+  90.54 E3  TimerOnTheEdge.test_the_other_driver_enters_modifier_2_during_the_deflect
+  90.7 S2  SlimSteeringOverlays.test_flick_then_flick_and_hold_repeats_the_scroll
+  90.6 R1  ChordedDelays.test_double_tap_and_hold_then_a_clean_release_through_the_cover
+  Menu buttons MB4  MenuButtons.test_enter_and_backspace_quickly_and_with_fn_up
+  Menu buttons MB5  MenuButtons.test_double_tap_and_hold_holds_the_key
+
+A11 (unverified; relies on it): A key or mouse output fires when a removal exposes it under an input that is held
+  90.10 T3  MenuAndTransitions.test_letting_go_of_the_menu_button_first_cancels
+  90.10 D6  Steering.test_w_carries_on_through_the_window_and_after_it
+  90.12 C7  CleanupLists.test_a_stuck_modifier_fn_layer_and_driver_each_clear
+  90.22 G5  Gamepad.test_letting_go_of_the_menu_button_before_the_click_types_one_key
+  90.25 K5  MenuKeys.test_a_stick_out_plus_a_button_leaves_and_the_press_counts_as_bases
+  90.39 F1  FallbackWindow.test_holding_past_the_second_and_letting_go_leaves_steering
+  90.46 R2  RampMenuExits.test_menu_cleanup_with_a_held_firing_button_keeps_one_mouse_press
+  90.46 R4  RampMenuExits.test_ramp_owned_driver_recovery_still_clears_initial_gyro_suppression
+  90.9 K3  MenuComboKeys.test_the_accepted_stray_key_when_the_first_menu_button_is_lifted_first
+  Temp cursor gyro TC4  TempCursorGyro.test_a_cancel_input_puts_the_tap_cover_on_for_the_rest_of_the_hold
+  Triggers and ramp-up TR5  TriggersAndRampUp.test_a_trigger_pull_brings_the_gyro_back_and_the_first_click_registers
+  Default trigger reference match DT2  TriggersAndRampUp.test_soft_and_full_pulls_in_base_gyro_and_the_ramp_stages
+
+A12 (reported by the author; relies on it): An interrupted delayed `add_layer` can fail to fire on the next press. Repeated removal of its target has restarted and recovered the delay in observed cases; a full restart is not dependable across all layer transitions
+  Rules: R120, R121, R122
+  90.26 D2  Disturbed.test_a_stick_touch_during_a_hold_costs_nothing
+  90.26 D3  Disturbed.test_a_right_pad_touch_around_a_hold_costs_nothing_since_90_30
+  90.6 C4/C5/S7  ChordedDelays.test_holding_the_stick_uses_up_the_tap
+
+A13 (reported by the author; relies on it): Layer removal can disturb a running start delay. It sometimes restarts or postpones it; rapid or simultaneous add/remove transitions can instead make a following delay appear to fire immediately
+  Rules: R123, R126, R141
+  90.26 D1  Disturbed.test_a_left_pad_touch_during_a_hold_costs_nothing
+  90.26 D2  Disturbed.test_a_stick_touch_during_a_hold_costs_nothing
+  90.26 D3  Disturbed.test_a_right_pad_touch_around_a_hold_costs_nothing_since_90_30
+  90.30 T1  NoCoverResets.test_a_pad_touch_no_longer_postpones_a_hold
+  90.38 D1  SteeringRtp.test_menu_delay_adds_its_target_before_removing_rtp
+  90.38 D2  SteeringRtp.test_directional_hold_completes_before_rtp_cleanup
+  90.39 D1  BackportedInteractions.test_menu_and_directional_delays_apply_before_rtp_cleanup
+  90.39 D2  BackportedInteractions.test_stick_touch_completions_preserve_target_before_rtp_cleanup
+  90.42 F3  FnEntryFeedback.test_both_thumb_release_completions_bump_before_helper_cleanup
+
+A14 (unverified; relies on it): A delay starts again when a removal exposes it under a button that is held
+  90.10 T5  MenuAndTransitions.test_stick_guards_come_and_go_and_the_menu_tap_or_hold_behaves
+  90.10 T7  MenuAndTransitions.test_the_accepted_gap_under_the_menu_tap_cover
+  90.15 M1  MenuSecondPressKeys.test_the_direction_exit_waits_for_the_second_press_layer_to_release
+  90.33 B4  TheBumpersInTheGuard.test_letting_the_driver_go_with_the_stick_up_pushes_back_into_the_guard [frozen 90.41]
+  90.46 R5  RampMenuExits.test_recentering_after_ramp_cleanup_allows_the_normal_menu_tap_and_fn_hold
+
+A16 (unverified; relies on it): A delay's clock starts when its layer is added, not at the physical press
+  90.10 D5  Steering.test_the_stick_double_tap
+  90.25 T1  TapCoverResets.test_a_normal_touch_never_fires_the_reset
+  90.25 M1  ChordedMenu.test_a_chorded_tap_types_the_key_once
+  90.25 M2  ChordedMenu.test_holding_both_menu_buttons_enters_menu_keys
+  90.25 M5  ChordedMenu.test_the_hold_also_works_once_the_fn_layer_is_up
+  90.26 H1  Holds.test_every_single_button_hold_lands_at_200_ms
+  90.26 H2  Holds.test_modifier_2_and_menu_keys_take_200_ms_from_the_second_button
+  90.26 H3  Holds.test_the_steering_modifiers_take_200_ms
+  90.27 B1  Pads.test_a_touch_gives_no_bump_and_the_right_pads_entry_point_comes_at_once
+  90.28 M2  EveryPress.test_a_hold_enters_menu_keys_on_a_later_press_too
+  90.29 Q2  Beeps.test_menu_keys_beeps_and_pulses_coming_on_and_beeps_going_off
+  90.30 T1  NoCoverResets.test_a_pad_touch_no_longer_postpones_a_hold
+  90.30 T2  NoCoverResets.test_the_tap_covers_still_come_at_150_ms_and_a_short_touch_still_opens_the_window
+  90.37 M1  BaseMenuChords.test_menu_hold_with_a_thumb_already_resting
+  90.37 M2  BaseMenuChords.test_held_menu_button_reenters_when_a_stick_window_expires
+  90.38 M1  SteeringRtp.test_each_stateful_owner_enters_and_releases_both_menu_fn_layers
+  90.38 M2  SteeringRtp.test_stateful_menu_reenters_after_a_pad_window_and_recovers_a_missed_release
+  90.38 P1  SteeringRtp.test_touch_hold_and_double_tap_scroll_work_in_armed_steering
+  90.38 P2  SteeringRtp.test_rtp_window_blocks_steering_direction_mutations_until_it_exits
+  90.38 D1  SteeringRtp.test_menu_delay_adds_its_target_before_removing_rtp
+  90.38 D2  SteeringRtp.test_directional_hold_completes_before_rtp_cleanup
+  90.39 M1  BackportedInteractions.test_menu_holds_with_resting_thumbs_in_each_entry_context
+  90.39 M2  BackportedInteractions.test_held_menu_after_rtp_window_and_missed_release
+  90.39 M3  BackportedInteractions.test_opposite_menu_button_repeats_in_entry_and_fn_contexts
+  90.39 P1  BackportedInteractions.test_rtp_hold_and_scroll_work_in_ordinary_steering_and_entry_guard
+  90.39 P2  BackportedInteractions.test_rtp_window_exits_before_a_held_direction_enters_fallback
+  90.39 P3  BackportedInteractions.test_rtp_before_and_during_fallback_keeps_the_timer_isolated
+  90.39 P6  BackportedInteractions.test_pad_clicks_during_the_window_cannot_change_its_timer
+  90.39 D1  BackportedInteractions.test_menu_and_directional_delays_apply_before_rtp_cleanup
+  90.39 D2  BackportedInteractions.test_stick_touch_completions_preserve_target_before_rtp_cleanup
+  90.39 C1  BackportedInteractions.test_gyro_two_driver_quick_clear_both_orders_and_release_orders
+  90.39 C2  BackportedInteractions.test_menu_plus_stick_clear_preserves_gyro
+  90.39 C3  BackportedInteractions.test_gyro_clear_removes_stale_steering_helpers
+  90.39 O1  BackportedInteractions.test_reordered_modifier_cursor_scroll_and_two_driver_inputs
+  90.39 E1  BackportedInteractions.test_turn_assist_is_cleared_on_steering_entry_and_stays_blocked
+  90.39 F1  FallbackWindow.test_holding_past_the_second_and_letting_go_leaves_steering
+  90.39 F3  FallbackWindow.test_a_roll_to_the_side_ends_the_second_and_coming_back_starts_a_new_one
+  90.39 F4  FallbackWindow.test_a_driver_or_a_menu_button_leaves_steering_once_the_second_is_over
+  90.39 F5  FallbackWindow.test_a_thumb_leaving_a_stick_starts_the_second_over
+  90.39 F6  FallbackWindow.test_thumbs_resting_on_both_sticks_do_nothing_as_the_window_closes
+  90.39 R1  Replacements.test_a_tap_inside_the_second_sends_its_replacement_and_the_second_runs_on
+  90.39 R3  Replacements.test_a_button_held_from_inside_the_second_leaves_steering_when_it_ends
+  90.39 R4  Replacements.test_after_the_second_a_driver_or_a_menu_button_leaves_steering_at_once
+  90.42 F1  FnEntryFeedback.test_delayed_fn_entry_bumps_once_without_a_beep
+  90.42 F2  FnEntryFeedback.test_the_opposite_menu_chord_bumps_on_early_fn_entry
+  90.42 F3  FnEntryFeedback.test_both_thumb_release_completions_bump_before_helper_cleanup
+  90.42 S4  SteeringFullDeflectionExit.test_rtp_window_leaves_before_a_held_direction_clears_steering
+  90.43 E6  SteeringEntryProtection.test_fresh_menu_handoffs_preserve_fn_feedback
+  90.43 D5  SteeringModifierRecovery.test_a_scroll_cover_keeps_its_held_output_and_recovers_a_missed_driver_release
+  90.44 H1  QuietSteeringDrivers.test_modifier_release_and_delayed_wheel_step_are_silent
+  90.44 S2  QuietSteeringDrivers.test_covered_mod2_use_preserves_steering_and_missed_release_recovers
+  90.44 C2  RetainedCursorGyro.test_held_cover_use_and_missed_releases_keep_cursor_and_recover_modifiers
+  90.46 E3  RepeatingSteeringDrivers.test_centered_mod2_reacquires_the_remaining_driver_for_each_release_order
+  90.46 R1  RampMenuExits.test_either_menu_clears_every_ramp_stage_and_preserves_tap_or_hold
+  90.46 R2  RampMenuExits.test_menu_cleanup_with_a_held_firing_button_keeps_one_mouse_press
+  90.46 R5  RampMenuExits.test_recentering_after_ramp_cleanup_allows_the_normal_menu_tap_and_fn_hold
+  90.47 H1  QuietTempCursorAdds.test_both_ordinary_and_gyro_modifiers_apply_the_cursor_silently_at_200_ms
+  90.47 T1  SteeringStickTouches.test_each_stick_inherits_hold_and_double_tap_after_entry_protection
+  90.47 W1  StickTouchWindows.test_plain_ws_isolates_each_window_and_a_held_full_direction_clears_only_after_expiry
+  90.47 W2  StickTouchWindows.test_a_real_right_stick_tap_protects_a_full_left_stick_push_until_its_window_expires
+  90.47 W3  StickTouchWindows.test_windows_keep_driver_adds_and_menus_blocked_then_held_drivers_resume
+  90.47 T3  SteeringTouchHandoffs.test_existing_helpers_allow_driver_modifiers_and_clean_up_after_release
+  90.47 T4  SteeringTouchHandoffs.test_helpers_allow_ramps_and_contextual_menus_without_residue
+  90.48 H1  QuietGyroSwitch.test_quick_toggle_and_long_dual_hold_have_no_haptic_in_either_order
+  90.48 H2  QuietGyroSwitch.test_missed_dual_hold_release_recovers_without_haptic
+  90.48 E1  GuardHandoff.test_fresh_and_carried_driver_handoffs_with_full_deflection_do_not_clear
+  90.53 T1  TimersOnTheDrivers.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.53 T2  TimersOnTheDrivers.test_second_deflects_chain_and_the_cover_waits_its_150_ms_every_time
+  90.54 E1  TimerOnTheEdge.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.7 S1  SlimSteeringOverlays.test_a_face_button_inside_the_stick_window
+
+A18 (unverified (the author's hypothesis); works either way): A `remove_layer` call makes Steam re-evaluate held inputs
+  90.52 P1  HeldPadClick.test_a_held_pad_click_stays_when_a_thumb_lifts_from_a_stick
+
+A24 (reported by the author; works either way): Adding or removing another layer while a layer with an Always On action is active caused crashes
+  Rules: R140, R146, R147, R148, R149
+
+A26 (unverified. a 2022 community report says sticks inherit only from the top layer and the action set; relies on it): Stick inputs inherit through the middle of the stack like any other input
+  Rules: R140
+  90.39 G1  EntryGuard.test_the_entry_guard_ends_when_the_direction_held_at_entry_lets_go
+
+A27 (reported; relies on it): An active chord suppresses an interruptible Regular Press on the same input. How two chords on one input are ordered is not known
+  Rules: R133, R135
+  90.10 T6  MenuAndTransitions.test_a_stick_touch_clears_a_stale_guard
+  90.12 C2  CleanupLists.test_a_held_bumper_keeps_modifier_2_through_a_stick_touch
+  90.12 C4  CleanupLists.test_steering_modifier_2_stays_while_one_bumper_is_held
+  90.14 P9  PadClick.test_a_stick_touch_leaves_a_pad_click_that_is_held
+  90.22 G3  Gamepad.test_a_menu_button_held_plus_a_stick_click_leaves_it
+  90.23 C2  StickTouches.test_a_touch_under_a_held_menu_button_moves_no_layer
+  90.23 C3  StickTouches.test_a_stick_touch_clears_a_stale_cover_over_a_pad_layer
+  90.24 K2  RequiredCleanups.test_a_stick_touch_does_nothing_while_the_layers_button_is_held
+  90.25 K5  MenuKeys.test_a_stick_out_plus_a_button_leaves_and_the_press_counts_as_bases
+  90.25 K6  MenuKeys.test_a_menu_button_plus_a_stick_click_clears
+  90.37 M1  BaseMenuChords.test_menu_hold_with_a_thumb_already_resting
+  90.37 M3  BaseMenuChords.test_a_missed_menu_release_clears_and_the_next_hold_works
+  90.39 M1  BackportedInteractions.test_menu_holds_with_resting_thumbs_in_each_entry_context
+  90.54 E1  TimerOnTheEdge.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.54 E2  TimerOnTheEdge.test_a_press_during_the_deflect_makes_it_a_hold_at_once
+  90.54 E4  TimerOnTheEdge.test_a_missed_driver_release_during_the_deflect_leaves_no_steering_stick_layer
+
+A31 (refuted as an unconditional claim by the author's report; works either way): A repeating activator keeps its schedule when another layer is removed
+  Rules: R114
+
+A32 (unverified; run both ways): When two separate activators on one input are due at the same moment, their order is not fixed. Inside one activator the array still runs bottom to top
+  90.43 D1  SteeringModifierRecovery.test_camera_recovery_keeps_the_held_driver_through_the_old_fifty_ms_gap
+  90.43 D3  SteeringModifierRecovery.test_the_driver_still_cleans_itself_after_its_release_was_missed
+  90.43 D4  SteeringModifierRecovery.test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver
+  90.43 D5  SteeringModifierRecovery.test_a_scroll_cover_keeps_its_held_output_and_recovers_a_missed_driver_release
+  90.43 B1  LayerFeedback.test_gyro_toggle_requests_exactly_one_beep_in_every_press_and_release_order
+  90.44 E1  EntryGuardDriverEdge.test_both_carried_drivers_disarm_centered_entry_without_clearing_steering
+  90.44 E2  EntryGuardDriverEdge.test_deflected_both_driver_entry_hands_off_without_exposing_the_steering_clear
+  90.44 E3  EntryGuardDriverEdge.test_reexposed_guard_recovers_after_a_timed_window_with_both_drivers_held
+  90.44 E4  EntryGuardDriverEdge.test_single_driver_handoffs_remain_quiet_for_carried_and_fresh_inputs
+  90.44 H1  QuietSteeringDrivers.test_modifier_release_and_delayed_wheel_step_are_silent
+  90.44 S1  QuietSteeringDrivers.test_centered_mod2_cleanup_permits_the_still_held_driver_to_reacquire
+  90.44 S2  QuietSteeringDrivers.test_covered_mod2_use_preserves_steering_and_missed_release_recovers
+  90.44 S3  QuietSteeringDrivers.test_full_direction_after_mod2_cleanup_still_uses_the_separate_steering_clear
+  90.44 S4  QuietSteeringDrivers.test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear
+  90.44 C1  RetainedCursorGyro.test_short_gestures_toggle_gyro_off_and_on_while_retaining_cursor_in_every_order
+  90.44 C2  RetainedCursorGyro.test_held_cover_use_and_missed_releases_keep_cursor_and_recover_modifiers
+  90.46 E1  RepeatingSteeringDrivers.test_single_fresh_and_carried_drivers_acquire_and_release_quietly
+  90.46 E2  RepeatingSteeringDrivers.test_both_fresh_and_carried_drivers_reach_mod2_in_either_order
+  90.46 E3  RepeatingSteeringDrivers.test_centered_mod2_reacquires_the_remaining_driver_for_each_release_order
+  90.46 E4  RepeatingSteeringDrivers.test_first_or_carried_direction_stays_protected_until_an_explicit_driver_handoff
+  90.46 R1  RampMenuExits.test_either_menu_clears_every_ramp_stage_and_preserves_tap_or_hold
+  90.46 R2  RampMenuExits.test_menu_cleanup_with_a_held_firing_button_keeps_one_mouse_press
+  90.46 R5  RampMenuExits.test_recentering_after_ramp_cleanup_allows_the_normal_menu_tap_and_fn_hold
+  90.46 R3  RampMenuExits.test_start_and_stick_click_enter_steering_from_every_ramp_stage_without_residue
+  90.46 R4  RampMenuExits.test_ramp_owned_driver_recovery_still_clears_initial_gyro_suppression
+  90.47 T2  SteeringStickTouches.test_resting_thumbs_do_not_bypass_the_guard_but_resume_helpers_after_disarming
+  90.47 W1  StickTouchWindows.test_plain_ws_isolates_each_window_and_a_held_full_direction_clears_only_after_expiry
+  90.47 W3  StickTouchWindows.test_windows_keep_driver_adds_and_menus_blocked_then_held_drivers_resume
+  90.48 H1  QuietGyroSwitch.test_quick_toggle_and_long_dual_hold_have_no_haptic_in_either_order
+  90.48 H2  QuietGyroSwitch.test_missed_dual_hold_release_recovers_without_haptic
+  90.48 E1  GuardHandoff.test_fresh_and_carried_driver_handoffs_with_full_deflection_do_not_clear
+  90.48 E3  GuardHandoff.test_missed_driver_release_after_guard_handoff_recovers
+  90.49 S1  SteeringScroll.test_flick_and_thumb_lift_complete_once [frozen 90.49]
+  90.51 S1  StickDeflect.test_four_deflects_in_one_driver_hold_each_scroll_once
+  90.52 S1  StickDeflect.test_four_quick_deflects_scroll_once_each_at_50_ms
+  90.52 S2  StickDeflect.test_a_second_deflect_scrolls_on_the_press_and_reopens_the_window
+  90.52 S3  StickDeflect.test_a_second_deflect_held_past_150_ms_repeats_and_ends_on_its_release
+  90.52 S4  StickDeflect.test_a_hold_past_200_ms_adds_the_marker_and_does_not_scroll
+  90.52 S5  StickDeflect.test_a_roll_into_a_side_ends_the_modifier_without_a_scroll
+  90.52 S6  StickDeflect.test_a_thumb_lifted_in_the_window_only_closes_it
+  90.52 S7  StickDeflect.test_a_thumb_that_leaves_the_stick_in_a_second_deflect_ends_it_clean
+  90.53 S1  EntryAndEdge.test_no_stick_movement_removes_the_driver_layer_while_the_driver_is_held
+  90.53 S2  EntryAndEdge.test_every_deflect_in_one_driver_hold_adds_its_modifier_and_scrolls_once
+  90.53 S3  EntryAndEdge.test_a_missed_driver_release_clears_when_the_edge_comes_back
+  90.53 S4  EntryAndEdge.test_pressing_the_driver_again_shuts_the_edge_chord_off
+  90.53 S5  EntryAndEdge.test_a_side_key_never_adds_the_hold_marker
+  90.53 S6  EntryAndEdge.test_the_right_pad_layers_stay_when_the_hold_marker_lands
+  90.53 T1  TimersOnTheDrivers.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.53 T2  TimersOnTheDrivers.test_second_deflects_chain_and_the_cover_waits_its_150_ms_every_time
+  90.53 T3  TimersOnTheDrivers.test_the_other_driver_enters_modifier_2_at_once_from_any_stick_layer
+  90.53 T4  TimersOnTheDrivers.test_the_driver_let_go_ends_the_stick_layers_wherever_the_sequence_is
+  90.54 E1  TimerOnTheEdge.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.54 E2  TimerOnTheEdge.test_a_press_during_the_deflect_makes_it_a_hold_at_once
+  90.54 E3  TimerOnTheEdge.test_the_other_driver_enters_modifier_2_during_the_deflect
+  90.54 E4  TimerOnTheEdge.test_a_missed_driver_release_during_the_deflect_leaves_no_steering_stick_layer
+  Temp cursor gyro TC6  TempCursorGyro.test_a_cancel_input_and_a_thumb_lift_together_at_200_ms
+
+A33 (reported; relies on it): Steam loads an exported VDF as written: the same layers, groups and bindings as the JSON it was made from
+  Rules: R151
+
+A34 (unverified; relies on it): A group marked `inactive modeshift` takes effect only while a `mode_shift` binding that targets it is held
+  No rule and no scenario rests on it
+
+A35 (unverified; works either way): Hold to Repeat with no stated rate repeats at one fixed default interval
+  Temp cursor gyro TC4  TempCursorGyro.test_a_cancel_input_puts_the_tap_cover_on_for_the_rest_of_the_hold
+
+A36 (unverified; relies on it): A chord is decided when its binding starts answering a held input: at the press, or when its layer lands or is exposed. Pressing the chord button afterwards doesn't start it
+  90.10 D4  Steering.test_stick_first_then_the_driver_is_a_modifier
+  90.21 C4  CursorGyro.test_both_sticks_out_remove_only_the_layer
+  90.24 K5  RequiredCleanups.test_the_other_driver_still_adds_the_modifier_2_layer_and_ends_a_stuck_driver_layer
+  90.28 M1  EveryPress.test_every_tap_in_one_hold_types_the_key
+  90.28 M2  EveryPress.test_a_hold_enters_menu_keys_on_a_later_press_too
+  90.28 M3  EveryPress.test_a_double_tap_and_hold_holds_the_key_on_a_later_press_too
+  90.28 M4  EveryPress.test_the_fn_layer_types_nothing_as_it_lands
+  90.28 M5  EveryPress.test_a_thumb_lift_brings_the_fn_layer_and_the_chain_still_runs
+  90.29 Q2  Beeps.test_menu_keys_beeps_and_pulses_coming_on_and_beeps_going_off
+  90.33 G3  TheStickBringsItIn.test_whichever_comes_first_decides_the_stick_or_the_driver [frozen 90.41]
+  90.33 B1  TheBumpersInTheGuard.test_with_the_stick_out_a_bumper_is_its_gyro_modifier_and_w_carries_on [frozen 90.41]
+  90.33 B2  TheBumpersInTheGuard.test_the_stick_held_sideways_also_makes_a_bumper_a_modifier [frozen 90.41]
+  90.33 C1  TheGuardsCleanup.test_a_fresh_stick_touch_at_centre_removes_the_guard_and_one_with_the_stick_out_does_not [frozen 90.41]
+  90.34 E3  OpenEdges.test_the_guard_can_land_over_a_ramp_stage_and_everything_unwinds [frozen 90.41]
+  90.35 S3  TheSwap.test_a_fresh_stick_touch_at_centre_hands_back_too [frozen 90.41]
+  90.37 M1  BaseMenuChords.test_menu_hold_with_a_thumb_already_resting
+  90.37 M2  BaseMenuChords.test_held_menu_button_reenters_when_a_stick_window_expires
+  90.37 M3  BaseMenuChords.test_a_missed_menu_release_clears_and_the_next_hold_works
+  90.38 M1  SteeringRtp.test_each_stateful_owner_enters_and_releases_both_menu_fn_layers
+  90.38 M2  SteeringRtp.test_stateful_menu_reenters_after_a_pad_window_and_recovers_a_missed_release
+  90.38 S2  SteeringRtp.test_gyro_modifier_edge_still_takes_precedence_over_the_fallback_chord [frozen 90.41]
+  90.39 M1  BackportedInteractions.test_menu_holds_with_resting_thumbs_in_each_entry_context
+  90.39 M2  BackportedInteractions.test_held_menu_after_rtp_window_and_missed_release
+  90.39 M3  BackportedInteractions.test_opposite_menu_button_repeats_in_entry_and_fn_contexts
+  90.39 O1  BackportedInteractions.test_reordered_modifier_cursor_scroll_and_two_driver_inputs
+  90.39 F6  FallbackWindow.test_thumbs_resting_on_both_sticks_do_nothing_as_the_window_closes
+  90.42 F1  FnEntryFeedback.test_delayed_fn_entry_bumps_once_without_a_beep
+  90.42 F2  FnEntryFeedback.test_the_opposite_menu_chord_bumps_on_early_fn_entry
+  90.42 F3  FnEntryFeedback.test_both_thumb_release_completions_bump_before_helper_cleanup
+  90.43 E5  SteeringEntryProtection.test_fresh_or_carried_drivers_remove_the_guard_before_driving
+  90.43 E6  SteeringEntryProtection.test_fresh_menu_handoffs_preserve_fn_feedback
+  90.43 E8  SteeringEntryProtection.test_a_carried_opposite_menu_does_not_consume_first_push_protection
+  90.43 D1  SteeringModifierRecovery.test_camera_recovery_keeps_the_held_driver_through_the_old_fifty_ms_gap
+  90.43 D2  SteeringModifierRecovery.test_button_recovery_does_not_take_ownership_of_a_valid_driver
+  90.44 E4  EntryGuardDriverEdge.test_single_driver_handoffs_remain_quiet_for_carried_and_fresh_inputs
+  90.44 C3  RetainedCursorGyro.test_deliberate_stick_and_menu_exits_still_work_after_gyro_was_toggled_off
+  90.46 E1  RepeatingSteeringDrivers.test_single_fresh_and_carried_drivers_acquire_and_release_quietly
+  90.46 E2  RepeatingSteeringDrivers.test_both_fresh_and_carried_drivers_reach_mod2_in_either_order
+  90.46 E3  RepeatingSteeringDrivers.test_centered_mod2_reacquires_the_remaining_driver_for_each_release_order
+  90.46 E4  RepeatingSteeringDrivers.test_first_or_carried_direction_stays_protected_until_an_explicit_driver_handoff
+  90.46 R1  RampMenuExits.test_either_menu_clears_every_ramp_stage_and_preserves_tap_or_hold
+  90.46 R2  RampMenuExits.test_menu_cleanup_with_a_held_firing_button_keeps_one_mouse_press
+  90.46 R5  RampMenuExits.test_recentering_after_ramp_cleanup_allows_the_normal_menu_tap_and_fn_hold
+  90.46 R3  RampMenuExits.test_start_and_stick_click_enter_steering_from_every_ramp_stage_without_residue
+  90.46 R4  RampMenuExits.test_ramp_owned_driver_recovery_still_clears_initial_gyro_suppression
+  90.47 T3  SteeringTouchHandoffs.test_existing_helpers_allow_driver_modifiers_and_clean_up_after_release
+  90.47 T5  SteeringTouchHandoffs.test_fresh_touch_recovers_a_missed_driver_release_and_helpers_recover_a_missed_thumb_lift
+  90.48 E1  GuardHandoff.test_fresh_and_carried_driver_handoffs_with_full_deflection_do_not_clear
+  90.51 S2  StickDeflect.test_a_missed_driver_release_with_the_stick_held_clears_on_the_next_input
+  90.52 S8  StickDeflect.test_a_missed_driver_release_with_the_stick_held_clears_as_the_marker_lands
+  90.53 T1  TimersOnTheDrivers.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.53 T2  TimersOnTheDrivers.test_second_deflects_chain_and_the_cover_waits_its_150_ms_every_time
+  90.54 E1  TimerOnTheEdge.test_taps_and_holds_in_any_order_keep_their_meaning
+
+A37 (unverified; works either way): When the layer that answers a held input changes and the new binding sends the same key, the key stays down with no release in between
+  90.10 T10  MenuAndTransitions.test_a_mouse_button_fires_through_a_window
+  90.10 D6  Steering.test_w_carries_on_through_the_window_and_after_it
+  90.46 R2  RampMenuExits.test_menu_cleanup_with_a_held_firing_button_keeps_one_mouse_press
+  90.53 T3  TimersOnTheDrivers.test_the_other_driver_enters_modifier_2_at_once_from_any_stick_layer
+  90.54 E3  TimerOnTheEdge.test_the_other_driver_enters_modifier_2_during_the_deflect
+
+A38 (unverified; relies on it): A stick group that doesn't state `edge_binding_invert` has a normal edge. It doesn't take the inverted setting of the group it replaces in a lower layer
+  Rules: R111
+  Temp cursor gyro TC8  TempCursorGyro.test_one_stick_keeps_the_cursor_and_both_remove_it
+  Temp cursor gyro TC9  TempCursorGyro.test_a_lost_modifier_clears_with_its_overlays
+
+A39 (unverified. a web search on 2026-10-02 found no report either way; the community steam input wiki lists the interruptible setting only for regular; works either way): An active Soft Press that is not interruptible suppresses an interruptible Soft Press on the same input
+  No rule and no scenario rests on it
+
+A40 (unverified. the layout used soft presses on stick edges only; relies on it): A Soft Press on a pad's outer ring reads the thumb's distance from the centre, on the scale of the D-pad deadzone and the outer ring radius (0 to 32767). An inverted one is active inside its threshold, and it fires reliably on a D-pad-mode pad
+  90.14 P1  PadClick.test_a_centre_click_is_the_middle_click
+  90.14 P2  PadClick.test_an_outer_click_is_the_d_pad_button
+  90.14 P3  PadClick.test_the_left_pad_has_the_same_two_layers
+  90.14 P5  PadClick.test_the_overlap_of_the_two_ranges_sends_one_output
+  90.14 P11  PadClick.test_a_click_in_circular_scroll_goes_through_the_entry_point
+  90.14 P12  PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it
+  90.17 S2  SoftPressOnly.test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click
+  90.18 H1  Handoff.test_the_entry_point_is_gone_once_the_chosen_layer_is_on
+  90.18 H3  Handoff.test_a_thumb_that_lifts_ends_the_entry_point
+  90.18 H4  Handoff.test_a_touch_release_seen_before_the_click_lets_go
+  90.25 P8  PadTouch.test_a_click_that_lands_with_the_touch_is_read_all_the_same
+  90.26 P2  Pads.test_the_outer_clicks_reset_fires_once_on_nothing_and_leaves_with_its_layer
+  90.27 B2  Pads.test_the_clicks_come_from_base_with_one_pulse [frozen 90.49]
+
+A41 (unverified. inferred on 2026-10-03; relies on it): A D-pad group that inverts its outer ring and states no radius uses a radius of about 24996 of 32767
+  90.14 P1  PadClick.test_a_centre_click_is_the_middle_click
+  90.14 P2  PadClick.test_an_outer_click_is_the_d_pad_button
+  90.14 P3  PadClick.test_the_left_pad_has_the_same_two_layers
+  90.14 P5  PadClick.test_the_overlap_of_the_two_ranges_sends_one_output
+  90.14 P11  PadClick.test_a_click_in_circular_scroll_goes_through_the_entry_point
+  90.14 P12  PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it
+  90.17 S2  SoftPressOnly.test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click
+  90.18 H1  Handoff.test_the_entry_point_is_gone_once_the_chosen_layer_is_on
+  90.27 B2  Pads.test_the_clicks_come_from_base_with_one_pulse [frozen 90.49]
+
+A42 (unverified. the author expects it ("a hold would behave like a release with a removal") and calls holds unreliable; in 90.13 the same self-hold sat on layers that base's own hold had put on; run both ways): A layer held with `hold_layer` is taken off when the activator that holds it is no longer active, also when `add_layer` put the layer on first and the layer holds itself
+  90.19 K1  Holds.test_an_ordinary_click_comes_and_goes_whether_or_not_the_hold_works
+  90.19 K2  Holds.test_a_press_inside_a_final_layer_is_held_by_the_layer_and_ends_with_it
+  90.19 K3  Holds.test_the_thumb_lifting_and_a_missed_release_still_clear_a_final_layer
+  90.20 B1  OneAdd.test_a_held_click_adds_the_entry_point_once_and_bumps_once [frozen 90.49]
+  90.52 P1  HeldPadClick.test_a_held_pad_click_stays_when_a_thumb_lifts_from_a_stick
+
+A43 (unverified; relies on it): On a button with an interruptible Regular Press, a Double Press and a Long Press: a tap sends the Regular Press once, after the Double Press time; a hold sends only the Long Press; a second press inside the Double Press time sends only the Double Press, for as long as it is held
+  Rules: R108, R168
+  90.22 G2  Gamepad.test_a_tap_a_double_press_and_a_hold_on_start_and_select
+  90.22 G4  Gamepad.test_a_quick_press_and_click_leaves_and_sends_no_start
+
+A44 (unverified; relies on it): Long Press and Double Press behave in a layer that no other layer is added over. This is the limit of A20
+  Rules: R108, R168
+  90.22 G2  Gamepad.test_a_tap_a_double_press_and_a_hold_on_start_and_select
+
+A45 (unverified; relies on it): A chord reads a button as held while that button carries Long Press and Double Press activators
+  Rules: R158
+  90.22 G3  Gamepad.test_a_menu_button_held_plus_a_stick_click_leaves_it
+  90.22 G4  Gamepad.test_a_quick_press_and_click_leaves_and_sends_no_start
+  90.22 G5  Gamepad.test_letting_go_of_the_menu_button_before_the_click_types_one_key
+
+A46 (unverified. the right pad's double tap window has read its ring on a touch since 90.6; works either way): A Soft Press on a pad's outer ring is read on a touch alone, with no click, when the pad's D-pad group doesn't require a click
+  No rule and no scenario rests on it
+
+A47 (reported by the author; works either way): A pad in directional swipe mode gives no touch Release
+  No rule and no scenario rests on it
+
+A48 (reported by the author; works either way): On a normal touch the right pad's Tap Cover reset fires once, as `RTP: Entry Point` lands on the thumb (A6), and not again: the Tap Cover lands at 150 ms and takes the touch over before the first repeat at 200 ms. That one removal leaves the trackball glide alone
+  No rule and no scenario rests on it
+
+A49 (unverified; relies on it): A layer command's two flags are the on-screen name and then the beep: `add_layer <layer> 0 1` beeps and shows no name
+  Rules: R161
+  90.29 Q1  Beeps.test_the_fn_hold_and_tap_do_not_beep
+  90.29 Q2  Beeps.test_menu_keys_beeps_and_pulses_coming_on_and_beeps_going_off
+  90.33 L1  LeavingFromTheGuard.test_the_quick_tap_of_both_bumpers_clears_to_base_with_gyro_on_or_off [frozen 90.41]
+  90.35 S5  TheSwap.test_the_quick_tap_from_the_guard_beeps_on_the_guard [frozen 90.41]
+  90.43 E1  SteeringEntryProtection.test_a_direction_carried_into_entry_is_protected_until_released
+  90.43 E7  SteeringEntryProtection.test_every_menu_click_clear_removes_guard_and_preserves_gyro
+  90.43 E12  SteeringEntryProtection.test_a_new_full_direction_after_disarming_clears_once_and_keeps_gyro
+  90.43 D4  SteeringModifierRecovery.test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver
+  90.43 D5  SteeringModifierRecovery.test_a_scroll_cover_keeps_its_held_output_and_recovers_a_missed_driver_release
+  90.43 B1  LayerFeedback.test_gyro_toggle_requests_exactly_one_beep_in_every_press_and_release_order
+  90.43 B2  LayerFeedback.test_steering_mod2_cleanup_preserves_steering_without_a_clear_beep
+  90.44 H1  QuietSteeringDrivers.test_modifier_release_and_delayed_wheel_step_are_silent
+  90.44 S1  QuietSteeringDrivers.test_centered_mod2_cleanup_permits_the_still_held_driver_to_reacquire
+  90.44 S3  QuietSteeringDrivers.test_full_direction_after_mod2_cleanup_still_uses_the_separate_steering_clear
+  90.44 S4  QuietSteeringDrivers.test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear
+  90.44 C1  RetainedCursorGyro.test_short_gestures_toggle_gyro_off_and_on_while_retaining_cursor_in_every_order
+  90.46 E3  RepeatingSteeringDrivers.test_centered_mod2_reacquires_the_remaining_driver_for_each_release_order
+  90.48 H1  QuietGyroSwitch.test_quick_toggle_and_long_dual_hold_have_no_haptic_in_either_order
+
+A50 (unverified. the author's july layout states a radius only in base and the fn layers; relies on it): A stick group that states no outer ring radius uses Steam's default, near the rim. It doesn't take the radius of the group it replaces in a lower layer
+  No rule and no scenario rests on it
+
+A51 (reported by the author; relies on it): A D-pad group's `layout` 0 is "Radial Without Overlap": a diagonal presses only the nearest direction. `layout` 1 is "Radial With Overlap", which a group that states none also gets. A layer's group does not change the layout of a four-way group under it
+  No rule and no scenario rests on it
+
+A52 (unverified; works either way): The stored order of an input's entries can change what Steam does: a Release stored between a Regular Press and its guard chord can stop the chord from interrupting the Regular Press
+  Rules: R133
+
+A53 (unverified; relies on it): A Soft Press on a D-pad stick direction with activation_threshold 29031 activates only near full deflection, and its repeating layer add fires on entry above that threshold
+  90.38 S1  SteeringRtp.test_full_direction_exits_steering_once_with_a_low_pulse
+  90.42 S1  SteeringFullDeflectionExit.test_up_and_down_exit_once_and_continue_base_movement_with_gyro_preserved
+  90.42 S2  SteeringFullDeflectionExit.test_a_direction_already_held_when_steering_lands_is_protected_until_release
+  90.42 S3  SteeringFullDeflectionExit.test_the_exit_removes_stale_steering_helpers_including_windows_first
+  90.42 S4  SteeringFullDeflectionExit.test_rtp_window_leaves_before_a_held_direction_clears_steering
+  90.43 E1  SteeringEntryProtection.test_a_direction_carried_into_entry_is_protected_until_released
+  90.43 E4  SteeringEntryProtection.test_direction_roll_or_edge_release_can_arm_a_still_held_full_direction
+  90.43 E12  SteeringEntryProtection.test_a_new_full_direction_after_disarming_clears_once_and_keeps_gyro
+  90.43 D1  SteeringModifierRecovery.test_camera_recovery_keeps_the_held_driver_through_the_old_fifty_ms_gap
+  90.43 D4  SteeringModifierRecovery.test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver
+  90.43 D5  SteeringModifierRecovery.test_a_scroll_cover_keeps_its_held_output_and_recovers_a_missed_driver_release
+  90.44 H1  QuietSteeringDrivers.test_modifier_release_and_delayed_wheel_step_are_silent
+  90.44 S3  QuietSteeringDrivers.test_full_direction_after_mod2_cleanup_still_uses_the_separate_steering_clear
+  90.44 S4  QuietSteeringDrivers.test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear
+  90.46 E4  RepeatingSteeringDrivers.test_first_or_carried_direction_stays_protected_until_an_explicit_driver_handoff
+  90.47 T2  SteeringStickTouches.test_resting_thumbs_do_not_bypass_the_guard_but_resume_helpers_after_disarming
+  90.47 W1  StickTouchWindows.test_plain_ws_isolates_each_window_and_a_held_full_direction_clears_only_after_expiry
+  90.47 W2  StickTouchWindows.test_a_real_right_stick_tap_protects_a_full_left_stick_push_until_its_window_expires
+
+A54 (unverified; explicitly requested by the author; relies on it): An activator-local inverted D-pad edge can reliably run a repeating chord when that edge binding answers the inward input. When it runs is A61: while no driver is held, not while one is, as this row said until 90.52
+  90.38 S2  SteeringRtp.test_gyro_modifier_edge_still_takes_precedence_over_the_fallback_chord [frozen 90.41]
+  90.38 S3  SteeringRtp.test_the_additive_return_stack_can_drive_reenter_fallback_and_clear [frozen 90.41]
+  90.44 E1  EntryGuardDriverEdge.test_both_carried_drivers_disarm_centered_entry_without_clearing_steering
+  90.44 E2  EntryGuardDriverEdge.test_deflected_both_driver_entry_hands_off_without_exposing_the_steering_clear
+  90.44 E3  EntryGuardDriverEdge.test_reexposed_guard_recovers_after_a_timed_window_with_both_drivers_held
+  90.44 E4  EntryGuardDriverEdge.test_single_driver_handoffs_remain_quiet_for_carried_and_fresh_inputs
+  90.46 E1  RepeatingSteeringDrivers.test_single_fresh_and_carried_drivers_acquire_and_release_quietly
+  90.46 E2  RepeatingSteeringDrivers.test_both_fresh_and_carried_drivers_reach_mod2_in_either_order
+  90.48 E1  GuardHandoff.test_fresh_and_carried_driver_handoffs_with_full_deflection_do_not_clear
+  90.53 G1  EntryGuard.test_a_centred_entry_keeps_no_guard_and_the_first_full_push_is_steerings_exit
+  90.53 G2  EntryGuard.test_a_stick_held_at_the_rim_through_the_entry_is_guarded_until_it_comes_back
+  90.53 G3  EntryGuard.test_a_driver_takes_over_from_the_guard
+
+A55 (unverified on deck; 90.49 sets equal numeric thresholds and the simulator checks only binary direction and edge events; relies on it): In the eight Steering scrolling joystick groups, an explicit outer-ring radius of 13276 closes a directional modifier when the stick returns inside its 13276 movement deadzone, including a partial up/down flick. An edge Release still reaches a modifier added over an already deflected stick
+  90.49 S1  SteeringScroll.test_flick_and_thumb_lift_complete_once [frozen 90.49]
+  90.49 S2  SteeringScroll.test_single_hold_and_second_push_keep_existing_scroll_contract
+  90.51 S1  StickDeflect.test_four_deflects_in_one_driver_hold_each_scroll_once
+
+A56 (unverified on deck. the simulator sees the output but does not consistently emit its haptic on first layer landing; it can emit it after a later re-exposure; relies on it): A final trackpad click layer added while the pad is already clicked fires its Regular Press output and requests that output's Low haptic once; its self-hold or repeat cleanup does not request another bump
+  90.50 C1  PadClicks.test_held_right_pad_click_survives_modifier_cover
+  90.50 C3  PadClicks.test_held_right_click_survives_stick_thumb_release_completion
+  90.50 C2  PadClicks.test_no_early_bump_for_each_pad_and_location
+  90.51 C1  RingBump.test_a_ring_click_types_its_output_on_both_pads
+
+A57 (unverified. read from the installed steam client on 2026-10-10; relies on it): A D-pad group's Haptic Intensity Override at Off (`0`) silences the haptics of its binds; at Use Activator Settings (`5`) each bind's own setting decides
+  90.51 C1  RingBump.test_a_ring_click_types_its_output_on_both_pads
+
+A58 (unverified; works either way): A chord with a Fire Start Delay holds back an interruptible Regular Press on the same input from the moment it is eligible, not only once it has fired
+  90.51 S1  StickDeflect.test_four_deflects_in_one_driver_hold_each_scroll_once
+
+A59 (unverified. the bit is the left stick's deflect (30) in the steam client's button list. `steering | ls up; relies on it): A stick direction's chord on that stick's deflect starts when the direction is pressed: the deflect counts as held at that moment, so the chord is a self-chord, as L1's chord on L1 is
+  90.52 S3  StickDeflect.test_a_second_deflect_held_past_150_ms_repeats_and_ends_on_its_release
+  90.52 S4  StickDeflect.test_a_hold_past_200_ms_adds_the_marker_and_does_not_scroll
+  90.52 S8  StickDeflect.test_a_missed_driver_release_with_the_stick_held_clears_as_the_marker_lands
+  90.53 S6  EntryAndEdge.test_the_right_pad_layers_stay_when_the_hold_marker_lands
+  90.53 T1  TimersOnTheDrivers.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.53 T2  TimersOnTheDrivers.test_second_deflects_chain_and_the_cover_waits_its_150_ms_every_time
+  90.53 T3  TimersOnTheDrivers.test_the_other_driver_enters_modifier_2_at_once_from_any_stick_layer
+
+A60 (unverified. `steering | ls; relies on it): A stick direction's Release fires in a layer that was added while that direction was already held, as L1's Release does in `L1: Modifier 0`
+  90.52 S1  StickDeflect.test_four_quick_deflects_scroll_once_each_at_50_ms
+  90.52 S2  StickDeflect.test_a_second_deflect_scrolls_on_the_press_and_reopens_the_window
+  90.52 S3  StickDeflect.test_a_second_deflect_held_past_150_ms_repeats_and_ends_on_its_release
+  90.52 S4  StickDeflect.test_a_hold_past_200_ms_adds_the_marker_and_does_not_scroll
+  90.52 S5  StickDeflect.test_a_roll_into_a_side_ends_the_modifier_without_a_scroll
+  90.52 S6  StickDeflect.test_a_thumb_lifted_in_the_window_only_closes_it
+  90.52 S7  StickDeflect.test_a_thumb_that_leaves_the_stick_in_a_second_deflect_ends_it_clean
+  90.52 S8  StickDeflect.test_a_missed_driver_release_with_the_stick_held_clears_as_the_marker_lands
+  90.53 S2  EntryAndEdge.test_every_deflect_in_one_driver_hold_adds_its_modifier_and_scrolls_once
+  90.53 S5  EntryAndEdge.test_a_side_key_never_adds_the_hold_marker
+  90.53 T1  TimersOnTheDrivers.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.53 T2  TimersOnTheDrivers.test_second_deflects_chain_and_the_cover_waits_its_150_ms_every_time
+
+A61 (reported by the author; relies on it): A Chorded Press with Invert Activation runs while its own input is released and no chord button is held. Pressing a chord button ends it, and letting that button go does not bring it back: the input has to be pressed and let go again, or its layer has to land again
+  Rules: R133
+  90.53 S1  EntryAndEdge.test_no_stick_movement_removes_the_driver_layer_while_the_driver_is_held
+  90.53 S3  EntryAndEdge.test_a_missed_driver_release_clears_when_the_edge_comes_back
+  90.53 S4  EntryAndEdge.test_pressing_the_driver_again_shuts_the_edge_chord_off
+  90.53 G1  EntryGuard.test_a_centred_entry_keeps_no_guard_and_the_first_full_push_is_steerings_exit
+  90.53 G2  EntryGuard.test_a_stick_held_at_the_rim_through_the_entry_is_guarded_until_it_comes_back
+  90.53 G3  EntryGuard.test_a_driver_takes_over_from_the_guard
+
+A62 (unverified. on 90.50 and 90.51 a deflect scrolled once and then not again; relies on it): A chord that needs a driver and the left stick's deflect, both, starts on every new deflect while the driver stays held, also when the layer it adds took the direction over before the stick came back
+  90.53 S1  EntryAndEdge.test_no_stick_movement_removes_the_driver_layer_while_the_driver_is_held
+  90.53 S2  EntryAndEdge.test_every_deflect_in_one_driver_hold_adds_its_modifier_and_scrolls_once
+
+A63 (reported by the author on the deck; works either way): A Fire Start Delay owned by a stick direction lands at once on every later press once it has been interrupted a single time. Owned by a bumper or a trigger, in a layer that lands on that held button, it waits its full time on every entry
+  90.53 T1  TimersOnTheDrivers.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.53 T2  TimersOnTheDrivers.test_second_deflects_chain_and_the_cover_waits_its_150_ms_every_time
+
+A64 (unverified. 90.54 is the author's trial of it (2026-10-11); relies on it): A Fire Start Delay owned by a stick's edge, its outer ring bind, waits its full time on every entry, as on a bumper, and does not misfire as on a stick direction (A63)
+  90.54 E1  TimerOnTheEdge.test_taps_and_holds_in_any_order_keep_their_meaning
+  90.54 E2  TimerOnTheEdge.test_a_press_during_the_deflect_makes_it_a_hold_at_once

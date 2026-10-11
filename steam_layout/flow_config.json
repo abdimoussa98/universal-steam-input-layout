@@ -154,6 +154,35 @@
     {
       "rule": "R139",
       "scope": {
+        "layers": [
+          "Steering | LS Up: Scroll Up",
+          "Steering | LS Down: Scroll Down"
+        ],
+        "inputs": {
+          "default": [
+            "switch/left_bumper",
+            "switch/right_bumper",
+            "switch/button_escape",
+            "switch/button_menu",
+            "right_joystick/edge"
+          ],
+          "alternative": [
+            "left_trigger/edge",
+            "right_trigger/edge",
+            "switch/button_escape",
+            "switch/button_menu",
+            "right_joystick/edge"
+          ]
+        }
+      },
+      "status": "allow",
+      "why": "90.52: a stick scroll layer sits on the W layer or on the S layer and binds only the two sticks, as the stick's Double Tap Cover does. It inherits the active owner's drivers, so W or S stays held and the owner's Release ends the family, and the owner's cleanup functions on Start, Select and the right stick's edge. Between the two stacks only the owner differs: which button is the driver and which owner's layer the inherited cleanup removes. Start and Select type the same keys in both.",
+      "decided": "Reviewed 2026-10-10 against the author's plan for 90.52 (plans/2026-10-10-stick-lifecycle-and-pad-click-after-stick-tap.md)",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
         "kind": "covers"
       },
       "status": "allow",
@@ -821,8 +850,745 @@
         ]
       },
       "status": "allow",
-      "why": "90.44: the author requested the old fallback-style inward left-edge chord on Entry Guard. It quietly removes only Entry Guard while either driver is held, preserving Steering and Gyro. Only this exact self-removal, quiet name/beep flags and per-variant activator settings qualify. The stick group stays non-inverted and normal direction/edge Releases remain independent exits. The general R111 ban and historical fallback exception remain unchanged; physical inward-edge detection is still A54, unverified.",
+      "why": "90.44: the author requested the old fallback-style inward left-edge chord on Entry Guard. It quietly removes only Entry Guard while either driver is held, preserving Steering and Gyro. Only this exact self-removal, quiet name/beep flags and per-variant activator settings qualify. The stick group stays non-inverted and normal direction/edge Releases remain independent exits. The general R111 ban and historical fallback exception remain unchanged; physical inward-edge detection is still A54, unverified. Corrected 2026-10-10 (author; Steam's own text for Invert Activation): the chord runs while no driver is held and the stick is inside the ring, not while one is held. The bind is unchanged.",
       "decided": "Author requested and authorized implementation, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | R1: W Key"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | LS Up: Scroll Up"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Down: Scroll Down"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Double Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Down: Modifier 0"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Up: Modifier 1"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "4",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "16777217",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53, and again for 90.55 (2026-10-11): the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | L1: S Key"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | LS Up: Scroll Up"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Down: Scroll Down"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Double Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Down: Modifier 0"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Up: Modifier 1"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "8",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "33554434",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53, and again for 90.55 (2026-10-11): the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS Up: Modifier 1"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | LS: Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Up: Modifier 1"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53: the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS Down: Modifier 0"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | LS: Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Down: Modifier 0"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53: the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS: Tap Cover"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Up: Modifier 1"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Down: Modifier 0"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Tap Cover"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53: the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS: Double Tap Cover"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Double Tap Cover"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53, and again for 90.55 (2026-10-11): the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS Up: Scroll Up"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Double Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Up: Scroll Up"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53: the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS Down: Scroll Down"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Double Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Down: Scroll Down"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53: the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | R1!L1: Modifier 2"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "L1: Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1!L1: Modifier 2"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53: the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | L1!R1: Modifier 2"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "R1: Tap Cover"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1!R1: Modifier 2"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.53: the author asked for the Entry Guard's edge pattern on the left stick's edge of the Steering layers. A chord with Invert Activation runs while its input is released and no chord button is held, so this one repeating chord is the layer's cleanup function on the edge and its own guard: with a driver held it is off, and without one it removes the layer's cleanup list. It replaces the repeating Regular Press and the empty guard chord, whose race could remove the W or S layer under a held driver. Only this exact list, these quiet flags and these per-variant settings qualify. Whether a repeating chord with more than one sub-command fires is set aside by the author (todos.md).",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R133",
+      "scope": {
+        "layers": [
+          "Steering | R1: W Key",
+          "Steering | L1: S Key",
+          "Steering | LS Up: Modifier 1",
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS: Tap Cover",
+          "Steering | LS: Double Tap Cover",
+          "Steering | LS Up: Scroll Up",
+          "Steering | LS Down: Scroll Down",
+          "Steering | R1!L1: Modifier 2",
+          "Steering | L1!R1: Modifier 2"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ],
+        "note": "one inverted chord in place of the Regular Press and its guard chord"
+      },
+      "status": "allow",
+      "why": "90.53: on the left stick's edge of these ten layers the cleanup function is one chord with Invert Activation on the layer's drivers, repeating and not interruptible. It runs while no driver is held (A61), so it is the removal and its guard in one entry and no interrupt can be missed. The exact chords are registered under R111; steam_layout/flow_model.py reads them as cleanup functions.",
+      "decided": "Author, 2026-10-10",
       "todo": null
     },
     {
@@ -839,6 +1605,55 @@
       "status": "allow",
       "why": "90.38 additive fallback return: Steering normally inherits Base's empty WASD slot. When the requested fallback edge adds Steering without removing fallback, it inherits that same silent driver-conditioned repeat adding already-active Steering. A3 makes the re-add idempotent; the inverted edge does not run at the rim. No output is displaced except Base's empty placeholder. Preserve this intentional inheritance and review the additive stack in the release scenarios. This decision applies only to layouts containing Fallback Guard; 90.43 reuses that slot as Entry Guard and removes the additive return.",
       "decided": "Codex review of author-requested additive fallback edge, 2026-10-08",
+      "todo": null
+    },
+    {
+      "rule": "R130",
+      "scope": {
+        "layers": [
+          "Steering | LS Up: Modifier 1",
+          "Steering | LS Up: Scroll Up"
+        ],
+        "inputs": [
+          "joystick/dpad_north"
+        ]
+      },
+      "status": "allow",
+      "why": "90.52: a Steering stick modifier's sequence runs on its own direction, as the bumper modifier's runs on its bumper, and that input carries no cleanup function (R130's left-out clause, as R171 leaves out a layer's own button). Up in the up modifier holds the 200 ms hold marker, its reset and the Release that opens the window; up in the scroll layer holds the scroll, the cover's 150 ms add, its reset and the Release back to the window. A driver release missed with the stick held in that direction is cleared by the next other input.",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R130",
+      "scope": {
+        "layers": [
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS Down: Scroll Down"
+        ],
+        "inputs": [
+          "joystick/dpad_south"
+        ]
+      },
+      "status": "allow",
+      "why": "90.52: a Steering stick modifier's sequence runs on its own direction, as the bumper modifier's runs on its bumper, and that input carries no cleanup function (R130's left-out clause, as R171 leaves out a layer's own button). Down in the down modifier and in its scroll layer, as up in theirs. A driver release missed with the stick held in that direction is cleared by the next other input.",
+      "decided": "Author, 2026-10-10",
+      "todo": null
+    },
+    {
+      "rule": "R130",
+      "scope": {
+        "layers": [
+          "Steering | LS: Tap Cover",
+          "Steering | LS: Double Tap Cover"
+        ],
+        "inputs": [
+          "joystick/dpad_north",
+          "joystick/dpad_south"
+        ]
+      },
+      "status": "allow",
+      "why": "90.52: a Steering stick modifier's sequence runs on its own direction, as the bumper modifier's runs on its bumper, and that input carries no cleanup function (R130's left-out clause, as R171 leaves out a layer's own button). The hold marker and the cover serve both modifiers, so up and down are both their own direction: each has the Release that ends the hold, and the cover the repeating scroll. A driver release missed with the stick held in that direction is cleared by the next other input.",
+      "decided": "Author, 2026-10-10",
       "todo": null
     }
   ]

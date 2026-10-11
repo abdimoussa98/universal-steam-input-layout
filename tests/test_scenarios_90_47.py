@@ -1,7 +1,7 @@
 """90.47: quiet Temp Cursor adds and safe stick-touch inheritance in Steering."""
 import unittest
 
-from tests.scenario import ScenarioCase, scenario
+from tests.scenario import ScenarioCase, scenario, old_inverted_chord
 from tests.test_scenarios_90_43 import DRIVERS, GUARD, MODIFIERS, RAMP, home
 
 
@@ -58,6 +58,7 @@ class SteeringStickTouches(ScenarioCase):
                         self.assertEqual(pad.stack, pad.layers(*home(gyro), 'Steering'))
                         self.assertEqual(pad.down(), [])
 
+    @old_inverted_chord
     @scenario('90.47 T2', rules=('R137',), rests=('A6', 'A7', 'A10', 'A53'), either=('A9', 'A32'))
     def test_resting_thumbs_do_not_bypass_the_guard_but_resume_helpers_after_disarming(self):
         for gyro in (False, True):

@@ -1,0 +1,63 @@
+{
+  "changed": {
+    "ring": [
+      [
+        "LTP: Arrow Keys",
+        "left_trackpad"
+      ],
+      [
+        "RTP: Mouse Buttons",
+        "right_trackpad"
+      ]
+    ],
+    "modifiers": [
+      [
+        "Steering | LS Up: Modifier 1",
+        "dpad_north"
+      ],
+      [
+        "Steering | LS Down: Modifier 0",
+        "dpad_south"
+      ]
+    ]
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 548,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  }
+}

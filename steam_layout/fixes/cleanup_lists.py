@@ -28,7 +28,7 @@ from collections import Counter
 import json
 from pathlib import Path
 
-from ..cleanups import BUTTONS, CHECKS, Cleanups, kept, name, run
+from ..cleanups import BUTTONS, CHECKS, Cleanups, hidden, kept, name, run
 from ..exceptions import load_config
 from ..flow_model import BITS
 from ..model import EMPTY, TARGET, Layout, actions, entries
@@ -177,5 +177,7 @@ def fix(data, config=None):
     changed = []
     for phase in (_guards, _missing, _unneeded, _hidden):
         layout = Layout(data)
-        changed += phase(layout, Cleanups(layout, stacks), keep)
+        cleanups = Cleanups(layout, stacks)
+        cleanups.accepted_hidden = hidden(config, variant)
+        changed += phase(layout, cleanups, keep)
     return {"changed": changed, "remaining": len(_open(run(data, config, stacks=stacks, extras=None)[0]))}

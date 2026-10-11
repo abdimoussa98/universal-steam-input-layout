@@ -311,6 +311,15 @@ non-inverted. Without a held driver, centered entry still protects the first
 push until its ordinary Release. Physical inward-edge detection remains A54;
 normal Releases and handoffs provide independent exits.
 
+**Corrected 2026-10-10 (A61).** An inverted chord runs while no chord button
+is held, so this chord removes the guard while **no** driver is held and the
+stick is inside the ring, not while one is held. The bind is unchanged since
+90.44. After a centred entry with no driver the guard leaves at once; it
+protects only a stick that is held at the rim through the entry. The author,
+2026-10-11: that is what it is for, and a first push after a centred entry is
+not meant to be guarded
+([record](../findings/2026-10-10-steering-entry-and-edge-chords/README.md#the-entry-guard)).
+
 Both Steering Modifier 2 release clears now preserve Steering and lose the
 beep previously attached to its removal. The other cleanup commands and the
 existing release-order behavior remain. A still-held driver can reacquire

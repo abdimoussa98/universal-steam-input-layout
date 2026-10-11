@@ -66,6 +66,8 @@ class LayoutHygieneTests(unittest.TestCase):
 
     def test_only_second_press_cover_resets_use_a_last_fourth_entry(self):
         chorded = {"Menu Left!Right: Enter", "Menu Right!Left: Backspace"}        # the two chorded menu chains, since 90.25
+        # The two Steering stick scroll layers had one from 90.52 to 90.54 (not in 90.53). Since 90.55 their
+        # 150 ms timer is a Soft Press on the stick's edge, and up or down holds three entries.
         expected = {"default": {"L1: Scroll Down", "R1: Scroll Up", "Menu Left: Escape", "Menu Right: Tab"} | chorded,
                     "alternative": {"L2: Scroll Down", "R2: Scroll Up", "Menu Left: Escape", "Menu Right: Tab"} | chorded}
         for variant, data in self.layouts.items():

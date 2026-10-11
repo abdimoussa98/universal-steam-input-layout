@@ -42,7 +42,7 @@ class Pads(ScenarioCase):
             pad.lift("LP").wait(400)
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
 
-    @scenario("90.27 B2", rests=("A6", "A40", "A41"))
+    @scenario("90.27 B2", rests=("A6", "A40", "A41"), frozen="90.49")
     def test_the_clicks_come_from_base_with_one_pulse(self):
         for name, (centre, key, outer, outer_key) in CLICKS.items():
             source = SOURCES[name]
@@ -71,7 +71,7 @@ class Pads(ScenarioCase):
                 pad.lift("LP").wait(300)
                 self.assertEqual(pad.stack, pad.layers("Base"))
 
-    @scenario("90.27 B4", rests=("A10",))
+    @scenario("90.27 B4", rests=("A10",), frozen="90.49")
     def test_steering_and_the_tap_cover_use_bases_click(self):
         for pad in self.each(start="steering"):
             pad.mark().click_pad("RP", "centre")

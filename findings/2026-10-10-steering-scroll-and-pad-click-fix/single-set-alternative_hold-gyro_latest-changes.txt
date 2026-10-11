@@ -1,0 +1,149 @@
+Changes from single-set-alternative_hold-gyro_90.48.json to single-set-alternative_hold-gyro_latest.json
+Layers: 88 -> 88 (added: none; removed: none)
+
+== LTP: Arrow Keys
+  left_trackpad: settings
+    before: {"haptic_intensity_override": "1"}
+    after:  {"haptic_intensity_override": "0"}
+  left_trackpad/dpad_north: binding
+    before: Full_Press(haptic_intensity=1): key_press UP_ARROW
+    after:  Full_Press(haptic_intensity=0): key_press UP_ARROW
+  left_trackpad/dpad_south: binding
+    before: Full_Press(haptic_intensity=1): key_press DOWN_ARROW
+    after:  Full_Press(haptic_intensity=0): key_press DOWN_ARROW
+  left_trackpad/dpad_east: binding
+    before: Full_Press(haptic_intensity=1): key_press RIGHT_ARROW
+    after:  Full_Press(haptic_intensity=0): key_press RIGHT_ARROW
+  left_trackpad/dpad_west: binding
+    before: Full_Press(haptic_intensity=1): key_press LEFT_ARROW
+    after:  Full_Press(haptic_intensity=0): key_press LEFT_ARROW
+
+== RTP: Mouse Buttons
+  right_trackpad: settings
+    before: {"haptic_intensity_override": "1"}
+    after:  {"haptic_intensity_override": "0"}
+  right_trackpad/dpad_east: binding
+    before: Full_Press(haptic_intensity=1): mouse_button FORWARD
+    after:  Full_Press(haptic_intensity=0): mouse_button FORWARD
+  right_trackpad/dpad_west: binding
+    before: Full_Press(haptic_intensity=1): mouse_button BACK
+    after:  Full_Press(haptic_intensity=0): mouse_button BACK
+
+== RTP: Circular Scroll
+  right_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=0): add_layer RTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=1): add_layer RTP: Click Entry Point
+
+== Steering | LS Up: Double Tap
+  joystick: settings
+    before: {"edge_binding_radius": null}
+    after:  {"edge_binding_radius": "13276"}
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer Steering | LS Up: Double Tap ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  release(haptic_intensity=0): remove_layer Steering | LS Up: Double Tap ; mouse_wheel SCROLL_UP ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer Steering | LS Up: Double Tap ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  release(haptic_intensity=0): remove_layer Steering | LS Up: Double Tap ; mouse_wheel SCROLL_UP ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== Steering | LS Down: Double Tap
+  joystick: settings
+    before: {"edge_binding_radius": null}
+    after:  {"edge_binding_radius": "13276"}
+  joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer Steering | LS Down: Double Tap ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  release(haptic_intensity=0): remove_layer Steering | LS Down: Double Tap ; mouse_wheel SCROLL_DOWN ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  right_joystick/touch: binding
+    before: release(haptic_intensity=0): remove_layer Steering | LS Down: Double Tap ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  release(haptic_intensity=0): remove_layer Steering | LS Down: Double Tap ; mouse_wheel SCROLL_DOWN ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+
+== Steering | LS: Double Tap Cover
+  joystick: settings
+    before: {"edge_binding_radius": null}
+    after:  {"edge_binding_radius": "13276"}
+
+== Steering | LS: Tap Cover
+  joystick: settings
+    before: {"edge_binding_radius": null}
+    after:  {"edge_binding_radius": "13276"}
+
+== Steering | LS Down: Modifier 0
+  joystick: settings
+    before: {"edge_binding_radius": null}
+    after:  {"edge_binding_radius": "13276"}
+  joystick/dpad_south: binding
+    before: Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Steering | LS: Tap Cover
+    before: chord(delay_start=200,gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): add_layer Steering | LS: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Middle Click
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | LS: Tap Cover
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Steering | LS: Tap Cover
+    after:  chord(delay_start=200,gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): add_layer Steering | LS: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+  joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    before: chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): add_layer Steering | LS: Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Middle Click
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer Steering | LS: Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+  right_joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    before: chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): add_layer Steering | LS: Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Middle Click
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Down: Modifier 0 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer Steering | LS: Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+
+== Steering | LS Up: Modifier 1
+  joystick: settings
+    before: {"edge_binding_radius": null}
+    after:  {"edge_binding_radius": "13276"}
+  joystick/dpad_north: binding
+    before: Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS: Tap Cover
+    before: Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Steering | LS: Tap Cover
+    before: chord(delay_start=200,gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): add_layer Steering | LS: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Middle Click
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | L2: S Key ; remove_layer Steering | R2: W Key ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | LS: Tap Cover
+    after:  Full_Press(hold_repeats=1,interruptable=0,repeat_rate=250): remove_layer Steering | LS: Tap Cover
+    after:  chord(delay_start=200,gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): add_layer Steering | LS: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+  joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    before: chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): add_layer Steering | LS: Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Middle Click
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer Steering | LS: Tap Cover ; remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+  right_joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    before: chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): add_layer Steering | LS: Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Click Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Middle Click
+    after:  Full_Press(hold_repeats=1): remove_layer Steering | LS: Tap Cover ; remove_layer Steering | LS Up: Modifier 1 ; remove_layer Steering | R2: W Key ; remove_layer Steering | L2: S Key
+    after:  chord(gyro_ratchet_button_mask=50331651,gyro_ratchet_button_requireany_or_all=0,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): add_layer Steering | LS: Tap Cover ; remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+
+== Steering | R2: W Key
+  joystick: settings
+    before: {"edge_binding_radius": null}
+    after:  {"edge_binding_radius": "13276"}
+
+== Steering | L2: S Key
+  joystick: settings
+    before: {"edge_binding_radius": null}
+    after:  {"edge_binding_radius": "13276"}
+
+== LTP: Middle Click
+  left_trackpad/click: binding
+    before: Full_Press(haptic_intensity=1): key_press CAPSLOCK
+    before: Soft_Press(haptic_intensity=0,interruptable=0): hold_layer LTP: Middle Click
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Middle Click
+    after:  Full_Press(haptic_intensity=0): key_press CAPSLOCK
+    after:  Soft_Press(haptic_intensity=0,interruptable=0): hold_layer LTP: Middle Click
+    after:  Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Middle Click
+
+== RTP: Middle Click
+  right_trackpad/click: binding
+    before: Full_Press(haptic_intensity=1): mouse_button MIDDLE
+    before: Soft_Press(haptic_intensity=0,interruptable=0): hold_layer RTP: Middle Click
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Middle Click
+    after:  Full_Press(haptic_intensity=0): mouse_button MIDDLE
+    after:  Soft_Press(haptic_intensity=0,interruptable=0): hold_layer RTP: Middle Click
+    after:  Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Middle Click
+
+13 layers changed, 29 changes

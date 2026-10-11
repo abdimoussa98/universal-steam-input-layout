@@ -83,7 +83,7 @@ class PadTouch(ScenarioCase):
                 pad.lift("LP").wait(300)
                 self.assertEqual(pad.stack, pad.layers("Base"))
 
-    @scenario("90.25 P7", rests=("A10",))
+    @scenario("90.25 P7", rests=("A10",), frozen="90.49")
     def test_a_pad_click_still_works_in_steering(self):
         for pad in self.each(start="steering"):
             pad.mark().click_pad("RP", "centre")
