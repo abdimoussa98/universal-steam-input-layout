@@ -2,7 +2,7 @@
 {
 	"version"				"3"
 	"revision"				"12834"
-	"title"					"single-set-alternative :: always-gyro :: 90.55"
+	"title"					"single-set-alternative :: always-gyro :: 90.56"
 	"description"			"WASD movement, gyro aiming, right-stick turn assist, and circular trackpad scrolling. L1/R1: mouse buttons; L2/R2: modifiers. Includes Fn controls, Steering, Cursor Gyro, and Gamepad modes."
 	"creator"				"76561198079670632"
 	"progenitor"			""
@@ -23506,7 +23506,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -23518,12 +23518,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
-							"haptic_intensity"							"0"
 						}
 					}
 				}
@@ -23668,7 +23676,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -23678,12 +23686,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
-							"haptic_intensity"							"0"
 						}
 					}
 				}
@@ -36913,7 +36929,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -36924,12 +36940,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
-							"haptic_intensity"							"0"
 						}
 					}
 					"Soft_Press"
@@ -37167,7 +37191,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -37178,12 +37202,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
-							"haptic_intensity"							"0"
 						}
 					}
 					"Soft_Press"
@@ -37396,7 +37428,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -37406,12 +37438,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
-							"haptic_intensity"							"0"
 						}
 					}
 				}
@@ -37610,7 +37650,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -37620,12 +37660,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
-							"haptic_intensity"							"0"
 						}
 					}
 				}
@@ -37796,7 +37844,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -37810,10 +37858,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"			"1"
+							"haptic_intensity"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"16777217"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
 							"haptic_intensity"							"0"
 						}
@@ -38099,7 +38157,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -38113,10 +38171,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"			"1"
+							"haptic_intensity"		"0"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"33554434"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
 							"haptic_intensity"							"0"
 						}
@@ -48902,7 +48970,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -48913,12 +48981,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
-							"haptic_intensity"							"0"
 						}
 					}
 					"Soft_Press"
@@ -49136,7 +49212,7 @@
 			{
 				"activators"
 				{
-					"chord"
+					"Full_Press"
 					{
 						"bindings"
 						{
@@ -49147,12 +49223,20 @@
 						}
 						"settings"
 						{
+							"hold_repeats"		"1"
+						}
+					}
+					"chord"
+					{
+						"bindings"
+						{
+							"binding"		"controller_action empty_binding, , "
+						}
+						"settings"
+						{
 							"gyro_ratchet_button_mask"					"50331651"
 							"gyro_ratchet_button_requireany_or_all"		"0"
-							"edge_binding_invert"						"1"
-							"hold_repeats"								"1"
 							"interruptable"								"0"
-							"haptic_intensity"							"0"
 						}
 					}
 					"Soft_Press"

@@ -1,0 +1,259 @@
+# python3 findings/2026-10-11-stick-touch-and-cleanup-audit/touch_releases.py default
+default: 160 stick-touch Releases in 91 layers; 56 add a layer; 22 layer-sticks have no touch Release
+
++ L1&R1: Tap Cover   (8 Releases)
+     L1!R1: Modifier 2 / LS: +L1&R1: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     L1!R1: Modifier 2 / RS: +L1&R1: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+     R1!L1: Modifier 2 / LS: +L1&R1: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     R1!L1: Modifier 2 / RS: +L1&R1: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+     Gyro | L1!R1: Modifier 2 / LS: +L1&R1: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Gyro | L1!R1: Modifier 2 / RS: +L1&R1: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+     Gyro | R1!L1: Modifier 2 / LS: +L1&R1: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Gyro | R1!L1: Modifier 2 / RS: +L1&R1: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ L1: Temp Cursor Gyro   (4 Releases)
+     L1: Modifier 0 / LS: +L1: Temp Cursor Gyro ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     L1: Modifier 0 / RS: +L1: Temp Cursor Gyro ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+     Gyro | L1: Modifier 0 / LS: +L1: Temp Cursor Gyro ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Gyro | L1: Modifier 0 / RS: +L1: Temp Cursor Gyro ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ R1: Temp Cursor Gyro   (4 Releases)
+     R1: Modifier 1 / LS: +R1: Temp Cursor Gyro ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     R1: Modifier 1 / RS: +R1: Temp Cursor Gyro ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+     Gyro | R1: Modifier 1 / LS: +R1: Temp Cursor Gyro ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Gyro | R1: Modifier 1 / RS: +R1: Temp Cursor Gyro ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ Steering | LS: Tap Cover   (4 Releases)
+     Steering | LS Down: Modifier 0 / LS: +Steering | LS: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Steering | LS Down: Modifier 0 / RS: +Steering | LS: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+     Steering | LS Up: Modifier 1 / LS: +Steering | LS: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Steering | LS Up: Modifier 1 / RS: +Steering | LS: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ Menu Buttons: Tap Cover   (4 Releases)
+     Menu Buttons: Left Stick Guard / LS: +Menu Buttons: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Menu Buttons: Left Stick Guard / RS: +Menu Buttons: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+     Menu Buttons: Right Stick Guard / LS: +Menu Buttons: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Menu Buttons: Right Stick Guard / RS: +Menu Buttons: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ Steering | LS: Double Tap Cover   (4 Releases)
+     Steering | LS Up: Scroll Up / LS: +Steering | LS: Double Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Steering | LS Up: Scroll Up / RS: +Steering | LS: Double Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+     Steering | LS Down: Scroll Down / LS: +Steering | LS: Double Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Steering | LS Down: Scroll Down / RS: +Steering | LS: Double Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ L1: Double Tap Cover   (2 Releases)
+     L1: Scroll Down / LS: +L1: Double Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     L1: Scroll Down / RS: +L1: Double Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ R1: Double Tap Cover   (2 Releases)
+     R1: Scroll Up / LS: +R1: Double Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     R1: Scroll Up / RS: +R1: Double Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ Menu Left: Double Tap Cover   (2 Releases)
+     Menu Left: Escape / LS: +Menu Left: Double Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Menu Left: Escape / RS: +Menu Left: Double Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ Menu Right: Double Tap Cover   (2 Releases)
+     Menu Right: Tab / LS: +Menu Right: Double Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Menu Right: Tab / RS: +Menu Right: Double Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ RTP: Tap Cover   (2 Releases)
+     RTP: Entry Point / LS: +RTP: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     RTP: Entry Point / RS: +RTP: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ Menu Left: Fn Layer   (2 Releases)
+     Menu Left: Entry Point / LS: +Menu Left: Fn Layer ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Menu Left: Entry Point / RS: +Menu Left: Fn Layer ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ Menu Right: Fn Layer   (2 Releases)
+     Menu Right: Entry Point / LS: +Menu Right: Fn Layer ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Menu Right: Entry Point / RS: +Menu Right: Fn Layer ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ L1: Tap Cover   (2 Releases)
+     Steering | R1!L1: Modifier 2 / LS: +L1: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Steering | R1!L1: Modifier 2 / RS: +L1: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ R1: Tap Cover   (2 Releases)
+     Steering | L1!R1: Modifier 2 / LS: +R1: Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Steering | L1!R1: Modifier 2 / RS: +R1: Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ Stateful | Menu Left: Fn Layer   (2 Releases)
+     Stateful | Menu Left: Entry Point / LS: +Stateful | Menu Left: Fn Layer ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro ; -RTP: Entry Point ; -RTP: Tap Cover ; -RTP: Circular Scroll ; -RTP: Click Entry Point ; -RTP: Mouse Buttons ; -RTP: Middle Click
+     Stateful | Menu Left: Entry Point / RS: +Stateful | Menu Left: Fn Layer ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro ; -RTP: Entry Point ; -RTP: Tap Cover ; -RTP: Circular Scroll ; -RTP: Click Entry Point ; -RTP: Mouse Buttons ; -RTP: Middle Click
+
++ Stateful | Menu Right: Fn Layer   (2 Releases)
+     Stateful | Menu Right: Entry Point / LS: +Stateful | Menu Right: Fn Layer ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro ; -RTP: Entry Point ; -RTP: Tap Cover ; -RTP: Circular Scroll ; -RTP: Click Entry Point ; -RTP: Mouse Buttons ; -RTP: Middle Click
+     Stateful | Menu Right: Entry Point / RS: +Stateful | Menu Right: Fn Layer ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro ; -RTP: Entry Point ; -RTP: Tap Cover ; -RTP: Circular Scroll ; -RTP: Click Entry Point ; -RTP: Mouse Buttons ; -RTP: Middle Click
+
++ Menu Left!Right: Double Tap Cover   (2 Releases)
+     Menu Left!Right: Enter / LS: +Menu Left!Right: Double Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Menu Left!Right: Enter / RS: +Menu Left!Right: Double Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ Menu Right!Left: Double Tap Cover   (2 Releases)
+     Menu Right!Left: Backspace / LS: +Menu Right!Left: Double Tap Cover ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+     Menu Right!Left: Backspace / RS: +Menu Right!Left: Double Tap Cover ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
++ LST: Double Tap   (1 Releases)
+     LST: Entry Point / LS: -LST: Entry Point ; +LST: Double Tap
+
++ RST: Double Tap   (1 Releases)
+     RST: Entry Point / RS: -RST: Entry Point ; +RST: Double Tap
+
+Releases with no add, by list:
+   40 x  -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+   40 x  -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -LST: Entry Point ; -LST: Temporary Gyro
+    1 x  -RST: Entry Point ; -RST: Temporary Gyro
+    1 x  -L1: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -L1: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -R1: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -R1: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -LST: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -RST: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -RTP: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -RTP: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -Menu Left: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -Menu Left: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -Menu Right: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -Menu Right: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -LST: Entry Point ; -LST: Tap Cover
+    1 x  -RST: Entry Point ; -RST: Tap Cover
+    1 x  -Steering | LS Up: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -Steering | LS Up: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -Steering | LS Down: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -Steering | LS Down: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -Menu Left!Right: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -Menu Left!Right: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+    1 x  -Menu Right!Left: Double Tap ; -LST: Entry Point ; -LST: Tap Cover ; -LST: Temporary Gyro
+    1 x  -Menu Right!Left: Double Tap ; -RST: Entry Point ; -RST: Tap Cover ; -RST: Temporary Gyro
+
+# python3 findings/2026-10-11-stick-touch-and-cleanup-audit/touch_releases.py alternative (first line)
+alternative: 160 stick-touch Releases in 91 layers; 56 add a layer; 22 layer-sticks have no touch Release
+
+# python3 findings/2026-10-11-stick-touch-and-cleanup-audit/cleanup_shape.py
+== default: 529 cleanup functions in 64 layers: {'button': 290, 'stick click': 24, 'stick edge': 87, 'stick touch': 128}
+   guard chords beside them: {'with an output, no repeat, not interruptible': 322, 'with an output, repeats, not interruptible': 80, 'empty, no repeat, interruptible': 12, 'empty, no repeat, not interruptible': 321, 'inverted chord': 10, 'with an output, no repeat, interruptible': 2}
+   shape findings: none
+   stick-touch binds that remove the W or S layer:
+      recovery (Full_Press), 20: Steering | LS: Double Tap Cover / LS; Steering | LS: Double Tap Cover / RS; Steering | LS: Tap Cover / LS; Steering | LS: Tap Cover / RS; Steering | LS Down: Modifier 0 / LS; Steering | LS Down: Modifier 0 / RS; Steering | LS Up: Modifier 1 / LS; Steering | LS Up: Modifier 1 / RS; Steering | R1!L1: Modifier 2 / LS; Steering | R1!L1: Modifier 2 / RS; Steering | L1!R1: Modifier 2 / LS; Steering | L1!R1: Modifier 2 / RS; Steering | R1: W Key / LS; Steering | R1: W Key / RS; Steering | L1: S Key / LS; Steering | L1: S Key / RS; Steering | LS Up: Scroll Up / LS; Steering | LS Up: Scroll Up / RS; Steering | LS Down: Scroll Down / LS; Steering | LS Down: Scroll Down / RS
+== alternative: 555 cleanup functions in 64 layers: {'button': 316, 'stick click': 24, 'stick edge': 87, 'stick touch': 128}
+   guard chords beside them: {'with an output, no repeat, not interruptible': 360, 'with an output, repeats, not interruptible': 80, 'empty, no repeat, interruptible': 12, 'empty, no repeat, not interruptible': 309, 'inverted chord': 10, 'with an output, no repeat, interruptible': 2}
+   shape findings: none
+
+# python3 findings/2026-10-11-stick-touch-and-cleanup-audit/thumb_sweep.py
+runs: 1600 | the driver layer or Steering lost under a held driver: never
+wheel steps after the thumb event, then the stick back (default switches; 4 runs each = 2 drivers x 2 directions):
+   modifier {'LS off-on': 0, 'LS off': 0, 'RS lift': 0, 'RS touch': 4, 'RS lift-touch': 0}
+   marker {'LS off-on': 0, 'LS off': 0, 'RS lift': 0, 'RS touch': 0, 'RS lift-touch': 0}
+   window {'LS off-on': 0, 'LS off': 0, 'RS lift': 0, 'RS touch': 4, 'RS lift-touch': 0}
+   scroll {'LS off-on': 8, 'LS off': 4, 'RS lift': 4, 'RS touch': 8, 'RS lift-touch': 8}
+   cover {'LS off-on': 4, 'LS off': 0, 'RS lift': 0, 'RS touch': 0, 'RS lift-touch': 4}
+   no thumb event: {'modifier': 4, 'marker': 0, 'window': 4, 'scroll': 8, 'cover': 0}
+
+# python3 findings/2026-10-11-stick-touch-and-cleanup-audit/driver_layer_removes.py default
+== default: binds that remove Steering | R1: W Key or Steering | L1: S Key
+
+Steering | LS Up: Double Tap
+   Release [S Key and W Key]: 2: switch/left_bumper, switch/right_bumper
+
+Steering | LS Down: Double Tap
+   Release [S Key and W Key]: 2: switch/left_bumper, switch/right_bumper
+
+Steering | LS: Double Tap Cover
+   Chorded Press with Invert Activation, repeating [S Key and W Key]: 1: left stick edge
+   Regular Press, repeating, beside 1 guard chord(s) [S Key and W Key]: 2: left stick touch, right stick touch
+
+Steering | LS: Tap Cover
+   Chorded Press with Invert Activation, repeating [S Key and W Key]: 1: left stick edge
+   Regular Press, repeating, beside 1 guard chord(s) [S Key and W Key]: 2: left stick touch, right stick touch
+
+Steering | LS Down: Modifier 0
+   Chorded Press with Invert Activation, repeating [S Key and W Key]: 1: left stick edge
+   Regular Press, repeating, beside 1 guard chord(s) [S Key and W Key]: 2: left stick touch, right stick touch
+
+Steering | LS Up: Modifier 1
+   Chorded Press with Invert Activation, repeating [S Key and W Key]: 1: left stick edge
+   Regular Press, repeating, beside 1 guard chord(s) [S Key and W Key]: 2: left stick touch, right stick touch
+
+Steering | R1!L1: Modifier 2
+   Chorded Press with Invert Activation, repeating [W Key]: 1: left stick edge
+   Regular Press, repeating, beside 1 guard chord(s) [W Key]: 15: button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, left stick click, left stick touch, right stick click, right stick edge, right stick touch, switch/button_escape, switch/button_menu
+
+Steering | L1!R1: Modifier 2
+   Chorded Press with Invert Activation, repeating [S Key]: 1: left stick edge
+   Regular Press, repeating, beside 1 guard chord(s) [S Key]: 15: button_diamond/button_a, button_diamond/button_b, button_diamond/button_x, button_diamond/button_y, dpad/dpad_east, dpad/dpad_north, dpad/dpad_south, dpad/dpad_west, left stick click, left stick touch, right stick click, right stick edge, right stick touch, switch/button_escape, switch/button_menu
+
+Steering | R1: W Key
+   Chorded Press with Invert Activation, repeating [W Key]: 1: left stick edge
+   Regular Press, repeating, beside 0 guard chord(s) [W Key]: 1: switch/left_bumper
+   Regular Press, repeating, beside 1 guard chord(s) [W Key]: 5: left stick touch, right stick edge, right stick touch, switch/button_escape, switch/button_menu
+   Release [W Key]: 1: switch/right_bumper
+
+Steering | L1: S Key
+   Chorded Press with Invert Activation, repeating [S Key]: 1: left stick edge
+   Regular Press, repeating, beside 0 guard chord(s) [S Key]: 1: switch/right_bumper
+   Regular Press, repeating, beside 1 guard chord(s) [S Key]: 5: left stick touch, right stick edge, right stick touch, switch/button_escape, switch/button_menu
+   Release [S Key]: 1: switch/left_bumper
+
+Steering | LS Up: Scroll Up
+   Chorded Press with Invert Activation, repeating [S Key and W Key]: 1: left stick edge
+   Regular Press, repeating, beside 1 guard chord(s) [S Key and W Key]: 2: left stick touch, right stick touch
+
+Steering | LS Down: Scroll Down
+   Chorded Press with Invert Activation, repeating [S Key and W Key]: 1: left stick edge
+   Regular Press, repeating, beside 1 guard chord(s) [S Key and W Key]: 2: left stick touch, right stick touch
+
+Clears of a whole mode (more than 12 removes), which also list them:
+   Gamepad | left stick click | Chorded Press | 89 removes
+   Gamepad | right stick click | Chorded Press | 89 removes
+   Menu Keys | left stick click | Chorded Press | 89 removes
+   Menu Keys | right stick click | Chorded Press | 89 removes
+   Menu Left!Right: Entry Point | switch/button_escape | Chorded Press | 89 removes
+   Menu Left: Entry Point | left stick click | Release | 89 removes
+   Menu Left: Entry Point | right stick click | Release | 89 removes
+   Menu Right!Left: Entry Point | switch/button_menu | Chorded Press | 89 removes
+   Menu Right: Entry Point | left stick click | Release | 89 removes
+   Menu Right: Entry Point | right stick click | Release | 89 removes
+   Stateful | Menu Left: Entry Point | left stick click | Release | 89 removes
+   Stateful | Menu Left: Entry Point | right stick click | Release | 89 removes
+   Stateful | Menu Right: Entry Point | left stick click | Release | 89 removes
+   Stateful | Menu Right: Entry Point | right stick click | Release | 89 removes
+   Steering | joystick/dpad_north | Soft Press | 16 removes
+   Steering | joystick/dpad_south | Soft Press | 16 removes
+   Steering | L1!R1: Modifier 2 | switch/right_bumper | Release | 88 removes
+   Steering | R1!L1: Modifier 2 | switch/left_bumper | Release | 88 removes
+
+== every chord with Invert Activation
+   Steering | LS: Double Tap Cover | left stick edge | chord buttons mask 12 | repeat 1 | -Steering | LS: Double Tap Cover ; -Steering | R1: W Key ; -Steering | L1: S Key
+   Steering | LS: Tap Cover | left stick edge | chord buttons mask 12 | repeat 1 | -Steering | LS: Tap Cover ; -Steering | LS Down: Modifier 0 ; -Steering | LS Up: Modifier 1 ; -Steering | R1: W Key ; -Steering | L1: S Key
+   Steering | LS Down: Modifier 0 | left stick edge | chord buttons mask 12 | repeat 1 | -Steering | L1: S Key ; -Steering | R1: W Key ; -Steering | LS Down: Modifier 0 ; -Steering | LS: Tap Cover
+   Steering | LS Up: Modifier 1 | left stick edge | chord buttons mask 12 | repeat 1 | -Steering | L1: S Key ; -Steering | R1: W Key ; -Steering | LS Up: Modifier 1 ; -Steering | LS: Tap Cover
+   Steering | R1!L1: Modifier 2 | left stick edge | chord buttons mask 12 | repeat 1 | -Steering | R1: W Key ; -Steering | R1!L1: Modifier 2 ; -L1: Tap Cover
+   Steering | L1!R1: Modifier 2 | left stick edge | chord buttons mask 12 | repeat 1 | -Steering | L1: S Key ; -Steering | L1!R1: Modifier 2 ; -R1: Tap Cover
+   Steering | R1: W Key | left stick edge | chord buttons mask 4 | repeat 1 | -Steering | R1: W Key ; -Steering | LS Up: Modifier 1 ; -Steering | LS Down: Modifier 0 ; -Steering | LS: Tap Cover ; -Steering | LS: Double Tap Cover ; -Steering | LS Down: Scroll Down ; -Steering | LS Up: Scroll Up
+   Steering | L1: S Key | left stick edge | chord buttons mask 8 | repeat 1 | -Steering | L1: S Key ; -Steering | LS Up: Modifier 1 ; -Steering | LS Down: Modifier 0 ; -Steering | LS: Tap Cover ; -Steering | LS: Double Tap Cover ; -Steering | LS Down: Scroll Down ; -Steering | LS Up: Scroll Up
+   Steering | LS: Entry Guard | left stick edge | chord buttons mask 12 | repeat 1 | -Steering | LS: Entry Guard
+   Steering | LS Up: Scroll Up | left stick edge | chord buttons mask 12 | repeat 1 | -Steering | LS Up: Scroll Up ; -Steering | LS: Double Tap Cover ; -Steering | R1: W Key ; -Steering | L1: S Key
+   Steering | LS Down: Scroll Down | left stick edge | chord buttons mask 12 | repeat 1 | -Steering | LS Down: Scroll Down ; -Steering | LS: Double Tap Cover ; -Steering | R1: W Key ; -Steering | L1: S Key
+
+# python3 findings/2026-10-11-stick-touch-and-cleanup-audit/suspicion_probe.py
+
+As the simulator assumes (the chord stays off while a bumper is held)
+   [thumbs first, then R1] stick centred, the right thumb lifts                 W down: True  | Steering on: True
+   [thumbs first, then R1] a plain tap up, thumbs stay on (wheel steps 1)       W down: True  | Steering on: True
+   [thumbs first, then R1] stick up in Modifier 1, the right thumb lifts        W down: True  | Steering on: True
+   [thumbs first, then R1] stick up in Modifier 1, the left thumb loses touch   W down: True  | Steering on: True
+   [R1 first, then thumbs] stick centred, the right thumb lifts                 W down: True  | Steering on: True
+   [R1 first, then thumbs] a plain tap up, thumbs stay on (wheel steps 1)       W down: True  | Steering on: True
+   [R1 first, then thumbs] stick up in Modifier 1, the right thumb lifts        W down: True  | Steering on: True
+   [R1 first, then thumbs] stick up in Modifier 1, the left thumb loses touch   W down: True  | Steering on: True
+
+The suspicion (a removal fires the chord anyway)
+   [thumbs first, then R1] stick centred, the right thumb lifts                 W down: True  | Steering on: True
+   [thumbs first, then R1] a plain tap up, thumbs stay on (wheel steps 1)       W down: True  | Steering on: True
+   [thumbs first, then R1] stick up in Modifier 1, the right thumb lifts        W down: True  | Steering on: False
+   [thumbs first, then R1] stick up in Modifier 1, the left thumb loses touch   W down: True  | Steering on: False
+   [R1 first, then thumbs] stick centred, the right thumb lifts                 W down: True  | Steering on: True
+   [R1 first, then thumbs] a plain tap up, thumbs stay on (wheel steps 1)       W down: True  | Steering on: True
+   [R1 first, then thumbs] stick up in Modifier 1, the right thumb lifts        W down: True  | Steering on: True
+   [R1 first, then thumbs] stick up in Modifier 1, the left thumb loses touch   W down: True  | Steering on: True

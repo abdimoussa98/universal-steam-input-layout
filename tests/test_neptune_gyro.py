@@ -10,6 +10,11 @@ from test_neptune_recovery import ROOT, load_layouts
 
 
 REFERENCE = ROOT / "findings/2026-07-11-layer-order-swap/MOST_RECENT_LAYOUT.post-fix.json"
+# The right stick's sensitivity and vertical scale since 90.45 (author, 2026-10-10). Every other setting is the
+# reference's. tests/test_steering_entry_quiet_drivers.py states the same three.
+RIGHT_STICK_90_45 = {"Base": {"sensitivity": "150"},
+                     "Turning Ramp Up 0": {"sensitivity": "200", "sensitivity_vert_scale": "75"},
+                     "Turning Ramp Up 1": {"sensitivity": "250", "sensitivity_vert_scale": "60"}}
 
 
 def active_sources(layout, title):
@@ -42,7 +47,8 @@ class NeptuneGyroTests(unittest.TestCase):
                     actual = active_sources(layout, title)[source]
                     reference = active_sources(self.reference, title)[source]
                     self.assertEqual(actual["mode"], reference["mode"])
-                    self.assertEqual(actual["settings"], reference["settings"])
+                    changed = RIGHT_STICK_90_45.get(title, {}) if source == "right_joystick" else {}
+                    self.assertEqual(actual["settings"], {**reference["settings"], **changed})
             for _, _, owner, _, _ in owners(variant):
                 for title in (owner, "Gyro | " + owner):
                     with self.subTest(variant=variant, layer=title):

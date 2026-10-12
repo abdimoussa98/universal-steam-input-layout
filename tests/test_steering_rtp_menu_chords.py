@@ -1,4 +1,8 @@
-"""90.38 generated configuration, ordering, and narrow inverted-edge exception."""
+"""90.38 generated configuration, ordering, and narrow inverted-edge exception.
+
+The contracts were last written against 90.42. 90.43 replaced `Steering | LS: Fallback Guard` with
+`Steering | LS: Entry Guard`, and the tests below name the Entry Guard where the requirement still holds.
+"""
 import copy
 import importlib.util
 import json
@@ -9,10 +13,29 @@ from steam_layout.model import Layout, entries
 from tools.audit_command_budget import audit_layout
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location(
-    'steering_rtp_build', ROOT / 'findings/2026-10-08-steering-rtp-and-menu-chords/build_candidate.py')
-build = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(build)
+ENTRY_GUARD = 'Steering | LS: Entry Guard'
+STATEFUL_MENU = ('Stateful | Menu Left: Entry Point', 'Stateful | Menu Right: Entry Point')
+FN_STEERING_CLEAR = ROOT / 'findings/2026-10-09-fn-haptics-and-steering-clear'          # the 90.42 build
+
+
+def module(path, name):
+    spec = importlib.util.spec_from_file_location(name, path)
+    loaded = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(loaded)
+    return loaded
+
+
+def release_builder(version):
+    """The builder of the findings folder whose stored build carries this version, newest folder first."""
+    for folder in sorted(ROOT.glob('findings/*'), reverse=True):
+        stored, script = folder / 'default-candidate.json', folder / 'build_candidate.py'
+        if stored.exists() and script.exists() and json.loads(stored.read_text())[
+                'controller_mappings']['title'].endswith(f' :: {version}'):
+            return module(script, 'release_build')
+    return None
+
+
+build = module(ROOT / 'findings/2026-10-08-steering-rtp-and-menu-chords/build_candidate.py', 'steering_rtp_build')
 
 
 class SteeringRtpMenu(unittest.TestCase):
@@ -22,21 +45,34 @@ class SteeringRtpMenu(unittest.TestCase):
             yield variant, data, Layout(data)
 
     def test_working_layouts_are_generated_including_stored_order(self):
-        # The live release extends 90.38 through the 90.42 directional clear.
-        live_spec = importlib.util.spec_from_file_location(
-            'fn_steering_clear_build', ROOT / 'findings/2026-10-09-fn-haptics-and-steering-clear/build_candidate.py')
-        live_build = importlib.util.module_from_spec(live_spec)
-        live_spec.loader.exec_module(live_build)
+        # R156. The builder is found by the version in the working layout's title, so this follows each
+        # release. Until 90.56 it named the 90.42 builder and failed from 90.43 on.
         for variant, working, _ in self.each():
-            generated, _ = live_build.build(variant)
+            version = working['controller_mappings']['title'].rsplit(' :: ', 1)[-1]
+            builder = release_builder(version)
+            self.assertIsNotNone(builder, f'no findings folder holds a build_candidate.py and a stored build of {version}')
+            generated = builder.build(variant)[0]
+            generated = json.loads(generated) if isinstance(generated, str) else generated
             for data in (working, generated):
                 for field in ('title', 'description'):
                     data['controller_mappings'].pop(field)
             self.assertEqual(json.dumps(working), json.dumps(generated))
 
+    def test_the_90_42_build_is_reproducible_including_stored_order(self):
+        # The frozen 90.42 scenarios run on this builder (tests/scenario.py), so it has to keep giving the stored build.
+        old = module(FN_STEERING_CLEAR / 'build_candidate.py', 'fn_steering_clear_build')
+        for variant in ('default', 'alternative'):
+            generated, _ = old.build(variant)
+            stored = json.loads((FN_STEERING_CLEAR / f'{variant}-candidate.json').read_text())
+            for data in (generated, stored):                 # the release's install wrote these two, not the builder
+                for field in ('title', 'description'):
+                    data['controller_mappings'].pop(field)
+            self.assertEqual(json.dumps(generated), json.dumps(stored))
+
     def test_menu_entry_conditions_repeat_and_do_not_repeat_key_output(self):
         for _, _, layout in self.each():
-            for title in ('Base', *build.MENU_OWNERS):
+            # Not the Entry Guard: it binds both as a silent Start Press (90.43, tests/test_steering_entry_feedback.py).
+            for title in ('Base', 'Steering', 'Cursor Gyro'):
                 for button, mask in (('button_menu', '4096'), ('button_escape', '16384')):
                     acts = layout.active(title)['switch']['inputs'][button]['activators']
                     self.assertEqual(list(acts), ['chord'])
@@ -55,8 +91,7 @@ class SteeringRtpMenu(unittest.TestCase):
 
     def test_steering_inherits_pad_and_direction_soft_presses_clear_its_family(self):
         for _, _, layout in self.each():
-            for title in ('Steering', build.GUARD):
-                self.assertNotIn('right_trackpad', layout.active(title))
+            self.assertNotIn('right_trackpad', layout.active('Steering'))      # the Entry Guard blocks both pads, by design
             for name in ('dpad_north', 'dpad_south'):
                 acts = layout.active('Steering')['joystick']['inputs'][name]['activators']
                 self.assertEqual(list(acts), ['Soft_Press'])
@@ -66,7 +101,7 @@ class SteeringRtpMenu(unittest.TestCase):
                 operations = layout.layer_ops(entry)
                 self.assertTrue(all(op == 'remove_layer' for op, _ in operations))
                 self.assertEqual(operations[-1], ('remove_layer', 'Steering'))
-                self.assertIn(('remove_layer', build.GUARD), operations)
+                self.assertIn(('remove_layer', ENTRY_GUARD), operations)
                 self.assertNotIn(('remove_layer', 'Gyro'), operations)
 
     def test_delayed_targets_complete_before_rtp_cleanup_including_touch_completion(self):
@@ -94,7 +129,11 @@ class SteeringRtpMenu(unittest.TestCase):
                             self.assertEqual(set(removed), set(build.RTP))
                             self.assertNotIn(('remove_layer', 'RTP: Double Tap'), ops)
                             found.append((title, source, name, kind))
-            self.assertEqual(len(found), 18)  # six delays and twelve thumb completions
+            # Two delays and four thumb completions, in the two stateful menu entries. Until 90.48 the four
+            # Steering modifier layers had three each (18); they remove no right pad layer any more (author,
+            # 2026-10-10 and 2026-10-11; tests/test_scenarios_90_55.py).
+            self.assertEqual(len(found), 6)
+            self.assertEqual({title for title, _, _, _ in found}, set(STATEFUL_MENU))
 
     def test_inverted_edge_exception_rejects_changed_action_selector_repeat_or_owner(self):
         for _, data, layout in self.each():
@@ -104,7 +143,7 @@ class SteeringRtpMenu(unittest.TestCase):
             for change in ('selector', 'repeat', 'target', 'owner'):
                 mutant = copy.deepcopy(data)
                 m = Layout(mutant)
-                group = m.active(build.GUARD)['joystick']
+                group = m.active(ENTRY_GUARD)['joystick']
                 edge = group['inputs']['edge']['activators']['chord']
                 if change == 'selector': edge['settings']['gyro_ratchet_button_mask'] = '4096'
                 if change == 'repeat': edge['settings']['hold_repeats'] = '0'

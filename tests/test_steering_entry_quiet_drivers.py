@@ -6,7 +6,7 @@ import json
 import unittest
 
 from steam_layout.model import Layout, actions, entries
-from tests.scenario import ROOT, Pad, VARIANTS, layout_data
+from tests.scenario import ROOT, Pad, VARIANTS, frozen_layout_data, layout_data
 from tests.test_steering_entry_feedback import GUARD, commands
 
 
@@ -71,9 +71,10 @@ def gyro_settings(layout, stack):
 
 
 class SteeringEntryQuietDrivers(unittest.TestCase):
-    def each(self):
+    def each(self, frozen=None):
+        """The working layout, or a release's stored build for a shape that later releases changed."""
         for variant in VARIANTS:
-            data = layout_data(variant)
+            data = frozen_layout_data(variant, frozen) if frozen else layout_data(variant)
             yield variant, Pad(variant, data=data), Layout(data), previous(variant)
 
     def test_inverted_edge_is_one_quiet_any_driver_self_removal(self):
@@ -138,8 +139,25 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
             self.assertEqual(len(changed), 6)
             self.assertEqual(len({title for title, _, _ in changed}), 4)
 
+    def test_every_driver_owned_activator_is_off_in_the_working_layout(self):
+        # What "quiet drivers" still requires. The bind-for-bind comparison with the 90.43 build is the next test.
+        for variant, pad, layout, _ in self.each():
+            for default_title in ('Steering | R1: W Key', 'Steering | L1: S Key'):
+                title = pad.title(default_title)
+                found = dict(activators(layout, title))
+                self.assertTrue(found, (variant, title))
+                for location, entry in found.items():
+                    self.assertEqual(entry.get('settings', {}).get('haptic_intensity'), '0', (variant, title, location))
+                repeats = [(entry['settings'].get('hold_repeats'), entry['settings'].get('repeat_rate'))
+                           for location, entry in found.items() if location[3] == 'chord' and any(
+                               op == 'add_layer' and target.endswith(': Modifier 2') for op, target in layout.layer_ops(entry))]
+                self.assertEqual(repeats, [('1', '50')], (variant, title))
+                self.assertEqual(layout.active(title)['joystick']['settings'].get('haptic_intensity_override'), '0', (variant, title))
+
     def test_all_driver_owned_activators_are_off_with_only_mod2_repeat_added(self):
-        for variant, pad, layout, old in self.each():
+        # On the stored 90.48 build: the W and S layers held exactly the 90.43 binds plus this repeat from 90.46
+        # to 90.48. 90.49 to 90.55 reshaped them (the ring, then no cleanup function on up and down).
+        for variant, pad, layout, old in self.each(frozen='90.48'):
             count = 0
             for default_title in ('Steering | R1: W Key', 'Steering | L1: S Key'):
                 title = pad.title(default_title)

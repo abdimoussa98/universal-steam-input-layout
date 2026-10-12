@@ -1,0 +1,135 @@
+1088 runs, default
+
+nothing for 400 ms
+    32  holds
+
+stick: touch LS 400 ms and lift
+    32  holds
+
+stick: touch RS 400 ms and lift
+    32  holds
+
+stick: tap LS 60 ms
+    32  holds
+
+stick: tap RS 60 ms
+    32  holds
+
+stick: push LS up 300 ms
+    32  holds
+
+stick: push RS 300 ms
+    32  holds
+
+stick: click LS
+    32  holds
+
+stick: click RS
+    32  holds
+
+bumper: L1 tap 40 ms
+    24  output cut 1x under L1: Double Tap
+        in: Base, Cursor Gyro, Gyro | clicks: LP centre, LP left, RP centre, RP left | A9 fires, A9 silent
+     8  holds
+
+bumper: R1 tap 40 ms
+    24  output cut 1x under R1: Double Tap
+        in: Base, Cursor Gyro, Gyro | clicks: LP centre, LP left, RP centre, RP left | A9 fires, A9 silent
+     8  holds
+
+bumper: L1 hold 400 ms
+    32  holds
+
+bumper: R1 hold 400 ms
+    32  holds
+
+bumper: L1 then R1, R1 let go first
+    32  holds
+
+bumper: R1 then L1, L1 let go first
+    32  holds
+
+bumper: R1 held, LS up 60 ms
+    24  holds
+     8  output cut 1x under Steering | LS Up: Double Tap
+        in: Steering | clicks: LP centre, LP left, RP centre, RP left | A9 fires, A9 silent
+
+bumper: R1 held, LS up 400 ms
+    32  holds
+
+trigger: LF tap
+    32  holds
+
+trigger: RF tap
+    32  holds
+
+button: A tap
+    32  holds
+
+button: D-pad Up tap
+    32  holds
+
+button: L4 tap
+    32  holds
+
+menu: Select tap
+    32  output cut 1x under Menu Left: Double Tap
+        in: Base, Cursor Gyro, Gyro, Steering | clicks: LP centre, LP left, RP centre, RP left | A9 fires, A9 silent
+
+menu: Start tap
+    32  output cut 1x under Menu Right: Double Tap
+        in: Base, Cursor Gyro, Gyro, Steering | clicks: LP centre, LP left, RP centre, RP left | A9 fires, A9 silent
+
+menu: Select hold 400 ms
+    24  holds
+     4  final layer taken off 1x, back 1x
+        in: Cursor Gyro, Steering | clicks: RP centre, RP left | A9 fires
+     4  final layer taken off 1x, never back; at let-go: layer off
+        in: Cursor Gyro, Steering | clicks: RP centre, RP left | A9 silent
+
+menu: Start hold 400 ms
+    24  holds
+     4  final layer taken off 1x, back 1x
+        in: Cursor Gyro, Steering | clicks: RP centre, RP left | A9 fires
+     4  final layer taken off 1x, never back; at let-go: layer off
+        in: Cursor Gyro, Steering | clicks: RP centre, RP left | A9 silent
+
+other pad: touch 60 ms
+    16  output cut 1x under RTP: Double Tap
+        in: Base, Cursor Gyro, Gyro, Steering | clicks: LP centre, LP left | A9 fires, A9 silent
+    16  holds
+
+other pad: touch 400 ms
+    32  holds
+
+other pad: click centre 200 ms
+    16  output cut 1x under RTP: Double Tap
+        in: Base, Cursor Gyro, Gyro, Steering | clicks: LP centre, LP left | A9 fires, A9 silent
+    16  holds
+
+other pad: click ring 200 ms
+    16  output cut 1x under RTP: Double Tap
+        in: Base, Cursor Gyro, Gyro, Steering | clicks: LP centre, LP left | A9 fires, A9 silent
+    16  holds
+
+same pad: slide to the centre
+    16  holds
+    16  output cut 1x; at let-go: layer on, output up
+        in: Base, Cursor Gyro, Gyro, Steering | clicks: LP left, RP left | A9 fires, A9 silent
+
+same pad: slide to the ring (up)
+    16  holds
+    16  output cut 1x; at let-go: layer on, output up
+        in: Base, Cursor Gyro, Gyro, Steering | clicks: LP left, RP left | A9 fires, A9 silent
+
+stick: lift LS, thumbs rested before the click
+    32  holds
+
+stick: lift RS, thumbs rested before the click
+    32  holds
+
+letting go of the pad 10, 60 or 120 ms after a 40 ms tap of L1, R1, Select or Start
+    56  a window is on top, bump bind not live, clean 1 s later
+        in: Base, Cursor Gyro, Gyro, Steering | clicks: LP centre, LP left, RP centre, RP left | taps: L1, R1, Select, Start
+     8  no window, bump bind live, clean 1 s later
+        in: Steering | clicks: LP centre, LP left, RP centre, RP left | taps: L1, R1

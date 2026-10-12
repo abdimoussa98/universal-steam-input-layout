@@ -162,8 +162,10 @@ class StickDeflectShape(unittest.TestCase):
         for layout in self.each():
             for title in (MARKER, COVER, *(t for side in SIDES for t in (side[2], side[4]))):
                 kinds = [kind for kind, _ in self.stick(layout, title, 'edge')]
-                # since 90.55 one inverted chord (R133, A61), and the timer's Soft Press in the four timer layers
-                self.assertEqual(kinds, ['chord', 'Soft_Press'] if title in (side[i] for side in SIDES for i in (2, 4)) else ['chord'], title)
+                # the cleanup press and its guard chord (one inverted chord in 90.53 and 90.55), and since 90.55 the
+                # timer's Soft Press in the four timer layers
+                timer = title in (side[i] for side in SIDES for i in (2, 4))
+                self.assertEqual(kinds, ['Full_Press', 'chord', 'Soft_Press'] if timer else ['Full_Press', 'chord'], title)
 
     def test_a_window_scrolls_at_50_ms_and_closes_at_150_ms(self):
         for layout in self.each():

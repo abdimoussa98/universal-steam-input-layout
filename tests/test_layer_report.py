@@ -153,7 +153,10 @@ class NeptuneReportTests(unittest.TestCase):
     def test_a_modifier_on_the_default_layout(self):
         layout = Layout(json.loads((ROOT / "neptune/single-set-default_hold-gyro_latest.json").read_text()))
         result = report(layout, "L1: Modifier 0")
-        self.assertIn("Gyro Off Ramp Up", result["below"]["layers"])
+        self.assertIn("LST: Entry Point", result["below"]["layers"])
+        # Since 90.46 a bumper pressed in `Gyro Off Ramp Up` removes the ramps, so no ramp layer is under a
+        # bumper modifier. Until 90.45 this test named that ramp layer as one that is.
+        self.assertEqual([title for title in result["below"]["layers"] if "Ramp Up" in title], [])
         self.assertIn("L1: Temp Cursor Gyro", result["above"])
         release_exit = next(e for e in result["exits"] if e["input"] == "switch/left_bumper" and e["role"] == "release")
         self.assertIn("L1: Temp Cursor Gyro", release_exit["present_and_removed"])

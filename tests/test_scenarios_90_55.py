@@ -1,9 +1,13 @@
 """90.55: the Steering stick's four timers are Soft Presses on the left stick's edge, the left edge cleans up with one inverted chord, and the unnecessary removes are gone."""
 
+# Since 90.56 the edge cleanup scenarios (C1 to C4) and the edge's shape test run on the 90.55 candidate (`frozen`):
+# the ten edges are back to the cleanup press and its guard chord (tests/test_scenarios_90_56.py). The rest of this
+# file still describes the working layout.
+
 import unittest
 
 from steam_layout.model import Layout, actions, entries, map_title
-from tests.scenario import RENAME, ScenarioCase, layout_data, scenario
+from tests.scenario import RENAME, ScenarioCase, frozen_layout_data, layout_data, scenario
 
 DEFLECT = 1 << 30                                         # the left stick's deflect, bit 30
 THRESHOLD = '13276'                                       # the timers' Soft Press: the stick's D-pad deadzone
@@ -182,7 +186,7 @@ class EdgeCleanup(ScenarioCase):
                 pad.hold(driver).touch('LS').wait(300)
                 yield pad, driver, owner, key
 
-    @scenario('90.55 C1', rules=('R133', 'R170'), rests=('A61',), either=('A9', 'A32'))
+    @scenario('90.55 C1', rules=('R133', 'R170'), rests=('A61',), either=('A9', 'A32'), frozen='90.55')
     def test_no_stick_movement_removes_the_driver_layer_while_the_driver_is_held(self):
         # The fault of 2026-10-10: a flick could drop the W layer under a held driver and leave Steering.
         # Up and down in the W and S layers carry no cleanup any more, and the edge's is off with a driver held.
@@ -200,7 +204,7 @@ class EdgeCleanup(ScenarioCase):
             self.assertTrue(pad.has('Steering', owner) and pad.lacks(*FAMILY))
             self.assertEqual(pad.down(), [key])
 
-    @scenario('90.55 C2', rules=('R133',), rests=('A25', 'A61'), either=('A9', 'A32'))
+    @scenario('90.55 C2', rules=('R133',), rests=('A25', 'A61'), either=('A9', 'A32'), frozen='90.55')
     def test_a_missed_driver_release_clears_when_the_edge_comes_back(self):
         for pad, driver, owner, _ in self.held():
             pad.miss(driver).wait(300)
@@ -211,7 +215,7 @@ class EdgeCleanup(ScenarioCase):
             self.assertTrue(pad.has('Steering') and pad.lacks(owner, *FAMILY))
             self.assertEqual(pad.down(), [])
 
-    @scenario('90.55 C3', rules=('R133',), rests=('A6', 'A25', 'A61'), either=('A9', 'A32'))
+    @scenario('90.55 C3', rules=('R133',), rests=('A6', 'A25', 'A61'), either=('A9', 'A32'), frozen='90.55')
     def test_a_missed_driver_release_during_a_deflect_leaves_no_stick_layer(self):
         for driver, owner, _ in DRIVERS:
             for direction, _, _, _, _, _ in SIDES:
@@ -222,7 +226,7 @@ class EdgeCleanup(ScenarioCase):
                     pad.lift('LS').wait(300)
                     self.assertEqual(pad.down(), [])
 
-    @scenario('90.55 C4', rules=('R133',), rests=('A61',), either=('A9', 'A32'))
+    @scenario('90.55 C4', rules=('R133',), rests=('A61',), either=('A9', 'A32'), frozen='90.55')
     def test_pressing_the_driver_again_shuts_the_edge_chord_off(self):
         for pad, driver, owner, key in self.held():
             pad.miss(driver).wait(100).hold(driver).wait(100)
@@ -232,9 +236,9 @@ class EdgeCleanup(ScenarioCase):
 
 
 class EdgeTimersShape(unittest.TestCase):
-    def each(self):
+    def each(self, frozen=None):
         for variant in ('default', 'alternative'):
-            layout = Layout(layout_data(variant))
+            layout = Layout(frozen_layout_data(variant, frozen) if frozen else layout_data(variant))
             yield layout, (lambda title, v=variant: map_title(title, RENAME) if v == 'alternative' else title)
 
     def test_no_steering_layer_states_an_outer_ring_radius_on_the_left_stick(self):
@@ -247,7 +251,7 @@ class EdgeTimersShape(unittest.TestCase):
 
     def test_the_left_edge_cleans_up_with_one_inverted_chord_and_holds_the_timer_as_a_soft_press(self):
         timers = {layer: (target, delay) for layer, _, target, delay, _ in TIMERS}
-        for layout, name in self.each():
+        for layout, name in self.each(frozen='90.55'):               # 90.56 put the press and its guard back
             for title in EDGE_CHORDS:
                 found = list(entries(layout.active(name(title))['joystick']['inputs']['edge']['activators']))
                 self.assertEqual([kind for kind, _ in found], ['chord', 'Soft_Press'] if title in timers else ['chord'], title)

@@ -9,14 +9,14 @@ The separate [90.39 fallback-window testing candidate](../findings/2026-10-09-fa
 extends frozen 90.32 with compatible later fixes. It has 90 layers and writes
 to its findings folder, with distinctly named snapshots under
 `versions/neptune/90.39/`. It is an inactive experiment: the live release
-continues from 90.38 through 90.40–90.55. Its build/validation commands, local rules and
+continues from 90.38 through 90.40–90.56. Its build/validation commands, local rules and
 scenario coverage remain separate from the live layouts.
 
 ## The builder
 
 The current live builder is
-[findings/2026-10-11-edge-soft-press-timers](../findings/2026-10-11-edge-soft-press-timers/README.md),
-for 90.55. Since 90.49 a builder reads the snapshot of the release before it. One line does not: 90.54 reads the
+[findings/2026-10-11-edge-cleanup-press-and-guard](../findings/2026-10-11-edge-cleanup-press-and-guard/README.md),
+for 90.56. Since 90.49 a builder reads the snapshot of the release before it. One line does not: 90.54 reads the
 90.52 snapshot, the author's trial of one change, so 90.53 is a snapshot off the line and 90.55 continues from 90.54. A separately named testing candidate does not become the live
 builder merely by having a newer version number.
 
@@ -24,6 +24,11 @@ builder merely by having a newer version number.
 python3 findings/2026-10-10-steering-entry-and-edge-chords/build_candidate.py            # candidates in that folder
 python3 findings/2026-10-10-steering-entry-and-edge-chords/build_candidate.py --install  # writes working JSON
 ```
+
+A test holds the working layout to its builder (R156,
+`test_steering_rtp_menu_chords`): it finds the findings folder whose stored
+`default-candidate.json` carries the working layout's version and runs that
+folder's `build_candidate.py`. A release's folder needs both files.
 
 The builder runs the fix pipeline (`steam_layout.fixes`). After installation,
 validate, export both sibling VDFs and save the version snapshots using
@@ -37,6 +42,7 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.56 | [edge-cleanup-press-and-guard](../findings/2026-10-11-edge-cleanup-press-and-guard/README.md) | From 90.55. One change: the left edge of ten Steering layers cleans up with the repeating press and its guard chord again, as in 90.54; only the Entry Guard keeps a chord with Invert Activation (A66) |
 | 90.55 | [edge-soft-press-timers](../findings/2026-10-11-edge-soft-press-timers/README.md) | From 90.54. The four timers of the Steering stick are Soft Presses on the left stick's edge (13276; A64, A65); the left edge of ten Steering layers cleans up with one inverted chord, at the default radius; no right pad removes in the four Steering modifier layers; up and down in the W and S layers carry no cleanup; A and D in the stick modifiers send only the key; three removes leave each Modifier 2 entry |
 | 90.54 | [hold-timer-on-the-edge](../findings/2026-10-11-hold-timer-on-the-edge/README.md) | From 90.52, not 90.53. One change: in the two Steering stick modifiers the 200 ms chord that adds the Tap Cover moves from up or down to the left stick's edge (A64) |
 | 90.53 | [steering-entry-and-edge-chords](../findings/2026-10-10-steering-entry-and-edge-chords/README.md) | The stick's hold timer and cover timer sit on the drivers, in one shared stick modifier, with the reset left on the stick; in the W and S layers up and down add the stick modifier with one chord on the driver and the deflect, with no cleanup; the left stick's edge of ten Steering layers cleans up with one inverted chord, at the default radius; no right pad removes in the Steering modifier layers; left and right send only A and D |

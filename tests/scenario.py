@@ -119,10 +119,12 @@ def frozen_layout_data(variant, version):
     """Load a retired interaction from its frozen builder or validated candidate."""
     builders = {'90.41': 'findings/2026-10-09-low-haptics-and-silent-fn/build_candidate.py',
                 '90.42': 'findings/2026-10-09-fn-haptics-and-steering-clear/build_candidate.py'}
-    candidates = {'90.49': 'findings/2026-10-10-steering-scroll-and-pad-click-fix',
+    candidates = {'90.48': 'findings/2026-10-10-quiet-gyro-and-guard-handoff',
+                  '90.49': 'findings/2026-10-10-steering-scroll-and-pad-click-fix',
                   '90.51': 'findings/2026-10-10-ring-bump-and-modifier-direction',
                   '90.53': 'findings/2026-10-10-steering-entry-and-edge-chords',
-                  '90.54': 'findings/2026-10-11-hold-timer-on-the-edge'}
+                  '90.54': 'findings/2026-10-11-hold-timer-on-the-edge',
+                  '90.55': 'findings/2026-10-11-edge-soft-press-timers'}
     key = version, variant
     if key not in _frozen_layouts:
         if version in candidates:

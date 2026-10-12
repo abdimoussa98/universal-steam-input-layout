@@ -1,0 +1,102 @@
+click layers: ['LTP: Click Entry Point', 'RTP: Click Entry Point', 'LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: Middle Click', 'RTP: Middle Click']
+
+Base
+   left_trackpad/click                  Soft_Press                         guard: -                            ADD ['LTP: Click Entry Point'] 
+   right_trackpad/click                  Soft_Press                         guard: -                            ADD ['RTP: Click Entry Point'] 
+
+LTP: Arrow Keys
+   left_trackpad/click                  Soft_Press                         guard: -                            ADD ['LTP: Arrow Keys'] 
+   left_trackpad/click                  Soft_Press inverted repeat         guard: -                            removes ['LTP: Arrow Keys'] of 1 commands
+   left_trackpad/touch                  release                            guard: -                            removes ['LTP: Arrow Keys'] of 1 commands
+   joystick/touch                  Full_Press repeat                  guard: chord_button 16              removes ['LTP: Arrow Keys'] of 1 commands
+   right_joystick/touch                  Full_Press repeat                  guard: chord_button 16              removes ['LTP: Arrow Keys'] of 1 commands
+
+RTP: Mouse Buttons
+   right_trackpad/click                  Soft_Press                         guard: -                            ADD ['RTP: Mouse Buttons'] 
+   right_trackpad/click                  Soft_Press inverted repeat         guard: -                            removes ['RTP: Mouse Buttons'] of 1 commands
+   right_trackpad/touch                  release                            guard: -                            removes ['RTP: Mouse Buttons'] of 4 commands
+   joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: Mouse Buttons'] of 4 commands
+   right_joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: Mouse Buttons'] of 4 commands
+
+RTP: Circular Scroll
+   right_trackpad/click                  Soft_Press                         guard: -                            ADD ['RTP: Click Entry Point'] 
+   right_trackpad/touch                  release                            guard: -                            removes ['RTP: CEP', 'RTP: Middle Click', 'RTP: Mouse Buttons'] of 4 commands
+   joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: CEP', 'RTP: Middle Click', 'RTP: Mouse Buttons'] of 4 commands
+   right_joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: CEP', 'RTP: Middle Click', 'RTP: Mouse Buttons'] of 4 commands
+
+RTP: Entry Point
+   right_joystick/edge                   Full_Press repeat                  guard: chord_button 17              removes ['RTP: Mouse Buttons', 'RTP: CEP', 'RTP: Middle Click'] of 5 commands
+   right_joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: Middle Click', 'RTP: CEP', 'RTP: Mouse Buttons'] of 5 commands
+   joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: Middle Click', 'RTP: CEP', 'RTP: Mouse Buttons'] of 5 commands
+
+Menu Left: Entry Point
+   joystick/click                  release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+   right_joystick/click                  release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+
+Menu Right: Entry Point
+   joystick/click                  release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+   right_joystick/click                  release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+
+Steering | R1!L1: Modifier 2
+   switch/left_bumper            release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 88 commands
+
+Steering | L1!R1: Modifier 2
+   switch/right_bumper           release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 88 commands
+
+Stateful | Menu Left: Entry Point
+   switch/button_menu            chord delay 200 chord on chord_button 15 guard: -                            removes ['RTP: CEP', 'RTP: Mouse Buttons', 'RTP: Middle Click'] of 7 commands
+   joystick/touch                  release                            guard: -                            removes ['RTP: CEP', 'RTP: Mouse Buttons', 'RTP: Middle Click'] of 10 commands
+   joystick/click                  release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+   right_joystick/touch                  release                            guard: -                            removes ['RTP: CEP', 'RTP: Mouse Buttons', 'RTP: Middle Click'] of 10 commands
+   right_joystick/click                  release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+
+Stateful | Menu Right: Entry Point
+   switch/button_escape          chord delay 200 chord on chord_button 14 guard: -                            removes ['RTP: CEP', 'RTP: Mouse Buttons', 'RTP: Middle Click'] of 7 commands
+   joystick/touch                  release                            guard: -                            removes ['RTP: CEP', 'RTP: Mouse Buttons', 'RTP: Middle Click'] of 10 commands
+   joystick/click                  release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+   right_joystick/touch                  release                            guard: -                            removes ['RTP: CEP', 'RTP: Mouse Buttons', 'RTP: Middle Click'] of 10 commands
+   right_joystick/click                  release                            guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+
+LTP: Click Entry Point
+   left_trackpad/edge                   Soft_Press inverted repeat         guard: -                            ADD ['LTP: Middle Click'] removes ['LTP: CEP'] of 2 commands
+   left_trackpad/edge                   Soft_Press repeat delay 5          guard: -                            ADD ['LTP: Arrow Keys'] removes ['LTP: CEP'] of 2 commands
+   left_trackpad/touch                  release                            guard: -                            removes ['LTP: CEP'] of 1 commands
+   left_trackpad/touch                  Full_Press repeat                  guard: -                            removes ['LTP: Arrow Keys'] of 1 commands
+   joystick/touch                  Full_Press repeat                  guard: chord_button 16              removes ['LTP: CEP'] of 1 commands
+   right_joystick/touch                  Full_Press repeat                  guard: chord_button 16              removes ['LTP: CEP'] of 1 commands
+
+RTP: Click Entry Point
+   right_trackpad/edge                   Soft_Press inverted repeat         guard: -                            ADD ['RTP: Middle Click'] removes ['RTP: CEP'] of 2 commands
+   right_trackpad/edge                   Soft_Press repeat delay 5          guard: -                            ADD ['RTP: Mouse Buttons'] removes ['RTP: CEP'] of 2 commands
+   right_trackpad/touch                  release                            guard: -                            removes ['RTP: CEP'] of 4 commands
+   right_trackpad/touch                  Full_Press repeat                  guard: -                            removes ['RTP: Mouse Buttons'] of 1 commands
+   joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: CEP'] of 4 commands
+   right_joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: CEP'] of 4 commands
+
+LTP: Middle Click
+   left_trackpad/click                  Soft_Press                         guard: -                            ADD ['LTP: Middle Click'] 
+   left_trackpad/click                  Soft_Press inverted repeat         guard: -                            removes ['LTP: Middle Click'] of 1 commands
+   left_trackpad/touch                  release                            guard: -                            removes ['LTP: Middle Click'] of 1 commands
+   joystick/touch                  Full_Press repeat                  guard: chord_button 16              removes ['LTP: Middle Click'] of 1 commands
+   right_joystick/touch                  Full_Press repeat                  guard: chord_button 16              removes ['LTP: Middle Click'] of 1 commands
+
+RTP: Middle Click
+   right_trackpad/click                  Soft_Press                         guard: -                            ADD ['RTP: Middle Click'] 
+   right_trackpad/click                  Soft_Press inverted repeat         guard: -                            removes ['RTP: Middle Click'] of 1 commands
+   right_trackpad/touch                  release                            guard: -                            removes ['RTP: Middle Click'] of 4 commands
+   joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: Middle Click'] of 4 commands
+   right_joystick/touch                  Full_Press repeat                  guard: chord_button 17              removes ['RTP: Middle Click'] of 4 commands
+
+Gamepad
+   joystick/click                  chord chord on mask 20480 (any)    guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+   right_joystick/click                  chord chord on mask 20480 (any)    guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+
+Menu Left!Right: Entry Point
+   switch/button_escape          chord delay 200 chord on chord_button 15 guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+
+Menu Right!Left: Entry Point
+   switch/button_menu            chord delay 200 chord on chord_button 14 guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+
+Menu Keys
+   joystick/click                  chord chord on mask 20480 (any)    guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands
+   right_joystick/click                  chord chord on mask 20480 (any)    guard: -                            removes ['LTP: Arrow Keys', 'RTP: Mouse Buttons', 'LTP: CEP', 'RTP: CEP', 'LTP: Middle Click', 'RTP: Middle Click'] of 90 commands

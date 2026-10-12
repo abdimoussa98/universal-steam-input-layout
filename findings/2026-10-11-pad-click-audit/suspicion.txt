@@ -1,0 +1,72 @@
+
+suspicion, only a call that takes a layer off: of 16 cases (4 starting layers, 4 clicks)
+  nothing for 400 ms                               drops  0
+  stick: touch LS 400 ms and lift                  drops  0
+  stick: lift LS, thumbs rested before the click   drops 16
+  stick: touch RS 400 ms and lift                  drops  0
+  stick: lift RS, thumbs rested before the click   drops 16
+  stick: tap LS 60 ms                              drops  0
+  stick: tap RS 60 ms                              drops  0
+  stick: push LS up 300 ms                         drops  4   in Steering; LP centre, LP left, RP centre, RP left
+  stick: push RS 300 ms                            drops  6   in Base, Gyro, Steering; LP centre, LP left
+  stick: click LS                                  drops  0
+  stick: click RS                                  drops  0
+  bumper: L1 tap 40 ms                             drops 16
+  bumper: R1 tap 40 ms                             drops 16
+  bumper: L1 hold 400 ms                           drops 16
+  bumper: R1 hold 400 ms                           drops 16
+  bumper: L1 then R1, R1 let go first              drops 16
+  bumper: R1 then L1, L1 let go first              drops 16
+  bumper: R1 held, LS up 60 ms                     drops 16
+  bumper: R1 held, LS up 400 ms                    drops 16
+  trigger: LF tap                                  drops  0
+  trigger: RF tap                                  drops  0
+  button: A tap                                    drops  0
+  button: D-pad Up tap                             drops  0
+  button: L4 tap                                   drops  0
+  menu: Select tap                                 drops 16
+  menu: Start tap                                  drops 16
+  menu: Select hold 400 ms                         drops 16
+  menu: Start hold 400 ms                          drops 16
+  other pad: touch 60 ms                           drops  8   in Base, Cursor Gyro, Gyro, Steering; LP centre, LP left
+  other pad: touch 400 ms                          drops  8   in Base, Cursor Gyro, Gyro, Steering; LP centre, LP left
+  other pad: click centre 200 ms                   drops 16
+  other pad: click ring 200 ms                     drops 16
+  same pad: slide to the centre                    drops  0
+  same pad: slide to the ring (up)                 drops  0
+
+suspicion, every call, also one that finds nothing: of 16 cases (4 starting layers, 4 clicks)
+  nothing for 400 ms                               drops  0
+  stick: touch LS 400 ms and lift                  drops 16
+  stick: lift LS, thumbs rested before the click   drops 16
+  stick: touch RS 400 ms and lift                  drops 16
+  stick: lift RS, thumbs rested before the click   drops 16
+  stick: tap LS 60 ms                              drops 16
+  stick: tap RS 60 ms                              drops 16
+  stick: push LS up 300 ms                         drops 16
+  stick: push RS 300 ms                            drops 16
+  stick: click LS                                  drops 16
+  stick: click RS                                  drops 16
+  bumper: L1 tap 40 ms                             drops 16
+  bumper: R1 tap 40 ms                             drops 16
+  bumper: L1 hold 400 ms                           drops 16
+  bumper: R1 hold 400 ms                           drops 16
+  bumper: L1 then R1, R1 let go first              drops 16
+  bumper: R1 then L1, L1 let go first              drops 16
+  bumper: R1 held, LS up 60 ms                     drops 16
+  bumper: R1 held, LS up 400 ms                    drops 16
+  trigger: LF tap                                  drops  0
+  trigger: RF tap                                  drops  0
+  button: A tap                                    drops  0
+  button: D-pad Up tap                             drops  0
+  button: L4 tap                                   drops  0
+  menu: Select tap                                 drops 16
+  menu: Start tap                                  drops 16
+  menu: Select hold 400 ms                         drops 16
+  menu: Start hold 400 ms                          drops 16
+  other pad: touch 60 ms                           drops  8   in Base, Cursor Gyro, Gyro, Steering; LP centre, LP left
+  other pad: touch 400 ms                          drops  8   in Base, Cursor Gyro, Gyro, Steering; LP centre, LP left
+  other pad: click centre 200 ms                   drops 16
+  other pad: click ring 200 ms                     drops 16
+  same pad: slide to the centre                    drops  0
+  same pad: slide to the ring (up)                 drops  0
