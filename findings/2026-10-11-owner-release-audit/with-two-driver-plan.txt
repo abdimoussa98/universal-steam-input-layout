@@ -1,0 +1,27 @@
+
+audit only
+  default: 608 flags in 640 gestures
+      144  the second driver typed S on its way to Modifier 2
+      144  the second driver typed W on its way to Modifier 2
+      128  Steering gone after the first driver was let go (stick out)
+      96  W and S down together after the second press
+      96  no Modifier 2 after the second press
+  alternative: 608 flags in 640 gestures
+      144  the second driver typed S on its way to Modifier 2
+      144  the second driver typed W on its way to Modifier 2
+      128  Steering gone after the first driver was let go (stick out)
+      96  W and S down together after the second press
+      96  no Modifier 2 after the second press
+  W through R1 held and L1 held for 500 ms: never touched
+
+plan only
+  default: 32 flags in 640 gestures
+      32  Steering gone after the second driver was let go (stick out)
+  alternative: 32 flags in 640 gestures
+      32  Steering gone after the second driver was let go (stick out)
+  W through R1 held and L1 held for 500 ms: handover at 0 ms, down at 0 ms, handover at 500 ms, down at 500 ms
+
+both
+  default: 0 flags in 640 gestures
+  alternative: 0 flags in 640 gestures
+  W through R1 held and L1 held for 500 ms: handover at 0 ms, down at 0 ms, handover at 500 ms, down at 500 ms

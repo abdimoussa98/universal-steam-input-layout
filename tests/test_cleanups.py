@@ -13,7 +13,7 @@ import tempfile
 import unittest
 
 from steam_layout.chains import Chains
-from steam_layout.cleanups import Cleanups, audit, kept
+from steam_layout.cleanups import Cleanups, audit, kept, release_of
 from steam_layout.fixes import cleanup_lists
 from steam_layout.model import Layout, entries
 from tests.test_audit_inheritance import EMPTY, add, build, remove
@@ -377,6 +377,15 @@ class NeverThereTests(unittest.TestCase):
                 self.assertEqual(kept(config, variant, modern | {'Steering | LS: Fallback Hold'}), {})
                 self.assertEqual(kept(config, variant, {'Steering | LS: Entry Guard'}), {})
                 self.assertEqual(kept(config, variant), {})
+
+    def test_a_kept_removal_can_end_at_a_release(self):
+        # 90.57 took the removes out, and the frozen builders up to 90.56 still rebuild with them (R132's `until`).
+        config = {'cleanups': {'keep': [{'layers': ['P'], 'removes': ['Ghost'], 'until': '90.56', 'why': 'gone in 90.57'}]}}
+        for version, holds in (('90.56', True), ('90.9', True), ('90.57', False), ('91.0', False), (None, True)):
+            with self.subTest(version=version):
+                self.assertEqual(set(kept(config, 'default', {'P'}, version)), {('P', 'Ghost')} if holds else set())
+        self.assertEqual(release_of('single-set-default :: always-gyro :: 90.57'), '90.57')
+        self.assertIsNone(release_of('a toy layout'))
 
     def test_a_cleanup_that_removes_a_layer_that_is_never_there(self):
         data = owner({"button_a": guarded(remove("P"), remove("C"), remove("Ghost"))},

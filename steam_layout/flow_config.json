@@ -85,10 +85,11 @@
           "Steering | LS: Entry Guard"
         ],
         "where": "Stateful | Menu Left: Fn Layer",
-        "not_where": "Steering | LS: Fallback Hold"
+        "not_where": "Steering | LS: Fallback Hold",
+        "until": "90.56"
       },
       "status": "allow",
-      "why": "90.43 retains the existing Gyro Modifier 2 clear scope while the broader dual-bumper redesign remains deferred. It still clears stale ordinary modifiers, the opposite Gyro Modifier 2 branch and Steering; the renamed Entry Guard replaces the old fallback target. These layers need not coexist in a normal adding chain. This preserves existing recovery removals without introducing a new entry route; feedback is chosen separately once per gesture. Requiring Stateful Fn and excluding Fallback Hold leaves pre-90.33 Entry Guard builds unchanged; the historical fallback-specific keeps remain unchanged too.",
+      "why": "90.43 retains the existing Gyro Modifier 2 clear scope while the broader dual-bumper redesign remains deferred. It still clears stale ordinary modifiers, the opposite Gyro Modifier 2 branch and Steering; the renamed Entry Guard replaces the old fallback target. These layers need not coexist in a normal adding chain. This preserves existing recovery removals without introducing a new entry route; feedback is chosen separately once per gesture. Requiring Stateful Fn and excluding Fallback Hold leaves pre-90.33 Entry Guard builds unchanged; the historical fallback-specific keeps remain unchanged too. Ended with 90.57 (author, 2026-10-12): the two-driver redesign is built, and the four Gyro Modifier 2 Releases stop naming these seven layers, none of which can be on the stack when they fire. The entry holds up to 90.56 only because the frozen builders of 90.43 to 90.56 rebuild with those removes.",
       "decided": "Author approved entry/recovery/feedback implementation and deferred broader clear redesign, 2026-10-09",
       "todo": null
     },
@@ -108,10 +109,11 @@
           "Steering | LS: Entry Guard"
         ],
         "where": "Stateful | Menu Left: Fn Layer",
-        "not_where": "Steering | LS: Fallback Hold"
+        "not_where": "Steering | LS: Fallback Hold",
+        "until": "90.56"
       },
       "status": "allow",
-      "why": "90.43 retains the existing Gyro Modifier 2 clear scope while the broader dual-bumper redesign remains deferred. It still clears stale ordinary modifiers, the opposite Gyro Modifier 2 branch and Steering; the renamed Entry Guard replaces the old fallback target. These layers need not coexist in a normal adding chain. This preserves existing recovery removals without introducing a new entry route; feedback is chosen separately once per gesture. Requiring Stateful Fn and excluding Fallback Hold leaves pre-90.33 Entry Guard builds unchanged; the historical fallback-specific keeps remain unchanged too.",
+      "why": "90.43 retains the existing Gyro Modifier 2 clear scope while the broader dual-bumper redesign remains deferred. It still clears stale ordinary modifiers, the opposite Gyro Modifier 2 branch and Steering; the renamed Entry Guard replaces the old fallback target. These layers need not coexist in a normal adding chain. This preserves existing recovery removals without introducing a new entry route; feedback is chosen separately once per gesture. Requiring Stateful Fn and excluding Fallback Hold leaves pre-90.33 Entry Guard builds unchanged; the historical fallback-specific keeps remain unchanged too. Ended with 90.57 (author, 2026-10-12): the two-driver redesign is built, and the four Gyro Modifier 2 Releases stop naming these seven layers, none of which can be on the stack when they fire. The entry holds up to 90.56 only because the frozen builders of 90.43 to 90.56 rebuild with those removes.",
       "decided": "Author approved entry/recovery/feedback implementation and deferred broader clear redesign, 2026-10-09",
       "todo": null
     },
@@ -444,11 +446,11 @@
     {
       "rule": "R159",
       "scope": {
-        "note": "Since 90.44 both Steering Modifier 2 release clears retain Steering, and all six release clears across the two Steering and two Gyro Modifier 2 layers retain Cursor Gyro. Gyro Modifier 2 still toggles Gyro and retains its existing Steering removal. Other cleanup targets remain unchanged."
+        "note": "Since 90.44 the Steering Modifier 2 Release kept Steering, and every Modifier 2 release clear kept Cursor Gyro. Since 90.57 the Steering Modifier 2 Release is no clear: the second driver's Release removes only its Modifier 2 layer, and Gyro and the first driver's layer stay. The same holds in Cursor Gyro: no Modifier 2 Release removes it, and inside it the quick tap only toggles Gyro. Four release clears are left, the two drivers in each Gyro Modifier 2 layer; they remove Gyro, their own layer, the three covers and the two Gyro modifiers."
       },
       "status": "allow",
-      "why": "The author requested removing Steering stateful clears from both Steering Modifier 2 layers and stopping Cursor Gyro stateful clears on the dual-bumper/trigger gesture. Dedicated Steering full-up/down, Cursor Gyro both-stick and menu-plus-click exits remain; the broader release-order redesign stays deferred.",
-      "decided": "Author requested and authorized implementation, 2026-10-10",
+      "why": "The author requested removing Steering stateful clears from both Steering Modifier 2 layers and stopping Cursor Gyro stateful clears on the dual-bumper/trigger gesture. Dedicated Steering full-up/down, Cursor Gyro both-stick and menu-plus-click exits remain; the broader release-order redesign stays deferred. 90.57 (author, 2026-10-12: \"I don't want to be cleared out of steering in mod 2\"; and on the Modifier 2 clear being gone for Steering, \"that is also true for the cursor gyro stateful layer so we need that note as well\"): the release-order redesign is built, and the Gyro Modifier 2 Releases stop naming Steering and its guard, which can't be on the stack when they fire.",
+      "decided": "Author requested and authorized implementation, 2026-10-10; the two-driver build, 2026-10-12",
       "todo": null
     },
     {
@@ -469,6 +471,35 @@
       "status": "allow",
       "why": "The author, describing the layer: from it 'you're not able to even go into the mods'; it only puts the arrow keys on the D-pad and Enter, Escape, Backspace and Tab on the face buttons.",
       "decided": "Author, 2026-10-03; in plans/2026-10-04-pad-bumps-and-menu-layer.md, which the author told me to build on 2026-10-04",
+      "todo": null
+    },
+    {
+      "rule": "R174",
+      "scope": {
+        "note": "The two Steering stick windows, Steering | LS Up: Double Tap and Steering | LS Down: Double Tap. A driver let go inside one removes the window and both driver layers, so with the other driver held Steering is the top layer until its next repeat adds that driver's layer back. The second driver pressed inside one types its key until the window closes itself, and Modifier 2 comes after that."
+      },
+      "status": "todo",
+      "why": "The author, 2026-10-12, shown that a chord in the window rests on a repeating multi-command chord firing under a held bumper: \"just dont touch the window for now and have it remove itself as today\". The windows keep every bind of 90.56. A Deck check on the installed layout says whether Modifier 2 comes after a window at all (plans/2026-10-11-two-drivers-in-steering.md, part 2).",
+      "decided": "Author, 2026-10-12",
+      "todo": "todos.md, Steering: The stick windows and two drivers"
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Stateful | Menu Left: Entry Point",
+          "Stateful | Menu Right: Entry Point"
+        ],
+        "removes": [
+          "LST: Tap Cover",
+          "LST: Temporary Gyro",
+          "RST: Tap Cover",
+          "RST: Temporary Gyro"
+        ]
+      },
+      "status": "allow",
+      "why": "These removes are needed, and the audit's chains cannot see it. A stick's Tap Cover and Temporary Gyro come on by a delayed add, which the chains do not follow, so the Cleanup audit calls them never there with a Stateful Entry Point. On the simulator they were on the stack when the Entry Point's stick click Release fired (findings/2026-10-12-remove-list-audit: 48,000 random walks a layout). Up to 90.57 that Release named every layer, and a whole-stack clear is exempt from the never-there check, so nothing had to say this. Since 90.58 the fourteen clears name only what can be on the stack (R163), the check applies to them, and the cleanup_lists fix would take these sixteen removes out. The entry goes stale when the chains follow a delayed add; on a layout up to 90.57 it is unused.",
+      "decided": "Author, 2026-10-12: \"trim\", then \"start building\" (plans/2026-10-12-removes-that-never-take-a-layer-off.md); the entry itself is Claude's, from the audit",
       "todo": null
     },
     {

@@ -96,6 +96,10 @@ class ExpandTests(unittest.TestCase):
         for section in ("keep", "required"):
             self.assertEqual({key: config["cleanups"][section][0][key] for key in gates}, gates)
 
+    def test_a_kept_removal_carries_the_release_it_ends_at(self):
+        config = exceptions.expand({"exceptions": [entry("R132", {"layers": ["P"], "removes": ["Ghost"], "until": "90.56"})]})
+        self.assertEqual(config["cleanups"]["keep"][0]["until"], "90.56")
+
     def test_review_scopes(self):
         config = exceptions.expand({"exceptions": [entry("R139", {"kind": "covers"}),
                                                    entry("R136", {"upper": "C", "lower": "P"})]})

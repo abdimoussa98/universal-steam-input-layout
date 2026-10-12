@@ -313,12 +313,9 @@ class LayerFeedback(ScenarioCase):
                     pad.hold(first).wait(30).hold(second).wait(30)
                     self.assertTrue(pad.has(mod2))
                     pad.let_go(release_first).wait(30).let_go(last).lift('LS').lift('RS').wait(400)
-                    if release_first == second:
-                        # Since 90.44 this broad cleanup retains Steering;
-                        # its existing Gyro removal remains intentional.
-                        self.assertEqual(pad.stack, pad.layers('Base', 'Steering'))
-                    else:
-                        self.assertEqual(pad.stack, pad.layers(*home(gyro), 'Steering'))
+                    # Since 90.44 the second driver's Release retained Steering; until 90.56 it still
+                    # removed Gyro. Since 90.57 it removes only the Modifier 2 layer.
+                    self.assertEqual(pad.stack, pad.layers(*home(gyro), 'Steering'))
                     self.assertEqual(pad.seen('beep'), [])
 
 

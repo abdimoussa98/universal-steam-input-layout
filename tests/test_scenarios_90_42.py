@@ -107,10 +107,13 @@ class SteeringFullDeflectionExit(ScenarioCase):
                 self.assertFalse(set(pad.stack) & steering_family(pad))
                 self.assertEqual(len(direction_pulses(pad)), 1)
 
-    @scenario('90.42 S3', rules=('R148',), rests=('A4', 'A6', 'A53'))
+    @scenario('90.42 S3', rules=('R148',), rests=('A4', 'A6', 'A53'), frozen='90.57')
     def test_the_exit_removes_stale_steering_helpers_including_windows_first(self):
         # Seed a stale stack deliberately; this checks the recovery list,
         # without claiming this full stack is normally reachable.
+        # On the 90.57 build. Since 90.58 the exit removes `Steering` alone: each of the thirteen helpers binds
+        # up and down, so it answers them while it is on, and none was ever under `Steering` (R132; the author,
+        # 2026-10-12: "trim"). A stack like this one, which no press sequence reaches, is no longer cleared here.
         helpers = (GUARD, 'Steering | R1: W Key', 'Steering | L1: S Key',
                    'Steering | R1!L1: Modifier 2', 'Steering | L1!R1: Modifier 2',
                    'Steering | LS Up: Modifier 1', 'Steering | LS Down: Modifier 0',

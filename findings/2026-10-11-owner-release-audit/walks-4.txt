@@ -1,0 +1,168 @@
+
+default: 12000 walks of 60 events, waits of 5 to 400 ms, 4% of button releases missed; {'done': 11629, 'looped': 371}
+
+  L1&R1: Tap Cover | left_bumper: fired 1312 times
+    lists 8; on the stack at least once: 8; never: 0
+    on the stack: L1&R1: Tap Cover, L1: Tap Cover, Gyro | L1: Modifier 0, L1: Modifier 0, Gyro | R1!L1: Modifier 2, R1!L1: Modifier 2, Gyro | L1!R1: Modifier 2, L1!R1: Modifier 2
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, Gyro | R1: Modifier 1, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, R1: Modifier 1, R1: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Tab
+
+  L1&R1: Tap Cover | right_bumper: fired 1272 times
+    lists 8; on the stack at least once: 8; never: 0
+    on the stack: L1&R1: Tap Cover, R1: Tap Cover, Gyro | R1: Modifier 1, R1: Modifier 1, Gyro | R1!L1: Modifier 2, R1!L1: Modifier 2, Gyro | L1!R1: Modifier 2, L1!R1: Modifier 2
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, Gyro | L1: Modifier 0, L1: Modifier 0, L1: Tap Cover, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Tab
+
+  L1: Tap Cover | left_bumper: fired 3420 times
+    lists 4; on the stack at least once: 4; never: 0
+    on the stack: L1: Tap Cover, Gyro | L1: Modifier 0, L1: Modifier 0, Steering | R1!L1: Modifier 2
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Steering | R1: W Key, Tab
+
+  R1: Tap Cover | right_bumper: fired 3541 times
+    lists 4; on the stack at least once: 4; never: 0
+    on the stack: R1: Tap Cover, Gyro | R1: Modifier 1, R1: Modifier 1, Steering | L1!R1: Modifier 2
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Steering | L1: S Key, Tab
+
+  Steering | L1!R1: Modifier 2 | right_bumper: fired 1120 times
+    lists 88; on the stack at least once: 24; never: 64
+    on the stack: Gyro, LST: Temporary Gyro, RST: Temporary Gyro, LTP: Arrow Keys, RTP: Mouse Buttons, RTP: Circular Scroll, Escape, Tab, Backspace, Enter, LST: Entry Point, RST: Entry Point, RTP: Entry Point, LST: Tap Cover, RST: Tap Cover, RTP: Tap Cover, Steering | L1!R1: Modifier 2, Steering | L1: S Key, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, LTP: Click Entry Point, RTP: Click Entry Point, LTP: Middle Click, RTP: Middle Click
+    on the stack and left: Steering
+
+  Steering | L1: S Key | left_bumper: fired 7305 times
+    lists 11; on the stack at least once: 9; never: 2
+    on the stack: Steering | LS: Double Tap Cover, Steering | LS Down: Scroll Down, Steering | LS Up: Scroll Up, Steering | LS: Tap Cover, R1: Tap Cover, Steering | LS Down: Modifier 0, Steering | LS Up: Modifier 1, Steering | L1!R1: Modifier 2, Steering | L1: S Key
+    never: Steering | LS Up: Double Tap, Steering | LS Down: Double Tap
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Tab
+
+  Steering | L1: S Key | right_bumper: fired 5 times
+    lists 10; on the stack at least once: 2; never: 8
+    on the stack: Steering | LS Down: Scroll Down, Steering | LS Up: Scroll Up
+    never: Steering | LS Up: Double Tap, Steering | LS Down: Double Tap, Steering | LS: Double Tap Cover, Steering | LS: Tap Cover, R1: Tap Cover, Steering | LS Down: Modifier 0, Steering | LS Up: Modifier 1, Steering | L1!R1: Modifier 2
+    on the stack and left: Escape, Gyro, LST: Entry Point, LST: Tap Cover, RTP: Entry Point, Steering, Steering | L1: S Key
+
+  Steering | LS Down: Double Tap | left_bumper: fired 58 times
+    lists 3; on the stack at least once: 3; never: 0
+    on the stack: Steering | LS Down: Double Tap, Steering | R1: W Key, Steering | L1: S Key
+    never: none
+    on the stack and left: Enter, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Middle Click, RST: Entry Point, RST: Tap Cover, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering
+
+  Steering | LS Down: Double Tap | right_bumper: fired 58 times
+    lists 3; on the stack at least once: 3; never: 0
+    on the stack: Steering | LS Down: Double Tap, Steering | R1: W Key, Steering | L1: S Key
+    never: none
+    on the stack and left: Backspace, Enter, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, RST: Entry Point, RST: Tap Cover, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering
+
+  Steering | LS Up: Double Tap | left_bumper: fired 60 times
+    lists 3; on the stack at least once: 3; never: 0
+    on the stack: Steering | LS Up: Double Tap, Steering | R1: W Key, Steering | L1: S Key
+    never: none
+    on the stack and left: Backspace, Enter, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, RST: Entry Point, RST: Tap Cover, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering
+
+  Steering | LS Up: Double Tap | right_bumper: fired 61 times
+    lists 3; on the stack at least once: 3; never: 0
+    on the stack: Steering | LS Up: Double Tap, Steering | R1: W Key, Steering | L1: S Key
+    never: none
+    on the stack and left: Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, RST: Entry Point, RST: Tap Cover, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering
+
+  Steering | R1!L1: Modifier 2 | left_bumper: fired 1049 times
+    lists 88; on the stack at least once: 22; never: 66
+    on the stack: Gyro, LST: Temporary Gyro, RST: Temporary Gyro, LTP: Arrow Keys, RTP: Mouse Buttons, RTP: Circular Scroll, Escape, Tab, Backspace, Enter, LST: Entry Point, RST: Entry Point, RTP: Entry Point, LST: Tap Cover, RST: Tap Cover, RTP: Tap Cover, Steering | R1!L1: Modifier 2, Steering | R1: W Key, LTP: Click Entry Point, RTP: Click Entry Point, LTP: Middle Click, RTP: Middle Click
+    on the stack and left: Steering
+
+  Steering | R1: W Key | left_bumper: fired 8 times
+    lists 10; on the stack at least once: 3; never: 7
+    on the stack: Steering | LS Down: Scroll Down, Steering | LS: Tap Cover, Steering | LS Down: Modifier 0
+    never: Steering | LS Up: Double Tap, Steering | LS Down: Double Tap, Steering | LS: Double Tap Cover, Steering | LS Up: Scroll Up, L1: Tap Cover, Steering | LS Up: Modifier 1, Steering | R1!L1: Modifier 2
+    on the stack and left: Gyro, LST: Entry Point, LTP: Middle Click, RST: Entry Point, RTP: Entry Point, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Steering | R1: W Key
+
+  Steering | R1: W Key | right_bumper: fired 7168 times
+    lists 11; on the stack at least once: 9; never: 2
+    on the stack: Steering | LS: Double Tap Cover, Steering | LS Down: Scroll Down, Steering | LS Up: Scroll Up, Steering | LS: Tap Cover, L1: Tap Cover, Steering | LS Down: Modifier 0, Steering | LS Up: Modifier 1, Steering | R1!L1: Modifier 2, Steering | R1: W Key
+    never: Steering | LS Up: Double Tap, Steering | LS Down: Double Tap
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Tab
+
+alternative: 12000 walks of 60 events, waits of 5 to 400 ms, 4% of button releases missed; {'done': 12000}
+
+  L2&R2: Tap Cover | left_trigger/edge: fired 1349 times
+    lists 8; on the stack at least once: 8; never: 0
+    on the stack: L2&R2: Tap Cover, L2: Tap Cover, Gyro | L2: Modifier 0, L2: Modifier 0, Gyro | R2!L2: Modifier 2, R2!L2: Modifier 2, Gyro | L2!R2: Modifier 2, L2!R2: Modifier 2
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, Gyro | R2: Modifier 1, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Tap Cover, R2: Modifier 1, R2: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Tab
+
+  L2&R2: Tap Cover | right_trigger/edge: fired 1288 times
+    lists 8; on the stack at least once: 8; never: 0
+    on the stack: L2&R2: Tap Cover, R2: Tap Cover, Gyro | R2: Modifier 1, R2: Modifier 1, Gyro | R2!L2: Modifier 2, R2!L2: Modifier 2, Gyro | L2!R2: Modifier 2, L2!R2: Modifier 2
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, Gyro | L2: Modifier 0, L2: Modifier 0, L2: Tap Cover, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Tab
+
+  L2: Tap Cover | left_trigger/edge: fired 3699 times
+    lists 4; on the stack at least once: 4; never: 0
+    on the stack: L2: Tap Cover, Gyro | L2: Modifier 0, L2: Modifier 0, Steering | R2!L2: Modifier 2
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Steering | R2: W Key, Tab
+
+  R2: Tap Cover | right_trigger/edge: fired 3770 times
+    lists 4; on the stack at least once: 4; never: 0
+    on the stack: R2: Tap Cover, Gyro | R2: Modifier 1, R2: Modifier 1, Steering | L2!R2: Modifier 2
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Steering | L2: S Key, Tab
+
+  Steering | L2!R2: Modifier 2 | right_trigger/edge: fired 1198 times
+    lists 88; on the stack at least once: 24; never: 64
+    on the stack: Gyro, LST: Temporary Gyro, RST: Temporary Gyro, LTP: Arrow Keys, RTP: Mouse Buttons, RTP: Circular Scroll, Escape, Tab, Backspace, Enter, LST: Entry Point, RST: Entry Point, RTP: Entry Point, LST: Tap Cover, RST: Tap Cover, RTP: Tap Cover, Steering | L2!R2: Modifier 2, Steering | L2: S Key, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, LTP: Click Entry Point, RTP: Click Entry Point, LTP: Middle Click, RTP: Middle Click
+    on the stack and left: Steering
+
+  Steering | L2: S Key | left_trigger/edge: fired 8039 times
+    lists 11; on the stack at least once: 9; never: 2
+    on the stack: Steering | LS: Double Tap Cover, Steering | LS Down: Scroll Down, Steering | LS Up: Scroll Up, Steering | LS: Tap Cover, R2: Tap Cover, Steering | LS Down: Modifier 0, Steering | LS Up: Modifier 1, Steering | L2!R2: Modifier 2, Steering | L2: S Key
+    never: Steering | LS Up: Double Tap, Steering | LS Down: Double Tap
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Tab
+
+  Steering | L2: S Key | right_trigger/edge: fired 9 times
+    lists 10; on the stack at least once: 0; never: 10
+    on the stack: none
+    never: Steering | LS Up: Double Tap, Steering | LS Down: Double Tap, Steering | LS: Double Tap Cover, Steering | LS Down: Scroll Down, Steering | LS Up: Scroll Up, Steering | LS: Tap Cover, R2: Tap Cover, Steering | LS Down: Modifier 0, Steering | LS Up: Modifier 1, Steering | L2!R2: Modifier 2
+    on the stack and left: Gyro, LST: Entry Point, LTP: Middle Click, RTP: Circular Scroll, RTP: Entry Point, RTP: Tap Cover, Steering, Steering | L2: S Key
+
+  Steering | LS Down: Double Tap | left_trigger/edge: fired 67 times
+    lists 3; on the stack at least once: 3; never: 0
+    on the stack: Steering | LS Down: Double Tap, Steering | R2: W Key, Steering | L2: S Key
+    never: none
+    on the stack and left: Backspace, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Middle Click, RST: Entry Point, RST: Tap Cover, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering
+
+  Steering | LS Down: Double Tap | right_trigger/edge: fired 66 times
+    lists 3; on the stack at least once: 3; never: 0
+    on the stack: Steering | LS Down: Double Tap, Steering | R2: W Key, Steering | L2: S Key
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LTP: Arrow Keys, LTP: Middle Click, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering
+
+  Steering | LS Up: Double Tap | left_trigger/edge: fired 63 times
+    lists 3; on the stack at least once: 3; never: 0
+    on the stack: Steering | LS Up: Double Tap, Steering | R2: W Key, Steering | L2: S Key
+    never: none
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Click Entry Point, LTP: Middle Click, RST: Entry Point, RST: Tap Cover, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering
+
+  Steering | LS Up: Double Tap | right_trigger/edge: fired 45 times
+    lists 3; on the stack at least once: 3; never: 0
+    on the stack: Steering | LS Up: Double Tap, Steering | R2: W Key, Steering | L2: S Key
+    never: none
+    on the stack and left: Enter, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, RST: Entry Point, RST: Tap Cover, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Tab
+
+  Steering | R2!L2: Modifier 2 | left_trigger/edge: fired 1090 times
+    lists 88; on the stack at least once: 24; never: 64
+    on the stack: Gyro, LST: Temporary Gyro, RST: Temporary Gyro, LTP: Arrow Keys, RTP: Mouse Buttons, RTP: Circular Scroll, Escape, Tab, Backspace, Enter, LST: Entry Point, RST: Entry Point, RTP: Entry Point, LST: Tap Cover, RST: Tap Cover, RTP: Tap Cover, Steering | R2!L2: Modifier 2, Steering | R2: W Key, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, LTP: Click Entry Point, RTP: Click Entry Point, LTP: Middle Click, RTP: Middle Click
+    on the stack and left: Steering
+
+  Steering | R2: W Key | left_trigger/edge: fired 5 times
+    lists 10; on the stack at least once: 3; never: 7
+    on the stack: Steering | LS Down: Scroll Down, Steering | LS: Tap Cover, Steering | LS Down: Modifier 0
+    never: Steering | LS Up: Double Tap, Steering | LS Down: Double Tap, Steering | LS: Double Tap Cover, Steering | LS Up: Scroll Up, L2: Tap Cover, Steering | LS Up: Modifier 1, Steering | R2!L2: Modifier 2
+    on the stack and left: Gyro, LST: Entry Point, RST: Entry Point, Steering, Steering | R2: W Key
+
+  Steering | R2: W Key | right_trigger/edge: fired 7780 times
+    lists 11; on the stack at least once: 9; never: 2
+    on the stack: Steering | LS: Double Tap Cover, Steering | LS Down: Scroll Down, Steering | LS Up: Scroll Up, Steering | LS: Tap Cover, L2: Tap Cover, Steering | LS Down: Modifier 0, Steering | LS Up: Modifier 1, Steering | R2!L2: Modifier 2, Steering | R2: W Key
+    never: Steering | LS Up: Double Tap, Steering | LS Down: Double Tap
+    on the stack and left: Backspace, Enter, Escape, Gyro, LST: Entry Point, LST: Tap Cover, LST: Temporary Gyro, LTP: Arrow Keys, LTP: Click Entry Point, LTP: Middle Click, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Entry Point, RST: Tap Cover, RST: Temporary Gyro, RTP: Circular Scroll, RTP: Click Entry Point, RTP: Entry Point, RTP: Middle Click, RTP: Mouse Buttons, RTP: Tap Cover, Steering, Tab

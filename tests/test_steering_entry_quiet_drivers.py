@@ -101,7 +101,9 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
                 self.assertEqual(layout.resolve('65'), GUARD)
 
     def test_mod2_releases_lose_only_the_requested_stateful_removals(self):
-        for variant, pad, layout, old in self.each():
+        # On the 90.56 build. In 90.57 a Steering Modifier 2 layer keeps one Release with one remove on its
+        # second driver, and the Gyro Modifier 2 Releases lose seven removes (tests/test_scenarios_90_57.py).
+        for variant, pad, layout, old in self.each(frozen='90.56'):
             changed = []
             for first, second in (('L1', 'R1'), ('R1', 'L1')):
                 for family in ('', 'Gyro | ', 'Steering | '):

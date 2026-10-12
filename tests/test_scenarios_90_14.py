@@ -183,11 +183,12 @@ class PadClick(ScenarioCase):
             self.assertEqual(pad.top, "Steering | L1!R1: Modifier 2")
             pad.press_pad("RP", "centre").wait(100)
             self.assertEqual(pad.top, "RTP: Middle Click")
-            pad.miss("RP click", "RP touch").let_go("R1").wait(50)                        # since 90.44 cleanup keeps Steering
-            self.assertTrue(pad.has("Steering"))
-            self.assertTrue(pad.lacks("Steering | L1!R1: Modifier 2", "RTP: Click Entry Point",
-                                      "RTP: Middle Click"))
-            pad.let_go("L1").wait(300)
+            # Until 90.56 the second driver's Release was a clear and took the pad's layers with it. Since 90.57
+            # it removes only the Modifier 2 layer: the pad's Entry Point stays until the pad's next touch.
+            pad.miss("RP click", "RP touch").let_go("R1").wait(50)
+            self.assertTrue(pad.has("Steering", "Steering | L1: S Key", "RTP: Entry Point"))
+            self.assertTrue(pad.lacks("Steering | L1!R1: Modifier 2", "RTP: Middle Click"))
+            pad.let_go("L1").wait(300).touch("RP").wait(100).lift("RP").wait(400)
             self.assertEqual((pad.stack, pad.down()), (pad.layers("Base", "Steering"), []))
 
 

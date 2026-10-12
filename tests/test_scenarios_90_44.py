@@ -69,14 +69,10 @@ class EntryGuardDriverEdge(ScenarioCase):
                         self.assertTrue(pad.has('Steering') and pad.lacks(GUARD, window))
                         self.assertEqual(pad.has('Gyro'), gyro)
                         self.assertEqual(pad.seen('beep'), [])
-                        # The new repeating entries now reach Mod 2 after the
-                        # window. Its existing delayed cover still gives one
-                        # bump; neither Guard nor the driver entry gives one.
-                        mod2 = next(title for title in pad.names() if ': Modifier 2' in title)
-                        second = mod2.split('!')[1].split(':')[0]
-                        source, name = pad.control(second)
-                        self.assertEqual(pad.seen('haptic'), [
-                            ('haptic', f'1 {pad.title(mod2)} {source}/{name}')])
+                        # The repeating entries reach Mod 2 after the window. Until 90.56 its delayed
+                        # cover gave one bump; 90.57 took that timer out. Guard and driver entry give none.
+                        self.assertTrue(any(': Modifier 2' in title for title in pad.names()))
+                        self.assertEqual(pad.seen('haptic'), [])
 
     @scenario('90.44 E4', rules=('R137', 'R171'), rests=('A4', 'A19', 'A36', 'A54'), either=('A9', 'A32'))
     def test_single_driver_handoffs_remain_quiet_for_carried_and_fresh_inputs(self):
@@ -122,10 +118,10 @@ class QuietSteeringDrivers(ScenarioCase):
                     pad.hold(first).wait(30).hold(second).wait(30).mark().let_go(second).wait(120)
                     self.assertTrue(pad.has('Steering', DRIVERS[first]))
                     self.assertFalse(any(': Modifier 2' in title for title in pad.stack))
-                    self.assertFalse(pad.has('Gyro'))
+                    self.assertEqual(pad.has('Gyro'), gyro)              # until 90.56 the tap turned Gyro off
                     self.assertEqual(pad.seen('beep', 'haptic'), [])
                     pad.let_go(first).wait(300)
-                    self.assertEqual(pad.stack, pad.layers('Base', 'Steering'))
+                    self.assertEqual(pad.stack, pad.layers(*home(gyro), 'Steering'))
 
     @scenario('90.44 S2', rules=('R133', 'R161'), rests=('A7', 'A16', 'A25'), either=('A9', 'A32'))
     def test_covered_mod2_use_preserves_steering_and_missed_release_recovers(self):
@@ -157,8 +153,10 @@ class QuietSteeringDrivers(ScenarioCase):
                         self.assertEqual(pad.seen('beep'), [('beep', 'Steering')])
                         self.assertEqual(len(pad.seen('haptic')), 1)
 
-    @scenario('90.44 S4', rules=('R133', 'R161'), rests=('A6', 'A7', 'A49', 'A53'), either=('A9', 'A32'))
+    @scenario('90.44 S4', rules=('R133', 'R161'), rests=('A6', 'A7', 'A49', 'A53'), either=('A9', 'A32'), frozen='90.56')
     def test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear(self):
+        # On the 90.56 build. Since 90.57 the second driver's Release leaves the first driver's layer on, so a
+        # full push carried through it no longer ends `Steering` (R174; 90.57 T2).
         for gyro in (False, True):
             for first, second in ORDERS:
                 for direction in ('up', 'down'):

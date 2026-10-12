@@ -64,13 +64,14 @@ class Holds(ScenarioCase):
                 self.assertTrue(pad.lacks("Steering | LS: Tap Cover"))       # 250 ms until 90.25
                 pad.wait(1)
                 self.assertTrue(pad.has("Steering | LS: Tap Cover"))
+        # Until 90.56 the second driver's 200 ms timer added its cover here. 90.57 took the timer out.
         for first, second, cover in (("L1", "R1", "R1: Tap Cover"), ("R1", "L1", "L1: Tap Cover")):
             for pad in self.each():
                 pad.enter_steering().hold(first).wait(400)
                 pad.hold(second).wait(199)
                 self.assertTrue(pad.lacks(cover))
-                pad.wait(1)
-                self.assertTrue(pad.has(cover))
+                pad.wait(301)
+                self.assertTrue(pad.lacks(cover))
 
     @scenario("90.26 H4", rules=("R120", "R121", "R122"), rests=("A6",))
     def test_the_reset_of_a_hold_that_nothing_disturbs_never_removes_its_layer(self):

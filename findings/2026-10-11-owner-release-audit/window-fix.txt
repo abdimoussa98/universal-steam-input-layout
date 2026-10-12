@@ -1,0 +1,34 @@
+
+The simulator as it is:
+  90.56: sweep flags 664 and 664 (default, alternative)
+        144  the second driver typed S on its way to Modifier 2
+        144  the second driver typed W on its way to Modifier 2
+        128  Steering gone after the first driver was let go (stick out)
+        96  W and S down together after the second press
+        96  no Modifier 2 after the second press
+        56  Steering gone after the second driver was let go (stick out)
+      in a window: Modifier 2 on; the second driver typed [its key, 'mouse_wheel SCROLL_UP']; A types ['M']
+  as answered: sweep flags 0 and 0 (default, alternative)
+      in a window: Modifier 2 on; the second driver typed nothing; A types ['M']
+  split entry: sweep flags 0 and 0 (default, alternative)
+      in a window: Modifier 2 on; the second driver typed nothing; A types ['M']
+  window adds it: sweep flags 0 and 0 (default, alternative)
+      in a window: Modifier 2 on; the second driver typed nothing; A types ['M']
+
+The simulator strict:
+  90.56: sweep flags 832 and 832 (default, alternative)
+        288  no Modifier 2 after the second press
+        144  the second driver typed S on its way to Modifier 2
+        144  the second driver typed W on its way to Modifier 2
+        128  Steering gone after the first driver was let go (stick out)
+        96  W and S down together after the second press
+        32  Steering gone after the second driver was let go (stick out)
+      in a window: Modifier 2 NOT on; the second driver typed [its key, 'mouse_wheel SCROLL_UP']; A types ['F']
+  as answered: sweep flags 336 and 336 (default, alternative)
+        288  no Modifier 2 after the second press
+        48  Steering gone after the first driver was let go (stick out)
+      in a window: Modifier 2 NOT on; the second driver typed nothing; A types ['F']
+  split entry: sweep flags 0 and 0 (default, alternative)
+      in a window: Modifier 2 on; the second driver typed nothing; A types ['M']
+  window adds it: sweep flags 0 and 0 (default, alternative)
+      in a window: Modifier 2 on; the second driver typed nothing; A types ['M']

@@ -1,0 +1,22 @@
+
+today
+  nothing: left on: Stateful | Menu Right: Entry Point, Menu Buttons: Left Stick Guard, Menu Buttons: Tap Cover
+  touch the left stick: left on: nothing
+  touch the right stick: left on: nothing
+  tap Start: left on: nothing
+  tap Select: left on: nothing
+  tap A: left on: Stateful | Menu Right: Entry Point, Menu Buttons: Left Stick Guard, Menu Buttons: Tap Cover
+  tap R1: left on: Menu Buttons: Left Stick Guard, Menu Buttons: Tap Cover
+  hold R1, tap L1, let go of R1: left on: nothing
+  the same with a thumb resting on the left stick: left on: nothing
+
+no cover
+  nothing: left on: Stateful | Menu Right: Entry Point, Menu Buttons: Left Stick Guard, Menu Buttons: Tap Cover
+  touch the left stick: left on: nothing
+  touch the right stick: left on: nothing
+  tap Start: left on: nothing
+  tap Select: left on: nothing
+  tap A: left on: Stateful | Menu Right: Entry Point, Menu Buttons: Left Stick Guard, Menu Buttons: Tap Cover
+  tap R1: left on: Menu Buttons: Left Stick Guard, Menu Buttons: Tap Cover
+  hold R1, tap L1, let go of R1: left on: Menu Buttons: Left Stick Guard, Menu Buttons: Tap Cover
+  the same with a thumb resting on the left stick: left on: nothing

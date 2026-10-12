@@ -1,0 +1,112 @@
+
+1. R1 held (W), L1 tapped for 60 ms (a bind exposed under a held button fires at once, A9)
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+     60 ms  release  switch/left_bumper
+     60 ms  remove   Steering | R1!L1: Modifier 2
+     60 ms  remove   Steering | R1: W Key
+     60 ms  handover W
+     60 ms  add      Steering | R1: W Key
+     60 ms  down     W
+  stack: Base > Steering > Steering | R1: W Key
+  keys down: ['W']
+
+1. R1 held (W), L1 tapped for 60 ms (a bind exposed under a held button fires on its next repeat, A9)
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+     60 ms  release  switch/left_bumper
+     60 ms  remove   Steering | R1!L1: Modifier 2
+     60 ms  remove   Steering | R1: W Key
+     60 ms  handover W
+    110 ms  add      Steering | R1: W Key
+    110 ms  down     W
+  stack: Base > Steering > Steering | R1: W Key
+  keys down: ['W']
+
+2. R1 held (W), L1 held 300 ms and let go: the cover's Release answers
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+    200 ms  add      L1: Tap Cover
+    300 ms  release  switch/left_bumper
+    300 ms  remove   L1: Tap Cover
+    300 ms  remove   Steering | R1!L1: Modifier 2
+  stack: Base > Steering > Steering | R1: W Key
+  keys down: ['W']
+
+3. R1 held (W), L1 pressed, R1 let go first: the W layer's own Release answers
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+     60 ms  release  switch/right_bumper
+     60 ms  up       W
+     60 ms  remove   Steering | R1!L1: Modifier 2
+     60 ms  remove   Steering | R1: W Key
+     60 ms  add      Steering | L1: S Key
+     60 ms  down     S
+  stack: Base > Steering > Steering | L1: S Key
+  keys down: ['S']
+
+4. As 1, with Gyro on under Steering
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+     60 ms  release  switch/left_bumper
+     60 ms  remove   Gyro
+     60 ms  remove   Steering | R1!L1: Modifier 2
+     60 ms  remove   Steering | R1: W Key
+     60 ms  handover W
+     60 ms  add      Steering | R1: W Key
+     60 ms  down     W
+  stack: Base > Steering > Steering | R1: W Key
+  keys down: ['W']
+
+5. As 1, with thumbs resting on the right pad and both sticks before R1
+  stack before: Base > Steering > RTP: Entry Point > RTP: Tap Cover > Steering | R1: W Key
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+     60 ms  release  switch/left_bumper
+     60 ms  remove   RTP: Entry Point
+     60 ms  remove   RTP: Tap Cover
+     60 ms  remove   Steering | R1!L1: Modifier 2
+     60 ms  remove   Steering | R1: W Key
+     60 ms  handover W
+     60 ms  add      LST: Entry Point
+     60 ms  add      RST: Entry Point
+     60 ms  add      RTP: Entry Point
+     60 ms  add      Steering | R1: W Key
+     60 ms  down     W
+    210 ms  add      RTP: Tap Cover
+  stack: Base > Steering > LST: Entry Point > RST: Entry Point > RTP: Entry Point > Steering | R1: W Key > RTP: Tap Cover
+  keys down: ['W']
+
+6. As 1, with thumbs resting on both sticks after R1
+  stack before: Base > Steering > Steering | R1: W Key
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+     60 ms  release  switch/left_bumper
+     60 ms  remove   Steering | R1!L1: Modifier 2
+     60 ms  remove   Steering | R1: W Key
+     60 ms  handover W
+     60 ms  add      LST: Entry Point
+     60 ms  add      RST: Entry Point
+     60 ms  add      Steering | R1: W Key
+     60 ms  down     W
+  stack: Base > Steering > LST: Entry Point > RST: Entry Point > Steering | R1: W Key
+  keys down: ['W']
+
+7. As 1, with the left pad clicked and held before R1
+  stack before: Base > Steering > LTP: Middle Click > Steering | R1: W Key
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+     60 ms  release  switch/left_bumper
+     60 ms  remove   Steering | R1!L1: Modifier 2
+     60 ms  remove   Steering | R1: W Key
+     60 ms  remove   LTP: Middle Click
+     60 ms  handover CAPSLOCK
+     60 ms  handover W
+     60 ms  add      LTP: Click Entry Point
+     60 ms  add      Steering | R1: W Key
+     60 ms  add      LTP: Middle Click
+     60 ms  remove   LTP: Click Entry Point
+     60 ms  down     W
+     60 ms  down     CAPSLOCK
+  stack: Base > Steering > Steering | R1: W Key > LTP: Middle Click
+  keys down: ['CAPSLOCK', 'W']

@@ -29,6 +29,8 @@ Scope, by rule:
                                                                           `where`, optional: only on a layout that has this layer. The frozen builders
                                                                           read this register too, so an entry for one build names a layer of that build.
                                                                           `not_where`, optional: exclude layouts that contain this layer
+                                                                          `until`, optional: the last release it holds on ("90.56"), for a
+                                                                          removal a later release took out with no layer to tell them apart
     R140         {"target": "...", "source": "...", "input": "..."}       a route the Window audit allows
     R130         {"layers": [...], "inputs": ["joystick/dpad_north", ...]}  an input on which the layer may hide the cleanup function below
     R136         {"kind": "touchpad"}                                     the hidden-exit pairs set aside
@@ -115,7 +117,7 @@ def expand(config):
         elif rule == "R132":
             config.setdefault("cleanups", {}).setdefault("keep", []).append(
                 {"layers": scope["layers"], "removes": scope["removes"], "why": entry["why"],
-                 **{key: scope[key] for key in ("where", "not_where") if key in scope}})
+                 **{key: scope[key] for key in ("where", "not_where", "until") if key in scope}})
         elif rule == "R130":
             config.setdefault("cleanups", {}).setdefault("hidden", []).append(
                 {"layers": scope["layers"], "inputs": scope["inputs"], "why": entry["why"]})

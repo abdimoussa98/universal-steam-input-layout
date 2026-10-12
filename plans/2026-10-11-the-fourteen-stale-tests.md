@@ -7,7 +7,8 @@ builder's output), which this plan missed. Frozen to 90.42 it would have left
 R156 unchecked. It stays on the working layout and finds the builder by the
 version in the layout's title; the 90.42 comparison of section C is a second
 test beside it. R156's example in the rule table names the current builder.
-Every rewritten test was shown to fail on a broken input (eleven cases).
+Every rewritten test was shown to fail on a broken input (eleven cases). Full
+suite afterwards: 1193 tests, none failing, 25 expected failures.
 
 ## The answer
 

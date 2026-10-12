@@ -124,7 +124,9 @@ def frozen_layout_data(variant, version):
                   '90.51': 'findings/2026-10-10-ring-bump-and-modifier-direction',
                   '90.53': 'findings/2026-10-10-steering-entry-and-edge-chords',
                   '90.54': 'findings/2026-10-11-hold-timer-on-the-edge',
-                  '90.55': 'findings/2026-10-11-edge-soft-press-timers'}
+                  '90.55': 'findings/2026-10-11-edge-soft-press-timers',
+                  '90.56': 'findings/2026-10-11-edge-cleanup-press-and-guard',
+                  '90.57': 'findings/2026-10-12-driver-handover-and-fewer-removes'}
     key = version, variant
     if key not in _frozen_layouts:
         if version in candidates:

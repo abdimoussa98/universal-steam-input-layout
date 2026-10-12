@@ -1,0 +1,14 @@
+
+default: 1162 removes taken out of 142 binds; removes in the layout 4013 -> 2851
+      950  a whole-stack clear (R163)
+      172  a cleanup function: allowed, not required
+       40  no rule fixes it
+  48000 walks, half with one release in ten missed: the whole log is the same in 46892, differs in 0; 1108 did not finish on one of the two
+  walks with a layer left over after everything is let go: working 612, trial 612
+
+alternative: 1174 removes taken out of 154 binds; removes in the layout 4083 -> 2909
+      950  a whole-stack clear (R163)
+      184  a cleanup function: allowed, not required
+       40  no rule fixes it
+  48000 walks, half with one release in ten missed: the whole log is the same in 48000, differs in 0; 0 did not finish on one of the two
+  walks with a layer left over after everything is let go: working 430, trial 430

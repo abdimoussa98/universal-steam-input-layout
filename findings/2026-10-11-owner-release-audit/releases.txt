@@ -1,0 +1,68 @@
+
+default: 90 layers; 276 Releases remove layers, 1823 removes in all
+  on a stick touch: 160 Releases, 516 removes
+  on a button: 70 Releases, 516 removes
+  on a pad: 23 Releases, 56 removes
+  on a stick: 15 Releases, 23 removes
+  on a stick click: 8 Releases, 712 removes
+
+  Whole-layout lists (read as deliberate clears): 10 Releases, 888 removes
+    Menu Left: Entry Point | L3: removes 89, 60 never there by the chains; then adds Transition Set 0
+    Menu Left: Entry Point | R3: removes 89, 60 never there by the chains; then adds Transition Set 1
+    Menu Right: Entry Point | L3: removes 89, 60 never there by the chains; then adds Transition Set 1
+    Menu Right: Entry Point | R3: removes 89, 60 never there by the chains; then adds Transition Set 0
+    Steering | R1!L1: Modifier 2 | LB: removes 88, 68 never there by the chains; adds nothing
+    Steering | L1!R1: Modifier 2 | RB: removes 88, 68 never there by the chains; adds nothing
+    Stateful | Menu Left: Entry Point | L3: removes 89, 66 never there by the chains; then adds Transition Set 2
+    Stateful | Menu Left: Entry Point | R3: removes 89, 66 never there by the chains; then adds Transition Set 2
+    Stateful | Menu Right: Entry Point | L3: removes 89, 66 never there by the chains; then adds Transition Set 2
+    Stateful | Menu Right: Entry Point | R3: removes 89, 66 never there by the chains; then adds Transition Set 2
+
+  Button Releases by size (70, 516 removes):
+     88 removes x 2: Steering | L1!R1: Modifier 2 (RB); Steering | R1!L1: Modifier 2 (LB)
+     22 removes x 2: RTP: Double Tap (Select); RTP: Double Tap (Start)
+     18 removes x 2: RTP: Double Tap (LB); RTP: Double Tap (RB)
+     14 removes x 4: Gyro | L1!R1: Modifier 2 (LB); Gyro | L1!R1: Modifier 2 (RB); Gyro | R1!L1: Modifier 2 (LB); Gyro | R1!L1: Modifier 2 (RB)
+     11 removes x 2: Steering | L1: S Key (LB); Steering | R1: W Key (RB)
+     10 removes x 2: Steering | L1: S Key (RB); Steering | R1: W Key (LB)
+      8 removes x 2: L1&R1: Tap Cover (LB); L1&R1: Tap Cover (RB)
+      7 removes x 2: Menu Buttons: Tap Cover (Select); Menu Buttons: Tap Cover (Start)
+      6 removes x 8: 8 Releases
+      4 removes x 2: L1: Tap Cover (LB); R1: Tap Cover (RB)
+      3 removes x 10: 10 Releases
+      2 removes x 14: 14 Releases
+      1 removes x 18: 18 Releases
+
+alternative: 90 layers; 276 Releases remove layers, 1823 removes in all
+  on a stick touch: 160 Releases, 516 removes
+  on a button: 70 Releases, 516 removes
+  on a pad: 23 Releases, 56 removes
+  on a stick: 15 Releases, 23 removes
+  on a stick click: 8 Releases, 712 removes
+
+  Whole-layout lists (read as deliberate clears): 10 Releases, 888 removes
+    Menu Left: Entry Point | L3: removes 89, 60 never there by the chains; then adds Transition Set 0
+    Menu Left: Entry Point | R3: removes 89, 60 never there by the chains; then adds Transition Set 1
+    Menu Right: Entry Point | L3: removes 89, 60 never there by the chains; then adds Transition Set 1
+    Menu Right: Entry Point | R3: removes 89, 60 never there by the chains; then adds Transition Set 0
+    Steering | R2!L2: Modifier 2 | LT: removes 88, 68 never there by the chains; adds nothing
+    Steering | L2!R2: Modifier 2 | RT: removes 88, 68 never there by the chains; adds nothing
+    Stateful | Menu Left: Entry Point | L3: removes 89, 66 never there by the chains; then adds Transition Set 2
+    Stateful | Menu Left: Entry Point | R3: removes 89, 66 never there by the chains; then adds Transition Set 2
+    Stateful | Menu Right: Entry Point | L3: removes 89, 66 never there by the chains; then adds Transition Set 2
+    Stateful | Menu Right: Entry Point | R3: removes 89, 66 never there by the chains; then adds Transition Set 2
+
+  Button Releases by size (70, 516 removes):
+     88 removes x 2: Steering | L2!R2: Modifier 2 (RT); Steering | R2!L2: Modifier 2 (LT)
+     22 removes x 2: RTP: Double Tap (Select); RTP: Double Tap (Start)
+     18 removes x 2: RTP: Double Tap (LT); RTP: Double Tap (RT)
+     14 removes x 4: Gyro | L2!R2: Modifier 2 (LT); Gyro | L2!R2: Modifier 2 (RT); Gyro | R2!L2: Modifier 2 (LT); Gyro | R2!L2: Modifier 2 (RT)
+     11 removes x 2: Steering | L2: S Key (LT); Steering | R2: W Key (RT)
+     10 removes x 2: Steering | L2: S Key (RT); Steering | R2: W Key (LT)
+      8 removes x 2: L2&R2: Tap Cover (LT); L2&R2: Tap Cover (RT)
+      7 removes x 2: Menu Buttons: Tap Cover (Select); Menu Buttons: Tap Cover (Start)
+      6 removes x 8: 8 Releases
+      4 removes x 2: L2: Tap Cover (LT); R2: Tap Cover (RT)
+      3 removes x 10: 10 Releases
+      2 removes x 14: 14 Releases
+      1 removes x 18: 18 Releases

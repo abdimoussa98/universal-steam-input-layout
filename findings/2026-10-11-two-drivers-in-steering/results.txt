@@ -1,0 +1,571 @@
+# matrix.py and traces.py on 90.56 and on the prototypes of prototype.py, 2026-10-11
+
+## matrix.py default, 90.56
+default: 640 gestures, 664 flags
+
+   144  the second driver typed S on its way to Modifier 2
+        A9 at once: True x72, False x72
+        first driver: R1 x144
+        stick way: up x72, down x72
+        stick state: window +20 ms x48, window +100 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x72, 400 x72
+        move: stick as it is x48, stick pushed x48, stick centred x48
+        let go first: first x72, second x72
+
+   144  the second driver typed W on its way to Modifier 2
+        A9 at once: True x72, False x72
+        first driver: L1 x144
+        stick way: up x72, down x72
+        stick state: window +20 ms x48, window +100 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x72, 400 x72
+        move: stick as it is x48, stick pushed x48, stick centred x48
+        let go first: first x72, second x72
+
+   128  Steering gone after the first driver was let go (stick out)
+        A9 at once: True x64, False x64
+        first driver: R1 x64, L1 x64
+        stick way: up x64, down x64
+        stick state: centre x16, out 100 ms x16, out 400 ms x16, window +20 ms x16, window +100 ms x16, scroll layer 60 ms x16, scroll layer 400 ms x16, window after scroll +20 ms x16
+        second press ms: 100 x64, 400 x64
+        move: stick pushed x64, stick as it is x64
+        let go first: first x128
+
+    96  W and S down together after the second press
+        A9 at once: True x48, False x48
+        first driver: R1 x48, L1 x48
+        stick way: up x48, down x48
+        stick state: window +20 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x96
+        move: stick as it is x32, stick pushed x32, stick centred x32
+        let go first: first x48, second x48
+
+    96  no Modifier 2 after the second press
+        A9 at once: True x48, False x48
+        first driver: R1 x48, L1 x48
+        stick way: up x48, down x48
+        stick state: window +20 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x96
+        move: stick as it is x32, stick pushed x32, stick centred x32
+        let go first: first x48, second x48
+
+    56  Steering gone after the second driver was let go (stick out)
+        A9 at once: True x28, False x28
+        first driver: R1 x28, L1 x28
+        stick way: up x28, down x28
+        stick state: out 100 ms x8, out 400 ms x8, window +20 ms x8, window +100 ms x8, scroll layer 60 ms x8, scroll layer 400 ms x8, window after scroll +20 ms x8
+        second press ms: 100 x56
+        move: stick as it is x32, stick pushed x24
+        let go first: second x56
+
+## matrix.py alternative, 90.56
+alternative: 640 gestures, 664 flags
+
+   144  the second driver typed S on its way to Modifier 2
+        A9 at once: True x72, False x72
+        first driver: R1 x144
+        stick way: up x72, down x72
+        stick state: window +20 ms x48, window +100 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x72, 400 x72
+        move: stick as it is x48, stick pushed x48, stick centred x48
+        let go first: first x72, second x72
+
+   144  the second driver typed W on its way to Modifier 2
+        A9 at once: True x72, False x72
+        first driver: L1 x144
+        stick way: up x72, down x72
+        stick state: window +20 ms x48, window +100 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x72, 400 x72
+        move: stick as it is x48, stick pushed x48, stick centred x48
+        let go first: first x72, second x72
+
+   128  Steering gone after the first driver was let go (stick out)
+        A9 at once: True x64, False x64
+        first driver: R1 x64, L1 x64
+        stick way: up x64, down x64
+        stick state: centre x16, out 100 ms x16, out 400 ms x16, window +20 ms x16, window +100 ms x16, scroll layer 60 ms x16, scroll layer 400 ms x16, window after scroll +20 ms x16
+        second press ms: 100 x64, 400 x64
+        move: stick pushed x64, stick as it is x64
+        let go first: first x128
+
+    96  W and S down together after the second press
+        A9 at once: True x48, False x48
+        first driver: R1 x48, L1 x48
+        stick way: up x48, down x48
+        stick state: window +20 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x96
+        move: stick as it is x32, stick pushed x32, stick centred x32
+        let go first: first x48, second x48
+
+    96  no Modifier 2 after the second press
+        A9 at once: True x48, False x48
+        first driver: R1 x48, L1 x48
+        stick way: up x48, down x48
+        stick state: window +20 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x96
+        move: stick as it is x32, stick pushed x32, stick centred x32
+        let go first: first x48, second x48
+
+    56  Steering gone after the second driver was let go (stick out)
+        A9 at once: True x28, False x28
+        first driver: R1 x28, L1 x28
+        stick way: up x28, down x28
+        stick state: out 100 ms x8, out 400 ms x8, window +20 ms x8, window +100 ms x8, scroll layer 60 ms x8, scroll layer 400 ms x8, window after scroll +20 ms x8
+        second press ms: 100 x56
+        move: stick as it is x32, stick pushed x24
+        let go first: second x56
+
+## matrix.py default, prototype: handover
+default: 640 gestures, 536 flags
+
+   144  the second driver typed S on its way to Modifier 2
+        A9 at once: True x72, False x72
+        first driver: R1 x144
+        stick way: up x72, down x72
+        stick state: window +20 ms x48, window +100 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x72, 400 x72
+        move: stick as it is x48, stick pushed x48, stick centred x48
+        let go first: first x72, second x72
+
+   144  the second driver typed W on its way to Modifier 2
+        A9 at once: True x72, False x72
+        first driver: L1 x144
+        stick way: up x72, down x72
+        stick state: window +20 ms x48, window +100 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x72, 400 x72
+        move: stick as it is x48, stick pushed x48, stick centred x48
+        let go first: first x72, second x72
+
+    96  W and S down together after the second press
+        A9 at once: True x48, False x48
+        first driver: R1 x48, L1 x48
+        stick way: up x48, down x48
+        stick state: window +20 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x96
+        move: stick as it is x32, stick pushed x32, stick centred x32
+        let go first: first x48, second x48
+
+    96  no Modifier 2 after the second press
+        A9 at once: True x48, False x48
+        first driver: R1 x48, L1 x48
+        stick way: up x48, down x48
+        stick state: window +20 ms x48, window after scroll +20 ms x48
+        second press ms: 100 x96
+        move: stick as it is x32, stick pushed x32, stick centred x32
+        let go first: first x48, second x48
+
+    56  Steering gone after the second driver was let go (stick out)
+        A9 at once: True x28, False x28
+        first driver: R1 x28, L1 x28
+        stick way: up x28, down x28
+        stick state: out 100 ms x8, out 400 ms x8, window +20 ms x8, window +100 ms x8, scroll layer 60 ms x8, scroll layer 400 ms x8, window after scroll +20 ms x8
+        second press ms: 100 x56
+        move: stick as it is x32, stick pushed x24
+        let go first: second x56
+
+## matrix.py default, prototype: handover, window
+default: 640 gestures, 32 flags
+
+    32  Steering gone after the second driver was let go (stick out)
+        A9 at once: True x16, False x16
+        first driver: R1 x16, L1 x16
+        stick way: up x16, down x16
+        stick state: out 100 ms x8, out 400 ms x8, scroll layer 60 ms x8, scroll layer 400 ms x8
+        second press ms: 100 x32
+        move: stick as it is x32
+        let go first: second x32
+
+## matrix.py default, prototype: handover, window, quicktap (the plan)
+default: 640 gestures, 0 flags
+
+## matrix.py alternative, prototype: handover, window, quicktap (the plan)
+alternative: 640 gestures, 0 flags
+
+## matrix.py default, prototype: handover, window-leave, quicktap-add-back (each part the other way)
+default: 640 gestures, 0 flags
+
+## matrix.py alternative, prototype: handover, window-leave, quicktap-add-back (each part the other way)
+alternative: 640 gestures, 0 flags
+
+## traces.py default, 90.56
+
+T1. R1 held, L1 pressed (Modifier 2), stick up, R1 let go
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+    200 ms  add      L1: Tap Cover
+    300 ms  press    joystick/touch
+    300 ms  press    joystick/dpad_north
+    300 ms  tap      mouse_wheel SCROLL_UP
+    300 ms  press    joystick/edge
+    350 ms  tap      mouse_wheel SCROLL_UP
+    500 ms  release  switch/right_bumper
+    500 ms  up       W
+    500 ms  remove   L1: Tap Cover
+    500 ms  remove   Steering | R1!L1: Modifier 2
+    500 ms  remove   Steering | R1: W Key
+    500 ms  remove   Steering
+    500 ms  beep     Steering
+    500 ms  add      LST: Entry Point
+    500 ms  down     W
+    500 ms  add      L1: Modifier 0
+    700 ms  add      L1: Temp Cursor Gyro
+  stack: Base > LST: Entry Point > L1: Modifier 0 > L1: Temp Cursor Gyro   keys down: ['W']   wheel steps: 5
+
+    ... stick back to centre, then L1 let go
+      0 ms  release  joystick/dpad_north
+      0 ms  up       W
+      0 ms  release  joystick/edge
+    300 ms  release  switch/left_bumper
+    300 ms  remove   L1: Temp Cursor Gyro
+    300 ms  remove   L1: Modifier 0
+    450 ms  add      LST: Tap Cover
+  stack: Base > LST: Entry Point > LST: Tap Cover   keys down: none   wheel steps: 0
+
+T2. R1 held, stick tapped up (its window open for 20 ms), L1 pressed and held
+      0 ms  press    switch/left_bumper
+      0 ms  down     S
+     30 ms  tap      mouse_wheel SCROLL_UP
+    130 ms  remove   Steering | LS Up: Double Tap
+    130 ms  handover S
+    130 ms  handover W
+    130 ms  add      Steering | R1!L1: Modifier 2
+    130 ms  down     W
+  stack: Base > Steering > Steering | R1: W Key > Steering | R1!L1: Modifier 2   keys down: ['W']   wheel steps: 1
+
+    ... L1 let go
+      0 ms  release  switch/left_bumper
+      0 ms  remove   Steering | R1!L1: Modifier 2
+      0 ms  remove   Steering | R1: W Key
+      0 ms  handover W
+      0 ms  add      LST: Entry Point
+      0 ms  add      Steering | R1: W Key
+      0 ms  down     W
+  stack: Base > Steering > LST: Entry Point > Steering | R1: W Key   keys down: ['W']   wheel steps: 0
+
+T3. R1 held, stick held up, L1 tapped for 100 ms (the Modifier 2 quick tap)
+      0 ms  press    switch/left_bumper
+      0 ms  remove   Steering | LS: Tap Cover
+      0 ms  remove   Steering | LS Up: Modifier 1
+      0 ms  add      Steering | R1!L1: Modifier 2
+      0 ms  tap      mouse_wheel SCROLL_UP
+    100 ms  release  switch/left_bumper
+    100 ms  remove   Steering | R1!L1: Modifier 2
+    100 ms  remove   Steering | R1: W Key
+    100 ms  handover W
+    100 ms  remove   Steering
+    100 ms  beep     Steering
+    100 ms  add      LST: Entry Point
+    100 ms  down     W
+    100 ms  add      R1: Modifier 1
+    300 ms  add      R1: Temp Cursor Gyro
+  stack: Base > LST: Entry Point > R1: Modifier 1 > R1: Temp Cursor Gyro   keys down: ['W']   wheel steps: 3
+
+T4. Rocking with the stick at centre: R1, L1, R1 up, R1 down, L1 up, R1 up
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+    200 ms  add      L1: Tap Cover
+    300 ms  release  switch/right_bumper
+    300 ms  up       W
+    300 ms  remove   L1: Tap Cover
+    300 ms  remove   Steering | R1!L1: Modifier 2
+    300 ms  remove   Steering | R1: W Key
+    300 ms  add      Steering | L1: S Key
+    300 ms  down     S
+    500 ms  press    switch/right_bumper
+    500 ms  add      Steering | L1!R1: Modifier 2
+    700 ms  add      R1: Tap Cover
+    800 ms  release  switch/left_bumper
+    800 ms  up       S
+    800 ms  remove   R1: Tap Cover
+    800 ms  remove   Steering | L1!R1: Modifier 2
+    800 ms  remove   Steering | L1: S Key
+    800 ms  add      Steering | R1: W Key
+    800 ms  down     W
+   1000 ms  release  switch/right_bumper
+   1000 ms  up       W
+   1000 ms  remove   Steering | R1: W Key
+  stack: Base > Steering   keys down: none   wheel steps: 0
+
+T5. L1 held, stick tapped down (window), R1 pressed, L1 let go after 100 ms
+      0 ms  press    switch/right_bumper
+      0 ms  down     W
+     30 ms  tap      mouse_wheel SCROLL_DOWN
+    100 ms  release  switch/left_bumper
+    100 ms  up       S
+    100 ms  remove   Steering | LS Down: Double Tap
+    100 ms  remove   Steering | L1: S Key
+    100 ms  handover W
+    100 ms  add      LST: Entry Point
+    100 ms  add      Steering | R1: W Key
+    100 ms  down     W
+  stack: Base > Steering > LST: Entry Point > Steering | R1: W Key   keys down: ['W']   wheel steps: 1
+
+T6. R1 held, L1 pressed, L1's release missed (Steam menu open), R1 let go
+      0 ms  release  switch/right_bumper
+      0 ms  up       W
+      0 ms  remove   L1: Tap Cover
+      0 ms  remove   Steering | R1!L1: Modifier 2
+      0 ms  remove   Steering | R1: W Key
+  stack: Base > Steering   keys down: none   wheel steps: 0
+
+    ... then a thumb on the left stick
+      0 ms  press    joystick/touch
+      0 ms  add      LST: Entry Point
+  stack: Base > Steering > LST: Entry Point   keys down: none   wheel steps: 0
+
+## traces.py default, prototype: handover, window, quicktap (the plan)
+
+T1. R1 held, L1 pressed (Modifier 2), stick up, R1 let go
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+      0 ms  handover W
+      0 ms  down     W
+    200 ms  add      L1: Tap Cover
+    300 ms  press    joystick/touch
+    300 ms  press    joystick/dpad_north
+    300 ms  tap      mouse_wheel SCROLL_UP
+    300 ms  press    joystick/edge
+    350 ms  tap      mouse_wheel SCROLL_UP
+    500 ms  release  switch/right_bumper
+    500 ms  up       W
+    500 ms  add      Steering | L1: S Key
+    500 ms  remove   L1: Tap Cover
+    500 ms  remove   Steering | R1!L1: Modifier 2
+    500 ms  remove   Steering | R1: W Key
+    500 ms  add      Steering | LS Up: Modifier 1
+    500 ms  down     S
+    700 ms  add      Steering | LS: Tap Cover
+  stack: Base > Steering > Steering | L1: S Key > Steering | LS Up: Modifier 1 > Steering | LS: Tap Cover   keys down: ['S']   wheel steps: 5
+
+    ... stick back to centre, then L1 let go
+      0 ms  release  joystick/dpad_north
+      0 ms  remove   Steering | LS Up: Modifier 1
+      0 ms  remove   Steering | LS: Tap Cover
+      0 ms  release  joystick/edge
+    300 ms  release  switch/left_bumper
+    300 ms  up       S
+    300 ms  remove   Steering | L1: S Key
+    300 ms  add      LST: Entry Point
+    450 ms  add      LST: Tap Cover
+  stack: Base > Steering > LST: Entry Point > LST: Tap Cover   keys down: none   wheel steps: 0
+
+T2. R1 held, stick tapped up (its window open for 20 ms), L1 pressed and held
+      0 ms  press    switch/left_bumper
+      0 ms  remove   Steering | LS Up: Double Tap
+      0 ms  add      Steering | R1!L1: Modifier 2
+      0 ms  handover W
+      0 ms  down     W
+    200 ms  add      L1: Tap Cover
+  stack: Base > Steering > Steering | R1: W Key > Steering | R1!L1: Modifier 2 > L1: Tap Cover   keys down: ['W']   wheel steps: 0
+
+    ... L1 let go
+      0 ms  release  switch/left_bumper
+      0 ms  remove   L1: Tap Cover
+      0 ms  remove   Steering | R1!L1: Modifier 2
+      0 ms  handover W
+      0 ms  down     W
+  stack: Base > Steering > Steering | R1: W Key   keys down: ['W']   wheel steps: 0
+
+T3. R1 held, stick held up, L1 tapped for 100 ms (the Modifier 2 quick tap)
+      0 ms  press    switch/left_bumper
+      0 ms  remove   Steering | LS: Tap Cover
+      0 ms  remove   Steering | LS Up: Modifier 1
+      0 ms  add      Steering | R1!L1: Modifier 2
+      0 ms  handover W
+      0 ms  tap      mouse_wheel SCROLL_UP
+      0 ms  down     W
+     50 ms  tap      mouse_wheel SCROLL_UP
+    100 ms  release  switch/left_bumper
+    100 ms  remove   Steering | R1!L1: Modifier 2
+    100 ms  handover W
+    100 ms  add      Steering | LS Up: Modifier 1
+    100 ms  down     W
+    300 ms  add      Steering | LS: Tap Cover
+  stack: Base > Steering > Steering | R1: W Key > Steering | LS Up: Modifier 1 > Steering | LS: Tap Cover   keys down: ['W']   wheel steps: 3
+
+T4. Rocking with the stick at centre: R1, L1, R1 up, R1 down, L1 up, R1 up
+      0 ms  press    switch/left_bumper
+      0 ms  add      Steering | R1!L1: Modifier 2
+      0 ms  handover W
+      0 ms  down     W
+    200 ms  add      L1: Tap Cover
+    300 ms  release  switch/right_bumper
+    300 ms  up       W
+    300 ms  add      Steering | L1: S Key
+    300 ms  remove   L1: Tap Cover
+    300 ms  remove   Steering | R1!L1: Modifier 2
+    300 ms  remove   Steering | R1: W Key
+    300 ms  down     S
+    500 ms  press    switch/right_bumper
+    500 ms  add      Steering | L1!R1: Modifier 2
+    500 ms  handover S
+    500 ms  down     S
+    700 ms  add      R1: Tap Cover
+    800 ms  release  switch/left_bumper
+    800 ms  up       S
+    800 ms  add      Steering | R1: W Key
+    800 ms  remove   R1: Tap Cover
+    800 ms  remove   Steering | L1!R1: Modifier 2
+    800 ms  remove   Steering | L1: S Key
+    800 ms  down     W
+   1000 ms  release  switch/right_bumper
+   1000 ms  up       W
+   1000 ms  remove   Steering | R1: W Key
+  stack: Base > Steering   keys down: none   wheel steps: 0
+
+T5. L1 held, stick tapped down (window), R1 pressed, L1 let go after 100 ms
+      0 ms  press    switch/right_bumper
+      0 ms  remove   Steering | LS Down: Double Tap
+      0 ms  add      Steering | L1!R1: Modifier 2
+      0 ms  handover S
+      0 ms  down     S
+    100 ms  release  switch/left_bumper
+    100 ms  up       S
+    100 ms  add      Steering | R1: W Key
+    100 ms  remove   Steering | L1!R1: Modifier 2
+    100 ms  remove   Steering | L1: S Key
+    100 ms  down     W
+  stack: Base > Steering > Steering | R1: W Key   keys down: ['W']   wheel steps: 0
+
+T6. R1 held, L1 pressed, L1's release missed (Steam menu open), R1 let go
+      0 ms  release  switch/right_bumper
+      0 ms  up       W
+      0 ms  add      Steering | L1: S Key
+      0 ms  remove   L1: Tap Cover
+      0 ms  remove   Steering | R1!L1: Modifier 2
+      0 ms  remove   Steering | R1: W Key
+  stack: Base > Steering > Steering | L1: S Key   keys down: none   wheel steps: 0
+
+    ... then a thumb on the left stick
+      0 ms  press    joystick/touch
+      0 ms  remove   Steering | L1: S Key
+      0 ms  add      LST: Entry Point
+  stack: Base > Steering > LST: Entry Point   keys down: none   wheel steps: 0
+
+## traces.py alternative, prototype: handover, window, quicktap (the plan)
+
+T1. R1 held, L1 pressed (Modifier 2), stick up, R1 let go
+      0 ms  press    left_trigger/edge
+      0 ms  add      Steering | R2!L2: Modifier 2
+      0 ms  handover W
+      0 ms  down     W
+    200 ms  add      L2: Tap Cover
+    300 ms  press    joystick/touch
+    300 ms  press    joystick/dpad_north
+    300 ms  tap      mouse_wheel SCROLL_UP
+    300 ms  press    joystick/edge
+    350 ms  tap      mouse_wheel SCROLL_UP
+    500 ms  release  right_trigger/edge
+    500 ms  up       W
+    500 ms  add      Steering | L2: S Key
+    500 ms  remove   L2: Tap Cover
+    500 ms  remove   Steering | R2!L2: Modifier 2
+    500 ms  remove   Steering | R2: W Key
+    500 ms  add      Steering | LS Up: Modifier 1
+    500 ms  down     S
+    700 ms  add      Steering | LS: Tap Cover
+  stack: Base > Steering > Steering | L1: S Key > Steering | LS Up: Modifier 1 > Steering | LS: Tap Cover   keys down: ['S']   wheel steps: 5
+
+    ... stick back to centre, then L1 let go
+      0 ms  release  joystick/dpad_north
+      0 ms  remove   Steering | LS Up: Modifier 1
+      0 ms  remove   Steering | LS: Tap Cover
+      0 ms  release  joystick/edge
+    300 ms  release  left_trigger/edge
+    300 ms  up       S
+    300 ms  remove   Steering | L2: S Key
+    300 ms  add      LST: Entry Point
+    450 ms  add      LST: Tap Cover
+  stack: Base > Steering > LST: Entry Point > LST: Tap Cover   keys down: none   wheel steps: 0
+
+T2. R1 held, stick tapped up (its window open for 20 ms), L1 pressed and held
+      0 ms  press    left_trigger/edge
+      0 ms  remove   Steering | LS Up: Double Tap
+      0 ms  add      Steering | R2!L2: Modifier 2
+      0 ms  handover W
+      0 ms  down     W
+    200 ms  add      L2: Tap Cover
+  stack: Base > Steering > Steering | R1: W Key > Steering | R1!L1: Modifier 2 > L1: Tap Cover   keys down: ['W']   wheel steps: 0
+
+    ... L1 let go
+      0 ms  release  left_trigger/edge
+      0 ms  remove   L2: Tap Cover
+      0 ms  remove   Steering | R2!L2: Modifier 2
+      0 ms  handover W
+      0 ms  down     W
+  stack: Base > Steering > Steering | R1: W Key   keys down: ['W']   wheel steps: 0
+
+T3. R1 held, stick held up, L1 tapped for 100 ms (the Modifier 2 quick tap)
+      0 ms  press    left_trigger/edge
+      0 ms  remove   Steering | LS: Tap Cover
+      0 ms  remove   Steering | LS Up: Modifier 1
+      0 ms  add      Steering | R2!L2: Modifier 2
+      0 ms  handover W
+      0 ms  tap      mouse_wheel SCROLL_UP
+      0 ms  down     W
+     50 ms  tap      mouse_wheel SCROLL_UP
+    100 ms  release  left_trigger/edge
+    100 ms  remove   Steering | R2!L2: Modifier 2
+    100 ms  handover W
+    100 ms  add      Steering | LS Up: Modifier 1
+    100 ms  down     W
+    300 ms  add      Steering | LS: Tap Cover
+  stack: Base > Steering > Steering | R1: W Key > Steering | LS Up: Modifier 1 > Steering | LS: Tap Cover   keys down: ['W']   wheel steps: 3
+
+T4. Rocking with the stick at centre: R1, L1, R1 up, R1 down, L1 up, R1 up
+      0 ms  press    left_trigger/edge
+      0 ms  add      Steering | R2!L2: Modifier 2
+      0 ms  handover W
+      0 ms  down     W
+    200 ms  add      L2: Tap Cover
+    300 ms  release  right_trigger/edge
+    300 ms  up       W
+    300 ms  add      Steering | L2: S Key
+    300 ms  remove   L2: Tap Cover
+    300 ms  remove   Steering | R2!L2: Modifier 2
+    300 ms  remove   Steering | R2: W Key
+    300 ms  down     S
+    500 ms  press    right_trigger/edge
+    500 ms  add      Steering | L2!R2: Modifier 2
+    500 ms  handover S
+    500 ms  down     S
+    700 ms  add      R2: Tap Cover
+    800 ms  release  left_trigger/edge
+    800 ms  up       S
+    800 ms  add      Steering | R2: W Key
+    800 ms  remove   R2: Tap Cover
+    800 ms  remove   Steering | L2!R2: Modifier 2
+    800 ms  remove   Steering | L2: S Key
+    800 ms  down     W
+   1000 ms  release  right_trigger/edge
+   1000 ms  up       W
+   1000 ms  remove   Steering | R2: W Key
+  stack: Base > Steering   keys down: none   wheel steps: 0
+
+T5. L1 held, stick tapped down (window), R1 pressed, L1 let go after 100 ms
+      0 ms  press    right_trigger/edge
+      0 ms  remove   Steering | LS Down: Double Tap
+      0 ms  add      Steering | L2!R2: Modifier 2
+      0 ms  handover S
+      0 ms  down     S
+    100 ms  release  left_trigger/edge
+    100 ms  up       S
+    100 ms  add      Steering | R2: W Key
+    100 ms  remove   Steering | L2!R2: Modifier 2
+    100 ms  remove   Steering | L2: S Key
+    100 ms  down     W
+  stack: Base > Steering > Steering | R1: W Key   keys down: ['W']   wheel steps: 0
+
+T6. R1 held, L1 pressed, L1's release missed (Steam menu open), R1 let go
+      0 ms  release  right_trigger/edge
+      0 ms  up       W
+      0 ms  add      Steering | L2: S Key
+      0 ms  remove   L2: Tap Cover
+      0 ms  remove   Steering | R2!L2: Modifier 2
+      0 ms  remove   Steering | R2: W Key
+  stack: Base > Steering > Steering | L1: S Key   keys down: none   wheel steps: 0
+
+    ... then a thumb on the left stick
+      0 ms  press    joystick/touch
+      0 ms  remove   Steering | L2: S Key
+      0 ms  add      LST: Entry Point
+  stack: Base > Steering > LST: Entry Point   keys down: none   wheel steps: 0

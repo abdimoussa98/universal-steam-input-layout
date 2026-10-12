@@ -1,0 +1,47 @@
+
+1. First driver held, the second tapped for 60 ms
+  leave it  8 of 8: the drive key held; on: Steering | first: drive key; all let go: Steering; keys none
+  no cover  8 of 8: the drive key held; on: Steering | first: drive key; all let go: Steering; keys none
+
+2. First driver held, the second held 500 ms and let go
+  leave it  8 of 8: the drive key held; on: Steering | first: drive key; all let go: Steering; keys none
+  no cover  8 of 8: the drive key held; on: Steering | first: drive key; all let go: Steering; keys none
+
+3. First driver held, the second down, A tapped, the second let go
+  leave it  8 of 8: typed ['M']; the drive key held; on: Steering | first: drive key; all let go: Steering; keys none
+  no cover  8 of 8: typed ['M']; the drive key held; on: Steering | first: drive key; all let go: Steering; keys none
+
+4. A thumb lifted off the right stick while both are held, then the second let go
+  leave it  8 of 8: the drive key held; on: Steering | first: drive key; all let go: Steering; keys none
+  no cover  8 of 8: the drive key held; on: Steering | first: drive key; all let go: Steering; keys none
+
+5. Both held 500 ms, the first let go first
+  leave it  4 of 8: on: Steering | second: drive key; keys ['W']; all let go: Steering
+  leave it  4 of 8: on: Steering | second: drive key; keys ['S']; all let go: Steering
+  no cover  4 of 8: on: Steering | second: drive key; keys ['W']; all let go: Steering
+  no cover  4 of 8: on: Steering | second: drive key; keys ['S']; all let go: Steering
+
+6. Both held, stick pushed fully up, the second let go after 500 ms
+  leave it  8 of 8: Steering stays; the drive key held
+  no cover  8 of 8: Steering stays; the drive key held
+
+7. Both held, the second let go unseen, then tapped
+  leave it  8 of 8: stale: Steering | first: drive key, Steering | first!second: Modifier 2, second: Tap Cover; after a tap of second: Steering | first: drive key; keys ['drive key']
+  no cover  8 of 8: stale: Steering | first: drive key, Steering | first!second: Modifier 2; after a tap of second: Steering | first: drive key; keys ['drive key']
+
+The same 6000 walks per layout on both versions (60 events, 0% of button releases missed):
+  finished on both: 11810; the same keys typed, the same layers left and Steering on or off alike: 11752
+  different keys typed: 57; different layers left at the end: 2; Steering on in one and off in the other: 1
+  bumps of the 200 ms timer in the 'leave it' walks: 3306
+
+The same 6000 walks per layout on both versions (60 events, 10% of button releases missed):
+  finished on both: 11826; the same keys typed, the same layers left and Steering on or off alike: 11600
+  different keys typed: 225; different layers left at the end: 4; Steering on in one and off in the other: 8
+  bumps of the 200 ms timer in the 'leave it' walks: 3305
+
+395 scenario tests
+  leave it: 7 differ from the layouts as they are
+  no cover: 9 differ from the layouts as they are
+  tests that tell 'leave it' and 'no cover' apart: 2
+    test_scenarios_90_26.Holds.test_the_steering_modifiers_take_200_ms: passes -> failures
+    test_scenarios_90_44.EntryGuardDriverEdge.test_reexposed_guard_recovers_after_a_timed_window_with_both_drivers_held: passes -> failures

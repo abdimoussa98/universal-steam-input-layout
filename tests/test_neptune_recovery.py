@@ -44,10 +44,13 @@ def recovery_specs(variant):
     # Cleanup rules (author, 2026-10-02; findings/2026-10-02-cleanup-boundaries): a list names only
     # layers that can be on the stack with its host. The Gyro and normal modifiers never are, and a
     # cursor is cancelled before Modifier 2 goes on, so neither is listed.
+    # Until 90.57 a modifier's cleanup function also named its Temp Cursor Gyro. The cursor layer binds every
+    # one of these inputs as a cancel (R135), so it answers them while it is on and the modifier's bind does not
+    # run; 90.58 took the remove out (R132 as tightened in 90.57).
     specs = {}
     for name, button, selector in zip(singles, (left, right), (lc, rc)):
         for prefix in ("", "Gyro | "):
-            specs[prefix + name] = ({selector}, {prefix + name, button + ": Tap Cover", button + ": Temp Cursor Gyro"})
+            specs[prefix + name] = ({selector}, {prefix + name, button + ": Tap Cover"})
     for name in (left + "!" + right + ": Modifier 2", right + "!" + left + ": Modifier 2"):
         for prefix in ("", "Gyro | "):
             specs[prefix + name] = ({lc, rc}, {prefix + name} | {prefix + single for single in singles} | covers)

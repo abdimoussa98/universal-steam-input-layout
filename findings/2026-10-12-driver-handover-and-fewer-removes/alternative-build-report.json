@@ -1,0 +1,128 @@
+{
+  "changed": {
+    "part 1, the first driver hands over": [
+      "Steering | R1!L1: Modifier 2: R1",
+      "Steering | L1!R1: Modifier 2: L1"
+    ],
+    "part 3, the second driver": {
+      "Steering | R1!L1: Modifier 2": {
+        "second driver": "L1",
+        "removes left": 1,
+        "adds of the cover taken out": 14
+      },
+      "Steering | L1!R1: Modifier 2": {
+        "second driver": "R1",
+        "removes left": 1,
+        "adds of the cover taken out": 14
+      }
+    },
+    "part 3, the cover out of four binds": {
+      "Steering | R1: W Key: the Modifier 2 entry": 1,
+      "Steering | L1: S Key: the Modifier 2 entry": 1,
+      "Steering: dpad_north": 2,
+      "Steering: dpad_south": 2
+    },
+    "part 6, never there when the bind fires": {
+      "Steering | R1: W Key: the Modifier 2 entry": 2,
+      "Steering | R1: W Key: the Release on R1": 3,
+      "Steering | R1: W Key: the Release on L1": 3,
+      "Steering | L1: S Key: the Modifier 2 entry": 2,
+      "Steering | L1: S Key: the Release on L1": 3,
+      "Steering | L1: S Key: the Release on R1": 3
+    },
+    "part 6, the Gyro Modifier 2 Releases": {
+      "Gyro | L1!R1: Modifier 2: the Release on L1": 7,
+      "Gyro | L1!R1: Modifier 2: the Release on R1": 7,
+      "Gyro | R1!L1: Modifier 2: the Release on L1": 7,
+      "Gyro | R1!L1: Modifier 2: the Release on R1": 7
+    }
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 554,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [
+        "L2: Tap Cover / LT release: drops Steering | R2!L2: Modifier 2",
+        "L2: Tap Cover / LSt Full_Press: drops Steering | R2!L2: Modifier 2",
+        "L2: Tap Cover / RSt Full_Press: drops Steering | R2!L2: Modifier 2",
+        "R2: Tap Cover / RT release: drops Steering | L2!R2: Modifier 2",
+        "R2: Tap Cover / LSt Full_Press: drops Steering | L2!R2: Modifier 2",
+        "R2: Tap Cover / RSt Full_Press: drops Steering | L2!R2: Modifier 2",
+        "Steering | R2!L2: Modifier 2 / button_diamond/button_a Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / button_diamond/button_b Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / button_diamond/button_x Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / button_diamond/button_y Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / dpad/dpad_north Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / dpad/dpad_south Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / dpad/dpad_east Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / dpad/dpad_west Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / Start Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / Select Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / L3 Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / joystick/edge Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / LSt Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / R3 Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / RSt Full_Press: drops L2: Tap Cover",
+        "Steering | R2!L2: Modifier 2 / right_joystick/edge Full_Press: drops L2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / button_diamond/button_a Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / button_diamond/button_b Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / button_diamond/button_x Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / button_diamond/button_y Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / dpad/dpad_north Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / dpad/dpad_south Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / dpad/dpad_east Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / dpad/dpad_west Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / Start Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / Select Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / L3 Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / joystick/edge Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / LSt Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / R3 Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / RSt Full_Press: drops R2: Tap Cover",
+        "Steering | L2!R2: Modifier 2 / right_joystick/edge Full_Press: drops R2: Tap Cover",
+        "Steering | R2: W Key / RT release: drops L2: Tap Cover",
+        "Steering | R2: W Key / LT release: drops L2: Tap Cover",
+        "Steering | L2: S Key / RT release: drops R2: Tap Cover",
+        "Steering | L2: S Key / LT release: drops R2: Tap Cover"
+      ],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": true,
+  "removes": {
+    "90.56": 4347,
+    "before the pipeline": 4125,
+    "90.57": 4083
+  }
+}

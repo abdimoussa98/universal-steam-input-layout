@@ -444,17 +444,31 @@ class Cleanups:
         return sorted(t for t in self.layers if self.reached(t) and self.keeper(t)[0] == "button" and t not in covered)
 
 
-def kept(config, variant, layers=None):
+def release_of(title):
+    """The release a layout's title ends in ("... :: 90.57"), or None."""
+    _, found, version = (title or "").rpartition(" :: ")
+    return version if found and all(part.isdigit() for part in version.split(".")) else None
+
+
+def _newer(version, other):
+    return tuple(int(part) for part in version.split(".")) > tuple(int(part) for part in other.split("."))
+
+
+def kept(config, variant, layers=None, version=None):
     """{(layer, removed layer): why} from the config's `cleanups.keep`, which the exceptions register fills (R132).
 
     A decision with `where` holds only on a layout that has that layer; `not_where` excludes layouts that
     contain a named historical layer. `layers` is the layout's titles. The frozen builders read the same
-    register, so later decisions must distinguish their layout from every earlier shape they could match."""
+    register, so later decisions must distinguish their layout from every earlier shape they could match.
+    When no layer tells the layouts apart, `until` names the last release the decision holds on, and
+    `version` is the layout's own (`release_of` its title); a layout without one keeps the decision."""
     mapping = config.get("variants", {}).get(variant, {})
     result = {}
     for decision in config.get("cleanups", {}).get("keep", []):
         if not decision.get("why"):
             raise ValueError(f"a kept removal needs a why: {decision}")
+        if decision.get("until") and version and _newer(version, decision["until"]):
+            continue
         if layers is None and decision.get('not_where'):
             continue
         if decision.get("where") and layers is not None and map_title(decision["where"], mapping) not in layers:
@@ -491,7 +505,7 @@ def run(data, config=None, only=None, stacks=None, changed=None, extras=DEFAULT_
     variant = "alternative" if "alternative" in layout.cm.get("title", "") else "default"
     cleanups = Cleanups(layout, stacks)
     cleanups.accepted_hidden = hidden(config, variant)
-    decided = kept(config, variant, set(layout.presets))
+    decided = kept(config, variant, set(layout.presets), release_of(layout.cm.get("title")))
     used, findings, keeping = set(), [], []
     for (check, layer, target, role, reason), row in cleanups.findings(only).items():
         entry = {"check": check, "layer": layer, "target": target, "kind": ROLE[role], "reason": reason,

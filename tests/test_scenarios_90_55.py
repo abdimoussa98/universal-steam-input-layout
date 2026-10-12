@@ -330,8 +330,10 @@ class EdgeTimersShape(unittest.TestCase):
                                 self.assertGreater(len(actions(entry)), 50, (title, source, control))
 
     def test_the_modifier_2_entry_removes_the_stick_family_and_its_own_hold_marker_only(self):
+        # On the 90.56 build. 90.57 took the hold marker and the two windows out of this list
+        # (test_scenarios_90_57: the W and S layers name no layer that answers the same driver).
         windows = tuple(side[3] for side in SIDES)
-        for layout, name in self.each():
+        for layout, name in self.each(frozen='90.56'):
             for (_, owner, _), (other, _, _), second in zip(DRIVERS, DRIVERS[::-1], MODIFIER_2):
                 found = [e for group in layout.active(name(owner)).values() for value in group.get('inputs', {}).values()
                          for kind, e in entries(value.get('activators', {}))

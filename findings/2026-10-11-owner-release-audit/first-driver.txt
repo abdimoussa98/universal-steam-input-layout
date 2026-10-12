@@ -1,0 +1,82 @@
+
+1. Hold the first driver, tap the second (60 ms)
+  today         4 of 8: the drive key let go and back in 0 ms; stack Steering > Steering | first: drive key
+  today         4 of 8: the drive key let go and back in 50 ms; stack Steering > Steering | first: drive key
+  leave it      8 of 8: the drive key held; stack Steering > Steering | first: drive key
+  take it off   4 of 8: the drive key let go and back in 0 ms; stack Steering > Steering | first: drive key
+  take it off   4 of 8: the drive key let go and back in 50 ms; stack Steering > Steering | first: drive key
+  off and back  8 of 8: the drive key held; stack Steering > Steering | first: drive key
+
+2. Both drivers, stick pushed fully up, the second let go
+  today         4 of 8: Steering ENDS; the drive key let go
+  today         2 of 8: Steering ENDS; the drive key let go and back in 0 ms
+  today         2 of 8: Steering ENDS; the drive key let go and back in 50 ms
+  leave it      8 of 8: Steering stays; the drive key held
+  take it off   4 of 8: Steering ENDS; the drive key let go
+  take it off   2 of 8: Steering ENDS; the drive key let go and back in 0 ms
+  take it off   2 of 8: Steering ENDS; the drive key let go and back in 50 ms
+  off and back  8 of 8: Steering stays; the drive key held
+
+3. First driver held, both thumbs resting on the sticks, tap the second
+  today         4 of 8: stack unchanged
+  today         3 of 8: stack Steering | first: drive key becomes LST: Entry Point > RST: Entry Point > Steering | first: drive key
+  today         1 of 8: stack Steering | first: drive key becomes LST: Entry Point > Steering | first: drive key
+  leave it      8 of 8: stack unchanged
+  take it off   4 of 8: stack unchanged
+  take it off   3 of 8: stack Steering | first: drive key becomes LST: Entry Point > RST: Entry Point > Steering | first: drive key
+  take it off   1 of 8: stack Steering | first: drive key becomes LST: Entry Point > Steering | first: drive key
+  off and back  8 of 8: stack unchanged
+
+4. Both held, the first let go unseen (Steam menu), the second let go inside 200 ms
+  today         8 of 8: left on: nothing; keys none; after one tap of first: nothing
+  leave it      8 of 8: left on: Steering | first: drive key; keys none; after one tap of first: nothing
+  take it off   8 of 8: left on: nothing; keys none; after one tap of first: nothing
+  off and back  8 of 8: left on: Steering | first: drive key; keys none; after one tap of first: nothing
+
+5. The same, the second held past 200 ms first (the cover's Release answers)
+  today         8 of 8: left on: Steering | first: drive key; keys none
+  leave it      8 of 8: left on: Steering | first: drive key; keys none
+  take it off   8 of 8: left on: Steering | first: drive key; keys none
+  off and back  8 of 8: left on: Steering | first: drive key; keys none
+
+6. Both held, both let go unseen, then the second tapped
+  today         8 of 8: stale: Steering | first: drive key, Steering | first!second: Modifier 2; after a tap of second: nothing; then a tap of first: nothing
+  leave it      8 of 8: stale: Steering | first: drive key, Steering | first!second: Modifier 2; after a tap of second: Steering | first: drive key; then a tap of first: nothing
+  take it off   8 of 8: stale: Steering | first: drive key, Steering | first!second: Modifier 2; after a tap of second: nothing; then a tap of first: nothing
+  off and back  8 of 8: stale: Steering | first: drive key, Steering | first!second: Modifier 2; after a tap of second: Steering | first: drive key; then a tap of first: nothing
+
+The same 6000 walks per layout on each version (60 events, 10% of button releases missed), both layouts:
+
+  today
+    quick taps with the first driver held and typing: 1989
+    the drive key let go and taken up at the same moment: 734
+    the drive key up after the tap: 1255
+    Steering gone before the next press or release: 169
+    walks finished: 11831; with a layer left on at the end: 319; with a W or S layer left on: 99
+
+  leave it
+    quick taps with the first driver held and typing: 2060
+    the drive key let go and taken up at the same moment: 0
+    the drive key up after the tap: 0
+    Steering gone before the next press or release: 0
+    walks finished: 11826; with a layer left on at the end: 318; with a W or S layer left on: 105
+
+  take it off
+    quick taps with the first driver held and typing: 1985
+    the drive key let go and taken up at the same moment: 757
+    the drive key up after the tap: 1228
+    Steering gone before the next press or release: 164
+    walks finished: 11823; with a layer left on at the end: 313; with a W or S layer left on: 100
+
+  off and back
+    quick taps with the first driver held and typing: 2061
+    the drive key let go and taken up at the same moment: 0
+    the drive key up after the tap: 0
+    Steering gone before the next press or release: 0
+    walks finished: 11826; with a layer left on at the end: 319; with a W or S layer left on: 105
+
+  leave it against today, walk by walk (11700 finished on all four): 110 end with a layer today's does not leave, 108 without one today's leaves
+
+  take it off against today, walk by walk (11700 finished on all four): 63 end with a layer today's does not leave, 65 without one today's leaves
+
+  off and back against today, walk by walk (11700 finished on all four): 111 end with a layer today's does not leave, 108 without one today's leaves

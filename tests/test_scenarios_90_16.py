@@ -46,9 +46,12 @@ class PadClickExits(ScenarioCase):
             pad.let_go("RP click").wait(300)
             self.assertEqual(pad.stack, pad.layers("Base"))
 
-    @scenario("90.16 X3", rests=("A6", "A10"), either=("A9",))
+    @scenario("90.16 X3", rests=("A6", "A10"), either=("A9",), frozen="90.56")
     def test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add(self):
-        """Changed in 90.20. From 90.16 to 90.19 Base had a second, repeating add, which brought the Click
+        """On the 90.56 build: the clear here is the Steering Modifier 2 quick tap, which 90.57 took out. A click
+        held through the second driver's Release now stays down (90.57 P1).
+
+        Changed in 90.20. From 90.16 to 90.19 Base had a second, repeating add, which brought the Click
         Entry Point back either way. Base has one add now, with no repeat: after a clear the layer returns
         only if Steam fires the add it exposed under the held click (A9). Otherwise the next click does it.
         From 90.25 to 90.26 the add was in the pad's Entry Point and repeated, so it came back either way."""

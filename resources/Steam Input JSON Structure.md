@@ -1405,11 +1405,11 @@ on the stack with its host (R132).
 |---|---|---|
 | Self only | A Double Tap window removes itself on timeout; a Temp Cursor Gyro cancellation removes only the cursor | The underlying stack and unrelated interactions |
 | Local pair | Menu Left: Double Tap Cover release removes itself and Menu Left: Escape; the right-side pair is Double Tap Cover + Tab | Other families; no global cleanup |
-| Single-modifier family | Either L1 overlay's release removes itself and the regular and Gyro L1 modifier (it can sit on either); the modifier's cleanup function removes the modifier, L1: Tap Cover and L1: Temp Cursor Gyro | R1's family and persistent Gyro |
-| Current Mod 2 branch | Either L1!R1 regular/Gyro cleanup function removes six layers: that Mod 2, the two single modifiers of its mode, and the three covers | The opposite-order R1!L1 pair and persistent Gyro |
+| Single-modifier family | Either L1 overlay's release removes itself and the regular and Gyro L1 modifier (it can sit on either); the modifier's cleanup function removes the modifier and L1: Tap Cover. Until 90.57 it also named L1: Temp Cursor Gyro, which binds those inputs as cancels and so answers them itself (R132); on a stick touch it names only the modifier since 90.58, because the cover binds both touches | R1's family and persistent Gyro |
+| Current Mod 2 branch | Either L1!R1 regular/Gyro cleanup function removes six layers: that Mod 2, the two single modifiers of its mode, and the three covers. On a stick touch it leaves out L1&R1: Tap Cover since 90.58: that cover binds both touches | The opposite-order R1!L1 pair and persistent Gyro |
 | Released side | L1&R1: Tap Cover on L1 release removes eight layers | R1's single-modifier family, which may still be held, and persistent Gyro |
 | Whole modifier family plus mode change | Uncovered Mod 2 release removes six layers and deliberately enables or disables persistent Gyro | Unrelated interaction families |
-| Transition (since 90.10) | A Transition Set's menu Release removes the transition. It has no cleanup function: a missed release is recovered by the next tap of either menu button. The binding that enters it clears every layer except Gyro first (R163) | Persistent Gyro |
+| Transition (since 90.10) | A Transition Set's menu Release removes the transition. It has no cleanup function: a missed release is recovered by the next tap of either menu button. The binding that enters it first clears every layer that can be on the stack there, never Gyro (R163; every layer but Gyro until 90.57) | Persistent Gyro |
 | Timed self-exit | Double Tap expiry removes its timed owner only | Other stacks; an early transition removes the timed owner first before changing them |
 
 In alternative, replace L1/R1 modifier-family names with L2/R2. The Menu Left /

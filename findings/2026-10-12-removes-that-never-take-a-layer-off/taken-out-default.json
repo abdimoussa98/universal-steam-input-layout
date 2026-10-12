@@ -1,0 +1,7374 @@
+[
+ {
+  "layer": "Gamepad",
+  "input": "joystick/click",
+  "kind": "chord",
+  "index": 1,
+  "role": "entry",
+  "listed": 89,
+  "fired": 13505,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Temporary Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Temporary Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Circular Scroll",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Left Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Right Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LTP: Click Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Click Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Gamepad",
+  "input": "right_joystick/click",
+  "kind": "chord",
+  "index": 1,
+  "role": "entry",
+  "listed": 89,
+  "fired": 12536,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Temporary Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Temporary Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Circular Scroll",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Left Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Right Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LTP: Click Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Click Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro Off Ramp Up",
+  "input": "switch/left_bumper",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "cancel",
+  "listed": 3,
+  "fired": 398,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro Off Ramp Up",
+  "input": "switch/right_bumper",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "cancel",
+  "listed": 3,
+  "fired": 388,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1!R1: Modifier 2",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 6,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1!R1: Modifier 2",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 6,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "button_diamond/button_a",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 48,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "button_diamond/button_b",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 39,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "button_diamond/button_x",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 20,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "button_diamond/button_y",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 19,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "dpad/dpad_east",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 13,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "dpad/dpad_north",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 15,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "dpad/dpad_south",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 12,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "dpad/dpad_west",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 14,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "joystick/click",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 22,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 59,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "right_joystick/click",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 12,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "right_joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 24,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 1,
+  "removes": [
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "switch/button_escape",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 83,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "switch/button_menu",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 91,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | L1: Modifier 0",
+  "input": "switch/right_bumper",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 57,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1!L1: Modifier 2",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 6,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1!L1: Modifier 2",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 6,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "button_diamond/button_a",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 49,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "button_diamond/button_b",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 28,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "button_diamond/button_x",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 20,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "button_diamond/button_y",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 25,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "dpad/dpad_east",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 20,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "dpad/dpad_north",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 13,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "dpad/dpad_south",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 23,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "dpad/dpad_west",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 17,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "joystick/click",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 11,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 45,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 1,
+  "removes": [
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "right_joystick/click",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 10,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "right_joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 16,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 1,
+  "removes": [
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "switch/button_escape",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 83,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "switch/button_menu",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 91,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Gyro | R1: Modifier 1",
+  "input": "switch/left_bumper",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 47,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1!R1: Modifier 2",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 6,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1!R1: Modifier 2",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 6,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "button_diamond/button_a",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 53,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "button_diamond/button_b",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 35,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "button_diamond/button_x",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 34,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "button_diamond/button_y",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 22,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "dpad/dpad_east",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 22,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "dpad/dpad_north",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 18,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "dpad/dpad_south",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 22,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "dpad/dpad_west",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 21,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "joystick/click",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 29,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 70,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 1,
+  "removes": [
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "right_joystick/click",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 14,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "right_joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 18,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 3,
+  "removes": [
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "switch/button_escape",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 94,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "switch/button_menu",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 87,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Modifier 0",
+  "input": "switch/right_bumper",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 45,
+  "removes": [
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Scroll Down",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 2,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "L1: Scroll Down",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 2,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Buttons: Left Stick Guard",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 6,
+  "removes": [
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Buttons: Left Stick Guard",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 14,
+  "removes": [
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Buttons: Left Stick Guard",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 1,
+  "removes": [
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Buttons: Right Stick Guard",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 11,
+  "removes": [
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Buttons: Right Stick Guard",
+  "input": "right_joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 2,
+  "removes": [
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Buttons: Right Stick Guard",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 1,
+  "removes": [
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Keys",
+  "input": "joystick/click",
+  "kind": "chord",
+  "index": 1,
+  "role": "entry",
+  "listed": 89,
+  "fired": 4940,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Temporary Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Temporary Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Left Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Right Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Keys",
+  "input": "right_joystick/click",
+  "kind": "chord",
+  "index": 1,
+  "role": "entry",
+  "listed": 89,
+  "fired": 4703,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Temporary Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Temporary Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Left Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Right Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Left!Right: Entry Point",
+  "input": "switch/button_escape",
+  "kind": "chord",
+  "index": 1,
+  "role": "hold",
+  "listed": 89,
+  "fired": 6778,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Left Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Right Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Left: Entry Point",
+  "input": "joystick/click",
+  "kind": "release",
+  "index": 0,
+  "role": "release",
+  "listed": 89,
+  "fired": 17906,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Left: Entry Point",
+  "input": "right_joystick/click",
+  "kind": "release",
+  "index": 0,
+  "role": "release",
+  "listed": 89,
+  "fired": 13223,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Left: Fn Layer",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 5,
+  "fired": 12,
+  "removes": [
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Left: Fn Layer",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 5,
+  "fired": 12,
+  "removes": [
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Right!Left: Entry Point",
+  "input": "switch/button_menu",
+  "kind": "chord",
+  "index": 1,
+  "role": "hold",
+  "listed": 89,
+  "fired": 7817,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Left Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Right Stick Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Buttons: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Right: Entry Point",
+  "input": "joystick/click",
+  "kind": "release",
+  "index": 0,
+  "role": "release",
+  "listed": 89,
+  "fired": 18639,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Right: Entry Point",
+  "input": "right_joystick/click",
+  "kind": "release",
+  "index": 0,
+  "role": "release",
+  "listed": 89,
+  "fired": 13404,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Right: Fn Layer",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 5,
+  "fired": 5,
+  "removes": [
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Menu Right: Fn Layer",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 5,
+  "fired": 6,
+  "removes": [
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1!L1: Modifier 2",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 6,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1!L1: Modifier 2",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 6,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "button_diamond/button_a",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 72,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "button_diamond/button_b",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 45,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "button_diamond/button_x",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 33,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "button_diamond/button_y",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 25,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "dpad/dpad_east",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 21,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "dpad/dpad_north",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 18,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "dpad/dpad_south",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 14,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "dpad/dpad_west",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 21,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "joystick/click",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 23,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 66,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 3,
+  "removes": [
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "right_joystick/click",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 14,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "right_joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 21,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "switch/button_escape",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 98,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "switch/button_menu",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 93,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Modifier 1",
+  "input": "switch/left_bumper",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 3,
+  "fired": 77,
+  "removes": [
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Scroll Up",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 2,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "R1: Scroll Up",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 2,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "RTP: Circular Scroll",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "RTP: Click Entry Point",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "RTP: Circular Scroll",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "RTP: Click Entry Point",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "RTP: Circular Scroll",
+  "input": "right_trackpad/touch",
+  "kind": "release",
+  "index": 0,
+  "role": "release",
+  "listed": 4,
+  "fired": 35,
+  "removes": [
+   {
+    "layer": "RTP: Click Entry Point",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   }
+  ]
+ },
+ {
+  "layer": "RTP: Entry Point",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 5,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "RTP: Click Entry Point",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "RTP: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "RTP: Entry Point",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 5,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "RTP: Click Entry Point",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "RTP: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Stateful | Menu Left: Entry Point",
+  "input": "joystick/click",
+  "kind": "release",
+  "index": 0,
+  "role": "release",
+  "listed": 89,
+  "fired": 4076,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Stateful | Menu Left: Entry Point",
+  "input": "right_joystick/click",
+  "kind": "release",
+  "index": 0,
+  "role": "release",
+  "listed": 89,
+  "fired": 2676,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Stateful | Menu Right: Entry Point",
+  "input": "joystick/click",
+  "kind": "release",
+  "index": 0,
+  "role": "release",
+  "listed": 89,
+  "fired": 5700,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Stateful | Menu Right: Entry Point",
+  "input": "right_joystick/click",
+  "kind": "release",
+  "index": 0,
+  "role": "release",
+  "listed": 89,
+  "fired": 3271,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Escape",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Tab",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "LST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RST: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "RTP: Double Tap",
+    "verdict": "answers first",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1&R1: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Temp Cursor Gyro",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "L1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "R1: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Transition Set 0",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Gamepad",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Enter",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Left!Right: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Entry Point",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Backspace",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Right!Left: Double Tap Cover",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Menu Keys",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   },
+   {
+    "layer": "Stateful | Menu Left: Fn Layer",
+    "verdict": "never there",
+    "rule": "a whole-stack clear (R163)"
+   }
+  ]
+ },
+ {
+  "layer": "Steering",
+  "input": "joystick/dpad_north",
+  "kind": "Soft_Press",
+  "index": 0,
+  "role": "cancel",
+  "listed": 14,
+  "fired": 1494,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   }
+  ]
+ },
+ {
+  "layer": "Steering",
+  "input": "joystick/dpad_south",
+  "kind": "Soft_Press",
+  "index": 0,
+  "role": "cancel",
+  "listed": 14,
+  "fired": 1520,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Double Tap",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Down: Double Tap",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | R1!L1: Modifier 2",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | L1!R1: Modifier 2",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | R1: W Key",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | L1: S Key",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Steering | LS: Entry Guard",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | L1: S Key",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 61,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | L1: S Key",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 53,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | L1: S Key",
+  "input": "right_joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 4,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | L1: S Key",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 10,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | L1: S Key",
+  "input": "switch/button_escape",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 19,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | L1: S Key",
+  "input": "switch/button_menu",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 20,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Down: Modifier 0",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Down: Modifier 0",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Down: Modifier 0",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 1,
+  "removes": [
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Down: Scroll Down",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Down: Scroll Down",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 1,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Down: Scroll Down",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Up: Modifier 1",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Up: Modifier 1",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Up: Modifier 1",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Up: Scroll Up",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Up: Scroll Up",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS Up: Scroll Up",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 4,
+  "fired": 0,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS: Entry Guard",
+  "input": "switch/button_escape",
+  "kind": "Start_Press",
+  "index": 0,
+  "role": "entry",
+  "listed": 4,
+  "fired": 825,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "no rule fixes it"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | LS: Entry Guard",
+  "input": "switch/button_menu",
+  "kind": "Start_Press",
+  "index": 0,
+  "role": "entry",
+  "listed": 4,
+  "fired": 569,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "never there",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Turning Ramp Up 0",
+    "verdict": "never there",
+    "rule": "no rule fixes it"
+   },
+   {
+    "layer": "Gyro Off Ramp Up",
+    "verdict": "never there",
+    "rule": "no rule fixes it"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | R1: W Key",
+  "input": "joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 60,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | R1: W Key",
+  "input": "joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 60,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | R1: W Key",
+  "input": "right_joystick/edge",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 15,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | R1: W Key",
+  "input": "right_joystick/touch",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 7,
+  "removes": [
+   {
+    "layer": "Steering | LS: Double Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Scroll Down",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Scroll Up",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS: Tap Cover",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | R1: W Key",
+  "input": "switch/button_escape",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 29,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Steering | R1: W Key",
+  "input": "switch/button_menu",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "recovery",
+  "listed": 7,
+  "fired": 16,
+  "removes": [
+   {
+    "layer": "Steering | LS Up: Modifier 1",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   },
+   {
+    "layer": "Steering | LS Down: Modifier 0",
+    "verdict": "answers first",
+    "rule": "a cleanup function: allowed, not required"
+   }
+  ]
+ },
+ {
+  "layer": "Turning Ramp Up 0",
+  "input": "right_joystick/edge",
+  "kind": "Soft_Press",
+  "index": 1,
+  "role": "cancel",
+  "listed": 3,
+  "fired": 1568,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   }
+  ]
+ },
+ {
+  "layer": "Turning Ramp Up 0",
+  "input": "switch/left_bumper",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "cancel",
+  "listed": 3,
+  "fired": 1734980,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   }
+  ]
+ },
+ {
+  "layer": "Turning Ramp Up 0",
+  "input": "switch/right_bumper",
+  "kind": "Full_Press",
+  "index": 0,
+  "role": "cancel",
+  "listed": 3,
+  "fired": 1245412,
+  "removes": [
+   {
+    "layer": "Turning Ramp Up 1",
+    "verdict": "answers first",
+    "rule": "no rule fixes it"
+   }
+  ]
+ }
+]

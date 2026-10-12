@@ -70,12 +70,13 @@ class SteeringEntryAndFeedback(unittest.TestCase):
                 self.assertEqual(set(acts), {'Start_Press'})
                 entry = acts['Start_Press']
                 self.assertNotEqual(entry['settings'].get('hold_repeats'), '1')
+                # Until 90.57 the three ramp layers were removed first, as in `Steering`'s own menu press. The
+                # guard binds the right stick's edge itself, so no ramp layer comes on while it is on, and
+                # 90.58 took those three removes out (R132).
                 self.assertEqual(commands(layout, entry), [
-                    ('remove_layer', 'Turning Ramp Up 1', '0', '0'),
-                    ('remove_layer', 'Turning Ramp Up 0', '0', '0'),
-                    ('remove_layer', 'Gyro Off Ramp Up', '0', '0'),
                     ('remove_layer', GUARD, '0', '0'),
                     ('add_layer', f'Stateful | Menu {side}: Entry Point', '0', '0')])
+                self.assertIn('edge', layout.active(GUARD)['right_joystick']['inputs'])
 
     def test_guard_touches_pads_and_camera_cannot_add_helpers_or_disarm_at_center(self):
         for variant, data, layout in self.each():

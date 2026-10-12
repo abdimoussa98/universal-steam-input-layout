@@ -28,7 +28,7 @@ from collections import Counter
 import json
 from pathlib import Path
 
-from ..cleanups import BUTTONS, CHECKS, Cleanups, hidden, kept, name, run
+from ..cleanups import BUTTONS, CHECKS, Cleanups, hidden, kept, name, release_of, run
 from ..exceptions import load_config
 from ..flow_model import BITS
 from ..model import EMPTY, TARGET, Layout, actions, entries
@@ -173,7 +173,7 @@ def fix(data, config=None):
     if not _open(first):
         return {"changed": [], "remaining": 0}     # already clean: the usual case in the pipeline
     variant = "alternative" if "alternative" in data["controller_mappings"].get("title", "") else "default"
-    keep = kept(config, variant, set(Layout(data).presets))
+    keep = kept(config, variant, set(Layout(data).presets), release_of(data["controller_mappings"].get("title")))
     changed = []
     for phase in (_guards, _missing, _unneeded, _hidden):
         layout = Layout(data)

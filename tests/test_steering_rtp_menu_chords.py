@@ -89,7 +89,9 @@ class SteeringRtpMenu(unittest.TestCase):
                 key = layout.active(f'Stateful | Menu {side}: Fn Layer')['switch']['inputs'][button]['activators']['chord']
                 self.assertNotEqual(key['settings'].get('hold_repeats'), '1')
 
-    def test_steering_inherits_pad_and_direction_soft_presses_clear_its_family(self):
+    def test_steering_inherits_pad_and_direction_soft_presses_leave_steering(self):
+        # Until 90.57 up and down removed the whole family, the Entry Guard included. Each of those layers binds
+        # up and down itself, so this bind only runs with `Steering` bare; since 90.58 it removes `Steering` alone.
         for _, _, layout in self.each():
             self.assertNotIn('right_trackpad', layout.active('Steering'))      # the Entry Guard blocks both pads, by design
             for name in ('dpad_north', 'dpad_south'):
@@ -98,11 +100,8 @@ class SteeringRtpMenu(unittest.TestCase):
                 entry = acts['Soft_Press']
                 self.assertEqual(entry['settings'], {'hold_repeats': '1', 'repeat_rate': '50',
                     'interruptable': '0', 'haptic_intensity': '1', 'activation_threshold': '29031'})
-                operations = layout.layer_ops(entry)
-                self.assertTrue(all(op == 'remove_layer' for op, _ in operations))
-                self.assertEqual(operations[-1], ('remove_layer', 'Steering'))
-                self.assertIn(('remove_layer', ENTRY_GUARD), operations)
-                self.assertNotIn(('remove_layer', 'Gyro'), operations)
+                self.assertEqual(layout.layer_ops(entry), [('remove_layer', 'Steering')])
+                self.assertIn(name, layout.active(ENTRY_GUARD)['joystick']['inputs'])
 
     def test_delayed_targets_complete_before_rtp_cleanup_including_touch_completion(self):
         for _, _, layout in self.each():

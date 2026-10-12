@@ -315,11 +315,9 @@ class NeptuneCursorTests(unittest.TestCase):
                 # (cleanup rule 6, author 2026-10-02).
                 for suffix in (": Tap Cover", ": Temp Cursor Gyro"):
                     title = button + suffix
+                    # Until 90.56 a Tap Cover also listed the Steering Modifier 2 layer it marked the hold of.
+                    # 90.57 took that timer out, and the cover is never on with a Steering layer.
                     overlay_targets = {title, owner, "Gyro | " + owner}
-                    if suffix == ": Tap Cover":
-                        left, right = ('L1', 'R1') if variant == 'default' else ('L2', 'R2')
-                        opposite = right if button == left else left
-                        overlay_targets.add(f'Steering | {opposite}!{button}: Modifier 2')
                     with self.subTest(variant=variant, layer=title):
                         primary = self.source(layout, title, source)["inputs"][name]
                         self.assertEqual(set(primary["activators"]), {"release"})

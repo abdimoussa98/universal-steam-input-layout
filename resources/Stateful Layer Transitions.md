@@ -335,6 +335,33 @@ and keeps Cursor Gyro's response settings. Toggling Gyro on again restores
 its activation override without reapplying Cursor Gyro. The deliberate
 both-stick and menu-plus-click exits still remove Cursor Gyro.
 
+Since 90.57 the Steering Modifier 2 Release is no clear
+([record](../findings/2026-10-12-driver-handover-and-fewer-removes/README.md)).
+The second driver's Release removes its Modifier 2 layer and nothing else:
+`Steering`, `Gyro` and the first driver's layer stay, and the 200 ms timer,
+its cover and its bump are gone. The first driver's Release hands over: it
+adds the other driver's layer, then removes the Modifier 2 layer and its own
+(R174). The same holds in `Cursor Gyro`: no Modifier 2 Release removes it,
+and inside it the quick tap only toggles `Gyro`. Four release clears are
+left, the two drivers in each Gyro Modifier 2 layer, and they stop naming
+`Steering`, its Entry Guard and the plain modifiers, none of which can be on
+the stack when they fire.
+
+Since 90.58 no list names a layer that cannot be on the stack when its bind
+fires ([record](../findings/2026-10-12-removes-that-never-take-a-layer-off/README.md)).
+Nothing was added and nothing plays differently on the simulator. Three
+places read differently from the sections below:
+
+- **The fourteen clears** that enter a transition, `Gamepad` or `Menu Keys`
+  named every layer but one, 89 removes. They name 5 to 27 (R163).
+- **`Steering`'s exit on up and down** removed the whole family, the two
+  windows first (90.42). It removes `Steering` alone: each of the thirteen
+  family layers binds up and down, so the exit only runs with `Steering`
+  bare.
+- **The Entry Guard's menu presses** removed the three ramp layers first
+  (90.46). The guard binds the right stick's edge itself, so no ramp layer
+  comes on while it is on.
+
 Steering Modifier 0/1 edge Releases and their automatic Double Tap completions
 are explicitly haptic Off. W/S-owned activators, incoming W/S adds and their
 left-stick D-pad mode haptics are also Off. Fn adds retain their Low bump,
@@ -409,7 +436,7 @@ fallback when that local edge answers. Gyro modifiers can cover that edge.
 
 | Exception | What it does |
 |---|---|
-| Modifier 2 clear | Both modifiers together use the existing release clear (bumpers in default, triggers in alternative). Since 90.44 the two Steering Modifier 2 clear releases keep Steering and all six Gyro/Steering clear releases keep Cursor Gyro. Gyro Modifier 2 still toggles Gyro with one beep and retains its existing Steering removal. Other cleanup targets and release-order behavior remain unchanged; this is no longer a universal return to Base. No transition |
+| Modifier 2 quick tap | Both modifiers together, the second let go (bumpers in default, triggers in alternative). It toggles `Gyro` with one beep and removes no other stateful layer (R159): from Base it adds `Gyro`; in `Gyro`, and in `Cursor Gyro` with `Gyro` on, it removes `Gyro`. In `Steering` it is no clear since 90.57: the second driver's Release removes only its Modifier 2 layer, and `Steering`, `Gyro` and the first driver's layer stay. It was the universal return to Base until 90.43. No transition |
 | Steering's fallback guard (90.33) | Not an exit. With no driver held, stick up or down adds `Steering \| LS: Fallback Guard` with a strong pulse: at once since 90.34, after 100 ms in 90.33. Since 90.34 Steering base reads the left stick four ways, so a diagonal counts as one direction, and leaves both stick edges open, so turn assist runs there and in the guard and is off only while a driver is held ([record](../findings/2026-10-05-steering-four-way-and-open-edges/README.md)). Since 90.35 the two swap places: the bind that adds the guard removes `Steering`, and each bind that removes the guard adds `Steering` first, because the guard's eight-way stick did not take effect over the four-way one on the Deck. The guard carries `Steering`'s Start, Select and right pad itself ([record](../findings/2026-10-06-steering-fallback-swap/README.md)). It types W and S and stays when the stick is let go. In it, each of the modifier pair adds its Gyro modifier while the left stick is out, and removes the guard, with a pulse, when the stick is at centre; the button then drives. Start and Select are Steering's own, so the menu-plus-click clear works from there. The author's design of 2026-10-04 and 2026-10-05, after the July layout ([record](../findings/2026-10-05-steering-fallback-guard/README.md)). From 90.11 to 90.32 the fallback was an exit: holding W or S for a time and letting go left Steering ([90.31 record](../findings/2026-10-04-fallback-window/README.md), [90.11 record](../findings/2026-10-02-steering-fallback-hold/README.md)) |
 | `Cursor Gyro`'s both-sticks exit | Pushing both sticks out about a quarter removes `Cursor Gyro` and nothing else; any active `Gyro` stays. No transition. It is only in `Cursor Gyro`: a layer on top that binds the stick edges (a held modifier, a held menu button, a window) answers instead, and the exit follows when that layer goes if the sticks are still out (author, 2026-10-03) |
 | `Cursor Gyro`'s entry | Its commit also adds `Gyro`. Since 90.44 a later dual-driver gesture may remove Gyro while retaining Cursor Gyro. Its menu-plus-click clear and both-stick exit preserve whatever Gyro state is currently active; they do not re-add it |
@@ -431,9 +458,9 @@ replace one. The list is kept for that.
       layer.
 - [ ] It has Entry Points whose click releases both lead to Transition 2, and
       its own menu press adds them.
-- [ ] Transition 2 removes it and its helpers. Modifier 2 follows the
-      registered survivor policy: since 90.44 its Steering clears preserve
-      Steering and all Gyro/Steering release clears preserve Cursor Gyro.
+- [ ] Transition 2 removes it and its helpers. The Modifier 2 quick tap does
+      not remove it (R159): since 90.57 no stateful layer but `Gyro` leaves on
+      that gesture.
 - [ ] It has no Release or delayed binding on Start or Select at entry. A
       repeating press that adds its Entry Point is allowed.
 - [ ] Nothing depends on chord hand-over or a D-pad centre bind outside the

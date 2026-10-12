@@ -10,9 +10,11 @@ from tests.scenario import ScenarioCase, scenario
 
 
 class SoftPressOnly(ScenarioCase):
-    @scenario("90.17 S1", rests=("A6", "A10"), either=("A9",))
+    @scenario("90.17 S1", rests=("A6", "A10"), either=("A9",), frozen="90.56")
     def test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add(self):
-        """Changed in 90.20, with Base's repeating add gone: see 90.16 X3."""
+        """On the 90.56 build, as 90.16 X3 is: 90.57 took the clear out (90.57 P1).
+
+        Changed in 90.20, with Base's repeating add gone: see 90.16 X3."""
         for pad in self.each(start="steering"):
             pad.hold("L1").wait(50).hold("R1").wait(50).press_pad("RP", "left").wait(100)
             self.assertEqual((pad.top, "mouse_button BACK" in pad.down()), ("RTP: Mouse Buttons", True))

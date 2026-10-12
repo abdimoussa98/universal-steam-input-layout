@@ -1,0 +1,21 @@
+395 scenario tests on the trial layout: 10 fail, 0 error, 25 expected failures
+  failure: test_scenarios_90_14.PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it
+      + (('Base', 'Steering'), []) [on default at 1240 ms, stack ('Base', 'Steering', 'RTP: Entry Point')]
+  failure: test_scenarios_90_16.PadClickExits.test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add
+      + (False, False) [on default {'exposed_fires': False} at 1345 ms, stack ('Base', 'Steering', 'LST: Entry Point', 'LST: Tap Cover', 'Steering | L1: S Key', 'RTP:
+  failure: test_scenarios_90_17.SoftPressOnly.test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add
+      AssertionError: False is not true [on default {'exposed_fires': True} at 892 ms, stack ('Base', 'Steering', 'Steering | L1: S Key', 'RTP: Entry Point', 'RTP: Mo
+  failure: test_scenarios_90_26.Holds.test_the_steering_modifiers_take_200_ms
+      AssertionError: False is not true [on default at 990 ms, stack ('Base', 'Steering', 'LST: Entry Point', 'LST: Tap Cover', 'Steering | L1: S Key', 'Steering | L1
+  failure: test_scenarios_90_33.LeavingFromTheGuard.test_the_quick_tap_from_steering_base_cleans_modifiers_and_retains_steering
+      + ('Base', 'Steering') [on default at 970 ms, stack ('Base', 'Gyro', 'Steering')]
+  failure: test_scenarios_90_43.LayerFeedback.test_steering_mod2_cleanup_preserves_steering_without_a_clear_beep
+      + ('Base', 'Steering') [on default {'exposed_fires': True} at 880 ms, stack ('Base', 'Gyro', 'Steering')]
+  failure: test_scenarios_90_44.EntryGuardDriverEdge.test_reexposed_guard_recovers_after_a_timed_window_with_both_drivers_held
+      + [('haptic', '1 Steering | L1!R1: Modifier 2 switch/right_bumper')] [on default {'exposed_fires': True, 'reverse_ties': False} at 500 ms, stack ('Base', 'Steer
+  failure: test_scenarios_90_44.QuietSteeringDrivers.test_centered_mod2_cleanup_permits_the_still_held_driver_to_reacquire
+      AssertionError: True is not false [on default {'exposed_fires': True, 'reverse_ties': False} at 180 ms, stack ('Base', 'Gyro', 'Steering', 'Steering | L1: S Key
+  failure: test_scenarios_90_44.QuietSteeringDrivers.test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear
+      AssertionError: False is not true [on default {'exposed_fires': True, 'reverse_ties': False} at 290 ms, stack ('Base', 'Steering', 'Steering | L1: S Key', 'Stee
+  failure: test_scenarios_90_55.EdgeTimersShape.test_the_modifier_2_entry_removes_the_stick_family_and_its_own_hold_marker_only
+         'Steering | LS: Tap Cover']

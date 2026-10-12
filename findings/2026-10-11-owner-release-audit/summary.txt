@@ -1,0 +1,77 @@
+Modifier button Releases, both layouts, all walks:
+  L1&R1: Tap Cover | L1: lists 8, fired 6522, on the stack at least once 8
+  L1&R1: Tap Cover | R1: lists 8, fired 6436, on the stack at least once 8
+  L1: Tap Cover | L1: lists 4, fired 18497, on the stack at least once 4
+  R1: Tap Cover | R1: lists 4, fired 18844, on the stack at least once 4
+  Steering | L1!R1: Modifier 2 | R1: lists 88, fired 7095, on the stack at least once 25
+  Steering | L1: S Key | L1: lists 11, fired 41522, on the stack at least once 9
+  Steering | L1: S Key | R1: lists 10, fired 77, on the stack at least once 5
+  Steering | LS Down: Double Tap | L1: lists 3, fired 468, on the stack at least once 3
+  Steering | LS Down: Double Tap | R1: lists 3, fired 418, on the stack at least once 3
+  Steering | LS Up: Double Tap | L1: lists 3, fired 445, on the stack at least once 3
+  Steering | LS Up: Double Tap | R1: lists 3, fired 393, on the stack at least once 3
+  Steering | R1!L1: Modifier 2 | L1: lists 88, fired 6472, on the stack at least once 25
+  Steering | R1: W Key | L1: lists 10, fired 84, on the stack at least once 5
+  Steering | R1: W Key | R1: lists 11, fired 40164, on the stack at least once 9
+
+Steering | L1!R1: Modifier 2 | R1: lists 88; on the stack by the chains 20, in the walks 25, by either 27, by neither 61
+  chains only: R1: Tap Cover, RTP: Double Tap
+  walks only: LST: Tap Cover, LST: Temporary Gyro, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Tap Cover, RST: Temporary Gyro
+    Gyro: kept on by mode
+    LST: Temporary Gyro: kept on by thumb LSt
+    RST: Temporary Gyro: kept on by thumb RSt
+    LTP: Arrow Keys: kept on by button LTP
+    RTP: Mouse Buttons: kept on by button RTP
+    RTP: Circular Scroll: kept on by button RTP
+    Escape: kept on by button LTP
+    Tab: kept on by button LTP
+    Backspace: kept on by button LTP
+    Enter: kept on by button LTP
+    LST: Entry Point: kept on by thumb LSt
+    RST: Entry Point: kept on by thumb RSt
+    RTP: Entry Point: kept on by button RTP
+    RTP: Double Tap: kept on by timer
+    R1: Tap Cover: kept on by button RB
+    LST: Tap Cover: kept on by thumb LSt
+    RST: Tap Cover: kept on by thumb RSt
+    RTP: Tap Cover: kept on by button RTP
+    Steering | L1!R1: Modifier 2: kept on by button RB
+    Steering | L1: S Key: kept on by button LB
+    Menu Buttons: Left Stick Guard: kept on by button Select+Start
+    Menu Buttons: Right Stick Guard: kept on by button Select+Start
+    Menu Buttons: Tap Cover: kept on by button Select+Start
+    LTP: Click Entry Point: kept on by button LTP
+    RTP: Click Entry Point: kept on by button RTP
+    LTP: Middle Click: kept on by button LTP
+    RTP: Middle Click: kept on by button RTP
+
+Steering | R1!L1: Modifier 2 | L1: lists 88; on the stack by the chains 20, in the walks 25, by either 27, by neither 61
+  chains only: L1: Tap Cover, RTP: Double Tap
+  walks only: LST: Tap Cover, LST: Temporary Gyro, Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, RST: Tap Cover, RST: Temporary Gyro
+    Gyro: kept on by mode
+    LST: Temporary Gyro: kept on by thumb LSt
+    RST: Temporary Gyro: kept on by thumb RSt
+    LTP: Arrow Keys: kept on by button LTP
+    RTP: Mouse Buttons: kept on by button RTP
+    RTP: Circular Scroll: kept on by button RTP
+    Escape: kept on by button LTP
+    Tab: kept on by button LTP
+    Backspace: kept on by button LTP
+    Enter: kept on by button LTP
+    LST: Entry Point: kept on by thumb LSt
+    RST: Entry Point: kept on by thumb RSt
+    RTP: Entry Point: kept on by button RTP
+    RTP: Double Tap: kept on by timer
+    L1: Tap Cover: kept on by button LB
+    LST: Tap Cover: kept on by thumb LSt
+    RST: Tap Cover: kept on by thumb RSt
+    RTP: Tap Cover: kept on by button RTP
+    Steering | R1!L1: Modifier 2: kept on by button LB
+    Steering | R1: W Key: kept on by button RB
+    Menu Buttons: Left Stick Guard: kept on by button Select+Start
+    Menu Buttons: Right Stick Guard: kept on by button Select+Start
+    Menu Buttons: Tap Cover: kept on by button Select+Start
+    LTP: Click Entry Point: kept on by button LTP
+    RTP: Click Entry Point: kept on by button RTP
+    LTP: Middle Click: kept on by button LTP
+    RTP: Middle Click: kept on by button RTP

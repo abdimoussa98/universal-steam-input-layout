@@ -7,7 +7,7 @@ from steam_layout import exceptions
 from steam_layout.fixes.window_routes import fix as fix_windows
 from steam_layout.inheritance import audit, declared_stacks
 from steam_layout.model import Layout
-from tests.scenario import ROOT, VARIANTS, layout_data
+from tests.scenario import ROOT, VARIANTS, frozen_layout_data, layout_data
 from tests.test_audit_inheritance import EMPTY, act, add, build
 
 WINDOWS = ('LST: Double Tap', 'RST: Double Tap')
@@ -67,12 +67,14 @@ class ConditionalDeclaredStacks(unittest.TestCase):
 
 class SteeringTouchWindowContracts(unittest.TestCase):
     def test_only_steering_touch_nodes_and_window_directions_change_in_these_groups(self):
+        # On the 90.57 build, the last one this comparison holds on: 90.58 cut `Steering`'s exit on up and down
+        # to `Steering` alone and took the ramp layers out of the Entry Guard's menu presses (R132).
         for variant in VARIANTS:
-            current = Layout(layout_data(variant))
+            current = Layout(frozen_layout_data(variant, '90.57'))
             old = Layout(json.loads((PREVIOUS / f'{variant}-candidate.json').read_text()))
             with self.subTest(variant=variant):
                 for source in ('joystick', 'right_joystick'):
-                    expected = copy.deepcopy(old.active('Steering')[source])
+                    expected = self.without_bumper_covers(old, old.active('Steering')[source])
                     expected['inputs'].pop('touch')
                     self.assertEqual(self.without_scroll_layers(current, current.active('Steering')[source]), expected)
                 self.assertEqual(current.active('Steering | LS: Entry Guard'),
@@ -87,6 +89,22 @@ class SteeringTouchWindowContracts(unittest.TestCase):
                         self.assertFalse(replacement.get('disabled_activators'))
                         expected['joystick']['inputs'][direction] = copy.deepcopy(replacement)
                     self.assertEqual(current.active(window), expected)
+
+    @staticmethod
+    def without_bumper_covers(layout, group):
+        """The group without the removals of the two bumper Tap Covers, which Steering's exit had until 90.56."""
+        covers = {str(layout.order.index(layout.presets[title]['name']) + 1) for title in layout.presets
+                  if title.endswith(': Tap Cover') and title[:2] in ('L1', 'R1', 'L2', 'R2') and '&' not in title}
+        assert len(covers) == 2
+        group = copy.deepcopy(group)
+        for item in group['inputs'].values():
+            for value in item.get('activators', {}).values():
+                for one in value if isinstance(value, list) else [value]:
+                    binding = one['bindings']['binding']
+                    if isinstance(binding, list):
+                        one['bindings']['binding'] = [b for b in binding if not (
+                            b.startswith('controller_action remove_layer ') and b.split()[2] in covers)]
+        return group
 
     @staticmethod
     def without_scroll_layers(layout, group):

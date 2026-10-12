@@ -1,0 +1,28 @@
+395 scenario tests on the layouts as they are: 0 fail
+
+never out: 27 removes left in each list; 1 tests change
+  test_scenarios_90_55.EdgeTimersShape.test_only_the_clear_to_base_removes_right_pad_layers_in_the_steering_modifier_layers: passes -> failures
+
+own: 2 removes left in each list; 7 tests change
+  test_scenarios_90_14.PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it: passes -> failures
+  test_scenarios_90_16.PadClickExits.test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add: passes -> failures
+  test_scenarios_90_17.SoftPressOnly.test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add: passes -> failures
+  test_scenarios_90_33.LeavingFromTheGuard.test_the_quick_tap_from_steering_base_cleans_modifiers_and_retains_steering: passes -> failures
+  test_scenarios_90_43.LayerFeedback.test_steering_mod2_cleanup_preserves_steering_without_a_clear_beep: passes -> failures
+  test_scenarios_90_44.QuietSteeringDrivers.test_centered_mod2_cleanup_permits_the_still_held_driver_to_reacquire: passes -> failures
+  test_scenarios_90_44.QuietSteeringDrivers.test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear: passes -> failures
+
+own + gyro: 3 removes left in each list; 4 tests change
+  test_scenarios_90_14.PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it: passes -> failures
+  test_scenarios_90_16.PadClickExits.test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add: passes -> failures
+  test_scenarios_90_17.SoftPressOnly.test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add: passes -> failures
+  test_scenarios_90_44.QuietSteeringDrivers.test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear: passes -> failures
+
+own + driver: 3 removes left in each list; 7 tests change
+  test_scenarios_90_14.PadClick.test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it: passes -> failures
+  test_scenarios_90_16.PadClickExits.test_a_click_still_held_after_a_clear_comes_back_only_if_steam_fires_the_exposed_add: passes -> failures
+  test_scenarios_90_17.SoftPressOnly.test_the_d_pad_layer_comes_back_under_a_held_click_only_if_steam_fires_the_exposed_add: passes -> failures
+  test_scenarios_90_33.LeavingFromTheGuard.test_the_quick_tap_from_steering_base_cleans_modifiers_and_retains_steering: passes -> failures
+  test_scenarios_90_43.LayerFeedback.test_steering_mod2_cleanup_preserves_steering_without_a_clear_beep: passes -> failures
+  test_scenarios_90_44.QuietSteeringDrivers.test_centered_mod2_cleanup_permits_the_still_held_driver_to_reacquire: passes -> failures
+  test_scenarios_90_44.QuietSteeringDrivers.test_full_direction_carried_through_mod2_cleanup_exposes_the_independent_clear: passes -> failures

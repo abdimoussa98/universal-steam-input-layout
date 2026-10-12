@@ -1,0 +1,38 @@
+
+default: removes in the layout 4277 -> 4033; in the Steering layers 738 -> 508
+  the plan's sweep: 480 flags in 640 gestures
+      144  the second driver typed S on its way to Modifier 2
+      144  the second driver typed W on its way to Modifier 2
+      96  W and S down together after the second press
+      96  no Modifier 2 after the second press
+  Steering | L1!R1: Modifier 2 | R1: release: -Steering | L1!R1: Modifier 2
+  Steering | L1!R1: Modifier 2 | L1: Full_Press: ; release: +Steering | R1: W Key, -Steering | L1!R1: Modifier 2, -Steering | L1: S Key
+  Steering | L1: S Key | L1: Full_Press: ; release: -Steering | LS: Double Tap Cover, -Steering | LS Down: Scroll Down, -Steering | LS Up: Scroll Up, -Steering | LS: Tap Cover, -Steering | LS Down: Modifier 0, -Steering | LS Up: Modifier 1, -Steering | L1: S Key
+  Steering | L1: S Key | R1: Full_Press: -Steering | L1: S Key, -Steering | LS Up: Modifier 1, -Steering | LS Down: Modifier 0, -Steering | LS: Tap Cover, -Steering | LS: Double Tap Cover, -Steering | LS Down: Scroll Down, -Steering | LS Up: Scroll Up; chord: -Steering | LS: Double Tap Cover, -Steering | LS Down: Scroll Down, -Steering | LS Up: Scroll Up, -Steering | LS: Tap Cover, -Steering | LS Down: Modifier 0, -Steering | LS Up: Modifier 1, +Steering | L1!R1: Modifier 2; release: -Steering | LS: Double Tap Cover, -Steering | LS Down: Scroll Down, -Steering | LS Up: Scroll Up, -Steering | LS: Tap Cover, -Steering | LS Down: Modifier 0, -Steering | LS Up: Modifier 1
+  Steering | R1!L1: Modifier 2 | L1: release: -Steering | R1!L1: Modifier 2
+  Steering | R1!L1: Modifier 2 | R1: Full_Press: ; release: +Steering | L1: S Key, -Steering | R1!L1: Modifier 2, -Steering | R1: W Key
+  Steering | R1: W Key | R1: Full_Press: ; release: -Steering | LS: Double Tap Cover, -Steering | LS Down: Scroll Down, -Steering | LS Up: Scroll Up, -Steering | LS: Tap Cover, -Steering | LS Down: Modifier 0, -Steering | LS Up: Modifier 1, -Steering | R1: W Key
+  Steering | R1: W Key | L1: Full_Press: -Steering | R1: W Key, -Steering | LS Up: Modifier 1, -Steering | LS Down: Modifier 0, -Steering | LS: Tap Cover, -Steering | LS: Double Tap Cover, -Steering | LS Down: Scroll Down, -Steering | LS Up: Scroll Up; chord: -Steering | LS: Double Tap Cover, -Steering | LS Down: Scroll Down, -Steering | LS Up: Scroll Up, -Steering | LS: Tap Cover, -Steering | LS Down: Modifier 0, -Steering | LS Up: Modifier 1, +Steering | R1!L1: Modifier 2; release: -Steering | LS: Double Tap Cover, -Steering | LS Down: Scroll Down, -Steering | LS Up: Scroll Up, -Steering | LS: Tap Cover, -Steering | LS Down: Modifier 0, -Steering | LS Up: Modifier 1
+  1. First driver held, the second tapped  4 of 4: the drive key let go and back in 0 ms; on: Steering | first: drive key; all let go: Steering; keys none
+  2. First driver held, the second held 50 4 of 4: the drive key let go and back in 0 ms; on: Steering | first: drive key; all let go: Steering; keys none
+  3. First driver held, the second down, A 4 of 4: typed ['M']; the drive key let go and back in 0 ms; on: Steering | first: drive key; all let go: Steering; keys none
+  4. A thumb lifted off the right stick wh 4 of 4: the drive key let go and back in 0 ms; on: Steering | first: drive key; all let go: Steering; keys none
+  5. Both held 500 ms, the first let go fi 2 of 4: on: Steering | second: drive key; keys ['W']; all let go: Steering
+  5. Both held 500 ms, the first let go fi 2 of 4: on: Steering | second: drive key; keys ['S']; all let go: Steering
+  6. Both held, stick pushed fully up, the 4 of 4: Steering stays; the drive key let go and back in 0 ms
+  7. Both held, the second let go unseen,  4 of 4: stale: Steering | first: drive key, Steering | first!second: Modifier 2; after a tap of second: Steering | first: drive key; keys ['drive key']
+
+alternative: removes in the layout 4347 -> 4103; in the Steering layers 738 -> 508
+  the plan's sweep: 480 flags in 640 gestures
+      144  the second driver typed S on its way to Modifier 2
+      144  the second driver typed W on its way to Modifier 2
+      96  W and S down together after the second press
+      96  no Modifier 2 after the second press
+  1. First driver held, the second tapped  4 of 4: the drive key let go and back in 0 ms; on: Steering | first: drive key; all let go: Steering; keys none
+  2. First driver held, the second held 50 4 of 4: the drive key let go and back in 0 ms; on: Steering | first: drive key; all let go: Steering; keys none
+  3. First driver held, the second down, A 4 of 4: typed ['M']; the drive key let go and back in 0 ms; on: Steering | first: drive key; all let go: Steering; keys none
+  4. A thumb lifted off the right stick wh 4 of 4: the drive key let go and back in 0 ms; on: Steering | first: drive key; all let go: Steering; keys none
+  5. Both held 500 ms, the first let go fi 2 of 4: on: Steering | second: drive key; keys ['W']; all let go: Steering
+  5. Both held 500 ms, the first let go fi 2 of 4: on: Steering | second: drive key; keys ['S']; all let go: Steering
+  6. Both held, stick pushed fully up, the 4 of 4: Steering stays; the drive key let go and back in 0 ms
+  7. Both held, the second let go unseen,  4 of 4: stale: Steering | first: drive key, Steering | first!second: Modifier 2; after a tap of second: Steering | first: drive key; keys ['drive key']

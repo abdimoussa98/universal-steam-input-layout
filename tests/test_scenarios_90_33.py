@@ -195,7 +195,7 @@ class LeavingFromTheGuard(ScenarioCase):
         for pad in self.each(start=("Base", "Gyro")):
             pad.enter_steering().mark().hold("R1").wait(30).hold("L1").wait(40).let_go("L1").wait(10).let_go("R1")
             pad.lift("LS").wait(500)
-            self.assertEqual(pad.stack, pad.layers("Base", "Steering"))
+            self.assertEqual(pad.stack, pad.layers("Base", "Gyro", "Steering"))     # until 90.56 the tap turned Gyro off
             self.assertEqual(pad.seen("beep", "haptic"), [])
 
     @old_inverted_chord
