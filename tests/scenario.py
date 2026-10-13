@@ -126,7 +126,13 @@ def frozen_layout_data(variant, version):
                   '90.54': 'findings/2026-10-11-hold-timer-on-the-edge',
                   '90.55': 'findings/2026-10-11-edge-soft-press-timers',
                   '90.56': 'findings/2026-10-11-edge-cleanup-press-and-guard',
-                  '90.57': 'findings/2026-10-12-driver-handover-and-fewer-removes'}
+                  '90.57': 'findings/2026-10-12-driver-handover-and-fewer-removes',
+                  '90.58': 'findings/2026-10-12-removes-that-never-take-a-layer-off',
+                  '90.61': 'findings/2026-10-12-inverted-chord-on-the-steering-left-edge',
+                  '90.62': 'findings/2026-10-12-steering-rocking-like-the-bumper-modifiers',
+                  '90.63': 'findings/2026-10-12-inverted-ring-on-the-steering-left-edge',
+                  '90.64': 'findings/2026-10-12-layer-order',
+                  '90.65': 'findings/2026-10-13-steering-left-edge-press-and-guard'}
     key = version, variant
     if key not in _frozen_layouts:
         if version in candidates:

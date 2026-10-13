@@ -1,0 +1,18 @@
+{
+  "by hand": [
+    "Steering | R1: W Key: the left stick's ring is inverted",
+    "Steering | L1: S Key: the left stick's ring is inverted",
+    "Steering | LS Up: Modifier 1: the left stick's ring is inverted",
+    "Steering | LS Down: Modifier 0: the left stick's ring is inverted",
+    "Steering | LS: Tap Cover: the left stick's ring is inverted",
+    "Steering | LS: Double Tap Cover: the left stick's ring is inverted",
+    "Steering | LS Up: Scroll Up: the left stick's ring is inverted",
+    "Steering | LS Down: Scroll Down: the left stick's ring is inverted",
+    "Steering | R1!L1: Modifier 2: the left stick's ring is inverted",
+    "Steering | L1!R1: Modifier 2: the left stick's ring is inverted"
+  ],
+  "removes": {
+    "90.62": 2885,
+    "90.63": 2885
+  }
+}

@@ -1,0 +1,145 @@
+1. Every bind that removes `Steering` (default layout): layer, input, activator, commands in the bind
+    Steering joystick/dpad_north Soft_Press 1
+    Steering joystick/dpad_south Soft_Press 1
+    Stateful | Menu Left: Entry Point joystick/click release 27
+    Stateful | Menu Left: Entry Point right_joystick/click release 27
+    Stateful | Menu Right: Entry Point joystick/click release 27
+    Stateful | Menu Right: Entry Point right_joystick/click release 27
+
+2. A bumper down at every moment, the stick up throughout, nothing else touched: 3,000 random rocks
+    default     A9=True  ties reversed=False `Steering` ends in 0 of 3000
+    default     A9=True  ties reversed=True  `Steering` ends in 0 of 3000
+    default     A9=False ties reversed=False `Steering` ends in 0 of 3000
+    default     A9=False ties reversed=True  `Steering` ends in 0 of 3000
+    alternative A9=True  ties reversed=False `Steering` ends in 0 of 3000
+    alternative A9=True  ties reversed=True  `Steering` ends in 0 of 3000
+    alternative A9=False ties reversed=False `Steering` ends in 0 of 3000
+    alternative A9=False ties reversed=True  `Steering` ends in 0 of 3000
+
+3. The held bumper up, the other down some ms later (no bumper down in between). Columns: ms     0     1    10    20    40    49    50    80
+    default     R1 then L1, A9=True       ENDS  ENDS  ENDS  ENDS  ENDS  ENDS  ENDS  ENDS 
+    default     R1 then L1, A9=False      stays stays stays stays stays stays ENDS  ENDS 
+    default     L1 then R1, A9=True       ENDS  ENDS  ENDS  ENDS  ENDS  ENDS  ENDS  ENDS 
+    default     L1 then R1, A9=False      stays stays stays stays stays stays ENDS  ENDS 
+    alternative R1 then L1, A9=True       ENDS  ENDS  ENDS  ENDS  ENDS  ENDS  ENDS  ENDS 
+    alternative R1 then L1, A9=False      stays stays stays stays stays stays ENDS  ENDS 
+    alternative L1 then R1, A9=True       ENDS  ENDS  ENDS  ENDS  ENDS  ENDS  ENDS  ENDS 
+    alternative L1 then R1, A9=False      stays stays stays stays stays stays ENDS  ENDS 
+    The log of a 60 ms gap, default layout, A9=False:
+      700 release  switch/right_bumper
+      700 up       W
+      700 remove   Steering | LS: Tap Cover
+      700 remove   Steering | LS Up: Modifier 1
+      700 remove   Steering | R1: W Key
+      750 haptic   1 Steering joystick/dpad_north
+      750 remove   Steering
+      750 beep     Steering
+      750 down     W
+      760 press    switch/left_bumper
+      760 add      L1: Modifier 0
+
+4. A 30 ms touch of the right pad, then the rock. Rows: the second bumper down t1 ms after the thumb lifts.
+   Columns: the first bumper up t2 ms after that:           5   30   60  100  140  160  250
+    default, R1 then L1, A9=True
+        t1=   5                                        ENDS ENDS ENDS ENDS ENDS  ok   ok 
+        t1=  40                                        ENDS ENDS ENDS ENDS  ok   ok   ok 
+        t1=  80                                        ENDS ENDS ENDS  ok   ok   ok   ok 
+        t1= 120                                        ENDS  ok   ok   ok   ok   ok   ok 
+        t1= 149                                         ok   ok   ok   ok   ok   ok   ok 
+        t1= 151                                         ok   ok   ok   ok   ok   ok   ok 
+    default, R1 then L1, A9=False
+        t1=   5                                        ENDS ENDS ENDS ENDS ENDS ENDS  ok 
+        t1=  40                                        ENDS ENDS ENDS ENDS ENDS  ok   ok 
+        t1=  80                                        ENDS ENDS ENDS ENDS  ok   ok   ok 
+        t1= 120                                        ENDS ENDS ENDS  ok   ok   ok   ok 
+        t1= 149                                        ENDS ENDS  ok   ok   ok   ok   ok 
+        t1= 151                                         ok   ok   ok   ok   ok   ok   ok 
+    default, L1 then R1, A9=True
+        t1=   5                                        ENDS ENDS ENDS ENDS ENDS  ok   ok 
+        t1=  40                                        ENDS ENDS ENDS ENDS  ok   ok   ok 
+        t1=  80                                        ENDS ENDS ENDS  ok   ok   ok   ok 
+        t1= 120                                        ENDS  ok   ok   ok   ok   ok   ok 
+        t1= 149                                         ok   ok   ok   ok   ok   ok   ok 
+        t1= 151                                         ok   ok   ok   ok   ok   ok   ok 
+    default, L1 then R1, A9=False
+        t1=   5                                        ENDS ENDS ENDS ENDS ENDS ENDS  ok 
+        t1=  40                                        ENDS ENDS ENDS ENDS ENDS  ok   ok 
+        t1=  80                                        ENDS ENDS ENDS ENDS  ok   ok   ok 
+        t1= 120                                        ENDS ENDS ENDS  ok   ok   ok   ok 
+        t1= 149                                        ENDS ENDS  ok   ok   ok   ok   ok 
+        t1= 151                                         ok   ok   ok   ok   ok   ok   ok 
+    How long the touch can be (second bumper 30 ms after the lift, first up 40 ms later):
+           1 ms: window, `Steering` ENDS
+          30 ms: window, `Steering` ENDS
+         100 ms: window, `Steering` ENDS
+         140 ms: window, `Steering` ENDS
+         150 ms: no window, `Steering` stays
+         300 ms: no window, `Steering` stays
+         800 ms: no window, `Steering` stays
+    The stick elsewhere (R1 held, 30 ms touch, L1 down 30 ms after the lift, R1 up 40 ms later):
+        stick centre: Base > Steering > Steering | L1: S Key, down ['S'], typed ['mouse_wheel SCROLL_DOWN', 'S']
+        stick left: Base > Steering > LST: Entry Point > Steering | L1: S Key, down ['A', 'S'], typed ['mouse_wheel SCROLL_DOWN', 'A', 'S']
+    The log, default layout, L1 then R1, A9=True:
+      700 press    right_trackpad/touch
+      700 add      RTP: Entry Point
+      703 release  right_trackpad/touch
+      703 remove   RTP: Entry Point
+      703 add      RTP: Double Tap
+      703 handover S
+      703 tap      mouse_wheel SCROLL_DOWN
+      760 press    switch/right_bumper
+      760 tap      mouse_wheel SCROLL_UP
+      837 release  switch/left_bumper
+      837 remove   RTP: Double Tap
+      837 remove   Steering | L1: S Key
+      837 remove   Steering | LS Up: Modifier 1
+      837 remove   Steering | LS: Tap Cover
+      837 haptic   1 Steering joystick/dpad_north
+      837 remove   Steering
+      837 beep     Steering
+      837 add      LST: Entry Point
+      837 down     W
+      837 add      R1: Modifier 1
+     1037 add      R1: Temp Cursor Gyro
+    The log, default layout, L1 then R1, A9=False:
+      700 press    right_trackpad/touch
+      700 add      RTP: Entry Point
+      703 release  right_trackpad/touch
+      703 remove   RTP: Entry Point
+      703 add      RTP: Double Tap
+      703 handover S
+      703 tap      mouse_wheel SCROLL_DOWN
+      760 press    switch/right_bumper
+      760 tap      mouse_wheel SCROLL_UP
+      837 release  switch/left_bumper
+      837 remove   RTP: Double Tap
+      937 remove   Steering | L1: S Key
+      937 remove   Steering | LS Up: Modifier 1
+      937 remove   Steering | LS: Tap Cover
+      987 haptic   1 Steering joystick/dpad_north
+      987 remove   Steering
+      987 beep     Steering
+      987 down     W
+     1037 add      LST: Entry Point
+     1037 add      R1: Modifier 1
+
+5. A stick window. Columns: the stick back at the rim after ms     5    20    40    49    51    80
+    default     A9=True                                  stays stays stays stays stays stays
+    default     A9=False                                 ENDS  ENDS  ENDS  ENDS  stays stays
+    alternative A9=True                                  stays stays stays stays stays stays
+    alternative A9=False                                 ENDS  ENDS  ENDS  ENDS  stays stays
+
+6. Older builds, default layout: a 60 ms gap, and the right pad touch (t1 30, t2 40)
+    90.38     A9=True: gap ENDS, pad ENDS    A9=False: gap ENDS, pad ENDS
+    90.48     A9=True: gap ENDS, pad ENDS    A9=False: gap ENDS, pad ENDS
+    90.54     A9=True: gap ENDS, pad ENDS    A9=False: gap ENDS, pad ENDS
+    90.56     A9=True: gap ENDS, pad ENDS    A9=False: gap ENDS, pad ENDS
+    90.57     A9=True: gap ENDS, pad ENDS    A9=False: gap ENDS, pad ENDS
+    90.58     A9=True: gap ENDS, pad ENDS    A9=False: gap ENDS, pad ENDS
+
+7. A trial in memory, not installed: the cleanup press on the other bumper also adds that driver's layer.
+   The right pad touch then the rock, over 1,496 timings a layout (both orders, both A9, t1 1 to 193, t2 1 to 253)
+    default     90.58     `Steering` ends in 468 of 1496, 364 of them with the first bumper up inside the window
+    default     trial     `Steering` ends in 104 of 1496, 0 of them with the first bumper up inside the window
+    alternative 90.58     `Steering` ends in 468 of 1496, 364 of them with the first bumper up inside the window
+    alternative trial     `Steering` ends in 104 of 1496, 0 of them with the first bumper up inside the window

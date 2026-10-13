@@ -1,9 +1,13 @@
 """90.56: the left edge's cleanup is the press and its guard chord again in ten Steering layers; only the Entry Guard keeps a chord with Invert Activation."""
 
+# Since 90.61 the ten edges hold one chord with Invert Activation again (tests/test_scenarios_90_61.py). The scenario
+# that states when the press runs (E2) and the two shape tests run on the 90.58 candidate (`frozen`), the last build
+# with the press and its guard there. The other scenarios still describe the working layout.
+
 import unittest
 
 from steam_layout.model import EMPTY, Layout, actions, entries, map_title
-from tests.scenario import RENAME, ScenarioCase, layout_data, scenario
+from tests.scenario import RENAME, ScenarioCase, frozen_layout_data, scenario
 
 DEFLECT = 1 << 30                                         # the left stick's deflect, bit 30
 MARKER, COVER = 'Steering | LS: Tap Cover', 'Steering | LS: Double Tap Cover'
@@ -48,7 +52,7 @@ class EdgeCleanup(ScenarioCase):
             self.assertTrue(pad.has('Steering', owner) and pad.lacks(*FAMILY))
             self.assertEqual(pad.down(), [key])
 
-    @scenario('90.56 E2', rules=('R133',), rests=('A25', 'A27'), either=('A9', 'A32'))
+    @scenario('90.56 E2', rules=('R133',), rests=('A25', 'A27'), either=('A9', 'A32'), frozen='90.58')
     def test_a_missed_driver_release_clears_when_the_stick_reaches_the_edge(self):
         # The press runs when the edge goes out with no driver held. The inverted chord of 90.55 ran as it came back.
         for pad, driver, owner, _ in self.held():
@@ -100,7 +104,7 @@ class EdgeCleanup(ScenarioCase):
 class EdgeCleanupShape(unittest.TestCase):
     def each(self):
         for variant in ('default', 'alternative'):
-            layout = Layout(layout_data(variant))
+            layout = Layout(frozen_layout_data(variant, '90.58'))          # 90.61 has the inverted chord again
             yield layout, (lambda title, v=variant: map_title(title, RENAME) if v == 'alternative' else title)
 
     def test_the_ten_edges_hold_the_cleanup_press_and_its_guard_chord(self):

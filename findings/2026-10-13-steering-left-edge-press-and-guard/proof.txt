@@ -1,0 +1,68 @@
+
+default: 12000 walks at each rate of missed releases
+  90.64 and 90.65, no release missed: 11715 walks finish on both; the whole log is the same in 11714, differs in 1 (285 did not finish)
+    90.64: a layer left on after everything is let go in 21; after a thumb on each stick in 0
+    90.65: a layer left on after everything is let go in 21; after a thumb on each stick in 0
+    1 first differ with 90.64: ('release', 'right_joystick/touch')  |  90.65: ('remove', 'Steering | LS: Tap Cover')  (seed 101, walk 1237)
+  90.64 and 90.65, one release in 10 missed: 11723 walks finish on both; the whole log is the same in 11688, differs in 35 (277 did not finish)
+    90.64: a layer left on after everything is let go in 299; after a thumb on each stick in 0
+    90.65: a layer left on after everything is let go in 298; after a thumb on each stick in 0
+    5 first differ with 90.64: ('remove', 'Steering | R1: W Key')  |  90.65: ('remove', 'Steering | R1: W Key')  (seed 101, walk 1145)
+    5 first differ with 90.64: ('remove', 'Steering | L1: S Key')  |  90.65: ('remove', 'Steering | L1: S Key')  (seed 101, walk 2273)
+    3 first differ with 90.64: ('remove', 'Steering | R1: W Key')  |  90.65: ('press', 'switch/button_escape')  (seed 101, walk 541)
+    2 first differ with 90.64: ('press', 'joystick/click')  |  90.65: ('remove', 'Steering | R1: W Key')  (seed 101, walk 2147)
+    2 first differ with 90.64: ('remove', 'Steering | L1: S Key')  |  90.65: ('press', 'switch/button_menu')  (seed 102, walk 2131)
+    1 first differ with 90.64: ('release', 'right_joystick/touch')  |  90.65: ('remove', 'Steering | LS: Tap Cover')  (seed 101, walk 1237)
+    1 first differ with 90.64: ('remove', 'Steering | R1: W Key')  |  90.65: ('release', 'button_diamond/button_b')  (seed 101, walk 1997)
+    1 first differ with 90.64: ('remove', 'Steering | R1: W Key')  |  90.65: ('press', 'button_diamond/button_a')  (seed 101, walk 2991)
+    and 15 more kinds
+  no delay and 90.65, no release missed: 11715 walks finish on both; the whole log is the same in 11714, differs in 1 (285 did not finish)
+    no delay: a layer left on after everything is let go in 21; after a thumb on each stick in 0
+    90.65: a layer left on after everything is let go in 21; after a thumb on each stick in 0
+    1 first differ with no delay: ('release', 'right_joystick/touch')  |  90.65: ('remove', 'Steering | LS: Tap Cover')  (seed 101, walk 1237)
+  no delay and 90.65, one release in 10 missed: 11723 walks finish on both; the whole log is the same in 11686, differs in 37 (277 did not finish)
+    no delay: a layer left on after everything is let go in 299; after a thumb on each stick in 0
+    90.65: a layer left on after everything is let go in 298; after a thumb on each stick in 0
+    5 first differ with no delay: ('remove', 'Steering | R1: W Key')  |  90.65: ('remove', 'Steering | R1: W Key')  (seed 101, walk 1145)
+    5 first differ with no delay: ('remove', 'Steering | L1: S Key')  |  90.65: ('remove', 'Steering | L1: S Key')  (seed 101, walk 2273)
+    3 first differ with no delay: ('remove', 'Steering | R1: W Key')  |  90.65: ('press', 'switch/button_escape')  (seed 101, walk 541)
+    2 first differ with no delay: ('press', 'joystick/click')  |  90.65: ('remove', 'Steering | R1: W Key')  (seed 101, walk 2147)
+    2 first differ with no delay: ('remove', 'Steering | L1: S Key')  |  90.65: ('press', 'switch/button_menu')  (seed 102, walk 2131)
+    1 first differ with no delay: ('release', 'right_joystick/touch')  |  90.65: ('remove', 'Steering | LS: Tap Cover')  (seed 101, walk 1237)
+    1 first differ with no delay: ('remove', 'Steering | R1: W Key')  |  90.65: ('release', 'button_diamond/button_b')  (seed 101, walk 1997)
+    1 first differ with no delay: ('remove', 'Steering | R1: W Key')  |  90.65: ('press', 'button_diamond/button_a')  (seed 101, walk 2991)
+    and 17 more kinds
+
+alternative: 12000 walks at each rate of missed releases
+  90.64 and 90.65, no release missed: 12000 walks finish on both; the whole log is the same in 11999, differs in 1 (0 did not finish)
+    90.64: a layer left on after everything is let go in 23; after a thumb on each stick in 0
+    90.65: a layer left on after everything is let go in 23; after a thumb on each stick in 0
+    1 first differ with 90.64: ('release', 'right_joystick/touch')  |  90.65: ('remove', 'Steering | LS: Tap Cover')  (seed 101, walk 1237)
+  90.64 and 90.65, one release in 10 missed: 12000 walks finish on both; the whole log is the same in 11968, differs in 32 (0 did not finish)
+    90.64: a layer left on after everything is let go in 188; after a thumb on each stick in 0
+    90.65: a layer left on after everything is let go in 187; after a thumb on each stick in 0
+    5 first differ with 90.64: ('remove', 'Steering | R2: W Key')  |  90.65: ('remove', 'Steering | R2: W Key')  (seed 101, walk 1145)
+    4 first differ with 90.64: ('remove', 'Steering | L2: S Key')  |  90.65: ('remove', 'Steering | L2: S Key')  (seed 101, walk 2273)
+    2 first differ with 90.64: ('remove', 'Steering | R2: W Key')  |  90.65: ('press', 'switch/button_escape')  (seed 101, walk 541)
+    2 first differ with 90.64: ('press', 'joystick/click')  |  90.65: ('remove', 'Steering | R2: W Key')  (seed 101, walk 2147)
+    2 first differ with 90.64: ('remove', 'Steering | L2: S Key')  |  90.65: ('press', 'switch/button_menu')  (seed 102, walk 2131)
+    1 first differ with 90.64: ('release', 'right_joystick/touch')  |  90.65: ('remove', 'Steering | LS: Tap Cover')  (seed 101, walk 1237)
+    1 first differ with 90.64: ('remove', 'Steering | R2: W Key')  |  90.65: ('release', 'button_diamond/button_b')  (seed 101, walk 1997)
+    1 first differ with 90.64: ('remove', 'Steering | R2: W Key')  |  90.65: ('press', 'button_diamond/button_a')  (seed 101, walk 2991)
+    and 14 more kinds
+  no delay and 90.65, no release missed: 12000 walks finish on both; the whole log is the same in 11999, differs in 1 (0 did not finish)
+    no delay: a layer left on after everything is let go in 23; after a thumb on each stick in 0
+    90.65: a layer left on after everything is let go in 23; after a thumb on each stick in 0
+    1 first differ with no delay: ('release', 'right_joystick/touch')  |  90.65: ('remove', 'Steering | LS: Tap Cover')  (seed 101, walk 1237)
+  no delay and 90.65, one release in 10 missed: 12000 walks finish on both; the whole log is the same in 11965, differs in 35 (0 did not finish)
+    no delay: a layer left on after everything is let go in 188; after a thumb on each stick in 0
+    90.65: a layer left on after everything is let go in 187; after a thumb on each stick in 0
+    5 first differ with no delay: ('remove', 'Steering | R2: W Key')  |  90.65: ('remove', 'Steering | R2: W Key')  (seed 101, walk 1145)
+    4 first differ with no delay: ('remove', 'Steering | L2: S Key')  |  90.65: ('remove', 'Steering | L2: S Key')  (seed 101, walk 2273)
+    2 first differ with no delay: ('remove', 'Steering | R2: W Key')  |  90.65: ('press', 'switch/button_escape')  (seed 101, walk 541)
+    2 first differ with no delay: ('press', 'joystick/click')  |  90.65: ('remove', 'Steering | R2: W Key')  (seed 101, walk 2147)
+    2 first differ with no delay: ('remove', 'Steering | L2: S Key')  |  90.65: ('press', 'switch/button_menu')  (seed 102, walk 2131)
+    2 first differ with no delay: ('remove', 'Steering | L2: S Key')  |  90.65: ('down', 'E')  (seed 104, walk 934)
+    1 first differ with no delay: ('release', 'right_joystick/touch')  |  90.65: ('remove', 'Steering | LS: Tap Cover')  (seed 101, walk 1237)
+    1 first differ with no delay: ('remove', 'Steering | R2: W Key')  |  90.65: ('release', 'button_diamond/button_b')  (seed 101, walk 1997)
+    and 16 more kinds

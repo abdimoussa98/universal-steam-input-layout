@@ -49,6 +49,7 @@ stated; the ones the layout must work either way under are switches.
     A35      `default_repeat_ms`: Hold to Repeat with no stated rate uses this interval
     A37      a key handed from one binding to another at the same moment stays down (`typed`)
     A38      a stick edge is inverted only where its own group says so
+    A67      a Soft Press on an edge doesn't follow the ring's inversion, only its own setting
     A42      `hold_releases`: `hold_layer` puts a layer on, and takes it off when the activator
              that holds it ends, whoever added the layer first (False: it only puts it on)
     A43      an input with a Double Press or a Long Press beside its Regular Press (`_native`): a tap
@@ -191,10 +192,15 @@ class Simulator:
                     elif UNSUPPORTED.search(action):
                         unsupported.append(action.split(",")[0])
                 condition = chord_condition(settings) if kind == "chord" else None
+                own = settings.get("edge_binding_invert") == "1"
+                if kind == "Soft_Press":
+                    inverted = own                      # A67: a Soft Press doesn't follow the ring's setting
+                elif kind == "chord" and own:
+                    inverted = not group_inverted       # A61 on an inverted ring: the input is "released" at the rim
+                else:
+                    inverted = group_inverted or own
                 found.append(Entry((source, name), layer, kind, index, settings, tuple(ops), tuple(outputs),
-                                   tuple(taps), tuple(beeps),
-                                   group_inverted or settings.get("edge_binding_invert") == "1",
-                                   condition, tuple(unsupported)))
+                                   tuple(taps), tuple(beeps), inverted, condition, tuple(unsupported)))
             self._cache[key] = found
         return self._cache[key]
 

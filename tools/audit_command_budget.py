@@ -15,7 +15,8 @@ covered by it.
 And on a layer command on an inverted edge of a D-pad-mode stick: the stick's
 return to centre isn't caught reliably there (Layer Definition of Done,
 section 3). Inverted means the group's own `edge_binding_invert` is 1, or the
-entry's; a group that doesn't state it passes. Mouse-mode sticks are out of
+entry's; a group that doesn't state it passes. A Soft Press doesn't follow
+the group's setting, only its own (A67). Mouse-mode sticks are out of
 scope (the ramp layers' Soft Press exits work), and so is an inverted edge
 that only sends output. These are reported as `inverted_edges`.
 
@@ -189,8 +190,9 @@ def audit_layout(data, source="<memory>", native=None):
             if (input_name == "edge" and group.get("mode") == "dpad"
                     and any(o["source_state"].split(" ", 1)[0] in STICKS for o in owners[gid])):
                 for entry in enabled:
-                    if "1" in (group.get("settings", {}).get("edge_binding_invert"),
-                               entry["settings"].get("edge_binding_invert")) \
+                    # A Soft Press doesn't follow the ring's setting, only its own (A67).
+                    ring = None if entry["activation"] == "Soft_Press" else group.get("settings", {}).get("edge_binding_invert")
+                    if "1" in (ring, entry["settings"].get("edge_binding_invert")) \
                             and any(action.startswith(LAYER_COMMANDS) for action in entry["actions"]):
                         destination = accepted_inverted if allowed_inverted(entry, owners[gid], data) else inverted
                         destination.append({"group_id": gid, "input": input_name, "owners": owners[gid],

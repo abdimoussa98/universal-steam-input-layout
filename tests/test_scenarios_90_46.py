@@ -43,8 +43,10 @@ class RepeatingSteeringDrivers(ScenarioCase):
                         self.assertEqual(pad.down(), [])
 
     @scenario('90.46 E2', rules=('R114', 'R137', 'R171'),
-              rests=('A4', 'A6', 'A36', 'A54'), either=('A9', 'A32'))
+              rests=('A4', 'A6', 'A36', 'A54'), either=('A9', 'A32'), frozen='90.61')
     def test_both_fresh_and_carried_drivers_reach_mod2_in_either_order(self):
+        # On 90.61: one driver layer under Modifier 2. Since 90.62 the second driver's layer is there too
+        # (scenario 90.62 R1).
         for gyro in (False, True):
             for order in ORDERS:
                 for carried in (False, True):

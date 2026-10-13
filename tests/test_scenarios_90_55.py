@@ -278,7 +278,9 @@ class EdgeTimersShape(unittest.TestCase):
                 for name, value in layout.active(title)['joystick']['inputs'].items():
                     for kind, entry in entries(value.get('activators', {})):
                         if entry.get('settings', {}).get('delay_start'):
-                            self.assertEqual((name, kind), ('edge', 'Soft_Press'), title)
+                            # since 90.65 the edge's cleanup press starts 5 ms late; the edge owns that one too
+                            late = kind == 'Full_Press' and entry['settings']['delay_start'] == '5'
+                            self.assertEqual((name, kind), ('edge', 'Full_Press' if late else 'Soft_Press'), title)
 
     def test_the_direction_keeps_the_reset_and_the_release(self):
         for layout, _ in self.each():

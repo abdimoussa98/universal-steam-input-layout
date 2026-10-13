@@ -1,0 +1,45 @@
+{
+  "by hand": [
+    "Steering | R1: W Key: the chord on the other driver adds Steering | L1: S Key under Steering | R1!L1: Modifier 2",
+    "Steering | L1: S Key: the chord on the other driver adds Steering | R1: W Key under Steering | L1!R1: Modifier 2"
+  ],
+  "the fix pipeline added (R128)": [
+    "Steering | R1!L1: Modifier 2 / button_diamond/button_a: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / button_diamond/button_b: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / button_diamond/button_x: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / button_diamond/button_y: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / dpad/dpad_north: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / dpad/dpad_south: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / dpad/dpad_east: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / dpad/dpad_west: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / Start: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / Select: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / L3: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / joystick/edge: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / LSt: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / R3: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / RSt: adds Steering | L1: S Key",
+    "Steering | R1!L1: Modifier 2 / right_joystick/edge: adds Steering | L1: S Key",
+    "Steering | L1!R1: Modifier 2 / button_diamond/button_a: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / button_diamond/button_b: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / button_diamond/button_x: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / button_diamond/button_y: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / dpad/dpad_north: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / dpad/dpad_south: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / dpad/dpad_east: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / dpad/dpad_west: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / Start: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / Select: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / L3: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / joystick/edge: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / LSt: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / R3: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / RSt: adds Steering | R1: W Key",
+    "Steering | L1!R1: Modifier 2 / right_joystick/edge: adds Steering | R1: W Key"
+  ],
+  "removes": {
+    "90.61": 2851,
+    "by hand": 2853,
+    "90.62": 2885
+  }
+}

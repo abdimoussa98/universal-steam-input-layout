@@ -9,15 +9,18 @@ The separate [90.39 fallback-window testing candidate](../findings/2026-10-09-fa
 extends frozen 90.32 with compatible later fixes. It has 90 layers and writes
 to its findings folder, with distinctly named snapshots under
 `versions/neptune/90.39/`. It is an inactive experiment: the live release
-continues from 90.38 through 90.40–90.58. Its build/validation commands, local rules and
+continues from 90.38 through 90.40–90.58 and 90.61–90.65. Its build/validation commands, local rules and
 scenario coverage remain separate from the live layouts.
 
 ## The builder
 
 The current live builder is
-[findings/2026-10-12-removes-that-never-take-a-layer-off](../findings/2026-10-12-removes-that-never-take-a-layer-off/README.md),
-for 90.58. Since 90.49 a builder reads the snapshot of the release before it. One line does not: 90.54 reads the
-90.52 snapshot, the author's trial of one change, so 90.53 is a snapshot off the line and 90.55 continues from 90.54. A separately named testing candidate does not become the live
+[findings/2026-10-13-steering-left-edge-press-and-guard](../findings/2026-10-13-steering-left-edge-press-and-guard/README.md),
+for 90.65. Since 90.49 a builder reads the snapshot of the release before it. Two lines do not: 90.54 reads the
+90.52 snapshot, the author's trial of one change, so 90.53 is a snapshot off the line and 90.55 continues from 90.54;
+and 90.61 reads the 90.58 snapshot. 90.59 and 90.60 were two trials for the same fault that did not help; their
+files were removed (author, 2026-10-12) and the [fault's record](../findings/2026-10-12-steering-ends-on-a-stick-touch/README.md)
+says what they were. A separately named testing candidate does not become the live
 builder merely by having a newer version number.
 
 ```bash
@@ -42,6 +45,11 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.65 | [steering-left-edge-press-and-guard](../findings/2026-10-13-steering-left-edge-press-and-guard/README.md) | From 90.64. On the left stick's edge of ten Steering layers the chord with Invert Activation becomes the repeating, interruptible Regular Press and its guard chord again, with their 90.58 settings and today's lists; the press starts 5 ms late; Outer Ring Binding Invert goes off in those ten groups. Removes unchanged. The Cleanup audit reads such a press as a cleanup function with a start delay on it |
+| 90.64 | [layer-order](../findings/2026-10-12-layer-order/README.md) | From 90.63. The layer list in a new order and nothing else: the two ramp layers, the five stateful layers (`Gyro`, `Steering`, `Cursor Gyro`, `Menu Keys`, `Gamepad`), then the other layers by parent. The `Preset_` keys and preset blocks follow (R104); every layer is bind for bind what it was |
+| 90.63 | [inverted-ring-on-the-steering-left-edge](../findings/2026-10-12-inverted-ring-on-the-steering-left-edge/README.md) | From 90.62. One setting in ten groups a layout: Outer Ring Binding Invert on the left stick of the ten Steering layers whose edge holds the cleanup chord. The chord then runs with the stick at the rim and no driver held, where it ran off the rim. No bind or list changes; removes unchanged. The simulator and the Budget audit read a Soft Press by its own inversion setting (A67) |
+| 90.62 | [steering-rocking-like-the-bumper-modifiers](../findings/2026-10-12-steering-rocking-like-the-bumper-modifiers/README.md) | From 90.61. Rocking the two drivers in `Steering` follows the bumper modifiers: the second driver's press adds its layer and then Modifier 2 over it, and a Release inside Modifier 2 only removes. The hand-over add of 90.57 is gone. 34 removes more a layout: two on the second driver's Release, 32 the fix pipeline adds to Modifier 2's cleanup functions (R128) |
+| 90.61 | [inverted-chord-on-the-steering-left-edge](../findings/2026-10-12-inverted-chord-on-the-steering-left-edge/README.md) | From 90.58. One change on ten inputs a layout: on the left stick's edge of ten Steering layers the cleanup press and its guard chord become one repeating chord with Invert Activation on the same drivers, carrying the press's list command for command. For the open fault [`Steering` ends on a right stick touch](../findings/2026-10-12-steering-ends-on-a-stick-touch/README.md). 90.55 had this chord with longer lists |
 | 90.58 | [removes-that-never-take-a-layer-off](../findings/2026-10-12-removes-that-never-take-a-layer-off/README.md) | From 90.57. Only removes are taken out, none added: 1,162 in the default layout and 1,174 in the alternative that never take a layer off, by the [audit of every remove](../findings/2026-10-12-remove-list-audit/README.md). The fourteen clears name 5 to 27 layers where they named 89 (R163), `Steering`'s exit removes `Steering` alone, and no cleanup function names a layer above it that answers the same input (R132). Every log is the same as 90.57's on the simulator |
 | 90.57 | [driver-handover-and-fewer-removes](../findings/2026-10-12-driver-handover-and-fewer-removes/README.md) | From 90.56. In the two Steering Modifier 2 layers the first driver's Release hands over to the other driver's layer (R174) and the second driver's Release removes only the Modifier 2 layer: no clear, no 200 ms timer, no cover. 264 removes fewer a layout, among them 28 in the four Gyro Modifier 2 Releases; the stick windows are left as they are |
 | 90.56 | [edge-cleanup-press-and-guard](../findings/2026-10-11-edge-cleanup-press-and-guard/README.md) | From 90.55. One change: the left edge of ten Steering layers cleans up with the repeating press and its guard chord again, as in 90.54; only the Entry Guard keeps a chord with Invert Activation (A66) |

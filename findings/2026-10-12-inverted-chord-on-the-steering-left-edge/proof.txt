@@ -1,0 +1,16 @@
+
+default: 12000 walks at each rate of missed releases
+  one release in none missed: 11715 walks finish on both; the whole log is the same in 11711, differs in 4 (285 did not finish)
+    90.58: a layer left on after everything is let go in 24; after a thumb on each stick in 0
+    90.61: a layer left on after everything is let go in 20; after a thumb on each stick in 0
+  one release in 10 missed: 11723 walks finish on both; the whole log is the same in 11670, differs in 53 (277 did not finish)
+    90.58: a layer left on after everything is let go in 301; after a thumb on each stick in 0
+    90.61: a layer left on after everything is let go in 281; after a thumb on each stick in 0
+
+alternative: 12000 walks at each rate of missed releases
+  one release in none missed: 12000 walks finish on both; the whole log is the same in 11999, differs in 1 (0 did not finish)
+    90.58: a layer left on after everything is let go in 22; after a thumb on each stick in 0
+    90.61: a layer left on after everything is let go in 21; after a thumb on each stick in 0
+  one release in 10 missed: 12000 walks finish on both; the whole log is the same in 11957, differs in 43 (0 did not finish)
+    90.58: a layer left on after everything is let go in 181; after a thumb on each stick in 0
+    90.61: a layer left on after everything is let go in 174; after a thumb on each stick in 0

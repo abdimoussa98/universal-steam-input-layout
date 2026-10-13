@@ -8,6 +8,14 @@ import unittest
 from steam_layout.model import Layout, actions, entries
 from tests.scenario import ROOT, Pad, VARIANTS, frozen_layout_data, layout_data
 from tests.test_steering_entry_feedback import GUARD, commands
+from tools.convert_runtime_ids import generate_lookup, ids_to_titles
+
+
+def by_title(data):
+    """The layout with its layer commands written by title, so two builds compare whatever their layer order (90.64)."""
+    data = json.loads(data) if isinstance(data, str) else data
+    text, _ = ids_to_titles(json.dumps(data), generate_lookup(data))
+    return json.loads(text)
 
 
 @functools.lru_cache(maxsize=None)
@@ -17,7 +25,7 @@ def previous(variant):
     builder = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(builder)
     data, _ = builder.build(variant)
-    return Layout(data)
+    return Layout(by_title(data))
 
 
 def activators(layout, title):
@@ -75,7 +83,7 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
         """The working layout, or a release's stored build for a shape that later releases changed."""
         for variant in VARIANTS:
             data = frozen_layout_data(variant, frozen) if frozen else layout_data(variant)
-            yield variant, Pad(variant, data=data), Layout(data), previous(variant)
+            yield variant, Pad(variant, data=data), Layout(by_title(data)), previous(variant)
 
     def test_inverted_edge_is_one_quiet_any_driver_self_removal(self):
         for variant, _, layout, old in self.each():
@@ -94,11 +102,9 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
                 for direction in ('north', 'south', 'east', 'west'):
                     name = 'dpad_' + direction
                     self.assertEqual(group['inputs'][name], old.active(GUARD)['joystick']['inputs'][name])
-                self.assertEqual(layout.order[:-2], old.order)
-                self.assertEqual([layout.titles[key] for key in layout.order[-2:]], list(SCROLLS))
-                self.assertEqual({key: title for key, title in layout.titles.items() if title not in SCROLLS}, old.titles)
+                # The same layers and the two stick scroll layers of 90.52. Their places changed in 90.64.
+                self.assertEqual(set(layout.titles.values()) - set(SCROLLS), set(old.titles.values()))
                 self.assertEqual(len(layout.cm['action_layers']), 90)           # 88 until 90.52
-                self.assertEqual(layout.resolve('65'), GUARD)
 
     def test_mod2_releases_lose_only_the_requested_stateful_removals(self):
         # On the 90.56 build. In 90.57 a Steering Modifier 2 layer keeps one Release with one remove on its

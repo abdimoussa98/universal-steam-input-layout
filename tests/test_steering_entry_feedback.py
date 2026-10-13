@@ -27,7 +27,7 @@ class SteeringEntryAndFeedback(unittest.TestCase):
         for variant, data, layout in self.each():
             with self.subTest(variant=variant):
                 self.assertEqual(len(layout.cm['action_layers']), 90)    # 88 until the two stick scroll layers of 90.52
-                self.assertEqual(layout.resolve('65'), GUARD)
+                self.assertIn(GUARD, layout.titles.values())             # place 65 until the new order of 90.64
                 self.assertNotIn(OLD_GUARD, json.dumps(data))
                 group = layout.active(GUARD)['joystick']
                 steering = layout.active('Steering')['joystick']

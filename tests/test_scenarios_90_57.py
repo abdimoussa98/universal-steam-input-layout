@@ -5,7 +5,7 @@ import json
 import unittest
 
 from steam_layout.model import Layout, entries, map_title
-from tests.scenario import RENAME, ROOT, ScenarioCase, layout_data, scenario
+from tests.scenario import RENAME, ROOT, ScenarioCase, frozen_layout_data, layout_data, scenario
 
 BUILD = ROOT / 'findings/2026-10-12-driver-handover-and-fewer-removes'
 STEERING, GUARD = 'Steering', 'Steering | LS: Entry Guard'
@@ -49,8 +49,9 @@ class TwoDrivers(ScenarioCase):
                     self.assertTrue(pad.has(STEERING, other) and pad.lacks(own, *MODIFIER_2), direction)
                     self.assertEqual(pad.down(), [other_key])
 
-    @scenario('90.57 H2', rules=('R174',), rests=('A4', 'A7', 'A10', 'A37'), either=('A9', 'A32'))
+    @scenario('90.57 H2', rules=('R174',), rests=('A4', 'A7', 'A10', 'A37'), either=('A9', 'A32'), frozen='90.61')
     def test_rocking_the_drivers_follows_the_held_one_and_steering_stays(self):
+        # On the 90.61 build: since 90.62 the second driver's layer is on under Modifier 2 (90.62 R1).
         # R1, L1, R1 up (the S layer), R1 down (L1 first now), L1 up (the W layer), L1 down, and round again.
         for direction in (None, 'up'):
             for pad in self.each(start=('Base', STEERING)):
@@ -148,9 +149,10 @@ class TwoDrivers(ScenarioCase):
                 pad.let_go(first).wait(300)
                 self.assertEqual(pad.stack, pad.layers('Base', STEERING))
 
-    @scenario('90.57 M2', rules=('R133', 'R174'), rests=('A7', 'A17', 'A25'), either=('A9', 'A32'))
+    @scenario('90.57 M2', rules=('R133', 'R174'), rests=('A7', 'A17', 'A25'), either=('A9', 'A32'), frozen='90.58')
     def test_the_hand_over_after_a_missed_second_driver_adds_a_layer_that_a_stick_touch_clears(self):
         # The add is blind: a Release can't ask whether the other driver is held. The layer types nothing.
+        # On the 90.58 build: since 90.61 the layer's inverted edge chord clears it at once (90.61 E7).
         for first, own, _, second, other, _, modifier in ORDERS:
             for stick in ('LS', 'RS'):
                 for pad in self.each(start=('Base', STEERING)):
@@ -253,9 +255,9 @@ class Sweep(ScenarioCase):
 
 
 class Shapes(unittest.TestCase):
-    def each(self):
+    def each(self, frozen=None):
         for variant in ('default', 'alternative'):
-            layout = Layout(layout_data(variant))
+            layout = Layout(frozen_layout_data(variant, frozen) if frozen else layout_data(variant))
             yield variant, layout, (lambda title, v=variant: map_title(title, RENAME) if v == 'alternative' else title)
 
     @staticmethod
@@ -271,7 +273,8 @@ class Shapes(unittest.TestCase):
                 for kind, entry in entries(value.get('activators') or {}) for op, target in layout.layer_ops(entry)]
 
     def test_the_second_driver_has_one_release_with_one_remove_and_no_timer(self):
-        for variant, layout, name in self.each():
+        # On the 90.61 build: since 90.62 that Release also removes the second driver's layer under Modifier 2.
+        for variant, layout, name in self.each(frozen='90.61'):
             for _, _, _, second, _, _, modifier in ORDERS:
                 found = self.found(layout, name(modifier), INPUT[variant][second])
                 self.assertEqual([kind for kind, _ in found], ['release'], modifier)
@@ -284,7 +287,8 @@ class Shapes(unittest.TestCase):
 
     def test_the_first_driver_keeps_its_key_and_hands_over_with_the_add_stored_last(self):
         # R174. Stored last runs first (A4): the other driver's layer is on before either remove runs.
-        for variant, layout, name in self.each():
+        # On the 90.61 build: since 90.62 the other driver's layer is on already and the Release only removes.
+        for variant, layout, name in self.each(frozen='90.61'):
             for first, own, key, _, other, _, modifier in ORDERS:
                 found = self.found(layout, name(modifier), INPUT[variant][first])
                 self.assertEqual([kind for kind, _ in found], ['Full_Press', 'release'], modifier)

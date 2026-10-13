@@ -133,6 +133,13 @@ class CommandBudgetTests(unittest.TestCase):
         for label, result in passing.items():
             with self.subTest(label):
                 self.assertFalse(result["inverted_edges"])
+        # A Soft Press doesn't follow the ring's setting, only its own (A67).
+        soft = layout({"Soft_Press": remove})
+        soft["controller_mappings"]["group"][0].update(mode="dpad", settings={"edge_binding_invert": "1"})
+        self.assertFalse(audit_layout(soft)["inverted_edges"])
+        soft = layout({"Soft_Press": {**remove, "settings": {"edge_binding_invert": "1"}}})
+        soft["controller_mappings"]["group"][0].update(mode="dpad", settings={"edge_binding_invert": "0"})
+        self.assertEqual(audit_layout(soft)["summary"]["inverted_edges"], 1)
         pad = layout({"Full_Press": remove})
         pad["controller_mappings"]["preset"][0]["group_source_bindings"] = {"1": "left_trackpad active"}
         pad["controller_mappings"]["group"][0].update(mode="dpad", settings={"edge_binding_invert": "1"})

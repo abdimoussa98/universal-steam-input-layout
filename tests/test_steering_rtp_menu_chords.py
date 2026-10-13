@@ -137,7 +137,7 @@ class SteeringRtpMenu(unittest.TestCase):
     def test_inverted_edge_exception_rejects_changed_action_selector_repeat_or_owner(self):
         for _, data, layout in self.each():
             report = audit_layout(data)
-            self.assertEqual(len(report['allowed_inverted']), 1)
+            self.assertEqual(len(report['allowed_inverted']), 1)        # the Entry Guard's; 90.61 to 90.64 had ten left edges too
             self.assertFalse(report['inverted_edges'])
             for change in ('selector', 'repeat', 'target', 'owner'):
                 mutant = copy.deepcopy(data)

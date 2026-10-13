@@ -1,0 +1,58 @@
+{
+  "left edges that changed": {
+    "Steering | R1: W Key": 1,
+    "Steering | L1: S Key": 1,
+    "Steering | LS Up: Modifier 1": 3,
+    "Steering | LS Down: Modifier 0": 3,
+    "Steering | LS: Tap Cover": 5,
+    "Steering | LS: Double Tap Cover": 3,
+    "Steering | LS Up: Scroll Up": 3,
+    "Steering | LS Down: Scroll Down": 3,
+    "Steering | R1!L1: Modifier 2": 2,
+    "Steering | L1!R1: Modifier 2": 2
+  },
+  "removes": {
+    "90.58": 2851,
+    "90.61": 2851
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13178",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 536,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L1: Scroll Down / left_bumper",
+        "R1: Scroll Up / right_bumper",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": false
+}

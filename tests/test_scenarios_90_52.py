@@ -162,8 +162,8 @@ class StickDeflectShape(unittest.TestCase):
         for layout in self.each():
             for title in (MARKER, COVER, *(t for side in SIDES for t in (side[2], side[4]))):
                 kinds = [kind for kind, _ in self.stick(layout, title, 'edge')]
-                # the cleanup press and its guard chord (one inverted chord in 90.53 and 90.55), and since 90.55 the
-                # timer's Soft Press in the four timer layers
+                # the cleanup press and its guard chord (one inverted chord in 90.53, 90.55 and 90.61 to 90.64),
+                # and since 90.55 the timer's Soft Press in the four timer layers
                 timer = title in (side[i] for side in SIDES for i in (2, 4))
                 self.assertEqual(kinds, ['Full_Press', 'chord', 'Soft_Press'] if timer else ['Full_Press', 'chord'], title)
 
@@ -191,9 +191,13 @@ class StickDeflectShape(unittest.TestCase):
                 self.assertEqual(layout.layer_ops(reset), [('remove_layer', COVER)])
                 self.assertEqual(reset['settings'], {'hold_repeats': '1', 'repeat_rate': '200', 'interruptable': '0'})
 
-    def test_the_two_scroll_layers_are_the_last_layers(self):
+    def test_the_two_scroll_layers_follow_the_steering_double_taps(self):
+        # Appended as the last two layers in 90.52 (R103). Since the new order of 90.64 they sit in the Steering
+        # group, after the two Double Tap layers that add them.
         for layout in self.each():
-            self.assertEqual([layout.titles[key] for key in layout.order[-2:]], [side[4] for side in SIDES])
+            listed = [layout.titles[key] for key in layout.order]
+            at = listed.index(SIDES[0][4])
+            self.assertEqual(listed[at - 2:at + 2], [side[3] for side in SIDES] + [side[4] for side in SIDES])
 
 
 class HeldPadClick(ScenarioCase):

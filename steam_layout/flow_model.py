@@ -233,7 +233,10 @@ def _classify(title, source, name, kind, settings, ops, delayed_targets, has_cho
         return "expiry", "window timeout", "expiry"
     if kind == "release":
         return "release", "release", "release"
-    if _delay(settings):
+    # A repeating, interruptible Regular Press of removes stays a cleanup function with a start delay on it
+    # (90.65: 5 ms on the left edge of ten Steering layers, author 2026-10-13). No earlier build has one.
+    late_cleanup = kind == "Full_Press" and repeat and removal_only and settings.get("interruptable") != "0"
+    if _delay(settings) and not late_cleanup:
         return "hold", "successful hold (the delay completes)", "hold"
     if repeat and removal_only:
         if set(removals) <= delayed_targets:

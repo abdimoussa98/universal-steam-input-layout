@@ -886,6 +886,719 @@
       "todo": null
     },
     {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | R1: W Key"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "4",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "16777217",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | L1: S Key"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "8",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "33554434",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS Up: Modifier 1"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | LS Up: Modifier 1"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS Down: Modifier 0"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | LS Down: Modifier 0"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS: Tap Cover"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Up: Modifier 1"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Down: Modifier 0"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Tap Cover"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS: Double Tap Cover"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS: Double Tap Cover"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS Up: Scroll Up"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Up: Scroll Up"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | LS Down: Scroll Down"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | LS Down: Scroll Down"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | R1!L1: Modifier 2"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | R1!L1: Modifier 2"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | L1!R1: Modifier 2"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1!R1: Modifier 2"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | R1!L1: Modifier 2"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1!L1: Modifier 2"
+          ],
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.62: the 90.61 left-edge chord of this Modifier 2 layer with one more remove. Since 90.62 the second driver's layer is added under Modifier 2 by that driver's own press, as the bumper modifiers outside Steering do it, so every cleanup function of Modifier 2 removes it too (R128); the fix pipeline added it here. The 90.61 entry for this layer stays for the 90.61 build. 90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"go ahead and write that up. As a fix\", \"add them\", \"start building\" (plans/2026-10-12-steering-rocking-like-the-bumper-modifiers.md)",
+      "todo": null
+    },
+    {
+      "rule": "R111",
+      "scope": {
+        "layers": [
+          "Steering | L1!R1: Modifier 2"
+        ],
+        "source": "joystick",
+        "activation": "chord",
+        "operations": [
+          [
+            "remove_layer",
+            "Steering | R1: W Key"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1!R1: Modifier 2"
+          ],
+          [
+            "remove_layer",
+            "Steering | L1: S Key"
+          ]
+        ],
+        "settings": {
+          "default": {
+            "gyro_ratchet_button_mask": "12",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          },
+          "alternative": {
+            "gyro_ratchet_button_mask": "50331651",
+            "gyro_ratchet_button_requireany_or_all": "0",
+            "edge_binding_invert": "1",
+            "hold_repeats": "1",
+            "interruptable": "0",
+            "haptic_intensity": "0"
+          }
+        },
+        "command_flags": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      },
+      "status": "allow",
+      "why": "90.62: the 90.61 left-edge chord of this Modifier 2 layer with one more remove. Since 90.62 the second driver's layer is added under Modifier 2 by that driver's own press, as the bumper modifiers outside Steering do it, so every cleanup function of Modifier 2 removes it too (R128); the fix pipeline added it here. The 90.61 entry for this layer stays for the 90.61 build. 90.61, from 90.58 (2026-10-12): on the Deck the driver layer's cleanup on the left stick's edge, a repeating Regular Press held back by an empty guard chord, ran although its bumper was held, and Steering then ended (findings/2026-10-12-steering-ends-on-a-stick-touch). The author asked for one chord with Invert Activation, repeating, in its place on the left edge of the Steering layers. It runs while the stick is off the rim and no driver is held (A61), so it is the removal and its guard in one entry. Its list is the press's 90.58 list, command for command. Only this exact list, these quiet flags and these per-variant settings qualify. The same ten edges had such a chord in 90.53 and 90.55, with longer lists; 90.56 took it out on a suspicion that was never checked on the Deck (A66). A repeating chord with more than one sub-command may not fire its repeat (author, 2026-10-10); the lists are left as they are by the author's word.",
+      "decided": "Author, 2026-10-12: \"go ahead and write that up. As a fix\", \"add them\", \"start building\" (plans/2026-10-12-steering-rocking-like-the-bumper-modifiers.md)",
+      "todo": null
+    },
+    {
+      "rule": "R133",
+      "scope": {
+        "layers": [
+          "Steering | R1: W Key",
+          "Steering | L1: S Key",
+          "Steering | LS Up: Modifier 1",
+          "Steering | LS Down: Modifier 0",
+          "Steering | LS: Tap Cover",
+          "Steering | LS: Double Tap Cover",
+          "Steering | LS Up: Scroll Up",
+          "Steering | LS Down: Scroll Down",
+          "Steering | R1!L1: Modifier 2",
+          "Steering | L1!R1: Modifier 2"
+        ],
+        "inputs": [
+          "joystick/edge"
+        ],
+        "note": "one inverted chord in place of the Regular Press and its guard chord"
+      },
+      "status": "allow",
+      "why": "90.61: on the left stick's edge of these ten layers the cleanup function is one chord with Invert Activation on the layer's drivers, repeating and not interruptible. It runs while no driver is held (A61), so it is the removal and its guard in one entry. The exact chords are registered under R111; steam_layout/flow_model.py reads them as cleanup functions. 90.53 and 90.55 had the same entry; 90.56 ended it. 90.65 ended it again: the press and its guard chord are back, the press 5 ms late (author, 2026-10-13); the entry stays for the 90.61 to 90.64 builds.",
+      "decided": "Author, 2026-10-12: \"just use a single inverted chord that is repeating ... the edge cleanup bind on the left stick. And all the steering layers\" (plans/2026-10-12-inverted-chord-on-the-steering-left-edge.md)",
+      "todo": null
+    },
+    {
       "rule": "R139",
       "scope": {
         "layers": [
