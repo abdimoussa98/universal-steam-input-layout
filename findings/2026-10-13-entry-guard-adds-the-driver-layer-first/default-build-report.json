@@ -1,0 +1,46 @@
+{
+  "chords reordered": [
+    "Steering | LS: Entry Guard / switch/right_bumper: adds Steering | R1: W Key, then removes the guard",
+    "Steering | LS: Entry Guard / switch/left_bumper: adds Steering | L1: S Key, then removes the guard"
+  ],
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13178",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 536,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L1: Scroll Down / left_bumper",
+        "R1: Scroll Up / right_bumper",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": false
+}

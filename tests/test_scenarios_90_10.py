@@ -271,7 +271,8 @@ class Steering(ScenarioCase):
             self.assertFalse([t for t in pad.stack if "Modifier" in t])      # no two-modifier map
             self.assertEqual(pad.down(), ["W"])                              # driving carries on
 
-    @scenario("90.10 D8", rules=("R133",), rests=("A25",))
+    # On the 90.66 build: since 90.67 the left-edge cleanup leaves the Entry Guard, and `Steering` stays (R176).
+    @scenario("90.10 D8", rules=("R133",), rests=("A25",), frozen="90.66")
     def test_a_mapped_button_uses_up_the_tap_and_a_stuck_map_clears(self):
         for pad in self.each(start="steering"):
             pad.hold("R1").push("LS", "up").wait(60).mark().tap("A")

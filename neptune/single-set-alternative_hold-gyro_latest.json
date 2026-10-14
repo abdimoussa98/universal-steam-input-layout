@@ -2,7 +2,7 @@
 	"controller_mappings": {
 		"version": "3",
 		"revision": "12834",
-		"title": "single-set-alternative :: always-gyro :: 90.65",
+		"title": "single-set-alternative :: always-gyro :: 90.68",
 		"description": "WASD movement, gyro aiming, right-stick turn assist, and circular trackpad scrolling. L1/R1: mouse buttons; L2/R2: modifiers. Includes Fn controls, Steering, Cursor Gyro, and Gamepad modes.",
 		"creator": "76561198079670632",
 		"progenitor": "",
@@ -18122,12 +18122,12 @@
 										"controller_action remove_layer 76 0 0, , ",
 										"controller_action remove_layer 80 0 0, , ",
 										"controller_action remove_layer 81 0 0, , ",
-										"controller_action remove_layer 82 0 0, , "
+										"controller_action remove_layer 82 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"delay_start": "5"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
@@ -18257,12 +18257,12 @@
 									"binding": [
 										"controller_action remove_layer 77 0 0, , ",
 										"controller_action remove_layer 76 0 0, , ",
-										"controller_action remove_layer 87 0 0, , "
+										"controller_action remove_layer 87 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"delay_start": "5"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
@@ -27737,12 +27737,12 @@
 									"binding": [
 										"controller_action remove_layer 81 0 0, , ",
 										"controller_action remove_layer 76 0 0, , ",
-										"controller_action remove_layer 77 0 0, , "
+										"controller_action remove_layer 77 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"delay_start": "5"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
@@ -27941,12 +27941,12 @@
 									"binding": [
 										"controller_action remove_layer 80 0 0, , ",
 										"controller_action remove_layer 76 0 0, , ",
-										"controller_action remove_layer 77 0 0, , "
+										"controller_action remove_layer 77 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"delay_start": "5"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
@@ -28117,12 +28117,12 @@
 									"binding": [
 										"controller_action remove_layer 77 0 0, , ",
 										"controller_action remove_layer 78 0 0, , ",
-										"controller_action remove_layer 76 0 0, , "
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"delay_start": "5"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
@@ -28282,12 +28282,12 @@
 									"binding": [
 										"controller_action remove_layer 76 0 0, , ",
 										"controller_action remove_layer 79 0 0, , ",
-										"controller_action remove_layer 77 0 0, , "
+										"controller_action remove_layer 77 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"delay_start": "5"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
@@ -28425,12 +28425,14 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 76 0 0, , "
+									"binding": [
+										"controller_action remove_layer 76 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
+									]
 								},
 								"settings": {
 									"hold_repeats": "1",
-									"haptic_intensity": "0",
-									"delay_start": "5"
+									"haptic_intensity": "0"
 								}
 							},
 							"chord": {
@@ -28647,12 +28649,14 @@
 						"activators": {
 							"Full_Press": {
 								"bindings": {
-									"binding": "controller_action remove_layer 77 0 0, , "
+									"binding": [
+										"controller_action remove_layer 77 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
+									]
 								},
 								"settings": {
 									"hold_repeats": "1",
-									"haptic_intensity": "0",
-									"delay_start": "5"
+									"haptic_intensity": "0"
 								}
 							},
 							"chord": {
@@ -36436,8 +36440,8 @@
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 77 0 0, , ",
-										"controller_action remove_layer 75 0 0, , "
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action add_layer 77 0 0, , "
 									]
 								},
 								"settings": {
@@ -36470,8 +36474,8 @@
 							"chord": {
 								"bindings": {
 									"binding": [
-										"controller_action add_layer 76 0 0, , ",
-										"controller_action remove_layer 75 0 0, , "
+										"controller_action remove_layer 75 0 0, , ",
+										"controller_action add_layer 76 0 0, , "
 									]
 								},
 								"settings": {
@@ -36691,12 +36695,12 @@
 									"binding": [
 										"controller_action remove_layer 77 0 0, , ",
 										"controller_action remove_layer 76 0 0, , ",
-										"controller_action remove_layer 85 0 0, , "
+										"controller_action remove_layer 85 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"delay_start": "5"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {
@@ -36884,12 +36888,12 @@
 									"binding": [
 										"controller_action remove_layer 77 0 0, , ",
 										"controller_action remove_layer 76 0 0, , ",
-										"controller_action remove_layer 86 0 0, , "
+										"controller_action remove_layer 86 0 0, , ",
+										"controller_action add_layer 75 0 0, , "
 									]
 								},
 								"settings": {
-									"hold_repeats": "1",
-									"delay_start": "5"
+									"hold_repeats": "1"
 								}
 							},
 							"chord": {

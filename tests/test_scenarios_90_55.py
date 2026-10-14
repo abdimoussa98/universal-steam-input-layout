@@ -278,7 +278,7 @@ class EdgeTimersShape(unittest.TestCase):
                 for name, value in layout.active(title)['joystick']['inputs'].items():
                     for kind, entry in entries(value.get('activators', {})):
                         if entry.get('settings', {}).get('delay_start'):
-                            # since 90.65 the edge's cleanup press starts 5 ms late; the edge owns that one too
+                            # on 90.65 the edge's cleanup press started 5 ms late; the edge owned that one too
                             late = kind == 'Full_Press' and entry['settings']['delay_start'] == '5'
                             self.assertEqual((name, kind), ('edge', 'Full_Press' if late else 'Soft_Press'), title)
 

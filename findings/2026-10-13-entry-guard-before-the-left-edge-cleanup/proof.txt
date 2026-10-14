@@ -1,0 +1,28 @@
+
+default: 12000 walks at each rate of missed releases
+  one release in none missed
+    against 90.66: 11715 walks finish on both; the whole log is the same in 11458, differs in 257 (285 did not finish)
+    against no add: 11715 walks finish on both; the whole log is the same in 11714, differs in 1 (285 did not finish)
+    90.66: 11715 walks finish; a layer left on after everything is let go in 21; after a thumb on each stick in 0
+    no add: 11715 walks finish; a layer left on after everything is let go in 21; after a thumb on each stick in 0
+    90.67: 11715 walks finish; a layer left on after everything is let go in 21; after a thumb on each stick in 0
+  one release in 10 missed
+    against 90.66: 11721 walks finish on both; the whole log is the same in 11442, differs in 279 (279 did not finish)
+    against no add: 11722 walks finish on both; the whole log is the same in 11680, differs in 42 (278 did not finish)
+    90.66: 11722 walks finish; a layer left on after everything is let go in 299; after a thumb on each stick in 0
+    no add: 11723 walks finish; a layer left on after everything is let go in 299; after a thumb on each stick in 0
+    90.67: 11723 walks finish; a layer left on after everything is let go in 299; after a thumb on each stick in 0
+
+alternative: 12000 walks at each rate of missed releases
+  one release in none missed
+    against 90.66: 12000 walks finish on both; the whole log is the same in 11748, differs in 252 (0 did not finish)
+    against no add: 12000 walks finish on both; the whole log is the same in 11999, differs in 1 (0 did not finish)
+    90.66: 12000 walks finish; a layer left on after everything is let go in 23; after a thumb on each stick in 0
+    no add: 12000 walks finish; a layer left on after everything is let go in 23; after a thumb on each stick in 0
+    90.67: 12000 walks finish; a layer left on after everything is let go in 23; after a thumb on each stick in 0
+  one release in 10 missed
+    against 90.66: 12000 walks finish on both; the whole log is the same in 11731, differs in 269 (0 did not finish)
+    against no add: 12000 walks finish on both; the whole log is the same in 11961, differs in 39 (0 did not finish)
+    90.66: 12000 walks finish; a layer left on after everything is let go in 188; after a thumb on each stick in 0
+    no add: 12000 walks finish; a layer left on after everything is let go in 188; after a thumb on each stick in 0
+    90.67: 12000 walks finish; a layer left on after everything is let go in 189; after a thumb on each stick in 0

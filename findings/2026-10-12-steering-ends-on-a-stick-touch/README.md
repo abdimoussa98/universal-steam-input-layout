@@ -1,8 +1,8 @@
 # `Steering` ends on a right stick touch with a bumper held
 
 The record of a Deck fault found on 2026-10-12 on **90.58**: what was tried,
-what each try showed, and how it led to **90.61**, **90.63** and **90.65**. The
-fault is still open: none of the three has a Deck result on record.
+what each try showed, and how it led to **90.61**, **90.63**, **90.65**, **90.66**, **90.67** and **90.68**.
+The cause is confirmed (A69). 90.68 has not run on the Deck.
 
 Everything under "on the Deck" is the author's own testing. The simulator
 never reproduced the fault at any point.
@@ -71,6 +71,10 @@ Why the guard does not hold is not known.
 | 17 | **Built 90.61:** one inverted chord in place of the press and guard on the left edge of ten Steering layers | Not yet on the Deck | |
 | 18 | **Built 90.63** (from 90.62): the ring inverted on those ten left edges, so the chord runs at the rim with no driver held | Not yet on the Deck | |
 | 19 | **Built 90.65** (from 90.64): the press and its guard chord back on those ten edges, on a normal ring, the press 5 ms late | Not yet on the Deck | The bind the fault happened on, plus the delay |
+| 20 | **The author, on the Deck:** spamming `remove_layer` makes a chord evaluate again, and an evaluation can fail | Confirmed | A69. The guard cannot be made safe |
+| 21 | **Built 90.66** (from 90.65): each driver in `Steering` mode-shifts the left stick to a group with empty up and down; the 5 ms is off | Not yet on the Deck | The leak may still happen; it no longer ends `Steering` if A70 holds |
+| 22 | **Built 90.67** (from 90.66, the author's change of mind the same day): the mode shift is out; each of the ten left-edge cleanup presses adds `Steering \| LS: Entry Guard` before it removes | Not yet on the Deck | The leak may still happen; what it leaves on top is the Entry Guard, whose driver chord puts the driver's layer back |
+| 23 | **Built 90.68** (from 90.67): in the Entry Guard each driver's chord adds the driver's layer first, then removes the guard | Not yet on the Deck | `Steering` is not the top layer between the two commands |
 
 ## What was learned
 
@@ -114,13 +118,21 @@ sends the removes.
 
 ## Still open
 
-- **Why the guard misses the held bumper.** Not known.
+- **Why the guard misses the held bumper: answered.** The author, on the
+  Deck, 2026-10-13: a `remove_layer` call makes a chord evaluate again, and
+  in a burst of them an evaluation can fail, so the interruptible press
+  beside it runs (A69). Rare. No guard chord can be made safe against it, so
+  the [plan](../../plans/2026-10-13-steering-mode-shift-on-the-drivers.md)
+  takes away what the leak costs: `Steering`'s exit on up and down while a
+  driver is held.
 - **Whether an inverted chord misses it too** (A66). The chord asks "is no
   bumper held?" itself. On 90.61 and 90.62 it is live whenever the stick is
   off the rim; on 90.63 and 90.64 only at the rim, where the fault happened.
   Since 90.65 no chord is there to ask.
-- **Whether 5 ms is enough for the guard** (A68). 90.65 has the press of
-  90.58 again, which ran past its guard on the Deck, now 5 ms late.
+- **What a mode shift in a layer does on the Deck** (A70). 90.66 rested
+  on it; 90.67 has no mode shift and does not.
+- **Whether the Entry Guard holds at the rim** (A61) and its driver chord
+  runs on a driver that is already held. 90.67 rests on both.
 - **The stick touches of the driver layers** keep the press and guard. They
   are pressed far less often than the edge.
 
@@ -150,6 +162,15 @@ driver held, where the press ran, and nowhere else.
 [90.65](../2026-10-13-steering-left-edge-press-and-guard/README.md) goes
 back to the press and its guard on a normal ring, and starts the press 5 ms
 late (author, 2026-10-13).
+
+[90.66](../2026-10-13-steering-mode-shift-on-the-drivers/README.md) takes
+the 5 ms off and leaves the leak alone: while a driver is held, `Steering`'s
+up and down are empty binds by a mode shift (R175).
+
+[90.67](../2026-10-13-entry-guard-before-the-left-edge-cleanup/README.md)
+takes the mode shift out again and still leaves the leak alone: each of the
+ten left-edge cleanup presses adds the Entry Guard before it removes, so a
+press that runs past its guard leaves that guard answering the stick (R176).
 
 A related fault is with another session:
 [`Steering` ends while rocking L1 and R1](../2026-10-12-steering-ends-while-rocking/README.md).

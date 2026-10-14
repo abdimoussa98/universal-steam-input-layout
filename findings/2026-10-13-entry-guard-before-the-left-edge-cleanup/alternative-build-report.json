@@ -1,0 +1,67 @@
+{
+  "the mode-shift group deleted": "13373",
+  "drivers": [
+    "Steering / R2 (right_trigger/edge): the mode shift to group 13373 is gone",
+    "Steering / L2 (left_trigger/edge): the mode shift to group 13373 is gone"
+  ],
+  "the Entry Guard added first on": [
+    "Steering | R2: W Key: 1 remove(s), then the add stored last",
+    "Steering | L2: S Key: 1 remove(s), then the add stored last",
+    "Steering | LS Up: Modifier 1: 3 remove(s), then the add stored last",
+    "Steering | LS Down: Modifier 0: 3 remove(s), then the add stored last",
+    "Steering | LS: Tap Cover: 5 remove(s), then the add stored last",
+    "Steering | LS: Double Tap Cover: 3 remove(s), then the add stored last",
+    "Steering | LS Up: Scroll Up: 3 remove(s), then the add stored last",
+    "Steering | LS Down: Scroll Down: 3 remove(s), then the add stored last",
+    "Steering | R2!L2: Modifier 2: 3 remove(s), then the add stored last",
+    "Steering | L2!R2: Modifier 2: 3 remove(s), then the add stored last"
+  ],
+  "removes": {
+    "90.66": 2943,
+    "90.67": 2943
+  },
+  "adds": {
+    "90.66": 370,
+    "90.67": 380
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 554,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": false
+}

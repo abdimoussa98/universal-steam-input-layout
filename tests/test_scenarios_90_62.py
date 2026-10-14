@@ -65,7 +65,8 @@ class Shapes(unittest.TestCase):
                          if kind in ('Full_Press', 'chord') and any(isinstance(op, tuple) and op == ('remove_layer', name(modifier)) for op in ops)]
                 self.assertEqual(len(found), 16, modifier)
                 for ops in found:
-                    self.assertEqual({target for _, target in ops}, {name(modifier), name(W), name(S)}, modifier)
+                    # 90.67: the left edge's press also adds the Entry Guard (R176)
+                    self.assertEqual({target for op, target in ops if op == 'remove_layer'}, {name(modifier), name(W), name(S)}, modifier)
 
     def test_against_90_61_only_the_two_driver_layers_and_the_two_modifier_2_layers_change(self):
         for variant in VARIANTS:

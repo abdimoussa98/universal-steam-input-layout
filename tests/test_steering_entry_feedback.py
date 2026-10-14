@@ -60,8 +60,8 @@ class SteeringEntryAndFeedback(unittest.TestCase):
                     entry = layout.active(owner)[source]['inputs'][name]['activators']['chord']
                     ops = commands(layout, entry)
                     expected = [('add_layer', pad.title(target), '0', '0')]
-                    if owner == GUARD:
-                        expected.insert(0, ('remove_layer', GUARD, '0', '0'))
+                    if owner == GUARD:                  # since 90.68 the add runs first, then the guard goes (R137)
+                        expected.append(('remove_layer', GUARD, '0', '0'))
                     self.assertEqual(ops, expected)
                     self.assertEqual(entry['settings']['hold_repeats'], '1')
                     self.assertEqual(entry['settings']['repeat_rate'], '50')

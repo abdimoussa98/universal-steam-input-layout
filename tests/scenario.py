@@ -132,7 +132,10 @@ def frozen_layout_data(variant, version):
                   '90.62': 'findings/2026-10-12-steering-rocking-like-the-bumper-modifiers',
                   '90.63': 'findings/2026-10-12-inverted-ring-on-the-steering-left-edge',
                   '90.64': 'findings/2026-10-12-layer-order',
-                  '90.65': 'findings/2026-10-13-steering-left-edge-press-and-guard'}
+                  '90.65': 'findings/2026-10-13-steering-left-edge-press-and-guard',
+                  '90.66': 'findings/2026-10-13-steering-mode-shift-on-the-drivers',
+                  '90.67': 'findings/2026-10-13-entry-guard-before-the-left-edge-cleanup',
+                  '90.68': 'findings/2026-10-13-entry-guard-adds-the-driver-layer-first'}
     key = version, variant
     if key not in _frozen_layouts:
         if version in candidates:

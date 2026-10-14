@@ -1,0 +1,64 @@
+{
+  "the mode-shift group": "13373",
+  "drivers": [
+    "Steering / R2 (right_trigger/edge): mode shift of the left stick to group 13373",
+    "Steering / L2 (left_trigger/edge): mode shift of the left stick to group 13373"
+  ],
+  "start delay taken off the left edge of": [
+    "Steering | R2: W Key",
+    "Steering | L2: S Key",
+    "Steering | LS Up: Modifier 1",
+    "Steering | LS Down: Modifier 0",
+    "Steering | LS: Tap Cover",
+    "Steering | LS: Double Tap Cover",
+    "Steering | LS Up: Scroll Up",
+    "Steering | LS Down: Scroll Down",
+    "Steering | R2!L2: Modifier 2",
+    "Steering | L2!R2: Modifier 2"
+  ],
+  "removes": {
+    "90.65": 2943,
+    "90.66": 2943
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 555,
+      "mode_shift_targets": [
+        "1039",
+        "1043",
+        "13373"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": false
+}

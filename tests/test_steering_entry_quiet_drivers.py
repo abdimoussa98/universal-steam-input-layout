@@ -214,8 +214,8 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
                     expected_ops = [
                         ('add_layer', pad.title('Steering | R1: W Key' if (source, name) == pad.control('R1')
                                                else 'Steering | L1: S Key'))]
-                    if title == GUARD:
-                        expected_ops.insert(0, ('remove_layer', GUARD))
+                    if title == GUARD:                  # since 90.68 the add runs first, then the guard goes (R137)
+                        expected_ops.append(('remove_layer', GUARD))
                     self.assertEqual(layout.layer_ops(current), expected_ops)
                     expected_mask = ('4' if (source, name) == pad.control('R1') else '8') if variant == 'default' \
                         else ('16777217' if (source, name) == pad.control('R1') else '33554434')

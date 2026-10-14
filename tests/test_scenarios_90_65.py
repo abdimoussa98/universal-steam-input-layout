@@ -10,12 +10,15 @@ ring is a normal ring again, so the press runs with the stick at the rim and no 
 
 The simulator never misses a held driver, so nothing here shows the Deck fault of 90.58 fixed
 (findings/2026-10-12-steering-ends-on-a-stick-touch).
+
+90.66 took the 5 ms off again (tests/test_scenarios_90_66.py): the shape tests and the two scenarios that state
+the delay (P2, P3) run on the 90.65 build.
 """
 
 import unittest
 
 from steam_layout.model import EMPTY, Layout, actions, entries
-from tests.scenario import VARIANTS, ScenarioCase, frozen_layout_data, layout_data, scenario
+from tests.scenario import VARIANTS, ScenarioCase, frozen_layout_data, scenario
 from tests.test_scenarios_90_55 import DRIVERS, EDGE_CHORDS, FAMILY, SIDES, TIMERS
 from tests.test_scenarios_90_61 import GUARD, inputs, named
 
@@ -42,12 +45,11 @@ class OnlyTheTenEdgesChange(unittest.TestCase):
             for title, source in differ:
                 x, y = old.active(title)[source]['settings'], new.active(title)[source]['settings']
                 self.assertEqual({k for k in x if x[k] != y[k]}, {'edge_binding_invert'}, title)
-            self.assertEqual(inputs(Layout(layout_data(variant))), b, variant)           # what is installed
 
     def test_each_press_carries_the_list_the_chord_had_on_90_64_command_for_command(self):
         for variant in VARIANTS:
             name = named(variant)
-            old, new = Layout(frozen_layout_data(variant, '90.64')), Layout(layout_data(variant))
+            old, new = Layout(frozen_layout_data(variant, '90.64')), Layout(frozen_layout_data(variant, '90.65'))
             for title in EDGE_CHORDS:
                 (_, chord), *_ = edge(old, name(title))
                 (_, press), (_, guard), *_ = edge(new, name(title))
@@ -58,7 +60,7 @@ class OnlyTheTenEdgesChange(unittest.TestCase):
         timers = {layer for layer, *_ in TIMERS}
         for variant in VARIANTS:
             name = named(variant)
-            old, new = Layout(frozen_layout_data(variant, '90.58')), Layout(layout_data(variant))
+            old, new = Layout(frozen_layout_data(variant, '90.58')), Layout(frozen_layout_data(variant, '90.65'))
             for title in EDGE_CHORDS:
                 found = edge(new, name(title))
                 self.assertEqual([kind for kind, _ in found],
@@ -78,7 +80,7 @@ class OnlyTheTenEdgesChange(unittest.TestCase):
 
     def test_no_steering_layer_has_an_inverted_ring_and_only_the_entry_guard_an_inverted_chord(self):
         for variant in VARIANTS:
-            layout = Layout(layout_data(variant))
+            layout = Layout(frozen_layout_data(variant, '90.65'))
             steering = [t for t in layout.presets if t.startswith('Steering') and 'joystick' in layout.active(t)]
             self.assertFalse([t for t in steering if layout.active(t)['joystick'].get('settings', {}).get('edge_binding_invert') == '1'])
             found = {(title, source, control) for title in layout.presets
@@ -90,7 +92,7 @@ class OnlyTheTenEdgesChange(unittest.TestCase):
 
     def test_the_5_ms_press_is_the_only_delayed_regular_press_on_a_steering_stick(self):
         for variant in VARIANTS:
-            layout, name = Layout(layout_data(variant)), named(variant)
+            layout, name = Layout(frozen_layout_data(variant, '90.65')), named(variant)
             found = {title for title in layout.presets if title.startswith('Steering') and 'joystick' in layout.active(title)
                      for control, value in layout.active(title)['joystick']['inputs'].items()
                      for kind, entry in entries(value.get('activators', {}))
@@ -123,7 +125,7 @@ class EdgeCleanupLate(ScenarioCase):
             self.assertTrue(pad.has('Steering', owner) and pad.lacks(*FAMILY))
             self.assertEqual(pad.down(), [key])
 
-    @scenario('90.65 P2', rules=('R133',), rests=('A25', 'A27', 'A68'), either=('A9', 'A32'))
+    @scenario('90.65 P2', rules=('R133',), rests=('A25', 'A27', 'A68'), either=('A9', 'A32'), frozen='90.65')
     def test_a_missed_driver_release_clears_5_ms_after_the_stick_reaches_the_rim(self):
         for pad, driver, owner, _ in self.held():
             pad.miss(driver).wait(400)
@@ -135,7 +137,7 @@ class EdgeCleanupLate(ScenarioCase):
             pad.let_go('LS edge').wait(100)
             self.assertEqual(pad.down(), [])
 
-    @scenario('90.65 P3', rules=('R133',), rests=('A25', 'A27', 'A68'), either=('A9', 'A32'))
+    @scenario('90.65 P3', rules=('R133',), rests=('A25', 'A27', 'A68'), either=('A9', 'A32'), frozen='90.65')
     def test_a_stick_back_off_the_rim_inside_5_ms_leaves_the_layer_for_the_next_reach(self):
         for pad, driver, owner, _ in self.held():
             pad.miss(driver).wait(400)

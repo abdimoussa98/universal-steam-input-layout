@@ -1,0 +1,12 @@
+Changes from single-set-default_hold-gyro_90.67.json to single-set-default_hold-gyro_latest.json
+Layers: 90 -> 90 (added: none; removed: none)
+
+== Steering | LS: Entry Guard
+  switch/left_bumper: binding
+    before: chord(gyro_ratchet_button_mask=8,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): remove_layer Steering | LS: Entry Guard ; add_layer Steering | L1: S Key
+    after:  chord(gyro_ratchet_button_mask=8,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Steering | L1: S Key ; remove_layer Steering | LS: Entry Guard
+  switch/right_bumper: binding
+    before: chord(gyro_ratchet_button_mask=4,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): remove_layer Steering | LS: Entry Guard ; add_layer Steering | R1: W Key
+    after:  chord(gyro_ratchet_button_mask=4,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1,interruptable=0,repeat_rate=50): add_layer Steering | R1: W Key ; remove_layer Steering | LS: Entry Guard
+
+1 layer changed, 2 changes

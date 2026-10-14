@@ -70,7 +70,7 @@ import copy
 import re
 
 from .flow_model import chord_condition, resolve
-from .model import TARGET, Layout, actions, entries
+from .model import MODE_SHIFT, TARGET, Layout, actions, entries
 
 ALWAYS_ON = "always_on_action"
 LEVEL = re.compile(r"(key_press|mouse_button|xinput_button) ([^,\s]+)")
@@ -151,8 +151,9 @@ class Simulator:
         self.between = set()            # held controls that are also inside an inverted range (`press_between`)
         self.acts = {}                  # (control, phase, kind, index) -> Act
         self.pressed_at = {}            # control -> when its last first press was (for a Double Press, A43)
-        self.bound = {}                 # (control, phase) -> the layer whose binding is established there
+        self.bound = {}                 # (control, phase) -> the (layer, mode-shift group) established there
         self._cache, self._order = {}, 0
+        self._shifts = self._mode_shifts()
         self._inverted = self._inverted_controls()
         self._rebind()
         self._drain()
@@ -169,10 +170,41 @@ class Simulator:
                         found.add((source, name))
         return found
 
-    def _entries_of(self, layer, source, name):
-        key = (layer, source, name)
+    def _mode_shifts(self):
+        """{(layer, control): (source, group id)}: a Regular Press in an action layer that mode-shifts a source.
+
+        While that layer answers the held control, the layer's own group for the source is swapped for the
+        target group (A34, A70). A layer above with its own group for the source is not reached. The Base
+        set's mode shifts stay unsupported.
+        """
+        found = {}
+        for title in self.layout.presets:
+            if title == self.base:
+                continue
+            for source, group in self.layout.active(title).items():
+                for name, value in group.get("inputs", {}).items():
+                    for kind, raw in entries(value.get("activators", {})):
+                        for action in actions(raw):
+                            shift = MODE_SHIFT.search(action)
+                            if shift and kind == "Full_Press" and shift.group(2) in self.layout.groups:
+                                found[(title, (source, name))] = (shift.group(1), shift.group(2))
+        return found
+
+    def _shifted(self, layer, source):
+        """The group id that a held mode shift of `layer` puts in place of its `source` group, or None."""
+        for (owner, control), (target, gid) in self._shifts.items():
+            if owner == layer and target == source and control[0] != source and control in self.held \
+                    and resolve(self.layout, self.stack, *control)[1] == layer:
+                return gid
+        return None
+
+    def _entries_of(self, layer, source, name, gid=None):
+        key = (layer, source, name, gid)
         if key not in self._cache:
-            group = self.layout.active(layer)[source]
+            group = self.layout.groups[gid] if gid else self.layout.active(layer)[source]
+            if name not in group.get("inputs", {}):
+                self._cache[key] = []
+                return self._cache[key]
             group_inverted = name == "edge" and (group.get("settings") or {}).get("edge_binding_invert") == "1"
             found = []
             for index, (kind, raw) in enumerate(entries(group["inputs"][name].get("activators", {}))):
@@ -189,7 +221,7 @@ class Simulator:
                         outputs.append(" ".join(LEVEL.search(action).groups()).replace("key_press ", ""))
                     elif MOMENTARY.search(action):
                         taps.append(" ".join(MOMENTARY.search(action).groups()))
-                    elif UNSUPPORTED.search(action):
+                    elif UNSUPPORTED.search(action) and (layer, (source, name)) not in self._shifts:
                         unsupported.append(action.split(",")[0])
                 condition = chord_condition(settings) if kind == "chord" else None
                 own = settings.get("edge_binding_invert") == "1"
@@ -209,7 +241,12 @@ class Simulator:
         kind, layer, _, _ = resolve(self.layout, self.stack, *control)
         if kind != "binding":
             return (layer if kind in ("mode", "disabled") else None), []
-        return layer, self._entries_of(layer, *control)
+        return layer, self._entries_of(layer, *control, self._shifted(layer, control[0]))
+
+    def _answer(self, control):
+        """What answers `control` now: the layer, and the mode-shift group in place of its own if one is held."""
+        layer, _ = self.binding(control)
+        return layer, (self._shifted(layer, control[0]) if layer else None)
 
     def gyro_disabled(self):
         """True if the topmost gyro group on the stack is a disabled one."""
@@ -332,6 +369,20 @@ class Simulator:
         self._drain()
         return self
 
+    def drop(self, *titles):
+        """Layers taken off at once by something the simulator never does itself: a cleanup that ran past its
+        guard (A69)."""
+        if any(title not in self.stack or title == self.base for title in titles):
+            raise ValueError(f"not on the stack: {titles}")
+        before = self.stack
+        self.stack = tuple(t for t in self.stack if t not in titles)
+        for title in titles:
+            self._note("remove", title)
+        self._reset(list(titles))
+        self._rebind(before)
+        self._drain()
+        return self
+
     def wait(self, ms):
         end = self.now + ms
         while True:
@@ -380,7 +431,7 @@ class Simulator:
     def _establish(self, control, phase, mode):
         """The binding that answers `control` starts answering it: decide which of its activators are live."""
         layer, found = self.binding(control)
-        self.bound[(control, phase)] = layer
+        self.bound[(control, phase)] = self._answer(control)
         if control in self.between:                     # between two ranges: a normal Soft Press that starts at or
             inner = [_threshold(e) for e in found if e.kind == "Soft_Press" and e.inverted]      # past the inverted
             found = [e for e in found if not (inner and e.kind == "Soft_Press" and not e.inverted  # one's edge
@@ -519,10 +570,14 @@ class Simulator:
         live = self._live()
         for control, phase in [pair for pair in self.bound if pair not in live]:
             self._end(control, phase)
-        for control, phase in sorted(live):
-            layer, _ = self.binding(control)
-            if (control, phase) in self.bound and self.bound[(control, phase)] == layer:
+        for control, phase in sorted(live):       # a held mode shift is read off the stack, so it is on first (A70)
+            answer = self._answer(control)
+            layer = answer[0]
+            if (control, phase) in self.bound and self.bound[(control, phase)] == answer:
                 continue
+            was = self.bound.get((control, phase))
             self._end(control, phase, handover=True)
-            how = "pressed" if control[1] == ALWAYS_ON else ("exposed" if layer in before else "landed")
+            swapped = was is not None and was[0] == layer            # the same layer, a mode shift went on or off
+            how = "pressed" if control[1] == ALWAYS_ON else (
+                ("landed" if answer[1] else "exposed") if swapped else "exposed" if layer in before else "landed")
             self._establish(control, phase, how)

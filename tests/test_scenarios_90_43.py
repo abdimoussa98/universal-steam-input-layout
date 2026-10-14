@@ -249,7 +249,8 @@ class SteeringModifierRecovery(ScenarioCase):
                     pad.lift('RS').lift('LS').wait(400)
                     self.assertEqual(pad.stack, pad.layers(*home(gyro), 'Steering'))
 
-    @scenario('90.43 D4', rules=('R133', 'R170', 'R171'), rests=('A6', 'A25', 'A49', 'A53'), either=('A9', 'A32'))
+    # On the 90.66 build: since 90.67 the left-edge cleanup leaves the Entry Guard, and `Steering` stays (R176).
+    @scenario('90.43 D4', rules=('R133', 'R170', 'R171'), rests=('A6', 'A25', 'A49', 'A53'), either=('A9', 'A32'), frozen='90.66')
     def test_full_held_movement_cannot_reapply_a_modifier_over_a_stale_driver(self):
         # Recovery must also terminate with LS still out. Otherwise the
         # exposed stale driver's repeating direction can re-add the modifier
@@ -272,7 +273,8 @@ class SteeringModifierRecovery(ScenarioCase):
                             pad.let_go(control).lift('LS').lift('RS').wait(400)
                             self.assertEqual(pad.stack, pad.layers(*home(gyro)))
 
-    @scenario('90.43 D5', rules=('R133', 'R169'), rests=('A6', 'A16', 'A25', 'A49', 'A53'), either=('A9', 'A32'))
+    # On the 90.66 build: since 90.67 the left-edge cleanup leaves the Entry Guard, and `Steering` stays (R176).
+    @scenario('90.43 D5', rules=('R133', 'R169'), rests=('A6', 'A16', 'A25', 'A49', 'A53'), either=('A9', 'A32'), frozen='90.66')
     def test_a_scroll_cover_keeps_its_held_output_and_recovers_a_missed_driver_release(self):
         for driver, owner in DRIVERS.items():
             for direction in MODIFIERS:

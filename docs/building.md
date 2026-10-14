@@ -9,14 +9,14 @@ The separate [90.39 fallback-window testing candidate](../findings/2026-10-09-fa
 extends frozen 90.32 with compatible later fixes. It has 90 layers and writes
 to its findings folder, with distinctly named snapshots under
 `versions/neptune/90.39/`. It is an inactive experiment: the live release
-continues from 90.38 through 90.40–90.58 and 90.61–90.65. Its build/validation commands, local rules and
+continues from 90.38 through 90.40–90.58 and 90.61–90.68. Its build/validation commands, local rules and
 scenario coverage remain separate from the live layouts.
 
 ## The builder
 
 The current live builder is
-[findings/2026-10-13-steering-left-edge-press-and-guard](../findings/2026-10-13-steering-left-edge-press-and-guard/README.md),
-for 90.65. Since 90.49 a builder reads the snapshot of the release before it. Two lines do not: 90.54 reads the
+[findings/2026-10-13-entry-guard-adds-the-driver-layer-first](../findings/2026-10-13-entry-guard-adds-the-driver-layer-first/README.md),
+for 90.68. Since 90.49 a builder reads the snapshot of the release before it. Two lines do not: 90.54 reads the
 90.52 snapshot, the author's trial of one change, so 90.53 is a snapshot off the line and 90.55 continues from 90.54;
 and 90.61 reads the 90.58 snapshot. 90.59 and 90.60 were two trials for the same fault that did not help; their
 files were removed (author, 2026-10-12) and the [fault's record](../findings/2026-10-12-steering-ends-on-a-stick-touch/README.md)
@@ -45,6 +45,9 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.68 | [entry-guard-adds-the-driver-layer-first](../findings/2026-10-13-entry-guard-adds-the-driver-layer-first/README.md) | From 90.67. One change on two inputs a layout: in `Steering \| LS: Entry Guard` each driver's chord runs its add of the driver's layer first and the guard's removal second (R137), so `Steering` is never the top layer between the two. The two commands swap places; no bind, setting or count changes |
+| 90.67 | [entry-guard-before-the-left-edge-cleanup](../findings/2026-10-13-entry-guard-before-the-left-edge-cleanup/README.md) | From 90.66. The mode shift of 90.66 is gone: `Steering`'s drivers and groups are 90.65's. On the left stick's edge of ten Steering layers the cleanup press adds `Steering \| LS: Entry Guard` before it removes, stored last (R176): a press that runs past its guard (A69) leaves the guard on top, not `Steering`'s exit. No start delay. Ten adds more a layout, no remove more or fewer |
+| 90.66 | [steering-mode-shift-on-the-drivers](../findings/2026-10-13-steering-mode-shift-on-the-drivers/README.md) | From 90.65. In `Steering` each driver gets a Regular Press, not interruptible, that mode-shifts the left stick to one new group with empty up and down (R175): a cleanup that runs past its guard (A69) no longer ends `Steering`. The 5 ms start delay of 90.65 comes off the ten left-edge presses. One group more a layout; removes unchanged. The simulator models a mode shift held from a layer (A70) and can take a layer off by hand (`drop`) |
 | 90.65 | [steering-left-edge-press-and-guard](../findings/2026-10-13-steering-left-edge-press-and-guard/README.md) | From 90.64. On the left stick's edge of ten Steering layers the chord with Invert Activation becomes the repeating, interruptible Regular Press and its guard chord again, with their 90.58 settings and today's lists; the press starts 5 ms late; Outer Ring Binding Invert goes off in those ten groups. Removes unchanged. The Cleanup audit reads such a press as a cleanup function with a start delay on it |
 | 90.64 | [layer-order](../findings/2026-10-12-layer-order/README.md) | From 90.63. The layer list in a new order and nothing else: the two ramp layers, the five stateful layers (`Gyro`, `Steering`, `Cursor Gyro`, `Menu Keys`, `Gamepad`), then the other layers by parent. The `Preset_` keys and preset blocks follow (R104); every layer is bind for bind what it was |
 | 90.63 | [inverted-ring-on-the-steering-left-edge](../findings/2026-10-12-inverted-ring-on-the-steering-left-edge/README.md) | From 90.62. One setting in ten groups a layout: Outer Ring Binding Invert on the left stick of the ten Steering layers whose edge holds the cleanup chord. The chord then runs with the stick at the rim and no driver held, where it ran off the rim. No bind or list changes; removes unchanged. The simulator and the Budget audit read a Soft Press by its own inversion setting (A67) |

@@ -61,6 +61,9 @@ DIRECTIONS = ("dpad_north", "dpad_east", "dpad_south", "dpad_west")
 ALWAYS_ON = ("switch", "always_on_action")
 # The layers whose inverted chord is their own exit, registered as such (R111, R170): it stays a "cancel".
 INVERTED_EXITS = frozenset({"Steering | LS: Entry Guard"})
+# The one layer a cleanup function may add before it removes (90.67, author 2026-10-13): if the press runs past
+# its guard chord (A69), this guard is what it leaves on top, not the stateful layer's own stick.
+CLEANUP_GUARDS = frozenset({"Steering | LS: Entry Guard"})
 
 
 @dataclass(frozen=True)
@@ -238,6 +241,12 @@ def _classify(title, source, name, kind, settings, ops, delayed_targets, has_cho
     late_cleanup = kind == "Full_Press" and repeat and removal_only and settings.get("interruptable") != "0"
     if _delay(settings) and not late_cleanup:
         return "hold", "successful hold (the delay completes)", "hold"
+    added = {t for op, t in ops if op == "add_layer"}
+    if kind == "Full_Press" and repeat and has_chord and removals and len(removals) + len(added) == len(ops) \
+            and added and added <= CLEANUP_GUARDS and settings.get("interruptable") != "0":
+        # Still a cleanup function, so the chains do not follow its add: the guard lands on what the same
+        # list leaves, which is the stack the guard's own entry gives.
+        return "recovery", "guarded recovery that adds its temporary guard first", "press"
     if repeat and removal_only:
         if set(removals) <= delayed_targets:
             return "reset", "interrupted-delay reset of this input's delayed add", "press"
