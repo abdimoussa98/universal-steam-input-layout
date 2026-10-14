@@ -41,7 +41,6 @@ class Shape(unittest.TestCase):
             for key in differ:
                 for (kind, settings, ops), (was_kind, was_settings, was) in zip(new[key], old[key]):
                     self.assertEqual((kind, settings, sorted(ops)), (was_kind, was_settings, sorted(was)), key)
-            self.assertEqual(inputs(Layout(layout_data(variant))), new, variant)             # what is installed
 
 
 class TheHandOver(ScenarioCase):

@@ -105,8 +105,9 @@ through [rules.py](../steam_layout/rules.py)), so the shape is fixed.
 | A66 | A chord with Invert Activation stays off while a chord button is held, also after a `remove_layer` call takes a layer off the stack | Unverified, and doubted by the author, 2026-10-11, on 90.55: with a bumper held and the stick up or down in a Steering stick modifier, a thumb lifting from a stick cleared the W or S layer and `Steering` ended. The author suspects the inverted chord on the left edge fired after the Release's `remove_layer` calls although the bumper was held. Not isolated. The notes of 2026-10-07 cover a chord that a bumper press had stopped, not a layer that lands with the bumper already down | Works either way | On 90.55: rest both thumbs on the sticks, then hold R1, push the stick up about halfway and lift the right thumb. `Steering` ending means it fails. The same with R1 held before the thumbs rest should stay: the stick's helper layers are then not on the stack, and the Release takes nothing off | From 90.56 to 90.58 nothing: the only chord with Invert Activation was the Entry Guard's, which removes only itself. Since 90.61 the left-edge cleanup of ten Steering layers again (scenarios 90.61 E1, E5, E6); since 90.63 on an inverted ring, so the chord is live at the rim and off everywhere else (scenario 90.63 G1). Since 90.65 nothing again: the ten edges have the press and its guard. The simulator assumes it (A61). The [audit](../findings/2026-10-11-stick-touch-and-cleanup-audit/README.md) has the simulator run with it switched off |
 | A67 | A Soft Press on a stick's edge does not follow the group's Outer Ring Binding Invert. It fires past its own threshold whether the ring is inverted or not; only its own setting inverts it | Reported by the author, 2026-10-12 ("soft presses dont respect the inversion so its fine"). Every Soft Press on an inverted ring up to 90.62 states its own inversion as well (116 over all snapshots), so no build had tested one without | Relies on it | On 90.63 hold a driver in `Steering` and tap the stick up eight times, with a hold past 200 ms in between: one wheel step per tap, none for a hold, as on 90.62. A wheel step on a hold, or none on a tap, means the timer follows the ring | Since 90.63 the hold timer of the two stick modifiers and the cover timer of the two stick scroll layers, on a ring that is inverted for the cleanup chord beside them (scenario 90.63 G4). Since 90.65 nothing: no ring with such a Soft Press is inverted. The simulator and the Budget audit read a Soft Press by its own setting |
 | A68 | A start delay on an interruptible Regular Press does not take it out from under its guard: a chord that is active on the same input when the delay ends still suppresses the press, and the press runs when the delay ends with no chord active. With Hold to Repeat it then repeats | Unverified. The delayed Regular Presses up to 90.64 are not interruptible and have no guard beside them | Relies on it | On 90.65, in `Steering`: hold R1 and flick the left stick to the rim in every direction, also while tapping the right stick touch. W and `Steering` stay. If they go, the delay did not help the guard, or the press ignores the guard once it is delayed | Since 90.65 the cleanup press on the left stick's edge of ten Steering layers, 5 ms late beside its guard chord (author, 2026-10-13; scenarios 90.65 P1 to P5). The simulator decides the guard at the press and runs the press 5 ms later. Since 90.66 nothing: the author asked for the delay out, 2026-10-13 |
-| A69 | A `remove_layer` call makes an active chord evaluate again. When `remove_layer` calls come in quick succession, an evaluation can fail although the chord button is held, and the interruptible bind stored beside the chord then runs | Verified by the author on the Deck, 2026-10-13 ("if you spam remove layers it will one reset/reevaluate the chord, but two if you spam it, it might fail the evaluation and the coupled interruptible bind will leak through. this has been confirmed"). Rare: it needs removes arriving in a burst while the guarded input is pressed. It is where A27 fails | Works either way | In `Steering` hold R1, tap the right stick touch rapidly (each Release sends three `remove_layer` calls) and flick the left stick to the rim: now and then the W layer's edge cleanup runs with R1 held | Every cleanup function's guard chord (R133): none may depend on holding through a burst of removes where a leak costs more than a layer that comes straight back. The case that mattered: the W or S layer's left-edge cleanup leaks, the layer goes, and `Steering`'s exit on up or down underneath ends `Steering` ([record](../findings/2026-10-12-steering-ends-on-a-stick-touch/README.md)). The simulator decides a guard once and never fails it. On 90.66 the drivers mode-shifted `Steering`'s up and down to empty binds (R175; scenarios 90.66 S1, S2). Since 90.67 that is gone and each of the ten left-edge cleanup presses adds the Entry Guard before it removes, so what leaks leaves the guard on top (R176). No scenario forces the leak (author, 2026-10-13) |
+| A69 | ([write-up](#guard-chords-leak-under-a-burst-of-removes)) A `remove_layer` call makes an active chord evaluate again. When `remove_layer` calls come in quick succession, an evaluation can fail although the chord button is held, and the interruptible bind stored beside the chord then runs | Verified by the author on the Deck, 2026-10-13 ("if you spam remove layers it will one reset/reevaluate the chord, but two if you spam it, it might fail the evaluation and the coupled interruptible bind will leak through. this has been confirmed"). Rare: it needs removes arriving in a burst while the guarded input is pressed. It is where A27 fails | Works either way | In `Steering` hold R1, tap the right stick touch rapidly (each Release sends three `remove_layer` calls) and flick the left stick to the rim: now and then the W layer's edge cleanup runs with R1 held | Every cleanup function's guard chord (R133): none may depend on holding through a burst of removes where a leak costs more than a layer that comes straight back. The case that mattered: the W or S layer's left-edge cleanup leaks, the layer goes, and `Steering`'s exit on up or down underneath ends `Steering` ([record](../findings/2026-10-12-steering-ends-on-a-stick-touch/README.md)). The simulator decides a guard once and never fails it. On 90.66 the drivers mode-shifted `Steering`'s up and down to empty binds (R175; scenarios 90.66 S1, S2). Since 90.67 that is gone and each of the ten left-edge cleanup presses adds the Entry Guard before it removes, so what leaks leaves the guard on top (R176); since 90.70 every cleanup press of the ten Steering layers does, and that works on the Deck (author, 2026-10-13: "the only solution that works is 90.70. we will get leaks and this precaution works"). 90.69, a trial off the line, took Hold to Repeat off those presses; it was not the fix. No scenario forces the leak (author, 2026-10-13) |
 | A70 | A mode shift bound in an action layer is on while that layer's bind answers the held button, and comes on at once when the bind is uncovered under a button that is already held, before the layer's other inputs answer. It swaps only that layer's own group for the source: a layer above with its own group for the source keeps it | Unverified. Up to 90.65 every mode shift was in the Base set. 90.66 was built without the editor check the plan offered (author, 2026-10-13: "Just build it"). Not relied on since 90.67, which has no mode shift in a layer (author, 2026-10-13: "revert the mode shift change") | Works either way | On 90.66 in `Steering`: (1) hold R1 and tap the stick up: one wheel step per tap, as before. None means the shift reaches the W layer's stick. (2) Hold R1, tap the right stick touch rapidly and flick the left stick to the rim: `Steering` stays. It ending means the shift was not on when the W layer leaked off, or came on after `Steering`'s exit ran | R175, on 90.66 only. The simulator reads a held shift off the stack, so it is on before anything else answers |
+| A71 | A cleanup press without Hold to Repeat runs past its guard chord less often than a repeating one: it has only the moment its input is pressed, where a repeating press tries again for as long as the input is held. It still leaks | Reported by the author, 2026-10-13, as an assumption to note after 90.69 and 90.70 on the Deck ("we should note an assumption that the no repeating removals leak less often"). Not counted or isolated | Works either way | Load 90.69 (`versions/neptune/90.69/`), where the 90 cleanup presses of the Steering layers do not repeat, and 90.68, where they do. On each, hold R1 in `Steering`, tap the right stick touch rapidly and flick the left stick to the rim for a fixed time, and count how often W drops or `Steering` ends ([the leak](#guard-chords-leak-under-a-burst-of-removes)) | Nothing on the working layout: its cleanup presses repeat, and it does not try to stop the leak (A69). It bears on any later choice to take Hold to Repeat off cleanup presses. 90.69 is the trial that has it |
 
 A33 and A34 were found while sorting the Deck checks
 ([record](../findings/2026-10-03-deck-check-sorting/README.md)). A31 and A32 come from the timing contract of the archived replay
@@ -188,6 +189,77 @@ explanation is the author's hypothesis; the timing cause is not confirmed.
 These observations describe an alternative cleanup mechanism under
 investigation; they do not change the required guarded-recovery shape in
 [Cleanup Functions](Cleanup%20Functions.md#the-kinds).
+
+## Guard chords leak under a burst of removes
+
+A69 and A71 in the table. Confirmed by the author on the Deck, 2026-10-13.
+The full history is in the fault's record,
+[`Steering` ends on a right stick touch with a bumper held](../findings/2026-10-12-steering-ends-on-a-stick-touch/README.md).
+
+**Terms.** A cleanup function is, on one input, an interruptible Regular
+Press that removes layers (the press) beside an empty chord on the layer's
+owner buttons (the guard chord). While an owner is held the chord is
+active and holds the press back (A27). A leak is the press running
+although an owner is held.
+
+### What happens
+
+- A `remove_layer` call makes an active chord evaluate again.
+- When several arrive in quick succession, an evaluation can fail although
+  the chord button is held. The interruptible bind beside the chord then
+  runs.
+- It is rare: it needs removes arriving in a burst while the guarded input
+  is pressed.
+
+### Where it was seen
+
+In `Steering`, R1 held, the right stick touch tapped rapidly (each Release
+sends three `remove_layer` calls) and the left stick flicked to the rim.
+The W layer's cleanup press ran with R1 held and took the W layer off.
+`Steering`'s exit on up and down was then the top bind under the stick,
+and `Steering` ended.
+
+### What it means for the layout
+
+- **A guard chord cannot be relied on to hold through a burst of removes.**
+  Every cleanup function has one, so every cleanup function can leak.
+- **The simulator never leaks.** It decides a guard once. A scenario or a
+  random walk that passes says nothing about a leak.
+- **Design for the leak, not against it.** Ask what the leaking press
+  removes and what the layer below does once it is gone. Where that costs
+  more than a layer that comes straight back, put a protecting layer on in
+  the same bind, before the removes (stored last, A4).
+
+### What was tried
+
+| Build | Change | Outcome on the Deck |
+|---|---|---|
+| 90.59 | Hold to Repeat on the guard chords | Worse |
+| 90.60 | Driver layers out of the child cleanups | No help |
+| 90.61, 90.63 | An inverted chord in place of the press and guard; an inverted ring under it | Not on record |
+| 90.65 | A 5 ms start delay on the press | Taken out again |
+| 90.66 | A mode shift on the drivers that empties `Steering`'s up and down | Reverted |
+| 90.67 | The left-edge cleanup presses add the Entry Guard before they remove | Superseded by 90.70 |
+| 90.69 | The Steering cleanup presses without Hold to Repeat | Not the fix; assumed to leak less often (A71) |
+| **90.70** | **Every Steering cleanup press adds the Entry Guard before it removes** | **Works. Leaks still happen, and the precaution holds** |
+
+### What works: 90.70
+
+Each of the 90 cleanup presses in the ten Steering layers adds
+`Steering | LS: Entry Guard` before its removes (R176). When one leaks, the
+guard is the top layer under the stick, not `Steering` and its exit. The
+held driver's chord in the guard then adds the driver's layer and removes
+the guard, in that order (R137).
+
+### The assumption about Hold to Repeat (A71)
+
+A press that does not repeat is assumed to leak less often than a
+repeating one. A repeating press tries again for as long as its input is
+held, so any failed evaluation in that time lets it through; a press that
+does not repeat has only the moment its input is pressed. It is an
+assumption, noted by the author on 2026-10-13, and has not been counted.
+It does not stop the leak: 90.69 had it and was not the fix. The working
+layout keeps Hold to Repeat on its cleanup presses.
 
 ## Tuning notes
 

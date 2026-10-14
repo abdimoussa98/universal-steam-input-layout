@@ -9,14 +9,15 @@ The separate [90.39 fallback-window testing candidate](../findings/2026-10-09-fa
 extends frozen 90.32 with compatible later fixes. It has 90 layers and writes
 to its findings folder, with distinctly named snapshots under
 `versions/neptune/90.39/`. It is an inactive experiment: the live release
-continues from 90.38 through 90.40–90.58 and 90.61–90.68. Its build/validation commands, local rules and
+continues from 90.38 through 90.40–90.58, 90.61–90.68 and 90.70. Its build/validation commands, local rules and
 scenario coverage remain separate from the live layouts.
 
 ## The builder
 
 The current live builder is
-[findings/2026-10-13-entry-guard-adds-the-driver-layer-first](../findings/2026-10-13-entry-guard-adds-the-driver-layer-first/README.md),
-for 90.68. Since 90.49 a builder reads the snapshot of the release before it. Two lines do not: 90.54 reads the
+[findings/2026-10-13-entry-guard-in-every-steering-cleanup](../findings/2026-10-13-entry-guard-in-every-steering-cleanup/README.md),
+for 90.70. It reads the 90.68 snapshot: 90.69 is a trial from 90.68 too, a snapshot off the line that was never the
+working layout. Since 90.49 a builder reads the snapshot of the release before it. Two lines do not: 90.54 reads the
 90.52 snapshot, the author's trial of one change, so 90.53 is a snapshot off the line and 90.55 continues from 90.54;
 and 90.61 reads the 90.58 snapshot. 90.59 and 90.60 were two trials for the same fault that did not help; their
 files were removed (author, 2026-10-12) and the [fault's record](../findings/2026-10-12-steering-ends-on-a-stick-touch/README.md)
@@ -45,6 +46,8 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.70 | [entry-guard-in-every-steering-cleanup](../findings/2026-10-13-entry-guard-in-every-steering-cleanup/README.md) | From 90.68, not 90.69. Every cleanup press of the ten Steering layers adds `Steering \| LS: Entry Guard` before it removes (R176): the 80 that are not on the left stick's edge get the add 90.67 gave the ten that are. 80 adds more a layout, no remove more or fewer |
+| 90.69 | [steering-cleanup-presses-without-repeat](../findings/2026-10-13-steering-cleanup-presses-without-repeat/README.md) | From 90.68, off the line and not installed. The 90 cleanup presses of the Steering layers lose Hold to Repeat and stay interruptible; the ten left-edge ones lose the Entry Guard add. A Deck trial for A69, saved under `versions/neptune/90.69/` |
 | 90.68 | [entry-guard-adds-the-driver-layer-first](../findings/2026-10-13-entry-guard-adds-the-driver-layer-first/README.md) | From 90.67. One change on two inputs a layout: in `Steering \| LS: Entry Guard` each driver's chord runs its add of the driver's layer first and the guard's removal second (R137), so `Steering` is never the top layer between the two. The two commands swap places; no bind, setting or count changes |
 | 90.67 | [entry-guard-before-the-left-edge-cleanup](../findings/2026-10-13-entry-guard-before-the-left-edge-cleanup/README.md) | From 90.66. The mode shift of 90.66 is gone: `Steering`'s drivers and groups are 90.65's. On the left stick's edge of ten Steering layers the cleanup press adds `Steering \| LS: Entry Guard` before it removes, stored last (R176): a press that runs past its guard (A69) leaves the guard on top, not `Steering`'s exit. No start delay. Ten adds more a layout, no remove more or fewer |
 | 90.66 | [steering-mode-shift-on-the-drivers](../findings/2026-10-13-steering-mode-shift-on-the-drivers/README.md) | From 90.65. In `Steering` each driver gets a Regular Press, not interruptible, that mode-shifts the left stick to one new group with empty up and down (R175): a cleanup that runs past its guard (A69) no longer ends `Steering`. The 5 ms start delay of 90.65 comes off the ten left-edge presses. One group more a layout; removes unchanged. The simulator models a mode shift held from a layer (A70) and can take a layer off by hand (`drop`) |

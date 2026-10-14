@@ -1,6 +1,13 @@
 # Plan: no Hold to Repeat on the cleanup presses in Steering; the Entry Guard add out again
 
-**Status, 2026-10-13:** plan, not built. It would be **90.69**, from 90.68.
+**Status, 2026-10-13:** built as **90.69**, from 90.68, as a trial off the line
+(author: "build 90.69 but also build 90.70";
+[release record](../findings/2026-10-13-steering-cleanup-presses-without-repeat/README.md)).
+It is not installed: 90.70, also from 90.68, is the working layout. The
+editor check in question 2 was not run first. One thing below turned out
+wrong: on the simulator a stale layer under an input that is already held
+does not clear on a repeat on 90.68 either, so the cost in "What you would
+feel" is what I expect on the Deck, not something a test shows.
 
 **Scope, decided by the author, 2026-10-13:** "all in steering". Every
 cleanup press in the Steering layers, and none outside them. The plan was

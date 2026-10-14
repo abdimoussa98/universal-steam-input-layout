@@ -261,6 +261,11 @@ def _classify(title, source, name, kind, settings, ops, delayed_targets, has_cho
                 else "stale-state recovery (repeating, interruptible)"
             return "recovery", guard, "press"
         return "cancel", "repeating non-interruptible removal", "press"
+    if kind == "Full_Press" and removal_only and has_chord and settings.get("interruptable") != "0":
+        # 90.69, a trial off the line (author, 2026-10-13: "Still interruptible, but no longer repeating"): beside
+        # a chord, an interruptible press of removes is a cleanup function without Hold to Repeat too. Up to
+        # 90.68 no press of removes without a repeat has a chord beside it.
+        return "recovery", "guarded recovery without a repeat (a satisfied chord suppresses it)", "press"
     if title in windows and ops[0] == ("remove_layer", title) and any(op == "add_layer" for op, _ in ops):
         return "second-press", "second press: removes the window first", "press"
     if any(op == "add_layer" for op, _ in ops):

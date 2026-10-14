@@ -9,13 +9,16 @@ A press that runs past its guard chord (A69) then leaves `Steering | LS: Entry G
 exit on up and down. The simulator never runs a press past its guard and is not made to (the author: "I don't think
 we need to necessarily account for that super edge case"). The scenarios state the ordinary cleanup, which carries
 the same add: after a missed driver release the stick at the rim leaves the Entry Guard, and `Steering` stays.
+
+90.70 put the add on every cleanup press of the ten layers, so the shape tests here read the 90.67 build; the
+scenarios hold on the working layout too.
 """
 
 import unittest
 
 from steam_layout.cleanups import Cleanups
 from steam_layout.model import MODE_SHIFT, Layout, actions, entries
-from tests.scenario import VARIANTS, ScenarioCase, frozen_layout_data, layout_data, scenario
+from tests.scenario import VARIANTS, ScenarioCase, frozen_layout_data, scenario
 from tests.test_scenarios_90_55 import DRIVERS, EDGE_CHORDS
 from tests.test_scenarios_90_61 import inputs, named
 from tests.test_scenarios_90_66 import WHERE
@@ -32,7 +35,7 @@ class Shape(unittest.TestCase):
 
     def test_no_layer_has_a_mode_shift_and_steering_has_no_mode_shift_group(self):
         for variant in VARIANTS:
-            layout = Layout(layout_data(variant))
+            layout = Layout(frozen_layout_data(variant, '90.67'))
             found = {title for title in layout.presets if title != layout.base
                      for group in layout.active(title).values() for value in group.get('inputs', {}).values()
                      for _, entry in entries(value.get('activators') or {}) if any(MODE_SHIFT.search(a) for a in actions(entry))}
@@ -44,7 +47,7 @@ class Shape(unittest.TestCase):
 
     def test_each_of_the_ten_presses_is_90_66s_with_the_entry_guard_add_stored_last(self):
         for variant in VARIANTS:
-            layout, old, name = Layout(layout_data(variant)), Layout(frozen_layout_data(variant, '90.66')), named(variant)
+            layout, old, name = Layout(frozen_layout_data(variant, '90.67')), Layout(frozen_layout_data(variant, '90.66')), named(variant)
             for title in EDGE_CHORDS:
                 (kind, press), *rest = edge(layout, name(title))
                 (_, was), *was_rest = edge(old, name(title))
@@ -58,14 +61,14 @@ class Shape(unittest.TestCase):
 
     def test_the_ten_presses_are_still_cleanup_functions(self):
         for variant in VARIANTS:
-            layout, name = Layout(layout_data(variant)), named(variant)
+            layout, name = Layout(frozen_layout_data(variant, '90.67')), named(variant)
             found = {t.layer for t in Cleanups(layout).inv.transitions
                      if t.role == 'recovery' and (t.source, t.input) == ('joystick', 'edge')}
             self.assertLessEqual({name(title) for title in EDGE_CHORDS}, found, variant)
 
     def test_no_other_cleanup_function_adds_a_layer(self):
         for variant in VARIANTS:
-            layout, name = Layout(layout_data(variant)), named(variant)
+            layout, name = Layout(frozen_layout_data(variant, '90.67')), named(variant)
             adding = {(t.layer, t.source, t.input) for t in Cleanups(layout).inv.transitions
                       if t.role == 'recovery' and any(op == 'add_layer' for op, _ in t.ops)}
             self.assertEqual(adding, {(name(title), 'joystick', 'edge') for title in EDGE_CHORDS}, variant)

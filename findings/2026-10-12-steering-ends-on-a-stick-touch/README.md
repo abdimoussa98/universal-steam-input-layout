@@ -1,8 +1,14 @@
 # `Steering` ends on a right stick touch with a bumper held
 
 The record of a Deck fault found on 2026-10-12 on **90.58**: what was tried,
-what each try showed, and how it led to **90.61**, **90.63**, **90.65**, **90.66**, **90.67** and **90.68**.
-The cause is confirmed (A69). 90.68 has not run on the Deck.
+what each try showed, and how it led to **90.61**, **90.63**, **90.65** to **90.70**.
+The cause is confirmed (A69).
+
+**Resolved by 90.70** (author, on the Deck, 2026-10-13: "the only solution that works is 90.70. we will get leaks and this precaution works").
+The leak is not stopped; the Entry Guard added by every Steering cleanup
+keeps it from ending `Steering`. The leak itself is written up in
+[Steam Behaviour Assumptions](../../resources/Steam%20Behaviour%20Assumptions.md#guard-chords-leak-under-a-burst-of-removes)
+(A69, A71).
 
 Everything under "on the Deck" is the author's own testing. The simulator
 never reproduced the fault at any point.
@@ -75,6 +81,8 @@ Why the guard does not hold is not known.
 | 21 | **Built 90.66** (from 90.65): each driver in `Steering` mode-shifts the left stick to a group with empty up and down; the 5 ms is off | Not yet on the Deck | The leak may still happen; it no longer ends `Steering` if A70 holds |
 | 22 | **Built 90.67** (from 90.66, the author's change of mind the same day): the mode shift is out; each of the ten left-edge cleanup presses adds `Steering \| LS: Entry Guard` before it removes | Not yet on the Deck | The leak may still happen; what it leaves on top is the Entry Guard, whose driver chord puts the driver's layer back |
 | 23 | **Built 90.68** (from 90.67): in the Entry Guard each driver's chord adds the driver's layer first, then removes the guard | Not yet on the Deck | `Steering` is not the top layer between the two commands |
+| 24 | **Built 90.69** (from 90.68, off the line): the 90 cleanup presses of the Steering layers without Hold to Repeat, still interruptible; no Entry Guard add | Did not solve it (author, 2026-10-13: only 90.70 works) | Taking the repeat off is not a fix. Not adopted |
+| 25 | **Built 90.70** (from 90.68): every cleanup press of the ten Steering layers adds the Entry Guard before it removes | **Works on the Deck** (author, 2026-10-13) | Leaks still happen; the precaution holds |
 
 ## What was learned
 

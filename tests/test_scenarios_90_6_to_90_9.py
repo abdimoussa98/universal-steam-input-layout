@@ -104,8 +104,11 @@ class SlimSteeringOverlays(ScenarioCase):
             self.assertEqual(pad.top, TAP_COVER)
             pad.touch("RS")
             self.assertTrue(pad.lacks(TAP_COVER, MOD1, DRIVER))
-            # Since 90.42 the exposed full direction clears Steering directly.
-            self.assertTrue(pad.lacks("Steering", "Steering | LS: Entry Guard"))
+            # From 90.42 to 90.69 the exposed full direction cleared Steering. Since 90.70 the right stick touch's
+            # cleanup adds the Entry Guard first (R176): the guard answers the stick and Steering stays.
+            self.assertTrue(pad.has("Steering", "Steering | LS: Entry Guard"))
+            pad.recentre("LS").wait(300)
+            self.assertTrue(pad.has("Steering") and pad.lacks("Steering | LS: Entry Guard"))
 
     @scenario("90.7 S6")
     def test_right_pad_touch_modes_work_in_steering_since_90_38(self):

@@ -116,8 +116,9 @@ class SteeringEntryAndFeedback(unittest.TestCase):
                         acts = layout.active(title)[source]['inputs'][name]['activators']
                         self.assertIn('chord', acts)
                         entry = acts['Full_Press']
+                        # Since 90.70 every cleanup press of a Steering layer adds the Entry Guard first (R176).
                         self.assertEqual(set(layout.layer_ops(entry)), {
-                            ('remove_layer', title), ('remove_layer', 'Steering | LS: Tap Cover')})
+                            ('add_layer', GUARD), ('remove_layer', title), ('remove_layer', 'Steering | LS: Tap Cover')})
                         self.assertEqual(entry['settings'].get('hold_repeats'), '1')
                         self.assertNotEqual(entry['settings'].get('interruptable'), '0')
                         checked += 1
