@@ -13,7 +13,7 @@ is clean only when every line passes (Layer Definition of Done, section 10).
 
 Read-only. Exit codes: 0 = every audit passed, 1 = at least one failed.
 
-    python3 -m tools.audit_build                      # both neptune/*_latest.json
+    python3 -m tools.audit_build                      # every controller's working layouts (steam_layout/controllers.py)
     python3 -m tools.audit_build path/to/layout.json  # one layout
     python3 -m tools.audit_build --verbose            # show each failing audit's output
     python3 -m tools.audit_build candidate.json --rules candidate-rules.json --baseline baseline.json
@@ -27,6 +27,7 @@ import subprocess
 import sys
 import time
 
+from steam_layout import controllers
 from steam_layout.rules import tag
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,12 +42,12 @@ AUDITS = [
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("layouts", nargs="*", type=Path, help="default: neptune/*_latest.json")
+    parser.add_argument("layouts", nargs="*", type=Path, help="default: every controller's *_latest.json")
     parser.add_argument("--verbose", action="store_true", help="print the output of each failing audit")
     parser.add_argument("--rules", type=Path, help="candidate-specific Flow/Cleanup rules and Window register")
     parser.add_argument("--baseline", type=Path, help="explicit Flow/Cleanup baseline (requires one layout)")
     args = parser.parse_args()
-    layouts = args.layouts or sorted((ROOT / "neptune").glob("*_latest.json"))
+    layouts = args.layouts or controllers.working_layouts()
     if args.baseline and len(layouts) != 1:
         parser.error("--baseline requires exactly one layout")
     if not layouts:

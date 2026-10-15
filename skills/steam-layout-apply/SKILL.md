@@ -1,6 +1,6 @@
 ---
 name: steam-layout-apply
-description: Finalize an edited Steam Input layout for loading into Steam. Runs pre-flight checks, converts {{Base::Title}} tokens back to numeric runtime IDs with convert_runtime_ids.py to-ids, confirms nothing was left unresolved, exports VDF with convert_vdf.mjs, and saves a per-version backup copy under versions/neptune/. Use this whenever edits to a layout JSON in this repo are finished and it needs to go back into Steam, or when the user asks to run to-ids, finalize, export, produce a VDF, or back up a layout version.
+description: Finalize an edited Steam Input layout for loading into Steam. Runs pre-flight checks, converts {{Base::Title}} tokens back to numeric runtime IDs with convert_runtime_ids.py to-ids, confirms nothing was left unresolved, exports VDF with convert_vdf.mjs, and saves a per-version snapshot under versions/<controller>/ with tools.release. Use this whenever edits to a layout JSON in this repo are finished and it needs to go back into Steam, or when the user asks to run to-ids, finalize, export, produce a VDF, or back up a layout version.
 ---
 
 # Finalize a layout for Steam
@@ -48,18 +48,20 @@ publishing to Steam, follow [Publishing layout changes](../../docs/publishing.md
 
 Standing user instruction: after the JSON is validated, the VDF is regenerated,
 and the description and version are final, **save a copy of the layout under
-`versions/neptune/<version>/`** in the same task, without asking. `neptune/`
-stays the live working copy; every edit still goes there. The snapshot is the
-final step of a completed layout edit (step 4, item 2 below).
+`versions/<controller>/<version>/`** in the same task, without asking, for each
+controller whose layout changed (`ibex`, `neptune`, `dse`). The controller
+directory stays the live working copy. The snapshot is the final step of a
+completed layout edit (step 4, item 2 below).
 
 - `<version>` is the release suffix of `controller_mappings.title` (the part
-  after the last ` :: `, such as `90.4`). Copy each variant's JSON and VDF,
-  replacing `_latest` in the filename with `_<version>`, for example
+  after the last ` :: `, such as `90.4`). Each variant's JSON and VDF are
+  copied with `_latest` in the filename replaced by `_<version>`, for example
   `versions/neptune/90.4/single-set-default_hold-gyro_90.4.json`.
-- Follow-up edits in the same release batch refresh that version's snapshot.
-  Never edit, overwrite, or delete a snapshot for any other version. If the
-  current version was already published, bump the title first (see above)
-  rather than overwriting its published snapshot.
+- Follow-up edits in the same release batch refresh that version's snapshot
+  until it is tagged. Never edit, overwrite, or delete a snapshot for any other
+  version, and never a tagged one (`<controller>-v<version>`): a fix after the
+  tag is a new version. `tools.release snapshot` refuses to overwrite a tagged
+  snapshot.
 - Snapshot files are backups. Don't edit them, and don't point tools or tests at
   them. Saving a snapshot does not authorize a commit or an upload to Steam.
 
@@ -93,7 +95,7 @@ isn't verified, with the rules and scenarios resting on it. A layer whose tests
 pass but rest on one of those is done, and listed.
 
 **R150.** Run the build audit first: `python3 -m tools.audit_build`. It runs the Budget audit,
-the Window audit, the Flow audit and the Cleanup audit on both working layouts and must exit
+the Window audit, the Flow audit and the Cleanup audit on every controller's working layouts and must exit
 **0** before any version is finalized
 ([Layer Definition of Done §10](../../resources/Layer%20Definition%20of%20Done.md#10-ship-it)).
 The paragraphs below describe the individual audits it runs.
@@ -174,21 +176,13 @@ grep -c 'controller_action [A-Za-z_]* {{' path/to/layout_final.json   # must pri
 ## 4. Hand off for Steam
 
 1. **JSON → VDF:** run `node tools/convert_vdf.mjs path/to/layout_final.json`. This writes/replaces the sibling `.vdf` using the installed `pfwobcke.vscode-vdf` serializer and verifies keys, values, repeated bindings, and order before writing. Use `-o path/to/output.vdf` for a different destination. See `docs/file-formats.md` for requirements and extension discovery. The agent can complete this export directly.
-2. **Save the version snapshot:** once every exported variant has its final description and version, copy each one into `versions/neptune/<version>/` (see [Required version snapshot](#required-version-snapshot)):
+2. **Save the version snapshot:** once every exported variant has its final description and version, copy each controller that changed into `versions/<controller>/<version>/` (see [Required version snapshot](#required-version-snapshot)):
 
    ```bash
-   for json in neptune/*_latest.json; do
-     v=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["controller_mappings"]["title"].rsplit(" :: ", 1)[-1])' "$json")
-     [[ "$v" =~ ^[0-9]+(\.[0-9]+)+$ ]] || { echo "unexpected version '$v' in $json"; break; }
-     mkdir -p "versions/neptune/$v"
-     for src in "$json" "${json%.json}.vdf"; do
-       dst="versions/neptune/$v/$(basename "${src/_latest/_$v}")"
-       cp "$src" "$dst" && cmp "$src" "$dst" && echo "saved $dst"
-     done
-   done
+   python3 -m tools.release snapshot neptune          # or: ibex neptune dse
    ```
 
-   Expect one `saved` line for each JSON and VDF. Run it from the repo root, and only after every variant is exported. It copies every `neptune/*_latest.json` and its sibling VDF, so a variant with a stale VDF would be snapshotted stale.
+   Expect a `saved` or `unchanged` line for each JSON and VDF. Run it from the repo root, and only after every variant is exported: it refuses a VDF whose title is not its JSON's, but a VDF exported from an older JSON with the same title would be snapshotted stale. Before a release, `python3 -m tools.release check <controller>` exports each snapshot again and compares ([publishing](../../docs/publishing.md)).
 3. **Test on a fresh load:** the user loads the layout and spot-checks the binds on any layers that were added, renamed, or reordered. Checking in the live editing session isn't enough, because there layers are resolved by handle and swaps don't show up.
 4. **Return to editing:** to keep working, run `to-titles` again (see `steam-layout-prep`).
 

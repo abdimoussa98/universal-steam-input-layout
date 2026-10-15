@@ -23,9 +23,10 @@ import json
 from pathlib import Path
 import re
 
+from . import controllers
 from .model import MODE_SHIFT, TARGET, Layout, actions, entries
 
-VERSIONS = Path(__file__).resolve().parent.parent / "versions" / "neptune"
+VERSIONS = controllers.NEPTUNE.versions        # the Deck's snapshots; another controller's are under its own name
 SHIFT = " mode shift"
 
 
@@ -186,10 +187,14 @@ def version(name):
     return tuple(int(part) for part in match.group(1).split(".")) if match else ()
 
 
-def newest_snapshot(working_name, versions=VERSIONS):
-    """The newest snapshot of a working layout (`..._latest.json`), or None."""
+def newest_snapshot(working_name, versions=None):
+    """The newest snapshot of a working layout (`..._latest.json`), or None. `versions` defaults to the
+    versions folder of the controller the name belongs to (steam_layout/controllers.py)."""
+    versions = Path(versions) if versions else controllers.for_name(working_name).versions
+    if not versions.is_dir():
+        return None
     stem = Path(working_name).name.replace("_latest.json", "")
-    found = [path for folder in Path(versions).iterdir() if folder.is_dir() and version(folder.name)
+    found = [path for folder in versions.iterdir() if folder.is_dir() and version(folder.name)
              for path in [folder / f"{stem}_{folder.name}.json"] if path.exists()]
     return max(found, key=lambda path: version(path.parent.name)) if found else None
 
@@ -199,7 +204,7 @@ def baseline_for(layout_path, baseline=None):
     if baseline:
         return Path(baseline)
     name = Path(layout_path).name
-    return newest_snapshot(name) if name.endswith("_latest.json") and VERSIONS.is_dir() else None
+    return newest_snapshot(name, controllers.for_path(layout_path).versions) if name.endswith("_latest.json") else None
 
 
 def changed_since(data, baseline):

@@ -1,7 +1,8 @@
 # Universal Steam Input Layout
 
-Custom Steam Input controller layouts for the Steam Deck, built from action
-layers on a single action set.
+Custom Steam Input controller layouts for the Steam Controller 2 (Ibex, the
+base layout), the Steam Deck and the DualSense Edge, built from action layers
+on a single action set.
 
 Layers are added and removed with explicit `add_layer` and `remove_layer`
 commands, and the layouts never switch action sets. `hold_layer` is used only
@@ -11,8 +12,12 @@ and the [Layer Definition of Done](resources/Layer%20Definition%20of%20Done.md).
 
 ## Install
 
-Drop the two `.vdf` files from `neptune/` in
-`/home/deck/.steam/steam/controller_base/templates/`.
+Download the [latest release](https://github.com/abdimoussa98/universal-steam-input-layout/releases/latest/download/universal-steam-input-layout.zip)
+([all releases](https://github.com/abdimoussa98/universal-steam-input-layout/releases)):
+one folder per controller. Copy your controller's two `.vdf` files into Steam's
+`controller_base/templates/` folder, on the Steam Deck
+`/home/deck/.steam/steam/controller_base/templates/`. What changed is in
+[CHANGELOG.md](CHANGELOG.md).
 
 ## The two variants
 
@@ -30,11 +35,12 @@ Drop the two `.vdf` files from `neptune/` in
 Run everything from the repo root.
 
 ```bash
-python3 -m tools.audit_build          # the gate for every version: four audits, both layouts
+python3 -m tools.audit_build          # the gate for every version: four audits, every controller's layouts
 python3 -m tools.change_report        # working layouts against their newest snapshots
 node tools/convert_vdf.mjs neptune/single-set-default_hold-gyro_latest.json   # JSON to VDF
+python3 -m tools.release check neptune   # before tagging a release (docs/publishing.md)
 
-# every Python test (about five minutes), then the exporter's tests
+# every Python test (about 46 minutes on this Mac), then the exporter's tests
 PYTHONPATH=.:tests python3 -m unittest $(ls tests/test_*.py | sed 's#/#.#; s#\.py$##' | tr '\n' ' ')
 node --test tests/test_convert_vdf.mjs
 ```
@@ -47,9 +53,13 @@ install.
 
 ```
 ├── README.md
+├── CHANGELOG.md           every release, newest first
 ├── todos.md               the live to-do list, and what is left to check on the Deck
-├── neptune/               the two working layouts, JSON and VDF. Generated
-├── versions/neptune/<v>/  one snapshot per release. Never changed afterwards
+├── ibex/                  Steam Controller 2: the base layout, JSON and VDF. Generated
+├── neptune/               Steam Deck: the two working layouts. Generated
+├── dse/                   DualSense Edge: the two working layouts. Converted from Ibex
+├── versions/<c>/<v>/      one snapshot per controller and version. Never changed once tagged
+├── .github/workflows/     the release pipeline: a pushed tag publishes the bundle
 ├── tools/                 the command-line scripts: audits, converters, editors
 ├── steam_layout/          the library behind the tools, and the fix pipeline
 ├── tests/                 unit tests, and press-by-press scenario tests
@@ -63,8 +73,8 @@ install.
 
 | Directory | What belongs there | What doesn't |
 |---|---|---|
-| `neptune/` | `single-set-{default,alternative}_hold-gyro_latest.json` and `.vdf` | Hand edits, candidates, backups |
-| `versions/` | The JSON and VDF of a release, with the version in the file name | Edits to an old snapshot |
+| `ibex/`, `neptune/`, `dse/` | Each controller's two working layouts, `<stem>_latest.json` and `.vdf` ([controllers](resources/Controllers.md)) | Hand edits, candidates, backups |
+| `versions/` | `<controller>/<version>/`: the JSON and VDF of a version, with the version in the file name | Edits to a tagged snapshot |
 | `tools/` | A script someone runs: `python3 -m tools.<name>`. [Reference](docs/tools.md) | Logic that two scripts share: that goes in `steam_layout/` |
 | `steam_layout/` | Importable code, the fixes in `fixes/`, the chain engine's source in `engine/`, and the two config files: `flow_config.json` (rules and the exceptions register) and `traced_stacks.json` | Scripts with a command line |
 | `tests/` | `test_*.py`, `test_scenarios_<release>.py`, and `scenario.py`, the gesture helpers | One-off scripts for an investigation: those stay with their finding |
@@ -81,7 +91,7 @@ install.
 
 | You have | Put it in |
 |---|---|
-| A new release | A new build folder under `findings/`, a snapshot under `versions/neptune/<v>/`, and `tests/test_scenarios_<v>.py` |
+| A new release | A new build folder under `findings/`, a snapshot under `versions/<controller>/<v>/` for each controller that changed, `tests/test_scenarios_<v>.py`, and a CHANGELOG section |
 | A check that should run on every build | `steam_layout/` for the logic, `tools/audit_*.py` for the command, a rule row in the Definition of Done |
 | A fix the installer should apply | `steam_layout/fixes/`, and the pipeline list in its `__init__.py` |
 | A rule, or an accepted exception to one | `resources/Layer Definition of Done.md`; the exception in `steam_layout/flow_config.json` |
@@ -94,7 +104,7 @@ install.
 |---|---|
 | [docs/tools.md](docs/tools.md) | Every script, the library's modules, and how to run the tests |
 | [docs/building.md](docs/building.md) | How the layouts are generated, and the chain of builders |
-| [docs/publishing.md](docs/publishing.md) | The five steps of a release |
+| [docs/publishing.md](docs/publishing.md) | The steps of a release, the tags and the release pipeline |
 | [docs/file-formats.md](docs/file-formats.md) | JSON and VDF, and the exporter |
 | [docs/runtime-ids.md](docs/runtime-ids.md) | How Steam numbers sets and layers, and the list-order hazard |
 | [docs/reading-guide.md](docs/reading-guide.md) | What each document in `resources/` covers, and the findings worth reading first |
@@ -115,4 +125,5 @@ install.
   that day. Paths and commands in them are as they were then; the scripts were
   at the repo root until 2026-10-03.
 - **Every changed layout ships with its VDF, a version bump and a snapshot**
-  ([publishing](docs/publishing.md)).
+  ([publishing](docs/publishing.md)). Each controller has its own version;
+  pushing a tag `<controller>-v<version>` publishes it.

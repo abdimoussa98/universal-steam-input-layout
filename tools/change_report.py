@@ -9,7 +9,7 @@ with layer commands compared by title, so a shifted runtime ID is not a change
 
 Read-only. Exit codes: 0 = report printed, 2 = invalid input.
 
-    python3 -m tools.change_report                         # each working layout against its newest snapshot
+    python3 -m tools.change_report                         # every controller's working layouts against their newest snapshots
     python3 -m tools.change_report BEFORE.json AFTER.json  # any two layouts
     python3 -m tools.change_report --out findings/<date>-<slug>/   # also write <name>-changes.txt there
     python3 -m tools.change_report --json
@@ -19,9 +19,7 @@ import json
 from pathlib import Path
 import sys
 
-from steam_layout import changes
-
-ROOT = Path(__file__).resolve().parents[1]
+from steam_layout import changes, controllers
 
 
 def pairs(files):
@@ -31,11 +29,12 @@ def pairs(files):
             raise ValueError("give two layouts, or none to compare the working layouts with their newest snapshots")
         return [(files[0], files[1])]
     found = []
-    for working in sorted((ROOT / "neptune").glob("*_latest.json")):
-        snapshot = changes.newest_snapshot(working.name)
-        if snapshot is None:
-            raise ValueError(f"no snapshot of {working.name} under versions/neptune/")
-        found.append((snapshot, working))
+    for controller in controllers.with_layouts():
+        for working in controller.working():
+            snapshot = changes.newest_snapshot(working.name, controller.versions)
+            if snapshot is None:
+                raise ValueError(f"no snapshot of {working.name} under versions/{controller.name}/")
+            found.append((snapshot, working))
     return found
 
 

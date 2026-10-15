@@ -6,13 +6,14 @@ modules: `python3 -m tools.<name>`. The exporter is `node tools/convert_vdf.mjs`
 
 | Tool | What it does | Writes |
 |---|---|---|
-| [`audit_build`](#build-audit-audit_build) | Runs the four audits on both working layouts. The gate for every version | Nothing |
+| [`audit_build`](#build-audit-audit_build) | Runs the four audits on every controller's working layouts. The gate for every version | Nothing |
 | [`audit_command_budget`](#budget-audit-audit_command_budget) | Budget audit: three entries per input, no banned activators | Nothing |
 | [`audit_inheritance`](#window-audit-audit_inheritance) | Window audit: what an Always On layer inherits, and whether it is blocked | Nothing |
 | [`audit_flow_inheritance`](#flow-audit-audit_flow_inheritance) | Flow audit: covers, coverage, entries to review | Nothing |
 | [`audit_cleanups`](#cleanup-audit-audit_cleanups) | Cleanup audit: what cleanups and releases remove, and where a layer must have one | Nothing |
 | [`audit_layer`](#layer-report-audit_layer) | Report on one layer: below, above, inherited, exits | Nothing |
 | [`change_report`](#change-report-change_report) | What differs between two layouts | Only with `--out` |
+| [`release`](#releases-release) | Checks a version before its tag, saves snapshots, builds the release bundle | Snapshots, or the bundle |
 | [`convert_runtime_ids`](#convert_runtime_ids-ids-and-titles) | Numeric runtime IDs to `{{Base::Title}}` tokens and back | The layout |
 | [`duplicate_layer`](#duplicate_layer-copy-a-layer) | Copies a layer without shifting any ID | The layout, and a backup |
 | [`delete_action_set_complete`](#delete_action_set_complete-delete-an-action-set) | Deletes an action set and remaps the IDs that shift | The layout, and a backup |
@@ -28,11 +29,12 @@ The skills in [`skills/`](../skills/README.md) wrap these in the order an edit n
 The gate for every version. It runs the Budget audit
 (`audit_command_budget.py`), the Window audit (`audit_inheritance.py`), the
 Flow audit (`audit_flow_inheritance.py`) and the Cleanup audit
-(`audit_cleanups.py`) on both working layouts, prints one line per audit and
-exits **0** only when all pass. Read-only, about ten seconds. See [Layer Definition of Done §10](../resources/Layer%20Definition%20of%20Done.md#10-ship-it).
+(`audit_cleanups.py`) on every controller's working layouts (the registry,
+`steam_layout/controllers.py`), prints one line per audit and exits **0** only
+when all pass. Read-only, about fifteen seconds a layout. See [Layer Definition of Done §10](../resources/Layer%20Definition%20of%20Done.md#10-ship-it).
 
 ```bash
-python3 -m tools.audit_build              # both neptune/*_latest.json
+python3 -m tools.audit_build              # every controller's *_latest.json
 python3 -m tools.audit_build --verbose    # also print each failing audit's output
 ```
 
@@ -248,8 +250,8 @@ From 4 extra presses on, 90.22 shows the same 12 findings
 
 Compares two layouts by layer and input: mode, settings and each input's
 activators, with layer commands compared by title so a shifted runtime ID is
-not a change. With no arguments it compares each working layout with its
-newest snapshot under `versions/neptune/`. Read it before shipping (rule R164):
+not a change. With no arguments it compares each working layout of every
+controller with its newest snapshot under `versions/<controller>/`. Read it before shipping (rule R164):
 a fix or a builder can change a binding nobody decided, and this is where it
 shows. It is a report, not a check.
 
@@ -257,6 +259,22 @@ shows. It is a report, not a check.
 python3 -m tools.change_report                                   # working layouts against their newest snapshots
 python3 -m tools.change_report BEFORE.json AFTER.json            # any two layouts
 python3 -m tools.change_report --out findings/<date>-<slug>/     # also write <name>-changes.txt there
+```
+
+## Releases: `release`
+
+A release is a version with a Git tag `<controller>-v<version>`; pushing the
+tag publishes it ([publishing](publishing.md)). `check` runs the seven checks
+before a tag: titles, snapshot, a fresh export of each VDF, the version above
+the controller's latest release, the CHANGELOG section, released snapshots
+unchanged, and for a conversion, that it is what `tools.convert` makes from its
+Ibex release. The release workflow runs it again with `--tagged`.
+
+```bash
+python3 -m tools.release check neptune                 # the version in the working titles, before its tag
+python3 -m tools.release snapshot neptune               # save versions/neptune/<version>/; never a tagged one
+python3 -m tools.release bundle neptune 90.74 out/      # the zip and RELEASE.md the workflow publishes
+python3 -m tools.release latest                         # each controller's latest release
 ```
 
 ## Editing scripts
@@ -378,6 +396,7 @@ The reusable code behind the scripts above. Import it from the repo root.
 
 | Module | Use it for |
 |---|---|
+| `steam_layout.controllers` | The registry: each controller's directory, Steam names, file stems, gyro style and what its conversion reads; version order |
 | `steam_layout.model` | Read a layout (numeric IDs or title tokens): layer titles, active groups per source, bindings in execution order, Always On layers |
 | `steam_layout.chains` | `Chains`: the stacks under a layer from backward chains (who adds it, back to Base, plus bystanders), each with its reason; `below`, `above`, `lineage`, `reached` |
 | `steam_layout.layer_report` | The per-layer report that `audit_layer.py` wraps |
@@ -408,8 +427,9 @@ PYTHONPATH=.:tests python3 -m unittest $(ls tests/test_*.py | sed 's#/#.#; s#\.p
 node --test tests/test_convert_vdf.mjs
 ```
 
-The first command runs every Python test: 701 on 2026-10-04, in a little over
-five minutes. `tests/` has to be on the path because four test modules import a
+The first command runs every Python test: 1,301 on 2026-10-15, in about 46
+minutes on this Mac. The release workflow runs them in four parts at once
+(`python3 -m tools.release shard <part> 4`). `tests/` has to be on the path because four test modules import a
 sibling by its bare name, and `python3 -m unittest discover` does not work
 here. One module: `PYTHONPATH=.:tests python3 -m unittest tests.test_rule_registry`.
 

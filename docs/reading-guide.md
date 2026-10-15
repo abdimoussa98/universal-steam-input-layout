@@ -15,6 +15,7 @@ Where the knowledge is. `resources/` holds what stays true across releases;
 | [Cleanup Functions](../resources/Cleanup%20Functions.md) | The kinds of cleanup and their terms. A draft; where it differs from R127 to R132, the rules are right |
 | [Steam Input JSON Structure](../resources/Steam%20Input%20JSON%20Structure.md) | JSON format, binding execution order, and the sections below |
 | [Neptune Chorded Button Ids](../resources/Neptune%20Chorded%20Button%20Ids.md) | The `chord_button` ID and mask bit of each Deck button. `neptune_chord_ids.json` and `.vdf` are its probe layout |
+| [Controllers](../resources/Controllers.md) | The three controllers: Steam's names, their inputs, the DualSense Edge's grips, touchpad and mute button, and the gyro conversion styles |
 
 The [guard chord leak](../resources/Steam%20Behaviour%20Assumptions.md#guard-chords-leak-under-a-burst-of-removes)
 write-up says why no cleanup function's guard can be relied on through a burst

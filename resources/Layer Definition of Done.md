@@ -26,6 +26,7 @@ don't restate it.
 | 9 | [Always On layers](#9-always-on-layers) | Ordering rules for the Double Tap windows. What they block comes from §8 |
 | 10 | [Ship it](#10-ship-it) | Audits, tests, scenarios, assumptions and publishing |
 | 11 | [Stateful layers](#11-stateful-layers) | A stateful layer is entered and left through the transition structure. Only for stateful layers |
+| 12 | [Controllers and conversions](#12-controllers-and-conversions) | Ibex is the base layout; how Neptune's and the DualSense Edge's layouts are made from it |
 | – | [Rule tables](#rule-tables) | How to read a rule row, and what each column means |
 | – | [Open questions](#open-questions) | Decisions for the author |
 
@@ -731,7 +732,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
 | R150 | The build audit is clean on every version | `python3 -m tools.audit_build` runs the four audits on both layouts and exits 0 | Author | Build audit; `test_stateful_transitions.test_audits_are_clean` | — | None |
-| R151 | A published layout has a reviewed description, one version bump per release, a regenerated VDF and a snapshot under `versions/neptune/<version>/`. Another version's snapshot never changes | 90.13: the title ends in `90.13`, and `versions/neptune/90.13/` holds both variants' JSON and VDF | Author, standing instruction | `test_layout_rules.test_every_snapshot_holds_both_layouts_under_its_own_version` (part) | A33 | None |
+| R151 | A published layout has a reviewed description, one version bump per release of its controller, a regenerated VDF and a snapshot under `versions/<controller>/<version>/`. Another version's snapshot never changes, and a tagged one (`<controller>-v<version>`) never changes at all: a fix after the tag is a new version | 90.13: the title ends in `90.13`, and `versions/neptune/90.13/` holds both variants' JSON and VDF. `python3 -m tools.release check` checks a version before its tag | Author, standing instruction; tags since 2026-10-15 | `test_layout_rules.test_every_snapshot_holds_both_layouts_under_its_own_version` (part); `test_release.test_released_snapshots_are_unchanged`; `test_controllers.test_every_working_layout_is_named_and_headed_for_its_controller` (part) | A33 | None |
 | R152 | The working layouts are a fixed point of the fix pipeline: running it again changes nothing | `python3 -m steam_layout.fixes neptune/*_latest.json --dry-run` reports nothing to change | Since the pipeline, 2026-09-30 | `test_fixes.test_working_layouts_are_a_fixed_point` | — | None |
 | R153 | A layout has no dead groups: no plain-inactive slot and no unreferenced group | 90.6 pruned the four inactive stick-touch Double Press groups | 2026-09-30 | `dead_groups` fix; `test_layout_hygiene.test_no_unreferenced_groups_or_plain_inactive_slots` | — | None |
 | R154 | The tests pass, a new invariant gets a new test, and the change is recorded in `findings/<date>-<slug>/` | 90.11 came with `tests/test_steering_fallback_hold.py` and `findings/2026-10-02-steering-fallback-hold/` | Author | Not checked yet | — | None |
@@ -892,6 +893,63 @@ stateful layer but `Gyro` (R159).
 See: [Stateful Layer Transitions](Stateful%20Layer%20Transitions.md) ·
 [brainstorm record](../plans/2026-10-01-stateful-layer-transitions.md) ·
 [runtime rules](Layout%20Vocabulary.md#runtime-rules-author-confirmed-2026-09-30)
+
+## 12. Controllers and conversions
+
+This section applies to every controller's layout. Ibex, the Steam Controller 2,
+is the base layout: a change is built on it, and
+`python3 -m tools.convert <controller>` makes Neptune's layout (`neptune/`,
+the handheld) and the DualSense Edge's (`dse/`) from an Ibex release by the
+rules below. The controllers, their Steam names and what the rules read (absent
+inputs, the grip swap, the gyro style) are in
+[controllers.py](../steam_layout/controllers.py); the rules are in
+[convert.py](../steam_layout/convert.py), one function each. Plan:
+[controller directories and release pipeline](../plans/2026-10-15-controller-dirs-and-release-pipeline.md).
+
+An **absent input** is one the Ibex layout binds and a converted layout lacks:
+the controller has no such input (the Edge's stick touch), or the author left it
+out (the Edge's right trackpad). A bind on one never fires.
+
+For every conversion:
+
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R177 | Ibex is the base layout. Every layout change is made on Ibex; Neptune's and the Edge's layouts are made from an Ibex release by their rules below and never edited by hand. A change for one of them alone is a new conversion rule in this section. Ibex states Player Space (`gyro_to_2d_conversion_style` 4) in every gyro-to-mouse group; each conversion states its own (R179, R180) | Neptune 90.75 and DSE 1.0 are both conversions of Ibex 1.0. Ibex 1.0 was made once from Neptune 90.74, the bootstrap, the one change that went the other way | Author, 2026-10-15 ("That the IBEX controller is the base controller. That's the default for everything") | Not checked yet | A72, A73 | None |
+| R178 | Absent inputs. When a converted layout lacks an input Ibex binds: (a) a bind on it is dropped; (b) a chord or gyro enable mask that needs any of several buttons loses the absent ones, and with none left is treated as (c); (c) a chord that needs all its buttons, or its one chord button, with one absent, is dropped, and a gyro enable mask like that is listed, not changed; (d) in a mask that needs all its buttons, a stick touch is dropped when the same stick's push is needed too; (e) a chord with Invert Activation on an absent button is listed, not rewritten: it runs while its own input is released and no chord button is held (A61), which no plain bind does; (f) a layer the converted layout can no longer reach is deleted with every command that names it, keeping the list order (R104); (g) a rule about an absent input does not apply to that layout: R169's stick touches and R172's right pad on the Edge. Dropping a bind, rather than leaving it to Steam, keeps the result the same whatever Steam does with an input the controller lacks | On the Edge, (a) drops 426 activators on the stick touches and (f) deletes the eight `LST:` and `RST:` layers that Base's stick touches added | Author, 2026-10-15 ("delete them and delete the left and right trackpad") | Not checked yet | A74 | None |
+
+Ibex to Neptune (`neptune`):
+
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R179 | Neptune's `controller_type` (`controller_neptune`), capabilities, Workshop link and file names, its next version in the title and its description. `gyro_to_2d_conversion_style` 2 (Yaw + Roll) in every gyro-to-mouse group: the handheld is held in both hands, so turning and leaning it both aim. Nothing else changes; no input is absent | Ibex 1.0 converts back to Neptune 90.74 apart from the title and 22 gyro styles: Neptune 90.75 | Author, 2026-10-15 ("It needs to be yaw+roll. [...] neptune is a handheld console layout for my steamdeck") | Not checked yet | — | None |
+
+Ibex to the DualSense Edge (`dse`), applied in the order R180, R181, R183,
+R182, R184, R185, then R178 (f), so that the whole pad's layers are made from
+the left pad's before anything is dropped:
+
+| ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
+|---|---|---|---|---|---|---|
+| R180 | The Edge's `controller_type` (`controller_ps5_edge`), capabilities and file names, the Edge's next version in the title and its description. The gyro style stays Ibex's Player Space (4). Chords keep their encoding; a chord on an input with no `chord_button` ID is a mask | `dse/dse_single-set-default_hold-gyro_latest.json`, titled `single-set-default :: always-gyro :: 1.0` | Author, 2026-10-15 | Not checked yet | — | None |
+| R181 | Grips. Each side's two grips trade places, with everything bound to them: L4 (`button_back_left_upper`) with L5 (`button_back_left`), R4 with R5. On the Edge L4 and R4 are on the front and L5 and R5 on the back, so Shift and Space sit on the back paddles and Ctrl and Alt on the front buttons | Base's L4 types Shift on Ibex and Neptune; on the Edge Shift is on L5, the left paddle | Author, 2026-10-15 ("r4 & l4 are on the front of the controller and r5 & l5 are on the back") | Not checked yet | — | None |
+| R182 | No stick touch. Both stick touches are absent inputs (R178): the Edge's sticks have none | `LST: Entry Point` is gone, and Base's left stick has no touch bind | Author, 2026-10-15 (touching a stick never did anything with the old Edge layouts) | Not checked yet | — | None |
+| R183 | The whole pad. The left pad's role goes to the whole touchpad, `center_trackpad`: in every layer the left pad's binds move to it, its touch switch to `center_trackpad_touch`, and chords on its touch (`chord_button` 16, mask bit 19) to mask bit 27. The left pad's six layers are replaced by six `CTP:` layers made from them, whose arrow keys have no centre press: no middle click and no Caps Lock. Every click on the whole pad is a Regular Press, with its model's other settings. The right pad is absent (R178): `right_trackpad`, its touch switch and chords on its touch (`chord_button` 17, mask bit 20). On the Edge R101's self-hold exception covers `CTP: Arrow Keys` with a Regular Press, R120's pad reset is `CTP: Click Entry Point`'s, and R149 and R172 hold for the whole pad as for the left pad | A swipe west on the pad adds `CTP: Escape`, whose touch types Escape; a click on the pad's ring gives that direction's arrow key; a click in the centre gives nothing | Author, 2026-10-15 ("the whole trackpad bind should be the same swipe gestures we are used to from the left trackpad and click should be arrow keys"; "need to be new layers that utilize the whole pad"; "no capslock in the center"; "THe arrow click should not be a softpress") | Not checked yet | A76 | None |
+| R184 | Mute button. Base binds the mute button (`button_capture`) to the middle mouse button with a Regular Press. No other layer binds it, so it answers in every layer | Mute held in `L1: Modifier 0` holds the middle mouse button | Author, 2026-10-15 ("the mute button should be middle mouse") | Not checked yet | A75 | None |
+| R185 | Gyro always on. The enable mask (`gyro_ratchet_button_mask` and `gyro_ratchet_button_requireany_or_all`) comes off the gyro groups of Base, `Gyro` and its four modifiers. A layer whose gyro is disabled, `Gyro Off Ramp Up` among them, still turns it off while it is on | With both sticks centred the gyro aims in Base; at the right stick's edge `Gyro Off Ramp Up` stops it | Author, 2026-10-15 ("gyro should always be on unless the gyro off layer is active but the mask should just always be on") | Not checked yet | — | None |
+
+### The whole pad's layers
+
+Each is made from the left-pad layer it replaces, its model, so it follows the
+rules and conventions that layer follows, with the pad changed to the whole pad
+and the differences the author named. Settings not named here are the model's.
+
+| New layer | Model | On the whole pad |
+|---|---|---|
+| `CTP: Click Entry Point` | `LTP: Click Entry Point` | Its ring press (a Regular Press) adds `CTP: Arrow Keys`, then removes the layer. No centre press: no middle click, no Caps Lock. The touch's Release removes the layer, and R120's reset on the touch removes `CTP: Arrow Keys` |
+| `CTP: Arrow Keys` | `LTP: Arrow Keys` | Each direction types its arrow key and its Release removes the layer; the ring's Release removes it; the click holds the layer (R101's self-hold) with a Regular Press; the touch's Release removes it |
+| `CTP: Escape`, `CTP: Enter`, `CTP: Tab`, `CTP: Backspace` | `Escape`, `Enter`, `Tab`, `Backspace` | The touch types the key; the touch's Release removes the layer; the click (a Regular Press) removes the layer, so Base's click goes on to the arrow keys |
+
+Every command that named a model names its new layer. Base's swipes on the
+whole pad add the four key layers, and its click adds `CTP: Click Entry Point`.
 
 ## Open questions
 

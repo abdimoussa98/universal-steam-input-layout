@@ -1,0 +1,120 @@
+# Publishes every release tag (<controller>-v<version>, such as neptune-v90.75) that has no GitHub Release
+# yet, oldest first: checks it, runs the tests and the build audit once per tagged commit, and attaches one
+# zip of every controller's latest release VDFs. It only checks VDFs and snapshots; it never writes one.
+# Steps: docs/publishing.md. Plan: plans/2026-10-15-controller-dirs-and-release-pipeline.md, part 2.
+name: Release
+
+on:
+  push:
+    tags: ["*-v*"]
+  workflow_dispatch:              # to retry: publishes whatever is still unpublished
+
+permissions:
+  contents: write
+
+# One run at a time. GitHub keeps one run waiting and cancels it when another arrives; that is safe,
+# because every run publishes every tag that is still unpublished, not only the one that started it.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  VDF_EXTENSION_URL: https://open-vsx.org/api/pfwobcke/vscode-vdf/5.12.3/file/pfwobcke.vscode-vdf-5.12.3.vsix
+  VDF_EXTENSION_SHA256: 8fd847e3f78e07dd3a4a45c9b9cba86d541b8afec629171735659533ed8d23c9
+
+jobs:
+  plan:
+    name: Find the tags to publish
+    runs-on: ubuntu-latest
+    outputs:
+      tags: ${{ steps.pending.outputs.tags }}
+      commits: ${{ steps.pending.outputs.commits }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0          # every tag, to find each controller's latest release
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.9"
+      - id: pending
+        name: The release tags with no GitHub Release, each on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch --force --tags origin
+          published=$(gh release list --limit 1000 --json tagName --jq '.[].tagName' | tr '\n' ' ')
+          python3 -m tools.release pending --published "$published" | tee -a "$GITHUB_OUTPUT"
+
+  test:
+    name: Tests (${{ matrix.part }}) at ${{ matrix.commit }}
+    needs: plan
+    if: needs.plan.outputs.tags != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        commit: ${{ fromJSON(needs.plan.outputs.commits) }}
+        part: ["1", "2", "3", "4", "audits"]
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ matrix.commit }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.9"
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "26"
+      - name: Install the VDF exporter (pfwobcke.vscode-vdf 5.12.3)
+        run: |
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/vdf.vsix" "$VDF_EXTENSION_URL"
+          echo "$VDF_EXTENSION_SHA256  $RUNNER_TEMP/vdf.vsix" | sha256sum --check --strict
+          unzip -q "$RUNNER_TEMP/vdf.vsix" 'extension/*' -d "$RUNNER_TEMP/vsix"
+          mkdir -p ~/.vscode/extensions
+          mv "$RUNNER_TEMP/vsix/extension" ~/.vscode/extensions/pfwobcke.vscode-vdf-5.12.3
+      - name: Python tests, part ${{ matrix.part }} of 4
+        if: matrix.part != 'audits'
+        run: PYTHONPATH=.:tests python3 -m unittest $(python3 -m tools.release shard ${{ matrix.part }} 4)
+      - name: Build audit on every controller's layouts, and the exporter's tests
+        if: matrix.part == 'audits'
+        run: |
+          python3 -m tools.audit_build
+          node --test tests/test_convert_vdf.mjs
+
+  publish:
+    name: Publish
+    needs: [plan, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.9"
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "26"
+      - name: Install the VDF exporter (pfwobcke.vscode-vdf 5.12.3)
+        run: |
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/vdf.vsix" "$VDF_EXTENSION_URL"
+          echo "$VDF_EXTENSION_SHA256  $RUNNER_TEMP/vdf.vsix" | sha256sum --check --strict
+          unzip -q "$RUNNER_TEMP/vdf.vsix" 'extension/*' -d "$RUNNER_TEMP/vsix"
+          mkdir -p ~/.vscode/extensions
+          mv "$RUNNER_TEMP/vsix/extension" ~/.vscode/extensions/pfwobcke.vscode-vdf-5.12.3
+      - name: Check, bundle and publish each tag, oldest first
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAGS: ${{ needs.plan.outputs.tags }}
+        run: |
+          for tag in $(python3 -c 'import json, os; print(" ".join(json.loads(os.environ["TAGS"])))'); do
+            controller=${tag%%-v*}
+            version=${tag#*-v}
+            git checkout -q "$tag"
+            python3 -m tools.release check "$controller" "$version" --tagged
+            out="$RUNNER_TEMP/$tag"
+            python3 -m tools.release bundle "$controller" "$version" "$out"
+            label=$(python3 -c "from steam_layout import controllers; print(controllers.get('$controller').label)")
+            gh release create "$tag" "$out/universal-steam-input-layout.zip" --verify-tag --latest \
+              --title "$controller $version ($label)" --notes-file "$out/RELEASE.md"
+          done
