@@ -23,6 +23,22 @@ or an upload to Steam.
 worktree for a release, also when an agent's own default says to branch before
 committing. When the author asks for a commit, it goes on `main`.
 
+## Ibex first, then the conversions
+
+**R177.** Ibex (`ibex/`, the Steam Controller 2) is the base layout. A change is
+built on Ibex; the Deck's (`neptune/`) and the DualSense Edge's (`dse/`) layouts
+are made from it and never edited by hand. In order:
+
+1. Finish Ibex: its builder installs `ibex/*_latest.json`; export both VDFs
+   (step 4 below) and save its snapshot: `python3 -m tools.release snapshot ibex`.
+2. Convert: `python3 -m tools.convert neptune` and `python3 -m tools.convert dse`.
+   Each prints what its rules did, and writes the controller's next version only
+   when its layout changed.
+3. Export and snapshot each controller that changed, as for Ibex.
+
+A change for the Deck or the Edge alone is a new conversion rule
+(`steam_layout/convert.py`, Definition of Done §12), not an edit of its layout.
+
 ## Required publication metadata
 
 **R151.** Every publication of a changed layout must include a reviewed description and

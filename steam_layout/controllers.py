@@ -57,10 +57,12 @@ class Controller:
     absent: frozenset = frozenset()          # (source, input) the controller lacks or the author left out (R178)
     absent_sources: frozenset = frozenset()  # sources it lacks: every bind on them is absent (R178)
     swaps: tuple = ()             # ((source, input), (source, input)): inputs that trade places (R181)
-    whole_pad: bool = False       # the left pad's role goes to the whole touchpad (R183)
+    whole_pad: bool = False       # the left pad's role goes to the whole touchpad, center_trackpad (R183); the
+                                  # two pad-touch switches stay: on the Edge they are the touchpad's halves
     mute: str = ""                # the input of the mute button, bound in Base (R184)
     always_gyro: bool = False     # the gyro enable masks come off (R185)
     first_version: str = "1.0"    # the version of a controller's first layout (Ibex's and the Edge's own lines)
+    built_until: str = ""         # the last version built directly, before the base layout (R177)
 
     @property
     def directory(self):
@@ -110,12 +112,11 @@ IBEX = Controller(
 NEPTUNE = Controller(
     name="neptune", label="Steam Deck", controller_type="controller_neptune", controller_caps="23117823",
     prefix="", gyro_style=2, descriptions=_per_variant(_DESCRIPTION),
-    urls={"default": "workshop://3660206238", "alternative": "workshop://3660203920"})
+    urls={"default": "workshop://3660206238", "alternative": "workshop://3660203920"}, built_until="90.74")
 DSE = Controller(
     name="dse", label="DualSense Edge", controller_type="controller_ps5_edge", controller_caps="852975615",
     prefix="dse_", gyro_style=4, descriptions=_per_variant(_EDGE_DESCRIPTION), urls={v: "" for v in VARIANTS},
-    absent=frozenset(STICK_TOUCHES + (("switch", "right_trackpad_touch"),)),
-    absent_sources=frozenset({"right_trackpad"}),
+    absent=frozenset(STICK_TOUCHES), absent_sources=frozenset({"right_trackpad"}),
     swaps=((("switch", "button_back_left_upper"), ("switch", "button_back_left")),
            (("switch", "button_back_right_upper"), ("switch", "button_back_right"))),
     whole_pad=True, mute="button_capture", always_gyro=True)

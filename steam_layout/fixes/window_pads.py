@@ -17,6 +17,9 @@ Author direction, 2026-09-30:
   no touch: a second tap north or south goes to Circular Scroll, and anywhere
   else stays in mouse mode.
 
+On the DualSense Edge the whole pad, `center_trackpad`, has the left pad's role and there is no right
+pad (R183): the left pad's part applies to the whole pad and the right pad's part is left out.
+
 Idempotent; works with numeric IDs or title tokens.
 """
 import copy
@@ -32,15 +35,21 @@ def cleared():
     return {"activators": {"Full_Press": {"bindings": {"binding": EMPTY}}}, "disabled_activators": {}}
 
 
+def swipe_pad(layout):
+    """The source of the swipe menu: the left pad, or the whole pad where it has the left pad's role (R183)."""
+    return "center_trackpad" if "center_trackpad" in layout.active(next(iter(layout.presets))) else "left_trackpad"
+
+
 def swipe_keys(layout):
     """{direction: (key binding, settings)} from the left pad's swipe menu.
 
     The menu is Base's until 90.24. Since 90.25 Base's left pad is a D-pad that only binds the
     touch, and the swipes are in `LTP: Entry Point`, where each one also removes that layer.
     """
-    base = layout.active(next(iter(layout.presets)))["left_trackpad"]
+    pad = swipe_pad(layout)
+    base = layout.active(next(iter(layout.presets)))[pad]
     if not all(direction in base.get("inputs", {}) for direction in SWIPES):
-        base = layout.active(SWIPE_LAYER)["left_trackpad"]
+        base = layout.active(SWIPE_LAYER)[pad]
     result = {}
     for direction in SWIPES:
         entry = base["inputs"][direction]["activators"]["Full_Press"]
@@ -59,9 +68,10 @@ def fix(data):
     layout = Layout(data)
     base, keys = swipe_keys(layout)
     changed = []
+    pad = swipe_pad(layout)
     for title in always_on_layers(layout):
         groups = layout.active(title)
-        left = groups["left_trackpad"]
+        left = groups[pad]
         inputs = {"click": cleared(), "touch": cleared()}
         for direction, (key, settings) in keys.items():
             inputs[direction] = {"activators": {"Full_Press": {"bindings": {"binding": key}, "settings": settings}},
@@ -71,7 +81,9 @@ def fix(data):
             if left["mode"] != "disabled" and left["mode"] != base["mode"]:
                 raise ValueError(f"{title}: unexpected left pad mode {left['mode']}")
             left.update(copy.deepcopy(wanted))
-            changed.append(f"{title} / left_trackpad")
+            changed.append(f"{title} / {pad}")
+        if "right_trackpad" not in groups:
+            continue
         right = groups["right_trackpad"]
         mouse = layout.active(next(iter(layout.presets)))["right_trackpad"]["mode"]
         if right["mode"] == "disabled":

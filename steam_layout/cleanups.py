@@ -76,9 +76,9 @@ BUTTONS = {("switch", "left_bumper"): "LB", ("switch", "right_bumper"): "RB",
            ("joystick", "click"): "L3", ("right_joystick", "click"): "R3",
            ("left_trigger", "click"): "LT", ("right_trigger", "click"): "RT",
            ("left_trigger", "edge"): "LT", ("right_trigger", "edge"): "RT",
-           ("left_trackpad", "touch"): "LTP", ("right_trackpad", "touch"): "RTP"}
+           ("left_trackpad", "touch"): "LTP", ("right_trackpad", "touch"): "RTP", ("center_trackpad", "touch"): "CTP"}
 THUMBS = frozenset({"LSt", "RSt"})
-PADS = frozenset({"left_trackpad", "right_trackpad"})
+PADS = frozenset({"left_trackpad", "right_trackpad", "center_trackpad"})    # the whole pad: the DualSense Edge
 NAMES = frozenset(BUTTONS.values())
 CHECKS = ("outside the guard", "left below", "left above", "hidden cleanup", "never there", "guard mismatch",
           "hidden exit", "exit to review")

@@ -114,7 +114,8 @@ def main():
                 print(f"{row['layer']} [{row['source_state']}] {row['input']} {row['activation']}: "
                       f"removes first {row['removes_first'] or 'nothing'}")
             return 0
-        config = exceptions.window(json.loads(args.stacks.read_text(encoding="utf-8")), exceptions.load(args.register))
+        config = exceptions.window(exceptions.stacks_for_layout(json.loads(args.stacks.read_text(encoding="utf-8")), data),
+                                   exceptions.load(args.register, data))
         report = audit(data, config)
     except (OSError, ValueError, KeyError, TypeError, IndexError) as error:
         print(f"Audit error: {error}", file=sys.stderr)

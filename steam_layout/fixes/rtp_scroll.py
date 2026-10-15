@@ -16,7 +16,9 @@ INPUTS = ("dpad_north", "dpad_south")
 
 def fix(data):
     cm = data["controller_mappings"]
-    key = next(k for k, v in cm["action_layers"].items() if v["title"] == LAYER)
+    key = next((k for k, v in cm["action_layers"].items() if v["title"] == LAYER), None)
+    if key is None:                       # a controller without the right pad has no such layer (R178)
+        return {"group": None, "changed": []}
     preset = next(p for p in cm["preset"] if p["name"] == key)
     gid = next(g for g, s in preset["group_source_bindings"].items() if s == SLOT)
     group = next(g for g in cm["group"] if g["id"] == gid)

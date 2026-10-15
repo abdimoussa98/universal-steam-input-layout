@@ -7,7 +7,7 @@ import sys
 import tempfile
 import unittest
 
-from steam_layout import changes
+from steam_layout import changes, controllers
 from tests.test_audit_inheritance import EMPTY, act, add, build, remove
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -157,7 +157,9 @@ class ScriptTests(unittest.TestCase):
     def test_the_working_layouts_against_their_newest_snapshot(self):
         result = self.run_script()
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(result.stdout.count("Changes from "), 2)      # one report per working layout
+        working = sum(len(controller.working()) for controller in controllers.with_layouts())
+        self.assertEqual(working, 6)                                      # Ibex, Neptune and the Edge, two each
+        self.assertEqual(result.stdout.count("Changes from "), working)  # one report per working layout
 
 
 if __name__ == "__main__":

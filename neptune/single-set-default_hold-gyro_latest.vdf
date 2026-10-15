@@ -2,7 +2,7 @@
 {
 	"version"				"3"
 	"revision"				"12896"
-	"title"					"single-set-default :: always-gyro :: 90.74"
+	"title"					"single-set-default :: always-gyro :: 90.75"
 	"description"			"WASD movement, gyro aiming, right-stick turn assist, and circular trackpad scrolling. L2/R2: mouse buttons; L1/R1: modifiers. Includes Fn controls, Steering, Cursor Gyro, and Gamepad modes."
 	"creator"				"76561198079670632"
 	"progenitor"			""
@@ -3426,7 +3426,7 @@
 			"gyro_natural_sensitivity"					"300"
 			"flickstick_rotation_sensitivity"			"3853"
 			"gyro_vertical_horizontal_ratio"			"200"
-			"gyro_to_2d_conversion_style"				"4"
+			"gyro_to_2d_conversion_style"				"2"
 			"gyro_speed_deadzone"						"0"
 			"gyro_precision_speed"						"300"
 			"gyro_ratchet_button_mask"					"211109453778944"
@@ -7461,8 +7461,9 @@
 		}
 		"settings"
 		{
-			"layer"							"1"
-			"gyro_ratchet_button_mask"		"140737488355328"
+			"layer"								"1"
+			"gyro_ratchet_button_mask"			"140737488355328"
+			"gyro_to_2d_conversion_style"		"2"
 		}
 	}
 	"group"
@@ -7476,8 +7477,9 @@
 		}
 		"settings"
 		{
-			"layer"							"1"
-			"gyro_ratchet_button_mask"		"70368744177664"
+			"layer"								"1"
+			"gyro_ratchet_button_mask"			"70368744177664"
+			"gyro_to_2d_conversion_style"		"2"
 		}
 	}
 	"group"
@@ -14878,6 +14880,7 @@
 			"layer"										"1"
 			"gyro_ratchet_button_mask"					"211109453758464"
 			"gyro_ratchet_button_requireany_or_all"		"0"
+			"gyro_to_2d_conversion_style"				"2"
 		}
 	}
 	"group"
@@ -14894,6 +14897,7 @@
 			"layer"										"1"
 			"gyro_ratchet_button_mask"					"211109453758464"
 			"gyro_ratchet_button_requireany_or_all"		"0"
+			"gyro_to_2d_conversion_style"				"2"
 		}
 	}
 	"group"
@@ -14910,6 +14914,7 @@
 			"layer"										"1"
 			"gyro_ratchet_button_mask"					"211109453758464"
 			"gyro_ratchet_button_requireany_or_all"		"0"
+			"gyro_to_2d_conversion_style"				"2"
 		}
 	}
 	"group"
@@ -14926,6 +14931,7 @@
 			"layer"										"1"
 			"gyro_ratchet_button_mask"					"211109453758464"
 			"gyro_ratchet_button_requireany_or_all"		"0"
+			"gyro_to_2d_conversion_style"				"2"
 		}
 	}
 	"group"
@@ -14942,6 +14948,7 @@
 			"layer"										"1"
 			"gyro_ratchet_button_mask"					"211109453758464"
 			"gyro_ratchet_button_requireany_or_all"		"0"
+			"gyro_to_2d_conversion_style"				"2"
 		}
 	}
 	"group"
@@ -19312,6 +19319,7 @@
 			"haptic_intensity"						"0"
 			"flickstick_haptic_bump_per_angle"		"1"
 			"mouse_move_threshold"					"5"
+			"gyro_to_2d_conversion_style"			"2"
 		}
 	}
 	"group"
@@ -19690,6 +19698,7 @@
 			"haptic_intensity"						"0"
 			"flickstick_haptic_bump_per_angle"		"1"
 			"mouse_move_threshold"					"5"
+			"gyro_to_2d_conversion_style"			"2"
 		}
 	}
 	"group"
@@ -32756,6 +32765,7 @@
 			"flickstick_haptic_bump_per_angle"		"1"
 			"mouse_move_threshold"					"5"
 			"layer"									"1"
+			"gyro_to_2d_conversion_style"			"2"
 		}
 	}
 	"group"

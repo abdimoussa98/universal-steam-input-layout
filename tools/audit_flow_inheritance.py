@@ -105,7 +105,7 @@ def needs_review(reached, changed, covers_accepted):
 
 def run(layout_path, config_path=None, layers=None, baseline=None):
     data = json.loads(Path(layout_path).read_text(encoding="utf-8"))
-    config = load_rules(config_path)
+    config = load_rules(config_path, data)
     layout = Layout(data)
     variant = "alternative" if "alternative" in layout.cm.get("title", "") else "default"
     mapping = config.get("variants", {}).get(variant, {})
@@ -286,8 +286,9 @@ def print_report(report, detail, layout=None):
 
 def print_inventory(layout_path, config_path, layers):
     """Every layer-changing binding, with what the chains do with it."""
-    layout = Layout(json.loads(Path(layout_path).read_text(encoding="utf-8")))
-    view = family_view(layout, load_rules(config_path))
+    data = json.loads(Path(layout_path).read_text(encoding="utf-8"))
+    layout = Layout(data)
+    view = family_view(layout, load_rules(config_path, data))
     for title in layout.presets:
         rows = view.inventory.by_layer(title)
         if not rows or (layers and title not in layers):

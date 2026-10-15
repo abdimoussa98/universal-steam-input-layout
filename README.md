@@ -38,6 +38,7 @@ Run everything from the repo root.
 python3 -m tools.audit_build          # the gate for every version: four audits, every controller's layouts
 python3 -m tools.change_report        # working layouts against their newest snapshots
 node tools/convert_vdf.mjs neptune/single-set-default_hold-gyro_latest.json   # JSON to VDF
+python3 -m tools.convert dse            # the Edge's layouts from the newest Ibex snapshot (docs/building.md)
 python3 -m tools.release check neptune   # before tagging a release (docs/publishing.md)
 
 # every Python test (about 46 minutes on this Mac), then the exporter's tests
@@ -45,9 +46,10 @@ PYTHONPATH=.:tests python3 -m unittest $(ls tests/test_*.py | sed 's#/#.#; s#\.p
 node --test tests/test_convert_vdf.mjs
 ```
 
-The layouts in `neptune/` are **generated**. To change one, change the builder
-and install it ([building](docs/building.md)); a hand edit is lost on the next
-install.
+The layouts are **generated**. Ibex's are built; the Deck's and the Edge's are
+converted from Ibex by their rules ([building](docs/building.md)). To change a
+layout, build the change on Ibex and convert; a hand edit is lost on the next
+build.
 
 ## Directory map
 

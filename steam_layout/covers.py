@@ -36,10 +36,11 @@ from .model import defined, map_title
 RULES = Path(__file__).with_name("flow_config.json")
 
 
-def load_rules(path=None):
-    """The rules file, with the exceptions register expanded into the sections the audits read."""
+def load_rules(path=None, data=None):
+    """The rules file, with the exceptions register expanded into the sections the audits read; with a layout,
+    the register as it applies to the layout's controller (exceptions.for_layout)."""
     from .exceptions import load_config
-    return load_config(path or RULES)
+    return load_config(path or RULES, data)
 
 
 def family_view(layout, rules=None):

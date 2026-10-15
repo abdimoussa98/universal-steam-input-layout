@@ -284,6 +284,10 @@ class RepositoryTests(unittest.TestCase):
         self.assertEqual(sorted(every), release.test_modules())
         self.assertEqual(len(every), len(set(every)))
         self.assertIn("tests.test_release", every)
+        self.assertEqual(sum("tests.test_scenario_registry" in part for part in parts), 1)
+        seconds = [sum(release.SLOW.get(m.split(".")[-1], 10) for m in part) for part in parts]
+        self.assertLess(max(seconds) - min(seconds), 120)                 # the slowest module goes first
+        self.assertTrue(set(release.SLOW) <= {m.split(".")[-1] for m in every}, "a slow module was renamed")
 
     def test_released_snapshots_are_unchanged(self):                                          # R151, check 6
         self.assertEqual(release.changed_snapshots(), [])

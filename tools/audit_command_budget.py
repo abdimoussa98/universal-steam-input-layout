@@ -119,7 +119,7 @@ def allowed_inverted(entry, owners, data):
     candidates = [{**row, 'scope': {**row['scope'],
                                     'layers': [map_title(t, mapping) for t in row['scope']['layers']],
                                     'operations': [[op, map_title(t, mapping)] for op, t in row['scope']['operations']]}}
-                  for row in exceptions.of(exceptions.load(), 'R111') if row['status'] == 'allow']
+                  for row in exceptions.of(exceptions.load(data=data), 'R111') if row['status'] == 'allow']
     candidates = [row for row in candidates
                   if all(o['title'] in row['scope']['layers']
                          and o['source_state'] == row['scope']['source'] + ' active' for o in owners)]
@@ -151,7 +151,7 @@ def allowed_inverted(entry, owners, data):
 
 def audit_layout(data, source="<memory>", native=None):
     """`native` is the R108 exceptions to apply; by default the ones in the exceptions register."""
-    native = native_exceptions() if native is None else native
+    native = native_exceptions(exceptions.load(data=data)) if native is None else native
     cm = data["controller_mappings"]
     names = {key: value["title"] for section in ("actions", "action_layers")
              for key, value in cm[section].items()}

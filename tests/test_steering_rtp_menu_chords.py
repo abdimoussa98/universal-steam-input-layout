@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 import unittest
 
+from steam_layout import controllers
 from steam_layout.model import Layout, entries
 from tools.audit_command_budget import audit_layout
 
@@ -25,12 +26,15 @@ def module(path, name):
     return loaded
 
 
-def release_builder(version):
-    """The builder of the findings folder whose stored build carries this version, newest folder first."""
+def release_builder(version, controller_type='controller_neptune'):
+    """The builder of the findings folder whose stored build carries this version for this controller, newest folder
+    first."""
     for folder in sorted(ROOT.glob('findings/*'), reverse=True):
         stored, script = folder / 'default-candidate.json', folder / 'build_candidate.py'
-        if stored.exists() and script.exists() and json.loads(stored.read_text())[
-                'controller_mappings']['title'].endswith(f' :: {version}'):
+        if not (stored.exists() and script.exists()):
+            continue
+        mappings = json.loads(stored.read_text())['controller_mappings']
+        if mappings['title'].endswith(f' :: {version}') and mappings.get('controller_type') == controller_type:
             return module(script, 'release_build')
     return None
 
@@ -46,17 +50,25 @@ class SteeringRtpMenu(unittest.TestCase):
 
     def test_working_layouts_are_generated_including_stored_order(self):
         # R156. The builder is found by the version in the working layout's title, so this follows each
-        # release. Until 90.56 it named the 90.42 builder and failed from 90.43 on.
-        for variant, working, _ in self.each():
+        # release. Until 90.56 it named the 90.42 builder and failed from 90.43 on. Since the base layout (R177)
+        # the built layouts are Ibex's; Neptune's are converted from Ibex after 90.74, which test_convert holds (C1).
+        built = [(controller, path) for controller in (controllers.IBEX, controllers.NEPTUNE)
+                 for path in controller.working()]
+        self.assertTrue(any(controller is controllers.IBEX for controller, _ in built))
+        for controller, path in built:
+            working = json.loads(path.read_text())
             version = working['controller_mappings']['title'].rsplit(' :: ', 1)[-1]
-            builder = release_builder(version)
-            self.assertIsNotNone(builder, f'no findings folder holds a build_candidate.py and a stored build of {version}')
-            generated = builder.build(variant)[0]
-            generated = json.loads(generated) if isinstance(generated, str) else generated
-            for data in (working, generated):
-                for field in ('title', 'description'):
-                    data['controller_mappings'].pop(field)
-            self.assertEqual(json.dumps(working), json.dumps(generated))
+            if not controller.base and controllers.version_key(version) > controllers.version_key(controller.built_until):
+                continue
+            with self.subTest(path.name):
+                builder = release_builder(version, controller.controller_type)
+                self.assertIsNotNone(builder, f'no findings folder holds a build_candidate.py and a stored build of {version}')
+                generated = builder.build(controller.variant_of(path))[0]
+                generated = json.loads(generated) if isinstance(generated, str) else generated
+                for data in (working, generated):
+                    for field in ('title', 'description'):
+                        data['controller_mappings'].pop(field)
+                self.assertEqual(json.dumps(working), json.dumps(generated))
 
     def test_the_90_42_build_is_reproducible_including_stored_order(self):
         # The frozen 90.42 scenarios run on this builder (tests/scenario.py), so it has to keep giving the stored build.

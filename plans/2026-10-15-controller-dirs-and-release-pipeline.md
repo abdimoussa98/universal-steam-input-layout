@@ -1,11 +1,29 @@
 # Plan: an Ibex base layout, its conversions to the Deck and the DualSense Edge, and a release pipeline
 
-**Status, 2026-10-15:** in progress since the author's "go ahead and start
-implementing this". Done: Part 0 (90.71 to 90.74 committed), Part 1 (the
-registry, `ibex/`, `dse/`) and Part 2 (`tools/release.py`, `CHANGELOG.md`, the
-workflow); the backfill tag is the author's to push. Revised ten times the same
-day on the author's word (below). Three readings of the author's words are
-marked in [the author's answers](#the-authors-answers) (1, 5 and 7).
+**Status, 2026-10-15:** built the same day, on the author's "go ahead and
+start implementing this"; untested on the devices. Parts 0 to 4 are in: the
+registry, `ibex/` and `dse/`, `tools/release.py`, `CHANGELOG.md` and the
+workflow; Ibex 1.0, Neptune 90.75 and DSE 1.0 with their snapshots
+([record](../findings/2026-10-15-ibex-base/README.md)). Left for the author:
+pushing `main` and the tags (step 2's backfill first, then step 7). Three
+readings of the author's words are marked in
+[the author's answers](#the-authors-answers) (1, 5 and 7).
+
+**Changed while building**, the plan below is as written:
+
+- There is no layout input `center_trackpad_touch`: it is only a field of the
+  Steam client's controller state message. On the Edge the two pad-touch
+  switches, `left_trackpad_touch` and `right_trackpad_touch`, are the
+  touchpad's halves, so R183 leaves them as they are and Base's mode shifts
+  follow a thumb anywhere on the pad; neither is an absent input. The whole
+  pad's touch chord is mask bit 27, as planned. A76 and R183 say so now.
+- The Click Entry Point's ring press, a Soft Press past 23000 on the Deck, is
+  a Regular Press on the whole pad's outer ring with its radius set to 23000.
+- Each conversion ends with the fix pipeline, as a build does; the result is
+  a fixed point of it. The audits read the exceptions register through a view
+  of the layout's controller (R178 g).
+- `tools.release snapshot` saves a controller's snapshot (and refuses a tagged
+  one), in place of the skill's copy loop.
 
 The author, 2026-10-15: "create a dse directory similar to the neptune dir.
 [...] I also want a directory for the steam controller 2, but i want you to call

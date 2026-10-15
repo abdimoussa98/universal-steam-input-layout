@@ -29,13 +29,18 @@ Retired interactions may specify `frozen="90.41"` on their scenario. Those
 run the named frozen builder and record reach separately; they cannot satisfy
 the working layout's coverage requirement. The assumption report labels them.
 
-Names. Buttons: Start, Select, A, B, X, Y, Up, Down, Left, Right, LB, RB, and the back
-buttons. L1 and R1 are the modifier buttons: the bumpers in the default layout, the
+Names. Buttons: Start, Select, A, B, X, Y, Up, Down, Left, Right, LB, RB, Mute (the DualSense Edge), and the back
+buttons, named where they are on the Deck: on a controller whose grips trade places (R181) a scenario's L4 presses
+the button that holds L4's bind. L1 and R1 are the modifier buttons: the bumpers in the default layout, the
 triggers' soft pull in the alternative. LF and RF are the firing buttons: the triggers'
 soft pull in the default, the bumpers in the alternative. Sticks are LS and RS, pads LP
-and RP. A pad click is `press_pad(pad, where)`: "centre", a direction for the outer part, or
+and RP; CP is the DualSense Edge's whole touchpad. A pad click is `press_pad(pad, where)`: "centre", a direction for the outer part, or
 "ring left" for the ring where the two ranges overlap (A39). A layer title is written with the default layout's names; `pad.title()` and the
 expectations turn L1 and R1 into L2 and R2 for the alternative.
+
+Controllers. The scenarios run on Neptune's working layouts. `SCENARIO_CONTROLLER=ibex` runs them on another
+controller's (C4 of plans/2026-10-15-controller-dirs-and-release-pipeline.md), and `self.each(controller="dse")`
+runs one scenario on that controller's; the layers it reaches are kept apart from Neptune's.
 
 Plan: plans/2026-10-02-rule-registry.md, phases 13 to 15.
 """
@@ -44,10 +49,11 @@ from collections import namedtuple
 import importlib.util
 import itertools
 import json
+import os
 from pathlib import Path
 import unittest
 
-from steam_layout import changes
+from steam_layout import changes, controllers
 from steam_layout.model import Layout, map_title
 from steam_layout.simulator import Simulator, desktop, typed
 
@@ -62,10 +68,12 @@ BUTTONS = {"Start": ("switch", "button_escape"), "Select": ("switch", "button_me
            "LT": ("left_trigger", "edge"), "RT": ("right_trigger", "edge"),
            "LT full": ("left_trigger", "click"), "RT full": ("right_trigger", "click"),
            "L4": ("switch", "button_back_left_upper"), "L5": ("switch", "button_back_left"),
-           "R4": ("switch", "button_back_right_upper"), "R5": ("switch", "button_back_right")}
+           "R4": ("switch", "button_back_right_upper"), "R5": ("switch", "button_back_right"),
+           "Mute": ("switch", "button_capture")}
 ROLES = {"default": {"L1": "LB", "R1": "RB", "LF": "LT", "RF": "RT"},
          "alternative": {"L1": "LT", "R1": "RT", "LF": "LB", "RF": "RB"}}
-SOURCES = {"LS": "joystick", "RS": "right_joystick", "LP": "left_trackpad", "RP": "right_trackpad"}
+SOURCES = {"LS": "joystick", "RS": "right_joystick", "LP": "left_trackpad", "RP": "right_trackpad",
+           "CP": "center_trackpad"}
 DIRECTIONS = {"up": "dpad_north", "down": "dpad_south", "left": "dpad_west", "right": "dpad_east"}
 SWITCHES = {"A9": ("exposed_fires", (True, False)), "A32": ("reverse_ties", (False, True)),
             "A42": ("hold_releases", (True, False))}                                             # the either-way assumptions
@@ -74,6 +82,7 @@ BACK = {new: old for old, new in RENAME.items()}
 
 Meta = namedtuple("Meta", "check name rules rests either frozen", defaults=(None,))
 SCENARIOS = []
+CONTROLLER = os.environ.get("SCENARIO_CONTROLLER", "neptune")      # whose working layouts the scenarios run on
 REACHED = {}                                 # layout -> the layers a scenario has put on the stack so far
 FROZEN_REACHED = {}                          # (version, layout) -> historical reach, never live coverage
 RELEASE_LIST = "unverified-assumptions.txt"
@@ -105,14 +114,15 @@ def old_inverted_chord(function):
     return unittest.expectedFailure(function)
 
 
-def layout_path(variant):
-    return ROOT / f"neptune/single-set-{variant}_hold-gyro_latest.json"
+def layout_path(variant, controller=None):
+    return controllers.get(controller or CONTROLLER).working_json(variant)
 
 
-def layout_data(variant):
-    if variant not in _layouts:
-        _layouts[variant] = json.loads(layout_path(variant).read_text(encoding="utf-8"))
-    return _layouts[variant]
+def layout_data(variant, controller=None):
+    key = (controller or CONTROLLER, variant)
+    if key not in _layouts:
+        _layouts[key] = json.loads(layout_path(variant, controller).read_text(encoding="utf-8"))
+    return _layouts[key]
 
 
 def frozen_layout_data(variant, version):
@@ -162,6 +172,9 @@ class Pad:
     def __init__(self, variant, start=None, data=None, **options):
         self.variant, self.options = variant, options
         self.layout = Layout(data or layout_data(variant))
+        controller = controllers.for_type(self.layout.cm.get("controller_type"))
+        self.swaps = dict(pair for one, other in (controller.swaps if controller else ())
+                          for pair in ((one, other), (other, one)))
         self.sim = Simulator(self.layout, start=tuple(self.title(t) for t in start) if start else None, **options)
         self._mark, self._began = 0, tuple(self.sim.stack)
 
@@ -177,7 +190,7 @@ class Pad:
     def control(self, name):
         name = ROLES[self.variant].get(name, name)
         if name in BUTTONS:
-            return BUTTONS[name]
+            return self.swaps.get(BUTTONS[name], BUTTONS[name])        # a Deck grip, where its bind is now (R181)
         stick, _, part = name.partition(" ")
         return (SOURCES[stick], part)          # "LS click", "RP touch"
 
@@ -376,7 +389,7 @@ class ScenarioCase(unittest.TestCase):
         where = f" [on {self._pad!r} at {self._pad.sim.now} ms, stack {self._pad.stack}]" if self._pad else ""
         return super()._formatMessage(msg, standardMsg) + where
 
-    def each(self, start=None, variants=VARIANTS, desktop_configuration=False, **options):
+    def each(self, start=None, variants=VARIANTS, desktop_configuration=False, controller=None, **options):
         meta = getattr(getattr(self, self._testMethodName), "scenario", None)
         names = [SWITCHES[a][0] for a in (meta.either if meta else ())]
         ways = [SWITCHES[a][1] for a in (meta.either if meta else ())]
@@ -384,7 +397,7 @@ class ScenarioCase(unittest.TestCase):
             for way in itertools.product(*ways):
                 chosen = {**options, **dict(zip(names, way))}
                 frozen = meta.frozen if meta else None
-                data = frozen_layout_data(variant, frozen) if frozen else layout_data(variant)
+                data = frozen_layout_data(variant, frozen) if frozen else layout_data(variant, controller)
                 if desktop_configuration:
                     data = desktop(data)
                 pad = Pad(variant, data=data, **chosen)
@@ -401,8 +414,10 @@ class ScenarioCase(unittest.TestCase):
                 finally:
                     if frozen:
                         FROZEN_REACHED.setdefault((frozen, variant), set()).update(pad.reached())
-                    else:
+                    elif controller in (None, CONTROLLER):
                         REACHED.setdefault(variant, set()).update(pad.reached())
+                    else:
+                        REACHED.setdefault((controller, variant), set()).update(pad.reached())
 
 
 def modules():

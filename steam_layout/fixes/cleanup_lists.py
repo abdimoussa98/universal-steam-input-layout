@@ -168,7 +168,7 @@ def fix(data, config=None):
     The stacks are built once. Every edit here is to a list the backward chains don't follow (a cleanup
     function) or drops a layer that is never on the stack at that point, so the stacks stay valid.
     """
-    config = load_config(RULES) if config is None else config
+    config = load_config(RULES, data) if config is None else config
     first, stacks = run(data, config, extras=None)             # no fix resolves an exit finding (R136)
     if not _open(first):
         return {"changed": [], "remaining": 0}     # already clean: the usual case in the pipeline

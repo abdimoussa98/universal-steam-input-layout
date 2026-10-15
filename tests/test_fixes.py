@@ -7,6 +7,7 @@ import sys
 import tempfile
 import unittest
 
+from steam_layout import controllers
 from steam_layout.fixes import PIPELINE, apply_all
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,11 +24,12 @@ class PipelineTests(unittest.TestCase):
                           "window_routes"])
 
     def test_working_layouts_are_a_fixed_point(self):
-        # Every fix has already been applied: running the pipeline again changes nothing.
-        for variant in ("default", "alternative"):
-            data = load(variant)
+        # Every fix has already been applied: running the pipeline again changes nothing. Every controller's layouts:
+        # a conversion ends with the pipeline too (R177).
+        for path in controllers.working_layouts():
+            data = json.loads(path.read_text())
             before = copy.deepcopy(data)
-            with self.subTest(variant=variant):
+            with self.subTest(path.name):
                 apply_all(data)
                 self.assertEqual(data, before)
 

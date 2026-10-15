@@ -43,6 +43,7 @@ all eleven. Suggested fixes for 90.23: findings/2026-10-04-required-cleanups/.
 """
 from collections import defaultdict
 
+from . import controllers
 from .flow_model import DIRECTIONS, is_clear
 from .model import defined, map_title
 
@@ -136,9 +137,17 @@ def bound_below(c, layer, control):
     return found
 
 
+def absent(c):
+    """The inputs of the three checks that the layout's controller lacks: no rule about them applies there (R178 g),
+    so R169 has nothing to ask of the DualSense Edge, which has no stick touch."""
+    controller = controllers.for_type(c.layout.cm.get("controller_type"))
+    return {control for control in TOUCHES + EDGES + BUTTONS if controller and controller.lacks(*control)}
+
+
 def missing(c, only=None):
     """[(check, layer, control, state, reason)]: every input that needs a cleanup function and has none."""
     rows = []
+    gone = absent(c)
     for layer in c.layers:
         kind = left_out(c, layer)
         if kind in EVERY_RULE or not c.reached(layer) or (only and layer not in only):
@@ -151,7 +160,7 @@ def missing(c, only=None):
 
         if kind != "helper":
             for control in TOUCHES:
-                if states[control] != "cleanup":
+                if states[control] != "cleanup" and control not in gone:
                     add(TOUCH, control)
         overrides = any(states[button] != "open" for button in EDGE_BUTTONS)
         for control in EDGES:

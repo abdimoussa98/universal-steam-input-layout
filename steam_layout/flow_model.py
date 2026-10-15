@@ -53,6 +53,7 @@ BITS = {3: [("switch", "left_bumper")], 2: [("switch", "right_bumper")],
         22: [("joystick", "click")], 26: [("right_joystick", "click")],
         14: [("switch", "button_escape")], 12: [("switch", "button_menu")],
         19: "pad:left_trackpad", 20: "pad:right_trackpad",
+        27: "pad:center_trackpad", 28: [("center_trackpad", "click")],          # the whole pad (resources/Controllers.md)
         46: [("joystick", "touch")], 47: [("right_joystick", "touch")],
         30: "deflect:joystick", 31: "deflect:right_joystick"}
 

@@ -48,9 +48,18 @@ EXPORTER = "5.12.3"                     # pfwobcke.vscode-vdf, the version the c
 TAG = re.compile(r"^(?P<controller>[a-z0-9]+)-v(?P<version>\d+(?:\.\d+)+)$")
 SECTION = re.compile(r"^## (?P<controller>[a-z0-9]+) (?P<version>\d+(?:\.\d+)+)\s*$", re.M)
 FROM_BASE = re.compile(r"\bFrom (?P<controller>[a-z0-9]+) (?P<version>\d+(?:\.\d+)+)\b")
-# Releases from before the base layout (R177): Neptune up to 90.74 was built directly, not converted.
-BEFORE_BASE = {"neptune": "90.74"}
 ZIP_TIME = (2026, 1, 1, 0, 0, 0)        # one timestamp for every file in the zip, so a bundle is reproducible
+# The slow test modules, in seconds each on this Mac (2026-10-15); every other module counts as 10. Only how evenly
+# the workflow's four parts split the 46 minutes depends on these numbers.
+SLOW = {"test_scenario_registry": 573, "test_steering_entry_quiet_drivers": 191, "test_steering_rtp_menu_chords": 191,
+        "test_cleanups": 174, "test_fallback_window_backport": 117, "test_scenarios_90_33": 110,
+        "test_scenarios_90_35": 110, "test_scenarios_90_34": 109, "test_scenarios_90_38": 108,
+        "test_steering_four_way_and_open_edges": 102, "test_steering_fallback_swap": 89, "test_convert": 88,
+        "test_menu_base_chords": 83, "test_cleanup_entry_order": 81, "test_steering_fallback_guard": 79,
+        "test_window_releases_and_tap_cover_resets": 74, "test_menu_chain_and_window_pads": 72,
+        "test_quiet_resets_and_beeps": 72, "test_fallback_window": 70, "test_fallback_window_replacements": 70,
+        "test_scenarios_90_58": 70, "test_pad_bump_removal": 66, "test_scenarios_90_43": 59,
+        "test_required_cleanups_build": 57}
 
 
 class Problem(Exception):
@@ -240,9 +249,9 @@ def check(name, version=None, tagged=False, export_vdfs=True, warn=print):
         problems.extend(changed_snapshots(every))
 
     def conversion():                                                                       # 7
-        if controller.base or (name in BEFORE_BASE and
-                               controllers.version_key(version) <= controllers.version_key(BEFORE_BASE[name])):
-            return
+        if controller.base or (controller.built_until and
+                               controllers.version_key(version) <= controllers.version_key(controller.built_until)):
+            return                                                       # built directly, before the base layout
         section = changelog_section(name, version) if (ROOT / "CHANGELOG.md").exists() else None
         base = base_release(section)
         if base is None:
@@ -254,7 +263,7 @@ def check(name, version=None, tagged=False, export_vdfs=True, warn=print):
             if not source.exists():
                 problems.append(f"{source.relative_to(ROOT)} is missing")
                 continue
-            made = convert.convert(json.loads(source.read_text(encoding="utf-8")), name, variant, version)
+            made, _ = convert.convert(json.loads(source.read_text(encoding="utf-8")), name, variant, version)
             working = controller.working_json(variant)
             if not working.exists() or json.loads(working.read_text(encoding="utf-8")) != made:
                 problems.append(f"{working.relative_to(ROOT)} is not the conversion of ibex {base} (R177)")
@@ -396,10 +405,16 @@ def test_modules():
 
 
 def shard(index, count):
-    """Part `index` (1 to `count`) of the Python test modules, dealt in turn by name."""
+    """Part `index` (1 to `count`) of the Python test modules: the slowest first, each to the part with the least
+    time so far (`SLOW`), so the parts take about as long."""
     if not 1 <= index <= count:
         raise ValueError(f"part {index} of {count}")
-    return test_modules()[index - 1::count]
+    loads, parts = [0] * count, [[] for _ in range(count)]
+    for module in sorted(test_modules(), key=lambda m: (-SLOW.get(m.split(".")[-1], 10), m)):
+        least = loads.index(min(loads))
+        loads[least] += SLOW.get(module.split(".")[-1], 10)
+        parts[least].append(module)
+    return sorted(parts[index - 1])
 
 
 def main():

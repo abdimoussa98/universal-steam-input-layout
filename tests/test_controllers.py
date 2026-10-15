@@ -60,18 +60,29 @@ class RegistryTests(unittest.TestCase):
 
     def test_the_edge_lacks_stick_touch_and_the_right_pad(self):                          # R178, R182, R183
         dse = controllers.DSE
-        for source, name in (("joystick", "touch"), ("right_joystick", "touch"), ("right_trackpad", "click"),
-                             ("switch", "right_trackpad_touch")):
+        for source, name in (("joystick", "touch"), ("right_joystick", "touch"), ("right_trackpad", "click")):
             with self.subTest(source=source, input=name):
                 self.assertTrue(dse.lacks(source, name))
                 self.assertFalse(controllers.IBEX.lacks(source, name))
                 self.assertFalse(controllers.NEPTUNE.lacks(source, name))
         self.assertFalse(dse.lacks("joystick", "click"))
         self.assertFalse(dse.lacks("left_trackpad", "click"))
+        for switch in ("left_trackpad_touch", "right_trackpad_touch"):      # the touchpad's two halves (A76)
+            self.assertFalse(dse.lacks("switch", switch))
 
     def test_gyro_styles(self):                                                                  # R177, R179, R180
         self.assertEqual({c.name: controllers.GYRO_STYLES[c.gyro_style] for c in controllers.CONTROLLERS},
                          {"ibex": "Player Space", "neptune": "Yaw + Roll", "dse": "Player Space"})
+
+    def test_every_gyro_to_mouse_group_states_its_controllers_style(self):                 # R177, R179, R180
+        for controller in controllers.with_layouts():
+            for path in controller.working():
+                groups = [g for g in json.loads(path.read_text(encoding="utf-8"))["controller_mappings"]["group"]
+                          if g["mode"] == "gyro_to_mouse"]
+                with self.subTest(path.name):
+                    self.assertTrue(groups)
+                    self.assertEqual({g["settings"].get("gyro_to_2d_conversion_style") for g in groups},
+                                     {str(controller.gyro_style)})
 
 
 class VersionTests(unittest.TestCase):

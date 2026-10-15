@@ -17,6 +17,14 @@ its supporting layers separately. This replaces the earlier “stateful set”
 wording. These features use layers throughout; action-set switching is excluded
 because the author reports buggy behavior with Steam action sets.
 
+## Ibex as the base layout, the DualSense Edge, the release pipeline (plan of 2026-10-15)
+
+- [x] **Built: the registry, the release pipeline, Ibex 1.0, Neptune 90.75 and DSE 1.0** (author, 2026-10-15: "go ahead and start implementing this"; [record](findings/2026-10-15-ibex-base/README.md) · [plan](plans/2026-10-15-controller-dirs-and-release-pipeline.md)). Ibex, the Steam Controller 2, is the base layout (R177); `tools.convert` makes the Deck's and the Edge's layouts from it (R178 to R185). The Deck's gyro turns by yaw and roll in 90.75. Each controller has its own version, and a pushed tag `<controller>-v<version>` publishes one zip of every controller's latest release.
+- [ ] **Publish, the author's step:** push `main`, then the backfill tag `neptune-v90.74` on the commit that added the pipeline, and see the workflow pass on GitHub before the three tags `ibex-v1.0`, `neptune-v90.75` and `dse-v1.0` ([publishing](docs/publishing.md)).
+- [ ] **On the Deck, 90.75:** turning and leaning the Deck both move the aim; nothing else feels different.
+- [ ] **On the DualSense Edge, DSE 1.0**, in [this order](findings/2026-10-15-ibex-base/README.md#on-the-devices): mute gives a middle click (A75); swipes, a ring click and a centre click on the touchpad (A76); the D-pad and face buttons with a thumb on the pad; the grips; the gyro with the sticks centred and the right stick at its edge.
+- [ ] **On a Steam Controller 2, Ibex 1.0**, when one is at hand: both pads, both stick touches and four grips answer (A72); a `chord_button` chord names its button and works (A73).
+
 ## The key layers' click and the Fn right stick (plan of 2026-10-14)
 
 - [x] **Built as 90.73, from 90.72** (author, 2026-10-15: "now go ahead and build these"; [record](findings/2026-10-15-key-layer-click/README.md) · [plan](plans/2026-10-14-key-layer-click-and-fn-right-stick.md)). In `Escape`, `Tab`, `Backspace` and `Enter` the left pad's click is a repeating, silent Soft Press that removes the layer, so Base's click carries on into its Click Entry Point.

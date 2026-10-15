@@ -87,9 +87,130 @@ def check(entries):
     return entries
 
 
-def load(path=None):
-    """The register's entries, checked."""
-    return check(json.loads(Path(path or REGISTER).read_text(encoding="utf-8")).get("exceptions", []))
+def load(path=None, data=None):
+    """The register's entries, checked; with a layout, as they apply to its controller (`for_layout`)."""
+    entries = check(json.loads(Path(path or REGISTER).read_text(encoding="utf-8")).get("exceptions", []))
+    return for_layout(entries, data) if data is not None else entries
+
+
+# --- one controller's view of the register (R178 g) ---------------------------------------------
+
+def _controller_view(data):
+    """(controller, title renames, the layout's titles by default-layout names, variant mapping), or None for a
+    Neptune layout (or one of no known controller): the register was written on Neptune's layouts."""
+    from . import controllers
+    from .convert import WHOLE_PAD_LAYERS
+    from .model import map_title
+    controller = controllers.of_layout(data)
+    if controller is None or controller is controllers.NEPTUNE:
+        return None
+    cm = data["controller_mappings"]
+    variant = "alternative" if "alternative" in cm.get("title", "") else "default"
+    mapping = json.loads(REGISTER.read_text(encoding="utf-8")).get("variants", {}).get(variant, {})
+    back = {new: old for old, new in mapping.items()}
+    present = {map_title(v["title"], back) for section in ("actions", "action_layers") for v in cm[section].values()}
+    renames = WHOLE_PAD_LAYERS if controller.whole_pad else {}
+    return controller, renames, present, mapping
+
+
+def _input(text, controller):
+    """A register input, `source/input`, on the controller: moved (R181, R183) or None if absent (R178)."""
+    from .convert import moved
+    source, _, name = text.partition("/")
+    now = moved(controller, (source, name))
+    return f"{now[0]}/{now[1]}" if now else None
+
+
+def _entry_view(entry, view):
+    """One entry on a converted controller, or None where it names nothing the layout has."""
+    from . import controllers
+    controller, renames, present, _ = view
+    if entry["rule"] == "R169" and any(controller.lacks(*touch) for touch in (("joystick", "touch"),
+                                                                              ("right_joystick", "touch"))):
+        return None                                      # R178 (g): no stick touch, no rule about it
+    split = controllers.NEPTUNE.built_until
+    if "until" in entry["scope"] and controllers.version_key(entry["scope"]["until"]) <= controllers.version_key(split):
+        return None                                      # it ended on Neptune's line, before the base layout (R177)
+    scope = copy.deepcopy(entry["scope"])
+
+    def title(name):
+        name = renames.get(name, name)
+        return name if name in present else None
+
+    for key in ("layers", "removes"):
+        if key in scope:
+            scope[key] = [t for t in map(title, scope[key]) if t]
+            if not scope[key]:
+                return None
+    for key in ("target", "upper", "lower", "cover", "where"):
+        if key in scope:
+            scope[key] = title(scope[key])
+            if scope[key] is None:
+                return None
+    if "not_where" in scope and title(scope["not_where"]) is None:
+        del scope["not_where"]                           # the layer it excludes is not there: nothing to exclude
+    elif "not_where" in scope:
+        scope["not_where"] = title(scope["not_where"])
+    if "operations" in scope:
+        if any(title(t) is None for _, t in scope["operations"]):
+            return None
+        scope["operations"] = [[op, title(t)] for op, t in scope["operations"]]
+    if entry["rule"] == "R140":
+        now = _input(f"{scope['source']}/{scope['input']}", controller)
+        if now is None:
+            return None
+        scope["source"], scope["input"] = now.split("/", 1)
+    if "inputs" in scope:
+        def inputs(listed):
+            return [now for now in (_input(text, controller) for text in listed) if now]
+        if isinstance(scope["inputs"], dict):
+            scope["inputs"] = {variant: inputs(listed) for variant, listed in scope["inputs"].items()}
+            if not any(scope["inputs"].values()):
+                return None
+        else:
+            scope["inputs"] = inputs(scope["inputs"])
+            if not scope["inputs"]:
+                return None
+    return {**entry, "scope": scope}
+
+
+def for_layout(entries, data):
+    """The entries as they apply to a layout's controller. Neptune: unchanged; the register was written on its
+    layouts. Ibex and the conversions: an entry whose `until` release is on Neptune's line before the base layout is
+    over (R177). A conversion such as the DualSense Edge's also has titles renamed as the conversion renames them
+    (the left pad's layers to the whole pad's), inputs moved as it moves them (the grips, the left pad), and what the
+    layout lacks left out: a layer it deleted, an absent input, and R169 where there is no stick touch (R178 g). An
+    entry left naming nothing is dropped."""
+    view = _controller_view(data)
+    if view is None:
+        return entries
+    return [kept for kept in (_entry_view(entry, view) for entry in entries) if kept is not None]
+
+
+def stacks_for_layout(stacks_config, data):
+    """The Window audit's declared targets and stacks (steam_layout/traced_stacks.json) for a layout's controller,
+    as `for_layout` does for the register: renamed, and without a target or stack the layout lacks."""
+    view = _controller_view(data)
+    if view is None:
+        return stacks_config
+    controller, renames, present, _ = view
+    config = copy.deepcopy(stacks_config)
+    targets = {}
+    for target, spec in config.get("targets", {}).items():
+        target = renames.get(target, target)
+        if target not in present:
+            continue
+        rows = []
+        for row in spec.get("stacks", []):
+            layers = [renames.get(t, t) for t in row["layers"]]
+            condition = row.get("when_inherited")
+            if any(t not in present for t in layers) or (condition and controller.lacks(condition["source"],
+                                                                                         condition["input"])):
+                continue
+            rows.append({**row, "layers": layers})
+        targets[target] = {**spec, "stacks": rows}
+    config["targets"] = targets
+    return config
 
 
 def of(entries, rule):
@@ -97,10 +218,12 @@ def of(entries, rule):
     return [entry for entry in entries if entry["rule"] == rule]
 
 
-def expand(config):
-    """A copy of `config` with the sections the audits read filled in from its `exceptions`."""
+def expand(config, data=None):
+    """A copy of `config` with the sections the audits read filled in from its `exceptions`, as they apply to the
+    layout `data` when given (`for_layout`)."""
     config = copy.deepcopy(config)
-    for entry in check(config.get("exceptions", [])):
+    entries = check(config.get("exceptions", []))
+    for entry in (for_layout(entries, data) if data is not None else entries):
         scope, rule = entry["scope"], entry["rule"]
         if rule == "R139" and scope.get("kind") == "covers":
             config.setdefault("review", {})["covers"] = entry["why"]
@@ -133,9 +256,10 @@ def expand(config):
     return config
 
 
-def load_config(path=None):
-    """The rules file with its exceptions expanded: what the Flow, cover and Cleanup audits read."""
-    return expand(json.loads(Path(path or REGISTER).read_text(encoding="utf-8")))
+def load_config(path=None, data=None):
+    """The rules file with its exceptions expanded: what the Flow, cover and Cleanup audits read. With a layout,
+    the exceptions as they apply to its controller (`for_layout`)."""
+    return expand(json.loads(Path(path or REGISTER).read_text(encoding="utf-8")), data)
 
 
 def window(stacks_config, entries):

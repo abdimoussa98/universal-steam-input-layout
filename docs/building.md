@@ -1,9 +1,32 @@
 # How the layouts are built
 
-Both working layouts, `neptune/single-set-default_hold-gyro_latest` and
-`neptune/single-set-alternative_hold-gyro_latest` (JSON and VDF), are
-**generated**. They have 90 layers each since 90.52 (88 from 90.33). A hand edit in `neptune/`
-is lost on the next install.
+Every working layout is **generated**; a hand edit is lost on the next build.
+Since 2026-10-15 **Ibex, the Steam Controller 2, is the base layout** (R177):
+
+| Directory | Made by | Layers |
+|---|---|---|
+| `ibex/` | A builder in `findings/<date>-<slug>/`, as below | 90 |
+| `neptune/` | `python3 -m tools.convert neptune`, from an Ibex snapshot (R179). Built by the builders below up to 90.74 | 90 |
+| `dse/` | `python3 -m tools.convert dse`, from an Ibex snapshot (R180 to R185) | 74 |
+
+A change is built on Ibex, and then the two conversions are run. A change for
+the Deck or the Edge alone is a new conversion rule in `steam_layout/convert.py`
+and the [Layer Definition of Done §12](../resources/Layer%20Definition%20of%20Done.md#12-controllers-and-conversions),
+never an edit of their layouts. A test fails when a converted layout is not
+what `tools.convert` makes from the Ibex release its CHANGELOG section names
+(C1, `test_convert`).
+
+```bash
+python3 findings/<date>-<slug>/build_candidate.py --install   # writes ibex/*_latest.json
+python3 -m tools.convert neptune                                # writes neptune/*_latest.json
+python3 -m tools.convert dse                                    # writes dse/*_latest.json
+python3 -m tools.convert dse --check                            # exit 1 if dse/ is not that conversion
+```
+
+`tools.convert` reads the newest Ibex snapshot, so export Ibex's VDFs and save
+its snapshot first (`python3 -m tools.release snapshot ibex`). It writes a
+controller's latest release version again when nothing changed for it, and its
+next version when something did.
 
 The separate [90.39 fallback-window testing candidate](../findings/2026-10-09-fallback-window-backport/README.md)
 extends frozen 90.32 with compatible later fixes. It has 90 layers and writes
@@ -15,8 +38,12 @@ scenario coverage remain separate from the live layouts.
 ## The builder
 
 The current live builder is
-[findings/2026-10-15-fn-right-stick](../findings/2026-10-15-fn-right-stick/README.md),
-for 90.74. It reads the 90.73 snapshot. 90.70's builder reads the 90.68 snapshot: 90.69 is a trial from 90.68 too, a snapshot off the line that was never the
+[findings/2026-10-15-ibex-base](../findings/2026-10-15-ibex-base/README.md),
+for Ibex 1.0. It reads the Neptune 90.74 snapshot: the bootstrap, the one change
+that went from the Deck to Ibex. The next builder reads the Ibex 1.0 snapshot,
+and writes `ibex/`. Neptune's own builders end at 90.74
+([fn-right-stick](../findings/2026-10-15-fn-right-stick/README.md), from the
+90.73 snapshot). 90.70's builder reads the 90.68 snapshot: 90.69 is a trial from 90.68 too, a snapshot off the line that was never the
 working layout. Since 90.49 a builder reads the snapshot of the release before it. Two lines do not: 90.54 reads the
 90.52 snapshot, the author's trial of one change, so 90.53 is a snapshot off the line and 90.55 continues from 90.54;
 and 90.61 reads the 90.58 snapshot. 90.59 and 90.60 were two trials for the same fault that did not help; their
@@ -25,19 +52,22 @@ says what they were. A separately named testing candidate does not become the li
 builder merely by having a newer version number.
 
 ```bash
-python3 findings/2026-10-15-fn-right-stick/build_candidate.py            # candidates in that folder
-python3 findings/2026-10-15-fn-right-stick/build_candidate.py --install  # writes working JSON
+python3 findings/2026-10-15-ibex-base/build_candidate.py            # candidates in that folder
+python3 findings/2026-10-15-ibex-base/build_candidate.py --install  # writes ibex/*_latest.json
 ```
 
-A test holds the working layout to its builder (R156,
+A test holds Ibex's working layouts to their builder (R156,
 `test_steering_rtp_menu_chords`): it finds the findings folder whose stored
-`default-candidate.json` carries the working layout's version and runs that
-folder's `build_candidate.py`. A release's folder needs both files.
+`default-candidate.json` carries the working layout's version and Steam's
+`controller_type` for it, and runs that folder's `build_candidate.py`. A
+release's folder needs both files. Neptune's layouts were held to theirs up to
+90.74.
 
-The builder runs the fix pipeline (`steam_layout.fixes`). After installation,
-validate, export both sibling VDFs and save the version snapshots using
-`steam-layout-apply` ([publishing](publishing.md)). Older builders use a
-separate `install_neptune.py` for installation.
+The builder runs the fix pipeline (`steam_layout.fixes`), and so does each
+conversion. After installation, validate, export the sibling VDFs and save the
+snapshots of each controller that changed using `steam-layout-apply`
+([publishing](publishing.md)). Older builders use a separate
+`install_neptune.py` for installation.
 
 ## The chain
 
@@ -46,6 +76,7 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| Ibex 1.0 | [ibex-base](../findings/2026-10-15-ibex-base/README.md) | From Neptune 90.74, the bootstrap: the Steam Controller 2's Steam names and Player Space in all eleven gyro-to-mouse groups; no bind changes. Neptune 90.75 and DSE 1.0 are its conversions |
 | 90.74 | [fn-right-stick](../findings/2026-10-15-fn-right-stick/README.md) | From 90.73. The right stick of the four Fn layers takes the left stick's group settings: `deadzone` 13276 and `requires_click` 0 come off. Its keys (`;` `'` `.` `,`), Low bumps, R3 guard and cleanups are unchanged. Removes and adds unchanged |
 | 90.73 | [key-layer-click](../findings/2026-10-15-key-layer-click/README.md) | From 90.72. In `Escape`, `Tab`, `Backspace` and `Enter` the left pad's click is a repeating, silent Soft Press, not interruptible, that removes the layer; Base's repeating click then adds its Click Entry Point. Four removes more a layout |
 | 90.72 | [pad-stick-edge-cleanups](../findings/2026-10-14-pad-stick-edge-cleanups/README.md) | From 90.71. The pad click layers get a cleanup function on both stick edges and the key layers on the left, a copy of their stick-touch cleanup guarded by the pad's touch, for controllers without stick touch. What those edges hide is done on the pad's click: the Steering stick layers add their cover, the ramp layers remove themselves. The menu Entry Points block the pad clicks (R172). 90 removes and 9 adds more a layout |

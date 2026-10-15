@@ -177,7 +177,7 @@ def main():
 
     try:
         data = json.loads(args.layout.read_text(encoding="utf-8"))
-        config = load_config(args.rules)
+        config = load_config(args.rules, data)
         changed = changes.changed_since(data, changes.baseline_for(args.layout, args.baseline))
         report = audit(data, config, only=args.layer, required=not args.no_required, changed=changed, extras=args.extras,
                        memory=int(args.memory * 1024 ** 3), progress=None if args.json else progress)

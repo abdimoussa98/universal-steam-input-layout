@@ -13,6 +13,7 @@ modules: `python3 -m tools.<name>`. The exporter is `node tools/convert_vdf.mjs`
 | [`audit_cleanups`](#cleanup-audit-audit_cleanups) | Cleanup audit: what cleanups and releases remove, and where a layer must have one | Nothing |
 | [`audit_layer`](#layer-report-audit_layer) | Report on one layer: below, above, inherited, exits | Nothing |
 | [`change_report`](#change-report-change_report) | What differs between two layouts | Only with `--out` |
+| [`convert`](#conversions-convert) | Makes the Deck's or the Edge's layouts from an Ibex snapshot by their rules | The controller's working JSON |
 | [`release`](#releases-release) | Checks a version before its tag, saves snapshots, builds the release bundle | Snapshots, or the bundle |
 | [`convert_runtime_ids`](#convert_runtime_ids-ids-and-titles) | Numeric runtime IDs to `{{Base::Title}}` tokens and back | The layout |
 | [`duplicate_layer`](#duplicate_layer-copy-a-layer) | Copies a layer without shifting any ID | The layout, and a backup |
@@ -261,6 +262,24 @@ python3 -m tools.change_report BEFORE.json AFTER.json            # any two layou
 python3 -m tools.change_report --out findings/<date>-<slug>/     # also write <name>-changes.txt there
 ```
 
+## Conversions: `convert`
+
+Ibex is the base layout (R177). `convert` makes Neptune's or the DualSense
+Edge's two working layouts from an Ibex snapshot by that controller's rules
+(`steam_layout/convert.py`; R178 to R185), ending with the fix pipeline, and
+prints what each rule did. It writes the controller's latest release version
+again when the conversion is that release, and its next version otherwise.
+
+```bash
+python3 -m tools.convert neptune                  # from the newest Ibex snapshot
+python3 -m tools.convert dse --ibex 1.0           # from versions/ibex/1.0/
+python3 -m tools.convert dse --check              # exit 1 if dse/ is not that conversion
+```
+
+The audits read the exceptions register through a view of the layout's
+controller (`exceptions.for_layout`): on the Edge the left pad's layers are the
+whole pad's, what the Edge lacks is left out, and R169 does not apply (R178 g).
+
 ## Releases: `release`
 
 A release is a version with a Git tag `<controller>-v<version>`; pushing the
@@ -397,6 +416,7 @@ The reusable code behind the scripts above. Import it from the repo root.
 | Module | Use it for |
 |---|---|
 | `steam_layout.controllers` | The registry: each controller's directory, Steam names, file stems, gyro style and what its conversion reads; version order |
+| `steam_layout.convert` | The conversion rules, one function each, and `convert` and `bootstrap` (R177 to R185) |
 | `steam_layout.model` | Read a layout (numeric IDs or title tokens): layer titles, active groups per source, bindings in execution order, Always On layers |
 | `steam_layout.chains` | `Chains`: the stacks under a layer from backward chains (who adds it, back to Base, plus bystanders), each with its reason; `below`, `above`, `lineage`, `reached` |
 | `steam_layout.layer_report` | The per-layer report that `audit_layer.py` wraps |
