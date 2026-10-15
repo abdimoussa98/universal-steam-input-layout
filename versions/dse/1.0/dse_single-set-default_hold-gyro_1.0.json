@@ -2307,7 +2307,9 @@
 					"gyro_vertical_horizontal_ratio": "200",
 					"gyro_to_2d_conversion_style": "4",
 					"gyro_speed_deadzone": "0",
-					"gyro_precision_speed": "300"
+					"gyro_precision_speed": "300",
+					"gyro_ratchet_button_mask": "3221245952",
+					"gyro_ratchet_button_requireany_or_all": "1"
 				}
 			},
 			{

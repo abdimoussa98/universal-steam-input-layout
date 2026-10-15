@@ -5,9 +5,10 @@ start implementing this"; untested on the devices. Parts 0 to 4 are in: the
 registry, `ibex/` and `dse/`, `tools/release.py`, `CHANGELOG.md` and the
 workflow; Ibex 1.0, Neptune 90.75 and DSE 1.0 with their snapshots
 ([record](../findings/2026-10-15-ibex-base/README.md)). Left for the author:
-pushing `main` and the tags (step 2's backfill first, then step 7). Three
-readings of the author's words are marked in
-[the author's answers](#the-authors-answers) (1, 5 and 7).
+pushing `main` and the tags (step 2's backfill first, then step 7). Of the
+three readings marked in [the author's answers](#the-authors-answers), the
+author corrected 5: "Gyro always on" does not include Base. Readings 1 and 7
+stand as written.
 
 **Changed while building**, the plan below is as written:
 
@@ -22,6 +23,9 @@ readings of the author's words are marked in
 - Each conversion ends with the fix pipeline, as a build does; the result is
   a fixed point of it. The audits read the exceptions register through a view
   of the layout's controller (R178 g).
+- R185 takes the gyro enable mask off `Gyro` and its four modifiers only. The
+  author, of reading 5: "no does not include base". Base keeps its mask, so
+  with no stick touch Base has no gyro of its own on the Edge.
 - `tools.release snapshot` saves a controller's snapshot (and refuses a tagged
   one), in place of the skill's copy loop.
 - C4 is a recorded run, not a test in the suite: it repeats the whole scenario

@@ -9,7 +9,7 @@ that controller's rules, one function each below, and never edited by hand (Laye
     R183  dse      `whole_pad`: the left pad's role goes to the whole touchpad, with six CTP: layers
     R182  dse      `drop_absent`: no stick touch (R178 a to e), and no right pad (R183)
     R184  dse      `mute`: the mute button is the middle mouse button
-    R185  dse      `gyro_always_on`: no gyro enable mask
+    R185  dse      `gyro_always_on`: no gyro enable mask in `Gyro` and its modifiers; Base keeps its own
     R178  all      `delete_unreachable`: (f) a layer the layout can no longer reach goes, with every command naming it
 
     data, report = convert.convert(ibex, "dse", "default", "1.0")          # a new dict; `ibex` is not changed
@@ -380,8 +380,14 @@ def mute(data, controller):
 
 # --- R185: gyro always on -----------------------------------------------------------------------
 
+def gyro_layer(title):
+    """`Gyro`, the stateful gyro layer, or one of its four modifiers (`Gyro | L1: Modifier 0`, ...)."""
+    return title == "Gyro" or title.startswith("Gyro | ")
+
+
 def gyro_always_on(data):
-    """The enable mask comes off every gyro-to-mouse group; the layers whose groups lost one, by title."""
+    """The enable mask comes off the gyro-to-mouse groups of `Gyro` and its four modifiers. Base keeps its own (author,
+    2026-10-15: "no does not include base"). Returns the layers whose groups lost one, by title."""
     names = titles(data)
     owners = {}
     for preset in data["controller_mappings"]["preset"]:
@@ -390,10 +396,14 @@ def gyro_always_on(data):
     changed = []
     for group in data["controller_mappings"]["group"]:
         settings = group.get("settings") or {}
-        if group["mode"] == "gyro_to_mouse" and MASK in settings:
-            settings.pop(MASK)
-            settings.pop(ANY_OR_ALL, None)
-            changed.extend(owners.get(group["id"], []))
+        layers = owners.get(group["id"], [])
+        if group["mode"] != "gyro_to_mouse" or MASK not in settings or not any(map(gyro_layer, layers)):
+            continue
+        if not all(map(gyro_layer, layers)):
+            raise ValueError(f"group {group['id']} is the gyro of {layers}: a gyro layer's and another's")
+        settings.pop(MASK)
+        settings.pop(ANY_OR_ALL, None)
+        changed.extend(layers)
     return changed
 
 

@@ -236,13 +236,15 @@ class MuteAndGyroTests(unittest.TestCase):
         self.assertEqual(list(inputs), ["button_a", "button_capture"])
         self.assertEqual(inputs["button_capture"]["activators"], act("mouse_button MIDDLE, , "))
 
-    def test_no_gyro_group_keeps_an_enable_mask(self):                                    # R185
+    def test_the_gyro_layers_lose_their_enable_mask_and_base_keeps_its(self):            # R185
         masked = {"gyro_ratchet_button_mask": "3221225472", "gyro_ratchet_button_requireany_or_all": "0",
                   "gyro_natural_sensitivity": "300"}
         data = toy({"Base": {"gyro": ("gyro_to_mouse", {}, masked)}, "Gyro": {"gyro": ("gyro_to_mouse", {}, masked)},
+                    "Gyro | L1: Modifier 0": {"gyro": ("gyro_to_mouse", {}, masked)},
                     "Gyro Off Ramp Up": {"gyro": ("disabled", {})}})
-        self.assertEqual(convert.gyro_always_on(data), ["Base", "Gyro"])
+        self.assertEqual(convert.gyro_always_on(data), ["Gyro", "Gyro | L1: Modifier 0"])
         self.assertEqual(group(data, "Gyro", "gyro")["settings"], {"gyro_natural_sensitivity": "300"})
+        self.assertEqual(group(data, "Base", "gyro")["settings"], masked)              # author: "does not include base"
         self.assertEqual(group(data, "Gyro Off Ramp Up", "gyro")["mode"], "disabled")
 
 
@@ -348,10 +350,16 @@ class ConversionTests(unittest.TestCase):
                 self.assertEqual(capture, ["Base"])
                 self.assertEqual(layout.active("Base")["switch"]["inputs"]["button_capture"]["activators"],
                                  act("mouse_button MIDDLE, , "))
-                gyros = [g for g in data["controller_mappings"]["group"] if g["mode"] == "gyro_to_mouse"]
+                gyros = {t: layout.active(t)["gyro"] for t in layout.presets
+                         if layout.active(t).get("gyro", {}).get("mode") == "gyro_to_mouse"}
                 self.assertEqual(len(gyros), 9)                       # the two Temporary Gyro layers are gone
-                for g in gyros:
-                    self.assertNotIn("gyro_ratchet_button_mask", g["settings"])
+                masked = {t for t, g in gyros.items() if "gyro_ratchet_button_mask" in g["settings"]}
+                self.assertEqual(masked, {"Base"})
+                # Base keeps its mask, with the stick touches dropped: each needs that stick's deflection too (R178 d)
+                self.assertEqual((gyros["Base"]["settings"]["gyro_ratchet_button_mask"],
+                                  gyros["Base"]["settings"]["gyro_ratchet_button_requireany_or_all"]),
+                                 (str(1 << 12 | 1 << 14 | 1 << 30 | 1 << 31), "1"))
+                for g in gyros.values():
                     self.assertEqual(g["settings"]["gyro_to_2d_conversion_style"], "4")
                 self.assertEqual(layout.active("Gyro Off Ramp Up")["gyro"]["mode"], "disabled")
 

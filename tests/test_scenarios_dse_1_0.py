@@ -7,8 +7,8 @@ plans/2026-10-15-controller-dirs-and-release-pipeline.md, part 4. Each runs on t
 - The whole pad, `CP`, has the left pad's gestures: a swipe adds a key layer whose touch types the key, a click on
   the ring gives that direction's arrow key, and a click in the centre gives nothing (R183).
 - The mute button is the middle mouse button (R184).
-- The gyro has no enable button: it aims in Base and in `Gyro` with both sticks centred, and `Gyro Off Ramp Up`
-  turns it off (R185).
+- `Gyro` and its modifiers have no gyro enable button: there the gyro aims with both sticks centred, and
+  `Gyro Off Ramp Up` turns it off. Base keeps its own (R185).
 - The grips trade places: Shift on the left paddle (L5), Ctrl on the left front button (L4) (R181).
 - With no stick touch, a release missed while the Steam menu was open clears at the next stick push to the edge,
   where Neptune clears it at the next stick touch (R170).
@@ -110,14 +110,18 @@ class TheRest(ScenarioCase):
             pad.let_go("L1").wait(100)
 
     @scenario("dse 1.0 E6", rules=("R185",))
-    def test_the_gyro_aims_with_the_sticks_centred_and_the_gyro_off_layer_stops_it(self):
-        for start in (("Base",), ("Base", "Gyro")):
-            for pad in self.each(controller="dse", start=start):
-                self.assertTrue(gyro_aims(pad), "no stick touched and no button held")
-                pad.push("RS", "right").wait(100)
-                self.assertTrue(pad.has("Gyro Off Ramp Up") and not gyro_aims(pad))
-                pad.recentre("RS").wait(200)
-                self.assertTrue(gyro_aims(pad))
+    def test_in_gyro_the_gyro_aims_with_the_sticks_centred_and_the_gyro_off_layer_stops_it(self):
+        for pad in self.each(controller="dse", start=("Base", "Gyro")):
+            self.assertTrue(gyro_aims(pad), "no stick touched and no button held")
+            pad.hold("L1").wait(200)
+            self.assertTrue(pad.has("Gyro | L1: Modifier 0") and gyro_aims(pad), "a modifier of Gyro: no mask either")
+            pad.let_go("L1").wait(200)
+            pad.push("RS", "right").wait(100)
+            self.assertTrue(pad.has("Gyro Off Ramp Up") and not gyro_aims(pad))
+            pad.recentre("RS").wait(200)
+            self.assertTrue(gyro_aims(pad))
+        for pad in self.each(controller="dse"):
+            self.assertFalse(gyro_aims(pad), "Base keeps its enable mask (author: not Base)")
 
     @scenario("dse 1.0 E8", rules=("R170",), rests=("A25",))
     def test_a_missed_release_clears_on_the_next_stick_push(self):

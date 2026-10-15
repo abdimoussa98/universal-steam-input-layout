@@ -48,7 +48,7 @@ simulator does not model gyro output, so no scenario changes.
 | R182 | 511 activators dropped: 426 on the stick touches (213 a stick), 97 on the right pad, 12 of them on both |
 | R178 (b to e) | The left pad's touch chord, `chord_button` 16 in the eight stick-edge guards of the `CTP:` layers, becomes mask bit 27. Base's gyro mask loses the stick touches (d), `Gyro`'s and its modifiers' lose them too (b) |
 | R184 | Base binds the mute button, `button_capture`, to the middle mouse button |
-| R185 | The gyro enable mask comes off Base, `Gyro` and its four modifiers |
+| R185 | The gyro enable mask comes off `Gyro` and its four modifiers. Base keeps its own (author: "no does not include base"), now all of Select, Start and both sticks' deflection: Base's gyro does not aim, since no stick touch brings the `Temporary Gyro` layers |
 | R178 (f) | 16 layers deleted, with every command naming them: the eight `LST:` and `RST:` layers, the seven right-pad layers and `LTP: Middle Click`. 75 presets with Base |
 
 The fix pipeline then changes nothing: DSE 1.0 is a fixed point (R152).
@@ -130,8 +130,8 @@ Nothing here has been on a device. In this order:
    pad's ring gives that direction's arrow key; a click in the centre gives
    nothing (A76). With a thumb on the pad the D-pad and face buttons change as
    on the Deck. Shift is on the left paddle, Ctrl on the left front button.
-   With both sticks centred the gyro aims; pushing the right stick to its
-   edge stops it.
+   In Gyro mode, with both sticks centred, the gyro aims; pushing the right
+   stick to its edge stops it. In Base it does not aim.
 3. **Steam Controller 2, Ibex 1.0, when one is at hand:** both pads, both
    stick touches and the four grips answer (A72); Base's LB chord into
    `L1: Modifier 0` names LB in the configurator and works (A73).

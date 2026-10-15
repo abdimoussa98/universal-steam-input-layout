@@ -11,7 +11,7 @@ R178 and R180 to R185 in the
 | Working layouts | `dse_single-set-default_hold-gyro_latest` and `dse_single-set-alternative_hold-gyro_latest`, JSON and VDF. Generated |
 | Snapshots | `versions/dse/<version>/`, one per release |
 | Version | Its own line from 1.0 |
-| Gyro | Player Space, always on; the gyro off layer still turns it off |
+| Gyro | Player Space. Always on in Gyro mode, where the gyro off layer still turns it off; Base keeps its enable button |
 
 What the conversion changes from Ibex:
 
@@ -25,6 +25,8 @@ What the conversion changes from Ibex:
   Enter, Tab and Backspace, and a click into the arrow keys, with no middle
   click or Caps Lock in the centre. Every click on it is a Regular Press.
 - **Mute is the middle mouse button.**
-- **Gyro is always on**, with no enable button.
+- **Gyro mode has no enable button:** in `Gyro` and its modifiers the gyro is
+  always on. Base keeps its enable button, so with no stick touch Base has no
+  gyro of its own.
 
 The registry entry is in [controllers.py](../steam_layout/controllers.py).

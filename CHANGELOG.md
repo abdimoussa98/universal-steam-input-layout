@@ -20,8 +20,9 @@ The first DualSense Edge layout. From ibex 1.0, by the Edge's conversion rules
   Tab and Backspace, and a click into the arrow keys, with nothing in the
   centre. Every click on it is a Regular Press.
 - **Mute is the middle mouse button.**
-- **The gyro is always on** (Player Space); the gyro off layer still turns it
-  off.
+- **In Gyro mode the gyro is always on** (Player Space), with no enable button;
+  the gyro off layer still turns it off. Base keeps its enable button, so with
+  no stick touch Base has no gyro of its own.
 
 Not yet checked on an Edge ([to-do](todos.md)).
 
