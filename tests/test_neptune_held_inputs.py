@@ -111,7 +111,8 @@ class NeptuneHeldInputTests(unittest.TestCase):
                                      f"{title} → {target} needs its start delay to fire on the held stick; {RULE}")
 
     def test_threshold_exits_that_change_layers_repeat(self):
-        expected = {GYRO_OFF, "Turning Ramp Up 0", "Turning Ramp Up 1", "LTP: Arrow Keys", "RTP: Mouse Buttons"}
+        # `LTP: Arrow Keys` and `RTP: Mouse Buttons` had one on the pad click until 90.70.
+        expected = {GYRO_OFF, "Turning Ramp Up 0", "Turning Ramp Up 1"}
         for variant, layout in self.layouts.items():
             found = set()
             for title in layout["presets"]:

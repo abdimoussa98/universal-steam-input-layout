@@ -1,0 +1,56 @@
+{
+  "changed": [
+    "Menu Left: Fn Layer / right_joystick: settings as the left stick's, without deadzone 13276, requires_click 0",
+    "Menu Right: Fn Layer / right_joystick: settings as the left stick's, without deadzone 13276, requires_click 0",
+    "Stateful | Menu Left: Fn Layer / right_joystick: settings as the left stick's, without deadzone 13276, requires_click 0",
+    "Stateful | Menu Right: Fn Layer / right_joystick: settings as the left stick's, without deadzone 13276, requires_click 0"
+  ],
+  "removes": {
+    "90.73": 2965,
+    "90.74": 2965
+  },
+  "adds": {
+    "90.73": 469,
+    "90.74": 469
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13178",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 557,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L1: Scroll Down / left_bumper",
+        "R1: Scroll Up / right_bumper",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": false
+}

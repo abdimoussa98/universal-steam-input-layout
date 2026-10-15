@@ -1,0 +1,106 @@
+{
+  "changed": [
+    "LTP: Click Entry Point / joystick/edge: cleanup removing ['LTP: Click Entry Point'], guard 16",
+    "LTP: Click Entry Point / right_joystick/edge: cleanup removing ['LTP: Click Entry Point'], guard 16",
+    "LTP: Arrow Keys / joystick/edge: cleanup removing ['LTP: Arrow Keys'], guard 16",
+    "LTP: Arrow Keys / right_joystick/edge: cleanup removing ['LTP: Arrow Keys'], guard 16",
+    "LTP: Middle Click / joystick/edge: cleanup removing ['LTP: Middle Click'], guard 16",
+    "LTP: Middle Click / right_joystick/edge: cleanup removing ['LTP: Middle Click'], guard 16",
+    "Escape / joystick/edge: cleanup removing ['Escape'], guard 16",
+    "Tab / joystick/edge: cleanup removing ['Tab'], guard 16",
+    "Backspace / joystick/edge: cleanup removing ['Backspace'], guard 16",
+    "Enter / joystick/edge: cleanup removing ['Enter'], guard 16",
+    "RTP: Click Entry Point / joystick/edge: cleanup removing ['RTP: Click Entry Point', 'RTP: Circular Scroll', 'RTP: Entry Point', 'RTP: Tap Cover'], guard 17",
+    "RTP: Click Entry Point / right_joystick/edge: cleanup removing ['RTP: Click Entry Point', 'RTP: Circular Scroll', 'RTP: Entry Point', 'RTP: Tap Cover'], guard 17",
+    "RTP: Mouse Buttons / joystick/edge: cleanup removing ['RTP: Mouse Buttons', 'RTP: Circular Scroll', 'RTP: Entry Point', 'RTP: Tap Cover'], guard 17",
+    "RTP: Mouse Buttons / right_joystick/edge: cleanup removing ['RTP: Mouse Buttons', 'RTP: Circular Scroll', 'RTP: Entry Point', 'RTP: Tap Cover'], guard 17",
+    "RTP: Middle Click / joystick/edge: cleanup removing ['RTP: Middle Click', 'RTP: Circular Scroll', 'RTP: Entry Point', 'RTP: Tap Cover'], guard 17",
+    "RTP: Middle Click / right_joystick/edge: cleanup removing ['RTP: Middle Click', 'RTP: Circular Scroll', 'RTP: Entry Point', 'RTP: Tap Cover'], guard 17",
+    "RTP: Entry Point / right_joystick/edge: no longer removes RTP: Click Entry Point",
+    "Steering | LS Up: Modifier 1 / right_trackpad/click: adds Steering | LS: Tap Cover, silent",
+    "Steering | LS Down: Modifier 0 / right_trackpad/click: adds Steering | LS: Tap Cover, silent",
+    "Steering | LS Up: Scroll Up / right_trackpad/click: adds Steering | LS: Double Tap Cover, silent",
+    "Steering | LS Down: Scroll Down / right_trackpad/click: adds Steering | LS: Double Tap Cover, silent",
+    "Steering | LS: Double Tap Cover / right_trackpad/click: as Base's: adds the pad's Click Entry Point",
+    "Steering | LS: Tap Cover / right_trackpad/click: as Base's: adds the pad's Click Entry Point",
+    "Gyro Off Ramp Up / left_trackpad/click: removes the three ramp layers, then adds LTP: Click Entry Point, silent",
+    "Turning Ramp Up 0 / left_trackpad/click: removes the three ramp layers, then adds LTP: Click Entry Point, silent",
+    "Turning Ramp Up 1 / left_trackpad/click: removes the three ramp layers, then adds LTP: Click Entry Point, silent",
+    "Menu Left: Entry Point: both pad clicks blocked, the left swipes type their keys, the left touch cleared",
+    "Menu Right: Entry Point: both pad clicks blocked, the left swipes type their keys, the left touch cleared",
+    "Stateful | Menu Left: Entry Point: both pad clicks blocked, the left swipes type their keys, the left touch cleared",
+    "Stateful | Menu Right: Entry Point: both pad clicks blocked, the left swipes type their keys, the left touch cleared",
+    "Menu Left!Right: Enter: both pad clicks blocked, the left swipes type their keys, the left touch cleared",
+    "Menu Right!Left: Backspace: both pad clicks blocked, the left swipes type their keys, the left touch cleared",
+    "Menu Left: Entry Point / right_trackpad/touch: Release removes ['RTP: Entry Point', 'RTP: Tap Cover', 'RTP: Circular Scroll']",
+    "Menu Right: Entry Point / right_trackpad/touch: Release removes ['RTP: Entry Point', 'RTP: Tap Cover', 'RTP: Circular Scroll']",
+    "Menu Left!Right: Enter / right_trackpad/touch: Release removes ['RTP: Entry Point', 'RTP: Tap Cover', 'RTP: Circular Scroll']",
+    "Menu Right!Left: Backspace / right_trackpad/touch: Release removes ['RTP: Entry Point', 'RTP: Tap Cover', 'RTP: Circular Scroll']",
+    "Steering | LS: Entry Guard / right_trackpad/touch: kept, no touch layer can be under it",
+    "Stateful | Menu Left: Entry Point / right_trackpad/touch: Release removes ['RTP: Entry Point']",
+    "Stateful | Menu Right: Entry Point / right_trackpad/touch: Release removes ['RTP: Entry Point']"
+  ],
+  "removes": {
+    "90.71": 2949,
+    "90.72": 3019
+  },
+  "adds": {
+    "90.71": 460,
+    "90.72": 469
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 575,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [
+        "LTP: Click Entry Point / LSt: adds Escape, Tab, Backspace, Enter",
+        "LTP: Click Entry Point / joystick/edge: adds Escape, Tab, Backspace, Enter",
+        "LTP: Click Entry Point / RSt: adds Escape, Tab, Backspace, Enter",
+        "LTP: Click Entry Point / right_joystick/edge: adds Escape, Tab, Backspace, Enter",
+        "LTP: Arrow Keys / LSt: adds Escape, Tab, Backspace, Enter",
+        "LTP: Arrow Keys / joystick/edge: adds Escape, Tab, Backspace, Enter",
+        "LTP: Arrow Keys / RSt: adds Escape, Tab, Backspace, Enter",
+        "LTP: Arrow Keys / right_joystick/edge: adds Escape, Tab, Backspace, Enter",
+        "LTP: Middle Click / LSt: adds Escape, Tab, Backspace, Enter",
+        "LTP: Middle Click / joystick/edge: adds Escape, Tab, Backspace, Enter",
+        "LTP: Middle Click / RSt: adds Escape, Tab, Backspace, Enter",
+        "LTP: Middle Click / right_joystick/edge: adds Escape, Tab, Backspace, Enter",
+        "RTP: Double Tap / Start release: drops Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, Menu Left!Right: Double Tap Cover, Menu Left!Right: Enter, Menu Left!Right: Entry Point, Menu Left: Entry Point, Menu Left: Fn Layer, Menu Right!Left: Backspace, Menu Right!Left: Double Tap Cover, Menu Right!Left: Entry Point, Menu Right: Entry Point, Menu Right: Fn Layer, Stateful | Menu Left: Entry Point, Stateful | Menu Left: Fn Layer, Stateful | Menu Right: Entry Point, Stateful | Menu Right: Fn Layer",
+        "RTP: Double Tap / Select release: drops Menu Buttons: Left Stick Guard, Menu Buttons: Right Stick Guard, Menu Buttons: Tap Cover, Menu Left!Right: Double Tap Cover, Menu Left!Right: Enter, Menu Left!Right: Entry Point, Menu Left: Entry Point, Menu Left: Fn Layer, Menu Right!Left: Backspace, Menu Right!Left: Double Tap Cover, Menu Right!Left: Entry Point, Menu Right: Entry Point, Menu Right: Fn Layer, Stateful | Menu Left: Entry Point, Stateful | Menu Left: Fn Layer, Stateful | Menu Right: Entry Point, Stateful | Menu Right: Fn Layer"
+      ],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": true
+}

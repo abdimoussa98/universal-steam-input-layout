@@ -3,7 +3,7 @@
 import unittest
 
 from steam_layout.model import Layout
-from tests.scenario import ScenarioCase, layout_data, scenario
+from tests.scenario import ScenarioCase, frozen_layout_data, layout_data, scenario
 
 
 WINDOWS = ('Steering | LS Up: Double Tap', 'Steering | LS Down: Double Tap')
@@ -66,7 +66,9 @@ class PadClicks(ScenarioCase):
                 for pad in self.each(start=('Base', 'Steering')):
                     pad.hold('R1').push('LS', direction).wait(30).mark()
                     pad.press_pad('RP', where).wait(600)
-                    self.assertEqual(pad.seen('haptic'), [])
+                    # Since 90.71 the held scroll's repeats bump Low; nothing else bumps.
+                    self.assertEqual({d for _, d in pad.seen('haptic')},
+                                     {'1 RTP: Mouse Buttons right_trackpad/dpad_north'} if where == 'up' else set())
                     self.assertTrue(pad.has('Steering | LS: Tap Cover'))
                     self.assertIn(output, pad.typed())
                     if where != 'up':
@@ -102,8 +104,9 @@ class PadClicks(ScenarioCase):
                     self.assertEqual(pad.down(), [])
 
     def test_single_configured_bump_is_on_each_final_click_output(self):
+        # On the 90.70 build: since 90.71 the bump is on the final layers' self-hold (test_scenarios_90_71 Shape).
         for variant in ('default', 'alternative'):
-            layout = Layout(layout_data(variant))
+            layout = Layout(frozen_layout_data(variant, '90.70'))
             for title, source in (('Base', 'left_trackpad'), ('Base', 'right_trackpad'),
                                   ('RTP: Circular Scroll', 'right_trackpad')):
                 entry = layout.active(title)[source]['inputs']['click']['activators']['Soft_Press']

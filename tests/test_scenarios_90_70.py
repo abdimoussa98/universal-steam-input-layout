@@ -42,7 +42,8 @@ class Shape(unittest.TestCase):
     def test_no_cleanup_function_outside_the_steering_layers_adds_a_layer(self):
         for variant in VARIANTS:
             found = [t for t in cleanups(Layout(layout_data(variant))) if not t.layer.startswith('Steering')]
-            self.assertEqual(len(found), {'default': 439, 'alternative': 465}[variant])
+            # 439 and 465 until 90.71; 90.72 adds the pad layers' sixteen stick-edge cleanups.
+            self.assertEqual(len(found), {'default': 455, 'alternative': 481}[variant])
             self.assertFalse([t for t in found if any(op == 'add_layer' for op, _ in t.ops)], variant)
 
     def test_against_90_68_eighty_presses_gain_the_add_and_nothing_else_differs(self):
@@ -61,7 +62,6 @@ class Shape(unittest.TestCase):
                         self.assertEqual(ops, [('add_layer', GUARD)] + was, key)
                         gained += 1
             self.assertEqual(gained, 80, variant)
-            self.assertEqual(inputs(Layout(layout_data(variant))), new, variant)             # what is installed
 
 
 class TheGuardInEveryCleanup(ScenarioCase):

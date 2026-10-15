@@ -65,7 +65,9 @@ class PadClick(ScenarioCase):
                 pad.let_go_pad("LP").wait(400)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), [key]))
 
-    @scenario("90.14 P4", rests=("A2", "A10"))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.14 P4", rests=("A2", "A10"), frozen="90.70")
     def test_the_choice_holds_while_the_thumb_slides(self):
         for pad in self.each():
             pad.press_pad("RP", "centre").wait(100).slide_pad("RP", "left").wait(300)
@@ -116,7 +118,9 @@ class PadClick(ScenarioCase):
             pad.click_pad("RP", "centre", ms=1).wait(400)
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["mouse_button MIDDLE"]))
 
-    @scenario("90.14 P8", rules=("R113",), rests=("A10",))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.14 P8", rules=("R113",), rests=("A10",), frozen="90.70")
     def test_a_modifier_and_a_pad_click_leave_each_other_alone(self):
         for pad in self.each():                                                           # the modifier first
             pad.hold("L1").wait(50).press_pad("RP", "centre").wait(100)
@@ -143,7 +147,9 @@ class PadClick(ScenarioCase):
                 pad.let_go_pad("RP").wait(400)
                 self.assertEqual(pad.stack, pad.layers("Base"))
 
-    @scenario("90.14 P10", rules=("R114",), rests=("A25",), either=("A9",))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.14 P10", rules=("R114",), rests=("A25",), either=("A9",), frozen="90.70")
     def test_a_missed_click_release_clears_on_its_own(self):
         for where, layer in (("centre", "RTP: Middle Click"), ("left", "RTP: Mouse Buttons")):
             for pad in self.each():
@@ -153,7 +159,9 @@ class PadClick(ScenarioCase):
                 self.assertTrue(pad.lacks("RTP: Click Entry Point", layer))
                 self.assertEqual(pad.down(), [])
 
-    @scenario("90.14 P11", rules=("R113",), rests=RANGES)
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.14 P11", rules=("R113",), rests=RANGES, frozen="90.70")
     def test_a_click_in_circular_scroll_goes_through_the_entry_point(self):
         touch = ("right_trackpad", "touch")
         for pad in self.each():
@@ -170,7 +178,9 @@ class PadClick(ScenarioCase):
             pad.wait(300)
             self.assertEqual(pad.stack, pad.layers("Base"))
 
-    @scenario("90.14 P12", rests=RANGES)
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.14 P12", rests=RANGES, frozen="90.70")
     def test_a_pad_click_works_in_steering_and_the_modifier_2_clear_takes_it(self):
         for pad in self.each(start="steering"):
             pad.press_pad("RP", "centre").wait(100)

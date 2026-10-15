@@ -17,6 +17,20 @@ its supporting layers separately. This replaces the earlier “stateful set”
 wording. These features use layers throughout; action-set switching is excluded
 because the author reports buggy behavior with Steam action sets.
 
+## The key layers' click and the Fn right stick (plan of 2026-10-14)
+
+- [x] **Built as 90.73, from 90.72** (author, 2026-10-15: "now go ahead and build these"; [record](findings/2026-10-15-key-layer-click/README.md) · [plan](plans/2026-10-14-key-layer-click-and-fn-right-stick.md)). In `Escape`, `Tab`, `Backspace` and `Enter` the left pad's click is a repeating, silent Soft Press that removes the layer, so Base's click carries on into its Click Entry Point.
+- [ ] **On the Deck, 90.73**, in [this order](findings/2026-10-15-key-layer-click/README.md#on-the-deck): swipe then click at the ring gives the key, then the arrow; swipe, back to the centre, click gives the Middle Click; a swipe and lift is unchanged.
+- [x] **Built as 90.74, from 90.73** (author, 2026-10-15: "these are the ones i want"; [record](findings/2026-10-15-fn-right-stick/README.md)). The right stick of the four Fn layers takes the left stick's settings (no `deadzone` 13276, no `requires_click`); its keys `;` `'` `.` `,` and Low bumps are unchanged. It is the working layout. The cause of the Deck fault is not found: by the binds and on the simulator the keys were already there.
+- [ ] **On the Deck, 90.74**, in [this order](findings/2026-10-15-fn-right-stick/README.md#on-the-deck): each right-stick direction in the Fn layer types its key with a Low bump, from Select and Start, in Base, `Steering` and Cursor Gyro, and with the thumb already on the stick. If not: what it types on the first and second push.
+
+## The pad click layers on touch (plan of 2026-10-14)
+
+- [x] **Built as 90.72, from 90.71** (author, 2026-10-14: "go ahead and first create the plan"; [record](findings/2026-10-14-pad-stick-edge-cleanups/README.md) · [plan](plans/2026-10-14-pad-stick-edge-cleanups.md)). The pad layers get stick-edge cleanups, for controllers without stick touch; the Steering stick layers and the ramp layers do on the pad's click what those edges hide; the menu Entry Points block the pad clicks.
+- [ ] **On the Deck, 90.72**, in [this order](findings/2026-10-14-pad-stick-edge-cleanups/README.md#on-the-deck): a stuck pad layer clears on a stick push with no touch seen; no scroll after a right-pad click during a Steering stick hold; the turn assist stops on a left-pad click and resumes after; the pad clicks do nothing while a menu button is held.
+- [x] **Built as 90.71, from 90.70** (author, 2026-10-14: "We are good to start building"; [record](findings/2026-10-14-pad-click-touch-layers/README.md) · [plan](plans/2026-10-14-pad-click-touch-layers.md)). The adders of the Click Entry Points repeat, silent; the D-pad layers work on touch with a Release on each direction and the centre; the only bump is the final click's self-hold, High; no inverted repeating removal. It is the working layout.
+- [ ] **On the Deck, 90.71**, in [this order](findings/2026-10-14-pad-click-touch-layers/README.md#on-the-deck): a High bump on a click (A5); the layer after the click lets go with the thumb resting; one output per direction; Circular Scroll back to scrolling after a click.
+
 ## The W layer drop, the Steering stick edges, the Fn bumps (plan of 2026-10-10)
 
 - [x] **Built as 90.55, from 90.54** (author, 2026-10-11; [record](findings/2026-10-11-edge-soft-press-timers/README.md) · [plan](plans/2026-10-11-edge-soft-press-timers-and-steering-removes.md)). The four timers of the Steering stick are Soft Presses on the left stick's edge at 13276; the left edge of ten Steering layers cleans up with the Entry Guard's inverted chord, at the default radius; the right pad removes left the four Steering modifier layers; up and down in the W and S layers carry no cleanup; A and D in the stick modifiers send only the key; three removes left each Modifier 2 entry. It is the working layout.

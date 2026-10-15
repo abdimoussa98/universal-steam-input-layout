@@ -32,7 +32,9 @@ class StickTouches(ScenarioCase):
     def over(self, pad, upper, lower):
         self.assertLess(pad.stack.index(pad.title(lower)), pad.stack.index(pad.title(upper)))
 
-    @scenario("90.23 C1", rules=("R116", "R117", "R136"), rests=("A2", "A7"))
+    # On the 90.71 build: since 90.72 the menu layers bind the right pad's touch, so its tap chain (RTP: Entry Point,
+    # the Double Tap window, Circular Scroll) no longer opens during a menu hold (90.72 E8).
+    @scenario("90.23 C1", rules=("R116", "R117", "R136"), rests=("A2", "A7"), frozen="90.71")
     def test_a_thumb_lift_is_seen_with_a_pad_layer_under_the_cover(self):
         for menu in ("Start", "Select"):
             for thumb, pushed in (("RS", "LS"), ("LS", "RS")):                   # the first is the one 90.22 lost
@@ -61,7 +63,9 @@ class StickTouches(ScenarioCase):
                 pad.recentre("LS").wait(50).let_go(menu).wait(400).lift("LS").wait(600)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
 
-    @scenario("90.23 C3", rules=("R116", "R133"), rests=("A2", "A25", "A27"))
+    # On the 90.71 build: since 90.72 the menu layers bind the right pad's touch, so its tap chain (RTP: Entry Point,
+    # the Double Tap window, Circular Scroll) no longer opens during a menu hold (90.72 E8).
+    @scenario("90.23 C3", rules=("R116", "R133"), rests=("A2", "A25", "A27"), frozen="90.71")
     def test_a_stick_touch_clears_a_stale_cover_over_a_pad_layer(self):
         for stick in ("RS", "LS"):
             for pad in self.each():

@@ -1,0 +1,56 @@
+{
+  "changed": [
+    "Escape / left_trackpad/click: repeating silent Soft Press removes Escape",
+    "Tab / left_trackpad/click: repeating silent Soft Press removes Tab",
+    "Backspace / left_trackpad/click: repeating silent Soft Press removes Backspace",
+    "Enter / left_trackpad/click: repeating silent Soft Press removes Enter"
+  ],
+  "removes": {
+    "90.72": 3019,
+    "90.73": 3023
+  },
+  "adds": {
+    "90.72": 469,
+    "90.73": 469
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 575,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": false
+}

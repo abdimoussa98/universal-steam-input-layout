@@ -137,7 +137,11 @@ def frozen_layout_data(variant, version):
                   '90.67': 'findings/2026-10-13-entry-guard-before-the-left-edge-cleanup',
                   '90.68': 'findings/2026-10-13-entry-guard-adds-the-driver-layer-first',
                   '90.69': 'findings/2026-10-13-steering-cleanup-presses-without-repeat',
-                  '90.70': 'findings/2026-10-13-entry-guard-in-every-steering-cleanup'}
+                  '90.70': 'findings/2026-10-13-entry-guard-in-every-steering-cleanup',
+                  '90.71': 'findings/2026-10-14-pad-click-touch-layers',
+                  '90.72': 'findings/2026-10-14-pad-stick-edge-cleanups',
+                  '90.73': 'findings/2026-10-15-key-layer-click',
+                  '90.74': 'findings/2026-10-15-fn-right-stick'}
     key = version, variant
     if key not in _frozen_layouts:
         if version in candidates:

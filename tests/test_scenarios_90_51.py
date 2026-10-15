@@ -57,8 +57,9 @@ class RingBump(ScenarioCase):
                 self.assertEqual(pad.down(), [])
 
     def test_the_ring_pads_leave_haptics_to_their_binds(self):
+        # On the 90.70 build: since 90.71 the D-pad outputs are silent and the click bumps High (90.71 Shape).
         for variant in ('default', 'alternative'):
-            layout = Layout(layout_data(variant))
+            layout = Layout(frozen_layout_data(variant, '90.70'))
             for title, source in (('LTP: Arrow Keys', 'left_trackpad'), ('RTP: Mouse Buttons', 'right_trackpad')):
                 group = layout.active(title)[source]
                 self.assertEqual(group['settings']['haptic_intensity_override'], '5')

@@ -1,0 +1,241 @@
+Changes from single-set-default_hold-gyro_90.71.json to single-set-default_hold-gyro_latest.json
+Layers: 90 -> 90 (added: none; removed: none)
+
+== Turning Ramp Up 0
+  left_trackpad: source added
+    after:  click: Soft_Press(haptic_intensity=0): remove_layer Gyro Off Ramp Up ; remove_layer Turning Ramp Up 0 ; remove_layer Turning Ramp Up 1 ; add_layer LTP: Click Entry Point
+
+== Turning Ramp Up 1
+  left_trackpad: source added
+    after:  click: Soft_Press(haptic_intensity=0): remove_layer Gyro Off Ramp Up ; remove_layer Turning Ramp Up 0 ; remove_layer Turning Ramp Up 1 ; add_layer LTP: Click Entry Point
+
+== Gyro Off Ramp Up
+  left_trackpad: source added
+    after:  click: Soft_Press(haptic_intensity=0): remove_layer Gyro Off Ramp Up ; remove_layer Turning Ramp Up 0 ; remove_layer Turning Ramp Up 1 ; add_layer LTP: Click Entry Point
+
+== RTP: Entry Point
+  right_joystick/edge: binding
+    before: Full_Press(hold_repeats=1): remove_layer RTP: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Click Entry Point ; remove_layer RTP: Middle Click
+    before: chord(chord_button=17,interruptable=0): empty_binding
+    after:  Full_Press(hold_repeats=1): remove_layer RTP: Tap Cover ; remove_layer RTP: Entry Point ; remove_layer RTP: Mouse Buttons ; remove_layer RTP: Middle Click
+    after:  chord(chord_button=17,interruptable=0): empty_binding
+
+== RTP: Double Tap
+  switch/button_escape: binding
+    before: Full_Press: empty_binding
+    before: release(haptic_intensity=0): remove_layer RTP: Double Tap ; remove_layer Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Menu Left: Fn Layer ; remove_layer Menu Right: Fn Layer ; remove_layer Menu Left: Escape ; remove_layer Menu Right: Tab ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Stateful | Menu Right: Entry Point ; remove_layer Stateful | Menu Left: Fn Layer ; remove_layer Stateful | Menu Right: Fn Layer ; remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Left!Right: Entry Point ; remove_layer Menu Right!Left: Entry Point ; remove_layer Menu Left!Right: Enter ; remove_layer Menu Right!Left: Backspace ; remove_layer Menu Left!Right: Double Tap Cover ; remove_layer Menu Right!Left: Double Tap Cover
+    after:  Full_Press: empty_binding
+    after:  release(haptic_intensity=0): remove_layer RTP: Double Tap ; remove_layer Menu Left: Escape ; remove_layer Menu Right: Tab ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover
+  switch/button_menu: binding
+    before: Full_Press: empty_binding
+    before: release(haptic_intensity=0): remove_layer RTP: Double Tap ; remove_layer Menu Left: Entry Point ; remove_layer Menu Right: Entry Point ; remove_layer Menu Left: Fn Layer ; remove_layer Menu Right: Fn Layer ; remove_layer Menu Left: Escape ; remove_layer Menu Right: Tab ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover ; remove_layer Stateful | Menu Left: Entry Point ; remove_layer Stateful | Menu Right: Entry Point ; remove_layer Stateful | Menu Left: Fn Layer ; remove_layer Stateful | Menu Right: Fn Layer ; remove_layer Menu Buttons: Left Stick Guard ; remove_layer Menu Buttons: Right Stick Guard ; remove_layer Menu Buttons: Tap Cover ; remove_layer Menu Left!Right: Entry Point ; remove_layer Menu Right!Left: Entry Point ; remove_layer Menu Left!Right: Enter ; remove_layer Menu Right!Left: Backspace ; remove_layer Menu Left!Right: Double Tap Cover ; remove_layer Menu Right!Left: Double Tap Cover
+    after:  Full_Press: empty_binding
+    after:  release(haptic_intensity=0): remove_layer RTP: Double Tap ; remove_layer Menu Left: Escape ; remove_layer Menu Right: Tab ; remove_layer Menu Left: Double Tap Cover ; remove_layer Menu Right: Double Tap Cover
+
+== LTP: Click Entry Point
+  joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer LTP: Click Entry Point
+    before: chord(chord_button=16,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Click Entry Point ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Click Entry Point ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+  right_joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer LTP: Click Entry Point
+    before: chord(chord_button=16,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Click Entry Point ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+  right_joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Click Entry Point ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+
+== RTP: Click Entry Point
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer RTP: Click Entry Point ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+    after:  chord(chord_button=17,interruptable=0): empty_binding
+  right_joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer RTP: Click Entry Point ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+    after:  chord(chord_button=17,interruptable=0): empty_binding
+
+== LTP: Arrow Keys
+  joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer LTP: Arrow Keys
+    before: chord(chord_button=16,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Arrow Keys ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Arrow Keys ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+  right_joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer LTP: Arrow Keys
+    before: chord(chord_button=16,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Arrow Keys ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+  right_joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Arrow Keys ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+
+== RTP: Mouse Buttons
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer RTP: Mouse Buttons ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+    after:  chord(chord_button=17,interruptable=0): empty_binding
+  right_joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer RTP: Mouse Buttons ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+    after:  chord(chord_button=17,interruptable=0): empty_binding
+
+== LTP: Middle Click
+  joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer LTP: Middle Click
+    before: chord(chord_button=16,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Middle Click ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LST: Entry Point ; remove_layer LST: Tap Cover ; remove_layer LST: Temporary Gyro
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Middle Click ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+  right_joystick/touch: binding
+    before: Full_Press(hold_repeats=1): remove_layer LTP: Middle Click
+    before: chord(chord_button=16,interruptable=0): empty_binding
+    before: release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Middle Click ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RST: Entry Point ; remove_layer RST: Tap Cover ; remove_layer RST: Temporary Gyro
+  right_joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer LTP: Middle Click ; remove_layer Escape ; remove_layer Tab ; remove_layer Backspace ; remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+
+== RTP: Middle Click
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer RTP: Middle Click ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+    after:  chord(chord_button=17,interruptable=0): empty_binding
+  right_joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer RTP: Middle Click ; remove_layer RTP: Circular Scroll ; remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover
+    after:  chord(chord_button=17,interruptable=0): empty_binding
+
+== Escape
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Escape
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+
+== Tab
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Tab
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+
+== Backspace
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Backspace
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+
+== Enter
+  joystick/edge: input added
+    after:  Full_Press(hold_repeats=1): remove_layer Enter
+    after:  chord(chord_button=16,interruptable=0): empty_binding
+
+== Menu Left: Entry Point
+  left_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: Full_Press: empty_binding
+    after:  dpad_west: Full_Press(haptic_intensity=1): key_press ESCAPE
+    after:  dpad_east: Full_Press(haptic_intensity=1): key_press RETURN
+    after:  dpad_north: Full_Press(haptic_intensity=1): key_press TAB
+    after:  dpad_south: Full_Press(haptic_intensity=1): key_press BACKSPACE
+  right_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+
+== Menu Right: Entry Point
+  left_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: Full_Press: empty_binding
+    after:  dpad_west: Full_Press(haptic_intensity=1): key_press ESCAPE
+    after:  dpad_east: Full_Press(haptic_intensity=1): key_press RETURN
+    after:  dpad_north: Full_Press(haptic_intensity=1): key_press TAB
+    after:  dpad_south: Full_Press(haptic_intensity=1): key_press BACKSPACE
+  right_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+
+== Menu Left!Right: Enter
+  left_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: Full_Press: empty_binding
+    after:  dpad_west: Full_Press(haptic_intensity=1): key_press ESCAPE
+    after:  dpad_east: Full_Press(haptic_intensity=1): key_press RETURN
+    after:  dpad_north: Full_Press(haptic_intensity=1): key_press TAB
+    after:  dpad_south: Full_Press(haptic_intensity=1): key_press BACKSPACE
+  right_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+
+== Menu Right!Left: Backspace
+  left_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: Full_Press: empty_binding
+    after:  dpad_west: Full_Press(haptic_intensity=1): key_press ESCAPE
+    after:  dpad_east: Full_Press(haptic_intensity=1): key_press RETURN
+    after:  dpad_north: Full_Press(haptic_intensity=1): key_press TAB
+    after:  dpad_south: Full_Press(haptic_intensity=1): key_press BACKSPACE
+  right_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RTP: Entry Point ; remove_layer RTP: Tap Cover ; remove_layer RTP: Circular Scroll
+
+== Steering | LS Up: Modifier 1
+  right_trackpad: source added
+    after:  click: Soft_Press(haptic_intensity=0): add_layer Steering | LS: Tap Cover
+
+== Steering | LS Down: Modifier 0
+  right_trackpad: source added
+    after:  click: Soft_Press(haptic_intensity=0): add_layer Steering | LS: Tap Cover
+
+== Steering | LS: Tap Cover
+  right_trackpad: source added
+    after:  click: Soft_Press(haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer RTP: Click Entry Point
+
+== Steering | LS Up: Scroll Up
+  right_trackpad: source added
+    after:  click: Soft_Press(haptic_intensity=0): add_layer Steering | LS: Double Tap Cover
+
+== Steering | LS Down: Scroll Down
+  right_trackpad: source added
+    after:  click: Soft_Press(haptic_intensity=0): add_layer Steering | LS: Double Tap Cover
+
+== Steering | LS: Double Tap Cover
+  right_trackpad: source added
+    after:  click: Soft_Press(haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer RTP: Click Entry Point
+
+== Stateful | Menu Left: Entry Point
+  left_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: Full_Press: empty_binding
+    after:  dpad_west: Full_Press(haptic_intensity=1): key_press ESCAPE
+    after:  dpad_east: Full_Press(haptic_intensity=1): key_press RETURN
+    after:  dpad_north: Full_Press(haptic_intensity=1): key_press TAB
+    after:  dpad_south: Full_Press(haptic_intensity=1): key_press BACKSPACE
+  right_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RTP: Entry Point
+
+== Stateful | Menu Right: Entry Point
+  left_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: Full_Press: empty_binding
+    after:  dpad_west: Full_Press(haptic_intensity=1): key_press ESCAPE
+    after:  dpad_east: Full_Press(haptic_intensity=1): key_press RETURN
+    after:  dpad_north: Full_Press(haptic_intensity=1): key_press TAB
+    after:  dpad_south: Full_Press(haptic_intensity=1): key_press BACKSPACE
+  right_trackpad: source added
+    after:  click: Full_Press: empty_binding
+    after:  touch: release(haptic_intensity=0): remove_layer RTP: Entry Point
+
+27 layers changed, 46 changes

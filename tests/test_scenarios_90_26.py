@@ -110,7 +110,9 @@ class Disturbed(ScenarioCase):
                     pad.hold(button).wait(100).touch(stick).wait(1000)
                     self.assertEqual(landed(pad, layer), 200, (button, stick))
 
-    @scenario("90.26 D3", rules=("R121",), rests=("A12", "A13"))
+    # On the 90.71 build: since 90.72 the menu layers bind the right pad's touch, so its tap chain (RTP: Entry Point,
+    # the Double Tap window, Circular Scroll) no longer opens during a menu hold (90.72 E8).
+    @scenario("90.26 D3", rules=("R121",), rests=("A12", "A13"), frozen="90.71")
     def test_a_right_pad_touch_around_a_hold_costs_nothing_since_90_30(self):
         # From 90.25 to 90.29 `RTP: Entry Point` had a Tap Cover reset. As the simulator reads A13, a reset's
         # repeat that removes nothing still restarts every delay that is counting, so the pad's reset and the

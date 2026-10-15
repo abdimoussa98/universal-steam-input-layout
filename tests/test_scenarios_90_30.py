@@ -31,7 +31,9 @@ def tap_pad(pad, ms=60):
 
 
 class PadWindow(ScenarioCase):
-    @scenario("90.30 W1", rules=("R136",), rests=("A7",))
+    # On the 90.71 build: since 90.72 the menu layers bind the right pad's touch, so its tap chain (RTP: Entry Point,
+    # the Double Tap window, Circular Scroll) no longer opens during a menu hold (90.72 E8).
+    @scenario("90.30 W1", rules=("R136",), rests=("A7",), frozen="90.71")
     def test_a_menu_button_let_go_inside_the_pads_window_leaves_nothing_on(self):
         for button, held, key in MENU:
             for pad in self.each():
@@ -98,7 +100,9 @@ class PadWindow(ScenarioCase):
                 self.assertEqual(pad.stack, pad.layers("Base"))
                 self.assertEqual([k for k in pad.typed() if "SCROLL" not in k], [])      # a modifier's press still scrolls
 
-    @scenario("90.30 W6", rules=("R157",), rests=("A7",))
+    # On the 90.71 build: since 90.72 the menu layers bind the right pad's touch, so its tap chain (RTP: Entry Point,
+    # the Double Tap window, Circular Scroll) no longer opens during a menu hold (90.72 E8).
+    @scenario("90.30 W6", rules=("R157",), rests=("A7",), frozen="90.71")
     def test_in_cursor_gyro_the_stateful_menu_layers_go_too(self):
         start = ("Base", "Gyro", "Cursor Gyro")
         for button in ("Select", "Start"):

@@ -1662,6 +1662,76 @@
       "why": "90.52: a Steering stick modifier's sequence runs on its own direction, as the bumper modifier's runs on its bumper, and that input carries no cleanup function (R130's left-out clause, as R171 leaves out a layer's own button). The hold marker and the cover serve both modifiers, so up and down are both their own direction: each has the Release that ends the hold, and the cover the repeating scroll. A driver release missed with the stick held in that direction is cleared by the next other input.",
       "decided": "Author, 2026-10-10",
       "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "RTP: Click Entry Point",
+          "RTP: Mouse Buttons",
+          "RTP: Middle Click"
+        ],
+        "inputs": [
+          "button_diamond/button_a",
+          "button_diamond/button_b",
+          "button_diamond/button_x",
+          "button_diamond/button_y",
+          "dpad/dpad_north",
+          "dpad/dpad_south",
+          "dpad/dpad_east",
+          "dpad/dpad_west",
+          "switch/button_escape",
+          "switch/button_menu",
+          "joystick/click",
+          "right_joystick/click",
+          "joystick/dpad_north",
+          "joystick/dpad_south",
+          "joystick/dpad_east",
+          "joystick/dpad_west"
+        ]
+      },
+      "status": "allow",
+      "why": "90.72: the right-pad click layers bind only the right pad and the sticks' touches and edges, and pass every other input through. Since 90.72 the Steering stick layers and their covers add the Click Entry Point on the right-pad click (the stand-ins for their left-edge timers), so the chains put these layers over the Steering stacks, where the face buttons, D-pad, Start, Select, stick clicks and left-stick directions come from whichever Steering layer is under them. 90.71 already put them there through Base's click; the chains did not see it. Inheriting is the intent (author, 2026-10-14: plans/2026-10-14-pad-stick-edge-cleanups.md).",
+      "decided": "Author, 2026-10-14",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Stateful | Menu Left: Entry Point",
+          "Stateful | Menu Right: Entry Point"
+        ],
+        "removes": [
+          "LTP: Arrow Keys",
+          "LTP: Middle Click",
+          "RTP: Mouse Buttons",
+          "RTP: Middle Click",
+          "RTP: Tap Cover",
+          "RTP: Circular Scroll"
+        ],
+        "where": "Menu Left!Right: Enter"
+      },
+      "status": "allow",
+      "why": "These removes are needed, and the audit's chains cannot see it. Since 90.72 the Stateful Entry Points block both pad clicks and bind the right pad's touch, so no pad layer can land on top of them, and the cleanup_lists fix reads that as these layers never being there. They are, underneath: a click or Circular Scroll that is on before Start or Select stays under the Entry Point that lands on top. On the simulator they were on the stack when the Entry Point's stick click Release fired (tests/test_scenarios_90_58.py, Clears: 240 random walks a layout; Circular Scroll by a direct sequence: scroll, hold Start, click a stick).",
+      "decided": "Claude, 2026-10-14, on the 90.58 clear check against 90.72 (plans/2026-10-14-pad-stick-edge-cleanups.md); follows the author's rule that a clear names every layer that can be on the stack (R163)",
+      "todo": null
+    },
+    {
+      "rule": "R139",
+      "scope": {
+        "layers": [
+          "Menu Buttons: Left Stick Guard",
+          "Menu Buttons: Right Stick Guard"
+        ],
+        "inputs": [
+          "right_trackpad/touch"
+        ]
+      },
+      "status": "allow",
+      "why": "90.72: every layer that blocks the right pad's click binds the pad's touch to a Release that removes the right pad's touch layers (author, 2026-10-14). The two menu stick guards bind no pad and inherit that Release from the menu Entry Point under them. Its list depends on which Entry Point: the plain ones name RTP: Entry Point, RTP: Tap Cover and RTP: Circular Scroll, the Stateful ones only RTP: Entry Point, as the cleanup rules find what can be under each. Either way a lift clears the right pad's touch layers that are there.",
+      "decided": "Claude, 2026-10-14, reading the Flow audit for 90.72 under the author's rule above (plans/2026-10-14-pad-stick-edge-cleanups.md); not yet confirmed by the author",
+      "todo": null
     }
   ]
 }

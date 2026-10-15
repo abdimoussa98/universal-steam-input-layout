@@ -126,7 +126,9 @@ class RequiredCleanups(ScenarioCase):
             pad.hold("R1").wait(100).miss("R1").hold("L1").wait(100)     # and the same press is the S driver
             self.assertEqual((pad.stack, pad.down()), (pad.layers("Base", "Steering", "Steering | L1: S Key"), ["S"]))
 
-    @scenario("90.24 K6", rules=("R136", "R169"), rests=("A2",))
+    # On the 90.71 build: since 90.72 the menu layers bind the right pad's touch, so its tap chain (RTP: Entry Point,
+    # the Double Tap window, Circular Scroll) no longer opens during a menu hold (90.72 E8).
+    @scenario("90.24 K6", rules=("R136", "R169"), rests=("A2",), frozen="90.71")
     def test_the_pad_cover_over_a_menu_layer_keeps_the_right_stick_click_from_starting_a_transition(self):
         """Called out by the author (2026-10-04). `RTP: Tap Cover` has a right-stick group in mouse mode since
         90.24. The pad touched first and a menu button pressed before the cover lands at 150 ms puts the cover

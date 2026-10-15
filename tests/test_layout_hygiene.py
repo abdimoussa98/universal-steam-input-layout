@@ -55,14 +55,17 @@ class LayoutHygieneTests(unittest.TestCase):
             for name, wheel in (("dpad_north", "SCROLL_UP"), ("dpad_south", "SCROLL_DOWN")):
                 with self.subTest(variant=variant, input=name):
                     activators = group["inputs"][name]["activators"]
-                    self.assertEqual(set(activators), {"chord", "Full_Press"})
+                    self.assertEqual(set(activators), {"chord", "Full_Press", "release"})   # the Release since 90.71
+                    number = len(cm["actions"]) + list(cm["action_layers"]).index(key) + 1
+                    self.assertEqual(activators["release"]["bindings"]["binding"],
+                                     f"controller_action remove_layer {number} 0 0, , ")
                     self.assertEqual(activators["Full_Press"]["bindings"]["binding"], f"mouse_wheel {wheel}, , ")
                     chord = activators["chord"]
                     self.assertEqual(chord["bindings"]["binding"], f"mouse_wheel {wheel}, , ")
                     self.assertEqual(chord["settings"], {
                         "gyro_ratchet_button_mask": RIGHT_PAD_TOUCH,
                         "gyro_ratchet_button_requireany_or_all": "0",
-                        "delay_start": "150", "hold_repeats": "1", "haptic_intensity": "0"})
+                        "delay_start": "150", "hold_repeats": "1", "haptic_intensity": "1"})   # Low since 90.71
 
     def test_only_second_press_cover_resets_use_a_last_fourth_entry(self):
         chorded = {"Menu Left!Right: Enter", "Menu Right!Left: Backspace"}        # the two chorded menu chains, since 90.25

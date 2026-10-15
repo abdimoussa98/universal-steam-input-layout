@@ -15,7 +15,9 @@ ENTRY = {"LP": "LTP: Click Entry Point", "RP": "RTP: Click Entry Point"}
 
 
 class Holds(ScenarioCase):
-    @scenario("90.19 K1", rules=("R113", "R114"), rests=("A5", "A6", "A10"), either=("A9", "A42"))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.19 K1", rules=("R113", "R114"), rests=("A5", "A6", "A10"), either=("A9", "A42"), frozen="90.70")
     def test_an_ordinary_click_comes_and_goes_whether_or_not_the_hold_works(self):
         for (name, where), layer in FINAL.items():
             for pad in self.each():
@@ -30,7 +32,9 @@ class Holds(ScenarioCase):
                 pad.lift(name).wait(400)
                 self.assertEqual((pad.stack, len(pad.typed())), (pad.layers("Base"), 1))
 
-    @scenario("90.19 K2", rests=("A6",), either=("A9", "A42"))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.19 K2", rests=("A6",), either=("A9", "A42"), frozen="90.70")
     def test_a_press_inside_a_final_layer_is_held_by_the_layer_and_ends_with_it(self):
         """A click too short for the hand-over leaves the Click Entry Point on; with the thumb still down it
         hands over to a final layer that nobody is pressing.
@@ -51,7 +55,9 @@ class Holds(ScenarioCase):
             self.assertTrue(pad.lacks("RTP: Mouse Buttons", "RTP: Click Entry Point"))
             self.assertEqual((pad.down(), pad.typed()), ([], ["mouse_button BACK"]))
 
-    @scenario("90.19 K3", rules=("R136",), rests=("A7", "A25"), either=("A9", "A42"))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.19 K3", rules=("R136",), rests=("A7", "A25"), either=("A9", "A42"), frozen="90.70")
     def test_the_thumb_lifting_and_a_missed_release_still_clear_a_final_layer(self):
         for pad in self.each():
             pad.press_pad("RP", "left").wait(100)

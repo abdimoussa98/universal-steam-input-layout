@@ -9,14 +9,14 @@ The separate [90.39 fallback-window testing candidate](../findings/2026-10-09-fa
 extends frozen 90.32 with compatible later fixes. It has 90 layers and writes
 to its findings folder, with distinctly named snapshots under
 `versions/neptune/90.39/`. It is an inactive experiment: the live release
-continues from 90.38 through 90.40–90.58, 90.61–90.68 and 90.70. Its build/validation commands, local rules and
+continues from 90.38 through 90.40–90.58, 90.61–90.68 and 90.70 to 90.74. Its build/validation commands, local rules and
 scenario coverage remain separate from the live layouts.
 
 ## The builder
 
 The current live builder is
-[findings/2026-10-13-entry-guard-in-every-steering-cleanup](../findings/2026-10-13-entry-guard-in-every-steering-cleanup/README.md),
-for 90.70. It reads the 90.68 snapshot: 90.69 is a trial from 90.68 too, a snapshot off the line that was never the
+[findings/2026-10-15-fn-right-stick](../findings/2026-10-15-fn-right-stick/README.md),
+for 90.74. It reads the 90.73 snapshot. 90.70's builder reads the 90.68 snapshot: 90.69 is a trial from 90.68 too, a snapshot off the line that was never the
 working layout. Since 90.49 a builder reads the snapshot of the release before it. Two lines do not: 90.54 reads the
 90.52 snapshot, the author's trial of one change, so 90.53 is a snapshot off the line and 90.55 continues from 90.54;
 and 90.61 reads the 90.58 snapshot. 90.59 and 90.60 were two trials for the same fault that did not help; their
@@ -25,8 +25,8 @@ says what they were. A separately named testing candidate does not become the li
 builder merely by having a newer version number.
 
 ```bash
-python3 findings/2026-10-10-steering-entry-and-edge-chords/build_candidate.py            # candidates in that folder
-python3 findings/2026-10-10-steering-entry-and-edge-chords/build_candidate.py --install  # writes working JSON
+python3 findings/2026-10-15-fn-right-stick/build_candidate.py            # candidates in that folder
+python3 findings/2026-10-15-fn-right-stick/build_candidate.py --install  # writes working JSON
 ```
 
 A test holds the working layout to its builder (R156,
@@ -46,6 +46,10 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| 90.74 | [fn-right-stick](../findings/2026-10-15-fn-right-stick/README.md) | From 90.73. The right stick of the four Fn layers takes the left stick's group settings: `deadzone` 13276 and `requires_click` 0 come off. Its keys (`;` `'` `.` `,`), Low bumps, R3 guard and cleanups are unchanged. Removes and adds unchanged |
+| 90.73 | [key-layer-click](../findings/2026-10-15-key-layer-click/README.md) | From 90.72. In `Escape`, `Tab`, `Backspace` and `Enter` the left pad's click is a repeating, silent Soft Press, not interruptible, that removes the layer; Base's repeating click then adds its Click Entry Point. Four removes more a layout |
+| 90.72 | [pad-stick-edge-cleanups](../findings/2026-10-14-pad-stick-edge-cleanups/README.md) | From 90.71. The pad click layers get a cleanup function on both stick edges and the key layers on the left, a copy of their stick-touch cleanup guarded by the pad's touch, for controllers without stick touch. What those edges hide is done on the pad's click: the Steering stick layers add their cover, the ramp layers remove themselves. The menu Entry Points block the pad clicks (R172). 90 removes and 9 adds more a layout |
+| 90.71 | [pad-click-touch-layers](../findings/2026-10-14-pad-click-touch-layers/README.md) | From 90.70. The adders of the Click Entry Points repeat every 50 ms, silent. The D-pad layers have Requires Click off, and each direction and the centre gets a Release that removes the layer; their outputs are silent and the scroll repeats bump Low. The four final layers' click is the self-hold alone, High; the inverted repeating removal is gone. The Middle Click output is its own Soft Press, silent. Ten removes in, four out, a layout |
 | 90.70 | [entry-guard-in-every-steering-cleanup](../findings/2026-10-13-entry-guard-in-every-steering-cleanup/README.md) | From 90.68, not 90.69. Every cleanup press of the ten Steering layers adds `Steering \| LS: Entry Guard` before it removes (R176): the 80 that are not on the left stick's edge get the add 90.67 gave the ten that are. 80 adds more a layout, no remove more or fewer |
 | 90.69 | [steering-cleanup-presses-without-repeat](../findings/2026-10-13-steering-cleanup-presses-without-repeat/README.md) | From 90.68, off the line and not installed. The 90 cleanup presses of the Steering layers lose Hold to Repeat and stay interruptible; the ten left-edge ones lose the Entry Guard add. A Deck trial for A69, saved under `versions/neptune/90.69/` |
 | 90.68 | [entry-guard-adds-the-driver-layer-first](../findings/2026-10-13-entry-guard-adds-the-driver-layer-first/README.md) | From 90.67. One change on two inputs a layout: in `Steering \| LS: Entry Guard` each driver's chord runs its add of the driver's layer first and the guard's removal second (R137), so `Steering` is never the top layer between the two. The two commands swap places; no bind, setting or count changes |

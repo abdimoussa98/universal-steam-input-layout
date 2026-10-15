@@ -1,0 +1,71 @@
+{
+  "changed": [
+    "Base / left_trackpad/click: repeating add of LTP: Click Entry Point, every 50 ms, haptic 0",
+    "Base / right_trackpad/click: repeating add of RTP: Click Entry Point, every 50 ms, haptic 0",
+    "RTP: Circular Scroll / right_trackpad/click: repeating add of RTP: Click Entry Point, every 50 ms, haptic 0",
+    "LTP: Arrow Keys: requires_click 0",
+    "LTP: Arrow Keys / dpad_north: Full Press haptic 0, Release removes LTP: Arrow Keys",
+    "LTP: Arrow Keys / dpad_south: Full Press haptic 0, Release removes LTP: Arrow Keys",
+    "LTP: Arrow Keys / dpad_east: Full Press haptic 0, Release removes LTP: Arrow Keys",
+    "LTP: Arrow Keys / dpad_west: Full Press haptic 0, Release removes LTP: Arrow Keys",
+    "LTP: Arrow Keys / edge: Release removes LTP: Arrow Keys",
+    "LTP: Arrow Keys / click: hold_layer haptic 3; the inverted repeating removal deleted",
+    "LTP: Middle Click / click: key_press CAPSLOCK on a Soft Press, haptic 0; hold_layer haptic 3; the inverted repeating removal deleted",
+    "RTP: Mouse Buttons: requires_click 0",
+    "RTP: Mouse Buttons / dpad_north: Full Press haptic 0, chord repeat haptic 1, Release removes RTP: Mouse Buttons",
+    "RTP: Mouse Buttons / dpad_south: Full Press haptic 0, chord repeat haptic 1, Release removes RTP: Mouse Buttons",
+    "RTP: Mouse Buttons / dpad_east: Full Press haptic 0, Release removes RTP: Mouse Buttons",
+    "RTP: Mouse Buttons / dpad_west: Full Press haptic 0, Release removes RTP: Mouse Buttons",
+    "RTP: Mouse Buttons / edge: Release removes RTP: Mouse Buttons",
+    "RTP: Mouse Buttons / click: hold_layer haptic 3; the inverted repeating removal deleted",
+    "RTP: Middle Click / click: mouse_button MIDDLE on a Soft Press, haptic 0; hold_layer haptic 3; the inverted repeating removal deleted"
+  ],
+  "removes": {
+    "90.70": 2943,
+    "90.71": 2949
+  },
+  "adds": {
+    "90.70": 460,
+    "90.71": 460
+  },
+  "fixes": {
+    "rtp_scroll": {
+      "group": "13185",
+      "changed": []
+    },
+    "dead_groups": {
+      "removed_inactive_slots": [],
+      "removed_groups": [],
+      "remaining_groups": 554,
+      "mode_shift_targets": [
+        "1039",
+        "1043"
+      ]
+    },
+    "cover_resets": {
+      "changed": [],
+      "already": [
+        "L2: Scroll Down / edge",
+        "R2: Scroll Up / edge",
+        "Menu Left: Escape / button_menu",
+        "Menu Right: Tab / button_escape",
+        "Menu Left!Right: Enter / button_escape",
+        "Menu Right!Left: Backspace / button_menu"
+      ]
+    },
+    "menu_combo_keys": {
+      "changed": []
+    },
+    "window_pads": {
+      "changed": []
+    },
+    "cleanup_lists": {
+      "changed": [],
+      "remaining": 0
+    },
+    "window_routes": {
+      "changed": []
+    }
+  },
+  "pipeline changed the layout": false
+}

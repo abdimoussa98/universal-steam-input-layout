@@ -1,0 +1,95 @@
+Changes from single-set-default_hold-gyro_90.70.json to single-set-default_hold-gyro_latest.json
+Layers: 90 -> 90 (added: none; removed: none)
+
+== Base
+  left_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=0): add_layer LTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer LTP: Click Entry Point
+  right_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=0): add_layer RTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer RTP: Click Entry Point
+
+== RTP: Circular Scroll
+  right_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=0): add_layer RTP: Click Entry Point
+    after:  Soft_Press(haptic_intensity=0,hold_repeats=1,repeat_rate=50): add_layer RTP: Click Entry Point
+
+== LTP: Arrow Keys
+  left_trackpad: settings
+    before: {"requires_click": null}
+    after:  {"requires_click": "0"}
+  left_trackpad/dpad_north: binding
+    before: Full_Press(haptic_intensity=1): key_press UP_ARROW
+    after:  Full_Press(haptic_intensity=0): key_press UP_ARROW
+    after:  release(haptic_intensity=0): remove_layer LTP: Arrow Keys
+  left_trackpad/dpad_south: binding
+    before: Full_Press(haptic_intensity=1): key_press DOWN_ARROW
+    after:  Full_Press(haptic_intensity=0): key_press DOWN_ARROW
+    after:  release(haptic_intensity=0): remove_layer LTP: Arrow Keys
+  left_trackpad/dpad_east: binding
+    before: Full_Press(haptic_intensity=1): key_press RIGHT_ARROW
+    after:  Full_Press(haptic_intensity=0): key_press RIGHT_ARROW
+    after:  release(haptic_intensity=0): remove_layer LTP: Arrow Keys
+  left_trackpad/dpad_west: binding
+    before: Full_Press(haptic_intensity=1): key_press LEFT_ARROW
+    after:  Full_Press(haptic_intensity=0): key_press LEFT_ARROW
+    after:  release(haptic_intensity=0): remove_layer LTP: Arrow Keys
+  left_trackpad/edge: binding
+    before: Full_Press(haptic_intensity=0): empty_binding
+    after:  Full_Press(haptic_intensity=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer LTP: Arrow Keys
+  left_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=0,interruptable=0): hold_layer LTP: Arrow Keys
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Arrow Keys
+    after:  Soft_Press(haptic_intensity=3,interruptable=0): hold_layer LTP: Arrow Keys
+
+== RTP: Mouse Buttons
+  right_trackpad: settings
+    before: {"requires_click": null}
+    after:  {"requires_click": "0"}
+  right_trackpad/dpad_north: binding
+    before: chord(delay_start=150,gyro_ratchet_button_mask=1048576,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1): mouse_wheel SCROLL_UP
+    before: Full_Press(haptic_intensity=1,interruptable=0): mouse_wheel SCROLL_UP
+    after:  chord(delay_start=150,gyro_ratchet_button_mask=1048576,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=1,hold_repeats=1): mouse_wheel SCROLL_UP
+    after:  Full_Press(haptic_intensity=0,interruptable=0): mouse_wheel SCROLL_UP
+    after:  release(haptic_intensity=0): remove_layer RTP: Mouse Buttons
+  right_trackpad/dpad_south: binding
+    before: chord(delay_start=150,gyro_ratchet_button_mask=1048576,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=0,hold_repeats=1): mouse_wheel SCROLL_DOWN
+    before: Full_Press(haptic_intensity=1,interruptable=0): mouse_wheel SCROLL_DOWN
+    after:  chord(delay_start=150,gyro_ratchet_button_mask=1048576,gyro_ratchet_button_requireany_or_all=0,haptic_intensity=1,hold_repeats=1): mouse_wheel SCROLL_DOWN
+    after:  Full_Press(haptic_intensity=0,interruptable=0): mouse_wheel SCROLL_DOWN
+    after:  release(haptic_intensity=0): remove_layer RTP: Mouse Buttons
+  right_trackpad/dpad_east: binding
+    before: Full_Press(haptic_intensity=1): mouse_button FORWARD
+    after:  Full_Press(haptic_intensity=0): mouse_button FORWARD
+    after:  release(haptic_intensity=0): remove_layer RTP: Mouse Buttons
+  right_trackpad/dpad_west: binding
+    before: Full_Press(haptic_intensity=1): mouse_button BACK
+    after:  Full_Press(haptic_intensity=0): mouse_button BACK
+    after:  release(haptic_intensity=0): remove_layer RTP: Mouse Buttons
+  right_trackpad/edge: binding
+    before: Full_Press(haptic_intensity=0): empty_binding
+    after:  Full_Press(haptic_intensity=0): empty_binding
+    after:  release(haptic_intensity=0): remove_layer RTP: Mouse Buttons
+  right_trackpad/click: binding
+    before: Soft_Press(haptic_intensity=0,interruptable=0): hold_layer RTP: Mouse Buttons
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Mouse Buttons
+    after:  Soft_Press(haptic_intensity=3,interruptable=0): hold_layer RTP: Mouse Buttons
+
+== LTP: Middle Click
+  left_trackpad/click: binding
+    before: Full_Press(haptic_intensity=1): key_press CAPSLOCK
+    before: Soft_Press(haptic_intensity=0,interruptable=0): hold_layer LTP: Middle Click
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer LTP: Middle Click
+    after:  Soft_Press(haptic_intensity=0,interruptable=0): key_press CAPSLOCK
+    after:  Soft_Press(haptic_intensity=3,interruptable=0): hold_layer LTP: Middle Click
+
+== RTP: Middle Click
+  right_trackpad/click: binding
+    before: Full_Press(haptic_intensity=1): mouse_button MIDDLE
+    before: Soft_Press(haptic_intensity=0,interruptable=0): hold_layer RTP: Middle Click
+    before: Soft_Press(edge_binding_invert=1,haptic_intensity=0,hold_repeats=1,interruptable=0): remove_layer RTP: Middle Click
+    after:  Soft_Press(haptic_intensity=0,interruptable=0): mouse_button MIDDLE
+    after:  Soft_Press(haptic_intensity=3,interruptable=0): hold_layer RTP: Middle Click
+
+6 layers changed, 19 changes

@@ -13,7 +13,9 @@ CLICK_LAYERS = ("RTP: Click Entry Point", "RTP: Middle Click", "RTP: Mouse Butto
 
 
 class PadClickExits(ScenarioCase):
-    @scenario("90.16 X1", rules=("R136",), rests=("A6", "A7"), either=("A9",))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.16 X1", rules=("R136",), rests=("A6", "A7"), either=("A9",), frozen="90.70")
     def test_a_thumb_that_lifts_takes_the_click_layers_and_what_is_under_them(self):
         """Base has the click's add (not from 90.25 to 90.26). With the click still down it is exposed: if
         Steam fires it (A9) the Click Entry Point lands on the held click and its centre bind, which
@@ -31,7 +33,9 @@ class PadClickExits(ScenarioCase):
                 pad.wait(300)
                 self.assertEqual(pad.stack, pad.layers("Base"))                   # and no Double Tap window opened
 
-    @scenario("90.16 X2", rules=("R136",), rests=("A6", "A7"), either=("A9",))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.16 X2", rules=("R136",), rests=("A6", "A7"), either=("A9",), frozen="90.70")
     def test_a_thumb_that_lifts_in_circular_scroll_ends_the_scroll_too(self):
         touch = (RP, "touch")
         for pad in self.each():

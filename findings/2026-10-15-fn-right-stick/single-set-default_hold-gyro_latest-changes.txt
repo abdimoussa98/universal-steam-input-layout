@@ -1,0 +1,24 @@
+Changes from single-set-default_hold-gyro_90.73.json to single-set-default_hold-gyro_latest.json
+Layers: 90 -> 90 (added: none; removed: none)
+
+== Menu Left: Fn Layer
+  right_joystick: settings
+    before: {"deadzone": "13276", "requires_click": "0"}
+    after:  {"deadzone": null, "requires_click": null}
+
+== Menu Right: Fn Layer
+  right_joystick: settings
+    before: {"deadzone": "13276", "requires_click": "0"}
+    after:  {"deadzone": null, "requires_click": null}
+
+== Stateful | Menu Left: Fn Layer
+  right_joystick: settings
+    before: {"deadzone": "13276", "requires_click": "0"}
+    after:  {"deadzone": null, "requires_click": null}
+
+== Stateful | Menu Right: Fn Layer
+  right_joystick: settings
+    before: {"deadzone": "13276", "requires_click": "0"}
+    after:  {"deadzone": null, "requires_click": null}
+
+4 layers changed, 4 changes

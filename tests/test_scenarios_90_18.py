@@ -28,7 +28,9 @@ class Handoff(ScenarioCase):
                 pad.let_go_pad(name).wait(400)
                 self.assertEqual(pad.stack, pad.layers("Base"))
 
-    @scenario("90.18 H2", rules=("R114",), rests=("A6",), either=("A9",))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.18 H2", rules=("R114",), rests=("A6",), either=("A9",), frozen="90.70")
     def test_a_click_that_ends_before_the_hand_over_sends_nothing_and_clears(self):
         """The entry point has no click exit, so it is still on when a short click ends. With the thumb still
         on the pad, its Soft Press hands over anyway; the chosen layer finds the pad not pressed and leaves.
@@ -49,7 +51,9 @@ class Handoff(ScenarioCase):
             pad.let_go_pad("RP").wait(400)                                        # the click lets go, then the thumb
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), []))
 
-    @scenario("90.18 H4", rests=("A6", "A40"), either=("A9",))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.18 H4", rests=("A6", "A40"), either=("A9",), frozen="90.70")
     def test_a_touch_release_seen_before_the_click_lets_go(self):
         """If Steam reports the thumb gone while the pad still reads as pressed, the touch Release removes the
         entry point. Read at the rim, inside the outer bind's 5 ms, the only time the entry point is still on:

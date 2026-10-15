@@ -28,7 +28,9 @@ class SoftPressOnly(ScenarioCase):
             pad.let_go("L1").wait(300)
             self.assertEqual((pad.stack, pad.down()), (pad.layers("Base", "Steering"), []))
 
-    @scenario("90.17 S2", rules=("R113",), rests=("A6", "A10", "A40", "A41"))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.17 S2", rules=("R113",), rests=("A6", "A10", "A40", "A41"), frozen="90.70")
     def test_the_left_centre_holds_caps_lock_and_lets_go_with_the_click(self):
         for pad in self.each():
             pad.press_pad("LP", "centre").wait(500)
@@ -38,7 +40,9 @@ class SoftPressOnly(ScenarioCase):
             pad.lift("LP").wait(300)
             self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), ["CAPSLOCK"]))
 
-    @scenario("90.17 S3", rules=("R114",), rests=("A25",), either=("A9",))
+    # On the 90.70 build: since 90.71 the final layers have no inverted repeating removal on the click and the
+    # D-pad layers work on touch; the 90.71 counterparts are in test_scenarios_90_71.py.
+    @scenario("90.17 S3", rules=("R114",), rests=("A25",), either=("A9",), frozen="90.70")
     def test_each_click_layer_clears_by_its_soft_press_exit_with_the_thumb_still_down(self):
         for where, layer in (("centre", "RTP: Middle Click"), ("left", "RTP: Mouse Buttons")):
             for pad in self.each():
