@@ -89,13 +89,35 @@ audit walks 6,549 stacks with five extra presses, Neptune's and Ibex's
   C1 (each conversion is what `tools.convert` makes from its Ibex release),
   C2 (the build audit on Ibex and the Edge), C3 (the round trip) and C5 (each
   `CTP:` layer is its model with only R183's changes).
-- `tests/test_scenarios_dse_1_0.py`: the Edge's scenarios E1 to E7 on the
+- `tests/test_scenarios_dse_1_0.py`: the Edge's scenarios E1 to E8 on the
   simulator: swipes, the ring click, the centre click, a click in a key layer,
-  mute, the gyro, the grips.
+  mute, the gyro, the grips, and a missed release that clears at the next stick
+  push to the edge, where Neptune clears it at the next stick touch (R170).
 - `tests/test_controllers.py`: every gyro-to-mouse group states its
   controller's style.
 - The R156 test holds Ibex's working layouts to this builder, and Neptune's to
   its builders up to 90.74 only.
+
+## The Deck's scenarios on the other layouts (C4)
+
+[c4_scenarios.py](c4_scenarios.py) runs every scenario of `tests/` that runs on
+the working layout twice more; [c4-scenarios.txt](c4-scenarios.txt) has the
+results. It is a recorded run, not a test in the suite: it repeats the whole
+scenario suite twice, about 25 minutes.
+
+- **Ibex 1.0:** all 535 pass. Its binds are Neptune 90.74's.
+- **The Edge stopped after R180 to R182** (its header, the grips, no stick
+  touch; the Deck's two pads still there): 53 of 535 do not pass, and each
+  needs a stick touch. 46 press one on the simulator, 2 start on
+  `LST: Double Tap`, which the Edge deletes, and 5 count or read binds that
+  include the stick touches'. Most are a release missed while the Steam menu
+  was open and cleared at the next stick touch: on the Edge the next stick
+  push clears it (E8). The grip swap failed none: there a scenario's L4
+  presses the Edge's L5, where Shift is.
+
+The first run found a fault in the scenario helper itself: a record that
+builds a `Pad` without its constructor had no grip swaps. A default on the
+class fixed it.
 
 ## On the devices
 

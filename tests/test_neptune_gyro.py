@@ -5,6 +5,7 @@ These compare saved source settings, not Steam's runtime property resolution.
 import json
 import unittest
 
+from steam_layout.controllers import without_gyro_style
 from test_neptune_cursor import CURSOR_PROFILE, owners
 from test_neptune_recovery import ROOT, load_layouts
 
@@ -48,7 +49,9 @@ class NeptuneGyroTests(unittest.TestCase):
                     reference = active_sources(self.reference, title)[source]
                     self.assertEqual(actual["mode"], reference["mode"])
                     changed = RIGHT_STICK_90_45.get(title, {}) if source == "right_joystick" else {}
-                    self.assertEqual(actual["settings"], {**reference["settings"], **changed})
+                    # The gyro style is each controller's own since 90.75 (R179); test_controllers checks it.
+                    self.assertEqual(without_gyro_style(actual["settings"]),
+                                     without_gyro_style({**reference["settings"], **changed}))
             for _, _, owner, _, _ in owners(variant):
                 for title in (owner, "Gyro | " + owner):
                     with self.subTest(variant=variant, layer=title):
@@ -96,7 +99,7 @@ class NeptuneGyroTests(unittest.TestCase):
             for title, (mode, settings) in expected.items():
                 with self.subTest(variant=variant, layer=title):
                     self.assertEqual(actual[title]["mode"], mode)
-                    self.assertEqual(actual[title]["settings"], settings)
+                    self.assertEqual(without_gyro_style(actual[title]["settings"]), without_gyro_style(settings))
                     self.assertFalse(actual[title].get("inputs"))
 
 

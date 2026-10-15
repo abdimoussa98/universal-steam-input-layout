@@ -27,6 +27,7 @@ VARIANTS = ("default", "alternative")
 # gyro_to_2d_conversion_style, "3DOF to 2D Conversion Style" in Steam's editor (read from the Steam client, 2026-10-15)
 GYRO_STYLES = {0: "Yaw", 1: "Roll", 2: "Yaw + Roll", 3: "Local Space", 4: "Player Space", 5: "World Space",
                6: "Laser Pointer"}
+GYRO_STYLE = "gyro_to_2d_conversion_style"
 STICK_TOUCHES = (("joystick", "touch"), ("right_joystick", "touch"))
 
 _DESCRIPTION = ("WASD movement, gyro aiming, right-stick turn assist, and circular trackpad scrolling. "
@@ -172,6 +173,16 @@ def with_layouts():
 def working_layouts():
     """Every working layout of every controller, base first."""
     return [path for controller in with_layouts() for path in controller.working()]
+
+
+def without_gyro_style(value):
+    """`value`, a group's settings or anything holding them, with every gyro style left out: for comparing a layout
+    with one from before each controller stated its own style in every gyro group (R177, R179, R180)."""
+    if isinstance(value, dict):
+        return {key: without_gyro_style(item) for key, item in value.items() if key != GYRO_STYLE}
+    if isinstance(value, list):
+        return [without_gyro_style(item) for item in value]
+    return value
 
 
 VERSION = re.compile(r"^\d+(\.\d+)+$")

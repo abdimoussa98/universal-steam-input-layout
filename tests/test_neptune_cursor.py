@@ -5,6 +5,7 @@ physical deflection thresholds, and overlapping chords still need Deck testing.
 """
 import unittest
 
+from steam_layout.controllers import without_gyro_style
 from tools.audit_command_budget import command_entries
 from test_neptune_recovery import EMPTY, addition, load_layouts, removal, recovery_specs
 
@@ -94,7 +95,7 @@ class NeptuneCursorTests(unittest.TestCase):
                     cursor = self.source(layout, button + ": Temp Cursor Gyro", "gyro")
                     self.assertEqual(cursor["mode"], "gyro_to_mouse")
                     self.assertEqual(cursor.get("inputs", {}), {})
-                    self.assertEqual(cursor["settings"], {"layer": "1", **CURSOR_PROFILE})
+                    self.assertEqual(without_gyro_style(cursor["settings"]), {"layer": "1", **CURSOR_PROFILE})  # R179
                     gyro_owner = self.source(layout, "Gyro | " + owner, "gyro")["settings"]
                     self.assertEqual(gyro_owner["gyro_ratchet_button_mask"], "211109453758464")
                     self.assertEqual(gyro_owner["gyro_ratchet_button_requireany_or_all"], "0")

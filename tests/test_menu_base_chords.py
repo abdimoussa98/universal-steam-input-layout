@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import unittest
 
+from steam_layout.controllers import without_gyro_style
 from steam_layout.model import Layout, map_title
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,7 +55,8 @@ class MenuBaseChords(unittest.TestCase):
                 with self.subTest(variant=variant, layer=new):
                     actual, reference = layout.active(new)['gyro'], self.reference.active(old)['gyro']
                     self.assertEqual(actual['mode'], reference['mode'])
-                    self.assertEqual(actual['settings'], reference['settings'])
+                    # The gyro style is each controller's own since 90.75 (R179); test_controllers checks it.
+                    self.assertEqual(without_gyro_style(actual['settings']), without_gyro_style(reference['settings']))
                     self.assertEqual(actual.get('inputs', {}), reference.get('inputs', {}))
 
 

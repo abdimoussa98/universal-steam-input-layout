@@ -168,6 +168,7 @@ def frozen_layout_data(variant, version):
 
 class Pad:
     """The controller in a scenario: gestures by name, on one layout."""
+    swaps = {}                  # a Deck grip -> the input that holds its bind (R181); records build a Pad without __init__
 
     def __init__(self, variant, start=None, data=None, **options):
         self.variant, self.options = variant, options

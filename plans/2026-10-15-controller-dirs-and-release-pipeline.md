@@ -24,6 +24,12 @@ readings of the author's words are marked in
   of the layout's controller (R178 g).
 - `tools.release snapshot` saves a controller's snapshot (and refuses a tagged
   one), in place of the skill's copy loop.
+- C4 is a recorded run, not a test in the suite: it repeats the whole scenario
+  suite twice, about 25 minutes
+  ([c4_scenarios.py](../findings/2026-10-15-ibex-base/c4_scenarios.py), with its
+  results beside it). The Edge's own scenarios add E8: with no stick touch, a
+  missed release clears at the next stick push to the edge.
+- The CI's four test parts are balanced by the slow modules' measured times.
 
 The author, 2026-10-15: "create a dse directory similar to the neptune dir.
 [...] I also want a directory for the steam controller 2, but i want you to call

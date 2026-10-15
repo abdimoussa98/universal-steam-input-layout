@@ -10,6 +10,8 @@ plans/2026-10-15-controller-dirs-and-release-pipeline.md, part 4. Each runs on t
 - The gyro has no enable button: it aims in Base and in `Gyro` with both sticks centred, and `Gyro Off Ramp Up`
   turns it off (R185).
 - The grips trade places: Shift on the left paddle (L5), Ctrl on the left front button (L4) (R181).
+- With no stick touch, a release missed while the Steam menu was open clears at the next stick push to the edge,
+  where Neptune clears it at the next stick touch (R170).
 """
 import unittest
 
@@ -116,6 +118,21 @@ class TheRest(ScenarioCase):
                 self.assertTrue(pad.has("Gyro Off Ramp Up") and not gyro_aims(pad))
                 pad.recentre("RS").wait(200)
                 self.assertTrue(gyro_aims(pad))
+
+    @scenario("dse 1.0 E8", rules=("R170",), rests=("A25",))
+    def test_a_missed_release_clears_on_the_next_stick_push(self):
+        """Where Neptune clears a release missed while the Steam menu was open at the next stick touch, the Edge, with
+        no stick touch, clears it at the next push of either stick to its edge: the edges' cleanup functions."""
+        missed = {"menu": lambda pad: pad.hold("Select").wait(50).miss("Select"),
+                  "modifier": lambda pad: pad.hold("L1").wait(300).miss("L1"),
+                  "modifier 2": lambda pad: pad.hold("L1").wait(30).hold("R1").wait(300).miss("L1", "R1")}
+        for what, gesture in missed.items():
+            for stick in ("LS", "RS"):
+                for pad in self.each(controller="dse"):
+                    gesture(pad).wait(100)
+                    self.assertNotEqual(pad.names(), ("Base",), what)
+                    pad.flick(stick, "up").wait(300)
+                    self.assertEqual(pad.names(), ("Base",), (what, stick))
 
     @scenario("dse 1.0 E7", rules=("R181",))
     def test_shift_is_on_the_left_paddle_and_ctrl_on_the_left_front_button(self):

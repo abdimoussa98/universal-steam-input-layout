@@ -5,6 +5,7 @@ import importlib.util
 import json
 import unittest
 
+from steam_layout.controllers import without_gyro_style
 from steam_layout.model import Layout, actions, entries
 from tests.scenario import ROOT, Pad, VARIANTS, frozen_layout_data, layout_data
 from tests.test_steering_entry_feedback import GUARD, commands
@@ -231,7 +232,8 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
         response = {'gyro_precision_speed': '750', 'haptic_intensity': '0',
                     'flickstick_haptic_bump_per_angle': '1', 'mouse_move_threshold': '5'}
         for variant, _, layout, old in self.each():
-            self.assertEqual(layout.active('Cursor Gyro'), old.active('Cursor Gyro'))
+            # The gyro style is each controller's own since 90.75 (R179); test_controllers checks it.
+            self.assertEqual(without_gyro_style(layout.active('Cursor Gyro')), without_gyro_style(old.active('Cursor Gyro')))
             for stack, activation_owner in ((('Base', 'Gyro', 'Cursor Gyro'), 'Gyro'),
                                              (('Base', 'Cursor Gyro'), 'Base'),
                                              (('Base', 'Cursor Gyro', 'Gyro'), 'Gyro')):
