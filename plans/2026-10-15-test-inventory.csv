@@ -1,0 +1,168 @@
+current_path,status,authored_test_methods_or_node_tests,decorated_scenarios,fixture_scope,proposed_home_or_split,review_note
+tests/test_audit_build.py,active Python,2,0,synthetic CLI orchestration,tests/integration,Candidate option forwarding and baseline ambiguity
+tests/test_audit_command_budget.py,active Python,14,0,synthetic schema/budget fixtures,tests/unit; tests/integration,Keep invalid schema and CLI behavior
+tests/test_audit_inheritance.py,active Python,33,0,synthetic/live/mutated/CLI,tests/unit; tests/contracts/neptune; tests/integration,Share identical Window report; keep timing uncached
+tests/test_base_pad_click_one_add.py,active Python,3,0,historical builder 90.20; prior 90.19,tests/releases/neptune,Base click shape and budget
+tests/test_chains.py,active Python,42,0,synthetic chain contracts,tests/unit,Extract toy helpers; preserve path and stack assertions; real-layout comparisons are archived
+tests/test_changes.py,active Python,13,0,synthetic/filesystem/historical comparisons,tests/unit; tests/releases/neptune; tests/integration,Preserve source ordering and baseline selection
+tests/test_cleanup_entry_order.py,active Python,4,0,historical builder 90.36; snapshots 90.35/90.36,tests/releases/neptune,Preserve stored order and scoped change report
+tests/test_cleanups.py,active Python,82,0,synthetic/live/historical/mutated/CLI,tests/unit; tests/contracts/neptune; tests/releases/neptune; tests/integration,Share report selectors; expensive fixed-snapshot regressions remain
+tests/test_covers.py,active Python,6,0,synthetic cover families,tests/unit,Contexts and foreign-arrival semantics distinct from general chains
+tests/test_cursor_gyro.py,active Python,11,0,historical builder 90.21; prior 90.20,tests/releases/neptune,Cursor Gyro transition and exit contracts
+tests/test_double_tap_windows.py,active Python,6,0,live,tests/contracts/neptune,Share current layouts and window inventories
+tests/test_exceptions.py,active Python,23,0,synthetic config and live registry integrity,tests/unit; tests/integration,Keep exception/documentation correspondence
+tests/test_fallback_window.py,active Python,12,0,historical builder 90.31,tests/releases/neptune,Keep retired behavior static contracts active
+tests/test_fallback_window_backport.py,active Python,7,0,candidate 90.39; frozen 90.32; live lineage,tests/releases/neptune; tests/scenarios/candidates support,Keep candidate rules and baseline separate
+tests/test_fallback_window_replacements.py,active Python,5,0,historical builder 90.32; prior 90.31,tests/releases/neptune,Preserve exact replacements and hold
+tests/test_fixes.py,active Python,7,0,live and historical mutation/idempotence,tests/contracts/neptune; tests/releases/neptune; tests/unit; tests/integration,Private raw data; preserve actual second pipeline execution
+tests/test_flow_inheritance.py,active Python,30,0,synthetic and real-layout/config cases,tests/unit; tests/integration,Inventory.of must observe mutated groups
+tests/test_fn_feedback_steering_clear.py,active Python,3,0,mixed live and frozen 90.57,tests/contracts/neptune; tests/releases/neptune,Split current feedback from frozen exit shape
+tests/test_gamepad.py,active Python,13,0,historical builder 90.22; prior 90.21; archived reference,tests/releases/neptune,Closed-layer contract and activator exceptions
+tests/test_layer_order_90_64.py,active Python,5,0,mixed live order and frozen 90.63 to 90.64,tests/contracts/neptune; tests/releases/neptune,Preserve order-sensitive historical equivalence
+tests/test_layer_report.py,active Python,18,0,synthetic/live/CLI,tests/unit; tests/contracts/neptune; tests/integration,Preserve witnesses and exact report projections
+tests/test_layout_hygiene.py,active Python,4,0,live,tests/contracts/neptune,Share exact budget report; retain all group banks
+tests/test_layout_rules.py,active Python,8,0,live/snapshot integrity,tests/contracts/neptune; tests/releases/neptune,Preserve both variants and snapshot order/provenance
+tests/test_menu_base_chords.py,active Python,2,0,mixed builder 90.37 and live/reference,tests/contracts/neptune; tests/releases/neptune,Separate historical comparison and current reference
+tests/test_menu_chain_and_window_pads.py,active Python,9,0,historical builder 90.28; prior 90.27,tests/releases/neptune,Menu chains and contextual Fn layers
+tests/test_menu_second_press_keys.py,active Python,3,0,historical builder 90.15; prior 90.14,tests/releases/neptune,Second press and scoped diff
+tests/test_modifier_rocking.py,active Python,9,0,live,tests/contracts/neptune,Good one-walk/multiple-observation example; retain distinct orders
+tests/test_native.py,active Python,14,0,synthetic and frozen 90.20 snapshot,tests/unit; tests/integration,Share default results; retain independent options/reference/limits
+tests/test_neptune_cursor.py,active Python,12,0,live,tests/contracts/neptune,Extract shared loader; preserve profile and recovery contracts
+tests/test_neptune_gyro.py,active Python,2,0,live and July reference,tests/contracts/neptune,Share reference preparation; retain modes and modifier edges
+tests/test_neptune_held_inputs.py,active Python,8,0,live and mutated negative fixtures,tests/contracts/neptune,Fresh analyses for mutants; share loader only
+tests/test_neptune_recovery.py,active Python,5,0,live,tests/contracts/neptune,Extract loader preserving duplicate-key checks and numeric/title forms
+tests/test_pad_bump_removal.py,active Python,7,0,historical builder 90.27; 90.24/25/26 comparisons,tests/releases/neptune,Retain exact removed layers and preserved routes
+tests/test_pad_bumps_and_menu_keys.py,active Python,17,0,historical builder 90.25; prior 90.24,tests/releases/neptune,Menu/pad contracts and append-only IDs
+tests/test_pad_click_exits.py,active Python,7,0,historical builder 90.16; prior 90.15,tests/releases/neptune,Pressure exits and feedback
+tests/test_pad_click_handoff.py,active Python,5,0,historical builder 90.18; prior 90.17,tests/releases/neptune,Handoff ordering and budget
+tests/test_pad_click_holds.py,active Python,6,0,historical builder 90.19; 90.18 and 90.13 references,tests/releases/neptune,Hold exception and feedback
+tests/test_pad_click_soft_press_only.py,active Python,6,0,historical builder 90.17; prior 90.16,tests/releases/neptune,Soft Press entries/exits and outputs
+tests/test_pad_middle_click.py,active Python,14,0,historical builder 90.14; prior 90.13,tests/releases/neptune,Layer append/order and output/cleanup/budget
+tests/test_quiet_resets_and_beeps.py,active Python,7,0,historical builder 90.29; prior 90.28,tests/releases/neptune,Feedback-only diff and silent resets
+tests/test_required_cleanups.py,active Python,48,0,synthetic/frozen 90.23/live/CLI,tests/unit; tests/releases/neptune; tests/contracts/neptune; tests/integration,Shared historical reports already good; keep mutable negative tests fresh
+tests/test_required_cleanups_build.py,active Python,10,0,historical builder 90.24; prior 90.23; manifest/rules,tests/releases/neptune,Profile nested fixes; retain stage and required-cleanup checks
+tests/test_rule_registry.py,active Python,27,0,synthetic parser and repository documentation,tests/unit; tests/integration,Recursive reference resolution needed before moves
+tests/test_scenario_registry.py,active Python,15,0,harness/registry/live coverage; mocked frozen bookkeeping,tests/integration,Separate metadata/rendering from execution; finalize complete live reach once
+tests/test_scenarios_90_10.py,active Python,18,18,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_11.py,active Python,5,5,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_12.py,active Python,8,8,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_14.py,active Python,11,11,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_15.py,active Python,3,3,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_16.py,active Python,5,5,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_17.py,active Python,3,3,frozen/history,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_18.py,active Python,4,4,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_19.py,active Python,3,3,frozen/history,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_20.py,active Python,2,2,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_21.py,active Python,9,9,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_22.py,active Python,7,7,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_23.py,active Python,3,3,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_24.py,active Python,7,7,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_25.py,active Python,20,20,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_26.py,active Python,8,8,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_27.py,active Python,4,4,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_28.py,active Python,10,10,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_29.py,active Python,2,2,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_30.py,active Python,8,8,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_33.py,active Python,17,17,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_34.py,active Python,3,3,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_35.py,active Python,6,6,frozen/history,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_37.py,active Python,3,3,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_38.py,active Python,9,9,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_39.py,active Python,30,30,candidate 90.39,tests/scenarios/candidates,Candidate rules and CANDIDATE_REACHED must remain separate from live R165
+tests/test_scenarios_90_42.py,active Python,7,7,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_43.py,active Python,19,19,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_44.py,active Python,12,12,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_46.py,active Python,9,9,mixed live and historical,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_47.py,active Python,9,9,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_48.py,active Python,4,4,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_49.py,active Python,7,5,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_51.py,active Python,5,3,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_52.py,active Python,15,9,live,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_53.py,active Python,22,13,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_54.py,active Python,6,4,frozen/history,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_55.py,active Python,19,11,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_56.py,active Python,6,4,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_57.py,active Python,17,11,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Preserve 1280 gesture cells and frozen/static helper selections
+tests/test_scenarios_90_58.py,active Python,11,4,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Preserve different equivalence/live seeds and complete logs; remove duplicate harness execution only
+tests/test_scenarios_90_61.py,active Python,12,7,frozen/history,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_62.py,active Python,9,5,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_63.py,active Python,7,4,frozen/history,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_65.py,active Python,11,6,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_66.py,active Python,10,5,frozen/history,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_67.py,active Python,10,5,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_68.py,active Python,3,1,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_69.py,active Python,5,2,frozen/history,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_6_to_90_9.py,active Python,11,11,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_70.py,active Python,5,2,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_71.py,active Python,13,11,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_72.py,active Python,12,8,mixed live and historical,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_73.py,active Python,4,4,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_90_74.py,active Python,3,2,live,tests/scenarios/neptune; tests/contracts/neptune or releases/neptune for non-scenario checks,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_cursor.py,active Python,10,10,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_menu_and_modifiers.py,active Python,12,12,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_scenarios_triggers_and_recovery.py,active Python,14,14,live,tests/scenarios/neptune,Keep labels and per-method source/assumption matrix; metadata alone does not classify all fixture use
+tests/test_simulator.py,active Python,52,0,synthetic and real-layout regression matrices,tests/unit; tests/integration,Fresh simulator state per gesture; extract imported helpers
+tests/test_stacks.py,active Python,2,0,synthetic concrete walks,tests/unit,Remove bare imports; retain explicit execution order
+tests/test_standard_delays.py,active Python,9,0,historical builder 90.26; prior 90.25,tests/releases/neptune,Delays/resets and unchanged ramp properties
+tests/test_stateful_transitions.py,active Python,26,0,historical builder 90.10; prior 90.9,tests/releases/neptune,Share compatible analysis; preserve three distinct audits
+tests/test_static_checks.py,active Python,4,0,live; includes graph analysis,tests/contracts/neptune,Name hides expensive co-presence calculation
+tests/test_steering_candidate.py,active Python,13,0,historical 09-29 candidate builder,tests/releases/neptune,Commands/ID roundtrip/budget
+tests/test_steering_entry_feedback.py,active Python,6,0,live,tests/contracts/neptune,Guard settings and feedback order
+tests/test_steering_entry_quiet_drivers.py,active Python,7,0,mixed live; frozen 90.48; builder 90.43; July reference,tests/contracts/neptune; tests/releases/neptune,Separate live silence from historical comparison
+tests/test_steering_fallback_guard.py,active Python,13,0,historical builder 90.33; prior 90.32,tests/releases/neptune,Renamed/deleted layers and guarded fallback
+tests/test_steering_fallback_hold.py,active Python,11,0,historical builder 90.11; prior 90.10,tests/releases/neptune,Append/order and fallback inheritance
+tests/test_steering_fallback_swap.py,active Python,8,0,historical builder 90.35; prior 90.34,tests/releases/neptune,Add-before-remove and bounded diff
+tests/test_steering_four_way_and_open_edges.py,active Python,8,0,historical builder 90.34; prior 90.33,tests/releases/neptune,Four-way settings and open edges
+tests/test_steering_lean.py,active Python,31,0,historical 09-30 builder,tests/releases/neptune,Preserve independent ordered-command executor
+tests/test_steering_native_gestures.py,active Python,2,0,isolated native gesture probe builder,tests/integration,Build once per probe combination; retain configuration checks
+tests/test_steering_probes.py,active Python,6,0,isolated owner/entry/clock probe builders,tests/integration,Preserve every variant/kind/clock combination
+tests/test_steering_rtp_menu_chords.py,active Python,6,0,mixed live R156/current rules; frozen builder 90.42,tests/contracts/neptune; tests/releases/neptune,Keep R156 independent/current; normalize copied data
+tests/test_steering_touch_windows.py,active Python,9,0,mixed synthetic/live/mutated/frozen,tests/unit; tests/contracts/neptune; tests/releases/neptune,Split responsibilities; retain eight mutant audits
+tests/test_tap_cover_stick_touches.py,active Python,3,0,historical builder 90.23; prior 90.22,tests/releases/neptune,Menu-cover ownership and scoped diff
+tests/test_window_releases_and_tap_cover_resets.py,active Python,6,0,historical builder 90.30; 90.29/90.24 comparisons,tests/releases/neptune,Window-first release and reset removal
+tests/test_convert_vdf.mjs,active Node,6,0,synthetic plus real exporter/CLI,tests/node,Include both files in full command; preserve real dependency/fresh-state behavior
+tests/test_steering_observer.mjs,active Node,2,0,isolated observer VM,tests/node,Include both files in full command; preserve real dependency/fresh-state behavior
+archived/capped-walk-and-first-engines/tests/test_native.py,archived Python,12,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/capped-walk-and-first-engines/tests/test_walk.py,archived Python,18,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/depth-search-and-family-walk/tests/test_audit_inheritance.py,archived Python,42,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/depth-search-and-family-walk/tests/test_chains.py,archived Python,47,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/depth-search-and-family-walk/tests/test_covers.py,archived Python,7,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/depth-search-and-family-walk/tests/test_flow_inheritance.py,archived Python,34,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/depth-search-and-family-walk/tests/test_stacks.py,archived Python,9,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_held_model.py,archived Python,12,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_invariants.py,archived Python,11,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_search_model.py,archived Python,3,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_source_geometry.py,archived Python,13,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_stack_evidence.py,archived Python,11,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_stack_report.py,archived Python,1,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_stack_search.py,archived Python,12,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_stack_search_disk.py,archived Python,9,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_symbolic.py,archived Python,8,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_symbolic_batch.py,archived Python,9,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_analog_envelope.py,archived Python,10,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_audit.py,archived Python,18,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_between.py,archived Python,6,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_discover.py,archived Python,9,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_elapsed_envelope.py,archived Python,8,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_envelope.py,archived Python,17,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_envelope_review.py,archived Python,3,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_facts.py,archived Python,8,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_mine.py,archived Python,8,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_minimize.py,archived Python,5,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_model.py,archived Python,23,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_phase_envelope.py,archived Python,23,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_physical_progress_envelope.py,archived Python,2,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_predicates.py,archived Python,14,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_progress_envelope.py,archived Python,9,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_proof.py,archived Python,15,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_reduction.py,archived Python,19,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_refine.py,archived Python,9,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_report.py,archived Python,12,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_search.py,archived Python,22,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_seek.py,archived Python,11,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_spec.py,archived Python,20,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_store.py,archived Python,20,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_timed_trace.py,archived Python,8,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/exhaustive-stack-search/tests/test_top_model.py,archived Python,5,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/fallback-window/tests/test_scenarios_90_31.py,archived Python,10,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
+archived/fallback-window/tests/test_scenarios_90_32.py,archived Python,4,,retired historical source; not active coverage,unchanged archive,Excluded from active discovery under archive policy
