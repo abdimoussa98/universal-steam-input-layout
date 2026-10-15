@@ -447,7 +447,7 @@ PYTHONPATH=.:tests python3 -m unittest $(ls tests/test_*.py | sed 's#/#.#; s#\.p
 node --test tests/test_convert_vdf.mjs
 ```
 
-The first command runs every Python test: 1,301 on 2026-10-15, in about 46
+The first command runs every Python test: 1,398 on 2026-10-15, in about 48
 minutes on this Mac. The release workflow runs them in four parts at once
 (`python3 -m tools.release shard <part> 4`). `tests/` has to be on the path because four test modules import a
 sibling by its bare name, and `python3 -m unittest discover` does not work
