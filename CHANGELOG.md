@@ -43,7 +43,8 @@ Steam Controller 2.
 
 ## neptune 90.74
 
-The first release published by the release pipeline. What changed since 90.70:
+Not published as a release: the pipeline's trial run on it stopped on a test
+that depended on test order, fixed after. What changed since 90.70:
 
 - **90.74:** the right stick of the four Fn layers takes the left stick's
   settings; its keys and bumps are unchanged
