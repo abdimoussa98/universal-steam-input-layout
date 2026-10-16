@@ -440,6 +440,8 @@ pub fn validate_request(
         && origin.is_none_or(|o| o == format!("http://{expected_host}"))
 }
 
+pub mod steam_hid;
+
 mod companion_link;
 pub use companion_link::{CompanionEndpoint, HostedViewer};
 

@@ -43,6 +43,7 @@ fn main() {
             recovery_available: true,
             hud: false,
             companion_url: None,
+            browser_connection: None,
             error: None,
         },
         std::env::temp_dir().join("keybind-fixture-settings"),

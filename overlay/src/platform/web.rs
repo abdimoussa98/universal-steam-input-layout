@@ -4,6 +4,38 @@ use std::{cell::RefCell, rc::Rc};
 use wasm_bindgen::{JsCast, prelude::*};
 use wasm_bindgen_futures::{JsFuture, spawn_local};
 
+const HID_DEVICE_ID: &str = "webhid:steam-controller-usb";
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = window, js_name = SteamHid)]
+    #[derive(Clone)]
+    type SteamHid;
+    #[wasm_bindgen(constructor, js_namespace = window)]
+    fn new(on_input: &js_sys::Function, on_state: &js_sys::Function) -> SteamHid;
+    #[wasm_bindgen(method, getter)]
+    fn available(this: &SteamHid) -> bool;
+    #[wasm_bindgen(method, getter, js_name = supportMessage)]
+    fn support_message(this: &SteamHid) -> String;
+    #[wasm_bindgen(method)]
+    fn connect(this: &SteamHid) -> js_sys::Promise;
+    #[wasm_bindgen(method)]
+    fn disconnect(this: &SteamHid) -> js_sys::Promise;
+    #[wasm_bindgen(method)]
+    fn destroy(this: &SteamHid) -> js_sys::Promise;
+}
+type HidReportCallback = Closure<dyn FnMut(u8, js_sys::Uint8Array)>;
+type HidStatusCallback = Closure<dyn FnMut(String, String)>;
+fn now_ms() -> f64 {
+    web_sys::window()
+        .and_then(|w| w.performance())
+        .map(|p| p.now())
+        .unwrap_or(0.0)
+}
+fn page_hidden() -> bool {
+    web_sys::window()
+        .and_then(|w| w.document())
+        .is_none_or(|d| d.hidden())
+}
 struct WebState {
     data: FrameData,
     tracker: InputTracker,
@@ -16,6 +48,10 @@ struct WebState {
     paused: bool,
     generation: u64,
     freshness: InputFreshness,
+    hid: Option<SteamHid>,
+    hid_input: Option<InputFrame>,
+    hid_received: Option<f64>,
+    hid_error: Option<String>,
 }
 fn storage_read(key: &str) -> Result<Option<String>, String> {
     web_sys::window()
@@ -84,6 +120,7 @@ impl WebState {
                 recovery_available: false,
                 hud: false,
                 companion_url: None,
+                browser_connection: None,
                 error,
             },
             tracker: InputTracker::default(),
@@ -99,6 +136,10 @@ impl WebState {
             paused: false,
             generation: 0,
             freshness: InputFreshness::default(),
+            hid: None,
+            hid_input: None,
+            hid_received: None,
+            hid_error: None,
         }
     }
     fn repaint(&self) {
@@ -106,8 +147,73 @@ impl WebState {
             c.request_repaint();
         }
     }
+    fn hid_report(&mut self, id: u8, bytes: &[u8]) {
+        if self.paused
+            || page_hidden()
+            || !self
+                .data
+                .browser_connection
+                .as_ref()
+                .is_some_and(|c| c.connected)
+        {
+            return;
+        }
+        match steam_hid::decode_report(id, bytes) {
+            Ok(Some(frame)) => {
+                let now = now_ms();
+                let changed = self.hid_input.as_ref() != Some(&frame);
+                self.hid_received = Some(now);
+                self.hid_error = None;
+                // Process every changed report immediately, including a press
+                // and release occurring between two render/poll frames.
+                if self.tracker.selected.as_deref() == Some(HID_DEVICE_ID)
+                    && (changed || self.data.state.status != InputStatus::Live)
+                {
+                    self.data.state.sample_input(
+                        HID_DEVICE_ID,
+                        frame.clone(),
+                        &self.data.profile,
+                        now as u64,
+                    );
+                    self.repaint();
+                }
+                self.hid_input = Some(frame);
+            }
+            Ok(None) => {}
+            Err(error) => {
+                self.hid_input = None;
+                self.hid_received = None;
+                self.hid_error = Some(error.into());
+                self.poll();
+            }
+        }
+    }
+    fn hid_status(&mut self, status: &str, message: String) {
+        let Some(connection) = &mut self.data.browser_connection else {
+            return;
+        };
+        connection.busy = matches!(status, "requesting" | "disconnecting");
+        connection.connected = status == "connected";
+        connection.message = message;
+        self.hid_input = None;
+        self.hid_received = None;
+        self.hid_error = None;
+        if status == "connected" {
+            self.tracker.select(Some(HID_DEVICE_ID.into()));
+            self.data.settings.selected = Some(HID_DEVICE_ID.into());
+        }
+        if self.tracker.selected.as_deref() == Some(HID_DEVICE_ID) {
+            self.data.state.unavailable(if status == "disconnected" {
+                InputStatus::Disconnected
+            } else {
+                InputStatus::Unavailable
+            });
+        }
+        self.poll();
+        self.repaint();
+    }
     fn poll(&mut self) {
-        let result = (|| -> Result<Vec<Device>, String> {
+        let mut result = (|| -> Result<Vec<Device>, String> {
             let pads = web_sys::window()
                 .ok_or("No browser window")?
                 .navigator()
@@ -173,6 +279,56 @@ impl WebState {
             }
             Ok(devices)
         })();
+        let hid_connected = self
+            .data
+            .browser_connection
+            .as_ref()
+            .is_some_and(|c| c.connected);
+        if hid_connected {
+            let input = self.hid_input.clone().unwrap_or_default();
+            let device = Device {
+                held: [input.down(Control::L1), input.down(Control::R1)],
+                input,
+                id: HID_DEVICE_ID.into(),
+                name: "Steam Controller · USB / WebHID".into(),
+                standard: true,
+            };
+            match &mut result {
+                Ok(devices) => devices.push(device),
+                Err(_) => result = Ok(vec![device]),
+            }
+        }
+        if self.tracker.selected.as_deref() == Some(HID_DEVICE_ID)
+            && (!hid_connected
+                || self
+                    .hid_received
+                    .is_none_or(|received| now_ms() - received > 1500.0))
+        {
+            let old = self.data.state.status.clone();
+            self.data.state.unavailable(if hid_connected {
+                InputStatus::Unavailable
+            } else {
+                InputStatus::Disconnected
+            });
+            if let Ok(devices) = result {
+                self.data.settings.devices = devices;
+            }
+            let error = hid_connected.then(|| {
+                self.hid_error.clone().unwrap_or_else(|| {
+                    if self.hid_received.is_some() {
+                        "Controller input stopped. Reconnect USB and use Connect controller again."
+                    } else {
+                        "Waiting for controller input…"
+                    }
+                    .into()
+                })
+            });
+            if old != self.data.state.status || self.data.settings.error != error {
+                self.data.settings.error = error;
+                self.repaint();
+            }
+            return;
+        }
         match result {
             Ok(devices) => {
                 let recovered = self.data.settings.error.take().is_some();
@@ -210,6 +366,22 @@ impl Backend for WebBackend {
         self.0.borrow().data.clone()
     }
     fn command(&mut self, command: Command) {
+        // The JS permission request can synchronously notify Rust. Release the
+        // state borrow before calling it, and preserve the button's activation.
+        if matches!(
+            command,
+            Command::ConnectController | Command::DisconnectController
+        ) {
+            let hid = self.0.borrow().hid.clone();
+            if let Some(hid) = hid {
+                if matches!(command, Command::ConnectController) {
+                    let _ = hid.connect();
+                } else {
+                    let _ = hid.disconnect();
+                }
+            }
+            return;
+        }
         let mut s = self.0.borrow_mut();
         match command {
             Command::Mode(mode) => {
@@ -316,6 +488,8 @@ fn tick(shared: &Rc<RefCell<WebState>>) {
             s.paused = true;
             s.generation += 1;
             s.data.state.unavailable(InputStatus::Paused);
+            s.hid_input = None;
+            s.hid_received = None;
             if let Some(b) = &mut s.bridge {
                 b.disconnect();
             }
@@ -406,6 +580,8 @@ pub struct WebHandle {
     callback: Option<Closure<dyn FnMut()>>,
     visibility: Option<Closure<dyn FnMut()>>,
     state: Option<Rc<RefCell<WebState>>>,
+    hid_report: Option<HidReportCallback>,
+    hid_status: Option<HidStatusCallback>,
 }
 #[wasm_bindgen]
 impl WebHandle {
@@ -417,6 +593,8 @@ impl WebHandle {
             callback: None,
             visibility: None,
             state: None,
+            hid_report: None,
+            hid_status: None,
         }
     }
     pub async fn start(&mut self, canvas: web_sys::HtmlCanvasElement) -> Result<(), JsValue> {
@@ -426,6 +604,33 @@ impl WebHandle {
             CompanionEndpoint::parse_fragment(&hash).map_err(|e| JsValue::from_str(&e))?;
         let shared = Rc::new(RefCell::new(WebState::new(endpoint)));
         self.state = Some(shared.clone());
+        if !shared.borrow().data.remote {
+            let weak = Rc::downgrade(&shared);
+            let report = Closure::wrap(Box::new(move |id: u8, bytes: js_sys::Uint8Array| {
+                if let Some(state) = weak.upgrade() {
+                    state.borrow_mut().hid_report(id, &bytes.to_vec());
+                }
+            }) as Box<dyn FnMut(u8, js_sys::Uint8Array)>);
+            let weak = Rc::downgrade(&shared);
+            let status = Closure::wrap(Box::new(move |status: String, message: String| {
+                if let Some(state) = weak.upgrade() {
+                    state.borrow_mut().hid_status(&status, message);
+                }
+            }) as Box<dyn FnMut(String, String)>);
+            let hid = SteamHid::new(
+                report.as_ref().unchecked_ref(),
+                status.as_ref().unchecked_ref(),
+            );
+            shared.borrow_mut().data.browser_connection = Some(BrowserConnection {
+                available: hid.available(),
+                busy: false,
+                connected: false,
+                message: hid.support_message(),
+            });
+            shared.borrow_mut().hid = Some(hid);
+            self.hid_report = Some(report);
+            self.hid_status = Some(status);
+        }
         let for_app = shared.clone();
         self.runner
             .start(
@@ -463,9 +668,17 @@ impl WebHandle {
             return "null".into();
         };
         let s = state.borrow();
-        serde_json::json!({"ui_targets":s.context.as_ref().and_then(|c|c.data(|d|d.get_temp::<std::collections::BTreeMap<String,[f32;2]>>(egui::Id::new("keybind.targets")))),"control_labels":s.data.state.control_labels(&s.data.profile),"input_status":s.data.input_status_label(),"controller_help":s.data.controller_help(),"state":s.data.state,"labels":s.data.state.view(&s.data.profile).labels,"devices":s.data.settings.devices,"error":s.data.error.as_ref().or(s.data.settings.error.as_ref()),"remote":s.data.remote,"settings":s.data.settings,"preferences":s.data.display_preferences()}).to_string()
+        serde_json::json!({"ui_targets":s.context.as_ref().and_then(|c|c.data(|d|d.get_temp::<std::collections::BTreeMap<String,[f32;2]>>(egui::Id::new("keybind.targets")))),"control_labels":s.data.state.control_labels(&s.data.profile),"input_status":s.data.input_status_label(),"controller_help":s.data.controller_help(),"browser_connection":s.data.browser_connection,"state":s.data.state,"labels":s.data.state.view(&s.data.profile).labels,"devices":s.data.settings.devices,"error":s.data.error.as_ref().or(s.data.settings.error.as_ref()),"remote":s.data.remote,"settings":s.data.settings,"preferences":s.data.display_preferences()}).to_string()
     }
     pub fn destroy(&mut self) {
+        if let Some(state) = &self.state {
+            let hid = state.borrow_mut().hid.take();
+            if let Some(hid) = hid {
+                let _ = hid.destroy();
+            }
+        }
+        self.hid_report = None;
+        self.hid_status = None;
         if let Some(timer) = self.timer.take()
             && let Some(w) = web_sys::window()
         {

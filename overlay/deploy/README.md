@@ -30,8 +30,9 @@ No server API credentials, self-hosted runner, or Terraform is needed.
    If the tunnel runs in a separate container, use a reachable server address;
    `localhost` would mean the tunnel container. Change host port `18091` in
    Compose if it is already occupied; the container listens on `8080`.
-5. For the wired Steam Controller on your Mac, follow the helper pairing steps
-   below. Other browser-supported controllers can use the normal Gamepad API.
+5. Plug the Steam Controller 2 into your computer by USB, click **Connect
+   controller** in the viewer, and select it in the browser picker. No local
+   helper or Steam installation is required for this connection.
 
 Use HTTPS for the public viewer so browser controller APIs are available.
 Honor Nginx's `Cache-Control: no-cache` headers in your tunnel/cache settings,
@@ -69,56 +70,53 @@ images in GHCR if you want to return to them later.
 
 ## Steam Controller in the hosted browser
 
-Your wired Steam Controller on macOS was not exposed by Brave's Gamepad API.
-Moving the page into Docker does not change that. Pairing mode lets
-the **hosted HTTPS page** use the same native controller reader that worked
-locally. Steam is not required. Controller input travels directly from the local helper
-to the browser; the hosted container only serves the web files.
+Open the HTTPS viewer in a desktop browser with WebHID enabled. Click
+**Connect controller** and choose your USB Steam Controller 2 in the browser's
+permission dialog. The viewer selects that controller automatically. It reads
+buttons, triggers, sticks, capacitive stick touches and trackpad positions
+straight from USB, then feeds the same Rust bindings and gesture engine.
+Controller input stays on your computer; the container only serves static files.
 
-Build the helper, or download `keybind-viewer-macos-helper` from the same
-workflow. After extracting the downloaded artifact, run `chmod +x
-keybind-overlay`. Start it with your actual viewer address:
+The direct decoder currently targets the wired Valve `28de:1302`
+Triton/Ibex controller. Other controllers still use the normal Gamepad API:
+press a button and select the controller under Settings. Bluetooth, dongle,
+and original Steam Controller HID protocols are not claimed by this decoder.
 
-```sh
-./keybind-overlay --viewer-url https://YOUR_VIEWER_HOSTNAME/
-```
+If no picker appears, enable HID device requests in the browser's site/device
+permissions and try again. Cancelling the dialog leaves the viewer disconnected.
+If the browser does not provide WebHID or the page is insecure, the viewer
+explains the missing capability. Chrome and Edge provide desktop WebHID;
+Brave must allow the site's HID requests. See
+[WebHID permissions](https://developer.chrome.com/docs/capabilities/hid).
+A permission grant cannot expose an interface blocked by the browser or OS.
 
-For a source build, the equivalent executable is
-`./overlay/target/release/keybind-overlay`. On Windows use
-`keybind-overlay.exe --viewer-url https://YOUR_VIEWER_HOSTNAME/`.
+Unplugging or stalled input clears held controls and timers. Reconnecting the
+same authorized device can resume input; otherwise click **Connect controller**
+again. **Disconnect controller** closes USB access. Background tabs pause the
+viewer and resume only from a fresh report. The browser temporarily disables
+the controller's desktop mouse emulation while connected, matching SDL's
+transient setting; the controller restores it when the connection stops.
 
-Open the **complete pairing link printed by the helper**, in a browser on the
-same computer as the controller. It opens the hosted page with a fragment
-containing a random session token and loopback port. URL fragments are not
-sent to Nginx, the tunnel or GHCR. The helper still listens only on `127.0.0.1`.
-It allows API requests from the exact configured viewer origin and requires
-the session token; arbitrary sites are refused. Input, trackpad positions,
-timing and profile inheritance retain native-host authority.
+The browser transport handles permissions and raw reports. Decoding and all
+binding/timing logic remain in Rust. The local browser smoke test exercises
+the real WASM app with synthetic USB input, including cancellation, denied
+permissions, quick tap edges, coordinates, unplug/reconnect and stale input.
+Physical browser access must also be checked on the target computer/browser.
 
-Allow local network access if the browser asks. Chrome/Brave may require that
-site permission; see [Chrome's local-network permission](https://developer.chrome.com/blog/local-network-access).
-If denied, enable it in the site's permissions and reload. If the helper
-restarts, open its newly printed pairing link. A plain visit without a pairing
-link still uses the normal browser Gamepad API and manual reference mode.
-Browser or organizational policies can block loopback access; the original
-`--companion WEB_DIR` local-page mode remains available in that case.
+### Optional native companion
 
-The hosted HTTPS-to-loopback path is covered by the real Chrome smoke test,
-including controls, trackpad/stick positions, timing, mode commands and helper
-shutdown. Run it locally with synthetic native input. Prior local validation passed in
-Brave 155 with the physical Steam Controller: the HTTPS test page reported
-`Live · Steam Controller · via helper`, accepted mode commands and detected
-helper shutdown. The final public hostname still needs its first permission
-grant and acceptance check; browser permission support is not universal. The
-helper binary is updated separately from the web image, using the workflow's
-Windows/macOS artifacts.
+The older native companion remains available for existing desktop users. It
+is optional for direct USB browser input. Its usage is documented in the
+[viewer README](../README.md#optional-macos-companion-steam-not-required).
 
 ## Local validation
 
 ```sh
 python3 -m unittest discover -s overlay/scripts -p 'test_*.py'
+node --test overlay/scripts/test_webhid.mjs
 cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
 python3 overlay/scripts/build_web.py
+python3 overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid
 cargo build --locked --manifest-path overlay/Cargo.toml --features desktop --example companion_fixture
 python3 overlay/scripts/browser_smoke.py --bundle overlay/dist \
   --companion-fixture overlay/target/debug/examples/companion_fixture --hosted-companion
@@ -131,7 +129,7 @@ OpenSSL. It creates a temporary HTTPS certificate/profile, accepts that test
 certificate only, and leaves browser CORS/mixed-content protections enabled.
 These tests run locally without publishing an image or updating a server.
 
-To repeat the optional physical-controller check, use `--live-helper
+To repeat the optional native-companion hardware check, use `--live-helper
 overlay/target/debug/keybind-overlay --hosted-companion` instead of
 `--companion-fixture`. This requires a connected controller. `--browser-binary`
 can point to Brave; use a ChromeDriver version matching its Chromium version.

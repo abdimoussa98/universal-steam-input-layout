@@ -1,5 +1,30 @@
 # Rust keybind viewer implementation — 2026-10-15
 
+## Direct browser USB input (2026-10-16)
+
+The viewer now has a **Connect controller** action using WebHID, with no native
+helper in this path. The picker is restricted to the wired Steam Controller 2
+(`28de:1302`); Rust decodes Triton report IDs `0x42`, `0x45`, and `0x47` into the
+existing input frame. Button mappings and packed layouts follow the pinned SDL
+3.4.18 Triton driver. JavaScript handles browser permissions, raw report delivery,
+USB lifecycle and the transient lizard-mode setting; bindings/timing remain Rust.
+
+Validation: 44 native Rust tests passed, including four new report-decoder tests;
+seven browser-transport lifecycle tests passed in Node. The packaged WASM app
+passed the Brave smoke test with a synthetic USB boundary: picker user activation,
+cancel/deny, controls, fast tap edges between frames, stick/trackpad positions,
+hidden/resume, unplug/reconnect, stalled input and disconnect. Native and WASM
+Clippy passed. Container validation included the new JS asset and release hashes.
+The pipeline continues to skip tests as requested; these checks ran locally.
+
+Physical WebHID input is not yet verified. In isolated automated browser probes,
+Brave returned a cancelled selection, and Chrome waited for device selection.
+A local browser-only preview was provided for the user's actual picker check.
+These observations are not evidence that the USB reports are accessible on every
+browser or that real controls have passed acceptance. The earlier companion
+hardware checks below apply only to the native path.
+
+
 ## Steering and live positions
 
 Added signed stick axes and independent left/right pad contacts to the shared

@@ -12,10 +12,16 @@ companion for the browser viewer, without Steam. Native Linux is not supported.
 
 ## Use
 
-Select **Settings → Controller**, choosing the physical controller rather than
-Steam's remapped virtual controller. In a browser, press a controller button
-first if the device list is empty. Only standard browser Gamepad mappings are
-accepted. Native reconnect uses a unique hardware serial identity when available,
+For a Steam Controller 2 connected by USB, click **Connect controller** in the
+web viewer and choose it in the browser's device picker. The website reads
+it directly using WebHID; no local helper or Steam is required. Use HTTPS or
+localhost and a desktop browser with WebHID enabled. Direct HID support currently
+targets the wired Valve `28de:1302` Triton/Ibex controller.
+
+For other controllers, select **Settings → Controller**, choosing the physical
+controller rather than Steam's remapped virtual controller. In a browser, press
+a controller button first if the device list is empty. This Gamepad API path
+accepts only standard mappings. Native reconnect uses a unique hardware serial identity when available,
 falling back to the device path. macOS device paths can change on reconnect.
 Otherwise reselect the controller if its instance ID changed.
 
@@ -47,7 +53,7 @@ for the gesture sequence and the difference between a single Tap and Tap, then h
 
 Durations and phase-specific labels are exported from the layout. These are
 configured expectations, not observed Steam outputs. Modifier use cancels its
-tap; native Steam Controller stick-touch release can complete a hold early or
+tap; native or direct WebHID Steam Controller stick-touch release can complete a hold early or
 cancel a pending window. Tracking that starts while a button is held waits for
 release before recognizing a gesture. Reconnect, mode/profile changes and input
 suspension reset pending timers.
@@ -67,7 +73,7 @@ visible during that uncertainty; releasing the owner restores the base reference
 A temporary gyro cover that removes itself on a fresh button press shows the
 binding that press exposes underneath, rather than an empty label. Select the mode manually if a gesture changed it. Standard
 browser Gamepad input cannot report capacitive stick touch, so its timing can
-differ from the native helper. Trigger pressure has no activation marker when
+differ from native or direct WebHID input. Trigger pressure has no activation marker when
 the layout does not explicitly specify a threshold.
 
 Windows shortcuts are global and reserved while the app runs. Change them to
@@ -138,8 +144,7 @@ python3 -m http.server 8080 --bind 127.0.0.1 --directory overlay/dist
 
 Open `http://127.0.0.1:8080`. `overlay/dist/` is a static bundle for HTTPS hosting
 or localhost; opening `index.html` directly with a `file:` URL is unsupported.
-Assets use relative URLs, so a subdirectory deployment works. No hosting or
-publication has been performed. Rust optimizes the WASM; wasm-pack's older
+Assets use relative URLs, so a subdirectory deployment works. Rust optimizes the WASM; wasm-pack's older
 optional wasm-opt step is disabled because it rejects current bulk-memory output.
 
 To host with Dockge, see the [container guide](deploy/README.md) and
@@ -147,7 +152,8 @@ To host with Dockge, see the [container guide](deploy/README.md) and
 and publish the web image to GHCR. Dockge pulls the `:latest` image when you
 deploy or update the stack. Your HTTPS tunnel forwards to port 18091.
 
-Standalone browser input works only for controllers the browser exposes. A
+Browser input uses direct WebHID for the supported USB Steam Controller or
+the Gamepad API for standard controllers the browser exposes. A
 visible second-monitor page and a hidden tab are different cases. Hidden pages
 pause input; resume samples current buttons before displaying live state.
 
@@ -179,19 +185,20 @@ It polls snapshots at most 30 times per second when visible, sends profiles only
 when needed, and redraws on changes. Suspended browser tabs cannot be forced to
 render by a native companion.
 
-## macOS companion (Steam not required)
+## Optional macOS companion (Steam not required)
 
-For a hosted HTTPS viewer, start the helper with
+The browser's **Connect controller** flow above works without this companion.
+For existing native companion users, start the helper with
 `keybind-overlay --viewer-url https://YOUR_VIEWER_HOSTNAME/` and open its
 printed pairing link in the browser on the same computer. The helper reads
 your Steam Controller locally while the page loads from your server. Allow local
 network access if prompted. No local web bundle is needed in this mode.
-See [hosted pairing and troubleshooting](deploy/README.md#steam-controller-in-the-hosted-browser).
+See [browser connection and hosting](deploy/README.md#steam-controller-in-the-hosted-browser).
 
 Some controllers, including the wired Steam Controller tested here, expose
 keyboard/mouse and vendor-specific USB interfaces rather than a standard browser
-gamepad. A binding profile cannot add browser hardware support. The macOS helper
-reads physical input through SDL's Steam Controller HID driver and serves the
+gamepad. The direct WebHID decoder handles the supported USB controller in the browser.
+The optional macOS helper reads physical input through SDL's Steam Controller HID driver and serves the
 same web viewer using the existing companion protocol. Steam is not required.
 
 Install Rust and CMake, build the web bundle above, then run from the repo root:
@@ -251,7 +258,8 @@ cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
 cargo check --locked --manifest-path overlay/Cargo.toml --target wasm32-unknown-unknown --features web
 wasm-pack test --headless --chrome overlay --no-default-features
 wasm-pack test --headless --firefox overlay --no-default-features
-python3 overlay/scripts/browser_smoke.py --bundle overlay/dist
+python3 overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid
+node --test overlay/scripts/test_webhid.mjs
 ```
 
 Browser tests need Chrome/ChromeDriver or Firefox/GeckoDriver. The smoke script
@@ -269,13 +277,17 @@ formatting checks and Clippy run locally using the commands above.
 - `src/platform/native.rs`: Windows hotkeys and overlay lifecycle.
 - `src/platform/sdl_input.rs`: shared Windows/macOS main-thread SDL input.
 - `src/platform/macos.rs`: headless direct-input companion, without Steam.
-- `src/platform/web.rs`: Gamepad polling, browser storage and companion client.
+- `src/platform/web.rs`: direct HID input, Gamepad polling, browser storage and companion client.
+- `src/core/steam_hid.rs`: shared Steam Controller 2 HID report decoder.
+- `web/steam-hid.js`: browser device permissions and raw HID transport; no binding or timing logic.
 - `src/platform/host.rs`, `server.rs`: host state and opt-in loopback transport.
 - `web/`: minimal canvas/startup shell; no duplicated binding logic.
 
 SDL preserves timestamped button edges and samples every 8 ms on the main thread; Windows eframe runs on a separate
 supported Windows event loop. Unchanged input does not wake the UI. Repaint and
 polling are separate, but no measured CPU/memory/latency guarantees are made yet.
+Direct HID input processes every changed report so quick taps between frames
+are preserved. Disconnection and stale input clear held state.
 The browser polls Gamepad snapshots every 16 ms while visible; it also repaints
 for changes, active countdowns or UI interaction. In companion mode, the host
 owns the gesture clock; browser animation never advances host gesture state. `window.keybindApp.diagnostic_snapshot()`

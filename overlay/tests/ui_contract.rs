@@ -13,6 +13,7 @@ fn browser_distinguishes_missing_devices_from_selection_and_input_errors() {
         recovery_available: false,
         hud: false,
         companion_url: None,
+        browser_connection: None,
         error: None,
     };
     assert_eq!(
@@ -74,6 +75,7 @@ fn companion_settings_display_host_shortcuts_and_keep_local_appearance() {
         recovery_available: false,
         hud: false,
         companion_url: None,
+        browser_connection: None,
         error: None,
     };
     assert_eq!(data.display_preferences().hotkeys, [5, 6, 7]);

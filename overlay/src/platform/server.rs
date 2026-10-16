@@ -51,6 +51,7 @@ fn start_server(
         for file in [
             "index.html",
             "start.js",
+            "steam-hid.js",
             "pkg/keybind_overlay.js",
             "pkg/keybind_overlay_bg.wasm",
         ] {
@@ -163,6 +164,7 @@ fn start_server(
                 // Whitelist bundle assets; no filesystem paths are accepted from clients.
                 let asset = match path.as_str() {
                     "/" | "/index.html" => Some(("index.html", "text/html; charset=utf-8")),
+                    "/steam-hid.js" => Some(("steam-hid.js", "text/javascript")),
                     "/start.js" => Some(("start.js", "text/javascript")),
                     "/pkg/keybind_overlay.js" => {
                         Some(("pkg/keybind_overlay.js", "text/javascript"))

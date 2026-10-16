@@ -10,7 +10,7 @@ import urllib.request
 from urllib.parse import urlparse
 
 
-ASSETS = ('index.html', 'start.js', 'pkg/keybind_overlay.js', 'pkg/keybind_overlay_bg.wasm')
+ASSETS = ('index.html', 'start.js', 'steam-hid.js', 'pkg/keybind_overlay.js', 'pkg/keybind_overlay_bg.wasm')
 REVISION = re.compile(r'[a-f0-9]{40}')
 
 

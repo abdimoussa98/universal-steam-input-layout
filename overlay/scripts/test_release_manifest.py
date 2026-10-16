@@ -16,7 +16,7 @@ class SiteTests(unittest.TestCase):
         self.directory = tempfile.TemporaryDirectory()
         self.bundle = Path(self.directory.name)
         (self.bundle / 'pkg').mkdir()
-        for path, data in [('index.html', b'<html>viewer</html>'), ('start.js', b'boot'),
+        for path, data in [('index.html', b'<html>viewer</html>'), ('start.js', b'boot'), ('steam-hid.js', b'hid'),
                            ('pkg/keybind_overlay.js', b'glue'), ('pkg/keybind_overlay_bg.wasm', b'\0asmtest')]:
             (self.bundle / path).write_bytes(data)
         write_manifest(self.bundle, REV)

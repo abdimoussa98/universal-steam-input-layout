@@ -51,6 +51,7 @@ impl Backend for NativeBackend {
             },
             Command::Hud(hud) => h.window(hud, false),
             Command::Hide => h.window(false, true),
+            Command::ConnectController | Command::DisconnectController => {}
         }
         h.changed();
     }
@@ -191,6 +192,7 @@ pub fn run() -> Result<(), String> {
             recovery_available: recovery.0,
             hud: false,
             companion_url: None,
+            browser_connection: None,
             error,
         },
         sequence: 1,

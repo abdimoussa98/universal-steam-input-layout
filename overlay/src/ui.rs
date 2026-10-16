@@ -13,7 +13,15 @@ pub struct FrameData {
     pub recovery_available: bool,
     pub hud: bool,
     pub companion_url: Option<String>,
+    pub browser_connection: Option<BrowserConnection>,
     pub error: Option<String>,
+}
+#[derive(Clone, serde::Serialize)]
+pub struct BrowserConnection {
+    pub available: bool,
+    pub busy: bool,
+    pub connected: bool,
+    pub message: String,
 }
 impl FrameData {
     fn browser_has_no_devices(&self) -> bool {
@@ -24,7 +32,15 @@ impl FrameData {
     }
     pub fn input_status_label(&self) -> String {
         if self.browser_has_no_devices() {
-            "No controllers exposed by this browser".into()
+            if self
+                .browser_connection
+                .as_ref()
+                .is_some_and(|c| c.available)
+            {
+                "Connect a controller to begin".into()
+            } else {
+                "No controllers exposed by this browser".into()
+            }
         } else if self.state.status == InputStatus::Live
             && let Some(device) = self
                 .settings
@@ -44,7 +60,7 @@ impl FrameData {
         }
     }
     pub fn controller_help(&self) -> Option<&'static str> {
-        self.browser_has_no_devices().then_some("Click this page and press a controller button. For a Steam Controller the browser cannot detect, run the local helper with --viewer-url followed by this site's HTTPS address, then open its printed pairing link. Allow local network access if asked. Steam is not required.")
+        self.browser_has_no_devices().then_some("For a Steam Controller 2 connected by USB, click Connect controller and select it in the browser picker. Other supported gamepads appear after pressing a controller button. Steam and a local helper are not required for the direct USB connection.")
     }
     pub fn display_preferences(&self) -> Preferences {
         let mut preferences = self.preferences.clone();
@@ -55,6 +71,8 @@ impl FrameData {
     }
 }
 pub enum Command {
+    ConnectController,
+    DisconnectController,
     Mode(Mode),
     Select(Option<String>),
     Profile(String),
@@ -256,14 +274,25 @@ impl eframe::App for OverlayApp {
             },
         );
         egui::CentralPanel::default().frame(egui::Frame::new().fill(fill).inner_margin(16.0)).show(ctx,|ui| {
-            egui::ScrollArea::vertical().show(ui,|ui| {
-                ui.horizontal(|ui| {
-                    ui.heading("Binding reference");
-                    if !data.hud { let response=ui.button(if self.show_settings {"Close settings"} else {"Settings"}); target(ui,"settings",&response); if response.clicked() { self.show_settings = !self.show_settings; self.draft=data.display_preferences(); } }
+            ui.horizontal(|ui| {
+                ui.heading("Binding reference");
+                if !data.hud { let response=ui.button(if self.show_settings {"Close settings"} else {"Settings"}); target(ui,"settings",&response); if response.clicked() { self.show_settings = !self.show_settings; self.draft=data.display_preferences(); } }
+            });
+            ui.small(&data.profile.name);
+            if let Some(connection) = &data.browser_connection {
+                ui.horizontal_wrapped(|ui| {
+                    let response = ui.add_enabled(connection.available && !connection.busy,
+                        egui::Button::new(if connection.busy { "Please wait…" } else if connection.connected { "Disconnect controller" } else { "Connect controller" }));
+                    target(ui, if connection.connected { "disconnect" } else { "connect" }, &response);
+                    if response.clicked() {
+                        self.backend.command(if connection.connected { Command::DisconnectController } else { Command::ConnectController });
+                    }
+                    ui.small(&connection.message);
                 });
-                ui.small(&data.profile.name);
-                self.mode_buttons(ui,&data);
-                ui.add_space(8.0);
+            }
+            self.mode_buttons(ui,&data);
+            ui.add_space(8.0);
+            egui::ScrollArea::vertical().show(ui,|ui| {
                 ui.horizontal(|ui| {
                     for i in 0..2 {
                         let color=if data.state.held[i] {Color32::from_rgb(72,221,173)} else {Color32::GRAY};

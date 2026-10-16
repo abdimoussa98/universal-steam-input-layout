@@ -18,6 +18,7 @@ fn real_http_companion_authority_origin_and_asset_boundaries() {
     for asset in [
         "index.html",
         "start.js",
+        "steam-hid.js",
         "pkg/keybind_overlay.js",
         "pkg/keybind_overlay_bg.wasm",
     ] {
@@ -35,6 +36,7 @@ fn real_http_companion_authority_origin_and_asset_boundaries() {
             recovery_available: true,
             hud: false,
             companion_url: None,
+            browser_connection: None,
             error: None,
         },
         directory.clone(),
@@ -99,6 +101,7 @@ fn hosted_viewer_pairs_only_with_its_allowed_origin_and_session() {
             recovery_available: false,
             hud: false,
             companion_url: None,
+            browser_connection: None,
             error: None,
         },
         std::env::temp_dir(),

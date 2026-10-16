@@ -7,6 +7,8 @@ window.addEventListener('hashchange', () => {
   if (initiallyPaired || location.hash.startsWith('#companion=')) location.reload();
 });
 try {
+  const { SteamHid } = await import('./steam-hid.js');
+  window.SteamHid = SteamHid;
   const { default: init, WebHandle } = await import('./pkg/keybind_overlay.js');
   await init();
   const app = new WebHandle();

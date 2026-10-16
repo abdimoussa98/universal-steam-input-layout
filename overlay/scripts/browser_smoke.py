@@ -34,6 +34,7 @@ def main():
     parser.add_argument('--browser-binary')
     parser.add_argument('--screenshot', type=Path)
     parser.add_argument('--companion-fixture', type=Path, help='Path to the compiled fake-input companion example')
+    parser.add_argument('--webhid', action='store_true', help='Test direct WebHID permissions/input with a synthetic USB boundary')
     parser.add_argument('--live-helper', type=Path, help='Optional hardware check: use the real helper instead of synthetic input tests')
     parser.add_argument('--hosted-companion', action='store_true', help='Test HTTPS viewer to HTTP loopback helper with real browser CORS')
     args = parser.parse_args()
@@ -111,6 +112,10 @@ def main():
             chrome['binary'] = args.browser_binary
         created = request('POST', '/session', {'capabilities': {'alwaysMatch': {'browserName': 'chrome', 'goog:chromeOptions': chrome, 'acceptInsecureCerts': bool(tls_directory)}}})
         session = created['sessionId']
+        if args.webhid:
+            fixture = Path(__file__).resolve().parents[1] / 'tests/fixtures/webhid.js'
+            request('POST', f'/session/{session}/goog/cdp/execute', {
+                'cmd': 'Page.addScriptToEvaluateOnNewDocument', 'params': {'source': fixture.read_text()}})
         navigate()
         if args.live_helper:
             companion = subprocess.Popen([str(args.live_helper.resolve()), '--viewer-url', site],
@@ -130,7 +135,8 @@ def main():
             print('PASS: physical helper mode commands and disconnect recovery')
             return
         js("Object.defineProperty(navigator,'getGamepads',{value:()=>[],configurable:true})")
-        wait_for(lambda: snapshot().get('input_status') == 'No controllers exposed by this browser', 'Missing controllers not explained')
+        empty_status = 'Connect a controller to begin' if snapshot()['browser_connection']['available'] else 'No controllers exposed by this browser'
+        wait_for(lambda: snapshot().get('input_status') == empty_status, 'Missing controllers not explained')
         assert snapshot()['controller_help'], 'Missing-controller troubleshooting not available'
         assert snapshot()['labels'] == ['F', 'V', 'C', 'R']
         assert js("return document.querySelector('#status')===null"), 'Startup status did not clear'
@@ -181,6 +187,7 @@ def main():
         click_target('device:'+snapshot()['devices'][0]['id'])
         wait_for(lambda: snapshot()['state']['status'] == 'live', 'Controller selection did not seed held buttons')
         assert snapshot()['labels'] == ['G','X','Z','T']
+        click_target('settings')  # Keep the floating settings window off the main controls.
         js('window.mockButtons[4]=1;window.mockButtons[5]=1')
         wait_for(lambda: snapshot()['labels'] == ['M','P','O','U'], 'Both modifiers did not resolve')
         js('window.mockButtons[4]=0;window.mockButtons[5]=1')
@@ -227,6 +234,7 @@ def main():
         js('window.mockButtons.fill(0);window.mockAxes.fill(0)')
         click_target('mode:0')
         wait_for(lambda: snapshot()['state']['mode']=='base', 'Base shortcut failed')
+        click_target('settings')
         js("Storage.prototype.setItem=function(){throw new Error('storage denied for test')}")
         click_target('apply')
         wait_for(lambda: snapshot()['error'] and 'storage denied' in snapshot()['error'], 'Storage failure was not surfaced')
@@ -302,6 +310,59 @@ def main():
             wait_for(lambda: snapshot()['state']['status']=='unavailable', 'Closing companion left live input')
             assert snapshot()['state']['held']==[False,False]
             print('PASS: real companion handshake, native input/timing authority, acknowledged browser commands, host settings synchronization, local input exclusion, disconnect recovery')
+
+        if args.webhid:
+            js('localStorage.clear()')
+            navigate()
+            assert snapshot()['browser_connection']['available']
+            js("Object.defineProperty(navigator,'getGamepads',{value:()=>[],configurable:true});fakeHid.cancel=true")
+            click_target('connect')
+            wait_for(lambda: 'No controller selected' in snapshot()['browser_connection']['message'], 'Picker cancellation not explained')
+            assert js('return fakeHid.requests[0].activated'), 'Picker did not run with user activation'
+            assert snapshot()['state']['status'] != 'live'
+            js('fakeHid.cancel=false;fakeHid.deny=true')
+            click_target('connect')
+            wait_for(lambda: 'blocked' in snapshot()['browser_connection']['message'], 'Permission denial not explained')
+            js('fakeHid.deny=false')
+            click_target('connect')
+            wait_for(lambda: snapshot()['state']['status']=='live', 'Direct HID input did not become live')
+            assert not snapshot()['remote'], 'HID should not use companion transport'
+            assert snapshot()['state']['device']=='webhid:steam-controller-usb'
+            js('fakeHid.device.frame(0x80000)')
+            wait_for(lambda: snapshot()['state']['held']==[True,False], 'Direct L1 did not reach Rust')
+            # A release and press delivered in one JS task must not collapse to
+            # the final snapshot: the shared gesture engine must see both edges.
+            js('fakeHid.device.frame(0);fakeHid.device.frame(0x80000)')
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase'] in ('second','cover'), 'Fast tap and hold lost between poll frames')
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: snapshot()['state']['held']==[False,False], 'Direct release was stale')
+            js('fakeHid.device.frame(0x0330ee6f,{5:16384,7:32767,9:-32768,11:32767,13:32767,15:-32768,19:-16384,21:16384,25:16384,27:-16384})')
+            wait_for(lambda: snapshot()['state']['input']['triggers']==[500,1000], 'Direct triggers not decoded')
+            value=snapshot()['state']['input']
+            assert value['stick_positions']==[[-1000,-1000],[1000,1000]]
+            assert value['touches']==[True,True]
+            assert value['pads']==[{'touching':True,'position':[-500,-500]},{'touching':True,'position':[500,500]}]
+            js("Object.defineProperty(document,'hidden',{value:true,configurable:true});document.dispatchEvent(new Event('visibilitychange'))")
+            wait_for(lambda: snapshot()['state']['status']=='paused', 'Hidden HID page not paused')
+            assert snapshot()['state']['held']==[False,False]
+            js("fakeHid.device.frame(0);Object.defineProperty(document,'hidden',{value:false,configurable:true});document.dispatchEvent(new Event('visibilitychange'))")
+            wait_for(lambda: snapshot()['state']['status']=='live', 'HID did not resume from fresh input')
+            assert snapshot()['state']['held']==[False,False]
+            js('fakeHid.device.frame(0x80000);fakeHid.remove()')
+            wait_for(lambda: snapshot()['state']['status']=='disconnected', 'USB removal did not clear input')
+            assert snapshot()['state']['held']==[False,False]
+            js('fakeHid.device.report=new Uint8Array(45);fakeHid.reconnect()')
+            wait_for(lambda: snapshot()['state']['status']=='live', 'USB reconnection failed')
+            # The browser can stop delivering input without a disconnect event.
+            js('fakeHid.device.frame(0x80000);clearInterval(fakeHid.device.timer)')
+            wait_for(lambda: snapshot()['state']['status']=='unavailable', 'Stalled HID input remained live')
+            assert snapshot()['state']['held']==[False,False]
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: snapshot()['state']['status']=='live', 'Fresh HID report did not recover')
+            click_target('disconnect')
+            wait_for(lambda: snapshot()['state']['status']=='disconnected', 'Disconnect action left input live')
+            assert not js('return fakeHid.device.opened')
+            print('PASS: direct WebHID picker activation, cancel/deny, controls, fast taps, positions, pause, reconnect, stale input and disconnect')
 
     except Exception:
         if session:

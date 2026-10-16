@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     subprocess.run(['wasm-pack', 'build', '--target', 'web', '--out-dir', 'dist/pkg',
                     str(ROOT), '--no-default-features', '--features', 'web', '--locked'], check=True)
-    for name in ('index.html', 'start.js'):
+    for name in ('index.html', 'start.js', 'steam-hid.js'):
         shutil.copyfile(ROOT / 'web' / name, ROOT / 'dist' / name)
     write_notices(ROOT / 'dist/THIRD_PARTY_NOTICES.txt', 'wasm32-unknown-unknown', 'web')
     print(f'Static viewer: {ROOT / "dist"}')
