@@ -143,7 +143,7 @@ publication has been performed. Rust optimizes the WASM; wasm-pack's older
 optional wasm-opt step is disabled because it rejects current bulk-memory output.
 
 To host with Dockge, see the [container guide](deploy/README.md) and
-[Compose example](deploy/compose.yaml). Relevant pushes to `main` build, test
+[Compose example](deploy/compose.yaml). Relevant pushes to `main` build
 and publish the web image to GHCR. Dockge pulls the `:latest` image when you
 deploy or update the stack. Your HTTPS tunnel forwards to port 18091.
 
@@ -261,7 +261,8 @@ browser paths for wasm-pack. Build before the packaged-browser smoke test.
 The same `tests/behavior.rs` and `tests/gestures.rs` bodies run natively and in WASM. Companion HTTP
 integration tests run on native hosts without Windows input hardware. On Linux,
 compiling the optional native UI also requires the platform GUI dependencies;
-CI uses Windows for desktop checks and Linux for the core/web targets.
+The viewer pipeline builds Windows/macOS helpers and the web image; tests,
+formatting checks and Clippy run locally using the commands above.
 
 - `src/core/`: state, profiles, monotonic gesture timing, hotkey lifecycle and protocol validation.
 - `src/ui.rs`: the one diagram/settings interface used by both entry points.

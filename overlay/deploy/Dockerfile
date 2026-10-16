@@ -1,4 +1,4 @@
-# The web CI job builds/tests dist first; compilers are not shipped to the NAS.
+# The web CI job builds dist first; compilers are not shipped in the image.
 FROM nginx:stable-alpine
 ARG REVISION
 ARG SOURCE

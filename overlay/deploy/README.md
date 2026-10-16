@@ -1,7 +1,7 @@
 # Host the viewer with Dockge and GHCR
 
 ```text
-Push to main → GitHub Actions tests/builds → GitHub Container Registry
+Push to main → GitHub Actions builds → GitHub Container Registry
 Dockge deploy/update → pull the image from GHCR → serve port 18091
 Existing HTTPS tunnel → http://SERVER_LAN_IP:18091 → viewer in your browser
 ```
@@ -14,7 +14,7 @@ No server API credentials, self-hosted runner, or Terraform is needed.
 ## First deployment
 
 1. Commit and push these files to `main`. In **Actions → Keybind viewer**, wait
-   for **Publish tested web image** to finish. You can also use **Run workflow**
+   for **Publish web image** to finish. You can also use **Run workflow**
    on `main`. The summary supplies your image reference:
    `ghcr.io/<owner>/<repository>-web:latest` (all lowercase).
 2. On GitHub, open the new package's **Package settings → Change visibility**
@@ -39,11 +39,14 @@ so an update can load new HTML, JS and WASM rather than a cached bundle.
 
 ## Updating and choosing a version
 
-Relevant pushes to `main` publish after all web, Windows and macOS checks pass.
+Relevant pushes to `main` publish after the web bundle and container build.
 Relevant paths include `overlay/**`, shared profile/export code, Ibex profile
-sources and the viewer workflow. Pull requests run checks without publishing.
-CI builds Linux amd64, saves the container tested in CI, and publishes that
-same image without rebuilding it.
+sources and the viewer workflow. Pull requests build without publishing.
+The viewer pipeline skips tests, browser/container smoke tests, formatting
+checks and Clippy. Windows/macOS helper builds run independently and do not
+block publishing the web image. CI builds Linux amd64, saves the container,
+and publishes that same image without rebuilding it. Tests remain available
+for local runs using the commands below.
 
 Each release has a full commit SHA tag and an immutable `@sha256:...` digest.
 The current `main` release also updates `:latest`; an older workflow cannot
@@ -102,7 +105,7 @@ Browser or organizational policies can block loopback access; the original
 
 The hosted HTTPS-to-loopback path is covered by the real Chrome smoke test,
 including controls, trackpad/stick positions, timing, mode commands and helper
-shutdown. CI uses synthetic native input. Local validation also passed in
+shutdown. Run it locally with synthetic native input. Prior local validation passed in
 Brave 155 with the physical Steam Controller: the HTTPS test page reported
 `Live · Steam Controller · via helper`, accepted mode commands and detected
 helper shutdown. The final public hostname still needs its first permission

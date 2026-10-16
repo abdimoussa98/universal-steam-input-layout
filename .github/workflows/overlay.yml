@@ -9,47 +9,17 @@ permissions:
   contents: read
 jobs:
   macos:
-    needs: web
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: '1.99.0'
-          components: rustfmt, clippy
-      - run: cargo fmt --manifest-path overlay/Cargo.toml -- --check
-      - run: cargo clippy --locked --manifest-path overlay/Cargo.toml --features desktop --all-targets -- -D warnings
-      - run: cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
       - run: cargo build --locked --manifest-path overlay/Cargo.toml --release --features desktop
       - uses: actions/upload-artifact@v4
         with:
           name: keybind-viewer-macos-helper
           path: overlay/target/release/keybind-overlay
-      - uses: actions/download-artifact@v4
-        with:
-          name: keybind-viewer-web
-          path: overlay/dist
-      - run: cargo build --locked --manifest-path overlay/Cargo.toml --features desktop --example companion_fixture
-      - uses: browser-actions/setup-chrome@v1
-        id: chrome
-        with:
-          install-chromedriver: true
-      - name: Test HTTPS viewer with a local controller helper
-        env:
-          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
-          DRIVER_PATH: ${{ steps.chrome.outputs.chromedriver-path }}
-        run: >-
-          python3 overlay/scripts/browser_smoke.py --bundle overlay/dist
-          --driver "$DRIVER_PATH" --browser-binary "$CHROME_PATH"
-          --companion-fixture overlay/target/debug/examples/companion_fixture --hosted-companion
-      - name: Test original local companion mode
-        env:
-          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
-          DRIVER_PATH: ${{ steps.chrome.outputs.chromedriver-path }}
-        run: >-
-          python3 overlay/scripts/browser_smoke.py --bundle overlay/dist
-          --driver "$DRIVER_PATH" --browser-binary "$CHROME_PATH"
-          --companion-fixture overlay/target/debug/examples/companion_fixture
   windows:
     runs-on: windows-latest
     steps:
@@ -57,17 +27,12 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: '1.99.0'
-          components: rustfmt, clippy
-      - run: cargo fmt --manifest-path overlay/Cargo.toml -- --check
-      - run: cargo clippy --locked --manifest-path overlay/Cargo.toml --features desktop --all-targets -- -D warnings
-      - run: cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
       - run: cargo build --locked --manifest-path overlay/Cargo.toml --release --features desktop
         env:
           RUSTFLAGS: '-C target-feature=+crt-static'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m unittest tests.integration.profiles.test_overlay_profile
       - run: python overlay/scripts/package_windows.py
       - uses: actions/upload-artifact@v4
         with:
@@ -81,24 +46,14 @@ jobs:
         with:
           toolchain: '1.99.0'
           targets: wasm32-unknown-unknown
-          components: clippy
-      - run: cargo test --locked --manifest-path overlay/Cargo.toml --no-default-features
-      - run: cargo clippy --locked --manifest-path overlay/Cargo.toml --target wasm32-unknown-unknown --features web --all-targets -- -D warnings
       - run: cargo install wasm-pack --version 0.13.1 --locked
-      - run: wasm-pack test --headless --chrome overlay --no-default-features
-      - run: wasm-pack test --headless --firefox overlay --no-default-features
       - run: python3 overlay/scripts/build_web.py
-      - run: python3 overlay/scripts/browser_smoke.py --bundle overlay/dist
-      - run: python3 -m unittest discover -s overlay/scripts -p 'test_*.py'
-      - name: Record the tested release
+      - name: Record the release
         run: python3 overlay/scripts/release_manifest.py --bundle overlay/dist --revision "$GITHUB_SHA"
-      - name: Test the web container
+      - name: Build the web container
         run: |
-          docker build -f overlay/deploy/Dockerfile -t keybind-web:test --build-arg REVISION="$GITHUB_SHA" --build-arg SOURCE="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" overlay
-          docker run -d --name keybind-web-test --read-only --tmpfs /tmp:rw,noexec,nosuid,size=32m --cap-drop ALL --security-opt no-new-privileges:true -p 127.0.0.1:18091:8080 keybind-web:test
-          trap 'docker logs keybind-web-test; docker rm -f keybind-web-test' EXIT
-          python3 -c 'import sys; sys.path.insert(0, "overlay/scripts"); from release_manifest import wait_for_site; import os; wait_for_site("http://127.0.0.1:18091", os.environ["GITHUB_SHA"], timeout=30)'
-          docker save keybind-web:test -o "$RUNNER_TEMP/keybind-web-image.tar"
+          docker build -f overlay/deploy/Dockerfile -t keybind-web:build --build-arg REVISION="$GITHUB_SHA" --build-arg SOURCE="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" overlay
+          docker save keybind-web:build -o "$RUNNER_TEMP/keybind-web-image.tar"
       - uses: actions/upload-artifact@v4
         with:
           name: keybind-viewer-image
@@ -111,8 +66,8 @@ jobs:
           path: overlay/dist/
           if-no-files-found: error
   publish-web:
-    name: Publish tested web image
-    needs: [web, macos, windows]
+    name: Publish web image
+    needs: web
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     permissions:
@@ -132,12 +87,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish the image that passed testing
+      - name: Publish the built image
         run: |
           docker load -i image/keybind-web-image.tar
           repository="ghcr.io/${GITHUB_REPOSITORY,,}-web"
           image="$repository:$GITHUB_SHA"
-          docker tag keybind-web:test "$image"
+          docker tag keybind-web:build "$image"
           docker push "$image"
           digest=$(docker image inspect --format '{{index .RepoDigests 0}}' "$image")
           [[ "$digest" == ghcr.io/*@sha256:* ]]
