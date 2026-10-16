@@ -193,12 +193,14 @@ impl WebState {
             return;
         };
         connection.busy = matches!(status, "requesting" | "disconnecting");
-        connection.connected = status == "connected";
+        // Waiting for radio input still owns an open receiver connection and
+        // must keep Disconnect available. Live requires a fresh input report.
+        connection.connected = matches!(status, "connected" | "waiting");
         connection.message = message;
         self.hid_input = None;
         self.hid_received = None;
         self.hid_error = None;
-        if status == "connected" {
+        if connection.connected {
             self.tracker.select(Some(HID_DEVICE_ID.into()));
             self.data.settings.selected = Some(HID_DEVICE_ID.into());
         }
@@ -290,7 +292,7 @@ impl WebState {
                 held: [input.down(Control::L1), input.down(Control::R1)],
                 input,
                 id: HID_DEVICE_ID.into(),
-                name: "Steam Controller · USB / WebHID".into(),
+                name: "Steam Controller · WebHID".into(),
                 standard: true,
             };
             match &mut result {
@@ -316,7 +318,7 @@ impl WebState {
             let error = hid_connected.then(|| {
                 self.hid_error.clone().unwrap_or_else(|| {
                     if self.hid_received.is_some() {
-                        "Controller input stopped. Reconnect USB and use Connect controller again."
+                        "Controller input stopped. Check the controller or receiver connection."
                     } else {
                         "Waiting for controller input…"
                     }

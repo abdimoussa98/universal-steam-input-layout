@@ -12,11 +12,20 @@ companion for the browser viewer, without Steam. Native Linux is not supported.
 
 ## Use
 
-For a Steam Controller 2 connected by USB, click **Connect controller** in the
-web viewer and choose it in the browser's device picker. The website reads
+For a Steam Controller 2 connected by USB cable or its wireless receiver, click
+**Connect controller** in the web viewer and choose the controller or receiver
+in the browser's device picker. The website reads
 it directly using WebHID; no local helper or Steam is required. Use HTTPS or
 localhost and a desktop browser with WebHID enabled. Direct HID support currently
-targets the wired Valve `28de:1302` Triton/Ibex controller.
+targets the wired Valve `28de:1302` Triton/Ibex controller and the
+`28de:1304` / `28de:1305` wireless receivers. Bluetooth is not supported by this
+connection path.
+
+For a receiver, turn on an already paired controller. The viewer follows the
+first active controller slot and keeps that selection through controller
+power-off/on and receiver unplug/replug. It shows one controller at a time;
+disconnect in the viewer and connect again to choose another. An empty receiver
+shows a waiting message; it does not count as live controller input.
 
 For other controllers, select **Settings → Controller**, choosing the physical
 controller rather than Steam's remapped virtual controller. In a browser, press

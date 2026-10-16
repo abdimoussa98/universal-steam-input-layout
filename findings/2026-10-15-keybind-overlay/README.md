@@ -1,5 +1,29 @@
 # Rust keybind viewer implementation — 2026-10-15
 
+## Wireless receiver input (2026-10-16)
+
+The user confirmed wired input also works in Flatpak Chrome on Bazzite, but
+their wireless receiver was missing from the picker. The browser filter only
+included `28de:1302`. It now includes Proteus `28de:1304` and Nereid `28de:1305`,
+using the IDs, reports and radio-state values from the pinned SDL 3.4.18 driver.
+
+A receiver exposes several controller interfaces. The browser listens to all
+supported interfaces, follows the first active controller slot and keeps that
+selection through radio power-off/on and USB reconnect. Keyboard/mouse
+interfaces are excluded. Only the selected active slot receives the transient
+lizard-mode setting. An empty receiver remains disconnectable in the viewer
+without claiming live input. Radio disconnect reports clear input and timing;
+other slots cannot silently take over. Explicitly disconnect and reconnect to
+choose a different controller. Existing Rust input decoding and binding/timing
+logic are shared unchanged. Bluetooth and pairing are outside this change.
+
+TDD: the new receiver cases failed against the wired-only implementation;
+all 13 Node lifecycle tests now pass. The packaged WASM viewer passed the Brave
+smoke test for both receiver IDs, non-first occupied slots, buttons/triggers,
+radio power-off/on, slot isolation and USB reconnect, plus the existing wired
+and Gamepad checks. Physical wireless acceptance on Bazzite is still pending;
+these synthetic checks do not establish actual receiver/browser compatibility.
+
 ## Direct browser USB input (2026-10-16)
 
 The viewer now has a **Connect controller** action using WebHID, with no native

@@ -41,7 +41,7 @@ test('picker opens only the selected supported input interface; disconnect stops
     const keyboard = new Device(); keyboard.collections = [{usagePage: 1, inputReports: [{reportId: 1}]}];
     hid.selected = [keyboard, device];
     await client.connect();
-    assert.deepEqual(hid.options, {filters: [{vendorId: 0x28de, productId: 0x1302}]});
+    assert.deepEqual(hid.options, {filters: [0x1302, 0x1304, 0x1305].map(productId => ({vendorId: 0x28de, productId}))});
     assert.equal(keyboard.opened, false);
     assert.equal(device.opened, true);
     assert.equal(states.at(-1)[0], 'connected');
@@ -146,5 +146,119 @@ test('failed device initialization closes USB and reports an error', async () =>
     assert.equal(device.opened, false);
     assert.equal(states.at(-1)[0], 'error');
     assert(!states.some(([state]) => state === 'connected'));
+  } finally { await client.destroy(); }
+});
+
+const settled = () => new Promise(resolve => setImmediate(resolve));
+function receiver(productId = 0x1304) {
+  const result = setup();
+  const slots = Array.from({length: 4}, () => Object.assign(new Device(), {productId}));
+  const keyboard = Object.assign(new Device(), {productId, collections: [{inputReports: [{reportId: 1}]}]});
+  result.hid.selected = [keyboard, ...slots];
+  return {...result, slots, keyboard};
+}
+
+for (const productId of [0x1304, 0x1305]) {
+  test(`receiver ${productId.toString(16)} finds a populated slot without opening the keyboard`, async () => {
+    const {client, slots, keyboard, states, reports} = receiver(productId);
+    try {
+      await client.connect();
+      assert(slots.every(slot => slot.opened));
+      assert.equal(keyboard.opened, false);
+      assert.equal(states.at(-1)[0], 'waiting');
+      assert(slots.every(slot => !slot.writes.length), 'Do not write to unoccupied receiver slots');
+      slots[0].input(0x47, [1]); // A malformed frame must not win selection.
+      const frame = Array(45).fill(0); frame[3] = 8; // L1
+      slots[2].input(0x47, frame);
+      await settled();
+      assert.equal(states.at(-1)[0], 'connected');
+      assert.match(states.at(-1)[1], /wireless/i);
+      assert.deepEqual(reports, [[0x47, frame]]);
+      assert.deepEqual(slots[2].writes[0], [1, [0x87, 3, 9, 0, 0, ...Array(58).fill(0)]]);
+      slots[1].input(0x47, Array(45).fill(0));
+      assert.equal(reports.length, 1, 'Another slot must not mix controller input');
+      assert.equal(slots[1].writes.length, 0);
+      await client.disconnect();
+      assert(slots.every(slot => !slot.opened));
+      slots[2].input(0x47, frame);
+      assert.equal(reports.length, 1);
+    } finally { await client.destroy(); }
+  });
+}
+
+test('radio power-off clears input immediately and the same slot resumes after power-on', async () => {
+  const {client, slots, states, reports} = receiver();
+  try {
+    await client.connect();
+    slots[2].input(0x79, [2]);
+    await settled();
+    slots[2].input(0x42, Array(45).fill(0));
+    assert.equal(reports.length, 1);
+    slots[0].input(0x46, [1]); // Unused slot cannot disconnect the selected one.
+    assert.equal(states.at(-1)[0], 'connected');
+    slots[2].input(0x46, [1]);
+    assert.equal(states.at(-1)[0], 'waiting');
+    assert(slots[2].opened, 'Keep receiver listening while controller is off');
+    slots[0].input(0x79, [2]);
+    slots[0].input(0x47, Array(45).fill(0));
+    await settled();
+    assert.equal(reports.length, 1, 'Never silently switch to a different slot');
+    slots[2].input(0x79, [2]);
+    await settled();
+    slots[2].input(0x47, Array(45).fill(0));
+    assert.equal(states.at(-1)[0], 'connected');
+    assert.equal(reports.length, 2);
+    assert.equal(slots[2].writes.length, 2, 'Reinitialize after radio reconnect');
+  } finally { await client.destroy(); }
+});
+
+test('receiver unplug/replug reopens authorized interfaces and preserves the chosen slot', async () => {
+  const {client, slots, hid, states, reports} = receiver();
+  try {
+    await client.connect();
+    slots[2].input(0x47, Array(45).fill(0)); await settled();
+    for (const slot of slots) {
+      const event = new Event('disconnect'); event.device = slot; hid.dispatchEvent(event);
+    }
+    await settled();
+    assert.equal(states.at(-1)[0], 'disconnected');
+    assert(slots.every(slot => !slot.opened));
+    for (const slot of [...slots].reverse()) {
+      const event = new Event('connect'); event.device = slot; hid.dispatchEvent(event);
+    }
+    await settled();
+    assert(slots.every(slot => slot.opened));
+    slots[0].input(0x47, Array(45).fill(0));
+    slots[2].input(0x47, Array(45).fill(0)); await settled();
+    assert.equal(states.at(-1)[0], 'connected');
+    assert.equal(reports.length, 2);
+  } finally { await client.destroy(); }
+});
+
+test('power-off during receiver initialization does not restore stale input', async () => {
+  const {client, slots, states, reports} = receiver();
+  try {
+    await client.connect();
+    let complete;
+    slots[1].sendFeatureReport = () => new Promise(resolve => { complete = resolve; });
+    slots[1].input(0x47, Array(45).fill(0));
+    slots[1].input(0x79, [1]);
+    complete(); await settled();
+    assert.equal(states.at(-1)[0], 'waiting');
+    assert.equal(reports.length, 0);
+  } finally { await client.destroy(); }
+});
+
+test('receiver open failure closes all slots, including a delayed open', async () => {
+  const {client, slots, states} = receiver();
+  let complete;
+  slots[1].open = () => new Promise(resolve => { complete = () => { slots[1].opened = true; resolve(); }; });
+  slots[2].open = async () => { throw new Error('Access denied'); };
+  try {
+    const pending = client.connect();
+    await settled();
+    complete(); await pending; await settled();
+    assert.equal(states.at(-1)[0], 'error');
+    assert(slots.every(slot => !slot.opened));
   } finally { await client.destroy(); }
 });

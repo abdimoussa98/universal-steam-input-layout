@@ -363,6 +363,41 @@ def main():
             wait_for(lambda: snapshot()['state']['status']=='disconnected', 'Disconnect action left input live')
             assert not js('return fakeHid.device.opened')
             print('PASS: direct WebHID picker activation, cancel/deny, controls, fast taps, positions, pause, reconnect, stale input and disconnect')
+            # A wireless receiver stays attached while its controller turns off.
+            # The occupied slot need not be the first HID interface returned.
+            for product_id in [0x1304, 0x1305]:
+                js('fakeHid.receiver(arguments[0])', product_id)
+                click_target('connect')
+                wait_for(lambda: 'Receiver connected' in snapshot()['browser_connection']['message'], 'Receiver did not open')
+                assert snapshot()['browser_connection']['connected'], 'Waiting receiver must remain disconnectable'
+                assert snapshot()['state']['status'] != 'live', 'An empty receiver is not a live controller'
+                js('fakeHid.device.radio(true)')
+                wait_for(lambda: snapshot()['state']['status']=='live', 'Occupied receiver slot was not found')
+                assert 'wireless' in snapshot()['browser_connection']['message']
+                js('fakeHid.device.frame(0x80000,{5:16384,7:32767})')
+                wait_for(lambda: snapshot()['state']['held']==[True,False], 'Wireless buttons did not reach Rust')
+                assert snapshot()['state']['input']['triggers']==[500,1000]
+                js('fakeHid.device.radio(false)')
+                wait_for(lambda: snapshot()['state']['status']!='live', 'Radio disconnect left stale input')
+                assert snapshot()['state']['held']==[False,False]
+                assert snapshot()['state']['input']['triggers']==[0,0]
+                assert snapshot()['browser_connection']['connected'], 'Controller power-off closed receiver access'
+                js('fakeHid.slots[0].radio(true);fakeHid.slots[0].frame(0x200)')
+                time.sleep(0.1)
+                assert snapshot()['state']['status']!='live', 'Another controller took over the selected slot'
+                js('fakeHid.device.frame(0);fakeHid.device.radio(true)')
+                wait_for(lambda: snapshot()['state']['status']=='live', 'Radio reconnect did not resume')
+                assert snapshot()['state']['held']==[False,False]
+                js('fakeHid.device.frame(0x80000);fakeHid.remove()')
+                wait_for(lambda: snapshot()['state']['status']=='disconnected', 'Receiver removal left stale input')
+                assert snapshot()['state']['held']==[False,False]
+                js('fakeHid.device.report=new Uint8Array(45);fakeHid.reconnect()')
+                wait_for(lambda: snapshot()['state']['status']=='live', 'Receiver USB reconnect failed')
+                assert snapshot()['state']['held']==[False,False], 'USB reconnect switched controller slots'
+                click_target('disconnect')
+                wait_for(lambda: snapshot()['state']['status']=='disconnected', 'Receiver disconnect action failed')
+                assert js('return fakeHid.devices.every(d=>!d.opened)'), 'Receiver interfaces leaked after disconnect'
+            print('PASS: both wireless receivers, inactive slots, wireless controls, radio power-off/on, slot isolation and receiver USB reconnect')
 
     except Exception:
         if session:

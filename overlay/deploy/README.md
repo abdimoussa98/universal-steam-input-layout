@@ -30,8 +30,8 @@ No server API credentials, self-hosted runner, or Terraform is needed.
    If the tunnel runs in a separate container, use a reachable server address;
    `localhost` would mean the tunnel container. Change host port `18091` in
    Compose if it is already occupied; the container listens on `8080`.
-5. Plug the Steam Controller 2 into your computer by USB, click **Connect
-   controller** in the viewer, and select it in the browser picker. No local
+5. Plug the Steam Controller 2 or its wireless receiver into your computer,
+   click **Connect controller** in the viewer, and select it in the browser picker. No local
    helper or Steam installation is required for this connection.
 
 Use HTTPS for the public viewer so browser controller APIs are available.
@@ -71,16 +71,26 @@ images in GHCR if you want to return to them later.
 ## Steam Controller in the hosted browser
 
 Open the HTTPS viewer in a desktop browser with WebHID enabled. Click
-**Connect controller** and choose your USB Steam Controller 2 in the browser's
-permission dialog. The viewer selects that controller automatically. It reads
+**Connect controller** and choose your Steam Controller 2 or its wireless
+receiver in the browser's permission dialog. The viewer selects a controller automatically. It reads
 buttons, triggers, sticks, capacitive stick touches and trackpad positions
 straight from USB, then feeds the same Rust bindings and gesture engine.
 Controller input stays on your computer; the container only serves static files.
 
-The direct decoder currently targets the wired Valve `28de:1302`
-Triton/Ibex controller. Other controllers still use the normal Gamepad API:
-press a button and select the controller under Settings. Bluetooth, dongle,
-and original Steam Controller HID protocols are not claimed by this decoder.
+The direct connection supports the wired Valve `28de:1302` Triton/Ibex
+controller and the `28de:1304` (Proteus) / `28de:1305` (Nereid) wireless
+receivers. Other controllers still use the normal Gamepad API: press a button
+and select the controller under Settings. Bluetooth and original Steam
+Controller HID protocols are not claimed by this decoder.
+
+For wireless input, use a controller already paired with the receiver. The
+viewer listens to the receiver's controller interfaces and follows the first
+active slot. It supports one controller at a time and retains that slot when
+the controller powers off or the receiver is unplugged. To choose another
+controller, use **Disconnect controller**, turn off other controllers, and
+connect again. The receiver can stay connected while waiting for its controller;
+held controls and timers clear immediately on a radio disconnect report.
+The viewer does not change pairing or update controller firmware.
 
 If no picker appears, enable HID device requests in the browser's site/device
 permissions and try again. Cancelling the dialog leaves the viewer disconnected.
@@ -101,7 +111,10 @@ The browser transport handles permissions and raw reports. Decoding and all
 binding/timing logic remain in Rust. The local browser smoke test exercises
 the real WASM app with synthetic USB input, including cancellation, denied
 permissions, quick tap edges, coordinates, unplug/reconnect and stale input.
-Physical browser access must also be checked on the target computer/browser.
+Receiver tests also cover unused slots, controller power-off/on and isolation
+from other active controllers. Physical wired input was confirmed by the user
+in Brave on macOS and Flatpak Chrome on Bazzite. Wireless receiver acceptance
+still needs a physical check on the target computer/browser.
 
 ### Optional native companion
 
