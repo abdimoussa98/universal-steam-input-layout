@@ -2,7 +2,6 @@
 // controller state, bindings and gesture timing. No input is sent to a server.
 // SDL 3.4.18 usb_ids.h: Triton USB, Proteus receiver, Nereid receiver.
 const PRODUCTS = [0x1302, 0x1304, 0x1305];
-const FILTERS = PRODUCTS.map(productId => ({vendorId: 0x28de, productId}));
 const INPUT_REPORTS = new Set([0x42, 0x45, 0x47]);
 const WIRELESS_STATUS = new Set([0x46, 0x79]);
 const isReceiver = device => device.productId !== 0x1302;
@@ -66,7 +65,9 @@ export class SteamHid {
     this.emit('requesting', 'Choose your Steam Controller in the browser picker.');
     try {
       // Invoke directly from the button action, before awaiting any other work.
-      const devices = await this.hid.requestDevice({filters: FILTERS});
+      // Leave discovery unrestricted. Compatibility is checked only after the
+      // user selects a device, so unknown controller/receiver IDs stay visible.
+      const devices = await this.hid.requestDevice({filters: []});
       if (this.stopped || generation !== this.generation) return;
       if (!devices.length) {
         this.busy = false;
@@ -77,7 +78,14 @@ export class SteamHid {
       // excluding keyboard/mouse/management interfaces, and follow the first
       // active controller. Do not assume the first returned slot is occupied.
       const inputs = devices.filter(supported);
-      if (!inputs.length) throw new Error('The selected device has no supported Steam Controller 2 input interface. Use its USB cable or wireless receiver.');
+      if (!inputs.length) {
+        const hex = value => value.toString(16).padStart(4, '0');
+        const names = [...new Set(devices.map(device =>
+          `${device.productName || 'HID device'} (${hex(device.vendorId)}:${hex(device.productId)})`))];
+        const error = new Error(`No compatible controller input found for ${names.join(', ')}. Other gamepads may be available under Settings → Controller.`);
+        error.name = 'UnsupportedDeviceError';
+        throw error;
+      }
       this.device = null;
       this.wantedDevices = new Set(isReceiver(inputs[0]) ? inputs : inputs.slice(0, 1));
       await Promise.all([...this.wantedDevices].map(device => this.open(device, generation)));
@@ -176,7 +184,8 @@ export class SteamHid {
     this.wantedDevices.clear();
     await this.release();
     if (this.stopped || failedGeneration !== this.generation) return;
-    const message = error?.name === 'NotAllowedError' || error?.name === 'SecurityError'
+    const message = error?.name === 'UnsupportedDeviceError' ? error.message
+      : error?.name === 'NotAllowedError' || error?.name === 'SecurityError'
       ? 'Controller access was blocked. Allow HID device requests in this site’s browser settings and try again.'
       : `Could not connect to the controller: ${error?.message || error}. Reconnect the controller or receiver and try Connect controller again.`;
     this.emit('error', message);

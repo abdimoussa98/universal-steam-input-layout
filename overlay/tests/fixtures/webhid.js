@@ -52,7 +52,7 @@
     async requestDevice(options) {
       this.requests.push({options, activated: navigator.userActivation.isActive});
       if (this.deny) throw new DOMException('Permission denied', 'NotAllowedError');
-      return this.cancel ? [] : this.devices.filter(d => options.filters.some(f => f.vendorId === d.vendorId && f.productId === d.productId));
+      return this.cancel ? [] : this.devices.filter(d => !options.filters.length || options.filters.some(f => f.vendorId === d.vendorId && f.productId === d.productId));
     }
     async getDevices() { return this.devices; }
     remove() {

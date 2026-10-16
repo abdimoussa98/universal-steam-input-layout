@@ -1,5 +1,21 @@
 # Rust keybind viewer implementation — 2026-10-15
 
+## Unfiltered device picker (2026-10-16)
+
+The user reported that the receiver was still absent after deployment and
+requested an unrestricted picker. The hosted `version.json` and `steam-hid.js`
+were verified to match `19565a2`, including both receiver IDs. Discovery now
+calls `requestDevice` with an empty filter list. Compatibility checks happen
+after selection; unsupported devices show their name and USB ID without being
+opened or receiving feature reports. Browser/OS visibility rules still apply.
+This broadens discovery, not the set of decoded controller protocols.
+
+TDD: unrestricted discovery and unsupported-device identification failed before
+the change; all 14 Node lifecycle tests now pass. The packaged Brave/WASM smoke
+test also passed unrestricted discovery, unsupported selection and the existing
+wired/receiver regressions. Physical receiver input is still unverified; the
+receiver's exact USB ID has not yet been provided.
+
 ## Wireless receiver input (2026-10-16)
 
 The user confirmed wired input also works in Flatpak Chrome on Bazzite, but

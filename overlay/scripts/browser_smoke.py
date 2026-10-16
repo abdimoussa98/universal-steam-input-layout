@@ -319,11 +319,17 @@ def main():
             click_target('connect')
             wait_for(lambda: 'No controller selected' in snapshot()['browser_connection']['message'], 'Picker cancellation not explained')
             assert js('return fakeHid.requests[0].activated'), 'Picker did not run with user activation'
+            assert js('return fakeHid.requests[0].options.filters.length') == 0, 'Picker is still hiding controllers by device ID'
             assert snapshot()['state']['status'] != 'live'
             js('fakeHid.cancel=false;fakeHid.deny=true')
             click_target('connect')
             wait_for(lambda: 'blocked' in snapshot()['browser_connection']['message'], 'Permission denial not explained')
             js('fakeHid.deny=false')
+            js('fakeHid.device.productId=0x1399')
+            click_target('connect')
+            wait_for(lambda: '28de:1399' in snapshot()['browser_connection']['message'], 'Unsupported selection did not identify the device')
+            assert not js('return fakeHid.device.opened'), 'Unsupported device was opened'
+            js('fakeHid.device.productId=0x1302')
             click_target('connect')
             wait_for(lambda: snapshot()['state']['status']=='live', 'Direct HID input did not become live')
             assert not snapshot()['remote'], 'HID should not use companion transport'

@@ -77,6 +77,11 @@ buttons, triggers, sticks, capacitive stick touches and trackpad positions
 straight from USB, then feeds the same Rust bindings and gesture engine.
 Controller input stays on your computer; the container only serves static files.
 
+The picker does not filter by vendor or product ID. Chrome's own device
+visibility rules still apply. If a selected device has no compatible input
+interface, the viewer displays its name and USB ID without opening it or
+sending controller commands. That ID helps identify receiver variants.
+
 The direct connection supports the wired Valve `28de:1302` Triton/Ibex
 controller and the `28de:1304` (Proteus) / `28de:1305` (Nereid) wireless
 receivers. Other controllers still use the normal Gamepad API: press a button

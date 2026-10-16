@@ -21,6 +21,11 @@ targets the wired Valve `28de:1302` Triton/Ibex controller and the
 `28de:1304` / `28de:1305` wireless receivers. Bluetooth is not supported by this
 connection path.
 
+The picker shows all HID devices exposed by the browser, without filtering by
+vendor or product ID. Selecting a device does not add a decoder for its input
+format. If no compatible input interface is found, the viewer shows the device
+name and USB ID; standard gamepads may still work through Settings → Controller.
+
 For a receiver, turn on an already paired controller. The viewer follows the
 first active controller slot and keeps that selection through controller
 power-off/on and receiver unplug/replug. It shows one controller at a time;

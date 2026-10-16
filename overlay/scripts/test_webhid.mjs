@@ -41,7 +41,7 @@ test('picker opens only the selected supported input interface; disconnect stops
     const keyboard = new Device(); keyboard.collections = [{usagePage: 1, inputReports: [{reportId: 1}]}];
     hid.selected = [keyboard, device];
     await client.connect();
-    assert.deepEqual(hid.options, {filters: [0x1302, 0x1304, 0x1305].map(productId => ({vendorId: 0x28de, productId}))});
+    assert.deepEqual(hid.options, {filters: []}, 'The picker must not hide devices by vendor/product ID');
     assert.equal(keyboard.opened, false);
     assert.equal(device.opened, true);
     assert.equal(states.at(-1)[0], 'connected');
@@ -52,6 +52,21 @@ test('picker opens only the selected supported input interface; disconnect stops
     assert.equal(reports.length, 1);
     assert.equal(device.opened, false);
     assert.equal(states.at(-1)[0], 'disconnected');
+  } finally { await client.destroy(); }
+});
+
+test('any device can be selected, but unknown input formats are identified without opening or writing', async () => {
+  const {client, device, states, reports} = setup();
+  device.productId = 0x1399;
+  device.productName = 'Unrecognized receiver';
+  try {
+    await client.connect();
+    assert.equal(states.at(-1)[0], 'error');
+    assert.match(states.at(-1)[1], /28de:1399/);
+    assert.match(states.at(-1)[1], /Unrecognized receiver/);
+    assert.equal(device.opened, false);
+    assert.equal(device.writes.length, 0);
+    assert.equal(reports.length, 0);
   } finally { await client.destroy(); }
 });
 
