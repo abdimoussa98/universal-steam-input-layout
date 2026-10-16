@@ -440,6 +440,9 @@ pub fn validate_request(
         && origin.is_none_or(|o| o == format!("http://{expected_host}"))
 }
 
+mod companion_link;
+pub use companion_link::{CompanionEndpoint, HostedViewer};
+
 pub trait HotkeyApi {
     fn register(&mut self, id: i32, key: u8) -> Result<(), String>;
     fn unregister(&mut self, id: i32);

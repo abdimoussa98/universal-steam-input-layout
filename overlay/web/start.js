@@ -1,5 +1,11 @@
 // Page bootstrap only. State, controller input, binding resolution and UI are Rust.
 const status = document.querySelector('#status');
+// Opening a pairing link in an already-open viewer changes only the fragment.
+// Recreate the Rust client so the new session/port takes effect.
+const initiallyPaired = location.hash.startsWith('#companion=');
+window.addEventListener('hashchange', () => {
+  if (initiallyPaired || location.hash.startsWith('#companion=')) location.reload();
+});
 try {
   const { default: init, WebHandle } = await import('./pkg/keybind_overlay.js');
   await init();

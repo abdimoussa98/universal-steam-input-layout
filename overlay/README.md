@@ -142,6 +142,11 @@ Assets use relative URLs, so a subdirectory deployment works. No hosting or
 publication has been performed. Rust optimizes the WASM; wasm-pack's older
 optional wasm-opt step is disabled because it rejects current bulk-memory output.
 
+To host with Dockge, see the [container guide](deploy/README.md) and
+[Compose example](deploy/compose.yaml). Relevant pushes to `main` build, test
+and publish the web image to GHCR. Dockge pulls the `:latest` image when you
+deploy or update the stack. Your HTTPS tunnel forwards to port 18091.
+
 Standalone browser input works only for controllers the browser exposes. A
 visible second-monitor page and a hidden tab are different cases. Hidden pages
 pause input; resume samples current buttons before displaying live state.
@@ -175,6 +180,13 @@ when needed, and redraws on changes. Suspended browser tabs cannot be forced to
 render by a native companion.
 
 ## macOS companion (Steam not required)
+
+For a hosted HTTPS viewer, start the helper with
+`keybind-overlay --viewer-url https://YOUR_VIEWER_HOSTNAME/` and open its
+printed pairing link in the browser on the same computer. The helper reads
+your Steam Controller locally while the page loads from your server. Allow local
+network access if prompted. No local web bundle is needed in this mode.
+See [hosted pairing and troubleshooting](deploy/README.md#steam-controller-in-the-hosted-browser).
 
 Some controllers, including the wired Steam Controller tested here, expose
 keyboard/mouse and vendor-specific USB interfaces rather than a standard browser

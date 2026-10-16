@@ -12,10 +12,13 @@ import json
 from pathlib import Path
 import shutil
 import socket
+import ssl
 import subprocess
+import tempfile
 import threading
 import time
 import urllib.request
+import urllib.error
 
 
 def free_port():
@@ -31,15 +34,32 @@ def main():
     parser.add_argument('--browser-binary')
     parser.add_argument('--screenshot', type=Path)
     parser.add_argument('--companion-fixture', type=Path, help='Path to the compiled fake-input companion example')
+    parser.add_argument('--live-helper', type=Path, help='Optional hardware check: use the real helper instead of synthetic input tests')
+    parser.add_argument('--hosted-companion', action='store_true', help='Test HTTPS viewer to HTTP loopback helper with real browser CORS')
     args = parser.parse_args()
     if not args.driver:
         parser.error('Install ChromeDriver or pass --driver PATH')
+    if args.hosted_companion and not (args.companion_fixture or args.live_helper):
+        parser.error('--hosted-companion requires --companion-fixture or --live-helper')
+    if args.live_helper and (args.companion_fixture or not args.hosted_companion):
+        parser.error('--live-helper requires --hosted-companion and excludes --companion-fixture')
     bundle = args.bundle.resolve()
     assert (bundle / 'pkg/keybind_overlay_bg.wasm').is_file(), 'Build the web bundle first'
     class QuietHandler(http.server.SimpleHTTPRequestHandler):
         def log_message(self, *args):
             pass
     server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(QuietHandler, directory=str(bundle.parent)))
+    tls_directory = tempfile.TemporaryDirectory(prefix='keybind-tls-') if args.hosted_companion else None
+    if tls_directory:
+        cert = str(Path(tls_directory.name) / 'cert.pem')
+        keyfile = str(Path(tls_directory.name) / 'key.pem')
+        subprocess.run(['openssl', 'req', '-x509', '-newkey', 'rsa:2048', '-nodes',
+                        '-keyout', keyfile, '-out', cert, '-days', '1', '-subj', '/CN=localhost'],
+                       check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        context.load_cert_chain(cert, keyfile)
+        server.socket = context.wrap_socket(server.socket, server_side=True)
+    site = f'{"https://localhost" if tls_directory else "http://127.0.0.1"}:{server.server_port}/{bundle.name}/'
     threading.Thread(target=server.serve_forever, daemon=True).start()
     driver_port = free_port()
     driver = subprocess.Popen([args.driver, f'--port={driver_port}'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -49,8 +69,11 @@ def main():
     def request(method, path, data=None):
         body = json.dumps(data).encode() if data is not None else None
         req = urllib.request.Request(endpoint + path, data=body, method=method, headers={'Content-Type': 'application/json'})
-        with urllib.request.urlopen(req, timeout=20) as response:
-            result = json.load(response).get('value')
+        try:
+            with urllib.request.urlopen(req, timeout=20) as response:
+                result = json.load(response).get('value')
+        except urllib.error.HTTPError as error:
+            raise RuntimeError(error.read().decode()) from error
         if isinstance(result, dict) and 'error' in result and 'message' in result:
             raise RuntimeError(result)
         return result
@@ -79,16 +102,33 @@ def main():
         point = wait_for(lambda: (snapshot() or {}).get('ui_targets', {}).get(name), f'Missing UI target: {name}')
         click(round(point[0]), round(point[1]))
     def navigate():
-        request('POST', f'/session/{session}/url', {'url': f'http://127.0.0.1:{server.server_port}/{bundle.name}/'})
+        request('POST', f'/session/{session}/url', {'url': site})
         wait_for(snapshot, 'WASM startup failed')
     try:
         wait_for(lambda: request('GET', '/status'), 'ChromeDriver did not start')
         chrome = {'args': ['--headless=new', '--no-sandbox', '--enable-unsafe-swiftshader', '--window-size=1060,920']}
         if args.browser_binary:
             chrome['binary'] = args.browser_binary
-        created = request('POST', '/session', {'capabilities': {'alwaysMatch': {'browserName': 'chrome', 'goog:chromeOptions': chrome}}})
+        created = request('POST', '/session', {'capabilities': {'alwaysMatch': {'browserName': 'chrome', 'goog:chromeOptions': chrome, 'acceptInsecureCerts': bool(tls_directory)}}})
         session = created['sessionId']
         navigate()
+        if args.live_helper:
+            companion = subprocess.Popen([str(args.live_helper.resolve()), '--viewer-url', site],
+                                         stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            line = companion.stdout.readline()
+            assert line.startswith('Browser companion: '), line
+            request('POST', f'/session/{session}/url', {'url': line.strip().removeprefix('Browser companion: ')})
+            wait_for(lambda: snapshot() and snapshot()['remote'] and snapshot()['state']['status']=='live',
+                     'Physical controller did not reach the hosted page')
+            assert js('return window.isSecureContext')
+            print('PASS: physical controller in HTTPS browser:', snapshot()['input_status'])
+            key('F2')
+            wait_for(lambda: snapshot()['state']['mode']=='steering', 'Physical helper did not acknowledge browser mode')
+            companion.terminate()
+            companion.wait(timeout=10)
+            wait_for(lambda: snapshot()['state']['status']=='unavailable', 'Stopping physical helper left stale live input')
+            print('PASS: physical helper mode commands and disconnect recovery')
+            return
         js("Object.defineProperty(navigator,'getGamepads',{value:()=>[],configurable:true})")
         wait_for(lambda: snapshot().get('input_status') == 'No controllers exposed by this browser', 'Missing controllers not explained')
         assert snapshot()['controller_help'], 'Missing-controller troubleshooting not available'
@@ -203,12 +243,20 @@ def main():
         wait_for(lambda: snapshot()['state']['mode'] == 'menu', 'Rebound browser shortcut failed')
         print('PASS: invalid profile recovery, persisted/rebound shortcuts')
         if args.companion_fixture:
-            companion = subprocess.Popen([str(args.companion_fixture.resolve()), str(bundle)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            command = [str(args.companion_fixture.resolve()), str(bundle)]
+            if args.hosted_companion:
+                command.append(site)
+            companion = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             line = companion.stdout.readline()
             assert line.startswith('Browser companion: '), line
             url = line.strip().removeprefix('Browser companion: ')
+            if args.hosted_companion:
+                assert url.startswith(site + '#companion=') and '&port=' in url
             request('POST', f'/session/{session}/url', {'url': url})
             wait_for(lambda: snapshot() and snapshot()['remote'] and snapshot()['state']['status']=='live', 'Companion handshake failed')
+            if args.hosted_companion:
+                assert js('return window.isSecureContext'), 'Hosted viewer is not a secure context'
+                assert js('return location.protocol') == 'https:'
             assert snapshot()['labels']==['G','X','Z','T'], 'Companion did not own held input'
             assert snapshot()['settings']['hotkeys']==[5,6,7]
             assert snapshot()['preferences']['hotkeys']==[5,6,7], 'Browser settings did not display host shortcuts'
@@ -276,6 +324,8 @@ def main():
         driver.wait(timeout=10)
         server.shutdown()
         server.server_close()
+        if tls_directory:
+            tls_directory.cleanup()
 
 
 if __name__ == '__main__':

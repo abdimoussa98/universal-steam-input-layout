@@ -85,3 +85,152 @@ fn real_http_companion_authority_origin_and_asset_boundaries() {
     running.store(false, Ordering::Release);
     std::fs::remove_dir_all(directory).unwrap();
 }
+
+#[test]
+fn hosted_viewer_pairs_only_with_its_allowed_origin_and_session() {
+    let hub = Arc::new(Mutex::new(Hub::new(
+        FrameData {
+            state: State::default(),
+            profile: Profile::parse(BUNDLED_PROFILE).unwrap(),
+            settings: HostSettings::default(),
+            preferences: Preferences::default(),
+            native: true,
+            remote: false,
+            recovery_available: false,
+            hud: false,
+            companion_url: None,
+            error: None,
+        },
+        std::env::temp_dir(),
+    )));
+    let running = Arc::new(AtomicBool::new(true));
+    server::start_hosted(
+        hub.clone(),
+        running.clone(),
+        None,
+        "https://viewer.example/app/",
+    )
+    .unwrap();
+    let link = hub.lock().unwrap().data.companion_url.clone().unwrap();
+    let endpoint = CompanionEndpoint::parse_fragment(link.split_once('#').unwrap().1)
+        .unwrap()
+        .unwrap();
+    let address = endpoint
+        .base_url
+        .trim_start_matches("http://")
+        .trim_end_matches('/');
+    let request = |method: &str, path: &str, origin: &str, host: &str, extra: &str, body: &str| {
+        let mut socket = TcpStream::connect(address).unwrap();
+        socket
+            .set_read_timeout(Some(std::time::Duration::from_secs(3)))
+            .unwrap();
+        write!(socket, "{method} {path} HTTP/1.0\r\nHost: {host}\r\nOrigin: {origin}\r\n{extra}Content-Length: {}\r\nConnection: close\r\n\r\n{body}", body.len()).unwrap();
+        let mut response = String::new();
+        socket.read_to_string(&mut response).unwrap();
+        response
+    };
+    let preflight = "Access-Control-Request-Method: GET\r\nAccess-Control-Request-Headers: x-keybind-session,x-keybind-profile\r\nAccess-Control-Request-Private-Network: true\r\n";
+    let response = request(
+        "OPTIONS",
+        "/api/state",
+        "https://viewer.example",
+        address,
+        preflight,
+        "",
+    );
+    assert!(response.starts_with("HTTP/1.0 204"), "{response}");
+    assert!(
+        response
+            .to_lowercase()
+            .contains("access-control-allow-origin: https://viewer.example")
+    );
+    assert!(
+        response
+            .to_lowercase()
+            .contains("access-control-allow-private-network: true")
+    );
+    for origin in [
+        "https://evil.example",
+        "https://viewer.example.evil.test",
+        "null",
+        "http://viewer.example",
+    ] {
+        let response = request("OPTIONS", "/api/state", origin, address, preflight, "");
+        assert!(response.starts_with("HTTP/1.0 403"));
+        assert!(
+            !response
+                .to_lowercase()
+                .contains("access-control-allow-origin")
+        );
+    }
+    assert!(
+        request(
+            "OPTIONS",
+            "/api/state",
+            "https://viewer.example",
+            "rebound.example",
+            preflight,
+            ""
+        )
+        .starts_with("HTTP/1.0 403")
+    );
+    assert!(
+        request(
+            "OPTIONS",
+            "/api/state",
+            "https://viewer.example",
+            address,
+            "Access-Control-Request-Method: DELETE\r\n",
+            ""
+        )
+        .starts_with("HTTP/1.0 403")
+    );
+    assert!(
+        request(
+            "GET",
+            "/api/state",
+            "https://viewer.example",
+            address,
+            "",
+            ""
+        )
+        .starts_with("HTTP/1.0 403")
+    );
+    let token = format!("X-Keybind-Session: {}\r\n", endpoint.session);
+    let response = request(
+        "POST",
+        "/api/mode",
+        "https://viewer.example",
+        address,
+        &token,
+        r#"{"mode":"steering"}"#,
+    );
+    assert!(response.starts_with("HTTP/1.0 200"), "{response}");
+    assert_eq!(hub.lock().unwrap().data.state.mode, Mode::Steering);
+    let response = request(
+        "GET",
+        "/api/state",
+        "https://viewer.example",
+        address,
+        &token,
+        "",
+    );
+    assert!(response.starts_with("HTTP/1.0 200"));
+    assert!(
+        response
+            .to_lowercase()
+            .contains("access-control-allow-origin: https://viewer.example")
+    );
+    assert!(
+        request(
+            "GET",
+            "/api/state",
+            "https://evil.example",
+            address,
+            &token,
+            ""
+        )
+        .starts_with("HTTP/1.0 403")
+    );
+    running.store(false, Ordering::Release);
+}

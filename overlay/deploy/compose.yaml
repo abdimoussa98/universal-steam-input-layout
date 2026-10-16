@@ -1,0 +1,15 @@
+# Paste into a Dockge stack and replace the image with your GHCR reference.
+# Point your existing HTTPS tunnel to http://SERVER_LAN_IP:18091.
+services:
+  viewer:
+    image: ghcr.io/your-owner/your-repo-web:latest
+    restart: unless-stopped
+    ports:
+      - "18091:8080"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

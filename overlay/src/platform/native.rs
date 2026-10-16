@@ -101,6 +101,7 @@ impl Drop for RecoveryHotkey {
 struct Options {
     diagnostic: bool,
     companion: Option<PathBuf>,
+    viewer_url: Option<String>,
     profile: Option<PathBuf>,
     device: Option<String>,
 }
@@ -111,10 +112,11 @@ impl Options {
         while let Some(arg) = args.next() {
             match arg.as_str() {
             "--diagnostic"=>opts.diagnostic=true,
+            "--viewer-url"=>opts.viewer_url=Some(args.next().ok_or("--viewer-url needs an HTTPS URL")?),
             "--companion"=>opts.companion=Some(args.next().ok_or("--companion needs the web bundle directory")?.into()),
             "--profile"=>opts.profile=Some(args.next().ok_or("--profile needs a JSON path")?.into()),
             "--device"=>opts.device=Some(args.next().ok_or("--device needs an SDL instance ID")?),
-            "--help"|"-h"=>return Err("Usage: keybind-overlay [--profile FILE] [--companion WEB_DIR] [--diagnostic] [--device SDL_ID]\nF1/F2/F3 select display modes. Ctrl+Alt+O recovers the interactive window.".into()),
+            "--help"|"-h"=>return Err("Usage: keybind-overlay [--profile FILE] [--companion WEB_DIR] [--viewer-url https://YOUR_VIEWER/] [--diagnostic] [--device SDL_ID]\nOpen the printed pairing link for hosted input. F1/F2/F3 select display modes. Ctrl+Alt+O recovers the interactive window.".into()),
             _=>return Err(format!("Unknown argument: {arg}")),
         }
         }
@@ -198,7 +200,9 @@ pub fn run() -> Result<(), String> {
         digest,
     }));
     let running = Arc::new(AtomicBool::new(true));
-    if let Some(dir) = opts.companion {
+    if let Some(url) = opts.viewer_url {
+        super::server::start_hosted(hub.clone(), running.clone(), opts.companion, &url)?;
+    } else if let Some(dir) = opts.companion {
         super::server::start(hub.clone(), running.clone(), dir)?;
     }
     let mut input = super::sdl_input::SdlInput::new()?;

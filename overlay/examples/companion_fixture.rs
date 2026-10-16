@@ -48,7 +48,11 @@ fn main() {
         std::env::temp_dir().join("keybind-fixture-settings"),
     )));
     let running = Arc::new(AtomicBool::new(true));
-    server::start(hub.clone(), running.clone(), directory).unwrap();
+    if let Some(url) = std::env::args().nth(2) {
+        server::start_hosted(hub.clone(), running.clone(), None, &url).unwrap();
+    } else {
+        server::start(hub.clone(), running.clone(), directory).unwrap();
+    }
     for line in std::io::stdin().lock().lines() {
         let line = line.unwrap();
         if line == "quit" {

@@ -23,6 +23,7 @@ web = ["ui", "dep:wasm-bindgen", "dep:wasm-bindgen-futures", "dep:web-sys", "dep
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.10"
+url = "2"
 eframe = { version = "=0.31.1", default-features = false, features = ["default_fonts", "glow"], optional = true }
 
 [target.'cfg(windows)'.dependencies]

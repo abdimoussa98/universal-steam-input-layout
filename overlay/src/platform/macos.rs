@@ -8,16 +8,20 @@ use std::{
     time::Duration,
 };
 
-const USAGE: &str = "Usage: keybind-overlay --companion WEB_DIR [--device SDL_ID] [--profile FILE] [--diagnostic]\nOr: keybind-overlay --diagnostic\nSteam is not required. The only connected controller is selected automatically; use --device for multiple controllers.\nOpen the printed link. Mode buttons and F1/F2/F3 work in the focused browser page. Ctrl+C stops the helper.";
+const USAGE: &str = "Usage: keybind-overlay --viewer-url https://YOUR_VIEWER/ [--device SDL_ID] [--profile FILE]\nOr: keybind-overlay --companion WEB_DIR [--device SDL_ID] [--profile FILE] [--diagnostic]\nOr: keybind-overlay --diagnostic\nSteam is not required. The only connected controller is selected automatically; use --device for multiple controllers.\nOpen the printed pairing link and allow local network access if the browser asks. Mode buttons and F1/F2/F3 work in the focused browser page. Ctrl+C stops the helper.";
 
 pub fn run() -> Result<(), String> {
     let mut args = std::env::args().skip(1);
     let mut directory = None;
+    let mut viewer_url = None;
     let mut device = None;
     let mut diagnostic = false;
     let mut profile = Profile::parse(BUNDLED_PROFILE)?;
     while let Some(arg) = args.next() {
         match arg.as_str() {
+            "--viewer-url" => {
+                viewer_url = Some(args.next().ok_or("--viewer-url needs an HTTPS URL")?)
+            }
             "--companion" => {
                 directory = Some(PathBuf::from(
                     args.next()
@@ -39,7 +43,7 @@ pub fn run() -> Result<(), String> {
             _ => return Err(format!("Unknown argument: {arg}\n{USAGE}")),
         }
     }
-    if directory.is_none() && !diagnostic {
+    if directory.is_none() && viewer_url.is_none() && !diagnostic {
         return Err(USAGE.into());
     }
     let mut input = SdlInput::new()?;
@@ -62,7 +66,14 @@ pub fn run() -> Result<(), String> {
         },
         std::env::temp_dir().join("keybind-overlay-macos"),
     )));
-    if let Some(dir) = directory {
+    if let Some(url) = viewer_url {
+        server::start_hosted(
+            hub.clone(),
+            Arc::new(AtomicBool::new(true)),
+            directory,
+            &url,
+        )?;
+    } else if let Some(dir) = directory {
         server::start(hub.clone(), Arc::new(AtomicBool::new(true)), dir)?;
     }
     println!(

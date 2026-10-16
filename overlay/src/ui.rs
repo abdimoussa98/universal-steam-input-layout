@@ -44,7 +44,7 @@ impl FrameData {
         }
     }
     pub fn controller_help(&self) -> Option<&'static str> {
-        self.browser_has_no_devices().then_some("Click this page and press a controller button. If the list stays empty, the browser may not support this controller. Use the native companion to read it directly; importing a binding profile does not add device support.")
+        self.browser_has_no_devices().then_some("Click this page and press a controller button. For a Steam Controller the browser cannot detect, run the local helper with --viewer-url followed by this site's HTTPS address, then open its printed pairing link. Allow local network access if asked. Steam is not required.")
     }
     pub fn display_preferences(&self) -> Preferences {
         let mut preferences = self.preferences.clone();

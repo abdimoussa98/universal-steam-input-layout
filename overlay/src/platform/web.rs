@@ -8,6 +8,7 @@ struct WebState {
     data: FrameData,
     tracker: InputTracker,
     bridge: Option<BridgeClient>,
+    bridge_base: String,
     context: Option<egui::Context>,
     busy: bool,
     pending_mode: Option<Mode>,
@@ -43,7 +44,7 @@ fn js_error(e: JsValue) -> String {
         .unwrap_or_else(|| format!("{e:?}"))
 }
 impl WebState {
-    fn new(session: Option<String>) -> Self {
+    fn new(endpoint: Option<CompanionEndpoint>) -> Self {
         let mut error = None;
         let profile = match storage_read("keybind.profile.v1") {
             Ok(Some(json)) => Profile::parse(&json).unwrap_or_else(|e| {
@@ -67,7 +68,7 @@ impl WebState {
                 Preferences::default()
             }
         };
-        let remote = session.is_some();
+        let remote = endpoint.is_some();
         let settings = HostSettings {
             hotkeys: preferences.hotkeys,
             ..Default::default()
@@ -86,7 +87,11 @@ impl WebState {
                 error,
             },
             tracker: InputTracker::default(),
-            bridge: session.map(BridgeClient::new),
+            bridge_base: endpoint
+                .as_ref()
+                .map(|e| e.base_url.clone())
+                .unwrap_or_default(),
+            bridge: endpoint.map(|e| BridgeClient::new(e.session)),
             context: None,
             busy: false,
             pending_mode: None,
@@ -252,12 +257,16 @@ impl Backend for WebBackend {
     }
 }
 async fn fetch_snapshot(
+    base: &str,
     token: &str,
     digest: &str,
     mode: Option<Mode>,
 ) -> Result<BridgeSnapshot, String> {
     let init = web_sys::RequestInit::new();
-    init.set_signal(Some(&web_sys::AbortSignal::timeout_with_u32(3000)));
+    // The initial Local Network Access permission prompt may need user time.
+    init.set_signal(Some(&web_sys::AbortSignal::timeout_with_u32(
+        if digest.is_empty() { 30000 } else { 3000 },
+    )));
     init.set_method(if mode.is_some() { "POST" } else { "GET" });
     let headers = web_sys::Headers::new().map_err(js_error)?;
     headers.set("X-Keybind-Session", token).map_err(js_error)?;
@@ -272,16 +281,16 @@ async fn fetch_snapshot(
     }
     init.set_headers(&headers);
     let window = web_sys::window().ok_or("No browser window")?;
+    let endpoint = format!(
+        "{base}api/{}",
+        if mode.is_some() { "mode" } else { "state" }
+    );
     let response: web_sys::Response = JsFuture::from(window.fetch_with_str_and_init(
-        if mode.is_some() {
-            "./api/mode"
-        } else {
-            "./api/state"
-        },
+        &endpoint,
         &init,
     ))
     .await
-    .map_err(js_error)?
+    .map_err(|e| format!("{} · keep the helper running, allow local network access in this site's browser permissions, and reopen its pairing link", js_error(e)))?
     .dyn_into()
     .map_err(js_error)?;
     if !response.ok() {
@@ -338,6 +347,7 @@ fn tick(shared: &Rc<RefCell<WebState>>) {
     s.last_poll = js_sys::Date::now();
     let bridge = s.bridge.as_ref().expect("remote");
     let token = bridge.session.clone();
+    let base = s.bridge_base.clone();
     let digest = bridge
         .profile
         .as_ref()
@@ -348,7 +358,7 @@ fn tick(shared: &Rc<RefCell<WebState>>) {
     let shared = shared.clone();
     drop(s);
     spawn_local(async move {
-        let result = fetch_snapshot(&token, &digest, mode).await;
+        let result = fetch_snapshot(&base, &token, &digest, mode).await;
         let mut s = shared.borrow_mut();
         s.busy = false;
         if generation != s.generation
@@ -412,11 +422,9 @@ impl WebHandle {
     pub async fn start(&mut self, canvas: web_sys::HtmlCanvasElement) -> Result<(), JsValue> {
         let window = web_sys::window().ok_or("No browser window")?;
         let hash = window.location().hash()?;
-        let session = hash
-            .strip_prefix("#companion=")
-            .filter(|s| !s.is_empty())
-            .map(str::to_owned);
-        let shared = Rc::new(RefCell::new(WebState::new(session)));
+        let endpoint =
+            CompanionEndpoint::parse_fragment(&hash).map_err(|e| JsValue::from_str(&e))?;
+        let shared = Rc::new(RefCell::new(WebState::new(endpoint)));
         self.state = Some(shared.clone());
         let for_app = shared.clone();
         self.runner
