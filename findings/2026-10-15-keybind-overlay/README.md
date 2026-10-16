@@ -17,13 +17,15 @@ hidden/resume, unplug/reconnect, stalled input and disconnect. Native and WASM
 Clippy passed. Container validation included the new JS asset and release hashes.
 The pipeline continues to skip tests as requested; these checks ran locally.
 
-Physical WebHID input is not yet verified. In isolated automated browser probes,
-Brave returned a cancelled selection, and Chrome waited for device selection.
-A local browser-only preview was provided for the user's actual picker check.
-These observations are not evidence that the USB reports are accessible on every
-browser or that real controls have passed acceptance. The earlier companion
-hardware checks below apply only to the native path.
-
+Physical connection was confirmed by the user on 2026-10-16: the wired Steam
+Controller 2 connects through **Connect controller** in their normal Brave
+window on macOS, and buttons respond in the local browser-only preview. No native
+helper is used. This confirms picker access and live button input; it does not
+claim a complete physical check of every analog control or timing sequence.
+Earlier isolated automated picker probes cancelled in Brave or waited for a
+selection in Chrome; those results did not reproduce the user's normal browser.
+The hosted HTTPS origin still needs its own permission grant after updating the
+Dockge image. Earlier companion hardware checks below apply only to that path.
 
 ## Steering and live positions
 
