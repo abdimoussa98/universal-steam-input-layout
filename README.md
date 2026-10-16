@@ -30,6 +30,11 @@ one folder per controller. Copy your controller's two `.vdf` files into Steam's
   switch the other buttons to alternate mappings.
 - **Alternative** inverts it, for games where analog trigger control matters less.
 
+For controls with both timed paths, use **Hold / Tap, then hold**: keep the
+first press down for Hold, or release it and hold a second press within the
+release window. A short single tap may have its own output. The exact behavior
+depends on the layout and mode; see [timed gestures](resources/Layout%20Vocabulary.md#timed-gestures).
+
 ## Quick start
 
 Run everything from the repo root.
@@ -41,10 +46,12 @@ node tools/convert_vdf.mjs neptune/single-set-default_hold-gyro_latest.json   # 
 python3 -m tools.convert dse            # the Edge's layouts from the newest Ibex snapshot (docs/building.md)
 python3 -m tools.release check neptune   # before tagging a release (docs/publishing.md)
 
-# every Python test (about 46 minutes on this Mac), then the exporter's tests
-PYTHONPATH=.:tests python3 -m unittest $(ls tests/test_*.py | sed 's#/#.#; s#\.py$##' | tr '\n' ' ')
-node --test tests/test_convert_vdf.mjs
+# full Python suite, scenario coverage and both Node test files
+python3 -m tests.runner
 ```
+
+The [testing guide](docs/testing.md) documents focused commands, fixture ownership
+and the pattern for adding tests.
 
 The layouts are **generated**. Ibex's are built; the Deck's and the Edge's are
 converted from Ibex by their rules ([building](docs/building.md)). To change a
@@ -93,7 +100,7 @@ build.
 
 | You have | Put it in |
 |---|---|
-| A new release | A new build folder under `findings/`, a snapshot under `versions/<controller>/<v>/` for each controller that changed, `tests/test_scenarios_<v>.py`, and a CHANGELOG section |
+| A new release | A new build folder under `findings/`, a snapshot under `versions/<controller>/<v>/` for each controller that changed, `tests/scenarios/<controller>/test_scenarios_<v>.py`, and a CHANGELOG section |
 | A check that should run on every build | `steam_layout/` for the logic, `tools/audit_*.py` for the command, a rule row in the Definition of Done |
 | A fix the installer should apply | `steam_layout/fixes/`, and the pipeline list in its `__init__.py` |
 | A rule, or an accepted exception to one | `resources/Layer Definition of Done.md`; the exception in `steam_layout/flow_config.json` |

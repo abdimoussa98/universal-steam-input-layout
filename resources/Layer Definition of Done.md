@@ -10,6 +10,9 @@ alternative). This page is the one list of the layout's rules. Each section
 starts with its rules, one row each, and then gives the notes and links that
 explain them. Other documents explain a rule and point at its ID here; they
 don't restate it.
+The player-facing wording for this recipe is
+[Hold / Tap, then hold](Layout%20Vocabulary.md#timed-gestures). Rule §6 retains
+its established heading and anchors because audits and other documents link to it.
 
 ## Contents
 
@@ -38,7 +41,7 @@ Main references: [Steam Input JSON Structure](Steam%20Input%20JSON%20Structure.m
 ## Rule tables
 
 Every rule has one row, always in these columns. A test reads them
-([test_rule_registry.py](../tests/test_rule_registry.py), through
+([test_rule_registry.py](../tests/integration/test_rule_registry.py), through
 [rules.py](../steam_layout/rules.py)), so the shape is fixed.
 
 | Column | What it holds |
@@ -62,7 +65,7 @@ exception covers, `allow` (accepted) or `todo` (a known gap), the reason, who
 decided it and when, and the to-do that ends it. The audits read their
 exceptions from there ([exceptions.py](../steam_layout/exceptions.py)). A rule's
 Exceptions column says "None" exactly when the register has no entry for it; a
-test checks that ([test_exceptions.py](../tests/test_exceptions.py)).
+test checks that ([test_exceptions.py](../tests/integration/test_exceptions.py)).
 
 ### Checks and rules
 
@@ -78,10 +81,10 @@ python3 -m steam_layout.rules      # not checked yet, and checked only in part
 A **scenario test** is one press sequence run on both layouts by a press
 simulator: hold this, tap that, wait, then say which layers are on the stack
 and which keys went down ([scenario.py](../tests/scenario.py),
-`tests/test_scenarios_*.py`). Each one names the rules it checks and the
+`tests/scenarios/<controller>/test_scenarios_*.py`). Each one names the rules it checks and the
 assumptions its outcome rests on. A test fails when a rule's row and the
 scenarios disagree about whether a scenario checks it
-([test_scenario_registry.py](../tests/test_scenario_registry.py)).
+([test_scenario_registry.py](../tests/integration/test_scenario_registry.py)).
 
 ```bash
 python3 -m tests.scenario R133     # the scenarios that check one rule
@@ -298,7 +301,7 @@ shape: L1 → `L1: Double Tap` → `L1: Scroll Down` → `L1: Double Tap Cover`.
 
 ```
 Base: Select press
-  └─ Menu Left: Entry Point ............ (1) parent: tap or hold?
+  └─ Menu Left: Entry Point ............ (1) Hold / Tap, then hold entry
        ├─ hold 200 ms ──► Menu Left: Fn Layer          (hold result)
        └─ release ──────► Menu Left: Double Tap ....... (2) Always On window, 150 ms
             ├─ timeout ──► window removes itself        (single tap)
@@ -645,7 +648,7 @@ for review against [§7](#7-cleanup); they aren't a check.
    chains can't reach. An undecided `open` route fails the check.
    A different source mode above the definer is a block, not a route
    ([below](#a-source-mode-change-blocks-inheritance)).
-6. **The test enforces it.** [test_audit_inheritance.py](../tests/test_audit_inheritance.py)
+6. **The test enforces it.** [test_audit_inheritance.py](../tests/contracts/neptune/test_audit_inheritance.py)
    fails when a change opens an undecided route in the working layouts, or
    leaves a window that no stack reaches.
 
@@ -729,6 +732,14 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 
 ## 10. Ship it
 
+Follow the [test organization and observation-sharing pattern](../docs/testing.md).
+`python3 -m tests.runner` runs the complete suite and finalizes scenario reach;
+focused registry tests validate the gate's behavior without executing gestures
+as hidden setup. The [test migration ledger](../tests/test-map.csv) resolves
+existing `test_module.test_method` checker references after moves and splits.
+Scenario labels, controller/variant scope and frozen sources stay explicit.
+
+
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |
 |---|---|---|---|---|---|---|
 | R150 | The build audit is clean on every version | `python3 -m tools.audit_build` runs the four audits on every controller's two layouts and exits 0 | Author | Build audit; `test_stateful_transitions.test_audits_are_clean`; `test_convert.test_c2_every_layout_passes_the_build_audit` | — | None |
@@ -772,7 +783,7 @@ See: [Always On isolation](Steam%20Input%20JSON%20Structure.md#always-on-layer-i
 - [ ] **R154:** the tests pass, and a new invariant gets a new test.
 - [ ] **R154:** the change is recorded in `findings/<date>-<slug>/`.
 - [ ] **R165:** the new layer's press sequences are scenario tests, in a
-      `tests/test_scenarios_*.py` file. They cover an input held across the
+      `tests/scenarios/<controller>/test_scenarios_*.py` file. They cover an input held across the
       change, a press inside the layer, and a release missed while the Steam
       menu is open. The check behind this rule is narrower: it fails while a
       layer that is new or changed since the newest snapshot is on the stack
@@ -806,12 +817,12 @@ somebody has run it.
 This section applies only when a stateful layer is added or changed. The
 structure is in [Stateful Layer Transitions](Stateful%20Layer%20Transitions.md).
 It was agreed on 2026-10-01 and is built since 90.10. Its press sequences are
-scenario tests ([test_scenarios_90_10.py](../tests/test_scenarios_90_10.py)).
+scenario tests ([test_scenarios_90_10.py](../tests/scenarios/neptune/test_scenarios_90_10.py)).
 
 The check is whether the transitions behave as that document says.
-[test_stateful_transitions.py](../tests/test_stateful_transitions.py) asserts
-it on the 90.10 build, [test_cursor_gyro.py](../tests/test_cursor_gyro.py) on
-90.21 and [test_gamepad.py](../tests/test_gamepad.py) on 90.22, where all four
+[test_stateful_transitions.py](../tests/releases/neptune/test_stateful_transitions.py) asserts
+it on the 90.10 build, [test_cursor_gyro.py](../tests/releases/neptune/test_cursor_gyro.py) on
+90.21 and [test_gamepad.py](../tests/releases/neptune/test_gamepad.py) on 90.22, where all four
 gestures are taken.
 
 | ID | Rule | Example | Decided | Checked by | Rests on | Exceptions |

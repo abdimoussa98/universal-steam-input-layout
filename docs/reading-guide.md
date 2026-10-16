@@ -3,6 +3,9 @@
 Where the knowledge is. `resources/` holds what stays true across releases;
 `findings/` holds dated records, one folder per investigation or build.
 
+The [testing guide](testing.md) documents test organization, shared observations,
+controller/source boundaries and local/CI validation.
+
 ## `resources/`
 
 | Document | What is in it |
@@ -10,7 +13,7 @@ Where the knowledge is. `resources/` holds what stays true across releases;
 | [Layer Definition of Done](../resources/Layer%20Definition%20of%20Done.md) | The one list of the layout's rules, each with its ID, example and check |
 | [Steam Behaviour Assumptions](../resources/Steam%20Behaviour%20Assumptions.md) | What the rules and tools assume Steam does, each with its status and a Deck procedure |
 | [Delay Timers and Repeat Rates](../resources/Delay%20Timers%20and%20Repeat%20Rates.md) | Layer removals accelerating held repeats, inconsistent delay resets, and immediate firing after rapid add/remove transitions; why timing must not carry mission-critical behavior |
-| [Layout Vocabulary](../resources/Layout%20Vocabulary.md) | Button overlays, owning layers, interaction stacks, and recovery terminology |
+| [Layout Vocabulary](../resources/Layout%20Vocabulary.md) | Hold / Tap, then hold timed gestures, button overlays, owning layers, interaction stacks and recovery terminology |
 | [Stateful Layer Transitions](../resources/Stateful%20Layer%20Transitions.md) | The menu-plus-stick-click gesture map, Entry Points, stick guards and transition layers every stateful layer goes through. Built in 90.10 |
 | [Cleanup Functions](../resources/Cleanup%20Functions.md) | The kinds of cleanup and their terms. A draft; where it differs from R127 to R132, the rules are right |
 | [Steam Input JSON Structure](../resources/Steam%20Input%20JSON%20Structure.md) | JSON format, binding execution order, and the sections below |

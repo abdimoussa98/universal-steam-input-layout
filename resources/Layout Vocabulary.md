@@ -1,5 +1,28 @@
 # Layout vocabulary
 
+## Timed gestures
+
+Use **Hold / Tap, then hold** for the pair of gestures available on a control
+when its binding supports both paths. A **hold** keeps the initial press down.
+**Tap, then hold** means release the first press, press again during the release
+window, and keep that second press held. Its stages are **Initial hold →
+Release window → Second hold**. A short first press may also produce a
+**single tap** output after release; that is a separate outcome and should be
+named Tap. The second hold may repeat that output or keep a key/button held,
+depending on the binding.
+
+Call this family **timed gestures**. The exact hold deadline, release window,
+output delay and second-hold deadline come from each layout binding. Do not
+assume every control has both paths. The default variant places its modifier
+gestures on L1/R1; the alternative variant places them on L2/R2. Menu buttons
+and Steering stick directions have their own binding and timing details.
+
+**Tap Cover**, **Double Tap** and **Double Tap Cover** are existing Steam layer
+names. They describe parts of the implementation, not the name of the player's
+gesture. Keep these names exact when referencing layers, JSON tokens, tools or
+historical records. Likewise, Steam's **Hold to Repeat** is an activator setting,
+not a label for either player gesture.
+
 Use **button overlay** for a layer whose job is to change one button's action
 or release behavior while running on top of an existing interaction. **Overlay**
 is the short form when that scope is clear. This replaces the earlier term

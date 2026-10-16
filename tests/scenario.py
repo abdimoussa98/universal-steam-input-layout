@@ -52,6 +52,7 @@ import json
 import os
 from pathlib import Path
 import unittest
+import hashlib
 
 from steam_layout import changes, controllers
 from steam_layout.model import Layout, map_title
@@ -80,21 +81,38 @@ SWITCHES = {"A9": ("exposed_fires", (True, False)), "A32": ("reverse_ties", (Fal
 RENAME = {"L1": "L2", "R1": "R2"}
 BACK = {new: old for old, new in RENAME.items()}
 
-Meta = namedtuple("Meta", "check name rules rests either frozen", defaults=(None,))
+Meta = namedtuple("Meta", "check name rules rests either frozen controller variants stage",
+                  defaults=(None, None, VARIANTS, "controller"))
 SCENARIOS = []
 CONTROLLER = os.environ.get("SCENARIO_CONTROLLER", "neptune")      # whose working layouts the scenarios run on
-REACHED = {}                                 # layout -> the layers a scenario has put on the stack so far
+REACHED = {}                                 # (controller, variant) -> observed layers; not completeness evidence
 FROZEN_REACHED = {}                          # (version, layout) -> historical reach, never live coverage
 RELEASE_LIST = "unverified-assumptions.txt"
 _layouts = {}
 _frozen_layouts = {}
-_ran = []
+_data_digests = {}
 
 
-def scenario(check, rules=(), rests=(), either=(), frozen=None):
+def data_fingerprint(data):
+    """Identity of the exact fixture, independent of runtime reach and options."""
+    key = id(data)
+    if key not in _data_digests:
+        _data_digests[key] = (data, hashlib.sha256(json.dumps(data).encode()).hexdigest())
+    return _data_digests[key][1]
+
+
+def validate_fixture_integrity():
+    """Check cached source objects once at run boundaries, not per gesture cell."""
+    for data, original in _data_digests.values():
+        if hashlib.sha256(json.dumps(data).encode()).hexdigest() != original:
+            raise ValueError("Scenario fixture data changed in memory while the suite was running")
+
+
+def scenario(check, rules=(), rests=(), either=(), frozen=None, controller=None, variants=VARIANTS, stage="controller"):
     """Mark a test as a scenario: its label, the rules it checks and the assumptions its outcome rests on."""
     def mark(function):
-        function.scenario = Meta(check, function.__qualname__, tuple(rules), tuple(rests) + tuple(either), tuple(either), frozen)
+        function.scenario = Meta(check, function.__qualname__, tuple(rules), tuple(rests) + tuple(either), tuple(either),
+                                 frozen, controller, tuple(variants), stage)
         if function.scenario not in SCENARIOS:               # a test file can be imported under two names
             SCENARIOS.append(function.scenario)
         return function
@@ -384,14 +402,33 @@ class Pad:
 class ScenarioCase(unittest.TestCase):
     """Runs a scenario on both layouts, once per way of each assumption it names in `either`."""
     _pad = None
+    fixture_kind = "live"
+    fixture_controller = None
+    fixture_version = None
+
+    def record_cell(self, pad, data, *, kind, controller, version=None,
+                    desktop_configuration=False, start=None):
+        """Attach one executed gesture to its test result, never a global run claim."""
+        if not hasattr(self, "_evidence_cells"):
+            self._evidence_cells = []
+        self._evidence_cells.append({
+            "controller": controller, "source_controller": "neptune" if kind != "live" else controller,
+            "variant": pad.variant, "kind": kind,
+            "version": version if kind != "live" else controllers.title_version(data["controller_mappings"].get("title", "")),
+            "stage": "desktop" if desktop_configuration else "controller",
+            "options": dict(pad.options), "start": start,
+            "fingerprint": data_fingerprint(data), "reached": sorted(pad.reached()),
+        })
 
     def _formatMessage(self, msg, standardMsg):
         """Say which layout and which way of an assumption a failed expectation was on."""
         where = f" [on {self._pad!r} at {self._pad.sim.now} ms, stack {self._pad.stack}]" if self._pad else ""
         return super()._formatMessage(msg, standardMsg) + where
 
-    def each(self, start=None, variants=VARIANTS, desktop_configuration=False, controller=None, **options):
+    def each(self, start=None, variants=None, desktop_configuration=False, controller=None, **options):
         meta = getattr(getattr(self, self._testMethodName), "scenario", None)
+        variants = variants if variants is not None else meta.variants if meta else VARIANTS
+        controller = controller or (meta.controller if meta else None)
         names = [SWITCHES[a][0] for a in (meta.either if meta else ())]
         ways = [SWITCHES[a][1] for a in (meta.either if meta else ())]
         for variant in variants:
@@ -399,31 +436,45 @@ class ScenarioCase(unittest.TestCase):
                 chosen = {**options, **dict(zip(names, way))}
                 frozen = meta.frozen if meta else None
                 data = frozen_layout_data(variant, frozen) if frozen else layout_data(variant, controller)
+                source_data = data
+                data_fingerprint(source_data)  # establish integrity before the first gesture can mutate it
                 if desktop_configuration:
                     data = desktop(data)
-                pad = Pad(variant, data=data, **chosen)
+                pad = Pad(variant, start=None if start == "steering" else start, data=data, **chosen)
                 if start == "steering":
                     # A settled baseline has no thumb held by its entry gesture.
                     # Since 90.47 a resting thumb legitimately owns LST helpers.
                     # Tests of that state use enter_steering() or touch() explicitly.
                     pad.enter_steering().lift("LS").wait(300)
-                elif start:
-                    pad = Pad(variant, start=start, data=data, **chosen)
                 self._pad = pad
                 try:
                     yield pad.mark()
                 finally:
+                    target = "neptune" if frozen else controller or CONTROLLER
+                    self.record_cell(pad, source_data, kind="frozen" if frozen else "live", controller=target,
+                                     version=frozen, desktop_configuration=desktop_configuration, start=start)
                     if frozen:
                         FROZEN_REACHED.setdefault((frozen, variant), set()).update(pad.reached())
-                    elif controller in (None, CONTROLLER):
-                        REACHED.setdefault(variant, set()).update(pad.reached())
                     else:
-                        REACHED.setdefault((controller, variant), set()).update(pad.reached())
+                        REACHED.setdefault((target, variant), set()).update(pad.reached())
 
 
 def modules():
     """Every scenario test file, imported (which registers its scenarios)."""
-    return [__import__(f"tests.{path.stem}", fromlist=["*"]) for path in sorted((ROOT / "tests").glob("test_scenarios_*.py"))]
+    from tests.support.discovery import test_modules
+    return [__import__(name, fromlist=["*"]) for name in test_modules()
+            if name.rsplit(".", 1)[-1].startswith("test_scenarios_")]
+
+
+def scenario_tests():
+    """Discover decorated cases only; static tests in the same modules stay separate."""
+    from tests.support.evidence import flatten
+    found = []
+    for module in modules():
+        for test in flatten(unittest.defaultTestLoader.loadTestsFromModule(module)):
+            if getattr(getattr(test, test._testMethodName), "scenario", None):
+                found.append(test)
+    return found
 
 
 def for_rule(rule_id):
@@ -433,18 +484,43 @@ def for_rule(rule_id):
 
 
 def reached():
-    """{layout: the layers some scenario puts on the stack}. Runs every scenario test once."""
-    if not _ran:
-        suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromModule(module) for module in modules())
-        suite.run(unittest.TestResult())             # a failure here shows when the tests themselves run
-        _ran.append(True)
+    """Observed live reach by (controller, variant), without executing any tests.
+
+    This is diagnostic state, not proof of a complete run. The runner validates
+    explicit outcome records before applying the R165 finalizer.
+    """
     return REACHED
 
 
-def uncovered(variant, baseline=None):
+def uncovered(variant, baseline=None, controller=None, evidence=None):
     """The layers changed since the newest snapshot (or since `baseline`) that no scenario puts on the stack (R165)."""
-    changed = changes.changed_since(layout_data(variant), changes.baseline_for(layout_path(variant), baseline))
-    return sorted(changed - reached().get(variant, set()))
+    controller = controller or CONTROLLER
+    changed = changes.changed_since(layout_data(variant, controller), changes.baseline_for(layout_path(variant, controller), baseline))
+    observed = reached() if evidence is None else evidence
+    return sorted(changed - observed.get((controller, variant), set()))
+
+
+def coverage_manifest(selected_controllers=None):
+    """Exact current fixture and comparison baseline for the declared live matrix."""
+    selected_controllers = selected_controllers or tuple(dict.fromkeys((CONTROLLER, "dse")))
+    result = []
+    for controller in selected_controllers:
+        for variant in VARIANTS:
+            data = layout_data(variant, controller)
+            path = layout_path(variant, controller)
+            baseline = changes.baseline_for(path)
+            result.append({"controller": controller, "variant": variant,
+                           "version": controllers.title_version(data["controller_mappings"]["title"]),
+                           "fingerprint": data_fingerprint(data),
+                           "baseline": str(baseline.relative_to(ROOT)) if baseline else None,
+                           "baseline_fingerprint": hashlib.sha256(baseline.read_bytes()).hexdigest() if baseline else None,
+                           "changed": sorted(changes.changed_since(data, baseline)),
+                           "required": [map_title(title, RENAME) if variant == "alternative" else title
+                                        for title in (("Base", "Steering", "Steering | LS: Entry Guard",
+                                                       "L1: Modifier 0", "Menu Right: Entry Point")
+                                                      if controller == CONTROLLER else ("Base",))],
+                           "titles": sorted(Layout(data).titles.values())})
+    return result
 
 
 def report():
@@ -470,20 +546,22 @@ def report():
     return "\n".join(lines)
 
 
-def coverage():
+def coverage(evidence=None, selected_controllers=None):
     """Which layers no scenario puts on the stack, and which of those changed since the newest snapshot."""
     lines = []
-    for variant in VARIANTS:
-        titles = set(Layout(layout_data(variant)).titles.values())
-        missing = sorted(titles - reached().get(variant, set()))
-        lines.append(f"\n{variant}: {len(titles) - len(missing)} of {len(titles)} layers are on the stack in a scenario")
+    observed = reached() if evidence is None else evidence
+    for entry in coverage_manifest(selected_controllers):
+        key = entry["controller"], entry["variant"]
+        titles = set(entry["titles"])
+        missing = sorted(titles - observed.get(key, set()))
+        lines.append(f"\n{key[0]}/{key[1]}: {len(titles) - len(missing)} of {len(titles)} layers are on the stack in a scenario")
         lines.extend(f"  never: {title}" for title in missing)
-        changed = uncovered(variant)
+        changed = sorted(set(entry["changed"]) - observed.get(key, set()))
         lines.append("  Changed since the newest snapshot and in no scenario (R165): " + (", ".join(changed) or "none"))
     return "\n".join(lines)
 
 
-def main(argv=None):
+def main(argv=None, *, executor=None):
     parser = argparse.ArgumentParser(description="The scenario tests: what rests on an unverified assumption, and what they reach.")
     parser.add_argument("rule", nargs="?", help="a rule ID: list the scenarios that check it")
     parser.add_argument("--out", type=Path, help=f"folder of the release's record: write {RELEASE_LIST} there")
@@ -496,7 +574,15 @@ def main(argv=None):
         return 0
     shown = report()
     print(shown)
-    print(coverage())
+    if executor is None:
+        from tests.runner import run_scenarios
+        executor = run_scenarios
+    try:
+        observed = executor()
+    except ValueError as exc:
+        print(f"Scenario evidence failed: {exc}")
+        return 1
+    print(coverage(observed))
     if args.out:
         args.out.mkdir(parents=True, exist_ok=True)
         (args.out / RELEASE_LIST).write_text(shown + "\n", encoding="utf-8")

@@ -104,7 +104,7 @@ This relies on:
 See the step-by-step walkthrough in
 [Rocking Between Modifiers](Steam%20Input%20JSON%20Structure.md#rocking-between-modifiers-0-1-and-2).
 `steam_layout.stacks.walk` replays any sequence like it, and
-[test_modifier_rocking.py](../tests/test_modifier_rocking.py) pins the rocking sequence in both
+[test_modifier_rocking.py](../tests/contracts/neptune/test_modifier_rocking.py) pins the rocking sequence in both
 layouts. A generator must never reorder these arrays or change which layer
 ends up on top.
 

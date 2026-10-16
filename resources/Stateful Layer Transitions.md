@@ -17,6 +17,8 @@ and the build steps are in the
 This is the structure every stateful layer enters and leaves through. A new
 stateful layer has to fit it; see [the checklist](#adding-a-stateful-layer)
 and [Layer Definition of Done §11](Layer%20Definition%20of%20Done.md#11-stateful-layers).
+For menu buttons with both timed paths, use the
+[Hold / Tap, then hold vocabulary](Layout%20Vocabulary.md#timed-gestures).
 
 ## Purpose
 
@@ -94,7 +96,7 @@ where the clicks lead.
 - **Since 90.28 that is two pairs of Fn layers.** Under Base's Entry Points
   the Fn layer's bind for the other menu button adds the chorded chain's
   Entry Point on every press: a tap types Enter or Backspace from the chain's
-  window, a double tap and hold holds it, and a 200 ms hold enters
+  window, Tap, then hold keeps the second press active, and a 200 ms Hold enters
   `Menu Keys`. The `Stateful |` Entry Points add their own copies,
   `Stateful | Menu Left: Fn Layer` and `Stateful | Menu Right: Fn Layer`,
   which type the key at once, as this paragraph describes
@@ -442,7 +444,7 @@ fallback when that local edge answers. Gyro modifiers can cover that edge.
 | `Cursor Gyro`'s entry | Its commit also adds `Gyro`. Since 90.44 a later dual-driver gesture may remove Gyro while retaining Cursor Gyro. Its menu-plus-click clear and both-stick exit preserve whatever Gyro state is currently active; they do not re-add it |
 | `Gamepad` and the Modifier 2 clear | The Modifier 2 quick tap does not leave `Gamepad`: the bumpers and triggers are gamepad buttons there (author, 2026-10-03). The one way out is a menu button held plus a stick click |
 | `Gamepad`'s exit | It has no Entry Points. Each stick click has a chord on Start or Select being held that runs the Entry Points' clear list and adds `Transition Set 2`. So the clear is entered at the click's **press**. The menu button's Release in the transition ends it as usual. If the menu button is let go before the click, Base is live under a held click and may type one Q or E (A11) |
-| `Gamepad`'s Start and Select | They use Steam's own Double Press and Long Press, the one exception to R108 (author, 2026-10-03): a tap sends the button after the Double Press time, a double press holds it, a hold sends nothing. It is safe only because `Gamepad` is closed: it binds every input, so no layer can be added over it (R168). Rests on A43 to A45 |
+| `Gamepad`'s Start and Select | They use Steam's own Double Press and Long Press, the one exception to R108 (author, 2026-10-03): a Tap sends the button after the Double Press time, Tap, then hold keeps it active, and an initial Hold sends nothing. It is safe only because `Gamepad` is closed: it binds every input, so no layer can be added over it (R168). Rests on A43 to A45 |
 | `Gyro` | Entered and left by the uncovered Modifier 2 release. It doesn't remap the controls that toggle it. The menu-plus-click clear leaves it on |
 | `Menu Keys`, the menu stateful layer (90.25) | Doesn't use this structure. Both menu buttons held for 200 ms enter it, from Base or `Gyro`, through a chorded Entry Point that the Fn layer adds on every press of the second button (90.28); both sticks out, or a stick out plus a face button or D-pad direction, leave it. Only its menu-plus-click exit goes through the clear transition, by a chord on the stick clicks as in `Gamepad` ([record](../findings/2026-10-04-pad-bumps-and-menu-keys/README.md)) |
 
@@ -621,12 +623,12 @@ section are still open: they are assumptions A26 and A8 in
 
 ## Tests
 
-[test_gamepad.py](../tests/test_gamepad.py) asserts, on the 90.22 build, all
+[test_gamepad.py](../tests/releases/neptune/test_gamepad.py) asserts, on the 90.22 build, all
 four gestures, the three transitions and their feedback, `Gamepad`'s map,
 its native menu activators, its exit chord, and that it is closed (R168).
-[test_cursor_gyro.py](../tests/test_cursor_gyro.py) asserts `Cursor Gyro`'s
+[test_cursor_gyro.py](../tests/releases/neptune/test_cursor_gyro.py) asserts `Cursor Gyro`'s
 binds, its entry, its three exits and the renamed Entry Points on the 90.21
-build. [test_stateful_transitions.py](../tests/test_stateful_transitions.py) asserts
+build. [test_stateful_transitions.py](../tests/releases/neptune/test_stateful_transitions.py) asserts
 for both layouts: each Entry Point's click-release targets, each transition's
 two menu-release destinations, that the transitions leave no layer-adding
 input unblocked, that the Fn layers and guards bind no stick click, the

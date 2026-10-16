@@ -1,0 +1,422 @@
+{
+  "artifact_sha256": "29992e3a112e7493a07fa072daed40bb2d38cbb48d2adc9a089205930269d2e7",
+  "comparison": {
+    "baseline": {
+      "execution_seconds": 2815.8418463330004,
+      "outcomes": {
+        "expectedFailures": 25,
+        "passed": 1382
+      },
+      "peak_python_rss_bytes": 1397424128,
+      "tests": 1407
+    },
+    "dse_cells": 60,
+    "execution_reduction_percent": 18.867071768744957,
+    "execution_seconds_saved": 531.2669020420003,
+    "largest_scenario_cells": [
+      [
+        "90.43 D4",
+        1664
+      ],
+      [
+        "90.57 S1",
+        1280
+      ],
+      [
+        "90.46 R1",
+        288
+      ],
+      [
+        "90.46 R2",
+        288
+      ],
+      [
+        "90.46 R5",
+        288
+      ],
+      [
+        "90.48 E1",
+        256
+      ],
+      [
+        "90.48 H1",
+        256
+      ],
+      [
+        "90.43 D1",
+        192
+      ],
+      [
+        "90.53 T4",
+        160
+      ],
+      [
+        "90.55 T7",
+        160
+      ]
+    ],
+    "mapped_cases": 1407,
+    "module_seconds": {
+      "tests.contracts.dse.test_convert": 0.485004416,
+      "tests.contracts.ibex.test_steering_rtp_menu_chords": 22.051299750000002,
+      "tests.contracts.neptune.test_audit_inheritance": 8.649679625000001,
+      "tests.contracts.neptune.test_cleanups": 0.005660958999996524,
+      "tests.contracts.neptune.test_double_tap_windows": 0.009379499999994323,
+      "tests.contracts.neptune.test_fixes": 0.011504166999998233,
+      "tests.contracts.neptune.test_flow_inheritance": 1.0843528749999933,
+      "tests.contracts.neptune.test_fn_feedback_steering_clear": 0.007374957999999765,
+      "tests.contracts.neptune.test_layer_order_90_64": 0.00034495900000308666,
+      "tests.contracts.neptune.test_layer_report": 8.928227459000006,
+      "tests.contracts.neptune.test_layout_hygiene": 0.11134441600000144,
+      "tests.contracts.neptune.test_layout_rules": 0.8137757920000013,
+      "tests.contracts.neptune.test_menu_base_chords": 0.008386375000000612,
+      "tests.contracts.neptune.test_modifier_rocking": 0.007030290999999522,
+      "tests.contracts.neptune.test_neptune_cursor": 0.44180333299999575,
+      "tests.contracts.neptune.test_neptune_gyro": 0.12844870800000052,
+      "tests.contracts.neptune.test_neptune_held_inputs": 0.10155733300000236,
+      "tests.contracts.neptune.test_neptune_recovery": 0.0958389170000018,
+      "tests.contracts.neptune.test_required_cleanups": 0.8466863750000044,
+      "tests.contracts.neptune.test_shapes_90_49": 0.00834316599999596,
+      "tests.contracts.neptune.test_shapes_90_52": 0.0007442080000004125,
+      "tests.contracts.neptune.test_shapes_90_55": 0.001420458999994878,
+      "tests.contracts.neptune.test_shapes_90_57": 0.0019227499999985298,
+      "tests.contracts.neptune.test_shapes_90_58": 30.857360458000002,
+      "tests.contracts.neptune.test_shapes_90_62": 0.01319979200000887,
+      "tests.contracts.neptune.test_shapes_90_68": 0.0001375420000044869,
+      "tests.contracts.neptune.test_shapes_90_70": 0.02165004199999032,
+      "tests.contracts.neptune.test_shapes_90_74": 0.00019504199998721106,
+      "tests.contracts.neptune.test_static_checks": 17.234654291,
+      "tests.contracts.neptune.test_steering_entry_feedback": 0.08439562499999909,
+      "tests.contracts.neptune.test_steering_entry_quiet_drivers": 172.56329879199998,
+      "tests.contracts.neptune.test_steering_rtp_menu_chords": 0.17671566600000688,
+      "tests.contracts.neptune.test_steering_touch_windows": 21.605141333000006,
+      "tests.contracts.shared.test_controllers": 0.09439254099999062,
+      "tests.contracts.shared.test_convert": 0.029914707999978418,
+      "tests.contracts.shared.test_exceptions": 0.0008502910000061092,
+      "tests.contracts.shared.test_fixes": 46.461911375,
+      "tests.integration.convert.test_convert": 56.70602233300002,
+      "tests.integration.profiles.test_overlay_profile": 0.34449212499998794,
+      "tests.integration.release.test_release": 3.143227749999994,
+      "tests.integration.release.test_test_compat": 0.0072206670000127815,
+      "tests.integration.test_audit_build": 0.0007865420000143786,
+      "tests.integration.test_audit_command_budget": 0.18266241700001729,
+      "tests.integration.test_audit_inheritance": 3.5163687090000053,
+      "tests.integration.test_changes": 0.35088404099997206,
+      "tests.integration.test_cleanups": 0.3365132499999959,
+      "tests.integration.test_exceptions": 0.021323750000021846,
+      "tests.integration.test_fixes": 10.58248254099999,
+      "tests.integration.test_layer_report": 0.19786912500001108,
+      "tests.integration.test_migration": 0.044182000000034805,
+      "tests.integration.test_native": 11.390823624999996,
+      "tests.integration.test_required_cleanups": 0.1463203749999593,
+      "tests.integration.test_rule_registry": 0.8144980830000463,
+      "tests.integration.test_scenario_registry": 0.13320362500002147,
+      "tests.integration.test_simulator": 0.5500427919999993,
+      "tests.integration.test_steering_native_gestures": 0.001668832999996539,
+      "tests.integration.test_steering_probes": 0.043371207999996386,
+      "tests.releases.ibex.test_convert": 0.16515591699999277,
+      "tests.releases.neptune.test_base_pad_click_one_add": 13.51350712499999,
+      "tests.releases.neptune.test_changes": 0.031281541999987894,
+      "tests.releases.neptune.test_cleanup_entry_order": 82.56313133300006,
+      "tests.releases.neptune.test_cleanups": 171.79706900000008,
+      "tests.releases.neptune.test_convert": 22.392581333000066,
+      "tests.releases.neptune.test_cursor_gyro": 19.03027462500006,
+      "tests.releases.neptune.test_fallback_window": 69.53733724999995,
+      "tests.releases.neptune.test_fallback_window_backport": 116.32938820799995,
+      "tests.releases.neptune.test_fallback_window_replacements": 70.499579875,
+      "tests.releases.neptune.test_fixes": 0.09917525000003025,
+      "tests.releases.neptune.test_fn_feedback_steering_clear": 0.0008560840000200187,
+      "tests.releases.neptune.test_gamepad": 19.396651040999927,
+      "tests.releases.neptune.test_layer_order_90_64": 0.49771091599996,
+      "tests.releases.neptune.test_layout_rules": 0.8552571250000938,
+      "tests.releases.neptune.test_menu_base_chords": 82.89840804100004,
+      "tests.releases.neptune.test_menu_chain_and_window_pads": 69.91155950000007,
+      "tests.releases.neptune.test_menu_second_press_keys": 13.415031624999983,
+      "tests.releases.neptune.test_pad_bump_removal": 67.80582962499989,
+      "tests.releases.neptune.test_pad_bumps_and_menu_keys": 34.258330417000025,
+      "tests.releases.neptune.test_pad_click_exits": 13.98756620800009,
+      "tests.releases.neptune.test_pad_click_handoff": 12.947167207999883,
+      "tests.releases.neptune.test_pad_click_holds": 13.092304875000082,
+      "tests.releases.neptune.test_pad_click_soft_press_only": 14.163952750000135,
+      "tests.releases.neptune.test_pad_middle_click": 13.364929874999916,
+      "tests.releases.neptune.test_quiet_resets_and_beeps": 69.85618145900003,
+      "tests.releases.neptune.test_required_cleanups": 2.515085083000031,
+      "tests.releases.neptune.test_required_cleanups_build": 52.66838458400002,
+      "tests.releases.neptune.test_shapes_90_51": 0.0073208750000048894,
+      "tests.releases.neptune.test_shapes_90_53": 0.012175832999901104,
+      "tests.releases.neptune.test_shapes_90_54": 0.006174416000021665,
+      "tests.releases.neptune.test_shapes_90_55": 0.006746832999851904,
+      "tests.releases.neptune.test_shapes_90_56": 0.007201291999990644,
+      "tests.releases.neptune.test_shapes_90_57": 0.032393375000083324,
+      "tests.releases.neptune.test_shapes_90_58": 33.989739666000105,
+      "tests.releases.neptune.test_shapes_90_61": 0.05171341699997356,
+      "tests.releases.neptune.test_shapes_90_62": 0.05904383400002189,
+      "tests.releases.neptune.test_shapes_90_63": 0.023201541999924302,
+      "tests.releases.neptune.test_shapes_90_65": 0.0258005000000594,
+      "tests.releases.neptune.test_shapes_90_66": 0.4920298750000711,
+      "tests.releases.neptune.test_shapes_90_67": 0.8606644589999632,
+      "tests.releases.neptune.test_shapes_90_68": 0.02450254199993651,
+      "tests.releases.neptune.test_shapes_90_69": 0.04385224999987258,
+      "tests.releases.neptune.test_shapes_90_70": 0.01869954200014945,
+      "tests.releases.neptune.test_shapes_90_71": 0.02150241599997571,
+      "tests.releases.neptune.test_shapes_90_72": 0.02876133400013714,
+      "tests.releases.neptune.test_standard_delays": 29.747789916999864,
+      "tests.releases.neptune.test_stateful_transitions": 8.99116820900008,
+      "tests.releases.neptune.test_steering_candidate": 0.5869159580001906,
+      "tests.releases.neptune.test_steering_fallback_guard": 74.31494587499992,
+      "tests.releases.neptune.test_steering_fallback_hold": 5.940632541000014,
+      "tests.releases.neptune.test_steering_fallback_swap": 81.76043241599996,
+      "tests.releases.neptune.test_steering_four_way_and_open_edges": 75.25770587500006,
+      "tests.releases.neptune.test_steering_lean": 1.2245588329999464,
+      "tests.releases.neptune.test_steering_rtp_menu_chords": 128.4804347910001,
+      "tests.releases.neptune.test_tap_cover_stick_touches": 19.518668832999992,
+      "tests.releases.neptune.test_window_releases_and_tap_cover_resets": 70.21686695799986,
+      "tests.scenarios.candidates.test_scenarios_90_39": 4.650492125000028,
+      "tests.scenarios.dse.test_scenarios_dse_1_0": 0.4594472500000393,
+      "tests.scenarios.neptune.test_scenarios_90_10": 1.495423542000026,
+      "tests.scenarios.neptune.test_scenarios_90_11": 0.12970854199988935,
+      "tests.scenarios.neptune.test_scenarios_90_12": 1.0436527920001026,
+      "tests.scenarios.neptune.test_scenarios_90_14": 0.5934285420000833,
+      "tests.scenarios.neptune.test_scenarios_90_15": 0.21800420799991116,
+      "tests.scenarios.neptune.test_scenarios_90_16": 0.7734121250000499,
+      "tests.scenarios.neptune.test_scenarios_90_17": 0.1525063340000088,
+      "tests.scenarios.neptune.test_scenarios_90_18": 0.2084885409999515,
+      "tests.scenarios.neptune.test_scenarios_90_19": 0.5758553750001738,
+      "tests.scenarios.neptune.test_scenarios_90_20": 0.8259709999999814,
+      "tests.scenarios.neptune.test_scenarios_90_21": 0.477515374999939,
+      "tests.scenarios.neptune.test_scenarios_90_22": 0.9845264579998911,
+      "tests.scenarios.neptune.test_scenarios_90_23": 0.17782041700002083,
+      "tests.scenarios.neptune.test_scenarios_90_24": 0.5693198750000192,
+      "tests.scenarios.neptune.test_scenarios_90_25": 1.5890025840001272,
+      "tests.scenarios.neptune.test_scenarios_90_26": 2.1366685840000628,
+      "tests.scenarios.neptune.test_scenarios_90_27": 0.763458417000038,
+      "tests.scenarios.neptune.test_scenarios_90_28": 0.6103325420001511,
+      "tests.scenarios.neptune.test_scenarios_90_29": 0.08469537500013757,
+      "tests.scenarios.neptune.test_scenarios_90_30": 1.185913041000049,
+      "tests.scenarios.neptune.test_scenarios_90_33": 105.94218170799991,
+      "tests.scenarios.neptune.test_scenarios_90_34": 0.08228237499997704,
+      "tests.scenarios.neptune.test_scenarios_90_35": 0.10397770899999159,
+      "tests.scenarios.neptune.test_scenarios_90_37": 0.3715854170000057,
+      "tests.scenarios.neptune.test_scenarios_90_38": 1.0334041250002883,
+      "tests.scenarios.neptune.test_scenarios_90_42": 0.8085326250002254,
+      "tests.scenarios.neptune.test_scenarios_90_43": 33.01890929199999,
+      "tests.scenarios.neptune.test_scenarios_90_44": 10.760123375000148,
+      "tests.scenarios.neptune.test_scenarios_90_46": 18.02609100000018,
+      "tests.scenarios.neptune.test_scenarios_90_47": 6.938391291000244,
+      "tests.scenarios.neptune.test_scenarios_90_48": 8.240787791999992,
+      "tests.scenarios.neptune.test_scenarios_90_49": 1.0569935420003276,
+      "tests.scenarios.neptune.test_scenarios_90_51": 0.9315841250004269,
+      "tests.scenarios.neptune.test_scenarios_90_52": 4.491684625000289,
+      "tests.scenarios.neptune.test_scenarios_90_53": 6.6448389170000155,
+      "tests.scenarios.neptune.test_scenarios_90_54": 1.035325957999703,
+      "tests.scenarios.neptune.test_scenarios_90_55": 6.571380041999873,
+      "tests.scenarios.neptune.test_scenarios_90_56": 2.5933065829999578,
+      "tests.scenarios.neptune.test_scenarios_90_57": 24.321198667000317,
+      "tests.scenarios.neptune.test_scenarios_90_58": 3.3050785830000677,
+      "tests.scenarios.neptune.test_scenarios_90_61": 3.342801917000088,
+      "tests.scenarios.neptune.test_scenarios_90_62": 1.6404699579998123,
+      "tests.scenarios.neptune.test_scenarios_90_63": 0.8234056249998503,
+      "tests.scenarios.neptune.test_scenarios_90_65": 2.7158282500004134,
+      "tests.scenarios.neptune.test_scenarios_90_66": 1.9345765840002969,
+      "tests.scenarios.neptune.test_scenarios_90_67": 2.4781395840000187,
+      "tests.scenarios.neptune.test_scenarios_90_68": 1.1470095409999885,
+      "tests.scenarios.neptune.test_scenarios_90_69": 0.3366359999999986,
+      "tests.scenarios.neptune.test_scenarios_90_6_to_90_9": 0.45469108399993274,
+      "tests.scenarios.neptune.test_scenarios_90_70": 0.9656100420002076,
+      "tests.scenarios.neptune.test_scenarios_90_71": 0.680579249999937,
+      "tests.scenarios.neptune.test_scenarios_90_72": 1.2063822919999438,
+      "tests.scenarios.neptune.test_scenarios_90_73": 0.44387591699978657,
+      "tests.scenarios.neptune.test_scenarios_90_74": 0.8320834999999533,
+      "tests.scenarios.neptune.test_scenarios_cursor": 2.1000131660002808,
+      "tests.scenarios.neptune.test_scenarios_menu_and_modifiers": 1.3245248329999413,
+      "tests.scenarios.neptune.test_scenarios_triggers_and_recovery": 0.9559528749996389,
+      "tests.unit.test_audit_command_budget": 0.00987829200039414,
+      "tests.unit.test_audit_inheritance": 0.003078041999742709,
+      "tests.unit.test_chains": 0.004432458000337647,
+      "tests.unit.test_changes": 0.0009276669998143916,
+      "tests.unit.test_cleanups": 0.7751865410000391,
+      "tests.unit.test_controllers": 0.00016637500038996222,
+      "tests.unit.test_convert": 0.0008235830000558053,
+      "tests.unit.test_covers": 0.0015016669999567966,
+      "tests.unit.test_discovery": 0.007699834000050032,
+      "tests.unit.test_exceptions": 0.0005898330000491114,
+      "tests.unit.test_fixes": 0.0010235419999844453,
+      "tests.unit.test_fixture_sources": 0.0051885000002585,
+      "tests.unit.test_flow_inheritance": 1.7461871250002332,
+      "tests.unit.test_layer_report": 0.0022073749996707193,
+      "tests.unit.test_required_cleanups": 0.00984029199980796,
+      "tests.unit.test_rule_registry": 0.008691334000104689,
+      "tests.unit.test_runner_evidence": 1.8221804999998312,
+      "tests.unit.test_simulator": 0.00459229200032496,
+      "tests.unit.test_stacks": 9.099999988393392e-05,
+      "tests.unit.test_steering_touch_windows": 0.00022770899977331283
+    },
+    "optimized": {
+      "execution_seconds": 2284.574944291,
+      "modules": 193,
+      "outcomes": {
+        "expected_failure": 25,
+        "success": 1432
+      },
+      "peak_python_rss_bytes": 1468284928,
+      "tests": 1457,
+      "timing": {
+        "collection_seconds": 0.274246375,
+        "execution_seconds": 2284.574944291,
+        "manifest_seconds": 0.797529708,
+        "peak_python_rss_bytes": 1468284928,
+        "revalidation_seconds": 0.9148542090001683
+      },
+      "whole_command_seconds": 2288.869875907898
+    },
+    "outcome_mismatches": [],
+    "scenario_cases": 449,
+    "scenario_cells": 11902,
+    "scenario_kinds": {
+      "candidate": 30,
+      "frozen": 102,
+      "live": 317
+    }
+  },
+  "date": "2026-10-15",
+  "environment": {
+    "machine": "arm64",
+    "native": {
+      "baseline": {
+        "binary_mtime": 1791091798.4829865,
+        "present": true,
+        "sha256": "14ebc533967ea70875bd965d11e7978c537a0498e9a5105cc0b418ca195bd346",
+        "source_mtime": 1791091758.7120655
+      },
+      "optimized": {
+        "binary_mtime": 1791091798.4829865,
+        "present": true,
+        "sha256": "14ebc533967ea70875bd965d11e7978c537a0498e9a5105cc0b418ca195bd346",
+        "source_mtime": 1791091758.7120655
+      }
+    },
+    "node": "v26.7.0",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.9.6 (default, Apr  7 2026, 02:38:40) \n[Clang 21.0.0 (clang-2100.0.123.102)]"
+  },
+  "head": "c54b909e1b0ad99fe87f97682c0cd7b74975afd7",
+  "input_fingerprints": {
+    "baseline": "6301c77d15d0f3ed1378ec7cd2bdf5d80b61393a52b6e91bfc2e8e368dab17e6",
+    "optimized": "21e4a47deff52932df6246d804ba329a30674724ac6e1f638261492767e99b00"
+  },
+  "limits": [
+    "Single local before/after sample, not a controlled benchmark. Baseline overlapped development checks and standalone scenario validation; optimized full run was serial.",
+    "Both runs used the same existing native binary; compilation was not measured.",
+    "Peak RSS measures only Python after test execution, excluding native children and later artifact serialization.",
+    "Four-part merge validation splits actual serial records using then-current module assignments; it is not four independent CI executions.",
+    "Source fingerprints describe the completed full run. Subsequent changes update timing weights, workflow artifact names/references and documentation; focused checks validate those changes.",
+    "DSE retains its existing targeted reach of 19/75 layers per variant; this result does not claim full DSE layer reach.",
+    "Remote GitHub Actions and release publishing were not executed.",
+    "Refreshed shard durations are sums from the serial run, not independently measured worker times; shared preparation may repeat across workers."
+  ],
+  "memory_probes": {
+    "caveat": "Separate-process structure sizes show additional retention but do not attribute peak RSS. Runtime sharing and peak cache occupancy were not measured; these graphs must not be summed as an explanation of the increase.",
+    "decoded_evidence_graph_bytes": 26000333,
+    "peak_delta_bytes": 70860800,
+    "peak_delta_percent": 5.070815551282659,
+    "two_neptune_cached_source_bundles_bytes": 20179273
+  },
+  "post_validation_changes": {
+    "external_workflow_reference_update": ".github/workflows/overlay.yml",
+    "final_input_fingerprint": "5eea8e612fca50c739fee541dc241e5db35921e3d98a68163c6ba06ee55008a9",
+    "fingerprinted_paths": [
+      ".github/workflows/release.yml",
+      "docs/publishing.md",
+      "docs/testing.md",
+      "tests/contracts/dse/test_convert.py",
+      "tests/contracts/shared/test_convert.py",
+      "tests/integration/convert/test_convert.py",
+      "tests/releases/ibex/test_convert.py",
+      "tests/releases/neptune/test_convert.py",
+      "tests/releases/neptune/test_menu_second_press_keys.py",
+      "tests/releases/neptune/test_required_cleanups_build.py",
+      "tests/releases/neptune/test_shapes_90_65.py",
+      "tests/releases/neptune/test_stateful_transitions.py",
+      "tests/scenarios/neptune/test_scenarios_90_25.py",
+      "tests/scenarios/neptune/test_scenarios_90_61.py",
+      "tests/scenarios/neptune/test_scenarios_90_65.py",
+      "tests/scenarios/neptune/test_scenarios_cursor.py",
+      "tests/support/fixtures/convert.py",
+      "tests/support/fixtures/scenarios_90_65.py",
+      "tests/unit/test_convert.py",
+      "tools/release.py"
+    ],
+    "test_source_changes": "Docstrings only: 19 docstrings in 16 files; AST comparison with docstrings removed proved executable bodies and metadata unchanged."
+  },
+  "refreshed_shard_projection": [
+    {
+      "index": 1,
+      "modules": 47,
+      "rounded_weight_seconds": 603,
+      "serial_observed_seconds": 571.9707725410013
+    },
+    {
+      "index": 2,
+      "modules": 48,
+      "rounded_weight_seconds": 603,
+      "serial_observed_seconds": 573.5697895830008
+    },
+    {
+      "index": 3,
+      "modules": 49,
+      "rounded_weight_seconds": 603,
+      "serial_observed_seconds": 571.5556130820005
+    },
+    {
+      "index": 4,
+      "modules": 49,
+      "rounded_weight_seconds": 603,
+      "serial_observed_seconds": 567.4774641290011
+    }
+  ],
+  "run_id": "local-c54b909e-test-reorganization",
+  "validation": {
+    "derived_four_part_case_counts": [
+      396,
+      277,
+      378,
+      406
+    ],
+    "derived_four_part_merge_exit_code": 0,
+    "follow_up_runner_migration_compat_profile_partition": {
+      "result": "passed",
+      "seconds": 0.387,
+      "tests": 51
+    },
+    "follow_up_unit_tests": {
+      "result": "passed",
+      "seconds": 2.219,
+      "tests": 365
+    },
+    "fresh_process_finalization_exit_code": 0,
+    "full_runner_exit_code": 0,
+    "node_failures": 0,
+    "node_tests": 8,
+    "python_3_9_grammar": "passed: tests, tools/release.py and tools/test_compat.py",
+    "scenario_reach": {
+      "dse/alternative": [
+        19,
+        75
+      ],
+      "dse/default": [
+        19,
+        75
+      ],
+      "neptune/alternative": [
+        91,
+        91
+      ],
+      "neptune/default": [
+        91,
+        91
+      ]
+    },
+    "uncovered_changed_layers": 0,
+    "workflow_yaml_parse": "passed: release.yml and overlay.yml"
+  }
+}

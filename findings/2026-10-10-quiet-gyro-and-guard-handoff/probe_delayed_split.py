@@ -1,8 +1,8 @@
 import copy,json,itertools
 from tests.scenario import Pad
 from steam_layout.model import Layout,actions
-from tests.test_scenarios_90_43 import GUARD,home
-from tests.test_scenarios_90_44 import enter_with_drivers
+from tests.scenarios.neptune.test_scenarios_90_43 import GUARD,home
+from tests.scenarios.neptune.test_scenarios_90_44 import enter_with_drivers
 for variant in ('default','alternative'):
  d=json.load(open(f'findings/2026-10-10-quiet-cursor-and-steering-touch/{variant}-candidate.json'));l=Layout(d)
  controls=(('switch','left_bumper'),('switch','right_bumper')) if variant=='default' else (('left_trigger','edge'),('right_trigger','edge'))

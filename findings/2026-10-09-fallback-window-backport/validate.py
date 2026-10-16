@@ -15,7 +15,7 @@ ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT))
 from steam_layout import changes, rules
 from tools.convert_runtime_ids import generate_lookup, ids_to_titles, titles_to_ids
-from tests import test_scenarios_90_39 as scenarios
+from tests.scenarios.candidates import test_scenarios_90_39 as scenarios
 
 spec = importlib.util.spec_from_file_location('window_backport_validation', HERE / 'build_candidate.py')
 build = importlib.util.module_from_spec(spec)

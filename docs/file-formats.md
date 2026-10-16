@@ -32,7 +32,7 @@ unresolved `controller_action {{title}}` targets fail before writing.
 Run the command-budget and layer-order checks before exporting, and use
 `convert_runtime_ids.py to-ids` first when editing with title tokens. Only a
 fresh load in Steam shows that Steam reads the file as written (assumptions A22
-and A33). Converter tests: `node --test tests/test_convert_vdf.mjs`.
+and A33). Converter tests: `node --test tests/node/test_convert_vdf.mjs`.
 
 Both working layouts, to numeric IDs and back to titles:
 

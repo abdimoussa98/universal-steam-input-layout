@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Binding reference</title>
+  <style>
+    html,body { margin:0; width:100%; height:100%; overflow:hidden; background:#121720; color:#dce6f0; font:16px system-ui,sans-serif }
+    canvas { width:100%; height:100%; display:block }
+    #status { position:absolute; top:35%; left:10%; right:10%; text-align:center; white-space:pre-wrap }
+  </style>
+</head>
+<body>
+  <canvas id="viewer" aria-label="Live controller binding reference"></canvas>
+  <div id="status" role="status">Loading binding reference…</div>
+  <noscript>This viewer needs JavaScript and WebAssembly enabled.</noscript>
+  <script type="module" src="./start.js"></script>
+</body>
+</html>

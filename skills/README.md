@@ -32,4 +32,4 @@ work in this repository.
 The skills restate rules next to their IDs (R108 and so on). The rules
 themselves are in the
 [Layer Definition of Done](../resources/Layer%20Definition%20of%20Done.md#rule-tables),
-and `tests/test_rule_registry.py` checks that every ID a skill names exists.
+and the registry checks under `tests/integration/` checks that every ID a skill names exists.

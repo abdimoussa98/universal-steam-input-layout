@@ -308,7 +308,7 @@ branch out of the tests:
 - [x] Implement brainstormed ideas (author, 2026-10-03 and 2026-10-04): built as **90.25**, one release ([record](findings/2026-10-04-pad-bumps-and-menu-keys/README.md) · [plan](plans/2026-10-04-pad-bumps-and-menu-layer.md) · scenarios [P1 to K7](tests/test_scenarios_90_25.py)). Twelve new layers, 78 to 90 per layout. Not run on the Deck
   - Part 1: a low bump on touch where a click would be the centre click: `RTP: Touch Entry Point` and `LTP: Touch Entry Point`, hand-over layers; Base's left pad is a D-pad and the swipes are in `LTP: Entry Point`
   - Part 2: `RTP: Middle Click` is a mouse pad, so the cursor moves while middle mouse is held
-  - Part 3: `Menu Keys`: both menu buttons held for 150 ms, from Base or `Gyro`. A chorded tap types Enter or Backspace, a double tap and hold holds it: two chains of four layers
+  - Part 3: `Menu Keys`: both menu buttons held for 150 ms, from Base or `Gyro`. A chorded Tap types Enter or Backspace; Tap, then hold keeps that key active: two chains of four layers
   - Part 4: five extra presses by default in the hidden-exit check
   - Part 5: the Tap Cover reset on `LST: Entry Point`, `RST: Entry Point` and `RTP: Entry Point`
   - [ ] Confirm what the build did differently from the plan ([list](findings/2026-10-04-pad-bumps-and-menu-keys/README.md#what-differs-from-the-plan)): `Menu Keys` without Entry Points (an R158 exception); the stick touches off in `Menu Keys`. Two others are settled: the hand-over layer on the left pad went with the bump in 90.27, and the chain running only on the first press of a hold was fixed in 90.28
@@ -498,7 +498,7 @@ Since 2026-10-03 Steering's press sequences are scenario tests (90.7 S, 90.10 D,
   - Enter: hold Select and Start for 150 ms, from Base or `Gyro`; `Gyro` goes off, with the beep and the strong pulse
   - Exit: both sticks out; a stick out plus a face button or a D-pad direction (the press then counts as Base's); a menu button held plus a stick click
   - Inputs: the D-pad is the arrow keys; A, B, X, Y are Enter, Escape, Backspace, Tab. The modifiers, Start, Select and the stick touches do nothing; everything else is Base's
-  - With one menu button held, a tap of the other types Enter or Backspace and a double tap and hold holds it
+- With one menu button held, a Tap of the other types Enter or Backspace; Tap, then hold keeps that key active
 
 ## Cursor gyro
 

@@ -1,5 +1,9 @@
 # DualSense Edge
 
+The converted layouts keep the default bumper and alternative trigger
+modifier patterns. The shared [Hold / Tap, then hold vocabulary](../resources/Layout%20Vocabulary.md#timed-gestures)
+describes their timed paths; conversion-specific omissions below still apply.
+
 A conversion of the Ibex layout ([ibex/](../ibex/README.md)), made by
 `python3 -m tools.convert dse` and never edited by hand (R177). The rules are
 R178 and R180 to R185 in the

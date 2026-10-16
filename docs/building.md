@@ -140,8 +140,10 @@ Each builder extends the one before it and loads it by file path, back to the
 | earlier | [steering-lean](../findings/2026-09-30-steering-lean/README.md) | Lean steering, on the 09-29 baseline in `findings/2026-09-29-steering-implementation/` |
 
 The scenario tests of 90.11 and 90.13 are in
-[tests/test_scenarios_90_11.py](../tests/test_scenarios_90_11.py); each later
-release has its own `tests/test_scenarios_90_<n>.py`.
+[test_scenarios_90_11.py](../tests/scenarios/neptune/test_scenarios_90_11.py); each later
+release has its own `tests/scenarios/<controller>/test_scenarios_<version>.py`.
+Static contracts and frozen comparisons live separately; follow the
+[testing pattern](testing.md) and retain each scenario's release label and source.
 
 ## Starting the next release
 

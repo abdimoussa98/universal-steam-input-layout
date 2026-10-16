@@ -443,15 +443,18 @@ and [findings/2026-10-01-backward-chain-stacks](../findings/2026-10-01-backward-
 ## Running the tests
 
 ```bash
-PYTHONPATH=.:tests python3 -m unittest $(ls tests/test_*.py | sed 's#/#.#; s#\.py$##' | tr '\n' ' ')
-node --test tests/test_convert_vdf.mjs
+python3 -m tests.runner
+python3 -m unittest discover -s tests -t .
+node --test tests/node/test_convert_vdf.mjs tests/node/test_steering_observer.mjs
 ```
 
-The first command runs every Python test: 1,398 on 2026-10-15, in about 48
-minutes on this Mac. The release workflow runs them in four parts at once
-(`python3 -m tools.release shard <part> 4`). `tests/` has to be on the path because four test modules import a
-sibling by its bare name, and `python3 -m unittest discover` does not work
-here. One module: `PYTHONPATH=.:tests python3 -m unittest tests.test_rule_registry`.
+The full runner executes the Python suite once, validates complete scenario
+coverage, and runs both Node files. Standard discovery runs the same Python
+selection and coverage finalizer. Focused module/test commands remain partial.
+No extra `PYTHONPATH` is needed. See [testing](testing.md) for the directory
+pattern, exact fixture boundaries, historical reference mapping and evidence
+requirements across the release workflow's four shards.
 
-`python3 -m tests.scenario` lists the press-by-press scenario tests and which
-of them rest on an unverified Steam assumption.
+`python3 -m tests.scenario` explicitly runs the scenario selection once and
+lists the assumptions and controller-specific reach. `python3 -m tests.scenario
+R133` lists metadata for one rule without running gestures.

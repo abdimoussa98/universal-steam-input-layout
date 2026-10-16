@@ -1,6 +1,9 @@
 # Steam Input JSON Configuration Structure
 
 This document describes the structure and relationships within Steam Input controller configuration files (JSON format converted from VDF).
+For player-facing names of the hold and second-hold paths, see
+[timed gestures](Layout%20Vocabulary.md#timed-gestures). Layer titles such as
+`Tap Cover` and `Double Tap Cover` remain exact technical identifiers here.
 
 **References:**
 - [Steam Input Action Sets & Layers Overview](https://partner.steamgames.com/doc/features/steam_controller/iga_file)
@@ -559,7 +562,7 @@ omit both stick-touch inputs, deliberately inheriting the parent's completion
 and helper cleanup; adding the already-active cursor does not establish a new
 hold. Normal covers keep their cleanup-only replacements so a thumb lift cannot
 reactivate cursor after cancellation. The saved bindings implement this lifecycle,
-and the scenario tests replay it ([test_scenarios_cursor.py](../tests/test_scenarios_cursor.py)).
+and the scenario tests replay it ([test_scenarios_cursor.py](../tests/scenarios/neptune/test_scenarios_cursor.py)).
 What Steam does when two of these fall in the same moment is not verified
 (A13 and A32 in [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md)).
 
@@ -662,7 +665,7 @@ drop it.
 The [blocking audit](../findings/2026-09-28-neptune-blocking-audit/AUDIT.md)
 of 2026-09-28 checked every layer of the 90.2 layouts: all 13 entry bindings
 added the timed layer last, and all 30 layer-changing bindings in a window
-removed it first. Today `tests/test_neptune_recovery.py` checks the same for
+removed it first. Today `tests/contracts/neptune/test_neptune_recovery.py` checks the same for
 every window on every run. Since 90.6 every window's left pad swipes straight to the Escape,
 Enter, Tab and Backspace keys, with no layer command, and clears click and
 touch. The right pad stays the mouse (Base's mode, settings inherited) with
@@ -887,9 +890,9 @@ remains a hypothesis (A18); it does not explain all these timing effects. See
 See the [held-input audit](../findings/2026-09-29-held-input-layer-transitions/AUDIT.md)
 for the ramp-up walkthrough, per-layout inventory, the alternative layout's
 former missing R2 → Mod 2 repeat, and the open questions. The
-[regression tests](../tests/test_neptune_held_inputs.py) protect the delays and
+[regression tests](../tests/contracts/neptune/test_neptune_held_inputs.py) protect the delays and
 repeats listed here. The staggered Gyro toggle is a scenario test (HI2 in
-[test_scenarios_triggers_and_recovery.py](../tests/test_scenarios_triggers_and_recovery.py)),
+[test_scenarios_triggers_and_recovery.py](../tests/scenarios/neptune/test_scenarios_triggers_and_recovery.py)),
 and what Steam does with a held input is A5 to A11 in
 [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md).
 
@@ -1037,7 +1040,7 @@ preserve the timed layer's isolation without issuing another removal. They
 temporarily displace the inherited edge modifier and leave directional movement
 unchanged. Double Tap Covers are separate overlays without Always On bindings;
 they do not automatically need the same block. The
-[regression checks](../tests/test_neptune_recovery.py) verify these seven
+[regression checks](../tests/contracts/neptune/test_neptune_recovery.py) verify these seven
 configured blocks and entry/exit ordering. Pending-activator behavior and
 current-client crash behavior still require runtime evidence.
 
@@ -1384,7 +1387,7 @@ block the edge. Those overrides intentionally displace the modifier. No upper
 bindings or layer-mutation order changed in the scaffold update. Inherited source settings can still
 affect contexts without their own settings. Which stacks leave Base's edge
 exposed, and which displace it, is a scenario test (WM3 in
-[test_scenarios_triggers_and_recovery.py](../tests/test_scenarios_triggers_and_recovery.py)).
+[test_scenarios_triggers_and_recovery.py](../tests/scenarios/neptune/test_scenarios_triggers_and_recovery.py)).
 What a removal exposes under a stick that is already out is assumption A11,
 and the feel of the modifier is a tuning note, both in
 [Steam Behaviour Assumptions](Steam%20Behaviour%20Assumptions.md#tuning-notes).
@@ -1616,7 +1619,7 @@ What makes it work:
 - **The 200 ms runs on the bumper pressed second**, as a delayed chord with
   the first bumper, protected by a 250 ms repeating reset on the same button.
 
-**Tests.** [test_modifier_rocking.py](../tests/test_modifier_rocking.py)
+**Tests.** [test_modifier_rocking.py](../tests/contracts/neptune/test_modifier_rocking.py)
 replays every sequence above with `steam_layout.stacks.walk`, on both layouts,
 with Gyro off and on: the double tap that scrolls, the used bumper and the
 cursor that don't, the exact add order of both Mod 2 entries, the quick tap

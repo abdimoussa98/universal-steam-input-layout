@@ -1,5 +1,9 @@
 # Delay timers and repeat rates
 
+For the player-facing Initial hold, Release window and Second hold stages, see
+[timed gestures](Layout%20Vocabulary.md#timed-gestures). The delay settings
+below implement portions of those stages.
+
 **Do not make mission-critical behavior depend on a delay, a repeat interval,
 or their ordering across layer changes.** The author reports that adding and
 removing layers can disturb both delayed actions and held repeats. A saved

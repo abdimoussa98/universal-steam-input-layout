@@ -98,7 +98,7 @@ what a static check shows, what a scenario shows on the simulator, and what
 Steam was seen to do (an assumption's status).
 
 **R165 to R167.** The press sequences of a new or changed layer are scenario
-tests in `tests/test_scenarios_*.py`: an input held across the change, a press
+tests in `tests/scenarios/<controller>/test_scenarios_*.py`: an input held across the change, a press
 inside the layer, and a release missed while the Steam menu is open
 ([how to write one](../../tests/scenario.py)). The tests fail while a layer
 that changed since the newest snapshot is on the stack in no scenario, so run

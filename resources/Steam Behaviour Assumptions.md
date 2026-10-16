@@ -21,7 +21,7 @@ add/remove transitions. Existing simulator outcomes do not settle these effects.
 
 ## How to read the table
 
-A test reads it ([test_rule_registry.py](../tests/test_rule_registry.py),
+A test reads it ([test_rule_registry.py](../tests/integration/test_rule_registry.py),
 through [rules.py](../steam_layout/rules.py)), so the shape is fixed.
 
 | Column | What it holds |

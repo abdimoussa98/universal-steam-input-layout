@@ -71,7 +71,28 @@ for delivery, or publishing it:
 publishes every release tag that has no GitHub Release yet, oldest first, so
 tags pushed together are all published even when GitHub cancels a waiting
 run. A tag must be on `main`. For each tagged commit it runs the Python tests
-in four parallel parts and the build audit; for each tag it runs
+in four parallel parts, both Node files and the build audit. Each Python part
+uploads its assigned case outcomes and scenario evidence. A dependent job
+requires all four parts from the same commit/run/attempt, rejects missing, duplicate,
+stale or unsuccessful records, and checks changed-layer reach separately for
+Neptune and DSE. Publication depends on that finalizer as well as every test
+and audit job. Checkouts retain tags/history for ancestry and snapshot tests.
+See [testing](testing.md) for local and focused commands.
+
+To retry a failed run, choose **Re-run all jobs**, or start a new **Run
+workflow**. Evidence artifacts are isolated by attempt, and all four Python
+parts must finish in that attempt. Rerunning only failed jobs does not supply
+a complete set of evidence for the new attempt and cannot pass the finalizer.
+
+The workflow loads `tools/test_compat.py` from its own commit so it can also
+publish older tags that predate the organized suite. At those tags it runs
+the tag's original four unittest shards and both original Node files, and
+requires four successful completion records for that exact commit/run/attempt and
+module partition. These explicitly legacy records cannot satisfy the new
+scenario-evidence gate. Tags containing `tests.runner` use the full protocol
+described above.
+
+For each tag it runs
 `tools.release check --tagged`, then `tools.release bundle`, and creates the
 GitHub Release with the bundle and the CHANGELOG section as its notes.
 

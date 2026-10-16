@@ -1,0 +1,5654 @@
+{
+  "schema_version": 2,
+  "dashboard": {
+    "pages": [
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape / Function layer"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab / Function layer"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down / Cursor gyro"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up / Cursor gyro"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "left",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "G"
+          },
+          "b": {
+            "kind": "label",
+            "text": "X"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Z"
+          },
+          "y": {
+            "kind": "label",
+            "text": "T"
+          },
+          "select": {
+            "kind": "label",
+            "text": "DELETE"
+          },
+          "start": {
+            "kind": "label",
+            "text": "INSERT"
+          },
+          "up": {
+            "kind": "label",
+            "text": "9"
+          },
+          "right": {
+            "kind": "label",
+            "text": "0"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DASH"
+          },
+          "left": {
+            "kind": "label",
+            "text": "EQUALS"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "CAPSLOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "l1": {
+            "kind": "unbound"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "right",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "H"
+          },
+          "b": {
+            "kind": "label",
+            "text": "N"
+          },
+          "x": {
+            "kind": "label",
+            "text": "B"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Y"
+          },
+          "select": {
+            "kind": "label",
+            "text": "END"
+          },
+          "start": {
+            "kind": "label",
+            "text": "HOME"
+          },
+          "up": {
+            "kind": "label",
+            "text": "5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Mouse back"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse forward"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "unbound"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "both",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "M"
+          },
+          "b": {
+            "kind": "label",
+            "text": "P"
+          },
+          "x": {
+            "kind": "label",
+            "text": "O"
+          },
+          "y": {
+            "kind": "label",
+            "text": "U"
+          },
+          "select": {
+            "kind": "label",
+            "text": "PAGE_DOWN"
+          },
+          "start": {
+            "kind": "label",
+            "text": "PAGE_UP"
+          },
+          "up": {
+            "kind": "label",
+            "text": "I"
+          },
+          "right": {
+            "kind": "label",
+            "text": "L"
+          },
+          "down": {
+            "kind": "label",
+            "text": "K"
+          },
+          "left": {
+            "kind": "label",
+            "text": "J"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "NUM_LOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "BACK_TICK"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Modifier combo"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Modifier combo"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "l1:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "G"
+          },
+          "b": {
+            "kind": "label",
+            "text": "X"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Z"
+          },
+          "y": {
+            "kind": "label",
+            "text": "T"
+          },
+          "select": {
+            "kind": "label",
+            "text": "DELETE"
+          },
+          "start": {
+            "kind": "label",
+            "text": "INSERT"
+          },
+          "up": {
+            "kind": "label",
+            "text": "9"
+          },
+          "right": {
+            "kind": "label",
+            "text": "0"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DASH"
+          },
+          "left": {
+            "kind": "label",
+            "text": "EQUALS"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "CAPSLOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Modifier"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "l1:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "G"
+          },
+          "b": {
+            "kind": "label",
+            "text": "X"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Z"
+          },
+          "y": {
+            "kind": "label",
+            "text": "T"
+          },
+          "select": {
+            "kind": "label",
+            "text": "DELETE"
+          },
+          "start": {
+            "kind": "label",
+            "text": "INSERT"
+          },
+          "up": {
+            "kind": "label",
+            "text": "9"
+          },
+          "right": {
+            "kind": "label",
+            "text": "0"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DASH"
+          },
+          "left": {
+            "kind": "label",
+            "text": "EQUALS"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "CAPSLOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Cursor gyro"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "l1:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "l1:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "BACK_TICK"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "l1:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "BACK_TICK"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "l1:consumed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "G"
+          },
+          "b": {
+            "kind": "label",
+            "text": "X"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Z"
+          },
+          "y": {
+            "kind": "label",
+            "text": "T"
+          },
+          "select": {
+            "kind": "label",
+            "text": "DELETE"
+          },
+          "start": {
+            "kind": "label",
+            "text": "INSERT"
+          },
+          "up": {
+            "kind": "label",
+            "text": "9"
+          },
+          "right": {
+            "kind": "label",
+            "text": "0"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DASH"
+          },
+          "left": {
+            "kind": "label",
+            "text": "EQUALS"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "CAPSLOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Modifier"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "r1:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "H"
+          },
+          "b": {
+            "kind": "label",
+            "text": "N"
+          },
+          "x": {
+            "kind": "label",
+            "text": "B"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Y"
+          },
+          "select": {
+            "kind": "label",
+            "text": "END"
+          },
+          "start": {
+            "kind": "label",
+            "text": "HOME"
+          },
+          "up": {
+            "kind": "label",
+            "text": "5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Mouse back"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse forward"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Modifier"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "r1:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "H"
+          },
+          "b": {
+            "kind": "label",
+            "text": "N"
+          },
+          "x": {
+            "kind": "label",
+            "text": "B"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Y"
+          },
+          "select": {
+            "kind": "label",
+            "text": "END"
+          },
+          "start": {
+            "kind": "label",
+            "text": "HOME"
+          },
+          "up": {
+            "kind": "label",
+            "text": "5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Mouse back"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse forward"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Cursor gyro"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "r1:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "r1:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "BACK_TICK"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "r1:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "BACK_TICK"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "r1:consumed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "H"
+          },
+          "b": {
+            "kind": "label",
+            "text": "N"
+          },
+          "x": {
+            "kind": "label",
+            "text": "B"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Y"
+          },
+          "select": {
+            "kind": "label",
+            "text": "END"
+          },
+          "start": {
+            "kind": "label",
+            "text": "HOME"
+          },
+          "up": {
+            "kind": "label",
+            "text": "5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Mouse back"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse forward"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Modifier"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "select:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Timed gesture"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Menu mode"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "select:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F3"
+          },
+          "b": {
+            "kind": "label",
+            "text": "F2"
+          },
+          "x": {
+            "kind": "label",
+            "text": "F4"
+          },
+          "y": {
+            "kind": "label",
+            "text": "F1"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Menu mode"
+          },
+          "up": {
+            "kind": "label",
+            "text": "F5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "F6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "F7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "F8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "F10"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "F9"
+          },
+          "l2": {
+            "kind": "unbound"
+          },
+          "r2": {
+            "kind": "unbound"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "select:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "select:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "select:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "start:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Menu mode"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Timed gesture"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "start:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F3"
+          },
+          "b": {
+            "kind": "label",
+            "text": "F2"
+          },
+          "x": {
+            "kind": "label",
+            "text": "F4"
+          },
+          "y": {
+            "kind": "label",
+            "text": "F1"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Menu mode"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "up": {
+            "kind": "label",
+            "text": "F5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "F6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "F7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "F8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "F10"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "F9"
+          },
+          "l2": {
+            "kind": "unbound"
+          },
+          "r2": {
+            "kind": "unbound"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "start:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "start:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "base",
+        "context": "none",
+        "phase": "start:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape / Function layer"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab / Function layer"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "both",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "M"
+          },
+          "b": {
+            "kind": "label",
+            "text": "P"
+          },
+          "x": {
+            "kind": "label",
+            "text": "O"
+          },
+          "y": {
+            "kind": "label",
+            "text": "U"
+          },
+          "select": {
+            "kind": "label",
+            "text": "PAGE_DOWN"
+          },
+          "start": {
+            "kind": "label",
+            "text": "PAGE_UP"
+          },
+          "up": {
+            "kind": "label",
+            "text": "I"
+          },
+          "right": {
+            "kind": "label",
+            "text": "L"
+          },
+          "down": {
+            "kind": "label",
+            "text": "K"
+          },
+          "left": {
+            "kind": "label",
+            "text": "J"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "NUM_LOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "BACK_TICK"
+          },
+          "l1": {
+            "kind": "unavailable",
+            "reason": "Bindings differ by press order or Base/Gyro state"
+          },
+          "r1": {
+            "kind": "unavailable",
+            "reason": "Bindings differ by press order or Base/Gyro state"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "select:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Timed gesture"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "select:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F3"
+          },
+          "b": {
+            "kind": "label",
+            "text": "F2"
+          },
+          "x": {
+            "kind": "label",
+            "text": "F4"
+          },
+          "y": {
+            "kind": "label",
+            "text": "F1"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "up": {
+            "kind": "label",
+            "text": "F5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "F6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "F7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "F8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "F10"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "F9"
+          },
+          "l2": {
+            "kind": "unbound"
+          },
+          "r2": {
+            "kind": "unbound"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "select:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "select:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "select:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "start:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Timed gesture"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "start:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F3"
+          },
+          "b": {
+            "kind": "label",
+            "text": "F2"
+          },
+          "x": {
+            "kind": "label",
+            "text": "F4"
+          },
+          "y": {
+            "kind": "label",
+            "text": "F1"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "up": {
+            "kind": "label",
+            "text": "F5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "F6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "F7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "F8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "F10"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "F9"
+          },
+          "l2": {
+            "kind": "unbound"
+          },
+          "r2": {
+            "kind": "unbound"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "start:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "start:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "none",
+        "phase": "start:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape / Function layer"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab / Function layer"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "unbound"
+          },
+          "r1": {
+            "kind": "unbound"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "left",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "unbound"
+          },
+          "r1": {
+            "kind": "unbound"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "right",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "unbound"
+          },
+          "r1": {
+            "kind": "unbound"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "both",
+        "phase": "reference",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "unbound"
+          },
+          "r1": {
+            "kind": "unbound"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "select:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Timed gesture"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "select:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F3"
+          },
+          "b": {
+            "kind": "label",
+            "text": "F2"
+          },
+          "x": {
+            "kind": "label",
+            "text": "F4"
+          },
+          "y": {
+            "kind": "label",
+            "text": "F1"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "up": {
+            "kind": "label",
+            "text": "F5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "F6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "F7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "F8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "F10"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "F9"
+          },
+          "l2": {
+            "kind": "unbound"
+          },
+          "r2": {
+            "kind": "unbound"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "select:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "select:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "select:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "unbound"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "start:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Timed gesture"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "start:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F3"
+          },
+          "b": {
+            "kind": "label",
+            "text": "F2"
+          },
+          "x": {
+            "kind": "label",
+            "text": "F4"
+          },
+          "y": {
+            "kind": "label",
+            "text": "F1"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Function layer"
+          },
+          "up": {
+            "kind": "label",
+            "text": "F5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "F6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "F7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "F8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Switch mode"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "F10"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "F9"
+          },
+          "l2": {
+            "kind": "unbound"
+          },
+          "r2": {
+            "kind": "unbound"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "start:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "start:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "menu",
+        "context": "none",
+        "phase": "start:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "Enter"
+          },
+          "b": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Backspace"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "select": {
+            "kind": "unbound"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "UP_ARROW"
+          },
+          "right": {
+            "kind": "label",
+            "text": "RIGHT_ARROW"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DOWN_ARROW"
+          },
+          "left": {
+            "kind": "label",
+            "text": "LEFT_ARROW"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Scroll down"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Scroll up"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:up:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "H"
+          },
+          "b": {
+            "kind": "label",
+            "text": "N"
+          },
+          "x": {
+            "kind": "label",
+            "text": "B"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Y"
+          },
+          "select": {
+            "kind": "label",
+            "text": "END"
+          },
+          "start": {
+            "kind": "label",
+            "text": "HOME"
+          },
+          "up": {
+            "kind": "label",
+            "text": "5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Mouse back"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse forward"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:up:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "H"
+          },
+          "b": {
+            "kind": "label",
+            "text": "N"
+          },
+          "x": {
+            "kind": "label",
+            "text": "B"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Y"
+          },
+          "select": {
+            "kind": "label",
+            "text": "END"
+          },
+          "start": {
+            "kind": "label",
+            "text": "HOME"
+          },
+          "up": {
+            "kind": "label",
+            "text": "5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Mouse back"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse forward"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:up:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:up:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:up:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:down:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "G"
+          },
+          "b": {
+            "kind": "label",
+            "text": "X"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Z"
+          },
+          "y": {
+            "kind": "label",
+            "text": "T"
+          },
+          "select": {
+            "kind": "label",
+            "text": "DELETE"
+          },
+          "start": {
+            "kind": "label",
+            "text": "INSERT"
+          },
+          "up": {
+            "kind": "label",
+            "text": "9"
+          },
+          "right": {
+            "kind": "label",
+            "text": "0"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DASH"
+          },
+          "left": {
+            "kind": "label",
+            "text": "EQUALS"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "CAPSLOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:down:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "G"
+          },
+          "b": {
+            "kind": "label",
+            "text": "X"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Z"
+          },
+          "y": {
+            "kind": "label",
+            "text": "T"
+          },
+          "select": {
+            "kind": "label",
+            "text": "DELETE"
+          },
+          "start": {
+            "kind": "label",
+            "text": "INSERT"
+          },
+          "up": {
+            "kind": "label",
+            "text": "9"
+          },
+          "right": {
+            "kind": "label",
+            "text": "0"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DASH"
+          },
+          "left": {
+            "kind": "label",
+            "text": "EQUALS"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "CAPSLOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:down:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:down:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "left",
+        "phase": "ls:down:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:up:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "H"
+          },
+          "b": {
+            "kind": "label",
+            "text": "N"
+          },
+          "x": {
+            "kind": "label",
+            "text": "B"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Y"
+          },
+          "select": {
+            "kind": "label",
+            "text": "END"
+          },
+          "start": {
+            "kind": "label",
+            "text": "HOME"
+          },
+          "up": {
+            "kind": "label",
+            "text": "5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Mouse back"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse forward"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:up:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "H"
+          },
+          "b": {
+            "kind": "label",
+            "text": "N"
+          },
+          "x": {
+            "kind": "label",
+            "text": "B"
+          },
+          "y": {
+            "kind": "label",
+            "text": "Y"
+          },
+          "select": {
+            "kind": "label",
+            "text": "END"
+          },
+          "start": {
+            "kind": "label",
+            "text": "HOME"
+          },
+          "up": {
+            "kind": "label",
+            "text": "5"
+          },
+          "right": {
+            "kind": "label",
+            "text": "6"
+          },
+          "down": {
+            "kind": "label",
+            "text": "7"
+          },
+          "left": {
+            "kind": "label",
+            "text": "8"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Mouse back"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse forward"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:up:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:up:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:up:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:down:pressed",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "G"
+          },
+          "b": {
+            "kind": "label",
+            "text": "X"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Z"
+          },
+          "y": {
+            "kind": "label",
+            "text": "T"
+          },
+          "select": {
+            "kind": "label",
+            "text": "DELETE"
+          },
+          "start": {
+            "kind": "label",
+            "text": "INSERT"
+          },
+          "up": {
+            "kind": "label",
+            "text": "9"
+          },
+          "right": {
+            "kind": "label",
+            "text": "0"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DASH"
+          },
+          "left": {
+            "kind": "label",
+            "text": "EQUALS"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "CAPSLOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:down:hold",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "G"
+          },
+          "b": {
+            "kind": "label",
+            "text": "X"
+          },
+          "x": {
+            "kind": "label",
+            "text": "Z"
+          },
+          "y": {
+            "kind": "label",
+            "text": "T"
+          },
+          "select": {
+            "kind": "label",
+            "text": "DELETE"
+          },
+          "start": {
+            "kind": "label",
+            "text": "INSERT"
+          },
+          "up": {
+            "kind": "label",
+            "text": "9"
+          },
+          "right": {
+            "kind": "label",
+            "text": "0"
+          },
+          "down": {
+            "kind": "label",
+            "text": "DASH"
+          },
+          "left": {
+            "kind": "label",
+            "text": "EQUALS"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "CAPSLOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "Mouse middle"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:down:window",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "S"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:down:second",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      },
+      {
+        "mode": "steering",
+        "context": "right",
+        "phase": "ls:down:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "F"
+          },
+          "b": {
+            "kind": "label",
+            "text": "V"
+          },
+          "x": {
+            "kind": "label",
+            "text": "C"
+          },
+          "y": {
+            "kind": "label",
+            "text": "R"
+          },
+          "select": {
+            "kind": "label",
+            "text": "Escape"
+          },
+          "start": {
+            "kind": "label",
+            "text": "Tab"
+          },
+          "up": {
+            "kind": "label",
+            "text": "1"
+          },
+          "right": {
+            "kind": "label",
+            "text": "2"
+          },
+          "down": {
+            "kind": "label",
+            "text": "3"
+          },
+          "left": {
+            "kind": "label",
+            "text": "4"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "Q"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "E"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Both modifiers"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "W"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
+      }
+    ],
+    "recipes": [
+      {
+        "mode": "base",
+        "control": "l1",
+        "hold_ms": 200,
+        "output_ms": 50,
+        "window_ms": 150,
+        "cover_ms": 150,
+        "repeat_ms": 50,
+        "tap_label": "Scroll down",
+        "hold_label": "Cursor gyro",
+        "both_sticks_consume": true,
+        "touch_completes": true,
+        "touch_cancels_window": true,
+        "cancel_controls": [
+          "a",
+          "b",
+          "x",
+          "y",
+          "select",
+          "start",
+          "up",
+          "right",
+          "down",
+          "left",
+          "l3",
+          "r3",
+          "r1"
+        ]
+      },
+      {
+        "mode": "base",
+        "control": "r1",
+        "hold_ms": 200,
+        "output_ms": 50,
+        "window_ms": 150,
+        "cover_ms": 150,
+        "repeat_ms": 50,
+        "tap_label": "Scroll up",
+        "hold_label": "Cursor gyro",
+        "both_sticks_consume": true,
+        "touch_completes": true,
+        "touch_cancels_window": true,
+        "cancel_controls": [
+          "a",
+          "b",
+          "x",
+          "y",
+          "select",
+          "start",
+          "up",
+          "right",
+          "down",
+          "left",
+          "l3",
+          "r3",
+          "l1"
+        ]
+      },
+      {
+        "mode": "base",
+        "control": "select",
+        "hold_ms": 200,
+        "output_ms": 50,
+        "window_ms": 150,
+        "cover_ms": 150,
+        "repeat_ms": null,
+        "tap_label": "Escape",
+        "hold_label": "Function layer",
+        "both_sticks_consume": false,
+        "touch_completes": true,
+        "touch_cancels_window": true,
+        "cancel_controls": []
+      },
+      {
+        "mode": "base",
+        "control": "start",
+        "hold_ms": 200,
+        "output_ms": 50,
+        "window_ms": 150,
+        "cover_ms": 150,
+        "repeat_ms": null,
+        "tap_label": "Tab",
+        "hold_label": "Function layer",
+        "both_sticks_consume": false,
+        "touch_completes": true,
+        "touch_cancels_window": true,
+        "cancel_controls": []
+      },
+      {
+        "mode": "steering",
+        "control": "select",
+        "hold_ms": 200,
+        "output_ms": 50,
+        "window_ms": 150,
+        "cover_ms": 150,
+        "repeat_ms": null,
+        "tap_label": "Escape",
+        "hold_label": "Function layer",
+        "both_sticks_consume": false,
+        "touch_completes": true,
+        "touch_cancels_window": true,
+        "cancel_controls": []
+      },
+      {
+        "mode": "steering",
+        "control": "start",
+        "hold_ms": 200,
+        "output_ms": 50,
+        "window_ms": 150,
+        "cover_ms": 150,
+        "repeat_ms": null,
+        "tap_label": "Tab",
+        "hold_label": "Function layer",
+        "both_sticks_consume": false,
+        "touch_completes": true,
+        "touch_cancels_window": true,
+        "cancel_controls": []
+      },
+      {
+        "mode": "menu",
+        "control": "select",
+        "hold_ms": 200,
+        "output_ms": 50,
+        "window_ms": 150,
+        "cover_ms": 150,
+        "repeat_ms": null,
+        "tap_label": "Escape",
+        "hold_label": "Function layer",
+        "both_sticks_consume": false,
+        "touch_completes": true,
+        "touch_cancels_window": true,
+        "cancel_controls": []
+      },
+      {
+        "mode": "menu",
+        "control": "start",
+        "hold_ms": 200,
+        "output_ms": 50,
+        "window_ms": 150,
+        "cover_ms": 150,
+        "repeat_ms": null,
+        "tap_label": "Tab",
+        "hold_label": "Function layer",
+        "both_sticks_consume": false,
+        "touch_completes": true,
+        "touch_cancels_window": true,
+        "cancel_controls": []
+      }
+    ],
+    "combined_hold_ms": 200,
+    "trigger_thresholds": [
+      null,
+      null
+    ],
+    "steering": {
+      "deadzone": 405,
+      "hold_ms": 200,
+      "window_ms": 150,
+      "cover_ms": 150,
+      "output_ms": 50
+    }
+  },
+  "name": "Ibex 1.0 · default",
+  "controller": "ibex",
+  "variant": "default",
+  "source_version": "1.0",
+  "source_digest": "bfd0072664145ed293a164c641eae13eb5e02a9c43b4d48d04977915e92229e0",
+  "modifiers": [
+    "L1",
+    "R1"
+  ],
+  "glyphs": [
+    "A",
+    "B",
+    "X",
+    "Y"
+  ],
+  "contexts": [
+    {
+      "mode": "base",
+      "context": "none",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "F"
+        },
+        {
+          "kind": "label",
+          "text": "V"
+        },
+        {
+          "kind": "label",
+          "text": "C"
+        },
+        {
+          "kind": "label",
+          "text": "R"
+        }
+      ]
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "G"
+        },
+        {
+          "kind": "label",
+          "text": "X"
+        },
+        {
+          "kind": "label",
+          "text": "Z"
+        },
+        {
+          "kind": "label",
+          "text": "T"
+        }
+      ]
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "H"
+        },
+        {
+          "kind": "label",
+          "text": "N"
+        },
+        {
+          "kind": "label",
+          "text": "B"
+        },
+        {
+          "kind": "label",
+          "text": "Y"
+        }
+      ]
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "M"
+        },
+        {
+          "kind": "label",
+          "text": "P"
+        },
+        {
+          "kind": "label",
+          "text": "O"
+        },
+        {
+          "kind": "label",
+          "text": "U"
+        }
+      ]
+    },
+    {
+      "mode": "steering",
+      "context": "none",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "F"
+        },
+        {
+          "kind": "label",
+          "text": "V"
+        },
+        {
+          "kind": "label",
+          "text": "C"
+        },
+        {
+          "kind": "label",
+          "text": "R"
+        }
+      ]
+    },
+    {
+      "mode": "steering",
+      "context": "left",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "F"
+        },
+        {
+          "kind": "label",
+          "text": "V"
+        },
+        {
+          "kind": "label",
+          "text": "C"
+        },
+        {
+          "kind": "label",
+          "text": "R"
+        }
+      ]
+    },
+    {
+      "mode": "steering",
+      "context": "right",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "F"
+        },
+        {
+          "kind": "label",
+          "text": "V"
+        },
+        {
+          "kind": "label",
+          "text": "C"
+        },
+        {
+          "kind": "label",
+          "text": "R"
+        }
+      ]
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "M"
+        },
+        {
+          "kind": "label",
+          "text": "P"
+        },
+        {
+          "kind": "label",
+          "text": "O"
+        },
+        {
+          "kind": "label",
+          "text": "U"
+        }
+      ]
+    },
+    {
+      "mode": "menu",
+      "context": "none",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "Enter"
+        },
+        {
+          "kind": "label",
+          "text": "Escape"
+        },
+        {
+          "kind": "label",
+          "text": "Backspace"
+        },
+        {
+          "kind": "label",
+          "text": "Tab"
+        }
+      ]
+    },
+    {
+      "mode": "menu",
+      "context": "left",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "Enter"
+        },
+        {
+          "kind": "label",
+          "text": "Escape"
+        },
+        {
+          "kind": "label",
+          "text": "Backspace"
+        },
+        {
+          "kind": "label",
+          "text": "Tab"
+        }
+      ]
+    },
+    {
+      "mode": "menu",
+      "context": "right",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "Enter"
+        },
+        {
+          "kind": "label",
+          "text": "Escape"
+        },
+        {
+          "kind": "label",
+          "text": "Backspace"
+        },
+        {
+          "kind": "label",
+          "text": "Tab"
+        }
+      ]
+    },
+    {
+      "mode": "menu",
+      "context": "both",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "Enter"
+        },
+        {
+          "kind": "label",
+          "text": "Escape"
+        },
+        {
+          "kind": "label",
+          "text": "Backspace"
+        },
+        {
+          "kind": "label",
+          "text": "Tab"
+        }
+      ]
+    }
+  ]
+}

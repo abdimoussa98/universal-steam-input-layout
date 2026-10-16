@@ -1,5 +1,9 @@
 # Ibex: Steam Controller 2
 
+The default layout puts timed modifier gestures on L1/R1; the alternative
+puts them on L2/R2. See [Hold / Tap, then hold](../resources/Layout%20Vocabulary.md#timed-gestures)
+for the gesture sequence and the distinction from a single tap.
+
 The base layout (R177). Every layout change is made here: a builder in
 `findings/<date>-<slug>/` writes the two working layouts, and
 `python3 -m tools.convert neptune` and `python3 -m tools.convert dse` make the

@@ -59,6 +59,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: ${{ matrix.commit }}
+          fetch-depth: 0          # ancestry and immutable tagged snapshots are test inputs
       - uses: actions/setup-python@v6
         with:
           python-version: "3.9"
@@ -72,18 +73,66 @@ jobs:
           unzip -q "$RUNNER_TEMP/vdf.vsix" 'extension/*' -d "$RUNNER_TEMP/vsix"
           mkdir -p ~/.vscode/extensions
           mv "$RUNNER_TEMP/vsix/extension" ~/.vscode/extensions/pfwobcke.vscode-vdf-5.12.3
+      - name: Load the test adapter from this workflow's commit
+        env:
+          VALIDATOR_COMMIT: ${{ github.workflow_sha }}
+        run: git show "$VALIDATOR_COMMIT:tools/test_compat.py" > "$RUNNER_TEMP/test_compat.py"
       - name: Python tests, part ${{ matrix.part }} of 4
         if: matrix.part != 'audits'
-        run: PYTHONPATH=.:tests python3 -m unittest $(python3 -m tools.release shard ${{ matrix.part }} 4)
+        run: >-
+          python3 "$RUNNER_TEMP/test_compat.py" run --shard ${{ matrix.part }} 4
+          --evidence evidence-${{ matrix.part }}.json
+          --run-id '${{ github.run_id }}:${{ github.run_attempt }}:${{ matrix.commit }}'
+      - name: Save the assigned test outcomes and scenario evidence
+        if: always() && matrix.part != 'audits'
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-evidence-${{ matrix.commit }}-${{ github.run_attempt }}-${{ matrix.part }}
+          path: evidence-${{ matrix.part }}.json
+          if-no-files-found: error
       - name: Build audit on every controller's layouts, and the exporter's tests
         if: matrix.part == 'audits'
         run: |
           python3 -m tools.audit_build
-          node --test tests/test_convert_vdf.mjs
+          python3 "$RUNNER_TEMP/test_compat.py" node
+
+  coverage:
+    name: Complete test evidence at ${{ matrix.commit }}
+    needs: [plan, test]
+    if: always() && !cancelled() && needs.plan.outputs.tags != '[]' && needs.plan.result == 'success'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        commit: ${{ fromJSON(needs.plan.outputs.commits) }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ matrix.commit }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.9"
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "26"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: test-evidence-${{ matrix.commit }}-${{ github.run_attempt }}-*
+          merge-multiple: true
+          path: evidence
+      - name: Load the test adapter from this workflow's commit
+        env:
+          VALIDATOR_COMMIT: ${{ github.workflow_sha }}
+        run: git show "$VALIDATOR_COMMIT:tools/test_compat.py" > "$RUNNER_TEMP/test_compat.py"
+      - name: Require every case exactly once, then check controller coverage
+        run: >-
+          python3 "$RUNNER_TEMP/test_compat.py" finalize evidence/*.json
+          --run-id '${{ github.run_id }}:${{ github.run_attempt }}:${{ matrix.commit }}'
 
   publish:
     name: Publish
-    needs: [plan, test]
+    needs: [plan, test, coverage]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

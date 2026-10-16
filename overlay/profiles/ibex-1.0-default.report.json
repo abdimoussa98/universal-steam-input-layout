@@ -1,0 +1,1678 @@
+{
+  "assumptions": [
+    "Legacy face rows: fresh presses with only L1/R1 held, pads untouched, sticks centered.",
+    "Manual Base/Gyro, Steering and Menu Keys selection; does not simulate Steam layer mutations.",
+    "Pure empty chord entries are guards; they contribute no key output alongside an active output chord.",
+    "Legacy face rows exclude layer operations from output labels; dashboard recipes separately describe reviewed timing windows. Stale Steam stacks are not inferred.",
+    "Dashboard timings are configured expectations, not observed Steam outputs.",
+    "Single-owner gesture pages include inherited bindings. Bumper stick deflection follows the exported Tap Cover rule. Pads, menu-stick deflection and combined menu gestures can suspend timing inference without erasing inherited reference bindings.",
+    "Trigger values show physical travel; profiles with unspecified activation thresholds do not invent a threshold."
+  ],
+  "issues": [],
+  "layer_operations": [
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_a",
+      "owner": "L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_a",
+      "owner": "L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_a",
+      "owner": "L1: Modifier 0",
+      "activation": "chord",
+      "command": "controller_action add_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_b",
+      "owner": "L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_b",
+      "owner": "L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_b",
+      "owner": "L1: Modifier 0",
+      "activation": "chord",
+      "command": "controller_action add_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_x",
+      "owner": "L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_x",
+      "owner": "L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_x",
+      "owner": "L1: Modifier 0",
+      "activation": "chord",
+      "command": "controller_action add_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_y",
+      "owner": "L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_y",
+      "owner": "L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_y",
+      "owner": "L1: Modifier 0",
+      "activation": "chord",
+      "command": "controller_action add_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_a",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_a",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_a",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "chord",
+      "command": "controller_action add_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_b",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_b",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_b",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "chord",
+      "command": "controller_action add_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_x",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_x",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_x",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "chord",
+      "command": "controller_action add_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_y",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_y",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "face": "button_y",
+      "owner": "Gyro | L1: Modifier 0",
+      "activation": "chord",
+      "command": "controller_action add_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_a",
+      "owner": "R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_a",
+      "owner": "R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_a",
+      "owner": "R1: Modifier 1",
+      "activation": "chord",
+      "command": "controller_action add_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_b",
+      "owner": "R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_b",
+      "owner": "R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_b",
+      "owner": "R1: Modifier 1",
+      "activation": "chord",
+      "command": "controller_action add_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_x",
+      "owner": "R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_x",
+      "owner": "R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_x",
+      "owner": "R1: Modifier 1",
+      "activation": "chord",
+      "command": "controller_action add_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_y",
+      "owner": "R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_y",
+      "owner": "R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_y",
+      "owner": "R1: Modifier 1",
+      "activation": "chord",
+      "command": "controller_action add_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_a",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_a",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_a",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "chord",
+      "command": "controller_action add_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_b",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_b",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_b",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "chord",
+      "command": "controller_action add_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_x",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_x",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_x",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "chord",
+      "command": "controller_action add_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_y",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_y",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "face": "button_y",
+      "owner": "Gyro | R1: Modifier 1",
+      "activation": "chord",
+      "command": "controller_action add_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 11 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 11 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 11 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 11 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "L1!R1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 12 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 12 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 12 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 10 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 9 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 12 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "R1!L1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 73 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 73 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 73 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 73 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | L1!R1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 74 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 74 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 74 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 15 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 14 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 13 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 72 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 71 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 74 0 0, , "
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Gyro | R1!L1: Modifier 2",
+      "activation": "chord",
+      "command": "controller_action add_layer 15 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action add_layer 75 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 79 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 77 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 76 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action add_layer 75 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 79 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 77 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 76 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action add_layer 75 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 79 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 77 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 76 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action add_layer 75 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 79 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 77 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Steering | L1!R1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 76 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action add_layer 75 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 78 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 76 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 77 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action add_layer 75 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 78 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 76 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 77 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action add_layer 75 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 78 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 76 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 77 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action add_layer 75 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 78 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 76 0 0, , "
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Steering | R1!L1: Modifier 2",
+      "activation": "Full_Press",
+      "command": "controller_action remove_layer 77 0 0, , "
+    },
+    {
+      "mode": "menu",
+      "context": "none",
+      "face": "button_a",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "none",
+      "face": "button_b",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "none",
+      "face": "button_x",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "none",
+      "face": "button_y",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "left",
+      "face": "button_a",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "left",
+      "face": "button_b",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "left",
+      "face": "button_x",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "left",
+      "face": "button_y",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "right",
+      "face": "button_a",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "right",
+      "face": "button_b",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "right",
+      "face": "button_x",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "right",
+      "face": "button_y",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "both",
+      "face": "button_a",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "both",
+      "face": "button_b",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "both",
+      "face": "button_x",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    },
+    {
+      "mode": "menu",
+      "context": "both",
+      "face": "button_y",
+      "owner": "Menu Keys",
+      "activation": "chord",
+      "command": "controller_action remove_layer 7 0 1, , "
+    }
+  ]
+}

@@ -11,7 +11,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from steam_layout.model import Layout
-from tests import test_steering_entry_quiet_drivers as contracts
+from tests.contracts.neptune import test_steering_entry_quiet_drivers as contracts
 
 
 def previous(variant):

@@ -1,0 +1,396 @@
+{
+  "date": "2026-10-15",
+  "scope": "Further test-runtime analysis; excludes overlay; no implementation changes.",
+  "full_run_reference": "2026-10-15-test-validation.json",
+  "full_run_tests": 1457,
+  "full_run_python_execution_seconds": 2284.574944291,
+  "area_seconds": {
+    "neptune_release_modules": 1579.1801761640004,
+    "scenario_modules": 279.3658812130027,
+    "quiet_driver_contract": 172.56329879199998,
+    "other_modules": 253.46428316600077
+  },
+  "test_body_seconds": 1144.5277001870022,
+  "fixture_seconds": 1140.0459391480017,
+  "largest_modules": [
+    {
+      "module": "tests.contracts.neptune.test_steering_entry_quiet_drivers",
+      "seconds": 172.56329879199998
+    },
+    {
+      "module": "tests.releases.neptune.test_cleanups",
+      "seconds": 171.79706900000008
+    },
+    {
+      "module": "tests.releases.neptune.test_steering_rtp_menu_chords",
+      "seconds": 128.4804347910001
+    },
+    {
+      "module": "tests.releases.neptune.test_fallback_window_backport",
+      "seconds": 116.32938820799995
+    },
+    {
+      "module": "tests.scenarios.neptune.test_scenarios_90_33",
+      "seconds": 105.94218170799991
+    },
+    {
+      "module": "tests.releases.neptune.test_menu_base_chords",
+      "seconds": 82.89840804100004
+    },
+    {
+      "module": "tests.releases.neptune.test_cleanup_entry_order",
+      "seconds": 82.56313133300006
+    },
+    {
+      "module": "tests.releases.neptune.test_steering_fallback_swap",
+      "seconds": 81.76043241599996
+    },
+    {
+      "module": "tests.releases.neptune.test_steering_four_way_and_open_edges",
+      "seconds": 75.25770587500006
+    },
+    {
+      "module": "tests.releases.neptune.test_steering_fallback_guard",
+      "seconds": 74.31494587499992
+    },
+    {
+      "module": "tests.releases.neptune.test_fallback_window_replacements",
+      "seconds": 70.499579875
+    },
+    {
+      "module": "tests.releases.neptune.test_window_releases_and_tap_cover_resets",
+      "seconds": 70.21686695799986
+    },
+    {
+      "module": "tests.releases.neptune.test_menu_chain_and_window_pads",
+      "seconds": 69.91155950000007
+    },
+    {
+      "module": "tests.releases.neptune.test_quiet_resets_and_beeps",
+      "seconds": 69.85618145900003
+    },
+    {
+      "module": "tests.releases.neptune.test_fallback_window",
+      "seconds": 69.53733724999995
+    },
+    {
+      "module": "tests.releases.neptune.test_pad_bump_removal",
+      "seconds": 67.80582962499989
+    },
+    {
+      "module": "tests.integration.convert.test_convert",
+      "seconds": 56.70602233300002
+    },
+    {
+      "module": "tests.releases.neptune.test_required_cleanups_build",
+      "seconds": 52.66838458400002
+    },
+    {
+      "module": "tests.contracts.shared.test_fixes",
+      "seconds": 46.461911375
+    },
+    {
+      "module": "tests.releases.neptune.test_pad_bumps_and_menu_keys",
+      "seconds": 34.258330417000025
+    }
+  ],
+  "historical_build_profile": {
+    "wall_seconds": 108.79294675,
+    "output_sha256": "544b866a6c8c622d9216575073573e3678d037da47f8ad10100d131db34e5178",
+    "title": "single-set-default :: always-gyro :: 90.43",
+    "cache_info": "CacheInfo(hits=0, misses=1, maxsize=None, currsize=1)",
+    "calls": {
+      "Chains._solve": {
+        "count": 15,
+        "inclusive_wall_seconds": 4.1964365809999995
+      },
+      "Inventory.of": {
+        "count": 30,
+        "inclusive_wall_seconds": 0.6601398770000166
+      },
+      "apply_all": {
+        "count": 5,
+        "inclusive_wall_seconds": 91.50766624999999
+      }
+    },
+    "caveat": "One cold variant; cProfile and wrapper overhead included. Timers overlap; do not sum them."
+  },
+  "profile_functions": [
+    {
+      "file": "steam_layout/fixes/__init__.py",
+      "line": 52,
+      "function": "apply_all",
+      "calls": 5,
+      "self_seconds": 6.667000000000001e-06,
+      "inclusive_seconds": 91.507644083
+    },
+    {
+      "file": "steam_layout/chains.py",
+      "line": 216,
+      "function": "below",
+      "calls": 50117,
+      "self_seconds": 9.597977672,
+      "inclusive_seconds": 79.047004998
+    },
+    {
+      "file": "steam_layout/cleanups.py",
+      "line": 200,
+      "function": "above",
+      "calls": 12063,
+      "self_seconds": 0.0019439630000000002,
+      "inclusive_seconds": 70.464899093
+    },
+    {
+      "file": "steam_layout/chains.py",
+      "line": 235,
+      "function": "above",
+      "calls": 499,
+      "self_seconds": 2.4649831470000003,
+      "inclusive_seconds": 70.46295513
+    },
+    {
+      "file": "steam_layout/chains.py",
+      "line": 208,
+      "function": "replay",
+      "calls": 81980523,
+      "self_seconds": 15.034647047000002,
+      "inclusive_seconds": 66.957034881
+    },
+    {
+      "file": "steam_layout/chains.py",
+      "line": 101,
+      "function": "fires",
+      "calls": 119287981,
+      "self_seconds": 25.626198421,
+      "inclusive_seconds": 30.264998925
+    },
+    {
+      "file": "steam_layout/stacks.py",
+      "line": 40,
+      "function": "apply_ops",
+      "calls": 40767636,
+      "self_seconds": 21.439568257,
+      "inclusive_seconds": 23.898643114000002
+    },
+    {
+      "file": "steam_layout/inheritance.py",
+      "line": 65,
+      "function": "check_stack",
+      "calls": 98468,
+      "self_seconds": 7.637591886,
+      "inclusive_seconds": 15.41744648
+    },
+    {
+      "file": "steam_layout/chains.py",
+      "line": 149,
+      "function": "_solve",
+      "calls": 15,
+      "self_seconds": 0.43628404000000004,
+      "inclusive_seconds": 4.1963870860000005
+    },
+    {
+      "file": "steam_layout/cleanups.py",
+      "line": 197,
+      "function": "below",
+      "calls": 6481,
+      "self_seconds": 0.051144866000000004,
+      "inclusive_seconds": 3.3190753880000003
+    },
+    {
+      "file": "steam_layout/flow_model.py",
+      "line": 283,
+      "function": "of",
+      "calls": 30,
+      "self_seconds": 0.001201285,
+      "inclusive_seconds": 0.660089959
+    },
+    {
+      "file": "steam_layout/chains.py",
+      "line": 94,
+      "function": "of",
+      "calls": 15,
+      "self_seconds": 1.9582e-05,
+      "inclusive_seconds": 0.328476792
+    },
+    {
+      "file": "steam_layout/exceptions.py",
+      "line": 216,
+      "function": "of",
+      "calls": 29,
+      "self_seconds": 8.083e-06,
+      "inclusive_seconds": 5.3500000000000006e-05
+    }
+  ],
+  "scenario_prototypes": [
+    {
+      "case": "d4",
+      "baseline_seconds": 17.544270333,
+      "prepared_seconds": 1.9419091249999987,
+      "saved_seconds": 15.602361208000001,
+      "reduction_percent": 88.93137709268335,
+      "cells": 1664,
+      "outcome": "success",
+      "equal_full_trace_digests": true,
+      "equal_normalized_evidence": true,
+      "source_integrity_preserved": true,
+      "prepared_sources": 2,
+      "prepared_entries": 2418,
+      "trace_set_digest": "52a5c6e7cb1fb3666b2ad9d0e01900fe1e6f95577a28bc4b245ff467640c2c31",
+      "measurement_note": "One sequential source-warm baseline/prototype pair, identical per-cell trace hashing; no phase timing wrappers."
+    },
+    {
+      "case": "s1",
+      "baseline_seconds": 13.93637625,
+      "prepared_seconds": 1.4434055000000008,
+      "saved_seconds": 12.49297075,
+      "reduction_percent": 89.64289228342267,
+      "cells": 1280,
+      "outcome": "success",
+      "equal_full_trace_digests": true,
+      "equal_normalized_evidence": true,
+      "source_integrity_preserved": true,
+      "prepared_sources": 2,
+      "prepared_entries": 2572,
+      "trace_set_digest": "c34a07a6cfc120c2ef32c546726a35bb02b7e8adbad81b70f4af9bed5e2fe321",
+      "measurement_note": "One sequential source-warm baseline/prototype pair, identical per-cell trace hashing; no phase timing wrappers."
+    }
+  ],
+  "repeated_builder_calls": {
+    "90.42": {
+      "per_variant": 3,
+      "both_variants": 6,
+      "consumers": [
+        "direct reproduction",
+        "cleanup recovery fixture",
+        "90.43 quiet-driver predecessor"
+      ]
+    },
+    "90.41": {
+      "per_variant": 4,
+      "both_variants": 8,
+      "consumers": [
+        "nested in each 90.42 build",
+        "frozen scenario loader"
+      ]
+    },
+    "warning": "Nested counts overlap. Early inherited builder hooks change inputs, so shared function/file/variant does not establish reusable output identity."
+  },
+  "options": [
+    {
+      "name": "Immutable simulator preparation",
+      "priority": 1,
+      "evidence": "Two full-case prototypes preserved all 2,944 cells, complete event-log/final-state digests, normalized evidence and source integrity.",
+      "requirements": [
+        "Bounded ordered-content/source-stage identity",
+        "Immutable compiled entries/settings",
+        "Fresh state, timers, activators, logs, lazy maps and initial settling for every cell",
+        "Mutable-layout fallback and mutation invalidation",
+        "Validate DSE, candidates, desktop, mode shifts and all assumptions",
+        "Keep independent simulator reference paths"
+      ]
+    },
+    {
+      "name": "One verified historical build per exact source/variant per run",
+      "priority": 2,
+      "requirements": [
+        "Actual build remains independent of stored expected source",
+        "Private copies for every consumer and successor stage",
+        "Retain fixed-point pipeline passes and deterministic reruns",
+        "Use 90.43 build_from only with verified 90.42 actual output",
+        "Preserve cold build entry-point coverage",
+        "Do not substitute snapshots without ordered-data equivalence; 90.41 snapshot fingerprints differ from recorded builder source",
+        "Prefer capture/reuse of actual generated intermediate stages during retained full builds; do not assume calling a successor helper alone preserves cold entry-point integration coverage."
+      ]
+    },
+    {
+      "name": "Investigate bystander replay algorithm after higher-confidence preparation reuse",
+      "priority": 3,
+      "requirements": [
+        "Separate engine optimization; current test guide rejects global production caches used only for fixture speed",
+        "Preserve exact ordered stacks, Why witnesses, replay failure and all bounds",
+        "Keep native/Python comparisons independent",
+        "Measure memory and validate all contexts/arrival options/mutations"
+      ],
+      "status": "Exploratory; simple bounded step cache is not ready for adoption"
+    },
+    {
+      "name": "Couple remaining duplicate observations",
+      "priority": 4,
+      "requirements": [
+        "Use one cleanups.run result for both report and Cleanups in frozen 90.10 SnapshotTests",
+        "Prepare repeated standard-delay holds scans once per unmodified variant",
+        "Keep all named assertions and mutation cases"
+      ]
+    },
+    {
+      "name": "Local process sharding",
+      "priority": 5,
+      "requirements": [
+        "CI already has four shards",
+        "Use complete same-run evidence finalization and explicit Node lane",
+        "Prebuild native binary once",
+        "Budget native threads and parent-plus-child RSS",
+        "Regenerate weights after reducing shared preparation",
+        "Projected shard sums are not measured parallel runtimes"
+      ]
+    }
+  ],
+  "limits": [
+    "The prior full-run timing is one local sample. Targeted pairs were sequential; no whole-suite optimized run was performed in this analysis.",
+    "Profile inclusive timings are nested and cannot be added. cProfile adds overhead.",
+    "Focused prototype reductions do not establish the same percentage reduction for the entire suite.",
+    "Builder-sharing and chain improvements overlap; do not add their possible savings.",
+    "Coverage preservation before adoption requires all 1,457 tests, 449 scenario labels, 11,902 gesture cells, 25 existing expected failures, both variants and 8 Node tests, with same outcomes/evidence or explained ordering-only differences.",
+    "The id-keyed simulator preparation prototype is an experiment, not a production-safe cache design."
+  ],
+  "chain_step_prototype": {
+    "cold_build": {
+      "wall_seconds": 100.247282791,
+      "output_sha256": "544b866a6c8c622d9216575073573e3678d037da47f8ad10100d131db34e5178",
+      "title": "single-set-default :: always-gyro :: 90.43",
+      "cache_info": "CacheInfo(hits=0, misses=1, maxsize=None, currsize=1)",
+      "calls": {
+        "Chains._solve": {
+          "count": 15,
+          "inclusive_wall_seconds": 4.464846041000019
+        },
+        "Inventory.of": {
+          "count": 30,
+          "inclusive_wall_seconds": 0.6923414589999739
+        },
+        "apply_all": {
+          "count": 5,
+          "inclusive_wall_seconds": 83.739419416
+        }
+      },
+      "caveat": "One cold variant; cProfile and wrapper overhead included. Timers overlap; do not sum them.",
+      "memo": {
+        "limit_per_instance": 16384,
+        "instances": 13,
+        "hits": 91188748,
+        "misses": 24218315,
+        "clears": 1472,
+        "peak_entries_per_instance": 16384
+      },
+      "peak_python_rss_bytes": 400146432,
+      "matches_baseline_digest": true
+    },
+    "snapshot_parity": {
+      "baseline_seconds": 2.10857225,
+      "prototype_seconds": 1.7281392079999995,
+      "layers": 71,
+      "ordered_witness_sha256": "8bef6375963b64fbe2dfdeb2a322649cfd4c5c8f62851cedfa9b3b60a5ccd347",
+      "report_sha256": "24ca51980ef4aa8a02cdd5bf452327380b666812ffba78b142fc1364ee123c8d",
+      "memo": {
+        "limit_per_instance": 16384,
+        "instances": 2,
+        "hits": 3041845,
+        "misses": 759131,
+        "clears": 46,
+        "peak_entries_per_instance": 16384
+      }
+    },
+    "cold_build_reduction_percent": 7.8549797705520845,
+    "assessment": "Modest targeted improvement with heavy cache thrashing; not recommended as the next production change. Baseline profile RSS was not captured."
+  }
+}

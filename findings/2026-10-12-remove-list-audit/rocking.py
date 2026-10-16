@@ -94,7 +94,7 @@ def batch(job):
 
 
 def rocking_tests(out):
-    import tests.test_modifier_rocking as module
+    import tests.contracts.neptune.test_modifier_rocking as module
     def trial_layouts(cls):
         cls.layouts = {v: Layout(json.loads((out / f"{v}.json").read_text(encoding="utf-8"))) for v in module.VARIANTS}
     module.RockingTests.setUpClass = classmethod(trial_layouts)

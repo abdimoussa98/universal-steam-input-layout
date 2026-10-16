@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "name": "Behavior fixture",
+  "controller": "test",
+  "variant": "default",
+  "source_version": "fixture",
+  "source_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "modifiers": [
+    "L1",
+    "R1"
+  ],
+  "glyphs": [
+    "A",
+    "B",
+    "X",
+    "Y"
+  ],
+  "contexts": [
+    {
+      "mode": "base",
+      "context": "none",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "base/none/south"
+        },
+        {
+          "kind": "label",
+          "text": "base/none/east"
+        },
+        {
+          "kind": "label",
+          "text": "base/none/west"
+        },
+        {
+          "kind": "label",
+          "text": "base/none/north"
+        }
+      ]
+    },
+    {
+      "mode": "base",
+      "context": "left",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "base/left/south"
+        },
+        {
+          "kind": "label",
+          "text": "base/left/east"
+        },
+        {
+          "kind": "label",
+          "text": "base/left/west"
+        },
+        {
+          "kind": "label",
+          "text": "base/left/north"
+        }
+      ]
+    },
+    {
+      "mode": "base",
+      "context": "right",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "base/right/south"
+        },
+        {
+          "kind": "label",
+          "text": "base/right/east"
+        },
+        {
+          "kind": "label",
+          "text": "base/right/west"
+        },
+        {
+          "kind": "label",
+          "text": "base/right/north"
+        }
+      ]
+    },
+    {
+      "mode": "base",
+      "context": "both",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "base/both/south"
+        },
+        {
+          "kind": "label",
+          "text": "base/both/east"
+        },
+        {
+          "kind": "label",
+          "text": "base/both/west"
+        },
+        {
+          "kind": "label",
+          "text": "base/both/north"
+        }
+      ]
+    },
+    {
+      "mode": "steering",
+      "context": "none",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "steering/none/south"
+        },
+        {
+          "kind": "label",
+          "text": "steering/none/east"
+        },
+        {
+          "kind": "label",
+          "text": "steering/none/west"
+        },
+        {
+          "kind": "label",
+          "text": "steering/none/north"
+        }
+      ]
+    },
+    {
+      "mode": "steering",
+      "context": "left",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "steering/left/south"
+        },
+        {
+          "kind": "label",
+          "text": "steering/left/east"
+        },
+        {
+          "kind": "label",
+          "text": "steering/left/west"
+        },
+        {
+          "kind": "label",
+          "text": "steering/left/north"
+        }
+      ]
+    },
+    {
+      "mode": "steering",
+      "context": "right",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "steering/right/south"
+        },
+        {
+          "kind": "label",
+          "text": "steering/right/east"
+        },
+        {
+          "kind": "label",
+          "text": "steering/right/west"
+        },
+        {
+          "kind": "label",
+          "text": "steering/right/north"
+        }
+      ]
+    },
+    {
+      "mode": "steering",
+      "context": "both",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "steering/both/south"
+        },
+        {
+          "kind": "label",
+          "text": "steering/both/east"
+        },
+        {
+          "kind": "label",
+          "text": "steering/both/west"
+        },
+        {
+          "kind": "label",
+          "text": "steering/both/north"
+        }
+      ]
+    },
+    {
+      "mode": "menu",
+      "context": "none",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "menu/none/south"
+        },
+        {
+          "kind": "label",
+          "text": "menu/none/east"
+        },
+        {
+          "kind": "label",
+          "text": "menu/none/west"
+        },
+        {
+          "kind": "label",
+          "text": "menu/none/north"
+        }
+      ]
+    },
+    {
+      "mode": "menu",
+      "context": "left",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "menu/left/south"
+        },
+        {
+          "kind": "label",
+          "text": "menu/left/east"
+        },
+        {
+          "kind": "label",
+          "text": "menu/left/west"
+        },
+        {
+          "kind": "label",
+          "text": "menu/left/north"
+        }
+      ]
+    },
+    {
+      "mode": "menu",
+      "context": "right",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "menu/right/south"
+        },
+        {
+          "kind": "label",
+          "text": "menu/right/east"
+        },
+        {
+          "kind": "label",
+          "text": "menu/right/west"
+        },
+        {
+          "kind": "label",
+          "text": "menu/right/north"
+        }
+      ]
+    },
+    {
+      "mode": "menu",
+      "context": "both",
+      "bindings": [
+        {
+          "kind": "label",
+          "text": "menu/both/south"
+        },
+        {
+          "kind": "label",
+          "text": "menu/both/east"
+        },
+        {
+          "kind": "label",
+          "text": "menu/both/west"
+        },
+        {
+          "kind": "label",
+          "text": "menu/both/north"
+        }
+      ]
+    }
+  ]
+}
