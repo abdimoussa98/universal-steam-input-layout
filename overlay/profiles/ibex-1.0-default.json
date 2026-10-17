@@ -132,7 +132,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "l2": {
             "kind": "label",
@@ -199,7 +199,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "r1": {
             "kind": "label",
@@ -270,11 +270,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "r1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "l2": {
             "kind": "label",
@@ -345,7 +345,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "l2": {
             "kind": "label",
@@ -416,7 +416,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "l2": {
             "kind": "label",
@@ -698,7 +698,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "l2": {
             "kind": "label",
@@ -765,7 +765,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "r1": {
             "kind": "label",
@@ -836,7 +836,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "r1": {
             "kind": "label",
@@ -1118,7 +1118,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Mod 2"
+            "text": "Mod 2 :: Base / Gyro"
           },
           "r1": {
             "kind": "label",
@@ -2105,12 +2105,12 @@
             "text": "BACK_TICK"
           },
           "l1": {
-            "kind": "unavailable",
-            "reason": "Bindings differ by press order or Base/Gyro state"
+            "kind": "label",
+            "text": "Mod 2"
           },
           "r1": {
-            "kind": "unavailable",
-            "reason": "Bindings differ by press order or Base/Gyro state"
+            "kind": "label",
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -5219,6 +5219,77 @@
             "text": "Mouse right"
           }
         }
+      },
+      {
+        "mode": "base",
+        "context": "both",
+        "phase": "combined:cover",
+        "bindings": {
+          "a": {
+            "kind": "label",
+            "text": "M"
+          },
+          "b": {
+            "kind": "label",
+            "text": "P"
+          },
+          "x": {
+            "kind": "label",
+            "text": "O"
+          },
+          "y": {
+            "kind": "label",
+            "text": "U"
+          },
+          "select": {
+            "kind": "label",
+            "text": "PAGE_DOWN"
+          },
+          "start": {
+            "kind": "label",
+            "text": "PAGE_UP"
+          },
+          "up": {
+            "kind": "label",
+            "text": "I"
+          },
+          "right": {
+            "kind": "label",
+            "text": "L"
+          },
+          "down": {
+            "kind": "label",
+            "text": "K"
+          },
+          "left": {
+            "kind": "label",
+            "text": "J"
+          },
+          "l3": {
+            "kind": "label",
+            "text": "NUM_LOCK"
+          },
+          "r3": {
+            "kind": "label",
+            "text": "BACK_TICK"
+          },
+          "l1": {
+            "kind": "label",
+            "text": "Mod 2"
+          },
+          "r1": {
+            "kind": "label",
+            "text": "Mod 2"
+          },
+          "l2": {
+            "kind": "label",
+            "text": "Mouse left"
+          },
+          "r2": {
+            "kind": "label",
+            "text": "Mouse right"
+          }
+        }
       }
     ],
     "recipes": [
@@ -5374,6 +5445,7 @@
       }
     ],
     "combined_hold_ms": 200,
+    "combined_release_label": "Base / Gyro",
     "trigger_thresholds": [
       null,
       null

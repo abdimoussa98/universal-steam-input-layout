@@ -150,6 +150,17 @@ CONTROLS.update(select=('switch','button_menu'), start=('switch','button_escape'
 
 def export_dashboard(layout, report):
     pages, recipes = [], []
+    # Base mode displays both stateful variants. Confirm both release paths
+    # before advertising their shared transition, including both press orders.
+    for mode, operation in [('base', 'add_layer'), ('gyro', 'remove_layer')]:
+        for stack in _stacks(mode, 'both'):
+            for control in ('l1', 'r1'):
+                acts = resolve(layout, stack, *CONTROLS[control])[2]
+                if not any(kind == 'release' and (operation, 'Gyro') in layout.layer_ops(e)
+                           for kind, e in entries(acts or {})):
+                    raise ValueError('Unrecognized Mod 2 stateful release transition')
+    combined_release_label = 'Base / Gyro'
+    combined_label = 'Mod 2 :: '+combined_release_label
     def layer_label(acts, held, source, name, stack):
         targets = []
         for _, entry in entries(acts or {}):
@@ -160,7 +171,7 @@ def export_dashboard(layout, report):
         if any(t.startswith('Transition Set ') for t in targets):
             return 'Switch mode'
         if any('Modifier 2' in t for t in targets):
-            return 'Mod 2'
+            return 'Mod 2' if any(t.startswith('Steering |') for t in targets) else combined_label
         for t in targets:
             if t in ('Steering | L1: S Key','Steering | R1: W Key'):
                 child = resolve(layout, stack+[t], source, name)[2]
@@ -222,8 +233,8 @@ def export_dashboard(layout, report):
             b = candidates[0]
             if any(c != b for c in candidates[1:]):
                 b = {'kind':'unavailable','reason':'Bindings differ by press order or Base/Gyro state'}
-            if mode=='base' and context=='both' and control in ('l1','r1'):
-                b = {'kind':'label','text':'Mod 2'}
+            if mode in ('base','steering') and context=='both' and control in ('l1','r1'):
+                b = {'kind':'label','text':'Mod 2' if mode=='steering' or phase=='combined:cover' else combined_label}
             bindings[control] = b
         pages.append(dict(mode=mode,context=context,phase=phase,bindings=bindings))
         return pages[-1]
@@ -342,10 +353,14 @@ def export_dashboard(layout, report):
                                   ('second',_stacks('steering',context)[0]+[second]),
                                   ('cover',_stacks('steering',context)[0]+[second,'Steering | LS: Double Tap Cover'])]:
                 page('steering',context,f'ls:{direction}:{phase}',[layers],held)
-    combined_ms,_=delayed_target('L1!R1: Modifier 2','switch','right_bumper')
+    combined_ms,combined_cover=delayed_target('L1!R1: Modifier 2','switch','right_bumper')
+    page('base','both','combined:cover',
+         [stack+[combined_cover] for mode in ('base','gyro') for stack in _stacks(mode,'both')],
+         {CONTROLS['l1'],CONTROLS['r1']})
     report['assumptions'] += [
         'Dashboard timings are configured expectations, not observed Steam outputs.',
         'Single-owner gesture pages include inherited bindings. Bumper stick deflection follows the exported Tap Cover rule. Pads, menu-stick deflection and combined menu gestures can suspend timing inference without erasing inherited reference bindings.',
         'Trigger values show physical travel; profiles with unspecified activation thresholds do not invent a threshold.',
     ]
-    return dict(pages=pages,recipes=recipes,combined_hold_ms=combined_ms,trigger_thresholds=[None,None],steering=steering)
+    return dict(pages=pages,recipes=recipes,combined_hold_ms=combined_ms,
+                combined_release_label=combined_release_label,trigger_thresholds=[None,None],steering=steering)

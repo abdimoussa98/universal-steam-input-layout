@@ -128,6 +128,28 @@ fn combined_release_preserves_other_side_without_starting_a_tap() {
 }
 #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
 #[cfg_attr(not(target_arch = "wasm32"), test)]
+fn combined_switch_label_disappears_when_cover_cancels_release() {
+    for first in [Control::L1, Control::R1] {
+        let mut s = State::default();
+        let mut i = InputFrame::default();
+        step(&mut s, &i, 0);
+        press(&mut i, first, true);
+        step(&mut s, &i, 10);
+        press(&mut i, Control::L1, true);
+        press(&mut i, Control::R1, true);
+        step(&mut s, &i, 40);
+        assert_eq!(
+            &s.control_labels(&profile())[12..14],
+            &["Mod 2 :: Base / Gyro", "Mod 2 :: Base / Gyro"]
+        );
+        step(&mut s, &i, 240);
+        assert_eq!(s.gestures.lanes[0].phase, Phase::CombinedCover);
+        assert_eq!(&s.control_labels(&profile())[12..14], &["Mod 2", "Mod 2"]);
+    }
+}
+
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
+#[cfg_attr(not(target_arch = "wasm32"), test)]
 fn reconnect_and_mode_switch_never_invent_a_tap_from_an_already_held_button() {
     let mut s = State::default();
     let mut i = InputFrame::default();

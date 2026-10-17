@@ -249,6 +249,24 @@ def main():
         wait_for(lambda: snapshot()['state']['status'] == 'unavailable', 'Blocked Gamepad API was not reported')
         js("Object.defineProperty(navigator,'getGamepads',{value:window.savedGamepads,configurable:true})")
         wait_for(lambda: snapshot()['state']['status'] == 'live' and not snapshot()['error'], 'Input error did not clear on recovery')
+        def sticks_do_not_overlap():
+            targets = snapshot()['ui_targets']
+            for side in range(2):
+                shell = targets[f'stick:{side}:shell']
+                origin = targets[f'stick:{side}:center']
+                limit = targets[f'stick:{side}:range']
+                lower = targets[f'stick:{side}:label_min']
+                upper = targets[f'stick:{side}:label_max']
+                scale = (limit[0]-origin[0])/10
+                # Text stays inside the original circle and above the entire
+                # movement field (including the marker stroke at full travel).
+                for x in (lower[0], upper[0]):
+                    for y in (lower[1], upper[1]):
+                        assert ((x-shell[0])**2+(y-shell[1])**2)**0.5 < 46*scale
+                assert upper[1] < origin[1]-16*scale
+                assert abs(origin[0]-shell[0]) < 0.01
+                assert abs(origin[1]-shell[1]-21*scale) < 0.01
+
         # Check the positions actually used by the painter, not just raw input.
         # Small and partial deflections must not snap to the rim or disappear.
         for axes in ([0, 0, 0, 0], [0.02, -0.04, -0.1, 0.2], [0.25, -0.5, -0.75, 1], [1, 0, 0, -1]):
@@ -266,6 +284,7 @@ def main():
                         return False
                 return True
             wait_for(markers_match, f'Stick drawing lost analog travel: {axes}')
+            sticks_do_not_overlap()
             if args.screenshot and axes[0]==0.25:
                 args.screenshot.with_name('analog-travel.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
         js('window.mockAxes.fill(0)')
@@ -296,6 +315,7 @@ def main():
                 js('window.mockButtons[arguments[0]]=1', button_index)
                 wait_for(lambda: snapshot()['state']['gestures']['lanes'][lane_index]['phase']=='hold', 'Fn hold did not activate')
                 assert snapshot()['control_labels'][14:16]==['Full: F12', 'Full: F11'], 'Fn trigger labels missing'
+                sticks_do_not_overlap()
                 if args.screenshot and mode=='base' and button_index==8:
                     args.screenshot.with_name('fn-triggers.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
                 js('window.mockButtons.fill(0)')
@@ -306,10 +326,14 @@ def main():
         wait_for(lambda: snapshot()['state']['mode']=='steering', 'Steering shortcut failed')
         js('window.mockButtons[5]=1;window.mockAxes=[0,-0.8,0.3,0]')
         wait_for(lambda: snapshot()['control_labels'][10]=='Mouse back', 'Up Steering click label missing')
+        sticks_do_not_overlap()
+        if args.screenshot:
+            args.screenshot.with_name('steering-sticks.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
         assert snapshot()['state']['input']['stick_positions']==[[0,-800],[300,0]]
         assert snapshot()['state']['input']['pads']==[None,None], 'Browser invented touch positions'
         js('window.mockAxes[1]=0.8')
         wait_for(lambda: snapshot()['control_labels'][11]=='Mouse middle', 'Down Steering click label missing')
+        sticks_do_not_overlap()
         js('window.mockButtons.fill(0);window.mockAxes.fill(0)')
         click_target('mode:0')
         wait_for(lambda: snapshot()['state']['mode']=='base', 'Base shortcut failed')

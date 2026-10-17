@@ -146,6 +146,8 @@ pub struct DashboardProfile {
     pub pages: Vec<ControlPage>,
     pub recipes: Vec<Recipe>,
     pub combined_hold_ms: u64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub combined_release_label: Option<String>,
     pub trigger_thresholds: [Option<u16>; 2],
     #[serde(default)]
     pub steering: Option<SteeringProfile>,
@@ -169,6 +171,10 @@ impl DashboardProfile {
         if self.pages.len() > 256
             || self.recipes.len() > 12
             || !(1..=1000).contains(&self.combined_hold_ms)
+            || self
+                .combined_release_label
+                .as_ref()
+                .is_some_and(|s| s.trim().is_empty())
             || self.trigger_thresholds.iter().flatten().any(|v| *v > 1000)
         {
             return Err("Invalid dashboard limits".into());
@@ -675,7 +681,10 @@ impl State {
                 })
             })
             .flatten();
-        let phase = phase.or(steering_phase);
+        let combined_phase = (self.held == [true, true]
+            && phases[..2].contains(&Phase::CombinedCover))
+        .then(|| "combined:cover".to_string());
+        let phase = phase.or(steering_phase).or(combined_phase);
         let page = phase
             .as_ref()
             .and_then(|phase| {

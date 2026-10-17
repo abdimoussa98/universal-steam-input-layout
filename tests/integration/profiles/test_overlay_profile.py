@@ -38,7 +38,7 @@ class OverlayProfileTests(unittest.TestCase):
         def binding(mode, phase, control):
             return next(p for p in dashboard['pages'] if p['mode']==mode and p['phase']==phase and p['context']=='none')['bindings'][control]
         self.assertEqual(binding('steering','reference','l1'), {'kind':'label','text':'S'})
-        self.assertEqual(binding('base','l1:pressed','r1'), {'kind':'label','text':'Mod 2'})
+        self.assertEqual(binding('base','l1:pressed','r1'), {'kind':'label','text':'Mod 2 :: Base / Gyro'})
         self.assertEqual(binding('base','select:pressed','l3'), {'kind':'label','text':'Switch mode'})
         self.assertEqual(binding('base','l1:hold','a'), {'kind':'label','text':'G'})
         self.assertEqual(binding('base','l1:consumed','a'), {'kind':'label','text':'G'})
@@ -51,6 +51,16 @@ class OverlayProfileTests(unittest.TestCase):
                     if item.get('settings',{}).get('delay_start')=='200': item['settings']['delay_start']='180'
         updated,_=export_profile(json.dumps(data).encode(),controller='ibex',version='1.0')
         self.assertEqual(next(r for r in updated['dashboard']['recipes'] if r['mode']=='base' and r['control']=='l1')['hold_ms'],180)
+
+    def test_mod2_release_transition_and_cover_are_distinct(self):
+        d = self.profile['dashboard']
+        self.assertEqual(d['combined_release_label'], 'Base / Gyro')
+        for mode, phase, expected in [('base','reference','Mod 2 :: Base / Gyro'),
+                                      ('base','combined:cover','Mod 2'),
+                                      ('steering','reference','Mod 2')]:
+            page = next(p for p in d['pages'] if p['mode']==mode and p['phase']==phase and p['context']=='both')
+            for control in ('l1','r1'):
+                self.assertEqual(page['bindings'][control], {'kind':'label','text':expected})
 
     def test_steering_position_pages_follow_source_inheritance(self):
         profile = self.profile

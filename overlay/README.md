@@ -47,7 +47,8 @@ available on hover. Pressed controls light up; trigger bars show physical travel
 The Ibex diagram follows the proportions of the [front-view hardware reference](https://steamdb.info/static/img/blog/106/sc_front.webp),
 with symmetric sticks and canted square trackpads.
 Stick dots show the full X/Y position, including center and small deflections;
-binding text sits above the sticks so it cannot hide movement. Rings
+click bindings sit inside the upper part of each stick, with a separate XY field
+below so text and movement stay clear. Rings
 turn green with capacitive thumb contact. Trackpad dots show actual contact
 coordinates. Standard browser Gamepad
 input has stick axes but no pad/touch data; use the companion for those markers.
@@ -96,6 +97,10 @@ that modifier's inherited clicks. Centering, reversing direction, both bumpers,
 and the release/second-press windows update the reference and shared timer.
 Thresholds and timings come from the exported layout. Manual mode selection
 still applies when a physical gesture changes Steam's stateful mode.
+
+Mod 2 displays `Mod 2 :: Base / Gyro` while an early release switches stateful
+layers. Once its cover applies, it displays `Mod 2`; Steering Mod 2 does not
+advertise a stateful switch.
 
 The bumper model also recognizes both sticks deflected as a Tap Cover gesture.
 Trackpad interactions and combined menu/state-changing gestures can make timing

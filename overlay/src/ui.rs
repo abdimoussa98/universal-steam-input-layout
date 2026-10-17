@@ -459,7 +459,7 @@ fn stick_marker(center: egui::Pos2, xy: [i16; 2], scale: f32) -> egui::Pos2 {
         + egui::vec2(
             f32::from(xy[0].clamp(-1000, 1000)),
             f32::from(xy[1].clamp(-1000, 1000)),
-        ) * (28.0 * scale / 1000.0)
+        ) * (10.0 * scale / 1000.0)
 }
 
 // Symmetric Ibex controls in a single, softly rounded shell. Physical control
@@ -643,26 +643,30 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
             p.circle_filled(center, 39.0 * scale, fill);
             p.circle_stroke(center, 39.0 * scale, stroke);
             let side = n - 10;
-            target_point(ui, &format!("stick:{side}:center"), center);
+            // Separate the click label above from the full XY travel field below.
+            let origin = center + egui::vec2(0.0, 21.0 * scale);
+            p.circle_stroke(origin, 16.0 * scale, egui::Stroke::new(1.0_f32, edge));
+            target_point(ui, &format!("stick:{side}:shell"), center);
+            target_point(ui, &format!("stick:{side}:center"), origin);
             target_point(
                 ui,
                 &format!("stick:{side}:range"),
-                center + egui::vec2(28.0 * scale, 0.0),
+                origin + egui::vec2(10.0 * scale, 0.0),
             );
             if data.state.status == InputStatus::Live {
                 if data.state.input.touches[side] == Some(true) {
                     p.circle_stroke(center, 43.0 * scale, egui::Stroke::new(2.0_f32, ACCENT));
                 }
                 if let Some(xy) = data.state.input.stick_positions[side] {
-                    let dot = stick_marker(center, xy, scale);
+                    let dot = stick_marker(origin, xy, scale);
                     let color = if data.state.input.touches[side] == Some(true) {
                         ACCENT
                     } else {
                         Color32::from_rgb(244, 191, 88)
                     };
-                    p.line_segment([center, dot], egui::Stroke::new(1.0_f32, color));
-                    p.circle_stroke(dot, 5.0 * scale, egui::Stroke::new(1.8_f32, color));
-                    p.circle_filled(dot, 2.0 * scale, color);
+                    p.line_segment([origin, dot], egui::Stroke::new(1.0_f32, color));
+                    p.circle_stroke(dot, 3.0 * scale, egui::Stroke::new(1.8_f32, color));
+                    p.circle_filled(dot, 1.0 * scale, color);
                     target_point(ui, &format!("stick:{side}:marker"), dot);
                 }
             }
@@ -696,7 +700,7 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
             label = recipe_binding(recipe);
         }
         let label_center = if matches!(control, Control::L3 | Control::R3) {
-            center - egui::vec2(0.0, 65.0 * scale)
+            center - egui::vec2(0.0, 15.0 * scale)
         } else {
             center
         };
@@ -729,7 +733,7 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
                     Color32::from_rgb(240, 243, 248)
                 },
                 (if matches!(control, Control::L3 | Control::R3) {
-                    150.0
+                    64.0
                 } else if n < 4 {
                     w - 4.0
                 } else {
@@ -742,7 +746,28 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
             } else {
                 1
             };
-            let galley = p.layout_job(job);
+            let mut galley = p.layout_job(job.clone());
+            if matches!(control, Control::L3 | Control::R3) {
+                // Fit two lines inside the upper part of the circle. The travel
+                // field stays clear even at maximum upward deflection.
+                while galley.size().y > 32.0 * scale || galley.size().x > 64.0 * scale {
+                    for section in &mut job.sections {
+                        section.format.font_id.size *= 0.95;
+                    }
+                    galley = p.layout_job(job.clone());
+                }
+                let half = galley.size() / 2.0;
+                target_point(
+                    ui,
+                    &format!("stick:{}:label_min", n - 10),
+                    label_center - half,
+                );
+                target_point(
+                    ui,
+                    &format!("stick:{}:label_max", n - 10),
+                    label_center + half,
+                );
+            }
             p.galley(
                 label_center - egui::vec2(0.0, galley.size().y / 2.0),
                 galley,
@@ -861,7 +886,10 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
         r.hold_ms
     };
     let tap = if combined {
-        "Release combo"
+        profile
+            .combined_release_label
+            .as_deref()
+            .unwrap_or("Stateful layer switch")
     } else {
         &r.tap_label
     };
@@ -870,7 +898,13 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
     } else {
         r.modifier_label.as_deref().unwrap_or(&r.hold_label)
     };
-    let summary = if combined || steering {
+    let summary = if combined {
+        if lane.phase == Phase::CombinedCover {
+            "Mod 2".into()
+        } else {
+            gesture_binding("Mod 2", tap)
+        }
+    } else if steering {
         gesture_binding(tap, hold)
     } else {
         recipe_binding(&r)
@@ -928,15 +962,16 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center),|ui| { ui.small(end); });
         });
         ui.collapsing("Gesture details", |ui| {
-            if let Some(modifier) = &r.modifier_label {
+            if combined {
+                ui.label(format!("Hold: Mod 2. Release either bumper before {hold_ms} ms to switch {tap}."));
+                ui.label("Once Tap Cover applies, releasing does not switch stateful layers.");
+            } else if let Some(modifier) = &r.modifier_label {
                 ui.label(format!("Hold: {modifier}. Tap, then hold: {}.", r.tap_label));
                 ui.label(format!("{} is a delayed effect after {} ms; {modifier} remains active.", r.hold_label, r.hold_ms));
             } else {
                 ui.label("Tap / tap, then hold :: Hold");
             }
-            if combined {
-                ui.label(format!("Release: {tap}. Hold: {hold}."));
-            } else {
+            if !combined {
                 for outcome in &outcomes { ui.label(outcome); }
             }
             ui.label(hint);
