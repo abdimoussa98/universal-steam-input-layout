@@ -354,11 +354,6 @@ impl eframe::App for OverlayApp {
                                         let live = data.state.status == InputStatus::Live;
                                         ui.label(RichText::new(if live { "Live input" } else { "Reference" })
                                             .color(if live { ACCENT } else { MUTED }));
-                                        for i in 0..2 {
-                                            if data.state.held[i] {
-                                                ui.label(RichText::new(format!("{} held", data.profile.modifiers[i])).color(ACCENT));
-                                            }
-                                        }
                                         ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                                             if let Some(connection) = &data.browser_connection {
                                                 let response = ui.add_enabled(connection.available && !connection.busy,
@@ -373,7 +368,7 @@ impl eframe::App for OverlayApp {
                                     ui.add_space(8.0);
                                     // Keep diagram labels legible on small windows; only the diagram scrolls sideways.
                                     egui::ScrollArea::horizontal().id_salt("controller-diagram").show(ui, |ui| {
-                                        ui.set_min_width(640.0);
+                                        ui.set_min_width(720.0);
                                         draw_controller(ui, &data);
                                     });
                                     ui.add_space(6.0);
@@ -390,6 +385,7 @@ impl eframe::App for OverlayApp {
                             ui.collapsing("Reading this view", |ui| {
                                 ui.label("Choose the mode to match Steam. Labels describe a fresh press in the current layer.");
                                 ui.label("Stick rings show deflection; green means thumb contact. Trackpad dots show thumb position. Trigger bars show travel; Full means a full pull.");
+                                ui.label("Before :: is the tap or tap-then-hold output; after :: is the hold action. For example, Escape :: Fn.");
                                 ui.label("Gesture timing follows the layout’s configured delays. No game input is sent.");
                                 if let Some(help) = data.controller_help() { ui.label(help); }
                             });
@@ -428,348 +424,311 @@ fn target(ui: &egui::Ui, name: &str, response: &egui::Response) {
         );
     });
 }
-// Front-view Ibex geometry. The pads and system buttons are orientation cues;
-// binding indicators remain the sixteen controls supported by the input model.
+// Display wording stays separate from profile semantics and source bindings.
+fn compact_binding(label: &str) -> String {
+    label
+        .replace(" / Function layer", " :: Fn")
+        .replace(" / Cursor gyro", " :: Gyro")
+        .replace("Function layer", "Fn")
+        .replace("Cursor gyro", "Gyro")
+        .replace("Mouse left", "Left click")
+        .replace("Mouse right", "Right click")
+        .replace("Mouse middle", "Middle click")
+        .replace("CAPSLOCK", "Caps Lock")
+        .replace("UP_ARROW", "↑")
+        .replace("RIGHT_ARROW", "→")
+        .replace("DOWN_ARROW", "↓")
+        .replace("LEFT_ARROW", "←")
+        .replace("_ARROW", "")
+        .replace("Unbound", "—")
+}
+
+fn gesture_binding(tap: &str, hold: &str) -> String {
+    format!("{} :: {}", compact_binding(tap), compact_binding(hold))
+}
+
+// Symmetric Ibex controls in a single, softly rounded shell. Physical control
+// names live in hover help; the drawing gives its space to the actual bindings.
 fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
     let available = ui.available_width();
-    let width = available.min(780.0);
+    let width = available.min(840.0);
     let scale = width / 1000.0;
     let (row, _) =
-        ui.allocate_exact_size(egui::vec2(available, 510.0 * scale), egui::Sense::hover());
+        ui.allocate_exact_size(egui::vec2(available, 505.0 * scale), egui::Sense::hover());
     let area = egui::Rect::from_center_size(row.center(), egui::vec2(width, row.height()));
     let p = ui.painter();
     let at = |x: f32, y: f32| area.min + egui::vec2(x * scale, y * scale);
     let box_at = |x: f32, y: f32, w: f32, h: f32| {
         egui::Rect::from_center_size(at(x, y), egui::vec2(w * scale, h * scale))
     };
-    let shell = Color32::from_rgb(34, 38, 44);
-    let edge = Color32::from_rgb(65, 72, 82);
-    let dark = Color32::from_rgb(17, 21, 27);
-    let teal = ACCENT;
-    // Sample cubic curves so the body keeps the controller's curved silhouette.
-    let curve = |points: [[f32; 2]; 4]| -> Vec<egui::Pos2> {
-        (0..=16)
-            .map(|i| {
-                let t = i as f32 / 16.0;
-                let u = 1.0 - t;
-                let x = u * u * u * points[0][0]
-                    + 3.0 * u * u * t * points[1][0]
-                    + 3.0 * u * t * t * points[2][0]
-                    + t * t * t * points[3][0];
-                let y = u * u * u * points[0][1]
-                    + 3.0 * u * u * t * points[1][1]
-                    + 3.0 * u * t * t * points[2][1]
-                    + t * t * t * points[3][1];
-                at(x, y)
-            })
-            .collect()
-    };
-    // Rounded descending grips sit behind the broad upper shell.
-    for mirror in [false, true] {
-        let transform = |v: egui::Pos2| {
-            if mirror {
-                egui::pos2(at(1000.0, 0.0).x - (v.x - area.left()), v.y)
-            } else {
-                v
-            }
-        };
-        let mut grip = curve([
-            [225.0, 110.0],
-            [182.0, 145.0],
-            [160.0, 310.0],
-            [158.0, 407.0],
-        ]);
-        grip.extend(curve([
-            [158.0, 407.0],
-            [155.0, 477.0],
-            [185.0, 493.0],
-            [224.0, 490.0],
-        ]));
-        grip.extend(curve([
-            [224.0, 490.0],
-            [259.0, 487.0],
-            [256.0, 423.0],
-            [288.0, 402.0],
-        ]));
-        grip.extend(curve([
-            [288.0, 402.0],
-            [321.0, 320.0],
-            [306.0, 173.0],
-            [225.0, 110.0],
-        ]));
-        p.add(egui::Shape::convex_polygon(
-            grip.into_iter().map(transform).collect(),
-            shell,
-            egui::Stroke::new(1.5_f32, edge),
-        ));
-    }
-    let mut top = curve([[225.0, 110.0], [245.0, 90.0], [755.0, 90.0], [775.0, 110.0]]);
-    top.extend(curve([
-        [775.0, 110.0],
-        [808.0, 135.0],
-        [824.0, 265.0],
-        [818.0, 355.0],
-    ]));
-    top.extend(curve([
-        [818.0, 355.0],
-        [805.0, 402.0],
-        [742.0, 412.0],
-        [700.0, 410.0],
-    ]));
-    top.push(at(300.0, 410.0));
-    top.extend(curve([
-        [300.0, 410.0],
-        [258.0, 412.0],
-        [195.0, 402.0],
-        [182.0, 355.0],
-    ]));
-    top.extend(curve([
-        [182.0, 355.0],
-        [176.0, 265.0],
-        [192.0, 135.0],
-        [225.0, 110.0],
-    ]));
-    p.add(egui::Shape::convex_polygon(
-        top,
-        shell,
-        egui::Stroke::new(1.5_f32, edge),
-    ));
-    // Recessed lower panel and the two canted square trackpads.
-    p.rect_filled(
-        box_at(500.0, 350.0, 460.0, 126.0),
-        35.0 * scale,
-        Color32::from_rgb(33, 38, 44),
-    );
-    for (n, (x, angle)) in [(360.0, 0.12_f32), (640.0, -0.12_f32)]
-        .into_iter()
-        .enumerate()
-    {
-        let center = at(x, 350.0);
-        let rotate = |q: egui::Pos2| {
-            let d = q - center;
-            center
-                + egui::vec2(
-                    d.x * angle.cos() - d.y * angle.sin(),
-                    d.x * angle.sin() + d.y * angle.cos(),
-                )
-        };
-        let mut outline = Vec::new();
-        for (cx, cy, start) in [
-            (-48.0, -48.0, 180.0_f32),
-            (48.0, -48.0, 270.0),
-            (48.0, 48.0, 0.0),
-            (-48.0, 48.0, 90.0),
-        ] {
-            for i in 0..=8 {
-                let a = (start + i as f32 * 90.0 / 8.0).to_radians();
-                outline.push(rotate(
-                    center
-                        + egui::vec2((cx + 18.0 * a.cos()) * scale, (cy + 18.0 * a.sin()) * scale),
-                ));
-            }
+    let shell = Color32::from_rgb(35, 39, 46);
+    let edge = Color32::from_rgb(66, 73, 84);
+    let dark = Color32::from_rgb(21, 24, 29);
+    let mut outline = Vec::new();
+    for [a, b, c, d] in [
+        [[212., 134.], [280., 106.], [387., 116.], [500., 116.]],
+        [[500., 116.], [613., 116.], [720., 106.], [788., 134.]],
+        [[788., 134.], [838., 158.], [850., 228.], [874., 313.]],
+        [[874., 313.], [893., 380.], [916., 455.], [875., 479.]],
+        [[875., 479.], [825., 510.], [778., 453.], [747., 418.]],
+        [[747., 418.], [708., 445.], [632., 440.], [500., 440.]],
+        [[500., 440.], [368., 440.], [292., 445.], [253., 418.]],
+        [[253., 418.], [222., 453.], [175., 510.], [125., 479.]],
+        [[125., 479.], [84., 455.], [107., 380.], [126., 313.]],
+        [[126., 313.], [150., 228.], [162., 158.], [212., 134.]],
+    ] {
+        for i in 0..20 {
+            let t = i as f32 / 20.0;
+            let u = 1.0 - t;
+            outline.push(at(
+                u * u * u * a[0]
+                    + 3.0 * u * u * t * b[0]
+                    + 3.0 * u * t * t * c[0]
+                    + t * t * t * d[0],
+                u * u * u * a[1]
+                    + 3.0 * u * u * t * b[1]
+                    + 3.0 * u * t * t * c[1]
+                    + t * t * t * d[1],
+            ));
         }
-        p.add(egui::Shape::convex_polygon(
-            outline,
-            dark,
-            egui::Stroke::new(2.0_f32, edge),
-        ));
-        p.text(
-            center,
-            egui::Align2::CENTER_CENTER,
-            match data.state.input.pads[n].as_ref() {
-                Some(pad) if pad.touching => "TOUCH",
-                Some(_) => "TRACKPAD",
-                None => "NO TOUCH DATA",
-            },
-            egui::FontId::proportional(9.0 * scale),
-            Color32::from_rgb(85, 95, 107),
+    }
+    // This outline is star-shaped around the bridge. A triangle fan preserves
+    // its concave underside, unlike egui's convex-polygon fill.
+    let mut mesh = egui::Mesh::default();
+    mesh.colored_vertex(at(500.0, 235.0), shell);
+    for pos in &outline {
+        mesh.colored_vertex(*pos, shell);
+    }
+    for n in 0..outline.len() {
+        mesh.add_triangle(0, (n + 1) as u32, ((n + 1) % outline.len() + 1) as u32);
+    }
+    p.add(egui::Shape::mesh(mesh));
+    p.add(egui::Shape::closed_line(
+        outline,
+        egui::Stroke::new(1.2_f32, edge),
+    ));
+
+    // Quiet hardware cues, without placeholder text inside the trackpads.
+    for (n, x) in [327.0, 673.0].into_iter().enumerate() {
+        let pad = box_at(x, 366.0, 148.0, 124.0);
+        p.rect_filled(
+            pad.expand(4.0 * scale),
+            25.0 * scale,
+            Color32::from_rgb(29, 33, 39),
+        );
+        p.rect_filled(pad, 22.0 * scale, dark);
+        p.rect_stroke(
+            pad,
+            22.0 * scale,
+            egui::Stroke::new(1.0_f32, edge),
+            egui::StrokeKind::Inside,
         );
         if data.state.status == InputStatus::Live
-            && let Some(pad) = data.state.input.pads[n].as_ref().filter(|pad| pad.touching)
+            && let Some(touch) = data.state.input.pads[n].as_ref().filter(|pad| pad.touching)
         {
-            let xy = pad
+            let xy = touch
                 .position
                 .map(|v| f32::from(v.clamp(-1000, 1000)) / 1000.0);
-            let dot = rotate(center + egui::vec2(xy[0] * 52.0 * scale, xy[1] * 52.0 * scale));
-            p.circle_filled(dot, 6.0 * scale, teal);
-            p.circle_stroke(dot, 9.0 * scale, egui::Stroke::new(1.0_f32, teal));
+            let dot = pad.center() + egui::vec2(xy[0] * 55.0, xy[1] * 43.0) * scale;
+            p.circle_filled(dot, 5.0 * scale, ACCENT);
+            p.circle_stroke(dot, 9.0 * scale, egui::Stroke::new(1.0_f32, ACCENT));
         }
     }
-    p.circle_filled(at(500.0, 190.0), 22.0 * scale, dark);
+    p.circle_filled(at(500.0, 222.0), 19.0 * scale, dark);
     p.circle_stroke(
-        at(500.0, 190.0),
-        22.0 * scale,
-        egui::Stroke::new(1.5_f32, edge),
-    );
-    p.text(
-        at(500.0, 190.0),
-        egui::Align2::CENTER_CENTER,
-        "STEAM",
-        egui::FontId::proportional(9.0 * scale),
-        Color32::GRAY,
+        at(500.0, 222.0),
+        19.0 * scale,
+        egui::Stroke::new(1.0_f32, edge),
     );
     p.circle_filled(
-        at(500.0, 143.0),
-        2.0 * scale,
+        at(500.0, 222.0),
+        3.0 * scale,
         if data.state.status == InputStatus::Live {
-            teal
+            ACCENT
         } else {
             edge
         },
     );
-    p.rect_filled(box_at(500.0, 350.0, 48.0, 25.0), 12.0 * scale, dark);
-    for x in [490.0, 500.0, 510.0] {
-        p.circle_filled(at(x, 350.0), 2.0 * scale, edge);
+    p.rect_filled(box_at(500.0, 350.0, 42.0, 18.0), 9.0 * scale, dark);
+    for x in [491.0, 500.0, 509.0] {
+        p.circle_filled(at(x, 350.0), 1.5 * scale, edge);
     }
-    // The D-pad is one connected cross, with four individually lit directions.
-    p.rect_filled(box_at(275.0, 200.0, 42.0, 126.0), 8.0 * scale, dark);
-    p.rect_filled(box_at(275.0, 200.0, 126.0, 42.0), 8.0 * scale, dark);
+
     let labels = data.state.control_labels(&data.profile);
     let positions = [
-        (725.0, 242.0),
-        (767.0, 200.0),
-        (683.0, 200.0),
-        (725.0, 158.0),
-        (375.0, 128.0),
-        (625.0, 128.0),
-        (275.0, 158.0),
-        (317.0, 200.0),
-        (275.0, 242.0),
-        (233.0, 200.0),
-        (402.0, 243.0),
-        (598.0, 243.0),
-        (300.0, 76.0),
-        (700.0, 76.0),
-        (300.0, 30.0),
-        (700.0, 30.0),
+        (754.0, 289.0),
+        (808.0, 235.0),
+        (700.0, 235.0),
+        (754.0, 181.0),
+        (404.0, 151.0),
+        (596.0, 151.0),
+        (246.0, 189.0),
+        (292.0, 235.0),
+        (246.0, 281.0),
+        (200.0, 235.0),
+        (405.0, 252.0),
+        (595.0, 252.0),
+        (280.0, 81.0),
+        (720.0, 81.0),
+        (280.0, 32.0),
+        (720.0, 32.0),
     ];
-    for (n, c) in Control::ALL.into_iter().enumerate() {
+    p.rect_filled(box_at(246.0, 235.0, 50.0, 142.0), 12.0 * scale, dark);
+    p.rect_filled(box_at(246.0, 235.0, 142.0, 50.0), 12.0 * scale, dark);
+    for (n, control) in Control::ALL.into_iter().enumerate() {
         let (x, y) = positions[n];
         let center = at(x, y);
-        let down = data.state.status == InputStatus::Live && data.state.input.down(c);
+        let down = data.state.status == InputStatus::Live && data.state.input.down(control);
         let fill = if down {
-            Color32::from_rgb(27, 82, 70)
+            Color32::from_rgb(36, 70, 61)
         } else {
             dark
         };
         let stroke = egui::Stroke::new(
-            if down { 2.0_f32 } else { 1.0_f32 },
-            if down { teal } else { edge },
+            if down { 1.8_f32 } else { 1.0_f32 },
+            if down { ACCENT } else { edge },
         );
-        let (w, h) = match c {
-            Control::L1 | Control::R1 | Control::L2 | Control::R2 => (160.0, 38.0),
-            Control::Select | Control::Start => (104.0, 36.0),
-            Control::L3 | Control::R3 => (86.0, 86.0),
-            _ => (42.0, 42.0),
+        let (w, h) = match control {
+            Control::L1 | Control::R1 | Control::L2 | Control::R2 => (244.0, 40.0),
+            Control::Select | Control::Start => (168.0, 38.0),
+            Control::L3 | Control::R3 => (110.0, 110.0),
+            Control::A | Control::B | Control::X | Control::Y => (60.0, 60.0),
+            _ => (50.0, 50.0),
         };
         let card = box_at(x, y, w, h);
-        if matches!(c, Control::L3 | Control::R3) {
-            p.circle_filled(
-                center + egui::vec2(0.0, 5.0 * scale),
-                48.0 * scale,
-                Color32::from_rgb(21, 25, 30),
-            );
-            p.circle_filled(center, 43.0 * scale, fill);
-            p.circle_stroke(center, 43.0 * scale, stroke);
-            p.circle_stroke(
-                center,
-                36.0 * scale,
-                egui::Stroke::new(2.0_f32, Color32::from_rgb(65, 72, 81)),
-            );
+        if matches!(control, Control::L3 | Control::R3) {
+            p.circle_filled(center, 57.0 * scale, Color32::from_rgb(17, 20, 25));
+            p.circle_stroke(center, 57.0 * scale, egui::Stroke::new(1.0_f32, edge));
+            p.circle_filled(center, 49.0 * scale, fill);
+            p.circle_stroke(center, 49.0 * scale, stroke);
+            if data.state.status == InputStatus::Live {
+                let side = n - 10;
+                if data.state.input.touches[side] == Some(true) {
+                    p.circle_stroke(center, 54.0 * scale, egui::Stroke::new(2.0_f32, ACCENT));
+                }
+                if let Some(xy) = data.state.input.stick_positions[side] {
+                    let delta = egui::vec2(f32::from(xy[0]), f32::from(xy[1])) / 1000.0;
+                    if delta.length() > 0.08 {
+                        // Keep motion feedback on the rim, clear of binding text.
+                        let dot = center + delta.normalized() * 53.0 * scale;
+                        p.circle_filled(dot, (2.0 + 3.0 * delta.length().min(1.0)) * scale, ACCENT);
+                    }
+                }
+            }
         } else if n < 4 {
-            p.circle_filled(center, 23.0 * scale, fill);
-            p.circle_stroke(center, 23.0 * scale, stroke);
+            p.circle_filled(center, 30.0 * scale, fill);
+            p.circle_stroke(center, 30.0 * scale, stroke);
         } else {
-            p.rect_filled(card, if n >= 12 { 10.0 * scale } else { 7.0 * scale }, fill);
-            if down || matches!(c, Control::Select | Control::Start) {
-                p.rect_stroke(card, 7.0 * scale, stroke, egui::StrokeKind::Inside);
+            let radius = if n >= 12 { 12.0 } else { 9.0 } * scale;
+            p.rect_filled(card, radius, fill);
+            if down || n < 6 || n >= 12 {
+                p.rect_stroke(card, radius, stroke, egui::StrokeKind::Inside);
             }
         }
-        let caption = if n >= 14 {
-            format!(
-                "{}   {}%",
-                c.label(),
-                data.state.input.triggers[n - 14] / 10
-            )
-        } else {
-            c.label().into()
+        let mut label = compact_binding(&labels[n]);
+        if n < 4 {
+            // Conventional keycap abbreviations avoid splitting a key name
+            // across lines on the small face buttons.
+            label = match label.as_str() {
+                "Escape" => "Esc".into(),
+                "Backspace" => "Bksp".into(),
+                _ => label,
+            };
+        }
+        if matches!(labels[n].as_str(), "Timed gesture" | "Modifier")
+            && let Some(recipe) = data
+                .profile
+                .dashboard
+                .as_ref()
+                .and_then(|d| d.recipe(data.state.mode, control))
+        {
+            label = gesture_binding(&recipe.tap_label, &recipe.hold_label);
+        }
+        let arrow = match label.as_str() {
+            "↑" => Some(egui::vec2(0.0, -1.0)),
+            "→" => Some(egui::vec2(1.0, 0.0)),
+            "↓" => Some(egui::vec2(0.0, 1.0)),
+            "←" => Some(egui::vec2(-1.0, 0.0)),
+            _ => None,
         };
-        p.text(
-            center - egui::vec2(0.0, 10.0 * scale),
-            egui::Align2::CENTER_CENTER,
-            caption,
-            egui::FontId::proportional((11.0 * scale).max(10.0)),
-            if down {
-                teal
-            } else {
-                Color32::from_rgb(156, 170, 184)
-            },
-        );
-        let label = labels[n]
-            .replace("Function layer", "Fn")
-            .replace("Cursor gyro", "Gyro")
-            .replace("_ARROW", "");
-        let mut job = egui::text::LayoutJob::simple(
-            label.clone(),
-            egui::FontId::proportional(if label.len() > 7 {
-                (12.0 * scale).max(11.0)
-            } else {
-                (17.0 * scale).max(13.0)
-            }),
-            Color32::WHITE,
-            (w - 7.0) * scale,
-        );
-        job.wrap.max_rows = 1;
-        let galley = p.layout_job(job);
-        p.galley(
-            egui::pos2(center.x - galley.size().x / 2.0, center.y),
-            galley,
-            Color32::WHITE,
-        );
-        if n >= 14 {
-            let bar = egui::Rect::from_min_size(
-                card.left_bottom() - egui::vec2(0.0, 3.0 * scale),
-                egui::vec2(
-                    w * scale * data.state.input.triggers[n - 14].min(1000) as f32 / 1000.0,
-                    3.0 * scale,
-                ),
+        if let Some(direction) = arrow {
+            // Default egui fonts do not include these keyboard-arrow glyphs.
+            p.arrow(
+                center - direction * 10.0 * scale,
+                direction * 20.0 * scale,
+                egui::Stroke::new(1.8_f32, if down { ACCENT } else { Color32::WHITE }),
             );
-            p.rect_filled(bar, 2.0 * scale, teal);
+        } else {
+            let font_size = if label.chars().count() <= 2 {
+                23.0
+            } else {
+                17.0
+            };
+            let mut job = egui::text::LayoutJob::simple(
+                label,
+                egui::FontId::proportional((font_size * scale).max(13.0)),
+                if down {
+                    ACCENT
+                } else {
+                    Color32::from_rgb(240, 243, 248)
+                },
+                (w - 12.0) * scale,
+            );
+            job.halign = egui::Align::Center;
+            job.wrap.max_rows = if matches!(control, Control::L3 | Control::R3) || n < 4 {
+                2
+            } else {
+                1
+            };
+            let galley = p.layout_job(job);
+            p.galley(
+                center - egui::vec2(0.0, galley.size().y / 2.0),
+                galley,
+                Color32::WHITE,
+            );
+        }
+        if n >= 14 {
+            let track = egui::Rect::from_min_size(
+                card.left_bottom() + egui::vec2(12.0, -4.0) * scale,
+                egui::vec2((w - 24.0) * scale, 2.0 * scale),
+            );
+            p.rect_filled(track, 1.0, BORDER);
+            let travel = data.state.input.triggers[n - 14].min(1000) as f32 / 1000.0;
+            if travel > 0.0 {
+                p.rect_filled(
+                    egui::Rect::from_min_size(
+                        track.min,
+                        egui::vec2(track.width() * travel, track.height()),
+                    ),
+                    1.0,
+                    ACCENT,
+                );
+            }
             if let Some(t) = data
                 .profile
                 .dashboard
                 .as_ref()
                 .and_then(|d| d.trigger_thresholds[n - 14])
             {
-                let x = card.left() + card.width() * t as f32 / 1000.0;
+                let x = track.left() + track.width() * t as f32 / 1000.0;
                 p.line_segment(
                     [
-                        egui::pos2(x, card.bottom() - 7.0 * scale),
-                        egui::pos2(x, card.bottom()),
+                        egui::pos2(x, track.top() - 3.0),
+                        egui::pos2(x, track.bottom()),
                     ],
-                    egui::Stroke::new(1.0_f32, Color32::WHITE),
+                    egui::Stroke::new(1.0_f32, ACCENT),
                 );
             }
         }
-        if matches!(c, Control::L3 | Control::R3) && data.state.status == InputStatus::Live {
-            let side = n - 10;
-            if let Some(xy) = data.state.input.stick_positions[side] {
-                let delta = egui::vec2(f32::from(xy[0]), f32::from(xy[1])) / 1000.0;
-                let dot = center + delta * 32.0 * scale;
-                let color = if data.state.input.touches[side] == Some(true) {
-                    teal
-                } else {
-                    Color32::from_rgb(244, 191, 88)
-                };
-                p.line_segment([center, dot], egui::Stroke::new(1.5_f32, color));
-                p.circle_stroke(dot, 5.0 * scale, egui::Stroke::new(2.0_f32, color));
-                if data.state.input.touches[side] == Some(true) {
-                    p.circle_filled(dot, 2.5 * scale, color);
-                }
-            }
+        let response = ui.interact(card, egui::Id::new(("control", n)), egui::Sense::hover());
+        let mut help = format!("{}: {}", control.label(), labels[n]);
+        if n >= 14 {
+            help.push_str(&format!(
+                "\nTravel: {}%",
+                data.state.input.triggers[n - 14] / 10
+            ));
         }
-        ui.interact(card, egui::Id::new(("control", n)), egui::Sense::hover())
-            .on_hover_text(format!("{}: {}", c.label(), labels[n]));
+        response.on_hover_text(help);
     }
 }
 fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
@@ -853,28 +812,14 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
     egui::Frame::new().fill(SURFACE).stroke(egui::Stroke::new(1.0_f32, BORDER)).corner_radius(14.0)
         .inner_margin(16.0).show(ui, |ui| {
         ui.set_width(ui.available_width());
-        ui.horizontal(|ui| {
-            ui.strong(format!("{owner}  ·  {}", if combined { "Combined modifiers" } else { "Hold / Tap, then hold" }));
+        ui.horizontal_wrapped(|ui| {
+            ui.label(RichText::new(gesture_binding(tap, hold)).size(19.0).color(Color32::WHITE))
+                .on_hover_text(owner);
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                ui.small(if combined { "Two modifiers" } else { "Timed gestures" });
+                ui.label(RichText::new(lane.phase.label()).size(12.0).color(if live { teal } else { muted }));
             });
         });
         ui.add_space(4.0);
-        if combined {
-            ui.columns(2, |cols| {
-                cols[0].label(RichText::new(format!("RELEASE   {tap}")).color(amber).size(15.0));
-                cols[1].label(RichText::new(format!("HOLD   {hold}")).color(teal).size(15.0));
-            });
-        } else if ui.available_width() < 520.0 {
-            for outcome in &outcomes { ui.label(RichText::new(outcome).size(13.0)); }
-        } else {
-            ui.columns(3, |cols| {
-                cols[0].label(RichText::new(&outcomes[0]).color(teal).size(14.0));
-                cols[1].label(RichText::new(&outcomes[1]).color(amber).size(14.0));
-                cols[2].label(RichText::new(&outcomes[2]).color(amber).size(14.0));
-            });
-        }
-        ui.add_space(7.0);
         let (stage, duration, start, end, hint) = match lane.phase {
             Phase::Window => (1, r.window_ms, "Released".to_string(), format!("Window closes {} ms", r.window_ms),
                 format!("{} at {} ms after release. Press again before this window closes.", r.tap_label, r.output_ms)),
@@ -890,12 +835,6 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
                     _ => format!("Release before {hold_ms} ms for {tap}. Keep holding for {hold}."),
                 }),
         };
-        ui.horizontal_wrapped(|ui| {
-            for (i, title) in ["1  Initial hold", "2  Release window", "3  Second hold"].iter().enumerate() {
-                ui.label(RichText::new(*title).color(if i == stage { Color32::WHITE } else { muted }));
-                if i < 2 { ui.label(" / "); }
-            }
-        });
         let (bar, _) = ui.allocate_exact_size(egui::vec2(ui.available_width(), 6.0), egui::Sense::hover());
         let painter = ui.painter();
         painter.rect_filled(bar, 6.0, Color32::from_rgb(49, 61, 77));
@@ -917,11 +856,19 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
             }
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center),|ui| { ui.small(end); });
         });
-        ui.collapsing("Gesture details", |ui| { ui.label(hint); });
-        if !live { ui.small("Connect a controller to animate this timeline."); }
-        else if lane.phase == Phase::Idle {
-            ui.small("Press a bumper, Select or Start. The bar follows its timed gesture.");
-        }
+        ui.collapsing("Gesture details", |ui| {
+            ui.label("Tap / tap, then hold :: Hold");
+            if combined {
+                ui.label(format!("Release: {tap}. Hold: {hold}."));
+            } else {
+                for outcome in &outcomes { ui.label(outcome); }
+            }
+            ui.label(hint);
+            if !live { ui.small("Connect a controller to animate this timeline."); }
+            else if lane.phase == Phase::Idle {
+                ui.small("Press a bumper, Select or Start. The bar follows its timed gesture.");
+            }
+        });
     });
     if let Some(message) = &data.state.gestures.uncertainty {
         ui.colored_label(Color32::YELLOW, message);

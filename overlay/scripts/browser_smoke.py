@@ -182,6 +182,9 @@ def main():
         js("document.querySelector('canvas').dispatchEvent(new KeyboardEvent('keyup',{key:'F3',code:'F3',bubbles:true}))")
         key('F3')
         wait_for(lambda: snapshot()['labels'] == ['Enter', 'Escape', 'Backspace', 'Tab'], 'F3 did not select Menu')
+        if args.screenshot:
+            args.screenshot.parent.mkdir(parents=True, exist_ok=True)
+            args.screenshot.with_name('menu.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
         key('F4')
         assert snapshot()['state']['mode'] == 'menu', 'F4 should be unassigned'
         # Actual pointer interaction with the shared mode button.
@@ -189,6 +192,8 @@ def main():
         wait_for(lambda: snapshot()['state']['mode'] == 'base', 'Base mode button did not work')
         if args.screenshot:
             args.screenshot.parent.mkdir(parents=True, exist_ok=True)
+            request('POST', f'/session/{session}/window/rect', {'width': 1060, 'height': 1100})
+            time.sleep(0.2)
             args.screenshot.write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
             request('POST', f'/session/{session}/window/rect', {'width': 640, 'height': 820})
             time.sleep(0.2)
@@ -196,7 +201,7 @@ def main():
             for name in ('settings', 'mode:0', 'mode:1', 'mode:2', 'connect'):
                 x, y = snapshot()['ui_targets'][name]
                 assert 0 <= x < 640 and y >= 0, f'{name} outside narrow viewport'
-            request('POST', f'/session/{session}/window/rect', {'width': 1060, 'height': 920})
+            request('POST', f'/session/{session}/window/rect', {'width': 1060, 'height': 1100})
             time.sleep(0.2)
         # Objects use native prototypes so the adapter exercises web-sys casts.
         js("""

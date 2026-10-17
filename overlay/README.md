@@ -41,11 +41,13 @@ Otherwise reselect the controller if its instance ID changed.
 
 Select **Base / Gyro**, **Steering** or **Menu**, using the buttons or F1/F2/F3.
 The mode is a manual reference selection; it does not change Steam's mode.
-The diagram shows face buttons, Start/Select, all four D-pad directions, both
-stick clicks, bumpers and triggers. Pressed controls light up; trigger bars show
-physical travel. The Ibex-shaped diagram uses symmetric sticks and tilted
-trackpads. Stick rings show deflection, turning green with capacitive thumb
-contact; trackpad dots show actual contact coordinates. Standard browser Gamepad
+The diagram places bindings on the face buttons, Start/Select, all four D-pad
+directions, both stick clicks, bumpers and triggers. Physical button names are
+available on hover. Pressed controls light up; trigger bars show physical travel.
+The rounded Ibex diagram uses symmetric sticks and recessed trackpads.
+Stick-rim dots show deflection direction and grow with its magnitude; rings
+turn green with capacitive thumb contact. Trackpad dots show actual contact
+coordinates. Standard browser Gamepad
 input has stick axes but no pad/touch data; use the companion for those markers.
 System buttons remain visual orientation cues.
 Labels describe a fresh press in the inferred context, including
@@ -53,6 +55,9 @@ its timed-gesture phase. They do not describe keys already held in the game. F4 
 The dark viewer keeps mode controls above the scrolling reference, with gesture
 details and reading help available on demand. Narrow windows can scroll the
 controller diagram horizontally to keep labels readable.
+Gesture bindings use **Escape :: Fn** or **Scroll down :: Gyro**: before `::`
+is the tap or tap-then-hold output; after it is the hold action. The timer uses
+the same compact wording, with the full gesture sequence in **Gesture details**.
 
 Trigger labels include both soft-pull and full-pull bindings when configured.
 Holding Select or Start to enter Fn shows **L2: Full: F12** and **R2: Full: F11**
