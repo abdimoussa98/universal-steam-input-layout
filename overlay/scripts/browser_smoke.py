@@ -190,6 +190,14 @@ def main():
         if args.screenshot:
             args.screenshot.parent.mkdir(parents=True, exist_ok=True)
             args.screenshot.write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+            request('POST', f'/session/{session}/window/rect', {'width': 640, 'height': 820})
+            time.sleep(0.2)
+            args.screenshot.with_name('narrow.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+            for name in ('settings', 'mode:0', 'mode:1', 'mode:2', 'connect'):
+                x, y = snapshot()['ui_targets'][name]
+                assert 0 <= x < 640 and y >= 0, f'{name} outside narrow viewport'
+            request('POST', f'/session/{session}/window/rect', {'width': 1060, 'height': 920})
+            time.sleep(0.2)
         # Objects use native prototypes so the adapter exercises web-sys casts.
         js("""
           window.mockButtons=Array(17).fill(0);window.mockButtons[4]=1;window.mockMapping='standard';window.mockConnected=true;
@@ -250,6 +258,21 @@ def main():
         js('window.mockButtons.fill(0)')
         wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase']=='idle', 'Hold release left a timer running')
         assert len(snapshot()['control_labels'])==16
+        # Fn outputs are full-pull trigger clicks, not the soft-pull edge.
+        for mode_index, mode in enumerate(('base', 'steering', 'menu')):
+            click_target(f'mode:{mode_index}')
+            wait_for(lambda: snapshot()['state']['mode']==mode
+                     and snapshot()['state']['gestures']['initialized']
+                     and not any(snapshot()['state']['input']['buttons']), 'Fn test mode did not settle')
+            for button_index, lane_index in ((8, 2), (9, 3)):
+                js('window.mockButtons[arguments[0]]=1', button_index)
+                wait_for(lambda: snapshot()['state']['gestures']['lanes'][lane_index]['phase']=='hold', 'Fn hold did not activate')
+                assert snapshot()['control_labels'][14:16]==['Full: F12', 'Full: F11'], 'Fn trigger labels missing'
+                if args.screenshot and mode=='base' and button_index==8:
+                    args.screenshot.with_name('fn-triggers.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+                js('window.mockButtons.fill(0)')
+                wait_for(lambda: snapshot()['state']['gestures']['lanes'][lane_index]['phase']=='idle', 'Fn hold did not release')
+        print('PASS: Fn full-pull trigger labels for Select/Start in all three modes')
         # Directional Steering labels follow axes across the browser/WASM boundary.
         click_target('mode:1')
         wait_for(lambda: snapshot()['state']['mode']=='steering', 'Steering shortcut failed')

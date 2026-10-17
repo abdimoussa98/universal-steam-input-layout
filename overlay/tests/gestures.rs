@@ -166,6 +166,31 @@ fn menu_hold_changes_all_labels_and_legacy_profiles_do_not_invent_controls() {
 
 #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
 #[cfg_attr(not(target_arch = "wasm32"), test)]
+fn fn_hold_exposes_full_pull_trigger_bindings_and_release_restores_base() {
+    for mode in Mode::ALL {
+        for owner in [Control::Select, Control::Start] {
+            let mut s = State::default();
+            s.select_mode(mode);
+            let mut i = InputFrame::default();
+            step(&mut s, &i, 0);
+            let original = s.control_labels(&profile());
+            press(&mut i, owner, true);
+            step(&mut s, &i, 10);
+            step(&mut s, &i, 210);
+            let labels = s.control_labels(&profile());
+            assert_eq!(labels[Control::L2 as usize], "Full: F12");
+            assert_eq!(labels[Control::R2 as usize], "Full: F11");
+            press(&mut i, owner, false);
+            step(&mut s, &i, 220);
+            let labels = s.control_labels(&profile());
+            assert_eq!(labels[Control::L2 as usize], original[Control::L2 as usize]);
+            assert_eq!(labels[Control::R2 as usize], original[Control::R2 as usize]);
+        }
+    }
+}
+
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
+#[cfg_attr(not(target_arch = "wasm32"), test)]
 fn touch_release_cancels_the_pending_window_output() {
     let mut s = State::default();
     let mut i = InputFrame {

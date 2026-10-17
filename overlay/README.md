@@ -50,6 +50,14 @@ input has stick axes but no pad/touch data; use the companion for those markers.
 System buttons remain visual orientation cues.
 Labels describe a fresh press in the inferred context, including
 its timed-gesture phase. They do not describe keys already held in the game. F4 is unassigned.
+The dark viewer keeps mode controls above the scrolling reference, with gesture
+details and reading help available on demand. Narrow windows can scroll the
+controller diagram horizontally to keep labels readable.
+
+Trigger labels include both soft-pull and full-pull bindings when configured.
+Holding Select or Start to enter Fn shows **L2: Full: F12** and **R2: Full: F11**
+in Base/Gyro, Steering and Menu. These are full-pull outputs; the travel bars
+still show physical pressure without inventing an activation threshold.
 
 One central timer follows the active L1, R1, Select or Start gesture. It names
 **Hold / Tap, then hold**, and also shows the separate single Tap output where

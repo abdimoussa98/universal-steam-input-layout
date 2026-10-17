@@ -4,7 +4,7 @@ import hashlib
 import json
 import unittest
 from steam_layout.overlay_profile import export_profile, display_binding
-from steam_layout.model import entries
+from steam_layout.model import Layout, entries
 from tests.support.sources import ROOT, load_json
 
 SOURCE = ROOT / 'versions/ibex/1.0/ibex_single-set-default_hold-gyro_1.0.json'
@@ -70,6 +70,32 @@ class OverlayProfileTests(unittest.TestCase):
         page = next(p for p in profile['dashboard']['pages']
                     if p['mode']=='base' and p['phase']=='select:pressed')
         self.assertEqual(page['bindings']['select'], {'kind':'label','text':'Timed gesture'})
+
+    def test_fn_triggers_show_full_pull_in_each_mode_and_menu_hold(self):
+        for mode in ('base', 'steering', 'menu'):
+            for owner in ('select', 'start'):
+                page = next(p for p in self.profile['dashboard']['pages']
+                            if p['mode']==mode and p['phase']==owner+':hold')
+                self.assertEqual(page['bindings']['l2'], {'kind':'label','text':'Full: F12'})
+                self.assertEqual(page['bindings']['r2'], {'kind':'label','text':'Full: F11'})
+
+    def test_trigger_stages_follow_source_and_report_unsupported_full_pull(self):
+        data = copy.deepcopy(self.source)
+        trigger = Layout(data).active('Menu Left: Fn Layer')['left_trigger']['inputs']
+        trigger['click']['activators'] = {'Full_Press': {'bindings': {'binding':'key_press F10'}}}
+        trigger['edge']['activators'] = {'Full_Press': {'bindings': {'binding':'key_press F9'}}}
+        def export():
+            profile, report = export_profile(json.dumps(data).encode(), controller='ibex', version='1.0')
+            page = next(p for p in profile['dashboard']['pages']
+                        if p['mode']=='base' and p['phase']=='select:hold')
+            return page['bindings']['l2'], report
+        self.assertEqual(export()[0], {'kind':'label','text':'Soft: F9 / Full: F10'})
+        trigger['click']['activators']['Full_Press']['bindings']['binding'] = 'unknown_command test'
+        binding, report = export()
+        self.assertEqual(binding['kind'], 'unavailable')
+        self.assertTrue(any(i.get('stage')=='full' and i['control']=='l2' for i in report['issues']))
+        trigger['click']['activators']['Full_Press']['bindings']['binding'] = 'controller_action empty_binding'
+        self.assertEqual(export()[0], {'kind':'label','text':'F9'})
 
     def test_real_layout_labels_and_identity(self):
         raw = self.raw

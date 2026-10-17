@@ -171,34 +171,51 @@ def export_dashboard(layout, report):
         if any(t.endswith('Fn Layer') for t in targets): return 'Function layer'
         if any(t.endswith(': Entry Point') for t in targets): return 'Timed gesture'
         return None
+    def binding(stack, source, name, held, optional=False):
+        kind, owner, acts, _ = resolve(layout, stack, source, name)
+        if kind in ('disabled', 'mode'):
+            b, issues = {'kind':'unbound'}, []
+        elif kind == 'none':
+            b, issues = ({'kind':'unbound'} if optional else {'kind':'unavailable','reason':'No binding definition'}), []
+        else:
+            b, issues = display_binding(acts, held)
+            # A repeating cancellation removes its own temporary cover on
+            # this fresh press, exposing the actual binding underneath.
+            # Empty bindings and mode barriers remain explicit blockers.
+            for _ in range(len(stack)):
+                cancels_self = any(kind=='Full_Press' and e.get('settings',{}).get('hold_repeats')=='1'
+                    and e.get('settings',{}).get('interruptable')=='0'
+                    and list(layout.layer_ops(e))==[('remove_layer',owner)]
+                    for kind,e in entries(acts or {}))
+                if b['kind']!='unbound' or not cancels_self: break
+                stack=[t for t in stack if t!=owner]
+                kind,owner,acts,_=resolve(layout,stack,source,name)
+                if kind!='binding': break
+                b,issues=display_binding(acts,held)
+            if b['kind']=='unbound':
+                label = layer_label(acts, held, source, name, stack)
+                if label: b={'kind':'label','text':label}
+        return b, issues, owner
+
     def page(mode, context, phase, stacks, held):
         bindings = {}
         for control, (source, name) in CONTROLS.items():
             candidates = []
             for stack in stacks:
-                kind, owner, acts, _ = resolve(layout, stack, source, name)
-                if kind in ('disabled', 'mode'):
-                    b, issues = {'kind':'unbound'}, []
-                elif kind == 'none':
-                    b, issues = {'kind':'unavailable','reason':'No binding definition'}, []
-                else:
-                    b, issues = display_binding(acts, held)
-                    # A repeating cancellation removes its own temporary cover on
-                    # this fresh press, exposing the actual binding underneath.
-                    # Empty bindings and mode barriers remain explicit blockers.
-                    for _ in range(len(stack)):
-                        cancels_self = any(kind=='Full_Press' and e.get('settings',{}).get('hold_repeats')=='1'
-                            and e.get('settings',{}).get('interruptable')=='0'
-                            and list(layout.layer_ops(e))==[('remove_layer',owner)]
-                            for kind,e in entries(acts or {}))
-                        if b['kind']!='unbound' or not cancels_self: break
-                        stack=[t for t in stack if t!=owner]
-                        kind,owner,acts,_=resolve(layout,stack,source,name)
-                        if kind!='binding': break
-                        b,issues=display_binding(acts,held)
-                    if b['kind']=='unbound':
-                        label = layer_label(acts, held, source, name, stack)
-                        if label: b={'kind':'label','text':label}
+                b, issues, owner = binding(stack, source, name, held)
+                if control in ('l2', 'r2'):
+                    # Steam stores soft pull under edge and full pull under click.
+                    # Resolve both through the same stack; an absent click is normal.
+                    full, full_issues, full_owner = binding(stack, source, 'click', held, optional=True)
+                    for issue in full_issues:
+                        report['issues'].append(dict(mode=mode,context=context,phase=phase,
+                            control=control,owner=full_owner,stage='full',issue=issue))
+                    if full['kind']=='unavailable':
+                        b = full
+                    elif full['kind']=='label' and b['kind']!='unavailable':
+                        text = 'Full: '+full['text']
+                        if b['kind']=='label': text = 'Soft: '+b['text']+' / '+text
+                        b = {'kind':'label','text':text}
                 candidates.append(b)
                 for issue in issues:
                     report['issues'].append(dict(mode=mode,context=context,phase=phase,control=control,owner=owner,issue=issue))
