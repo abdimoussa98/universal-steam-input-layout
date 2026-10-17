@@ -190,6 +190,7 @@ def main():
         # Actual pointer interaction with the shared mode button.
         click_target('mode:0')
         wait_for(lambda: snapshot()['state']['mode'] == 'base', 'Base mode button did not work')
+        assert snapshot()['control_labels'][12:14]==['Mod 0 :: Scroll down', 'Mod 1 :: Scroll up']
         if args.screenshot:
             args.screenshot.parent.mkdir(parents=True, exist_ok=True)
             request('POST', f'/session/{session}/window/rect', {'width': 1060, 'height': 1100})
@@ -248,6 +249,28 @@ def main():
         wait_for(lambda: snapshot()['state']['status'] == 'unavailable', 'Blocked Gamepad API was not reported')
         js("Object.defineProperty(navigator,'getGamepads',{value:window.savedGamepads,configurable:true})")
         wait_for(lambda: snapshot()['state']['status'] == 'live' and not snapshot()['error'], 'Input error did not clear on recovery')
+        # Check the positions actually used by the painter, not just raw input.
+        # Small and partial deflections must not snap to the rim or disappear.
+        for axes in ([0, 0, 0, 0], [0.02, -0.04, -0.1, 0.2], [0.25, -0.5, -0.75, 1], [1, 0, 0, -1]):
+            js('window.mockAxes=arguments[0]', axes)
+            def markers_match():
+                targets = snapshot()['ui_targets']
+                for side in range(2):
+                    center = targets.get(f'stick:{side}:center')
+                    marker = targets.get(f'stick:{side}:marker')
+                    limit = targets.get(f'stick:{side}:range')
+                    if not center or not marker or not limit:
+                        return False
+                    radius = limit[0] - center[0]
+                    if any(abs((marker[axis]-center[axis])/radius - axes[side*2+axis]) > 0.005 for axis in range(2)):
+                        return False
+                return True
+            wait_for(markers_match, f'Stick drawing lost analog travel: {axes}')
+            if args.screenshot and axes[0]==0.25:
+                args.screenshot.with_name('analog-travel.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+        js('window.mockAxes.fill(0)')
+        wait_for(lambda: snapshot()['state']['input']['stick_positions']==[[0,0],[0,0]], 'Stick centers did not reset')
+        print('PASS: both rendered stick markers track center, small movements, partial travel and full deflection')
         # Each added physical control is normalized independently, including analog travel.
         for browser_index, control_index in [(8,4),(9,5),(12,6),(15,7),(13,8),(14,9),(10,10),(11,11),(6,14),(7,15)]:
             js('window.mockButtons.fill(0);window.mockButtons[arguments[0]]=arguments[1]', browser_index, 0.72 if browser_index==6 else 1)

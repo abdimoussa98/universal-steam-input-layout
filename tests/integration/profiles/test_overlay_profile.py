@@ -38,7 +38,7 @@ class OverlayProfileTests(unittest.TestCase):
         def binding(mode, phase, control):
             return next(p for p in dashboard['pages'] if p['mode']==mode and p['phase']==phase and p['context']=='none')['bindings'][control]
         self.assertEqual(binding('steering','reference','l1'), {'kind':'label','text':'S'})
-        self.assertEqual(binding('base','l1:pressed','r1'), {'kind':'label','text':'Both modifiers'})
+        self.assertEqual(binding('base','l1:pressed','r1'), {'kind':'label','text':'Mod 2'})
         self.assertEqual(binding('base','select:pressed','l3'), {'kind':'label','text':'Switch mode'})
         self.assertEqual(binding('base','l1:hold','a'), {'kind':'label','text':'G'})
         self.assertEqual(binding('base','l1:consumed','a'), {'kind':'label','text':'G'})
@@ -78,6 +78,18 @@ class OverlayProfileTests(unittest.TestCase):
                             if p['mode']==mode and p['phase']==owner+':hold')
                 self.assertEqual(page['bindings']['l2'], {'kind':'label','text':'Full: F12'})
                 self.assertEqual(page['bindings']['r2'], {'kind':'label','text':'Full: F11'})
+
+    def test_bumper_labels_keep_the_modifier_distinct_from_delayed_gyro(self):
+        pages = self.profile['dashboard']['pages']
+        for control, modifier, scroll in [('l1', 'Mod 0', 'Scroll down'), ('r1', 'Mod 1', 'Scroll up')]:
+            recipe = next(r for r in self.profile['dashboard']['recipes'] if r['mode']=='base' and r['control']==control)
+            self.assertEqual(recipe['modifier_label'], modifier)
+            self.assertEqual(recipe['hold_label'], 'Cursor gyro')
+            for phase, expected in [('reference', modifier+' :: '+scroll), ('pressed', modifier),
+                                    ('hold', modifier), ('consumed', modifier), ('second', scroll), ('cover', scroll)]:
+                page = next(p for p in pages if p['mode']=='base' and p['context']=='none'
+                            and p['phase']==('reference' if phase=='reference' else control+':'+phase))
+                self.assertEqual(page['bindings'][control], {'kind':'label','text':expected})
 
     def test_trigger_stages_follow_source_and_report_unsupported_full_pull(self):
         data = copy.deepcopy(self.source)

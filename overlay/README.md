@@ -44,8 +44,10 @@ The mode is a manual reference selection; it does not change Steam's mode.
 The diagram places bindings on the face buttons, Start/Select, all four D-pad
 directions, both stick clicks, bumpers and triggers. Physical button names are
 available on hover. Pressed controls light up; trigger bars show physical travel.
-The rounded Ibex diagram uses symmetric sticks and recessed trackpads.
-Stick-rim dots show deflection direction and grow with its magnitude; rings
+The Ibex diagram follows the proportions of the [front-view hardware reference](https://steamdb.info/static/img/blog/106/sc_front.webp),
+with symmetric sticks and canted square trackpads.
+Stick dots show the full X/Y position, including center and small deflections;
+binding text sits above the sticks so it cannot hide movement. Rings
 turn green with capacitive thumb contact. Trackpad dots show actual contact
 coordinates. Standard browser Gamepad
 input has stick axes but no pad/touch data; use the companion for those markers.
@@ -55,18 +57,20 @@ its timed-gesture phase. They do not describe keys already held in the game. F4 
 The dark viewer keeps mode controls above the scrolling reference, with gesture
 details and reading help available on demand. Narrow windows can scroll the
 controller diagram horizontally to keep labels readable.
-Gesture bindings use **Escape :: Fn** or **Scroll down :: Gyro**: before `::`
-is the tap or tap-then-hold output; after it is the hold action. The timer uses
-the same compact wording, with the full gesture sequence in **Gesture details**.
+Bumpers show **Mod 0 :: Scroll down** and **Mod 1 :: Scroll up**: hold the
+modifier, or tap then hold to scroll. A single tap also produces a scroll step.
+The delayed cursor-gyro effect does not replace the modifier binding.
+Menu buttons retain **Escape :: Fn** and **Tab :: Fn** for their key/function-layer
+alternatives. The timer uses the same compact wording, with each gesture's
+sequence and delayed effects in **Gesture details**.
 
 Trigger labels include both soft-pull and full-pull bindings when configured.
 Holding Select or Start to enter Fn shows **L2: Full: F12** and **R2: Full: F11**
 in Base/Gyro, Steering and Menu. These are full-pull outputs; the travel bars
 still show physical pressure without inventing an activation threshold.
 
-One central timer follows the active L1, R1, Select or Start gesture. It names
-**Hold / Tap, then hold**, and also shows the separate single Tap output where
-one is configured. The same bar switches between the Initial hold deadline,
+One central timer follows the active L1, R1, Select or Start gesture. Its details
+distinguish **Hold**, **Tap**, and **Tap, then hold**. The same bar switches between the Initial hold deadline,
 Release window and Second hold cover countdown. The last gesture
 stays visible as a reference when idle. Combined bumpers share one timer. For the bundled
 profile, the initial release deadline is 200 ms. Releasing early opens a 150 ms

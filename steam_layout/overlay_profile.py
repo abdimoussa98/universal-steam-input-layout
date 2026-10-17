@@ -160,7 +160,7 @@ def export_dashboard(layout, report):
         if any(t.startswith('Transition Set ') for t in targets):
             return 'Switch mode'
         if any('Modifier 2' in t for t in targets):
-            return 'Both modifiers'
+            return 'Mod 2'
         for t in targets:
             if t in ('Steering | L1: S Key','Steering | R1: W Key'):
                 child = resolve(layout, stack+[t], source, name)[2]
@@ -223,7 +223,7 @@ def export_dashboard(layout, report):
             if any(c != b for c in candidates[1:]):
                 b = {'kind':'unavailable','reason':'Bindings differ by press order or Base/Gyro state'}
             if mode=='base' and context=='both' and control in ('l1','r1'):
-                b = {'kind':'label','text':'Modifier combo'}
+                b = {'kind':'label','text':'Mod 2'}
             bindings[control] = b
         pages.append(dict(mode=mode,context=context,phase=phase,bindings=bindings))
         return pages[-1]
@@ -276,6 +276,10 @@ def export_dashboard(layout, report):
                         touch_cancels_window=all(any(kind=='release' and op=='remove_layer' and t==window
                             for kind,e in entries(activators(window,stick,'touch')) for op,t in layout.layer_ops(e))
                             for stick in ('joystick','right_joystick')),cancel_controls=[])
+            if control in ('l1', 'r1'):
+                # The entry modifier is the primary hold binding. The delayed
+                # cursor-gyro overlay is an effect, not a replacement for it.
+                recipe['modifier_label'] = parent.rsplit(': ', 1)[1].replace('Modifier ', 'Mod ')
             base_stack=_stacks(mode,'none')[0]
             phase_targets={'pressed':parent,'hold':hold_target,'window':window,'second':second,'cover':cover}
             if control in ('l1','r1'): phase_targets['consumed']=stem+': Tap Cover'
@@ -285,7 +289,7 @@ def export_dashboard(layout, report):
                 layers = [target] if phase in ('pressed','window','second') else [second,cover] if phase=='cover' else [parent,target]
                 stack=base_stack+layers
                 pg=page(mode,'none',control+':'+phase,[stack],{(source,name)})
-                pg['bindings'][control]={'kind':'label','text':recipe['hold_label'] if phase=='hold' else recipe['tap_label'] if phase in ('window','second','cover') else 'Modifier' if control in ('l1','r1') else 'Timed gesture'}
+                pg['bindings'][control]={'kind':'label','text':recipe['tap_label'] if phase in ('window','second','cover') else recipe['modifier_label'] if 'modifier_label' in recipe else recipe['hold_label'] if phase=='hold' else 'Timed gesture'}
             if control in ('l1','r1'):
                 target=stem+': Tap Cover'
                 for c,(src,n) in CONTROLS.items():
@@ -306,7 +310,10 @@ def export_dashboard(layout, report):
         if pg['phase']!='reference':continue
         for r in recipes:
             if r['mode']==pg['mode'] and pg['context']=='none':
-                pg['bindings'][r['control']]={'kind':'label','text':r['tap_label']+' / '+r['hold_label']}
+                text = r['modifier_label']+' :: '+r['tap_label'] if 'modifier_label' in r else r['tap_label']+' / '+r['hold_label']
+                pg['bindings'][r['control']]={'kind':'label','text':text}
+            elif r['mode']==pg['mode'] and 'modifier_label' in r and pg['context']=={'l1':'left','r1':'right'}.get(r['control']):
+                pg['bindings'][r['control']]={'kind':'label','text':r['modifier_label']}
     # Steering direction modifiers are entered only with one bumper held.
     steering = {}
     for context in ('left', 'right'):

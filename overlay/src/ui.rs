@@ -384,8 +384,8 @@ impl eframe::App for OverlayApp {
                             ui.add_space(8.0);
                             ui.collapsing("Reading this view", |ui| {
                                 ui.label("Choose the mode to match Steam. Labels describe a fresh press in the current layer.");
-                                ui.label("Stick rings show deflection; green means thumb contact. Trackpad dots show thumb position. Trigger bars show travel; Full means a full pull.");
-                                ui.label("Before :: is the tap or tap-then-hold output; after :: is the hold action. For example, Escape :: Fn.");
+                                ui.label("Stick dots show X/Y travel; green rings mean thumb contact. Trackpad dots show thumb position. Trigger bars show travel; Full means a full pull.");
+                                ui.label("Bumpers: Mod 0 :: Scroll down and Mod 1 :: Scroll up mean hold the modifier, or tap then hold to scroll. Menu buttons: Escape :: Fn and Tab :: Fn show the key and function-layer alternatives.");
                                 ui.label("Gesture timing follows the layout’s configured delays. No game input is sent.");
                                 if let Some(help) = data.controller_help() { ui.label(help); }
                             });
@@ -414,14 +414,14 @@ impl eframe::App for OverlayApp {
     }
 }
 fn target(ui: &egui::Ui, name: &str, response: &egui::Response) {
+    target_point(ui, name, response.rect.center());
+}
+fn target_point(ui: &egui::Ui, name: &str, point: egui::Pos2) {
     ui.ctx().data_mut(|d| {
         let map = d.get_temp_mut_or_default::<std::collections::BTreeMap<String, [f32; 2]>>(
             egui::Id::new("keybind.targets"),
         );
-        map.insert(
-            name.into(),
-            [response.rect.center().x, response.rect.center().y],
-        );
+        map.insert(name.into(), [point.x, point.y]);
     });
 }
 // Display wording stays separate from profile semantics and source bindings.
@@ -447,14 +447,29 @@ fn gesture_binding(tap: &str, hold: &str) -> String {
     format!("{} :: {}", compact_binding(tap), compact_binding(hold))
 }
 
+fn recipe_binding(recipe: &Recipe) -> String {
+    match &recipe.modifier_label {
+        Some(modifier) => gesture_binding(modifier, &recipe.tap_label),
+        None => gesture_binding(&recipe.tap_label, &recipe.hold_label),
+    }
+}
+
+fn stick_marker(center: egui::Pos2, xy: [i16; 2], scale: f32) -> egui::Pos2 {
+    center
+        + egui::vec2(
+            f32::from(xy[0].clamp(-1000, 1000)),
+            f32::from(xy[1].clamp(-1000, 1000)),
+        ) * (28.0 * scale / 1000.0)
+}
+
 // Symmetric Ibex controls in a single, softly rounded shell. Physical control
 // names live in hover help; the drawing gives its space to the actual bindings.
 fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
     let available = ui.available_width();
-    let width = available.min(840.0);
+    let width = available.min(780.0);
     let scale = width / 1000.0;
     let (row, _) =
-        ui.allocate_exact_size(egui::vec2(available, 505.0 * scale), egui::Sense::hover());
+        ui.allocate_exact_size(egui::vec2(available, 685.0 * scale), egui::Sense::hover());
     let area = egui::Rect::from_center_size(row.center(), egui::vec2(width, row.height()));
     let p = ui.painter();
     let at = |x: f32, y: f32| area.min + egui::vec2(x * scale, y * scale);
@@ -465,17 +480,21 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
     let edge = Color32::from_rgb(66, 73, 84);
     let dark = Color32::from_rgb(21, 24, 29);
     let mut outline = Vec::new();
+    // Proportions and control centers follow the front-view hardware reference:
+    // https://steamdb.info/static/img/blog/106/sc_front.webp
+    // The shell is about 1.4 times as wide as it is tall (excluding shoulders).
     for [a, b, c, d] in [
-        [[212., 134.], [280., 106.], [387., 116.], [500., 116.]],
-        [[500., 116.], [613., 116.], [720., 106.], [788., 134.]],
-        [[788., 134.], [838., 158.], [850., 228.], [874., 313.]],
-        [[874., 313.], [893., 380.], [916., 455.], [875., 479.]],
-        [[875., 479.], [825., 510.], [778., 453.], [747., 418.]],
-        [[747., 418.], [708., 445.], [632., 440.], [500., 440.]],
-        [[500., 440.], [368., 440.], [292., 445.], [253., 418.]],
-        [[253., 418.], [222., 453.], [175., 510.], [125., 479.]],
-        [[125., 479.], [84., 455.], [107., 380.], [126., 313.]],
-        [[126., 313.], [150., 228.], [162., 158.], [212., 134.]],
+        [[223., 145.], [270., 112.], [380., 115.], [500., 115.]],
+        [[500., 115.], [620., 115.], [730., 112.], [777., 145.]],
+        [[777., 145.], [821., 186.], [856., 355.], [874., 450.]],
+        [[874., 450.], [896., 585.], [861., 651.], [798., 658.]],
+        [[798., 658.], [751., 665.], [747., 590.], [718., 557.]],
+        [[718., 557.], [706., 539.], [685., 538.], [670., 538.]],
+        [[670., 538.], [570., 536.], [430., 536.], [330., 538.]],
+        [[330., 538.], [315., 538.], [294., 539.], [282., 557.]],
+        [[282., 557.], [253., 590.], [249., 665.], [202., 658.]],
+        [[202., 658.], [139., 651.], [104., 585.], [126., 450.]],
+        [[126., 450.], [144., 355.], [179., 186.], [223., 145.]],
     ] {
         for i in 0..20 {
             let t = i as f32 / 20.0;
@@ -495,7 +514,7 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
     // This outline is star-shaped around the bridge. A triangle fan preserves
     // its concave underside, unlike egui's convex-polygon fill.
     let mut mesh = egui::Mesh::default();
-    mesh.colored_vertex(at(500.0, 235.0), shell);
+    mesh.colored_vertex(at(500.0, 280.0), shell);
     for pos in &outline {
         mesh.colored_vertex(*pos, shell);
     }
@@ -508,40 +527,62 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
         egui::Stroke::new(1.2_f32, edge),
     ));
 
-    // Quiet hardware cues, without placeholder text inside the trackpads.
-    for (n, x) in [327.0, 673.0].into_iter().enumerate() {
-        let pad = box_at(x, 366.0, 148.0, 124.0);
-        p.rect_filled(
-            pad.expand(4.0 * scale),
-            25.0 * scale,
-            Color32::from_rgb(29, 33, 39),
-        );
-        p.rect_filled(pad, 22.0 * scale, dark);
-        p.rect_stroke(
+    // The lower inset and canted square pads retain the hardware proportions.
+    p.rect_filled(
+        box_at(500.0, 420.0, 520.0, 228.0),
+        48.0 * scale,
+        Color32::from_rgb(29, 33, 39),
+    );
+    for (n, (x, angle)) in [(352.0, 0.12_f32), (648.0, -0.12_f32)]
+        .into_iter()
+        .enumerate()
+    {
+        let center = at(x, 410.0);
+        let rotate = |delta: egui::Vec2| {
+            center
+                + egui::vec2(
+                    delta.x * angle.cos() - delta.y * angle.sin(),
+                    delta.x * angle.sin() + delta.y * angle.cos(),
+                )
+        };
+        let mut pad = Vec::new();
+        for (cx, cy, start) in [
+            (-62.0, -62.0, 180.0_f32),
+            (62.0, -62.0, 270.0),
+            (62.0, 62.0, 0.0),
+            (-62.0, 62.0, 90.0),
+        ] {
+            for i in 0..=8 {
+                let a = (start + i as f32 * 90.0 / 8.0).to_radians();
+                pad.push(rotate(
+                    egui::vec2(cx + 20.0 * a.cos(), cy + 20.0 * a.sin()) * scale,
+                ));
+            }
+        }
+        p.add(egui::Shape::convex_polygon(
             pad,
-            22.0 * scale,
+            dark,
             egui::Stroke::new(1.0_f32, edge),
-            egui::StrokeKind::Inside,
-        );
+        ));
         if data.state.status == InputStatus::Live
             && let Some(touch) = data.state.input.pads[n].as_ref().filter(|pad| pad.touching)
         {
             let xy = touch
                 .position
                 .map(|v| f32::from(v.clamp(-1000, 1000)) / 1000.0);
-            let dot = pad.center() + egui::vec2(xy[0] * 55.0, xy[1] * 43.0) * scale;
+            let dot = rotate(egui::vec2(xy[0], xy[1]) * 65.0 * scale);
             p.circle_filled(dot, 5.0 * scale, ACCENT);
             p.circle_stroke(dot, 9.0 * scale, egui::Stroke::new(1.0_f32, ACCENT));
         }
     }
-    p.circle_filled(at(500.0, 222.0), 19.0 * scale, dark);
+    p.circle_filled(at(500.0, 207.0), 25.0 * scale, dark);
     p.circle_stroke(
-        at(500.0, 222.0),
-        19.0 * scale,
+        at(500.0, 207.0),
+        25.0 * scale,
         egui::Stroke::new(1.0_f32, edge),
     );
     p.circle_filled(
-        at(500.0, 222.0),
+        at(500.0, 160.0),
         3.0 * scale,
         if data.state.status == InputStatus::Live {
             ACCENT
@@ -549,32 +590,32 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
             edge
         },
     );
-    p.rect_filled(box_at(500.0, 350.0, 42.0, 18.0), 9.0 * scale, dark);
-    for x in [491.0, 500.0, 509.0] {
-        p.circle_filled(at(x, 350.0), 1.5 * scale, edge);
+    p.rect_filled(box_at(500.0, 410.0, 62.0, 28.0), 12.0 * scale, dark);
+    for x in [489.0, 500.0, 511.0] {
+        p.circle_filled(at(x, 410.0), 2.0 * scale, edge);
     }
 
     let labels = data.state.control_labels(&data.profile);
     let positions = [
-        (754.0, 289.0),
-        (808.0, 235.0),
-        (700.0, 235.0),
-        (754.0, 181.0),
-        (404.0, 151.0),
-        (596.0, 151.0),
-        (246.0, 189.0),
-        (292.0, 235.0),
-        (246.0, 281.0),
-        (200.0, 235.0),
-        (405.0, 252.0),
-        (595.0, 252.0),
+        (735.0, 257.0),
+        (779.0, 213.0),
+        (691.0, 213.0),
+        (735.0, 169.0),
+        (364.0, 145.0),
+        (636.0, 145.0),
+        (264.0, 173.0),
+        (304.0, 213.0),
+        (264.0, 253.0),
+        (224.0, 213.0),
+        (385.0, 257.0),
+        (615.0, 257.0),
         (280.0, 81.0),
         (720.0, 81.0),
         (280.0, 32.0),
         (720.0, 32.0),
     ];
-    p.rect_filled(box_at(246.0, 235.0, 50.0, 142.0), 12.0 * scale, dark);
-    p.rect_filled(box_at(246.0, 235.0, 142.0, 50.0), 12.0 * scale, dark);
+    p.rect_filled(box_at(264.0, 213.0, 44.0, 124.0), 10.0 * scale, dark);
+    p.rect_filled(box_at(264.0, 213.0, 124.0, 44.0), 10.0 * scale, dark);
     for (n, control) in Control::ALL.into_iter().enumerate() {
         let (x, y) = positions[n];
         let center = at(x, y);
@@ -590,34 +631,44 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
         );
         let (w, h) = match control {
             Control::L1 | Control::R1 | Control::L2 | Control::R2 => (244.0, 40.0),
-            Control::Select | Control::Start => (168.0, 38.0),
-            Control::L3 | Control::R3 => (110.0, 110.0),
-            Control::A | Control::B | Control::X | Control::Y => (60.0, 60.0),
-            _ => (50.0, 50.0),
+            Control::Select | Control::Start => (136.0, 38.0),
+            Control::L3 | Control::R3 => (92.0, 92.0),
+            Control::A | Control::B | Control::X | Control::Y => (48.0, 48.0),
+            _ => (44.0, 44.0),
         };
         let card = box_at(x, y, w, h);
         if matches!(control, Control::L3 | Control::R3) {
-            p.circle_filled(center, 57.0 * scale, Color32::from_rgb(17, 20, 25));
-            p.circle_stroke(center, 57.0 * scale, egui::Stroke::new(1.0_f32, edge));
-            p.circle_filled(center, 49.0 * scale, fill);
-            p.circle_stroke(center, 49.0 * scale, stroke);
+            p.circle_filled(center, 46.0 * scale, Color32::from_rgb(17, 20, 25));
+            p.circle_stroke(center, 46.0 * scale, egui::Stroke::new(1.0_f32, edge));
+            p.circle_filled(center, 39.0 * scale, fill);
+            p.circle_stroke(center, 39.0 * scale, stroke);
+            let side = n - 10;
+            target_point(ui, &format!("stick:{side}:center"), center);
+            target_point(
+                ui,
+                &format!("stick:{side}:range"),
+                center + egui::vec2(28.0 * scale, 0.0),
+            );
             if data.state.status == InputStatus::Live {
-                let side = n - 10;
                 if data.state.input.touches[side] == Some(true) {
-                    p.circle_stroke(center, 54.0 * scale, egui::Stroke::new(2.0_f32, ACCENT));
+                    p.circle_stroke(center, 43.0 * scale, egui::Stroke::new(2.0_f32, ACCENT));
                 }
                 if let Some(xy) = data.state.input.stick_positions[side] {
-                    let delta = egui::vec2(f32::from(xy[0]), f32::from(xy[1])) / 1000.0;
-                    if delta.length() > 0.08 {
-                        // Keep motion feedback on the rim, clear of binding text.
-                        let dot = center + delta.normalized() * 53.0 * scale;
-                        p.circle_filled(dot, (2.0 + 3.0 * delta.length().min(1.0)) * scale, ACCENT);
-                    }
+                    let dot = stick_marker(center, xy, scale);
+                    let color = if data.state.input.touches[side] == Some(true) {
+                        ACCENT
+                    } else {
+                        Color32::from_rgb(244, 191, 88)
+                    };
+                    p.line_segment([center, dot], egui::Stroke::new(1.0_f32, color));
+                    p.circle_stroke(dot, 5.0 * scale, egui::Stroke::new(1.8_f32, color));
+                    p.circle_filled(dot, 2.0 * scale, color);
+                    target_point(ui, &format!("stick:{side}:marker"), dot);
                 }
             }
         } else if n < 4 {
-            p.circle_filled(center, 30.0 * scale, fill);
-            p.circle_stroke(center, 30.0 * scale, stroke);
+            p.circle_filled(center, 24.0 * scale, fill);
+            p.circle_stroke(center, 24.0 * scale, stroke);
         } else {
             let radius = if n >= 12 { 12.0 } else { 9.0 } * scale;
             p.rect_filled(card, radius, fill);
@@ -642,8 +693,13 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
                 .as_ref()
                 .and_then(|d| d.recipe(data.state.mode, control))
         {
-            label = gesture_binding(&recipe.tap_label, &recipe.hold_label);
+            label = recipe_binding(recipe);
         }
+        let label_center = if matches!(control, Control::L3 | Control::R3) {
+            center - egui::vec2(0.0, 65.0 * scale)
+        } else {
+            center
+        };
         let arrow = match label.as_str() {
             "↑" => Some(egui::vec2(0.0, -1.0)),
             "→" => Some(egui::vec2(1.0, 0.0)),
@@ -654,7 +710,7 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
         if let Some(direction) = arrow {
             // Default egui fonts do not include these keyboard-arrow glyphs.
             p.arrow(
-                center - direction * 10.0 * scale,
+                label_center - direction * 10.0 * scale,
                 direction * 20.0 * scale,
                 egui::Stroke::new(1.8_f32, if down { ACCENT } else { Color32::WHITE }),
             );
@@ -672,7 +728,13 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
                 } else {
                     Color32::from_rgb(240, 243, 248)
                 },
-                (w - 12.0) * scale,
+                (if matches!(control, Control::L3 | Control::R3) {
+                    150.0
+                } else if n < 4 {
+                    w - 4.0
+                } else {
+                    w - 12.0
+                }) * scale,
             );
             job.halign = egui::Align::Center;
             job.wrap.max_rows = if matches!(control, Control::L3 | Control::R3) || n < 4 {
@@ -682,7 +744,7 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
             };
             let galley = p.layout_job(job);
             p.galley(
-                center - egui::vec2(0.0, galley.size().y / 2.0),
+                label_center - egui::vec2(0.0, galley.size().y / 2.0),
                 galley,
                 Color32::WHITE,
             );
@@ -803,7 +865,16 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
     } else {
         &r.tap_label
     };
-    let hold = if combined { "Tap Cover" } else { &r.hold_label };
+    let hold = if combined {
+        "Tap Cover"
+    } else {
+        r.modifier_label.as_deref().unwrap_or(&r.hold_label)
+    };
+    let summary = if combined || steering {
+        gesture_binding(tap, hold)
+    } else {
+        recipe_binding(&r)
+    };
     let outcomes = timed_gesture_outcomes(&r);
     let amber = Color32::from_rgb(244, 191, 88);
     let teal = ACCENT;
@@ -813,7 +884,7 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
         .inner_margin(16.0).show(ui, |ui| {
         ui.set_width(ui.available_width());
         ui.horizontal_wrapped(|ui| {
-            ui.label(RichText::new(gesture_binding(tap, hold)).size(19.0).color(Color32::WHITE))
+            ui.label(RichText::new(&summary).size(19.0).color(Color32::WHITE))
                 .on_hover_text(owner);
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 ui.label(RichText::new(lane.phase.label()).size(12.0).color(if live { teal } else { muted }));
@@ -857,7 +928,12 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center),|ui| { ui.small(end); });
         });
         ui.collapsing("Gesture details", |ui| {
-            ui.label("Tap / tap, then hold :: Hold");
+            if let Some(modifier) = &r.modifier_label {
+                ui.label(format!("Hold: {modifier}. Tap, then hold: {}.", r.tap_label));
+                ui.label(format!("{} is a delayed effect after {} ms; {modifier} remains active.", r.hold_label, r.hold_ms));
+            } else {
+                ui.label("Tap / tap, then hold :: Hold");
+            }
             if combined {
                 ui.label(format!("Release: {tap}. Hold: {hold}."));
             } else {
@@ -877,7 +953,13 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
 
 fn timed_gesture_outcomes(recipe: &Recipe) -> [String; 3] {
     [
-        format!("HOLD  {}", recipe.hold_label),
+        format!(
+            "HOLD  {}",
+            recipe
+                .modifier_label
+                .as_deref()
+                .unwrap_or(&recipe.hold_label)
+        ),
         format!("TAP  {}", recipe.tap_label),
         format!("TAP, THEN HOLD  {} while held", recipe.tap_label),
     ]
@@ -895,7 +977,7 @@ mod timed_gesture_wording_tests {
         assert_eq!(
             timed_gesture_outcomes(bumper),
             [
-                "HOLD  Cursor gyro",
+                "HOLD  Mod 0",
                 "TAP  Scroll down",
                 "TAP, THEN HOLD  Scroll down while held"
             ]

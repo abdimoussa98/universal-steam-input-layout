@@ -132,6 +132,9 @@ pub struct Recipe {
     pub repeat_ms: Option<u64>,
     pub tap_label: String,
     pub hold_label: String,
+    /// Immediate modifier action; hold_label describes its delayed effect.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub modifier_label: Option<String>,
     pub touch_completes: bool,
     pub touch_cancels_window: bool,
     pub both_sticks_consume: bool,
@@ -224,6 +227,9 @@ impl DashboardProfile {
                     .any(|x| !(1..=1000).contains(x))
                 || r.output_ms >= r.window_ms
                 || r.repeat_ms.is_some_and(|x| !(1..=1000).contains(&x))
+                || r.modifier_label
+                    .as_ref()
+                    .is_some_and(|s| s.trim().is_empty())
             {
                 return Err("Invalid gesture recipe".into());
             }

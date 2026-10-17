@@ -57,11 +57,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Scroll down / Cursor gyro"
+            "text": "Mod 0 :: Scroll down"
           },
           "r1": {
             "kind": "label",
-            "text": "Scroll up / Cursor gyro"
+            "text": "Mod 1 :: Scroll up"
           },
           "l2": {
             "kind": "label",
@@ -127,11 +127,12 @@
             "text": "Mouse middle"
           },
           "l1": {
-            "kind": "unbound"
+            "kind": "label",
+            "text": "Mod 0"
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -198,10 +199,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
-            "kind": "unbound"
+            "kind": "label",
+            "text": "Mod 1"
           },
           "l2": {
             "kind": "label",
@@ -268,11 +270,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Modifier combo"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
-            "text": "Modifier combo"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -339,11 +341,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Modifier"
+            "text": "Mod 0"
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -410,11 +412,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Cursor gyro"
+            "text": "Mod 0"
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -692,11 +694,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Modifier"
+            "text": "Mod 0"
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -763,11 +765,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
-            "text": "Modifier"
+            "text": "Mod 1"
           },
           "l2": {
             "kind": "label",
@@ -834,11 +836,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
-            "text": "Cursor gyro"
+            "text": "Mod 1"
           },
           "l2": {
             "kind": "label",
@@ -1116,11 +1118,11 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
-            "text": "Modifier"
+            "text": "Mod 1"
           },
           "l2": {
             "kind": "label",
@@ -1966,7 +1968,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -2033,7 +2035,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
@@ -3857,7 +3859,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -3928,7 +3930,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -4070,7 +4072,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -4141,7 +4143,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -4212,7 +4214,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -4283,7 +4285,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -4425,7 +4427,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -4496,7 +4498,7 @@
           },
           "r1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "l2": {
             "kind": "label",
@@ -4563,7 +4565,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
@@ -4634,7 +4636,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
@@ -4776,7 +4778,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
@@ -4847,7 +4849,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
@@ -4918,7 +4920,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
@@ -4989,7 +4991,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
@@ -5131,7 +5133,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
@@ -5202,7 +5204,7 @@
           },
           "l1": {
             "kind": "label",
-            "text": "Both modifiers"
+            "text": "Mod 2"
           },
           "r1": {
             "kind": "label",
@@ -5247,7 +5249,8 @@
           "l3",
           "r3",
           "r1"
-        ]
+        ],
+        "modifier_label": "Mod 0"
       },
       {
         "mode": "base",
@@ -5276,7 +5279,8 @@
           "l3",
           "r3",
           "l1"
-        ]
+        ],
+        "modifier_label": "Mod 1"
       },
       {
         "mode": "base",
