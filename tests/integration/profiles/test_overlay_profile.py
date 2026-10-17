@@ -52,6 +52,25 @@ class OverlayProfileTests(unittest.TestCase):
         updated,_=export_profile(json.dumps(data).encode(),controller='ibex',version='1.0')
         self.assertEqual(next(r for r in updated['dashboard']['recipes'] if r['mode']=='base' and r['control']=='l1')['hold_ms'],180)
 
+    def test_menu_transition_shows_key_and_menu_outcomes_for_both_orders(self):
+        pages = self.profile['dashboard']['pages']
+        for phase, control, text in [('select:pressed','start','Enter :: Menu'),
+                                     ('select:hold','start','Enter :: Menu'),
+                                     ('start:pressed','select','Backspace :: Menu'),
+                                     ('start:hold','select','Backspace :: Menu')]:
+            page = next(p for p in pages if p['mode']=='base' and p['phase']==phase)
+            self.assertEqual(page['bindings'][control], {'kind':'label','text':text})
+        self.assertFalse(any(b.get('text')=='Menu mode' for p in pages for b in p['bindings'].values()))
+        mutated = copy.deepcopy(self.source)
+        outputs = Layout(mutated).active('Menu Left!Right: Enter')['switch']['inputs']['button_escape']['activators']
+        for _, entry in entries(outputs):
+            bindings = entry.get('bindings', {}).get('binding')
+            if isinstance(bindings, str) and 'key_press RETURN' in bindings:
+                entry['bindings']['binding'] = bindings.replace('key_press RETURN', 'key_press SPACE')
+        updated, _ = export_profile(json.dumps(mutated).encode(), controller='ibex', version='1.0')
+        page = next(p for p in updated['dashboard']['pages'] if p['mode']=='base' and p['phase']=='select:pressed')
+        self.assertEqual(page['bindings']['start'], {'kind':'label','text':'Space :: Menu'})
+
     def test_mod2_release_transition_and_cover_are_distinct(self):
         d = self.profile['dashboard']
         self.assertEqual(d['combined_release_label'], 'Base / Gyro')

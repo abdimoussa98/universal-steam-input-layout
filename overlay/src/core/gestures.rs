@@ -620,6 +620,7 @@ impl State {
             .or_else(|| (0..4).find(|n| supported(*n)))
     }
     pub fn sample_input(&mut self, id: &str, input: InputFrame, p: &Profile, now: u64) {
+        let now = now / u64::from(self.timing_scale());
         if self.device.as_deref() != Some(id) || self.status != InputStatus::Live {
             self.gestures = Gestures::default();
         }

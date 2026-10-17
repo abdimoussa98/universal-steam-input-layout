@@ -1,6 +1,8 @@
 """Check the packaged web release over HTTP, without a deployment service."""
 import functools
+import hashlib
 import http.server
+import json
 from pathlib import Path
 import tempfile
 import threading
@@ -16,7 +18,9 @@ class SiteTests(unittest.TestCase):
         self.directory = tempfile.TemporaryDirectory()
         self.bundle = Path(self.directory.name)
         (self.bundle / 'pkg').mkdir()
-        for path, data in [('index.html', b'<html>viewer</html>'), ('start.js', b'boot'), ('steam-hid.js', b'hid'),
+        (self.bundle / 'layouts').mkdir()
+        for path, data in [('index.html', b'<html>viewer</html>'), ('start.js', b'boot'), ('steam-hid.js', b'hid'), ('downloads.js', b'downloads'),
+                           ('layouts/index.json', b'{"layouts": []}'),
                            ('pkg/keybind_overlay.js', b'glue'), ('pkg/keybind_overlay_bg.wasm', b'\0asmtest')]:
             (self.bundle / path).write_bytes(data)
         write_manifest(self.bundle, REV)
@@ -47,6 +51,21 @@ class SiteTests(unittest.TestCase):
         write_manifest(self.bundle, REV)
         with self.assertRaisesRegex(RuntimeError, 'WebAssembly'):
             verify_site(self.url, REV)
+
+    def test_layout_files_are_checked_as_part_of_the_deployed_release(self):
+        data = b'published template'
+        path = self.bundle / 'layouts/deck_1.0.vdf'
+        path.write_bytes(data)
+        (self.bundle / 'layouts/index.json').write_text(json.dumps({'layouts': [
+            {'filename': path.name, 'sha256': hashlib.sha256(data).hexdigest()}
+        ]}))
+        write_manifest(self.bundle, REV)
+        self.assertEqual(verify_site(self.url, REV), REV)
+        path.write_bytes(b'wrong template')
+        with self.assertRaisesRegex(RuntimeError, 'mismatched'):
+            verify_site(self.url, REV)
+        with self.assertRaisesRegex(ValueError, 'mismatched'):
+            write_manifest(self.bundle, REV)
 
 
 if __name__ == '__main__':

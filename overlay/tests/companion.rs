@@ -15,10 +15,14 @@ use std::{
 fn real_http_companion_authority_origin_and_asset_boundaries() {
     let directory = std::env::temp_dir().join(format!("keybind-http-test-{}", std::process::id()));
     std::fs::create_dir_all(directory.join("pkg")).unwrap();
+    std::fs::create_dir_all(directory.join("layouts")).unwrap();
     for asset in [
         "index.html",
         "start.js",
         "steam-hid.js",
+        "downloads.js",
+        "layouts/index.json",
+        "layouts/deck_1.0.vdf",
         "pkg/keybind_overlay.js",
         "pkg/keybind_overlay_bg.wasm",
     ] {
@@ -63,9 +67,21 @@ fn real_http_companion_authority_origin_and_asset_boundaries() {
     assert!(request("/api/state", session, "http://evil.test", None).starts_with("HTTP/1.0 403"));
     assert!(request("/../profile.json", session, origin, None).starts_with("HTTP/1.0 404"));
     assert!(request("/", session, origin, None).contains("test asset"));
+    for path in [
+        "/layouts/../profile.vdf",
+        "/layouts/%2e%2e/profile.vdf",
+        "/layouts/sub/file.vdf",
+        "/layouts/profile.json",
+    ] {
+        assert!(request(path, session, origin, None).starts_with("HTTP/1.0 404"));
+    }
+
     for asset in [
         "start.js",
         "steam-hid.js",
+        "downloads.js",
+        "layouts/index.json",
+        "layouts/deck_1.0.vdf",
         "pkg/keybind_overlay.js",
         "pkg/keybind_overlay_bg.wasm",
     ] {

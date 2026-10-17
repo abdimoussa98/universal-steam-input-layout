@@ -178,8 +178,18 @@ def export_dashboard(layout, report):
                 child = resolve(layout, stack+[t], source, name)[2]
                 b,_ = display_binding(child, held | {(source,name)})
                 if b['kind']=='label': return b['text']
-        if any(t in ('Menu Left!Right: Entry Point','Menu Right!Left: Entry Point') for t in targets):
-            return 'Menu mode'
+        for target in targets:
+            if target not in ('Menu Left!Right: Entry Point','Menu Right!Left: Entry Point'):
+                continue
+            window = target.replace(': Entry Point', ': Double Tap')
+            second_press = resolve(layout, stack+[window], source, name)[2]
+            for _, entry in entries(second_press or {}):
+                for op, child in layout.layer_ops(entry):
+                    if op != 'add_layer': continue
+                    output = resolve(layout, stack+[child], source, name)[2]
+                    label, _ = display_binding(output, held | {(source,name)})
+                    if label['kind']=='label': return label['text']+' :: Menu'
+            raise ValueError('Unrecognized Menu transition output: '+target)
         if any(t.endswith('Fn Layer') for t in targets): return 'Function layer'
         if any(t.endswith(': Entry Point') for t in targets): return 'Timed gesture'
         return None

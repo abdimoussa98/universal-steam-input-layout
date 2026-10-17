@@ -106,6 +106,8 @@ impl FrameData {
     }
 }
 pub enum Command {
+    TimingScale(u8),
+    DownloadLayouts,
     ConnectController,
     DisconnectController,
     Mode(Mode),
@@ -124,7 +126,6 @@ pub struct OverlayApp {
     backend: Box<dyn Backend>,
     show_settings: bool,
     profile_json: String,
-    pad_touch_view: bool,
     draft: Preferences,
     applied_scale: f32,
     host_clock: u64,
@@ -138,7 +139,6 @@ impl OverlayApp {
             backend,
             show_settings: false,
             profile_json: String::new(),
-            pad_touch_view: false,
             draft,
             applied_scale: 0.0,
             host_clock: 0,
@@ -163,6 +163,14 @@ impl OverlayApp {
                 target(ui, &format!("mode:{i}"), &response);
                 if response.clicked() {
                     self.backend.command(Command::Mode(mode));
+                }
+            }
+            if !data.native && !data.hud {
+                let response =
+                    ui.add(egui::Button::new("Download layouts").min_size(egui::vec2(120.0, 36.0)));
+                target(ui, "downloads", &response);
+                if response.clicked() {
+                    self.backend.command(Command::DownloadLayouts);
                 }
             }
         });
@@ -256,9 +264,10 @@ impl eframe::App for OverlayApp {
             self.host_clock = data.state.gestures.clock_ms;
             self.clock_received = time;
         }
-        let now = self
-            .host_clock
-            .saturating_add(((time - self.clock_received).max(0.0) * 1000.0) as u64);
+        let now = self.host_clock.saturating_add(
+            ((time - self.clock_received).max(0.0) * 1000.0 / f64::from(data.state.timing_scale()))
+                as u64,
+        );
         if data.state.status == InputStatus::Live && data.state.gestures.animating() {
             ctx.request_repaint_after(std::time::Duration::from_millis(16));
         }
@@ -348,6 +357,26 @@ impl eframe::App for OverlayApp {
                             ui.label(RichText::new(&data.profile.name).size(12.0).color(MUTED));
                             ui.add_space(12.0);
                             self.mode_buttons(ui, &data);
+                            if !data.hud {
+                                ui.horizontal_wrapped(|ui| {
+                                    ui.label(RichText::new("Gesture slow motion").size(12.0).color(MUTED));
+                                    let mut scale = data.state.timing_scale();
+                                    let response = ui.add(egui::Slider::new(&mut scale, 1..=10)
+                                        .suffix("× longer").show_value(true));
+                                    target(ui, "timing-scale", &response);
+                                    target_point(ui, "timing-scale:slow", egui::pos2(response.rect.left() + ui.spacing().slider_width - 4.0, response.rect.center().y));
+                                    if response.changed() { self.backend.command(Command::TimingScale(scale)); }
+                                    if scale > 1 {
+                                        let response = ui.small_button("Normal speed");
+                                        target(ui, "timing-normal", &response);
+                                        if response.clicked() { self.backend.command(Command::TimingScale(1)); }
+                                        ui.label(RichText::new("Viewer preview only · Steam unchanged").size(12.0).color(ACCENT));
+                                    }
+                                });
+                                if data.state.timing_scale() > 1 {
+                                    ui.label(RichText::new("Hold or tap, then hold your controller buttons to explore. Steam keeps its normal timing. Release held buttons after changing speed.").size(12.0).color(MUTED));
+                                }
+                            }
                             ui.add_space(8.0);
                             let content_height = (ui.ctx().screen_rect().bottom() - ui.cursor().min.y - 20.0).max(100.0);
                             egui::ScrollArea::vertical().id_salt("viewer-content")
@@ -374,7 +403,7 @@ impl eframe::App for OverlayApp {
                                     // Keep diagram labels legible on small windows; only the diagram scrolls sideways.
                                     egui::ScrollArea::horizontal().id_salt("controller-diagram").show(ui, |ui| {
                                         ui.set_min_width(720.0);
-                                        draw_controller(ui, &data, self.pad_touch_view);
+                                        draw_controller(ui, &data);
                                     });
                                     ui.add_space(6.0);
                                     ui.label(RichText::new(data.input_status_label()).size(12.0).color(MUTED));
@@ -385,13 +414,14 @@ impl eframe::App for OverlayApp {
                                 });
                             ui.add_space(4.0);
                             draw_timelines(ui, &data, now);
-                            trackpads::explorer(ui, &data, &mut self.pad_touch_view);
+                            trackpads::explorer(ui, &data);
                             ui.add_space(8.0);
                             ui.collapsing("Reading this view", |ui| {
                                 ui.label("Choose the mode to match Steam. Labels describe a fresh press in the current layer.");
                                 ui.label("Stick dots show X/Y travel; green rings mean thumb contact. Trackpad dots show thumb position. Trigger bars show travel; Full means a full pull.");
                                 ui.label("Bumpers: Mod 0 :: Scroll down and Mod 1 :: Scroll up mean hold the modifier, or tap then hold to scroll. Menu buttons: Escape :: Fn and Tab :: Fn show the key and function-layer alternatives.");
-                                ui.label("Gesture timing follows the layout’s configured delays. No game input is sent.");
+                                ui.label("At 1×, gestures follow the layout’s configured delays. Slow motion stretches the viewer’s hold, release-window and second-hold timings together. It does not change Steam or send game input.");
+                                ui.label("Enter :: Menu and Backspace :: Menu show tap-then-hold key output versus holding to enter Menu, depending on which menu button you press first.");
                                 if let Some(help) = data.controller_help() { ui.label(help); }
                             });
                             if let Some(error) = data.error.as_ref().or(data.settings.error.as_ref()) {
@@ -469,7 +499,7 @@ fn stick_marker(center: egui::Pos2, xy: [i16; 2], scale: f32) -> egui::Pos2 {
 
 // Symmetric Ibex controls in a single, softly rounded shell. Physical control
 // names live in hover help; the drawing gives its space to the actual bindings.
-fn draw_controller(ui: &mut egui::Ui, data: &FrameData, pad_touch_view: bool) {
+fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
     let available = ui.available_width();
     let width = available.min(780.0);
     let scale = width / 1000.0;
@@ -569,21 +599,18 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData, pad_touch_view: bool) {
             dark,
             egui::Stroke::new(1.0_f32, edge),
         ));
-        let input = trackpads::feedback(data, n, trackpads::hover(ui, center, 82.0 * scale, angle));
+        let input = trackpads::feedback(
+            ui,
+            data,
+            n,
+            trackpads::hover(ui, center, 82.0 * scale, angle),
+        );
         if let Some(pads) = data
             .state
             .control_page(&data.profile)
             .and_then(|page| page.trackpads.as_ref())
         {
-            trackpads::field(
-                p,
-                center,
-                82.0 * scale,
-                angle,
-                &pads[n],
-                pad_touch_view,
-                input,
-            );
+            trackpads::field(p, center, 82.0 * scale, angle, &pads[n], input);
             trackpads::record_feedback(ui, n, &pads[n], input);
         } else if let Some([x, y]) = input.position {
             p.circle_stroke(
@@ -892,6 +919,7 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
         &data.state.gestures.lanes[n]
     };
     let live = data.state.status == InputStatus::Live;
+    let real_ms = |ms: u64| ms * u64::from(data.state.timing_scale());
     let combined = matches!(lane.phase, Phase::Combined | Phase::CombinedCover);
     let owner = if steering {
         if data.state.gestures.steering_direction < 0 {
@@ -950,18 +978,18 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
         });
         ui.add_space(4.0);
         let (stage, duration, start, end, hint) = match lane.phase {
-            Phase::Window => (1, r.window_ms, "Released".to_string(), format!("Window closes {} ms", r.window_ms),
-                format!("{} at {} ms after release. Press again before this window closes.", r.tap_label, r.output_ms)),
-            Phase::Second | Phase::Cover => (2, r.cover_ms, "Second hold".into(), format!("Cover at {} ms", r.cover_ms),
+            Phase::Window => (1, r.window_ms, "Released".to_string(), format!("Window closes {} ms", real_ms(r.window_ms)),
+                format!("{} at {} ms after release. Press again before this window closes.", r.tap_label, real_ms(r.output_ms))),
+            Phase::Second | Phase::Cover => (2, r.cover_ms, "Second hold".into(), format!("Cover at {} ms", real_ms(r.cover_ms)),
                 if lane.phase == Phase::Cover { "Tap, then hold is active. Release ends the gesture.".into() }
                 else { "Keep the second press held until its cover applies; releasing early reopens the release window.".into() }),
-            _ => (0, hold_ms, "Initial hold".into(), format!("Hold at {hold_ms} ms"),
+            _ => (0, hold_ms, "Initial hold".into(), format!("Hold at {} ms", real_ms(hold_ms)),
                 match lane.phase {
                     Phase::Hold => format!("{hold} active. Release ends the gesture."),
                     Phase::Consumed | Phase::CombinedCover => "Tap Cover applied. The modifier was used; release will not trigger a tap.".into(),
                     Phase::Unknown => "Release this button once to start tracking its timing.".into(),
                     Phase::Interrupted => "Timing paused; inherited bindings remain visible.".into(),
-                    _ => format!("Release before {hold_ms} ms for {tap}. Keep holding for {hold}."),
+                    _ => format!("Release before {} ms for {tap}. Keep holding for {hold}.", real_ms(hold_ms)),
                 }),
         };
         let (bar, _) = ui.allocate_exact_size(egui::vec2(ui.available_width(), 6.0), egui::Sense::hover());
@@ -981,17 +1009,17 @@ fn draw_timelines(ui: &mut egui::Ui, data: &FrameData, now: u64) {
         ui.horizontal(|ui| {
             ui.small(start);
             if live && let Some(deadline)=lane.deadline_ms {
-                ui.label(RichText::new(format!("{} ms left",deadline.saturating_sub(now))).color(if stage==1 {amber} else {teal}).strong());
+                ui.label(RichText::new(format!("{} ms left",real_ms(deadline.saturating_sub(now)))).color(if stage==1 {amber} else {teal}).strong());
             }
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center),|ui| { ui.small(end); });
         });
         ui.collapsing("Gesture details", |ui| {
             if combined {
-                ui.label(format!("Hold: Mod 2. Release either bumper before {hold_ms} ms to switch {tap}."));
+                ui.label(format!("Hold: Mod 2. Release either bumper before {} ms to switch {tap}.", real_ms(hold_ms)));
                 ui.label("Once Tap Cover applies, releasing does not switch stateful layers.");
             } else if let Some(modifier) = &r.modifier_label {
                 ui.label(format!("Hold: {modifier}. Tap, then hold: {}.", r.tap_label));
-                ui.label(format!("{} is a delayed effect after {} ms; {modifier} remains active.", r.hold_label, r.hold_ms));
+                ui.label(format!("{} is a delayed effect after {} ms; {modifier} remains active.", r.hold_label, real_ms(r.hold_ms)));
             } else {
                 ui.label("Tap / tap, then hold :: Hold");
             }

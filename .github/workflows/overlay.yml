@@ -1,14 +1,18 @@
 name: Keybind viewer
 on:
   push:
-    paths: ['overlay/**', 'steam_layout/overlay_profile.py', 'tools/export_overlay_profile.py', 'tests/integration/profiles/test_overlay_profile.py', 'steam_layout/model.py', 'steam_layout/flow_model.py', 'versions/ibex/**', '.github/workflows/overlay.yml']
+    paths: ['overlay/**', 'steam_layout/overlay_profile.py', 'tools/export_overlay_profile.py', 'tests/integration/profiles/test_overlay_profile.py', 'steam_layout/model.py', 'steam_layout/flow_model.py', 'versions/**', 'steam_layout/controllers.py', 'tools/release.py', '.github/workflows/overlay.yml']
   pull_request:
-    paths: ['overlay/**', 'steam_layout/overlay_profile.py', 'tools/export_overlay_profile.py', 'tests/integration/profiles/test_overlay_profile.py', 'steam_layout/model.py', 'steam_layout/flow_model.py', 'versions/ibex/**', '.github/workflows/overlay.yml']
+    paths: ['overlay/**', 'steam_layout/overlay_profile.py', 'tools/export_overlay_profile.py', 'tests/integration/profiles/test_overlay_profile.py', 'steam_layout/model.py', 'steam_layout/flow_model.py', 'versions/**', 'steam_layout/controllers.py', 'tools/release.py', '.github/workflows/overlay.yml']
   workflow_dispatch:
+  workflow_run:
+    workflows: [Release]
+    types: [completed]
 permissions:
   contents: read
 jobs:
   macos:
+    if: github.event_name != 'workflow_run'
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,6 +25,7 @@ jobs:
           name: keybind-viewer-macos-helper
           path: overlay/target/release/keybind-overlay
   windows:
+    if: github.event_name != 'workflow_run'
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,14 +44,21 @@ jobs:
           name: keybind-viewer-windows
           path: overlay/windows-bundle/
   web:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: '1.99.0'
           targets: wasm32-unknown-unknown
       - run: cargo install wasm-pack --version 0.13.1 --locked
+      - name: Check downloads and packaging
+        run: |
+          node --test overlay/scripts/test_downloads.mjs overlay/scripts/test_webhid.mjs
+          python3 -m unittest discover -s overlay/scripts -p 'test_*.py'
       - run: python3 overlay/scripts/build_web.py
       - name: Record the release
         run: python3 overlay/scripts/release_manifest.py --bundle overlay/dist --revision "$GITHUB_SHA"

@@ -12,6 +12,27 @@ companion for the browser viewer, without Steam. Native Linux is not supported.
 
 ## Use
 
+**Download layouts** opens the latest released templates for Steam Controller 2,
+Steam Deck, and DualSense Edge: Default and Alternative for each controller.
+**Choose folder & save all** opens the browser's folder picker and saves six loose,
+versioned `.vdf` files directly in the chosen folder. Identical existing files are
+skipped; files with different contents are preserved. Individual download links
+work when the browser lacks a folder picker. In that case, enable the browser's
+“Ask where to save” setting to choose a destination for each download.
+
+The panel detects the OS and shows common Steam template directories, with an
+OS selector and copy buttons. macOS uses the directory inside `Steam.AppBundle`;
+Linux guidance includes SteamOS and Flatpak installations. A custom Steam install
+can use a different location. Browsers cannot preselect an arbitrary system path:
+navigate to the template folder in the picker, or save elsewhere and move the VDFs
+with your file manager. The browser may require HTTPS and write permission.
+
+Downloads come from each controller's latest release tag on the build's history,
+using the tagged bytes rather than working copies. The web build needs full Git
+history and tags (`git fetch --tags --unshallow` for a shallow clone). Successful
+layout release workflows rebuild the web image; update the deployed image to
+serve new releases. The download catalog does not change the viewer's loaded profile.
+
 For a Steam Controller 2 connected by USB cable or its wireless receiver, click
 **Connect controller** in the web viewer and choose the controller or receiver
 in the browser's device picker. The website reads
@@ -70,10 +91,14 @@ coordinates. Standard browser Gamepad
 input has stick axes but no pad/touch data; use direct WebHID or the companion for those markers.
 System buttons remain visual orientation cues.
 
-The trackpads show click bindings directly on the controller. **Click zones**
-opens enlarged diagrams: left center is Caps Lock with outer arrow keys; right
-center is Middle click with outer Back/Forward and Scroll up/down. Moving a
-thumb or hovering over either view previews the winning binding. The center
+The trackpads show **touch bindings first**, both on the controller and in the
+enlarged Trackpads panel. Press a pad to reveal its click bindings: left center
+is Caps Lock with outer arrow keys; right center is Middle click with outer
+Back/Forward and Scroll up/down. Only the pressed pad switches to click bindings;
+release restores its touch bindings even when the thumb stays on the pad.
+Without a controller, hold the mouse button over a pad to preview a click.
+Moving a thumb or hovering previews the winning click region with a faint tint
+while keeping the touch labels visible. The center
 wins the shared region and gives the entire pad a faint tint; an outer binding
 lights only its directional edge. A physical pad press adds a clearer outline
 and a Pressed label. Lifting, releasing, pausing, and disconnecting clear live
@@ -86,7 +111,7 @@ Press feedback uses the independent physical click flags from WebHID USB/wireles
 or the native Triton helper. Unsupported sources leave clicks unknown and still
 allow mouse previews.
 
-**Touch gestures** shows the left pad's Tab/Enter/Backspace/Escape swipes and
+The touch view shows the left pad's Tab/Enter/Backspace/Escape swipes and
 the right pad's double-touch circular scroll. Lift the first touch before 150 ms,
 then touch the upper or lower edge within the 150 ms window. Clockwise scrolls
 down; counterclockwise scrolls up. Center/sides return to the pointer. The
@@ -96,6 +121,18 @@ trackpad references still load.
 
 Labels describe a fresh press in the inferred context, including
 its timed-gesture phase. They do not describe keys already held in the game. F4 is unassigned.
+The paired Menu transition reads **Enter :: Menu** when Select is held first,
+or **Backspace :: Menu** in the opposite order: the key is the tap-then-hold
+outcome, and holding enters Menu. The exporter reads the key from the layout.
+
+**Gesture slow motion** stretches the viewer's gesture timing from **1× to 10×**.
+A 200 ms hold takes two seconds at 10×; release windows, delayed output, second
+holds, progress bars, and countdowns scale together. Use **Normal speed** to
+return to the layout's timing. Changing speed clears the current gesture; release
+held buttons before trying again. This setting is temporary and affects only the
+viewer, including its local preview of companion input. Steam and the downloadable
+layouts keep their original timings. Paired Menu transitions still require manual
+mode selection; slow motion does not infer unsupported persistent layer changes.
 The dark viewer keeps mode controls above the scrolling reference, with gesture
 details and reading help available on demand. Narrow windows can scroll the
 controller diagram horizontally to keep labels readable.

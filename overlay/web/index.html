@@ -9,11 +9,45 @@
     html,body { margin:0; width:100%; height:100%; overflow:hidden; background:#111317; color:#e6e9ef; font:16px system-ui,sans-serif }
     canvas { width:100%; height:100%; display:block }
     #status { position:absolute; top:35%; left:10%; right:10%; text-align:center; white-space:pre-wrap }
+    #downloads { box-sizing:border-box; width:min(680px,calc(100% - 24px)); max-height:calc(100% - 32px); overflow:auto; padding:28px; border:1px solid #343c45; border-radius:18px; background:#181c21; color:#e6e9ef; box-shadow:0 24px 80px #0008 }
+    #downloads::backdrop { background:#080b10bc }
+    #downloads header { display:flex; align-items:center; justify-content:space-between; gap:16px }
+    #downloads h2 { font-size:22px; font-weight:550; margin:0 }
+    #downloads h3 { font-size:14px; font-weight:550; margin:0 0 12px }
+    #downloads p { font-size:13px; line-height:1.6; color:#a8b1bd; margin:14px 0 }
+    #downloads button,#downloads select,#downloads a { box-sizing:border-box; font:inherit; font-size:13px; border:1px solid #3c4651; border-radius:8px; color:#e6e9ef; background:#20262d; padding:9px 12px }
+    #downloads button,#downloads a { cursor:pointer }
+    #downloads button:hover,#downloads a:hover { background:#2b353e }
+    #downloads :focus-visible { outline:2px solid #83d3c0; outline-offset:3px }
+    #downloads button:disabled { opacity:.5; cursor:wait }
+    #downloads #save-layouts { background:#29463f; border-color:#65ad9c; color:#b4eddf; margin:4px 0 16px }
+    #downloads .layout-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px }
+    #downloads .layout-list section { border:1px solid #303842; border-radius:12px; padding:14px; min-width:0 }
+    #downloads .layout-list a { display:block; text-decoration:none; margin-top:8px; font-size:12px; padding:9px }
+    #downloads .template-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; border-top:1px solid #303842; padding-top:20px; margin-top:22px; font-size:14px }
+    #downloads .template-paths>div { display:grid; grid-template-columns:1fr auto; gap:6px 12px; margin-top:16px }
+    #downloads .template-paths span { color:#a8b1bd; font-size:12px }
+    #downloads code { grid-column:1; overflow-wrap:anywhere; font-size:12px; line-height:1.6; user-select:text }
+    #downloads .template-paths button { grid-column:2; grid-row:1 / span 2; align-self:center }
+    #downloads [role=status] { min-height:21px; color:#a2dbc9 }
+    @media(max-width:560px) { #downloads { padding:20px } #downloads .layout-list { grid-template-columns:1fr } #downloads .layout-list section { display:grid; grid-template-columns:1fr 1fr; gap:8px } #downloads h3 { grid-column:1 / -1; margin:0 } #downloads .layout-list a { margin:0 } }
   </style>
 </head>
 <body>
   <canvas id="viewer" aria-label="Live controller binding reference"></canvas>
   <div id="status" role="status">Loading binding reference…</div>
+  <dialog id="downloads" aria-labelledby="downloads-title">
+    <header><h2 id="downloads-title">Download layouts</h2><button type="button" class="close-downloads" aria-label="Close downloads">Close</button></header>
+    <p>Steam Controller 2, Steam Deck, and DualSense Edge. Both variants, ready for Steam’s templates folder.</p>
+    <p class="download-help"></p>
+    <button type="button" id="save-layouts" disabled>Choose folder &amp; save all</button>
+    <div class="layout-list"></div>
+    <p>Default uses L2/R2 for aim and fire. Alternative uses L1/R1.</p>
+    <div class="template-heading"><label for="template-os">Common template folders</label><select id="template-os"><option value="windows">Windows</option><option value="macos">macOS</option><option value="linux">Linux / SteamOS</option><option value="other">Other OS</option></select></div>
+    <div class="template-paths"></div>
+    <p>Paths depend on where Steam is installed. “~” means your home folder. If Steam’s folder is hidden or not writable in the picker, save elsewhere and move the VDF files there using your file manager.</p>
+    <p role="status" aria-live="polite"></p>
+  </dialog>
   <noscript>This viewer needs JavaScript and WebAssembly enabled.</noscript>
   <script type="module" src="./start.js"></script>
 </body>

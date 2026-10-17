@@ -167,12 +167,24 @@ fn start_server(
                 let asset = match asset_path {
                     "/" | "/index.html" => Some(("index.html", "text/html; charset=utf-8")),
                     "/steam-hid.js" => Some(("steam-hid.js", "text/javascript")),
+                    "/downloads.js" => Some(("downloads.js", "text/javascript")),
+                    "/layouts/index.json" => Some(("layouts/index.json", "application/json")),
                     "/start.js" => Some(("start.js", "text/javascript")),
                     "/pkg/keybind_overlay.js" => {
                         Some(("pkg/keybind_overlay.js", "text/javascript"))
                     }
                     "/pkg/keybind_overlay_bg.wasm" => {
                         Some(("pkg/keybind_overlay_bg.wasm", "application/wasm"))
+                    }
+                    _ if asset_path.strip_prefix("/layouts/").is_some_and(|name| {
+                        name.ends_with(".vdf")
+                            && name.starts_with(|c: char| c.is_ascii_alphanumeric())
+                            && name
+                                .bytes()
+                                .all(|b| b.is_ascii_alphanumeric() || b"_.-".contains(&b))
+                    }) =>
+                    {
+                        Some((&asset_path[1..], "application/octet-stream"))
                     }
                     _ => None,
                 };

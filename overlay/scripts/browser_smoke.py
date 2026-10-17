@@ -120,6 +120,13 @@ def main():
     def click_target(name):
         point = wait_for(lambda: (snapshot() or {}).get('ui_targets', {}).get(name), f'Missing UI target: {name}')
         click(round(point[0]), round(point[1]))
+    def hold_target(name):
+        point = wait_for(lambda: (snapshot() or {}).get('ui_targets', {}).get(name), f'Missing UI target: {name}')
+        click_actions = [{'type':'pointerMove','duration':0,'x':round(point[0]),'y':round(point[1])},
+                         {'type':'pointerDown','button':0}]
+        request('POST', f'/session/{session}/actions', {'actions':[{'type':'pointer','id':'mouse','parameters':{'pointerType':'mouse'},'actions':click_actions}]})
+    def release_pointer():
+        request('POST', f'/session/{session}/actions', {'actions':[{'type':'pointer','id':'mouse','parameters':{'pointerType':'mouse'},'actions':[{'type':'pointerUp','button':0}]}]})
     def scroll_target(name):
         for _ in range(5):
             point = snapshot()['ui_targets'][name]
@@ -147,7 +154,7 @@ def main():
                 'cmd': 'Page.addScriptToEvaluateOnNewDocument', 'params': {'source': fixture.read_text()}})
         if args.stale_cache:
             request('POST', f'/session/{session}/url', {'url': site.rsplit('/', 2)[0] + '/cache-prime'})
-            paths = ['start.js', 'steam-hid.js', 'pkg/keybind_overlay.js', 'pkg/keybind_overlay_bg.wasm']
+            paths = ['start.js', 'steam-hid.js', 'downloads.js', 'pkg/keybind_overlay.js', 'pkg/keybind_overlay_bg.wasm']
             result = request('POST', f'/session/{session}/execute/async', {
                 'script': 'const done=arguments[2]; Promise.all(arguments[1].map(p=>fetch(new URL(p,arguments[0])).then(r=>r.arrayBuffer()))).then(()=>done("cached"),e=>done(String(e)));',
                 'args': [site, paths]})
@@ -173,6 +180,76 @@ def main():
             wait_for(lambda: snapshot()['state']['status']=='unavailable', 'Stopping physical helper left stale live input')
             print('PASS: physical helper mode commands and disconnect recovery')
             return
+        # Exercise the real download dialog and release files, substituting only
+        # the browser-owned directory picker and writable handles.
+        js("""
+          window.savedLayouts=new Map(); window.pickerRequests=[];
+          window.showDirectoryPicker=async options=>{
+            pickerRequests.push({options,activated:navigator.userActivation.isActive});
+            if(window.cancelSave) throw new DOMException('Canceled','AbortError');
+            if(window.denySave) throw new DOMException('Choose a writable folder.','NotAllowedError');
+            return {name:'Chosen templates',getFileHandle:async(name,options)=>{
+              if(!options?.create&&!savedLayouts.has(name))throw new DOMException('Missing','NotFoundError');
+              return {getFile:async()=>new Blob([savedLayouts.get(name)]),createWritable:async()=>{
+                let data; return {write:async bytes=>{data=bytes;},close:async()=>savedLayouts.set(name,data),abort:async()=>{}};
+              }};
+            }};
+          };
+        """)
+        click_target('downloads')
+        wait_for(lambda: js("return document.querySelectorAll('#downloads a[download]').length===6"), 'Download catalog failed')
+        assert js("return document.querySelector('#downloads').open"), 'Downloads button did not open dialog'
+        if 'Mac' in js('return navigator.platform'):
+            assert js("return document.querySelector('#template-os').value")=='macos'
+        links=js("return Array.from(document.querySelectorAll('#downloads a[download]'),a=>({name:a.download,url:a.href}))")
+        assert len(set(link['name'] for link in links))==6
+        assert all(link['name'].endswith('.vdf') and '/' not in link['name'] and '/layouts/' in link['url'] for link in links)
+        # DOM controls receive real pointer activation, as the native picker requires.
+        def click_dom(selector):
+            x,y=js("const e=document.querySelector(arguments[0]);e.scrollIntoView({block:'nearest'});const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2]",selector)
+            click(round(x),round(y))
+        if args.screenshot:
+            args.screenshot.parent.mkdir(parents=True,exist_ok=True)
+            args.screenshot.with_name('downloads.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+        mode=snapshot()['state']['mode']
+        js("document.querySelector('#template-os').dispatchEvent(new KeyboardEvent('keydown',{key:'F2',code:'F2',bubbles:true}))")
+        assert snapshot()['state']['mode']==mode, 'Download dialog changed the viewer mode'
+        click_dom('#save-layouts')
+        wait_for(lambda: 'Saved 6 files' in js("return document.querySelector('#downloads [role=status]').textContent"), 'Folder save failed')
+        assert js('return pickerRequests[0].activated'), 'Folder picker lost user activation'
+        assert js('return pickerRequests[0].options.mode')=='readwrite'
+        assert js('return savedLayouts.size')==6
+        assert js('return [...savedLayouts.values()].every(v=>v.byteLength>1000)'), 'Saved files are empty'
+        click_dom('#save-layouts')
+        wait_for(lambda: '6 identical files' in js("return document.querySelector('#downloads [role=status]').textContent"), 'Existing identical files were not recognized')
+        js('savedLayouts.set([...savedLayouts.keys()][0],new TextEncoder().encode("my edited template"))')
+        click_dom('#save-layouts')
+        wait_for(lambda: 'different contents' in js("return document.querySelector('#downloads [role=status]').textContent"), 'Edited template conflict not explained')
+        assert js('return new TextDecoder().decode([...savedLayouts.values()][0])')=='my edited template'
+        js('window.cancelSave=true')
+        click_dom('#save-layouts')
+        wait_for(lambda: 'canceled' in js("return document.querySelector('#downloads [role=status]').textContent"), 'Picker cancellation not handled')
+        js('window.cancelSave=false;window.denySave=true')
+        click_dom('#save-layouts')
+        wait_for(lambda: 'writable folder' in js("return document.querySelector('#downloads [role=status]').textContent"), 'Picker permission denial not explained')
+        request('POST', f'/session/{session}/window/rect', {'width': 420, 'height': 760})
+        js("document.querySelector('#template-os').value='linux';document.querySelector('#template-os').dispatchEvent(new Event('change'))")
+        assert js("return document.querySelector('.template-paths').textContent.includes('/home/deck/')")
+        assert js("const d=document.querySelector('#downloads');return d.scrollWidth<=d.clientWidth"), 'Downloads overflow on a narrow screen'
+        if args.screenshot:
+            args.screenshot.with_name('downloads-narrow.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+        click_dom('.close-downloads')
+        request('POST', f'/session/{session}/window/rect', {'width':1060,'height':920})
+        # Feature detection must offer working individual links without a picker.
+        request('POST', f'/session/{session}/goog/cdp/execute', {
+            'cmd':'Page.addScriptToEvaluateOnNewDocument','params':{'source':'window.showDirectoryPicker=undefined;'}})
+        navigate()
+        click_target('downloads')
+        wait_for(lambda: js("return document.querySelectorAll('#downloads a[download]').length===6"), 'Fallback downloads missing')
+        assert js("return document.querySelector('#save-layouts').hidden")
+        assert 'Ask where to save' in js("return document.querySelector('.download-help').textContent")
+        click_dom('.close-downloads')
+        print('PASS: six loose release downloads, activated folder picker, verified saves, cancellation, conflicts, OS paths, narrow layout and fallback links')
         js("Object.defineProperty(navigator,'getGamepads',{value:()=>[],configurable:true})")
         empty_status = 'Connect a controller to begin' if snapshot()['browser_connection']['available'] else 'No controllers exposed by this browser'
         wait_for(lambda: snapshot().get('input_status') == empty_status, 'Missing controllers not explained')
@@ -229,31 +306,39 @@ def main():
         time.sleep(0.35)
         if args.screenshot:
             args.screenshot.with_name('pads-scroll.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+        wait_for(lambda: snapshot()['pad_layers']==['touch','touch'], 'Pads must start with touch bindings')
         for side, center_label, outer_label in ((0,'Caps Lock','→'),(1,'Middle click','Forward')):
-            click_target(f'pad:{side}:overlap')
-            wait_for(lambda: snapshot()['pad_previews'][side]==f'Overlap · inner wins · {center_label}', 'Pad overlap selected the outer binding')
-            click_target(f'pad:{side}:outer')
-            wait_for(lambda: snapshot()['pad_previews'][side]==f'Outer click · {outer_label}', 'Pad outer region did not select direction')
-        click_target('pad:1:overlap')
+            hold_target(f'pad:{side}:overlap')
+            wait_for(lambda: snapshot()['pad_previews'][side]==f'Overlap · inner wins · {center_label} · Pressed', 'Pad overlap selected the outer binding')
+            assert snapshot()['pad_layers'][side]=='click'
+            assert snapshot()['pad_layers'][1-side]=='touch', 'One pad press switched both pads'
+            release_pointer()
+            wait_for(lambda: snapshot()['pad_layers']==['touch','touch'], 'Mouse release did not restore touch bindings')
+            assert snapshot()['pad_previews'][side].startswith('Touch ·'), 'Old click caption survived release'
+            hold_target(f'pad:{side}:outer')
+            wait_for(lambda: snapshot()['pad_previews'][side]==f'Outer click · {outer_label} · Pressed', 'Pad outer region did not select direction')
+            release_pointer()
+        hold_target('pad:1:overlap')
         if args.screenshot:
             args.screenshot.with_name('pad-clicks.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
-        click_target('pads:touch')
-        time.sleep(0.2)
+        release_pointer()
+        wait_for(lambda: snapshot()['pad_layers']==['touch','touch'], 'Pads did not return to touch view')
         assert snapshot()['trackpads'][0]['swipe'][3]['text']=='Escape'
         assert snapshot()['trackpads'][1]['double_tap']['clockwise']['text']=='Scroll down'
         if args.screenshot:
             args.screenshot.with_name('pad-touch.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
-        click_target('pads:click')
         if args.screenshot:
             request('POST', f'/session/{session}/window/rect', {'width':640,'height':820})
             time.sleep(0.2)
             scroll_target('pad:0:overlap')
-            click_target('pad:0:overlap')
-            wait_for(lambda: snapshot()['pad_previews'][0]=='Overlap · inner wins · Caps Lock', 'Narrow left pad preview failed')
+            hold_target('pad:0:overlap')
+            wait_for(lambda: snapshot()['pad_previews'][0]=='Overlap · inner wins · Caps Lock · Pressed', 'Narrow left pad preview failed')
             args.screenshot.with_name('pad-narrow.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+            release_pointer()
             scroll_target('pad:1:overlap')
-            click_target('pad:1:overlap')
-            wait_for(lambda: snapshot()['pad_previews'][1]=='Overlap · inner wins · Middle click', 'Narrow right pad preview failed')
+            hold_target('pad:1:overlap')
+            wait_for(lambda: snapshot()['pad_previews'][1]=='Overlap · inner wins · Middle click · Pressed', 'Narrow right pad preview failed')
+            release_pointer()
             for side in range(2):
                 assert 0 < snapshot()['ui_targets'][f'pad:{side}:outer'][0] < 640
             request('POST', f'/session/{session}/window/rect', {'width':1060,'height':1100})
@@ -263,7 +348,7 @@ def main():
         request('POST', f'/session/{session}/goog/cdp/execute', {
             'cmd':'Input.dispatchMouseEvent','params':{'type':'mouseWheel','x':800,'y':650,'deltaX':0,'deltaY':-3000}})
         time.sleep(0.35)
-        print('PASS: pad overlap previews choose center; outer zones, swipes and double-touch references match the profile')
+        print('PASS: touch-first pads, independent held-click views, release restoration, overlap priority, swipes and double-touch references')
         # Objects use native prototypes so the adapter exercises web-sys casts.
         js("""
           window.mockButtons=Array(17).fill(0);window.mockButtons[4]=1;window.mockMapping='standard';window.mockConnected=true;
@@ -466,6 +551,26 @@ def main():
             wait_for(lambda: snapshot()['state']['input']['pads']==positions['pads'], 'Trackpad contacts lost in companion transport')
             assert snapshot()['state']['input']['stick_positions']==positions['stick_positions']
 
+            host_input(1700)
+            click_target('timing-scale:slow')
+            wait_for(lambda: snapshot()['state']['timing_scale']==10, 'Remote preview speed did not change')
+            def preview_input(at_ms, down):
+                buttons=[i==12 and down for i in range(16)]
+                companion.stdin.write(json.dumps({'input':{'buttons':buttons},'at_ms':at_ms})+'\n');companion.stdin.flush()
+                wait_for(lambda: snapshot()['state']['input']['buttons'][12]==down, 'Remote preview input missing')
+            preview_input(1710,True)
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase']=='pressed', 'Remote preview did not start')
+            time.sleep(0.3)
+            assert snapshot()['state']['gestures']['lanes'][0]['phase']=='pressed', 'Remote preview used host speed'
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase']=='hold', 'Remote clock did not advance between unchanged snapshots')
+            preview_input(1720,False)
+            click_target('timing-normal')
+            wait_for(lambda: snapshot()['state']['timing_scale']==1, 'Remote speed reset failed')
+            preview_input(1730,True)
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase']=='hold', 'Remote normal-speed preview failed')
+            preview_input(1740,False)
+            print('PASS: companion slow motion runs locally without changing host timing')
+
             assert js('return window.localReads')==0, 'Companion and local controller input were mixed'
             if args.screenshot:
                 args.screenshot.with_name('companion.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
@@ -497,6 +602,41 @@ def main():
             wait_for(lambda: snapshot()['state']['status']=='live', 'Direct HID input did not become live')
             assert not snapshot()['remote'], 'HID should not use companion transport'
             assert snapshot()['state']['device']=='webhid:steam-controller-usb'
+            # Slow motion changes the gesture engine and the timeline together,
+            # while raw controller freshness continues using real time.
+            click_target('timing-scale:slow')
+            wait_for(lambda: snapshot()['state']['timing_scale']==10, 'Timing slider did not reach 10x')
+            js('fakeHid.device.frame(0)')
+            time.sleep(0.1)
+            js('fakeHid.device.frame(0x4000)')
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][2]['phase']=='pressed', 'Slow Select press missing')
+            assert snapshot()['control_labels'][5]=='Enter :: Menu'
+            time.sleep(0.3)
+            assert snapshot()['state']['gestures']['lanes'][2]['phase']=='pressed', 'Hold completed at normal speed in slow motion'
+            if args.screenshot:
+                args.screenshot.with_name('slow-motion-menu.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][2]['phase']=='hold', 'Slow hold never completed')
+            assert snapshot()['control_labels'][5]=='Enter :: Menu'
+            js('fakeHid.device.frame(0)')
+            time.sleep(0.1)
+            js('fakeHid.device.frame(0x40)')
+            wait_for(lambda: snapshot()['control_labels'][4]=='Backspace :: Menu', 'Reverse Menu transition label missing')
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='window', 'Slow release window missing')
+            time.sleep(0.3)
+            assert snapshot()['state']['gestures']['lanes'][3]['phase']=='window', 'Release window did not stretch'
+            js('fakeHid.device.frame(0x40)')
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='second', 'Slow second hold missing')
+            time.sleep(0.3)
+            assert snapshot()['state']['gestures']['lanes'][3]['phase']=='second', 'Second hold completed at normal speed'
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='cover', 'Slow second hold never completed')
+            click_target('timing-normal')
+            wait_for(lambda: snapshot()['state']['timing_scale']==1, 'Normal speed reset failed')
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='unknown', 'Speed change completed an already held gesture')
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='idle', 'Release after speed change failed')
+            print('PASS: 10x hold, release window and second hold; normal-speed reset and both Menu transition labels')
+
             js('fakeHid.device.frame(0x80000)')
             wait_for(lambda: snapshot()['state']['held']==[True,False], 'Direct L1 did not reach Rust')
             # A release and press delivered in one JS task must not collapse to
@@ -518,15 +658,24 @@ def main():
             for raw, zone in ((0,'inner'),(21298,'inner'),(23920,'overlap'),(31000,'outer1')):
                 js('fakeHid.device.frame(0x02200000,{19:arguments[0],25:arguments[0]})',raw)
                 wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:released']*2, 'Live pad preview selected the wrong zone')
+                assert snapshot()['pad_layers']==['touch','touch']
                 if args.screenshot and raw==0:
                     args.screenshot.with_name('pad-live-hover.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
                 js('fakeHid.device.frame(0x06600000,{19:arguments[0],25:arguments[0]})',raw)
                 wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:pressed']*2, 'Pad click actuation did not reach the drawing')
+                assert snapshot()['pad_layers']==['click','click']
                 assert snapshot()['state']['input']['pad_clicks']==[True,True]
                 if args.screenshot and raw in (0,31000):
                     args.screenshot.with_name('pad-live-center.png' if raw==0 else 'pad-live-edge.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
                 js('fakeHid.device.frame(0x02200000,{19:arguments[0],25:arguments[0]})',raw)
                 wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:released']*2, 'Pad click release stayed highlighted')
+                assert snapshot()['pad_layers']==['touch','touch']
+            js('fakeHid.device.frame(0x06200000,{19:31000,25:31000})')
+            wait_for(lambda: snapshot()['pad_layers']==['click','touch'], 'Left physical click changed the right pad')
+            js('fakeHid.device.frame(0x02600000,{19:31000,25:31000})')
+            wait_for(lambda: snapshot()['pad_layers']==['touch','click'], 'Right physical click changed the left pad')
+            js('fakeHid.device.frame(0x02200000,{19:31000,25:31000})')
+            wait_for(lambda: snapshot()['pad_layers']==['touch','touch'], 'Releasing clicks while touching did not restore touch bindings')
             # Real contact takes priority over a mouse hovering another region.
             click_target('controller-pad:0:center')
             assert snapshot()['pad_feedback'][0]=='live:outer1:released'
@@ -539,6 +688,7 @@ def main():
             assert snapshot()['state']['held']==[False,False]
             assert snapshot()['state']['input']['pad_clicks']==[None,None]
             wait_for(lambda: snapshot()['pad_feedback']==['idle:none:released']*2, 'Paused input left a pad pressed')
+            assert snapshot()['pad_layers']==['touch','touch']
             js("fakeHid.device.frame(0);Object.defineProperty(document,'hidden',{value:false,configurable:true});document.dispatchEvent(new Event('visibilitychange'))")
             wait_for(lambda: snapshot()['state']['status']=='live', 'HID did not resume from fresh input')
             assert snapshot()['state']['held']==[False,False]
@@ -616,8 +766,10 @@ def main():
             for raw, zone in ((0,'inner'),(23920,'overlap'),(31000,'outer1')):
                 js('fakeHid.device.frame(0x180000,{16:arguments[0],20:arguments[0]})',raw)
                 wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:released']*2, 'Deck contact chose wrong click zone')
+                assert snapshot()['pad_layers']==['touch','touch']
                 js('fakeHid.device.frame(0x1e0000,{16:arguments[0],20:arguments[0]})',raw)
                 wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:pressed']*2, 'Deck pad click not shown')
+                assert snapshot()['pad_layers']==['click','click']
                 if args.screenshot and raw==23920:
                     args.screenshot.with_name('deck-pad-overlap.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
             js('fakeHid.device.frame(0)')

@@ -15,6 +15,8 @@ window.addEventListener('hashchange', () => {
   if (initiallyPaired || location.hash.startsWith('#companion=')) location.reload();
 });
 try {
+  const { installDownloads } = await import(assetUrl('./downloads.js').href);
+  installDownloads(assetUrl);
   const { SteamHid } = await import(assetUrl('./steam-hid.js').href);
   window.SteamHid = SteamHid;
   const { default: init, WebHandle } = await import(assetUrl('./pkg/keybind_overlay.js').href);

@@ -10,7 +10,8 @@ import urllib.request
 from urllib.parse import urlparse
 
 
-ASSETS = ('index.html', 'start.js', 'steam-hid.js', 'pkg/keybind_overlay.js', 'pkg/keybind_overlay_bg.wasm')
+ASSETS = ('index.html', 'start.js', 'steam-hid.js', 'downloads.js', 'layouts/index.json',
+          'pkg/keybind_overlay.js', 'pkg/keybind_overlay_bg.wasm')
 REVISION = re.compile(r'[a-f0-9]{40}')
 
 
@@ -23,6 +24,12 @@ def write_manifest(bundle, revision):
         if not data:
             raise ValueError(f'Empty asset: {path}')
         assets[path] = hashlib.sha256(data).hexdigest()
+    for entry in json.loads((bundle / 'layouts/index.json').read_text())['layouts']:
+        path = 'layouts/' + entry['filename']
+        digest = hashlib.sha256((bundle / path).read_bytes()).hexdigest()
+        if digest != entry['sha256']:
+            raise ValueError(f'Layout asset mismatched: {path}')
+        assets[path] = digest
     (bundle / 'version.json').write_text(json.dumps({'revision': revision, 'assets': assets}) + '\n')
 
 
@@ -40,7 +47,11 @@ def verify_site(base_url, revision=None):
     actual = manifest['revision']
     if not REVISION.fullmatch(actual) or (revision is not None and actual != revision):
         raise RuntimeError('Server is not serving the expected release')
-    for path in ASSETS:
+    if not set(ASSETS).issubset(manifest['assets']):
+        raise RuntimeError('Release manifest is missing required assets')
+    for path in manifest['assets']:
+        if path not in ASSETS and not re.fullmatch(r'layouts/[a-z0-9][a-z0-9_.-]*\.vdf', path):
+            raise RuntimeError('Invalid release asset path')
         data, mime = read(path)
         if not data or hashlib.sha256(data).hexdigest() != manifest['assets'][path]:
             raise RuntimeError(f'Release asset missing or mismatched: {path}')

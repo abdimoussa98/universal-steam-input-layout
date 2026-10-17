@@ -24,6 +24,7 @@ impl Backend for NativeBackend {
     fn command(&mut self, command: Command) {
         let mut h = self.0.lock().expect("hub");
         match command {
+            Command::TimingScale(scale) => h.data.state.set_timing_scale(scale),
             Command::Mode(mode) => {
                 h.data.state.select_mode(mode);
             }
@@ -51,7 +52,9 @@ impl Backend for NativeBackend {
             },
             Command::Hud(hud) => h.window(hud, false),
             Command::Hide => h.window(false, true),
-            Command::ConnectController | Command::DisconnectController => {}
+            Command::ConnectController
+            | Command::DisconnectController
+            | Command::DownloadLayouts => {}
         }
         h.changed();
     }

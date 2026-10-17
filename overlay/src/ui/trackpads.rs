@@ -48,7 +48,12 @@ pub(super) struct Feedback {
     pub live: bool,
 }
 
-pub(super) fn feedback(data: &FrameData, side: usize, hover: Option<[f32; 2]>) -> Feedback {
+pub(super) fn feedback(
+    ui: &egui::Ui,
+    data: &FrameData,
+    side: usize,
+    hover: Option<[f32; 2]>,
+) -> Feedback {
     if data.state.status == InputStatus::Live {
         let pressed = data.state.input.pad_clicks[side] == Some(true);
         if let Some(touch) = data.state.input.pads[side]
@@ -75,6 +80,7 @@ pub(super) fn feedback(data: &FrameData, side: usize, hover: Option<[f32; 2]>) -
     }
     Feedback {
         position: hover,
+        pressed: hover.is_some() && ui.input(|i| i.pointer.primary_down()),
         ..Feedback::default()
     }
 }
@@ -136,6 +142,16 @@ pub(super) fn record_feedback(ui: &egui::Ui, side: usize, pad: &TrackpadBindings
     );
     ui.ctx()
         .data_mut(|d| d.insert_temp(egui::Id::new(format!("pad:{side}:feedback")), value));
+    ui.ctx().data_mut(|d| {
+        d.insert_temp(
+            egui::Id::new(format!("pad:{side}:layer")),
+            if input.pressed {
+                "click".to_string()
+            } else {
+                "touch".to_string()
+            },
+        )
+    });
 }
 
 /// The same configured zones and light feedback on both pad views.
@@ -145,7 +161,6 @@ pub(super) fn field(
     half: f32,
     angle: f32,
     pad: &TrackpadBindings,
-    touch_view: bool,
     input: Feedback,
 ) {
     let at = |x: f32, y: f32| {
@@ -160,7 +175,7 @@ pub(super) fn field(
         .and_then(|xy| pad.regions.as_ref().map(|r| r.zone(xy)));
     let detailed = half > 85.0;
     let size = if detailed { 14.0 } else { 10.0 };
-    if !touch_view {
+    {
         let outline: Vec<_> = (0..=96)
             .map(|i| {
                 let angle = i as f32 * std::f32::consts::TAU / 96.0;
@@ -228,6 +243,8 @@ pub(super) fn field(
                 egui::Stroke::new(1.8_f32, edge),
             ));
         }
+    }
+    if input.pressed {
         text(
             p,
             center,
@@ -317,7 +334,7 @@ pub(super) fn field(
     }
 }
 
-pub(super) fn explorer(ui: &mut egui::Ui, data: &FrameData, touch_view: &mut bool) {
+pub(super) fn explorer(ui: &mut egui::Ui, data: &FrameData) {
     let Some(pads) = data
         .state
         .control_page(&data.profile)
@@ -328,42 +345,19 @@ pub(super) fn explorer(ui: &mut egui::Ui, data: &FrameData, touch_view: &mut boo
     ui.add_space(8.0);
     egui::Frame::new().fill(SURFACE).corner_radius(14.0)
         .stroke(egui::Stroke::new(1.0_f32,BORDER)).inner_margin(16.0).show(ui,|ui| {
-        ui.horizontal_wrapped(|ui| {
-            ui.label(RichText::new("Trackpads").size(19.0).color(Color32::WHITE));
-            for (value,title) in [(false,"Click zones"),(true,"Touch gestures")] {
-                let response=ui.selectable_label(*touch_view==value,title);
-                target(ui,if value {"pads:touch"} else {"pads:click"},&response);
-                if response.clicked() {*touch_view=value;}
-            }
-        });
-        ui.add_space(8.0);
-        if *touch_view {
-            ui.label(RichText::new("Swipes and double-tap touch bindings for the current layer.").color(MUTED));
-        } else {
-            ui.horizontal_wrapped(|ui| {
-                ui.colored_label(ACCENT,"Inner click");
-                ui.colored_label(OVERLAP,"Overlap · inner wins");
-                ui.label("Outer click");
-            });
-            ui.label(RichText::new("Move your thumb or hover over a pad. Press to see click feedback.").size(12.0).color(MUTED))
-                .on_hover_text("The preview normalizes the layout's configured thresholds to pad coordinates; it predicts a fresh click, not Steam's output. Click feedback comes from the controller's physical press flag.");
-        }
+        ui.label(RichText::new("Trackpads").size(19.0).color(Color32::WHITE));
+        ui.label(RichText::new("Touch bindings first. Press a pad to see its click bindings; release to return.").color(MUTED));
+        ui.label(RichText::new("You can also hold the mouse button over a pad to preview a click. The inner binding wins in the overlap.").size(12.0).color(MUTED));
         ui.add_space(12.0);
         if ui.available_width()>=620.0 {
-            ui.columns(2,|cols| {for side in 0..2 {card(&mut cols[side],side,&pads[side],*touch_view,data);}});
+            ui.columns(2,|cols| {for side in 0..2 {card(&mut cols[side],side,&pads[side],data);}});
         } else {
-            for (side,pad) in pads.iter().enumerate() {card(ui,side,pad,*touch_view,data);ui.add_space(12.0);}
+            for (side,pad) in pads.iter().enumerate() {card(ui,side,pad,data);ui.add_space(12.0);}
         }
     });
 }
 
-fn card(
-    ui: &mut egui::Ui,
-    side: usize,
-    pad: &TrackpadBindings,
-    touch_view: bool,
-    data: &FrameData,
-) {
+fn card(ui: &mut egui::Ui, side: usize, pad: &TrackpadBindings, data: &FrameData) {
     egui::Frame::new()
         .fill(PAD_FILL)
         .corner_radius(12.0)
@@ -385,7 +379,7 @@ fn card(
             );
             let center = area.center();
             let bounds = egui::Rect::from_center_size(center, egui::vec2(half * 2.0, half * 2.0));
-            let input = feedback(data, side, hover(ui, center, half, 0.0));
+            let input = feedback(ui, data, side, hover(ui, center, half, 0.0));
             let painter = ui.painter();
             painter.rect_filled(bounds, 18.0, Color32::from_rgb(25, 30, 36));
             painter.rect_stroke(
@@ -394,7 +388,19 @@ fn card(
                 egui::Stroke::new(1.0_f32, BORDER),
                 egui::StrokeKind::Inside,
             );
-            field(painter, center, half, 0.0, pad, touch_view, input);
+            field(painter, center, half, 0.0, pad, input);
+            if !input.pressed {
+                let value = if pad.swipe.is_some() {
+                    "Touch · Swipe bindings".into()
+                } else if pad.double_tap.is_some() {
+                    "Touch · Pointer / Double tap to scroll".into()
+                } else {
+                    format!("Touch · {}", pad.touch)
+                };
+                ui.ctx().data_mut(|d| {
+                    d.insert_temp(egui::Id::new(format!("pad:{side}:preview")), value)
+                });
+            }
             if input.live || input.position.is_some() {
                 record_feedback(ui, side, pad, input);
             }
@@ -416,7 +422,7 @@ fn card(
                 &format!("pad:{side}:outer"),
                 center + egui::vec2(half * 0.84, 0.0),
             );
-            if !touch_view {
+            if input.pressed {
                 let (selected, caption) = if pad.regions.is_none() {
                     (&pad.center, "Click")
                 } else {

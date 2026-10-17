@@ -507,3 +507,77 @@ fn steering_center_sideways_combo_and_double_tap_boundaries() {
     assert_eq!(s.input.stick_positions, [None, None]);
     assert_eq!(s.input.pads, [None, None]);
 }
+
+#[test]
+fn slow_motion_scales_hold_window_output_and_second_hold_together() {
+    let p = profile();
+    for scale in [1, 2, 5, 10] {
+        let mut s = State::default();
+        s.set_timing_scale(scale);
+        let t = |time| time * u64::from(scale);
+        let mut input = InputFrame::default();
+        s.sample_input("pad", input.clone(), &p, t(0));
+        input.buttons[Control::L1 as usize] = true;
+        s.sample_input("pad", input.clone(), &p, t(10));
+        s.sample_input("pad", input.clone(), &p, t(209));
+        assert_eq!(s.gestures.lanes[0].phase, Phase::Pressed);
+        s.sample_input("pad", input.clone(), &p, t(210));
+        assert_eq!(s.gestures.lanes[0].phase, Phase::Hold);
+        input.buttons[Control::L1 as usize] = false;
+        s.sample_input("pad", input.clone(), &p, t(220));
+        assert_eq!(s.gestures.lanes[0].phase, Phase::Idle);
+        input.buttons[Control::L1 as usize] = true;
+        s.sample_input("pad", input.clone(), &p, t(300));
+        input.buttons[Control::L1 as usize] = false;
+        s.sample_input("pad", input.clone(), &p, t(350));
+        assert_eq!(s.gestures.lanes[0].phase, Phase::Window);
+        s.sample_input("pad", input.clone(), &p, t(399));
+        assert!(!s.gestures.lanes[0].output_seen);
+        s.sample_input("pad", input.clone(), &p, t(400));
+        assert!(s.gestures.lanes[0].output_seen);
+        input.buttons[Control::L1 as usize] = true;
+        s.sample_input("pad", input.clone(), &p, t(450));
+        assert_eq!(s.gestures.lanes[0].phase, Phase::Second);
+        s.sample_input("pad", input.clone(), &p, t(599));
+        assert_eq!(s.gestures.lanes[0].phase, Phase::Second);
+        s.sample_input("pad", input.clone(), &p, t(600));
+        assert_eq!(s.gestures.lanes[0].phase, Phase::Cover);
+        assert_eq!(
+            p.dashboard
+                .as_ref()
+                .unwrap()
+                .recipe(Mode::Base, Control::L1)
+                .unwrap()
+                .hold_ms,
+            200
+        );
+    }
+}
+
+#[test]
+fn changing_preview_speed_requires_release_and_never_finishes_a_pending_gesture() {
+    let p = profile();
+    let mut s = State::default();
+    let mut input = InputFrame::default();
+    s.sample_input("pad", input.clone(), &p, 1000);
+    input.buttons[Control::Select as usize] = true;
+    s.sample_input("pad", input.clone(), &p, 1010);
+    s.set_timing_scale(10);
+    s.sample_input("pad", input.clone(), &p, 1100);
+    assert_eq!(s.gestures.lanes[2].phase, Phase::Unknown);
+    assert!(s.gestures.lanes[2].deadline_ms.is_none());
+    input.buttons[Control::Select as usize] = false;
+    s.sample_input("pad", input.clone(), &p, 1200);
+    input.buttons[Control::Select as usize] = true;
+    s.sample_input("pad", input.clone(), &p, 1300);
+    s.sample_input("pad", input.clone(), &p, 3290);
+    assert_eq!(s.gestures.lanes[2].phase, Phase::Pressed);
+    s.sample_input("pad", input.clone(), &p, 3300);
+    assert_eq!(s.gestures.lanes[2].phase, Phase::Hold);
+    s.set_timing_scale(1);
+    s.sample_input("pad", input, &p, 3400);
+    assert_eq!(s.gestures.lanes[2].phase, Phase::Unknown);
+    s.unavailable(InputStatus::Disconnected);
+    assert_eq!(s.timing_scale(), 1);
+    assert!(!s.gestures.animating());
+}

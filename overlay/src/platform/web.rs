@@ -7,6 +7,8 @@ use wasm_bindgen_futures::{JsFuture, spawn_local};
 const HID_DEVICE_ID: &str = "webhid:steam-controller-usb";
 #[wasm_bindgen]
 extern "C" {
+    #[wasm_bindgen(js_namespace = window, js_name = openLayoutDownloads)]
+    fn open_layout_downloads();
     #[wasm_bindgen(js_namespace = window, js_name = SteamHid)]
     #[derive(Clone)]
     type SteamHid;
@@ -52,6 +54,7 @@ struct WebState {
     hid_input: Option<InputFrame>,
     hid_received: Option<f64>,
     hid_error: Option<String>,
+    remote_timing_scale: Option<u8>,
 }
 fn storage_read(key: &str) -> Result<Option<String>, String> {
     web_sys::window()
@@ -140,6 +143,7 @@ impl WebState {
             hid_input: None,
             hid_received: None,
             hid_error: None,
+            remote_timing_scale: None,
         }
     }
     fn repaint(&self) {
@@ -378,6 +382,10 @@ impl Backend for WebBackend {
         self.0.borrow().data.clone()
     }
     fn command(&mut self, command: Command) {
+        if matches!(command, Command::DownloadLayouts) {
+            open_layout_downloads();
+            return;
+        }
         // The JS permission request can synchronously notify Rust. Release the
         // state borrow before calling it, and preserve the button's activation.
         if matches!(
@@ -396,6 +404,12 @@ impl Backend for WebBackend {
         }
         let mut s = self.0.borrow_mut();
         match command {
+            Command::TimingScale(scale) => {
+                s.data.state.set_timing_scale(scale);
+                if s.data.remote {
+                    s.remote_timing_scale = Some(scale.clamp(1, 10));
+                }
+            }
             Command::Mode(mode) => {
                 if s.bridge.is_some() {
                     s.pending_mode = Some(mode);
@@ -526,6 +540,15 @@ fn tick(shared: &Rc<RefCell<WebState>>) {
         s.data.error = Some("Companion input timed out".into());
         s.repaint();
     }
+    if s.remote_timing_scale.is_some() && s.data.state.status == InputStatus::Live {
+        let FrameData { state, profile, .. } = &mut s.data;
+        if let Some(id) = state.device.clone() {
+            state.sample_input(&id, state.input.clone(), profile, now_ms() as u64);
+        }
+        if s.data.state.gestures.animating() {
+            s.repaint();
+        }
+    }
     if s.busy || js_sys::Date::now() - s.last_poll < 33.0 {
         return;
     }
@@ -555,6 +578,7 @@ fn tick(shared: &Rc<RefCell<WebState>>) {
         {
             return;
         }
+        let profile_changed = result.as_ref().is_ok_and(|snap| snap.profile.is_some());
         let result = result.and_then(|snap| s.bridge.as_mut().expect("remote").accept(snap));
         match result {
             Ok(changed) => {
@@ -564,10 +588,30 @@ fn tick(shared: &Rc<RefCell<WebState>>) {
                     let state = b.state.clone();
                     let settings = b.settings.clone();
                     let profile = b.profile.clone();
-                    s.data.state = state;
                     s.data.settings = settings;
                     if let Some(p) = profile {
                         s.data.profile = p;
+                    }
+                    if let Some(scale) = s.remote_timing_scale {
+                        if profile_changed {
+                            s.data.state.gestures = Gestures::default();
+                        }
+                        s.data.state.set_timing_scale(scale);
+                        s.data.state.select_mode(state.mode);
+                        if state.status == InputStatus::Live {
+                            if let Some(id) = state.device {
+                                let FrameData {
+                                    state: preview,
+                                    profile,
+                                    ..
+                                } = &mut s.data;
+                                preview.sample_input(&id, state.input, profile, now_ms() as u64);
+                            }
+                        } else {
+                            s.data.state.unavailable(state.status);
+                        }
+                    } else {
+                        s.data.state = state;
                     }
                     s.data.error = None;
                     s.repaint();
@@ -690,7 +734,12 @@ impl WebHandle {
                 .as_ref()
                 .and_then(|c| c.data(|d| d.get_temp(egui::Id::new(format!("pad:{side}:feedback")))))
         });
-        serde_json::json!({"pad_feedback":pad_feedback,"pad_previews":pad_previews,"trackpads":s.data.state.control_page(&s.data.profile).and_then(|page|page.trackpads.as_ref()),"ui_targets":s.context.as_ref().and_then(|c|c.data(|d|d.get_temp::<std::collections::BTreeMap<String,[f32;2]>>(egui::Id::new("keybind.targets")))),"control_labels":s.data.state.control_labels(&s.data.profile),"input_status":s.data.input_status_label(),"controller_help":s.data.controller_help(),"browser_connection":s.data.browser_connection,"state":s.data.state,"labels":s.data.state.view(&s.data.profile).labels,"devices":s.data.settings.devices,"error":s.data.error.as_ref().or(s.data.settings.error.as_ref()),"remote":s.data.remote,"settings":s.data.settings,"preferences":s.data.display_preferences()}).to_string()
+        let pad_layers: [Option<String>; 2] = std::array::from_fn(|side| {
+            s.context
+                .as_ref()
+                .and_then(|c| c.data(|d| d.get_temp(egui::Id::new(format!("pad:{side}:layer")))))
+        });
+        serde_json::json!({"pad_layers":pad_layers,"pad_feedback":pad_feedback,"pad_previews":pad_previews,"trackpads":s.data.state.control_page(&s.data.profile).and_then(|page|page.trackpads.as_ref()),"ui_targets":s.context.as_ref().and_then(|c|c.data(|d|d.get_temp::<std::collections::BTreeMap<String,[f32;2]>>(egui::Id::new("keybind.targets")))),"control_labels":s.data.state.control_labels(&s.data.profile),"input_status":s.data.input_status_label(),"controller_help":s.data.controller_help(),"browser_connection":s.data.browser_connection,"state":s.data.state,"labels":s.data.state.view(&s.data.profile).labels,"devices":s.data.settings.devices,"error":s.data.error.as_ref().or(s.data.settings.error.as_ref()),"remote":s.data.remote,"settings":s.data.settings,"preferences":s.data.display_preferences()}).to_string()
     }
     pub fn destroy(&mut self) {
         if let Some(state) = &self.state {

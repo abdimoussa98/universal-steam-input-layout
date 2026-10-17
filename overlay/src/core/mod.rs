@@ -205,7 +205,7 @@ impl InputStatus {
         }
     }
 }
-#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct State {
     pub mode: Mode,
     pub held: [bool; 2],
@@ -215,6 +215,25 @@ pub struct State {
     pub input: InputFrame,
     #[serde(default)]
     pub gestures: Gestures,
+    /// Viewer-only time stretch; Steam and the exported profile stay unchanged.
+    #[serde(default = "normal_timing")]
+    pub timing_scale: u8,
+}
+fn normal_timing() -> u8 {
+    1
+}
+impl Default for State {
+    fn default() -> Self {
+        Self {
+            mode: Mode::default(),
+            held: [false; 2],
+            status: InputStatus::default(),
+            device: None,
+            input: InputFrame::default(),
+            gestures: Gestures::default(),
+            timing_scale: 1,
+        }
+    }
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct View {
@@ -224,6 +243,18 @@ pub struct View {
     pub status: InputStatus,
 }
 impl State {
+    pub fn timing_scale(&self) -> u8 {
+        self.timing_scale.clamp(1, 10)
+    }
+    pub fn set_timing_scale(&mut self, scale: u8) {
+        let scale = scale.clamp(1, 10);
+        if self.timing_scale != scale {
+            self.timing_scale = scale;
+            // A speed change cannot finish a gesture or turn a held button into
+            // a fresh press. The next sample requires release before tracking.
+            self.gestures = Gestures::default();
+        }
+    }
     pub fn select_mode(&mut self, mode: Mode) -> bool {
         let changed = self.mode != mode;
         if changed {
