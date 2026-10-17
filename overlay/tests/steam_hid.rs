@@ -252,3 +252,47 @@ fn deck_header_validation_rejects_truncated_input_and_ignores_other_messages() {
     assert!(decode_report(0, &invalid).is_err());
     assert!(decode_report(0, &[bytes.as_slice(), &[0]].concat()).is_err());
 }
+
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
+#[cfg_attr(not(target_arch = "wasm32"), test)]
+fn deck_force_previews_clicks_when_firmware_click_bits_are_disabled() {
+    for side in 0..2 {
+        let mut bytes = deck_report([0x80000, 0x100000][side], 0);
+        axis(&mut bytes, 56 + side * 2, 6000);
+        let mut frame = decode_report(0, &bytes).unwrap().unwrap();
+        assert_eq!(frame.pad_clicks, [Some(false); 2]);
+        assert_eq!(frame.pad_pressures[side], Some(183));
+        assert!(frame.pad_pressed(side, 150, false));
+        assert!(!frame.pad_pressed(1 - side, 150, false));
+        assert!(
+            !frame.pad_pressed(side, 250, false),
+            "preview sensitivity is adjustable"
+        );
+        frame.pad_pressures[side] = Some(140);
+        assert!(
+            frame.pad_pressed(side, 150, true),
+            "pressure jitter must not flicker"
+        );
+        assert!(
+            !frame.pad_pressed(side, 150, false),
+            "light contact isn't a click"
+        );
+        frame.pad_pressures[side] = Some(119);
+        assert!(!frame.pad_pressed(side, 150, true));
+        frame.pad_pressures[side] = Some(1000);
+        frame.pads[side].as_mut().unwrap().touching = false;
+        assert!(
+            !frame.pad_pressed(side, 150, true),
+            "lifting releases even with residual force"
+        );
+        axis(&mut bytes, 56 + side * 2, -1);
+        assert_eq!(
+            decode_report(0, &bytes).unwrap().unwrap().pad_pressures[side],
+            Some(1000)
+        );
+    }
+    // Old companion snapshots still deserialize with no pressure support.
+    let old: InputFrame = serde_json::from_str("{}").unwrap();
+    assert_eq!(old.pad_pressures, [None; 2]);
+    assert!(!old.pad_pressed(0, 150, true));
+}

@@ -54,8 +54,18 @@ pub(super) fn feedback(
     side: usize,
     hover: Option<[f32; 2]>,
 ) -> Feedback {
+    let key = egui::Id::new(format!("pad:{side}:pressure-pressed"));
+    let pressed = ui.ctx().data_mut(|d| {
+        let force = d
+            .get_temp::<u16>(egui::Id::new("pad:click-force"))
+            .unwrap_or(15);
+        let was_pressed = d.get_temp::<bool>(key).unwrap_or(false);
+        let pressed = data.state.status == InputStatus::Live
+            && data.state.input.pad_pressed(side, force * 10, was_pressed);
+        d.insert_temp(key, pressed);
+        pressed
+    });
     if data.state.status == InputStatus::Live {
-        let pressed = data.state.input.pad_clicks[side] == Some(true);
         if let Some(touch) = data.state.input.pads[side]
             .as_ref()
             .filter(|pad| pad.touching)
@@ -335,6 +345,14 @@ pub(super) fn field(
 }
 
 pub(super) fn explorer(ui: &mut egui::Ui, data: &FrameData) {
+    if data.state.input.pad_pressures.iter().any(Option::is_some) {
+        let key = egui::Id::new("pad:click-force");
+        let mut force = ui.ctx().data(|d| d.get_temp::<u16>(key)).unwrap_or(15);
+        let response = ui.add(egui::Slider::new(&mut force, 1..=100).suffix("%").text("Deck click force"))
+            .on_hover_text("Adjust the viewer's pressure threshold to match your Steam click feel. This only changes the preview.");
+        target(ui, "pad:click-force", &response);
+        ui.ctx().data_mut(|d| d.insert_temp(key, force));
+    }
     let Some(pads) = data
         .state
         .control_page(&data.profile)

@@ -62,3 +62,60 @@ test('failed writes abort and report only completed files', async () => {
   await assert.rejects(saveFiles(folder,files,count=>{completed=count;}),/Disk full/);
   assert(aborted); assert.equal(completed,0);
 });
+
+const repository = 'abdimoussa98/universal-steam-input-layout';
+const blobSha = createHash('sha1').update(`blob ${bytes.byteLength}\0`).update(new Uint8Array(bytes)).digest('hex');
+function github({version='1.10', offline=false, corrupt=false, paged=false}={}) {
+  const calls=[];
+  const fetcher=async(url, options)=>{
+    url=String(url); calls.push([url,options]);
+    if(url.includes('/releases?')) {
+      if(offline) return new Response('',{status:403});
+      const releases=['ibex','neptune','dse'].flatMap(id=>[
+        {tag_name:`${id}-v${version}`}, {tag_name:`${id}-v1.9`},
+        {tag_name:`${id}-v99.0`,draft:true}, {tag_name:`${id}-v98.0`,prerelease:true},
+      ]);
+      return Response.json(paged && url.endsWith('page=1') ? Array(100).fill({tag_name:'unrelated'}) : releases);
+    }
+    if(url.includes('/contents/versions/')) {
+      const [,id,v]=url.match(/versions\/(\w+)\/([\d.]+)/);
+      return Response.json(['default','alternative'].map(variant=>({type:'file',
+        name:`${id==='neptune'?'':id+'_'}single-set-${variant}_hold-gyro_${v}.vdf`,size:bytes.byteLength,sha:blobSha})));
+    }
+    if(url.startsWith('https://raw.githubusercontent.com/')) return new Response(corrupt?'wrong bytes':bytes);
+    if(url.endsWith('/layouts/index.json')) return Response.json({layouts:[entry]});
+    throw new Error(`Unexpected URL: ${url}`);
+  };
+  return {fetcher,calls};
+}
+const assetUrl=path=>new URL(path,'https://viewer.test/subdirectory/');
+const {latestPublishedLayouts,currentLayouts,layoutUrl}=await import('../web/downloads.js');
+test('live downloads choose numeric latest published release per controller, including later pages', async()=>{
+  const remote=github({paged:true});
+  const entries=await latestPublishedLayouts(remote.fetcher);
+  assert.equal(entries.length,6);
+  assert(entries.every(e=>e.version==='1.10'));
+  assert(remote.calls.some(([url])=>url.endsWith('page=2')));
+  assert(remote.calls.every(([,options])=>options.cache==='no-store'));
+  const selected=entries[0];
+  assert.equal(layoutUrl(selected,assetUrl('./layouts/')).href,
+    `https://raw.githubusercontent.com/${repository}/ibex-v1.10/versions/ibex/1.10/${selected.filename}`);
+  const files=await loadFiles(entries,assetUrl('./layouts/'),remote.fetcher);
+  assert(files.every(f=>f.entry.sha256===entry.sha256));
+  assert.deepEqual(await saveFiles(directory(),files),{saved:6,unchanged:0});
+  await assert.rejects(loadFiles(entries,assetUrl('./layouts/'),github({corrupt:true}).fetcher),/verification/);
+});
+test('opening downloads rechecks releases without rebuilding and explicitly identifies bundled fallback',async()=>{
+  const old=await currentLayouts(assetUrl,github({version:'1.10'}).fetcher);
+  const next=await currentLayouts(assetUrl,github({version:'1.11'}).fetcher);
+  assert(old.live && next.live);
+  assert(old.entries.every(e=>e.version==='1.10'));
+  assert(next.entries.every(e=>e.version==='1.11'));
+  const fallback=await currentLayouts(assetUrl,github({offline:true}).fetcher);
+  assert.equal(fallback.live,false); assert.deepEqual(fallback.entries,[entry]);
+});
+test('release metadata cannot redirect downloads or claim another file',async()=>{
+  const [released]=await latestPublishedLayouts(github().fetcher);
+  for(const change of [{release:'../../main'},{version:'1.11'},{filename:'unrelated.vdf'},{git_sha1:'bad'}])
+    assert.throws(()=>validateCatalog({layouts:[{...released,...change}]}));
+});

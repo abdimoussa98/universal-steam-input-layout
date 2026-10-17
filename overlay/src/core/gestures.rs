@@ -70,6 +70,8 @@ pub struct InputFrame {
     pub pads: [Option<PadContact>; 2],
     /// Physical pad presses, separate from touch. None means unsupported.
     pub pad_clicks: [Option<bool>; 2],
+    /// Deck pad force in thousandths. Digital clicks may be disabled by Steam/SDL.
+    pub pad_pressures: [Option<u16>; 2],
 }
 #[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -78,6 +80,20 @@ pub struct PadContact {
     pub position: [i16; 2],
 }
 impl InputFrame {
+    pub fn pad_pressed(&self, side: usize, threshold: u16, was_pressed: bool) -> bool {
+        if self.pad_clicks[side] == Some(true) {
+            return true;
+        }
+        let touching = self.pads[side].as_ref().is_some_and(|pad| pad.touching);
+        // Release slightly below actuation to avoid flickering near the threshold.
+        let threshold = if was_pressed {
+            threshold * 4 / 5
+        } else {
+            threshold
+        };
+        touching && self.pad_pressures[side].is_some_and(|force| force >= threshold.max(1))
+    }
+
     pub fn down(&self, c: Control) -> bool {
         self.buttons[c as usize]
     }

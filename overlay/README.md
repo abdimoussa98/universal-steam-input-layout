@@ -12,13 +12,15 @@ companion for the browser viewer, without Steam. Native Linux is not supported.
 
 ## Use
 
-**Download layouts** opens the latest released templates for Steam Controller 2,
-Steam Deck, and DualSense Edge: Default and Alternative for each controller.
+**Download layouts** opens the latest released templates for **ibex**, **neptune**,
+and **dse**: Default and Alternative for each controller.
 **Choose folder & save all** opens the browser's folder picker and saves six loose,
 versioned `.vdf` files directly in the chosen folder. Identical existing files are
-skipped; files with different contents are preserved. Individual download links
-work when the browser lacks a folder picker. In that case, enable the browser's
-“Ask where to save” setting to choose a destination for each download.
+skipped; files with different contents are preserved. Selecting a single variant
+opens a Save As picker in supported browsers, with its versioned VDF filename
+prefilled. Pickers require HTTPS or localhost. If a browser lacks the file picker,
+individual links use normal downloads; enable its “Ask where to save” setting
+to choose a destination for each download.
 
 The panel detects the OS and shows common Steam template directories, with an
 OS selector and copy buttons. macOS uses the directory inside `Steam.AppBundle`;
@@ -27,11 +29,15 @@ can use a different location. Browsers cannot preselect an arbitrary system path
 navigate to the template folder in the picker, or save elsewhere and move the VDFs
 with your file manager. The browser may require HTTPS and write permission.
 
-Downloads come from each controller's latest release tag on the build's history,
-using the tagged bytes rather than working copies. The web build needs full Git
-history and tags (`git fetch --tags --unshallow` for a shallow clone). Successful
-layout release workflows rebuild the web image; update the deployed image to
-serve new releases. The download catalog does not change the viewer's loaded profile.
+Each time the panel opens, it checks GitHub's published releases and selects the
+highest released version for each controller. Drafts, prereleases and untagged
+working versions are excluded. Downloads use files from those tags and verify
+their Git blob hashes. New releases appear without rebuilding the viewer.
+
+If GitHub is unavailable or rate limited, the panel explicitly offers the versions
+bundled with this viewer; reopen it to retry. The bundled fallback needs full Git
+history and tags at build time (`git fetch --tags --unshallow` for a shallow clone).
+The download catalog does not change the viewer's loaded profile.
 
 For a Steam Controller 2 connected by USB cable or its wireless receiver, click
 **Connect controller** in the web viewer and choose the controller or receiver
@@ -47,7 +53,13 @@ On the Deck, open the HTTPS viewer in a WebHID-capable browser such as Chrome
 in **Desktop Mode**, click **Connect controller**, and choose the built-in
 controller (the picker may call it **Steam Controller**). This path reads buttons,
 trigger travel, full stick positions, capacitive stick touches, pad positions,
-and physical pad clicks. It sends no controller configuration commands, so
+and pad force as well as digital clicks. Steam/SDL can suppress the Deck's digital
+click bits; the viewer also previews clicks from pressure while a finger is touching
+the pad. The preview defaults to 15% force, with release at 12% to prevent flicker.
+Adjust **Deck click force** in the Trackpads panel to match your Steam click feel;
+this is a viewer-only threshold and does not read or change Steam's setting.
+Lifting the finger, disconnecting, or stale input clears the preview.
+It sends no controller configuration commands, so
 Steam's current mappings and pressure thresholds remain in place. If the device
 is missing or cannot open, check that the browser's Linux package has access to
 HID devices; a sandboxed browser may restrict access. No native Linux helper is

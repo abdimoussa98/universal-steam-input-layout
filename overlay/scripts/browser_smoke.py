@@ -148,6 +148,9 @@ def main():
             chrome['binary'] = args.browser_binary
         created = request('POST', '/session', {'capabilities': {'alwaysMatch': {'browserName': 'chrome', 'goog:chromeOptions': chrome, 'acceptInsecureCerts': bool(tls_directory)}}})
         session = created['sessionId']
+        release_fixture = Path(__file__).resolve().parents[1] / 'tests/fixtures/releases.js'
+        request('POST', f'/session/{session}/goog/cdp/execute', {
+            'cmd':'Page.addScriptToEvaluateOnNewDocument', 'params':{'source':release_fixture.read_text()}})
         if args.webhid:
             fixture = Path(__file__).resolve().parents[1] / 'tests/fixtures/webhid.js'
             request('POST', f'/session/{session}/goog/cdp/execute', {
@@ -184,6 +187,17 @@ def main():
         # the browser-owned directory picker and writable handles.
         js("""
           window.savedLayouts=new Map(); window.pickerRequests=[];
+          window.filePickerRequests=[]; window.savedSingle=null;
+          window.showSaveFilePicker=async options=>{
+            filePickerRequests.push({options,activated:navigator.userActivation.isActive});
+            if(window.cancelFile) throw new DOMException('Canceled','AbortError');
+            if(window.denyFile) throw new DOMException('Choose a writable location.','NotAllowedError');
+            return {name:'my-template.vdf',createWritable:async()=>{
+              let data; return {write:async bytes=>{
+                if(window.failFileWrite) throw new Error('Disk full'); data=bytes;
+              },close:async()=>{window.savedSingle=data;},abort:async()=>{window.fileAborted=true;}};
+            }};
+          };
           window.showDirectoryPicker=async options=>{
             pickerRequests.push({options,activated:navigator.userActivation.isActive});
             if(window.cancelSave) throw new DOMException('Canceled','AbortError');
@@ -198,6 +212,7 @@ def main():
         """)
         click_target('downloads')
         wait_for(lambda: js("return document.querySelectorAll('#downloads a[download]').length===6"), 'Download catalog failed')
+        assert 'bundled versions' in js("return document.querySelector('.download-source').textContent")
         assert js("return document.querySelector('#downloads').open"), 'Downloads button did not open dialog'
         if 'Mac' in js('return navigator.platform'):
             assert js("return document.querySelector('#template-os').value")=='macos'
@@ -211,6 +226,18 @@ def main():
         if args.screenshot:
             args.screenshot.parent.mkdir(parents=True,exist_ok=True)
             args.screenshot.with_name('downloads.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+        click_dom('#downloads a[download]')
+        wait_for(lambda: js("return window.savedSingle?.byteLength>1000"), 'Bundled individual Save As failed')
+        assert js("return filePickerRequests[0].activated"), 'Save As picker lost user activation'
+        assert js("return filePickerRequests[0].options.suggestedName") == links[0]['name']
+        assert 'Saved my-template.vdf' in js("return document.querySelector('#downloads [role=status]').textContent")
+        for flag, expected in [('cancelFile','canceled'),('denyFile','writable location'),('failFileWrite','Disk full')]:
+            js('window.savedSingle=null;window[arguments[0]]=true',flag)
+            click_dom('#downloads a[download]')
+            wait_for(lambda: expected in js("return document.querySelector('#downloads [role=status]').textContent"), 'Single-file failure not explained')
+            assert js('return window.savedSingle===null'), 'Failed/canceled download wrote a file'
+            js('window[arguments[0]]=false',flag)
+        assert js('return window.fileAborted'), 'Failed write was not aborted'
         mode=snapshot()['state']['mode']
         js("document.querySelector('#template-os').dispatchEvent(new KeyboardEvent('keydown',{key:'F2',code:'F2',bubbles:true}))")
         assert snapshot()['state']['mode']==mode, 'Download dialog changed the viewer mode'
@@ -240,16 +267,42 @@ def main():
             args.screenshot.with_name('downloads-narrow.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
         click_dom('.close-downloads')
         request('POST', f'/session/{session}/window/rect', {'width':1060,'height':920})
+        # A newly published release must appear without a viewer rebuild/reload.
+        js("releaseFixture.online=true;window.denySave=false;savedLayouts.clear()")
+        click_target('downloads')
+        wait_for(lambda: 'checked just now' in js("return document.querySelector('.download-source').textContent"), 'Live release check missing')
+        assert js("return [...document.querySelectorAll('#downloads a[download]')].every(a=>a.textContent.includes('99.2'))")
+        click_dom('#save-layouts')
+        wait_for(lambda: 'Saved 6 files' in js("return document.querySelector('#downloads [role=status]').textContent"), 'Live release folder save failed')
+        assert js("return [...savedLayouts.keys()].every(name=>name.endsWith('_99.2.vdf'))")
+        click_dom('.close-downloads')
+        js("releaseFixture.version='99.3'")
+        click_target('downloads')
+        wait_for(lambda: js("return document.querySelectorAll('#downloads a[download]').length===6 && [...document.querySelectorAll('#downloads a[download]')].every(a=>a.textContent.includes('99.3'))"), 'Reopen did not refresh releases')
+        js('window.savedSingle=null')
+        click_dom('#downloads a[download]')
+        wait_for(lambda: js('return window.savedSingle?.byteLength>1000'), 'Live individual Save As failed')
+        assert js("return filePickerRequests.at(-1).options.suggestedName.endsWith('_99.3.vdf')")
+        assert js('return filePickerRequests.at(-1).activated')
+        click_dom('.close-downloads')
         # Feature detection must offer working individual links without a picker.
         request('POST', f'/session/{session}/goog/cdp/execute', {
-            'cmd':'Page.addScriptToEvaluateOnNewDocument','params':{'source':'window.showDirectoryPicker=undefined;'}})
+            'cmd':'Page.addScriptToEvaluateOnNewDocument','params':{'source':'window.showDirectoryPicker=undefined;window.showSaveFilePicker=undefined;'}})
         navigate()
         click_target('downloads')
         wait_for(lambda: js("return document.querySelectorAll('#downloads a[download]').length===6"), 'Fallback downloads missing')
         assert js("return document.querySelector('#save-layouts').hidden")
         assert 'Ask where to save' in js("return document.querySelector('.download-help').textContent")
         click_dom('.close-downloads')
-        print('PASS: six loose release downloads, activated folder picker, verified saves, cancellation, conflicts, OS paths, narrow layout and fallback links')
+        js("releaseFixture.online=true")
+        click_target('downloads')
+        wait_for(lambda: 'checked just now' in js("return document.querySelector('.download-source').textContent"), 'Fallback live catalog failed')
+        # Without Save As support, cross-origin downloads use verified Blobs.
+        js("document.addEventListener('click',e=>{if(e.target instanceof HTMLAnchorElement && e.target.href.startsWith('blob:')){e.preventDefault();window.singleDownload=e.target.download;}},true)")
+        click_dom('#downloads a[download]')
+        wait_for(lambda: js("return window.singleDownload?.endsWith('_99.2.vdf')"), 'Individual fallback did not use a Blob')
+        click_dom('.close-downloads')
+        print('PASS: loose release downloads, activated folder and Save As pickers, cancellation, write failures, verified saves, OS paths and fallback links')
         js("Object.defineProperty(navigator,'getGamepads',{value:()=>[],configurable:true})")
         empty_status = 'Connect a controller to begin' if snapshot()['browser_connection']['available'] else 'No controllers exposed by this browser'
         wait_for(lambda: snapshot().get('input_status') == empty_status, 'Missing controllers not explained')
@@ -772,9 +825,26 @@ def main():
                 assert snapshot()['pad_layers']==['click','click']
                 if args.screenshot and raw==23920:
                     args.screenshot.with_name('deck-pad-overlap.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+            # Steam/SDL can disable firmware click bits. Real Deck force still
+            # switches each pad independently, including the center/edge priority.
+            for raw, zone in ((0,'inner'),(23920,'overlap'),(31000,'outer1')):
+                js('fakeHid.device.frame(0x180000,{16:arguments[0],20:arguments[0],56:6000})',raw)
+                wait_for(lambda: snapshot()['pad_layers']==['click','touch'], 'Deck pressure-only left click missing')
+                assert snapshot()['state']['input']['pad_clicks']==[False,False]
+                assert snapshot()['pad_feedback'][0]==f'live:{zone}:pressed'
+                js('fakeHid.device.frame(0x180000,{16:arguments[0],20:arguments[0],58:6000})',raw)
+                wait_for(lambda: snapshot()['pad_layers']==['touch','click'], 'Deck pressure-only right click missing')
+                js('fakeHid.device.frame(0x180000,{16:arguments[0],20:arguments[0],58:4500})',raw)
+                time.sleep(0.1)
+                assert snapshot()['pad_layers']==['touch','click'], 'Pressure jitter flickered to touch'
+                js('fakeHid.device.frame(0x180000,{16:arguments[0],20:arguments[0],58:3000})',raw)
+                wait_for(lambda: snapshot()['pad_layers']==['touch','touch'], 'Pressure release failed while still touching')
+            # Lift even with residual force, and clear held pressure on stale input.
+            js('fakeHid.device.frame(0,{56:6000,58:6000})')
+            wait_for(lambda: snapshot()['pad_layers']==['touch','touch'], 'Residual pressure clicked after lift')
             js('fakeHid.device.frame(0)')
             wait_for(lambda: snapshot()['pad_feedback']==['idle:none:released']*2, 'Deck pad release remained highlighted')
-            js('fakeHid.device.frame(0x1e0000);clearInterval(fakeHid.device.timer)')
+            js('fakeHid.device.frame(0x180000,{56:6000,58:6000});clearInterval(fakeHid.device.timer)')
             wait_for(lambda: snapshot()['state']['status']=='unavailable', 'Stalled Deck input remained live')
             assert snapshot()['state']['input']['pad_clicks']==[None,None]
             js('fakeHid.device.frame(0);fakeHid.remove()')

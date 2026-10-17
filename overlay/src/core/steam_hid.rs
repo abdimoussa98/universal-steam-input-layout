@@ -107,6 +107,11 @@ fn decode_deck(bytes: &[u8]) -> Result<Option<InputFrame>, &'static str> {
         frame.touches[side] = Some(touches & [0x4000, 0x8000][side] != 0);
         let touching = buttons & [0x80000, 0x100000][side] != 0;
         frame.pad_clicks[side] = Some(buttons & [0x20000, 0x40000][side] != 0);
+        // Steam/SDL can set the firmware click threshold to 0xffff, suppressing
+        // the digital bits. Preserve force for the viewer's local click preview.
+        let offset = 56 + side * 2;
+        let force = u32::from(u16::from_le_bytes([bytes[offset], bytes[offset + 1]]));
+        frame.pad_pressures[side] = Some((force * 1000 / 32767).min(1000) as u16);
         frame.pads[side] = Some(PadContact {
             touching,
             position: [axis(16 + side * 4, false), axis(18 + side * 4, true)],

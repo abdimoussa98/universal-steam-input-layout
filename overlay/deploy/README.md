@@ -67,6 +67,10 @@ docker compose pull
 docker compose up -d
 ```
 
+The layout download panel checks GitHub releases whenever opened, independently
+of the deployed image version. It labels bundled fallback versions explicitly if
+the live check fails. The UI code itself still needs an image update.
+
 Refresh the browser to load the new viewer. To pin a release or roll back,
 replace the Compose `image:` with a previous successful run's
 `ghcr.io/<owner>/<repository>-web@sha256:<digest>` and redeploy. Keep those
