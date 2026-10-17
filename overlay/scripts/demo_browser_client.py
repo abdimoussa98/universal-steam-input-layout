@@ -53,6 +53,8 @@ class Browser:
         print('Browser:', result['capabilities']['browserVersion'], result['capabilities']['platformName'], flush=True)
         audio = (Path(__file__).resolve().parents[1] / 'tests/fixtures/demo-audio.js').read_text()
         self.cdp('Page.addScriptToEvaluateOnNewDocument', {'source': audio})
+        clock = (Path(__file__).resolve().parents[1] / 'tests/fixtures/demo-clock.js').read_text()
+        self.cdp('Page.addScriptToEvaluateOnNewDocument', {'source': clock})
         if self.args.webhid:
             source = (Path(__file__).resolve().parents[1] / 'tests/fixtures/webhid.js').read_text()
             self.cdp('Page.addScriptToEvaluateOnNewDocument', {'source': source})
@@ -108,31 +110,46 @@ class Browser:
                       {'type': 'pointerDown', 'button': button}, {'type': 'pause', 'duration': 50},
                       {'type': 'pointerUp', 'button': button}])
 
-    def sequence(self, events):
-        """Dispatch real DOM mouse events on one in-page schedule, independent of driver RTT.
+    def sequence(self, events, frame_delay_ms=0):
+        """Dispatch DOM mouse events with controlled time and real rendered frames.
 
         It uses normal UI hit testing; there is no test-only engine mutation API.
         Each tuple is (delay_ms, target, type, dx_fraction, dy_fraction).
         """
         self.js('''
-          window.demoSequenceDone=false;
+          window.demoSequenceDone=false; window.demoSequenceError=null;
+          window.demoSequenceTiming=[];
           const events=arguments[0], canvas=document.querySelector('canvas');
+          const rendered=()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+          const snapshot=()=>JSON.parse(keybindApp.diagnostic_snapshot());
+          demoClock.begin(arguments[1]);
           (async()=>{
+            try {
+            await rendered();
+            const initial=snapshot(), start=demoClock.realNow();
+            let elapsed=0;
             for(const [delay,target,type,dx,dy] of events){
-              await new Promise(r=>setTimeout(r,delay));
-              const s=JSON.parse(keybindApp.diagnostic_snapshot());
+              demoClock.advance(delay); elapsed+=delay;
+              const s=snapshot();
               const [x,y,w,h]=s.targets[target];
               const options={bubbles:true,clientX:x+dx*w/2,clientY:y+dy*h/2,button:0,buttons:type==='mouseup'?0:1,
                 pointerType:'mouse',pointerId:1,isPrimary:true};
               canvas.dispatchEvent(type==='mousemove' ? new MouseEvent(type,options) :
                 new PointerEvent(type.replace('mouse','pointer'),options));
+              await rendered();
+              const logical=snapshot().demo.now-initial.demo.now;
+              const expected=elapsed/initial.scale;
+              demoSequenceTiming.push({type,expected_ms:expected,logical_ms:logical,real_ms:demoClock.realNow()-start});
+              if(Math.abs(logical-expected)>1) throw new Error(`Gesture clock mismatch: ${logical} != ${expected}`);
             }
-            await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-            window.demoSequenceSnapshot=JSON.parse(keybindApp.diagnostic_snapshot());
-            window.demoSequenceDone=true;
+            window.demoSequenceSnapshot=snapshot();
+            } catch(error) { window.demoSequenceError=String(error); }
+            finally { demoClock.end(); window.demoSequenceDone=true; }
           })();
-        ''', events)
+        ''', events, frame_delay_ms)
         self.wait(lambda: self.js('return window.demoSequenceDone'), 'pointer sequence')
+        error = self.js('return window.demoSequenceError')
+        assert not error, f'{error}; timing: {self.js("return window.demoSequenceTiming")}'
         return self.js('return window.demoSequenceSnapshot')
 
     def screenshot(self, path):

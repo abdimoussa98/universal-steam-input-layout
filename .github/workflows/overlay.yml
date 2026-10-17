@@ -113,7 +113,14 @@ jobs:
           }))
           PY
           wasm-pack test --headless --chrome --chromedriver "$CHROMEDRIVER" overlay --no-default-features
-          python3 -u overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid --webdriver-delay-ms "$WEBDRIVER_DELAY_MS" --driver "$CHROMEDRIVER" --browser-binary "$CHROME_BIN"
+          python3 -u overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid --webdriver-delay-ms "$WEBDRIVER_DELAY_MS" --driver "$CHROMEDRIVER" --browser-binary "$CHROME_BIN" --screenshot "$RUNNER_TEMP/browser-smoke.png"
+      - name: Keep browser failure screenshot
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-failure
+          path: ${{ runner.temp }}/browser-smoke.png
+          if-no-files-found: ignore
       - name: Record the release
         run: python3 overlay/scripts/release_manifest.py --bundle overlay/dist --revision "$GITHUB_SHA"
       - name: Build the web container

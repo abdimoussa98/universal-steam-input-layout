@@ -42,7 +42,7 @@ def run(browser):
     browser.click('recenter')
     assert browser.snapshot()['demo']['output']['pointer'] == pointer, 'Recenter emitted output'
     print('PASS: mouse buttons, stateful Cursor Gyro, activation, cuboid motion and threshold output', flush=True)
-    for scale in (1, 10):
+    for scale, frame_delay in ((1, 0), (10, 0), (1, 200)):
         browser.click('reset')
         browser.click(f'speed:{scale}')
         events = [(30, 'right_trackpad', 'mousedown', 0, 0), (60*scale, 'right_trackpad', 'mouseup', 0, 0),
@@ -50,12 +50,15 @@ def run(browser):
         events += [(30*scale, 'right_trackpad', 'mousemove', .9*math.cos(a), .9*math.sin(a))
                    for a in [(-90+i*30)*math.pi/180 for i in range(1, 10)]]
         events += [(30*scale, 'right_trackpad', 'mouseup', 0, .9)]
-        result = browser.sequence(events)
+        result = browser.sequence(events, frame_delay_ms=frame_delay)
         assert result['demo']['output']['wheel'] > 0, result
         assert not any('RTP:' in layer for layer in result['demo']['stack']), result
         assert result['demo']['output']['down'] == [], result
         assert result['demo']['error'] is None, result
-    print('PASS: real mouse double-touch and circular wheel output, cleanup at 1x and 10x', flush=True)
+        edges = [e for e in result['demo']['output']['events'] if e['detail'] == 'right_trackpad/touch' and e['kind'] in ('press', 'release')]
+        assert abs(edges[1]['at'] - edges[0]['at'] - 60) <= 1, edges
+        assert abs(edges[2]['at'] - edges[1]['at'] - 50) <= 1, edges
+    print('PASS: mouse double-touch scroll at 1x and 10x, exact input timing and 200 ms slow-frame regression', flush=True)
     browser.click('pause')
     frozen = browser.snapshot()['demo']['now']
     browser.click('button_diamond/button_b')
@@ -122,6 +125,7 @@ def main():
     except Exception:
         if browser.session:
             print('Browser diagnostic:', browser.snapshot().get('demo'))
+            print('Sequence timing:', browser.js('return window.demoSequenceTiming'))
             if args.screenshot:
                 browser.screenshot(args.screenshot)
         raise

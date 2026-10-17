@@ -92,8 +92,11 @@ docker run --rm --platform linux/amd64 --shm-size=1g \
 ```
 
 Normal browser tests use **zero extra WebDriver delay**. The 650 ms latency stress
-run remains optional. Browser timing sequences run inside the page, avoiding
-host/driver round-trip timing assumptions. Use `--driver` and `--browser-binary`
+run remains optional. Gesture scenarios control the browser's monotonic clock
+and wait for each real frame, so slow rendering cannot turn a 60 ms tap into a
+hold. They assert input timestamps at 1×/10× and include a 200 ms slow-frame
+regression. The fixture does not change the packaged app or its layout timings.
+Use `--driver` and `--browser-binary`
 to select matching local executables. Deployment remains at the existing URL;
 see [deploy/README.md](deploy/README.md).
 
