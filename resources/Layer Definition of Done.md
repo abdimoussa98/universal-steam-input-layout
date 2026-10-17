@@ -856,8 +856,9 @@ stateful layer but `Gyro` (R159).
 
 - [ ] **Gesture (R157).** The layer is entered by one of the four menu-plus-stick-click
       gestures, and the gesture map is updated.
-- [ ] **Entry (R157, R163).** The Base Entry Point sends that click's Release to the right
-      transition, and the transition's menu Release adds the layer.
+- [ ] **Entry (R157, R163).** The Base Entry Point's Fn layer sends that click's Release to
+      the right transition (the Entry Point's own until Ibex 1.1), and the transition's menu
+      Release adds the layer.
 - [ ] **Transition feedback (R161).** Every menu Release in a transition beeps and
       gives a low haptic pulse (author, 2026-10-09, 90.41), entering or clearing:
       `haptic_intensity` 1 on the Release, and the beep flag on the stateful

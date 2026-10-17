@@ -17,6 +17,13 @@ its supporting layers separately. This replaces the earlier “stateful set”
 wording. These features use layers throughout; action-set switching is excluded
 because the author reports buggy behavior with Steam action sets.
 
+## The Fn layers take over from the Entry Points (plan of 2026-10-16)
+
+- [x] **Built as Ibex 1.1, Neptune 90.77 and DSE 1.1, from Ibex 1.0** (author, 2026-10-16: "implement this plan"; [record](findings/2026-10-16-fn-right-stick-owner/README.md) · [plan](plans/2026-10-16-fn-right-stick-owner.md)). The Entry Points, the stick guards and the Tap Cover keep Base's mouse mode on the right stick; every bind that adds an Fn layer removes its Entry Point; the stick clicks add Fn at the press, and Fn does the transition. No tag and no commit yet.
+- [ ] **On the Deck, 90.77**, in [this order](findings/2026-10-16-fn-right-stick-owner/README.md#on-the-deck): the right stick's Fn keys with a Low bump, from Select and Start, in Base, `Steering` and Cursor Gyro, and with the thumb already on the stick; the camera while a menu button is held; a stick click before Fn comes in.
+- [x] **A78:** verified by the author, 2026-10-17 ("I can confirm that an interuptible chord will be interupted by an uninnteruptible chord"). The simulator models it, and scenario ibex 1.1 F4 checks that a stick click holds back both sticks' Fn keys ([record](findings/2026-10-16-fn-right-stick-owner/README.md#the-click-guard-a78-verified-on-2026-10-17)).
+- [ ] **A77, if wanted:** the check in its row, on 90.75.
+
 ## Ibex as the base layout, the DualSense Edge, the release pipeline (plan of 2026-10-15)
 
 - [x] **Built: the registry, the release pipeline, Ibex 1.0, Neptune 90.75 and DSE 1.0** (author, 2026-10-15: "go ahead and start implementing this"; [record](findings/2026-10-15-ibex-base/README.md) · [plan](plans/2026-10-15-controller-dirs-and-release-pipeline.md)). Ibex, the Steam Controller 2, is the base layout (R177); `tools.convert` makes the Deck's and the Edge's layouts from it (R178 to R185). The Deck's gyro turns by yaw and roll in 90.75. Each controller has its own version, and a pushed tag `<controller>-v<version>` publishes one zip of every controller's latest release.
@@ -30,7 +37,7 @@ because the author reports buggy behavior with Steam action sets.
 - [x] **Built as 90.73, from 90.72** (author, 2026-10-15: "now go ahead and build these"; [record](findings/2026-10-15-key-layer-click/README.md) · [plan](plans/2026-10-14-key-layer-click-and-fn-right-stick.md)). In `Escape`, `Tab`, `Backspace` and `Enter` the left pad's click is a repeating, silent Soft Press that removes the layer, so Base's click carries on into its Click Entry Point.
 - [ ] **On the Deck, 90.73**, in [this order](findings/2026-10-15-key-layer-click/README.md#on-the-deck): swipe then click at the ring gives the key, then the arrow; swipe, back to the centre, click gives the Middle Click; a swipe and lift is unchanged.
 - [x] **Built as 90.74, from 90.73** (author, 2026-10-15: "these are the ones i want"; [record](findings/2026-10-15-fn-right-stick/README.md)). The right stick of the four Fn layers takes the left stick's settings (no `deadzone` 13276, no `requires_click`); its keys `;` `'` `.` `,` and Low bumps are unchanged. It is the working layout. The cause of the Deck fault is not found: by the binds and on the simulator the keys were already there.
-- [ ] **On the Deck, 90.74**, in [this order](findings/2026-10-15-fn-right-stick/README.md#on-the-deck): each right-stick direction in the Fn layer types its key with a Low bump, from Select and Start, in Base, `Steering` and Cursor Gyro, and with the thumb already on the stick. If not: what it types on the first and second push.
+- [x] **On the Deck, 90.74**, in [this order](findings/2026-10-15-fn-right-stick/README.md#on-the-deck): each right-stick direction in the Fn layer types its key with a Low bump, from Select and Start, in Base, `Steering` and Cursor Gyro, and with the thumb already on the stick. If not: what it types on the first and second push. **Result:** nothing on 90.74 and 90.75 (author, 2026-10-16); the cause is A77, and Ibex 1.1 (Neptune 90.77) is the fix.
 
 ## The pad click layers on touch (plan of 2026-10-14)
 

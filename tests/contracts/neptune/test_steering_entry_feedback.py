@@ -143,10 +143,13 @@ class SteeringEntryAndFeedback(unittest.TestCase):
                             targets = [command for command in commands(layout, entry)
                                        if command[0] == 'add_layer' and command[1] in FN]
                             if targets:
-                                self.assertEqual(entry.get('settings', {}).get('haptic_intensity'), '1')
+                                # Sixteen until Ibex 1.1, which added the eight stick-click presses, silent (author,
+                                # 2026-10-16: "no bump on this and make it repeating"). The sixteen keep Low.
+                                silent = name == 'click' and kind == 'Full_Press'
+                                self.assertEqual(entry.get('settings', {}).get('haptic_intensity'), '0' if silent else '1')
                                 self.assertTrue(all(command[3] == '0' for command in targets))
-                                found.append((group['id'], name, bank, kind))
-            self.assertEqual(len(found), 16, variant)
+                                found.append((group['id'], name, bank, kind, silent))
+            self.assertEqual((len(found), sum(1 for *_, silent in found if silent)), (24, 8), variant)
 
 
 if __name__ == "__main__":

@@ -123,13 +123,13 @@ class ChordedMenu(ScenarioCase):
         for first, second, key, entry, window, _, _, plain, fn in CHAINS:
             for pad in self.each():
                 pad.hold(first).wait(40).hold(second)
-                self.assertEqual(pad.names()[-3:], (plain, fn, entry))
+                self.assertEqual(pad.names()[-3:], ("Base", fn, entry))       # since Ibex 1.1 the Fn adder hands over: its Entry Point goes
                 pad.wait(60).let_go(second)
                 self.assertEqual((pad.top, pad.typed()), (window, []))
                 pad.wait(60)
                 self.assertEqual((pad.typed(), pad.down()), ([key], [key]))  # the window types it, 50 ms in
                 pad.wait(200)
-                self.assertEqual((pad.names()[-2:], pad.down()), ((plain, fn), []))   # back on the Fn layer
+                self.assertEqual((pad.names()[-2:], pad.down()), (("Base", fn), []))  # back on the Fn layer
                 pad.let_go(first).wait(300)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base"), [key]))
 
@@ -157,7 +157,7 @@ class ChordedMenu(ScenarioCase):
                 pad.wait(200)
                 self.assertEqual((pad.top, pad.down()), (cover, [key]))      # held past 150 ms
                 pad.mark().let_go(second).wait(300)
-                self.assertEqual((pad.typed(), pad.names()[-2:]), ([], (plain, fn)))      # a clean end, no window
+                self.assertEqual((pad.typed(), pad.names()[-2:]), ([], ("Base", fn)))     # a clean end, no window
             for pad in self.each():
                 pad.hold(first).wait(40).tap(second).wait(70).tap(second, 60)
                 self.assertEqual(pad.top, window)                            # a short second press reopens the window
@@ -171,7 +171,7 @@ class ChordedMenu(ScenarioCase):
         for first, second, _, entry, _, _, _, plain, fn in CHAINS:
             for pad in self.each():
                 pad.hold(first).wait(250)
-                self.assertEqual(pad.names()[-2:], (plain, fn))              # the hold brings the Fn layer alone (90.28)
+                self.assertEqual(pad.names()[-2:], ("Base", fn))             # the Fn layer alone (90.28); since Ibex 1.1 the Fn adder hands over: its Entry Point goes
                 pad.hold(second).wait(210)
                 self.assertEqual(pad.stack, pad.layers("Base", MENU_KEYS))
 

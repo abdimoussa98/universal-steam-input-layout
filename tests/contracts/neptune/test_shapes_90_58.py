@@ -4,6 +4,11 @@ Fixture responsibility: contracts/neptune. See docs/testing.md and tests/test-ma
 """
 from tests.support.fixtures.scenarios_90_58 import *
 
+MOVED_CLEARS = {'Menu Left: Entry Point': 'Menu Left: Fn Layer', 'Menu Right: Entry Point': 'Menu Right: Fn Layer',
+                'Stateful | Menu Left: Entry Point': 'Stateful | Menu Left: Fn Layer',
+                'Stateful | Menu Right: Entry Point': 'Stateful | Menu Right: Fn Layer'}
+
+
 class Clears(unittest.TestCase):
     def test_a_clear_names_every_layer_that_is_on_the_stack_when_it_fires(self):
         # R163, since 90.58: a clear names every layer that can be on the stack there. A whole list could not go
@@ -16,6 +21,10 @@ class Clears(unittest.TestCase):
                      for title, source, name, kind, index, found in removes(old) if len(found) == 89}
             self.assertEqual(len(keeps), 14)
             self.assertTrue(all(len(keep) == 1 for keep in keeps.values()))
+            # Since Ibex 1.1 (Neptune 90.77) the eight stick-click Releases of the four menu Entry Points are their Fn
+            # layers' (the hand-over, plans/2026-10-16-fn-right-stick-owner.md): the same clears, in the Fn layer.
+            keeps = {(MOVED_CLEARS.get(title, title) if control[1] == 'click' else title, control, kind, index): keep
+                     for (title, control, kind, index), keep in keeps.items()}
             fired, left = Counter(), []
 
             class Watching(walk.Watcher):

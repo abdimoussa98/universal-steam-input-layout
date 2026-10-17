@@ -53,8 +53,9 @@ class StaticChecks(unittest.TestCase):
                     "bindings": {"binding": "controller_action empty_binding, WASD Modifier, , "},
                     "settings": {"haptic_intensity": "0", "soft_press_sytle": "2", "activation_threshold": "26610",
                                  "interruptable": "0", "edge_binding_invert": "1"}}})
-                self.assertEqual({k: group["settings"][k] for k in ("edge_binding_radius", "deadzone", "requires_click")},
-                                 {"edge_binding_radius": "21700", "deadzone": "13276", "requires_click": "0"})
+                # `requires_click` came off every stick D-pad in Ibex 1.1 (author, 2026-10-16: not needed on a stick).
+                self.assertEqual({k: group["settings"].get(k) for k in ("edge_binding_radius", "deadzone", "requires_click")},
+                                 {"edge_binding_radius": "21700", "deadzone": "13276", "requires_click": None})
 
     def test_the_two_modifier_2_orders_are_never_on_the_stack_together(self):                # MR2
         for variant in VARIANTS:

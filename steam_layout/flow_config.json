@@ -695,6 +695,28 @@
       "todo": null
     },
     {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Left!Right: Double Tap",
+        "lower": "Menu Left: Fn Layer"
+      },
+      "status": "allow",
+      "why": "Ibex 1.1: the stick clicks' Releases, the transition gestures, are the Fn layer's own: they moved from the Entry Point, which every Fn adder now removes (plans/2026-10-16-fn-right-stick-owner.md, part 3). The entry above held the same pair over the Entry Point. The chorded window sits on the Fn layer. A window must not let a layer change through (R140), so it clears both clicks for its 150 ms. The Fn layer's keeper is its menu button, and the window carries that button's Release: it removes the window first, then the Fn layer. Nothing is left on.",
+      "decided": "Claude, reading the Cleanup audit for the Ibex 1.1 build, 2026-10-16, after the author's design; not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R136",
+      "scope": {
+        "upper": "Menu Right!Left: Double Tap",
+        "lower": "Menu Right: Fn Layer"
+      },
+      "status": "allow",
+      "why": "Ibex 1.1: the stick clicks' Releases, the transition gestures, are the Fn layer's own: they moved from the Entry Point, which every Fn adder now removes (plans/2026-10-16-fn-right-stick-owner.md, part 3). The entry above held the same pair over the Entry Point. The chorded window sits on the Fn layer. A window must not let a layer change through (R140), so it clears both clicks for its 150 ms. The Fn layer's keeper is its menu button, and the window carries that button's Release: it removes the window first, then the Fn layer. Nothing is left on.",
+      "decided": "Claude, reading the Cleanup audit for the Ibex 1.1 build, 2026-10-16, after the author's design; not yet confirmed by the author",
+      "todo": null
+    },
+    {
       "rule": "R139",
       "scope": {
         "layers": [
@@ -1731,6 +1753,32 @@
       "status": "allow",
       "why": "90.72: every layer that blocks the right pad's click binds the pad's touch to a Release that removes the right pad's touch layers (author, 2026-10-14). The two menu stick guards bind no pad and inherit that Release from the menu Entry Point under them. Its list depends on which Entry Point: the plain ones name RTP: Entry Point, RTP: Tap Cover and RTP: Circular Scroll, the Stateful ones only RTP: Entry Point, as the cleanup rules find what can be under each. Either way a lift clears the right pad's touch layers that are there.",
       "decided": "Claude, 2026-10-14, reading the Flow audit for 90.72 under the author's rule above (plans/2026-10-14-pad-stick-edge-cleanups.md); not yet confirmed by the author",
+      "todo": null
+    },
+    {
+      "rule": "R132",
+      "scope": {
+        "layers": [
+          "Stateful | Menu Left: Fn Layer",
+          "Stateful | Menu Right: Fn Layer"
+        ],
+        "removes": [
+          "LST: Tap Cover",
+          "LST: Temporary Gyro",
+          "RST: Tap Cover",
+          "RST: Temporary Gyro",
+          "LTP: Arrow Keys",
+          "LTP: Middle Click",
+          "RTP: Mouse Buttons",
+          "RTP: Middle Click",
+          "RTP: Tap Cover",
+          "RTP: Circular Scroll"
+        ],
+        "where": "Menu Left!Right: Enter"
+      },
+      "status": "allow",
+      "why": "Ibex 1.1: the stick clicks' Releases, the transitions, moved from the Stateful Entry Points to their Fn layers, command for command, because each Fn adder now removes its Entry Point (plans/2026-10-16-fn-right-stick-owner.md, part 3). The two entries above keep these ten removes in the Entry Points' Releases, and their reasons hold here: a stick's Tap Cover and Temporary Gyro come on by a delayed add, which the chains do not follow, and a pad click layer or Circular Scroll that is on before Start or Select stays underneath, where nothing in the chains shows it. Fn lands on what was under its Entry Point, so the same layers are under it. Without this the cleanup_lists fix takes all ten out of both Releases of both layers. On a layout before Ibex 1.1 the Stateful Fn layers have no click Release and the entry is unused.",
+      "decided": "Claude, 2026-10-16, building the author's design (plans/2026-10-16-fn-right-stick-owner.md); follows the two entries for the Stateful Entry Points",
       "todo": null
     }
   ]

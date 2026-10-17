@@ -7,6 +7,47 @@ Steam Deck and `dse` the DualSense Edge. Pushing the tag
 ([publishing](docs/publishing.md)). A conversion's section names the Ibex
 release it is made from, as `From ibex <version>.`
 
+## dse 1.1
+
+From ibex 1.1: the Fn layers take over from the Entry Points, so the right
+stick's Fn keys can type on the Edge as on the Deck. With no stick touch, an
+Fn layer comes in from the menu button's hold, the other menu button or a
+stick click ([record](findings/2026-10-16-fn-right-stick-owner/README.md)).
+Not yet checked on an Edge.
+
+## neptune 90.77
+
+From ibex 1.1: the Fn layers take over from the Entry Points, so the right
+stick types `;` `'` `.` `,` in the Fn layers again (see ibex 1.1). 90.76 was a
+trial for the Deck, never released
+([record](findings/2026-10-16-entry-point-requires-click/README.md)). Not yet
+checked on the Deck ([to-do](todos.md)).
+
+## ibex 1.1
+
+The Fn layers' right stick typed nothing on the Deck: the menu Entry Point
+under it had changed the stick's mode, and a layer in the same mode above such
+a layer doesn't answer (the author's rule, A77). Since 1.1
+([record](findings/2026-10-16-fn-right-stick-owner/README.md)):
+
+- **The Fn layer takes over from its Entry Point.** Every way into an Fn layer
+  removes the Entry Point, and the stick clicks' transitions are the Fn
+  layer's own. A stick click while a menu button is held brings Fn in at the
+  press, with no bump, and does the transition on the release.
+- **The camera moves while a menu button is held,** until Fn comes in: the
+  Entry Points, the stick guards and the menu Tap Cover keep Base's mouse mode
+  on the right stick. The right stick guard comes on at about two thirds of
+  the stick's travel, where it came on near the rim.
+- **While either stick is clicked, neither stick types an Fn key;** a click
+  held back only its own stick's keys before.
+- **No Requires Click on a stick,** and the Fn layers' and the Entry Points'
+  sticks fire a direction past about 40% of their travel.
+- **Two chords that differed only in their button are one chord on either:**
+  in the Fn layers, the combo Entry Points and the Modifier 2 layers. Nothing
+  changes in play.
+
+Not yet checked on a Steam Controller 2.
+
 ## dse 1.0
 
 The first DualSense Edge layout. From ibex 1.0, by the Edge's conversion rules

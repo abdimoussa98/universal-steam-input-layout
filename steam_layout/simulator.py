@@ -44,6 +44,7 @@ stated; the ones the layout must work either way under are switches.
              it back, nor does a removal that exposes it: the input has to be pressed and let go
              again, or its layer has to land
     A27      an active chord suppresses an interruptible Regular Press on the same input
+    A78      an active chord that is not interruptible suppresses an interruptible chord on the same input
     A31      a repeat keeps its schedule when another layer is removed
     A32      `reverse_ties`: activators due at the same moment run in file order, or reversed
     A35      `default_repeat_ms`: Hold to Repeat with no stated rate uses this interval
@@ -448,7 +449,9 @@ class Simulator:
         chords = [e for e in found if e.kind == "chord" and (                                      # A17, A36
             mode != "exposed" and not any(c in self.held for c in e.condition.controls())          # A61: a removal
             if _inverted_chord(e) else e.condition.satisfied(self.held))]                          # doesn't start it
-        others = [e for e in found if e.kind != "chord" and not (chords and e.settings.get("interruptable") != "0")]
+        if any(e.settings.get("interruptable") == "0" for e in chords):                            # A78
+            chords = [e for e in chords if e.settings.get("interruptable") == "0"]
+        others =[e for e in found if e.kind != "chord" and not (chords and e.settings.get("interruptable") != "0")]
         for entry in self._ordered(sorted(chords + others, key=lambda e: e.index)):                # A27
             self._arm(entry, phase, mode)
 

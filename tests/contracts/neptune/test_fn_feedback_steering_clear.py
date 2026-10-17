@@ -21,7 +21,10 @@ class FnFeedbackAndSteeringClear(unittest.TestCase):
                                 continue
                             with self.subTest(variant=variant, group=group['id'],
                                               input=name, bank=bank, kind=kind):
-                                self.assertEqual(entry.get('settings', {}).get('haptic_intensity'), '1')
+                                # Since Ibex 1.1 an Entry Point's stick click adds its Fn layer at the press, silent
+                                # (author, 2026-10-16: "no bump on this and make it repeating"); every other add bumps Low.
+                                silent = name == 'click' and kind == 'Full_Press'
+                                self.assertEqual(entry.get('settings', {}).get('haptic_intensity'), '0' if silent else '1')
                                 for action in actions(entry):
                                     match = ADD.search(action)
                                     if match and layout.resolve(match.group(1)) in FN:

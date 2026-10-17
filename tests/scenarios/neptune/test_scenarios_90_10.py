@@ -55,16 +55,20 @@ class MenuAndTransitions(ScenarioCase):
     @scenario("90.10 T3", rules=("R157",), rests=("A11",))
     def test_letting_go_of_the_menu_button_first_cancels(self):
         """The checklist asked what the click's release does. Base's click key (Q) goes down when Start is
-        let go with the click still held, and comes up with the click; then Start's tap types Tab."""
+        let go with the click still held, and comes up with the click. Until Ibex 1.1 Start's tap then typed Tab:
+        its release was the Entry Point's, which opens the Double Tap window. Since Ibex 1.1 the click brings the
+        Fn layer in at the press (plans/2026-10-16-fn-right-stick-owner.md), so the release is Fn's, as for a
+        click after Fn is up: no window and no Tab."""
         for pad in self.each():
             pad.hold("Start").touch("LS")
             pad.sim.press(("joystick", "click"))
+            self.assertEqual(pad.top, "Menu Right: Fn Layer")
             pad.let_go("Start")
             self.assertEqual(pad.down(), ["Q"])
             pad.sim.release(("joystick", "click"))
             pad.wait(300)
             self.assertTrue(pad.lacks("Steering", "Transition Set 0", "Transition Set 1", "Transition Set 2"))
-            self.assertEqual(pad.typed(), ["Q", "TAB"])
+            self.assertEqual(pad.typed(), ["Q"])
 
     @scenario("90.10 T4", rules=("R160", "R169", "R170", "R171"), rests=("A17", "A25"))
     def test_a_transition_left_by_a_missed_release_ends_on_the_next_menu_tap(self):

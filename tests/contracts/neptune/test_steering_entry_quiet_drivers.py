@@ -21,7 +21,9 @@ class SteeringEntryQuietDrivers(unittest.TestCase):
                     'edge_binding_invert': '1', 'hold_repeats': '1',
                     'interruptable': '0', 'haptic_intensity': '0'})
                 self.assertEqual(edge['release'], old.active(GUARD)['joystick']['inputs']['edge']['activators']['release'])
-                self.assertEqual(group['settings'], old.active(GUARD)['joystick']['settings'])
+                # Less `requires_click`, which came off every stick D-pad in Ibex 1.1 (author, 2026-10-16).
+                self.assertEqual(group['settings'], {k: v for k, v in old.active(GUARD)['joystick']['settings'].items()
+                                                     if k != 'requires_click'})
                 for direction in ('north', 'south', 'east', 'west'):
                     name = 'dpad_' + direction
                     self.assertEqual(group['inputs'][name], old.active(GUARD)['joystick']['inputs'][name])

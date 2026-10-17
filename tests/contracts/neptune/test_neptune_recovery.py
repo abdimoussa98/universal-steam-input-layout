@@ -5,9 +5,22 @@ These verify saved configuration contracts, not Steam's runtime scheduling.
 import re
 import unittest
 
+from steam_layout import convert
 from tools.audit_command_budget import audit_layout, command_entries
 from tools.convert_runtime_ids import titles_to_ids
 from tests.support.neptune import EMPTY, addition, load_layouts, removal, recovery_specs
+
+
+def selector_ids(settings):
+    """The legacy `chord_button` IDs a guard chord waits for: its own, or each one its Any mask holds. Since Ibex 1.1
+    two guards that differed only in their button are one Any chord (plans/2026-10-16-fn-right-stick-owner.md,
+    part 4). An All mask of more than one button guards on none of them alone."""
+    if "chord_button" in settings:
+        return {settings["chord_button"]}
+    mask = int(settings.get("gyro_ratchet_button_mask", 0))
+    if settings.get("gyro_ratchet_button_requireany_or_all") == "1" and bin(mask).count("1") > 1:
+        return set()
+    return {cid for cid, control in convert.CHORD_INPUTS.items() if mask >> convert.BITS[control] & 1}
 
 
 class NeptuneRecoveryTests(unittest.TestCase):
@@ -29,8 +42,8 @@ class NeptuneRecoveryTests(unittest.TestCase):
         activators = input_value["activators"]
         chords = activators["chord"]
         chords = chords if isinstance(chords, list) else [chords]
-        guards = [c for c in chords if "chord_button" in c["settings"]]
-        self.assertEqual({c["settings"]["chord_button"] for c in guards}, selectors)
+        guards = [c for c in chords if selector_ids(c["settings"])]
+        self.assertEqual(set().union(*(selector_ids(c["settings"]) for c in guards)), selectors)
         for chord in guards:
             self.assertEqual(chord["bindings"]["binding"], EMPTY)
             if cursor_override:
@@ -48,7 +61,7 @@ class NeptuneRecoveryTests(unittest.TestCase):
             self.assertEqual(override[0]["settings"]["interruptable"], "0")
             self.assertEqual(override[0]["settings"].get("hold_repeats"), "1")
         else:
-            self.assertEqual(len(chords), len(selectors))
+            self.assertEqual(len(chords), len(guards))
         fallback = activators["Full_Press"]
         self.assertEqual(fallback["settings"]["hold_repeats"], "1")
         self.assertNotEqual(fallback["settings"].get("interruptable"), "0")
@@ -73,10 +86,12 @@ class NeptuneRecoveryTests(unittest.TestCase):
                         for group in (ls, rs):                      # a cleanup since 90.24 (R170)
                             self.assert_menu_cleanup(group['inputs']['edge']['activators'], title)
                     elif title in ('Menu Left: Entry Point', 'Menu Right: Entry Point'):
-                        # Both sticks are D-pads with the same edge; each adds its own stick guard.
+                        # Each stick's edge adds its own stick guard. Since Ibex 1.1 the right stick keeps Base's
+                        # mouse mode, edge at 21000, so the Fn layer above owns it (A77); the left stays a D-pad.
+                        self.assertEqual((ls['mode'], rs['mode']), ('dpad', 'joystick_mouse'))
+                        self.assertNotIn('edge_binding_radius', ls['settings'])   # Steam's default since 90.31 (R173)
+                        self.assertEqual(rs['settings']['edge_binding_radius'], '21000')
                         for group, stick in ((ls, 'Left'), (rs, 'Right')):
-                            self.assertEqual(group['mode'], 'dpad')
-                            self.assertNotIn('edge_binding_radius', group['settings'])   # Steam's default since 90.31 (R173)
                             self.assertEqual(group['settings']['edge_binding_invert'], '0')
                             activators = group['inputs']['edge']['activators']
                             self.assertEqual(set(activators), {'chord', 'Full_Press'})

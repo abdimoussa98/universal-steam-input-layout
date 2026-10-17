@@ -50,15 +50,22 @@ It removes the stateful layer and everything above Base except `Gyro`.
 
 ```
 Base: menu button press
-  └─ Menu Entry Point ................... (1) holds the stick-click binds
+  └─ Menu Entry Point ................... (1) decides where the clicks lead
        ├─ stick out ──► LS / RS Stick Guard    (2) no Fn while a stick is out
        │                └─ held past the delay, or thumb lifted ──► menu Tap Cover
-       ├─ held past the Fn delay ──► Fn Layer  (inherits the click binds)
-       └─ stick click RELEASE ──► clear the menu layers, add the Transition
-            └─ Transition ............... (3) blocks every layer entry
-                 └─ menu button RELEASE ► remove the Transition,
-                                          add the destination (4)
+       └─ held past the Fn delay, or a stick click PRESS
+            └─ Fn Layer ................. holds the click binds; the Entry Point,
+                 │                        guards and Tap Cover are removed
+                 └─ stick click RELEASE ──► clear the menu layers, add the Transition
+                      └─ Transition ..... (3) blocks every layer entry
+                           └─ menu button RELEASE ► remove the Transition,
+                                                    add the destination (4)
 ```
+
+Since Ibex 1.1 the Fn layer holds the transitions, and every bind that adds
+it removes its Entry Point (the hand-over;
+[record](../findings/2026-10-16-fn-right-stick-owner/README.md)). Until 1.0
+the Entry Point held them and the Fn layer inherited them.
 
 The stick click is released first and the menu button second. Both are up at
 the commit, in a fixed order, with nothing to count. Every step uses
@@ -72,8 +79,9 @@ menu release is an ordinary one.
 
 ### (1) Menu Entry Points
 
-They hold the transition binds, so the layer that adds an Entry Point decides
-where the clicks lead.
+Each adds its own Fn layer, which holds the transition binds, so the layer that
+adds an Entry Point still decides where the clicks lead. The click releases
+below are the Fn layer's since Ibex 1.1, the Entry Point's until 1.0.
 
 | Entry Point | Added by | LS click release | RS click release |
 |---|---|---|---|
@@ -82,14 +90,23 @@ where the clicks lead.
 | `Stateful \| Menu Left: Entry Point` | `Steering` with no driver held, `Cursor Gyro` | Transition 2 | Transition 2 |
 | `Stateful \| Menu Right: Entry Point` | `Steering` with no driver held, `Cursor Gyro` | Transition 2 | Transition 2 |
 
-- **Both sticks are D-pads in every Entry Point.** The right stick copies the
-  left stick's setup with empty directions, so it is dead while a menu button
-  is held. This is what lets the Fn layers inherit the click binds: a
-  different source mode would block the inheritance.
-- **The click binds are Release activators.** Binding them replaces the whole
-  input, so Base's Q and E don't fire with a menu button held.
-- **The Fn layers bind no stick click.** They inherit both from the Entry
-  Point underneath.
+- **The sticks keep Base's modes** (Ibex 1.1). The left stick is a D-pad. The
+  right stick is a mouse group with its edge at 21000, so the camera moves
+  while a menu button is held, and the Fn layer's D-pad over it is the
+  stick's owner (A77). Until 1.0 the right stick was a D-pad with empty
+  directions, so that the Fn layers could inherit the click binds. By A77
+  the Entry Point then answered the whole stick in Fn, and the right stick's
+  Fn keys typed nothing on the Deck.
+- **The click binds:**
+  - In the Entry Point each stick click is a Regular Press, silent, not
+    interruptible and repeating every 50 ms. It adds the Fn layer and removes
+    the Entry Point, both guards and the Tap Cover.
+  - In the Fn layer the click's Release is the transition.
+  - Binding the clicks replaces the whole input, so Base's Q and E don't fire
+    with a menu button held.
+- **Every bind that adds an Fn layer removes its Entry Point:** the hold, the
+  other menu button, both stick-touch Releases and both clicks. Fn lands on
+  what was under the Entry Point, with copies of its two trackpad groups.
 - **The other menu button only adds Fn** (author, 2026-10-01). Backspace and
   Enter are typed by the Fn layers alone, as before the menu split. The
   Entry Point's own key from 90.9 goes away.
@@ -125,7 +142,7 @@ menu Tap Cover where the Entry Point would bring in Fn.
 | Added by | Entry Point's LS edge, repeating | Entry Point's RS edge, repeating |
 | Own stick | Normal outer edge; its **Release** removes this guard | Same |
 | Other stick | Unbound, inherits the Entry Point's edge | Same |
-| Stick clicks | Unbound, inherits the transition binds | Same |
+| Stick clicks | Unbound: the Entry Point's press, which adds Fn and removes the guards | Same |
 | Menu button release | Opens that button's Double Tap window, as in the Entry Point | Same |
 | Menu button held 200 ms | Adds the menu Tap Cover, with the 250 ms repeating reset | Same |
 | Stick touch release | Adds the menu Tap Cover, then clears that stick's trio | Same |
@@ -137,8 +154,10 @@ menu Tap Cover where the Entry Point would bring in Fn.
   removes only its guard.
 - When the last guard comes off before the Tap Cover has landed, the player
   is back in the Entry Point, and Fn follows through the repeating reset.
-- Both sticks use the D-pad edge radius (4915 today: engages near 25% of
-  travel, releases near 5%). Guard and Entry Point use the same radius.
+- Guard and Entry Point use the same edges. The left stick is a D-pad at
+  Steam's default radius, near the rim (A50; 4915 until 90.30). Since Ibex
+  1.1 the right stick is in Base's mouse mode at 21000, about two thirds of
+  its travel.
 
 **The menu Tap Cover** is one layer for both menu sides, built like
 `L1&R1: Tap Cover`:
@@ -455,11 +474,11 @@ replace one. The list is kept for that.
 
 - [ ] Its gesture is one of the four in the [gesture map](#gesture-map), and
       the map above is updated.
-- [ ] The Base Entry Point for that menu side sends the click's Release to
-      the right transition, and that transition's menu Release adds the new
-      layer.
-- [ ] It has Entry Points whose click releases both lead to Transition 2, and
-      its own menu press adds them.
+- [ ] The Fn layer of the Base Entry Point for that menu side sends the
+      click's Release to the right transition, and that transition's menu
+      Release adds the new layer.
+- [ ] It has Entry Points whose Fn layers' click releases both lead to
+      Transition 2, and its own menu press adds them.
 - [ ] Transition 2 removes it and its helpers. The Modifier 2 quick tap does
       not remove it (R159): since 90.57 no stateful layer but `Gyro` leaves on
       that gesture.
@@ -476,7 +495,11 @@ replace one. The list is kept for that.
 
 ## Accepted consequences
 
-- The camera is dead while a menu button is held.
+- The camera moves while a menu button is held, until Fn lands (Ibex 1.1;
+  until 1.0 it was dead).
+- A stick click inside a quick menu tap brings Fn in, so the menu release
+  types nothing, as after Fn is up. Until 1.0 the release opened the Double
+  Tap window and typed the tap's key.
 - With a stick out, Fn can't be reached. A quick menu tap still types Tab or
   Escape through the Double Tap window; a 200 ms hold or a thumb lift makes
   the release silent.
@@ -488,8 +511,9 @@ replace one. The list is kept for that.
 - Steering can sit under the two menu Double Tap windows. They bind
   left-stick up and down as plain W and S, so no fallback guard comes on
   during the window.
-- The clear happens at the stick click's release, not its press. `Gamepad`
-  is the exception: its exit chord fires at the press.
+- The clear happens at the stick click's release, not its press; since Ibex
+  1.1 the press brings the Fn layer in. `Gamepad` is the exception: its exit
+  chord fires at the press.
 - In `Gamepad` a single Start or Select tap arrives late by the Double Press
   time (200 ms). The pad clicks send Select and Start at once.
 - In Transition 1 the two menu buttons lead to different places, so a stray
@@ -598,8 +622,9 @@ section are still open: they are assumptions A26 and A8 in
      Point and the guard doesn't bind the click. A
      [2022 community report](https://steamcommunity.com/app/353370/discussions/0/3468361193665969286/)
      says sticks take inputs only from the top layer and Base. If so, a click
-     under a guard would send Base's Q and never reach the transition. The
-     Fn layer over an Entry Point has the same shape.
+     under a guard would send Base's Q and never reach the transition. Until
+     Ibex 1.1 the Fn layer over an Entry Point had the same shape; since 1.1
+     it binds both clicks itself.
   2. **An edge Release in a layer added while the stick was already out.**
      The guard is added because the stick is out, and its only edge bind is
      a Release. If the Release needs the layer to have seen the push, the
@@ -634,4 +659,6 @@ two menu-release destinations, that the transitions leave no layer-adding
 input unblocked, that the Fn layers and guards bind no stick click, the
 guards' and the Tap Cover's binds, and Steering's left-stick recipe and
 windows, on the 90.10 build. The later builds have their own test files,
-above.
+above. Since Ibex 1.1 the Fn layers bind both clicks:
+[test_shapes_ibex_1_1.py](../tests/releases/ibex/test_shapes_ibex_1_1.py) and
+[test_scenarios_ibex_1_1.py](../tests/scenarios/ibex/test_scenarios_ibex_1_1.py).

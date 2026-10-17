@@ -19,12 +19,16 @@ class Shape(unittest.TestCase):
             for title in FN_LAYERS:
                 left, right = layout.active(title)["joystick"], layout.active(title)["right_joystick"]
                 self.assertEqual(right["settings"], left["settings"], (variant, title))
-                self.assertNotIn("deadzone", right["settings"])
+                # 90.74 took `deadzone` off; since Ibex 1.1 (90.77) both sticks state 13276 (author, 2026-10-16).
+                self.assertEqual(right["settings"].get("deadzone"), "13276")
                 for where, part in PARTS.items():
                     key, guard = right["inputs"][part]["activators"]["chord"]
                     self.assertEqual(key["bindings"]["binding"], f"key_press {KEYS[where]}, , ")
                     self.assertEqual(key["settings"].get("haptic_intensity"), "1", (variant, title, where))
-                    self.assertEqual(guard["settings"], {"chord_button": "20", "interruptable": "0"})
+                    # The guard was on R3 (button 20); since Ibex 1.1 it holds on either stick's click, Any.
+                    self.assertEqual(guard["settings"], {"gyro_ratchet_button_mask": "71303168",
+                                                         "gyro_ratchet_button_requireany_or_all": "0",
+                                                         "interruptable": "0"})
 
 
 if __name__ == "__main__":
