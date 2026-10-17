@@ -12,7 +12,7 @@ export const templatePaths = {
   macos: [['Steam', '~/Library/Application Support/Steam/Steam.AppBundle/Steam/Contents/MacOS/controller_base/templates']],
   linux: [['Steam / SteamOS', '~/.steam/steam/controller_base/templates'],
     ['Alternate Steam install', '~/.local/share/Steam/controller_base/templates'],
-    ['neptune', '/home/deck/.steam/steam/controller_base/templates'],
+    ['Steam Deck', '/home/deck/.steam/steam/controller_base/templates'],
     ['Flatpak Steam', '~/.var/app/com.valvesoftware.Steam/.local/share/Steam/controller_base/templates']],
   other: [['Inside your Steam installation', 'controller_base/templates']],
 };
