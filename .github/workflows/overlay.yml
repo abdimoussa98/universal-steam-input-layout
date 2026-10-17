@@ -5,6 +5,11 @@ on:
   pull_request:
     paths: ['overlay/**', 'steam_layout/overlay_profile.py', 'tools/export_overlay_profile.py', 'tests/integration/profiles/test_overlay_profile.py', 'steam_layout/model.py', 'steam_layout/flow_model.py', 'versions/**', 'steam_layout/controllers.py', 'tools/release.py', '.github/workflows/overlay.yml']
   workflow_dispatch:
+    inputs:
+      stress_timing:
+        description: 'Add 650 ms of browser-driver latency to stress timing checks'
+        type: boolean
+        default: false
   workflow_run:
     workflows: [Release]
     types: [completed]
@@ -99,6 +104,7 @@ jobs:
           CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
           CHROMEDRIVER: ${{ steps.chrome.outputs.chromedriver-path }}
           WASM_BINDGEN_TEST_WEBDRIVER_JSON: ${{ runner.temp }}/overlay-webdriver.json
+          WEBDRIVER_DELAY_MS: ${{ inputs.stress_timing && '650' || '0' }}
         run: |
           python3 - <<'PY'
           import json, os
@@ -108,7 +114,7 @@ jobs:
           }))
           PY
           wasm-pack test --headless --chrome --chromedriver "$CHROMEDRIVER" overlay --no-default-features
-          python3 -u overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid --webdriver-delay-ms 650 --driver "$CHROMEDRIVER" --browser-binary "$CHROME_BIN"
+          python3 -u overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid --webdriver-delay-ms "$WEBDRIVER_DELAY_MS" --driver "$CHROMEDRIVER" --browser-binary "$CHROME_BIN"
       - name: Record the release
         run: python3 overlay/scripts/release_manifest.py --bundle overlay/dist --revision "$GITHUB_SHA"
       - name: Build the web container

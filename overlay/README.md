@@ -417,8 +417,10 @@ accepts `--driver PATH`, `--browser-binary PATH` and `--screenshot PATH`; it use
 a temporary browser profile. `WASM_BINDGEN_TEST_WEBDRIVER_JSON` can supply custom
 browser paths for wasm-pack. Build before the packaged-browser smoke test.
 The smoke harness prints browser/driver versions. `--webdriver-delay-ms 650`
-adds latency after every driver response; CI uses it to catch tests that depend
-on quick round trips. Timed input sequences and timeline observations run inside
+adds latency after every driver response to catch tests that depend on quick
+round trips. Normal CI runs use zero added delay. To run the slower check on
+GitHub, manually run the **Keybind viewer** workflow with **stress_timing** enabled.
+Timed input sequences and timeline observations run inside
 the browser so gesture windows do not include Python/HTTP overhead.
 
 To run the packaged viewer in CI's Ubuntu 24.04 and pinned Chrome environment,
@@ -426,11 +428,12 @@ first build `overlay/dist`, then run from the repository root (Docker required):
 
 ```sh
 docker build --platform linux/amd64 -t keybind-browser-check -f overlay/scripts/browser_linux.Dockerfile overlay/scripts
-docker run --rm --platform linux/amd64 --shm-size=1g -v "$PWD/overlay:/work/overlay:ro" keybind-browser-check --webdriver-delay-ms 650
+docker run --rm --platform linux/amd64 --shm-size=1g -v "$PWD/overlay:/work/overlay:ro" keybind-browser-check
 ```
 
 Apple Silicon uses Docker's amd64 emulation. This checks the same WASM bundle
 and browser scenarios on Linux; it does not test physical controller hardware.
+Append `--webdriver-delay-ms 650` to the Docker command for the optional stress run.
 
 The same `tests/behavior.rs` and `tests/gestures.rs` bodies run natively and in WASM. Companion HTTP
 integration tests run on native hosts without Windows input hardware. On Linux,
