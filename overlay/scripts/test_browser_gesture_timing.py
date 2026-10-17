@@ -55,6 +55,13 @@ class GestureTimingTests(unittest.TestCase):
     def test_late_driver_response_does_not_require_transient_phase_to_still_be_active(self):
         check_stage(hold_trace(), 0, 'pressed', 200, 10, completed='hold')
 
+    def test_completed_frame_can_stop_repainting_while_driver_waits(self):
+        samples = hold_trace()[:3]
+        frozen = deepcopy(samples[-1])
+        frozen['at_ms'] += 3000
+        samples.append(frozen)
+        check_stage(samples, 0, 'pressed', 200, 10, completed='hold')
+
     def test_unscaled_clock_still_fails_despite_correct_declared_scale_and_logical_deadline(self):
         samples = hold_trace()
         for sample in samples:

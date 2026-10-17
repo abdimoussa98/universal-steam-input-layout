@@ -74,8 +74,11 @@ def check_stage(samples, lane, phase, duration, scale, completed=None):
     if completed:
         finished = [value for value in samples if value['lanes'][lane]['phase'] == completed]
         assert finished, f'{phase} never reached {completed}'
-        end = finished[-1]
-        assert end['lanes'][lane]['started_ms'] == first['lanes'][lane]['deadline_ms'], \
+        # A completed hold no longer needs repainting. Later rAF reads may
+        # repeatedly observe that same frame while WebDriver is still waiting.
+        end = finished[0]
+        assert all(value['lanes'][lane]['started_ms'] == first['lanes'][lane]['deadline_ms']
+                   for value in finished), \
             f'{phase} completed at the wrong logical deadline'
         assert end['timeline']['active'] and end['timeline']['progress'] == 1, \
             f'{completed} timeline is incomplete'
