@@ -277,3 +277,62 @@ test('receiver open failure closes all slots, including a delayed open', async (
     assert(slots.every(slot => !slot.opened));
   } finally { await client.destroy(); }
 });
+
+for (const usagePage of [0xff00, 0xffff]) {
+  test(`Deck vendor interface ${usagePage.toString(16)} reads without changing Steam settings`, async () => {
+    const {hid, device, states, reports, client} = setup();
+    device.productId = 0x1205;
+    device.collections = [{usagePage, inputReports: [{reportId: 0}]}];
+    const keyboard = Object.assign(new Device(), {
+      productId: 0x1205, collections: [{usagePage: 1, inputReports: [{reportId: 0}]}],
+    });
+    hid.selected = [keyboard, device];
+    try {
+      await client.connect();
+      assert.equal(keyboard.opened, false);
+      assert.equal(device.opened, true);
+      assert.equal(states.at(-1)[0], 'connected');
+      assert.match(states.at(-1)[1], /Steam Deck/);
+      assert.equal(device.writes.length, 0);
+      assert.equal(client.timer, null, 'Deck must not receive Triton watchdog writes');
+      const frame = [1, 0, 9, 64, ...Array(60).fill(0)];
+      device.input(0x47, Array(45).fill(0));
+      assert.deepEqual(reports, [], 'Deck must not use a Triton input report');
+      device.input(0, frame);
+      assert.deepEqual(reports, [[0, frame]]);
+      const removed = new Event('disconnect'); removed.device = device;
+      hid.dispatchEvent(removed);
+      await settled();
+      assert.equal(states.at(-1)[0], 'disconnected');
+      device.input(0, frame);
+      assert.equal(reports.length, 1);
+      const added = new Event('connect'); added.device = device;
+      hid.dispatchEvent(added);
+      await settled();
+      device.input(0, frame);
+      assert.equal(reports.length, 2);
+      assert.equal(device.writes.length, 0);
+      await client.disconnect();
+      assert.equal(device.opened, false);
+      device.input(0, frame);
+      assert.equal(reports.length, 2);
+    } finally { await client.destroy(); }
+  });
+}
+
+test('Deck cannot be opened through a keyboard/mouse or Triton interface', async () => {
+  const {device, states, client} = setup();
+  device.productId = 0x1205;
+  try {
+    for (const collections of [
+      [{usagePage: 1, inputReports: [{reportId: 0}]}],
+      [{usagePage: 0xffff, inputReports: [{reportId: 0x47}]}],
+    ]) {
+      device.collections = collections;
+      await client.connect();
+      assert.equal(states.at(-1)[0], 'error');
+      assert.equal(device.opened, false);
+      assert.equal(device.writes.length, 0);
+    }
+  } finally { await client.destroy(); }
+});

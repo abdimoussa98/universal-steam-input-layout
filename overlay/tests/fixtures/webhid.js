@@ -11,7 +11,11 @@
     constructor(productId = 0x1302) {
       super();
       this.productId = productId;
-      this.powered = productId === 0x1302;
+      this.powered = [0x1302, 0x1205].includes(productId);
+      if (productId === 0x1205) {
+        this.collections = [{usagePage: 0xffff, inputReports: [{reportId: 0}]}];
+        this.frame();
+      }
     }
     async open() { this.opened = true; this.timer = setInterval(() => this.emit(), 8); }
     async close() { this.opened = false; clearInterval(this.timer); }
@@ -19,14 +23,19 @@
     emit() {
       if (!this.opened || !this.powered) return;
       const event = new Event('inputreport');
-      event.reportId = 0x47;
+      event.reportId = this.productId === 0x1205 ? 0 : 0x47;
       event.data = new DataView(this.report.buffer);
       this.dispatchEvent(event);
     }
-    frame(buttons = 0, values = {}) {
-      this.report = new Uint8Array(45);
+    frame(buttons = 0, values = {}, touches = 0) {
+      const deck = this.productId === 0x1205;
+      this.report = new Uint8Array(deck ? 64 : 45);
       const view = new DataView(this.report.buffer);
-      view.setUint32(1, buttons, true);
+      if (deck) {
+        this.report.set([1, 0, 9, 64]);
+        view.setUint32(12, touches, true);
+      }
+      view.setUint32(deck ? 8 : 1, buttons, true);
       for (const [offset, value] of Object.entries(values)) view.setInt16(Number(offset), value, true);
       this.emit();
     }
@@ -48,6 +57,10 @@
     receiver(productId = 0x1304) {
       this.slots = Array.from({length: 4}, () => new Device(productId));
       this.device = this.slots[2];
+    }
+    deck() {
+      this.slots = null;
+      this.device = new Device(0x1205);
     }
     async requestDevice(options) {
       this.requests.push({options, activated: navigator.userActivation.isActive});

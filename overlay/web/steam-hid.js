@@ -1,17 +1,19 @@
 // Browser permissions and raw HID transport only. Rust decodes reports and owns
 // controller state, bindings and gesture timing. No input is sent to a server.
-// SDL 3.4.18 usb_ids.h: Triton USB, Proteus receiver, Nereid receiver.
-const PRODUCTS = [0x1302, 0x1304, 0x1305];
+// SDL 3.4.18 controller_list.h / usb_ids.h: Deck, Triton USB, Proteus, Nereid.
+const PRODUCTS = [0x1205, 0x1302, 0x1304, 0x1305];
 const INPUT_REPORTS = new Set([0x42, 0x45, 0x47]);
 const WIRELESS_STATUS = new Set([0x46, 0x79]);
-const isReceiver = device => device.productId !== 0x1302;
-function hasInput(collections) {
-  return collections.some(c => (c.inputReports || []).some(r => INPUT_REPORTS.has(r.reportId))
-    || hasInput(c.children || []));
+const isDeck = device => device.productId === 0x1205;
+const isReceiver = device => [0x1304, 0x1305].includes(device.productId);
+function hasInput(collections, deck) {
+  return collections.some(c => (c.inputReports || []).some(r => deck
+    ? c.usagePage >= 0xff00 && r.reportId === 0
+    : INPUT_REPORTS.has(r.reportId)) || hasInput(c.children || [], deck));
 }
 function supported(device) {
   return device.vendorId === 0x28de && PRODUCTS.includes(device.productId)
-    && hasInput(device.collections || []);
+    && hasInput(device.collections || [], isDeck(device));
 }
 
 export class SteamHid {
@@ -20,7 +22,7 @@ export class SteamHid {
     this.available = !!secure && !!hid;
     this.supportMessage = !secure ? 'Open this viewer over HTTPS to connect a controller.'
       : !hid ? 'Direct USB connection needs WebHID. Use a desktop browser with WebHID enabled, such as Chrome or Edge.'
-      : 'Connect your Steam Controller 2 by USB cable or wireless receiver, then choose it in the browser picker. No helper or Steam required.';
+      : 'Connect your Steam Controller 2 by USB cable or wireless receiver, or use the Steam Deck’s built-in controller in Desktop Mode. Choose it in the browser picker.';
     this.onInput = onInput;
     this.onState = onState;
     this.generation = 0;
@@ -62,7 +64,7 @@ export class SteamHid {
     if (!this.available) { this.emit('error', this.supportMessage); return; }
     this.busy = true;
     const generation = ++this.generation;
-    this.emit('requesting', 'Choose your Steam Controller in the browser picker.');
+    this.emit('requesting', 'Choose your Steam Controller or Steam Deck in the browser picker.');
     try {
       // Invoke directly from the button action, before awaiting any other work.
       // Leave discovery unrestricted. Compatibility is checked only after the
@@ -118,6 +120,7 @@ export class SteamHid {
     const device = event.target;
     if (this.stopped || !this.devices.has(device) || (this.device && device !== this.device)) return;
     const bytes = new Uint8Array(event.data.buffer, event.data.byteOffset, event.data.byteLength);
+    if (isDeck(device) && event.reportId !== 0) return;
     if (isReceiver(device)) {
       // SDL's TritonWirelessStatus_t: one byte, 1 = off, 2 = connected.
       if (WIRELESS_STATUS.has(event.reportId)) {
@@ -143,6 +146,17 @@ export class SteamHid {
   activate(device) {
     if (this.initialized || this.activation || (this.device && device !== this.device)) return this.activation;
     this.device = device;
+    // Deck streams native reports without initialization. Read only: Triton's
+    // lizard-mode command is not Deck's protocol, and changing Deck mappings or
+    // pressure thresholds would interfere with the Steam Input being viewed.
+    if (isDeck(device)) {
+      this.initialized = true;
+      this.emit('connected', 'Steam Deck connected directly to this browser.');
+      const pending = this.pendingReport;
+      this.pendingReport = null;
+      if (pending) this.onInput?.(...pending);
+      return;
+    }
     const generation = this.generation;
     const epoch = ++this.epoch;
     const current = () => !this.stopped && generation === this.generation && epoch === this.epoch;

@@ -292,7 +292,17 @@ impl WebState {
                 held: [input.down(Control::L1), input.down(Control::R1)],
                 input,
                 id: HID_DEVICE_ID.into(),
-                name: "Steam Controller · WebHID".into(),
+                name: if self
+                    .data
+                    .browser_connection
+                    .as_ref()
+                    .is_some_and(|c| c.message.starts_with("Steam Deck connected"))
+                {
+                    "Steam Deck · WebHID"
+                } else {
+                    "Steam Controller · WebHID"
+                }
+                .into(),
                 standard: true,
             };
             match &mut result {

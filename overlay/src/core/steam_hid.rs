@@ -1,12 +1,16 @@
-//! Steam Controller 2 (Triton/Ibex) HID input, shared by native/WASM tests.
+//! Steam Controller 2 (Triton/Ibex) and Steam Deck HID input.
 //!
 //! Wire layout and button assignments follow SDL 3.4.18's
-//! src/joystick/hidapi/SDL_hidapi_steam_triton.c and steam/controller_structs.h.
+//! src/joystick/hidapi/SDL_hidapi_steam_triton.c, SDL_hidapi_steamdeck.c,
+//! and steam/controller_structs.h.
 //! This is an independent decoder, not an SDL driver. WebHID has already
 //! separated the report ID from the payload before this function is called.
 use super::{Control, InputChange, InputFrame, PadContact};
 
 pub fn decode_report(id: u8, bytes: &[u8]) -> Result<Option<InputFrame>, &'static str> {
+    if id == 0 {
+        return decode_deck(bytes);
+    }
     let pad_offset = match id {
         0x42 | 0x45 => 17,
         0x47 => 19,
@@ -54,6 +58,58 @@ pub fn decode_report(id: u8, bytes: &[u8]) -> Result<Option<InputFrame>, &'stati
                 axis(pad_offset + side * 6, false),
                 axis(pad_offset + side * 6 + 2, true),
             ],
+        });
+        frame.pad_active |= touching;
+    }
+    Ok(Some(frame))
+}
+
+fn decode_deck(bytes: &[u8]) -> Result<Option<InputFrame>, &'static str> {
+    // Deck uses an unnumbered 64-byte report. The version/type/length header
+    // remains in the payload, unlike Triton's separate WebHID report ID.
+    if !bytes.starts_with(&[1, 0, 9]) {
+        return Ok(None);
+    }
+    if bytes.len() != 64 || bytes[3] != 64 {
+        return Err("Incomplete or invalid Steam Deck input report");
+    }
+    let buttons = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
+    let touches = u32::from_le_bytes(bytes[12..16].try_into().unwrap());
+    let mut frame = InputFrame::default();
+    for (control, mask) in [
+        (Control::A, 0x80),
+        (Control::B, 0x20),
+        (Control::X, 0x40),
+        (Control::Y, 0x10),
+        (Control::Select, 0x1000),
+        (Control::Start, 0x4000),
+        (Control::Up, 0x100),
+        (Control::Right, 0x200),
+        (Control::Down, 0x800),
+        (Control::Left, 0x400),
+        (Control::L3, 0x400000),
+        (Control::R3, 0x04000000),
+        (Control::L1, 0x8),
+        (Control::R1, 0x4),
+    ] {
+        frame.buttons[control as usize] = buttons & mask != 0;
+    }
+    let axis = |offset, invert: bool| {
+        let raw = i32::from(i16::from_le_bytes([bytes[offset], bytes[offset + 1]]));
+        (raw * if invert { -1000 } else { 1000 } / 32767).clamp(-1000, 1000) as i16
+    };
+    for side in 0..2 {
+        let offset = 44 + side * 2;
+        let trigger = u32::from(u16::from_le_bytes([bytes[offset], bytes[offset + 1]]));
+        InputChange::Trigger(side, (trigger * 1000 / 32767).min(1000) as u16).apply(&mut frame);
+        InputChange::StickAxis(side, 0, axis(48 + side * 4, false)).apply(&mut frame);
+        InputChange::StickAxis(side, 1, axis(50 + side * 4, true)).apply(&mut frame);
+        frame.touches[side] = Some(touches & [0x4000, 0x8000][side] != 0);
+        let touching = buttons & [0x80000, 0x100000][side] != 0;
+        frame.pad_clicks[side] = Some(buttons & [0x20000, 0x40000][side] != 0);
+        frame.pads[side] = Some(PadContact {
+            touching,
+            position: [axis(16 + side * 4, false), axis(18 + side * 4, true)],
         });
         frame.pad_active |= touching;
     }

@@ -19,7 +19,23 @@ it directly using WebHID; no local helper or Steam is required. Use HTTPS or
 localhost and a desktop browser with WebHID enabled. Direct HID support currently
 targets the wired Valve `28de:1302` Triton/Ibex controller and the
 `28de:1304` / `28de:1305` wireless receivers. Bluetooth is not supported by this
-connection path.
+connection path. The Steam Deck's built-in `28de:1205` controller is also supported
+directly in the browser.
+
+On the Deck, open the HTTPS viewer in a WebHID-capable browser such as Chrome
+in **Desktop Mode**, click **Connect controller**, and choose the built-in
+controller (the picker may call it **Steam Controller**). This path reads buttons,
+trigger travel, full stick positions, capacitive stick touches, pad positions,
+and physical pad clicks. It sends no controller configuration commands, so
+Steam's current mappings and pressure thresholds remain in place. If the device
+is missing or cannot open, check that the browser's Linux package has access to
+HID devices; a sandboxed browser may restrict access. No native Linux helper is
+provided. Deck decoding and viewer feedback have automated coverage; physical
+Deck/browser acceptance is still pending.
+
+The Deck uses the same controller diagram and loaded binding profile. Connecting
+hardware does not import the layout installed in Steam; load a matching viewer
+profile when its binds or click thresholds differ.
 
 The picker shows all HID devices exposed by the browser, without filtering by
 vendor or product ID. Selecting a device does not add a decoder for its input
@@ -66,7 +82,7 @@ feedback. Thumb contact takes priority over mouse hover.
 The preview normalizes the profile's inner/outer thresholds to the controller's
 coordinate range. It predicts a fresh click rather than observing Steam's
 output or latched layers; the Soft Press scale has not been hardware-calibrated.
-Press feedback uses the independent physical click flags from WebHID USB/wireless
+Press feedback uses the independent physical click flags from WebHID USB/wireless/Deck
 or the native Triton helper. Unsupported sources leave clicks unknown and still
 allow mouse previews.
 
@@ -213,7 +229,7 @@ To host with Dockge, see the [container guide](deploy/README.md) and
 and publish the web image to GHCR. Dockge pulls the `:latest` image when you
 deploy or update the stack. Your HTTPS tunnel forwards to port 18091.
 
-Browser input uses direct WebHID for the supported USB Steam Controller or
+Browser input uses direct WebHID for the supported Steam Controller and Steam Deck, or
 the Gamepad API for standard controllers the browser exposes. A
 visible second-monitor page and a hidden tab are different cases. Hidden pages
 pause input; resume samples current buttons before displaying live state.
@@ -339,7 +355,7 @@ formatting checks and Clippy run locally using the commands above.
 - `src/platform/sdl_input.rs`: shared Windows/macOS main-thread SDL input.
 - `src/platform/macos.rs`: headless direct-input companion, without Steam.
 - `src/platform/web.rs`: direct HID input, Gamepad polling, browser storage and companion client.
-- `src/core/steam_hid.rs`: shared Steam Controller 2 HID report decoder.
+- `src/core/steam_hid.rs`: shared Steam Controller 2 and Steam Deck HID report decoders.
 - `web/steam-hid.js`: browser device permissions and raw HID transport; no binding or timing logic.
 - `src/platform/host.rs`, `server.rs`: host state and opt-in loopback transport.
 - `web/`: minimal canvas/startup shell; no duplicated binding logic.

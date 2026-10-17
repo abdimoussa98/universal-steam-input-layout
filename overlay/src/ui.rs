@@ -95,7 +95,7 @@ impl FrameData {
         }
     }
     pub fn controller_help(&self) -> Option<&'static str> {
-        self.browser_has_no_devices().then_some("For a Steam Controller 2, click Connect controller and select the controller or its wireless receiver in the browser picker. Other supported gamepads appear after pressing a controller button. Steam and a local helper are not required.")
+        self.browser_has_no_devices().then_some("For a Steam Controller 2 or Steam Deck, click Connect controller and choose it in the browser picker. On the Deck, use a WebHID browser in Desktop Mode; the built-in controller may be named Steam Controller. Other supported gamepads appear after pressing a controller button.")
     }
     pub fn display_preferences(&self) -> Preferences {
         let mut preferences = self.preferences.clone();

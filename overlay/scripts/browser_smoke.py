@@ -596,6 +596,45 @@ def main():
                 wait_for(lambda: snapshot()['state']['status']=='disconnected', 'Receiver disconnect action failed')
                 assert js('return fakeHid.devices.every(d=>!d.opened)'), 'Receiver interfaces leaked after disconnect'
             print('PASS: both wireless receivers, inactive slots, wireless controls, radio power-off/on, slot isolation and receiver USB reconnect')
+            js('fakeHid.deck()')
+            click_target('connect')
+            wait_for(lambda: snapshot()['state']['status']=='live', 'Deck input did not become live')
+            assert 'Steam Deck' in snapshot()['input_status']
+            js('fakeHid.device.frame(0x8)')
+            wait_for(lambda: snapshot()['state']['held']==[True,False], 'Deck L1 mapping failed')
+            js('fakeHid.device.frame(0);fakeHid.device.frame(0x8)')
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase'] in ('second','cover'), 'Deck fast tap and hold lost')
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: snapshot()['state']['held']==[False,False], 'Deck release was stale')
+            js('fakeHid.device.frame(0,{44:16384,46:32767,48:-32768,50:32767,52:3277,54:-6554},0xc000)')
+            wait_for(lambda: snapshot()['state']['input']['triggers']==[500,1000], 'Deck triggers failed')
+            value=snapshot()['state']['input']
+            assert value['stick_positions']==[[-1000,-1000],[100,200]], 'Deck lost small stick motion'
+            assert value['touches']==[True,True]
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: all(p['regions'] for p in snapshot()['trackpads']), 'Deck pad bindings did not recover')
+            for raw, zone in ((0,'inner'),(23920,'overlap'),(31000,'outer1')):
+                js('fakeHid.device.frame(0x180000,{16:arguments[0],20:arguments[0]})',raw)
+                wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:released']*2, 'Deck contact chose wrong click zone')
+                js('fakeHid.device.frame(0x1e0000,{16:arguments[0],20:arguments[0]})',raw)
+                wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:pressed']*2, 'Deck pad click not shown')
+                if args.screenshot and raw==23920:
+                    args.screenshot.with_name('deck-pad-overlap.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: snapshot()['pad_feedback']==['idle:none:released']*2, 'Deck pad release remained highlighted')
+            js('fakeHid.device.frame(0x1e0000);clearInterval(fakeHid.device.timer)')
+            wait_for(lambda: snapshot()['state']['status']=='unavailable', 'Stalled Deck input remained live')
+            assert snapshot()['state']['input']['pad_clicks']==[None,None]
+            js('fakeHid.device.frame(0);fakeHid.remove()')
+            wait_for(lambda: snapshot()['state']['status']=='disconnected', 'Deck removal not detected')
+            js('fakeHid.reconnect()')
+            wait_for(lambda: snapshot()['state']['status']=='live', 'Deck reconnect failed')
+            assert 'Steam Deck' in snapshot()['input_status']
+            click_target('disconnect')
+            wait_for(lambda: snapshot()['state']['status']=='disconnected', 'Deck disconnect failed')
+            assert not js('return fakeHid.device.opened')
+            print('PASS: Steam Deck controls, fast taps, stick travel, touch, pad zones/clicks, stale input, reconnect and disconnect')
+
 
     except Exception:
         if session:
