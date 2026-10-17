@@ -141,7 +141,7 @@ def main():
         request('POST', f'/session/{session}/window', {'handle': original})
     mouse_callbacks = dict(snapshot=snapshot, wait_for=wait_for, click_target=click_target,
                            hold_target=hold_target, release_pointer=release_pointer,
-                           actions=pointer_actions, focus_change=focus_change)
+                           actions=pointer_actions, focus_change=focus_change, js=js)
     def scroll_target(name):
         for _ in range(5):
             point = snapshot()['ui_targets'][name]

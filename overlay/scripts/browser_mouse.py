@@ -4,7 +4,7 @@ The browser smoke harness supplies WebDriver callbacks. These checks read the
 rendered diagnostics, but never write simulated input into the application.
 """
 
-import time
+from browser_mouse_timing import GestureTrace, check_stage
 
 
 CONTROLS = (
@@ -16,7 +16,7 @@ OWNERS = {'l1': 0, 'r1': 1, 'select': 2, 'start': 3}
 
 class MouseChecks:
     def __init__(self, *, snapshot, wait_for, click_target, hold_target,
-                 release_pointer, actions, focus_change):
+                 release_pointer, actions, focus_change, js):
         self.snapshot = snapshot
         self.wait = wait_for
         self.click = click_target
@@ -24,6 +24,7 @@ class MouseChecks:
         self.release = release_pointer
         self.actions = actions
         self.focus_change = focus_change
+        self.trace = GestureTrace(js)
 
     def phase(self, key):
         return self.snapshot()['state']['gestures']['lanes'][OWNERS[key]]['phase']
@@ -105,52 +106,36 @@ class MouseChecks:
         print('PASS: right-click pinned modifiers combine with mouse buttons and each other, unpin cleanly and clear on focus loss')
 
     def hold_timing(self):
-        started = time.monotonic()
         self.hold('control:l1')
         self.wait_phase('l1', 'hold')
-        normal_elapsed = time.monotonic() - started
         assert self.snapshot()['timeline']['active'], 'Normal hold has no timeline'
         self.release()
         self.idle()
 
         self.scale(True)
-        started = time.monotonic()
+        self.trace.start()
         self.hold('control:l1')
-        self.wait_phase('l1', 'pressed')
-        before = self.snapshot()['timeline']
-        assert before['active'] and before['text'], 'Active :: binding has no timeline text'
-        time.sleep(0.3)
-        after = self.snapshot()['timeline']
-        assert self.phase('l1') == 'pressed', 'Slow mouse hold completed at normal speed'
-        assert after['progress'] > before['progress'], 'Slow timeline progress did not advance'
-        assert 0 < after['remaining_ms'] < before['remaining_ms'], 'Slow countdown did not advance'
         self.wait_phase('l1', 'hold')
-        slow_elapsed = time.monotonic() - started
-        assert slow_elapsed >= 1.5 and slow_elapsed > normal_elapsed * 2, \
-            f'Mouse slowdown was not applied: normal={normal_elapsed}, slow={slow_elapsed}'
+        check_stage(self.trace.stop(), 0, 'pressed', 200, 10, completed='hold')
         self.release()
         self.idle()
 
     def tap_then_hold(self):
-        # One WebDriver action sequence sends down/up without a pause. Even a
-        # click that lands between animation frames must reach the gesture engine.
-        self.click('control:select')
-        self.wait_phase('select', 'window')
-        before = self.snapshot()['timeline']
-        time.sleep(0.3)
-        after = self.snapshot()['timeline']
-        assert self.phase('select') == 'window', 'Slow release window closed at normal speed'
-        assert after['progress'] > before['progress'], 'Release timeline did not advance'
-        assert after['remaining_ms'] < before['remaining_ms'], 'Release countdown did not advance'
-        self.hold('control:select')
-        self.wait_phase('select', 'second')
-        started = time.monotonic()
-        time.sleep(0.3)
-        assert self.phase('select') == 'second', 'Second mouse hold completed at normal speed'
+        # Deliver tap + second hold in one real pointer action sequence. Driver
+        # round trips must not consume the 1.5-second second-press window.
+        x, y = self.snapshot()['ui_targets']['control:select']
+        self.trace.start()
+        self.actions([
+            {'type': 'pointerMove', 'duration': 0, 'x': round(x), 'y': round(y)},
+            {'type': 'pointerDown', 'button': 0},
+            {'type': 'pointerUp', 'button': 0},
+            {'type': 'pause', 'duration': 600},
+            {'type': 'pointerDown', 'button': 0},
+        ])
         self.wait_phase('select', 'cover')
-        assert time.monotonic() - started >= 1.0, 'Slow second hold did not stretch'
-        value = self.snapshot()['timeline']
-        assert value['active'] and value['progress'] == 1, 'Completed cover timeline is incomplete'
+        samples = self.trace.stop()
+        check_stage(samples, 2, 'window', 150, 10)
+        check_stage(samples, 2, 'second', 150, 10, completed='cover')
         self.release()
         self.idle()
         print('PASS: mouse normal and 10x hold, immediate tap, stretched release window, second hold and timeline progress/countdown')
@@ -162,29 +147,32 @@ class MouseChecks:
         self.release()
         self.idle()
 
+        # After an idle pause egui can show a tooltip as the pointer arrives.
+        # The tooltip must not intercept the next controller press.
+        self.actions([{'type': 'pause', 'duration': 1200}])
         self.hold('control:l1')
-        self.wait_phase('l1', 'pressed')
+        self.wait(lambda: self.snapshot()['state']['held'][0], 'Focus-loss setup failed')
         self.focus_change()
         self.idle()
         # WebDriver still remembers its physical button state after focus loss.
         self.release()
         self.idle()
 
-        self.click('control:select')
-        self.wait_phase('select', 'window')
+        self.pin('select')
+        self.wait(lambda: self.snapshot()['state']['input']['buttons'][4], 'Mode-reset setup failed')
         self.click('mode:1')
         self.wait(lambda: self.snapshot()['state']['mode'] == 'steering', 'Mode change failed')
         self.idle()
         self.click('mode:0')
         self.wait(lambda: self.snapshot()['state']['mode'] == 'base', 'Base mode reset failed')
 
-        self.click('control:start')
-        self.wait_phase('start', 'window')
+        self.pin('start')
+        self.wait(lambda: self.snapshot()['state']['input']['buttons'][5], 'Speed-reset setup failed')
         self.scale(False)
         self.idle()
         self.scale(True)
         self.pin('l1')
-        self.wait_phase('l1', 'pressed')
+        self.wait(lambda: self.snapshot()['state']['held'][0], 'Pinned speed-reset setup failed')
         self.scale(False)
         self.idle()
         # A fresh press after all reset paths must still start an ordinary gesture.

@@ -2,6 +2,9 @@
 use super::*;
 use std::collections::BTreeMap;
 
+#[cfg(test)]
+mod tests;
+
 #[derive(Clone)]
 struct HitTarget {
     rect: egui::Rect,
@@ -106,13 +109,13 @@ impl MousePreview {
     }
 
     fn hit(ctx: &egui::Context, pos: egui::Pos2) -> Option<Control> {
-        let layer = ctx.layer_id_at(pos);
-        ctx.data(|d| {
-            d.get_temp::<BTreeMap<Control, HitTarget>>(egui::Id::new("keybind.controls"))?
-                .into_iter()
-                .find(|(_, target)| target.rect.contains(pos) && Some(target.layer) == layer)
-                .map(|(control, _)| control)
-        })
+        let targets = ctx.data(|d| {
+            d.get_temp::<BTreeMap<Control, HitTarget>>(egui::Id::new("keybind.controls"))
+        })?;
+        targets
+            .into_iter()
+            .find(|(_, target)| target.rect.contains(pos) && uncovered(ctx, target.layer, pos))
+            .map(|(control, _)| control)
     }
 
     fn reset_capture(&mut self) {
@@ -124,4 +127,30 @@ impl MousePreview {
         self.preview.cancel();
         self.reset_capture();
     }
+}
+
+fn uncovered(ctx: &egui::Context, layer: egui::LayerId, pos: egui::Pos2) -> bool {
+    let top = ctx.layer_id_at(pos);
+    if top == Some(layer) {
+        return true;
+    }
+    if !top.is_some_and(|top| top.order == egui::Order::Tooltip)
+        || !ctx.memory(|memory| memory.is_above_modal_layer(layer))
+    {
+        return false;
+    }
+    // Tooltip areas can be interactable for text selection. They must not eat
+    // a controller press, but a window or popup beneath them still blocks it.
+    let visible = ctx.memory(|memory| memory.areas().visible_layer_ids());
+    !visible.into_iter().any(|other| {
+        other != layer
+            && other.order >= layer.order
+            && other.order != egui::Order::Tooltip
+            && egui::AreaState::load(ctx, other.id).is_some_and(|area| {
+                let rect = ctx
+                    .layer_transform_to_global(other)
+                    .map_or(area.rect(), |transform| transform * area.rect());
+                area.interactable && rect.contains(pos)
+            })
+    })
 }
