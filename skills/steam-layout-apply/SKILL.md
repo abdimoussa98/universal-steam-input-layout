@@ -80,6 +80,10 @@ completed layout edit (step 4, item 2 below).
   snapshot.
 - Snapshot files are backups. Don't edit them, and don't point tools or tests at
   them. Saving a snapshot does not authorize a commit or an upload to Steam.
+- **Tag every version pushed to `main`** (author, 2026-10-17): when a push to
+  `main` carries a new version, run `python3 -m tools.release check <controller>`
+  for each one, then tag it `<controller>-v<version>` and push the tags with
+  `main` ([publishing](../../docs/publishing.md), step 8).
 
 ## 1. Run the pre-flight check
 

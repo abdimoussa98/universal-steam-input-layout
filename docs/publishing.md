@@ -56,12 +56,14 @@ for delivery, or publishing it:
    unchanged, and a conversion equal to what `tools.convert` makes from its
    Ibex release.
 8. Commit and push `main`, then tag each controller the change releases and
-   push the tags. **Pushing a tag publishes it, so this is the author's step.**
-   An Ibex change usually releases all three, and the tags can go together:
+   push the tags in the same step. **Every push to `main` that carries a new
+   version is tagged** (author, 2026-10-17): a version on `main` without its
+   tag is not done. An Ibex change usually releases all three, and the tags
+   can go together:
 
    ```bash
-   git tag ibex-v1.1 && git tag neptune-v90.76 && git tag dse-v1.1
-   git push origin main ibex-v1.1 neptune-v90.76 dse-v1.1
+   git tag ibex-v1.1 && git tag neptune-v90.77 && git tag dse-v1.1
+   git push origin main ibex-v1.1 neptune-v90.77 dse-v1.1
    ```
 
 ## What the workflow does
