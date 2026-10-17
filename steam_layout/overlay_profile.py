@@ -9,6 +9,7 @@ import hashlib
 import json
 from .model import Layout, actions, entries
 from .flow_model import chord_condition, resolve
+from .overlay_trackpads import export_trackpads
 
 FACES = ('button_a', 'button_b', 'button_x', 'button_y')
 CONTEXTS = ('none', 'left', 'right', 'both')
@@ -236,7 +237,8 @@ def export_dashboard(layout, report):
             if mode in ('base','steering') and context=='both' and control in ('l1','r1'):
                 b = {'kind':'label','text':'Mod 2' if mode=='steering' or phase=='combined:cover' else combined_label}
             bindings[control] = b
-        pages.append(dict(mode=mode,context=context,phase=phase,bindings=bindings))
+        pages.append(dict(mode=mode,context=context,phase=phase,bindings=bindings,
+                          trackpads=export_trackpads(layout,stacks,held)))
         return pages[-1]
     def activators(title, source, name):
         return resolve(layout, ['Base',title], source, name)[2] or {}

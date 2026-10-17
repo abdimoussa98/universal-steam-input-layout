@@ -62,6 +62,44 @@ class OverlayProfileTests(unittest.TestCase):
             for control in ('l1','r1'):
                 self.assertEqual(page['bindings'][control], {'kind':'label','text':expected})
 
+    def test_trackpad_clicks_swipes_and_double_touch(self):
+        for mode in ('base','steering','menu'):
+            page = next(p for p in self.profile['dashboard']['pages'] if p['mode']==mode and p['context']=='none' and p['phase']=='reference')
+            left,right = page['trackpads']
+            self.assertEqual(left['center'], {'kind':'label','text':'CAPSLOCK'})
+            self.assertEqual([b['text'] for b in left['outer']], ['UP_ARROW','RIGHT_ARROW','DOWN_ARROW','LEFT_ARROW'])
+            self.assertEqual([b['text'] for b in left['swipe']], ['Tab','Enter','Backspace','Escape'])
+            self.assertIsNone(left['double_tap'])
+            self.assertEqual(right['center'], {'kind':'label','text':'Mouse middle'})
+            self.assertEqual([b['text'] for b in right['outer']], ['Scroll up','Mouse forward','Scroll down','Mouse back'])
+            self.assertEqual(right['repeat_ms'], [150,None,150,None])
+            self.assertEqual(right['regions'], dict(inner_threshold=24996,outer_threshold=23000,outer_delay_ms=5))
+            self.assertEqual(right['double_tap'], dict(hold_ms=150,window_ms=150,
+                clockwise={'kind':'label','text':'Scroll down'},counterclockwise={'kind':'label','text':'Scroll up'}))
+        for page in self.profile['dashboard']['pages']:
+            if page['mode']=='steering' and page['phase'] in ('ls:up:pressed','ls:down:pressed','ls:up:second','ls:down:second'):
+                self.assertIsNotNone(page['trackpads'][1]['regions'])
+            if page['phase'] in ('select:pressed','select:hold','start:hold','l1:window','r1:window'):
+                for pad in page['trackpads']:
+                    self.assertIsNone(pad['regions'], page['phase'])
+                    self.assertEqual(pad['center'], {'kind':'unbound'}, page['phase'])
+                    self.assertIsNone(pad['double_tap'], page['phase'])
+
+    def test_pad_export_tracks_source_outputs_and_overlap_thresholds(self):
+        data=copy.deepcopy(self.source)
+        layout=Layout(data)
+        group=layout.active('LTP: Middle Click')['left_trackpad']
+        group['inputs']['click']['activators']['Soft_Press'][0]['bindings']['binding']='key_press F8, , '
+        edge=layout.active('LTP: Click Entry Point')['left_trackpad']['inputs']['edge']['activators']['Soft_Press']
+        edge[0]['settings']['activation_threshold']='26000'
+        changed,_=export_profile(json.dumps(data).encode(),controller='ibex',version='1.0')
+        pad=changed['dashboard']['pages'][0]['trackpads'][0]
+        self.assertEqual(pad['center'], {'kind':'label','text':'F8'})
+        self.assertEqual(pad['regions']['inner_threshold'],26000)
+        edge[1]['settings']['delay_start']='0'
+        with self.assertRaisesRegex(ValueError,'center must win'):
+            export_profile(json.dumps(data).encode(),controller='ibex',version='1.0')
+
     def test_steering_position_pages_follow_source_inheritance(self):
         profile = self.profile
         d = profile['dashboard']

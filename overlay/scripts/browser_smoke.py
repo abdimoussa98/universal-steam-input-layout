@@ -120,6 +120,17 @@ def main():
     def click_target(name):
         point = wait_for(lambda: (snapshot() or {}).get('ui_targets', {}).get(name), f'Missing UI target: {name}')
         click(round(point[0]), round(point[1]))
+    def scroll_target(name):
+        for _ in range(5):
+            point = snapshot()['ui_targets'][name]
+            width,height=js('return [innerWidth,innerHeight]')
+            if 190 < point[1] < height-70:
+                return
+            for params in ({'type':'mouseMoved','x':width-40,'y':height-90},
+                           {'type':'mouseWheel','x':width-40,'y':height-90,'deltaX':0,'deltaY':point[1]-height/2}):
+                request('POST', f'/session/{session}/goog/cdp/execute', {'cmd':'Input.dispatchMouseEvent','params':params})
+            time.sleep(0.25)
+        raise AssertionError(f'Could not scroll to {name}')
     def navigate():
         request('POST', f'/session/{session}/url', {'url': site})
         wait_for(snapshot, 'WASM startup failed')
@@ -204,6 +215,50 @@ def main():
                 assert 0 <= x < 640 and y >= 0, f'{name} outside narrow viewport'
             request('POST', f'/session/{session}/window/rect', {'width': 1060, 'height': 1100})
             time.sleep(0.2)
+        # Explore actual painted pad zones; the shared ring must choose center,
+        # while the farther edge resolves its directional binding.
+        request('POST', f'/session/{session}/goog/cdp/execute', {
+            'cmd':'Input.dispatchMouseEvent','params':{'type':'mouseMoved','x':800,'y':650}})
+        request('POST', f'/session/{session}/goog/cdp/execute', {
+            'cmd':'Input.dispatchMouseEvent','params':{'type':'mouseWheel','x':800,'y':650,'deltaX':0,'deltaY':700}})
+        time.sleep(0.35)
+        if args.screenshot:
+            args.screenshot.with_name('pads-scroll.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+        for side, center_label, outer_label in ((0,'Caps Lock','→'),(1,'Middle click','Forward')):
+            click_target(f'pad:{side}:overlap')
+            wait_for(lambda: snapshot()['pad_previews'][side]==f'Overlap · inner wins · {center_label}', 'Pad overlap selected the outer binding')
+            click_target(f'pad:{side}:outer')
+            wait_for(lambda: snapshot()['pad_previews'][side]==f'Outer click · {outer_label}', 'Pad outer region did not select direction')
+        click_target('pad:1:overlap')
+        if args.screenshot:
+            args.screenshot.with_name('pad-clicks.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+        click_target('pads:touch')
+        time.sleep(0.2)
+        assert snapshot()['trackpads'][0]['swipe'][3]['text']=='Escape'
+        assert snapshot()['trackpads'][1]['double_tap']['clockwise']['text']=='Scroll down'
+        if args.screenshot:
+            args.screenshot.with_name('pad-touch.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+        click_target('pads:click')
+        if args.screenshot:
+            request('POST', f'/session/{session}/window/rect', {'width':640,'height':820})
+            time.sleep(0.2)
+            scroll_target('pad:0:overlap')
+            click_target('pad:0:overlap')
+            wait_for(lambda: snapshot()['pad_previews'][0]=='Overlap · inner wins · Caps Lock', 'Narrow left pad preview failed')
+            args.screenshot.with_name('pad-narrow.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+            scroll_target('pad:1:overlap')
+            click_target('pad:1:overlap')
+            wait_for(lambda: snapshot()['pad_previews'][1]=='Overlap · inner wins · Middle click', 'Narrow right pad preview failed')
+            for side in range(2):
+                assert 0 < snapshot()['ui_targets'][f'pad:{side}:outer'][0] < 640
+            request('POST', f'/session/{session}/window/rect', {'width':1060,'height':1100})
+            time.sleep(0.2)
+        request('POST', f'/session/{session}/goog/cdp/execute', {
+            'cmd':'Input.dispatchMouseEvent','params':{'type':'mouseMoved','x':800,'y':650}})
+        request('POST', f'/session/{session}/goog/cdp/execute', {
+            'cmd':'Input.dispatchMouseEvent','params':{'type':'mouseWheel','x':800,'y':650,'deltaX':0,'deltaY':-3000}})
+        time.sleep(0.35)
+        print('PASS: pad overlap previews choose center; outer zones, swipes and double-touch references match the profile')
         # Objects use native prototypes so the adapter exercises web-sys casts.
         js("""
           window.mockButtons=Array(17).fill(0);window.mockButtons[4]=1;window.mockMapping='standard';window.mockConnected=true;

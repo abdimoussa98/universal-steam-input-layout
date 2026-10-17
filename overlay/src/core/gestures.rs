@@ -119,6 +119,8 @@ pub struct ControlPage {
     pub context: Context,
     pub phase: String,
     pub bindings: BTreeMap<Control, Binding>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub trackpads: Option<[TrackpadBindings; 2]>,
 }
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -189,6 +191,11 @@ impl DashboardProfile {
             return Err("Invalid Steering thresholds".into());
         }
         for (n, p) in self.pages.iter().enumerate() {
+            if let Some(pads) = &p.trackpads {
+                for pad in pads {
+                    pad.validate()?;
+                }
+            }
             if p.bindings.len() != 16
                 || Control::ALL.iter().any(|c| !p.bindings.contains_key(c))
                 || self.pages[..n]
@@ -622,16 +629,8 @@ impl State {
         self.device = Some(id.into());
         self.status = InputStatus::Live;
     }
-    pub fn control_labels(&self, p: &Profile) -> [String; 16] {
-        let Some(d) = &p.dashboard else {
-            return std::array::from_fn(|n| {
-                if n < 4 {
-                    p.labels(self.mode, Context::from_held(self.held))[n].clone()
-                } else {
-                    "Unavailable".into()
-                }
-            });
-        };
+    pub fn control_page<'a>(&self, p: &'a Profile) -> Option<&'a ControlPage> {
+        let d = p.dashboard.as_ref()?;
         let phases: [Phase; 4] = std::array::from_fn(|n| {
             let lane = &self.gestures.lanes[n];
             if lane.phase == Phase::Interrupted {
@@ -685,7 +684,7 @@ impl State {
             && phases[..2].contains(&Phase::CombinedCover))
         .then(|| "combined:cover".to_string());
         let phase = phase.or(steering_phase).or(combined_phase);
-        let page = phase
+        phase
             .as_ref()
             .and_then(|phase| {
                 d.pages.iter().find(|row| {
@@ -704,7 +703,19 @@ impl State {
                             }))
                         && row.phase == "reference"
                 })
+            })
+    }
+    pub fn control_labels(&self, p: &Profile) -> [String; 16] {
+        let Some(_) = &p.dashboard else {
+            return std::array::from_fn(|n| {
+                if n < 4 {
+                    p.labels(self.mode, Context::from_held(self.held))[n].clone()
+                } else {
+                    "Unavailable".into()
+                }
             });
+        };
+        let page = self.control_page(p);
         std::array::from_fn(
             |n| match page.and_then(|row| row.bindings.get(&Control::ALL[n])) {
                 Some(Binding::Label { text }) => text.clone(),

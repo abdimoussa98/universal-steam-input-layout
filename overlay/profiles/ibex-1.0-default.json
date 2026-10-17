@@ -71,7 +71,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -142,7 +248,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -213,7 +425,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -284,7 +602,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -355,7 +779,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -426,7 +956,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -495,7 +1131,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "base",
@@ -566,7 +1279,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -637,7 +1456,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -708,7 +1633,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -779,7 +1810,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -850,7 +1987,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -919,7 +2162,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "base",
@@ -990,7 +2310,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1061,7 +2487,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1132,7 +2664,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1203,7 +2841,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1274,7 +2989,84 @@
             "kind": "label",
             "text": "Full: F11"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1344,7 +3136,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1414,7 +3283,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1484,7 +3459,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1555,7 +3636,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1626,7 +3784,84 @@
             "kind": "label",
             "text": "Full: F11"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1696,7 +3931,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1766,7 +4078,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -1836,7 +4254,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -1907,7 +4431,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -1978,7 +4608,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2049,7 +4785,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2120,7 +4962,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2191,7 +5139,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2262,7 +5287,84 @@
             "kind": "label",
             "text": "Full: F11"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2332,7 +5434,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2402,7 +5581,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2472,7 +5757,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2543,7 +5934,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2614,7 +6082,84 @@
             "kind": "label",
             "text": "Full: F11"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2684,7 +6229,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2754,7 +6376,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -2824,7 +6552,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -2893,7 +6727,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -2960,7 +6900,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3027,7 +7073,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3094,7 +7246,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3165,7 +7423,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3236,7 +7571,84 @@
             "kind": "label",
             "text": "Full: F11"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3306,7 +7718,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3376,7 +7865,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3446,7 +8041,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3517,7 +8218,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3588,7 +8366,84 @@
             "kind": "label",
             "text": "Full: F11"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3658,7 +8513,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3728,7 +8660,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "menu",
@@ -3798,7 +8836,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -3869,7 +9013,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -3940,7 +9190,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4011,7 +9367,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4082,7 +9515,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4153,7 +9692,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4224,7 +9869,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4295,7 +10046,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4366,7 +10223,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4437,7 +10371,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4508,7 +10548,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4579,7 +10725,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4650,7 +10902,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4721,7 +11079,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4792,7 +11227,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4863,7 +11404,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -4934,7 +11581,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -5005,7 +11758,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -5076,7 +11935,84 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "unbound"
+            },
+            "outer": [
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              },
+              {
+                "kind": "unbound"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": null,
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": null
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -5147,7 +12083,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "steering",
@@ -5218,7 +12260,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       },
       {
         "mode": "base",
@@ -5289,7 +12437,113 @@
             "kind": "label",
             "text": "Mouse right"
           }
-        }
+        },
+        "trackpads": [
+          {
+            "center": {
+              "kind": "label",
+              "text": "CAPSLOCK"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "UP_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "RIGHT_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "DOWN_ARROW"
+              },
+              {
+                "kind": "label",
+                "text": "LEFT_ARROW"
+              }
+            ],
+            "repeat_ms": [
+              null,
+              null,
+              null,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Directional swipe",
+            "swipe": [
+              {
+                "kind": "label",
+                "text": "Tab"
+              },
+              {
+                "kind": "label",
+                "text": "Enter"
+              },
+              {
+                "kind": "label",
+                "text": "Backspace"
+              },
+              {
+                "kind": "label",
+                "text": "Escape"
+              }
+            ],
+            "double_tap": null
+          },
+          {
+            "center": {
+              "kind": "label",
+              "text": "Mouse middle"
+            },
+            "outer": [
+              {
+                "kind": "label",
+                "text": "Scroll up"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse forward"
+              },
+              {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              {
+                "kind": "label",
+                "text": "Mouse back"
+              }
+            ],
+            "repeat_ms": [
+              150,
+              null,
+              150,
+              null
+            ],
+            "regions": {
+              "inner_threshold": 24996,
+              "outer_threshold": 23000,
+              "outer_delay_ms": 5
+            },
+            "touch": "Pointer",
+            "swipe": null,
+            "double_tap": {
+              "hold_ms": 150,
+              "window_ms": 150,
+              "clockwise": {
+                "kind": "label",
+                "text": "Scroll down"
+              },
+              "counterclockwise": {
+                "kind": "label",
+                "text": "Scroll up"
+              }
+            }
+          }
+        ]
       }
     ],
     "recipes": [

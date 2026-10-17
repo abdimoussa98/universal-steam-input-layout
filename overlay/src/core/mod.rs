@@ -1,8 +1,10 @@
 //! Platform-independent display state. This never changes Steam's state.
 mod gestures;
 pub use gestures::*;
+mod trackpads;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
+pub use trackpads::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]

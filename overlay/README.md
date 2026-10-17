@@ -53,6 +53,23 @@ turn green with capacitive thumb contact. Trackpad dots show actual contact
 coordinates. Standard browser Gamepad
 input has stick axes but no pad/touch data; use the companion for those markers.
 System buttons remain visual orientation cues.
+
+The trackpads show click bindings directly on the controller. **Click zones**
+opens enlarged diagrams: left center is Caps Lock with outer arrow keys; right
+center is Middle click with outer Back/Forward and Scroll up/down. The gold ring
+marks the overlap, where the center takes priority. Hover or drag over a diagram
+to preview the winning binding; this is a reference preview, not a Steam output.
+The zone sizes are schematic because the source Soft Press thresholds have not
+been calibrated against physical touch coordinates.
+
+**Touch gestures** shows the left pad's Tab/Enter/Backspace/Escape swipes and
+the right pad's double-touch circular scroll. Lift the first touch before 150 ms,
+then touch the upper or lower edge within the 150 ms window. Clockwise scrolls
+down; counterclockwise scrolls up. Center/sides return to the pointer. The
+exporter reads these outputs and timings from the layout and honors temporary
+click/touch blocks, including Fn and release windows. Older profiles without
+trackpad references still load.
+
 Labels describe a fresh press in the inferred context, including
 its timed-gesture phase. They do not describe keys already held in the game. F4 is unassigned.
 The dark viewer keeps mode controls above the scrolling reference, with gesture

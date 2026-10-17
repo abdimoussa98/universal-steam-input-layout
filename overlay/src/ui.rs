@@ -1,4 +1,5 @@
 //! One interface used by both native eframe and WebRunner.
+mod trackpads;
 use crate::core::*;
 use eframe::egui::{self, Color32, RichText};
 
@@ -123,6 +124,7 @@ pub struct OverlayApp {
     backend: Box<dyn Backend>,
     show_settings: bool,
     profile_json: String,
+    pad_touch_view: bool,
     draft: Preferences,
     applied_scale: f32,
     host_clock: u64,
@@ -136,6 +138,7 @@ impl OverlayApp {
             backend,
             show_settings: false,
             profile_json: String::new(),
+            pad_touch_view: false,
             draft,
             applied_scale: 0.0,
             host_clock: 0,
@@ -346,7 +349,9 @@ impl eframe::App for OverlayApp {
                             ui.add_space(12.0);
                             self.mode_buttons(ui, &data);
                             ui.add_space(8.0);
-                            egui::ScrollArea::vertical().id_salt("viewer-content").show(ui, |ui| {
+                            let content_height = (ui.ctx().screen_rect().bottom() - ui.cursor().min.y - 20.0).max(100.0);
+                            egui::ScrollArea::vertical().id_salt("viewer-content")
+                                .max_height(content_height).auto_shrink([false, false]).show(ui, |ui| {
                             egui::Frame::new().fill(SURFACE).corner_radius(14.0)
                                 .stroke(egui::Stroke::new(1.0_f32, BORDER)).inner_margin(16.0)
                                 .show(ui, |ui| {
@@ -369,18 +374,18 @@ impl eframe::App for OverlayApp {
                                     // Keep diagram labels legible on small windows; only the diagram scrolls sideways.
                                     egui::ScrollArea::horizontal().id_salt("controller-diagram").show(ui, |ui| {
                                         ui.set_min_width(720.0);
-                                        draw_controller(ui, &data);
+                                        draw_controller(ui, &data, self.pad_touch_view);
                                     });
                                     ui.add_space(6.0);
                                     ui.label(RichText::new(data.input_status_label()).size(12.0).color(MUTED));
-                                    if let Some(connection) = &data.browser_connection {
-                                        if !connection.message.starts_with("Connect your Steam Controller") {
-                                            ui.label(RichText::new(&connection.message).size(12.0).color(MUTED));
-                                        }
+                                    if let Some(connection) = &data.browser_connection
+                                        && !connection.message.starts_with("Connect your Steam Controller") {
+                                        ui.label(RichText::new(&connection.message).size(12.0).color(MUTED));
                                     }
                                 });
                             ui.add_space(4.0);
                             draw_timelines(ui, &data, now);
+                            trackpads::explorer(ui, &data, &mut self.pad_touch_view);
                             ui.add_space(8.0);
                             ui.collapsing("Reading this view", |ui| {
                                 ui.label("Choose the mode to match Steam. Labels describe a fresh press in the current layer.");
@@ -464,7 +469,7 @@ fn stick_marker(center: egui::Pos2, xy: [i16; 2], scale: f32) -> egui::Pos2 {
 
 // Symmetric Ibex controls in a single, softly rounded shell. Physical control
 // names live in hover help; the drawing gives its space to the actual bindings.
-fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
+fn draw_controller(ui: &mut egui::Ui, data: &FrameData, pad_touch_view: bool) {
     let available = ui.available_width();
     let width = available.min(780.0);
     let scale = width / 1000.0;
@@ -564,6 +569,21 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
             dark,
             egui::Stroke::new(1.0_f32, edge),
         ));
+        if let Some(pads) = data
+            .state
+            .control_page(&data.profile)
+            .and_then(|page| page.trackpads.as_ref())
+        {
+            trackpads::field(
+                p,
+                center,
+                82.0 * scale,
+                angle,
+                &pads[n],
+                pad_touch_view,
+                None,
+            );
+        }
         if data.state.status == InputStatus::Live
             && let Some(touch) = data.state.input.pads[n].as_ref().filter(|pad| pad.touching)
         {
@@ -676,7 +696,7 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData) {
         } else {
             let radius = if n >= 12 { 12.0 } else { 9.0 } * scale;
             p.rect_filled(card, radius, fill);
-            if down || n < 6 || n >= 12 {
+            if down || !(6..12).contains(&n) {
                 p.rect_stroke(card, radius, stroke, egui::StrokeKind::Inside);
             }
         }
