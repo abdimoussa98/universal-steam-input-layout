@@ -1,6 +1,7 @@
 # Publishes every release tag (<controller>-v<version>, such as neptune-v90.75) that has no GitHub Release
-# yet, oldest first: checks it, runs the tests and the build audit once per tagged commit, and attaches one
-# zip of every controller's latest release VDFs. It only checks VDFs and snapshots; it never writes one.
+# yet, oldest first: checks it and attaches one zip of every controller's latest release VDFs. The tests and
+# the build audit run once per tagged commit beside it; publishing doesn't wait for them (author, 2026-10-17),
+# so a failing test shows as a red run after the release is out. It only checks VDFs and snapshots; it never writes one.
 # Steps: docs/publishing.md. Plan: plans/2026-10-15-controller-dirs-and-release-pipeline.md, part 2.
 name: Release
 
@@ -132,7 +133,8 @@ jobs:
 
   publish:
     name: Publish
-    needs: [plan, test, coverage]
+    needs: plan                   # not the tests: they run beside it (author, 2026-10-17)
+    if: needs.plan.outputs.tags != '[]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

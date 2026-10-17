@@ -77,8 +77,11 @@ in four parallel parts, both Node files and the build audit. Each Python part
 uploads its assigned case outcomes and scenario evidence. A dependent job
 requires all four parts from the same commit/run/attempt, rejects missing, duplicate,
 stale or unsuccessful records, and checks changed-layer reach separately for
-Neptune and DSE. Publication depends on that finalizer as well as every test
-and audit job. Checkouts retain tags/history for ancestry and snapshot tests.
+Neptune and DSE. **Publication doesn't wait for the tests** (author,
+2026-10-17): the publish job needs only the list of tags, and runs
+`tools.release check --tagged` itself. A failing test or audit shows as a red
+run after the release is out, and the fix is a new version. Checkouts retain
+tags/history for ancestry and snapshot tests.
 See [testing](testing.md) for local and focused commands.
 
 To retry a failed run, choose **Re-run all jobs**, or start a new **Run
