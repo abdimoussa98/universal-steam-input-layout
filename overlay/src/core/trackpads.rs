@@ -1,5 +1,6 @@
 //! Display references for pad clicks and touch gestures, resolved per layer page.
-use super::*;
+use super::Binding;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

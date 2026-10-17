@@ -11,7 +11,26 @@ on:
 permissions:
   contents: read
 jobs:
+  quality:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.99.0'
+          components: rustfmt, clippy
+          targets: wasm32-unknown-unknown
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 overlay/scripts/check_rust_size.py
+      - run: cargo fmt --manifest-path overlay/Cargo.toml -- --check
+      - run: cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --no-default-features -- -D warnings
+      - run: cargo test --locked --manifest-path overlay/Cargo.toml --no-default-features
+      - run: cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --target wasm32-unknown-unknown --features web -- -D warnings
   macos:
+    needs: quality
     if: github.event_name != 'workflow_run'
     runs-on: macos-latest
     steps:
@@ -19,12 +38,16 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: '1.99.0'
+          components: clippy
+      - run: cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --features desktop -- -D warnings
+      - run: cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
       - run: cargo build --locked --manifest-path overlay/Cargo.toml --release --features desktop
       - uses: actions/upload-artifact@v4
         with:
           name: keybind-viewer-macos-helper
           path: overlay/target/release/keybind-overlay
   windows:
+    needs: quality
     if: github.event_name != 'workflow_run'
     runs-on: windows-latest
     steps:
@@ -32,6 +55,9 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: '1.99.0'
+          components: clippy
+      - run: cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --features desktop -- -D warnings
+      - run: cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
       - run: cargo build --locked --manifest-path overlay/Cargo.toml --release --features desktop
         env:
           RUSTFLAGS: '-C target-feature=+crt-static'
@@ -44,6 +70,7 @@ jobs:
           name: keybind-viewer-windows
           path: overlay/windows-bundle/
   web:
+    needs: quality
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
     steps:
@@ -60,6 +87,26 @@ jobs:
           node --test overlay/scripts/test_downloads.mjs overlay/scripts/test_webhid.mjs
           python3 -m unittest discover -s overlay/scripts -p 'test_*.py'
       - run: python3 overlay/scripts/build_web.py
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: stable
+          install-chromedriver: true
+      - name: Test WASM behavior and the packaged viewer
+        env:
+          CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
+          CHROMEDRIVER: ${{ steps.chrome.outputs.chromedriver-path }}
+          WASM_BINDGEN_TEST_WEBDRIVER_JSON: ${{ runner.temp }}/overlay-webdriver.json
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          Path(os.environ['WASM_BINDGEN_TEST_WEBDRIVER_JSON']).write_text(json.dumps({
+              'goog:chromeOptions': {'binary': os.environ['CHROME_BIN'], 'args': ['--no-sandbox']}
+          }))
+          PY
+          wasm-pack test --headless --chrome --chromedriver "$CHROMEDRIVER" overlay --no-default-features
+          python3 overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid --driver "$CHROMEDRIVER" --browser-binary "$CHROME_BIN"
       - name: Record the release
         run: python3 overlay/scripts/release_manifest.py --bundle overlay/dist --revision "$GITHUB_SHA"
       - name: Build the web container

@@ -376,16 +376,28 @@ Do not use the exporter for an arbitrary layout without reviewing its stacks.
 
 ## Tests and architecture
 
+Organization rules live in [AGENTS.md](AGENTS.md). CI enforces a 400-line limit
+for maintained Rust files in `src/`, `tests/`, `examples/`, `benches/`, and
+`build.rs`. [Clippy configuration](clippy.toml) limits functions to 60 code lines,
+cognitive complexity to 15, and arguments to five (including `self`). These
+specific lints are denied in `Cargo.toml`; the rest of Clippy's defaults remain
+active. Clippy excludes blank and comment-only lines from function length.
+The existing public `InputTracker::sample_timed` signature has a documented,
+scoped argument-count exception to preserve compatibility.
+
 ```sh
+python3 overlay/scripts/check_rust_size.py
 cargo test --locked --manifest-path overlay/Cargo.toml --no-default-features
 cargo fmt --manifest-path overlay/Cargo.toml -- --check
 cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --features desktop -- -D warnings
 cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
-cargo check --locked --manifest-path overlay/Cargo.toml --target wasm32-unknown-unknown --features web
+cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --no-default-features -- -D warnings
+cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --target wasm32-unknown-unknown --features web -- -D warnings
 wasm-pack test --headless --chrome overlay --no-default-features
 wasm-pack test --headless --firefox overlay --no-default-features
 python3 overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid
-node --test overlay/scripts/test_webhid.mjs
+node --test overlay/scripts/test_downloads.mjs overlay/scripts/test_webhid.mjs
+python3 -m unittest discover -s overlay/scripts -p 'test_*.py'
 ```
 
 Browser tests need Chrome/ChromeDriver or Firefox/GeckoDriver. The smoke script
@@ -395,18 +407,22 @@ browser paths for wasm-pack. Build before the packaged-browser smoke test.
 The same `tests/behavior.rs` and `tests/gestures.rs` bodies run natively and in WASM. Companion HTTP
 integration tests run on native hosts without Windows input hardware. On Linux,
 compiling the optional native UI also requires the platform GUI dependencies;
-The viewer pipeline builds Windows/macOS helpers and the web image; tests,
-formatting checks and Clippy run locally using the commands above.
+the viewer pipeline checks formatting, file sizes, core tests, and core/WASM
+Clippy before packaging. Windows and macOS each run desktop Clippy and tests
+before building their helpers. The web job runs browser behavior tests and the
+packaged WebHID smoke test before producing its image. Use the same checks locally
+with the commands above.
 
 - `src/core/`: state, profiles, monotonic gesture timing, hotkey lifecycle and protocol validation.
-- `src/ui.rs`: the one diagram/settings interface used by both entry points.
-- `src/platform/native.rs`: Windows hotkeys and overlay lifecycle.
-- `src/platform/sdl_input.rs`: shared Windows/macOS main-thread SDL input.
+- `src/core/profile.rs`, `state.rs`, `gestures/`: profile validation and display/gesture state.
+- `src/ui.rs`, `src/ui/`: shared app wiring, backend contracts, settings, controller rendering, timelines, and trackpad feedback.
+- `src/platform/native.rs`, `native/`: Windows lifecycle, hotkeys, settings, and input loop.
+- `src/platform/sdl_input.rs`, `sdl_input/`: shared Windows/macOS polling and SDL event decoding.
 - `src/platform/macos.rs`: headless direct-input companion, without Steam.
-- `src/platform/web.rs`: direct HID input, Gamepad polling, browser storage and companion client.
+- `src/platform/web.rs`, `web/`: browser lifecycle, direct HID/Gamepad input, storage, and companion client.
 - `src/core/steam_hid.rs`: shared Steam Controller 2 and Steam Deck HID report decoders.
 - `web/steam-hid.js`: browser device permissions and raw HID transport; no binding or timing logic.
-- `src/platform/host.rs`, `server.rs`: host state and opt-in loopback transport.
+- `src/platform/host.rs`, `server.rs`, `server/`: host state, opt-in loopback transport, and scoped HTTP requests.
 - `web/`: minimal canvas/startup shell; no duplicated binding logic.
 
 SDL preserves timestamped button edges and samples every 8 ms on the main thread; Windows eframe runs on a separate

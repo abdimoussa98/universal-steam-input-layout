@@ -5,6 +5,11 @@ edition = "2024"
 rust-version = "1.88"
 publish = false
 
+[lints.clippy]
+too_many_lines = "deny"
+cognitive_complexity = "deny"
+too_many_arguments = "deny"
+
 [lib]
 crate-type = ["cdylib", "rlib"]
 
