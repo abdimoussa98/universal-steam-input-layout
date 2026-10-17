@@ -86,4 +86,14 @@ pub enum Command {
 pub trait Backend {
     fn data(&self) -> FrameData;
     fn command(&mut self, command: Command);
+    /// Preserve device edges that arrive between rendered frames.
+    fn input_samples(&mut self) -> Vec<(String, f64, InputFrame)> {
+        vec![]
+    }
+    fn input_blocked(&self) -> bool {
+        false
+    }
+    fn input_epoch(&self) -> u64 {
+        0
+    }
 }

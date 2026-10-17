@@ -1,4 +1,4 @@
-# Overlay development
+# Browser demo and adapter development
 
 These rules apply to the Rust overlay, browser viewer, and companion adapters.
 Preserve controller mappings, gesture timing, serialization, diagnostic IDs, and

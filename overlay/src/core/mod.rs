@@ -21,7 +21,7 @@ pub use hotkey_api::HotkeyApi;
 pub use hotkeys::Hotkeys;
 pub use input::{
     Control, Device, DeviceSelection, InputChange, InputEvent, InputFrame, InputFreshness,
-    InputTracker, PadContact, physical_device_identity,
+    InputTracker, MotionSample, PadContact, physical_device_identity,
 };
 pub use preferences::{Preferences, can_enter_hud, page_shortcut};
 pub use profile::{Binding, Bindings, Context, Mode, Profile, ProfileSlot};

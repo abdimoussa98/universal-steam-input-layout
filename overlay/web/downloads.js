@@ -162,6 +162,8 @@ export function installDownloads(assetUrl) {
   const paths = dialog.querySelector('.template-paths');
   const source = document.createElement('p'); source.className = 'download-source';
   list.before(source);
+  const demoIdentity = document.createElement('p'); demoIdentity.className = 'demo-identity';
+  list.before(demoIdentity);
   let entries, busy = false, loadGeneration = 0;
   const supported = isSecureContext && typeof window.showDirectoryPicker === 'function';
   const saveAsSupported = isSecureContext && typeof window.showSaveFilePicker === 'function';
@@ -256,6 +258,8 @@ export function installDownloads(assetUrl) {
   }
   window.openLayoutDownloads = () => {
     if (dialog.open) return;
+    const demo = window.keybindApp && JSON.parse(window.keybindApp.diagnostic_snapshot()).demo;
+    demoIdentity.textContent = demo ? `The demo runs ${demo.layout}. Newer downloads may differ from this built-in version.` : '';
     dialog.showModal();
     void load();
   };

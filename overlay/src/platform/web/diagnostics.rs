@@ -11,6 +11,11 @@ fn pad_values(state: &WebState, kind: &str) -> [Option<String>; 2] {
 }
 
 pub(super) fn snapshot(s: &WebState) -> String {
+    if let Some(mut demo) = context_value::<serde_json::Value>(s, "keybind.demo") {
+        demo["browser_connection"] = serde_json::json!(s.data.browser_connection);
+        demo["devices"] = serde_json::json!(s.data.settings.devices);
+        return demo.to_string();
+    }
     let mut data = s.data.clone();
     let rendered = context_value::<State>(s, "keybind.rendered-state");
     let preview =

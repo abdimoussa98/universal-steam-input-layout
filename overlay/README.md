@@ -1,478 +1,111 @@
-# Keybind viewer
+# Layout playground
 
-A Windows binding overlay and a browser viewer built from the same Rust state
-machine, profiles and egui interface. The browser is a normal page, suitable
-for a second monitor; it is not a desktop overlay.
+An interactive browser demonstration compiled from the released Steam Input
+layouts. Use a mouse without installing Steam or connecting a controller.
+Choose Ibex, Neptune or DualSense Edge, Default or Alternative. The title shows
+the **actual bundled version**; Details includes its release tag and source hash.
+The demo never injects keyboard or mouse events into other applications.
 
-This is an initial implementation. Automated behavior tests and browser tests
-are recorded in `../findings/2026-10-15-keybind-overlay/README.md`. Windows
-controller visibility under Steam Input, HUD behavior and resource usage still
-need the hardware acceptance checks below. macOS supports a headless controller
-companion for the browser viewer, without Steam. Native Linux is not supported.
+## Try it
 
-## Use
+- Press/hold any controller button. Right-click to latch it for a chord, then
+  right-click again to release. Hover for its resolved binding.
+- Select **Touch** or **Click** for the pads, then drag. Touch is finger contact;
+  Click adds a physical press. Left-pad swipes type keys in the output playground.
+- For right-pad circular scrolling, briefly touch and lift, touch the top/bottom
+  within the release window, then circle. Clockwise scrolls down; reverse to go up.
+  Both 150 ms windows stretch with the selected slowdown.
+- Drag the sticks, use the stick-touch buttons, and adjust trigger travel.
+  Back buttons, DSE mute and DSE's whole pad use their own compiled bindings.
+- Enter **Cursor Gyro** by holding Select, clicking/releasing R3, then releasing
+  Select. Hold RS touch on Ibex/Neptune to open its gyro gate. Drag the rectangular
+  block for pitch/yaw or use Roll. Fine motion makes threshold buildup easier to
+  see. Recenter changes only the displayed pose. Sound is optional.
+- Modes change through the layout's real gestures. For example, Start + L3
+  enters Steering; Start + R3 enters Gamepad. The same gestures exit stateful modes.
+  There is no manual layer picker in the main demo.
+- Pause, advance to the next event, reset, or replay recorded input. Slowdown
+  changes the logical clock, keeping input, output and pending timers together.
+  The top timeline stays blank while no timed action is pending.
 
-**Download layouts** opens the latest released templates for **ibex**, **neptune**,
-and **dse**: Default and Alternative for each controller.
-**Choose folder & save all** opens the browser's folder picker and saves six loose,
-versioned `.vdf` files directly in the chosen folder. Identical existing files are
-skipped; files with different contents are preserved. Selecting a single variant
-opens a Save As picker in supported browsers, with its versioned VDF filename
-prefilled. Pickers require HTTPS or localhost. If a browser lacks the file picker,
-individual links use normal downloads; enable its “Ask where to save” setting
-to choose a destination for each download.
+The playground displays held keys/mouse buttons, typed text, pointer movement,
+wheel output and gamepad axes. Details exposes the actual active stack, recent
+events and a construct coverage report. Labels and behavior share one engine.
 
-The panel detects the OS and shows common Steam template directories, with an
-OS selector and copy buttons. macOS uses the directory inside `Steam.AppBundle`;
-Linux guidance includes SteamOS and Flatpak installations. A custom Steam install
-can use a different location. Browsers cannot preselect an arbitrary system path:
-navigate to the template folder in the picker, or save elsewhere and move the VDFs
-with your file manager. The browser may require HTTPS and write permission.
+## Controller input
 
-Each time the panel opens, it checks GitHub's published releases and selects the
-highest released version for each controller. Drafts, prereleases and untagged
-working versions are excluded. Downloads use files from those tags and verify
-their Git blob hashes. New releases appear without rebuilding the viewer.
+**Connect controller** uses the existing WebHID adapter for wired/wireless
+Steam Controller 2 and the Steam Deck's built-in controller. Choose the connected
+device in the source selector; Mouse and device input remain separate. HTTPS or
+localhost and a browser with WebHID are required. Normalized Gamepad devices are
+also selectable, but that API cannot provide pad contacts, capacitive touches,
+grips or gyro. Unsupported signals remain unavailable.
 
-If GitHub is unavailable or rate limited, the panel explicitly offers the versions
-bundled with this viewer; reopen it to retry. The bundled fallback needs full Git
-history and tags at build time (`git fetch --tags --unshallow` for a shallow clone).
-The download catalog does not change the viewer's loaded profile.
+Ibex/Deck IMU axes, scales, timestamps and grip bits follow the pinned SDL 3.4.18
+protocols and have synthetic-report tests. Calibrate at rest removes a stationary
+bias. Physical device/browser acceptance is still required; synthetic tests do
+not establish live hardware accuracy. The optional native companion supplies
+sampled input to the browser and retains its existing executable/pairing URL.
 
-For a Steam Controller 2 connected by USB cable or its wireless receiver, click
-**Connect controller** in the web viewer and choose the controller or receiver
-in the browser's device picker. The website reads
-it directly using WebHID; no local helper or Steam is required. Use HTTPS or
-localhost and a desktop browser with WebHID enabled. Direct HID support currently
-targets the wired Valve `28de:1302` Triton/Ibex controller and the
-`28de:1304` / `28de:1305` wireless receivers. Bluetooth is not supported by this
-connection path. The Steam Deck's built-in `28de:1205` controller is also supported
-directly in the browser.
+## Fidelity
 
-On the Deck, open the HTTPS viewer in a WebHID-capable browser such as Chrome
-in **Desktop Mode**, click **Connect controller**, and choose the built-in
-controller (the picker may call it **Steam Controller**). This path reads buttons,
-trigger travel, full stick positions, capacitive stick touches, pad positions,
-and pad force as well as digital clicks. Steam/SDL can suppress the Deck's digital
-click bits; the viewer also previews clicks from pressure while a finger is touching
-the pad. The preview defaults to 15% force, with release at 12% to prevent flicker.
-Adjust **Deck click force** in the Trackpads panel to match your Steam click feel;
-this is a viewer-only threshold and does not read or change Steam's setting.
-Lifting the finger, disconnecting, or stale input clears the preview.
-It sends no controller configuration commands, so
-Steam's current mappings and pressure thresholds remain in place. If the device
-is missing or cannot open, check that the browser's Linux package has access to
-HID devices; a sandboxed browser may restrict access. No native Linux helper is
-provided. Deck decoding and viewer feedback have automated coverage; physical
-Deck/browser acceptance is still pending.
+Digital execution follows the repository's documented simulator assumptions:
+ordered layer operations, inheritance/blocking, held-input rebinding, delayed
+and repeating activators, chord interruption, release ownership, mode shifts and
+the existing native Gamepad Long/Double Press exceptions. Generated reference
+traces run against both native Rust and WASM.
 
-The Deck uses the same controller diagram and loaded binding profile. Connecting
-hardware does not import the layout installed in Steam; load a matching viewer
-profile when its binds or click thresholds differ.
+Analog response remains a **browser approximation**, explicitly listed in
+Details. The JSON does not specify Steam's complete transfer functions/defaults.
+The gyro movement gate accumulates motion, as described in
+[Valve's input-source documentation](https://partner.steamgames.com/doc/features/steam_controller/input_source_modes).
+The exported threshold's exact physical scale, precision response and haptic
+cadence still need device comparison. The threshold number is shown in demo
+output units; the optional threshold tick is explanatory feedback, separate
+from layer-change beeps and physical haptics. Circular scrolling uses the
+exported `scroll_angle` with a documented tenths-of-a-degree demo convention.
+Pointer acceleration/inertia, response curves and OS key composition are not
+claims of pixel-for-pixel Steam or operating-system equivalence.
 
-The picker shows all HID devices exposed by the browser, without filtering by
-vendor or product ID. Selecting a device does not add a decoder for its input
-format. If no compatible input interface is found, the viewer shows the device
-name and USB ID; standard gamepads may still work through Settings → Controller.
-
-For a receiver, turn on an already paired controller. The viewer follows the
-first active controller slot and keeps that selection through controller
-power-off/on and receiver unplug/replug. It shows one controller at a time;
-disconnect in the viewer and connect again to choose another. An empty receiver
-shows a waiting message; it does not count as live controller input.
-
-For other controllers, select **Settings → Controller**, choosing the physical
-controller rather than Steam's remapped virtual controller. In a browser, press
-a controller button first if the device list is empty. This Gamepad API path
-accepts only standard mappings. Native reconnect uses a unique hardware serial identity when available,
-falling back to the device path. macOS device paths can change on reconnect.
-Otherwise reselect the controller if its instance ID changed.
-
-Select **Base / Gyro**, **Steering** or **Menu**, using the buttons or F1/F2/F3.
-The mode is a manual reference selection; it does not change Steam's mode.
-The diagram places bindings on the face buttons, Start/Select, all four D-pad
-directions, both stick clicks, bumpers and triggers. Physical button names are
-available on hover. Pressed controls light up; trigger bars show physical travel.
-The Ibex diagram follows the proportions of the [front-view hardware reference](https://steamdb.info/static/img/blog/106/sc_front.webp),
-with symmetric sticks and canted square trackpads.
-Stick dots show the full X/Y position, including center and small deflections;
-click bindings sit inside the upper part of each stick, with a separate XY field
-below so text and movement stay clear. Rings
-turn green with capacitive thumb contact. Trackpad dots show actual contact
-coordinates. Standard browser Gamepad
-input has stick axes but no pad/touch data; use direct WebHID or the companion for those markers.
-System buttons remain visual orientation cues.
-
-Click and hold any of the 16 binding buttons to preview its input with the mouse,
-including D-pad directions, stick clicks, bumpers, menu buttons, and full trigger
-pulls. Right-click a button to keep it held, then try other buttons or trackpads;
-right-click it again to release. Mouse input runs the same gesture lifecycle as
-controller input, without a connected controller or sending input to a game.
-The viewer returns to the physical input source after the mouse gesture finishes.
-Changing mode, profile, or speed, or leaving the window clears mouse holds.
-
-The trackpads show **touch bindings first**, both on the controller and in the
-enlarged Trackpads panel. Press a pad to reveal its click bindings: left center
-is Caps Lock with outer arrow keys; right center is Middle click with outer
-Back/Forward and Scroll up/down. Only the pressed pad switches to click bindings;
-release restores its touch bindings even when the thumb stays on the pad.
-Without a controller, hold the mouse button over a pad to preview a click.
-Moving a thumb or hovering previews the winning click region with a faint tint
-while keeping the touch labels visible. The center
-wins the shared region and gives the entire pad a faint tint; an outer binding
-lights only its directional edge. A physical pad press adds a clearer outline
-and a Pressed label. Lifting, releasing, pausing, and disconnecting clear live
-feedback. Thumb contact takes priority over mouse hover.
-
-The preview normalizes the profile's inner/outer thresholds to the controller's
-coordinate range. It predicts a fresh click rather than observing Steam's
-output or latched layers; the Soft Press scale has not been hardware-calibrated.
-Press feedback uses the independent physical click flags from WebHID USB/wireless/Deck
-or the native Triton helper. Unsupported sources leave clicks unknown and still
-allow mouse previews.
-
-The touch view shows the left pad's Tab/Enter/Backspace/Escape swipes and
-the right pad's double-touch circular scroll. Lift the first touch before 150 ms,
-then touch the upper or lower edge within the 150 ms window. Clockwise scrolls
-down; counterclockwise scrolls up. Center/sides return to the pointer. The
-exporter reads these outputs and timings from the layout and honors temporary
-click/touch blocks, including Fn and release windows. Older profiles without
-trackpad references still load.
-
-Labels describe a fresh press in the inferred context, including
-its timed-gesture phase. They do not describe keys already held in the game. F4 is unassigned.
-The paired Menu transition reads **Enter :: Menu** when Select is held first,
-or **Backspace :: Menu** in the opposite order: the key is the tap-then-hold
-outcome, and holding enters Menu. The exporter reads the key from the layout.
-
-**Gesture slow motion** stretches the viewer's gesture timing from **1× to 10×**.
-A 200 ms hold takes two seconds at 10×; release windows, delayed output, second
-holds, progress bars, and countdowns scale together. Use **Normal speed** to
-return to the layout's timing. Changing speed clears the current gesture; release
-held buttons before trying again. This setting is temporary and affects only the
-viewer, including its local preview of companion input. Steam and the downloadable
-layouts keep their original timings. Paired Menu transitions still require manual
-mode selection; slow motion does not infer unsupported persistent layer changes.
-The viewer keeps its compact timeline above the scrolling controller reference.
-Its text appears only during an active **::** binding lifecycle; idle shows a thin
-empty rail. Hover an active timeline for gesture details. Reading help remains
-available below the controller. Narrow windows can scroll the
-controller diagram horizontally to keep labels readable.
-Bumpers show **Mod 0 :: Scroll down** and **Mod 1 :: Scroll up**: hold the
-modifier, or tap then hold to scroll. A single tap also produces a scroll step.
-The delayed cursor-gyro effect does not replace the modifier binding.
-Menu buttons retain **Escape :: Fn** and **Tab :: Fn** for their key/function-layer
-alternatives. The timer uses the same compact wording, with each gesture's
-sequence and delayed effects available on hover.
-
-Trigger labels include both soft-pull and full-pull bindings when configured.
-Holding Select or Start to enter Fn shows **L2: Full: F12** and **R2: Full: F11**
-in Base/Gyro, Steering and Menu. These are full-pull outputs; the travel bars
-still show physical pressure without inventing an activation threshold.
-
-One central timer follows the active L1, R1, Select or Start gesture. Its details
-distinguish **Hold**, **Tap**, and **Tap, then hold**. The same bar switches between the Initial hold deadline,
-Release window and Second hold cover countdown. Text clears when the lifecycle
-ends; the fixed timeline height keeps mouse targets still. Combined bumpers share one timer. For the bundled
-profile, the initial release deadline is 200 ms. Releasing early opens a 150 ms
-second-press window, with the expected scroll (or Escape/Tab) at 50 ms. Pressing
-again cancels the pending window and starts a separate 150 ms countdown for the
-Second hold cover. Releasing before that cover reopens the window; releasing after cover
-ends the gesture. Steering
-bumpers are direct S/W bindings and have no bumper tap countdown.
-See the [timed-gesture vocabulary](../resources/Layout%20Vocabulary.md#timed-gestures)
-for the gesture sequence and the difference between a single Tap and Tap, then hold.
-
-Durations and phase-specific labels are exported from the layout. These are
-configured expectations, not observed Steam outputs. Modifier use cancels its
-tap; native or direct WebHID Steam Controller stick-touch release can complete a hold early or
-cancel a pending window. Tracking that starts while a button is held waits for
-release before recognizing a gesture. Reconnect, mode/profile changes and input
-suspension reset pending timers.
-
-Steering now follows left-stick up/down while exactly one bumper is held,
-including the inherited face/D-pad and L3/R3 bindings. Up exposes Mouse back /
-Mouse forward clicks; down exposes Caps Lock / Mouse middle. Tap Cover preserves
-that modifier's inherited clicks. Centering, reversing direction, both bumpers,
-and the release/second-press windows update the reference and shared timer.
-Thresholds and timings come from the exported layout. Manual mode selection
-still applies when a physical gesture changes Steam's stateful mode.
-
-Mod 2 displays `Mod 2 :: Base / Gyro` while an early release switches stateful
-layers. Once its cover applies, it displays `Mod 2`; Steering Mod 2 does not
-advertise a stateful switch.
-
-The bumper model also recognizes both sticks deflected as a Tap Cover gesture.
-Trackpad interactions and combined menu/state-changing gestures can make timing
-uncertain until controls are released. Known inherited modifier bindings remain
-visible during that uncertainty; releasing the owner restores the base reference.
-A temporary gyro cover that removes itself on a fresh button press shows the
-binding that press exposes underneath, rather than an empty label. Select the mode manually if a gesture changed it. Standard
-browser Gamepad input cannot report capacitive stick touch, so its timing can
-differ from native or direct WebHID input. Trigger pressure has no activation marker when
-the layout does not explicitly specify a threshold.
-
-Windows shortcuts are global and reserved while the app runs. Change them to
-three distinct F1–F12 keys in Settings if they conflict with a game or another
-app. Conflicts are shown; the mode buttons keep working. Standalone browser
-shortcuts need page focus, and the browser may reserve some keys.
-
-For a Windows overlay, position the interactive window, then choose **Enter
-click-through HUD**. **Ctrl+Alt+O** restores the interactive window. HUD and
-hide controls are disabled if that recovery shortcut cannot register. Use
-windowed or borderless games; exclusive fullscreen is not supported. Size and
-background opacity are adjustable. Each launch uses a fresh window position
-rather than restoring a potentially offscreen position from another monitor.
-
-The bundled profile is the **Ibex 1.0 default** layout: L1/R1 modifiers. It is
-compiled into both targets, with its source SHA-256. This does not establish
-physical controller compatibility. Alternative L2/R2 profiles are explicitly
-rejected until trigger threshold/hysteresis behavior is implemented. Import a
-validated profile by dropping its JSON file on the window or pasting it in
-Settings. An invalid replacement retains the current profile.
-
-Windows stores preferences and the imported profile in `%APPDATA%\KeybindOverlay`.
-The browser uses local storage; unavailable storage reports an error while
-in-memory changes remain usable. Modes and held buttons are not persisted.
-
-## Build Windows
-
-Install Rust with the MSVC toolchain, Visual Studio C++ build tools and CMake.
-The tested development toolchain is Rust 1.99.0; `Cargo.lock` pins dependencies.
-SDL3 is compiled from source and linked statically. Run from the repository root:
-
-```powershell
-cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
-cargo run --locked --manifest-path overlay/Cargo.toml --features desktop
-# Match the static MSVC CRT in Rust and SDL's CMake build:
-$env:RUSTFLAGS = '-C target-feature=+crt-static'
-$env:CMAKE_TOOLCHAIN_FILE = (Resolve-Path overlay/cmake/windows-static-crt.cmake).Path
-cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
-cargo build --locked --manifest-path overlay/Cargo.toml --release --features desktop
-python overlay/scripts/package_windows.py
-```
-
-The executable is `overlay/target/release/keybind-overlay.exe`. The packaging
-script produces `overlay/windows-bundle/`, including the source profile and
-dependency license notices. CI builds this separately from the Steam layout ZIP.
-A clean Windows machine smoke test is still required before calling it portable.
-
-Input probe (run on the Windows PC with Steam and a game active):
-
-```powershell
-.\keybind-overlay.exe --diagnostic
-.\keybind-overlay.exe --diagnostic --device 1
-.\keybind-overlay.exe --profile profiles\ibex-1.0-default.json
-```
-
-The diagnostic prints SDL device names, instance IDs, device paths/types and
-changed L1/R1 samples. It does not prove that a device is physical just because
-SDL calls it a gamepad. Compare its output to real presses while the game has
-focus. If Steam exposes only remapped outputs, the hardware gate fails; the
-browser companion cannot fix missing native input.
-
-## Build the browser viewer
+## Build and validate
 
 ```sh
-rustup target add wasm32-unknown-unknown
-cargo install wasm-pack --version 0.13.1 --locked
-python3 overlay/scripts/build_web.py
+python3 -m tools.compile_demo             # latest immutable tags, all six layouts
+python3 -m tools.compile_demo --check     # reject stale generated data
+python3 -m tools.demo_traces              # regenerate Python reference traces
+python3 overlay/scripts/build_web.py     # compile releases, Rust/WASM and downloads
 python3 -m http.server 8080 --bind 127.0.0.1 --directory overlay/dist
 ```
 
-Open `http://127.0.0.1:8080`. `overlay/dist/` is a static bundle for HTTPS hosting
-or localhost; opening `index.html` directly with a `file:` URL is unsupported.
-Assets use relative URLs, so a subdirectory deployment works. Rust optimizes the WASM; wasm-pack's older
-optional wasm-opt step is disabled because it rejects current bulk-memory output.
+Full Git history/tags and the existing Rust/WASM toolchain are required. Unknown
+commands, modes, activators and setting names fail compilation. Source JSON/VDF
+files are never edited by the compiler. The web build compiles the same releases
+it bundles for downloads. The download dialog can offer a newer release, and
+explicitly distinguishes it from the demo's version.
 
-To host with Dockge, see the [container guide](deploy/README.md) and
-[Compose example](deploy/compose.yaml). Relevant pushes to `main` build
-and publish the web image to GHCR. Dockge pulls the `:latest` image when you
-deploy or update the stack. Your HTTPS tunnel forwards to port 18091.
-
-Browser input uses direct WebHID for the supported Steam Controller and Steam Deck, or
-the Gamepad API for standard controllers the browser exposes. A
-visible second-monitor page and a hidden tab are different cases. Hidden pages
-pause input; resume samples current buttons before displaying live state.
-
-## Optional Windows companion
-
-Build the web bundle above, copy its contents into `web/` beside the executable,
-then run:
-
-```powershell
-.\keybind-overlay.exe --companion web
-```
-
-Open the link printed in the console or shown in Settings. It uses a random
-loopback port and a session token in the URL fragment. The same web bundle now
-reads the Windows controller and mode state, including global shortcuts. Browser
-mode buttons send acknowledged commands to the companion. It never mixes native
-input with local browser Gamepad input. Controller/profile/shortcut settings
-are read-only in the browser while connected; configure them in the native app.
-Size remains a browser-local setting.
-
-Choose **Hide window · use browser only** to stop native rendering while native
-input continues. Ctrl+Alt+O restores the settings window. Closing the Windows
-app stops the companion. Restarting it creates a new link; reopen that link.
-Interrupted input clears held indicators and displays an unavailable state.
-
-The server binds to `127.0.0.1`, checks Host/Origin/session, permits only known
-web assets and state/mode endpoints, and exposes no generic file or input APIs.
-It polls snapshots at most 30 times per second when visible, sends profiles only
-when needed, and redraws on changes. Suspended browser tabs cannot be forced to
-render by a native companion.
-
-## Optional macOS companion (Steam not required)
-
-The browser's **Connect controller** flow above works without this companion.
-For existing native companion users, start the helper with
-`keybind-overlay --viewer-url https://YOUR_VIEWER_HOSTNAME/` and open its
-printed pairing link in the browser on the same computer. The helper reads
-your Steam Controller locally while the page loads from your server. Allow local
-network access if prompted. No local web bundle is needed in this mode.
-See [browser connection and hosting](deploy/README.md#steam-controller-in-the-hosted-browser).
-
-Some controllers, including the wired Steam Controller tested here, expose
-keyboard/mouse and vendor-specific USB interfaces rather than a standard browser
-gamepad. The direct WebHID decoder handles the supported USB controller in the browser.
-The optional macOS helper reads physical input through SDL's Steam Controller HID driver and serves the
-same web viewer using the existing companion protocol. Steam is not required.
-
-Install Rust and CMake, build the web bundle above, then run from the repo root:
+Run the checks in [AGENTS.md](AGENTS.md), including the packaged browser suite:
 
 ```sh
-cargo build --locked --manifest-path overlay/Cargo.toml --release --features desktop
-./overlay/target/release/keybind-overlay --companion overlay/dist
-```
-
-Open the **new URL printed by the helper**, including its `#companion=` fragment.
-The ordinary static-server URL still uses browser-only input. Keep the helper
-running while using the viewer; Ctrl+C stops it. This is a browser viewer, with
-no native macOS overlay or global keyboard hooks. Mode buttons and F1/F2/F3 work
-when the browser page has focus (browser-reserved keys may need its buttons).
-
-The helper selects the sole connected controller and restores it on reconnect
-only if its unique hardware serial identity (or fallback device path) matches.
-Serials are hashed internally and are not sent to the browser. It never switches to a different pad
-after a disconnect. With multiple controllers, restart with `--device SDL_ID`
-using an ID printed in the console. Use `--diagnostic` to print L1/R1 changes,
-and `--profile FILE` to load a different validated display profile. The helper
-does not persist preferences; appearance remains local to the browser.
-
-## Profile generation
-
-The exporter is deliberately limited to the reviewed default Ibex family.
-It resolves all sixteen controls through the existing layout model, compares
-Base/Gyro and both combined-modifier press orders, and exports single-owner
-gesture pages and timing recipes. Unsupported constructs are reported.
-Its report records ignored layer operations and the reference assumptions.
-It does not change layout JSON, VDF or version snapshots.
-
-```sh
-python3 -m unittest tests.test_overlay_profile
-python3 -m tools.export_overlay_profile \
-  versions/ibex/1.0/ibex_single-set-default_hold-gyro_1.0.json \
-  --controller ibex --version 1.0 --output overlay/profiles/ibex-1.0-default.json
-```
-
-Schema 2 adds complete sixteen-control pages, gesture recipes, trigger threshold
-metadata and validation. Older schema 1 profiles remain loadable, with the added
-controls and timing explicitly unavailable. Schema 1 requires twelve explicit
-mode/context entries, four bindings each in
-south/east/west/north order. Binding kinds are `label`, `unbound`, `unavailable`
-(with a reason), and `inherit` (only from that mode's unmodified context).
-Missing contexts, duplicates, unknown fields and unsupported modifiers fail
-validation. See `tests/fixtures/profile.json` for a small independent fixture.
-Do not use the exporter for an arbitrary layout without reviewing its stacks.
-
-## Tests and architecture
-
-Organization rules live in [AGENTS.md](AGENTS.md). CI enforces a 400-line limit
-for maintained Rust files in `src/`, `tests/`, `examples/`, `benches/`, and
-`build.rs`. [Clippy configuration](clippy.toml) limits functions to 60 code lines,
-cognitive complexity to 15, and arguments to five (including `self`). These
-specific lints are denied in `Cargo.toml`; the rest of Clippy's defaults remain
-active. Clippy excludes blank and comment-only lines from function length.
-The existing public `InputTracker::sample_timed` signature has a documented,
-scoped argument-count exception to preserve compatibility.
-
-```sh
-python3 overlay/scripts/check_rust_size.py
-cargo test --locked --manifest-path overlay/Cargo.toml --no-default-features
-cargo fmt --manifest-path overlay/Cargo.toml -- --check
-cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --features desktop -- -D warnings
-cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
-cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --no-default-features -- -D warnings
-cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --target wasm32-unknown-unknown --features web -- -D warnings
-wasm-pack test --headless --chrome overlay --no-default-features
-wasm-pack test --headless --firefox overlay --no-default-features
 python3 overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid
-node --test overlay/scripts/test_downloads.mjs overlay/scripts/test_webhid.mjs
-python3 -m unittest discover -s overlay/scripts -p 'test_*.py'
+docker run --rm --platform linux/amd64 --shm-size=1g \
+  -v "$PWD/overlay:/work/overlay:ro" keybind-browser-check:155
 ```
 
-Browser tests need Chrome/ChromeDriver or Firefox/GeckoDriver. The smoke script
-accepts `--driver PATH`, `--browser-binary PATH` and `--screenshot PATH`; it uses
-a temporary browser profile. `WASM_BINDGEN_TEST_WEBDRIVER_JSON` can supply custom
-browser paths for wasm-pack. Build before the packaged-browser smoke test.
-The smoke harness prints browser/driver versions. `--webdriver-delay-ms 650`
-adds latency after every driver response to catch tests that depend on quick
-round trips. Normal CI runs use zero added delay. To run the slower check on
-GitHub, manually run the **Keybind viewer** workflow with **stress_timing** enabled.
-Timed input sequences and timeline observations run inside
-the browser so gesture windows do not include Python/HTTP overhead.
+Normal browser tests use **zero extra WebDriver delay**. The 650 ms latency stress
+run remains optional. Browser timing sequences run inside the page, avoiding
+host/driver round-trip timing assumptions. Use `--driver` and `--browser-binary`
+to select matching local executables. Deployment remains at the existing URL;
+see [deploy/README.md](deploy/README.md).
 
-To run the packaged viewer in CI's Ubuntu 24.04 and pinned Chrome environment,
-first build `overlay/dist`, then run from the repository root (Docker required):
+## Desktop overlay deprecation
 
-```sh
-docker build --platform linux/amd64 -t keybind-browser-check -f overlay/scripts/browser_linux.Dockerfile overlay/scripts
-docker run --rm --platform linux/amd64 --shm-size=1g -v "$PWD/overlay:/work/overlay:ro" keybind-browser-check
-```
+The desktop HUD, click-through window and global mode hotkeys are deprecated.
+Windows and macOS executables now start the input-only companion. CI retains
+both native adapter checks and publishes helper binaries, without desktop HUD
+packaging. Historical UI/gesture code remains for compatibility and regression
+tests; [README.legacy.md](README.legacy.md) and `scripts/browser_legacy.py` record
+the retired manual-reference product. Neither drives the browser demo.
 
-Apple Silicon uses Docker's amd64 emulation. This checks the same WASM bundle
-and browser scenarios on Linux; it does not test physical controller hardware.
-Append `--webdriver-delay-ms 650` to the Docker command for the optional stress run.
-
-The same `tests/behavior.rs` and `tests/gestures.rs` bodies run natively and in WASM. Companion HTTP
-integration tests run on native hosts without Windows input hardware. On Linux,
-compiling the optional native UI also requires the platform GUI dependencies;
-the viewer pipeline checks formatting, file sizes, core tests, and core/WASM
-Clippy before packaging. Windows and macOS each run desktop Clippy and tests
-before building their helpers. The web job runs browser behavior tests and the
-packaged WebHID smoke test before producing its image. Use the same checks locally
-with the commands above.
-
-- `src/core/`: state, profiles, monotonic gesture timing, hotkey lifecycle and protocol validation.
-- `src/core/profile.rs`, `state.rs`, `gestures/`: profile validation and display/gesture state.
-- `src/ui.rs`, `src/ui/`: shared app wiring, backend contracts, settings, controller rendering, timelines, and trackpad feedback.
-- `src/platform/native.rs`, `native/`: Windows lifecycle, hotkeys, settings, and input loop.
-- `src/platform/sdl_input.rs`, `sdl_input/`: shared Windows/macOS polling and SDL event decoding.
-- `src/platform/macos.rs`: headless direct-input companion, without Steam.
-- `src/platform/web.rs`, `web/`: browser lifecycle, direct HID/Gamepad input, storage, and companion client.
-- `src/core/steam_hid.rs`: shared Steam Controller 2 and Steam Deck HID report decoders.
-- `web/steam-hid.js`: browser device permissions and raw HID transport; no binding or timing logic.
-- `src/platform/host.rs`, `server.rs`, `server/`: host state, opt-in loopback transport, and scoped HTTP requests.
-- `web/`: minimal canvas/startup shell; no duplicated binding logic.
-
-SDL preserves timestamped button edges and samples every 8 ms on the main thread; Windows eframe runs on a separate
-supported Windows event loop. Unchanged input does not wake the UI. Repaint and
-polling are separate, but no measured CPU/memory/latency guarantees are made yet.
-Direct HID input processes every changed report so quick taps between frames
-are preserved. Disconnection and stale input clear held state.
-The browser polls Gamepad snapshots every 16 ms while visible; it also repaints
-for changes, active countdowns or UI interaction. In companion mode, the host
-owns the gesture clock; browser animation never advances host gesture state. `window.keybindApp.diagnostic_snapshot()`
-returns a read-only semantic snapshot for diagnostics and smoke tests.
-
-## Hardware acceptance still required
-
-Record Windows version, PC, GPU, controller model/connection, SDL device identity,
-Steam/game, browser version and focus/visibility for each run. Verify both
-press/release orders, held-at-start, reconnect-held, device switching,
-suspend/resume, shortcut conflicts, HUD recovery, DPI and multiple monitors.
-Verify browser focus loss separately from hidden-tab resume, and companion
-mode while the game has focus. Measure CPU, working set, GPU, input-to-label
-latency, startup/download size and hidden-window rendering. Set numeric budgets
-from that diagnostic baseline before calling this release lightweight or ready.
+The `overlay/`, executable, WASM and container identifiers remain compatible with
+existing deployments. Renaming them is a separate migration, not a prerequisite
+for using the browser product.

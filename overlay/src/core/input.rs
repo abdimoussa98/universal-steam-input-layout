@@ -73,6 +73,35 @@ pub struct InputFrame {
     pub pad_clicks: [Option<bool>; 2],
     /// Deck pad force in thousandths. Digital clicks may be disabled by Steam/SDL.
     pub pad_pressures: [Option<u16>; 2],
+    /// L4, L5, R4, R5. Unknown is different from released.
+    pub back_buttons: [Option<bool>; 4],
+    pub motion: Option<MotionSample>,
+}
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct MotionSample {
+    /// Pitch, yaw, roll in millidegrees/second, SDL's right-handed axes.
+    pub rate: [i32; 3],
+    pub timestamp: u32,
+    /// Timestamp tick in microseconds (Deck reports use a 4000 us update period).
+    pub tick_us: u32,
+    pub modulus: u64,
+}
+impl MotionSample {
+    pub fn elapsed_ms(&self, previous: &Self) -> Option<u64> {
+        if self.modulus != previous.modulus
+            || self.tick_us != previous.tick_us
+            || !(1..=1_u64 << 32).contains(&self.modulus)
+            || u64::from(self.timestamp) >= self.modulus
+            || u64::from(previous.timestamp) >= self.modulus
+        {
+            return None;
+        }
+        let elapsed = (u64::from(self.timestamp) + self.modulus - u64::from(previous.timestamp))
+            % self.modulus;
+        let ms = elapsed.checked_mul(u64::from(self.tick_us))? / 1000;
+        (1..=100).contains(&ms).then_some(ms)
+    }
 }
 #[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

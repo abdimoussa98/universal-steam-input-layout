@@ -2,7 +2,7 @@ use super::backend::WebBackend;
 use super::input::{HidReportCallback, HidStatusCallback};
 use super::{WebState, companion, diagnostics, input, page_hidden};
 use crate::core::{CompanionEndpoint, InputStatus};
-use crate::ui::OverlayApp;
+use crate::demo_ui::DemoApp;
 use std::{cell::RefCell, rc::Rc};
 use wasm_bindgen::{JsCast, prelude::*};
 
@@ -79,7 +79,7 @@ impl WebHandle {
                 eframe::WebOptions::default(),
                 Box::new(move |cc| {
                     for_app.borrow_mut().context = Some(cc.egui_ctx.clone());
-                    Ok(Box::new(OverlayApp::new(cc, Box::new(WebBackend(for_app)))))
+                    Ok(Box::new(DemoApp::new(cc, Box::new(WebBackend(for_app)))))
                 }),
             )
             .await?;

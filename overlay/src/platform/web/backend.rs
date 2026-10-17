@@ -13,6 +13,23 @@ extern "C" {
 pub(super) struct WebBackend(pub(super) Rc<RefCell<WebState>>);
 
 impl Backend for WebBackend {
+    fn input_epoch(&self) -> u64 {
+        self.0.borrow().generation
+    }
+    fn input_blocked(&self) -> bool {
+        web_sys::window()
+            .and_then(|w| w.document())
+            .and_then(|d| d.get_element_by_id("downloads"))
+            .is_some_and(|e| {
+                js_sys::Reflect::get(&e, &JsValue::from_str("open"))
+                    .ok()
+                    .and_then(|v| v.as_bool())
+                    == Some(true)
+            })
+    }
+    fn input_samples(&mut self) -> Vec<(String, f64, crate::core::InputFrame)> {
+        self.0.borrow_mut().samples.drain(..).collect()
+    }
     fn data(&self) -> FrameData {
         self.0.borrow().data.clone()
     }

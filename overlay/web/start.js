@@ -1,5 +1,42 @@
 // Page bootstrap only. State, controller input, binding resolution and UI are Rust.
 const status = document.querySelector('#status');
+// Audio follows logical feedback events, including multiple events per frame.
+// Reset/pause/hide cancel scheduled sounds so resuming never plays a backlog.
+let audioContext;
+let soundEnabled = false;
+let lastSound;
+const oscillators = new Set();
+window.demoSoundCancel = () => {
+  for (const oscillator of oscillators) oscillator.stop();
+  oscillators.clear();
+  lastSound = undefined;
+};
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) window.demoSoundCancel();
+});
+window.demoSoundEnable = enabled => {
+  soundEnabled = enabled;
+  if (enabled) {
+    audioContext ??= new AudioContext();
+    audioContext.resume().catch(() => {});
+  } else window.demoSoundCancel();
+};
+window.demoSoundTick = (at, scale, kind) => {
+  if (!soundEnabled || document.hidden || audioContext?.state !== 'running') return;
+  const time = Math.max(audioContext.currentTime, lastSound && at >= lastSound.at
+    ? lastSound.time + (at - lastSound.at) * scale / 1000 : audioContext.currentTime);
+  lastSound = {at, time};
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+  oscillator.frequency.value = kind === 'beep' ? 1040 : kind === 'haptic' ? 240 : 720;
+  gain.gain.setValueAtTime(0.025, time);
+  gain.gain.exponentialRampToValueAtTime(0.001, time + 0.035);
+  oscillator.connect(gain).connect(audioContext.destination);
+  oscillators.add(oscillator);
+  oscillator.onended = () => oscillators.delete(oscillator);
+  oscillator.start(time);
+  oscillator.stop(time + 0.04);
+};
 // A tunnel may cache stable JS/WASM filenames despite the origin's headers.
 // Keep every dependency on the version selected by the freshly loaded HTML.
 const bundleVersion = new URL(import.meta.url).searchParams.get('v');

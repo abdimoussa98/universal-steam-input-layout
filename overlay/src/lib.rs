@@ -1,4 +1,7 @@
 pub mod core;
+pub mod demo;
+#[cfg(feature = "ui")]
+pub mod demo_ui;
 pub mod platform;
 #[cfg(feature = "ui")]
 pub mod ui;

@@ -6,6 +6,7 @@
 //! This is an independent decoder, not an SDL driver. WebHID has already
 //! separated the report ID from the payload before this function is called.
 use super::{Control, InputChange, InputFrame, PadContact};
+mod motion;
 
 pub fn decode_report(id: u8, bytes: &[u8]) -> Result<Option<InputFrame>, &'static str> {
     if id == 0 {
@@ -21,6 +22,7 @@ pub fn decode_report(id: u8, bytes: &[u8]) -> Result<Option<InputFrame>, &'stati
     }
     let buttons = u32::from_le_bytes(bytes[1..5].try_into().unwrap());
     let mut frame = InputFrame::default();
+    motion::triton(&mut frame, id, bytes, buttons);
     for (control, mask) in [
         (Control::A, 0x1),
         (Control::B, 0x2),
@@ -76,6 +78,7 @@ fn decode_deck(bytes: &[u8]) -> Result<Option<InputFrame>, &'static str> {
     let buttons = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
     let touches = u32::from_le_bytes(bytes[12..16].try_into().unwrap());
     let mut frame = InputFrame::default();
+    motion::deck(&mut frame, bytes, buttons, touches);
     for (control, mask) in [
         (Control::A, 0x80),
         (Control::B, 0x20),

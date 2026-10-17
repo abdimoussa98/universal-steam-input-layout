@@ -1,6 +1,6 @@
 #[cfg(windows)]
 fn main() {
-    if let Err(error) = keybind_overlay::platform::native::run() {
+    if let Err(error) = keybind_overlay::platform::macos::run() {
         eprintln!("{error}");
         std::process::exit(1);
     }

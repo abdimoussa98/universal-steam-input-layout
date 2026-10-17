@@ -29,6 +29,7 @@ struct WebState {
     hid_received: Option<f64>,
     hid_error: Option<String>,
     remote_timing_scale: Option<u8>,
+    samples: std::collections::VecDeque<(String, f64, InputFrame)>,
 }
 
 impl WebState {
@@ -53,6 +54,7 @@ impl WebState {
             hid_received: None,
             hid_error: None,
             remote_timing_scale: None,
+            samples: std::collections::VecDeque::new(),
         }
     }
 

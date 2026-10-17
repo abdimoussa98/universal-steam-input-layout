@@ -73,6 +73,13 @@ impl WebState {
             Ok(Some(frame)) => {
                 let now = now_ms();
                 let changed = self.hid_input.as_ref() != Some(&frame);
+                if changed {
+                    if self.samples.len() >= 1024 {
+                        self.samples.clear();
+                    }
+                    self.samples
+                        .push_back((HID_DEVICE_ID.into(), now, frame.clone()));
+                }
                 self.hid_received = Some(now);
                 self.hid_error = None;
                 // Process every changed report immediately, including a press

@@ -1,4 +1,5 @@
-//! macOS runs only the physical-input host; the existing web bundle is its UI.
+//! Headless physical-input companion for Windows and macOS.
+//! The module path remains for compatibility; the browser is the supported UI.
 use super::{host::Hub, sdl_input::SdlInput, server};
 use crate::{BUNDLED_PROFILE, core::*, ui::FrameData};
 use std::{
@@ -8,7 +9,7 @@ use std::{
     time::Duration,
 };
 
-const USAGE: &str = "Usage: keybind-overlay --viewer-url https://YOUR_VIEWER/ [--device SDL_ID] [--profile FILE]\nOr: keybind-overlay --companion WEB_DIR [--device SDL_ID] [--profile FILE] [--diagnostic]\nOr: keybind-overlay --diagnostic\nSteam is not required. The only connected controller is selected automatically; use --device for multiple controllers.\nOpen the printed pairing link and allow local network access if the browser asks. Mode buttons and F1/F2/F3 work in the focused browser page. Ctrl+C stops the helper.";
+const USAGE: &str = "Usage: keybind-overlay --viewer-url https://YOUR_VIEWER/ [--device SDL_ID] [--profile FILE]\nOr: keybind-overlay --companion WEB_DIR [--device SDL_ID] [--profile FILE] [--diagnostic]\nOr: keybind-overlay --diagnostic\nSteam is not required. The only connected controller is selected automatically; use --device for multiple controllers.\nOpen the printed pairing link and allow local network access if the browser asks. Choose Companion input in the browser. Desktop HUD and global mode hotkeys are deprecated. Ctrl+C stops the helper.";
 
 pub fn run() -> Result<(), String> {
     let Some(options) = Options::parse()? else {
