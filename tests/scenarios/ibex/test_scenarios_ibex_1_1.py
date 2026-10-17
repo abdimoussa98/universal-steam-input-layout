@@ -7,8 +7,10 @@ the Deck's conversion of Ibex 1.1; `SCENARIO_CONTROLLER=ibex` runs them on Ibex'
 
 - On the Deck the Fn layers' right stick typed nothing: a D-pad over the menu Entry Point's D-pad over Base's mouse
   stick. By the author's rule (A77) the Entry Point, the layer that changed the mode, answered the whole stick. Since
-  Ibex 1.1 the Entry Points, the stick guards and the Tap Cover keep Base's mouse mode on the right stick, and every
-  bind that adds an Fn layer removes its Entry Point, so Fn lands on a mouse stick and is its owner.
+  Ibex 1.1 the Entry Points, the stick guards and the Tap Cover keep Base's mouse mode on the right stick, so Fn lands
+  on a mouse stick and is its owner. In 1.1 every bind that adds an Fn layer also removed its Entry Point; on the Deck
+  that broke the menu button's 200 ms delay after a stick guard ate it, so since Ibex 1.2 (Neptune 90.78, DSE 1.2) the
+  Entry Point stays under Fn again (findings/2026-10-17-entry-point-stays-under-fn/).
 - The stick clicks: an Entry Point's click adds its Fn layer at the press, silent and repeating, and also removes the
   guards and the Tap Cover; Fn's own click Release does the transition, command for command the Entry Point's.
 - Each Fn stick key's click guard is one Any chord on both stick clicks, not interruptible: it holds the key's chord
@@ -27,8 +29,9 @@ MODES = {"Base": None, "Gyro": ("Base", "Gyro"), "Steering": "steering", "Cursor
 STATEFUL = ("Steering", "Cursor Gyro")
 GUARDS = {"LS": "Menu Buttons: Left Stick Guard", "RS": "Menu Buttons: Right Stick Guard"}
 TAP_COVER = "Menu Buttons: Tap Cover"
-HANDED_OVER = ("Menu Left: Entry Point", "Menu Right: Entry Point", "Stateful | Menu Left: Entry Point",
-               "Stateful | Menu Right: Entry Point", *GUARDS.values(), TAP_COVER)
+ENTRIES = ("Menu Left: Entry Point", "Menu Right: Entry Point", "Stateful | Menu Left: Entry Point",
+           "Stateful | Menu Right: Entry Point")
+COVERS = (*GUARDS.values(), TAP_COVER)        # what a click into Fn removes; since 1.2 the Entry Point stays
 KEYS = {"LS": {"up": "BACKSLASH", "down": "FORWARD_SLASH", "right": "RIGHT_BRACKET", "left": "LEFT_BRACKET"},
         "RS": {"up": "SEMICOLON", "down": "SINGLE_QUOTE", "right": "PERIOD", "left": "COMMA"}}
 MERGED_KEYS = {"A": "F3", "B": "F2", "X": "F4", "Y": "F1", "Up": "F5", "Down": "F7", "Right": "F6", "Left": "F8",
@@ -41,6 +44,10 @@ CLICKS = "71303168"                       # bits 22 and 26: either stick's click
 
 def fn_of(side, mode="Base"):
     return f"{'Stateful | ' if mode in STATEFUL else ''}{side}: Fn Layer"
+
+
+def entry_of(side, mode="Base"):
+    return f"{'Stateful | ' if mode in STATEFUL else ''}{side}: Entry Point"
 
 
 def other_stick(stick):
@@ -94,7 +101,7 @@ class FnRightStick(ScenarioCase):
                             pad.touch("LS").touch("RS").wait(300)
                         pad.hold(button).wait(300)
                         self.assertEqual(pad.top, fn, (mode, side, resting))
-                        self.assertTrue(pad.lacks(*HANDED_OVER), "the Entry Point handed over")
+                        self.assertTrue(pad.has(entry_of(side, mode)) and pad.lacks(*COVERS), "the Entry Point stays under Fn (1.2)")
                         for stick, keys in KEYS.items():
                             for where, key in keys.items():
                                 pad.mark().push(stick, where).wait(80)
@@ -107,7 +114,7 @@ class FnRightStick(ScenarioCase):
                         pad.let_go(button).lift("LS").lift("RS").wait(300)
 
     @scenario("ibex 1.1 F2", rules=("R123",), rests=("A3", "A4", "A5", "A6", "A7"))
-    def test_every_adder_lands_fn_with_no_entry_point_guard_or_cover_under_it(self):
+    def test_every_adder_lands_fn_over_its_entry_point_with_no_guard_or_cover(self):
         gestures = {
             "the hold": lambda pad, button: pad.hold(button).wait(300),
             "the other menu button": lambda pad, button: pad.hold(button).wait(50).hold(OTHER[button]).wait(50),
@@ -122,7 +129,7 @@ class FnRightStick(ScenarioCase):
                     for pad in self.each(start=MODES[mode]):
                         gesture(pad, button)
                         self.assertTrue(pad.has(fn_of(side, mode)), (mode, side, name))
-                        self.assertTrue(pad.lacks(*HANDED_OVER), (mode, side, name, pad.names()))
+                        self.assertTrue(pad.has(entry_of(side, mode)) and pad.lacks(*COVERS), (mode, side, name, pad.names()))
                         if name == "the other menu button" and mode == "Base":
                             self.assertEqual(pad.top, COMBO[side], "the chord also adds the combo Entry Point")
 
@@ -148,7 +155,7 @@ class FnRightStick(ScenarioCase):
                             pad.mark()
                             press_click(pad, stick).wait(30)
                             self.assertEqual(pad.top, fn, f"{place}: Fn lands at the press")
-                            self.assertTrue(pad.lacks(*HANDED_OVER), (mode, side, stick, place, pad.names()))
+                            self.assertTrue(pad.has(entry_of(side, mode)) and pad.lacks(*COVERS), (mode, side, stick, place, pad.names()))
                             self.assertEqual([b for b in bumps(pad) if b.endswith("/click")], [], "no bump at the press")
                             let_go_click(pad, stick).wait(30)
                             self.assertTrue(pad.lacks(fn))
@@ -264,7 +271,7 @@ class FnRightStick(ScenarioCase):
                     self.assertTrue(pad.lacks(fn_of(side)), "the 200 ms start again when the guard leaves (A15)")
                     pad.wait(100)
                     self.assertEqual(pad.top, fn_of(side))
-                    self.assertTrue(pad.lacks(*HANDED_OVER))
+                    self.assertTrue(pad.has(entry_of(side)) and pad.lacks(*COVERS))
 
     @scenario("ibex 1.1 F10", rules=("R169", "R170"), rests=("A25",))
     def test_a_release_missed_in_the_steam_menu_clears_at_the_next_stick_touch(self):
@@ -275,7 +282,7 @@ class FnRightStick(ScenarioCase):
                         pad.hold(button).wait(300).miss(button).wait(100)
                         self.assertEqual(pad.top, fn_of(side, mode))
                         pad.touch(stick).wait(50)
-                        self.assertTrue(pad.lacks(fn_of(side, mode), *HANDED_OVER), (mode, side, stick))
+                        self.assertTrue(pad.lacks(fn_of(side, mode), *ENTRIES, *COVERS), (mode, side, stick))
 
     @scenario("ibex 1.1 F11", rules=("R170",), rests=("A25",), controller="dse")
     def test_on_the_edge_fn_takes_over_and_a_missed_release_clears_at_the_next_stick_push(self):
@@ -284,13 +291,13 @@ class FnRightStick(ScenarioCase):
                 for pad in self.each(controller="dse"):
                     press_click(pad.hold(button).wait(50), stick).wait(30)
                     self.assertEqual(pad.top, fn_of(side))
-                    self.assertTrue(pad.lacks(*HANDED_OVER))
+                    self.assertTrue(pad.has(entry_of(side)) and pad.lacks(*COVERS))
                     let_go_click(pad, stick).let_go(button).wait(400)
                     self.assertEqual(pad.names(), TRANSITIONS[side, stick])
                 for pad in self.each(controller="dse"):
                     pad.hold(button).wait(300)
                     self.assertEqual(pad.top, fn_of(side))
-                    self.assertTrue(pad.lacks(*HANDED_OVER))
+                    self.assertTrue(pad.has(entry_of(side)) and pad.lacks(*COVERS))
                     for where, key in KEYS[stick].items():
                         pad.mark().push(stick, where).wait(80)
                         self.assertEqual(pad.typed(), [key], (side, stick, where))
@@ -347,7 +354,7 @@ class FnRightStick(ScenarioCase):
                 self.assertEqual(pad.top, f"Stateful | {side}: Entry Point")
                 pad.wait(250)
                 self.assertEqual(pad.top, fn_of(side, "Steering"))
-                self.assertTrue(pad.lacks(*HANDED_OVER))
+                self.assertTrue(pad.has(entry_of(side, "Steering")) and pad.lacks(*COVERS))
 
 
 if __name__ == "__main__":

@@ -79,9 +79,7 @@ class Holds(ScenarioCase):
             for pad in self.each():
                 pad.hold(button).wait(1500)                                  # six of the reset's intervals
                 self.assertEqual(landed(pad, layer), 200)
-                # Since Ibex 1.1 the Fn add hands over: the only remove is of its Entry Point, never of the layer.
-                handed = {"Menu Left: Fn Layer": ["Menu Left: Entry Point"], "Menu Right: Fn Layer": ["Menu Right: Entry Point"]}
-                self.assertEqual([detail for _, detail in pad.seen("remove")], handed.get(layer, []))
+                self.assertEqual([detail for _, detail in pad.seen("remove")], [])
                 self.assertTrue(pad.has(layer))
         for stick, cover in (("LS", "LST: Tap Cover"), ("RS", "RST: Tap Cover"), ("RP", "RTP: Tap Cover")):
             for pad in self.each():

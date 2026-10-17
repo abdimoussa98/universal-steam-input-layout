@@ -5,9 +5,11 @@ plans/2026-10-16-fn-right-stick-owner.md, part 5.
 
 - A77, the author's rule: above a layer that changed a source's mode, a group in the same mode doesn't answer; the
   owner answers the whole source. Each Fn layer's right stick is a D-pad, so in every stack the chains give, the
-  right stick under it must be in another mode (Base's mouse mode), and no menu Entry Point, stick guard or Tap Cover
-  may be under it. The simulator and the audits follow A1 and don't model A77; the 1.0 shape, a D-pad Entry Point
-  under each Fn layer, fails this test.
+  right stick group under it must be in another mode (Base's mouse mode). Since Ibex 1.2 (Neptune 90.78, DSE 1.2)
+  the Entry Point stays under Fn again, in mouse mode on that stick; Ibex 1.1 removed it (the hand-over), which
+  broke the menu button's 200 ms delay on the Deck after a stick guard ate it
+  (findings/2026-10-17-entry-point-stays-under-fn/). The simulator and the audits follow A1 and don't model A77; the
+  1.0 shape, a D-pad Entry Point under each Fn layer, fails this test.
 - Part 4: where two chords on one input have the same bind and settings, each on one button, they are one chord on a
   mask of both, Any. No input may keep such a pair, nor a pair an Any mask could hold, on any controller.
 
@@ -22,14 +24,11 @@ from steam_layout.model import Layout, actions, entries
 from tests.support.sources import load_json
 
 FN = ("Menu Left: Fn Layer", "Menu Right: Fn Layer", "Stateful | Menu Left: Fn Layer", "Stateful | Menu Right: Fn Layer")
-HANDED_OVER = {"Menu Left: Entry Point", "Menu Right: Entry Point", "Stateful | Menu Left: Entry Point",
-               "Stateful | Menu Right: Entry Point", "Menu Buttons: Left Stick Guard", "Menu Buttons: Right Stick Guard",
-               "Menu Buttons: Tap Cover"}
 CHORD_KEYS = ("chord_button", convert.MASK, convert.ANY_OR_ALL)
 
 
 def owner_problems(layout, chains=None):
-    """For each Fn layer, the stacks under it that put a menu layer there or leave its right stick a same-mode group."""
+    """For each Fn layer, the stacks under it whose right stick group is in the Fn layer's own mode."""
     chains = chains or Chains.of(layout)
     found = {}
     for fn in FN:
@@ -39,7 +38,7 @@ def owner_problems(layout, chains=None):
         for stack in stacks:
             under = next((layout.active(t)["right_joystick"]["mode"] for t in reversed(stack)
                           if "right_joystick" in layout.active(t)), None)
-            if set(stack) & HANDED_OVER or under == mode:
+            if under == mode:
                 bad.append(stack)
         found[fn] = (mode, len(stacks), bad)
     return found
@@ -78,7 +77,7 @@ class FnOwnsItsRightStick(unittest.TestCase):
     def setUpClass(cls):
         cls.layouts = {path: Layout(convert.readable(load_json(path))) for path in controllers.working_layouts()}
 
-    def test_each_fn_layer_owns_its_right_stick_with_no_menu_layer_under_it(self):        # A77
+    def test_each_fn_layer_owns_its_right_stick(self):                                     # A77
         for path, layout in self.layouts.items():
             for fn, (mode, count, bad) in owner_problems(layout).items():
                 with self.subTest(path.name, layer=fn):

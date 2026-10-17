@@ -7,6 +7,25 @@ Steam Deck and `dse` the DualSense Edge. Pushing the tag
 ([publishing](docs/publishing.md)). A conversion's section names the Ibex
 release it is made from, as `From ibex <version>.`
 
+## dse 1.2
+
+From ibex 1.2: the menu button's half-second hold works again after a stick
+guard ([record](findings/2026-10-17-entry-point-stays-under-fn/README.md)).
+
+## neptune 90.78
+
+From ibex 1.2: the menu button's half-second hold works again after a stick
+guard ([record](findings/2026-10-17-entry-point-stays-under-fn/README.md)).
+
+## ibex 1.2
+
+Fixes 1.1 ([record](findings/2026-10-17-entry-point-stays-under-fn/README.md)).
+
+- **The menu button's half-second hold works again after a stick guard.** On
+  1.1, pushing a stick during the hold and then letting it come back made the
+  next hold bring Fn in at once. The Entry Point now stays under Fn until the
+  menu button is let go, as before 1.1; everything else in 1.1 stays.
+
 ## dse 1.1
 
 From ibex 1.1: the Fn layers take over from the Entry Points, so the right

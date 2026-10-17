@@ -83,7 +83,7 @@ class PadWindow(ScenarioCase):
                 pad.hold(button).wait(400)
                 for _ in range(3):
                     tap_pad(pad).wait(300)                 # each window runs out on its own
-                    self.assertEqual(pad.names()[-2:], ("Base", held[1]))     # since Ibex 1.1 the Fn adder hands over: its Entry Point goes
+                    self.assertEqual(pad.names()[-2:], held)
                 tap_pad(pad).wait(100)
                 pad.let_go(button).wait(600)
                 self.assertEqual(pad.stack, pad.layers("Base"))

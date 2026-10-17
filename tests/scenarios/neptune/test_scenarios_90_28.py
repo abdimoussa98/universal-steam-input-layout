@@ -34,7 +34,7 @@ class EveryPress(ScenarioCase):
         for first, second, key, plain, fn, entry, window, _, _ in CHAINS:
             for pad in self.each():
                 pad.hold(first).wait(400)
-                self.assertEqual(pad.names()[-2:], ("Base", fn))             # the hold brings the Fn layer alone; since Ibex 1.1 the Fn adder hands over: its Entry Point goes
+                self.assertEqual(pad.names()[-2:], (plain, fn))              # the hold brings the Fn layer alone
                 for _ in range(3):
                     pad.mark().hold(second)
                     self.assertEqual((pad.top, pad.typed()), (entry, []))    # the Fn layer adds it; nothing is typed at the press
@@ -75,7 +75,7 @@ class EveryPress(ScenarioCase):
         for first, second, key, plain, fn, entry, _, _, _ in CHAINS:
             for pad in self.each():
                 pad.hold(first).wait(60).mark().hold(second)
-                self.assertEqual((pad.names()[-3:], pad.typed()), (("Base", fn, entry), []))   # since Ibex 1.1 the Fn adder hands over: its Entry Point goes
+                self.assertEqual((pad.names()[-3:], pad.typed()), ((plain, fn, entry), []))
                 pad.wait(200)
                 self.assertEqual((pad.stack, pad.typed()), (pad.layers("Base", MENU_KEYS), []))
             for pad in self.each():
@@ -87,7 +87,7 @@ class EveryPress(ScenarioCase):
         for first, second, key, plain, fn, entry, _, _, _ in CHAINS:
             for pad in self.each():
                 pad.touch("RS").wait(300).hold(first).wait(60).lift("RS").wait(60)
-                self.assertEqual(pad.names()[-2:], ("Base", fn))             # since Ibex 1.1 the Fn adder hands over: its Entry Point goes
+                self.assertEqual(pad.names()[-2:], (plain, fn))
                 pad.mark().tap(second, 60).wait(300)
                 self.assertEqual(pad.typed(), [key])
                 pad.hold(second).wait(200)

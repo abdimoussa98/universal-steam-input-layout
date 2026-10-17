@@ -29,8 +29,8 @@ STUCK = {
         lambda pad: second_press(pad, "Select").miss("Select"), ("Menu Left: Escape", "Menu Left: Double Tap Cover")),
     "the scroll layer and its cover": (
         lambda pad: second_press(pad, "R1").miss("R1"), ("R1: Scroll Up", "R1: Double Tap Cover")),
-    "the Fn layer": (                    # and its Entry Point until Ibex 1.1, where the Fn adder removes it
-        lambda pad: pad.hold("Select").wait(300).miss("Select"), ("Menu Left: Fn Layer",)),
+    "the Fn layer and its Entry Point": (
+        lambda pad: pad.hold("Select").wait(300).miss("Select"), ("Menu Left: Fn Layer", "Menu Left: Entry Point")),
     "the Modifier 2 layer and the combined cover": (
         lambda pad: pad.hold("L1").wait(50).hold("R1").wait(500).miss("L1", "R1"),
         ("L1!R1: Modifier 2", "L1&R1: Tap Cover", "L1: Modifier 0", "R1: Modifier 1")),

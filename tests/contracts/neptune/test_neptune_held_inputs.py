@@ -227,11 +227,10 @@ class NeptuneHeldInputTests(unittest.TestCase):
                 with self.subTest(variant=variant, entry=entry):
                     chord = input_value(layout, entry, "switch", button)["activators"]["chord"]
                     execution = [b for b in reversed(chord["bindings"]["binding"]) if "empty_binding" not in b]
-                    # Since Ibex 1.1 the chord hands over: it removes its Entry Point after the adds.
-                    self.assertEqual(execution, [addition(fn), addition(chorded), removal(entry)])
+                    self.assertEqual(execution, [addition(fn), addition(chorded)])
                     stateful = input_value(layout, "Stateful | " + entry, "switch", button)["activators"]["chord"]
                     self.assertEqual([b for b in reversed(stateful["bindings"]["binding"]) if "empty_binding" not in b],
-                                     [addition("Stateful | " + fn), removal("Stateful | " + entry)])
+                                     [addition("Stateful | " + fn)])
                     own = input_value(layout, "Stateful | " + fn, "switch", button)["activators"]["chord"]
                     self.assertIn(f"key_press {key}, , ", own["bindings"]["binding"])
                     plain = input_value(layout, fn, "switch", button)["activators"]["chord"]

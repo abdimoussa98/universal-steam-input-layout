@@ -38,9 +38,11 @@ scenario coverage remain separate from the live layouts.
 ## The builder
 
 The current live builder is
-[findings/2026-10-16-fn-right-stick-owner](../findings/2026-10-16-fn-right-stick-owner/README.md),
-for Ibex 1.1. It reads the Ibex 1.0 snapshot and writes `ibex/`; Neptune 90.77
-and DSE 1.1 are its conversions. Ibex 1.0's builder,
+[findings/2026-10-17-entry-point-stays-under-fn](../findings/2026-10-17-entry-point-stays-under-fn/README.md),
+for Ibex 1.2. It reads the Ibex 1.0 snapshot, runs Ibex 1.1's builder
+([fn-right-stick-owner](../findings/2026-10-16-fn-right-stick-owner/README.md))
+less its Entry Point removes, and writes `ibex/`; Neptune 90.78 and DSE 1.2 are
+its conversions. Ibex 1.0's builder,
 [ibex-base](../findings/2026-10-15-ibex-base/README.md), reads the Neptune 90.74
 snapshot: the bootstrap, the one change that went from the Deck to Ibex.
 Neptune's own builders end at 90.74
@@ -81,6 +83,7 @@ Each builder extends the one before it and loads it by file path, back to the
 
 | Release | Builder | What it added |
 |---|---|---|
+| Ibex 1.2 | [entry-point-stays-under-fn](../findings/2026-10-17-entry-point-stays-under-fn/README.md) | From Ibex 1.0, as Ibex 1.1 less one thing: no bind that adds an Fn layer removes its Entry Point, which stays under Fn until its own Release, as up to 1.0. On 1.1 a stick guard that ate the menu button's 200 ms delay made the next hold bring Fn in at once (Deck, 2026-10-17). Neptune 90.78 and DSE 1.2 are its conversions |
 | Ibex 1.1 | [fn-right-stick-owner](../findings/2026-10-16-fn-right-stick-owner/README.md) | From Ibex 1.0. The Fn layers take over from the Entry Points: the Entry Points, both stick guards and the Tap Cover keep Base's mouse mode on the right stick, edge at 21000; every bind that adds an Fn layer removes its Entry Point; the stick clicks add Fn at the press, silent and repeating, and Fn's own click Release does the transition. No `requires_click` on a stick, `deadzone` 13276 on the Fn and Entry Point sticks, and 84 pairs of chords that differ only in their button are one Any chord. Neptune 90.77 and DSE 1.1 are its conversions. 84 removes fewer and 8 adds more a layout |
 | Ibex 1.0 | [ibex-base](../findings/2026-10-15-ibex-base/README.md) | From Neptune 90.74, the bootstrap: the Steam Controller 2's Steam names and Player Space in all eleven gyro-to-mouse groups; no bind changes. Neptune 90.75 and DSE 1.0 are its conversions |
 | 90.74 | [fn-right-stick](../findings/2026-10-15-fn-right-stick/README.md) | From 90.73. The right stick of the four Fn layers takes the left stick's group settings: `deadzone` 13276 and `requires_click` 0 come off. Its keys (`;` `'` `.` `,`), Low bumps, R3 guard and cleanups are unchanged. Removes and adds unchanged |

@@ -59,7 +59,7 @@ class ConversionTests(unittest.TestCase):
                             for op, target in layout.layer_ops(entry):
                                 self.assertIn(target, layout.presets, f"{title} {name} names a deleted layer")
                 cm = data["controller_mappings"]
-                self.assertEqual((cm["controller_type"], cm["title"].rsplit(" :: ", 1)[-1]), ("controller_ps5_edge", "1.1"))
+                self.assertEqual((cm["controller_type"], cm["title"].rsplit(" :: ", 1)[-1]), ("controller_ps5_edge", "1.2"))
 
     def test_mute_and_gyro_on_the_edge(self):                                            # R184, R185, R180
         for variant, data in self.dse.items():
