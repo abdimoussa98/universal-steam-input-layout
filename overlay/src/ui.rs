@@ -569,6 +569,7 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData, pad_touch_view: bool) {
             dark,
             egui::Stroke::new(1.0_f32, edge),
         ));
+        let input = trackpads::feedback(data, n, trackpads::hover(ui, center, 82.0 * scale, angle));
         if let Some(pads) = data
             .state
             .control_page(&data.profile)
@@ -581,19 +582,22 @@ fn draw_controller(ui: &mut egui::Ui, data: &FrameData, pad_touch_view: bool) {
                 angle,
                 &pads[n],
                 pad_touch_view,
-                None,
+                input,
+            );
+            trackpads::record_feedback(ui, n, &pads[n], input);
+        } else if let Some([x, y]) = input.position {
+            p.circle_stroke(
+                rotate(egui::vec2(x, y) * 82.0 * scale),
+                4.0,
+                egui::Stroke::new(1.0_f32, ACCENT),
             );
         }
-        if data.state.status == InputStatus::Live
-            && let Some(touch) = data.state.input.pads[n].as_ref().filter(|pad| pad.touching)
-        {
-            let xy = touch
-                .position
-                .map(|v| f32::from(v.clamp(-1000, 1000)) / 1000.0);
-            let dot = rotate(egui::vec2(xy[0], xy[1]) * 65.0 * scale);
-            p.circle_filled(dot, 5.0 * scale, ACCENT);
-            p.circle_stroke(dot, 9.0 * scale, egui::Stroke::new(1.0_f32, ACCENT));
-        }
+        target_point(ui, &format!("controller-pad:{n}:center"), center);
+        target_point(
+            ui,
+            &format!("controller-pad:{n}:outer"),
+            rotate(egui::vec2(0.92, 0.0) * 82.0 * scale),
+        );
     }
     p.circle_filled(at(500.0, 207.0), 25.0 * scale, dark);
     p.circle_stroke(

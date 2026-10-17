@@ -68,6 +68,8 @@ pub struct InputFrame {
     /// Signed thousandths; positive Y points down. None means unavailable.
     pub stick_positions: [Option<[i16; 2]>; 2],
     pub pads: [Option<PadContact>; 2],
+    /// Physical pad presses, separate from touch. None means unsupported.
+    pub pad_clicks: [Option<bool>; 2],
 }
 #[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

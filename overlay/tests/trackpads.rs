@@ -7,20 +7,35 @@ wasm_bindgen_test::wasm_bindgen_test_configure!(run_in_browser);
 #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
 #[cfg_attr(not(target_arch = "wasm32"), test)]
 fn middle_wins_overlap_in_every_direction() {
+    let regions = PadRegions {
+        inner_threshold: 24996,
+        outer_threshold: 23000,
+        outer_delay_ms: 5,
+    };
     for [x, y] in [
-        [0.5, 0.0],
-        [-0.5, 0.0],
-        [0.0, -0.5],
-        [0.0, 0.5],
-        [0.35, 0.35],
+        [0.73, 0.0],
+        [-0.73, 0.0],
+        [0.0, -0.73],
+        [0.0, 0.73],
+        [0.52, 0.52],
     ] {
-        assert_eq!(preview_pad_zone(x, y), PadZone::Overlap);
+        assert_eq!(regions.zone([x, y]), PadZone::Overlap);
     }
-    assert_eq!(preview_pad_zone(0.0, 0.0), PadZone::Inner);
-    assert_eq!(preview_pad_zone(0.0, -0.9), PadZone::Outer(0));
-    assert_eq!(preview_pad_zone(0.9, 0.0), PadZone::Outer(1));
-    assert_eq!(preview_pad_zone(0.0, 0.9), PadZone::Outer(2));
-    assert_eq!(preview_pad_zone(-0.9, 0.0), PadZone::Outer(3));
+    assert_eq!(regions.zone([0.0, 0.0]), PadZone::Inner);
+    assert_eq!(regions.zone([0.65, 0.0]), PadZone::Inner);
+    let wider = PadRegions {
+        inner_threshold: 30000,
+        ..regions.clone()
+    };
+    assert_eq!(wider.zone([0.9, 0.0]), PadZone::Overlap);
+    assert_eq!(
+        regions.zone([regions.inner_radius(), 0.0]),
+        PadZone::Overlap
+    );
+    assert_eq!(regions.zone([0.0, -0.9]), PadZone::Outer(0));
+    assert_eq!(regions.zone([0.9, 0.0]), PadZone::Outer(1));
+    assert_eq!(regions.zone([0.0, 0.9]), PadZone::Outer(2));
+    assert_eq!(regions.zone([-0.9, 0.0]), PadZone::Outer(3));
 }
 
 #[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]

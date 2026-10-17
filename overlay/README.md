@@ -51,16 +51,24 @@ click bindings sit inside the upper part of each stick, with a separate XY field
 below so text and movement stay clear. Rings
 turn green with capacitive thumb contact. Trackpad dots show actual contact
 coordinates. Standard browser Gamepad
-input has stick axes but no pad/touch data; use the companion for those markers.
+input has stick axes but no pad/touch data; use direct WebHID or the companion for those markers.
 System buttons remain visual orientation cues.
 
 The trackpads show click bindings directly on the controller. **Click zones**
 opens enlarged diagrams: left center is Caps Lock with outer arrow keys; right
-center is Middle click with outer Back/Forward and Scroll up/down. The gold ring
-marks the overlap, where the center takes priority. Hover or drag over a diagram
-to preview the winning binding; this is a reference preview, not a Steam output.
-The zone sizes are schematic because the source Soft Press thresholds have not
-been calibrated against physical touch coordinates.
+center is Middle click with outer Back/Forward and Scroll up/down. Moving a
+thumb or hovering over either view previews the winning binding. The center
+wins the shared region and gives the entire pad a faint tint; an outer binding
+lights only its directional edge. A physical pad press adds a clearer outline
+and a Pressed label. Lifting, releasing, pausing, and disconnecting clear live
+feedback. Thumb contact takes priority over mouse hover.
+
+The preview normalizes the profile's inner/outer thresholds to the controller's
+coordinate range. It predicts a fresh click rather than observing Steam's
+output or latched layers; the Soft Press scale has not been hardware-calibrated.
+Press feedback uses the independent physical click flags from WebHID USB/wireless
+or the native Triton helper. Unsupported sources leave clicks unknown and still
+allow mouse previews.
 
 **Touch gestures** shows the left pad's Tab/Enter/Backspace/Escape swipes and
 the right pad's double-touch circular scroll. Lift the first touch before 150 ms,

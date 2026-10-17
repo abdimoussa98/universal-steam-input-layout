@@ -215,6 +215,11 @@ def main():
                 assert 0 <= x < 640 and y >= 0, f'{name} outside narrow viewport'
             request('POST', f'/session/{session}/window/rect', {'width': 1060, 'height': 1100})
             time.sleep(0.2)
+        # The controller drawing itself supports hover without inventing a click.
+        click_target('controller-pad:0:center')
+        wait_for(lambda: snapshot()['pad_feedback'][0]=='hover:inner:released', 'Controller pad center hover failed')
+        click_target('controller-pad:0:outer')
+        wait_for(lambda: snapshot()['pad_feedback'][0]=='hover:outer1:released', 'Controller pad edge hover failed')
         # Explore actual painted pad zones; the shared ring must choose center,
         # while the farther edge resolves its directional binding.
         request('POST', f'/session/{session}/goog/cdp/execute', {
@@ -506,9 +511,34 @@ def main():
             assert value['stick_positions']==[[-1000,-1000],[1000,1000]]
             assert value['touches']==[True,True]
             assert value['pads']==[{'touching':True,'position':[-500,-500]},{'touching':True,'position':[500,500]}]
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: all(p['regions'] for p in snapshot()['trackpads']), 'Pad bindings did not recover after release')
+            # Actual HID contact and press bits drive both painted pads. The old
+            # schematic boundary would misclassify x=0.65 as an outer click.
+            for raw, zone in ((0,'inner'),(21298,'inner'),(23920,'overlap'),(31000,'outer1')):
+                js('fakeHid.device.frame(0x02200000,{19:arguments[0],25:arguments[0]})',raw)
+                wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:released']*2, 'Live pad preview selected the wrong zone')
+                if args.screenshot and raw==0:
+                    args.screenshot.with_name('pad-live-hover.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+                js('fakeHid.device.frame(0x06600000,{19:arguments[0],25:arguments[0]})',raw)
+                wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:pressed']*2, 'Pad click actuation did not reach the drawing')
+                assert snapshot()['state']['input']['pad_clicks']==[True,True]
+                if args.screenshot and raw in (0,31000):
+                    args.screenshot.with_name('pad-live-center.png' if raw==0 else 'pad-live-edge.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
+                js('fakeHid.device.frame(0x02200000,{19:arguments[0],25:arguments[0]})',raw)
+                wait_for(lambda: snapshot()['pad_feedback']==[f'live:{zone}:released']*2, 'Pad click release stayed highlighted')
+            # Real contact takes priority over a mouse hovering another region.
+            click_target('controller-pad:0:center')
+            assert snapshot()['pad_feedback'][0]=='live:outer1:released'
+            click_target('mode:0')
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: snapshot()['pad_feedback']==['idle:none:released']*2, 'Lifting thumbs left stale pad highlights')
+            js('fakeHid.device.frame(0x06600000)')
             js("Object.defineProperty(document,'hidden',{value:true,configurable:true});document.dispatchEvent(new Event('visibilitychange'))")
             wait_for(lambda: snapshot()['state']['status']=='paused', 'Hidden HID page not paused')
             assert snapshot()['state']['held']==[False,False]
+            assert snapshot()['state']['input']['pad_clicks']==[None,None]
+            wait_for(lambda: snapshot()['pad_feedback']==['idle:none:released']*2, 'Paused input left a pad pressed')
             js("fakeHid.device.frame(0);Object.defineProperty(document,'hidden',{value:false,configurable:true});document.dispatchEvent(new Event('visibilitychange'))")
             wait_for(lambda: snapshot()['state']['status']=='live', 'HID did not resume from fresh input')
             assert snapshot()['state']['held']==[False,False]
@@ -537,6 +567,10 @@ def main():
                 assert snapshot()['state']['status'] != 'live', 'An empty receiver is not a live controller'
                 js('fakeHid.device.radio(true)')
                 wait_for(lambda: snapshot()['state']['status']=='live', 'Occupied receiver slot was not found')
+                js('fakeHid.device.frame(0x06600000,{19:31000,25:31000})')
+                wait_for(lambda: snapshot()['pad_feedback']==['live:outer1:pressed']*2, 'Wireless pad clicks did not reach the viewer')
+                js('fakeHid.device.frame(0)')
+                wait_for(lambda: snapshot()['state']['input']['pad_clicks']==[False,False], 'Wireless pad release was lost')
                 assert 'wireless' in snapshot()['browser_connection']['message']
                 js('fakeHid.device.frame(0x80000,{5:16384,7:32767})')
                 wait_for(lambda: snapshot()['state']['held']==[True,False], 'Wireless buttons did not reach Rust')

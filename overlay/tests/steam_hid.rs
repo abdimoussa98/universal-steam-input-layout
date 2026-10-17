@@ -107,3 +107,26 @@ fn malformed_or_other_hid_reports_cannot_create_controller_input() {
     assert_eq!(released.stick_positions, [Some([0, 0]), Some([0, 0])]);
     assert_eq!(released.triggers, InputFrame::default().triggers);
 }
+
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen_test)]
+#[cfg_attr(not(target_arch = "wasm32"), test)]
+fn pad_click_flags_are_independent_of_contact_and_other_buttons() {
+    for id in [0x42, 0x45, 0x47] {
+        for (bits, expected) in [
+            (0, [false, false]),
+            (0x04000000, [true, false]),
+            (0x00400000, [false, true]),
+            (0x04400000, [true, true]),
+        ] {
+            let frame = decode_report(id, &report(bits)).unwrap().unwrap();
+            assert_eq!(frame.pad_clicks, expected.map(Some));
+            assert!(!frame.pad_active);
+            assert_eq!(frame.buttons, [false; 16]);
+        }
+        let touched = decode_report(id, &report(0x02200000)).unwrap().unwrap();
+        assert!(touched.pad_active);
+        assert_eq!(touched.pad_clicks, [Some(false), Some(false)]);
+    }
+    let old: InputFrame = serde_json::from_str("{}").unwrap();
+    assert_eq!(old.pad_clicks, [None, None]);
+}

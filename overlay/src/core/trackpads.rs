@@ -70,26 +70,31 @@ impl TrackpadBindings {
     }
 }
 
-/// Schematic display zones, deliberately separate from Steam's raw Soft Press
-/// thresholds. The middle owns the shared band before directional selection.
+/// Configured radial preview, normalized against the controller axis range.
+/// This predicts a fresh click; it does not observe Steam's resulting output.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PadZone {
     Inner,
     Overlap,
     Outer(usize),
 }
-pub const PAD_INNER_RADIUS: f32 = 0.56;
-pub const PAD_OUTER_START: f32 = 0.45;
-
-pub fn preview_pad_zone(x: f32, y: f32) -> PadZone {
-    let radius = x.hypot(y);
-    if radius <= PAD_OUTER_START {
-        PadZone::Inner
-    } else if radius <= PAD_INNER_RADIUS {
-        PadZone::Overlap
-    } else if x.abs() > y.abs() {
-        PadZone::Outer(if x > 0.0 { 1 } else { 3 })
-    } else {
-        PadZone::Outer(if y > 0.0 { 2 } else { 0 })
+impl PadRegions {
+    pub fn inner_radius(&self) -> f32 {
+        f32::from(self.inner_threshold) / 32767.0
+    }
+    pub fn outer_start(&self) -> f32 {
+        f32::from(self.outer_threshold) / 32767.0
+    }
+    pub fn zone(&self, [x, y]: [f32; 2]) -> PadZone {
+        let radius = x.hypot(y);
+        if radius <= self.outer_start() {
+            PadZone::Inner
+        } else if radius <= self.inner_radius() {
+            PadZone::Overlap
+        } else if x.abs() > y.abs() {
+            PadZone::Outer(if x > 0.0 { 1 } else { 3 })
+        } else {
+            PadZone::Outer(if y > 0.0 { 2 } else { 0 })
+        }
     }
 }

@@ -41,8 +41,104 @@ fn text(p: &egui::Painter, center: egui::Pos2, value: &str, width: f32, size: f3
     );
 }
 
-/// Same schematic zones on the small controller pads and the enlarged explorer.
-/// Text stays upright even though the physical pad is canted.
+#[derive(Clone, Copy, Default)]
+pub(super) struct Feedback {
+    pub position: Option<[f32; 2]>,
+    pub pressed: bool,
+    pub live: bool,
+}
+
+pub(super) fn feedback(data: &FrameData, side: usize, hover: Option<[f32; 2]>) -> Feedback {
+    if data.state.status == InputStatus::Live {
+        let pressed = data.state.input.pad_clicks[side] == Some(true);
+        if let Some(touch) = data.state.input.pads[side]
+            .as_ref()
+            .filter(|pad| pad.touching)
+        {
+            return Feedback {
+                position: Some(
+                    touch
+                        .position
+                        .map(|v| f32::from(v.clamp(-1000, 1000)) / 1000.0),
+                ),
+                pressed,
+                live: true,
+            };
+        }
+        if pressed {
+            return Feedback {
+                position: None,
+                pressed: true,
+                live: true,
+            };
+        }
+    }
+    Feedback {
+        position: hover,
+        ..Feedback::default()
+    }
+}
+
+pub(super) fn hover(ui: &egui::Ui, center: egui::Pos2, half: f32, angle: f32) -> Option<[f32; 2]> {
+    if !ui.rect_contains_pointer(egui::Rect::from_center_size(
+        center,
+        egui::vec2(half * 2.3, half * 2.3),
+    )) {
+        return None;
+    }
+    ui.input(|i| i.pointer.hover_pos()).and_then(|pos| {
+        let delta = (pos - center) / half;
+        let xy = [
+            delta.x * angle.cos() + delta.y * angle.sin(),
+            -delta.x * angle.sin() + delta.y * angle.cos(),
+        ];
+        let distance = xy[0].hypot(xy[1]);
+        (distance <= pad_edge(xy[1].atan2(xy[0]))).then_some(xy)
+    })
+}
+
+fn pad_edge(angle: f32) -> f32 {
+    let (x, y) = (angle.cos().abs(), angle.sin().abs());
+    let corner = 62.0 / 82.0;
+    let radius = 20.0 / 82.0;
+    if y <= corner * x {
+        1.0 / x
+    } else if x <= corner * y {
+        1.0 / y
+    } else {
+        corner * (x + y)
+            + (radius * radius - corner * corner * (x - y) * (x - y))
+                .max(0.0)
+                .sqrt()
+    }
+}
+
+pub(super) fn record_feedback(ui: &egui::Ui, side: usize, pad: &TrackpadBindings, input: Feedback) {
+    let zone = match input
+        .position
+        .and_then(|xy| pad.regions.as_ref().map(|r| r.zone(xy)))
+    {
+        Some(PadZone::Inner) => "inner".to_string(),
+        Some(PadZone::Overlap) => "overlap".into(),
+        Some(PadZone::Outer(n)) => format!("outer{n}"),
+        None => "none".into(),
+    };
+    let value = format!(
+        "{}:{zone}:{}",
+        if input.live {
+            "live"
+        } else if input.position.is_some() {
+            "hover"
+        } else {
+            "idle"
+        },
+        if input.pressed { "pressed" } else { "released" }
+    );
+    ui.ctx()
+        .data_mut(|d| d.insert_temp(egui::Id::new(format!("pad:{side}:feedback")), value));
+}
+
+/// The same configured zones and light feedback on both pad views.
 pub(super) fn field(
     p: &egui::Painter,
     center: egui::Pos2,
@@ -50,7 +146,7 @@ pub(super) fn field(
     angle: f32,
     pad: &TrackpadBindings,
     touch_view: bool,
-    preview: Option<[f32; 2]>,
+    input: Feedback,
 ) {
     let at = |x: f32, y: f32| {
         center
@@ -59,56 +155,78 @@ pub(super) fn field(
                 x * angle.sin() + y * angle.cos(),
             ) * half
     };
-    let active = preview.map(|[x, y]| preview_pad_zone(x, y));
+    let active = input
+        .position
+        .and_then(|xy| pad.regions.as_ref().map(|r| r.zone(xy)));
     let detailed = half > 85.0;
     let size = if detailed { 14.0 } else { 10.0 };
     if !touch_view {
-        if pad.regions.is_some() {
-            // Outer wedges first, center last: the shared band belongs to center.
-            for n in 0..4 {
-                let start = -135.0 + n as f32 * 90.0;
-                let mut polygon = vec![center];
-                for i in 0..=16 {
-                    let a = (start + i as f32 * 90.0 / 16.0).to_radians();
-                    polygon.push(at(a.cos() * 0.96, a.sin() * 0.96));
-                }
+        let outline: Vec<_> = (0..=96)
+            .map(|i| {
+                let angle = i as f32 * std::f32::consts::TAU / 96.0;
+                let radius = pad_edge(angle);
+                at(angle.cos() * radius, angle.sin() * radius)
+            })
+            .collect();
+        let tint =
+            Color32::from_rgba_unmultiplied(119, 211, 182, if input.pressed { 8 } else { 4 });
+        let edge =
+            Color32::from_rgba_unmultiplied(119, 211, 182, if input.pressed { 70 } else { 18 });
+        if let Some(regions) = &pad.regions {
+            // Neutral guides stay visible through a light, whole-pad center tint.
+            p.circle_stroke(
+                center,
+                half * regions.inner_radius(),
+                egui::Stroke::new(1.0_f32, Color32::from_white_alpha(7)),
+            );
+            p.circle_stroke(
+                center,
+                half * regions.outer_start(),
+                egui::Stroke::new(1.0_f32, Color32::from_white_alpha(4)),
+            );
+            if matches!(active, Some(PadZone::Inner | PadZone::Overlap)) {
                 p.add(egui::Shape::convex_polygon(
-                    polygon,
-                    if active == Some(PadZone::Outer(n)) {
-                        Color32::from_rgb(37, 77, 67)
-                    } else {
-                        Color32::from_rgb(28, 35, 41)
-                    },
-                    egui::Stroke::new(1.0_f32, BORDER),
+                    outline.clone(),
+                    tint,
+                    egui::Stroke::new(1.0_f32, edge),
                 ));
             }
-            p.circle_filled(
-                center,
-                half * PAD_INNER_RADIUS,
-                if matches!(active, Some(PadZone::Inner | PadZone::Overlap)) {
-                    Color32::from_rgb(42, 71, 65)
-                } else {
-                    Color32::from_rgb(29, 44, 43)
-                },
-            );
-            let band = (PAD_INNER_RADIUS - PAD_OUTER_START) * half;
-            p.circle_stroke(
-                center,
-                (PAD_INNER_RADIUS + PAD_OUTER_START) * half / 2.0,
-                egui::Stroke::new(
-                    band,
-                    if active == Some(PadZone::Overlap) {
-                        OVERLAP
-                    } else {
-                        Color32::from_rgb(101, 84, 57)
-                    },
-                ),
-            );
-            p.circle_stroke(
-                center,
-                PAD_INNER_RADIUS * half,
-                egui::Stroke::new(1.0_f32, OVERLAP.gamma_multiply(0.65)),
-            );
+            if let Some(PadZone::Outer(n)) = active {
+                let start = (-135.0 + n as f32 * 90.0).to_radians();
+                for i in 0..24 {
+                    let a = start + i as f32 * std::f32::consts::FRAC_PI_2 / 24.0;
+                    let b = start + (i + 1) as f32 * std::f32::consts::FRAC_PI_2 / 24.0;
+                    let point =
+                        |angle: f32, radius: f32| at(angle.cos() * radius, angle.sin() * radius);
+                    let inner = regions.inner_radius();
+                    p.add(egui::Shape::convex_polygon(
+                        vec![
+                            point(a, inner),
+                            point(a, pad_edge(a)),
+                            point(b, pad_edge(b)),
+                            point(b, inner),
+                        ],
+                        tint,
+                        egui::Stroke::NONE,
+                    ));
+                    p.line_segment(
+                        [point(a, pad_edge(a)), point(b, pad_edge(b))],
+                        egui::Stroke::new(if input.pressed { 1.8_f32 } else { 1.0_f32 }, edge),
+                    );
+                }
+            }
+        } else if input.position.is_some() && matches!(pad.center, Binding::Label { .. }) {
+            p.add(egui::Shape::convex_polygon(
+                outline.clone(),
+                tint,
+                egui::Stroke::new(1.0_f32, edge),
+            ));
+        }
+        if input.pressed && active.is_none() {
+            p.add(egui::Shape::closed_line(
+                outline,
+                egui::Stroke::new(1.8_f32, edge),
+            ));
         }
         text(
             p,
@@ -188,10 +306,14 @@ pub(super) fn field(
     } else {
         text(p, center, &pad.touch, half * 1.4, size, MUTED);
     }
-    if let Some([x, y]) = preview {
+    if let Some([x, y]) = input.position {
         let dot = at(x, y);
-        p.circle_filled(dot, 3.0, Color32::WHITE);
-        p.circle_stroke(dot, 6.0, egui::Stroke::new(1.0_f32, Color32::WHITE));
+        let color = if input.live { ACCENT } else { Color32::WHITE };
+        p.circle_stroke(
+            dot,
+            if input.pressed { 5.0 } else { 4.0 },
+            egui::Stroke::new(if input.pressed { 2.0_f32 } else { 1.0_f32 }, color),
+        );
     }
 }
 
@@ -223,19 +345,25 @@ pub(super) fn explorer(ui: &mut egui::Ui, data: &FrameData, touch_view: &mut boo
                 ui.colored_label(OVERLAP,"Overlap · inner wins");
                 ui.label("Outer click");
             });
-            ui.label(RichText::new("Hover or drag across a pad to preview its binding.").size(12.0).color(MUTED))
-                .on_hover_text("Zone sizes are schematic. Steam's raw Soft Press thresholds are not a calibrated touch radius.");
+            ui.label(RichText::new("Move your thumb or hover over a pad. Press to see click feedback.").size(12.0).color(MUTED))
+                .on_hover_text("The preview normalizes the layout's configured thresholds to pad coordinates; it predicts a fresh click, not Steam's output. Click feedback comes from the controller's physical press flag.");
         }
         ui.add_space(12.0);
         if ui.available_width()>=620.0 {
-            ui.columns(2,|cols| {for side in 0..2 {card(&mut cols[side],side,&pads[side],*touch_view);}});
+            ui.columns(2,|cols| {for side in 0..2 {card(&mut cols[side],side,&pads[side],*touch_view,data);}});
         } else {
-            for (side,pad) in pads.iter().enumerate() {card(ui,side,pad,*touch_view);ui.add_space(12.0);}
+            for (side,pad) in pads.iter().enumerate() {card(ui,side,pad,*touch_view,data);ui.add_space(12.0);}
         }
     });
 }
 
-fn card(ui: &mut egui::Ui, side: usize, pad: &TrackpadBindings, touch_view: bool) {
+fn card(
+    ui: &mut egui::Ui,
+    side: usize,
+    pad: &TrackpadBindings,
+    touch_view: bool,
+    data: &FrameData,
+) {
     egui::Frame::new()
         .fill(PAD_FILL)
         .corner_radius(12.0)
@@ -251,16 +379,13 @@ fn card(ui: &mut egui::Ui, side: usize, pad: &TrackpadBindings, touch_view: bool
                 .strong(),
             );
             let half = (ui.available_width() / 2.0 - 8.0).min(116.0);
-            let (area, response) = ui.allocate_exact_size(
+            let (area, _) = ui.allocate_exact_size(
                 egui::vec2(ui.available_width(), half * 2.0 + 24.0),
                 egui::Sense::click_and_drag(),
             );
             let center = area.center();
             let bounds = egui::Rect::from_center_size(center, egui::vec2(half * 2.0, half * 2.0));
-            let preview = ui
-                .input(|i| i.pointer.hover_pos())
-                .filter(|pos| bounds.contains(*pos) && response.contains_pointer())
-                .map(|pos| [(pos.x - center.x) / half, (pos.y - center.y) / half]);
+            let input = feedback(data, side, hover(ui, center, half, 0.0));
             let painter = ui.painter();
             painter.rect_filled(bounds, 18.0, Color32::from_rgb(25, 30, 36));
             painter.rect_stroke(
@@ -269,12 +394,22 @@ fn card(ui: &mut egui::Ui, side: usize, pad: &TrackpadBindings, touch_view: bool
                 egui::Stroke::new(1.0_f32, BORDER),
                 egui::StrokeKind::Inside,
             );
-            field(painter, center, half, 0.0, pad, touch_view, preview);
+            field(painter, center, half, 0.0, pad, touch_view, input);
+            if input.live || input.position.is_some() {
+                record_feedback(ui, side, pad, input);
+            }
             target_point(ui, &format!("pad:{side}:center"), center);
             target_point(
                 ui,
                 &format!("pad:{side}:overlap"),
-                center + egui::vec2(half * (PAD_INNER_RADIUS + PAD_OUTER_START) / 2.0, 0.0),
+                center
+                    + egui::vec2(
+                        half * pad
+                            .regions
+                            .as_ref()
+                            .map_or(0.5, |r| (r.inner_radius() + r.outer_start()) / 2.0),
+                        0.0,
+                    ),
             );
             target_point(
                 ui,
@@ -285,14 +420,21 @@ fn card(ui: &mut egui::Ui, side: usize, pad: &TrackpadBindings, touch_view: bool
                 let (selected, caption) = if pad.regions.is_none() {
                     (&pad.center, "Click")
                 } else {
-                    match preview.map(|[x, y]| preview_pad_zone(x, y)) {
+                    match input
+                        .position
+                        .and_then(|xy| pad.regions.as_ref().map(|r| r.zone(xy)))
+                    {
                         Some(PadZone::Inner) => (&pad.center, "Inner click"),
                         Some(PadZone::Overlap) => (&pad.center, "Overlap · inner wins"),
                         Some(PadZone::Outer(n)) => (&pad.outer[n], "Outer click"),
                         None => (&pad.center, "Inner click"),
                     }
                 };
-                let value = format!("{caption} · {}", label(selected));
+                let value = format!(
+                    "{caption} · {}{}",
+                    label(selected),
+                    if input.pressed { " · Pressed" } else { "" }
+                );
                 ui.ctx().data_mut(|d| {
                     d.insert_temp(egui::Id::new(format!("pad:{side}:preview")), value.clone())
                 });

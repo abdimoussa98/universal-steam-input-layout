@@ -47,6 +47,7 @@ pub fn decode_report(id: u8, bytes: &[u8]) -> Result<Option<InputFrame>, &'stati
         InputChange::StickAxis(side, 1, axis(11 + side * 4, true)).apply(&mut frame);
         frame.touches[side] = Some(buttons & [0x01000000, 0x00100000][side] != 0);
         let touching = buttons & [0x02000000, 0x00200000][side] != 0;
+        frame.pad_clicks[side] = Some(buttons & [0x04000000, 0x00400000][side] != 0);
         frame.pads[side] = Some(PadContact {
             touching,
             position: [

@@ -261,6 +261,11 @@ fn frame(p: &Gamepad) -> InputFrame {
                     Some(sdl3::sys::joystick::SDL_GetJoystickButton(j, 19)),
                     Some(sdl3::sys::joystick::SDL_GetJoystickButton(j, 18)),
                 ];
+                // SDL's Triton-specific raw buttons 17/16 are pad clicks.
+                i.pad_clicks = [
+                    Some(sdl3::sys::joystick::SDL_GetJoystickButton(j, 17)),
+                    Some(sdl3::sys::joystick::SDL_GetJoystickButton(j, 16)),
+                ];
             }
         }
     }
