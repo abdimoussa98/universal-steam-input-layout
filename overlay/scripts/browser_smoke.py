@@ -371,14 +371,23 @@ def main():
         request('POST', f'/session/{session}/goog/cdp/execute', {
             'cmd':'Input.dispatchMouseEvent','params':{'type':'mouseMoved','x':800,'y':650}})
         request('POST', f'/session/{session}/goog/cdp/execute', {
-            'cmd':'Input.dispatchMouseEvent','params':{'type':'mouseWheel','x':800,'y':650,'deltaX':0,'deltaY':700}})
+            'cmd':'Input.dispatchMouseEvent','params':{'type':'mouseWheel','x':800,'y':650,'deltaX':0,'deltaY':3000}})
         time.sleep(0.35)
         if args.screenshot:
             args.screenshot.with_name('pads-scroll.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
         wait_for(lambda: snapshot()['pad_layers']==['touch','touch'], 'Pads must start with touch bindings')
         for side, center_label, outer_label in ((0,'Caps Lock','→'),(1,'Middle click','Forward')):
+            # At the bottom scroll limit, switching captions must not shrink the
+            # content and move the overlap ring away from a stationary pointer.
+            before = snapshot()['ui_targets'][f'pad:{side}:overlap']
             hold_target(f'pad:{side}:overlap')
-            wait_for(lambda: snapshot()['pad_previews'][side]==f'Overlap · inner wins · {center_label} · Pressed', 'Pad overlap selected the outer binding')
+            pointer_actions([{'type':'pause','duration':700}])
+            after = snapshot()
+            assert after['ui_targets'][f'pad:{side}:overlap'] == before, \
+                f'Pad {side} moved while pressed: {before} -> {after["ui_targets"][f"pad:{side}:overlap"]}'
+            expected = f'Overlap · inner wins · {center_label} · Pressed'
+            assert after['pad_previews'][side] == expected, \
+                f'Pad {side} overlap: expected {expected!r}, got {after["pad_previews"][side]!r}'
             assert snapshot()['pad_layers'][side]=='click'
             assert snapshot()['pad_layers'][1-side]=='touch', 'One pad press switched both pads'
             release_pointer()

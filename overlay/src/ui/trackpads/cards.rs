@@ -16,12 +16,26 @@ pub(super) fn card(ui: &mut egui::Ui, side: usize, pad: &TrackpadBindings, data:
                 .strong(),
             );
             let input = pad_diagram(ui, side, pad, data);
-            if input.pressed {
-                click_caption(ui, side, pad, input);
-            } else {
-                touch_caption(ui, pad);
-            }
+            caption(ui, side, pad, input);
         });
+}
+
+fn caption(ui: &mut egui::Ui, side: usize, pad: &TrackpadBindings, input: Feedback) {
+    // Keep the touch instructions' space while pressed. Shrinking a card near
+    // the scroll limit otherwise moves the pad underneath a stationary mouse.
+    let rect = ui.available_rect_before_wrap();
+    let mut touch = ui.new_child(egui::UiBuilder::new().max_rect(rect));
+    if input.pressed {
+        touch.set_invisible();
+    }
+    touch_caption(&mut touch, pad);
+    let mut bounds = touch.min_rect();
+    if input.pressed {
+        let mut click = ui.new_child(egui::UiBuilder::new().max_rect(rect));
+        click_caption(&mut click, side, pad, input);
+        bounds = bounds.union(click.min_rect());
+    }
+    ui.allocate_rect(bounds, egui::Sense::hover());
 }
 fn pad_diagram(
     ui: &mut egui::Ui,
