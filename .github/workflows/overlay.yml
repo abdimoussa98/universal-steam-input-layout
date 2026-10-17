@@ -50,6 +50,9 @@ jobs:
     needs: quality
     if: github.event_name != 'workflow_run'
     runs-on: windows-latest
+    env:
+      RUSTFLAGS: '-C target-feature=+crt-static'
+      CMAKE_TOOLCHAIN_FILE: ${{ github.workspace }}/overlay/cmake/windows-static-crt.cmake
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -59,8 +62,6 @@ jobs:
       - run: cargo clippy --locked --manifest-path overlay/Cargo.toml --all-targets --features desktop -- -D warnings
       - run: cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
       - run: cargo build --locked --manifest-path overlay/Cargo.toml --release --features desktop
-        env:
-          RUSTFLAGS: '-C target-feature=+crt-static'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -90,7 +91,8 @@ jobs:
       - uses: browser-actions/setup-chrome@v2
         id: chrome
         with:
-          chrome-version: stable
+          # Keep aligned with scripts/browser_linux.Dockerfile for reproduction.
+          chrome-version: '155.0.8059.84'
           install-chromedriver: true
       - name: Test WASM behavior and the packaged viewer
         env:
@@ -106,7 +108,7 @@ jobs:
           }))
           PY
           wasm-pack test --headless --chrome --chromedriver "$CHROMEDRIVER" overlay --no-default-features
-          python3 overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid --driver "$CHROMEDRIVER" --browser-binary "$CHROME_BIN"
+          python3 -u overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid --webdriver-delay-ms 650 --driver "$CHROMEDRIVER" --browser-binary "$CHROME_BIN"
       - name: Record the release
         run: python3 overlay/scripts/release_manifest.py --bundle overlay/dist --revision "$GITHUB_SHA"
       - name: Build the web container

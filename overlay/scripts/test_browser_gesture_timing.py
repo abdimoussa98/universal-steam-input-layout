@@ -1,8 +1,10 @@
 """Regression checks for CI delays without weakening slow-motion assertions."""
 from copy import deepcopy
+import json
+import subprocess
 import unittest
 
-from browser_mouse_timing import check_stage
+from browser_gesture_timing import START_TRACE, STOP_TRACE, check_stage
 
 
 def hold_trace():
@@ -23,7 +25,33 @@ def hold_trace():
     return result
 
 
-class MouseTimingTests(unittest.TestCase):
+class GestureTimingTests(unittest.TestCase):
+    def test_recorder_uses_rendered_clock_and_captures_completion_before_next_animation(self):
+        # The input poll has already advanced to hold while the UI still paints
+        # pressed. Then the UI completes before the recorder's next rAF callback.
+        # Run the actual injected JS, without a browser or wall-clock sleeps.
+        script = r'''
+          const {start, stop} = JSON.parse(require('node:fs').readFileSync(0, 'utf8'));
+          const value = {state: {status: 'live', gestures: {clock_ms: 999}},
+            rendered_state: {status: 'live', timing_scale: 10,
+              gestures: {clock_ms: 95, lanes: [{phase: 'pressed'}]}},
+            timeline: {clock_ms: 100}, rendered_control_labels: ['rendered']};
+          global.window = {keybindApp: {diagnostic_snapshot: () => JSON.stringify(value)}};
+          global.requestAnimationFrame = () => 1;
+          global.cancelAnimationFrame = () => {};
+          new Function(start)(false);
+          value.rendered_state.gestures.lanes[0].phase = 'hold';
+          value.timeline.clock_ms = 300;
+          const samples = new Function(stop)();
+          const assert = require('node:assert/strict');
+          assert.deepEqual(samples.map(s => s.clock_ms), [100, 300]);
+          assert.deepEqual(samples.map(s => s.lanes[0].phase), ['pressed', 'hold']);
+          assert.deepEqual(samples[0].control_labels, ['rendered']);
+          assert.equal(window.viewerGestureTrace, undefined);
+        '''
+        subprocess.run(['node', '-e', script], check=True, text=True,
+                       input=json.dumps({'start': START_TRACE, 'stop': STOP_TRACE}))
+
     def test_late_driver_response_does_not_require_transient_phase_to_still_be_active(self):
         check_stage(hold_trace(), 0, 'pressed', 200, 10, completed='hold')
 

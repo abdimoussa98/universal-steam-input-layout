@@ -16,13 +16,16 @@ pub(super) fn draw(ui: &mut egui::Ui, data: &FrameData, now: u64) {
     );
     target_point(ui, "timeline", rect.center());
     let timeline = Timeline::active(data);
-    let diagnostic = timeline.as_ref().map_or_else(
+    let mut diagnostic = timeline.as_ref().map_or_else(
         || {
             serde_json::json!({ "active": false, "text": "", "progress": 0.0,
             "remaining_ms": null, "phase": null })
         },
         |timeline| timeline.diagnostic(now),
     );
+    // The renderer may interpolate beyond the latest input sample. Keep the
+    // displayed countdown's clock available alongside the rendered state.
+    diagnostic["clock_ms"] = now.into();
     ui.ctx().data_mut(|data| {
         data.insert_temp(egui::Id::new("keybind.timeline"), diagnostic);
     });

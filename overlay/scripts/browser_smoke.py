@@ -21,6 +21,8 @@ import urllib.request
 import urllib.error
 from urllib.parse import urlparse
 from browser_mouse import run_mouse_checks, run_mouse_source_checks
+from browser_hid_timing import run_hid_timing_checks
+from browser_gesture_timing import GestureTrace, check_stage
 
 
 def free_port():
@@ -35,12 +37,16 @@ def main():
     parser.add_argument('--driver', default=shutil.which('chromedriver'))
     parser.add_argument('--browser-binary')
     parser.add_argument('--screenshot', type=Path)
+    parser.add_argument('--webdriver-delay-ms', type=int, default=0,
+                        help='Delay each driver response to expose timing assumptions on slow CI workers')
     parser.add_argument('--companion-fixture', type=Path, help='Path to the compiled fake-input companion example')
     parser.add_argument('--webhid', action='store_true', help='Test direct WebHID permissions/input with a synthetic USB boundary')
     parser.add_argument('--stale-cache', action='store_true', help='Preload obsolete JS/WASM into the browser cache before opening the viewer')
     parser.add_argument('--live-helper', type=Path, help='Optional hardware check: use the real helper instead of synthetic input tests')
     parser.add_argument('--hosted-companion', action='store_true', help='Test HTTPS viewer to HTTP loopback helper with real browser CORS')
     args = parser.parse_args()
+    if args.webdriver_delay_ms < 0:
+        parser.error('--webdriver-delay-ms must be nonnegative')
     if not args.driver:
         parser.error('Install ChromeDriver or pass --driver PATH')
     if args.hosted_companion and not (args.companion_fixture or args.live_helper):
@@ -96,6 +102,8 @@ def main():
             raise RuntimeError(error.read().decode()) from error
         if isinstance(result, dict) and 'error' in result and 'message' in result:
             raise RuntimeError(result)
+        if args.webdriver_delay_ms:
+            time.sleep(args.webdriver_delay_ms / 1000)
         return result
     def wait_for(check, message, timeout=20):
         deadline = time.monotonic() + timeout
@@ -163,6 +171,13 @@ def main():
             chrome['binary'] = args.browser_binary
         created = request('POST', '/session', {'capabilities': {'alwaysMatch': {'browserName': 'chrome', 'goog:chromeOptions': chrome, 'acceptInsecureCerts': bool(tls_directory)}}})
         session = created['sessionId']
+        capabilities = created['capabilities']
+        print('Browser environment:', json.dumps({
+            'platform': capabilities.get('platformName'),
+            'browser': capabilities.get('browserVersion'),
+            'driver': capabilities.get('chrome', {}).get('chromedriverVersion'),
+            'webdriver_delay_ms': args.webdriver_delay_ms,
+        }), flush=True)
         release_fixture = Path(__file__).resolve().parents[1] / 'tests/fixtures/releases.js'
         request('POST', f'/session/{session}/goog/cdp/execute', {
             'cmd':'Page.addScriptToEvaluateOnNewDocument', 'params':{'source':release_fixture.read_text()}})
@@ -637,11 +652,11 @@ def main():
                 buttons=[i==12 and down for i in range(16)]
                 companion.stdin.write(json.dumps({'input':{'buttons':buttons},'at_ms':at_ms})+'\n');companion.stdin.flush()
                 wait_for(lambda: snapshot()['state']['input']['buttons'][12]==down, 'Remote preview input missing')
+            trace = GestureTrace(js)
+            trace.start(mouse_only=False)
             preview_input(1710,True)
-            wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase']=='pressed', 'Remote preview did not start')
-            time.sleep(0.3)
-            assert snapshot()['state']['gestures']['lanes'][0]['phase']=='pressed', 'Remote preview used host speed'
-            wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase']=='hold', 'Remote clock did not advance between unchanged snapshots')
+            wait_for(lambda: snapshot()['rendered_state']['gestures']['lanes'][0]['phase']=='hold', 'Remote clock did not advance between unchanged snapshots')
+            check_stage(trace.stop(), 0, 'pressed', 200, 10, completed='hold')
             preview_input(1720,False)
             click_target('timing-normal')
             wait_for(lambda: snapshot()['state']['timing_scale']==1, 'Remote speed reset failed')
@@ -681,46 +696,16 @@ def main():
             wait_for(lambda: snapshot()['state']['status']=='live', 'Direct HID input did not become live')
             assert not snapshot()['remote'], 'HID should not use companion transport'
             assert snapshot()['state']['device']=='webhid:steam-controller-usb'
-            # Slow motion changes the gesture engine and the timeline together,
-            # while raw controller freshness continues using real time.
-            click_target('timing-scale:slow')
-            wait_for(lambda: snapshot()['state']['timing_scale']==10, 'Timing slider did not reach 10x')
-            js('fakeHid.device.frame(0)')
-            time.sleep(0.1)
-            js('fakeHid.device.frame(0x4000)')
-            wait_for(lambda: snapshot()['state']['gestures']['lanes'][2]['phase']=='pressed', 'Slow Select press missing')
-            assert snapshot()['control_labels'][5]=='Enter :: Menu'
-            time.sleep(0.3)
-            assert snapshot()['state']['gestures']['lanes'][2]['phase']=='pressed', 'Hold completed at normal speed in slow motion'
-            if args.screenshot:
-                args.screenshot.with_name('slow-motion-menu.png').write_bytes(base64.b64decode(request('GET', f'/session/{session}/screenshot')))
-            wait_for(lambda: snapshot()['state']['gestures']['lanes'][2]['phase']=='hold', 'Slow hold never completed')
-            assert snapshot()['control_labels'][5]=='Enter :: Menu'
-            js('fakeHid.device.frame(0)')
-            time.sleep(0.1)
-            js('fakeHid.device.frame(0x40)')
-            wait_for(lambda: snapshot()['control_labels'][4]=='Backspace :: Menu', 'Reverse Menu transition label missing')
-            js('fakeHid.device.frame(0)')
-            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='window', 'Slow release window missing')
-            time.sleep(0.3)
-            assert snapshot()['state']['gestures']['lanes'][3]['phase']=='window', 'Release window did not stretch'
-            js('fakeHid.device.frame(0x40)')
-            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='second', 'Slow second hold missing')
-            time.sleep(0.3)
-            assert snapshot()['state']['gestures']['lanes'][3]['phase']=='second', 'Second hold completed at normal speed'
-            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='cover', 'Slow second hold never completed')
-            click_target('timing-normal')
-            wait_for(lambda: snapshot()['state']['timing_scale']==1, 'Normal speed reset failed')
-            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='unknown', 'Speed change completed an already held gesture')
-            js('fakeHid.device.frame(0)')
-            wait_for(lambda: snapshot()['state']['gestures']['lanes'][3]['phase']=='idle', 'Release after speed change failed')
-            print('PASS: 10x hold, release window and second hold; normal-speed reset and both Menu transition labels')
+            run_hid_timing_checks(snapshot=snapshot, wait_for=wait_for,
+                                  click_target=click_target, js=js)
 
             js('fakeHid.device.frame(0x80000)')
             wait_for(lambda: snapshot()['state']['held']==[True,False], 'Direct L1 did not reach Rust')
             # A release and press delivered in one JS task must not collapse to
             # the final snapshot: the shared gesture engine must see both edges.
-            js('fakeHid.device.frame(0);fakeHid.device.frame(0x80000)')
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase']=='idle', 'L1 did not reset')
+            js('fakeHid.device.frame(0x80000);fakeHid.device.frame(0);fakeHid.device.frame(0x80000)')
             wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase'] in ('second','cover'), 'Fast tap and hold lost between poll frames')
             js('fakeHid.device.frame(0)')
             wait_for(lambda: snapshot()['state']['held']==[False,False], 'Direct release was stale')
@@ -831,7 +816,9 @@ def main():
             assert 'Steam Deck' in snapshot()['input_status']
             js('fakeHid.device.frame(0x8)')
             wait_for(lambda: snapshot()['state']['held']==[True,False], 'Deck L1 mapping failed')
-            js('fakeHid.device.frame(0);fakeHid.device.frame(0x8)')
+            js('fakeHid.device.frame(0)')
+            wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase']=='idle', 'Deck L1 did not reset')
+            js('fakeHid.device.frame(0x8);fakeHid.device.frame(0);fakeHid.device.frame(0x8)')
             wait_for(lambda: snapshot()['state']['gestures']['lanes'][0]['phase'] in ('second','cover'), 'Deck fast tap and hold lost')
             js('fakeHid.device.frame(0)')
             wait_for(lambda: snapshot()['state']['held']==[False,False], 'Deck release was stale')

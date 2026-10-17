@@ -4,7 +4,7 @@ The browser smoke harness supplies WebDriver callbacks. These checks read the
 rendered diagnostics, but never write simulated input into the application.
 """
 
-from browser_mouse_timing import GestureTrace, check_stage
+from browser_gesture_timing import GestureTrace, check_stage
 
 
 CONTROLS = (

@@ -244,8 +244,10 @@ SDL3 is compiled from source and linked statically. Run from the repository root
 ```powershell
 cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
 cargo run --locked --manifest-path overlay/Cargo.toml --features desktop
-# Release with a static MSVC CRT:
+# Match the static MSVC CRT in Rust and SDL's CMake build:
 $env:RUSTFLAGS = '-C target-feature=+crt-static'
+$env:CMAKE_TOOLCHAIN_FILE = (Resolve-Path overlay/cmake/windows-static-crt.cmake).Path
+cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
 cargo build --locked --manifest-path overlay/Cargo.toml --release --features desktop
 python overlay/scripts/package_windows.py
 ```
@@ -414,6 +416,22 @@ Browser tests need Chrome/ChromeDriver or Firefox/GeckoDriver. The smoke script
 accepts `--driver PATH`, `--browser-binary PATH` and `--screenshot PATH`; it uses
 a temporary browser profile. `WASM_BINDGEN_TEST_WEBDRIVER_JSON` can supply custom
 browser paths for wasm-pack. Build before the packaged-browser smoke test.
+The smoke harness prints browser/driver versions. `--webdriver-delay-ms 650`
+adds latency after every driver response; CI uses it to catch tests that depend
+on quick round trips. Timed input sequences and timeline observations run inside
+the browser so gesture windows do not include Python/HTTP overhead.
+
+To run the packaged viewer in CI's Ubuntu 24.04 and pinned Chrome environment,
+first build `overlay/dist`, then run from the repository root (Docker required):
+
+```sh
+docker build --platform linux/amd64 -t keybind-browser-check -f overlay/scripts/browser_linux.Dockerfile overlay/scripts
+docker run --rm --platform linux/amd64 --shm-size=1g -v "$PWD/overlay:/work/overlay:ro" keybind-browser-check --webdriver-delay-ms 650
+```
+
+Apple Silicon uses Docker's amd64 emulation. This checks the same WASM bundle
+and browser scenarios on Linux; it does not test physical controller hardware.
+
 The same `tests/behavior.rs` and `tests/gestures.rs` bodies run natively and in WASM. Companion HTTP
 integration tests run on native hosts without Windows input hardware. On Linux,
 compiling the optional native UI also requires the platform GUI dependencies;

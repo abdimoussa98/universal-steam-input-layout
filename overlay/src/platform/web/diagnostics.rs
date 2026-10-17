@@ -12,6 +12,7 @@ fn pad_values(state: &WebState, kind: &str) -> [Option<String>; 2] {
 
 pub(super) fn snapshot(s: &WebState) -> String {
     let mut data = s.data.clone();
+    let rendered = context_value::<State>(s, "keybind.rendered-state");
     let preview =
         !page_hidden() && context_value::<bool>(s, "keybind.mouse-preview").unwrap_or(false);
     if preview && let Some(state) = context_value::<State>(s, "keybind.rendered-state") {
@@ -26,6 +27,8 @@ pub(super) fn snapshot(s: &WebState) -> String {
         "pad_previews": pad_previews,
         "mouse_preview": preview,
         "source_state": s.data.state,
+        "rendered_state": rendered,
+        "rendered_control_labels": rendered.as_ref().map(|state| state.control_labels(&data.profile)),
         "timeline": context_value::<serde_json::Value>(s, "keybind.timeline"),
         "trackpads": data.state.control_page(&data.profile).and_then(|page| page.trackpads.as_ref()),
         "ui_targets": s.context.as_ref().and_then(|c| c.data(|d| d.get_temp::<std::collections::BTreeMap<String, [f32; 2]>>(egui::Id::new("keybind.targets")))),
