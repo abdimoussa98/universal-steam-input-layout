@@ -59,8 +59,8 @@ impl OverlayApp {
                         if !data.hud {
                             self.timing_controls(ui, data);
                         }
-                        ui.add_space(8.0);
-                        self.content(ui, data, now);
+                        timelines::draw(ui, data, now);
+                        self.content(ui, data);
                     });
                 });
             });
@@ -122,10 +122,10 @@ impl OverlayApp {
             }
         });
         if data.state.timing_scale() > 1 {
-            ui.label(RichText::new("Hold or tap, then hold your controller buttons to explore. Steam keeps its normal timing. Release held buttons after changing speed.").size(12.0).color(MUTED));
+            ui.label(RichText::new("Hold or tap, then hold a button with your mouse or controller. Release held buttons after changing speed.").size(12.0).color(MUTED));
         }
     }
-    fn content(&mut self, ui: &mut egui::Ui, data: &FrameData, now: u64) {
+    fn content(&mut self, ui: &mut egui::Ui, data: &FrameData) {
         let content_height =
             (ui.ctx().screen_rect().bottom() - ui.cursor().min.y - 20.0).max(100.0);
         egui::ScrollArea::vertical()
@@ -135,7 +135,6 @@ impl OverlayApp {
             .show(ui, |ui| {
                 self.controller_panel(ui, data);
                 ui.add_space(4.0);
-                timelines::draw(ui, data, now);
                 trackpads::explorer(ui, data);
                 ui.add_space(8.0);
                 reading_help(ui, data);
@@ -177,13 +176,17 @@ impl OverlayApp {
     }
     fn connection_controls(&mut self, ui: &mut egui::Ui, data: &FrameData) {
         ui.horizontal_wrapped(|ui| {
+            let preview = data.state.device.as_deref() == Some("viewer-mouse");
             let live = data.state.status == InputStatus::Live;
             ui.label(
-                RichText::new(if live { "Live input" } else { "Reference" }).color(if live {
-                    ACCENT
+                RichText::new(if preview {
+                    "Mouse preview"
+                } else if live {
+                    "Live input"
                 } else {
-                    MUTED
-                }),
+                    "Reference"
+                })
+                .color(if live { ACCENT } else { MUTED }),
             );
             ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
                 if let Some(connection) = &data.browser_connection {
@@ -221,6 +224,7 @@ impl OverlayApp {
 fn reading_help(ui: &mut egui::Ui, data: &FrameData) {
     ui.collapsing("Reading this view", |ui| {
         ui.label("Choose the mode to match Steam. Labels describe a fresh press in the current layer.");
+        ui.label("Click and hold any controller button to preview it. Right-click to hold or release a button while you try another button or trackpad. Mouse previews stay in the viewer.");
         ui.label("Stick dots show X/Y travel; green rings mean thumb contact. Trackpad dots show thumb position. Trigger bars show travel; Full means a full pull.");
         ui.label("Bumpers: Mod 0 :: Scroll down and Mod 1 :: Scroll up mean hold the modifier, or tap then hold to scroll. Menu buttons: Escape :: Fn and Tab :: Fn show the key and function-layer alternatives.");
         ui.label("At 1×, gestures follow the layout’s configured delays. Slow motion stretches the viewer’s hold, release-window and second-hold timings together. It does not change Steam or send game input.");

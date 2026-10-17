@@ -8,6 +8,7 @@ pub struct OverlayApp {
     applied_scale: f32,
     host_clock: u64,
     clock_received: f64,
+    mouse: mouse::MousePreview,
 }
 impl OverlayApp {
     pub fn new(cc: &eframe::CreationContext<'_>, backend: Box<dyn Backend>) -> Self {
@@ -21,6 +22,7 @@ impl OverlayApp {
             applied_scale: 0.0,
             host_clock: 0,
             clock_received: 0.0,
+            mouse: mouse::MousePreview::default(),
         }
     }
     fn frame_clock(&mut self, ctx: &egui::Context, data: &FrameData) -> u64 {
@@ -93,7 +95,8 @@ impl OverlayApp {
 }
 impl eframe::App for OverlayApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        let data = self.backend.data();
+        let source = self.backend.data();
+        let data = self.mouse.frame(ctx, &source);
         ctx.data_mut(|d| {
             d.insert_temp(
                 egui::Id::new("keybind.targets"),
@@ -104,7 +107,7 @@ impl eframe::App for OverlayApp {
         self.page_shortcuts(ctx, &data);
         self.dropped_profiles(ctx, &data);
         self.viewer(ctx, &data, now);
-        self.settings_window(ctx, &data);
+        self.settings_window(ctx, &source);
     }
     fn clear_color(&self, _visuals: &egui::Visuals) -> [f32; 4] {
         [0.0; 4]

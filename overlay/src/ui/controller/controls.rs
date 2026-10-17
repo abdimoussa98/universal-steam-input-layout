@@ -350,14 +350,26 @@ impl<'a> ControlDrawing<'a> {
         let n = self.n;
         let control = self.control;
         let card = self.card;
-        let response = ui.interact(card, egui::Id::new(("control", n)), egui::Sense::hover());
-        let mut help = format!("{}: {}", control.label(), label);
+        let response = ui.interact(
+            card,
+            egui::Id::new(("control", n)),
+            egui::Sense::click_and_drag(),
+        );
+        target(ui, &format!("control:{}", control.key()), &response);
+        mouse::register(ui, control, &response);
+        let mut help = format!(
+            "{}: {}\nClick and hold to preview. Right-click to hold or release for combinations.",
+            control.label(),
+            label
+        );
         if n >= 14 {
             help.push_str(&format!(
                 "\nTravel: {}%",
                 data.state.input.triggers[n - 14] / 10
             ));
         }
-        response.on_hover_text(help);
+        response
+            .on_hover_cursor(egui::CursorIcon::PointingHand)
+            .on_hover_text(help);
     }
 }

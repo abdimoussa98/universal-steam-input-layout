@@ -103,6 +103,14 @@ coordinates. Standard browser Gamepad
 input has stick axes but no pad/touch data; use direct WebHID or the companion for those markers.
 System buttons remain visual orientation cues.
 
+Click and hold any of the 16 binding buttons to preview its input with the mouse,
+including D-pad directions, stick clicks, bumpers, menu buttons, and full trigger
+pulls. Right-click a button to keep it held, then try other buttons or trackpads;
+right-click it again to release. Mouse input runs the same gesture lifecycle as
+controller input, without a connected controller or sending input to a game.
+The viewer returns to the physical input source after the mouse gesture finishes.
+Changing mode, profile, or speed, or leaving the window clears mouse holds.
+
 The trackpads show **touch bindings first**, both on the controller and in the
 enlarged Trackpads panel. Press a pad to reveal its click bindings: left center
 is Caps Lock with outer arrow keys; right center is Middle click with outer
@@ -145,15 +153,17 @@ held buttons before trying again. This setting is temporary and affects only the
 viewer, including its local preview of companion input. Steam and the downloadable
 layouts keep their original timings. Paired Menu transitions still require manual
 mode selection; slow motion does not infer unsupported persistent layer changes.
-The dark viewer keeps mode controls above the scrolling reference, with gesture
-details and reading help available on demand. Narrow windows can scroll the
+The viewer keeps its compact timeline above the scrolling controller reference.
+Its text appears only during an active **::** binding lifecycle; idle shows a thin
+empty rail. Hover an active timeline for gesture details. Reading help remains
+available below the controller. Narrow windows can scroll the
 controller diagram horizontally to keep labels readable.
 Bumpers show **Mod 0 :: Scroll down** and **Mod 1 :: Scroll up**: hold the
 modifier, or tap then hold to scroll. A single tap also produces a scroll step.
 The delayed cursor-gyro effect does not replace the modifier binding.
 Menu buttons retain **Escape :: Fn** and **Tab :: Fn** for their key/function-layer
 alternatives. The timer uses the same compact wording, with each gesture's
-sequence and delayed effects in **Gesture details**.
+sequence and delayed effects available on hover.
 
 Trigger labels include both soft-pull and full-pull bindings when configured.
 Holding Select or Start to enter Fn shows **L2: Full: F12** and **R2: Full: F11**
@@ -162,13 +172,13 @@ still show physical pressure without inventing an activation threshold.
 
 One central timer follows the active L1, R1, Select or Start gesture. Its details
 distinguish **Hold**, **Tap**, and **Tap, then hold**. The same bar switches between the Initial hold deadline,
-Release window and Second hold cover countdown. The last gesture
-stays visible as a reference when idle. Combined bumpers share one timer. For the bundled
+Release window and Second hold cover countdown. Text clears when the lifecycle
+ends; the fixed timeline height keeps mouse targets still. Combined bumpers share one timer. For the bundled
 profile, the initial release deadline is 200 ms. Releasing early opens a 150 ms
 second-press window, with the expected scroll (or Escape/Tab) at 50 ms. Pressing
 again cancels the pending window and starts a separate 150 ms countdown for the
 Second hold cover. Releasing before that cover reopens the window; releasing after cover
-ends the gesture. Event notes remain visible after the window closes. Steering
+ends the gesture. Steering
 bumpers are direct S/W bindings and have no bumper tap countdown.
 See the [timed-gesture vocabulary](../resources/Layout%20Vocabulary.md#timed-gestures)
 for the gesture sequence and the difference between a single Tap and Tap, then hold.

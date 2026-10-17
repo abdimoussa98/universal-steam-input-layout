@@ -29,7 +29,9 @@ impl FrameData {
             && self.settings.devices.is_empty()
     }
     pub fn input_status_label(&self) -> String {
-        if self.browser_has_no_devices() {
+        if self.state.device.as_deref() == Some("viewer-mouse") {
+            "Mouse preview · right-click a button to hold or release it".into()
+        } else if self.browser_has_no_devices() {
             if self
                 .browser_connection
                 .as_ref()

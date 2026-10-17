@@ -20,6 +20,7 @@ import time
 import urllib.request
 import urllib.error
 from urllib.parse import urlparse
+from browser_mouse import run_mouse_checks, run_mouse_source_checks
 
 
 def free_port():
@@ -127,6 +128,20 @@ def main():
         request('POST', f'/session/{session}/actions', {'actions':[{'type':'pointer','id':'mouse','parameters':{'pointerType':'mouse'},'actions':click_actions}]})
     def release_pointer():
         request('POST', f'/session/{session}/actions', {'actions':[{'type':'pointer','id':'mouse','parameters':{'pointerType':'mouse'},'actions':[{'type':'pointerUp','button':0}]}]})
+    def pointer_actions(actions):
+        request('POST', f'/session/{session}/actions', {'actions': [{
+            'type': 'pointer', 'id': 'mouse', 'parameters': {'pointerType': 'mouse'}, 'actions': actions,
+        }]})
+    def focus_change():
+        original = request('GET', f'/session/{session}/window')
+        temporary = request('POST', f'/session/{session}/window/new', {'type': 'tab'})['handle']
+        request('POST', f'/session/{session}/window', {'handle': temporary})
+        time.sleep(0.2)
+        request('DELETE', f'/session/{session}/window')
+        request('POST', f'/session/{session}/window', {'handle': original})
+    mouse_callbacks = dict(snapshot=snapshot, wait_for=wait_for, click_target=click_target,
+                           hold_target=hold_target, release_pointer=release_pointer,
+                           actions=pointer_actions, focus_change=focus_change)
     def scroll_target(name):
         for _ in range(5):
             point = snapshot()['ui_targets'][name]
@@ -309,6 +324,7 @@ def main():
         assert snapshot()['controller_help'], 'Missing-controller troubleshooting not available'
         assert snapshot()['labels'] == ['F', 'V', 'C', 'R']
         assert js("return document.querySelector('#status')===null"), 'Startup status did not clear'
+        run_mouse_checks(**mouse_callbacks)
         key('F2')
         wait_for(lambda: snapshot()['state']['mode'] == 'steering', 'F2 did not select Steering')
         # egui determines repeat from held keys, not the DOM repeat flag. Model
@@ -447,6 +463,7 @@ def main():
         wait_for(lambda: snapshot()['state']['status'] == 'unavailable', 'Blocked Gamepad API was not reported')
         js("Object.defineProperty(navigator,'getGamepads',{value:window.savedGamepads,configurable:true})")
         wait_for(lambda: snapshot()['state']['status'] == 'live' and not snapshot()['error'], 'Input error did not clear on recovery')
+        run_mouse_source_checks(**mouse_callbacks)
         def sticks_do_not_overlap():
             targets = snapshot()['ui_targets']
             for side in range(2):
