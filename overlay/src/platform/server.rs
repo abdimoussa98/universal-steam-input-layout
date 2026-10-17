@@ -162,7 +162,9 @@ fn start_server(
                 }
             } else if req.method() == &Method::Get {
                 // Whitelist bundle assets; no filesystem paths are accepted from clients.
-                let asset = match path.as_str() {
+                // Static assets carry a bundle-version query for browser caches.
+                let asset_path = path.split_once('?').map_or(path.as_str(), |(path, _)| path);
+                let asset = match asset_path {
                     "/" | "/index.html" => Some(("index.html", "text/html; charset=utf-8")),
                     "/steam-hid.js" => Some(("steam-hid.js", "text/javascript")),
                     "/start.js" => Some(("start.js", "text/javascript")),

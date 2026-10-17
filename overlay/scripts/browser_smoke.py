@@ -19,6 +19,7 @@ import threading
 import time
 import urllib.request
 import urllib.error
+from urllib.parse import urlparse
 
 
 def free_port():
@@ -35,6 +36,7 @@ def main():
     parser.add_argument('--screenshot', type=Path)
     parser.add_argument('--companion-fixture', type=Path, help='Path to the compiled fake-input companion example')
     parser.add_argument('--webhid', action='store_true', help='Test direct WebHID permissions/input with a synthetic USB boundary')
+    parser.add_argument('--stale-cache', action='store_true', help='Preload obsolete JS/WASM into the browser cache before opening the viewer')
     parser.add_argument('--live-helper', type=Path, help='Optional hardware check: use the real helper instead of synthetic input tests')
     parser.add_argument('--hosted-companion', action='store_true', help='Test HTTPS viewer to HTTP loopback helper with real browser CORS')
     args = parser.parse_args()
@@ -46,9 +48,25 @@ def main():
         parser.error('--live-helper requires --hosted-companion and excludes --companion-fixture')
     bundle = args.bundle.resolve()
     assert (bundle / 'pkg/keybind_overlay_bg.wasm').is_file(), 'Build the web bundle first'
+    priming_cache = args.stale_cache
     class QuietHandler(http.server.SimpleHTTPRequestHandler):
         def log_message(self, *args):
             pass
+        def do_GET(self):
+            path = urlparse(self.path).path
+            if path == '/cache-prime':
+                body, mime = b'<!doctype html><title>Cache priming</title>', 'text/html'
+            elif priming_cache and path.endswith(('.js', '.wasm')):
+                body, mime = (b'\0asmobsolete', 'application/wasm') if path.endswith('.wasm') else (
+                    b'throw new Error("Cached code from the previous release");', 'text/javascript')
+            else:
+                return super().do_GET()
+            self.send_response(200)
+            self.send_header('Content-Type', mime)
+            self.send_header('Cache-Control', 'max-age=14400')
+            self.send_header('Content-Length', str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
     server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(QuietHandler, directory=str(bundle.parent)))
     tls_directory = tempfile.TemporaryDirectory(prefix='keybind-tls-') if args.hosted_companion else None
     if tls_directory:
@@ -116,7 +134,17 @@ def main():
             fixture = Path(__file__).resolve().parents[1] / 'tests/fixtures/webhid.js'
             request('POST', f'/session/{session}/goog/cdp/execute', {
                 'cmd': 'Page.addScriptToEvaluateOnNewDocument', 'params': {'source': fixture.read_text()}})
+        if args.stale_cache:
+            request('POST', f'/session/{session}/url', {'url': site.rsplit('/', 2)[0] + '/cache-prime'})
+            paths = ['start.js', 'steam-hid.js', 'pkg/keybind_overlay.js', 'pkg/keybind_overlay_bg.wasm']
+            result = request('POST', f'/session/{session}/execute/async', {
+                'script': 'const done=arguments[2]; Promise.all(arguments[1].map(p=>fetch(new URL(p,arguments[0])).then(r=>r.arrayBuffer()))).then(()=>done("cached"),e=>done(String(e)));',
+                'args': [site, paths]})
+            assert result == 'cached', result
+            priming_cache = False
         navigate()
+        if args.stale_cache:
+            print('PASS: current WASM viewer starts despite obsolete JS/WASM cached for four hours')
         if args.live_helper:
             companion = subprocess.Popen([str(args.live_helper.resolve()), '--viewer-url', site],
                                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

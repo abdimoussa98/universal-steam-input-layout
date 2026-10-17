@@ -63,6 +63,20 @@ fn real_http_companion_authority_origin_and_asset_boundaries() {
     assert!(request("/api/state", session, "http://evil.test", None).starts_with("HTTP/1.0 403"));
     assert!(request("/../profile.json", session, origin, None).starts_with("HTTP/1.0 404"));
     assert!(request("/", session, origin, None).contains("test asset"));
+    for asset in [
+        "start.js",
+        "steam-hid.js",
+        "pkg/keybind_overlay.js",
+        "pkg/keybind_overlay_bg.wasm",
+    ] {
+        let response = request(&format!("/{asset}?v=release-hash"), session, origin, None);
+        assert!(response.starts_with("HTTP/1.0 200"), "{asset}: {response}");
+        assert!(response.contains("test asset"));
+    }
+    assert!(
+        request("/../profile.json?v=release-hash", session, origin, None)
+            .starts_with("HTTP/1.0 404")
+    );
     let response = request("/api/state", session, origin, None);
     assert!(response.starts_with("HTTP/1.0 200"));
     let first: BridgeSnapshot =

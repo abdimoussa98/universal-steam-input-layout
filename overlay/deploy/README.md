@@ -36,7 +36,11 @@ No server API credentials, self-hosted runner, or Terraform is needed.
 
 Use HTTPS for the public viewer so browser controller APIs are available.
 Honor Nginx's `Cache-Control: no-cache` headers in your tunnel/cache settings,
-so an update can load new HTML, JS and WASM rather than a cached bundle.
+especially for HTML. Each build includes a content-derived version in the
+bootstrap, controller script, JS glue and WASM URLs. An updated page therefore
+loads current code even when a browser still has the previous scripts cached.
+Keep query strings in the tunnel/CDN cache key; a normal page reload after
+updating the container loads the new bundle.
 
 ## Updating and choosing a version
 
@@ -118,8 +122,10 @@ the real WASM app with synthetic USB input, including cancellation, denied
 permissions, quick tap edges, coordinates, unplug/reconnect and stale input.
 Receiver tests also cover unused slots, controller power-off/on and isolation
 from other active controllers. Physical wired input was confirmed by the user
-in Brave on macOS and Flatpak Chrome on Bazzite. Wireless receiver acceptance
-still needs a physical check on the target computer/browser.
+in Brave on macOS and Flatpak Chrome on Bazzite. The user also confirmed wireless
+`28de:1304` input in Chrome Incognito on Bazzite: L1/R1 change the bindings and
+reset on release. The regular browser session had not picked up working
+discovery; versioned asset URLs address stale scripts across deployments.
 
 ### Optional native companion
 
@@ -134,7 +140,7 @@ python3 -m unittest discover -s overlay/scripts -p 'test_*.py'
 node --test overlay/scripts/test_webhid.mjs
 cargo test --locked --manifest-path overlay/Cargo.toml --features desktop
 python3 overlay/scripts/build_web.py
-python3 overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid
+python3 overlay/scripts/browser_smoke.py --bundle overlay/dist --webhid --stale-cache
 cargo build --locked --manifest-path overlay/Cargo.toml --features desktop --example companion_fixture
 python3 overlay/scripts/browser_smoke.py --bundle overlay/dist \
   --companion-fixture overlay/target/debug/examples/companion_fixture --hosted-companion

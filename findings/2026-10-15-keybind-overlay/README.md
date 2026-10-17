@@ -1,5 +1,33 @@
 # Rust keybind viewer implementation — 2026-10-15
 
+## Browser cache during receiver discovery (2026-10-16)
+
+The Bazzite receiver is `28de:1304`. User-provided diagnostics showed five HID
+nodes inside Chrome's Flatpak, readable report descriptors and read/write
+device-file permissions. Four descriptors expose the expected vendor controller
+collection and reports `0x42`/`0x45`; the fifth has a different vendor usage.
+Adding read-only `/run/udev` access did not resolve the missing picker entry.
+The user then confirmed the receiver appears in HID Explorer and in our viewer
+in a Chrome Incognito window. The user then confirmed physical wireless input:
+L1/R1 change the bindings and reset on release. Regular-session state is
+implicated in the missing picker entry.
+
+The live site served release `15742eb` but returned `max-age=14400` for its
+stable script URLs. Browser caching is a concrete deployment weakness and a
+likely explanation for the regular session retaining an older picker. The
+build now fingerprints all runtime assets and versions the bootstrap URL in
+HTML. The bootstrap propagates that version to both JS imports and the explicit
+WASM URL. The optional local static server accepts the same version queries
+while retaining its asset whitelist and API/origin checks.
+
+TDD: a browser preloaded with obsolete JS/WASM failed startup before the change;
+the updated packaged WASM viewer passes that case plus the existing Gamepad and
+wired/wireless WebHID smoke checks. A packaging regression verifies every runtime
+dependency changes the entry URL and repeated unchanged builds remain stable.
+All three Python packaging/manifest tests and both local HTTP server tests pass.
+CI still skips tests as requested. HTML must revalidate and CDN cache keys must
+retain query strings for the new versioned URLs to take effect.
+
 ## Unfiltered device picker (2026-10-16)
 
 The user reported that the receiver was still absent after deployment and
@@ -13,8 +41,8 @@ This broadens discovery, not the set of decoded controller protocols.
 TDD: unrestricted discovery and unsupported-device identification failed before
 the change; all 14 Node lifecycle tests now pass. The packaged Brave/WASM smoke
 test also passed unrestricted discovery, unsupported selection and the existing
-wired/receiver regressions. Physical receiver input is still unverified; the
-receiver's exact USB ID has not yet been provided.
+wired/receiver regressions. Later diagnostics identified `28de:1304` and the
+user confirmed wireless L1/R1 press/release in Incognito, as recorded above.
 
 ## Wireless receiver input (2026-10-16)
 
@@ -37,8 +65,8 @@ TDD: the new receiver cases failed against the wired-only implementation;
 all 13 Node lifecycle tests now pass. The packaged WASM viewer passed the Brave
 smoke test for both receiver IDs, non-first occupied slots, buttons/triggers,
 radio power-off/on, slot isolation and USB reconnect, plus the existing wired
-and Gamepad checks. Physical wireless acceptance on Bazzite is still pending;
-these synthetic checks do not establish actual receiver/browser compatibility.
+and Gamepad checks. These synthetic checks were later supplemented by the
+user's successful physical wireless L1/R1 check on Bazzite recorded above.
 
 ## Direct browser USB input (2026-10-16)
 
