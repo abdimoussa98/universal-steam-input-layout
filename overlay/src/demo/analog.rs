@@ -78,7 +78,7 @@ impl Engine {
             between,
         );
     }
-    fn soft_ranges(&self, source: &str) -> (Option<f64>, Option<f64>) {
+    pub(crate) fn soft_ranges(&self, source: &str) -> (Option<f64>, Option<f64>) {
         let entries = self
             .layout
             .layers

@@ -1,7 +1,4 @@
-use super::{
-    ACCENT, SURFACE,
-    mouse::{Capture, Hit},
-};
+use super::mouse::{Capture, Hit};
 use crate::{
     demo::{Catalog, Layout, Session},
     ui::Backend,
@@ -21,6 +18,7 @@ pub struct DemoApp {
     pub(super) pinned: BTreeSet<String>,
     pub(super) pad_click: bool,
     pub(super) fine_motion: bool,
+    pub(super) gyro_options: bool,
     pub(super) sound: bool,
     pub(super) feedback_seen: u64,
     pub(super) roll: f32,
@@ -34,13 +32,7 @@ impl DemoApp {
     pub fn new(cc: &eframe::CreationContext<'_>, backend: Box<dyn Backend>) -> Self {
         let catalog = Layout::catalog().expect("validated executable catalog");
         let source = backend.data().remote.then(|| "companion".into());
-        cc.egui_ctx.set_visuals(egui::Visuals::dark());
-        cc.egui_ctx.style_mut(|style| {
-            style.visuals.panel_fill = egui::Color32::from_rgb(17, 21, 27);
-            style.visuals.widgets.inactive.bg_fill = SURFACE;
-            style.visuals.selection.bg_fill = ACCENT.gamma_multiply(0.25);
-            style.spacing.item_spacing = egui::vec2(10., 8.);
-        });
+        crate::ui::theme::apply(&cc.egui_ctx);
         Self {
             session: Session::new(catalog[0].clone()),
             catalog,
@@ -53,6 +45,7 @@ impl DemoApp {
             pinned: BTreeSet::new(),
             pad_click: false,
             fine_motion: false,
+            gyro_options: false,
             sound: false,
             feedback_seen: 0,
             roll: 0.,
@@ -83,20 +76,25 @@ impl DemoApp {
     }
     fn body(&mut self, ctx: &egui::Context) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            egui::ScrollArea::vertical().show(ui, |ui| {
-                if ui.available_width() >= 900. {
-                    ui.columns(2, |columns| {
-                        self.controller(&mut columns[0]);
-                        self.gyro_panel(&mut columns[1]);
-                        self.playground(&mut columns[1]);
+            egui::ScrollArea::vertical()
+                .drag_to_scroll(false)
+                .id_salt("viewer-content")
+                .show(ui, |ui| {
+                    let width = ui.available_width().min(1000.);
+                    ui.with_layout(egui::Layout::left_to_right(egui::Align::Min), |ui| {
+                        ui.add_space(((ui.available_width() - width) / 2.).max(0.));
+                        ui.vertical(|ui| {
+                            ui.set_width(width);
+                            self.controller(ui);
+                            self.gyro_panel(ui);
+                            self.explorer(ui);
+                            self.analog_details(ui);
+                            egui::CollapsingHeader::new("Output playground")
+                                .show(ui, |ui| self.playground(ui));
+                            self.details(ui);
+                        });
                     });
-                } else {
-                    self.controller(ui);
-                    self.gyro_panel(ui);
-                    self.playground(ui);
-                }
-                self.details(ui);
-            });
+                });
         });
     }
     fn diagnostics(&self, ctx: &egui::Context) {
@@ -107,6 +105,7 @@ impl DemoApp {
         });
         let snapshot = serde_json::json!({"demo":self.session.engine.snapshot(), "targets":targets,
             "scale":self.session.scale,"paused":self.session.paused,"replaying":self.session.replaying,
+            "timeline":ctx.data(|d| d.get_temp::<serde_json::Value>(egui::Id::new("demo.timeline.state"))),
             "source":self.source,"sound":self.sound,"recorded":self.session.recording.len()});
         ctx.data_mut(|d| d.insert_temp(egui::Id::new("keybind.demo"), snapshot));
     }

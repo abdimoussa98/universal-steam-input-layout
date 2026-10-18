@@ -1,52 +1,67 @@
-use super::{
-    ACCENT, BORDER, DemoApp, MUTED, SURFACE,
-    mouse::{Hit, Target},
-    target,
-};
+use super::{ACCENT, BORDER, DemoApp, MUTED, SURFACE, mouse::Target, target};
 use crate::demo::Input;
 use eframe::egui::{self, Color32, Rect, Sense, Stroke, vec2};
 
 impl DemoApp {
     pub(super) fn gyro_panel(&mut self, ui: &mut egui::Ui) {
         let status = self.session.engine.gyro_status();
-        ui.horizontal(|ui| {
-            ui.heading(if status["cursor"] == true {
-                "Cursor Gyro"
-            } else {
-                "Gyro"
-            });
-            ui.label(
-                egui::RichText::new(status["status"].as_str().unwrap_or("Off")).color(
-                    if status["active"] == true {
-                        ACCENT
-                    } else {
-                        MUTED
-                    },
-                ),
-            );
-        });
-        ui.label(
-            egui::RichText::new(status["reason"].as_str().unwrap_or(""))
-                .small()
-                .color(MUTED),
-        );
-        let (rect, _) = ui.allocate_exact_size(vec2(ui.available_width(), 210.), Sense::hover());
+        let (row, _) = ui.allocate_exact_size(vec2(ui.available_width(), 132.), Sense::hover());
+        let rect = Rect::from_center_size(row.center() - vec2(100., 0.), vec2(160., 100.));
         cuboid(
             ui,
             rect,
             self.session.engine.gyro.pose,
             status["active"] == true,
         );
-        target(ui, "gyro", rect);
-        self.hits.push(Hit {
-            target: Target::Gyro,
-            rect,
-            clip: ui.clip_rect(),
-            layer: ui.layer_id(),
+        self.hit(ui, "gyro", Target::Gyro, (rect, 0.));
+        let panel = Rect::from_min_size(rect.right_top() + vec2(12., 0.), vec2(200., 110.));
+        let mut controls = ui.new_child(
+            egui::UiBuilder::new()
+                .id_salt("gyro-status")
+                .max_rect(panel),
+        );
+        controls.horizontal(|ui| {
+            ui.strong(if status["cursor"] == true {
+                "Cursor Gyro"
+            } else {
+                "Gyro"
+            });
+            ui.colored_label(
+                if status["active"] == true {
+                    ACCENT
+                } else {
+                    MUTED
+                },
+                status["status"].as_str().unwrap_or("Off"),
+            )
+            .on_hover_text(status["reason"].as_str().unwrap_or(""));
         });
-        self.motion_controls(ui);
-        self.threshold(ui, &status);
-        self.motion_source(ui);
+        self.threshold(&mut controls, &status);
+        controls.horizontal(|ui| {
+            let fine = ui.checkbox(&mut self.fine_motion, "Fine motion");
+            target(ui, "fine-motion", fine.rect);
+            let r = ui.small_button("Recenter");
+            target(ui, "recenter", r.rect);
+            if r.clicked() {
+                self.session.input(Input::Recenter);
+                self.roll = 0.;
+            }
+        });
+        let options = controls.small_button("Gyro controls…");
+        target(&controls, "gyro-options", options.rect);
+        if options.clicked() {
+            self.gyro_options = !self.gyro_options;
+        }
+        if self.gyro_options {
+            let mut open = true;
+            egui::Window::new("Gyro controls")
+                .open(&mut open)
+                .show(ui.ctx(), |ui| {
+                    self.motion_controls(ui);
+                    self.motion_source(ui);
+                });
+            self.gyro_options = open;
+        }
     }
     fn motion_controls(&mut self, ui: &mut egui::Ui) {
         ui.horizontal(|ui| {
@@ -96,35 +111,29 @@ impl DemoApp {
         }
     }
     fn threshold(&self, ui: &mut egui::Ui, status: &serde_json::Value) {
-        if status["cursor"] == true {
-            let threshold = status["threshold"].as_f64().unwrap_or(5.);
-            let gyro = &self.session.engine.gyro;
-            let pending = gyro.pending[0].hypot(gyro.pending[1]);
-            ui.add(
-                egui::ProgressBar::new((pending / threshold.max(0.001)) as f32)
-                    .text(format!(
-                        "Movement building up · {:.1} / {threshold:.0}",
-                        pending
-                    ))
-                    .fill(ACCENT),
-            );
-            let pulse = gyro
-                .last_output
-                .is_some_and(|at| self.session.engine.now.saturating_sub(at) < 120);
-            ui.label(
-                egui::RichText::new(if pulse {
-                    "Movement emitted"
-                } else {
-                    "Waiting for movement"
-                })
-                .color(if pulse { ACCENT } else { MUTED }),
-            );
-            ui.label(
-                egui::RichText::new("Threshold feedback is simulated; sound is optional.")
-                    .small()
-                    .color(MUTED),
-            );
-        }
+        let gyro = &self.session.engine.gyro;
+        let threshold = status["threshold"].as_f64().unwrap_or(0.);
+        let pulse = gyro
+            .last_output
+            .is_some_and(|at| self.session.engine.now.saturating_sub(at) < 120);
+        let caption = if threshold <= 0. {
+            "Drag the block to rotate"
+        } else if pulse {
+            "Movement emitted"
+        } else {
+            "Movement threshold"
+        };
+        ui.add(
+            egui::ProgressBar::new(if threshold > 0. {
+                (gyro.pending[0].hypot(gyro.pending[1]) / threshold) as f32
+            } else {
+                0.
+            })
+            .desired_width(190.)
+            .desired_height(14.)
+            .text(caption)
+            .fill(if pulse { egui::Color32::WHITE } else { ACCENT }),
+        );
     }
 }
 fn cuboid(ui: &egui::Ui, rect: Rect, pose: [f64; 3], active: bool) {
@@ -161,7 +170,10 @@ fn cuboid(ui: &egui::Ui, rect: Rect, pose: [f64; 3], active: bool) {
             .map(|i| {
                 let p = vertices[*i];
                 let perspective = 4. / (4. - p[2]);
-                rect.center() + vec2(p[0] as f32, -p[1] as f32) * 65. * perspective as f32
+                rect.center()
+                    + vec2(p[0] as f32, -p[1] as f32)
+                        * (rect.width().min(rect.height()) * 0.3)
+                        * perspective as f32
             })
             .collect();
         ui.painter().add(egui::Shape::convex_polygon(

@@ -38,6 +38,7 @@ pub(crate) struct Act {
 }
 
 pub struct Engine {
+    pub(crate) presentation: super::presentation::Presentation,
     pub layout: Arc<Layout>,
     pub now: u64,
     pub error: Option<String>,
@@ -59,6 +60,7 @@ pub struct Engine {
 impl Engine {
     pub fn new(layout: Arc<Layout>) -> Self {
         let mut engine = Self {
+            presentation: Default::default(),
             layout,
             now: 0,
             error: None,
@@ -177,7 +179,7 @@ impl Engine {
             "layout": self.layout.label(), "tag": self.layout.tag, "sha256": self.layout.sha256,
             "now": self.now, "mode": self.mode(), "stack": self.stack_titles(), "held": self.held,
             "output": self.output, "gyro": self.gyro_status(), "surfaces": self.surfaces,
-            "timers": self.timers(), "error": self.error,
+            "timers": self.timers(), "error": self.error, "lifecycle": self.lifecycle(),
         })
     }
     pub(crate) fn timers(&self) -> Vec<serde_json::Value> {

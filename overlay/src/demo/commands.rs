@@ -9,6 +9,7 @@ impl Engine {
         commands: bool,
     ) {
         let before = self.stack.clone();
+        let parent = self.presentation.layers.get(&binding.layer).cloned();
         let mut removed = vec![];
         let mut changed = false;
         for op in &binding.entry.commands {
@@ -25,6 +26,7 @@ impl Engine {
                 Operation::AddLayer { target, beep } | Operation::HoldLayer { target, beep } => {
                     if !self.stack.contains(target) {
                         self.stack.push(*target);
+                        self.trace_layer(binding, *target, parent.as_ref());
                         self.note("add", self.layout.layers[*target].title.clone());
                     }
                     if matches!(op, Operation::HoldLayer { .. })
@@ -58,6 +60,9 @@ impl Engine {
             self.reset_delays(&removed, act);
         }
         if changed {
+            self.presentation
+                .layers
+                .retain(|layer, _| self.stack.contains(layer));
             self.rebind(before);
         }
     }

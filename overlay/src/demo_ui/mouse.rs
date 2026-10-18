@@ -12,12 +12,20 @@ pub(super) enum Target {
 pub(super) struct Hit {
     pub target: Target,
     pub rect: Rect,
+    pub angle: f32,
     pub clip: Rect,
     pub layer: egui::LayerId,
 }
 impl Hit {
+    fn local(&self, pos: Pos2) -> egui::Vec2 {
+        let delta = pos - self.rect.center();
+        egui::vec2(
+            delta.x * self.angle.cos() + delta.y * self.angle.sin(),
+            -delta.x * self.angle.sin() + delta.y * self.angle.cos(),
+        ) / (self.rect.size() * 0.5)
+    }
     fn contains(&self, pos: Pos2, ctx: &egui::Context) -> bool {
-        self.rect.contains(pos)
+        self.local(pos).abs().max_elem() <= 1.
             && self.clip.contains(pos)
             && ctx
                 .layer_id_at(pos)
@@ -75,7 +83,7 @@ impl DemoApp {
         };
         match &hit.target {
             Target::Button(control) => self.virtual_button(control, true),
-            Target::Surface(source) => self.send_surface(source.clone(), hit.rect, pos, true),
+            Target::Surface(source) => self.send_surface(source.clone(), &hit, pos, true),
             Target::Gyro => {}
         }
         self.capture = Some(Capture {
@@ -88,13 +96,13 @@ impl DemoApp {
         let Some(capture) = self.capture.take() else {
             return;
         };
-        match capture.hit.target {
+        match &capture.hit.target {
             Target::Button(control) => {
-                if !self.pinned.contains(&control) {
-                    self.virtual_button(&control, false);
+                if !self.pinned.contains(control) {
+                    self.virtual_button(control, false);
                 }
             }
-            Target::Surface(source) => self.send_surface(source, capture.hit.rect, pos, false),
+            Target::Surface(source) => self.send_surface(source.clone(), &capture.hit, pos, false),
             Target::Gyro => {}
         }
     }
@@ -139,9 +147,7 @@ impl DemoApp {
             return;
         };
         match &capture.hit.target {
-            Target::Surface(source) => {
-                self.send_surface(source.clone(), capture.hit.rect, pos, true)
-            }
+            Target::Surface(source) => self.send_surface(source.clone(), &capture.hit, pos, true),
             Target::Gyro => {
                 let delta = pos - capture.last;
                 let scale = if self.fine_motion { 0.02 } else { 0.35 };
@@ -156,12 +162,12 @@ impl DemoApp {
         capture.at = self.session.engine.now;
         self.capture = Some(capture);
     }
-    fn send_surface(&mut self, source: String, rect: Rect, pos: Pos2, down: bool) {
+    fn send_surface(&mut self, source: String, hit: &Hit, pos: Pos2, down: bool) {
         let stick = source.contains("joystick");
         let position = if !down && stick {
             [0.; 2]
         } else {
-            let p = (pos - rect.center()) / (rect.width().min(rect.height()) * 0.5);
+            let p = hit.local(pos);
             [f64::from(p.x.clamp(-1., 1.)), f64::from(p.y.clamp(-1., 1.))]
         };
         let touch = down || (stick && self.pinned.contains(&format!("{source}/touch")));

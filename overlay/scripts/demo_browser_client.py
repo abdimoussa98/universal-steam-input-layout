@@ -118,7 +118,7 @@ class Browser:
         """
         self.js('''
           window.demoSequenceDone=false; window.demoSequenceError=null;
-          window.demoSequenceTiming=[];
+          window.demoSequenceTiming=[]; window.demoSequenceFrames=[];
           const events=arguments[0], canvas=document.querySelector('canvas');
           const rendered=()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
           const snapshot=()=>JSON.parse(keybindApp.diagnostic_snapshot());
@@ -137,6 +137,7 @@ class Browser:
               canvas.dispatchEvent(type==='mousemove' ? new MouseEvent(type,options) :
                 new PointerEvent(type.replace('mouse','pointer'),options));
               await rendered();
+              demoSequenceFrames.push(snapshot());
               const logical=snapshot().demo.now-initial.demo.now;
               const expected=elapsed/initial.scale;
               demoSequenceTiming.push({type,expected_ms:expected,logical_ms:logical,real_ms:demoClock.realNow()-start});

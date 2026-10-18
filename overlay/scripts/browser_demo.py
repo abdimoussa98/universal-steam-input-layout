@@ -4,9 +4,11 @@ import math
 from pathlib import Path
 import shutil
 from demo_browser_client import Browser
+import browser_viewer
 
 
 def run(browser):
+    browser_viewer.lifecycle(browser)
     state = browser.snapshot()
     assert state['demo']['layout'] == 'ibex 1.2 · default', state
     assert state['demo']['timers'] == []
@@ -52,6 +54,7 @@ def run(browser):
         events += [(30*scale, 'right_trackpad', 'mouseup', 0, .9)]
         result = browser.sequence(events, frame_delay_ms=frame_delay)
         assert result['demo']['output']['wheel'] > 0, result
+        browser_viewer.geometry(result)
         assert not any('RTP:' in layer for layer in result['demo']['stack']), result
         assert result['demo']['output']['down'] == [], result
         assert result['demo']['error'] is None, result
@@ -71,11 +74,14 @@ def run(browser):
         expected = ['ibex 1.2', 'neptune 90.78', 'dse 1.2'][index // 2] + (' · alternative' if index % 2 else ' · default')
         browser.wait(lambda: browser.snapshot()['demo']['layout'] == expected, 'selected layout rendered')
         assert browser.snapshot()['demo']['error'] is None
+        browser_viewer.selected_layout(browser, index)
     assert browser.snapshot()['demo']['layout'].startswith('dse')
     assert 'center_trackpad' in browser.snapshot()['targets']
     print('PASS: pause, reset and six layout selections', flush=True)
+    browser_viewer.explorer(browser)
     if browser.args.webhid:
         hardware(browser)
+    browser_viewer.narrow(browser)
     browser.click('downloads')
     browser.wait(lambda: browser.js("return document.querySelector('#downloads').open"), 'downloads dialog')
     assert browser.js("return document.querySelector('.demo-identity').textContent.includes('The demo runs')")

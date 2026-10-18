@@ -8,7 +8,7 @@ mod mouse;
 mod panels;
 mod preview;
 mod settings;
-mod theme;
+pub(crate) mod theme;
 mod timelines;
 mod trackpads;
 

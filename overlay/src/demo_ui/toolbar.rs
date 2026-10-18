@@ -1,34 +1,54 @@
-use super::{ACCENT, DemoApp, MUTED, target};
+use super::{ACCENT, DemoApp, target};
 use crate::ui::Command;
 use eframe::egui;
 
 impl DemoApp {
     pub(super) fn toolbar(&mut self, ctx: &egui::Context) {
         egui::TopBottomPanel::top("demo.header").show(ctx, |ui| {
-            ui.horizontal_wrapped(|ui| {
-                ui.heading("Layout playground");
-                ui.label(egui::RichText::new(self.session.engine.mode()).color(ACCENT));
-                let mut index = self.selection;
-                let response = egui::ComboBox::from_id_salt("demo.layout")
-                    .selected_text(self.catalog[index].label())
-                    .show_ui(ui, |ui| {
-                        for (i, l) in self.catalog.iter().enumerate() {
-                            let r = ui.selectable_value(&mut index, i, l.label());
-                            target(ui, &format!("layout:{i}"), r.rect);
-                        }
-                    });
-                target(ui, "layout", response.response.rect);
-                if index != self.selection {
-                    self.select_layout(index);
-                }
-                let downloads = ui.button("Download layouts");
-                target(ui, "downloads", downloads.rect);
-                if downloads.clicked() {
-                    self.backend.command(Command::DownloadLayouts);
-                }
-                ui.checkbox(&mut self.inspector, "Details");
+            let width = ui.available_width().min(1000.);
+            ui.with_layout(egui::Layout::left_to_right(egui::Align::Min), |ui| {
+                ui.add_space(((ui.available_width() - width) / 2.).max(0.));
+                ui.vertical(|ui| {
+                    ui.set_width(width);
+                    self.header(ui);
+                });
             });
-            self.playback_controls(ui);
+        });
+    }
+    fn header(&mut self, ui: &mut egui::Ui) {
+        ui.horizontal_wrapped(|ui| {
+            ui.label(egui::RichText::new("Binding reference").size(26.).strong());
+            ui.label(egui::RichText::new(self.session.engine.mode()).color(ACCENT));
+            let mut index = self.selection;
+            let response = egui::ComboBox::from_id_salt("demo.layout")
+                .height(300.)
+                .selected_text(self.catalog[index].label())
+                .show_ui(ui, |ui| {
+                    for (i, l) in self.catalog.iter().enumerate() {
+                        let r = ui.selectable_value(&mut index, i, l.label());
+                        target(ui, &format!("layout:{i}"), r.rect);
+                    }
+                });
+            target(ui, "layout", response.response.rect);
+            if index != self.selection {
+                self.select_layout(index);
+            }
+            let downloads = ui.button("Download layouts");
+            target(ui, "downloads", downloads.rect);
+            if downloads.clicked() {
+                self.backend.command(Command::DownloadLayouts);
+            }
+            ui.checkbox(&mut self.inspector, "Details");
+        });
+        self.playback_controls(ui);
+        ui.horizontal_wrapped(|ui| {
+            self.pad_controls(ui);
+            self.source_selector(ui);
+            let sound = ui.checkbox(&mut self.sound, "Sound");
+            target(ui, "sound", sound.rect);
+            if sound.changed() {
+                self.enable_sound();
+            }
         });
     }
     fn playback_controls(&mut self, ui: &mut egui::Ui) {
@@ -77,12 +97,6 @@ impl DemoApp {
             if reset.clicked() {
                 self.reset();
             }
-            let sound = ui.checkbox(&mut self.sound, "Sound");
-            target(ui, "sound", sound.rect);
-            if sound.changed() {
-                self.enable_sound();
-            }
-            self.source_selector(ui);
         });
     }
     fn source_selector(&mut self, ui: &mut egui::Ui) {
@@ -144,39 +158,5 @@ impl DemoApp {
             }
             r.on_hover_text(connection.message);
         }
-    }
-    pub(super) fn timeline(&self, ctx: &egui::Context) {
-        egui::TopBottomPanel::top("demo.timeline")
-            .exact_height(44.)
-            .show(ctx, |ui| {
-                let timers = self.session.engine.timers();
-                if timers.is_empty() {
-                    return;
-                }
-                ui.horizontal(|ui| {
-                    for timer in timers.iter().take(3) {
-                        let start = timer["start"].as_u64().unwrap_or(0);
-                        let due = timer["due"].as_u64().unwrap_or(start + 1);
-                        let fraction =
-                            (self.session.engine.now - start) as f32 / (due - start).max(1) as f32;
-                        ui.vertical(|ui| {
-                            ui.label(
-                                egui::RichText::new(timer["layer"].as_str().unwrap_or(""))
-                                    .small()
-                                    .color(MUTED),
-                            );
-                            ui.add(
-                                egui::ProgressBar::new(fraction)
-                                    .desired_width(210.)
-                                    .desired_height(4.)
-                                    .fill(ACCENT),
-                            );
-                        });
-                    }
-                    if timers.len() > 3 {
-                        ui.label(format!("+{} timers", timers.len() - 3));
-                    }
-                });
-            });
     }
 }

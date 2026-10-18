@@ -1,18 +1,21 @@
 //! Browser-first, interactive playground for the executable layout.
 mod app;
+mod controller;
 mod controls;
 mod gyro;
 mod hardware;
 mod mouse;
+mod pads;
 mod panels;
+mod timeline;
 mod toolbar;
 
 pub use app::DemoApp;
 use eframe::egui::{self, Color32};
 const ACCENT: Color32 = Color32::from_rgb(125, 211, 184);
 const MUTED: Color32 = Color32::from_rgb(156, 164, 177);
-const SURFACE: Color32 = Color32::from_rgb(24, 29, 36);
-const BORDER: Color32 = Color32::from_rgb(54, 64, 75);
+const SURFACE: Color32 = Color32::from_rgb(24, 27, 32);
+const BORDER: Color32 = Color32::from_rgb(44, 49, 57);
 
 fn target(ui: &egui::Ui, id: &str, rect: egui::Rect) {
     ui.ctx().data_mut(|data| {

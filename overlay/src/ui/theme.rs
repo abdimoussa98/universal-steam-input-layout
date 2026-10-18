@@ -1,6 +1,6 @@
 use super::*;
 
-pub(super) fn apply(ctx: &egui::Context) {
+pub(crate) fn apply(ctx: &egui::Context) {
     let mut style = (*ctx.style()).clone();
     style.visuals = egui::Visuals::dark();
     style.visuals.panel_fill = BACKGROUND;

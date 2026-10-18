@@ -17,6 +17,7 @@ mod lifecycle_tests;
 mod output;
 #[cfg(test)]
 mod parity_tests;
+pub(crate) mod presentation;
 mod resolve;
 mod session;
 #[cfg(test)]
