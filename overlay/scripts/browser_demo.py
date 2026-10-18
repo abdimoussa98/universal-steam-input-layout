@@ -83,7 +83,7 @@ def run(browser):
     assert browser.snapshot()['demo']['layout'].startswith('dse')
     assert 'center_trackpad' in browser.snapshot()['targets']
     print('PASS: pause, reset and six layout selections', flush=True)
-    print('PASS: all six layouts display Mod 0 inherited G before pressing A, through its cover, and restore F on release', flush=True)
+    print('PASS: all six layouts show and emit Mod 0 G/T/Z/X at 1x/10x, preserve labels through covers, and restore base labels', flush=True)
     browser_viewer.explorer(browser)
     if browser.args.webhid:
         hardware(browser)

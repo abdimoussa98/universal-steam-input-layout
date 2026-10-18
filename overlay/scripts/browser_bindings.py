@@ -1,5 +1,11 @@
 """Visible inherited labels and the draggable slow-motion control."""
 
+FACE_CONTROLS = tuple('button_diamond/button_' + c for c in ('a', 'y', 'x', 'b'))
+
+
+def face_labels(state):
+    return [state['binding_labels'][control] for control in FACE_CONTROLS]
+
 
 def slider(browser):
     browser.click('reset')
@@ -25,20 +31,23 @@ def slider(browser):
 
 def inherited(browser, index):
     owner = 'left_trigger/edge' if index % 2 else 'switch/left_bumper'
-    button = 'button_diamond/button_a'
-    browser.click('reset'); browser.click('speed:10')
-    browser.sequence([(0, owner, 'mousedown', 0, 0),
-                      (2100, owner, 'mousemove', 0, 0)])
-    held = browser.js('return demoSequenceFrames')[1]
-    assert any(t.endswith('Temp Cursor Gyro') for t in held['demo']['stack']), held['demo']['stack']
-    assert held['binding_labels'][button] == 'G', held['binding_labels']
-    assert held['demo']['output']['text'] == '', 'Rendering a binding must not execute it'
-    # Latch the owner so a second mouse press can exercise the displayed binding.
-    browser.click(owner, button=2)
-    browser.click(button)
-    browser.wait(lambda: browser.snapshot()['demo']['output']['text'] == 'g', 'displayed inherited G output')
-    browser.wait(lambda: browser.snapshot()['binding_labels'][button] == 'G', 'cover keeps inherited G visible')
-    browser.click(owner, button=2)
-    browser.wait(lambda: browser.snapshot()['binding_labels'][button] == 'F', 'release restores base F label')
+    for scale in (1, 10):
+        browser.click('reset'); browser.click(f'speed:{scale}')
+        browser.sequence([(0, owner, 'mousedown', 0, 0),
+                          (210*scale, owner, 'mousemove', 0, 0)])
+        initial, held = browser.js('return demoSequenceFrames')
+        assert any(t.endswith('Temp Cursor Gyro') for t in held['demo']['stack']), held['demo']['stack']
+        for state in (initial, held):
+            assert face_labels(state) == list('GTZX'), state['binding_labels']
+            assert state['demo']['output']['text'] == '', 'Rendering a binding must not execute it'
+        # Latch the owner so a second mouse press can exercise the displayed binding.
+        browser.click(owner, button=2)
+        for offset, control in enumerate(FACE_CONTROLS):
+            browser.click(control)
+            browser.wait(lambda: browser.snapshot()['demo']['output']['text'] == 'gtzx'[:offset+1],
+                         'displayed inherited face-button output')
+            browser.wait(lambda: face_labels(browser.snapshot()) == list('GTZX'), 'cover keeps all inherited labels visible')
+        browser.click(owner, button=2)
+        browser.wait(lambda: face_labels(browser.snapshot()) == list('FRCV'), 'release restores all base labels')
     browser.click('reset'); browser.click('speed:1')
 

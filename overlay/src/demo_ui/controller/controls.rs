@@ -22,7 +22,7 @@ const CONTROLS: [(&str, &str, f32, f32, f32, f32); 16] = [
 ];
 impl Diagram<'_> {
     pub(super) fn controls(&mut self) {
-        for (label, control, mut x, mut y, w, h) in CONTROLS {
+        for (label, control, mut x, mut y, mut w, h) in CONTROLS {
             match self.app.session.engine.layout.controller.as_str() {
                 "neptune" if label == "L3" => {
                     x = 340.;
@@ -43,10 +43,12 @@ impl Diagram<'_> {
                 "dse" if label == "Select" => {
                     x = 325.;
                     y = 150.;
+                    w = 64.;
                 }
                 "dse" if label == "Start" => {
                     x = 675.;
                     y = 150.;
+                    w = 64.;
                 }
                 "dse" if label == "L3" || label == "R3" => {
                     y = 380.;

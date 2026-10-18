@@ -7,6 +7,12 @@ def geometry(state):
     assert gyro[1] - gyro[3] / 2 > controller[1] + controller[3] / 2, targets
     assert gyro[2:4] in ([160, 100], [100, 76]), gyro
     assert controller[2] > gyro[2] * 2.5, targets
+    for menu in ('switch/button_menu', 'switch/button_escape'):
+        x, y, w, h = targets[menu]
+        for control, (bx, by, bw, bh) in targets.items():
+            if control.startswith(('button_diamond/', 'dpad/')) or control in (
+                    'left_trackpad', 'right_trackpad', 'center_trackpad'):
+                assert abs(x-bx) >= (w+bw)/2 or abs(y-by) >= (h+bh)/2, (menu, control, targets)
 
 
 def lifecycle(browser):

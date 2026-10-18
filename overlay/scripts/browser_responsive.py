@@ -120,6 +120,10 @@ def recorded_replay(browser):
     assert end >= 250
     browser.click('playback-options'); browser.click('replay')
     browser.wait(lambda: browser.snapshot()['replaying'], 'replay started from menu')
+    # The menu resets the session after this frame's tick. Its first replay tick
+    # establishes the clock origin and consumes the recorded inputs at t=0.
+    browser.wait(lambda: browser.snapshot()['demo']['output']['text'] == 'f',
+                 'first replay frame consumed the recorded input')
     browser.js('demoClock.advance(arguments[0])', end)
     browser.wait(lambda: not browser.snapshot()['replaying'], 'replay completed')
     assert browser.snapshot()['demo']['output']['text'] == 'f'
