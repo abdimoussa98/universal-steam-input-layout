@@ -5,8 +5,8 @@ def geometry(state):
     controller, gyro, timeline = (targets[k] for k in ('controller', 'gyro', 'timeline'))
     assert timeline[1] + timeline[3] / 2 < controller[1] - controller[3] / 2, targets
     assert gyro[1] - gyro[3] / 2 > controller[1] + controller[3] / 2, targets
-    assert gyro[2:4] == [160, 100], gyro
-    assert controller[2] > gyro[2] * 3, targets
+    assert gyro[2:4] in ([160, 100], [100, 76]), gyro
+    assert controller[2] > gyro[2] * 2.5, targets
 
 
 def lifecycle(browser):
@@ -63,6 +63,8 @@ def selected_layout(browser, index):
 def explorer(browser):
     browser.click('layout'); browser.click('layout:0')
     browser.click('reset'); browser.click('speed:10'); browser.click('pad-click')
+    reveal(browser, 'trackpad-detail')
+    browser.click('trackpad-detail')
     scroll(browser, 650)
     browser.wait(lambda: browser.snapshot()['targets']['explorer:right_trackpad'][1] < 800, 'explorer scrolled into view')
     target = 'explorer:right_trackpad'
@@ -72,6 +74,10 @@ def explorer(browser):
     browser.click('reset'); browser.click('pad-touch')
     scroll(browser, -2000)
     browser.wait(lambda: browser.snapshot()['targets']['controller'][1] > 400, 'viewer returned to top')
+    reveal(browser, 'trackpad-detail')
+    browser.click('trackpad-detail')
+    scroll(browser, -2000)
+    browser.wait(lambda: browser.snapshot()['targets']['controller'][1] > 400, 'viewer returned after closing detail')
     browser.click('speed:1')
     print('PASS: restored trackpad explorer uses the same inner/outer bindings and cleanup', flush=True)
 
@@ -79,6 +85,17 @@ def explorer(browser):
 def scroll(browser, delta):
     browser.actions([{'type':'pointerMove', 'x':900, 'y':700, 'duration':0}])
     browser.cdp('Input.dispatchMouseEvent', {'type':'mouseWheel', 'x':900, 'y':700, 'deltaX':0, 'deltaY':delta})
+
+
+def reveal(browser, target):
+    width, height = browser.js('return [innerWidth, innerHeight]')
+    y = browser.point(target)[1]
+    if y > height - 40 or y < browser.snapshot()['targets']['timeline'][1] + 40:
+        x, bottom = width/2, height-50
+        browser.cdp('Input.dispatchMouseEvent', {'type':'mouseMoved', 'x':x, 'y':bottom})
+        browser.cdp('Input.dispatchMouseEvent', {'type':'mouseWheel', 'x':x, 'y':bottom,
+            'deltaX':0, 'deltaY':y-height*.6})
+        browser.wait(lambda: 0 < browser.point(target)[1] < height-30, 'target scrolled into view')
 
 
 def narrow(browser):

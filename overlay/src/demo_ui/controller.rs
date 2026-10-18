@@ -14,44 +14,39 @@ struct Diagram<'a> {
     scale: f32,
 }
 impl DemoApp {
-    pub(super) fn controller(&mut self, ui: &mut egui::Ui) {
+    pub(super) fn controller(&mut self, ui: &mut egui::Ui, max_width: f32) {
         egui::Frame::new()
             .fill(SURFACE)
             .corner_radius(14.)
             .stroke(Stroke::new(1.0_f32, BORDER))
-            .inner_margin(16.)
+            .inner_margin(12.)
             .show(ui, |ui| {
-                ui.horizontal(|ui| {
+                ui.spacing_mut().interact_size.y = 18.;
+                ui.horizontal_wrapped(|ui| {
                     ui.colored_label(ACCENT, self.session.engine.mode());
                     ui.label(
-                        egui::RichText::new("Hold to press · right-click to latch a chord")
+                        egui::RichText::new("Hold to press · right-click to latch/release")
                             .small()
                             .color(MUTED),
                     );
                 });
-                egui::ScrollArea::horizontal()
-                    .drag_to_scroll(false)
-                    .id_salt("illustrated-controller")
-                    .show(ui, |ui| {
-                        ui.set_min_width(620.);
-                        let available = ui.available_width();
-                        let width = available.min(780.);
-                        let scale = width / 1000.;
-                        let (row, _) =
-                            ui.allocate_exact_size(vec2(available, 685. * scale), Sense::hover());
-                        let area = Rect::from_center_size(row.center(), vec2(width, row.height()));
-                        target(ui, "controller", area);
-                        let mut diagram = Diagram {
-                            app: self,
-                            ui,
-                            area,
-                            scale,
-                        };
-                        diagram.shell();
-                        diagram.pads();
-                        diagram.controls();
-                        diagram.extras();
-                    });
+                let available = ui.available_width();
+                let width = available.min(max_width);
+                let scale = width / 1000.;
+                let (row, _) =
+                    ui.allocate_exact_size(vec2(available, 685. * scale), Sense::hover());
+                let area = Rect::from_center_size(row.center(), vec2(width, row.height()));
+                target(ui, "controller", area);
+                let mut diagram = Diagram {
+                    app: self,
+                    ui,
+                    area,
+                    scale,
+                };
+                diagram.shell();
+                diagram.pads();
+                diagram.controls();
+                diagram.extras();
             });
     }
 }

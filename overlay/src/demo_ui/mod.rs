@@ -5,6 +5,7 @@ mod controls;
 mod gyro;
 mod hardware;
 mod mouse;
+mod output;
 mod pads;
 mod panels;
 mod timeline;

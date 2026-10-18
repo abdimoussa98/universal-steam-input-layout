@@ -76,6 +76,8 @@ impl DemoApp {
     }
     fn body(&mut self, ctx: &egui::Context) {
         egui::CentralPanel::default().show(ctx, |ui| {
+            // Measure before scrolling: scrolling and output must not resize hit targets.
+            let diagram_width = ((ui.available_height() - 252.) / 0.685).clamp(420., 780.);
             egui::ScrollArea::vertical()
                 .drag_to_scroll(false)
                 .id_salt("viewer-content")
@@ -85,9 +87,12 @@ impl DemoApp {
                         ui.add_space(((ui.available_width() - width) / 2.).max(0.));
                         ui.vertical(|ui| {
                             ui.set_width(width);
-                            self.controller(ui);
+                            self.controller(ui, diagram_width);
                             self.gyro_panel(ui);
-                            self.explorer(ui);
+                            self.output_preview(ui);
+                            let pads = egui::CollapsingHeader::new("Trackpad detail")
+                                .show(ui, |ui| self.explorer(ui));
+                            super::target(ui, "trackpad-detail", pads.header_response.rect);
                             self.analog_details(ui);
                             egui::CollapsingHeader::new("Output playground")
                                 .show(ui, |ui| self.playground(ui));
@@ -106,7 +111,9 @@ impl DemoApp {
         let snapshot = serde_json::json!({"demo":self.session.engine.snapshot(), "targets":targets,
             "scale":self.session.scale,"paused":self.session.paused,"replaying":self.session.replaying,
             "timeline":ctx.data(|d| d.get_temp::<serde_json::Value>(egui::Id::new("demo.timeline.state"))),
-            "source":self.source,"sound":self.sound,"recorded":self.session.recording.len()});
+            "output_preview":ctx.data(|d| d.get_temp::<[String; 2]>(egui::Id::new("demo.output-preview"))),
+            "gyro_meter":ctx.data(|d| d.get_temp::<serde_json::Value>(egui::Id::new("demo.gyro-meter"))),
+            "source":self.source,"sound":self.sound,"fine_motion":self.fine_motion,"recorded":self.session.recording.len()});
         ctx.data_mut(|d| d.insert_temp(egui::Id::new("keybind.demo"), snapshot));
     }
 }

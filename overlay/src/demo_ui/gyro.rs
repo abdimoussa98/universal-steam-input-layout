@@ -5,8 +5,14 @@ use eframe::egui::{self, Color32, Rect, Sense, Stroke, vec2};
 impl DemoApp {
     pub(super) fn gyro_panel(&mut self, ui: &mut egui::Ui) {
         let status = self.session.engine.gyro_status();
-        let (row, _) = ui.allocate_exact_size(vec2(ui.available_width(), 132.), Sense::hover());
-        let rect = Rect::from_center_size(row.center() - vec2(100., 0.), vec2(160., 100.));
+        let (row, _) = ui.allocate_exact_size(vec2(ui.available_width(), 120.), Sense::hover());
+        let width = row.width().min(390.);
+        let size = if row.width() < 500. {
+            vec2(100., 76.)
+        } else {
+            vec2(160., 100.)
+        };
+        let rect = Rect::from_center_size(row.center() - vec2((width - size.x) / 2., 0.), size);
         cuboid(
             ui,
             rect,
@@ -14,12 +20,31 @@ impl DemoApp {
             status["active"] == true,
         );
         self.hit(ui, "gyro", Target::Gyro, (rect, 0.));
-        let panel = Rect::from_min_size(rect.right_top() + vec2(12., 0.), vec2(200., 110.));
+        let panel = Rect::from_min_size(
+            egui::pos2(rect.right() + 12., row.top() + 6.),
+            vec2(width - size.x - 12., 108.),
+        );
         let mut controls = ui.new_child(
             egui::UiBuilder::new()
                 .id_salt("gyro-status")
                 .max_rect(panel),
         );
+        controls.spacing_mut().item_spacing = vec2(6., 4.);
+        controls.spacing_mut().interact_size.y = 20.;
+        self.gyro_status(&mut controls, &status);
+        if self.gyro_options {
+            let mut open = true;
+            egui::Window::new("Gyro controls")
+                .default_width(320.)
+                .open(&mut open)
+                .show(ui.ctx(), |ui| {
+                    self.motion_controls(ui);
+                    self.motion_source(ui);
+                });
+            self.gyro_options = open;
+        }
+    }
+    fn gyro_status(&mut self, controls: &mut egui::Ui, status: &serde_json::Value) {
         controls.horizontal(|ui| {
             ui.strong(if status["cursor"] == true {
                 "Cursor Gyro"
@@ -36,7 +61,7 @@ impl DemoApp {
             )
             .on_hover_text(status["reason"].as_str().unwrap_or(""));
         });
-        self.threshold(&mut controls, &status);
+        self.threshold(controls, status);
         controls.horizontal(|ui| {
             let fine = ui.checkbox(&mut self.fine_motion, "Fine motion");
             target(ui, "fine-motion", fine.rect);
@@ -48,19 +73,9 @@ impl DemoApp {
             }
         });
         let options = controls.small_button("Gyro controls…");
-        target(&controls, "gyro-options", options.rect);
+        target(controls, "gyro-options", options.rect);
         if options.clicked() {
             self.gyro_options = !self.gyro_options;
-        }
-        if self.gyro_options {
-            let mut open = true;
-            egui::Window::new("Gyro controls")
-                .open(&mut open)
-                .show(ui.ctx(), |ui| {
-                    self.motion_controls(ui);
-                    self.motion_source(ui);
-                });
-            self.gyro_options = open;
         }
     }
     fn motion_controls(&mut self, ui: &mut egui::Ui) {
@@ -116,24 +131,58 @@ impl DemoApp {
         let pulse = gyro
             .last_output
             .is_some_and(|at| self.session.engine.now.saturating_sub(at) < 120);
-        let caption = if threshold <= 0. {
+        let visible = status["active"] == true && threshold > 0.;
+        let progress = if visible {
+            (gyro.pending[0].hypot(gyro.pending[1]) / threshold) as f32
+        } else {
+            0.
+        };
+        let caption = if !visible {
             "Drag the block to rotate"
         } else if pulse {
             "Movement emitted"
         } else {
             "Movement threshold"
         };
-        ui.add(
-            egui::ProgressBar::new(if threshold > 0. {
-                (gyro.pending[0].hypot(gyro.pending[1]) / threshold) as f32
-            } else {
-                0.
-            })
-            .desired_width(190.)
-            .desired_height(14.)
-            .text(caption)
-            .fill(if pulse { egui::Color32::WHITE } else { ACCENT }),
+        let (area, _) = ui.allocate_exact_size(vec2(ui.available_width(), 34.), Sense::hover());
+        let painter = ui.painter().with_clip_rect(area);
+        painter.text(
+            area.left_top(),
+            egui::Align2::LEFT_TOP,
+            caption,
+            egui::FontId::proportional(12.),
+            MUTED,
         );
+        if visible {
+            let rail = Rect::from_min_size(area.min + vec2(0., 21.), vec2(area.width(), 6.));
+            target(ui, "gyro-threshold", rail);
+            painter.rect_filled(rail, 3., BORDER);
+            if progress > 0. || pulse {
+                let fill = if pulse { 1. } else { progress.clamp(0., 1.) };
+                painter.rect_filled(
+                    Rect::from_min_size(rail.min, vec2(rail.width() * fill, 6.)),
+                    3.,
+                    if pulse { Color32::WHITE } else { ACCENT },
+                );
+            }
+        } else {
+            let hint = if status["cursor"] == true {
+                "Hold RS touch to enable"
+            } else if status["active"] == true {
+                "Motion controls the pointer"
+            } else {
+                "Select + R3 to enable"
+            };
+            painter.text(
+                area.min + vec2(0., 18.),
+                egui::Align2::LEFT_TOP,
+                hint,
+                egui::FontId::proportional(11.),
+                MUTED,
+            );
+        }
+        ui.ctx().data_mut(|d| d.insert_temp(egui::Id::new("demo.gyro-meter"),
+            serde_json::json!({"visible":visible,"progress":progress,"pulse":visible && pulse,"caption":caption})));
     }
 }
 fn cuboid(ui: &egui::Ui, rect: Rect, pose: [f64; 3], active: bool) {

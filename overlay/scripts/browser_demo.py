@@ -5,6 +5,7 @@ from pathlib import Path
 import shutil
 from demo_browser_client import Browser
 import browser_viewer
+import browser_responsive
 
 
 def run(browser):
@@ -54,6 +55,7 @@ def run(browser):
         events += [(30*scale, 'right_trackpad', 'mouseup', 0, .9)]
         result = browser.sequence(events, frame_delay_ms=frame_delay)
         assert result['demo']['output']['wheel'] > 0, result
+        assert f'Scroll {result["demo"]["output"]["wheel"]:+}' in result['output_preview'][1], result
         browser_viewer.geometry(result)
         assert not any('RTP:' in layer for layer in result['demo']['stack']), result
         assert result['demo']['output']['down'] == [], result
@@ -82,6 +84,9 @@ def run(browser):
     if browser.args.webhid:
         hardware(browser)
     browser_viewer.narrow(browser)
+    browser_responsive.responsive(browser)
+    browser_responsive.gyro_meter(browser)
+    browser_responsive.playback(browser)
     browser.click('downloads')
     browser.wait(lambda: browser.js("return document.querySelector('#downloads').open"), 'downloads dialog')
     assert browser.js("return document.querySelector('.demo-identity').textContent.includes('The demo runs')")

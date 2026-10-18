@@ -109,6 +109,10 @@ fn pad_labels(ui: &egui::Ui, g: Geometry, view: &PadView) {
         FontId::proportional(size),
         Color32::WHITE,
     );
+    // Tiny integrated pads remain an overview; expanded detail retains every label.
+    if g.rect.width().min(g.rect.height()) < 80. {
+        return;
+    }
     for (index, (x, y)) in [(0., -0.8), (0.76, 0.), (0., 0.8), (-0.76, 0.)]
         .into_iter()
         .enumerate()

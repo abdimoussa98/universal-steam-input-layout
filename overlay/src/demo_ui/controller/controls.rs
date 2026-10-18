@@ -82,7 +82,7 @@ impl Diagram<'_> {
         } else {
             engine.display_label(control)
         };
-        let font = if rect.width() < 50. { 20. } else { 16. } * self.scale;
+        let font = (if rect.width() < 50. { 20. } else { 16. } * self.scale).max(10.);
         let measured = p
             .layout_no_wrap(binding.clone(), FontId::proportional(font), Color32::WHITE)
             .size()

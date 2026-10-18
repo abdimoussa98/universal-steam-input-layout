@@ -8,8 +8,11 @@ The demo never injects keyboard or mouse events into other applications.
 
 The illustrated gamepad is the main view, with the original binding labels and
 interactive pads. Its minimal lifecycle timeline sits above it; a small
-160 × 100 gyro cuboid sits directly below. The trackpad explorer follows, and
-the output playground and extra analog controls expand when needed. The
+gyro cuboid sits directly below (160 × 100, or 100 × 76 on narrow screens).
+The gamepad fits the viewport width and available height. A compact output
+preview shows emitted keys, pointer motion and scrolling without opening a panel.
+Trackpad detail, the full output playground and extra analog controls expand
+when needed; trackpad detail cards stack on phones. The
 presentation reads the executable layout engine, including the timeline's
 hold, release-window and second-hold phases.
 
@@ -34,12 +37,17 @@ hold, release-window and second-hold phases.
 - Modes change through the layout's real gestures. For example, Start + L3
   enters Steering; Start + R3 enters Gamepad. The same gestures exit stateful modes.
   There is no manual layer picker in the main demo.
-- Pause, advance to the next event, reset, or replay recorded input. Slowdown
+- Pause or reset from the toolbar; **More** contains Next event and Replay.
+  Slowdown
   changes the logical clock, keeping input, output and pending timers together.
   The top timeline has no text outside a `::` lifecycle. It stays visible through
   active held/cover phases even when there is no pending timer. Its fixed height
   keeps mouse targets stationary. Pad and gyro drags never scroll the page;
   use the mouse wheel or scrollbars to navigate the viewer.
+
+The gyro shows activation help when off, and a separate threshold meter only
+while threshold-based gyro is active. Its output pulse uses the same logical
+clock as the timeline and slowdown.
 
 The expandable output playground displays held keys/mouse buttons, typed text, pointer movement,
 wheel output and gamepad axes. Details exposes the actual active stack, recent
@@ -109,7 +117,9 @@ run remains optional. Gesture scenarios control the browser's monotonic clock
 and wait for each real frame, so slow rendering cannot turn a 60 ms tap into a
 hold. They assert input timestamps at 1×/10× and include a 200 ms slow-frame
 regression. The suite also checks all six layouts' gesture outputs, timeline
-phases and geometry, the trackpad explorer, and narrow-screen mouse controls.
+phases and geometry, the trackpad explorer, and 320/390/700px mouse controls.
+Laptop checks also keep the gamepad, gyro and output preview on screen together;
+visible output and threshold-meter checks run against the real rendered app.
 The fixture does not change the packaged app or its layout timings.
 Use `--driver` and `--browser-binary`
 to select matching local executables. Deployment remains at the existing URL;
