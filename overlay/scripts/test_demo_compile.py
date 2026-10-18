@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from steam_layout.demo_compile import compile_layout
 from tools.compile_demo import catalog, OUTPUT
+from demo_inheritance import generate, OUTPUT as INHERITANCE_OUTPUT
 
 
 class DemoCompilerTests(unittest.TestCase):
@@ -24,6 +25,9 @@ class DemoCompilerTests(unittest.TestCase):
         self.assertEqual(len(layouts), 6)
         self.assertEqual(len({(l['controller'], l['variant']) for l in layouts}), 6)
         self.assertTrue(all(len(l['sha256']) == 64 for l in layouts))
+
+    def test_all_layer_inheritance_expectations_match_the_released_sources(self):
+        self.assertEqual(generate(), INHERITANCE_OUTPUT.read_text())
 
     def test_unknown_command_and_settings_fail_closed(self):
         data = json.loads(json.dumps(self.data))

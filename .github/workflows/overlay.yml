@@ -1,9 +1,9 @@
 name: Layout playground
 on:
   push:
-    paths: ['overlay/**', 'steam_layout/demo_compile.py', 'steam_layout/demo_coverage.py', 'tools/compile_demo.py', 'tools/demo_traces.py', 'steam_layout/simulator.py', 'steam_layout/overlay_profile.py', 'tools/export_overlay_profile.py', 'tests/integration/profiles/test_overlay_profile.py', 'steam_layout/model.py', 'steam_layout/flow_model.py', 'versions/**', 'steam_layout/controllers.py', 'tools/release.py', '.github/workflows/overlay.yml']
+    paths: ['overlay/**', 'steam_layout/demo_compile.py', 'steam_layout/demo_coverage.py', 'tools/compile_demo.py', 'tools/demo_traces.py', 'steam_layout/simulator.py', 'steam_layout/overlay_profile.py', 'tools/export_overlay_profile.py', 'tests/integration/profiles/test_overlay_profile.py', 'steam_layout/model.py', 'steam_layout/flow_model.py', 'steam_layout/chains.py', 'steam_layout/covers.py', 'steam_layout/flow_config.json', 'steam_layout/exceptions.py', 'versions/**', 'steam_layout/controllers.py', 'tools/release.py', '.github/workflows/overlay.yml']
   pull_request:
-    paths: ['overlay/**', 'steam_layout/demo_compile.py', 'steam_layout/demo_coverage.py', 'tools/compile_demo.py', 'tools/demo_traces.py', 'steam_layout/simulator.py', 'steam_layout/overlay_profile.py', 'tools/export_overlay_profile.py', 'tests/integration/profiles/test_overlay_profile.py', 'steam_layout/model.py', 'steam_layout/flow_model.py', 'versions/**', 'steam_layout/controllers.py', 'tools/release.py', '.github/workflows/overlay.yml']
+    paths: ['overlay/**', 'steam_layout/demo_compile.py', 'steam_layout/demo_coverage.py', 'tools/compile_demo.py', 'tools/demo_traces.py', 'steam_layout/simulator.py', 'steam_layout/overlay_profile.py', 'tools/export_overlay_profile.py', 'tests/integration/profiles/test_overlay_profile.py', 'steam_layout/model.py', 'steam_layout/flow_model.py', 'steam_layout/chains.py', 'steam_layout/covers.py', 'steam_layout/flow_config.json', 'steam_layout/exceptions.py', 'versions/**', 'steam_layout/controllers.py', 'tools/release.py', '.github/workflows/overlay.yml']
   workflow_dispatch:
     inputs:
       stress_timing:

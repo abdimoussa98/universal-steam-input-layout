@@ -11,6 +11,8 @@ mod coverage_tests;
 mod data;
 mod engine;
 mod gyro;
+#[cfg(test)]
+mod inheritance_tests;
 mod input;
 #[cfg(test)]
 mod lifecycle_tests;

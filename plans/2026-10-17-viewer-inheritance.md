@@ -37,3 +37,15 @@ tests, 75 headless WASM tests, 25 JavaScript tests, 20 Python tests, and the ful
 packaged browser suites on macOS and Linux Chrome 155.0.8059.84 (the CI version)
 passed, including viewport, gyro, and playback checks. Windows and physical
 devices were not tested locally. Publication is tracked by the GitHub Actions run.
+
+Follow-up all-layer audit:
+
+The original scenario traces did not cover every layer. A new source-derived
+fixture uses the existing Python family-chain inheritance audit as an independent
+oracle for the Rust/WASM resolver. It covers all 91 layer/set records in each
+Ibex/Neptune variant and all 75 in each DSE variant: 2,650 stacks and 134,550
+binding lookups. All passed locally. The check also fails if a declared layer
+is missing from coverage or the fixture no longer matches its released source.
+This is a binding-resolution check; timing, held-input mode shifts, arbitrary
+stale stacks, analog response and physical Steam behavior have separate coverage
+and are not exhaustively proved by this matrix.

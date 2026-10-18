@@ -124,6 +124,12 @@ phases and geometry, the trackpad explorer, and 320/390/700px mouse controls.
 Laptop checks also keep the gamepad, gyro and output preview on screen together;
 visible output and threshold-meter checks run against the real rendered app.
 The fixture does not change the packaged app or its layout timings.
+An additional Rust/WASM regression checks inheritance against the Python source
+layout audit for every declared layer: 2,650 family-chain stacks and 134,550
+binding lookups across the six bundled layouts. This covers binding ownership,
+explicit blocks, and mode barriers, not every timed or stale-stack combination.
+Regenerate its source-derived fixture with `python3 overlay/scripts/demo_inheritance.py`
+after refreshing the catalog; the web build also refreshes it for release builds.
 Use `--driver` and `--browser-binary`
 to select matching local executables. Deployment remains at the existing URL;
 see [deploy/README.md](deploy/README.md).

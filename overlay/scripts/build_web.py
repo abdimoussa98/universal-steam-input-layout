@@ -30,6 +30,7 @@ def main():
     # Compile exactly the releases packaged below, including workflow_run builds
     # after a layout release. Unknown semantics fail before publishing anything.
     subprocess.run(['python3', '-m', 'tools.compile_demo'], cwd=ROOT.parent, check=True)
+    subprocess.run(['python3', str(ROOT / 'scripts/demo_inheritance.py')], cwd=ROOT.parent, check=True)
     subprocess.run(['wasm-pack', 'build', '--target', 'web', '--out-dir', 'dist/pkg',
                     str(ROOT), '--no-default-features', '--features', 'web', '--locked'], check=True)
     package_layouts(ROOT / 'dist')
