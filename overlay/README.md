@@ -119,7 +119,9 @@ Normal browser tests use **zero extra WebDriver delay**. The 650 ms latency stre
 run remains optional. Gesture scenarios control the browser's monotonic clock
 and wait for each real frame, so slow rendering cannot turn a 60 ms tap into a
 hold. They assert input timestamps at 1×/10× and include a 200 ms slow-frame
-regression. The suite also checks all six layouts' gesture outputs, timeline
+regression. Playback checks also control this clock so driver latency cannot
+expire the pending event before Pause or finish replay before it is observed.
+The suite also checks all six layouts' gesture outputs, timeline
 phases and geometry, the trackpad explorer, and 320/390/700px mouse controls.
 Laptop checks also keep the gamepad, gyro and output preview on screen together;
 visible output and threshold-meter checks run against the real rendered app.

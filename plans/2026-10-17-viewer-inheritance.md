@@ -49,3 +49,9 @@ is missing from coverage or the fixture no longer matches its released source.
 This is a binding-resolution check; timing, held-input mode shifts, arbitrary
 stale stacks, analog response and physical Steam behavior have separate coverage
 and are not exhaustively proved by this matrix.
+
+CI exposed a separate playback-test race: slow driver calls let the 200 ms
+logical hold finish before Pause, leaving no event for Next event to advance.
+Playback checks now freeze the existing test clock during setup and advance it
+explicitly for replay. They assert the exact pending deadline without adding
+sleeps or changing layout timings.

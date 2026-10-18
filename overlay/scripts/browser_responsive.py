@@ -88,18 +88,39 @@ def gyro_meter(browser):
 
 
 def playback(browser):
+    # Driver round trips must not consume the timer before Pause or finish the
+    # replay before we can observe it. Keep logical time explicit for both.
+    browser.js('demoClock.begin()')
+    try:
+        paused_step(browser)
+        recorded_replay(browser)
+    finally:
+        browser.js('demoClock.end()')
+    print('PASS: compact playback menu advances pending events and replays recorded output', flush=True)
+
+
+def paused_step(browser):
     browser.click('reset'); browser.click('speed:10')
     browser.click('switch/left_bumper', button=2)
     browser.click('pause')
-    before = browser.snapshot()['demo']['now']
+    state = browser.snapshot()
+    assert state['paused'] and state['demo']['timers'], state
+    deadline = min(t['due'] for t in state['demo']['timers'])
     browser.click('playback-options'); browser.click('step')
-    browser.wait(lambda: browser.snapshot()['demo']['now'] > before, 'next event advanced paused clock')
+    browser.wait(lambda: browser.snapshot()['demo']['now'] == deadline, 'next event reached the pending deadline')
     assert browser.snapshot()['paused']
+
+
+def recorded_replay(browser):
     browser.click('reset'); browser.click('speed:1')
-    browser.click('button_diamond/button_a'); browser.click('pause')
+    browser.click('button_diamond/button_a')
+    browser.js('demoClock.advance(250)')
+    browser.click('pause')
+    end = browser.snapshot()['demo']['now']
+    assert end >= 250
     browser.click('playback-options'); browser.click('replay')
     browser.wait(lambda: browser.snapshot()['replaying'], 'replay started from menu')
+    browser.js('demoClock.advance(arguments[0])', end)
     browser.wait(lambda: not browser.snapshot()['replaying'], 'replay completed')
     assert browser.snapshot()['demo']['output']['text'] == 'f'
     browser.click('reset')
-    print('PASS: compact playback menu advances pending events and replays recorded output', flush=True)
