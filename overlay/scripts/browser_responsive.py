@@ -26,7 +26,7 @@ def responsive(browser):
             state = browser.snapshot()
             browser_viewer.geometry(state)
             visible(state, ('controller', 'gyro', 'output-preview', 'layout', 'source',
-                            'connect', 'pad-click', 'pause', 'reset'), width, height)
+                            'connect', 'pad-click', 'pause', 'reset', 'speed-slider'), width, height)
             controls = [k for k in state['targets'] if k.startswith(('switch/', 'button_diamond/', 'dpad/'))]
             visible(state, controls, width, height)
             before = {k: state['targets'][k] for k in ('controller', 'gyro', 'output-preview')}

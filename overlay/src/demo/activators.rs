@@ -1,6 +1,38 @@
 use super::{Act, Binding, Engine, Operation, Phase};
 use std::collections::BTreeSet;
 
+pub(super) fn select_chords(
+    found: Vec<Binding>,
+    held: &BTreeSet<String>,
+    exposed: bool,
+) -> Vec<Binding> {
+    let mut chords: Vec<_> = found
+        .iter()
+        .filter(|b| b.entry.kind == "chord")
+        .filter(|b| {
+            b.entry.condition.as_ref().is_some_and(|c| {
+                if b.inverted_chord() {
+                    !exposed && !c.any_held(held)
+                } else {
+                    c.satisfied(held)
+                }
+            })
+        })
+        .cloned()
+        .collect();
+    if chords.iter().any(|b| !b.entry.interruptible()) {
+        chords.retain(|b| !b.entry.interruptible());
+    }
+    let has_chords = !chords.is_empty();
+    chords.extend(
+        found
+            .into_iter()
+            .filter(|b| b.entry.kind != "chord" && !(has_chords && b.entry.interruptible())),
+    );
+    chords.sort_by_key(|b| b.index);
+    chords
+}
+
 impl Engine {
     pub(crate) fn end(&mut self, control: &str, phase: Phase, handover: bool) {
         let ids: Vec<_> = self
@@ -39,31 +71,7 @@ impl Engine {
         if phase == Phase::Down {
             found = self.native(control, how, found);
         }
-        let mut chords: Vec<_> = found
-            .iter()
-            .filter(|b| b.entry.kind == "chord")
-            .filter(|b| {
-                b.entry.condition.as_ref().is_some_and(|c| {
-                    if b.inverted_chord() {
-                        how != "exposed" && !c.any_held(&self.held)
-                    } else {
-                        c.satisfied(&self.held)
-                    }
-                })
-            })
-            .cloned()
-            .collect();
-        if chords.iter().any(|b| !b.entry.interruptible()) {
-            chords.retain(|b| !b.entry.interruptible());
-        }
-        let has_chords = !chords.is_empty();
-        chords.extend(
-            found
-                .into_iter()
-                .filter(|b| b.entry.kind != "chord" && !(has_chords && b.entry.interruptible())),
-        );
-        chords.sort_by_key(|b| b.index);
-        for binding in chords {
+        for binding in select_chords(found, &self.held, how == "exposed") {
             self.arm(binding, phase, how, None);
         }
     }

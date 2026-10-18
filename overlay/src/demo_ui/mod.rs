@@ -18,6 +18,19 @@ const MUTED: Color32 = Color32::from_rgb(156, 164, 177);
 const SURFACE: Color32 = Color32::from_rgb(24, 27, 32);
 const BORDER: Color32 = Color32::from_rgb(44, 49, 57);
 
+impl DemoApp {
+    fn binding_label(&self, ui: &egui::Ui, control: &str) -> String {
+        let label = self.session.engine.display_label(control);
+        ui.ctx().data_mut(|data| {
+            data.get_temp_mut_or_default::<std::collections::BTreeMap<String, String>>(
+                egui::Id::new("demo.binding-labels"),
+            )
+            .insert(control.into(), label.clone());
+        });
+        label
+    }
+}
+
 fn target(ui: &egui::Ui, id: &str, rect: egui::Rect) {
     ui.ctx().data_mut(|data| {
         let targets = data.get_temp_mut_or_default::<std::collections::BTreeMap<String, [f32; 4]>>(

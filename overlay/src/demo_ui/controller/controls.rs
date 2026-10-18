@@ -80,7 +80,7 @@ impl Diagram<'_> {
         let binding = if name.ends_with(" touch") {
             "Touch".into()
         } else {
-            engine.display_label(control)
+            self.app.binding_label(self.ui, control)
         };
         let font = (if rect.width() < 50. { 20. } else { 16. } * self.scale).max(10.);
         let measured = p
@@ -133,7 +133,7 @@ impl Diagram<'_> {
             Stroke::new(1.0_f32, EDGE),
         );
         let name = if source == "joystick" { "L3" } else { "R3" };
-        let label = self.app.session.engine.display_label(control);
+        let label = self.app.binding_label(self.ui, control);
         let click = Rect::from_center_size(
             rect.center() - vec2(0., rect.height() * 0.15),
             vec2(rect.width() * 0.64, rect.height() * 0.38),

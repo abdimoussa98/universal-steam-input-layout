@@ -67,18 +67,7 @@ impl DemoApp {
     }
     fn playback_controls(&mut self, ui: &mut egui::Ui) {
         ui.horizontal_wrapped(|ui| {
-            let mut scale = self.session.scale;
-            for (value, label) in [(1, "1×"), (2, "1/2×"), (5, "1/5×"), (10, "1/10×")] {
-                let r =
-                    ui.selectable_value(&mut scale, value, label)
-                        .on_hover_text(if value == 1 {
-                            "Normal speed".into()
-                        } else {
-                            format!("1/{value} speed · stretches gesture windows {value}×")
-                        });
-                target(ui, &format!("speed:{value}"), r.rect);
-            }
-            self.session.scale = scale;
+            self.speed_slider(ui);
             let pause = ui.button(if self.session.paused {
                 "Resume"
             } else {
@@ -97,6 +86,38 @@ impl DemoApp {
             }
             let more = ui.menu_button("More", |ui| self.extra_playback(ui));
             target(ui, "playback-options", more.response.rect);
+        });
+    }
+    fn speed_slider(&mut self, ui: &mut egui::Ui) {
+        ui.horizontal(|ui| {
+            ui.label("Slow motion");
+            ui.spacing_mut().slider_width = 100.;
+            let r = ui
+                .add(egui::Slider::new(&mut self.session.scale, 1..=10).show_value(false))
+                .on_hover_text("Drag to stretch gesture timing from normal speed to 10× longer.");
+            target(ui, "speed-slider", r.rect);
+            let radius = r.rect.height() / 2.5;
+            for value in 1..=10 {
+                let x = r.rect.left()
+                    + radius
+                    + (r.rect.width() - 2. * radius) * (value - 1) as f32 / 9.;
+                target(
+                    ui,
+                    &format!("speed:{value}"),
+                    egui::Rect::from_center_size(
+                        egui::pos2(x, r.rect.center().y),
+                        egui::vec2(1., 1.),
+                    ),
+                );
+            }
+            ui.add_sized(
+                [67., 20.],
+                egui::Label::new(if self.session.scale == 1 {
+                    "Normal".into()
+                } else {
+                    format!("{}× slower", self.session.scale)
+                }),
+            );
         });
     }
     fn extra_playback(&mut self, ui: &mut egui::Ui) {

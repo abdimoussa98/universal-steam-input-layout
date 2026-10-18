@@ -6,9 +6,11 @@ import shutil
 from demo_browser_client import Browser
 import browser_viewer
 import browser_responsive
+import browser_bindings
 
 
 def run(browser):
+    browser_bindings.slider(browser)
     browser_viewer.lifecycle(browser)
     state = browser.snapshot()
     assert state['demo']['layout'] == 'ibex 1.2 · default', state
@@ -77,9 +79,11 @@ def run(browser):
         browser.wait(lambda: browser.snapshot()['demo']['layout'] == expected, 'selected layout rendered')
         assert browser.snapshot()['demo']['error'] is None
         browser_viewer.selected_layout(browser, index)
+        browser_bindings.inherited(browser, index)
     assert browser.snapshot()['demo']['layout'].startswith('dse')
     assert 'center_trackpad' in browser.snapshot()['targets']
     print('PASS: pause, reset and six layout selections', flush=True)
+    print('PASS: all six layouts display Mod 0 inherited G before pressing A, through its cover, and restore F on release', flush=True)
     browser_viewer.explorer(browser)
     if browser.args.webhid:
         hardware(browser)

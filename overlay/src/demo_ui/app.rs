@@ -112,6 +112,7 @@ impl DemoApp {
             "scale":self.session.scale,"paused":self.session.paused,"replaying":self.session.replaying,
             "timeline":ctx.data(|d| d.get_temp::<serde_json::Value>(egui::Id::new("demo.timeline.state"))),
             "output_preview":ctx.data(|d| d.get_temp::<[String; 2]>(egui::Id::new("demo.output-preview"))),
+            "binding_labels":ctx.data(|d| d.get_temp::<std::collections::BTreeMap<String, String>>(egui::Id::new("demo.binding-labels"))),
             "gyro_meter":ctx.data(|d| d.get_temp::<serde_json::Value>(egui::Id::new("demo.gyro-meter"))),
             "source":self.source,"sound":self.sound,"fine_motion":self.fine_motion,"recorded":self.session.recording.len()});
         ctx.data_mut(|d| d.insert_temp(egui::Id::new("keybind.demo"), snapshot));
@@ -137,7 +138,11 @@ impl eframe::App for DemoApp {
             d.insert_temp(
                 egui::Id::new("demo.targets"),
                 std::collections::BTreeMap::<String, [f32; 4]>::new(),
-            )
+            );
+            d.insert_temp(
+                egui::Id::new("demo.binding-labels"),
+                std::collections::BTreeMap::<String, String>::new(),
+            );
         });
         self.toolbar(ctx);
         self.timeline(ctx);

@@ -20,6 +20,9 @@ hold, release-window and second-hold phases.
 
 - Press/hold any controller button. Right-click to latch it for a chord, then
   right-click again to release. Hover for its resolved binding.
+  Labels follow the active stack and immediate cursor cancellation: holding
+  Mod 0 keeps A's inherited G visible before and after its Tap Cover activates.
+  Explicit blocks and disabled sources remain blank.
 - Select **Touch** or **Click** for the pads, then drag. Touch is finger contact;
   Click adds a physical press. Left-pad swipes type keys in the output playground.
 - For right-pad circular scrolling, briefly touch and lift, touch the top/bottom
@@ -38,8 +41,8 @@ hold, release-window and second-hold phases.
   enters Steering; Start + R3 enters Gamepad. The same gestures exit stateful modes.
   There is no manual layer picker in the main demo.
 - Pause or reset from the toolbar; **More** contains Next event and Replay.
-  Slowdown
-  changes the logical clock, keeping input, output and pending timers together.
+  Drag **Slow motion** from normal speed to 10× slower, including intermediate
+  values. It changes the logical clock, keeping input, output and pending timers together.
   The top timeline has no text outside a `::` lifecycle. It stays visible through
   active held/cover phases even when there is no pending timer. Its fixed height
   keeps mouse targets stationary. Pad and gyro drags never scroll the page;

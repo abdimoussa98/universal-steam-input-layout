@@ -2,8 +2,11 @@ use super::{Binding, Engine, Phase, Settings};
 
 impl Engine {
     pub(crate) fn group_at(&self, layer: usize, source: &str) -> Option<usize> {
+        self.group_on(&self.stack, layer, source)
+    }
+    fn group_on(&self, stack: &[usize], layer: usize, source: &str) -> Option<usize> {
         for control in &self.held {
-            let (owner, entries) = self.binding_unshifted(control);
+            let (owner, entries) = self.binding_on(stack, control, false);
             if owner.map(|o| o.0) != Some(layer) {
                 continue;
             }
@@ -26,8 +29,9 @@ impl Engine {
         }
         self.layout.layers[layer].sources.get(source).copied()
     }
-    fn resolve_binding(
+    pub(crate) fn binding_on(
         &self,
+        stack: &[usize],
         control: &str,
         shifted: bool,
     ) -> (Option<(usize, usize)>, Vec<Binding>) {
@@ -36,9 +40,9 @@ impl Engine {
         };
         let mut mode = None;
         let mut top = None;
-        for &layer in self.stack.iter().rev() {
+        for &layer in stack.iter().rev() {
             let gid = if shifted {
-                self.group_at(layer, source)
+                self.group_on(stack, layer, source)
             } else {
                 self.layout.layers[layer].sources.get(source).copied()
             };
@@ -62,11 +66,8 @@ impl Engine {
         }
         (None, vec![])
     }
-    pub(crate) fn binding_unshifted(&self, c: &str) -> (Option<(usize, usize)>, Vec<Binding>) {
-        self.resolve_binding(c, false)
-    }
     pub(crate) fn binding(&self, c: &str) -> (Option<(usize, usize)>, Vec<Binding>) {
-        self.resolve_binding(c, true)
+        self.binding_on(&self.stack, c, true)
     }
     fn entries_of(&self, layer: usize, gid: usize, control: &str) -> Vec<Binding> {
         let group = &self.layout.groups[gid];

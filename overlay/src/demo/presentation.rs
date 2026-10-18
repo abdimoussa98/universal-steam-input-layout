@@ -1,4 +1,8 @@
 //! Read-only presentation of the executed layout graph. Never schedules input.
+#[cfg(any(feature = "ui", test))]
+mod bindings;
+#[cfg(test)]
+mod inheritance_tests;
 mod lifecycle;
 #[cfg(any(feature = "ui", test))]
 mod pads;
@@ -107,9 +111,9 @@ impl Engine {
         {
             return trace.summary;
         }
-        let (_, entries) = self.binding(control);
-        for b in &entries {
-            for op in &b.entry.commands {
+        let entries = self.display_entries(control);
+        for entry in &entries {
+            for op in &entry.commands {
                 if let Operation::AddLayer { target, .. } = op
                     && let Some(summary) = self.layout.gesture_summary(*target)
                 {
@@ -117,7 +121,6 @@ impl Engine {
                 }
             }
         }
-        let entries: Vec<_> = entries.into_iter().map(|b| b.entry).collect();
         let value = self.layout.entry_label(&entries, 3);
         if value.is_empty() {
             "—".into()
